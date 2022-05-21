@@ -102,9 +102,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         [Fact]
         public void AddUserSecrets_ThrowsIfAssemblyAttributeFromType()
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => new ConfigurationBuilder().AddUserSecrets<string>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                new ConfigurationBuilder().AddUserSecrets<string>());
             Assert.Equal(
                 SR.Format(
                     SR.Error_Missing_UserSecretsIdAttribute,
@@ -113,9 +112,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
                 ex.Message
             );
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () => new ConfigurationBuilder().AddUserSecrets(typeof(JObject).Assembly)
-            );
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                new ConfigurationBuilder().AddUserSecrets(typeof(JObject).Assembly));
             Assert.Equal(
                 SR.Format(
                     SR.Error_Missing_UserSecretsIdAttribute,
@@ -146,12 +144,10 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
                 File.Delete(secretPath);
             }
 
-            Assert.Throws<FileNotFoundException>(
-                () =>
-                    new ConfigurationBuilder()
-                        .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
-                        .Build()
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                new ConfigurationBuilder()
+                    .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
+                    .Build());
         }
 
         [Fact]

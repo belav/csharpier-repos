@@ -359,66 +359,52 @@ namespace System.IO.Compression.Tests
                 Stream s = edeleted.Open();
                 //invalid ops while entry open
                 Assert.Throws<IOException>(() => edeleted.Open());
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var x = edeleted.Length;
-                    }
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var x = edeleted.CompressedLength;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var x = edeleted.Length;
+                });
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var x = edeleted.CompressedLength;
+                });
                 Assert.Throws<IOException>(() => edeleted.Delete());
                 s.Dispose();
 
                 //invalid ops on stream after entry closed
                 Assert.Throws<ObjectDisposedException>(() => s.ReadByte());
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var x = edeleted.Length;
-                    }
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var x = edeleted.CompressedLength;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var x = edeleted.Length;
+                });
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var x = edeleted.CompressedLength;
+                });
 
                 edeleted.Delete();
                 //invalid ops while entry deleted
                 Assert.Throws<InvalidOperationException>(() => edeleted.Open());
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        edeleted.LastWriteTime = new DateTimeOffset();
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    edeleted.LastWriteTime = new DateTimeOffset();
+                });
 
                 ZipArchiveEntry e = target.GetEntry("notempty/second.txt");
 
                 target.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        var x = target.Entries;
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    var x = target.Entries;
+                });
                 Assert.Throws<ObjectDisposedException>(() => target.CreateEntry("dirka"));
                 Assert.Throws<ObjectDisposedException>(() => e.Open());
                 Assert.Throws<ObjectDisposedException>(() => e.Delete());
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        e.LastWriteTime = new DateTimeOffset();
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    e.LastWriteTime = new DateTimeOffset();
+                });
             }
         }
 

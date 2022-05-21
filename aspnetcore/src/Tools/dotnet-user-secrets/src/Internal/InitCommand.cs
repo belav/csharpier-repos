@@ -27,12 +27,10 @@ public class InitCommandFactory : ICommand
         command.Description = "Set a user secrets ID to enable secret storage";
         command.HelpOption();
 
-        command.OnExecute(
-            () =>
-            {
-                options.Command = new InitCommandFactory(options);
-            }
-        );
+        command.OnExecute(() =>
+        {
+            options.Command = new InitCommandFactory(options);
+        });
     }
 
     public InitCommandFactory(CommandLineOptions options)

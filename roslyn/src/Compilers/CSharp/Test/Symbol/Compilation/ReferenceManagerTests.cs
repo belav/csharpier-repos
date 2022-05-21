@@ -1708,12 +1708,10 @@ public class A
                     syntaxTrees: new[] { tree },
                     options: options
                 );
-                Assert.Throws<TestException>(
-                    () =>
-                    {
-                        var a = c.Assembly;
-                    }
-                );
+                Assert.Throws<TestException>(() =>
+                {
+                    var a = c.Assembly;
+                });
             }
         }
 
@@ -2858,9 +2856,8 @@ public class Source
 
             md.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => compilation.GetTypeByMetadataName("System.Int64").GetMembers()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                compilation.GetTypeByMetadataName("System.Int64").GetMembers());
         }
 
         [WorkItem(43, "https://roslyn.codeplex.com/workitem/43")]

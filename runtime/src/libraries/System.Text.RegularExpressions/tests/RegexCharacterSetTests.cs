@@ -1177,49 +1177,41 @@ namespace System.Text.RegularExpressions.Tests
         )]
         public async Task ValidateValidateSet(RegexEngine engine)
         {
-            await Assert.ThrowsAsync<XunitException>(
-                () =>
-                    ValidateSetAsync(
-                        engine,
-                        "[a]",
-                        RegexOptions.None,
-                        new HashSet<char>() { 'b' },
-                        null
-                    )
-            );
-            await Assert.ThrowsAsync<XunitException>(
-                () =>
-                    ValidateSetAsync(
-                        engine,
-                        "[a]",
-                        RegexOptions.None,
-                        new HashSet<char>() { 'b' },
-                        null,
-                        validateEveryChar: true
-                    )
-            );
+            await Assert.ThrowsAsync<XunitException>(() =>
+                ValidateSetAsync(
+                    engine,
+                    "[a]",
+                    RegexOptions.None,
+                    new HashSet<char>() { 'b' },
+                    null
+                ));
+            await Assert.ThrowsAsync<XunitException>(() =>
+                ValidateSetAsync(
+                    engine,
+                    "[a]",
+                    RegexOptions.None,
+                    new HashSet<char>() { 'b' },
+                    null,
+                    validateEveryChar: true
+                ));
 
-            await Assert.ThrowsAsync<XunitException>(
-                () =>
-                    ValidateSetAsync(
-                        engine,
-                        "[b]",
-                        RegexOptions.None,
-                        null,
-                        new HashSet<char>() { 'b' }
-                    )
-            );
-            await Assert.ThrowsAsync<XunitException>(
-                () =>
-                    ValidateSetAsync(
-                        engine,
-                        "[b]",
-                        RegexOptions.None,
-                        null,
-                        new HashSet<char>() { 'b' },
-                        validateEveryChar: true
-                    )
-            );
+            await Assert.ThrowsAsync<XunitException>(() =>
+                ValidateSetAsync(
+                    engine,
+                    "[b]",
+                    RegexOptions.None,
+                    null,
+                    new HashSet<char>() { 'b' }
+                ));
+            await Assert.ThrowsAsync<XunitException>(() =>
+                ValidateSetAsync(
+                    engine,
+                    "[b]",
+                    RegexOptions.None,
+                    null,
+                    new HashSet<char>() { 'b' },
+                    validateEveryChar: true
+                ));
         }
 
         [Fact]

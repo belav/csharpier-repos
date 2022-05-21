@@ -300,9 +300,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             var instance = new ComplexOptions();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             string expectedMessage = SR.Format(
                 SR.Error_MissingConfig,
@@ -339,9 +338,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
                 "'ThisDoesNotExistInTheModel'"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -481,13 +479,11 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             // act
             var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
-            var getValueException = Assert.Throws<InvalidOperationException>(
-                () => config.GetValue(type, "Value")
-            );
+            var getValueException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetValue(type, "Value"));
 
-            var getException = Assert.Throws<InvalidOperationException>(
-                () => config.GetSection("Value").Get(type)
-            );
+            var getException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetSection("Value").Get(type));
 
             // assert
             Assert.NotNull(exception.InnerException);
@@ -801,9 +797,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
                 exception.Message
@@ -822,9 +817,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(
                     SR.Error_MissingParameterlessConstructor,
@@ -846,9 +840,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(
                 SR.Format(SR.Error_FailedToActivate, typeof(ThrowsWhenActivated)),
@@ -871,9 +864,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
                 exception.Message
@@ -936,9 +928,8 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ByteArrayOptions>()
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ByteArrayOptions>());
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, "MyByteArray", typeof(byte[])),
                 exception.Message

@@ -484,9 +484,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
-                Assert.Throws<InvalidOperationException>(
-                    () => request.CreateSelfSigned(now, now.AddDays(1))
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    request.CreateSelfSigned(now, now.AddDays(1)));
             }
         }
 
@@ -622,10 +621,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
-            Exception exception = Assert.Throws<CryptographicException>(
-                () =>
-                    request.Create(request.SubjectName, generator, now, now.AddDays(1), new byte[1])
-            );
+            Exception exception = Assert.Throws<CryptographicException>(() =>
+                request.Create(request.SubjectName, generator, now, now.AddDays(1), new byte[1]));
 
             if (CultureInfo.CurrentCulture.Name == "en-US")
             {
@@ -658,10 +655,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
-            Exception exception = Assert.Throws<CryptographicException>(
-                () =>
-                    request.Create(request.SubjectName, generator, now, now.AddDays(1), new byte[1])
-            );
+            Exception exception = Assert.Throws<CryptographicException>(() =>
+                request.Create(request.SubjectName, generator, now, now.AddDays(1), new byte[1]));
 #if NETCOREAPP
             if (CultureInfo.CurrentCulture.Name == "en-US")
             {
@@ -1051,9 +1046,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     byte[] serialNumber = { 1, 1, 2, 3, 5, 8, 13 };
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => request.Create(cert, now, now.AddHours(3), serialNumber)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        request.Create(cert, now, now.AddHours(3), serialNumber));
 
                     X509SignatureGenerator generator = X509SignatureGenerator.CreateForRSA(
                         rsa,

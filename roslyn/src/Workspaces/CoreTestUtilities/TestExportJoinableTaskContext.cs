@@ -143,13 +143,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             protected override void QueueTask(Task task)
             {
-                _joinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        await _joinableTaskFactory.SwitchToMainThreadAsync();
-                        TryExecuteTask(task);
-                    }
-                );
+                _joinableTaskFactory.RunAsync(async () =>
+                {
+                    await _joinableTaskFactory.SwitchToMainThreadAsync();
+                    TryExecuteTask(task);
+                });
             }
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)

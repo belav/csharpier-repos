@@ -74,24 +74,19 @@ namespace System.Net.Quic.Tests
 
             await new[]
             {
-                Task.Run(
-                    async () =>
-                    {
-                        using QuicConnection serverConnection =
-                            await listener.AcceptConnectionAsync();
-                        await serverFunction(serverConnection);
-                    }
-                ),
-                Task.Run(
-                    async () =>
-                    {
-                        using QuicConnection clientConnection = CreateQuicConnection(
-                            listener.ListenEndPoint
-                        );
-                        await clientConnection.ConnectAsync();
-                        await clientFunction(clientConnection);
-                    }
-                )
+                Task.Run(async () =>
+                {
+                    using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
+                    await serverFunction(serverConnection);
+                }),
+                Task.Run(async () =>
+                {
+                    using QuicConnection clientConnection = CreateQuicConnection(
+                        listener.ListenEndPoint
+                    );
+                    await clientConnection.ConnectAsync();
+                    await clientFunction(clientConnection);
+                })
             }.WhenAllOrAnyFailed(millisecondsTimeout);
         }
     }

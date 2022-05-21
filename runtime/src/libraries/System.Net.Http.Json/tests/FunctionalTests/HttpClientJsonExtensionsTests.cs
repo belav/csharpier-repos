@@ -88,18 +88,14 @@ namespace System.Net.Http.Json.Functional.Tests
                 {
                     using (HttpClient client = new HttpClient(handler))
                     {
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.GetFromJsonAsync(uri, typeof(Person))
-                        );
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.GetFromJsonAsync<Person>(uri)
-                        );
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.GetFromJsonAsync(uri, typeof(Person), JsonContext.Default)
-                        );
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.GetFromJsonAsync(uri, JsonContext.Default.Person)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.GetFromJsonAsync(uri, typeof(Person)));
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.GetFromJsonAsync<Person>(uri));
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.GetFromJsonAsync(uri, typeof(Person), JsonContext.Default));
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.GetFromJsonAsync(uri, JsonContext.Default.Person));
                     }
                 },
                 server => server.HandleRequestAsync(statusCode: HttpStatusCode.InternalServerError)

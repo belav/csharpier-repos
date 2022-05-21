@@ -78,32 +78,28 @@ namespace Roslyn.Test.Utilities
             using (var threadStartedEvent = new ManualResetEventSlim(initialState: false))
             {
                 DispatcherSynchronizationContext synchronizationContext = null;
-                StaThread = new Thread(
-                    () =>
+                StaThread = new Thread(() =>
+                {
+                    var oldContext = SynchronizationContext.Current;
+                    try
                     {
-                        var oldContext = SynchronizationContext.Current;
-                        try
-                        {
-                            // All WPF Tests need a DispatcherSynchronizationContext and we dont want to block pending keyboard
-                            // or mouse input from the user. So use background priority which is a single level below user input.
-                            synchronizationContext = new DispatcherSynchronizationContext();
+                        // All WPF Tests need a DispatcherSynchronizationContext and we dont want to block pending keyboard
+                        // or mouse input from the user. So use background priority which is a single level below user input.
+                        synchronizationContext = new DispatcherSynchronizationContext();
 
-                            // xUnit creates its own synchronization context and wraps any existing context so that messages are
-                            // still pumped as necessary. So we are safe setting it here, where we are not safe setting it in test.
-                            SynchronizationContext.SetSynchronizationContext(
-                                synchronizationContext
-                            );
+                        // xUnit creates its own synchronization context and wraps any existing context so that messages are
+                        // still pumped as necessary. So we are safe setting it here, where we are not safe setting it in test.
+                        SynchronizationContext.SetSynchronizationContext(synchronizationContext);
 
-                            threadStartedEvent.Set();
+                        threadStartedEvent.Set();
 
-                            Dispatcher.Run();
-                        }
-                        finally
-                        {
-                            SynchronizationContext.SetSynchronizationContext(oldContext);
-                        }
+                        Dispatcher.Run();
                     }
-                );
+                    finally
+                    {
+                        SynchronizationContext.SetSynchronizationContext(oldContext);
+                    }
+                });
                 StaThread.Name = $"{nameof(StaTaskScheduler)} thread";
                 StaThread.IsBackground = true;
                 StaThread.SetApartmentState(ApartmentState.STA);

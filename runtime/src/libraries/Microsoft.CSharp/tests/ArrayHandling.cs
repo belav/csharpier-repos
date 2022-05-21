@@ -40,22 +40,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 d = Array.CreateInstance(typeof(int), new[] { 8 }, new[] { -2 });
-                ex = Assert.Throws<RuntimeBinderException>(
-                    () =>
-                    {
-                        string s = d;
-                    }
-                );
+                ex = Assert.Throws<RuntimeBinderException>(() =>
+                {
+                    string s = d;
+                });
                 Assert.Contains("int[*]", ex.Message);
             }
 
             d = new int[3];
-            ex = Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    string s = d;
-                }
-            );
+            ex = Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string s = d;
+            });
             Assert.Contains("int[]", ex.Message);
         }
 
@@ -67,23 +63,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void MultiDimArrayTypeNames()
         {
             dynamic d = new int[3, 2, 1];
-            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    string s = d;
-                }
-            );
+            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string s = d;
+            });
             Assert.Contains("int[,,]", ex.Message);
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 d = Array.CreateInstance(typeof(int), new[] { 3, 2, 1 }, new[] { -2, 2, -0 });
-                ex = Assert.Throws<RuntimeBinderException>(
-                    () =>
-                    {
-                        string s = d;
-                    }
-                );
+                ex = Assert.Throws<RuntimeBinderException>(() =>
+                {
+                    string s = d;
+                });
                 Assert.Contains("int[,,]", ex.Message);
             }
         }

@@ -72,13 +72,11 @@ namespace System.Formats.Asn1.Tests.Reader
 
             byte[] data = (EncodedValue + "0500").HexToByteArray();
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
-                    reader.PeekEncodedValue();
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
+                reader.PeekEncodedValue();
+            });
         }
 
         [Fact]
@@ -120,13 +118,11 @@ namespace System.Formats.Asn1.Tests.Reader
 
             byte[] data = (EncodedValue + "0500").HexToByteArray();
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
-                    reader.PeekContentBytes();
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                AsnReader reader = new AsnReader(data, AsnEncodingRules.BER);
+                reader.PeekContentBytes();
+            });
         }
 
         [Theory]

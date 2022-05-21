@@ -25,9 +25,8 @@ public class MvcApplicationBuilderExtensionsTest
             .Returns(Mock.Of<IServiceProvider>());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationBuilderMock.Object.UseMvc(rb => { })
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            applicationBuilderMock.Object.UseMvc(rb => { }));
 
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling "
@@ -77,20 +76,18 @@ public class MvcApplicationBuilderExtensionsTest
         var appBuilder = new ApplicationBuilder(serviceProvider);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                appBuilder.UseMvc(
-                    routes =>
-                    {
-                        routes.MapRoute(
-                            name: "default",
-                            template: "{controller=Home}/{action=Index}/{id?}"
-                        );
-                    }
-                );
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            appBuilder.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}"
+                    );
+                }
+            );
+        });
 
         var expected =
             "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use "

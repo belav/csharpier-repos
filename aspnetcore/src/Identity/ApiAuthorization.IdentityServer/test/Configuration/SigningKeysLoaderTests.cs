@@ -28,9 +28,8 @@ public class SigningKeysLoaderTests
     public void LoadFromFile_ThrowsIfFileDoesNotExist()
     {
         // Arrange, Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => SigningKeysLoader.LoadFromFile("./nonexisting.pfx", "", DefaultFlags)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            SigningKeysLoader.LoadFromFile("./nonexisting.pfx", "", DefaultFlags));
         Assert.Equal(
             $"There was an error loading the certificate. The file './nonexisting.pfx' was not found.",
             exception.Message
@@ -41,9 +40,8 @@ public class SigningKeysLoaderTests
     public void LoadFromFile_ThrowsIfPasswordIsNull()
     {
         // Arrange, Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => SigningKeysLoader.LoadFromFile("test.pfx", null, DefaultFlags)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            SigningKeysLoader.LoadFromFile("test.pfx", null, DefaultFlags));
         Assert.Equal(
             "There was an error loading the certificate. No password was provided.",
             exception.Message
@@ -54,9 +52,8 @@ public class SigningKeysLoaderTests
     public void LoadFromFile_ThrowsIfPasswordIsIncorrect()
     {
         // Arrange, Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => SigningKeysLoader.LoadFromFile("test.pfx", "incorrect", DefaultFlags)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            SigningKeysLoader.LoadFromFile("test.pfx", "incorrect", DefaultFlags));
         Assert.Equal(
             $"There was an error loading the certificate. Either the password is incorrect or the process does not have permisions to store the key in the Keyset '{DefaultFlags}'",
             exception.Message
@@ -70,15 +67,8 @@ public class SigningKeysLoaderTests
         var time = new DateTimeOffset(2018, 09, 25, 12, 0, 0, TimeSpan.Zero);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                SigningKeysLoader.LoadFromStoreCert(
-                    "Invalid",
-                    "My",
-                    StoreLocation.CurrentUser,
-                    time
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            SigningKeysLoader.LoadFromStoreCert("Invalid", "My", StoreLocation.CurrentUser, time));
         Assert.Equal(
             "Couldn't find a valid certificate with subject 'Invalid' on the 'CurrentUser\\My'",
             exception.Message
@@ -173,9 +163,8 @@ public class SigningKeysLoaderTests
     public static void LoadDevelopment_ThrowsIfKeyDoesNotExist()
     {
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => SigningKeysLoader.LoadDevelopment("c:/inexistent.json", createIfMissing: false)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            SigningKeysLoader.LoadDevelopment("c:/inexistent.json", createIfMissing: false));
         Assert.Equal(
             "Couldn't find the file 'c:/inexistent.json' and creation of a development key was not requested.",
             exception.Message

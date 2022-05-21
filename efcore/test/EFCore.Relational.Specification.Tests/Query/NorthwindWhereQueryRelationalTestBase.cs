@@ -19,9 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Where_equals_method_string_with_ignore_case(bool async)
         {
-            return AssertTranslationFailed(
-                () => base.Where_equals_method_string_with_ignore_case(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Where_equals_method_string_with_ignore_case(async));
         }
 
         protected virtual bool CanExecuteQueryString => false;

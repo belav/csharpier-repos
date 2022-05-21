@@ -99,12 +99,10 @@ namespace System.Reflection.Emit.Tests
             );
 
             type.CreateTypeInfo().AsType();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    property.SetSetMethod(method);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                property.SetSetMethod(method);
+            });
         }
 
         private MethodBuilder ImplementMethod(

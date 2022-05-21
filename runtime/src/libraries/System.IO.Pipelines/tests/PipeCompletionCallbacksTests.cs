@@ -151,9 +151,8 @@ namespace System.IO.Pipelines.Tests
                 callbackState2
             );
 
-            var aggregateException = Assert.Throws<AggregateException>(
-                () => pipe.Reader.Complete()
-            );
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                pipe.Reader.Complete());
             Assert.Equal(exception1, aggregateException.InnerExceptions[0]);
             Assert.Equal(exception2, aggregateException.InnerExceptions[1]);
             Assert.Equal(2, counter);
@@ -324,12 +323,10 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<FlushResult> awaiter = buffer.FlushAsync().GetAwaiter();
 
             Assert.False(awaiter.IsCompleted);
-            awaiter.OnCompleted(
-                () =>
-                {
-                    continuationRan = true;
-                }
-            );
+            awaiter.OnCompleted(() =>
+            {
+                continuationRan = true;
+            });
             pipe.Reader.Complete();
 
             Assert.True(callbackRan);
@@ -468,9 +465,8 @@ namespace System.IO.Pipelines.Tests
                 callbackState2
             );
 
-            var aggregateException = Assert.Throws<AggregateException>(
-                () => pipe.Writer.Complete()
-            );
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                pipe.Writer.Complete());
             Assert.Equal(exception1, aggregateException.InnerExceptions[0]);
             Assert.Equal(exception2, aggregateException.InnerExceptions[1]);
             Assert.Equal(2, counter);
@@ -639,12 +635,10 @@ namespace System.IO.Pipelines.Tests
             Assert.False(awaiter.IsCompleted);
             awaiter
                 .GetAwaiter()
-                .OnCompleted(
-                    () =>
-                    {
-                        continuationRan = true;
-                    }
-                );
+                .OnCompleted(() =>
+                {
+                    continuationRan = true;
+                });
             pipe.Writer.Complete();
 
             Assert.True(callbackRan);

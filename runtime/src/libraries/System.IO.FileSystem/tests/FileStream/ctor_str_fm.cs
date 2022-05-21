@@ -131,9 +131,8 @@ namespace System.IO.Tests
         public void FileModeOpenThrows(string streamSpecifier)
         {
             string fileName = GetTestFilePath() + streamSpecifier;
-            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(
-                () => CreateFileStream(fileName, FileMode.Open)
-            );
+            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() =>
+                CreateFileStream(fileName, FileMode.Open));
             Assert.Equal(fileName, fnfe.FileName);
         }
 
@@ -189,9 +188,8 @@ namespace System.IO.Tests
         public void FileModeTruncateThrows(string streamSpecifier)
         {
             string fileName = GetTestFilePath() + streamSpecifier;
-            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(
-                () => CreateFileStream(fileName, FileMode.Truncate)
-            );
+            FileNotFoundException fnfe = Assert.Throws<FileNotFoundException>(() =>
+                CreateFileStream(fileName, FileMode.Truncate));
             Assert.Equal(fileName, fnfe.FileName);
         }
 

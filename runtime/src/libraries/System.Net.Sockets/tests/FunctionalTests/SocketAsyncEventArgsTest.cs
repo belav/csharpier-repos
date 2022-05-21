@@ -109,9 +109,8 @@ namespace System.Net.Sockets.Tests
                     };
 
                     Assert.True(client.ReceiveAsync(receiveSaea));
-                    Assert.Throws<InvalidOperationException>(
-                        () => client.ReceiveAsync(receiveSaea)
-                    ); // already in progress
+                    Assert.Throws<InvalidOperationException>(() =>
+                        client.ReceiveAsync(receiveSaea)); // already in progress
 
                     receiveSaea.Dispose();
 
@@ -429,14 +428,12 @@ namespace System.Net.Sockets.Tests
                     Offset = offset,
                     Count = count
                 }.ToActual();
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => e.BufferList = new List<ArraySegment<byte>> { invalidBuffer }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    e.BufferList = new List<ArraySegment<byte>> { invalidBuffer });
 
                 ArraySegment<byte> validBuffer = new ArraySegment<byte>(new byte[1]);
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => e.BufferList = new List<ArraySegment<byte>> { validBuffer, invalidBuffer }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    e.BufferList = new List<ArraySegment<byte>> { validBuffer, invalidBuffer });
             }
         }
 

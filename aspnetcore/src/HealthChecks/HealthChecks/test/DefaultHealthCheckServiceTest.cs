@@ -60,9 +60,8 @@ public class DefaultHealthCheckServiceTest
         var logger = services.GetRequiredService<ILogger<DefaultHealthCheckService>>();
 
         // Act
-        var exception = Assert.Throws<ArgumentException>(
-            () => new DefaultHealthCheckService(scopeFactory, options, logger)
-        );
+        var exception = Assert.Throws<ArgumentException>(() =>
+            new DefaultHealthCheckService(scopeFactory, options, logger));
 
         // Assert
         Assert.StartsWith(
@@ -708,14 +707,12 @@ public class DefaultHealthCheckServiceTest
             var token = cts.Token;
             token.Register(() => throw new OperationCanceledException(token));
 
-            SingleThreadedSynchronizationContext.Run(
-                () =>
-                {
-                    // Act
-                    service.CheckHealthAsync(token).GetAwaiter().GetResult();
-                    hangs = false;
-                }
-            );
+            SingleThreadedSynchronizationContext.Run(() =>
+            {
+                // Act
+                service.CheckHealthAsync(token).GetAwaiter().GetResult();
+                hangs = false;
+            });
         }
 
         // Assert

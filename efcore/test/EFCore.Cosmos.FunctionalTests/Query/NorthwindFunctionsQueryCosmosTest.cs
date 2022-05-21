@@ -1467,9 +1467,8 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] < 10250))"
 
         public override Task Regex_IsMatch_MethodCall_constant_input(bool async)
         {
-            return AssertTranslationFailed(
-                () => base.Regex_IsMatch_MethodCall_constant_input(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Regex_IsMatch_MethodCall_constant_input(async));
         }
 
         [ConditionalTheory]

@@ -101,12 +101,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ForNullString()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Rope.ForString(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Rope.ForString(null);
+            });
         }
 
         [Fact]
@@ -114,18 +112,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             foreach (var r in someRopes)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Rope.Concat(r, null);
-                    }
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Rope.Concat(null, r);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Rope.Concat(r, null);
+                });
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Rope.Concat(null, r);
+                });
             }
         }
 

@@ -873,19 +873,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             };
 
             var asyncToken = Listener.BeginAsyncOperation(nameof(RequestExecutionQueue_Errored));
-            _errorShutdownTask = Task.Run(
-                    async () =>
-                    {
-                        Logger?.TraceInformation("Shutting down language server.");
+            _errorShutdownTask = Task.Run(async () =>
+                {
+                    Logger?.TraceInformation("Shutting down language server.");
 
-                        await JsonRpc
-                            .NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message)
-                            .ConfigureAwait(false);
+                    await JsonRpc
+                        .NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message)
+                        .ConfigureAwait(false);
 
-                        ShutdownImpl();
-                        ExitImpl();
-                    }
-                )
+                    ShutdownImpl();
+                    ExitImpl();
+                })
                 .CompletesAsyncOperation(asyncToken);
         }
 

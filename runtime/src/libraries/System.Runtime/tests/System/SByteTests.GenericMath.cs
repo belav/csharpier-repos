@@ -185,12 +185,10 @@ namespace System.Tests
             Assert.Equal((sbyte)0x00, BinaryNumberHelper<sbyte>.Log2((sbyte)0x00));
             Assert.Equal((sbyte)0x00, BinaryNumberHelper<sbyte>.Log2((sbyte)0x01));
             Assert.Equal((sbyte)0x06, BinaryNumberHelper<sbyte>.Log2((sbyte)0x7F));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => BinaryNumberHelper<sbyte>.Log2(unchecked((sbyte)0x80))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => BinaryNumberHelper<sbyte>.Log2(unchecked((sbyte)0xFF))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                BinaryNumberHelper<sbyte>.Log2(unchecked((sbyte)0x80)));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                BinaryNumberHelper<sbyte>.Log2(unchecked((sbyte)0xFF)));
         }
 
         [Fact]
@@ -653,9 +651,8 @@ namespace System.Tests
             Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<short>(0x0000));
             Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<short>(0x0001));
             Assert.Throws<OverflowException>(() => NumberHelper<sbyte>.Create<short>(0x7FFF));
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<short>(unchecked((short)0x8000))
-            );
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<short>(unchecked((short)0x8000)));
             Assert.Equal(
                 unchecked((sbyte)0xFF),
                 NumberHelper<sbyte>.Create<short>(unchecked((short)0xFFFF))
@@ -668,9 +665,8 @@ namespace System.Tests
             Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<int>(0x00000000));
             Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<int>(0x00000001));
             Assert.Throws<OverflowException>(() => NumberHelper<sbyte>.Create<int>(0x7FFFFFFF));
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<int>(unchecked((int)0x80000000))
-            );
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<int>(unchecked((int)0x80000000)));
             Assert.Equal(
                 unchecked((sbyte)0xFF),
                 NumberHelper<sbyte>.Create<int>(unchecked((int)0xFFFFFFFF))
@@ -682,12 +678,10 @@ namespace System.Tests
         {
             Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<long>(0x0000000000000000));
             Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<long>(0x0000000000000001));
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<long>(0x7FFFFFFFFFFFFFFF)
-            );
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<long>(unchecked((long)0x8000000000000000))
-            );
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<long>(0x7FFFFFFFFFFFFFFF));
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<long>(unchecked((long)0x8000000000000000)));
             Assert.Equal(
                 unchecked((sbyte)0xFF),
                 NumberHelper<sbyte>.Create<long>(unchecked((long)0xFFFFFFFFFFFFFFFF))
@@ -707,12 +701,10 @@ namespace System.Tests
                     (sbyte)0x01,
                     NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x0000000000000001))
                 );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x7FFFFFFFFFFFFFFF))
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x8000000000000000))
-                );
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x7FFFFFFFFFFFFFFF)));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x8000000000000000)));
                 Assert.Equal(
                     unchecked((sbyte)0xFF),
                     NumberHelper<sbyte>.Create<nint>(unchecked((nint)0xFFFFFFFFFFFFFFFF))
@@ -722,12 +714,10 @@ namespace System.Tests
             {
                 Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<nint>((nint)0x00000000));
                 Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<nint>((nint)0x00000001));
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nint>((nint)0x7FFFFFFF)
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x80000000))
-                );
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nint>((nint)0x7FFFFFFF));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nint>(unchecked((nint)0x80000000)));
                 Assert.Equal(
                     unchecked((sbyte)0xFF),
                     NumberHelper<sbyte>.Create<nint>(unchecked((nint)0xFFFFFFFF))
@@ -776,15 +766,12 @@ namespace System.Tests
         {
             Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<ulong>(0x0000000000000000));
             Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<ulong>(0x0000000000000001));
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<ulong>(0x7FFFFFFFFFFFFFFF)
-            );
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<ulong>(0x8000000000000000)
-            );
-            Assert.Throws<OverflowException>(
-                () => NumberHelper<sbyte>.Create<ulong>(0xFFFFFFFFFFFFFFFF)
-            );
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<ulong>(0x7FFFFFFFFFFFFFFF));
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<ulong>(0x8000000000000000));
+            Assert.Throws<OverflowException>(() =>
+                NumberHelper<sbyte>.Create<ulong>(0xFFFFFFFFFFFFFFFF));
         }
 
         [Fact]
@@ -800,29 +787,23 @@ namespace System.Tests
                     (sbyte)0x01,
                     NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0x0000000000000001))
                 );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0x7FFFFFFFFFFFFFFF))
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0x8000000000000000))
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF))
-                );
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0x7FFFFFFFFFFFFFFF)));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0x8000000000000000)));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
                 Assert.Equal((sbyte)0x00, NumberHelper<sbyte>.Create<nuint>((nuint)0x00000000));
                 Assert.Equal((sbyte)0x01, NumberHelper<sbyte>.Create<nuint>((nuint)0x00000001));
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>((nuint)0x7FFFFFFF)
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>((nuint)0x80000000)
-                );
-                Assert.Throws<OverflowException>(
-                    () => NumberHelper<sbyte>.Create<nuint>((nuint)0xFFFFFFFF)
-                );
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>((nuint)0x7FFFFFFF));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>((nuint)0x80000000));
+                Assert.Throws<OverflowException>(() =>
+                    NumberHelper<sbyte>.Create<nuint>((nuint)0xFFFFFFFF));
             }
         }
 

@@ -206,17 +206,15 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
                 ex =>
                 {
                     // Emulate transport abort so the _connectionTask completes.
-                    Task.Run(
-                        () =>
-                        {
-                            Logger.LogInformation(
-                                0,
-                                ex,
-                                "ConnectionContext.Abort() was called. Completing _pair.Application.Output."
-                            );
-                            _pair.Application.Output.Complete(ex);
-                        }
-                    );
+                    Task.Run(() =>
+                    {
+                        Logger.LogInformation(
+                            0,
+                            ex,
+                            "ConnectionContext.Abort() was called. Completing _pair.Application.Output."
+                        );
+                        _pair.Application.Output.Complete(ex);
+                    });
                 }
             );
 
@@ -308,12 +306,10 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(
-                () =>
-                {
-                    sem.Release();
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                sem.Release();
+            });
 
             await sem.WaitAsync().DefaultTimeout();
         };
@@ -333,17 +329,15 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(
-                () =>
+            context.RequestAborted.Register(() =>
+            {
+                lock (_abortedStreamIdsLock)
                 {
-                    lock (_abortedStreamIdsLock)
-                    {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
-
-                    sem.Release();
+                    _abortedStreamIds.Add(streamIdFeature.StreamId);
                 }
-            );
+
+                sem.Release();
+            });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -355,17 +349,15 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(
-                () =>
+            context.RequestAborted.Register(() =>
+            {
+                lock (_abortedStreamIdsLock)
                 {
-                    lock (_abortedStreamIdsLock)
-                    {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
-
-                    sem.Release();
+                    _abortedStreamIds.Add(streamIdFeature.StreamId);
                 }
-            );
+
+                sem.Release();
+            });
 
             await sem.WaitAsync().DefaultTimeout();
 

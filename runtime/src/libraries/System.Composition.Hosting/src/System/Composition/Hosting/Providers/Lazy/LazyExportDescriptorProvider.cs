@@ -56,9 +56,8 @@ namespace System.Composition.Hosting.Providers.Lazy
                                 var da = dsc.Activator;
                                 return ExportDescriptor.Create(
                                     (c, o) =>
-                                        new Lazy<TValue>(
-                                            () => (TValue)CompositionOperation.Run(c, da)
-                                        ),
+                                        new Lazy<TValue>(() =>
+                                            (TValue)CompositionOperation.Run(c, da)),
                                     dsc.Metadata
                                 );
                             }

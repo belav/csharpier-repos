@@ -85,12 +85,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         public void MinimumLevel_Setter_Throws_With_Bad_Level(TraceLevel level)
         {
             // Arrange & Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SystemDiagnosticsTraceWriter().MinimumLevel = level;
-                }
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().MinimumLevel = level;
+            });
             Assert.Equal("value", exception.ParamName);
             Assert.Contains(
                 "The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.",
@@ -106,9 +104,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { })
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { }));
             Assert.Equal("category", exception.ParamName);
         }
 
@@ -119,15 +116,13 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () =>
-                    writer.Trace(
-                        new HttpRequestMessage(),
-                        "MyCategory",
-                        TraceLevel.Info,
-                        traceAction: null
-                    )
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                writer.Trace(
+                    new HttpRequestMessage(),
+                    "MyCategory",
+                    TraceLevel.Info,
+                    traceAction: null
+                ));
             Assert.Equal("traceAction", exception.ParamName);
         }
 
@@ -140,9 +135,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { })
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { }));
             Assert.Equal("level", exception.ParamName);
             Assert.Contains(
                 "The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.",
@@ -471,12 +465,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         void Format_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SystemDiagnosticsTraceWriter().Format(null);
-                }
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().Format(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }
@@ -646,12 +638,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         void FormatRequestEnvelope_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SystemDiagnosticsTraceWriter().FormatRequestEnvelope(null);
-                }
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().FormatRequestEnvelope(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }
@@ -899,12 +889,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         void TranslateHttpResponseException_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(null);
-                }
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }

@@ -224,30 +224,22 @@ namespace System.Collections.Specialized.Tests
                 Assert.Equal(d[i], 100 + i);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    int foo = (int)d[-1];
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    d[-1] = 5;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    int foo = (int)d[1000];
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    d[1000] = 5;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int foo = (int)d[-1];
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                d[-1] = 5;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int foo = (int)d[1000];
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                d[1000] = 5;
+            });
         }
 
         // public object this[object key] { get; set; }
@@ -273,18 +265,14 @@ namespace System.Collections.Specialized.Tests
             }
 
             Assert.Null(d["asdasd"]);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var a = d[null];
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    d[null] = 1337;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var a = d[null];
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                d[null] = 1337;
+            });
         }
 
         // public ICollection Values { get; }
@@ -375,25 +363,19 @@ namespace System.Collections.Specialized.Tests
             Assert.True(d.IsReadOnly);
             Assert.Equal("bar", d["foo"]);
             Assert.Equal(37, d[(object)13]);
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    d["foo"] = "moooooooooaaah";
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    d["asdasd"] = "moooooooooaaah";
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                d["foo"] = "moooooooooaaah";
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                d["asdasd"] = "moooooooooaaah";
+            });
             Assert.Null(d["asdasd"]);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var a = d[null];
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var a = d[null];
+            });
         }
 
         // public void Clear();
@@ -672,12 +654,10 @@ namespace System.Collections.Specialized.Tests
                 testKeysProperty ? orderedDictionary.Keys : orderedDictionary.Values
             );
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    list[0] = "a";
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                list[0] = "a";
+            });
             Assert.Throws<NotSupportedException>(() => list.Add("a"));
             Assert.Throws<NotSupportedException>(() => list.Clear());
             Assert.Throws<NotSupportedException>(() => list.Insert(0, "a"));

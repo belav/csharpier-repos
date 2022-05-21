@@ -39,9 +39,8 @@ namespace AutoMapper.UnitTests.Bug
             [Fact]
             public void Should_not_validate() =>
                 Should
-                    .Throw<AutoMapperConfigurationException>(
-                        () => Configuration.AssertConfigurationIsValid()
-                    )
+                    .Throw<AutoMapperConfigurationException>(() =>
+                        Configuration.AssertConfigurationIsValid())
                     .Errors.Single()
                     .UnmappedPropertyNames.Single()
                     .ShouldBe(nameof(Destination.InnerSourceValue));

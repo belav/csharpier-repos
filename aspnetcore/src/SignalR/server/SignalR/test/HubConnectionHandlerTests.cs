@@ -293,12 +293,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 null,
                 LoggerFactory
             );
-            var ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                    serviceProvider.GetRequiredService<
-                        IHubContext<SimpleVoidReturningTypedHub, IVoidReturningTypedHubClient>
-                    >()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<
+                    IHubContext<SimpleVoidReturningTypedHub, IVoidReturningTypedHubClient>
+                >());
             Assert.Equal(
                 $"Cannot generate proxy implementation for '{typeof(IVoidReturningTypedHubClient).FullName}.{nameof(IVoidReturningTypedHubClient.Send)}'. All client proxy methods must return '{typeof(Task).FullName}'.",
                 ex.Message
@@ -883,13 +881,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
-                    {
-                        var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
-                        await connectionHandlerTask.DefaultTimeout();
-                    }
-                );
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                {
+                    var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
+                    await connectionHandlerTask.DefaultTimeout();
+                });
                 Assert.Equal("Lifetime manager OnConnectedAsync failed.", exception.Message);
 
                 client.Dispose();
@@ -981,9 +977,8 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
                 client.Dispose();
 
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await connectionHandlerTask
-                );
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await connectionHandlerTask);
                 Assert.Equal("Hub OnDisconnected failed.", exception.Message);
 
                 mockLifetimeManager.Verify(
@@ -1711,9 +1706,8 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 LoggerFactory
             );
 
-            var exception = Assert.Throws<NotSupportedException>(
-                () => serviceProvider.GetService<HubConnectionHandler<GenericMethodHub>>()
-            );
+            var exception = Assert.Throws<NotSupportedException>(() =>
+                serviceProvider.GetService<HubConnectionHandler<GenericMethodHub>>());
 
             Assert.Equal(
                 "Method 'GenericMethod' is a generic method which is not supported on a Hub.",
@@ -3196,13 +3190,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             {
                 client.SupportedFormats = TransferFormat.Binary;
                 await Assert
-                    .ThrowsAsync<InvalidOperationException>(
-                        async () =>
-                            await await client.ConnectAsync(
-                                connectionHandler,
-                                expectedHandshakeResponseMessage: false
-                            )
-                    )
+                    .ThrowsAsync<InvalidOperationException>(async () =>
+                        await await client.ConnectAsync(
+                            connectionHandler,
+                            expectedHandshakeResponseMessage: false
+                        ))
                     .DefaultTimeout();
             }
         }
@@ -3237,13 +3229,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             {
                 client.SupportedFormats = TransferFormat.Binary;
                 await Assert
-                    .ThrowsAsync<InvalidOperationException>(
-                        async () =>
-                            await await client.ConnectAsync(
-                                connectionHandler,
-                                expectedHandshakeResponseMessage: false
-                            )
-                    )
+                    .ThrowsAsync<InvalidOperationException>(async () =>
+                        await await client.ConnectAsync(
+                            connectionHandler,
+                            expectedHandshakeResponseMessage: false
+                        ))
                     .DefaultTimeout();
             }
         }
@@ -4539,13 +4529,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                     .DefaultTimeout();
             }
 
-            var ex = await Assert.ThrowsAsync<TimeoutException>(
-                async () =>
-                {
-                    await client.SendInvocationAsync("Echo", "test");
-                    var result = (CompletionMessage)await client.ReadAsync().DefaultTimeout(5000);
-                }
-            );
+            var ex = await Assert.ThrowsAsync<TimeoutException>(async () =>
+            {
+                await client.SendInvocationAsync("Echo", "test");
+                var result = (CompletionMessage)await client.ReadAsync().DefaultTimeout(5000);
+            });
         }
     }
 

@@ -252,37 +252,35 @@ namespace System.Security.Claims
         public void Current_FallsBackToThread_NoPrincipalPolicy()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    ClaimsPrincipal principal1 = new ClaimsPrincipal();
+                    ClaimsPrincipal principal2 = new ClaimsPrincipal();
+
+                    Thread.CurrentPrincipal = principal1;
+                    Assert.Same(principal1, ClaimsPrincipal.Current);
+
+                    Thread.CurrentPrincipal = principal2;
+                    Assert.Same(principal2, ClaimsPrincipal.Current);
+
+                    NonClaimsIdentity id = new NonClaimsIdentity()
                     {
-                        ClaimsPrincipal principal1 = new ClaimsPrincipal();
-                        ClaimsPrincipal principal2 = new ClaimsPrincipal();
+                        Name = "NonClaimsIdentity_Name"
+                    };
+                    NonClaimsPrincipal nonClaimsPrincipal = new NonClaimsPrincipal()
+                    {
+                        Identity = id
+                    };
 
-                        Thread.CurrentPrincipal = principal1;
-                        Assert.Same(principal1, ClaimsPrincipal.Current);
+                    Thread.CurrentPrincipal = nonClaimsPrincipal;
 
-                        Thread.CurrentPrincipal = principal2;
-                        Assert.Same(principal2, ClaimsPrincipal.Current);
+                    ClaimsPrincipal current = ClaimsPrincipal.Current;
+                    Assert.NotNull(current);
+                    Assert.Equal("NonClaimsIdentity_Name", current.Identity.Name);
 
-                        NonClaimsIdentity id = new NonClaimsIdentity()
-                        {
-                            Name = "NonClaimsIdentity_Name"
-                        };
-                        NonClaimsPrincipal nonClaimsPrincipal = new NonClaimsPrincipal()
-                        {
-                            Identity = id
-                        };
-
-                        Thread.CurrentPrincipal = nonClaimsPrincipal;
-
-                        ClaimsPrincipal current = ClaimsPrincipal.Current;
-                        Assert.NotNull(current);
-                        Assert.Equal("NonClaimsIdentity_Name", current.Identity.Name);
-
-                        Thread.CurrentPrincipal = null;
-                        Assert.Null(ClaimsPrincipal.Current);
-                    }
-                )
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(ClaimsPrincipal.Current);
+                })
                 .Dispose();
         }
 
@@ -290,16 +288,14 @@ namespace System.Security.Claims
         public void Current_FallsBackToThread_UnauthenticatedPrincipalPolicy()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.UnauthenticatedPrincipal
-                        );
-                        Thread.CurrentPrincipal = null;
-                        Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(
+                        PrincipalPolicy.UnauthenticatedPrincipal
+                    );
+                    Thread.CurrentPrincipal = null;
+                    Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);
+                })
                 .Dispose();
         }
 

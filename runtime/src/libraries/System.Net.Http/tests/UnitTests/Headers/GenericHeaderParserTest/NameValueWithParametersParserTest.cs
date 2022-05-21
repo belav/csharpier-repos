@@ -48,12 +48,10 @@ namespace System.Net.Http.Tests
                 GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue("custom;=value", null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("custom;=value", null, ref index);
+            });
         }
 
         [Fact]

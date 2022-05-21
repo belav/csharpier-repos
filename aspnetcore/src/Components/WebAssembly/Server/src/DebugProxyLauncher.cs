@@ -89,16 +89,14 @@ internal static class DebugProxyLauncher
             PassThroughConsoleOutput(debugProxyProcess);
             CompleteTaskWhenServerIsReady(debugProxyProcess, tcs);
 
-            new CancellationTokenSource(DebugProxyLaunchTimeout).Token.Register(
-                () =>
-                {
-                    tcs.TrySetException(
-                        new TimeoutException(
-                            $"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."
-                        )
-                    );
-                }
-            );
+            new CancellationTokenSource(DebugProxyLaunchTimeout).Token.Register(() =>
+            {
+                tcs.TrySetException(
+                    new TimeoutException(
+                        $"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."
+                    )
+                );
+            });
         }
 
         return await tcs.Task;

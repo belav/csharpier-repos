@@ -225,23 +225,19 @@ namespace System.Drawing.Drawing2D.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_WidthZero_ThrowsOutOfMemoryException()
         {
-            Assert.Throws<OutOfMemoryException>(
-                () => new Matrix(new Rectangle(1, 1, 0, 1), new Point[3])
-            );
-            Assert.Throws<OutOfMemoryException>(
-                () => new Matrix(new RectangleF(1, 1, 0, 1), new PointF[3])
-            );
+            Assert.Throws<OutOfMemoryException>(() =>
+                new Matrix(new Rectangle(1, 1, 0, 1), new Point[3]));
+            Assert.Throws<OutOfMemoryException>(() =>
+                new Matrix(new RectangleF(1, 1, 0, 1), new PointF[3]));
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_HeightZero_ThrowsOutOfMemoryException()
         {
-            Assert.Throws<OutOfMemoryException>(
-                () => new Matrix(new Rectangle(1, 1, 1, 0), new Point[3])
-            );
-            Assert.Throws<OutOfMemoryException>(
-                () => new Matrix(new RectangleF(1, 1, 1, 0), new PointF[3])
-            );
+            Assert.Throws<OutOfMemoryException>(() =>
+                new Matrix(new Rectangle(1, 1, 1, 0), new Point[3]));
+            Assert.Throws<OutOfMemoryException>(() =>
+                new Matrix(new RectangleF(1, 1, 1, 0), new PointF[3]));
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -742,9 +738,8 @@ namespace System.Drawing.Drawing2D.Tests
             using (var matrix = new Matrix())
             {
                 Assert.Throws<InvalidOperationException>(() => matrix.Multiply(matrix));
-                Assert.Throws<InvalidOperationException>(
-                    () => matrix.Multiply(matrix, MatrixOrder.Prepend)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    matrix.Multiply(matrix, MatrixOrder.Prepend));
             }
         }
 

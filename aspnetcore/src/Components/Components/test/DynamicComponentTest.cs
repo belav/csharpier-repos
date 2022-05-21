@@ -15,15 +15,11 @@ public class DynamicComponentTest
     [Fact]
     public void RejectsUnknownParameters()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
-                _ = new DynamicComponent().SetParametersAsync(
-                    ParameterView.FromDictionary(parameters)
-                );
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
+            _ = new DynamicComponent().SetParametersAsync(ParameterView.FromDictionary(parameters));
+        });
 
         Assert.StartsWith(
             $"{nameof(DynamicComponent)} does not accept a parameter with the name 'unknownparameter'.",
@@ -38,9 +34,8 @@ public class DynamicComponentTest
         var renderer = new TestRenderer();
         var componentId = renderer.AssignRootComponentId(instance);
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => renderer.RenderRootComponent(componentId, ParameterView.Empty)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            renderer.RenderRootComponent(componentId, ParameterView.Empty));
 
         Assert.StartsWith(
             $"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(DynamicComponent.Type)}.",

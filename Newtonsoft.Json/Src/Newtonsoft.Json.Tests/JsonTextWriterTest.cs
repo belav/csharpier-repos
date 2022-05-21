@@ -1037,18 +1037,14 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null);
-                    }
-                );
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null, true);
-                    }
-                );
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null);
+                });
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null, true);
+                });
             }
         }
 
@@ -1058,14 +1054,12 @@ Parameter name: value",
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
                 ArgumentOutOfRangeException ex =
-                    ExceptionAssert.Throws<ArgumentOutOfRangeException>(
-                        () => jsonWriter.WriteToken((JsonToken)int.MinValue)
-                    );
+                    ExceptionAssert.Throws<ArgumentOutOfRangeException>(() =>
+                        jsonWriter.WriteToken((JsonToken)int.MinValue));
                 Assert.AreEqual("token", ex.ParamName);
 
-                ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(
-                    () => jsonWriter.WriteToken((JsonToken)int.MinValue, "test")
-                );
+                ex = ExceptionAssert.Throws<ArgumentOutOfRangeException>(() =>
+                    jsonWriter.WriteToken((JsonToken)int.MinValue, "test"));
                 Assert.AreEqual("token", ex.ParamName);
             }
         }

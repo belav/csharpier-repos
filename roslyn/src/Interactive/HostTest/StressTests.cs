@@ -44,18 +44,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
             host.InteractiveHostProcessCreated += new Action<Process>(
                 proc =>
                 {
-                    _ = Task.Run(
-                        async () =>
-                        {
-                            await Task.Delay(milliseconds).ConfigureAwait(false);
+                    _ = Task.Run(async () =>
+                    {
+                        await Task.Delay(milliseconds).ConfigureAwait(false);
 
-                            try
-                            {
-                                proc.Kill();
-                            }
-                            catch { }
+                        try
+                        {
+                            proc.Kill();
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
 

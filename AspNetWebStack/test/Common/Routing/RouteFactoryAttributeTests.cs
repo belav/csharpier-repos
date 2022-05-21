@@ -126,13 +126,11 @@ namespace System.Web.Mvc.Routing
 
             string name = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    name = builder.Name;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                name = builder.Name;
+                return null;
+            });
             DirectRouteFactoryContext context = CreateContext((i) => builder);
 
             // Act
@@ -152,13 +150,11 @@ namespace System.Web.Mvc.Routing
 
             int order = 0;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    order = builder.Order;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                order = builder.Order;
+                return null;
+            });
             DirectRouteFactoryContext context = CreateContext((i) => builder);
 
             // Act
@@ -181,13 +177,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary defaults = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    defaults = builder.Defaults;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                defaults = builder.Defaults;
+                return null;
+            });
             Assert.Null(builder.Defaults); // Guard
             DirectRouteFactoryContext context = CreateContext((i) => builder);
 
@@ -225,13 +219,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary defaults = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    defaults = builder.Defaults;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                defaults = builder.Defaults;
+                return null;
+            });
 
             builder.Defaults = existingDefaults;
 
@@ -265,13 +257,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary defaults = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    defaults = builder.Defaults;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                defaults = builder.Defaults;
+                return null;
+            });
 
             builder.Defaults = existingDefaults;
 
@@ -297,13 +287,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary constraints = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    constraints = builder.Constraints;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                constraints = builder.Constraints;
+                return null;
+            });
             Assert.Null(builder.Constraints); // Guard
             DirectRouteFactoryContext context = CreateContext((i) => builder);
 
@@ -341,13 +329,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary constraints = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    constraints = builder.Constraints;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                constraints = builder.Constraints;
+                return null;
+            });
 
             builder.Constraints = existingConstraints;
 
@@ -381,13 +367,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary constraints = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    constraints = builder.Constraints;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                constraints = builder.Constraints;
+                return null;
+            });
 
             builder.Constraints = existingConstraints;
 
@@ -413,13 +397,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary dataTokens = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    dataTokens = builder.DataTokens;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                dataTokens = builder.DataTokens;
+                return null;
+            });
             Assert.Null(builder.DataTokens); // Guard
             DirectRouteFactoryContext context = CreateContext((i) => builder);
 
@@ -457,13 +439,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary dataTokens = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    dataTokens = builder.DataTokens;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                dataTokens = builder.DataTokens;
+                return null;
+            });
 
             builder.DataTokens = existingDataTokens;
 
@@ -497,13 +477,11 @@ namespace System.Web.Mvc.Routing
 
             TRouteDictionary dataTokens = null;
             IDirectRouteBuilder builder = null;
-            builder = CreateBuilder(
-                () =>
-                {
-                    dataTokens = builder.DataTokens;
-                    return null;
-                }
-            );
+            builder = CreateBuilder(() =>
+            {
+                dataTokens = builder.DataTokens;
+                return null;
+            });
 
             builder.DataTokens = existingDataTokens;
 

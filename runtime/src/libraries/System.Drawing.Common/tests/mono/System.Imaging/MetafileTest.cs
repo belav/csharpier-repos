@@ -318,9 +318,8 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Metafile_StreamIntPtrEmfType_Null()
         {
-            Assert.Throws<NullReferenceException>(
-                () => Metafile_StreamEmfType(null, EmfType.EmfOnly)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                Metafile_StreamEmfType(null, EmfType.EmfOnly));
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -337,9 +336,8 @@ namespace MonoTests.System.Drawing.Imaging
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () => Metafile_StreamEmfType(ms, (EmfType)int.MinValue)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    Metafile_StreamEmfType(ms, (EmfType)int.MinValue));
             }
         }
 

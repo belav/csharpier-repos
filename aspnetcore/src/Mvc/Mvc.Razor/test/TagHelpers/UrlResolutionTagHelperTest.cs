@@ -341,9 +341,8 @@ public class UrlResolutionTagHelperTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => tagHelper.Process(context, tagHelperOutput)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            tagHelper.Process(context, tagHelperOutput));
         Assert.Equal(expectedExceptionMessage, exception.Message, StringComparer.Ordinal);
     }
 }

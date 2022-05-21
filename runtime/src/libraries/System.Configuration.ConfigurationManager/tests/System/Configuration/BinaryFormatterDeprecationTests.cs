@@ -21,20 +21,18 @@ namespace System.ConfigurationTests
         public void ThrowOnSettingsPropertyConstructorWithSettingsSerializeAsBinary()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    new SettingsProperty(
-                        "Binary",
-                        typeof(byte[]),
-                        null,
-                        false,
-                        "AString",
-                        SettingsSerializeAs.Binary,
-                        new SettingsAttributeDictionary(),
-                        true,
-                        true
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                new SettingsProperty(
+                    "Binary",
+                    typeof(byte[]),
+                    null,
+                    false,
+                    "AString",
+                    SettingsSerializeAs.Binary,
+                    new SettingsAttributeDictionary(),
+                    true,
+                    true
+                ));
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 

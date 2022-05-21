@@ -148,49 +148,47 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(token);
 
-            _ = Task.Run(
-                async () =>
+            _ = Task.Run(async () =>
+            {
+                try
                 {
+                    RunLoopStopReason reason;
+                    Exception exception;
+
                     try
                     {
-                        RunLoopStopReason reason;
-                        Exception exception;
-
-                        try
-                        {
-                            (reason, exception) = await RunLoop(receive, linkedCts);
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.LogDebug(
-                                $"RunLoop threw an exception. (parentToken: {token.IsCancellationRequested}, linked: {linkedCts.IsCancellationRequested}): {ex} "
-                            );
-                            RunLoopStopped?.Invoke(this, (RunLoopStopReason.Exception, ex));
-                            return;
-                        }
-
-                        try
-                        {
-                            logger.LogDebug(
-                                $"RunLoop stopped, reason: {reason}. (parentToken: {token.IsCancellationRequested}, linked: {linkedCts.IsCancellationRequested}): {exception?.Message}"
-                            );
-                            RunLoopStopped?.Invoke(this, (reason, exception));
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.LogError(
-                                ex,
-                                $"Invoking RunLoopStopped event failed for (reason: {reason}, exception: {exception})"
-                            );
-                        }
+                        (reason, exception) = await RunLoop(receive, linkedCts);
                     }
-                    finally
+                    catch (Exception ex)
                     {
-                        logger.LogDebug($"Loop ended with socket: {socket.State}");
-                        linkedCts.Cancel();
+                        logger.LogDebug(
+                            $"RunLoop threw an exception. (parentToken: {token.IsCancellationRequested}, linked: {linkedCts.IsCancellationRequested}): {ex} "
+                        );
+                        RunLoopStopped?.Invoke(this, (RunLoopStopReason.Exception, ex));
+                        return;
+                    }
+
+                    try
+                    {
+                        logger.LogDebug(
+                            $"RunLoop stopped, reason: {reason}. (parentToken: {token.IsCancellationRequested}, linked: {linkedCts.IsCancellationRequested}): {exception?.Message}"
+                        );
+                        RunLoopStopped?.Invoke(this, (reason, exception));
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(
+                            ex,
+                            $"Invoking RunLoopStopped event failed for (reason: {reason}, exception: {exception})"
+                        );
                     }
                 }
-            );
+                finally
+                {
+                    logger.LogDebug($"Loop ended with socket: {socket.State}");
+                    linkedCts.Cancel();
+                }
+            });
         }
 
         private async Task<(RunLoopStopReason, Exception)> RunLoop(

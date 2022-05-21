@@ -62,9 +62,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_the_error()
         {
-            new Action(
-                () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
+            new Action(() =>
+                Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(
                 ex =>
                 {
                     ex.MemberMap.DestinationName.ShouldBe("Three");
@@ -692,9 +691,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_show_valid()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 

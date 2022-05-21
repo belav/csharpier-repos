@@ -53,9 +53,8 @@ namespace System.IO.Tests
         public Task Read_FileNotFoundAsync()
         {
             string path = GetTestFilePath();
-            return Assert.ThrowsAsync<FileNotFoundException>(
-                async () => await File.ReadAllBytesAsync(path)
-            );
+            return Assert.ThrowsAsync<FileNotFoundException>(async () =>
+                await File.ReadAllBytesAsync(path));
         }
 
         [Fact]
@@ -88,9 +87,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllBytesAsync(path, new byte[0], token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllBytesAsync(path, new byte[0], token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.WriteAllBytesAsync(path, new byte[0], token));
         }
 
         [Fact]
@@ -126,12 +124,10 @@ namespace System.IO.Tests
             byte[] bytes = Encoding.UTF8.GetBytes(new string('c', 100));
             using (File.Create(path))
             {
-                await Assert.ThrowsAsync<IOException>(
-                    async () => await File.WriteAllBytesAsync(path, bytes)
-                );
-                await Assert.ThrowsAsync<IOException>(
-                    async () => await File.ReadAllBytesAsync(path)
-                );
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.WriteAllBytesAsync(path, bytes));
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.ReadAllBytesAsync(path));
             }
         }
 
@@ -159,10 +155,8 @@ namespace System.IO.Tests
                     );
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
-                        async () =>
-                            await File.WriteAllBytesAsync(path, Encoding.UTF8.GetBytes("text"))
-                    );
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+                        await File.WriteAllBytesAsync(path, Encoding.UTF8.GetBytes("text")));
             }
             finally
             {
@@ -277,28 +271,24 @@ namespace System.IO.Tests
             var contentBytes = new byte[] { 1, 2, 3 };
 
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    byte[] readBytes = await File.ReadAllBytesAsync(fifoPath);
+                    Assert.Equal<byte>(contentBytes, readBytes);
+                }),
+                Task.Run(() =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
+                    foreach (byte content in contentBytes)
                     {
-                        byte[] readBytes = await File.ReadAllBytesAsync(fifoPath);
-                        Assert.Equal<byte>(contentBytes, readBytes);
+                        fs.WriteByte(content);
                     }
-                ),
-                Task.Run(
-                    () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        foreach (byte content in contentBytes)
-                        {
-                            fs.WriteByte(content);
-                        }
-                    }
-                )
+                })
             );
         }
     }

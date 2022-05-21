@@ -453,19 +453,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         private Task CompileNamespaceAsAsync(NamespaceSymbol symbol)
         {
             return Task.Run(
-                UICultureUtilities.WithCurrentUICulture(
-                    () =>
+                UICultureUtilities.WithCurrentUICulture(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            CompileNamespace(symbol);
-                        }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
-                        {
-                            throw ExceptionUtilities.Unreachable;
-                        }
+                        CompileNamespace(symbol);
                     }
-                ),
+                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
+                    {
+                        throw ExceptionUtilities.Unreachable;
+                    }
+                }),
                 _cancellationToken
             );
         }
@@ -504,19 +502,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         private Task CompileNamedTypeAsync(NamedTypeSymbol symbol)
         {
             return Task.Run(
-                UICultureUtilities.WithCurrentUICulture(
-                    () =>
+                UICultureUtilities.WithCurrentUICulture(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            CompileNamedType(symbol);
-                        }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
-                        {
-                            throw ExceptionUtilities.Unreachable;
-                        }
+                        CompileNamedType(symbol);
                     }
-                ),
+                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
+                    {
+                        throw ExceptionUtilities.Unreachable;
+                    }
+                }),
                 _cancellationToken
             );
         }

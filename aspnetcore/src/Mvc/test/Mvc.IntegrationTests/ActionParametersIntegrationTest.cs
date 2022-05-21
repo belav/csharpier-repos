@@ -410,9 +410,8 @@ public class ActionParameterIntegrationTest
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -480,9 +479,8 @@ public class ActionParameterIntegrationTest
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -507,9 +505,8 @@ public class ActionParameterIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -534,9 +531,8 @@ public class ActionParameterIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -581,9 +577,8 @@ public class ActionParameterIntegrationTest
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -616,9 +611,8 @@ public class ActionParameterIntegrationTest
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,

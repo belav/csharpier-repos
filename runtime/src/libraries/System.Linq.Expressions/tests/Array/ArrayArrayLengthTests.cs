@@ -2176,61 +2176,51 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionBoolArrayArrayLength(bool[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckBoolArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckBoolArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckBoolArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckBoolArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionByteArrayArrayLength(byte[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckByteArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckByteArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckByteArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckByteArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionCustomArrayArrayLength(C[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckCustomArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckCustomArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckCustomArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckCustomArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionCharArrayArrayLength(char[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckCharArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckCharArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckCharArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckCharArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionCustom2ArrayArrayLength(D[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckCustom2ArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckCustom2ArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckCustom2ArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckCustom2ArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionDecimalArrayArrayLength(
@@ -2239,13 +2229,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckDecimalArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckDecimalArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckDecimalArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckDecimalArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionDelegateArrayArrayLength(
@@ -2254,13 +2242,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckDelegateArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckDelegateArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckDelegateArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckDelegateArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionDoubleArrayArrayLength(
@@ -2269,25 +2255,21 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckDoubleArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckDoubleArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckDoubleArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckDoubleArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionEnumArrayArrayLength(E[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckEnumArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckEnumArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckEnumArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckEnumArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionEnumLongArrayArrayLength(
@@ -2296,13 +2278,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckEnumLongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckEnumLongArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckEnumLongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckEnumLongArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionFloatArrayArrayLength(
@@ -2311,13 +2291,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckFloatArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckFloatArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckFloatArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckFloatArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionFuncArrayArrayLength(
@@ -2326,13 +2304,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckFuncArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckFuncArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckFuncArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckFuncArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionInterfaceArrayArrayLength(
@@ -2341,13 +2317,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckInterfaceArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckInterfaceArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckInterfaceArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckInterfaceArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionIEquatableCustomArrayArrayLength(
@@ -2356,13 +2330,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckIEquatableCustomArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckIEquatableCustomArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckIEquatableCustomArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckIEquatableCustomArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionIEquatableCustom2ArrayArrayLength(
@@ -2371,37 +2343,31 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckIEquatableCustom2ArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckIEquatableCustom2ArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckIEquatableCustom2ArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckIEquatableCustom2ArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionIntArrayArrayLength(int[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckIntArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckIntArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckIntArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckIntArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionLongArrayArrayLength(long[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckLongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckLongArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckLongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckLongArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionObjectArrayArrayLength(
@@ -2410,25 +2376,21 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckObjectArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckObjectArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckObjectArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckObjectArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStructArrayArrayLength(S[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckStructArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStructArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckStructArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStructArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionSByteArrayArrayLength(
@@ -2437,13 +2399,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckSByteArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckSByteArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckSByteArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckSByteArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStructWithStringArrayArrayLength(
@@ -2452,13 +2412,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckStructWithStringArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStructWithStringArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckStructWithStringArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStructWithStringArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStructWithStringAndValueArrayArrayLength(
@@ -2467,21 +2425,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckStructWithStringAndValueArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStructWithStringAndValueArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckStructWithStringAndValueArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStructWithStringAndValueArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionShortArrayArrayLength(
@@ -2490,13 +2438,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckShortArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckShortArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckShortArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckShortArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStructWithTwoValuesArrayArrayLength(
@@ -2505,13 +2451,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckStructWithTwoValuesArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStructWithTwoValuesArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckStructWithTwoValuesArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStructWithTwoValuesArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStructWithValueArrayArrayLength(
@@ -2520,13 +2464,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckStructWithValueArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStructWithValueArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckStructWithValueArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStructWithValueArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionStringArrayArrayLength(
@@ -2535,25 +2477,21 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckStringArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckStringArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckStringArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckStringArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionUIntArrayArrayLength(uint[][] array, bool useInterpreter)
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckUIntArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckUIntArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckUIntArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckUIntArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionULongArrayArrayLength(
@@ -2562,13 +2500,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckULongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckULongArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckULongArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckULongArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionUShortArrayArrayLength(
@@ -2577,13 +2513,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckUShortArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckUShortArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckUShortArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckUShortArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionGenericArrayArrayLength<T>(
@@ -2592,13 +2526,11 @@ namespace System.Linq.Expressions.Tests
         )
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () => CheckGenericArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericArrayArrayLengthExpression(array, useInterpreter));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => CheckGenericArrayArrayLengthExpression(array, useInterpreter)
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericArrayArrayLengthExpression(array, useInterpreter));
         }
 
         private static void CheckExceptionGenericWithClassRestrictionArrayArrayLength<Tc>(
@@ -2607,21 +2539,17 @@ namespace System.Linq.Expressions.Tests
         ) where Tc : class
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckGenericWithClassRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericWithClassRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckGenericWithClassRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericWithClassRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
         }
 
         private static void CheckExceptionGenericWithSubClassRestrictionArrayArrayLength<TC>(
@@ -2630,21 +2558,17 @@ namespace System.Linq.Expressions.Tests
         ) where TC : C
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckGenericWithSubClassRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericWithSubClassRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckGenericWithSubClassRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericWithSubClassRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
         }
 
         private static void CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLength<Tcn>(
@@ -2653,21 +2577,17 @@ namespace System.Linq.Expressions.Tests
         ) where Tcn : class, new()
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
         }
 
         private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLength<TCn>(
@@ -2676,21 +2596,17 @@ namespace System.Linq.Expressions.Tests
         ) where TCn : C, new()
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
         }
 
         private static void CheckExceptionGenericWithStructRestrictionArrayArrayLength<Ts>(
@@ -2699,21 +2615,17 @@ namespace System.Linq.Expressions.Tests
         ) where Ts : struct
         {
             if (array == null)
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        CheckGenericWithStructRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    CheckGenericWithStructRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
             else
-                Assert.Throws<IndexOutOfRangeException>(
-                    () =>
-                        CheckGenericWithStructRestrictionArrayArrayLengthExpression(
-                            array,
-                            useInterpreter
-                        )
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    CheckGenericWithStructRestrictionArrayArrayLengthExpression(
+                        array,
+                        useInterpreter
+                    ));
         }
 
         #endregion

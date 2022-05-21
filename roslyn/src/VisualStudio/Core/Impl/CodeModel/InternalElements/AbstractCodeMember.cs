@@ -133,67 +133,59 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeParameter AddParameter(string name, object type, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    // The parameters are part of the node key, so we need to update it
-                    // after adding a parameter.
-                    var node = LookupNode();
-                    var nodePath = new SyntaxPath(node);
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                // The parameters are part of the node key, so we need to update it
+                // after adding a parameter.
+                var node = LookupNode();
+                var nodePath = new SyntaxPath(node);
 
-                    var parameter = FileCodeModel.AddParameter(this, node, name, type, position);
+                var parameter = FileCodeModel.AddParameter(this, node, name, type, position);
 
-                    ReacquireNodeKey(nodePath, CancellationToken.None);
+                ReacquireNodeKey(nodePath, CancellationToken.None);
 
-                    return parameter;
-                }
-            );
+                return parameter;
+            });
         }
 
         public void RemoveParameter(object element)
         {
-            FileCodeModel.EnsureEditor(
-                () =>
+            FileCodeModel.EnsureEditor(() =>
+            {
+                // The parameters are part of the node key, so we need to update it
+                // after removing a parameter.
+                var node = LookupNode();
+                var nodePath = new SyntaxPath(node);
+
+                var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
+
+                if (codeElement == null)
                 {
-                    // The parameters are part of the node key, so we need to update it
-                    // after removing a parameter.
-                    var node = LookupNode();
-                    var nodePath = new SyntaxPath(node);
-
-                    var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                        element
+                    codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                        this.Parameters.Item(element)
                     );
-
-                    if (codeElement == null)
-                    {
-                        codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                            this.Parameters.Item(element)
-                        );
-                    }
-
-                    if (codeElement == null)
-                    {
-                        throw new ArgumentException(
-                            ServicesVSResources.Element_is_not_valid,
-                            nameof(element)
-                        );
-                    }
-
-                    codeElement.Delete();
-
-                    ReacquireNodeKey(nodePath, CancellationToken.None);
                 }
-            );
+
+                if (codeElement == null)
+                {
+                    throw new ArgumentException(
+                        ServicesVSResources.Element_is_not_valid,
+                        nameof(element)
+                    );
+                }
+
+                codeElement.Delete();
+
+                ReacquireNodeKey(nodePath, CancellationToken.None);
+            });
         }
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
+            });
         }
     }
 }

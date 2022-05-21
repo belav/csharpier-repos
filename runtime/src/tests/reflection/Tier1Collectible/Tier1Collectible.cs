@@ -14,15 +14,13 @@ public static class Program
         const int Pass = 100,
             Fail = 1;
 
-        PromoteToTier1AndRun(
-            () =>
-            {
-                CollectibleTestIteration();
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                GC.WaitForPendingFinalizers();
-            }
-        );
+        PromoteToTier1AndRun(() =>
+        {
+            CollectibleTestIteration();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.WaitForPendingFinalizers();
+        });
 
         return Pass;
     }

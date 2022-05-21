@@ -236,31 +236,13 @@ public sealed class ParallelRunner
                 )
             )
             {
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    // Warmup runs
+                    if (measurePerf)
                     {
-                        // Warmup runs
-                        if (measurePerf)
-                        {
-                            Console.WriteLine("Warmup runs:");
-                            for (int run = 0; run < warmupRuns; ++run)
-                            {
-                                BuildProjects(
-                                    startIndex,
-                                    endIndex,
-                                    totalCount,
-                                    failureCount,
-                                    processList,
-                                    jittedMethods,
-                                    degreeOfParallelism
-                                );
-                            }
-                            // Wait for all the warmup events to come in before starting the real run so there is no interference
-                            perfMeasurer.WaitForWarmupFinished();
-                            Console.WriteLine("Real runs:");
-                        }
-
-                        for (int run = 0; run < realRuns; ++run)
+                        Console.WriteLine("Warmup runs:");
+                        for (int run = 0; run < warmupRuns; ++run)
                         {
                             BuildProjects(
                                 startIndex,
@@ -272,13 +254,29 @@ public sealed class ParallelRunner
                                 degreeOfParallelism
                             );
                         }
-                        if (measurePerf)
-                        {
-                            perfMeasurer.PrintPerfResults();
-                        }
-                        traceEventSession.Stop();
+                        // Wait for all the warmup events to come in before starting the real run so there is no interference
+                        perfMeasurer.WaitForWarmupFinished();
+                        Console.WriteLine("Real runs:");
                     }
-                );
+
+                    for (int run = 0; run < realRuns; ++run)
+                    {
+                        BuildProjects(
+                            startIndex,
+                            endIndex,
+                            totalCount,
+                            failureCount,
+                            processList,
+                            jittedMethods,
+                            degreeOfParallelism
+                        );
+                    }
+                    if (measurePerf)
+                    {
+                        perfMeasurer.PrintPerfResults();
+                    }
+                    traceEventSession.Stop();
+                });
             }
             traceEventSession.Source.Process();
         }

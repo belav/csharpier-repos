@@ -244,20 +244,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _compilerTasks.Push(
                     Task.Run(
-                        UICultureUtilities.WithCurrentUICulture(
-                            () =>
+                        UICultureUtilities.WithCurrentUICulture(() =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    Visit(m);
-                                }
-                                catch (Exception e)
-                                    when (FatalError.ReportAndPropagateUnlessCanceled(e))
-                                {
-                                    throw ExceptionUtilities.Unreachable;
-                                }
+                                Visit(m);
                             }
-                        ),
+                            catch (Exception e)
+                                when (FatalError.ReportAndPropagateUnlessCanceled(e))
+                            {
+                                throw ExceptionUtilities.Unreachable;
+                            }
+                        }),
                         _cancellationToken
                     )
                 );

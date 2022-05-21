@@ -127,9 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_one_to_one_and_one_to_many_self_reference(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () => AssertQuery(async, ss => ss.Set<Weapon>().Include(w => w.Owner.Weapons))
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(async, ss => ss.Set<Weapon>().Include(w => w.Owner.Weapons)));
         }
 
         [ConditionalTheory]
@@ -154,9 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_one_to_one_and_one_to_one_and_one_to_many(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () => AssertQuery(async, ss => ss.Set<CogTag>().Include(t => t.Gear.Squad.Members))
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(async, ss => ss.Set<CogTag>().Include(t => t.Gear.Squad.Members)));
         }
 
         [ConditionalTheory]
@@ -219,23 +217,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_multiple_include_then_include(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Gear>()
-                                .Include(g => g.AssignedCity.BornGears)
-                                .ThenInclude(g => g.Tag)
-                                .Include(g => g.AssignedCity.StationedGears)
-                                .ThenInclude(g => g.Tag)
-                                .Include(g => g.CityOfBirth.BornGears)
-                                .ThenInclude(g => g.Tag)
-                                .Include(g => g.CityOfBirth.StationedGears)
-                                .ThenInclude(g => g.Tag)
-                                .OrderBy(g => g.Nickname)
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Gear>()
+                            .Include(g => g.AssignedCity.BornGears)
+                            .ThenInclude(g => g.Tag)
+                            .Include(g => g.AssignedCity.StationedGears)
+                            .ThenInclude(g => g.Tag)
+                            .Include(g => g.CityOfBirth.BornGears)
+                            .ThenInclude(g => g.Tag)
+                            .Include(g => g.CityOfBirth.StationedGears)
+                            .ThenInclude(g => g.Tag)
+                            .OrderBy(g => g.Nickname)
+                ));
         }
 
         [ConditionalTheory]
@@ -3003,22 +2999,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                     typeof(IQueryable<Gear>).ShortDisplayName()
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<CogTag>()
-                                        .OrderBy(t => t.Note)
-                                        .Select(
-                                            t =>
-                                                ss.Set<Gear>()
-                                                    .Where(g => g.Nickname == t.GearNickName)
-                                        ),
-                                assertOrder: true,
-                                elementAsserter: (e, a) => AssertCollection(e, a)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<CogTag>()
+                                    .OrderBy(t => t.Note)
+                                    .Select(
+                                        t => ss.Set<Gear>().Where(g => g.Nickname == t.GearNickName)
+                                    ),
+                            assertOrder: true,
+                            elementAsserter: (e, a) => AssertCollection(e, a)
+                        ))
                 ).Message,
                 ignoreLineEndingDifferences: true
             );
@@ -3794,17 +3786,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_method_on_collection_navigation_in_predicate(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            from g in ss.Set<Gear>()
-                            where
-                                g.HasSoulPatch && FavoriteWeapon(g.Weapons).Name == "Marcus' Lancer"
-                            select g.Nickname
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from g in ss.Set<Gear>()
+                        where g.HasSoulPatch && FavoriteWeapon(g.Weapons).Name == "Marcus' Lancer"
+                        select g.Nickname
+                ));
         }
 
         [ConditionalTheory]
@@ -3813,37 +3802,33 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            from g in ss.Set<Gear>()
-                            where
-                                !g.HasSoulPatch
-                                && FavoriteWeapon(EF.Property<List<Weapon>>(g, "Weapons")).Name
-                                    == "Cole's Gnasher"
-                            select g.Nickname
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from g in ss.Set<Gear>()
+                        where
+                            !g.HasSoulPatch
+                            && FavoriteWeapon(EF.Property<List<Weapon>>(g, "Weapons")).Name
+                                == "Cole's Gnasher"
+                        select g.Nickname
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Client_method_on_collection_navigation_in_order_by(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            from g in ss.Set<Gear>()
-                            where !g.HasSoulPatch
-                            orderby FavoriteWeapon(g.Weapons).Name descending
-                            select g.Nickname,
-                        assertOrder: true
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from g in ss.Set<Gear>()
+                        where !g.HasSoulPatch
+                        orderby FavoriteWeapon(g.Weapons).Name descending
+                        select g.Nickname,
+                    assertOrder: true
+                ));
         }
 
         [ConditionalTheory]
@@ -3852,17 +3837,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            from g in ss.Set<Gear>().OfType<Officer>()
-                            from v in Veterans(g.Reports)
-                            select new { g = g.Nickname, v = v.Nickname },
-                        elementSorter: e => e.g + e.v
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from g in ss.Set<Gear>().OfType<Officer>()
+                        from v in Veterans(g.Reports)
+                        select new { g = g.Nickname, v = v.Nickname },
+                    elementSorter: e => e.g + e.v
+                ));
         }
 
         [ConditionalTheory(Skip = "Issue #17328")]
@@ -3872,21 +3855,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                from o in ss.Set<Gear>().OfType<Officer>()
-                                join g in ss.Set<Gear>()
-                                    on FavoriteWeapon(o.Weapons).Name equals FavoriteWeapon(
-                                        g.Weapons
-                                    ).Name
-                                where o.HasSoulPatch
-                                select new { o = o.Nickname, g = g.Nickname },
-                            elementSorter: e => e.o + e.g
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from o in ss.Set<Gear>().OfType<Officer>()
+                            join g in ss.Set<Gear>()
+                                on FavoriteWeapon(o.Weapons).Name equals FavoriteWeapon(
+                                    g.Weapons
+                                ).Name
+                            where o.HasSoulPatch
+                            select new { o = o.Nickname, g = g.Nickname },
+                        elementSorter: e => e.o + e.g
+                    ))
             ).Message;
         }
 
@@ -4634,9 +4615,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo"))
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(async, ss => ss.Set<Gear>().Include("Reports.Foo")))
             ).Message;
 
             Assert.Contains(
@@ -6289,14 +6269,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             };
 
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss => ss.Set<Gear>().Include(g => g.Squad).Concat(ss.Set<Gear>()),
-                            elementAsserter: (e, a) => AssertInclude(e, a, expectedIncludes)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss => ss.Set<Gear>().Include(g => g.Squad).Concat(ss.Set<Gear>()),
+                        elementAsserter: (e, a) => AssertInclude(e, a, expectedIncludes)
+                    ))
             ).Message;
 
             Assert.Equal(CoreStrings.SetOperationWithDifferentIncludesInOperands, message);
@@ -6535,34 +6513,32 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_complex_key_selector(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Squad>()
-                                .Join(
-                                    ss.Set<CogTag>().Where(t => t.Note == "Marcus' Tag"),
-                                    o => true,
-                                    i => true,
-                                    (o, i) => new { o, i }
-                                )
-                                .GroupJoin(
-                                    ss.Set<Gear>(),
-                                    oo => oo.o.Members.FirstOrDefault(v => v.Tag == oo.i),
-                                    ii => ii,
-                                    (k, g) =>
-                                        new
-                                        {
-                                            k.o,
-                                            k.i,
-                                            value = g.OrderBy(gg => gg.FullName).FirstOrDefault()
-                                        }
-                                )
-                                .Select(r => new { r.o.Id, TagId = r.i.Id }),
-                        elementSorter: e => (e.Id, e.TagId)
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Squad>()
+                            .Join(
+                                ss.Set<CogTag>().Where(t => t.Note == "Marcus' Tag"),
+                                o => true,
+                                i => true,
+                                (o, i) => new { o, i }
+                            )
+                            .GroupJoin(
+                                ss.Set<Gear>(),
+                                oo => oo.o.Members.FirstOrDefault(v => v.Tag == oo.i),
+                                ii => ii,
+                                (k, g) =>
+                                    new
+                                    {
+                                        k.o,
+                                        k.i,
+                                        value = g.OrderBy(gg => gg.FullName).FirstOrDefault()
+                                    }
+                            )
+                            .Select(r => new { r.o.Id, TagId = r.i.Id }),
+                    elementSorter: e => (e.Id, e.TagId)
+                ));
         }
 
         [ConditionalTheory]
@@ -6579,22 +6555,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                     typeof(IOrderedEnumerable<Weapon>).ShortDisplayName()
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertFirstOrDefault(
-                                async,
-                                ss =>
-                                    ss.Set<Gear>()
-                                        .OrderBy(g => g.Nickname)
-                                        .Select(
-                                            g =>
-                                                g.Weapons
-                                                    .Where(w => !w.IsAutomatic)
-                                                    .OrderBy(w => w.Id)
-                                        ),
-                                asserter: (e, a) => AssertCollection(e, a, ordered: true)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertFirstOrDefault(
+                            async,
+                            ss =>
+                                ss.Set<Gear>()
+                                    .OrderBy(g => g.Nickname)
+                                    .Select(
+                                        g => g.Weapons.Where(w => !w.IsAutomatic).OrderBy(w => w.Id)
+                                    ),
+                            asserter: (e, a) => AssertCollection(e, a, ordered: true)
+                        ))
                 ).Message,
                 ignoreLineEndingDifferences: true
             );
@@ -7054,9 +7025,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Cast_to_derived_type_causes_client_eval(bool async)
         {
-            return Assert.ThrowsAsync<InvalidCastException>(
-                () => AssertQuery(async, ss => ss.Set<Gear>().Cast<Officer>())
-            );
+            return Assert.ThrowsAsync<InvalidCastException>(() =>
+                AssertQuery(async, ss => ss.Set<Gear>().Cast<Officer>()));
         }
 
         [ConditionalTheory]
@@ -8700,17 +8670,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("h => h.Commander"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Faction>()
-                                        .Where(f => f is LocustHorde)
-                                        .Select(f => (LocustHorde)f)
-                                        .Include(h => h.Commander)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Faction>()
+                                    .Where(f => f is LocustHorde)
+                                    .Select(f => (LocustHorde)f)
+                                    .Include(h => h.Commander)
+                        ))
                 ).Message
             );
         }
@@ -8722,16 +8690,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("c => c.BornGears"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Faction>()
-                                        .Select(f => f.Capital)
-                                        .Include(c => c.BornGears)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Faction>().Select(f => f.Capital).Include(c => c.BornGears)
+                        ))
                 ).Message
             );
         }
@@ -8743,16 +8706,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("x => x.f.Capital"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Faction>()
-                                        .Select(f => new { f })
-                                        .Include(x => x.f.Capital)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Faction>().Select(f => new { f }).Include(x => x.f.Capital)
+                        ))
                 ).Message
             );
         }
@@ -8764,13 +8722,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("h => h.Capital"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss => ss.Set<Faction>().Select(f => f).Include(h => h.Capital)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Faction>().Select(f => f).Include(h => h.Capital)
+                        ))
                 ).Message
             );
         }
@@ -8782,16 +8738,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("g => g.Squad"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Faction>()
-                                        .SelectMany(f => f.Capital.BornGears)
-                                        .Include(g => g.Squad)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Faction>()
+                                    .SelectMany(f => f.Capital.BornGears)
+                                    .Include(g => g.Squad)
+                        ))
                 ).Message
             );
         }
@@ -9082,16 +9036,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Group_by_with_aggregate_max_on_entity_type(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Gear>()
-                                .GroupBy(g => g.CityOfBirthName)
-                                .Select(g => new { g.Key, Aggregate = g.Max() })
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Gear>()
+                            .GroupBy(g => g.CityOfBirthName)
+                            .Select(g => new { g.Key, Aggregate = g.Max() })
+                ));
         }
 
         [ConditionalTheory]
@@ -9611,15 +9563,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             checked
             {
-                return Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQueryScalar(
-                            isAsync,
-                            ss =>
-                                ss.Set<LocustLeader>()
-                                    .Select(w => w.ThreatLevel >= (byte)GetThreatLevel())
-                        )
-                );
+                return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQueryScalar(
+                        isAsync,
+                        ss =>
+                            ss.Set<LocustLeader>()
+                                .Select(w => w.ThreatLevel >= (byte)GetThreatLevel())
+                    ));
             }
         }
 

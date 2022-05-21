@@ -39,12 +39,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Nullable object must have a value.",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
+                            async
+                        ))
                 ).Message
             );
         }
@@ -81,9 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override async Task Projecting_correlated_collection_followed_by_Distinct(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Projecting_correlated_collection_followed_by_Distinct(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_correlated_collection_followed_by_Distinct(async))
             ).Message;
 
             Assert.Equal(InMemoryStrings.DistinctOnSubqueryNotSupported, message);
@@ -94,12 +91,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(InMemoryStrings.DistinctOnSubqueryNotSupported, message);

@@ -97,40 +97,38 @@ namespace System.IO.Tests
         public void FileShareOpen_Inheritable()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int i = 0;
-                        foreach (
-                            FileAccess access in new[]
-                            {
-                                FileAccess.ReadWrite,
-                                FileAccess.Write,
-                                FileAccess.Read
-                            }
-                        )
+                .Invoke(() =>
+                {
+                    int i = 0;
+                    foreach (
+                        FileAccess access in new[]
                         {
-                            foreach (FileShare share in s_shares)
-                            {
-                                string fileName = GetTestFilePath(i++);
-                                CreateFileStream(
-                                        fileName,
-                                        FileMode.CreateNew,
-                                        FileAccess.ReadWrite,
-                                        FileShare.ReadWrite | FileShare.Delete
-                                    )
-                                    .Dispose();
-                                CreateFileStream(
-                                        fileName,
-                                        FileMode.Open,
-                                        access,
-                                        share | FileShare.Inheritable
-                                    )
-                                    .Dispose();
-                            }
+                            FileAccess.ReadWrite,
+                            FileAccess.Write,
+                            FileAccess.Read
+                        }
+                    )
+                    {
+                        foreach (FileShare share in s_shares)
+                        {
+                            string fileName = GetTestFilePath(i++);
+                            CreateFileStream(
+                                    fileName,
+                                    FileMode.CreateNew,
+                                    FileAccess.ReadWrite,
+                                    FileShare.ReadWrite | FileShare.Delete
+                                )
+                                .Dispose();
+                            CreateFileStream(
+                                    fileName,
+                                    FileMode.Open,
+                                    access,
+                                    share | FileShare.Inheritable
+                                )
+                                .Dispose();
                         }
                     }
-                )
+                })
                 .Dispose();
         }
 
@@ -212,11 +210,9 @@ namespace System.IO.Tests
             {
                 fs.Write(new byte[] { 42 }, 0, 1);
                 fs.Flush();
-                FSAssert.ThrowsSharingViolation(
-                    () =>
-                        CreateFileStream(fileName, fileMode, FileAccess.Write, FileShare.None)
-                            .Dispose()
-                );
+                FSAssert.ThrowsSharingViolation(() =>
+                    CreateFileStream(fileName, fileMode, FileAccess.Write, FileShare.None)
+                        .Dispose());
             }
             using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Read))
             {

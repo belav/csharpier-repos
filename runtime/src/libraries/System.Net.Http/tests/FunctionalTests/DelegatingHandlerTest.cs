@@ -25,9 +25,8 @@ namespace System.Net.Http.Functional.Tests
             MockHandler handler = new MockHandler();
             Assert.Null(handler.InnerHandler);
             handler.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () => handler.InnerHandler = new MockTransportHandler()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                handler.InnerHandler = new MockTransportHandler());
         }
 
         [Fact]
@@ -48,15 +47,10 @@ namespace System.Net.Http.Functional.Tests
         {
             MockHandler handler = new MockHandler();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    Task t = handler.TestSendAsync(
-                        new HttpRequestMessage(),
-                        CancellationToken.None
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -111,12 +105,10 @@ namespace System.Net.Http.Functional.Tests
             var transport = new MockTransportHandler();
             var handler = new MockHandler(transport);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task t = handler.TestSendAsync(null, CancellationToken.None);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = handler.TestSendAsync(null, CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -126,15 +118,10 @@ namespace System.Net.Http.Functional.Tests
             var handler = new MockHandler(transport);
             handler.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    Task t = handler.TestSendAsync(
-                        new HttpRequestMessage(),
-                        CancellationToken.None
-                    );
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
             Assert.Throws<ObjectDisposedException>(() => handler.InnerHandler = new MockHandler());
             Assert.Equal(transport, handler.InnerHandler);
         }
@@ -156,15 +143,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var handler = new MockHandler();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    Task t = handler.TestSendAsync(
-                        new HttpRequestMessage(),
-                        CancellationToken.None
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Task t = handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
         }
 
         [Fact]

@@ -75,13 +75,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.InvalidIncludeExpression("o.Customer.CustomerID"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
+                        ))
                 ).Message
             );
         }
@@ -93,9 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.InvalidIncludeExpression("o.OrderDate"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate)))
                 ).Message
             );
         }
@@ -104,13 +101,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Include_property_expression_invalid(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Order>().Include(o => new { o.Customer, o.OrderDetails })
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Order>().Include(o => new { o.Customer, o.OrderDetails })
+                ));
         }
 
         [ConditionalTheory]
@@ -146,16 +141,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Then_include_property_expression_invalid(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Include(o => o.Orders)
-                                .ThenInclude(o => new { o.Customer, o.OrderDetails })
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Customer>()
+                            .Include(o => o.Orders)
+                            .ThenInclude(o => new { o.Customer, o.OrderDetails })
+                ));
         }
 
         [ConditionalTheory]
@@ -952,14 +945,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     )
                 )[21..],
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Customer>().Include(c => c.Orders).Where(c => c.IsLondon)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss => ss.Set<Customer>().Include(c => c.Orders).Where(c => c.IsLondon)
+                        ))
                 ).Message
                     .Replace("\r", "")
                     .Replace("\n", "")
@@ -1721,16 +1711,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("t => t.Item1.Orders"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<Customer>()
-                                        .Select(c => new Tuple<Customer, int>(c, 5))
-                                        .Include(t => t.Item1.Orders)
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Customer>()
+                                    .Select(c => new Tuple<Customer, int>(c, 5))
+                                    .Include(t => t.Item1.Orders)
+                        ))
                 ).Message
             );
         }

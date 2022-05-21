@@ -24,9 +24,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter_CustomTag(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
         }
 
         [Theory]
@@ -52,9 +51,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushSetOf();
             writer.PopSetOf();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
         }
 
         [Theory]
@@ -78,9 +76,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushSetOf();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
         }
 
         [Theory]
@@ -458,9 +455,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             Assert.Throws<InvalidOperationException>(() => writer.GetEncodedLength());
             Assert.Throws<InvalidOperationException>(() => writer.Encode());
-            Assert.Throws<InvalidOperationException>(
-                () => writer.TryEncode(Span<byte>.Empty, out written)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.TryEncode(Span<byte>.Empty, out written));
             Assert.Equal(-5, written);
 
             byte[] buf = new byte[10];

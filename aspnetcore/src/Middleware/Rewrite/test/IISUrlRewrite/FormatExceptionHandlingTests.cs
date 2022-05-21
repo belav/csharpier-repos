@@ -67,9 +67,8 @@ public class FormatExceptionHandlingTests
     public void ThrowFormatExceptionWithCorrectMessage(string input, string expected)
     {
         // Arrange, Act, Assert
-        var ex = Assert.Throws<FormatException>(
-            () => new UrlRewriteFileParser().Parse(new StringReader(input), false)
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+            new UrlRewriteFileParser().Parse(new StringReader(input), false));
         Assert.Equal(expected, ex.Message);
     }
 }

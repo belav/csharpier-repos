@@ -102,12 +102,10 @@ namespace System.Net.Tests
                     HttpWebResponse httpResponse = (HttpWebResponse)response;
                     httpResponse.Close();
 
-                    Assert.Throws<ObjectDisposedException>(
-                        () =>
-                        {
-                            httpResponse.GetResponseStream();
-                        }
-                    );
+                    Assert.Throws<ObjectDisposedException>(() =>
+                    {
+                        httpResponse.GetResponseStream();
+                    });
                 }
             );
         }
@@ -182,9 +180,8 @@ namespace System.Net.Tests
                             HttpWebResponse hwr = (HttpWebResponse)response;
 
                             // HttpWebResponse is not serializable on .NET Core.
-                            Assert.Throws<SerializationException>(
-                                () => formatter.Serialize(fs, hwr)
-                            );
+                            Assert.Throws<SerializationException>(() =>
+                                formatter.Serialize(fs, hwr));
                         }
                     }
                 }

@@ -137,29 +137,27 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
         ComponentProperties.ClearCache();
         Routing.QueryParameterValueSupplier.ClearCache();
 
-        await Dispatcher.InvokeAsync(
-            () =>
+        await Dispatcher.InvokeAsync(() =>
+        {
+            if (_rootComponentsLatestParameters is null)
             {
-                if (_rootComponentsLatestParameters is null)
-                {
-                    return;
-                }
+                return;
+            }
 
-                IsRenderingOnMetadataUpdate = true;
-                try
+            IsRenderingOnMetadataUpdate = true;
+            try
+            {
+                foreach (var (componentId, parameters) in _rootComponentsLatestParameters)
                 {
-                    foreach (var (componentId, parameters) in _rootComponentsLatestParameters)
-                    {
-                        var componentState = GetRequiredComponentState(componentId);
-                        componentState.SetDirectParameters(parameters);
-                    }
-                }
-                finally
-                {
-                    IsRenderingOnMetadataUpdate = false;
+                    var componentState = GetRequiredComponentState(componentId);
+                    componentState.SetDirectParameters(parameters);
                 }
             }
-        );
+            finally
+            {
+                IsRenderingOnMetadataUpdate = false;
+            }
+        });
     }
 
     /// <summary>

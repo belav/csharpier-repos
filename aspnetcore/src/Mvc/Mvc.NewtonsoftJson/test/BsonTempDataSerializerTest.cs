@@ -35,12 +35,10 @@ public class BsonTempDataSerializerTest : TempDataSerializerTestBase
         var testProvider = new BsonTempDataSerializer();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                testProvider.EnsureObjectCanBeSerialized(value);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            testProvider.EnsureObjectCanBeSerialized(value);
+        });
         Assert.Equal(
             $"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize "
                 + $"an object of type '{type}'.",
@@ -73,12 +71,10 @@ public class BsonTempDataSerializerTest : TempDataSerializerTestBase
         var testProvider = new BsonTempDataSerializer();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                testProvider.EnsureObjectCanBeSerialized(value);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            testProvider.EnsureObjectCanBeSerialized(value);
+        });
         Assert.Equal(
             $"The '{typeof(BsonTempDataSerializer).FullName}' cannot serialize a dictionary "
                 + $"with a key of type '{type}'. The key must be of type 'System.String'.",

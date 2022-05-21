@@ -44,24 +44,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             for (var i = 0; i < numSets; i++)
             {
                 var setNum = i;
-                var task = Task.Run(
-                    () =>
-                    {
-                        var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(
-                            oldTokens,
-                            newTokens,
-                            setNum
-                        );
-                        var currentEditSet = s_instance.ComputeDiff(
-                            oldTokensSubset,
-                            newTokensSubset
-                        );
+                var task = Task.Run(() =>
+                {
+                    var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(
+                        oldTokens,
+                        newTokens,
+                        setNum
+                    );
+                    var currentEditSet = s_instance.ComputeDiff(oldTokensSubset, newTokensSubset);
 
-                        // Adjust the indices of our results since we partitioned them earlier into smaller sets.
-                        var adjustedEdits = AdjustEditPositions(oldTokens, setNum, currentEditSet);
-                        return adjustedEdits;
-                    }
-                );
+                    // Adjust the indices of our results since we partitioned them earlier into smaller sets.
+                    var adjustedEdits = AdjustEditPositions(oldTokens, setNum, currentEditSet);
+                    return adjustedEdits;
+                });
 
                 tasks.Add(task);
             }

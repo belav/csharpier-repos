@@ -154,12 +154,10 @@ namespace System.Linq.Tests
         {
             var selected = new FastInfiniteEnumerator<int>().Select((e, i) => e);
             using (var en = selected.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]

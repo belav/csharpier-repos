@@ -415,21 +415,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             if (provider is INotifyCommittingItemCompletionProvider notifyProvider)
             {
-                _ = ThreadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        // Make sure the notification isn't sent on UI thread.
-                        await TaskScheduler.Default;
-                        _ = notifyProvider
-                            .NotifyCommittingItemAsync(
-                                document,
-                                roslynItem,
-                                commitCharacter,
-                                cancellationToken
-                            )
-                            .ReportNonFatalErrorAsync();
-                    }
-                );
+                _ = ThreadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    // Make sure the notification isn't sent on UI thread.
+                    await TaskScheduler.Default;
+                    _ = notifyProvider
+                        .NotifyCommittingItemAsync(
+                            document,
+                            roslynItem,
+                            commitCharacter,
+                            cancellationToken
+                        )
+                        .ReportNonFatalErrorAsync();
+                });
             }
 
             if (includesCommitCharacter)

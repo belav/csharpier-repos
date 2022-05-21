@@ -13,25 +13,20 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadSimpleKeyValuePairFail()
         {
             // Invalid form: no Value
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<string, int>>(@"{""Key"": 123}")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(@"{""Key"": 123}"));
 
             // Invalid form: extra property
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<KeyValuePair<string, int>>(
-                        @"{""Key"": ""Key"", ""Value"": 123, ""Value2"": 456}"
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(
+                    @"{""Key"": ""Key"", ""Value"": 123, ""Value2"": 456}"
+                ));
 
             // Invalid form: does not contain both Key and Value properties
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<KeyValuePair<string, int>>(
-                        @"{""Key"": ""Key"", ""Val"": 123"
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(
+                    @"{""Key"": ""Key"", ""Val"": 123"
+                ));
         }
 
         [Fact]
@@ -378,9 +373,8 @@ namespace System.Text.Json.Serialization.Tests
             const string json = @"{""key"":""Hello, World!"",""value"":1}";
 
             // Baseline - with case-sensitive matching, the payload doesn't have mapping properties.
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<string, int>>(json)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(json));
 
             // Test - with case-insensitivity on, we have property matches.
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
@@ -414,9 +408,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // "Key" and "Value" matching is case sensitive.
             json = @"{""key"":""Hello, World!"",""value"":1}";
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<string, int>>(json, options)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(json, options));
 
             // "Key" and "Value" matching is case sensitive, even when case insensitivity is on.
             // Case sensitivity only applies to the result of converting the CLR property names
@@ -427,9 +420,8 @@ namespace System.Text.Json.Serialization.Tests
                 PropertyNameCaseInsensitive = true
             };
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<string, int>>(json, options)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, int>>(json, options));
         }
 
         private class LeadingUnderscorePolicy : JsonNamingPolicy
@@ -477,15 +469,13 @@ namespace System.Text.Json.Serialization.Tests
                 PropertyNamingPolicy = (JsonNamingPolicy)Activator.CreateInstance(policyType)
             };
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<string, string>>("", options)
-            );
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<string, string>>("", options));
             string exAsStr = ex.ToString();
             Assert.Contains(offendingProperty, exAsStr);
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(new KeyValuePair<string, string>("", ""), options)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(new KeyValuePair<string, string>("", ""), options));
         }
 
         private class KeyNameNullPolicy : JsonNamingPolicy
@@ -520,9 +510,8 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(@"{""Value"":1,""Value"":2}")]
         public static void InvalidJsonFail(string json)
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<int, int>>(json)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<int, int>>(json));
         }
 
         [Theory]
@@ -535,15 +524,13 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(@"{""Key"":1,""Value"":2,""Extra"":3}", "$.Extra")]
         public static void JsonPathIsAccurate(string json, string expectedPath)
         {
-            JsonException ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<int, int>>(json)
-            );
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<int, int>>(json));
             Assert.Contains(expectedPath, ex.ToString());
 
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<int, int>>(json)
-            );
+            ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<int, int>>(json));
             Assert.Contains(expectedPath, ex.ToString());
         }
 
@@ -553,9 +540,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonPathIsAccurate_CaseInsensitive(string json, string expectedPath)
         {
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            JsonException ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<int, int>>(json, options)
-            );
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<int, int>>(json, options));
             Assert.Contains(expectedPath, ex.ToString());
         }
 
@@ -568,9 +554,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 PropertyNamingPolicy = new LeadingUnderscorePolicy()
             };
-            JsonException ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<KeyValuePair<int, int>>(json, options)
-            );
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<KeyValuePair<int, int>>(json, options));
             Assert.Contains(expectedPath, ex.ToString());
         }
     }

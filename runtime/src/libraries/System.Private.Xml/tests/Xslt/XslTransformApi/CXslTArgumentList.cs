@@ -9157,9 +9157,8 @@ namespace System.Xml.Tests
 
             m_xsltArg.AddExtensionObject(szDefaultNS, obj);
             LoadXSL("MyObject_CaseSensitive.xsl", xslInputType, readerType);
-            var e = Assert.Throws<XsltException>(
-                () => Transform_ArgList("fruits.xml", outputType, navType)
-            );
+            var e = Assert.Throws<XsltException>(() =>
+                Transform_ArgList("fruits.xml", outputType, navType));
             var exceptionSourceAssembly = "System.Xml";
             CheckExpectedError(
                 e,

@@ -127,12 +127,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<object>();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mock.DefaultValue = defaultValue;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mock.DefaultValue = defaultValue;
+            });
         }
 
         [Fact]
@@ -160,12 +158,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<object>();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mock.DefaultValueProvider = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mock.DefaultValueProvider = null;
+            });
         }
 
         [Fact]
@@ -187,9 +183,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IComparable>();
 
-            Assert.Throws<ArgumentNullException>(
-                () => mock.Setup((Expression<Action<IComparable>>)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                mock.Setup((Expression<Action<IComparable>>)null));
         }
 
         [Fact]
@@ -197,9 +192,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IComparable>();
 
-            Assert.Throws<ArgumentNullException>(
-                () => mock.Setup((Expression<Func<IComparable, string>>)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                mock.Setup((Expression<Func<IComparable, string>>)null));
         }
 
         [Fact]
@@ -844,12 +838,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>(MockBehavior.Strict);
             mock.SetupSet(m => m.Value = null);
 
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    mock.Object.Value = 5;
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                mock.Object.Value = 5;
+            });
 
             var ex = Assert.Throws<MockException>(() => mock.VerifyAll());
             Assert.True(ex.IsVerificationError);
@@ -866,12 +858,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>(MockBehavior.Strict);
             mock.SetupSet(m => m.Value = 5);
 
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    mock.Object.Value = 6;
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                mock.Object.Value = 6;
+            });
         }
 
         [Fact]
@@ -1241,12 +1231,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<Accessibility.ClassWithAccessibleAndInaccessibleMethod>();
 
-            var error = Record.Exception(
-                () =>
-                {
-                    mock.Setup(m => m.Internal());
-                }
-            );
+            var error = Record.Exception(() =>
+            {
+                mock.Setup(m => m.Internal());
+            });
 
             Assert.NotNull(error);
             Assert.IsType<ArgumentException>(error);
@@ -1259,12 +1247,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<Accessibility.ClassWithAccessibleAndInaccessibleMethod>();
 
-            var error = Record.Exception(
-                () =>
-                {
-                    mock.Setup(m => m.Public());
-                }
-            );
+            var error = Record.Exception(() =>
+            {
+                mock.Setup(m => m.Public());
+            });
 
             Assert.Null(error);
         }

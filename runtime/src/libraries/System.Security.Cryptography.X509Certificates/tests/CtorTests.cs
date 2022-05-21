@@ -44,9 +44,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Assert.ThrowsAny<CryptographicException>(() => ignored = c.IssuerName);
             Assert.ThrowsAny<CryptographicException>(() => c.GetCertHashString());
 #if HAVE_THUMBPRINT_OVERLOADS
-            Assert.ThrowsAny<CryptographicException>(
-                () => c.GetCertHashString(HashAlgorithmName.SHA256)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                c.GetCertHashString(HashAlgorithmName.SHA256));
 #endif
             Assert.ThrowsAny<CryptographicException>(() => c.GetEffectiveDateString());
             Assert.ThrowsAny<CryptographicException>(() => c.GetExpirationDateString());
@@ -60,9 +59,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 #pragma warning restore 0618
 
 #if HAVE_THUMBPRINT_OVERLOADS
-            Assert.ThrowsAny<CryptographicException>(
-                () => c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _));
 #endif
         }
 
@@ -349,9 +347,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)] // StoreSavedAsSerializedCerData not supported on Unix
         public static void TestByteArrayConstructor_SerializedCert_Unix()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(TestData.StoreSavedAsSerializedCerData)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestData.StoreSavedAsSerializedCerData));
         }
 
         [Fact]
@@ -444,9 +441,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void InvalidCertificateBlob()
         {
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(new byte[] { 0x01, 0x02, 0x03 })
-            );
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(new byte[] { 0x01, 0x02, 0x03 }));
 
             CryptographicException defaultException = new CryptographicException();
             Assert.NotEqual(defaultException.Message, ex.Message);

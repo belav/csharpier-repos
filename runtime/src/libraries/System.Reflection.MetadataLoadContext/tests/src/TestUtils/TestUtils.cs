@@ -295,35 +295,31 @@ namespace System.Reflection.Tests
         private static MetadataLoadContext TestMetadataLoadContext =>
             s_lazyTestMetadataLoadContext.Value;
         private static readonly Lazy<MetadataLoadContext> s_lazyTestMetadataLoadContext =
-            new Lazy<MetadataLoadContext>(
-                () =>
-                {
-                    return new MetadataLoadContext(new SimpleAssemblyResolver());
-                }
-            );
-
-        private static readonly Lazy<bool> s_useRuntimeTypesForTests = new Lazy<bool>(
-            () =>
+            new Lazy<MetadataLoadContext>(() =>
             {
-                if (PlatformDetection.IsBrowser)
-                    return false;
+                return new MetadataLoadContext(new SimpleAssemblyResolver());
+            });
 
-                var loc = AssemblyPathHelper.GetAssemblyLocation(typeof(TestUtils).Assembly);
-
-                if (File.Exists(Path.Combine(loc, "UseRuntimeTypes.txt")))
-                {
-                    // Disable projection so that are Reflection tests run against the runtime types. This is used primarily to verify
-                    // the *test* code for correctness.
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine(
-                        "! Running Reflection tests on runtime types. They should pass but the results say nothing about MetadataLoadContext correctness."
-                    );
-                    Console.ResetColor();
-                    return true;
-                }
+        private static readonly Lazy<bool> s_useRuntimeTypesForTests = new Lazy<bool>(() =>
+        {
+            if (PlatformDetection.IsBrowser)
                 return false;
+
+            var loc = AssemblyPathHelper.GetAssemblyLocation(typeof(TestUtils).Assembly);
+
+            if (File.Exists(Path.Combine(loc, "UseRuntimeTypes.txt")))
+            {
+                // Disable projection so that are Reflection tests run against the runtime types. This is used primarily to verify
+                // the *test* code for correctness.
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(
+                    "! Running Reflection tests on runtime types. They should pass but the results say nothing about MetadataLoadContext correctness."
+                );
+                Console.ResetColor();
+                return true;
             }
-        );
+            return false;
+        });
     }
 }

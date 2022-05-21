@@ -313,36 +313,32 @@ namespace System.Net.Mail.Tests
         public void TryReadDomainLiteral_WithInvalidCharacter_ShouldThrow()
         {
             int index = InvalidDomainLiteral.Length - 1;
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    DomainLiteralReader.TryReadReverse(
-                        InvalidDomainLiteral,
-                        index,
-                        out int _,
-                        throwExceptionIfFail: true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                DomainLiteralReader.TryReadReverse(
+                    InvalidDomainLiteral,
+                    index,
+                    out int _,
+                    throwExceptionIfFail: true
+                );
+            });
         }
 
         [Fact]
         public void TryReadQuotedString_WithUnicodeAndUnicodeIsInvalid_ShouldThrow()
         {
             int index = UnicodeQuotedString.Length - 1;
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    QuotedStringFormatReader.TryReadReverseUnQuoted(
-                        UnicodeQuotedString,
-                        index,
-                        false,
-                        false,
-                        out int _,
-                        throwExceptionIfFail: true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                QuotedStringFormatReader.TryReadReverseUnQuoted(
+                    UnicodeQuotedString,
+                    index,
+                    false,
+                    false,
+                    out int _,
+                    throwExceptionIfFail: true
+                );
+            });
         }
 
         [Fact]
@@ -401,18 +397,16 @@ namespace System.Net.Mail.Tests
         public void TryReadQuotedString_WithInvalidCharacters_ShouldThrow()
         {
             int index = InvalidQuotedString.Length - 1;
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    QuotedStringFormatReader.TryReadReverseQuoted(
-                        InvalidQuotedString,
-                        index,
-                        false,
-                        out int _,
-                        throwExceptionIfFail: true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                QuotedStringFormatReader.TryReadReverseQuoted(
+                    InvalidQuotedString,
+                    index,
+                    false,
+                    out int _,
+                    throwExceptionIfFail: true
+                );
+            });
         }
 
         [Fact]
@@ -502,17 +496,15 @@ namespace System.Net.Mail.Tests
         public void TryReadDotAtom_WithDotAtBeginning_ShouldThrow()
         {
             int index = InvalidDotAtomStartsWithDot.Length - 1;
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    DotAtomReader.TryReadReverse(
-                        InvalidDotAtomStartsWithDot,
-                        index,
-                        out int _,
-                        throwExceptionIfFail: true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                DotAtomReader.TryReadReverse(
+                    InvalidDotAtomStartsWithDot,
+                    index,
+                    out int _,
+                    throwExceptionIfFail: true
+                );
+            });
         }
 
         [Fact]
@@ -694,31 +686,23 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void TryParseAddress_WithInvalidLocalPart_ShouldThrow()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MailAddressParser.TryParseAddress(
-                        "test[test]@test.com",
-                        out ParseAddressInfo _,
-                        true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MailAddressParser.TryParseAddress(
+                    "test[test]@test.com",
+                    out ParseAddressInfo _,
+                    true
+                );
+            });
         }
 
         [Fact]
         public void TryParseAddress_WithHangingAngleBracket_ShouldThrow()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MailAddressParser.TryParseAddress(
-                        "<test@test.com",
-                        out ParseAddressInfo _,
-                        true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MailAddressParser.TryParseAddress("<test@test.com", out ParseAddressInfo _, true);
+            });
         }
 
         [Fact]
@@ -740,16 +724,14 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void TryParseAddress_WithInvalidLocalPartAtEnd_ShouldThrow()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MailAddressParser.TryParseAddress(
-                        "[test]test@test.com",
-                        out ParseAddressInfo _,
-                        true
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MailAddressParser.TryParseAddress(
+                    "[test]test@test.com",
+                    out ParseAddressInfo _,
+                    true
+                );
+            });
         }
 
         [Fact]

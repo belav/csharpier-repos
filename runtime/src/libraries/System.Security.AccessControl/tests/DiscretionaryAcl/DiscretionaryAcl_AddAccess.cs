@@ -526,26 +526,24 @@ namespace System.Security.AccessControl.Tests
             );
 
             //Case 7, null sid
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    accessControlType = 1;
-                    accessMask = 1;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.AddAccess(
-                        (AccessControlType)accessControlType,
-                        null,
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                accessControlType = 1;
+                accessMask = 1;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.AddAccess(
+                    (AccessControlType)accessControlType,
+                    null,
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 8, add one Access ACE to the DiscretionaryAcl with no ACE
             isContainer = true;
@@ -621,86 +619,82 @@ namespace System.Security.AccessControl.Tests
             //Case 10, add Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
 
-                    inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    accessControlType = 100;
-                    sid = "BA";
-                    accessMask = 1;
+                accessControlType = 100;
+                sid = "BA";
+                accessMask = 1;
 
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.AddAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.AddAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 11, all the ACEs in the Dacl are non-qualified ACE, no merge
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
 
-                    inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    accessControlType = 0;
-                    sid = "BA";
-                    accessMask = 1;
+                accessControlType = 0;
+                sid = "BA";
+                accessMask = 1;
 
-                    rawAcl = new RawAcl(0, 1);
-                    opaque = new byte[4];
-                    gAce = new CustomAce(
-                        AceType.MaxDefinedAceType + 1,
-                        AceFlags.InheritanceFlags,
-                        opaque
-                    );
-                    rawAcl.InsertAce(0, gAce);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                rawAcl = new RawAcl(0, 1);
+                opaque = new byte[4];
+                gAce = new CustomAce(
+                    AceType.MaxDefinedAceType + 1,
+                    AceFlags.InheritanceFlags,
+                    opaque
+                );
+                rawAcl.InsertAce(0, gAce);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    gAce = new CommonAce(
-                        AceFlags.ContainerInherit | AceFlags.InheritOnly,
-                        AceQualifier.AccessAllowed,
-                        accessMask,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, gAce);
+                gAce = new CommonAce(
+                    AceFlags.ContainerInherit | AceFlags.InheritOnly,
+                    AceQualifier.AccessAllowed,
+                    accessMask,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, gAce);
 
-                    //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
-                    //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
+                //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
+                //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
 
-                    TestAddAccess(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                TestAddAccess(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 12, add Ace to exceed binary length boundary, throw exception
             isContainer = true;
@@ -720,20 +714,18 @@ namespace System.Security.AccessControl.Tests
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    discretionaryAcl.AddAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                discretionaryAcl.AddAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
         }
     }
 }

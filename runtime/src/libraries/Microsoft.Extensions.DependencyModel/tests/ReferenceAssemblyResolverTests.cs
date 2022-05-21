@@ -186,9 +186,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 new string[] { ReferencePath }
             );
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => resolver.TryResolveAssemblyPaths(library, assemblies)
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                resolver.TryResolveAssemblyPaths(library, assemblies));
 
             exception.Message.Should().Contain(F.SecondAssemblyPath).And.Contain(library.Name);
         }

@@ -610,17 +610,15 @@ class Query
                 for (int j = 0; j < tasks.Length; j++)
                 {
                     var metadataOnly = j % 2 == 0;
-                    tasks[j] = Task.Run(
-                        () =>
-                        {
-                            var stream = new MemoryStream();
-                            var result = compilation.Emit(
-                                stream,
-                                options: new EmitOptions(metadataOnly: metadataOnly)
-                            );
-                            result.Diagnostics.Verify();
-                        }
-                    );
+                    tasks[j] = Task.Run(() =>
+                    {
+                        var stream = new MemoryStream();
+                        var result = compilation.Emit(
+                            stream,
+                            options: new EmitOptions(metadataOnly: metadataOnly)
+                        );
+                        result.Diagnostics.Verify();
+                    });
                 }
 
                 // this should not fail. if you ever see a NRE or some kind of crash here enter a bug.

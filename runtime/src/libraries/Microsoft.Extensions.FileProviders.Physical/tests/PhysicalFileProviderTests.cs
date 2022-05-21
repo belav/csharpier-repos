@@ -2166,12 +2166,10 @@ namespace Microsoft.Extensions.FileProviders
                         )
                         {
                             // Act / Assert
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    provider.UsePollingFileWatcher = true;
-                                }
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                provider.UsePollingFileWatcher = true;
+                            });
                         }
                     }
                 }

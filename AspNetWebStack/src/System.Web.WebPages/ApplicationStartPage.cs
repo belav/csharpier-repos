@@ -45,14 +45,12 @@ namespace System.Web.WebPages
         internal void ExecuteInternal()
         {
             // See comments in GetSafeExecuteStartPageThunk().
-            _safeExecuteStartPageThunk(
-                () =>
-                {
-                    Output = new StringWriter(CultureInfo.InvariantCulture);
-                    Execute();
-                    Markup = new HtmlString(Output.ToString());
-                }
-            );
+            _safeExecuteStartPageThunk(() =>
+            {
+                Output = new StringWriter(CultureInfo.InvariantCulture);
+                Execute();
+                Markup = new HtmlString(Output.ToString());
+            });
         }
 
         internal static void ExecuteStartPage(HttpApplication application)

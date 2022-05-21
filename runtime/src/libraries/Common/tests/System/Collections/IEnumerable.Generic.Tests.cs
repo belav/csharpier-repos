@@ -367,9 +367,8 @@ namespace System.Collections.Tests
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(
-                                    () => enumerator.MoveNext()
-                                );
+                                Assert.Throws<InvalidOperationException>(() =>
+                                    enumerator.MoveNext());
                             }
                             else
                             {
@@ -429,9 +428,8 @@ namespace System.Collections.Tests
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(
-                                    () => enumerator.MoveNext()
-                                );
+                                Assert.Throws<InvalidOperationException>(() =>
+                                    enumerator.MoveNext());
                             }
                             else
                             {
@@ -488,9 +486,8 @@ namespace System.Collections.Tests
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(
-                                    () => enumerator.MoveNext()
-                                );
+                                Assert.Throws<InvalidOperationException>(() =>
+                                    enumerator.MoveNext());
                             }
                             else
                             {

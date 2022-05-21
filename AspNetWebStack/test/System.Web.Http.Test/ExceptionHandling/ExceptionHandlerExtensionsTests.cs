@@ -162,9 +162,8 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => ExceptionHandlerExtensions.HandleAsync(handler, context, cancellationToken)
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                ExceptionHandlerExtensions.HandleAsync(handler, context, cancellationToken));
             Assert.Equal("IHttpActionResult.ExecuteAsync must not return null.", exception.Message);
         }
 

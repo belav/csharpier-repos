@@ -96,9 +96,8 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
         );
 
         // Act & assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => tokenProvider.GenerateRequestToken(httpContext, cookieToken)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            tokenProvider.GenerateRequestToken(httpContext, cookieToken));
         Assert.Equal(
             "The provided identity of type "
                 + $"'{typeof(MyAuthenticatedIdentityWithoutUsername).FullName}' "
@@ -283,9 +282,8 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
 
         // Act & Assert
         string message;
-        var ex = Assert.Throws<ArgumentNullException>(
-            () => tokenProvider.TryValidateTokenSet(httpContext, null, fieldtoken, out message)
-        );
+        var ex = Assert.Throws<ArgumentNullException>(() =>
+            tokenProvider.TryValidateTokenSet(httpContext, null, fieldtoken, out message));
 
         Assert.StartsWith(@"The required antiforgery cookie token must be provided.", ex.Message);
     }
@@ -306,9 +304,8 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
 
         // Act & Assert
         string message;
-        var ex = Assert.Throws<ArgumentNullException>(
-            () => tokenProvider.TryValidateTokenSet(httpContext, cookieToken, null, out message)
-        );
+        var ex = Assert.Throws<ArgumentNullException>(() =>
+            tokenProvider.TryValidateTokenSet(httpContext, cookieToken, null, out message));
 
         Assert.StartsWith("The required antiforgery request token must be provided.", ex.Message);
     }

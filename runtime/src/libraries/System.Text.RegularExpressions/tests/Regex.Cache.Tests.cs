@@ -43,15 +43,13 @@ namespace System.Text.RegularExpressions.Tests
         public void Ctor_Cache_Second_drops_first()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Regex.CacheSize = 1;
-                        Assert.True(Regex.IsMatch("1", "1"));
-                        Assert.True(Regex.IsMatch("2", "2")); // previous removed from cache
-                        Assert.True(GetCachedItemsNum() == 1);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Regex.CacheSize = 1;
+                    Assert.True(Regex.IsMatch("1", "1"));
+                    Assert.True(Regex.IsMatch("2", "2")); // previous removed from cache
+                    Assert.True(GetCachedItemsNum() == 1);
+                })
                 .Dispose();
         }
 
@@ -59,19 +57,17 @@ namespace System.Text.RegularExpressions.Tests
         public void Ctor_Cache_Shrink_cache()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Regex.CacheSize = 2;
-                        Assert.True(Regex.IsMatch("1", "1"));
-                        Assert.True(Regex.IsMatch("2", "2"));
-                        Assert.True(GetCachedItemsNum() == 2);
-                        Regex.CacheSize = 1;
-                        Assert.True(GetCachedItemsNum() == 1);
-                        Regex.CacheSize = 0; // clear
-                        Assert.True(GetCachedItemsNum() == 0);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Regex.CacheSize = 2;
+                    Assert.True(Regex.IsMatch("1", "1"));
+                    Assert.True(Regex.IsMatch("2", "2"));
+                    Assert.True(GetCachedItemsNum() == 2);
+                    Regex.CacheSize = 1;
+                    Assert.True(GetCachedItemsNum() == 1);
+                    Regex.CacheSize = 0; // clear
+                    Assert.True(GetCachedItemsNum() == 0);
+                })
                 .Dispose();
         }
 
@@ -79,20 +75,18 @@ namespace System.Text.RegularExpressions.Tests
         public void Ctor_Cache_Promote_entries()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Regex.CacheSize = 3;
-                        Assert.True(Regex.IsMatch("1", "1"));
-                        Assert.True(Regex.IsMatch("2", "2"));
-                        Assert.True(Regex.IsMatch("3", "3"));
-                        Assert.True(GetCachedItemsNum() == 3);
-                        Assert.True(Regex.IsMatch("1", "1")); // should be put first
-                        Assert.True(GetCachedItemsNum() == 3);
-                        Regex.CacheSize = 1; // only 1 stays
-                        Assert.True(GetCachedItemsNum() == 1);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Regex.CacheSize = 3;
+                    Assert.True(Regex.IsMatch("1", "1"));
+                    Assert.True(Regex.IsMatch("2", "2"));
+                    Assert.True(Regex.IsMatch("3", "3"));
+                    Assert.True(GetCachedItemsNum() == 3);
+                    Assert.True(Regex.IsMatch("1", "1")); // should be put first
+                    Assert.True(GetCachedItemsNum() == 3);
+                    Regex.CacheSize = 1; // only 1 stays
+                    Assert.True(GetCachedItemsNum() == 1);
+                })
                 .Dispose();
         }
 
@@ -100,24 +94,22 @@ namespace System.Text.RegularExpressions.Tests
         public void Ctor_Cache_Uses_culture_and_options()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Regex.CacheSize = 0;
-                        Regex.CacheSize = 3;
-                        Assert.True(Regex.IsMatch("1", "1", RegexOptions.IgnoreCase));
-                        Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
-                        Assert.True(GetCachedItemsNum() == 2);
-                        // Force to set a different culture than the current culture!
-                        CultureInfo.CurrentCulture = CultureInfo.CurrentCulture.Equals(
-                            CultureInfo.GetCultureInfo("de-DE")
-                        )
-                            ? CultureInfo.InvariantCulture
-                            : CultureInfo.GetCultureInfo("de-DE");
-                        Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
-                        Assert.True(GetCachedItemsNum() == 3);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Regex.CacheSize = 0;
+                    Regex.CacheSize = 3;
+                    Assert.True(Regex.IsMatch("1", "1", RegexOptions.IgnoreCase));
+                    Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
+                    Assert.True(GetCachedItemsNum() == 2);
+                    // Force to set a different culture than the current culture!
+                    CultureInfo.CurrentCulture = CultureInfo.CurrentCulture.Equals(
+                        CultureInfo.GetCultureInfo("de-DE")
+                    )
+                        ? CultureInfo.InvariantCulture
+                        : CultureInfo.GetCultureInfo("de-DE");
+                    Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
+                    Assert.True(GetCachedItemsNum() == 3);
+                })
                 .Dispose();
         }
 
@@ -126,38 +118,36 @@ namespace System.Text.RegularExpressions.Tests
         {
             // assume the limit is less than the cache size so we cross it two times:
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    int original = Regex.CacheSize;
+                    Regex.CacheSize = 0;
+                    Fill(original);
+                    const int limit = 10;
+                    Regex.CacheSize = limit - 1;
+                    Regex.CacheSize = 0;
+                    Fill(original);
+                    Remove(original);
+
+                    void Fill(int n)
                     {
-                        int original = Regex.CacheSize;
-                        Regex.CacheSize = 0;
-                        Fill(original);
-                        const int limit = 10;
-                        Regex.CacheSize = limit - 1;
-                        Regex.CacheSize = 0;
-                        Fill(original);
-                        Remove(original);
-
-                        void Fill(int n)
+                        for (int i = 0; i < n; i++)
                         {
-                            for (int i = 0; i < n; i++)
-                            {
-                                Regex.CacheSize++;
-                                Assert.True(Regex.IsMatch(i.ToString(), i.ToString()));
-                                Assert.True(GetCachedItemsNum() == i + 1);
-                            }
-                        }
-
-                        void Remove(int n)
-                        {
-                            for (int i = 0; i < original; i++)
-                            {
-                                Regex.CacheSize--;
-                                Assert.True(GetCachedItemsNum() == Regex.CacheSize);
-                            }
+                            Regex.CacheSize++;
+                            Assert.True(Regex.IsMatch(i.ToString(), i.ToString()));
+                            Assert.True(GetCachedItemsNum() == i + 1);
                         }
                     }
-                )
+
+                    void Remove(int n)
+                    {
+                        for (int i = 0; i < original; i++)
+                        {
+                            Regex.CacheSize--;
+                            Assert.True(GetCachedItemsNum() == Regex.CacheSize);
+                        }
+                    }
+                })
                 .Dispose();
         }
 

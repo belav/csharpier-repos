@@ -91,14 +91,10 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                SocketException ex = Assert.ThrowsAny<SocketException>(
-                    () =>
-                    {
-                        sock.Connect(
-                            new DnsEndPoint(Configuration.Sockets.InvalidHost, UnusedPort)
-                        );
-                    }
-                );
+                SocketException ex = Assert.ThrowsAny<SocketException>(() =>
+                {
+                    sock.Connect(new DnsEndPoint(Configuration.Sockets.InvalidHost, UnusedPort));
+                });
 
                 SocketError errorCode = ex.SocketErrorCode;
                 Assert.True(
@@ -106,12 +102,10 @@ namespace System.Net.Sockets.Tests
                     $"SocketErrorCode: {errorCode}"
                 );
 
-                ex = Assert.ThrowsAny<SocketException>(
-                    () =>
-                    {
-                        sock.Connect(new DnsEndPoint("localhost", UnusedPort));
-                    }
-                );
+                ex = Assert.ThrowsAny<SocketException>(() =>
+                {
+                    sock.Connect(new DnsEndPoint("localhost", UnusedPort));
+                });
 
                 Assert.Equal(SocketError.ConnectionRefused, ex.SocketErrorCode);
             }
@@ -247,17 +241,15 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                SocketException ex = Assert.ThrowsAny<SocketException>(
-                    () =>
-                    {
-                        IAsyncResult result = sock.BeginConnect(
-                            new DnsEndPoint(Configuration.Sockets.InvalidHost, UnusedPort),
-                            null,
-                            null
-                        );
-                        sock.EndConnect(result);
-                    }
-                );
+                SocketException ex = Assert.ThrowsAny<SocketException>(() =>
+                {
+                    IAsyncResult result = sock.BeginConnect(
+                        new DnsEndPoint(Configuration.Sockets.InvalidHost, UnusedPort),
+                        null,
+                        null
+                    );
+                    sock.EndConnect(result);
+                });
 
                 SocketError errorCode = ex.SocketErrorCode;
                 Assert.True(
@@ -265,17 +257,15 @@ namespace System.Net.Sockets.Tests
                     "SocketErrorCode: {0}" + errorCode
                 );
 
-                ex = Assert.ThrowsAny<SocketException>(
-                    () =>
-                    {
-                        IAsyncResult result = sock.BeginConnect(
-                            new DnsEndPoint("localhost", UnusedPort),
-                            null,
-                            null
-                        );
-                        sock.EndConnect(result);
-                    }
-                );
+                ex = Assert.ThrowsAny<SocketException>(() =>
+                {
+                    IAsyncResult result = sock.BeginConnect(
+                        new DnsEndPoint("localhost", UnusedPort),
+                        null,
+                        null
+                    );
+                    sock.EndConnect(result);
+                });
 
                 Assert.Equal(SocketError.ConnectionRefused, ex.SocketErrorCode);
             }

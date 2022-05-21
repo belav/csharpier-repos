@@ -675,9 +675,8 @@ namespace System.Tests
         [InlineData("Yellow,Orange")]
         public static void Parse_NonExistentValue_IncludedInErrorMessage(string value)
         {
-            ArgumentException e = Assert.Throws<ArgumentException>(
-                () => Enum.Parse(typeof(SimpleEnum), value)
-            );
+            ArgumentException e = Assert.Throws<ArgumentException>(() =>
+                Enum.Parse(typeof(SimpleEnum), value));
             Assert.Contains(value, e.Message);
         }
 
@@ -1193,9 +1192,8 @@ namespace System.Tests
         [MemberData(nameof(IsDefined_NonIntegerValue_TestData))]
         public void IsDefined_NonIntegerValue_ThrowsThrowsInvalidOperationException(object value)
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Enum.IsDefined(typeof(SimpleEnum), value)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Enum.IsDefined(typeof(SimpleEnum), value));
         }
 
         public static IEnumerable<object[]> HasFlag_TestData()
@@ -3167,15 +3165,12 @@ namespace System.Tests
                 () => Enum.Format(typeof(SimpleEnum), "Red", "F")
             ); // Value is of the wrong integral
 
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")
-            ); // Format is empty
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "   \t")
-            ); // Format is whitespace
-            Assert.Throws<FormatException>(
-                () => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "t")
-            ); // No such format
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")); // Format is empty
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "   \t")); // Format is whitespace
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "t")); // No such format
         }
 
         public static IEnumerable<object[]> UnsupportedEnumType_TestData()
@@ -3249,27 +3244,24 @@ namespace System.Tests
             object value
         )
         {
-            Exception formatGException = Assert.ThrowsAny<Exception>(
-                () => Enum.Format(enumType, value, "G")
-            );
+            Exception formatGException = Assert.ThrowsAny<Exception>(() =>
+                Enum.Format(enumType, value, "G"));
             string formatGExceptionName = formatGException.GetType().Name;
             Assert.True(
                 formatGExceptionName == nameof(InvalidOperationException)
                     || formatGExceptionName == "ContractException"
             );
 
-            Exception formatXException = Assert.ThrowsAny<Exception>(
-                () => Enum.Format(enumType, value, "X")
-            );
+            Exception formatXException = Assert.ThrowsAny<Exception>(() =>
+                Enum.Format(enumType, value, "X"));
             string formatXExceptionName = formatXException.GetType().Name;
             Assert.True(
                 formatXExceptionName == nameof(InvalidOperationException)
                     || formatXExceptionName == "ContractException"
             );
 
-            Exception formatFException = Assert.ThrowsAny<Exception>(
-                () => Enum.Format(enumType, value, "F")
-            );
+            Exception formatFException = Assert.ThrowsAny<Exception>(() =>
+                Enum.Format(enumType, value, "F"));
             string formatFExceptionName = formatFException.GetType().Name;
             Assert.True(
                 formatFExceptionName == nameof(InvalidOperationException)

@@ -290,9 +290,8 @@ namespace System.Text.Json.Nodes.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-                Assert.Throws<InvalidOperationException>(
-                    () => JsonValue.Create(document.RootElement)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    JsonValue.Create(document.RootElement));
         }
 
         [Fact]

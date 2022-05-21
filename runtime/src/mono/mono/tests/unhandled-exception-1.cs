@@ -16,19 +16,17 @@ class Driver
         ManualResetEvent mre = new ManualResetEvent(false);
 
         var t = new Thread(
-            new ThreadStart(
-                () =>
+            new ThreadStart(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        throw new CustomException();
-                    }
-                    finally
-                    {
-                        mre.Set();
-                    }
+                    throw new CustomException();
                 }
-            )
+                finally
+                {
+                    mre.Set();
+                }
+            })
         );
         t.Start();
 

@@ -69,37 +69,33 @@ namespace System.SpanTests
         [Fact]
         public static void TestUnalignedForwards()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
+            Assert.Throws<ArgumentException>(() =>
+            {
+                int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
-                    ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                    ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
-                        bytes.Slice(2, 5 * sizeof(int))
-                    );
+                ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
-                    Span<int> actual = a.AsSpan(0, 5);
+                Span<int> actual = a.AsSpan(0, 5);
 
-                    DoubleEachElementForwards(source, actual);
-                }
-            );
+                DoubleEachElementForwards(source, actual);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
+            Assert.Throws<ArgumentException>(() =>
+            {
+                int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
-                    ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                    ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
-                        bytes.Slice(2, 5 * sizeof(int))
-                    );
+                ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
-                    Span<int> actual = a.AsSpan(1, 5);
+                Span<int> actual = a.AsSpan(1, 5);
 
-                    DoubleEachElementForwards(source, actual);
-                }
-            );
+                DoubleEachElementForwards(source, actual);
+            });
         }
 
         private static void DoubleEachElementBackwards(
@@ -163,37 +159,33 @@ namespace System.SpanTests
         [Fact]
         public static void TestUnalignedBackwards()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
+            Assert.Throws<ArgumentException>(() =>
+            {
+                int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
-                    ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                    ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
-                        bytes.Slice(2, 5 * sizeof(int))
-                    );
+                ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
-                    Span<int> actual = a.AsSpan(0, 5);
+                Span<int> actual = a.AsSpan(0, 5);
 
-                    DoubleEachElementBackwards(source, actual);
-                }
-            );
+                DoubleEachElementBackwards(source, actual);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
+            Assert.Throws<ArgumentException>(() =>
+            {
+                int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
-                    ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                    ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
-                        bytes.Slice(2, 5 * sizeof(int))
-                    );
+                ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
-                    Span<int> actual = a.AsSpan(1, 5);
+                Span<int> actual = a.AsSpan(1, 5);
 
-                    DoubleEachElementBackwards(source, actual);
-                }
-            );
+                DoubleEachElementBackwards(source, actual);
+            });
         }
 
         [Fact]

@@ -333,9 +333,8 @@ namespace System.Text.Json.Serialization.Tests
                 [ETestEnum.TestValue1] = ETestEnum.TestValue1
             };
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(dict, options)
-            );
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(dict, options));
 
             Assert.Contains(typeof(CustomJsonNamingPolicy).ToString(), ex.Message);
         }
@@ -349,13 +348,11 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             // A naming policy that returns null is not allowed.
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await JsonSerializerWrapperForString.SerializeWrapper(
-                        new Dictionary<string, int> { { "onlyKey", 1 } },
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await JsonSerializerWrapperForString.SerializeWrapper(
+                    new Dictionary<string, int> { { "onlyKey", 1 } },
+                    options
+                ));
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int> obj = await JsonSerializerWrapperForString.DeserializeWrapper<
@@ -401,13 +398,11 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             // A naming policy that returns null is not allowed.
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await JsonSerializerWrapperForString.SerializeWrapper(
-                        new Dictionary<string, int?> { { "onlyKey", 1 } },
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await JsonSerializerWrapperForString.SerializeWrapper(
+                    new Dictionary<string, int?> { { "onlyKey", 1 } },
+                    options
+                ));
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int?> obj = await JsonSerializerWrapperForString.DeserializeWrapper<

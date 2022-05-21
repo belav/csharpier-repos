@@ -259,15 +259,13 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         {
             ApplyingLoad = true;
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                foreach (var worker in _workers.Values)
                 {
-                    foreach (var worker in _workers.Values)
-                    {
-                        worker.Worker.StartTestAsync(sendInterval, messageSize);
-                    }
+                    worker.Worker.StartTestAsync(sendInterval, messageSize);
                 }
-            );
+            });
         }
 
         public void StopWorker(int workerId)

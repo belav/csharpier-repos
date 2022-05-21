@@ -79,12 +79,10 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(']')]
         public void Ctor_SeparatorInMethod_Exception(char separator)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new HttpMethod("Get" + separator);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new HttpMethod("Get" + separator);
+            });
         }
 
         [Fact]

@@ -53,16 +53,10 @@ namespace System.Net.Security.Tests
             Type expectedException
         )
         {
-            Exception e = await Record.ExceptionAsync(
-                () =>
-                {
-                    return ServerAsyncSslHelper(
-                        clientProtocol,
-                        serverProtocol,
-                        expectedToFail: true
-                    );
-                }
-            );
+            Exception e = await Record.ExceptionAsync(() =>
+            {
+                return ServerAsyncSslHelper(clientProtocol, serverProtocol, expectedToFail: true);
+            });
 
             Assert.NotNull(e);
             Assert.IsAssignableFrom(expectedException, e);

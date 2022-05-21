@@ -1069,9 +1069,8 @@ END"
                     context,
                     c =>
                     {
-                        var updateException = Assert.Throws<DbUpdateException>(
-                            () => c.SaveChanges()
-                        );
+                        var updateException = Assert.Throws<DbUpdateException>(() =>
+                            c.SaveChanges());
                         Assert.Single(updateException.Entries);
                     }
                 );

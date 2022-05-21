@@ -50,13 +50,11 @@ public class PageLoaderMatcherPolicyTest
         var tcs = new TaskCompletionSource<int>();
         var candidateSet = CreateCandidateSet(compiled);
 
-        var loadTask = Task.Run(
-            async () =>
-            {
-                await tcs.Task;
-                return compiled;
-            }
-        );
+        var loadTask = Task.Run(async () =>
+        {
+            await tcs.Task;
+            return compiled;
+        });
         var loader = Mock.Of<PageLoader>(
             p =>
                 p.LoadAsync(

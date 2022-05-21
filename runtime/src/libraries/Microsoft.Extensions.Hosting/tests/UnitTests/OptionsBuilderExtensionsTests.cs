@@ -21,9 +21,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void ValidateOnStart_NullOptionsBuilder_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => OptionsBuilderExtensions.ValidateOnStart<object>(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                OptionsBuilderExtensions.ValidateOnStart<object>(null));
         }
 
         [Fact]
@@ -48,12 +47,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 1);
             }
@@ -81,12 +78,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 1);
             }
@@ -114,12 +109,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 1, "Boolean must be true.");
             }
@@ -163,12 +156,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<FakeSettings>(
                     error,
@@ -229,12 +220,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 2, "Boolean", "Integer");
             }
@@ -372,12 +361,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 1, "first Boolean must be true.");
             }
@@ -415,12 +402,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 2);
             }
@@ -456,12 +441,10 @@ namespace Microsoft.Extensions.Hosting.Tests
             );
             using (var host = hostBuilder.Build())
             {
-                var error = await Assert.ThrowsAsync<OptionsValidationException>(
-                    async () =>
-                    {
-                        await host.StartAsync();
-                    }
-                );
+                var error = await Assert.ThrowsAsync<OptionsValidationException>(async () =>
+                {
+                    await host.StartAsync();
+                });
 
                 ValidateFailure<ComplexOptions>(error, 3, "Virtual", "Integer");
             }

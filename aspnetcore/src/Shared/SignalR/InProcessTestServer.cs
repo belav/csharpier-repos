@@ -137,13 +137,11 @@ public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup 
             .Addresses.Single();
 
         _lifetime = _host.Services.GetRequiredService<IHostApplicationLifetime>();
-        _lifetime.ApplicationStopped.Register(
-            () =>
-            {
-                _logger.LogInformation("Test server shut down");
-                _logToken?.Dispose();
-            }
-        );
+        _lifetime.ApplicationStopped.Register(() =>
+        {
+            _logger.LogInformation("Test server shut down");
+            _logToken?.Dispose();
+        });
     }
 
     private static string RenderLogs(IList<LogRecord> logs)

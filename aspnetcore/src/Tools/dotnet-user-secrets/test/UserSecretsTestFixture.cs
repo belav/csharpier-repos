@@ -16,12 +16,10 @@ public class UserSecretsTestFixture : IDisposable
 
     public UserSecretsTestFixture()
     {
-        _disposables.Push(
-            () =>
-                TryDelete(
-                    Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
-                )
-        );
+        _disposables.Push(() =>
+            TryDelete(
+                Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
+            ));
     }
 
     public void Dispose()
@@ -73,20 +71,16 @@ public class UserSecretsTestFixture : IDisposable
         );
 
         var id = userSecretsId;
-        _disposables.Push(
-            () =>
+        _disposables.Push(() =>
+        {
+            try
             {
-                try
-                {
-                    // may throw if id is bad
-                    var secretsDir = Path.GetDirectoryName(
-                        PathHelper.GetSecretsPathFromSecretsId(id)
-                    );
-                    TryDelete(secretsDir);
-                }
-                catch { }
+                // may throw if id is bad
+                var secretsDir = Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(id));
+                TryDelete(secretsDir);
             }
-        );
+            catch { }
+        });
         _disposables.Push(() => TryDelete(projectPath.FullName));
 
         return projectPath.FullName;

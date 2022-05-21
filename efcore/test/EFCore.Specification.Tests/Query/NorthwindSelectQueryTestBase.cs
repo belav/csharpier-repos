@@ -114,32 +114,30 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Unsupported Binary operator type specified.",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    from o in ss.Set<Order>()
-                                        .OrderBy(o => o.OrderID)
-                                        .Take(3)
-                                        .Select(o2 => new { o2, Mod = o2.OrderID % 2 })
-                                    from e in ss.Set<Employee>()
-                                        .OrderBy(e => e.EmployeeID)
-                                        .Take(2)
-                                        .Select(e2 => new { e2, Square = e2.EmployeeID ^ 2 })
-                                    select new
-                                    {
-                                        Add = e.e2.EmployeeID + o.o2.OrderID,
-                                        e.Square,
-                                        e.e2,
-                                        Literal = 42,
-                                        o.o2,
-                                        o.Mod
-                                    },
-                                elementSorter: e => (e.e2.EmployeeID, e.o2.OrderID),
-                                entryCount: 3
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                from o in ss.Set<Order>()
+                                    .OrderBy(o => o.OrderID)
+                                    .Take(3)
+                                    .Select(o2 => new { o2, Mod = o2.OrderID % 2 })
+                                from e in ss.Set<Employee>()
+                                    .OrderBy(e => e.EmployeeID)
+                                    .Take(2)
+                                    .Select(e2 => new { e2, Square = e2.EmployeeID ^ 2 })
+                                select new
+                                {
+                                    Add = e.e2.EmployeeID + o.o2.OrderID,
+                                    e.Square,
+                                    e.e2,
+                                    Literal = 42,
+                                    o.o2,
+                                    o.Mod
+                                },
+                            elementSorter: e => (e.e2.EmployeeID, e.o2.OrderID),
+                            entryCount: 3
+                        ))
                 ).Message
             );
         }
@@ -3104,34 +3102,32 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task VisitLambda_should_not_be_visited_trivially(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                        {
-                            var orders = ss.Set<Order>()
-                                .Where(o => o.CustomerID.StartsWith("A"))
-                                .ToList();
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                    {
+                        var orders = ss.Set<Order>()
+                            .Where(o => o.CustomerID.StartsWith("A"))
+                            .ToList();
 
-                            return ss.Set<Customer>()
-                                .Select(
-                                    c =>
-                                        new
-                                        {
-                                            Customer = c,
-                                            HasOrder = orders.Any(o => o.CustomerID == c.CustomerID)
-                                        }
-                                );
-                        },
-                        elementSorter: e => e.Customer.CustomerID,
-                        elementAsserter: (e, a) =>
-                        {
-                            AssertEqual(e.Customer, a.Customer);
-                            AssertEqual(e.HasOrder, a.HasOrder);
-                        }
-                    )
-            );
+                        return ss.Set<Customer>()
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        Customer = c,
+                                        HasOrder = orders.Any(o => o.CustomerID == c.CustomerID)
+                                    }
+                            );
+                    },
+                    elementSorter: e => e.Customer.CustomerID,
+                    elementAsserter: (e, a) =>
+                    {
+                        AssertEqual(e.Customer, a.Customer);
+                        AssertEqual(e.HasOrder, a.HasOrder);
+                    }
+                ));
         }
 
         [ConditionalTheory]

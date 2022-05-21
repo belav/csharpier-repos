@@ -122,21 +122,18 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Cast_Unordered_InvalidCastException(int count)
         {
-            AssertThrows.Wrapped<InvalidCastException>(
-                () =>
-                    UnorderedSources
-                        .Default(count)
-                        .Cast<double>()
-                        .ForAll(
-                            x =>
-                            {
-                                ;
-                            }
-                        )
-            );
-            AssertThrows.Wrapped<InvalidCastException>(
-                () => UnorderedSources.Default(count).Cast<double>().ToList()
-            );
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                UnorderedSources
+                    .Default(count)
+                    .Cast<double>()
+                    .ForAll(
+                        x =>
+                        {
+                            ;
+                        }
+                    ));
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                UnorderedSources.Default(count).Cast<double>().ToList());
         }
 
         [Theory]
@@ -144,17 +141,15 @@ namespace System.Linq.Parallel.Tests
         public static void Cast_InvalidCastException(Labeled<ParallelQuery<int>> labeled, int count)
         {
             _ = count;
-            AssertThrows.Wrapped<InvalidCastException>(
-                () =>
-                    labeled.Item
-                        .Cast<double>()
-                        .ForAll(
-                            x =>
-                            {
-                                ;
-                            }
-                        )
-            );
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                labeled.Item
+                    .Cast<double>()
+                    .ForAll(
+                        x =>
+                        {
+                            ;
+                        }
+                    ));
             AssertThrows.Wrapped<InvalidCastException>(() => labeled.Item.Cast<double>().ToList());
         }
 
@@ -164,23 +159,19 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Cast_Unordered_Assignable_InvalidCastException(int count)
         {
-            AssertThrows.Wrapped<InvalidCastException>(
-                () =>
-                    UnorderedSources
-                        .Default(count)
-                        .Select(x => (Int32)x)
-                        .Cast<Castable>()
-                        .ForAll(
-                            x =>
-                            {
-                                ;
-                            }
-                        )
-            );
-            AssertThrows.Wrapped<InvalidCastException>(
-                () =>
-                    UnorderedSources.Default(count).Select(x => (Int32)x).Cast<Castable>().ToList()
-            );
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => (Int32)x)
+                    .Cast<Castable>()
+                    .ForAll(
+                        x =>
+                        {
+                            ;
+                        }
+                    ));
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                UnorderedSources.Default(count).Select(x => (Int32)x).Cast<Castable>().ToList());
         }
 
         [Theory]
@@ -191,21 +182,18 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            AssertThrows.Wrapped<InvalidCastException>(
-                () =>
-                    labeled.Item
-                        .Select(x => (Int32)x)
-                        .Cast<Castable>()
-                        .ForAll(
-                            x =>
-                            {
-                                ;
-                            }
-                        )
-            );
-            AssertThrows.Wrapped<InvalidCastException>(
-                () => labeled.Item.Select(x => (Int32)x).Cast<Castable>().ToList()
-            );
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                labeled.Item
+                    .Select(x => (Int32)x)
+                    .Cast<Castable>()
+                    .ForAll(
+                        x =>
+                        {
+                            ;
+                        }
+                    ));
+            AssertThrows.Wrapped<InvalidCastException>(() =>
+                labeled.Item.Select(x => (Int32)x).Cast<Castable>().ToList());
         }
 
         [Fact]

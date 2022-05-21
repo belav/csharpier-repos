@@ -292,9 +292,8 @@ namespace System.Net.Http
             var content = new ObjectContent<TestClass>(value, _formatterMock.Object, _mediaType);
             SetupUpRoundTripSerialization(type => new TestClass());
 
-            await Assert.ThrowsAsync<InvalidCastException>(
-                () => content.ReadAsAsync<string>(_formatters)
-            );
+            await Assert.ThrowsAsync<InvalidCastException>(() =>
+                content.ReadAsAsync<string>(_formatters));
 
             Assert.IsNotType<string>(await content.ReadAsAsync(typeof(string), _formatters));
 
@@ -353,9 +352,8 @@ namespace System.Net.Http
             cts.Cancel();
             HttpContent content = new StringContent("42", Encoding.Default, "application/json");
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => content.ReadAsAsync(typeof(int), cts.Token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                content.ReadAsAsync(typeof(int), cts.Token));
         }
 
         [Fact]
@@ -430,9 +428,8 @@ namespace System.Net.Http
             cts.Cancel();
             HttpContent content = new StringContent("42", Encoding.Default, "application/json");
 
-            return Assert.ThrowsAsync<OperationCanceledException>(
-                () => content.ReadAsAsync<int>(cts.Token)
-            );
+            return Assert.ThrowsAsync<OperationCanceledException>(() =>
+                content.ReadAsAsync<int>(cts.Token));
         }
 
         [Fact]

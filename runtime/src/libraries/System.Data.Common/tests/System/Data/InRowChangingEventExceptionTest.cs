@@ -47,12 +47,10 @@ namespace System.Data.Tests
         private void Row_Changing(object sender, DataRowChangeEventArgs e)
         {
             // InRowChangingEventException - EndEdit
-            Assert.Throws<InRowChangingEventException>(
-                () =>
-                {
-                    e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
-                }
-            );
+            Assert.Throws<InRowChangingEventException>(() =>
+            {
+                e.Row.EndEdit(); //can't invoke EndEdit while in ChangingEvent
+            });
             _eventTriggered = true;
         }
     }

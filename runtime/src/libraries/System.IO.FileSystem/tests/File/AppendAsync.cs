@@ -26,9 +26,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllTextAsync(path, "", token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.AppendAllTextAsync(path, "", token));
         }
     }
 
@@ -52,9 +51,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.AppendAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllTextAsync(path, "", Encoding.UTF8, token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.AppendAllTextAsync(path, "", Encoding.UTF8, token));
         }
     }
 
@@ -73,9 +71,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.AppendAllLinesAsync(path, new[] { "" }, token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllLinesAsync(path, new[] { "" }, token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.AppendAllLinesAsync(path, new[] { "" }, token));
         }
     }
 
@@ -108,9 +105,8 @@ namespace System.IO.Tests
             Assert.True(
                 File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token).IsCanceled
             );
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.AppendAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token));
         }
     }
 }

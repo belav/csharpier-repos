@@ -131,32 +131,30 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
             // If possible, check that the new file name is unique to on disk files as well
             // as solution items.
-            IOUtilities.PerformIO(
-                () =>
+            IOUtilities.PerformIO(() =>
+            {
+                if (File.Exists(document.FilePath))
                 {
-                    if (File.Exists(document.FilePath))
+                    var directory = Directory.GetParent(document.FilePath).FullName;
+                    var newDocumentFilePath = Path.Combine(directory, newName);
+
+                    var versionNumber = 1;
+                    while (File.Exists(newDocumentFilePath))
                     {
-                        var directory = Directory.GetParent(document.FilePath).FullName;
-                        var newDocumentFilePath = Path.Combine(directory, newName);
-
-                        var versionNumber = 1;
-                        while (File.Exists(newDocumentFilePath))
+                        if (newName.Equals(document.Name, StringComparison.OrdinalIgnoreCase))
                         {
-                            if (newName.Equals(document.Name, StringComparison.OrdinalIgnoreCase))
-                            {
-                                // If the document name is the same as the original, we know
-                                // it can be renamed to that because the old file on disk will
-                                // be removed.
-                                return;
-                            }
-
-                            var nameWithoutExtension = ReplacementText + $"_{versionNumber++}";
-                            newName = Path.ChangeExtension(nameWithoutExtension, extension);
-                            newDocumentFilePath = Path.Combine(directory, newName);
+                            // If the document name is the same as the original, we know
+                            // it can be renamed to that because the old file on disk will
+                            // be removed.
+                            return;
                         }
+
+                        var nameWithoutExtension = ReplacementText + $"_{versionNumber++}";
+                        newName = Path.ChangeExtension(nameWithoutExtension, extension);
+                        newDocumentFilePath = Path.Combine(directory, newName);
                     }
                 }
-            );
+            });
 
             _renamedDocument = (document.Id, newName);
         }

@@ -12,12 +12,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_LengthOnlyOverloadUseInvalidValues_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    ContentRangeHeaderValue v = new ContentRangeHeaderValue(-1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                ContentRangeHeaderValue v = new ContentRangeHeaderValue(-1);
+            });
         }
 
         [Fact]
@@ -36,24 +34,18 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_FromAndToOverloadUseInvalidValues_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(-1, 1);
-                }
-            ); // "Negative 'from'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(0, -1);
-                }
-            ); // "Negative 'to'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(2, 1);
-                }
-            ); // "'from' > 'to'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(-1, 1);
+            }); // "Negative 'from'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(0, -1);
+            }); // "Negative 'to'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(2, 1);
+            }); // "'from' > 'to'"
         }
 
         [Fact]
@@ -72,36 +64,26 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_FromToAndLengthOverloadUseInvalidValues_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(-1, 1, 2);
-                }
-            ); // "Negative 'from'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(0, -1, 2);
-                }
-            ); // "Negative 'to'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(0, 1, -1);
-                }
-            ); // "Negative 'length'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(2, 1, 3);
-                }
-            ); // "'from' > 'to'"
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ContentRangeHeaderValue(1, 2, 1);
-                }
-            ); // "'to' > 'length'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(-1, 1, 2);
+            }); // "Negative 'from'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(0, -1, 2);
+            }); // "Negative 'to'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(0, 1, -1);
+            }); // "Negative 'length'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(2, 1, 3);
+            }); // "'from' > 'to'"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ContentRangeHeaderValue(1, 2, 1);
+            }); // "'to' > 'length'"
         }
 
         [Fact]
@@ -138,24 +120,18 @@ namespace System.Net.Http.Tests
                     range.Unit = "";
                 }
             ); // "empty string"
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = " x";
-                }
-            ); // "leading space"
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = "x ";
-                }
-            ); // "trailing space"
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = "x y";
-                }
-            ); // "invalid token"
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = " x";
+            }); // "leading space"
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x ";
+            }); // "trailing space"
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x y";
+            }); // "invalid token"
         }
 
         [Fact]
@@ -356,12 +332,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    ContentRangeHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                ContentRangeHeaderValue.Parse(input);
+            });
         }
 
         private void CheckValidTryParse(string input, ContentRangeHeaderValue expectedResult)

@@ -191,22 +191,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                     // schedule an update
                     _threadingContext.JoinableTaskFactory
                         .WithPriority(TextView.VisualElement.Dispatcher, DispatcherPriority.Render)
-                        .RunAsync(
-                            async () =>
+                        .RunAsync(async () =>
+                        {
+                            using (
+                                _asyncListener.BeginAsyncOperation(GetType() + ".OnTagsChanged.2")
+                            )
                             {
-                                using (
-                                    _asyncListener.BeginAsyncOperation(
-                                        GetType() + ".OnTagsChanged.2"
-                                    )
-                                )
-                                {
-                                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                        alwaysYield: true
-                                    );
-                                    UpdateInvalidSpans();
-                                }
+                                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                    alwaysYield: true
+                                );
+                                UpdateInvalidSpans();
                             }
-                        );
+                        });
                 }
             }
         }

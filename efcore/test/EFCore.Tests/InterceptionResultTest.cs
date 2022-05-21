@@ -15,9 +15,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoInterceptionResult,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => default(InterceptionResult<object>).Result
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        default(InterceptionResult<object>).Result)
                     .Message
             );
         }

@@ -16,18 +16,14 @@ namespace System.Security.Cryptography.Algorithms.Tests
             var rsa = new EmptyRSA();
             Assert.Throws<NotImplementedException>(() => rsa.Decrypt(null, null));
             Assert.Throws<NotImplementedException>(() => rsa.Encrypt(null, null));
-            Assert.Throws<NotImplementedException>(
-                () => rsa.SignHash(null, HashAlgorithmName.SHA256, null)
-            );
-            Assert.Throws<NotImplementedException>(
-                () => rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null)
-            );
-            Assert.Throws<NotImplementedException>(
-                () => rsa.HashData(null, 0, 0, HashAlgorithmName.SHA256)
-            );
-            Assert.Throws<NotImplementedException>(
-                () => rsa.HashData(null, HashAlgorithmName.SHA256)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                rsa.SignHash(null, HashAlgorithmName.SHA256, null));
+            Assert.Throws<NotImplementedException>(() =>
+                rsa.VerifyHash(null, null, HashAlgorithmName.SHA256, null));
+            Assert.Throws<NotImplementedException>(() =>
+                rsa.HashData(null, 0, 0, HashAlgorithmName.SHA256));
+            Assert.Throws<NotImplementedException>(() =>
+                rsa.HashData(null, HashAlgorithmName.SHA256));
         }
 
         [Fact]

@@ -97,9 +97,10 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_report_error()
             {
-                new Action(
-                    () => Mapper.Map<Source, Dest>(new Source { Value = 5 })
-                ).ShouldThrowException<AutoMapperMappingException>(
+                new Action(() =>
+                    Mapper.Map<Source, Dest>(
+                        new Source { Value = 5 }
+                    )).ShouldThrowException<AutoMapperMappingException>(
                     ex =>
                     {
                         var inner = ex.InnerException;

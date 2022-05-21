@@ -54,32 +54,28 @@ internal class AspNetTestInvoker : XunitTestInvoker
         );
         var lifecycleHooks = GetLifecycleHooks(testClassInstance, TestClass, TestMethod);
 
-        await Aggregator.RunAsync(
-            async () =>
+        await Aggregator.RunAsync(async () =>
+        {
+            foreach (var lifecycleHook in lifecycleHooks)
             {
-                foreach (var lifecycleHook in lifecycleHooks)
-                {
-                    await lifecycleHook.OnTestStartAsync(context, CancellationTokenSource.Token);
-                }
+                await lifecycleHook.OnTestStartAsync(context, CancellationTokenSource.Token);
             }
-        );
+        });
 
         var time = await base.InvokeTestMethodAsync(testClassInstance);
 
-        await Aggregator.RunAsync(
-            async () =>
+        await Aggregator.RunAsync(async () =>
+        {
+            var exception = Aggregator.HasExceptions ? Aggregator.ToException() : null;
+            foreach (var lifecycleHook in lifecycleHooks)
             {
-                var exception = Aggregator.HasExceptions ? Aggregator.ToException() : null;
-                foreach (var lifecycleHook in lifecycleHooks)
-                {
-                    await lifecycleHook.OnTestEndAsync(
-                        context,
-                        exception,
-                        CancellationTokenSource.Token
-                    );
-                }
+                await lifecycleHook.OnTestEndAsync(
+                    context,
+                    exception,
+                    CancellationTokenSource.Token
+                );
             }
-        );
+        });
 
         return time;
     }

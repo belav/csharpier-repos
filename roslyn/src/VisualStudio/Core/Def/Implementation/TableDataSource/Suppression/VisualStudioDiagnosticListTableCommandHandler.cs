@@ -283,18 +283,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (selectedDiagnostic.DocumentId != null)
                 {
                     // Kick off diagnostic re-analysis for affected document so that the configured diagnostic gets refreshed.
-                    _ = Task.Run(
-                        () =>
-                        {
-                            _diagnosticService.Reanalyze(
-                                _workspace,
-                                documentIds: SpecializedCollections.SingletonEnumerable(
-                                    selectedDiagnostic.DocumentId
-                                ),
-                                highPriority: true
-                            );
-                        }
-                    );
+                    _ = Task.Run(() =>
+                    {
+                        _diagnosticService.Reanalyze(
+                            _workspace,
+                            documentIds: SpecializedCollections.SingletonEnumerable(
+                                selectedDiagnostic.DocumentId
+                            ),
+                            highPriority: true
+                        );
+                    });
                 }
             }
             catch (OperationCanceledException) { }

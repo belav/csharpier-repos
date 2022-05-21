@@ -104,9 +104,8 @@ namespace System.Net.Security.Enterprise.Tests
 
                 Task clientTask = client.AuthenticateAsClientAsync(creds, target);
 
-                await Assert.ThrowsAsync<AuthenticationException>(
-                    () => server.AuthenticateAsServerAsync()
-                );
+                await Assert.ThrowsAsync<AuthenticationException>(() =>
+                    server.AuthenticateAsServerAsync());
             }
         }
 

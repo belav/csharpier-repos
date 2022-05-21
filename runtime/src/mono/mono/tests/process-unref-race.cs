@@ -23,41 +23,39 @@ class Driver
             MaxDegreeOfParallelism = Environment.ProcessorCount * 4,
         };
 
-        Thread t1 = new Thread(
-            () =>
+        Thread t1 = new Thread(() =>
+        {
+            ProcessStartInfo psi = new ProcessStartInfo()
             {
-                ProcessStartInfo psi = new ProcessStartInfo()
+                FileName = "echo",
+                Arguments = "hello",
+                RedirectStandardOutput = true,
+                UseShellExecute = false
+            };
+
+            Parallel.ForEach(
+                UntilTimeout(15 * 1000),
+                options,
+                _ =>
                 {
-                    FileName = "echo",
-                    Arguments = "hello",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false
-                };
-
-                Parallel.ForEach(
-                    UntilTimeout(15 * 1000),
-                    options,
-                    _ =>
+                    using (Process p = Process.Start(psi))
                     {
-                        using (Process p = Process.Start(psi))
-                        {
-                            p.BeginOutputReadLine();
-                            p.WaitForExit();
-                        }
-
-                        lock (count_lock)
-                        {
-                            count += 1;
-
-                            if (count % (10) == 0)
-                                Console.Write(".");
-                            if (count % (10 * 50) == 0)
-                                Console.WriteLine();
-                        }
+                        p.BeginOutputReadLine();
+                        p.WaitForExit();
                     }
-                );
-            }
-        );
+
+                    lock (count_lock)
+                    {
+                        count += 1;
+
+                        if (count % (10) == 0)
+                            Console.Write(".");
+                        if (count % (10 * 50) == 0)
+                            Console.WriteLine();
+                    }
+                }
+            );
+        });
 
         t1.Start();
 

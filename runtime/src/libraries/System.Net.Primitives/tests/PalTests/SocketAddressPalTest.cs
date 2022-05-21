@@ -32,9 +32,8 @@ namespace System.Net.Primitives.PalTests
         public void AddressFamily_Get_Set_Throws()
         {
             var buffer = new byte[1];
-            Assert.ThrowsAny<Exception>(
-                () => SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetwork)
-            );
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetwork));
             Assert.ThrowsAny<Exception>(() => SocketAddressPal.GetAddressFamily(buffer));
         }
 
@@ -207,12 +206,10 @@ namespace System.Net.Primitives.PalTests
             uint unused;
             var buffer = new byte[4];
             SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetworkV6);
-            Assert.ThrowsAny<Exception>(
-                () => SocketAddressPal.SetIPv6Address(buffer, new byte[16], 0)
-            );
-            Assert.ThrowsAny<Exception>(
-                () => SocketAddressPal.GetIPv6Address(buffer, new byte[16], out unused)
-            );
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.SetIPv6Address(buffer, new byte[16], 0));
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.GetIPv6Address(buffer, new byte[16], out unused));
         }
 
         public static IEnumerable<object[]> IPv4AddressAndPortData = IPv4AddressData

@@ -18,12 +18,10 @@ public class WebEncodersTests
     public void Base64UrlDecode_BadOffsets(string input, int offset, int count)
     {
         // Act & assert
-        Assert.ThrowsAny<ArgumentException>(
-            () =>
-            {
-                var retVal = WebEncoders.Base64UrlDecode(input, offset, count);
-            }
-        );
+        Assert.ThrowsAny<ArgumentException>(() =>
+        {
+            var retVal = WebEncoders.Base64UrlDecode(input, offset, count);
+        });
     }
 
     [Theory]
@@ -32,12 +30,10 @@ public class WebEncodersTests
     public void Base64UrlDecode_MalformedInput(string input)
     {
         // Act & assert
-        Assert.Throws<FormatException>(
-            () =>
-            {
-                var retVal = WebEncoders.Base64UrlDecode(input);
-            }
-        );
+        Assert.Throws<FormatException>(() =>
+        {
+            var retVal = WebEncoders.Base64UrlDecode(input);
+        });
     }
 
     [Theory]
@@ -131,11 +127,9 @@ public class WebEncodersTests
         byte[] input = new byte[inputLength];
 
         // Act & assert
-        Assert.ThrowsAny<ArgumentException>(
-            () =>
-            {
-                var retVal = WebEncoders.Base64UrlEncode(input, offset, count);
-            }
-        );
+        Assert.ThrowsAny<ArgumentException>(() =>
+        {
+            var retVal = WebEncoders.Base64UrlEncode(input, offset, count);
+        });
     }
 }

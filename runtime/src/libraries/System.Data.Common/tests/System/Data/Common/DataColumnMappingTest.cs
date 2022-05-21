@@ -75,16 +75,14 @@ namespace System.Data.Tests.Common
             dataTable.Columns.Add(priceColumn);
             dataTable.Columns.Add(taxColumn);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    DataColumnMapping.GetDataColumnBySchemaAction(
-                        "",
-                        "tax",
-                        dataTable,
-                        typeof(string),
-                        new MissingSchemaAction()
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                DataColumnMapping.GetDataColumnBySchemaAction(
+                    "",
+                    "tax",
+                    dataTable,
+                    typeof(string),
+                    new MissingSchemaAction()
+                ));
         }
 
         [Fact]

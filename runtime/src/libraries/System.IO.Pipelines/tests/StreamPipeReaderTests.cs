@@ -248,9 +248,8 @@ namespace System.IO.Pipelines.Tests
             PipeReader reader = PipeReader.Create(Stream.Null);
 
             reader.Complete();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await reader.ReadAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await reader.ReadAsync());
         }
 
         [Fact]
@@ -580,9 +579,8 @@ namespace System.IO.Pipelines.Tests
             ReadOnlySequence<byte> buffer = readResult.Buffer;
 
             PipeReader reader = PipeReader.Create(Stream.Null);
-            Assert.Throws<InvalidOperationException>(
-                () => reader.AdvanceTo(buffer.Start, buffer.End)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                reader.AdvanceTo(buffer.Start, buffer.End));
 
             pipe.Reader.Complete();
             pipe.Writer.Complete();
@@ -599,23 +597,19 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public void InvalidBufferSizeThrows()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeReaderOptions(bufferSize: -2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeReaderOptions(bufferSize: 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(bufferSize: -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(bufferSize: 0));
         }
 
         [Fact]
         public void InvalidMinimumReadSizeThrows()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeReaderOptions(minimumReadSize: -2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeReaderOptions(minimumReadSize: 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(minimumReadSize: -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(minimumReadSize: 0));
         }
 
         [Fact]
@@ -665,9 +659,8 @@ namespace System.IO.Pipelines.Tests
         {
             PipeReader reader = PipeReader.Create(new ThrowsOperationCanceledExceptionStream());
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () => await reader.ReadAsync()
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                await reader.ReadAsync());
         }
 
         private static async Task<string> ReadFromPipeAsString(PipeReader reader)

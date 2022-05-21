@@ -157,20 +157,18 @@ public class RegistryXmlRepositoryTests
         }
     }
 
-    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(
-        () =>
+    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(() =>
+    {
+        try
         {
-            try
-            {
-                return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
-            }
-            catch
-            {
-                // swallow all failures
-                return null;
-            }
+            return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
         }
-    );
+        catch
+        {
+            // swallow all failures
+            return null;
+        }
+    });
 
     private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
     {

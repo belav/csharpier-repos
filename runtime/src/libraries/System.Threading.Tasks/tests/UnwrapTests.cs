@@ -13,24 +13,18 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ((Task<Task>)null).Unwrap();
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ((Task<Task<int>>)null).Unwrap();
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ((Task<Task<string>>)null).Unwrap();
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task>)null).Unwrap();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task<int>>)null).Unwrap();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ((Task<Task<string>>)null).Unwrap();
+            });
         }
 
         /// <summary>

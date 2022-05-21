@@ -221,12 +221,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void AcceptRanges_AddInvalidValue_Throw()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.AcceptRanges.Add("this is invalid");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.AcceptRanges.Add("this is invalid");
+            });
         }
 
         [Fact]
@@ -795,66 +793,46 @@ namespace System.Net.Http.Tests
         {
             // Try adding content headers. Use different casing to make sure case-insensitive comparison
             // is used.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Allow", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Encoding", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Language", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("content-length", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Location", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-MD5", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Range", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("CONTENT-TYPE", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Expires", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Last-Modified", "v");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Allow", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Language", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("content-length", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Location", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-MD5", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("CONTENT-TYPE", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Expires", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Last-Modified", "v");
+            });
         }
     }
 }

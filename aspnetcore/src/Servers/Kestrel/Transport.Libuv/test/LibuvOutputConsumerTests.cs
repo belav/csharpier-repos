@@ -278,370 +278,362 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             int maxResponseBufferSize
         )
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var completeQueue = new ConcurrentQueue<Action<int>>();
+
+                // Arrange
+                _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
                 {
-                    var completeQueue = new ConcurrentQueue<Action<int>>();
+                    completeQueue.Enqueue(triggerCompleted);
+                    return 0;
+                };
 
-                    // Arrange
-                    _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
+                var pipeOptions = new PipeOptions(
+                    pool: _memoryPool,
+                    readerScheduler: _libuvThread,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: maxResponseBufferSize,
+                    resumeWriterThreshold: maxResponseBufferSize,
+                    useSynchronizationContext: false
+                );
+
+                await using (var processor = CreateOutputProducer(pipeOptions))
+                {
+                    var outputProducer = processor.OutputProducer;
+                    var bufferSize = maxResponseBufferSize / 2;
+                    var data = new byte[bufferSize];
+                    var halfWriteBehindBuffer = new ArraySegment<byte>(data, 0, bufferSize);
+
+                    // Act
+                    var writeTask1 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
+
+                    // Assert
+                    // The first write should pre-complete since it is <= _maxBytesPreCompleted.
+                    Assert.Equal(TaskStatus.RanToCompletion, writeTask1.Status);
+                    await _mockLibuv.OnPostTask;
+                    Assert.NotEmpty(completeQueue);
+
+                    // Add more bytes to the write-behind buffer to prevent the next write from
+                    _ = outputProducer.WriteDataAsync(halfWriteBehindBuffer, default);
+
+                    // Act
+                    var writeTask2 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
+                    Assert.False(writeTask2.IsCompleted);
+
+                    var writeTask3 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
+                    Assert.False(writeTask3.IsCompleted);
+
+                    // Drain the write queue
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
                     {
-                        completeQueue.Enqueue(triggerCompleted);
-                        return 0;
-                    };
-
-                    var pipeOptions = new PipeOptions(
-                        pool: _memoryPool,
-                        readerScheduler: _libuvThread,
-                        writerScheduler: PipeScheduler.Inline,
-                        pauseWriterThreshold: maxResponseBufferSize,
-                        resumeWriterThreshold: maxResponseBufferSize,
-                        useSynchronizationContext: false
-                    );
-
-                    await using (var processor = CreateOutputProducer(pipeOptions))
-                    {
-                        var outputProducer = processor.OutputProducer;
-                        var bufferSize = maxResponseBufferSize / 2;
-                        var data = new byte[bufferSize];
-                        var halfWriteBehindBuffer = new ArraySegment<byte>(data, 0, bufferSize);
-
-                        // Act
-                        var writeTask1 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
-
-                        // Assert
-                        // The first write should pre-complete since it is <= _maxBytesPreCompleted.
-                        Assert.Equal(TaskStatus.RanToCompletion, writeTask1.Status);
-                        await _mockLibuv.OnPostTask;
-                        Assert.NotEmpty(completeQueue);
-
-                        // Add more bytes to the write-behind buffer to prevent the next write from
-                        _ = outputProducer.WriteDataAsync(halfWriteBehindBuffer, default);
-
-                        // Act
-                        var writeTask2 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
-                        Assert.False(writeTask2.IsCompleted);
-
-                        var writeTask3 = outputProducer.WriteDataAsync(halfWriteBehindBuffer);
-                        Assert.False(writeTask3.IsCompleted);
-
-                        // Drain the write queue
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
-
-                        var timeout = TestConstants.DefaultTimeout;
-
-                        await writeTask2.TimeoutAfter(timeout);
-                        await writeTask3.TimeoutAfter(timeout);
-
-                        Assert.Empty(completeQueue);
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
                     }
+
+                    var timeout = TestConstants.DefaultTimeout;
+
+                    await writeTask2.TimeoutAfter(timeout);
+                    await writeTask3.TimeoutAfter(timeout);
+
+                    Assert.Empty(completeQueue);
                 }
-            );
+            });
         }
 
         [Theory]
         [MemberData(nameof(PositiveMaxResponseBufferSizeData))]
         public async Task FailedWriteCompletesOrCancelsAllPendingTasks(int maxResponseBufferSize)
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var completeQueue = new ConcurrentQueue<Action<int>>();
+
+                // Arrange
+                _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
                 {
-                    var completeQueue = new ConcurrentQueue<Action<int>>();
+                    completeQueue.Enqueue(triggerCompleted);
+                    return 0;
+                };
 
-                    // Arrange
-                    _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
-                    {
-                        completeQueue.Enqueue(triggerCompleted);
-                        return 0;
-                    };
+                var abortedSource = new CancellationTokenSource();
 
-                    var abortedSource = new CancellationTokenSource();
+                var pipeOptions = new PipeOptions(
+                    pool: _memoryPool,
+                    readerScheduler: _libuvThread,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: maxResponseBufferSize,
+                    resumeWriterThreshold: maxResponseBufferSize,
+                    useSynchronizationContext: false
+                );
 
-                    var pipeOptions = new PipeOptions(
-                        pool: _memoryPool,
-                        readerScheduler: _libuvThread,
-                        writerScheduler: PipeScheduler.Inline,
-                        pauseWriterThreshold: maxResponseBufferSize,
-                        resumeWriterThreshold: maxResponseBufferSize,
-                        useSynchronizationContext: false
+                await using (var processor = CreateOutputProducer(pipeOptions, abortedSource))
+                {
+                    var outputProducer = processor.OutputProducer;
+                    var bufferSize = maxResponseBufferSize - 1;
+
+                    var data = new byte[bufferSize];
+                    var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
+
+                    // Act
+                    var task1Success = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: abortedSource.Token
+                    );
+                    // task1 should complete successfully as < _maxBytesPreCompleted
+
+                    // First task is completed and successful
+                    Assert.True(task1Success.IsCompleted);
+                    Assert.False(task1Success.IsCanceled);
+                    Assert.False(task1Success.IsFaulted);
+
+                    // following tasks should wait.
+                    var task2Success = outputProducer.WriteDataAsync(fullBuffer);
+                    var task3Canceled = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: abortedSource.Token
                     );
 
-                    await using (var processor = CreateOutputProducer(pipeOptions, abortedSource))
+                    // Give time for tasks to percolate
+                    await _mockLibuv.OnPostTask;
+
+                    // Second task is not completed
+                    Assert.False(task2Success.IsCompleted);
+                    Assert.False(task2Success.IsCanceled);
+                    Assert.False(task2Success.IsFaulted);
+
+                    // Third task is not completed
+                    Assert.False(task3Canceled.IsCompleted);
+                    Assert.False(task3Canceled.IsCanceled);
+                    Assert.False(task3Canceled.IsFaulted);
+
+                    // Cause all writes to fail
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
                     {
-                        var outputProducer = processor.OutputProducer;
-                        var bufferSize = maxResponseBufferSize - 1;
-
-                        var data = new byte[bufferSize];
-                        var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
-
-                        // Act
-                        var task1Success = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: abortedSource.Token
+                        await _libuvThread.PostAsync(
+                            cb => cb(LibuvConstants.ECONNRESET.Value),
+                            triggerNextCompleted
                         );
-                        // task1 should complete successfully as < _maxBytesPreCompleted
+                    }
 
-                        // First task is completed and successful
-                        Assert.True(task1Success.IsCompleted);
-                        Assert.False(task1Success.IsCanceled);
-                        Assert.False(task1Success.IsFaulted);
+                    await task2Success.DefaultTimeout();
 
-                        // following tasks should wait.
-                        var task2Success = outputProducer.WriteDataAsync(fullBuffer);
-                        var task3Canceled = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: abortedSource.Token
-                        );
+                    // Second task is now completed
+                    Assert.True(task2Success.IsCompleted);
+                    Assert.False(task2Success.IsCanceled);
+                    Assert.False(task2Success.IsFaulted);
 
-                        // Give time for tasks to percolate
-                        await _mockLibuv.OnPostTask;
+                    // A final write guarantees that the error is observed by OutputProducer,
+                    // but doesn't return a canceled/faulted task.
+                    var task4Success = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: default(CancellationToken)
+                    );
+                    Assert.True(task4Success.IsCompleted);
+                    Assert.False(task4Success.IsCanceled);
+                    Assert.False(task4Success.IsFaulted);
 
-                        // Second task is not completed
-                        Assert.False(task2Success.IsCompleted);
-                        Assert.False(task2Success.IsCanceled);
-                        Assert.False(task2Success.IsFaulted);
+                    // Third task is now canceled
+                    await Assert.ThrowsAsync<OperationCanceledException>(() => task3Canceled);
+                    Assert.True(task3Canceled.IsCanceled);
 
-                        // Third task is not completed
-                        Assert.False(task3Canceled.IsCompleted);
-                        Assert.False(task3Canceled.IsCanceled);
-                        Assert.False(task3Canceled.IsFaulted);
+                    Assert.True(abortedSource.IsCancellationRequested);
 
-                        // Cause all writes to fail
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(
-                                cb => cb(LibuvConstants.ECONNRESET.Value),
-                                triggerNextCompleted
-                            );
-                        }
+                    await _mockLibuv.OnPostTask;
 
-                        await task2Success.DefaultTimeout();
-
-                        // Second task is now completed
-                        Assert.True(task2Success.IsCompleted);
-                        Assert.False(task2Success.IsCanceled);
-                        Assert.False(task2Success.IsFaulted);
-
-                        // A final write guarantees that the error is observed by OutputProducer,
-                        // but doesn't return a canceled/faulted task.
-                        var task4Success = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: default(CancellationToken)
-                        );
-                        Assert.True(task4Success.IsCompleted);
-                        Assert.False(task4Success.IsCanceled);
-                        Assert.False(task4Success.IsFaulted);
-
-                        // Third task is now canceled
-                        await Assert.ThrowsAsync<OperationCanceledException>(() => task3Canceled);
-                        Assert.True(task3Canceled.IsCanceled);
-
-                        Assert.True(abortedSource.IsCancellationRequested);
-
-                        await _mockLibuv.OnPostTask;
-
-                        // Complete the 4th write
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
+                    // Complete the 4th write
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
+                    {
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
                     }
                 }
-            );
+            });
         }
 
         [Theory]
         [MemberData(nameof(PositiveMaxResponseBufferSizeData))]
         public async Task CancelsBeforeWriteRequestCompletes(int maxResponseBufferSize)
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var completeQueue = new ConcurrentQueue<Action<int>>();
+
+                // Arrange
+                _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
                 {
-                    var completeQueue = new ConcurrentQueue<Action<int>>();
+                    completeQueue.Enqueue(triggerCompleted);
+                    return 0;
+                };
 
-                    // Arrange
-                    _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
-                    {
-                        completeQueue.Enqueue(triggerCompleted);
-                        return 0;
-                    };
+                var abortedSource = new CancellationTokenSource();
 
-                    var abortedSource = new CancellationTokenSource();
+                var pipeOptions = new PipeOptions(
+                    pool: _memoryPool,
+                    readerScheduler: _libuvThread,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: maxResponseBufferSize,
+                    resumeWriterThreshold: maxResponseBufferSize,
+                    useSynchronizationContext: false
+                );
 
-                    var pipeOptions = new PipeOptions(
-                        pool: _memoryPool,
-                        readerScheduler: _libuvThread,
-                        writerScheduler: PipeScheduler.Inline,
-                        pauseWriterThreshold: maxResponseBufferSize,
-                        resumeWriterThreshold: maxResponseBufferSize,
-                        useSynchronizationContext: false
+                await using (var processor = CreateOutputProducer(pipeOptions))
+                {
+                    var outputProducer = processor.OutputProducer;
+                    var bufferSize = maxResponseBufferSize - 1;
+
+                    var data = new byte[bufferSize];
+                    var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
+
+                    // Act
+                    var task1Success = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: abortedSource.Token
+                    );
+                    // task1 should complete successfully as < _maxBytesPreCompleted
+
+                    // First task is completed and successful
+                    Assert.True(task1Success.IsCompleted);
+                    Assert.False(task1Success.IsCanceled);
+                    Assert.False(task1Success.IsFaulted);
+
+                    // following tasks should wait.
+                    var task3Canceled = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: abortedSource.Token
                     );
 
-                    await using (var processor = CreateOutputProducer(pipeOptions))
+                    // Give time for tasks to percolate
+                    await _mockLibuv.OnPostTask;
+
+                    // Third task is not completed
+                    Assert.False(task3Canceled.IsCompleted);
+                    Assert.False(task3Canceled.IsCanceled);
+                    Assert.False(task3Canceled.IsFaulted);
+
+                    abortedSource.Cancel();
+
+                    // Complete writes
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
                     {
-                        var outputProducer = processor.OutputProducer;
-                        var bufferSize = maxResponseBufferSize - 1;
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
+                    }
 
-                        var data = new byte[bufferSize];
-                        var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
+                    // A final write guarantees that the error is observed by OutputProducer,
+                    // but doesn't return a canceled/faulted task.
+                    var task4Success = outputProducer.WriteDataAsync(fullBuffer);
+                    Assert.True(task4Success.IsCompleted);
+                    Assert.False(task4Success.IsCanceled);
+                    Assert.False(task4Success.IsFaulted);
 
-                        // Act
-                        var task1Success = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: abortedSource.Token
-                        );
-                        // task1 should complete successfully as < _maxBytesPreCompleted
+                    // Third task is now canceled
+                    await Assert.ThrowsAsync<OperationCanceledException>(() => task3Canceled);
+                    Assert.True(task3Canceled.IsCanceled);
 
-                        // First task is completed and successful
-                        Assert.True(task1Success.IsCompleted);
-                        Assert.False(task1Success.IsCanceled);
-                        Assert.False(task1Success.IsFaulted);
+                    Assert.True(abortedSource.IsCancellationRequested);
 
-                        // following tasks should wait.
-                        var task3Canceled = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: abortedSource.Token
-                        );
+                    await _mockLibuv.OnPostTask;
 
-                        // Give time for tasks to percolate
-                        await _mockLibuv.OnPostTask;
-
-                        // Third task is not completed
-                        Assert.False(task3Canceled.IsCompleted);
-                        Assert.False(task3Canceled.IsCanceled);
-                        Assert.False(task3Canceled.IsFaulted);
-
-                        abortedSource.Cancel();
-
-                        // Complete writes
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
-
-                        // A final write guarantees that the error is observed by OutputProducer,
-                        // but doesn't return a canceled/faulted task.
-                        var task4Success = outputProducer.WriteDataAsync(fullBuffer);
-                        Assert.True(task4Success.IsCompleted);
-                        Assert.False(task4Success.IsCanceled);
-                        Assert.False(task4Success.IsFaulted);
-
-                        // Third task is now canceled
-                        await Assert.ThrowsAsync<OperationCanceledException>(() => task3Canceled);
-                        Assert.True(task3Canceled.IsCanceled);
-
-                        Assert.True(abortedSource.IsCancellationRequested);
-
-                        await _mockLibuv.OnPostTask;
-
-                        // Complete the 4th write
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
+                    // Complete the 4th write
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
+                    {
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
                     }
                 }
-            );
+            });
         }
 
         [Theory]
         [MemberData(nameof(PositiveMaxResponseBufferSizeData))]
         public async Task WriteAsyncWithTokenAfterCallWithoutIsCancelled(int maxResponseBufferSize)
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var completeQueue = new ConcurrentQueue<Action<int>>();
+
+                // Arrange
+                _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
                 {
-                    var completeQueue = new ConcurrentQueue<Action<int>>();
+                    completeQueue.Enqueue(triggerCompleted);
+                    return 0;
+                };
 
-                    // Arrange
-                    _mockLibuv.OnWrite = (socket, buffers, triggerCompleted) =>
-                    {
-                        completeQueue.Enqueue(triggerCompleted);
-                        return 0;
-                    };
+                var abortedSource = new CancellationTokenSource();
 
-                    var abortedSource = new CancellationTokenSource();
+                var pipeOptions = new PipeOptions(
+                    pool: _memoryPool,
+                    readerScheduler: _libuvThread,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: maxResponseBufferSize,
+                    resumeWriterThreshold: maxResponseBufferSize,
+                    useSynchronizationContext: false
+                );
 
-                    var pipeOptions = new PipeOptions(
-                        pool: _memoryPool,
-                        readerScheduler: _libuvThread,
-                        writerScheduler: PipeScheduler.Inline,
-                        pauseWriterThreshold: maxResponseBufferSize,
-                        resumeWriterThreshold: maxResponseBufferSize,
-                        useSynchronizationContext: false
+                await using (var processor = CreateOutputProducer(pipeOptions))
+                {
+                    var outputProducer = processor.OutputProducer;
+                    var bufferSize = maxResponseBufferSize;
+
+                    var data = new byte[bufferSize];
+                    var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
+
+                    // Act
+                    var task1Waits = outputProducer.WriteDataAsync(fullBuffer);
+
+                    // First task is not completed
+                    Assert.False(task1Waits.IsCompleted);
+                    Assert.False(task1Waits.IsCanceled);
+                    Assert.False(task1Waits.IsFaulted);
+
+                    // following tasks should wait.
+                    var task2Canceled = outputProducer.WriteDataAsync(
+                        fullBuffer,
+                        cancellationToken: abortedSource.Token
                     );
 
-                    await using (var processor = CreateOutputProducer(pipeOptions))
+                    // Give time for tasks to percolate
+                    await _mockLibuv.OnPostTask;
+
+                    // Second task is not completed
+                    Assert.False(task2Canceled.IsCompleted);
+                    Assert.False(task2Canceled.IsCanceled);
+                    Assert.False(task2Canceled.IsFaulted);
+
+                    abortedSource.Cancel();
+
+                    // Complete writes
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
                     {
-                        var outputProducer = processor.OutputProducer;
-                        var bufferSize = maxResponseBufferSize;
-
-                        var data = new byte[bufferSize];
-                        var fullBuffer = new ArraySegment<byte>(data, 0, bufferSize);
-
-                        // Act
-                        var task1Waits = outputProducer.WriteDataAsync(fullBuffer);
-
-                        // First task is not completed
-                        Assert.False(task1Waits.IsCompleted);
-                        Assert.False(task1Waits.IsCanceled);
-                        Assert.False(task1Waits.IsFaulted);
-
-                        // following tasks should wait.
-                        var task2Canceled = outputProducer.WriteDataAsync(
-                            fullBuffer,
-                            cancellationToken: abortedSource.Token
-                        );
-
-                        // Give time for tasks to percolate
-                        await _mockLibuv.OnPostTask;
-
-                        // Second task is not completed
-                        Assert.False(task2Canceled.IsCompleted);
-                        Assert.False(task2Canceled.IsCanceled);
-                        Assert.False(task2Canceled.IsFaulted);
-
-                        abortedSource.Cancel();
-
-                        // Complete writes
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
-
-                        await task1Waits.DefaultTimeout();
-
-                        // First task is completed
-                        Assert.True(task1Waits.IsCompleted);
-                        Assert.False(task1Waits.IsCanceled);
-                        Assert.False(task1Waits.IsFaulted);
-
-                        // Second task is now canceled
-                        await Assert.ThrowsAsync<OperationCanceledException>(() => task2Canceled);
-                        Assert.True(task2Canceled.IsCanceled);
-
-                        // A final write can still succeed.
-                        var task3Success = outputProducer.WriteDataAsync(fullBuffer);
-
-                        await _mockLibuv.OnPostTask;
-
-                        // Complete the 3rd write
-                        while (completeQueue.TryDequeue(out var triggerNextCompleted))
-                        {
-                            await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
-                        }
-
-                        await task3Success.DefaultTimeout();
-
-                        Assert.True(task3Success.IsCompleted);
-                        Assert.False(task3Success.IsCanceled);
-                        Assert.False(task3Success.IsFaulted);
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
                     }
+
+                    await task1Waits.DefaultTimeout();
+
+                    // First task is completed
+                    Assert.True(task1Waits.IsCompleted);
+                    Assert.False(task1Waits.IsCanceled);
+                    Assert.False(task1Waits.IsFaulted);
+
+                    // Second task is now canceled
+                    await Assert.ThrowsAsync<OperationCanceledException>(() => task2Canceled);
+                    Assert.True(task2Canceled.IsCanceled);
+
+                    // A final write can still succeed.
+                    var task3Success = outputProducer.WriteDataAsync(fullBuffer);
+
+                    await _mockLibuv.OnPostTask;
+
+                    // Complete the 3rd write
+                    while (completeQueue.TryDequeue(out var triggerNextCompleted))
+                    {
+                        await _libuvThread.PostAsync(cb => cb(0), triggerNextCompleted);
+                    }
+
+                    await task3Success.DefaultTimeout();
+
+                    Assert.True(task3Success.IsCompleted);
+                    Assert.False(task3Success.IsCanceled);
+                    Assert.False(task3Success.IsFaulted);
                 }
-            );
+            });
         }
 
         [Theory]

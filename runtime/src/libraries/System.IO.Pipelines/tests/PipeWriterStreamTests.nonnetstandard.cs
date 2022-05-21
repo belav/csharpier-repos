@@ -43,9 +43,8 @@ namespace System.IO.Pipelines.Tests
             await writerCompletedTask.Task;
 
             // Unable to write after disposing.
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await s.WriteAsync(new byte[1])
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await s.WriteAsync(new byte[1]));
 
             // Reads still work and return 0.
             ReadResult rr = await pipe.Reader.ReadAsync();
@@ -116,26 +115,20 @@ namespace System.IO.Pipelines.Tests
             Assert.True(stream.CanWrite);
             Assert.False(stream.CanSeek);
             Assert.False(stream.CanRead);
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long length = stream.Length;
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long position = stream.Position;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long length = stream.Length;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long position = stream.Position;
+            });
             Assert.Throws<NotSupportedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<NotSupportedException>(() => stream.Read(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => stream.ReadAsync(new byte[10], 0, 10)
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => stream.ReadAsync(new byte[10]).AsTask()
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.ReadAsync(new byte[10], 0, 10));
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.ReadAsync(new byte[10]).AsTask());
             await Assert.ThrowsAsync<NotSupportedException>(() => stream.CopyToAsync(Stream.Null));
 
             pipe.Reader.Complete();

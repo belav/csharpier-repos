@@ -42,16 +42,14 @@ namespace System.Net.Http.Tests
         public void Ctor_NoEnvironmentVariables_NotHttpEnvironmentProxy()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
-                        Assert.NotNull(proxy);
+                .Invoke(() =>
+                {
+                    IWebProxy proxy = SystemProxyInfo.ConstructSystemProxy();
+                    Assert.NotNull(proxy);
 
-                        HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
-                        Assert.Null(envProxy);
-                    }
-                )
+                    HttpEnvironmentProxy envProxy = proxy as HttpEnvironmentProxy;
+                    Assert.Null(envProxy);
+                })
                 .Dispose();
         }
 

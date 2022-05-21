@@ -9,24 +9,20 @@ namespace System.Reflection.Internal
 {
     internal static class FileStreamReadLightUp
     {
-        internal static Lazy<Type> FileStreamType = new Lazy<Type>(
-            () =>
-            {
-                const string systemIOFileSystem =
-                    "System.IO.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken = b03f5f7f11d50a3a";
-                const string mscorlib =
-                    "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+        internal static Lazy<Type> FileStreamType = new Lazy<Type>(() =>
+        {
+            const string systemIOFileSystem =
+                "System.IO.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken = b03f5f7f11d50a3a";
+            const string mscorlib =
+                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
 
-                return LightUpHelper.GetType("System.IO.FileStream", systemIOFileSystem, mscorlib);
-            }
-        );
+            return LightUpHelper.GetType("System.IO.FileStream", systemIOFileSystem, mscorlib);
+        });
 
-        internal static Lazy<PropertyInfo> SafeFileHandle = new Lazy<PropertyInfo>(
-            () =>
-            {
-                return FileStreamType.Value.GetTypeInfo().GetDeclaredProperty("SafeFileHandle");
-            }
-        );
+        internal static Lazy<PropertyInfo> SafeFileHandle = new Lazy<PropertyInfo>(() =>
+        {
+            return FileStreamType.Value.GetTypeInfo().GetDeclaredProperty("SafeFileHandle");
+        });
 
         // internal for testing
         internal static bool readFileNotAvailable;

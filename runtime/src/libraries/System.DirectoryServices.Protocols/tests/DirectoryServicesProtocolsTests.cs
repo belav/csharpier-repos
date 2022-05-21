@@ -21,17 +21,15 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using LdapConnection connection = GetConnection();
 
-            LdapException ex = Assert.Throws<LdapException>(
-                () =>
-                {
-                    var searchRequest = new SearchRequest(
-                        LdapConfiguration.Configuration.SearchDn,
-                        "==invalid==",
-                        SearchScope.OneLevel
-                    );
-                    _ = (SearchResponse)connection.SendRequest(searchRequest);
-                }
-            );
+            LdapException ex = Assert.Throws<LdapException>(() =>
+            {
+                var searchRequest = new SearchRequest(
+                    LdapConfiguration.Configuration.SearchDn,
+                    "==invalid==",
+                    SearchScope.OneLevel
+                );
+                _ = (SearchResponse)connection.SendRequest(searchRequest);
+            });
 
             Assert.Equal( /* LdapError.FilterError */
                 0x57,
@@ -44,17 +42,15 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using LdapConnection connection = GetConnection();
 
-            DirectoryOperationException ex = Assert.Throws<DirectoryOperationException>(
-                () =>
-                {
-                    var searchRequest = new SearchRequest(
-                        "==invaliddn==",
-                        "(objectClass=*)",
-                        SearchScope.OneLevel
-                    );
-                    var searchResponse = (SearchResponse)connection.SendRequest(searchRequest);
-                }
-            );
+            DirectoryOperationException ex = Assert.Throws<DirectoryOperationException>(() =>
+            {
+                var searchRequest = new SearchRequest(
+                    "==invaliddn==",
+                    "(objectClass=*)",
+                    SearchScope.OneLevel
+                );
+                var searchResponse = (SearchResponse)connection.SendRequest(searchRequest);
+            });
 
             Assert.Equal(ResultCode.InvalidDNSyntax, ex.Response.ResultCode);
         }
@@ -64,24 +60,22 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using LdapConnection connection = GetConnection();
 
-            DirectoryOperationException ex = Assert.Throws<DirectoryOperationException>(
-                () =>
-                {
-                    var searchRequest = new SearchRequest(
-                        LdapConfiguration.Configuration.SearchDn,
-                        "(objectClass=*)",
-                        SearchScope.OneLevel
-                    );
-                    var control = new DirectoryControl(
-                        "==invalid-control==",
-                        value: null,
-                        isCritical: true,
-                        serverSide: true
-                    );
-                    searchRequest.Controls.Add(control);
-                    _ = (SearchResponse)connection.SendRequest(searchRequest);
-                }
-            );
+            DirectoryOperationException ex = Assert.Throws<DirectoryOperationException>(() =>
+            {
+                var searchRequest = new SearchRequest(
+                    LdapConfiguration.Configuration.SearchDn,
+                    "(objectClass=*)",
+                    SearchScope.OneLevel
+                );
+                var control = new DirectoryControl(
+                    "==invalid-control==",
+                    value: null,
+                    isCritical: true,
+                    serverSide: true
+                );
+                searchRequest.Controls.Add(control);
+                _ = (SearchResponse)connection.SendRequest(searchRequest);
+            });
 
             Assert.Equal(ResultCode.UnavailableCriticalExtension, ex.Response.ResultCode);
         }
@@ -186,9 +180,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                     Assert.Equal("Protocols Group 3", (string)sre.Attributes["description"][0]);
-                    Assert.Throws<DirectoryOperationException>(
-                        () => AddAttribute(connection, dn, "description", "Protocols Group 3")
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        AddAttribute(connection, dn, "description", "Protocols Group 3"));
 
                     ModifyAttribute(connection, dn, "description", "Modified Protocols Group 3");
                     sre = SearchOrganizationalUnit(
@@ -350,9 +343,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     ModifyRequest modRequest = new ModifyRequest(fullDn, mods);
                     ModifyResponse modResponse = (ModifyResponse)connection.SendRequest(modRequest);
                     Assert.Equal(ResultCode.Success, modResponse.ResultCode);
-                    Assert.Throws<DirectoryOperationException>(
-                        () => (ModifyResponse)connection.SendRequest(modRequest)
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        (ModifyResponse)connection.SendRequest(modRequest));
 
                     SearchResultEntry sre = SearchOrganizationalUnit(
                         connection,
@@ -361,22 +353,19 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                     Assert.Equal("Description 5", (string)sre.Attributes["description"][0]);
-                    Assert.Throws<DirectoryOperationException>(
-                        () => AddAttribute(connection, dn, "description", "Description 5")
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        AddAttribute(connection, dn, "description", "Description 5"));
                     Assert.Equal(
                         "123 4th Ave NE, State, Country",
                         (string)sre.Attributes["postalAddress"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(
-                        () =>
-                            AddAttribute(
-                                connection,
-                                dn,
-                                "postalAddress",
-                                "123 4th Ave NE, State, Country"
-                            )
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        AddAttribute(
+                            connection,
+                            dn,
+                            "postalAddress",
+                            "123 4th Ave NE, State, Country"
+                        ));
 
                     mod1 = new DirectoryAttributeModification();
                     mod1.Operation = DirectoryAttributeOperation.Replace;
@@ -402,22 +391,19 @@ namespace System.DirectoryServices.Protocols.Tests
                         "Modified Description 5",
                         (string)sre.Attributes["description"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(
-                        () => AddAttribute(connection, dn, "description", "Modified Description 5")
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        AddAttribute(connection, dn, "description", "Modified Description 5"));
                     Assert.Equal(
                         "689 5th Ave NE, State, Country",
                         (string)sre.Attributes["postalAddress"][0]
                     );
-                    Assert.Throws<DirectoryOperationException>(
-                        () =>
-                            AddAttribute(
-                                connection,
-                                dn,
-                                "postalAddress",
-                                "689 5th Ave NE, State, Country"
-                            )
-                    );
+                    Assert.Throws<DirectoryOperationException>(() =>
+                        AddAttribute(
+                            connection,
+                            dn,
+                            "postalAddress",
+                            "689 5th Ave NE, State, Country"
+                        ));
 
                     mod1 = new DirectoryAttributeModification();
                     mod1.Operation = DirectoryAttributeOperation.Delete;

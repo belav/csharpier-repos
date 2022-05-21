@@ -416,13 +416,8 @@ namespace Roslyn.Utilities
             private static readonly ObjectPool<
                 SegmentedDictionary<object, int>
             > s_referenceDictionaryPool =
-                new(
-                    () =>
-                        new SegmentedDictionary<object, int>(
-                            128,
-                            ReferenceEqualityComparer.Instance
-                        )
-                );
+                new(() =>
+                    new SegmentedDictionary<object, int>(128, ReferenceEqualityComparer.Instance));
 
             private static readonly ObjectPool<
                 SegmentedDictionary<object, int>

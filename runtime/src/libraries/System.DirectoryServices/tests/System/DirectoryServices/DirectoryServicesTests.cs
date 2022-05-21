@@ -215,24 +215,20 @@ namespace System.DirectoryServices.Tests
                             user.CommitChanges();
 
                             SearchOrganizationalRole(toOU, "user.move.1");
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOrganizationalRole(fromOU, "user.move.1")
-                            );
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOrganizationalRole(fromOU, "user.move.1"));
 
                             user.MoveTo(fromOU, "cn=user.moved.1");
                             user.CommitChanges();
 
                             SearchOrganizationalRole(fromOU, "user.moved.1");
 
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOrganizationalRole(fromOU, "user.move.1")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOrganizationalRole(toOU, "user.move.1")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => user.MoveTo(toOU, "user.move.2")
-                            );
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOrganizationalRole(fromOU, "user.move.1"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOrganizationalRole(toOU, "user.move.1"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                user.MoveTo(toOU, "user.move.2"));
                         }
                     }
                 }
@@ -273,9 +269,8 @@ namespace System.DirectoryServices.Tests
 
                             // The Lightweight Directory Access Protocol (LDAP) provider does not currently support the CopyTo(DirectoryEntry) method.
                             Assert.Throws<NotImplementedException>(() => user.CopyTo(toOU));
-                            Assert.Throws<NotImplementedException>(
-                                () => user.CopyTo(toOU, "user.move.2")
-                            );
+                            Assert.Throws<NotImplementedException>(() =>
+                                user.CopyTo(toOU, "user.move.2"));
                         }
                     }
                 }
@@ -308,15 +303,13 @@ namespace System.DirectoryServices.Tests
                         user.Rename("cn=user.after.rename");
                         user.CommitChanges();
 
-                        Assert.Throws<DirectoryServicesCOMException>(
-                            () => SearchOrganizationalRole(rootOU, "user.before.rename")
-                        );
+                        Assert.Throws<DirectoryServicesCOMException>(() =>
+                            SearchOrganizationalRole(rootOU, "user.before.rename"));
 
                         SearchOrganizationalRole(rootOU, "user.after.rename");
 
-                        Assert.Throws<DirectoryServicesCOMException>(
-                            () => user.Rename("user.after.after.rename")
-                        );
+                        Assert.Throws<DirectoryServicesCOMException>(() =>
+                            user.Rename("user.after.after.rename"));
                     }
                 }
                 finally
@@ -407,21 +400,16 @@ namespace System.DirectoryServices.Tests
                         {
                             rootOU.DeleteTree();
 
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOUByName(de, "RootToDelete")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOUByName(rootOU, "Child1")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOUByName(rootOU, "Child2")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOUByName(childOU, "GrandChild")
-                            );
-                            Assert.Throws<DirectoryServicesCOMException>(
-                                () => SearchOrganizationalRole(grandChildOU, "user.grandChild.1")
-                            );
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOUByName(de, "RootToDelete"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOUByName(rootOU, "Child1"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOUByName(rootOU, "Child2"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOUByName(childOU, "GrandChild"));
+                            Assert.Throws<DirectoryServicesCOMException>(() =>
+                                SearchOrganizationalRole(grandChildOU, "user.grandChild.1"));
                         }
                         else
                         {
@@ -442,12 +430,10 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry("SomeWrongPath"))
             {
-                Assert.Throws<COMException>(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                Assert.Throws<COMException>(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -461,12 +447,10 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry(LdapConfiguration.Configuration.LdapPath))
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -486,12 +470,10 @@ namespace System.DirectoryServices.Tests
                 )
             )
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -507,12 +489,10 @@ namespace System.DirectoryServices.Tests
                 )
             )
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";

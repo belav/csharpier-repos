@@ -281,45 +281,39 @@ namespace System.Runtime.Tests
         [Fact]
         public void SetTarget_NotAllocated_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    DependentHandle handle = default;
-                    handle.Target = new();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DependentHandle handle = default;
+                handle.Target = new();
+            });
         }
 
         [Fact]
         public void SetTarget_NotNullObject_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    DependentHandle handle = default;
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DependentHandle handle = default;
 
-                    try
-                    {
-                        handle.Target = new();
-                    }
-                    finally
-                    {
-                        handle.Dispose();
-                    }
+                try
+                {
+                    handle.Target = new();
                 }
-            );
+                finally
+                {
+                    handle.Dispose();
+                }
+            });
         }
 
         [Fact]
         public void SetDependent_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    DependentHandle handle = default;
-                    handle.Dependent = new();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DependentHandle handle = default;
+                handle.Dependent = new();
+            });
         }
 
         [Fact]

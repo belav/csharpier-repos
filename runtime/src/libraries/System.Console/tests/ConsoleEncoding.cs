@@ -149,28 +149,26 @@ public partial class ConsoleEncoding
     public void InputEncoding_SetWithInInitialized_ResetsIn()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
+            .Invoke(() =>
+            {
+                // Initialize Console.In
+                TextReader inReader = Console.In;
+                Assert.NotNull(inReader);
+                Assert.Same(inReader, Console.In);
+
+                // Change the InputEncoding
+                Console.InputEncoding = Encoding.Unicode; // Not ASCII: not supported by Windows Nano
+                Assert.Equal(Encoding.Unicode, Console.InputEncoding);
+
+                if (PlatformDetection.IsWindows)
                 {
-                    // Initialize Console.In
-                    TextReader inReader = Console.In;
-                    Assert.NotNull(inReader);
-                    Assert.Same(inReader, Console.In);
-
-                    // Change the InputEncoding
-                    Console.InputEncoding = Encoding.Unicode; // Not ASCII: not supported by Windows Nano
-                    Assert.Equal(Encoding.Unicode, Console.InputEncoding);
-
-                    if (PlatformDetection.IsWindows)
-                    {
-                        // Console.set_InputEncoding is effectively a nop on Unix,
-                        // so although the reader accessed by Console.In will be reset,
-                        // it'll be re-initialized on re-access to the same singleton,
-                        // (assuming input isn't redirected).
-                        Assert.NotSame(inReader, Console.In);
-                    }
+                    // Console.set_InputEncoding is effectively a nop on Unix,
+                    // so although the reader accessed by Console.In will be reset,
+                    // it'll be re-initialized on re-access to the same singleton,
+                    // (assuming input isn't redirected).
+                    Assert.NotSame(inReader, Console.In);
                 }
-            )
+            })
             .Dispose();
     }
 
@@ -193,27 +191,25 @@ public partial class ConsoleEncoding
     public void OutputEncoding_SetWithErrorAndOutputInitialized_ResetsErrorAndOutput()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    // Initialize Console.Error
-                    TextWriter errorWriter = Console.Error;
-                    Assert.NotNull(errorWriter);
-                    Assert.Same(errorWriter, Console.Error);
+            .Invoke(() =>
+            {
+                // Initialize Console.Error
+                TextWriter errorWriter = Console.Error;
+                Assert.NotNull(errorWriter);
+                Assert.Same(errorWriter, Console.Error);
 
-                    // Initialize Console.Out
-                    TextWriter outWriter = Console.Out;
-                    Assert.NotNull(outWriter);
-                    Assert.Same(outWriter, Console.Out);
+                // Initialize Console.Out
+                TextWriter outWriter = Console.Out;
+                Assert.NotNull(outWriter);
+                Assert.Same(outWriter, Console.Out);
 
-                    // Change the OutputEncoding
-                    Console.OutputEncoding = Encoding.Unicode; // Not ASCII: not supported by Windows Nano
-                    Assert.Equal(Encoding.Unicode, Console.OutputEncoding);
+                // Change the OutputEncoding
+                Console.OutputEncoding = Encoding.Unicode; // Not ASCII: not supported by Windows Nano
+                Assert.Equal(Encoding.Unicode, Console.OutputEncoding);
 
-                    Assert.NotSame(errorWriter, Console.Error);
-                    Assert.NotSame(outWriter, Console.Out);
-                }
-            )
+                Assert.NotSame(errorWriter, Console.Error);
+                Assert.NotSame(outWriter, Console.Out);
+            })
             .Dispose();
     }
 

@@ -23,13 +23,11 @@ namespace System.CommandLine.Tests
             const string value = "This is a test";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        Environment.GetEnvironmentVariable(variable).Should().Be(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    Environment.GetEnvironmentVariable(variable).Should().Be(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -49,13 +47,11 @@ namespace System.CommandLine.Tests
             const string value = "This is a test";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        Environment.GetEnvironmentVariable(variable).Should().Be(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    Environment.GetEnvironmentVariable(variable).Should().Be(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -75,13 +71,11 @@ namespace System.CommandLine.Tests
             const string value = "This is a test";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        Environment.GetEnvironmentVariable(variable).Should().Be(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    Environment.GetEnvironmentVariable(variable).Should().Be(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -101,13 +95,11 @@ namespace System.CommandLine.Tests
             const string value = "This is = a test containing equals";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        Environment.GetEnvironmentVariable(variable).Should().Be(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    Environment.GetEnvironmentVariable(variable).Should().Be(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -126,13 +118,11 @@ namespace System.CommandLine.Tests
             string variable = test_variable;
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        Environment.GetEnvironmentVariable(variable).Should().BeNull();
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    Environment.GetEnvironmentVariable(variable).Should().BeNull();
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -151,14 +141,12 @@ namespace System.CommandLine.Tests
             string value = $"This is a test, random: {randomizer.Next()}";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        var env = Environment.GetEnvironmentVariables();
-                        env.Values.Cast<string>().Should().NotContain(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    var env = Environment.GetEnvironmentVariables();
+                    env.Values.Cast<string>().Should().NotContain(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)
@@ -177,14 +165,12 @@ namespace System.CommandLine.Tests
             string value = $"This is a test, random: {randomizer.Next()}";
             var rootCommand = new RootCommand
             {
-                Handler = CommandHandler.Create(
-                    () =>
-                    {
-                        asserted = true;
-                        var env = Environment.GetEnvironmentVariables();
-                        env.Values.Cast<string>().Should().NotContain(value);
-                    }
-                )
+                Handler = CommandHandler.Create(() =>
+                {
+                    asserted = true;
+                    var env = Environment.GetEnvironmentVariables();
+                    env.Values.Cast<string>().Should().NotContain(value);
+                })
             };
 
             var parser = new CommandLineBuilder(rootCommand)

@@ -3323,9 +3323,8 @@ namespace System.Security.Cryptography.Xml.Tests
 </Signature>
 ";
             SignedXml sign = GetSignedXml(xml);
-            Assert.Throws<CryptographicException>(
-                () => sign.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue")))
-            );
+            Assert.Throws<CryptographicException>(() =>
+                sign.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue"))));
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/20429")]
@@ -3351,9 +3350,8 @@ namespace System.Security.Cryptography.Xml.Tests
 </Signature>
 ";
             SignedXml sign = GetSignedXml(xml);
-            Assert.Throws<FormatException>(
-                () => sign.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue")))
-            );
+            Assert.Throws<FormatException>(() =>
+                sign.CheckSignature(new HMACSHA1(Encoding.ASCII.GetBytes("no clue"))));
         }
 
         [Fact]

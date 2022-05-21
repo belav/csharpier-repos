@@ -45,12 +45,10 @@ public class ListIntegrationTest
         patchDocument.Test(o => o.SimpleObject.IntegerList, 4, -1);
 
         // Act & Assert
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
         Assert.Equal(
             "The index value provided by path segment '-1' is out of bounds of the array size.",
             exception.Message
@@ -158,12 +156,10 @@ public class ListIntegrationTest
         patchDocument.Remove("IntegerList/" + position);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -251,12 +247,10 @@ public class ListIntegrationTest
         patchDocument.Replace(o => o.SimpleObject.IntegerList, 5, -1);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(

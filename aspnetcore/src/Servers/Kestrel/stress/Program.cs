@@ -789,58 +789,52 @@ public class Program
             }
 
             // Spin up a thread dedicated to outputting stats for each defined interval
-            new Thread(
-                () =>
+            new Thread(() =>
+            {
+                while (true)
                 {
-                    while (true)
+                    Thread.Sleep(DisplayIntervalMilliseconds);
+                    lock (Console.Out)
                     {
-                        Thread.Sleep(DisplayIntervalMilliseconds);
-                        lock (Console.Out)
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("[" + DateTime.Now + "]");
+                        Console.ResetColor();
+                        Console.WriteLine(
+                            " Total: " + total.ToString("N0", CultureInfo.InvariantCulture)
+                        );
+
+                        if (reuseAddressFailure > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine(
+                                "~~ Reuse address failures: "
+                                    + reuseAddressFailure.ToString(
+                                        "N0",
+                                        CultureInfo.InvariantCulture
+                                    )
+                                    + "~~"
+                            );
+                            Console.ResetColor();
+                        }
+
+                        for (int i = 0; i < clientOperations.Length; i++)
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.Write("[" + DateTime.Now + "]");
+                            Console.Write("\t" + clientOperations[i].Item1.PadRight(30));
                             Console.ResetColor();
-                            Console.WriteLine(
-                                " Total: " + total.ToString("N0", CultureInfo.InvariantCulture)
-                            );
-
-                            if (reuseAddressFailure > 0)
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine(
-                                    "~~ Reuse address failures: "
-                                        + reuseAddressFailure.ToString(
-                                            "N0",
-                                            CultureInfo.InvariantCulture
-                                        )
-                                        + "~~"
-                                );
-                                Console.ResetColor();
-                            }
-
-                            for (int i = 0; i < clientOperations.Length; i++)
-                            {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Write("\t" + clientOperations[i].Item1.PadRight(30));
-                                Console.ResetColor();
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write("Success: ");
-                                Console.ResetColor();
-                                Console.Write(
-                                    success[i].ToString("N0", CultureInfo.InvariantCulture)
-                                );
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.Write("\tFail: ");
-                                Console.ResetColor();
-                                Console.WriteLine(
-                                    fail[i].ToString("N0", CultureInfo.InvariantCulture)
-                                );
-                            }
-                            Console.WriteLine();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("Success: ");
+                            Console.ResetColor();
+                            Console.Write(success[i].ToString("N0", CultureInfo.InvariantCulture));
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("\tFail: ");
+                            Console.ResetColor();
+                            Console.WriteLine(fail[i].ToString("N0", CultureInfo.InvariantCulture));
                         }
+                        Console.WriteLine();
                     }
                 }
-            )
+            })
             {
                 IsBackground = true
             }.Start();
@@ -851,56 +845,53 @@ public class Program
                     .Range(0, concurrentRequests)
                     .Select(
                         taskNum =>
-                            Task.Run(
-                                async () =>
+                            Task.Run(async () =>
+                            {
+                                var clientContext = new ClientContext(
+                                    client,
+                                    taskNum: taskNum,
+                                    seed: seed
+                                );
+                                // TODO make 50000 configurable based on time.
+                                for (long i = taskNum; i < 500000; i++)
                                 {
-                                    var clientContext = new ClientContext(
-                                        client,
-                                        taskNum: taskNum,
-                                        seed: seed
-                                    );
-                                    // TODO make 50000 configurable based on time.
-                                    for (long i = taskNum; i < 500000; i++)
+                                    long opIndex = i % clientOperations.Length;
+                                    (string operation, Func<ClientContext, Task> func) =
+                                        clientOperations[opIndex];
+                                    try
                                     {
-                                        long opIndex = i % clientOperations.Length;
-                                        (string operation, Func<ClientContext, Task> func) =
-                                            clientOperations[opIndex];
-                                        try
-                                        {
-                                            await func(clientContext);
+                                        await func(clientContext);
 
-                                            Increment(ref success[opIndex]);
+                                        Increment(ref success[opIndex]);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Increment(ref fail[opIndex]);
+
+                                        if (
+                                            e is HttpRequestException hre
+                                            && hre.InnerException is SocketException se
+                                            && se.SocketErrorCode == SocketError.AddressAlreadyInUse
+                                        )
+                                        {
+                                            Interlocked.Increment(ref reuseAddressFailure);
                                         }
-                                        catch (Exception e)
+                                        else
                                         {
-                                            Increment(ref fail[opIndex]);
-
-                                            if (
-                                                e is HttpRequestException hre
-                                                && hre.InnerException is SocketException se
-                                                && se.SocketErrorCode
-                                                    == SocketError.AddressAlreadyInUse
-                                            )
+                                            lock (Console.Out)
                                             {
-                                                Interlocked.Increment(ref reuseAddressFailure);
-                                            }
-                                            else
-                                            {
-                                                lock (Console.Out)
-                                                {
-                                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                                    Console.WriteLine(
-                                                        $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
-                                                    );
-                                                    Console.ResetColor();
-                                                    Console.WriteLine(e);
-                                                    Console.WriteLine();
-                                                }
+                                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                                Console.WriteLine(
+                                                    $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
+                                                );
+                                                Console.ResetColor();
+                                                Console.WriteLine(e);
+                                                Console.WriteLine();
                                             }
                                         }
                                     }
                                 }
-                            )
+                            })
                     )
                     .ToArray()
             );

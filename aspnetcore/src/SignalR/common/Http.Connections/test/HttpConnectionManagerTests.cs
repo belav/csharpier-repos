@@ -113,33 +113,29 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
                 connection.ApplicationTask = Task.FromException(
                     new Exception("Application failed")
                 );
-                connection.TransportTask = Task.Run(
-                    async () =>
-                    {
-                        // Wait for the application to end
-                        var result = await connection.Application.Input.ReadAsync();
-                        connection.Application.Input.AdvanceTo(result.Buffer.End);
+                connection.TransportTask = Task.Run(async () =>
+                {
+                    // Wait for the application to end
+                    var result = await connection.Application.Input.ReadAsync();
+                    connection.Application.Input.AdvanceTo(result.Buffer.End);
 
-                        if (transportFaulted)
-                        {
-                            throw new Exception("Transport failed");
-                        }
+                    if (transportFaulted)
+                    {
+                        throw new Exception("Transport failed");
                     }
-                );
+                });
             }
             else if (transportFaulted)
             {
                 // If the transport is faulted then we want to make sure the transport task only completes after
                 // the application completes
                 connection.TransportTask = Task.FromException(new Exception("Application failed"));
-                connection.ApplicationTask = Task.Run(
-                    async () =>
-                    {
-                        // Wait for the application to end
-                        var result = await connection.Transport.Input.ReadAsync();
-                        connection.Transport.Input.AdvanceTo(result.Buffer.End);
-                    }
-                );
+                connection.ApplicationTask = Task.Run(async () =>
+                {
+                    // Wait for the application to end
+                    var result = await connection.Transport.Input.ReadAsync();
+                    connection.Transport.Input.AdvanceTo(result.Buffer.End);
+                });
             }
             else
             {
@@ -162,14 +158,12 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             result = await connection.Application.Output.FlushAsync();
             Assert.True(result.IsCompleted);
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await connection.Transport.Input.ReadAsync()
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await connection.Transport.Input.ReadAsync());
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
 
-            exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await connection.Application.Input.ReadAsync()
-            );
+            exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await connection.Application.Input.ReadAsync());
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
         }
     }
@@ -306,36 +300,32 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             var connectionManager = CreateConnectionManager(LoggerFactory);
             var connection = connectionManager.CreateConnection();
 
-            connection.ApplicationTask = Task.Run(
-                async () =>
-                {
-                    var result = await connection.Transport.Input.ReadAsync();
+            connection.ApplicationTask = Task.Run(async () =>
+            {
+                var result = await connection.Transport.Input.ReadAsync();
 
-                    try
-                    {
-                        Assert.True(result.IsCompleted);
-                    }
-                    finally
-                    {
-                        connection.Transport.Input.AdvanceTo(result.Buffer.End);
-                    }
-                }
-            );
-
-            connection.TransportTask = Task.Run(
-                async () =>
+                try
                 {
-                    var result = await connection.Application.Input.ReadAsync();
-                    try
-                    {
-                        Assert.True(result.IsCanceled);
-                    }
-                    finally
-                    {
-                        connection.Application.Input.AdvanceTo(result.Buffer.End);
-                    }
+                    Assert.True(result.IsCompleted);
                 }
-            );
+                finally
+                {
+                    connection.Transport.Input.AdvanceTo(result.Buffer.End);
+                }
+            });
+
+            connection.TransportTask = Task.Run(async () =>
+            {
+                var result = await connection.Application.Input.ReadAsync();
+                try
+                {
+                    Assert.True(result.IsCanceled);
+                }
+                finally
+                {
+                    connection.Application.Input.AdvanceTo(result.Buffer.End);
+                }
+            });
 
             connectionManager.CloseConnections();
 
@@ -385,14 +375,12 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
 
             tcs.TrySetException(new InvalidOperationException("Error"));
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await firstTask.DefaultTimeout()
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await firstTask.DefaultTimeout());
             Assert.Equal("Error", exception.Message);
 
-            exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await secondTask.DefaultTimeout()
-            );
+            exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await secondTask.DefaultTimeout());
             Assert.Equal("Error", exception.Message);
         }
     }
@@ -416,12 +404,10 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
 
             tcs.TrySetCanceled();
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await firstTask.DefaultTimeout()
-            );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await secondTask.DefaultTimeout()
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await firstTask.DefaultTimeout());
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await secondTask.DefaultTimeout());
         }
     }
 

@@ -121,22 +121,18 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             using (X509Certificate2 keyAgreeCertificate = Certificates.DHKeyAgree1.GetCertificate())
             {
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        _ = new CmsRecipient(keyAgreeCertificate, RSAEncryptionPadding.OaepSHA1);
-                    }
-                );
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        _ = new CmsRecipient(
-                            SubjectIdentifierType.IssuerAndSerialNumber,
-                            keyAgreeCertificate,
-                            RSAEncryptionPadding.OaepSHA1
-                        );
-                    }
-                );
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    _ = new CmsRecipient(keyAgreeCertificate, RSAEncryptionPadding.OaepSHA1);
+                });
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    _ = new CmsRecipient(
+                        SubjectIdentifierType.IssuerAndSerialNumber,
+                        keyAgreeCertificate,
+                        RSAEncryptionPadding.OaepSHA1
+                    );
+                });
             }
         }
 

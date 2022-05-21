@@ -29,13 +29,11 @@ namespace System.Globalization.Tests
             );
             using (new ThreadCultureChange(newCurrentCulture, newCurrentUICulture))
             {
-                Task t = Task.Run(
-                    () =>
-                    {
-                        Assert.Equal(CultureInfo.CurrentCulture, newCurrentCulture);
-                        Assert.Equal(CultureInfo.CurrentUICulture, newCurrentUICulture);
-                    }
-                );
+                Task t = Task.Run(() =>
+                {
+                    Assert.Equal(CultureInfo.CurrentCulture, newCurrentCulture);
+                    Assert.Equal(CultureInfo.CurrentUICulture, newCurrentUICulture);
+                });
 
                 ((IAsyncResult)t).AsyncWaitHandle.WaitOne();
                 t.Wait();

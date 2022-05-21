@@ -29,9 +29,8 @@ public class ResponseBodyTests
             Assert.False(context.AllowSynchronousIO);
 
             Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Body.Write(new byte[10], 0, 10)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Body.Write(new byte[10], 0, 10));
             Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
 
             context.AllowSynchronousIO = true;
@@ -212,9 +211,8 @@ public class ResponseBodyTests
             Assert.True(writeTask.IsCanceled);
             context.Dispose();
 
-            await Assert.ThrowsAsync<HttpRequestException>(
-                () => response.Content.LoadIntoBufferAsync()
-            );
+            await Assert.ThrowsAsync<HttpRequestException>(() =>
+                response.Content.LoadIntoBufferAsync());
         }
     }
 
@@ -236,9 +234,8 @@ public class ResponseBodyTests
             Assert.True(writeTask.IsCanceled);
             context.Dispose();
 
-            await Assert.ThrowsAsync<HttpRequestException>(
-                () => response.Content.LoadIntoBufferAsync()
-            );
+            await Assert.ThrowsAsync<HttpRequestException>(() =>
+                response.Content.LoadIntoBufferAsync());
         }
     }
 
@@ -265,30 +262,26 @@ public class ResponseBodyTests
             await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
             await disconnectCts.Task.DefaultTimeout();
 
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                // It can take several tries before Write notices the disconnect.
+                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                    {
-                        context.Response.Body.Write(
-                            Utilities.WriteBuffer,
-                            0,
-                            Utilities.WriteBuffer.Length
-                        );
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
-                    }
-                }
-            );
-
-            Assert.Throws<ObjectDisposedException>(
-                () =>
                     context.Response.Body.Write(
                         Utilities.WriteBuffer,
                         0,
                         Utilities.WriteBuffer.Length
-                    )
-            );
+                    );
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
+                }
+            });
+
+            Assert.Throws<ObjectDisposedException>(() =>
+                context.Response.Body.Write(
+                    Utilities.WriteBuffer,
+                    0,
+                    Utilities.WriteBuffer.Length
+                ));
 
             context.Dispose();
         }
@@ -316,30 +309,26 @@ public class ResponseBodyTests
             await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
             await disconnectCts.Task.DefaultTimeout();
 
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                // It can take several tries before Write notices the disconnect.
+                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                    {
-                        await context.Response.Body.WriteAsync(
-                            Utilities.WriteBuffer,
-                            0,
-                            Utilities.WriteBuffer.Length
-                        );
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
-                    }
-                }
-            );
-
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () =>
-                    context.Response.Body.WriteAsync(
+                    await context.Response.Body.WriteAsync(
                         Utilities.WriteBuffer,
                         0,
                         Utilities.WriteBuffer.Length
-                    )
-            );
+                    );
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
+                }
+            });
+
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                context.Response.Body.WriteAsync(
+                    Utilities.WriteBuffer,
+                    0,
+                    Utilities.WriteBuffer.Length
+                ));
 
             context.Dispose();
         }
@@ -440,21 +429,19 @@ public class ResponseBodyTests
                 await disconnectCts.Task.DefaultTimeout();
             }
 
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                // It can take several tries before Write notices the disconnect.
+                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                    {
-                        context.Response.Body.Write(
-                            Utilities.WriteBuffer,
-                            0,
-                            Utilities.WriteBuffer.Length
-                        );
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
-                    }
+                    context.Response.Body.Write(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
                 }
-            );
+            });
             context.Dispose();
         }
     }
@@ -490,21 +477,19 @@ public class ResponseBodyTests
                 await disconnectCts.Task.DefaultTimeout();
             }
 
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                // It can take several tries before Write notices the disconnect.
+                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                    {
-                        await context.Response.Body.WriteAsync(
-                            Utilities.WriteBuffer,
-                            0,
-                            Utilities.WriteBuffer.Length
-                        );
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
-                    }
+                    await context.Response.Body.WriteAsync(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
                 }
-            );
+            });
             context.Dispose();
         }
     }

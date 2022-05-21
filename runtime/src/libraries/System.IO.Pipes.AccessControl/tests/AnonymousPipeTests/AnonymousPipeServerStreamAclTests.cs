@@ -20,54 +20,42 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public void Create_NotSupportedPipeDirection()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), PipeDirection.InOut)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), PipeDirection.InOut).Dispose();
+            });
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidPipeDirection_MemberData))]
         public void Create_InvalidPipeDirection(PipeDirection direction)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), direction).Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), direction).Dispose();
+            });
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidInheritability_MemberData))]
         public void Create_InvalidInheritability(HandleInheritability inheritability)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyAnonymousPipe(
-                            GetBasicPipeSecurity(),
-                            inheritability: inheritability
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), inheritability: inheritability)
+                    .Dispose();
+            });
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidBufferSize_MemberData))]
         public void Create_InvalidBufferSize(int bufferSize)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), bufferSize: bufferSize)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyAnonymousPipe(GetBasicPipeSecurity(), bufferSize: bufferSize)
+                    .Dispose();
+            });
         }
 
         public static IEnumerable<object[]> Create_ValidParameters_MemberData() =>
@@ -126,19 +114,17 @@ namespace System.IO.Pipes.Tests
                     rights,
                     accessControl
                 );
-                Assert.Throws<UnauthorizedAccessException>(
-                    () =>
-                    {
-                        AnonymousPipeServerStreamAcl
-                            .Create(
-                                DefaultPipeDirection,
-                                DefaultInheritability,
-                                DefaultBufferSize,
-                                security
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                {
+                    AnonymousPipeServerStreamAcl
+                        .Create(
+                            DefaultPipeDirection,
+                            DefaultInheritability,
+                            DefaultBufferSize,
+                            security
+                        )
+                        .Dispose();
+                });
             }
         }
 

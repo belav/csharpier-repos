@@ -128,12 +128,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new TextChange(new TextSpan(6, 7), "Universe"),
                 new TextChange(new TextSpan(0, 5), "Halo")
             };
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    var newText = text.WithChanges(changes);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                var newText = text.WithChanges(changes);
+            });
         }
 
         [Fact]
@@ -226,12 +224,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, -1, 2));
             Assert.Throws<ArgumentOutOfRangeException>(() => newText.CopyTo(0, destination, 0, -1));
             Assert.Throws<ArgumentNullException>(() => newText.CopyTo(0, null, 0, 2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => newText.CopyTo(newText.Length - 1, destination, 0, 2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => newText.CopyTo(0, destination, destination.Length - 1, 2)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                newText.CopyTo(newText.Length - 1, destination, 0, 2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                newText.CopyTo(0, destination, destination.Length - 1, 2));
         }
 
         [Fact]

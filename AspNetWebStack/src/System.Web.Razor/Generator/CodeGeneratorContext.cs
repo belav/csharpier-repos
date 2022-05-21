@@ -325,12 +325,10 @@ namespace System.Web.Razor.Generator
         {
             Action<string, CodeLinePragma> oldCollector = StatementCollector;
             StatementCollector = collector;
-            return new DisposableAction(
-                () =>
-                {
-                    StatementCollector = oldCollector;
-                }
-            );
+            return new DisposableAction(() =>
+            {
+                StatementCollector = oldCollector;
+            });
         }
 
         [SuppressMessage(

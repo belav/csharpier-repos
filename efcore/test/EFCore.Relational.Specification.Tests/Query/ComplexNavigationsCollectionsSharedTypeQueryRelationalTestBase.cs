@@ -22,12 +22,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_with_navigation_and_Distinct_projecting_columns_including_join_key(
+                            async
+                        ))
                 ).Message
             );
         }

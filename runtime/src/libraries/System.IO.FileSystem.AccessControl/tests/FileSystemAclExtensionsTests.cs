@@ -20,9 +20,8 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_DirectoryInfo_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null));
         }
 
         [Fact]
@@ -38,13 +37,11 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_DirectoryInfo_AccessControlSections_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    FileSystemAclExtensions.GetAccessControl(
-                        (DirectoryInfo)null,
-                        new AccessControlSections()
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl(
+                    (DirectoryInfo)null,
+                    new AccessControlSections()
+                ));
         }
 
         [Fact]
@@ -63,9 +60,8 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_FileInfo_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileSystemAclExtensions.GetAccessControl((FileInfo)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl((FileInfo)null));
         }
 
         [Fact]
@@ -82,13 +78,11 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_FileInfo_AccessControlSections_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    FileSystemAclExtensions.GetAccessControl(
-                        (FileInfo)null,
-                        new AccessControlSections()
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl(
+                    (FileInfo)null,
+                    new AccessControlSections()
+                ));
         }
 
         [Fact]
@@ -253,9 +247,8 @@ namespace System.IO
             var dirInfo = new DirectoryInfo(dirPath);
             var security = new DirectorySecurity();
             // Fails because the DirectorySecurity lacks any rights to create parent folder
-            Assert.Throws<UnauthorizedAccessException>(
-                () => CreateDirectoryWithSecurity(dirInfo, security)
-            );
+            Assert.Throws<UnauthorizedAccessException>(() =>
+                CreateDirectoryWithSecurity(dirInfo, security));
         }
 
         [Fact]
@@ -403,18 +396,16 @@ namespace System.IO
             var fileInfo = new FileInfo(path);
             var security = new FileSecurity();
 
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                    CreateFileWithSecurity(
-                        fileInfo,
-                        FileMode.CreateNew,
-                        FileSystemRights.WriteData,
-                        FileShare.Delete,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                CreateFileWithSecurity(
+                    fileInfo,
+                    FileMode.CreateNew,
+                    FileSystemRights.WriteData,
+                    FileShare.Delete,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                ));
         }
 
         [Theory]
@@ -504,18 +495,16 @@ namespace System.IO
             var security = new FileSecurity();
             var info = new FileInfo("path");
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CreateFileWithSecurity(
-                        info,
-                        mode,
-                        rights,
-                        FileShare.Delete,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                CreateFileWithSecurity(
+                    info,
+                    mode,
+                    rights,
+                    FileShare.Delete,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                ));
         }
 
         [Fact]

@@ -68,28 +68,24 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void GetMethodsThrowsOnStatic()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    MethodFinder.GetAllInstanceMethods(
-                        typeof(object),
-                        BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                MethodFinder.GetAllInstanceMethods(
+                    typeof(object),
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+                ));
         }
 
         [Test]
         public void GetMethodsThrowsOnOtherFlags()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    MethodFinder.GetAllInstanceMethods(
-                        typeof(object),
-                        BindingFlags.Instance
-                            | BindingFlags.NonPublic
-                            | BindingFlags.Public
-                            | BindingFlags.DeclaredOnly
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                MethodFinder.GetAllInstanceMethods(
+                    typeof(object),
+                    BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.DeclaredOnly
+                ));
         }
     }
 }

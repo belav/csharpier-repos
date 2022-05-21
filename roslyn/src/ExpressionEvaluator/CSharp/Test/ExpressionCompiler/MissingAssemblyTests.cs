@@ -610,14 +610,12 @@ class C
 
             var references = ImmutableArray<MetadataBlock>.Empty;
             var missingAssemblyIdentities = ImmutableArray.Create(new AssemblyIdentity("A"));
-            Assert.Throws<COMException>(
-                () =>
-                    ExpressionCompiler.ShouldTryAgainWithMoreMetadataBlocks(
-                        gmdbpf,
-                        missingAssemblyIdentities,
-                        ref references
-                    )
-            );
+            Assert.Throws<COMException>(() =>
+                ExpressionCompiler.ShouldTryAgainWithMoreMetadataBlocks(
+                    gmdbpf,
+                    missingAssemblyIdentities,
+                    ref references
+                ));
         }
 
         [Fact]
@@ -630,14 +628,12 @@ class C
 
             var references = ImmutableArray<MetadataBlock>.Empty;
             var missingAssemblyIdentities = ImmutableArray.Create(new AssemblyIdentity("A"));
-            Assert.Throws<Exception>(
-                () =>
-                    ExpressionCompiler.ShouldTryAgainWithMoreMetadataBlocks(
-                        gmdbpf,
-                        missingAssemblyIdentities,
-                        ref references
-                    )
-            );
+            Assert.Throws<Exception>(() =>
+                ExpressionCompiler.ShouldTryAgainWithMoreMetadataBlocks(
+                    gmdbpf,
+                    missingAssemblyIdentities,
+                    ref references
+                ));
         }
 
         private static void ShouldTryAgain_False(DkmUtilities.GetMetadataBytesPtrFunction gmdbpf)

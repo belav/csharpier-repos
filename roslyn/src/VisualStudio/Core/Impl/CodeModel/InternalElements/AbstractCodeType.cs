@@ -221,62 +221,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeElement AddBase(object @base, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                FileCodeModel.AddBase(LookupNode(), @base, position);
+
+                var codeElements = this.Bases as ICodeElements;
+                var hr = codeElements.Item(1, out var element);
+
+                if (ErrorHandler.Succeeded(hr))
                 {
-                    FileCodeModel.AddBase(LookupNode(), @base, position);
-
-                    var codeElements = this.Bases as ICodeElements;
-                    var hr = codeElements.Item(1, out var element);
-
-                    if (ErrorHandler.Succeeded(hr))
-                    {
-                        return element;
-                    }
-
-                    return null;
+                    return element;
                 }
-            );
+
+                return null;
+            });
         }
 
         public EnvDTE.CodeInterface AddImplementedInterface(object @base, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                var name = FileCodeModel.AddImplementedInterface(LookupNode(), @base, position);
+
+                var codeElements = this.ImplementedInterfaces as ICodeElements;
+                var hr = codeElements.Item(name, out var element);
+
+                if (ErrorHandler.Succeeded(hr))
                 {
-                    var name = FileCodeModel.AddImplementedInterface(LookupNode(), @base, position);
-
-                    var codeElements = this.ImplementedInterfaces as ICodeElements;
-                    var hr = codeElements.Item(name, out var element);
-
-                    if (ErrorHandler.Succeeded(hr))
-                    {
-                        return element as EnvDTE.CodeInterface;
-                    }
-
-                    return null;
+                    return element as EnvDTE.CodeInterface;
                 }
-            );
+
+                return null;
+            });
         }
 
         public void RemoveBase(object element)
         {
-            FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    FileCodeModel.RemoveBase(LookupNode(), element);
-                }
-            );
+            FileCodeModel.EnsureEditor(() =>
+            {
+                FileCodeModel.RemoveBase(LookupNode(), element);
+            });
         }
 
         public void RemoveInterface(object element)
         {
-            FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    FileCodeModel.RemoveImplementedInterface(LookupNode(), element);
-                }
-            );
+            FileCodeModel.EnsureEditor(() =>
+            {
+                FileCodeModel.RemoveImplementedInterface(LookupNode(), element);
+            });
         }
     }
 }

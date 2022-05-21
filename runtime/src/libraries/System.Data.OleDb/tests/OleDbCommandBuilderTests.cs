@@ -79,9 +79,8 @@ namespace System.Data.OleDb.Tests
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = @"SELECT * FROM " + tableName;
                     connection.Close();
-                    var exception = Record.Exception(
-                        () => OleDbCommandBuilder.DeriveParameters(command)
-                    );
+                    var exception = Record.Exception(() =>
+                        OleDbCommandBuilder.DeriveParameters(command));
                     Assert.NotNull(exception);
                     Assert.IsType<InvalidOperationException>(exception);
                     Assert.Contains(

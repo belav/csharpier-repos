@@ -29,18 +29,16 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Supported on netfx")]
         public static void AllUsersApplicationDataFolderTest()
         {
-            Assert.Throws<System.IO.DirectoryNotFoundException>(
-                () => SpecialDirectories.AllUsersApplicationData
-            );
+            Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                SpecialDirectories.AllUsersApplicationData);
         }
 
         [Fact]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Supported on netfx")]
         public static void CurrentUserApplicationDataFolderTest()
         {
-            Assert.Throws<System.IO.DirectoryNotFoundException>(
-                () => SpecialDirectories.CurrentUserApplicationData
-            );
+            Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                SpecialDirectories.CurrentUserApplicationData);
         }
 
         [Fact]
@@ -54,9 +52,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         {
             if (PlatformDetection.IsWindowsNanoServer)
             {
-                Assert.Throws<System.IO.DirectoryNotFoundException>(
-                    () => SpecialDirectories.MyDocuments
-                );
+                Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                    SpecialDirectories.MyDocuments);
             }
             else
             {

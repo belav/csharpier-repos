@@ -73,9 +73,8 @@ namespace System.Reflection.Emit.Tests
             byte[] bytes = Enumerable.Range(0, 256).Select(i => (byte)i).ToArray();
             type.CreateTypeInfo().AsType();
 
-            Assert.Throws<InvalidOperationException>(
-                () => field.SetCustomAttribute(attributeConstructor, bytes)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                field.SetCustomAttribute(attributeConstructor, bytes));
         }
 
         [Fact]
@@ -126,12 +125,10 @@ namespace System.Reflection.Emit.Tests
             CustomAttributeBuilder attribute = new CustomAttributeBuilder(con, new object[0]);
             type.CreateTypeInfo().AsType();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    field.SetCustomAttribute(attribute);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                field.SetCustomAttribute(attribute);
+            });
         }
     }
 }

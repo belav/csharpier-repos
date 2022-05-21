@@ -44,28 +44,26 @@ namespace System.Reflection.Tests
         public void Assembly_IsCollectibleFalse_WhenUsingAssemblyLoad()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assembly asm = Assembly.LoadFrom(asmPath);
+                .Invoke(() =>
+                {
+                    Assembly asm = Assembly.LoadFrom(asmPath);
 
-                        Assert.NotNull(asm);
+                    Assert.NotNull(asm);
 
-                        Assert.False(asm.IsCollectible);
+                    Assert.False(asm.IsCollectible);
 
-                        AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(asm);
-                        Assert.False(alc.IsCollectible);
-                        Assert.Equal(AssemblyLoadContext.Default, alc);
-                        Assert.Equal("Default", alc.Name);
-                        Assert.Contains("\"Default\"", alc.ToString());
-                        Assert.Contains(
-                            "System.Runtime.Loader.DefaultAssemblyLoadContext",
-                            alc.ToString()
-                        );
-                        Assert.Contains(alc, AssemblyLoadContext.All);
-                        Assert.Contains(asm, alc.Assemblies);
-                    }
-                )
+                    AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(asm);
+                    Assert.False(alc.IsCollectible);
+                    Assert.Equal(AssemblyLoadContext.Default, alc);
+                    Assert.Equal("Default", alc.Name);
+                    Assert.Contains("\"Default\"", alc.ToString());
+                    Assert.Contains(
+                        "System.Runtime.Loader.DefaultAssemblyLoadContext",
+                        alc.ToString()
+                    );
+                    Assert.Contains(alc, AssemblyLoadContext.All);
+                    Assert.Contains(asm, alc.Assemblies);
+                })
                 .Dispose();
         }
 
@@ -73,36 +71,31 @@ namespace System.Reflection.Tests
         public void Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AssemblyLoadContext alc = new AssemblyLoadContext(
-                            "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext"
-                        );
+                .Invoke(() =>
+                {
+                    AssemblyLoadContext alc = new AssemblyLoadContext(
+                        "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext"
+                    );
 
-                        Assembly asm = alc.LoadFromAssemblyPath(asmPath);
+                    Assembly asm = alc.LoadFromAssemblyPath(asmPath);
 
-                        Assert.NotNull(asm);
+                    Assert.NotNull(asm);
 
-                        Assert.False(asm.IsCollectible);
-                        Assert.False(alc.IsCollectible);
+                    Assert.False(asm.IsCollectible);
+                    Assert.False(alc.IsCollectible);
 
-                        Assert.Equal(
-                            "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext",
-                            alc.Name
-                        );
-                        Assert.Contains(
-                            "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext",
-                            alc.ToString()
-                        );
-                        Assert.Contains(
-                            "System.Runtime.Loader.AssemblyLoadContext",
-                            alc.ToString()
-                        );
-                        Assert.Contains(alc, AssemblyLoadContext.All);
-                        Assert.Contains(asm, alc.Assemblies);
-                    }
-                )
+                    Assert.Equal(
+                        "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext",
+                        alc.Name
+                    );
+                    Assert.Contains(
+                        "Assembly_IsCollectibleFalse_WhenUsingAssemblyLoadContext",
+                        alc.ToString()
+                    );
+                    Assert.Contains("System.Runtime.Loader.AssemblyLoadContext", alc.ToString());
+                    Assert.Contains(alc, AssemblyLoadContext.All);
+                    Assert.Contains(asm, alc.Assemblies);
+                })
                 .Dispose();
         }
 
@@ -110,28 +103,26 @@ namespace System.Reflection.Tests
         public void Assembly_IsCollectibleTrue_WhenUsingTestAssemblyLoadContext()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AssemblyLoadContext alc = new TestAssemblyLoadContext();
+                .Invoke(() =>
+                {
+                    AssemblyLoadContext alc = new TestAssemblyLoadContext();
 
-                        Assembly asm = alc.LoadFromAssemblyPath(asmPath);
+                    Assembly asm = alc.LoadFromAssemblyPath(asmPath);
 
-                        Assert.NotNull(asm);
+                    Assert.NotNull(asm);
 
-                        Assert.True(asm.IsCollectible);
-                        Assert.True(alc.IsCollectible);
+                    Assert.True(asm.IsCollectible);
+                    Assert.True(alc.IsCollectible);
 
-                        Assert.Null(alc.Name);
-                        Assert.Contains("\"\"", alc.ToString());
-                        Assert.Contains(
-                            "System.Reflection.Tests.TestAssemblyLoadContext",
-                            alc.ToString()
-                        );
-                        Assert.Contains(alc, AssemblyLoadContext.All);
-                        Assert.Contains(asm, alc.Assemblies);
-                    }
-                )
+                    Assert.Null(alc.Name);
+                    Assert.Contains("\"\"", alc.ToString());
+                    Assert.Contains(
+                        "System.Reflection.Tests.TestAssemblyLoadContext",
+                        alc.ToString()
+                    );
+                    Assert.Contains(alc, AssemblyLoadContext.All);
+                    Assert.Contains(asm, alc.Assemblies);
+                })
                 .Dispose();
         }
 
@@ -281,23 +272,21 @@ namespace System.Reflection.Tests
         public void GenericWithCollectibleTypeParameter_IsCollectibleTrue_WhenUsingAssemblyLoadContext()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AssemblyLoadContext alc = new TestAssemblyLoadContext();
+                .Invoke(() =>
+                {
+                    AssemblyLoadContext alc = new TestAssemblyLoadContext();
 
-                        Type t1 = Type.GetType(
-                            "System.Collections.Generic.Dictionary`2[[System.Int32],[TestCollectibleAssembly.MyTestClass, TestCollectibleAssembly, Version=1.0.0.0]]",
-                            collectibleAssemblyResolver(alc),
-                            typeResolver(false),
-                            true
-                        );
+                    Type t1 = Type.GetType(
+                        "System.Collections.Generic.Dictionary`2[[System.Int32],[TestCollectibleAssembly.MyTestClass, TestCollectibleAssembly, Version=1.0.0.0]]",
+                        collectibleAssemblyResolver(alc),
+                        typeResolver(false),
+                        true
+                    );
 
-                        Assert.NotNull(t1);
+                    Assert.NotNull(t1);
 
-                        Assert.True(t1.IsCollectible);
-                    }
-                )
+                    Assert.True(t1.IsCollectible);
+                })
                 .Dispose();
         }
     }

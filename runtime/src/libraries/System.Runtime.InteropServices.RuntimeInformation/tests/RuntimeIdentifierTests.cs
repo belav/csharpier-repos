@@ -43,14 +43,12 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         public void VerifyAppContextVariable()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
 
-                        Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
+                    Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
+                })
                 .Dispose();
         }
 
@@ -58,25 +56,21 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         public void VerifyAppContextVariableUnknown()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
 
-                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                })
                 .Dispose();
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
 
-                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-                    }
-                )
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                })
                 .Dispose();
         }
 

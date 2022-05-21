@@ -107,19 +107,17 @@ namespace Microsoft.Extensions.Hosting.Tests
         )]
         public void EnsureEnvironmentExitCode()
         {
-            using var remoteHandle = RemoteExecutor.Invoke(
-                async () =>
-                {
-                    await Host.CreateDefaultBuilder()
-                        .ConfigureServices(
-                            (hostContext, services) =>
-                            {
-                                services.AddHostedService<EnsureEnvironmentExitCodeWorker>();
-                            }
-                        )
-                        .RunConsoleAsync();
-                }
-            );
+            using var remoteHandle = RemoteExecutor.Invoke(async () =>
+            {
+                await Host.CreateDefaultBuilder()
+                    .ConfigureServices(
+                        (hostContext, services) =>
+                        {
+                            services.AddHostedService<EnsureEnvironmentExitCodeWorker>();
+                        }
+                    )
+                    .RunConsoleAsync();
+            });
 
             remoteHandle.Process.WaitForExit();
 
@@ -130,12 +128,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             protected override async Task ExecuteAsync(CancellationToken stoppingToken)
             {
-                await Task.Run(
-                    () =>
-                    {
-                        Environment.Exit(124);
-                    }
-                );
+                await Task.Run(() =>
+                {
+                    Environment.Exit(124);
+                });
             }
         }
 

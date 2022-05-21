@@ -165,13 +165,11 @@ namespace System.Security.AccessControl.Tests
             //when count  = 0, or count/2, it is reduandent
             if (0 != index && count / 2 != index)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        ace = rawAcl[index];
-                        rawAcl.RemoveAce(index);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    ace = rawAcl[index];
+                    rawAcl.RemoveAce(index);
+                });
             }
         }
     }

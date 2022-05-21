@@ -355,21 +355,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnStarting(() =>
+            {
+                local.Value++;
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnCompleted(() =>
+            {
+                local.Value++;
+                return Task.CompletedTask;
+            });
 
             local.Value++;
             context.Response.ContentLength = 1;
@@ -396,21 +392,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnStarting(() =>
+            {
+                local.Value.Value++;
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnCompleted(() =>
+            {
+                local.Value.Value++;
+                return Task.CompletedTask;
+            });
 
             local.Value.Value++;
             context.Response.ContentLength = 1;
@@ -435,21 +427,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(1, local.Value);
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value++;
+                Assert.Equal(1, local.Value);
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(1, local.Value);
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value++;
+                Assert.Equal(1, local.Value);
+            });
 
             context.Response.ContentLength = 1;
             return context.Response.WriteAsync($"{value}");
@@ -471,21 +459,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
+            });
 
             local.Value++;
             Assert.Equal(1, local.Value);
@@ -516,21 +500,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value); // Start
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value.Value++;
-                    Assert.Equal(2, local.Value.Value); // Second
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value.Value++;
+                Assert.Equal(2, local.Value.Value); // Second
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value.Value++;
-                    Assert.Equal(4, local.Value.Value); // Fourth
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value.Value++;
+                Assert.Equal(4, local.Value.Value); // Fourth
+            });
 
             local.Value.Value++;
             Assert.Equal(1, local.Value.Value); // First
@@ -559,25 +539,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
+            context.Response.OnStarting(() =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
 
-                    return Task.CompletedTask;
-                }
-            );
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
+            context.Response.OnCompleted(() =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
 
-                    return Task.CompletedTask;
-                }
-            );
+                return Task.CompletedTask;
+            });
 
             local.Value++;
             Assert.Equal(1, local.Value);
@@ -1840,14 +1816,12 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     buffer[5] = (byte)'1';
 
                     // Synchronous reads throw.
-                    var ioEx = Assert.Throws<InvalidOperationException>(
-                        () => context.Request.Body.Read(new byte[1], 0, 1)
-                    );
+                    var ioEx = Assert.Throws<InvalidOperationException>(() =>
+                        context.Request.Body.Read(new byte[1], 0, 1));
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
-                    var ioEx2 = Assert.Throws<InvalidOperationException>(
-                        () => context.Request.Body.CopyTo(Stream.Null)
-                    );
+                    var ioEx2 = Assert.Throws<InvalidOperationException>(() =>
+                        context.Request.Body.CopyTo(Stream.Null));
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     while (offset < 5)
@@ -1939,14 +1913,12 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.False(bodyControlFeature.AllowSynchronousIO);
 
                     // Synchronous reads now throw.
-                    var ioEx = Assert.Throws<InvalidOperationException>(
-                        () => context.Request.Body.Read(new byte[1], 0, 1)
-                    );
+                    var ioEx = Assert.Throws<InvalidOperationException>(() =>
+                        context.Request.Body.Read(new byte[1], 0, 1));
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
-                    var ioEx2 = Assert.Throws<InvalidOperationException>(
-                        () => context.Request.Body.CopyTo(Stream.Null)
-                    );
+                    var ioEx2 = Assert.Throws<InvalidOperationException>(() =>
+                        context.Request.Body.CopyTo(Stream.Null));
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     var buffer = new byte[5];
@@ -2120,9 +2092,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     httpContext.Request.BodyReader.Complete();
 
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () => await request.BodyReader.ReadAsync()
-                    );
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                        await request.BodyReader.ReadAsync());
 
                     response.Headers["Content-Length"] = new[] { "11" };
 

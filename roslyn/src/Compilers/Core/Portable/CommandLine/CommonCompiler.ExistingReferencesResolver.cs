@@ -39,15 +39,13 @@ namespace Microsoft.CodeAnalysis
                 _availableReferences = availableReferences;
 
                 // Delay reading assembly identities until they are actually needed (only when #r is encountered).
-                _lazyAvailableReferences = new Lazy<HashSet<AssemblyIdentity>>(
-                    () =>
-                        new HashSet<AssemblyIdentity>(
-                            from reference in _availableReferences
-                            let identity = TryGetIdentity(reference)
-                            where identity != null
-                            select identity!
-                        )
-                );
+                _lazyAvailableReferences = new Lazy<HashSet<AssemblyIdentity>>(() =>
+                    new HashSet<AssemblyIdentity>(
+                        from reference in _availableReferences
+                        let identity = TryGetIdentity(reference)
+                        where identity != null
+                        select identity!
+                    ));
             }
 
             public override ImmutableArray<PortableExecutableReference> ResolveReference(

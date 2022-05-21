@@ -969,9 +969,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Foo", nameof(Building)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedBuildingValues.GetValue<string>("Foo")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedBuildingValues.GetValue<string>("Foo"))
                     .Message
             );
         }
@@ -1019,9 +1018,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedBuildingValues.GetValue<string>(property)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedBuildingValues.GetValue<string>(property))
                     .Message
             );
         }
@@ -1083,27 +1081,24 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedValues["TerminationDate"] = "foo"
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedValues["TerminationDate"] = "foo")
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Shadow4", nameof(CurrentEmployee)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedValues.GetValue<string>("Shadow4")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedValues.GetValue<string>("Shadow4"))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedValues.GetValue<string>("TerminationDate")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedValues.GetValue<string>("TerminationDate"))
                     .Message
             );
         }
@@ -1175,9 +1170,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(CurrentEmployee)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedValues.GetValue<string>(shadowProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedValues.GetValue<string>(shadowProperty))
                     .Message
             );
 
@@ -1226,9 +1220,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(CurrentEmployee)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => clonedValues.GetValue<string>(termProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        clonedValues.GetValue<string>(termProperty))
                     .Message
             );
         }

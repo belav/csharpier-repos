@@ -654,12 +654,10 @@ namespace System.IO
             // A non-existent directory path is considered:
             // - In NetFX: an invalid name because paths that are too long are not correctly handled
             // - NetCore: a valid name because long paths are correctly handled, and non-existent, as expected
-            AssertExtensions.Throws<DirectoryNotFoundException, ArgumentException>(
-                () =>
-                {
-                    new DirectorySecurity(longDir, AccessControlSections.Owner);
-                }
-            );
+            AssertExtensions.Throws<DirectoryNotFoundException, ArgumentException>(() =>
+            {
+                new DirectorySecurity(longDir, AccessControlSections.Owner);
+            });
         }
 
         [Fact]
@@ -672,12 +670,10 @@ namespace System.IO
             // A non-existent file path is considered:
             // - In NetFX: an invalid name because paths that are too long are not correctly handled
             // - NetCore: a valid name because long paths are correctly handled, and non-existent, as expected
-            AssertExtensions.Throws<FileNotFoundException, ArgumentException>(
-                () =>
-                {
-                    new FileSecurity(filePath, AccessControlSections.Owner);
-                }
-            );
+            AssertExtensions.Throws<FileNotFoundException, ArgumentException>(() =>
+            {
+                new FileSecurity(filePath, AccessControlSections.Owner);
+            });
         }
 
         // Attempting to create a directory with a very long path in .NET Framework fails with DirectoryNotFoundException

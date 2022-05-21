@@ -17,9 +17,8 @@ namespace Microsoft.EntityFrameworkCore
                 validateScopes: true
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IPilkington>()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<IPilkington>());
         }
 
         [ConditionalFact]
@@ -29,9 +28,8 @@ namespace Microsoft.EntityFrameworkCore
                 validateScopes: true
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService(typeof(IPilkington))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService(typeof(IPilkington)));
         }
 
         [ConditionalFact]
@@ -47,9 +45,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => serviceProvider.GetRequiredService<IPilkington>()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        serviceProvider.GetRequiredService<IPilkington>())
                     .Message
             );
         }
@@ -68,9 +65,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => serviceProvider.GetRequiredService(typeof(IPilkington))
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        serviceProvider.GetRequiredService(typeof(IPilkington)))
                     .Message
             );
         }
@@ -127,9 +123,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => serviceProvider.GetService(typeof(IPilkington))
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        serviceProvider.GetService(typeof(IPilkington)))
                     .Message
             );
         }

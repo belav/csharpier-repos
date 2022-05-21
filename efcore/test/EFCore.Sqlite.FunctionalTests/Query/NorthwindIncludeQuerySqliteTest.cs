@@ -25,9 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Include_collection_with_cross_apply_with_filter(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Include_collection_with_cross_apply_with_filter(async))
                 ).Message
             );
 
@@ -35,9 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Include_collection_with_outer_apply_with_filter(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Include_collection_with_outer_apply_with_filter(async))
                 ).Message
             );
 
@@ -45,9 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Filtered_include_with_multiple_ordering(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_with_multiple_ordering(async))
                 ).Message
             );
 
@@ -57,10 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Include_collection_with_outer_apply_with_filter_non_equality(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Include_collection_with_outer_apply_with_filter_non_equality(async))
                 ).Message
             );
     }

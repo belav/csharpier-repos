@@ -125,26 +125,22 @@ public class Test_GetTotalAllocatedBytes
         {
             object lck = new object();
 
-            tsk = Task.Run(
-                () =>
+            tsk = Task.Run(() =>
+            {
+                while (running)
                 {
-                    while (running)
+                    Thread thd = new Thread(() =>
                     {
-                        Thread thd = new Thread(
-                            () =>
-                            {
-                                lock (lck)
-                                {
-                                    s_stash = new byte[1234];
-                                }
-                            }
-                        );
+                        lock (lck)
+                        {
+                            s_stash = new byte[1234];
+                        }
+                    });
 
-                        thd.Start();
-                        thd.Join();
-                    }
+                    thd.Start();
+                    thd.Join();
                 }
-            );
+            });
 
             Counts previous = default(Counts);
             for (int i = 0; i < 1000; ++i)
@@ -171,20 +167,18 @@ public class Test_GetTotalAllocatedBytes
         int threadNum = Environment.ProcessorCount + Environment.ProcessorCount / 2;
         for (int i = 0; i < threadNum; i++)
         {
-            Thread thr = new Thread(
-                () =>
+            Thread thr = new Thread(() =>
+            {
+                me.Wait();
+                Counts previous = default(Counts);
+                for (int i = 0; i < 2; ++i)
                 {
-                    me.Wait();
-                    Counts previous = default(Counts);
-                    for (int i = 0; i < 2; ++i)
-                    {
-                        s_stash = new byte[123456];
-                        previous = CallGetTotalAllocatedBytes(previous);
-                        s_stash = new byte[1234];
-                        previous = CallGetTotalAllocatedBytes(previous);
-                    }
+                    s_stash = new byte[123456];
+                    previous = CallGetTotalAllocatedBytes(previous);
+                    s_stash = new byte[1234];
+                    previous = CallGetTotalAllocatedBytes(previous);
                 }
-            );
+            });
 
             thr.Start();
             threads.Add(thr);

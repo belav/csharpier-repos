@@ -183,17 +183,15 @@ namespace System.Diagnostics.Tests
         )]
         public void ProcessStart_TryExitCommandAsFileName_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(
-                () =>
-                    Process.Start(
-                        new ProcessStartInfo
-                        {
-                            UseShellExecute = false,
-                            FileName = "exit",
-                            Arguments = "42"
-                        }
-                    )
-            );
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start(
+                    new ProcessStartInfo
+                    {
+                        UseShellExecute = false,
+                        FileName = "exit",
+                        Arguments = "42"
+                    }
+                ));
         }
 
         [Fact]
@@ -203,16 +201,14 @@ namespace System.Diagnostics.Tests
         )]
         public void ProcessStart_UseShellExecuteFalse_FilenameIsUrl_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(
-                () =>
-                    Process.Start(
-                        new ProcessStartInfo
-                        {
-                            UseShellExecute = false,
-                            FileName = "https://www.github.com/corefx"
-                        }
-                    )
-            );
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start(
+                    new ProcessStartInfo
+                    {
+                        UseShellExecute = false,
+                        FileName = "https://www.github.com/corefx"
+                    }
+                ));
         }
 
         [Fact]
@@ -222,16 +218,10 @@ namespace System.Diagnostics.Tests
         )]
         public void ProcessStart_TryOpenFolder_UseShellExecuteIsFalse_ThrowsWin32Exception()
         {
-            Assert.Throws<Win32Exception>(
-                () =>
-                    Process.Start(
-                        new ProcessStartInfo
-                        {
-                            UseShellExecute = false,
-                            FileName = Path.GetTempPath()
-                        }
-                    )
-            );
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start(
+                    new ProcessStartInfo { UseShellExecute = false, FileName = Path.GetTempPath() }
+                ));
         }
 
         [Fact]
@@ -1199,9 +1189,8 @@ namespace System.Diagnostics.Tests
         public void TestInvalidPriorityClass(ProcessPriorityClass priorityClass)
         {
             var process = new Process();
-            Assert.Throws<InvalidEnumArgumentException>(
-                () => process.PriorityClass = priorityClass
-            );
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                process.PriorityClass = priorityClass);
         }
 
         [Fact]
@@ -1601,9 +1590,8 @@ namespace System.Diagnostics.Tests
             // .NET Core fixes a bug where Process.StartInfo for a unrelated process would
             // return information about the current process, not the unrelated process.
             // See https://github.com/dotnet/runtime/issues/14329.
-            Assert.Throws<InvalidOperationException>(
-                () => process.StartInfo = new ProcessStartInfo()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                process.StartInfo = new ProcessStartInfo());
 
             process.Kill();
             Assert.True(process.WaitForExit(WaitInMS));
@@ -1770,13 +1758,11 @@ namespace System.Diagnostics.Tests
         public void Start_RedirectStandardOutput_StartAgain_DoesntThrow()
         {
             using (
-                Process process = CreateProcess(
-                    () =>
-                    {
-                        Console.WriteLine("hello world");
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                )
+                Process process = CreateProcess(() =>
+                {
+                    Console.WriteLine("hello world");
+                    return RemoteExecutor.SuccessExitCode;
+                })
             )
             {
                 process.StartInfo.RedirectStandardOutput = true;
@@ -1877,72 +1863,65 @@ namespace System.Diagnostics.Tests
         public void HandleCountChanges()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    RetryHelper.Execute(() =>
                     {
-                        RetryHelper.Execute(
-                            () =>
+                        using (Process p = Process.GetCurrentProcess())
+                        {
+                            // Warm up code paths
+                            p.Refresh();
+                            using (
+                                var tmpFile = File.Open(GetTestFilePath(), FileMode.OpenOrCreate)
+                            )
                             {
-                                using (Process p = Process.GetCurrentProcess())
+                                // Get the initial handle count
+                                p.Refresh();
+                                int handleCountAtStart = p.HandleCount;
+                                int handleCountAfterOpens;
+
+                                // Open a bunch of files and get a new handle count, then close the files
+                                var files = new List<FileStream>();
+                                try
                                 {
-                                    // Warm up code paths
-                                    p.Refresh();
-                                    using (
-                                        var tmpFile = File.Open(
-                                            GetTestFilePath(),
-                                            FileMode.OpenOrCreate
-                                        )
-                                    )
-                                    {
-                                        // Get the initial handle count
-                                        p.Refresh();
-                                        int handleCountAtStart = p.HandleCount;
-                                        int handleCountAfterOpens;
-
-                                        // Open a bunch of files and get a new handle count, then close the files
-                                        var files = new List<FileStream>();
-                                        try
-                                        {
-                                            files.AddRange(
-                                                Enumerable
-                                                    .Range(0, 50)
-                                                    .Select(
-                                                        _ =>
-                                                            File.Open(
-                                                                GetTestFilePath(),
-                                                                FileMode.OpenOrCreate
-                                                            )
+                                    files.AddRange(
+                                        Enumerable
+                                            .Range(0, 50)
+                                            .Select(
+                                                _ =>
+                                                    File.Open(
+                                                        GetTestFilePath(),
+                                                        FileMode.OpenOrCreate
                                                     )
-                                            );
-                                            p.Refresh();
-                                            handleCountAfterOpens = p.HandleCount;
-                                        }
-                                        finally
-                                        {
-                                            files.ForEach(f => f.Dispose());
-                                        }
-
-                                        // Get the handle count after closing all the files
-                                        p.Refresh();
-                                        int handleCountAtEnd = p.HandleCount;
-
-                                        Assert.InRange(
-                                            handleCountAfterOpens,
-                                            handleCountAtStart + 1,
-                                            int.MaxValue
-                                        );
-                                        Assert.InRange(
-                                            handleCountAtEnd,
-                                            handleCountAtStart,
-                                            handleCountAfterOpens - 1
-                                        );
-                                    }
+                                            )
+                                    );
+                                    p.Refresh();
+                                    handleCountAfterOpens = p.HandleCount;
                                 }
+                                finally
+                                {
+                                    files.ForEach(f => f.Dispose());
+                                }
+
+                                // Get the handle count after closing all the files
+                                p.Refresh();
+                                int handleCountAtEnd = p.HandleCount;
+
+                                Assert.InRange(
+                                    handleCountAfterOpens,
+                                    handleCountAtStart + 1,
+                                    int.MaxValue
+                                );
+                                Assert.InRange(
+                                    handleCountAtEnd,
+                                    handleCountAtStart,
+                                    handleCountAfterOpens - 1
+                                );
                             }
-                        );
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                )
+                        }
+                    });
+                    return RemoteExecutor.SuccessExitCode;
+                })
                 .Dispose();
         }
 
@@ -2420,15 +2399,12 @@ namespace System.Diagnostics.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Starting process with authentication not supported on Unix
         public void Process_StartInvalidNamesTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Process.Start(null, "userName", new SecureString(), "thisDomain")
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Process.Start(string.Empty, "userName", new SecureString(), "thisDomain")
-            );
-            Assert.Throws<Win32Exception>(
-                () => Process.Start("exe", string.Empty, new SecureString(), "thisDomain")
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Process.Start(null, "userName", new SecureString(), "thisDomain"));
+            Assert.Throws<InvalidOperationException>(() =>
+                Process.Start(string.Empty, "userName", new SecureString(), "thisDomain"));
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start("exe", string.Empty, new SecureString(), "thisDomain"));
         }
 
         [OuterLoop("May take many seconds the first time it's run")]
@@ -2437,18 +2413,15 @@ namespace System.Diagnostics.Tests
         public void Process_StartWithInvalidUserNamePassword()
         {
             SecureString password = AsSecureString("Value");
-            Assert.Throws<Win32Exception>(
-                () => Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain")
-            );
-            Assert.Throws<Win32Exception>(
-                () =>
-                    Process.Start(
-                        GetCurrentProcessName(),
-                        Environment.UserName,
-                        password,
-                        Environment.UserDomainName
-                    )
-            );
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start(GetCurrentProcessName(), "userName", password, "thisDomain"));
+            Assert.Throws<Win32Exception>(() =>
+                Process.Start(
+                    GetCurrentProcessName(),
+                    Environment.UserName,
+                    password,
+                    Environment.UserDomainName
+                ));
         }
 
         [Fact]
@@ -2729,19 +2702,16 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Kill_EntireProcessTree_True_CalledOnTreeContainingCallingProcess_ThrowsInvalidOperationException()
         {
-            Process containingProcess = CreateProcess(
-                () =>
-                {
-                    Process parentProcess = CreateProcess(
-                        () => RunProcessAttemptingToKillEntireTreeOnParent()
-                    );
+            Process containingProcess = CreateProcess(() =>
+            {
+                Process parentProcess = CreateProcess(() =>
+                    RunProcessAttemptingToKillEntireTreeOnParent());
 
-                    parentProcess.Start();
-                    parentProcess.WaitForExit();
+                parentProcess.Start();
+                parentProcess.WaitForExit();
 
-                    return parentProcess.ExitCode;
-                }
-            );
+                return parentProcess.ExitCode;
+            });
 
             containingProcess.Start();
             containingProcess.WaitForExit();
@@ -2808,13 +2778,11 @@ namespace System.Diagnostics.Tests
 
                 parentProcess.Kill(entireProcessTree: false);
 
-                await Helpers.RetryWithBackoff(
-                    () =>
-                    {
-                        var actual = tree.Select(p => p.HasExited).ToList();
-                        Assert.Equal(new[] { true, false, false }, actual);
-                    }
-                );
+                await Helpers.RetryWithBackoff(() =>
+                {
+                    var actual = tree.Select(p => p.HasExited).ToList();
+                    Assert.Equal(new[] { true, false, false }, actual);
+                });
             }
             finally
             {
@@ -2843,13 +2811,11 @@ namespace System.Diagnostics.Tests
 
                 parentProcess.Kill(entireProcessTree: true);
 
-                await Helpers.RetryWithBackoff(
-                    () =>
-                    {
-                        var actual = tree.Select(p => p.HasExited).ToList();
-                        Assert.Equal(new[] { true, true, true }, actual);
-                    }
-                );
+                await Helpers.RetryWithBackoff(() =>
+                {
+                    var actual = tree.Select(p => p.HasExited).ToList();
+                    Assert.Equal(new[] { true, true, true }, actual);
+                });
             }
             finally
             {

@@ -175,31 +175,27 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Any_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Any(
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Any(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Select(
+                        (Func<int, int>)(
                             x =>
                             {
                                 throw new DeliberateTestException();
                             }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Select(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
-                        )
-                        .Any()
-            );
+                    )
+                    .Any());
         }
 
         [Fact]

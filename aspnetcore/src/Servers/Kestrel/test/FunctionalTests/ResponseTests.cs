@@ -720,12 +720,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.RequestAborted.Register(
-                        () =>
-                        {
-                            aborted.SetResult();
-                        }
-                    );
+                    context.RequestAborted.Register(() =>
+                    {
+                        aborted.SetResult();
+                    });
 
                     context.Response.ContentLength = chunks * chunkSize;
 
@@ -841,12 +839,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted.SetResult();
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted.SetResult();
+            });
 
             try
             {
@@ -878,16 +874,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     ""
                 );
 
-                var sendTask = Task.Run(
-                    async () =>
+                var sendTask = Task.Run(async () =>
+                {
+                    for (var i = 0; i < bufferCount; i++)
                     {
-                        for (var i = 0; i < bufferCount; i++)
-                        {
-                            await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
-                            await Task.Delay(10);
-                        }
+                        await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
+                        await Task.Delay(10);
                     }
-                );
+                });
 
                 // Don't use the 5 second timeout for debug builds. This can actually take a while.
                 await requestAborted.Task.DefaultTimeout(TimeSpan.FromSeconds(30));
@@ -938,12 +932,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             for (var i = 0; i < chunkCount; i++)
             {
@@ -1029,12 +1021,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             context.Response.Headers[$"X-Custom-Header"] = headerStringValues;
             context.Response.ContentLength = 0;
@@ -1120,12 +1110,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             for (var i = 0; i < chunkCount; i++)
             {

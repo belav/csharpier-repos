@@ -590,13 +590,11 @@ namespace System.Web.Http.SelfHost
 
             config.ClientCredentialType = clientCredentialType;
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    // Act
-                    BindingParameterCollection parameters = config.ConfigureBinding(binding);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                // Act
+                BindingParameterCollection parameters = config.ConfigureBinding(binding);
+            });
         }
 
         [Theory]
@@ -639,13 +637,11 @@ namespace System.Web.Http.SelfHost
 
             config.ClientCredentialType = clientCredentialType;
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    // Act
-                    BindingParameterCollection parameters = config.ConfigureBinding(binding);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                // Act
+                BindingParameterCollection parameters = config.ConfigureBinding(binding);
+            });
         }
 
         [Theory]

@@ -529,9 +529,8 @@ public class OpenIdConnectChallengeTests
         );
 
         var server = settings.CreateTestServer();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.SendAsync(ChallengeEndpoint)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.SendAsync(ChallengeEndpoint));
         Assert.Equal(
             "Cannot redirect to the authorization endpoint, the configuration may be missing or invalid.",
             exception.Message

@@ -311,13 +311,11 @@ public class BinaryMessageParserTests
     [InlineData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF })]
     public void BinaryMessageParserThrowsForMessagesOver2GB(byte[] payload)
     {
-        var ex = Assert.Throws<FormatException>(
-            () =>
-            {
-                var buffer = new ReadOnlySequence<byte>(payload);
-                BinaryMessageParser.TryParseMessage(ref buffer, out var message);
-            }
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+        {
+            var buffer = new ReadOnlySequence<byte>(payload);
+            BinaryMessageParser.TryParseMessage(ref buffer, out var message);
+        });
         Assert.Equal("Messages over 2GB in size are not supported.", ex.Message);
     }
 

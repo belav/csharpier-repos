@@ -26,9 +26,8 @@ public class ThrowingWasUpgradedWriteOnlyStreamTests
         Assert.Equal(
             CoreStrings.ResponseStreamWasUpgraded,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => stream.WriteAsync(new byte[1], 0, 1)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    stream.WriteAsync(new byte[1], 0, 1))
             ).Message
         );
         Assert.Equal(

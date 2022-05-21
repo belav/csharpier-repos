@@ -221,13 +221,11 @@ namespace System.Web.WebPages.Administration.Test
                 .Returns(true);
             fileSystem
                 .Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath))))
-                .Returns(
-                    () =>
-                    {
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        return memoryStream;
-                    }
-                );
+                .Returns(() =>
+                {
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    return memoryStream;
+                });
             fileSystem
                 .Setup(
                     f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())

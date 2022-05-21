@@ -20,12 +20,10 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public void BaseVirtualsNotImplementedException()
         {
             var dsa = new EmptyDSA();
-            Assert.Throws<NotImplementedException>(
-                () => dsa.HashData(null, HashAlgorithmName.SHA1)
-            );
-            Assert.Throws<NotImplementedException>(
-                () => dsa.HashData(null, 0, 0, HashAlgorithmName.SHA1)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                dsa.HashData(null, HashAlgorithmName.SHA1));
+            Assert.Throws<NotImplementedException>(() =>
+                dsa.HashData(null, 0, 0, HashAlgorithmName.SHA1));
         }
 
         [ConditionalFact(nameof(SupportsKeyGeneration))]

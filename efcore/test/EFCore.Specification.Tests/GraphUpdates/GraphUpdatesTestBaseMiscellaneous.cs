@@ -86,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore
                                 $"{{CityId: {city.Id}}}"
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => context.Entry(college).State = EntityState.Modified
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    context.Entry(college).State = EntityState.Modified)
                                 .Message
                         );
                     }
@@ -100,9 +99,8 @@ namespace Microsoft.EntityFrameworkCore
                                 $"{{Id: {college.Id}}}"
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => context.Entry(college).State = EntityState.Modified
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    context.Entry(college).State = EntityState.Modified)
                                 .Message
                         );
                     }
@@ -208,12 +206,10 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                         (
                             async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                    async () => await context.SaveChangesAsync()
-                                )
-                                : Assert.Throws<InvalidOperationException>(
-                                    () => context.SaveChanges()
-                                )
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                                    await context.SaveChangesAsync())
+                                : Assert.Throws<InvalidOperationException>(() =>
+                                    context.SaveChanges())
                         ).Message
                     );
                 }
@@ -252,9 +248,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         if (async)
                         {
-                            await Assert.ThrowsAsync<DbUpdateException>(
-                                async () => await context.SaveChangesAsync()
-                            );
+                            await Assert.ThrowsAsync<DbUpdateException>(async () =>
+                                await context.SaveChangesAsync());
                         }
                         else
                         {
@@ -267,12 +262,10 @@ namespace Microsoft.EntityFrameworkCore
                             CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                             (
                                 async
-                                    ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                        async () => await context.SaveChangesAsync()
-                                    )
-                                    : Assert.Throws<InvalidOperationException>(
-                                        () => context.SaveChanges()
-                                    )
+                                    ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                                        await context.SaveChangesAsync())
+                                    : Assert.Throws<InvalidOperationException>(() =>
+                                        context.SaveChanges())
                             ).Message
                         );
                     }
@@ -330,12 +323,10 @@ namespace Microsoft.EntityFrameworkCore
                         CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
                         (
                             async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                    async () => await context.SaveChangesAsync()
-                                )
-                                : Assert.Throws<InvalidOperationException>(
-                                    () => context.SaveChanges()
-                                )
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                                    await context.SaveChangesAsync())
+                                : Assert.Throws<InvalidOperationException>(() =>
+                                    context.SaveChanges())
                         ).Message
                     );
                 }
@@ -369,10 +360,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (Fixture.ForceClientNoAction)
                     {
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            async () =>
-                                _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
-                        );
+                        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges());
                     }
                     else
                     {
@@ -491,9 +480,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         if (async)
                         {
-                            await Assert.ThrowsAsync<DbUpdateException>(
-                                async () => await context.SaveChangesAsync()
-                            );
+                            await Assert.ThrowsAsync<DbUpdateException>(async () =>
+                                await context.SaveChangesAsync());
                         }
                         else
                         {
@@ -685,12 +673,10 @@ namespace Microsoft.EntityFrameworkCore
                         ),
                         (
                             async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                    async () => await context.SaveChangesAsync()
-                                )
-                                : Assert.Throws<InvalidOperationException>(
-                                    () => context.SaveChanges()
-                                )
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                                    await context.SaveChangesAsync())
+                                : Assert.Throws<InvalidOperationException>(() =>
+                                    context.SaveChanges())
                         ).Message
                     );
                 }

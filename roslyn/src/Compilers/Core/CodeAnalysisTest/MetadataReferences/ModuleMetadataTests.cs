@@ -19,23 +19,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public unsafe void CreateFromMetadata_Errors()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ModuleMetadata.CreateFromMetadata(IntPtr.Zero, 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                        ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                        ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ModuleMetadata.CreateFromMetadata(IntPtr.Zero, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1);
+            });
 
             fixed (byte* ptr = new byte[] { 1, 2, 3 })
             {
@@ -75,32 +70,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public unsafe void CreateFromImage()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ModuleMetadata.CreateFromImage(IntPtr.Zero, 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                        ModuleMetadata.CreateFromImage((IntPtr)ptr, 0);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* ptr = new byte[] { 1, 2, 3 })
-                        ModuleMetadata.CreateFromImage((IntPtr)ptr, -1);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ModuleMetadata.CreateFromImage(IntPtr.Zero, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromImage((IntPtr)ptr, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromImage((IntPtr)ptr, -1);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () => ModuleMetadata.CreateFromImage(default(ImmutableArray<byte>))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ModuleMetadata.CreateFromImage(default(ImmutableArray<byte>)));
 
             IEnumerable<byte> enumerableImage = null;
-            Assert.Throws<ArgumentNullException>(
-                () => ModuleMetadata.CreateFromImage(enumerableImage)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ModuleMetadata.CreateFromImage(enumerableImage));
 
             byte[] arrayImage = null;
             Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(arrayImage));
@@ -113,15 +101,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromImageStream()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ModuleMetadata.CreateFromStream(peStream: null)
-            );
-            Assert.Throws<ArgumentException>(
-                () => ModuleMetadata.CreateFromStream(new TestStream(canRead: false, canSeek: true))
-            );
-            Assert.Throws<ArgumentException>(
-                () => ModuleMetadata.CreateFromStream(new TestStream(canRead: true, canSeek: false))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ModuleMetadata.CreateFromStream(peStream: null));
+            Assert.Throws<ArgumentException>(() =>
+                ModuleMetadata.CreateFromStream(new TestStream(canRead: false, canSeek: true)));
+            Assert.Throws<ArgumentException>(() =>
+                ModuleMetadata.CreateFromStream(new TestStream(canRead: true, canSeek: false)));
         }
 
         [ConditionalFact(
@@ -136,26 +121,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             char systemDrive = Environment.GetFolderPath(Environment.SpecialFolder.Windows)[0];
             Assert.Throws<IOException>(() => ModuleMetadata.CreateFromFile(@"http://goo.bar"));
-            Assert.Throws<FileNotFoundException>(
-                () =>
-                    ModuleMetadata.CreateFromFile(systemDrive + @":\file_that_does_not_exists.dll")
-            );
-            Assert.Throws<FileNotFoundException>(
-                () =>
-                    ModuleMetadata.CreateFromFile(
-                        systemDrive
-                            + @":\directory_that_does_not_exists\file_that_does_not_exists.dll"
-                    )
-            );
-            Assert.Throws<PathTooLongException>(
-                () => ModuleMetadata.CreateFromFile(systemDrive + @":\" + new string('x', 1000))
-            );
-            Assert.Throws<IOException>(
-                () =>
-                    ModuleMetadata.CreateFromFile(
-                        Environment.GetFolderPath(Environment.SpecialFolder.Windows)
-                    )
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                ModuleMetadata.CreateFromFile(systemDrive + @":\file_that_does_not_exists.dll"));
+            Assert.Throws<FileNotFoundException>(() =>
+                ModuleMetadata.CreateFromFile(
+                    systemDrive + @":\directory_that_does_not_exists\file_that_does_not_exists.dll"
+                ));
+            Assert.Throws<PathTooLongException>(() =>
+                ModuleMetadata.CreateFromFile(systemDrive + @":\" + new string('x', 1000)));
+            Assert.Throws<IOException>(() =>
+                ModuleMetadata.CreateFromFile(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Windows)
+                ));
         }
 
         [Fact]
@@ -200,20 +177,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void EmptyStream()
         {
             ModuleMetadata.CreateFromStream(new MemoryStream(), PEStreamOptions.Default);
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    ModuleMetadata.CreateFromStream(
-                        new MemoryStream(),
-                        PEStreamOptions.PrefetchMetadata
-                    )
-            );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    ModuleMetadata.CreateFromStream(
-                        new MemoryStream(),
-                        PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                ModuleMetadata.CreateFromStream(
+                    new MemoryStream(),
+                    PEStreamOptions.PrefetchMetadata
+                ));
+            Assert.Throws<BadImageFormatException>(() =>
+                ModuleMetadata.CreateFromStream(
+                    new MemoryStream(),
+                    PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage
+                ));
         }
     }
 }

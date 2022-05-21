@@ -65,9 +65,8 @@ namespace System.Diagnostics.Tests
                     eventLog.Source = source;
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 1);
-                    EventLogEntry entry = Helpers.Retry(
-                        () => eventLog.Entries[eventLog.Entries.Count - 1]
-                    );
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]);
                     Assert.False(entry.Equals(null));
                 }
             }
@@ -93,16 +92,14 @@ namespace System.Diagnostics.Tests
                     eventLog.Source = source;
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 1); //There is latency between writing and getting the entry
-                    EventLogEntry entry = Helpers.Retry(
-                        () => eventLog.Entries[eventLog.Entries.Count - 1]
-                    );
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]);
                     Assert.True(entry.Equals(entry));
 
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 2);
-                    EventLogEntry secondEntry = Helpers.Retry(
-                        () => eventLog.Entries[eventLog.Entries.Count - 1]
-                    );
+                    EventLogEntry secondEntry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]);
                     Assert.Equal(entry.Index + 1, secondEntry.Index);
                 }
             }
@@ -129,12 +126,10 @@ namespace System.Diagnostics.Tests
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 2);
-                    EventLogEntry entry = Helpers.Retry(
-                        () => eventLog.Entries[eventLog.Entries.Count - 1]
-                    );
-                    EventLogEntry secondEntry = Helpers.Retry(
-                        () => eventLog.Entries[eventLog.Entries.Count - 2]
-                    );
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]);
+                    EventLogEntry secondEntry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 2]);
                     Assert.False(entry.Equals(secondEntry));
                 }
             }

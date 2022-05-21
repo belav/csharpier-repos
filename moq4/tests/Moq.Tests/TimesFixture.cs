@@ -84,9 +84,8 @@ namespace Moq.Tests
         [Fact]
         public void BetweenInclusiveThrowsIfFromLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Times.Between(-1, 10, Range.Inclusive)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Times.Between(-1, 10, Range.Inclusive));
             Assert.Throws<ArgumentOutOfRangeException>(() => Times.Between(-2, 3, Range.Inclusive));
         }
 
@@ -94,9 +93,8 @@ namespace Moq.Tests
         public void BetweenInclusiveThrowsIfFromGreaterThanTo()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Times.Between(3, 2, Range.Inclusive));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Times.Between(-3, -2, Range.Inclusive)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Times.Between(-3, -2, Range.Inclusive));
             Assert.Throws<ArgumentOutOfRangeException>(() => Times.Between(0, -2, Range.Inclusive));
         }
 
@@ -117,9 +115,8 @@ namespace Moq.Tests
         [Fact]
         public void BetweenExclusiveThrowsIfFromLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Times.Between(-1, 10, Range.Exclusive)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Times.Between(-1, 10, Range.Exclusive));
             Assert.Throws<ArgumentOutOfRangeException>(() => Times.Between(-2, 3, Range.Exclusive));
         }
 

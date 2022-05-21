@@ -251,13 +251,11 @@ namespace Tests.Integration
 
             private Lazy<T> CreateWrapped<T>(Lazy<T> lazy, Type type)
             {
-                return new Lazy<T>(
-                    () =>
-                    {
-                        this.OnTypeLoaded(type);
-                        return lazy.Value;
-                    }
-                );
+                return new Lazy<T>(() =>
+                {
+                    this.OnTypeLoaded(type);
+                    return lazy.Value;
+                });
             }
 
             private LazyMemberInfo CreateWrapped(LazyMemberInfo lazyMember, Type type)

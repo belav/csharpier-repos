@@ -1532,50 +1532,42 @@ namespace System.Drawing.Drawing2D.Tests
         {
             using (GraphicsPath gp = new GraphicsPath())
             {
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        gp.AddString(
-                            null,
-                            FontFamily.GenericMonospace,
-                            0,
-                            10,
-                            new Point(10, 10),
-                            StringFormat.GenericDefault
-                        )
-                );
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        gp.AddString(
-                            null,
-                            FontFamily.GenericMonospace,
-                            0,
-                            10,
-                            new PointF(10f, 10f),
-                            StringFormat.GenericDefault
-                        )
-                );
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        gp.AddString(
-                            null,
-                            FontFamily.GenericMonospace,
-                            0,
-                            10,
-                            new Rectangle(10, 10, 10, 10),
-                            StringFormat.GenericDefault
-                        )
-                );
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        gp.AddString(
-                            null,
-                            FontFamily.GenericMonospace,
-                            0,
-                            10,
-                            new RectangleF(10f, 10f, 10f, 10f),
-                            StringFormat.GenericDefault
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    gp.AddString(
+                        null,
+                        FontFamily.GenericMonospace,
+                        0,
+                        10,
+                        new Point(10, 10),
+                        StringFormat.GenericDefault
+                    ));
+                Assert.Throws<NullReferenceException>(() =>
+                    gp.AddString(
+                        null,
+                        FontFamily.GenericMonospace,
+                        0,
+                        10,
+                        new PointF(10f, 10f),
+                        StringFormat.GenericDefault
+                    ));
+                Assert.Throws<NullReferenceException>(() =>
+                    gp.AddString(
+                        null,
+                        FontFamily.GenericMonospace,
+                        0,
+                        10,
+                        new Rectangle(10, 10, 10, 10),
+                        StringFormat.GenericDefault
+                    ));
+                Assert.Throws<NullReferenceException>(() =>
+                    gp.AddString(
+                        null,
+                        FontFamily.GenericMonospace,
+                        0,
+                        10,
+                        new RectangleF(10f, 10f, 10f, 10f),
+                        StringFormat.GenericDefault
+                    ));
             }
         }
 

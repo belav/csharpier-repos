@@ -26,26 +26,22 @@ public class HstsMiddlewareTests
     [Fact]
     public void Ctor_ArgumentNextIsNull_ThrowsArgumentNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                _ = new HstsMiddleware(
-                    next: null,
-                    options: new OptionsWrapper<HstsOptions>(new HstsOptions())
-                );
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            _ = new HstsMiddleware(
+                next: null,
+                options: new OptionsWrapper<HstsOptions>(new HstsOptions())
+            );
+        });
     }
 
     [Fact]
     public void Ctor_ArgumentOptionsIsNull_ThrowsArgumentNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                _ = new HstsMiddleware(innerHttpContext => Task.CompletedTask, options: null);
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            _ = new HstsMiddleware(innerHttpContext => Task.CompletedTask, options: null);
+        });
     }
 
     [Fact]

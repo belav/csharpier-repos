@@ -239,12 +239,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 partDefinition as ReflectionComposablePartDefinition;
             Assert.NotNull(definition);
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    definition.ExportDefinitions.Count();
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                definition.ExportDefinitions.Count();
+            });
         }
 
         [Fact]
@@ -330,12 +328,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ReflectionComposablePartDefinition definition =
                 partDefinition as ReflectionComposablePartDefinition;
             Assert.NotNull(definition);
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    definition.ImportDefinitions.Count();
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                definition.ImportDefinitions.Count();
+            });
         }
 
         [Fact]
@@ -397,12 +393,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 partDefinition as ReflectionComposablePartDefinition;
             Assert.NotNull(definition);
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    definition.GetPartType();
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                definition.GetPartType();
+            });
         }
 
         [Fact]

@@ -170,9 +170,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             byte[] hash = new byte[20];
 
             Assert.Throws<ObjectDisposedException>(() => dsa.TryCreateSignature(hash, sig, out _));
-            Assert.Throws<ObjectDisposedException>(
-                () => dsa.VerifySignature(hash.AsSpan(), sig.AsSpan())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                dsa.VerifySignature(hash.AsSpan(), sig.AsSpan()));
         }
 
         private static byte[] TryWithOutputArray(Func<byte[], (bool, int)> func)
@@ -251,43 +250,38 @@ namespace System.Security.Cryptography.Dsa.Tests
 
             UseAfterDispose(key, data, sig);
 
-            Assert.Throws<ObjectDisposedException>(
-                () => key.ImportParameters(DSATestData.GetDSA1024Params())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.ImportParameters(DSATestData.GetDSA1024Params()));
 
             // Either set_KeySize or SignData should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        key.KeySize = 576;
-                    }
-                    catch (CryptographicException)
-                    {
-                        // DSACryptoServiceProvider on Android only supports 1024 and does an early check for legal
-                        // key sizes, since it is more restrictive than the wrapped implementation. It will throw
-                        // CryptographicException. SignData should still throw ObjectDisposedException.
-                        if (!PlatformDetection.IsAndroid)
-                        {
-                            throw;
-                        }
-                    }
-
-                    SignData(key, data, HashAlgorithmName.SHA1);
+                    key.KeySize = 576;
                 }
-            );
+                catch (CryptographicException)
+                {
+                    // DSACryptoServiceProvider on Android only supports 1024 and does an early check for legal
+                    // key sizes, since it is more restrictive than the wrapped implementation. It will throw
+                    // CryptographicException. SignData should still throw ObjectDisposedException.
+                    if (!PlatformDetection.IsAndroid)
+                    {
+                        throw;
+                    }
+                }
+
+                SignData(key, data, HashAlgorithmName.SHA1);
+            });
         }
 
         protected virtual void UseAfterDispose(DSA dsa, byte[] data, byte[] sig)
         {
-            Assert.Throws<ObjectDisposedException>(
-                () => SignData(dsa, data, HashAlgorithmName.SHA1)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                SignData(dsa, data, HashAlgorithmName.SHA1));
 
-            Assert.Throws<ObjectDisposedException>(
-                () => VerifyData(dsa, data, sig, HashAlgorithmName.SHA1)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                VerifyData(dsa, data, sig, HashAlgorithmName.SHA1));
         }
 
         [ConditionalFact(nameof(SupportsKeyGeneration))]
@@ -360,9 +354,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             {
                 dsa.ImportParameters(keyParameters);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignData(dsa, DSATestData.HelloBytes, HashAlgorithmName.SHA1)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignData(dsa, DSATestData.HelloBytes, HashAlgorithmName.SHA1));
             }
         }
 

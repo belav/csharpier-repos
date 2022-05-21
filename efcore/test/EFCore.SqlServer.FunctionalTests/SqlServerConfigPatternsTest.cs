@@ -159,21 +159,19 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.NoProviderConfigured,
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    using var context = new NorthwindContext(
-                                        new DbContextOptionsBuilder()
-                                            .UseInternalServiceProvider(
-                                                new ServiceCollection()
-                                                    .AddEntityFrameworkSqlServer()
-                                                    .BuildServiceProvider(validateScopes: true)
-                                            )
-                                            .Options
-                                    );
-                                    Assert.Equal(91, context.Customers.Count());
-                                }
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                            {
+                                using var context = new NorthwindContext(
+                                    new DbContextOptionsBuilder()
+                                        .UseInternalServiceProvider(
+                                            new ServiceCollection()
+                                                .AddEntityFrameworkSqlServer()
+                                                .BuildServiceProvider(validateScopes: true)
+                                        )
+                                        .Options
+                                );
+                                Assert.Equal(91, context.Customers.Count());
+                            })
                             .Message
                     );
                 }
@@ -200,13 +198,11 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.NoProviderConfigured,
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    using var context = new NorthwindContext();
-                                    Assert.Equal(91, context.Customers.Count());
-                                }
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                            {
+                                using var context = new NorthwindContext();
+                                Assert.Equal(91, context.Customers.Count());
+                            })
                             .Message
                     );
                 }
@@ -238,17 +234,15 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.NoProviderConfigured,
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    using var context = new NorthwindContext(
-                                        new DbContextOptionsBuilder()
-                                            .UseInternalServiceProvider(serviceProvider)
-                                            .Options
-                                    );
-                                    Assert.Equal(91, context.Customers.Count());
-                                }
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                            {
+                                using var context = new NorthwindContext(
+                                    new DbContextOptionsBuilder()
+                                        .UseInternalServiceProvider(serviceProvider)
+                                        .Options
+                                );
+                                Assert.Equal(91, context.Customers.Count());
+                            })
                             .Message
                     );
                 }

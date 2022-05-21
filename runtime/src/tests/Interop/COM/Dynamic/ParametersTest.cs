@@ -64,9 +64,8 @@ namespace Dynamic
             AssertExtensions.CollectionEqual(expected, ret);
 
             // Invalid name
-            COMException e = Assert.Throws<COMException>(
-                () => obj.Required(one, two, invalid: three)
-            );
+            COMException e = Assert.Throws<COMException>(() =>
+                obj.Required(one, two, invalid: three));
             const int DISP_E_UNKNOWNNAME = unchecked((int)0x80020006);
             Assert.Equal(DISP_E_UNKNOWNNAME, e.HResult);
         }
@@ -160,14 +159,12 @@ namespace Dynamic
         {
             // Too few parameters
             Assert.Throws<System.Reflection.TargetParameterCountException>(() => obj.Mixed());
-            Assert.Throws<System.Reflection.TargetParameterCountException>(
-                () => obj.Required(one, two)
-            );
+            Assert.Throws<System.Reflection.TargetParameterCountException>(() =>
+                obj.Required(one, two));
 
             // Too many parameters
-            Assert.Throws<System.Reflection.TargetParameterCountException>(
-                () => obj.Required(one, two, three, one)
-            );
+            Assert.Throws<System.Reflection.TargetParameterCountException>(() =>
+                obj.Required(one, two, three, one));
 
             // Invalid type
             Assert.Throws<System.ArgumentException>(() => obj.Required("one", "two", "three"));

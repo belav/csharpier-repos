@@ -13,12 +13,10 @@ public class DisposableActionTest
     {
         // Arrange
         var called = false;
-        var action = new DisposableAction(
-            () =>
-            {
-                called = true;
-            }
-        );
+        var action = new DisposableAction(() =>
+        {
+            called = true;
+        });
 
         // Act
         action.Dispose();

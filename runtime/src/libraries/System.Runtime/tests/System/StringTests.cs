@@ -3198,31 +3198,26 @@ namespace System.Tests
             Task[] tasks = new Task[parallelism];
             for (int i = 0; i < parallelism; i++)
             {
-                tasks[i] = new Task(
-                    () =>
+                tasks[i] = new Task(() =>
+                {
+                    for (int i = 0; i < 1_00_000; i++)
                     {
-                        for (int i = 0; i < 1_00_000; i++)
-                        {
-                            Assert.True(ci.IndexOf(source, pattern, options) > 0, "ci.IndexOf 1");
-                            Assert.True(
-                                ci.LastIndexOf(source, pattern, options) > 0,
-                                "LastIndexOf 1"
-                            );
+                        Assert.True(ci.IndexOf(source, pattern, options) > 0, "ci.IndexOf 1");
+                        Assert.True(ci.LastIndexOf(source, pattern, options) > 0, "LastIndexOf 1");
 
-                            Assert.False(ci.IndexOf(source, pattern1, options) > 0, "IndexOf 2");
-                            Assert.False(
-                                ci.LastIndexOf(source, pattern1, options) > 0,
-                                "LastIndexOf 2"
-                            );
+                        Assert.False(ci.IndexOf(source, pattern1, options) > 0, "IndexOf 2");
+                        Assert.False(
+                            ci.LastIndexOf(source, pattern1, options) > 0,
+                            "LastIndexOf 2"
+                        );
 
-                            Assert.True(ci.IsPrefix(source1, pattern, options), "IsPrefix 1");
-                            Assert.True(ci.IsSuffix(source1, pattern, options), "IsSuffix 1");
+                        Assert.True(ci.IsPrefix(source1, pattern, options), "IsPrefix 1");
+                        Assert.True(ci.IsSuffix(source1, pattern, options), "IsSuffix 1");
 
-                            Assert.False(ci.IsPrefix(source, pattern, options), "IsPrefix 2");
-                            Assert.False(ci.IsSuffix(source, pattern, options), "IsPrefix 2");
-                        }
+                        Assert.False(ci.IsPrefix(source, pattern, options), "IsPrefix 2");
+                        Assert.False(ci.IsSuffix(source, pattern, options), "IsPrefix 2");
                     }
-                );
+                });
             }
 
             for (int i = 0; i < parallelism; i++)

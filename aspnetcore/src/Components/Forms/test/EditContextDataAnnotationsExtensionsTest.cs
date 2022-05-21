@@ -13,9 +13,8 @@ public class EditContextDataAnnotationsExtensionsTest
     public void CannotUseNullEditContext()
     {
         var editContext = (EditContext)null;
-        var ex = Assert.Throws<ArgumentNullException>(
-            () => editContext.EnableDataAnnotationsValidation()
-        );
+        var ex = Assert.Throws<ArgumentNullException>(() =>
+            editContext.EnableDataAnnotationsValidation());
         Assert.Equal("editContext", ex.ParamName);
     }
 

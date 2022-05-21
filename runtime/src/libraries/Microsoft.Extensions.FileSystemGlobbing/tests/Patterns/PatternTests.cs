@@ -118,27 +118,23 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.Patterns
         public void ThrowExceptionForInvalidParentsPath(string sample)
         {
             // parent segment is only allowed at the beginning of the pattern
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var builder = new PatternBuilder();
-                    var pattern = builder.Build(sample);
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var builder = new PatternBuilder();
+                var pattern = builder.Build(sample);
 
-                    Assert.Null(pattern);
-                }
-            );
+                Assert.Null(pattern);
+            });
         }
 
         [Fact]
         public void ThrowExceptionForNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var builder = new PatternBuilder();
-                    builder.Build(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var builder = new PatternBuilder();
+                builder.Build(null);
+            });
         }
     }
 }

@@ -126,12 +126,10 @@ namespace System.ComponentModel.Composition
                 CreationPolicy.Any
             );
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var m = import.RequiredMetadata;
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                var m = import.RequiredMetadata;
+            });
         }
 
         [Fact]
@@ -151,12 +149,10 @@ namespace System.ComponentModel.Composition
                 CreationPolicy.Any
             );
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var m = import.RequiredMetadata;
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                var m = import.RequiredMetadata;
+            });
         }
 
         [Fact]

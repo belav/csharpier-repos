@@ -46,19 +46,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertTranslationFailed(() => base.Convert_ToString(async));
 
         public override Task Projecting_Math_Truncate_and_ordering_by_it_twice(bool async) =>
-            AssertTranslationFailed(
-                () => base.Projecting_Math_Truncate_and_ordering_by_it_twice(async)
-            );
+            AssertTranslationFailed(() =>
+                base.Projecting_Math_Truncate_and_ordering_by_it_twice(async));
 
         public override Task Projecting_Math_Truncate_and_ordering_by_it_twice2(bool async) =>
-            AssertTranslationFailed(
-                () => base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async)
-            );
+            AssertTranslationFailed(() =>
+                base.Projecting_Math_Truncate_and_ordering_by_it_twice2(async));
 
         public override Task Projecting_Math_Truncate_and_ordering_by_it_twice3(bool async) =>
-            AssertTranslationFailed(
-                () => base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async)
-            );
+            AssertTranslationFailed(() =>
+                base.Projecting_Math_Truncate_and_ordering_by_it_twice3(async));
 
         public override Task Where_functions_nested(bool async) =>
             AssertTranslationFailed(() => base.Where_functions_nested(async));

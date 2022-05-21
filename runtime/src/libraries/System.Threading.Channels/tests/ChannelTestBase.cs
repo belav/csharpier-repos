@@ -157,24 +157,20 @@ namespace System.Threading.Channels.Tests
 
             const int NumItems = 100000;
             Task.WaitAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            await c.Writer.WriteAsync(i);
-                        }
+                        await c.Writer.WriteAsync(i);
                     }
-                ),
-                Task.Run(
-                    async () =>
+                }),
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            Assert.Equal(i, await c.Reader.ReadAsync());
-                        }
+                        Assert.Equal(i, await c.Reader.ReadAsync());
                     }
-                )
+                })
             );
         }
 
@@ -190,26 +186,22 @@ namespace System.Threading.Channels.Tests
 
             const int NumItems = 100000;
             Task.WaitAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            Assert.Equal(i, await c1.Reader.ReadAsync());
-                            await c2.Writer.WriteAsync(i);
-                        }
+                        Assert.Equal(i, await c1.Reader.ReadAsync());
+                        await c2.Writer.WriteAsync(i);
                     }
-                ),
-                Task.Run(
-                    async () =>
+                }),
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            await c1.Writer.WriteAsync(i);
-                            Assert.Equal(i, await c2.Reader.ReadAsync());
-                        }
+                        await c1.Writer.WriteAsync(i);
+                        Assert.Equal(i, await c2.Reader.ReadAsync());
                     }
-                )
+                })
             );
         }
 
@@ -245,44 +237,40 @@ namespace System.Threading.Channels.Tests
 
             for (int i = 0; i < numReaders; i++)
             {
-                tasks[i] = Task.Run(
-                    async () =>
+                tasks[i] = Task.Run(async () =>
+                {
+                    try
                     {
-                        try
+                        while (await c.Reader.WaitToReadAsync())
                         {
-                            while (await c.Reader.WaitToReadAsync())
+                            if (c.Reader.TryRead(out int value))
                             {
-                                if (c.Reader.TryRead(out int value))
-                                {
-                                    Interlocked.Add(ref readTotal, value);
-                                }
+                                Interlocked.Add(ref readTotal, value);
                             }
                         }
-                        catch (ChannelClosedException) { }
                     }
-                );
+                    catch (ChannelClosedException) { }
+                });
             }
 
             for (int i = 0; i < numWriters; i++)
             {
-                tasks[numReaders + i] = Task.Run(
-                    async () =>
+                tasks[numReaders + i] = Task.Run(async () =>
+                {
+                    while (true)
                     {
-                        while (true)
+                        int value = Interlocked.Decrement(ref remainingItems);
+                        if (value < 0)
                         {
-                            int value = Interlocked.Decrement(ref remainingItems);
-                            if (value < 0)
-                            {
-                                break;
-                            }
-                            await c.Writer.WriteAsync(value + 1);
+                            break;
                         }
-                        if (Interlocked.Decrement(ref remainingWriters) == 0)
-                        {
-                            c.Writer.Complete();
-                        }
+                        await c.Writer.WriteAsync(value + 1);
                     }
-                );
+                    if (Interlocked.Decrement(ref remainingWriters) == 0)
+                    {
+                        c.Writer.Complete();
+                    }
+                });
             }
 
             Task.WaitAll(tasks);
@@ -457,9 +445,8 @@ namespace System.Threading.Channels.Tests
         {
             Channel<int> c = CreateChannel();
             c.Writer.Complete();
-            await Assert.ThrowsAnyAsync<InvalidOperationException>(
-                async () => await c.Writer.WriteAsync(42)
-            );
+            await Assert.ThrowsAnyAsync<InvalidOperationException>(async () =>
+                await c.Writer.WriteAsync(42));
         }
 
         [Fact]
@@ -797,9 +784,8 @@ namespace System.Threading.Channels.Tests
             c.Writer.Complete(e);
             Assert.True(c.Reader.Completion.IsFaulted);
 
-            ChannelClosedException cce = await Assert.ThrowsAsync<ChannelClosedException>(
-                () => c.Reader.ReadAsync().AsTask()
-            );
+            ChannelClosedException cce = await Assert.ThrowsAsync<ChannelClosedException>(() =>
+                c.Reader.ReadAsync().AsTask());
             Assert.Same(e, cce.InnerException);
         }
 
@@ -812,9 +798,8 @@ namespace System.Threading.Channels.Tests
             c.Writer.Complete(e);
             Assert.True(c.Reader.Completion.IsCanceled);
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => c.Reader.ReadAsync().AsTask()
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                c.Reader.ReadAsync().AsTask());
         }
 
         [Fact]
@@ -893,16 +878,14 @@ namespace System.Threading.Channels.Tests
                     if (onCompleted)
                     {
                         read.GetAwaiter().OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.GetAwaiter().OnCompleted(() => { }));
                     }
                     else
                     {
                         read.GetAwaiter().UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.GetAwaiter().UnsafeOnCompleted(() => { }));
                     }
                     break;
 
@@ -912,24 +895,20 @@ namespace System.Threading.Channels.Tests
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                read.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .OnCompleted(() => { }));
                     }
                     else
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                read.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => { }));
                     }
                     break;
             }
@@ -956,16 +935,14 @@ namespace System.Threading.Channels.Tests
                     if (onCompleted)
                     {
                         read.GetAwaiter().OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.GetAwaiter().OnCompleted(() => { }));
                     }
                     else
                     {
                         read.GetAwaiter().UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => read.GetAwaiter().UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.GetAwaiter().UnsafeOnCompleted(() => { }));
                     }
                     break;
 
@@ -975,24 +952,20 @@ namespace System.Threading.Channels.Tests
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                read.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .OnCompleted(() => { }));
                     }
                     else
                     {
                         read.ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                read.ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            read.ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => { }));
                     }
                     break;
             }
@@ -1011,9 +984,8 @@ namespace System.Threading.Channels.Tests
             Assert.True(c.Writer.TryWrite(42));
             Assert.True(await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(
-                () => read.GetAwaiter().OnCompleted(() => { })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                read.GetAwaiter().OnCompleted(() => { }));
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
 
@@ -1030,9 +1002,8 @@ namespace System.Threading.Channels.Tests
             Assert.True(c.Writer.TryWrite(42));
             Assert.Equal(42, await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(
-                () => read.GetAwaiter().OnCompleted(() => { })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                read.GetAwaiter().OnCompleted(() => { }));
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
 
@@ -1049,9 +1020,8 @@ namespace System.Threading.Channels.Tests
             await c.Reader.ReadAsync();
             Assert.True(await write);
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(
-                () => write.GetAwaiter().OnCompleted(() => { })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                write.GetAwaiter().OnCompleted(() => { }));
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }
 
@@ -1068,9 +1038,8 @@ namespace System.Threading.Channels.Tests
             await c.Reader.ReadAsync();
             await write;
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(
-                () => write.GetAwaiter().OnCompleted(() => { })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                write.GetAwaiter().OnCompleted(() => { }));
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }
 
@@ -1099,16 +1068,14 @@ namespace System.Threading.Channels.Tests
                     if (onCompleted)
                     {
                         write.GetAwaiter().OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write.GetAwaiter().OnCompleted(() => { }));
                     }
                     else
                     {
                         write.GetAwaiter().UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write.GetAwaiter().UnsafeOnCompleted(() => { }));
                     }
                     break;
 
@@ -1119,13 +1086,11 @@ namespace System.Threading.Channels.Tests
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                write
-                                    .ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .OnCompleted(() => { }));
                     }
                     else
                     {
@@ -1133,13 +1098,11 @@ namespace System.Threading.Channels.Tests
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                write
-                                    .ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => { }));
                     }
                     break;
             }
@@ -1170,16 +1133,14 @@ namespace System.Threading.Channels.Tests
                     if (onCompleted)
                     {
                         write.GetAwaiter().OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write.GetAwaiter().OnCompleted(() => { }));
                     }
                     else
                     {
                         write.GetAwaiter().UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () => write.GetAwaiter().UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write.GetAwaiter().UnsafeOnCompleted(() => { }));
                     }
                     break;
 
@@ -1190,13 +1151,11 @@ namespace System.Threading.Channels.Tests
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                write
-                                    .ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .OnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .OnCompleted(() => { }));
                     }
                     else
                     {
@@ -1204,13 +1163,11 @@ namespace System.Threading.Channels.Tests
                             .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .UnsafeOnCompleted(() => { });
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                write
-                                    .ConfigureAwait(continueOnCapturedContext.Value)
-                                    .GetAwaiter()
-                                    .UnsafeOnCompleted(() => { })
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            write
+                                .ConfigureAwait(continueOnCapturedContext.Value)
+                                .GetAwaiter()
+                                .UnsafeOnCompleted(() => { }));
                     }
                     break;
             }
@@ -1366,103 +1323,99 @@ namespace System.Threading.Channels.Tests
                 return;
             }
 
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                Assert.Null(SynchronizationContext.Current);
+
+                Channel<bool> c = CreateChannel<bool>();
+                ValueTask<bool> vt = readOrWait ? c.Reader.ReadAsync() : c.Reader.WaitToReadAsync();
+
+                var continuationRan = new TaskCompletionSource<bool>();
+                var asyncLocal = new AsyncLocal<int>();
+                bool schedulerWasFlowed = false;
+                bool executionContextWasFlowed = false;
+                Action continuation = () =>
                 {
-                    Assert.Null(SynchronizationContext.Current);
+                    schedulerWasFlowed = TaskScheduler.Current is CustomTaskScheduler;
+                    executionContextWasFlowed = 42 == asyncLocal.Value;
+                    continuationRan.SetResult(true);
+                };
 
-                    Channel<bool> c = CreateChannel<bool>();
-                    ValueTask<bool> vt = readOrWait
-                        ? c.Reader.ReadAsync()
-                        : c.Reader.WaitToReadAsync();
-
-                    var continuationRan = new TaskCompletionSource<bool>();
-                    var asyncLocal = new AsyncLocal<int>();
-                    bool schedulerWasFlowed = false;
-                    bool executionContextWasFlowed = false;
-                    Action continuation = () =>
-                    {
-                        schedulerWasFlowed = TaskScheduler.Current is CustomTaskScheduler;
-                        executionContextWasFlowed = 42 == asyncLocal.Value;
-                        continuationRan.SetResult(true);
-                    };
-
-                    if (completeBeforeOnCompleted)
-                    {
-                        Assert.False(vt.IsCompleted);
-                        Assert.False(vt.IsCompletedSuccessfully);
-                        c.Writer.TryWrite(true);
-                    }
-
-                    await Task.Factory.StartNew(
-                        () =>
-                        {
-                            if (setDefaultSyncContext)
-                            {
-                                SynchronizationContext.SetSynchronizationContext(
-                                    new SynchronizationContext()
-                                );
-                            }
-
-                            Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
-                            asyncLocal.Value = 42;
-                            switch (continueOnCapturedContext)
-                            {
-                                case null:
-                                    if (flowExecutionContext)
-                                    {
-                                        vt.GetAwaiter().OnCompleted(continuation);
-                                    }
-                                    else
-                                    {
-                                        vt.GetAwaiter().UnsafeOnCompleted(continuation);
-                                    }
-                                    break;
-                                default:
-                                    if (flowExecutionContext)
-                                    {
-                                        vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                            .GetAwaiter()
-                                            .OnCompleted(continuation);
-                                    }
-                                    else
-                                    {
-                                        vt.ConfigureAwait(continueOnCapturedContext.Value)
-                                            .GetAwaiter()
-                                            .UnsafeOnCompleted(continuation);
-                                    }
-                                    break;
-                            }
-                            asyncLocal.Value = 0;
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        new CustomTaskScheduler()
-                    );
-
-                    if (!completeBeforeOnCompleted)
-                    {
-                        Assert.False(vt.IsCompleted);
-                        Assert.False(vt.IsCompletedSuccessfully);
-                        c.Writer.TryWrite(true);
-                    }
-
-                    await continuationRan.Task;
-                    Assert.True(vt.IsCompleted);
-                    Assert.True(vt.IsCompletedSuccessfully);
-
-                    Assert.Equal(continueOnCapturedContext != false, schedulerWasFlowed);
-                    if (completeBeforeOnCompleted)
-                    {
-                        // OnCompleted may or may not flow ExecutionContext here; it's not needed,
-                        // and we avoid it when it's easy, but it's also not wrong to do so.
-                    }
-                    else
-                    {
-                        Assert.Equal(flowExecutionContext, executionContextWasFlowed);
-                    }
+                if (completeBeforeOnCompleted)
+                {
+                    Assert.False(vt.IsCompleted);
+                    Assert.False(vt.IsCompletedSuccessfully);
+                    c.Writer.TryWrite(true);
                 }
-            );
+
+                await Task.Factory.StartNew(
+                    () =>
+                    {
+                        if (setDefaultSyncContext)
+                        {
+                            SynchronizationContext.SetSynchronizationContext(
+                                new SynchronizationContext()
+                            );
+                        }
+
+                        Assert.IsType<CustomTaskScheduler>(TaskScheduler.Current);
+                        asyncLocal.Value = 42;
+                        switch (continueOnCapturedContext)
+                        {
+                            case null:
+                                if (flowExecutionContext)
+                                {
+                                    vt.GetAwaiter().OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    vt.GetAwaiter().UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                            default:
+                                if (flowExecutionContext)
+                                {
+                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .OnCompleted(continuation);
+                                }
+                                else
+                                {
+                                    vt.ConfigureAwait(continueOnCapturedContext.Value)
+                                        .GetAwaiter()
+                                        .UnsafeOnCompleted(continuation);
+                                }
+                                break;
+                        }
+                        asyncLocal.Value = 0;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    new CustomTaskScheduler()
+                );
+
+                if (!completeBeforeOnCompleted)
+                {
+                    Assert.False(vt.IsCompleted);
+                    Assert.False(vt.IsCompletedSuccessfully);
+                    c.Writer.TryWrite(true);
+                }
+
+                await continuationRan.Task;
+                Assert.True(vt.IsCompleted);
+                Assert.True(vt.IsCompletedSuccessfully);
+
+                Assert.Equal(continueOnCapturedContext != false, schedulerWasFlowed);
+                if (completeBeforeOnCompleted)
+                {
+                    // OnCompleted may or may not flow ExecutionContext here; it's not needed,
+                    // and we avoid it when it's easy, but it's also not wrong to do so.
+                }
+                else
+                {
+                    Assert.Equal(flowExecutionContext, executionContextWasFlowed);
+                }
+            });
         }
 
         [Fact]

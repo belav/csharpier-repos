@@ -64,12 +64,10 @@ namespace System.Web.Http.Controllers
             Mock<HttpRequestContext> requestContextMock = new Mock<HttpRequestContext>();
             requestContextMock
                 .Setup(c => c.Principal)
-                .Callback(
-                    () =>
-                    {
-                        calls++;
-                    }
-                );
+                .Callback(() =>
+                {
+                    calls++;
+                });
             controller.RequestContext = requestContextMock.Object;
             IHttpActionResult innerResult = CreateStubActionResult();
 

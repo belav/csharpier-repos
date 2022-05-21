@@ -212,9 +212,8 @@ ConnectionString
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "ConnectionString");
 
-            var exception = Assert.Throws<FormatException>(
-                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
-            );
+            var exception = Assert.Throws<FormatException>(() =>
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -230,9 +229,8 @@ DefaultConnection=TestConnectionString
             var iniConfigSrc = new IniConfigurationProvider(new IniConfigurationSource());
             var expectedMsg = SR.Format(SR.Error_UnrecognizedLineFormat, "[ConnectionString");
 
-            var exception = Assert.Throws<FormatException>(
-                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
-            );
+            var exception = Assert.Throws<FormatException>(() =>
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -242,9 +240,8 @@ DefaultConnection=TestConnectionString
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddIniFile(path: null)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddIniFile(path: null));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -254,9 +251,8 @@ DefaultConnection=TestConnectionString
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddIniFile(string.Empty)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddIniFile(string.Empty));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -279,9 +275,8 @@ DefaultConnection=TestConnectionString
                 "Data:DefaultConnection:ConnectionString"
             );
 
-            var exception = Assert.Throws<FormatException>(
-                () => iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini))
-            );
+            var exception = Assert.Throws<FormatException>(() =>
+                iniConfigSrc.Load(TestStreamHelpers.StringToStream(ini)));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -290,9 +285,8 @@ DefaultConnection=TestConnectionString
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50867", TestPlatforms.Android)]
         public void IniConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var exception = Assert.Throws<FileNotFoundException>(
-                () => new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build()
-            );
+            var exception = Assert.Throws<FileNotFoundException>(() =>
+                new ConfigurationBuilder().AddIniFile("NotExistingConfig.ini").Build());
 
             // Assert
             Assert.StartsWith(

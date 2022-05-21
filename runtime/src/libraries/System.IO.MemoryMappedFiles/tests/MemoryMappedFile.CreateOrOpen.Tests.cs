@@ -70,22 +70,18 @@ namespace System.IO.MemoryMappedFiles.Tests
         [MemberData(nameof(CreateValidMapNames))]
         public void MapNamesNotSupported_Unix(string mapName)
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => MemoryMappedFile.CreateOrOpen(mapName, 4096)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => MemoryMappedFile.CreateOrOpen(mapName, 4096, MemoryMappedFileAccess.ReadWrite)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    MemoryMappedFile.CreateOrOpen(
-                        mapName,
-                        4096,
-                        MemoryMappedFileAccess.ReadWrite,
-                        MemoryMappedFileOptions.None,
-                        HandleInheritability.None
-                    )
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                MemoryMappedFile.CreateOrOpen(mapName, 4096));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                MemoryMappedFile.CreateOrOpen(mapName, 4096, MemoryMappedFileAccess.ReadWrite));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                MemoryMappedFile.CreateOrOpen(
+                    mapName,
+                    4096,
+                    MemoryMappedFileAccess.ReadWrite,
+                    MemoryMappedFileOptions.None,
+                    HandleInheritability.None
+                ));
         }
 
         /// <summary>
@@ -571,9 +567,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             }
             else
             {
-                Assert.Throws<IOException>(
-                    () => MemoryMappedFile.CreateOrOpen(CreateUniqueMapName(), long.MaxValue)
-                );
+                Assert.Throws<IOException>(() =>
+                    MemoryMappedFile.CreateOrOpen(CreateUniqueMapName(), long.MaxValue));
             }
         }
 
@@ -644,9 +639,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             {
                 // Even though we passed ReadWrite to CreateOrOpen, trying to open a view accessor with ReadWrite should fail
                 Assert.Throws<IOException>(() => opened.CreateViewAccessor());
-                Assert.Throws<IOException>(
-                    () => opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.ReadWrite)
-                );
+                Assert.Throws<IOException>(() =>
+                    opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.ReadWrite));
 
                 // But Read should succeed
                 opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.Read).Dispose();
@@ -678,9 +672,8 @@ namespace System.IO.MemoryMappedFiles.Tests
             {
                 // Even though we passed ReadWrite to CreateNew, trying to open a view accessor with ReadWrite should fail
                 Assert.Throws<UnauthorizedAccessException>(() => opened.CreateViewAccessor());
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.ReadWrite)
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.ReadWrite));
 
                 // But Read should succeed
                 opened.CreateViewAccessor(0, Capacity, MemoryMappedFileAccess.Read).Dispose();

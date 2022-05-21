@@ -1147,9 +1147,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(decimal).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList())
                     .Message
             );
 
@@ -1159,9 +1158,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(DateTimeOffset).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList())
                     .Message
             );
 
@@ -1171,9 +1169,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(TimeSpan).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList())
                     .Message
             );
 
@@ -1183,9 +1180,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ulong).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList())
                     .Message
             );
         }
@@ -1245,9 +1241,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(decimal).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList())
                     .Message
             );
 
@@ -1257,9 +1252,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(DateTimeOffset).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList())
                     .Message
             );
 
@@ -1269,9 +1263,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(TimeSpan).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList())
                     .Message
             );
 
@@ -1281,9 +1274,8 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ulong).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList())
                     .Message
             );
         }
@@ -1318,13 +1310,11 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(decimal).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () =>
-                            context
-                                .Set<BuiltInNullableDataTypes>()
-                                .Where(e => e.PartitionId == 202)
-                                .Average(e => e.TestNullableDecimal)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        context
+                            .Set<BuiltInNullableDataTypes>()
+                            .Where(e => e.PartitionId == 202)
+                            .Average(e => e.TestNullableDecimal))
                     .Message
             );
         }
@@ -1359,13 +1349,11 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(decimal).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () =>
-                            context
-                                .Set<BuiltInDataTypes>()
-                                .Where(e => e.PartitionId == 203)
-                                .Sum(e => e.TestDecimal)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        context
+                            .Set<BuiltInDataTypes>()
+                            .Where(e => e.PartitionId == 203)
+                            .Sum(e => e.TestDecimal))
                     .Message
             );
         }
@@ -1843,24 +1831,20 @@ namespace Microsoft.EntityFrameworkCore
 
             var query = context.Set<BuiltInNullableDataTypes>().Where(e => e.PartitionId == 205);
 
-            var ex = Assert.Throws<NotSupportedException>(
-                () => query.OrderBy(e => e.TestNullableDecimal).First()
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                query.OrderBy(e => e.TestNullableDecimal).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("decimal"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.OrderBy(e => e.TestNullableDateTimeOffset).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.OrderBy(e => e.TestNullableDateTimeOffset).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("DateTimeOffset"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.OrderBy(e => e.TestNullableTimeSpan).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.OrderBy(e => e.TestNullableTimeSpan).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("TimeSpan"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.OrderBy(e => e.TestNullableUnsignedInt64).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.OrderBy(e => e.TestNullableUnsignedInt64).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("ulong"), ex.Message);
         }
 
@@ -1913,24 +1897,20 @@ namespace Microsoft.EntityFrameworkCore
                 .Where(e => e.PartitionId == 206)
                 .OrderBy(e => e.PartitionId);
 
-            var ex = Assert.Throws<NotSupportedException>(
-                () => query.ThenBy(e => e.TestNullableDecimal).First()
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                query.ThenBy(e => e.TestNullableDecimal).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("decimal"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.ThenBy(e => e.TestNullableDateTimeOffset).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.ThenBy(e => e.TestNullableDateTimeOffset).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("DateTimeOffset"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.ThenBy(e => e.TestNullableTimeSpan).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.ThenBy(e => e.TestNullableTimeSpan).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("TimeSpan"), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => query.ThenBy(e => e.TestNullableUnsignedInt64).First()
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                query.ThenBy(e => e.TestNullableUnsignedInt64).First());
             Assert.Equal(SqliteStrings.OrderByNotSupported("ulong"), ex.Message);
         }
 

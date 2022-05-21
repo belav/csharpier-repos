@@ -56,12 +56,10 @@ internal class ProcessEx : IDisposable
             $"Process proc {proc.ProcessName} {proc.StartInfo.Arguments} timed out after {timeout}.";
 
         _processTimeoutCts = new CancellationTokenSource(timeout);
-        _processTimeoutCts.Token.Register(
-            () =>
-            {
-                _exited.TrySetException(new TimeoutException(timeoutExMessage));
-            }
-        );
+        _processTimeoutCts.Token.Register(() =>
+        {
+            _exited.TrySetException(new TimeoutException(timeoutExMessage));
+        });
     }
 
     public Process Process => _process;

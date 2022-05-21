@@ -304,20 +304,18 @@ System.Diagnostics.Process.GetCurrentProcess()
             Assert.NotNull(process);
         }
 
-        private static readonly Lazy<bool> s_isSystemV2AndV4Available = new Lazy<bool>(
-            () =>
-            {
-                string path;
-                return GlobalAssemblyCache.Instance.ResolvePartialName(
-                        "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                        out path
-                    ) != null
-                    && GlobalAssemblyCache.Instance.ResolvePartialName(
-                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                        out path
-                    ) != null;
-            }
-        );
+        private static readonly Lazy<bool> s_isSystemV2AndV4Available = new Lazy<bool>(() =>
+        {
+            string path;
+            return GlobalAssemblyCache.Instance.ResolvePartialName(
+                    "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                    out path
+                ) != null
+                && GlobalAssemblyCache.Instance.ResolvePartialName(
+                    "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                    out path
+                ) != null;
+        });
 
         [Fact]
         public void References_Versioning_FxUnification1()
@@ -669,9 +667,8 @@ c1 = c2;
                 var script = CSharpScript.Create("new S1()", options);
                 script.Compile();
 
-                Assert.Throws<TypeLoadException>(
-                    () => script.EvaluateAsync().GetAwaiter().GetResult()
-                );
+                Assert.Throws<TypeLoadException>(() =>
+                    script.EvaluateAsync().GetAwaiter().GetResult());
             }
             finally
             {

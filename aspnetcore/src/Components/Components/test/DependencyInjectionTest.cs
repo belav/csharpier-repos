@@ -45,12 +45,10 @@ public class DependencyInjectionTest
     [Fact]
     public void ThrowsForInjectablePropertiesWithoutSetter()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                InstantiateComponent<HasGetOnlyPropertyWithInject>();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            InstantiateComponent<HasGetOnlyPropertyWithInject>();
+        });
 
         Assert.Equal(
             $"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' "
@@ -63,12 +61,10 @@ public class DependencyInjectionTest
     [Fact]
     public void ThrowsIfNoSuchServiceIsRegistered()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                InstantiateComponent<HasInjectableProperty>();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            InstantiateComponent<HasInjectableProperty>();
+        });
 
         Assert.Equal(
             $"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' "

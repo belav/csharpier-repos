@@ -12,18 +12,16 @@ namespace Microsoft.Web.Helpers.Test
         [Fact]
         public void StartTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // Act
-                    AppDomainUtils.SetPreAppStartStage();
-                    PreApplicationStartCode.Start();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Act
+                AppDomainUtils.SetPreAppStartStage();
+                PreApplicationStartCode.Start();
 
-                    // Assert
-                    var imports = WebPageRazorHost.GetGlobalImports();
-                    Assert.Contains(imports, ns => ns.Equals("Microsoft.Web.Helpers"));
-                }
-            );
+                // Assert
+                var imports = WebPageRazorHost.GetGlobalImports();
+                Assert.Contains(imports, ns => ns.Equals("Microsoft.Web.Helpers"));
+            });
         }
 
         [Fact]

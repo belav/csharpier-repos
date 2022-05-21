@@ -19,30 +19,22 @@ namespace CoreXml.Test.XLinq
         public static void ArgumentValidation()
         {
             // Verify that ArgumentNullExceptions are thrown when passing null to LoadAsync and SaveAsync
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    XDocument.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new XDocument().SaveAsync((XmlWriter)null, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    XElement.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new XElement("Name").SaveAsync((XmlWriter)null, CancellationToken.None);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                XDocument.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new XDocument().SaveAsync((XmlWriter)null, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                XElement.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new XElement("Name").SaveAsync((XmlWriter)null, CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -50,94 +42,71 @@ namespace CoreXml.Test.XLinq
         {
             // Verify that providing an already canceled cancellation token will result in a canceled task
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    XDocument.LoadAsync(Stream.Null, LoadOptions.None, new CancellationToken(true))
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    XDocument.LoadAsync(
-                        StreamReader.Null,
-                        LoadOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    XDocument.LoadAsync(
-                        XmlReader.Create(Stream.Null),
-                        LoadOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XDocument.LoadAsync(Stream.Null, LoadOptions.None, new CancellationToken(true)));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XDocument.LoadAsync(
+                    StreamReader.Null,
+                    LoadOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XDocument.LoadAsync(
+                    XmlReader.Create(Stream.Null),
+                    LoadOptions.None,
+                    new CancellationToken(true)
+                ));
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XDocument().SaveAsync(
-                        Stream.Null,
-                        SaveOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XDocument().SaveAsync(
-                        StreamWriter.Null,
-                        SaveOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XDocument().SaveAsync(
-                        XmlWriter.Create(Stream.Null),
-                        new CancellationToken(true)
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XDocument().SaveAsync(
+                    Stream.Null,
+                    SaveOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XDocument().SaveAsync(
+                    StreamWriter.Null,
+                    SaveOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XDocument().SaveAsync(
+                    XmlWriter.Create(Stream.Null),
+                    new CancellationToken(true)
+                ));
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => XElement.LoadAsync(Stream.Null, LoadOptions.None, new CancellationToken(true))
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    XElement.LoadAsync(
-                        StreamReader.Null,
-                        LoadOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    XElement.LoadAsync(
-                        XmlReader.Create(Stream.Null),
-                        LoadOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XElement.LoadAsync(Stream.Null, LoadOptions.None, new CancellationToken(true)));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XElement.LoadAsync(
+                    StreamReader.Null,
+                    LoadOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                XElement.LoadAsync(
+                    XmlReader.Create(Stream.Null),
+                    LoadOptions.None,
+                    new CancellationToken(true)
+                ));
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XElement("Name").SaveAsync(
-                        Stream.Null,
-                        SaveOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XElement("Name").SaveAsync(
-                        StreamWriter.Null,
-                        SaveOptions.None,
-                        new CancellationToken(true)
-                    )
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    new XElement("Name").SaveAsync(
-                        XmlWriter.Create(Stream.Null),
-                        new CancellationToken(true)
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XElement("Name").SaveAsync(
+                    Stream.Null,
+                    SaveOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XElement("Name").SaveAsync(
+                    StreamWriter.Null,
+                    SaveOptions.None,
+                    new CancellationToken(true)
+                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                new XElement("Name").SaveAsync(
+                    XmlWriter.Create(Stream.Null),
+                    new CancellationToken(true)
+                ));
         }
 
         [Theory]

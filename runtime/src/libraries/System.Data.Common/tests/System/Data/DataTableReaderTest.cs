@@ -72,24 +72,22 @@ namespace System.Data.Tests
         [Fact]
         public void RowInAccessibleTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        reader.Read();
-                        reader.Read(); // 2nd row
-                        _dt.Rows[1].Delete();
-                        string value = reader[1].ToString();
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read();
+                    reader.Read(); // 2nd row
+                    _dt.Rows[1].Delete();
+                    string value = reader[1].ToString();
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
@@ -224,25 +222,23 @@ namespace System.Data.Tests
         [Fact]
         public void CloseTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        int i = 0;
-                        while (reader.Read() && i < 1)
-                            i++;
-                        reader.Close();
-                        reader.Read();
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    int i = 0;
+                    while (reader.Read() && i < 1)
+                        i++;
+                    reader.Close();
+                    reader.Read();
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
@@ -306,86 +302,78 @@ namespace System.Data.Tests
         [Fact]
         public void ReadAfterClosedTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        reader.Read();
-                        reader.Close();
-                        reader.Read();
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read();
+                    reader.Close();
+                    reader.Read();
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
         public void AccessAfterClosedTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        reader.Read();
-                        reader.Close();
-                        _ = (int)reader[0];
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read();
+                    reader.Close();
+                    _ = (int)reader[0];
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
         public void AccessBeforeReadTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        _ = (int)reader[0];
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    _ = (int)reader[0];
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
         public void InvalidIndexTest()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        reader.Read();
-                        _ = (int)reader[90]; // kidding, ;-)
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read();
+                    _ = (int)reader[90]; // kidding, ;-)
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
@@ -497,24 +485,22 @@ namespace System.Data.Tests
         [Fact]
         public void DeleteFirstCurrentAndAcceptChangesTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
                 {
-                    DataTableReader reader = new DataTableReader(_dt);
-                    try
-                    {
-                        reader.Read(); // first row
-                        _dt.Rows[0].Delete(); // delete row, where reader points to
-                        _dt.AcceptChanges(); // accept the action
-                        Assert.Equal(2, (int)reader[0]);
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read(); // first row
+                    _dt.Rows[0].Delete(); // delete row, where reader points to
+                    _dt.AcceptChanges(); // accept the action
+                    Assert.Equal(2, (int)reader[0]);
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]

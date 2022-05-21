@@ -231,9 +231,8 @@ namespace System.Text.Json.Serialization.Tests
                     IgnoreNullValues = ignoreNullValues,
                 };
 
-                JsonException ex = await Assert.ThrowsAsync<JsonException>(
-                    async () => await JsonSerializer.DeserializeAsync(stream, type, readOptions)
-                );
+                JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
+                    await JsonSerializer.DeserializeAsync(stream, type, readOptions));
                 Assert.Equal(expectedFailure.Line, ex.LineNumber);
                 Assert.Equal(expectedFailure.Column, ex.BytePositionInLine);
             }
@@ -314,13 +313,11 @@ namespace System.Text.Json.Serialization.Tests
                 chunk.Next.Memory.Length
             );
 
-            JsonException ex = Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(sequence);
-                    JsonSerializer.Deserialize(ref reader, type, readOptions);
-                }
-            );
+            JsonException ex = Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(sequence);
+                JsonSerializer.Deserialize(ref reader, type, readOptions);
+            });
             Assert.Equal(expectedFailure.Line, ex.LineNumber);
             Assert.Equal(expectedFailure.Column, ex.BytePositionInLine);
         }

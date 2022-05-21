@@ -136,9 +136,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
         )
         {
             var sourceName = IOUtilities.PerformIO(() => Path.GetFileName(sourceDocument.FilePath));
-            var destinationName = IOUtilities.PerformIO(
-                () => Path.GetFileName(destinationDocument.FilePath)
-            );
+            var destinationName = IOUtilities.PerformIO(() =>
+                Path.GetFileName(destinationDocument.FilePath));
             if (string.IsNullOrEmpty(sourceName) || string.IsNullOrEmpty(destinationName))
             {
                 return banner;

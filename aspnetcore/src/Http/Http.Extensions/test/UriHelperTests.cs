@@ -338,9 +338,8 @@ public class UriHelperTests
         var resPath = new PathString();
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
-        Assert.Throws<ArgumentNullException>(
-            () => UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment)
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment));
     }
 
     [Fact]
@@ -351,16 +350,14 @@ public class UriHelperTests
         var resPath = new PathString();
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                UriHelper.FromAbsolute(
-                    null,
-                    out resScheme,
-                    out resHost,
-                    out resPath,
-                    out resQuery,
-                    out resFragment
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            UriHelper.FromAbsolute(
+                null,
+                out resScheme,
+                out resHost,
+                out resPath,
+                out resQuery,
+                out resFragment
+            ));
     }
 }

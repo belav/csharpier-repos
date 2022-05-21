@@ -54,9 +54,8 @@ namespace System.IO.Pipelines.Tests
             await readerCompletedTask.Task;
 
             // Unable to read after disposing.
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await s.ReadAsync(new byte[1])
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await s.ReadAsync(new byte[1]));
 
             // Writes still work.
             await pipe.Writer.WriteAsync(new byte[1]);
@@ -160,9 +159,8 @@ namespace System.IO.Pipelines.Tests
 
             Stream stream = pipeReader.AsStream();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await stream.ReadAsync(new byte[5])
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await stream.ReadAsync(new byte[5]));
         }
 
         [Fact]
@@ -174,26 +172,20 @@ namespace System.IO.Pipelines.Tests
             Assert.False(stream.CanWrite);
             Assert.False(stream.CanSeek);
             Assert.True(stream.CanRead);
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long length = stream.Length;
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long position = stream.Position;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long length = stream.Length;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long position = stream.Position;
+            });
             Assert.Throws<NotSupportedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<NotSupportedException>(() => stream.Write(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => stream.WriteAsync(new byte[10], 0, 10)
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => stream.WriteAsync(new byte[10]).AsTask()
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.WriteAsync(new byte[10], 0, 10));
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.WriteAsync(new byte[10]).AsTask());
 
             pipe.Reader.Complete();
             pipe.Writer.Complete();
@@ -280,21 +272,19 @@ namespace System.IO.Pipelines.Tests
 
             int consumedSum = 0,
                 producedSum = 0;
-            Task consumer = Task.Run(
-                () =>
+            Task consumer = Task.Run(() =>
+            {
+                using (Stream reader = pipe.Reader.AsStream())
                 {
-                    using (Stream reader = pipe.Reader.AsStream())
+                    int b;
+                    while ((b = reader.ReadByte()) != -1)
                     {
-                        int b;
-                        while ((b = reader.ReadByte()) != -1)
-                        {
-                            consumedSum += b;
-                        }
-
-                        Assert.Equal(-1, reader.ReadByte());
+                        consumedSum += b;
                     }
+
+                    Assert.Equal(-1, reader.ReadByte());
                 }
-            );
+            });
 
             var rand = new Random();
             using (Stream writer = pipe.Writer.AsStream())

@@ -657,12 +657,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns<CancellationToken>(
                     token =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
+                        return Task.Run(() =>
+                        {
+                            token.WaitHandle.WaitOne();
+                        });
                     }
                 );
 
@@ -697,12 +695,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns<CancellationToken>(
                     token =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
+                        return Task.Run(() =>
+                        {
+                            token.WaitHandle.WaitOne();
+                        });
                     }
                 );
 
@@ -740,12 +736,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns<CancellationToken>(
                     token =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
+                        return Task.Run(() =>
+                        {
+                            token.WaitHandle.WaitOne();
+                        });
                     }
                 );
 
@@ -832,13 +826,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             lifetime.ApplicationStarted.Register(() => wasStartedCalled = true);
 
             var wasStoppingCalled = false;
-            lifetime.ApplicationStopping.Register(
-                () =>
-                {
-                    wasStoppingCalled = true;
-                    otherTcs.SetResult(true);
-                }
-            );
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                wasStoppingCalled = true;
+                otherTcs.SetResult(true);
+            });
 
             // Ensure all completions have been signaled before continuing
             await Task.WhenAll(host.StartAsync(), throwingTcs.Task, otherTcs.Task);
@@ -894,46 +886,37 @@ namespace Microsoft.Extensions.Hosting.Internal
                 var applicationStoppingCompletedBeforeApplicationStopped = false;
                 var applicationStoppedCompletedBeforeRunCompleted = false;
 
-                lifetime.ApplicationStarted.Register(
-                    () =>
-                    {
-                        applicationStartedEvent.Set();
-                    }
-                );
+                lifetime.ApplicationStarted.Register(() =>
+                {
+                    applicationStartedEvent.Set();
+                });
 
-                lifetime.ApplicationStopping.Register(
-                    () =>
-                    {
-                        // Check whether the applicationStartedEvent has been set
-                        applicationStartedCompletedBeforeApplicationStopping =
-                            applicationStartedEvent.IsSet;
+                lifetime.ApplicationStopping.Register(() =>
+                {
+                    // Check whether the applicationStartedEvent has been set
+                    applicationStartedCompletedBeforeApplicationStopping =
+                        applicationStartedEvent.IsSet;
 
-                        // Simulate work.
-                        Thread.Sleep(1000);
+                    // Simulate work.
+                    Thread.Sleep(1000);
 
-                        applicationStoppingEvent.Set();
-                    }
-                );
+                    applicationStoppingEvent.Set();
+                });
 
-                lifetime.ApplicationStopped.Register(
-                    () =>
-                    {
-                        // Check whether the applicationStoppingEvent has been set
-                        applicationStoppingCompletedBeforeApplicationStopped =
-                            applicationStoppingEvent.IsSet;
-                        applicationStoppedEvent.Set();
-                    }
-                );
+                lifetime.ApplicationStopped.Register(() =>
+                {
+                    // Check whether the applicationStoppingEvent has been set
+                    applicationStoppingCompletedBeforeApplicationStopped =
+                        applicationStoppingEvent.IsSet;
+                    applicationStoppedEvent.Set();
+                });
 
-                var runHostAndVerifyApplicationStopped = Task.Run(
-                    async () =>
-                    {
-                        await host.RunAsync();
-                        // Check whether the applicationStoppingEvent has been set
-                        applicationStoppedCompletedBeforeRunCompleted =
-                            applicationStoppedEvent.IsSet;
-                    }
-                );
+                var runHostAndVerifyApplicationStopped = Task.Run(async () =>
+                {
+                    await host.RunAsync();
+                    // Check whether the applicationStoppingEvent has been set
+                    applicationStoppedCompletedBeforeRunCompleted = applicationStoppedEvent.IsSet;
+                });
 
                 // Wait until application has started to shut down the host
                 Assert.True(applicationStartedEvent.Wait(5000));
@@ -1501,19 +1484,17 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             var hostApplicationLifetimeMock = new Mock<IHostApplicationLifetime>();
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    CreateBuilder()
-                        .ConfigureServices(
-                            (hostContext, services) =>
-                            {
-                                services.AddSingleton(hostApplicationLifetimeMock.Object);
-                            }
-                        )
-                        .Build();
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                CreateBuilder()
+                    .ConfigureServices(
+                        (hostContext, services) =>
+                        {
+                            services.AddSingleton(hostApplicationLifetimeMock.Object);
+                        }
+                    )
+                    .Build();
+            });
         }
 
         /// <summary>

@@ -175,15 +175,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentNullException>(() => new SignedCms(null, false));
             Assert.Throws<ArgumentNullException>(() => new SignedCms(null, true));
 
-            Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, false));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SignedCms(SubjectIdentifierType.SubjectKeyIdentifier, null, true));
         }
 
         [Fact]
@@ -440,9 +437,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            Assert.Throws<InvalidOperationException>(
-                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: true)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                cms.ComputeSignature(new CmsSigner(identifierType), silent: true));
         }
 
         [Theory]
@@ -460,9 +456,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = new ContentInfo(new byte[] { 9, 8, 7, 6, 5 });
             SignedCms cms = new SignedCms(contentInfo, detached);
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => cms.ComputeSignature(new CmsSigner(identifierType), silent: false)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                cms.ComputeSignature(new CmsSigner(identifierType), silent: false));
         }
 
         [Theory]
@@ -828,15 +823,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
                 );
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        cms.ComputeSignature(
-                            new CmsSigner(SubjectIdentifierType.NoSignature)
-                            {
-                                IncludeOption = X509IncludeOption.None,
-                            }
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    cms.ComputeSignature(
+                        new CmsSigner(SubjectIdentifierType.NoSignature)
+                        {
+                            IncludeOption = X509IncludeOption.None,
+                        }
+                    ));
             }
 
             Assert.Equal(1, cms.SignerInfos.Count);
@@ -861,30 +854,26 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
                 );
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        cms.ComputeSignature(
-                            new CmsSigner(SubjectIdentifierType.NoSignature)
-                            {
-                                IncludeOption = X509IncludeOption.None,
-                            }
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    cms.ComputeSignature(
+                        new CmsSigner(SubjectIdentifierType.NoSignature)
+                        {
+                            IncludeOption = X509IncludeOption.None,
+                        }
+                    ));
 
                 cms.RemoveSignature(0);
 
                 // Because the document was already initialized (when initially signed),
                 // the "NoSignature must be the first signer" exception is thrown, even
                 // though there are no signers.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        cms.ComputeSignature(
-                            new CmsSigner(SubjectIdentifierType.NoSignature)
-                            {
-                                IncludeOption = X509IncludeOption.None,
-                            }
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    cms.ComputeSignature(
+                        new CmsSigner(SubjectIdentifierType.NoSignature)
+                        {
+                            IncludeOption = X509IncludeOption.None,
+                        }
+                    ));
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);
@@ -907,15 +896,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
                 );
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        cms.ComputeSignature(
-                            new CmsSigner(SubjectIdentifierType.NoSignature)
-                            {
-                                IncludeOption = X509IncludeOption.None,
-                            }
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    cms.ComputeSignature(
+                        new CmsSigner(SubjectIdentifierType.NoSignature)
+                        {
+                            IncludeOption = X509IncludeOption.None,
+                        }
+                    ));
 
                 cms.RemoveSignature(0);
 
@@ -936,15 +923,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 // Because the document was already initialized (when loaded),
                 // the "NoSignature must be the first signer" exception is thrown, even
                 // though there are no signers.
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        cms.ComputeSignature(
-                            new CmsSigner(SubjectIdentifierType.NoSignature)
-                            {
-                                IncludeOption = X509IncludeOption.None,
-                            }
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    cms.ComputeSignature(
+                        new CmsSigner(SubjectIdentifierType.NoSignature)
+                        {
+                            IncludeOption = X509IncludeOption.None,
+                        }
+                    ));
             }
 
             Assert.Equal(0, cms.SignerInfos.Count);
@@ -1499,12 +1484,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms signedCms = new SignedCms();
             signedCms.Decode(SignedDocuments.RsaPkcs1SignedSha1DeclaredSha256WithRsa);
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                {
-                    signedCms.CheckSignature(true);
-                }
-            );
+            Assert.Throws<CryptographicException>(() =>
+            {
+                signedCms.CheckSignature(true);
+            });
         }
 
         [Theory]

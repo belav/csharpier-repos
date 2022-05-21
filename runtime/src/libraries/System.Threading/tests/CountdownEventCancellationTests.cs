@@ -33,12 +33,10 @@ namespace System.Threading.Tests
 
             CountdownEvent countdownEvent = new CountdownEvent(2); // countdownEvent that will block all waiters
 
-            Task.Run(
-                () =>
-                {
-                    cancellationTokenSource.Cancel();
-                }
-            );
+            Task.Run(() =>
+            {
+                cancellationTokenSource.Cancel();
+            });
 
             //Now wait.. the wait should abort and an exception should be thrown
             EnsureOperationCanceledExceptionThrown(

@@ -153,9 +153,8 @@ namespace System.Text.Json.Serialization.Tests
             // - Path does not flow through to custom converters that re-enter the serializer.
             // - "Path:" is not repeated due to having two try\catch blocks (the second block does not append "Path:" again).
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options)
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<TopLevelPocoWithNoConverter>(Json, options));
             Assert.Contains(typeof(int[,]).ToString(), ex.ToString());
             Assert.Contains(
                 typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(),
@@ -184,9 +183,8 @@ namespace System.Text.Json.Serialization.Tests
                 }
             };
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Serialize(poco, options)
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(poco, options));
             Assert.Contains(typeof(int[,]).ToString(), ex.ToString());
             Assert.Contains(
                 typeof(ChildPocoWithNoConverterAndInvalidProperty).ToString(),

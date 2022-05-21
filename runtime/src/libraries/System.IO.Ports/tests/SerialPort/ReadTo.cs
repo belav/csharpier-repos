@@ -578,12 +578,10 @@ namespace System.IO.Ports.Tests
                 if (!com2.IsOpen) //This is necessary since com1 and com2 might be the same port if we are using a loopback
                     com2.Open();
 
-                Task writeToCom2Task = Task.Run(
-                    () =>
-                    {
-                        com1.Write(buffer, 0, bufferSize);
-                    }
-                );
+                Task writeToCom2Task = Task.Run(() =>
+                {
+                    com1.Write(buffer, 0, bufferSize);
+                });
 
                 Assert.Throws<TimeoutException>(() => com2.ReadTo(endString));
                 writeToCom2Task.Wait();

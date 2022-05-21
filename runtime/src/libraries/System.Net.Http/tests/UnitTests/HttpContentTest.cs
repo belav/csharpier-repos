@@ -31,12 +31,10 @@ namespace System.Net.Http.Tests
             content.Dispose();
 
             // The following line will throw an ObjectDisposedException if the buffered-stream was correctly disposed.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    string str = bufferedContentStream.Length.ToString();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string str = bufferedContentStream.Length.ToString();
+            });
         }
 
         [Theory]

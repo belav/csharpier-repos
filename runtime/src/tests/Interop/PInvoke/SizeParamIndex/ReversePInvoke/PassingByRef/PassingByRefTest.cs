@@ -301,14 +301,12 @@ public class ReversePInvoke_MashalArrayByRef_AsManagedTest
             Console.WriteLine(
                 "\tScenario 3 : short ==> SHORT, Array_Size = -1, Return_Array_Size = 20"
             );
-            Assert.Throws<OverflowException>(
-                () =>
-                    DoCallBack_MarshalShortArray_AsParam_AsByRef(
-                        new DelShortArrByRefAsCdeclCaller(
-                            TestMethodForShortArray_AsReversePInvokeByRef_AsCdecl
-                        )
+            Assert.Throws<OverflowException>(() =>
+                DoCallBack_MarshalShortArray_AsParam_AsByRef(
+                    new DelShortArrByRefAsCdeclCaller(
+                        TestMethodForShortArray_AsReversePInvokeByRef_AsCdecl
                     )
-            );
+                ));
             Console.WriteLine("\t\tMarshalShortArray_AsReversePInvokeByRef_AsCdecl Passed!");
         }
 

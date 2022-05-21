@@ -18,13 +18,11 @@ namespace System.Net.Http.Functional.Tests
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Task GetAndDropResponse(HttpClient client, Uri url)
         {
-            return Task.Run(
-                async () =>
-                {
-                    // Get the response stream, but don't dispose it or return it. Just drop it.
-                    await client.GetStreamAsync(url);
-                }
-            );
+            return Task.Run(async () =>
+            {
+                // Get the response stream, but don't dispose it or return it. Just drop it.
+                await client.GetStreamAsync(url);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]

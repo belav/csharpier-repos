@@ -26,9 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
                 (
-                    await Assert.ThrowsAsync<NotSupportedException>(
-                        async () => await transactionManager.BeginTransactionAsync()
-                    )
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await transactionManager.BeginTransactionAsync())
                 ).Message
             );
 
@@ -42,9 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
                 (
-                    await Assert.ThrowsAsync<NotSupportedException>(
-                        async () => await transactionManager.CommitTransactionAsync()
-                    )
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await transactionManager.CommitTransactionAsync())
                 ).Message
             );
 
@@ -58,9 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
                 (
-                    await Assert.ThrowsAsync<NotSupportedException>(
-                        async () => await transactionManager.RollbackTransactionAsync()
-                    )
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await transactionManager.RollbackTransactionAsync())
                 ).Message
             );
 

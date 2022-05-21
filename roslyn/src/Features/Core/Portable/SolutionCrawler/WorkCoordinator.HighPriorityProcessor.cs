@@ -73,9 +73,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         lock (_gate)
                         {
                             var analyzers = _lazyAnalyzers.Value;
-                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
-                                () => analyzers.Add(analyzer)
-                            );
+                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() =>
+                                analyzers.Add(analyzer));
                         }
                     }
 

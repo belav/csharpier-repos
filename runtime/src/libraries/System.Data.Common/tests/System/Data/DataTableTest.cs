@@ -770,9 +770,8 @@ Assert.False(true);
             dt2.Columns.Add();
 
             // PrimaryKey columns do not belong to this table.
-            Assert.Throws<ArgumentException>(
-                () => dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] }
-            );
+            Assert.Throws<ArgumentException>(() =>
+                dt.PrimaryKey = new DataColumn[] { dt2.Columns[0] });
 
             Assert.Equal(0, dt.Constraints.Count);
 
@@ -818,27 +817,23 @@ Assert.False(true);
             DataRelation dr = new DataRelation("DR", table.Columns[0], table1.Columns[0]);
             set.Relations.Add(dr);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // Set to a different sensitivity than before: this breaks the DataRelation constraint
-                    // because it is not the sensitivity of the related table
-                    table.CaseSensitive = true;
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // Set to a different sensitivity than before: this breaks the DataRelation constraint
+                // because it is not the sensitivity of the related table
+                table.CaseSensitive = true;
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // Set to a different culture than before: this breaks the DataRelation constraint
-                    // because it is not the locale of the related table
-                    CultureInfo cultureInfo =
-                        table.Locale.Name == "en-US"
-                            ? new CultureInfo("en-GB")
-                            : new CultureInfo("en-US");
-                    table.Locale = cultureInfo;
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // Set to a different culture than before: this breaks the DataRelation constraint
+                // because it is not the locale of the related table
+                CultureInfo cultureInfo =
+                    table.Locale.Name == "en-US"
+                        ? new CultureInfo("en-GB")
+                        : new CultureInfo("en-US");
+                table.Locale = cultureInfo;
+            });
 
             Assert.Throws<DataException>(() => table.Prefix = "Prefix#1");
         }
@@ -1016,12 +1011,10 @@ Assert.False(true);
         {
             DataTable table1 = new DataTable("Table1");
 
-            Assert.Throws<EvaluateException>(
-                () =>
-                {
-                    DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
-                }
-            );
+            Assert.Throws<EvaluateException>(() =>
+            {
+                DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
+            });
         }
 
         [Fact]
@@ -1151,9 +1144,8 @@ Assert.False(true);
             target.ImportRow(src.Rows[3]); // import 4th row
 
             // import 3rd row again
-            ConstraintException ex = Assert.Throws<ConstraintException>(
-                () => target.ImportRow(src.Rows[2])
-            );
+            ConstraintException ex = Assert.Throws<ConstraintException>(() =>
+                target.ImportRow(src.Rows[2]));
             // Column 'id' is constrained to be unique.
             // Value '3' is already present
             Assert.Null(ex.InnerException);
@@ -1279,9 +1271,8 @@ Assert.False(true);
             Assert.Equal(2, table.Rows.Count);
             Assert.Equal(DataRowState.Deleted, table.Rows[1].RowState);
 
-            ConstraintException ex = Assert.Throws<ConstraintException>(
-                () => table.RejectChanges()
-            );
+            ConstraintException ex = Assert.Throws<ConstraintException>(() =>
+                table.RejectChanges());
             // Column 'col' is constrained to be unique.
             // Value '1' is already present
             Assert.Null(ex.InnerException);
@@ -1722,9 +1713,8 @@ Assert.False(true);
             dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
             dt.Rows.Add(new object[] { 1, 3 });
 
-            Assert.Throws<NoNullAllowedException>(
-                () => dt.Rows.Add(new object[] { DBNull.Value, 3 })
-            );
+            Assert.Throws<NoNullAllowedException>(() =>
+                dt.Rows.Add(new object[] { DBNull.Value, 3 }));
         }
 
         [Fact]
@@ -2091,9 +2081,8 @@ Assert.False(true);
             DataTable dtLoad = new DataTable("LoadIncompatible");
             dtLoad.Columns.Add("name", typeof(double));
             DataTableReader dtr = _dt.CreateDataReader();
-            Assert.Throws<ArgumentException>(
-                () => dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                dtLoad.Load(dtr, LoadOption.PreserveChanges, FillErrorHandler));
         }
 
         [Fact]
@@ -2357,9 +2346,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[2][1, DataRowVersion.Current]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[2][1, DataRowVersion.Current]);
         }
 
         [Fact]
@@ -2419,9 +2407,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.PreserveChanges);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[2][1, DataRowVersion.Current]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[2][1, DataRowVersion.Current]);
         }
 
         [Fact]
@@ -2585,9 +2572,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[2][1, DataRowVersion.Current]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[2][1, DataRowVersion.Current]);
         }
 
         [Fact]
@@ -2606,9 +2592,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[3][1, DataRowVersion.Original]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[3][1, DataRowVersion.Original]);
         }
 
         [Fact]
@@ -2631,9 +2616,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[3][1, DataRowVersion.Original]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[3][1, DataRowVersion.Original]);
         }
 
         [Fact]
@@ -2652,9 +2636,8 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             dtLoad.Load(dtr, LoadOption.Upsert);
 
-            Assert.Throws<VersionNotFoundException>(
-                () => dtLoad.Rows[3][1, DataRowVersion.Original]
-            );
+            Assert.Throws<VersionNotFoundException>(() =>
+                dtLoad.Rows[3][1, DataRowVersion.Original]);
         }
 
         [Fact]

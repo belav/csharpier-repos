@@ -46,9 +46,8 @@ namespace System.Net.Http
             new StringWithQualityHeaderValue("gzip");
         private static readonly StringWithQualityHeaderValue s_deflateHeaderValue =
             new StringWithQualityHeaderValue("deflate");
-        private static readonly Lazy<bool> s_supportsTls13 = new Lazy<bool>(
-            () => CheckTls13Support()
-        );
+        private static readonly Lazy<bool> s_supportsTls13 = new Lazy<bool>(() =>
+            CheckTls13Support());
 
         [ThreadStatic]
         private static StringBuilder? t_requestHeadersBuilder;

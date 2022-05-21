@@ -285,9 +285,8 @@ namespace Microsoft.EntityFrameworkCore
                     loggerFactory.CreateLogger("MyLogger");
                 }
 
-                Assert.Throws<ObjectDisposedException>(
-                    () => loggerFactory.CreateLogger("MyLogger")
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    loggerFactory.CreateLogger("MyLogger"));
             }
         }
 
@@ -2084,22 +2083,18 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(ConstructorTestContextWithOC1A)),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ => { })
-                    )
+                    .Throws<ArgumentException>(() =>
+                        serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(_ => { }))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(ConstructorTestContextWithOC1A)),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(
-                                (_, __) => { }
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        serviceCollection.AddDbContext<ConstructorTestContextWithOC1A>(
+                            (_, __) => { }
+                        ))
                     .Message
             );
         }
@@ -2885,9 +2880,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoEfServices,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => new ConstructorTestContextWithSets(options)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        new ConstructorTestContextWithSets(options))
                     .Message
             );
         }
@@ -2907,10 +2901,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoEfServices,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            serviceScope.ServiceProvider.GetService<ConstructorTestContextWithSets>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithSets>())
                     .Message
             );
         }
@@ -2945,9 +2937,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoEfServices,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>())
                     .Message
             );
         }
@@ -3452,9 +3443,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => new ConstructorTestContextWithOC3A(options)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        new ConstructorTestContextWithOC3A(options))
                     .Message
             );
         }
@@ -3482,10 +3472,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
                     .Message
             );
         }
@@ -3539,9 +3527,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(ILoggerFactory)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => new ConstructorTestContextWithOC3A(options)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        new ConstructorTestContextWithOC3A(options))
                     .Message
             );
         }
@@ -3569,10 +3556,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(ILoggerFactory)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
                     .Message
             );
         }
@@ -3626,9 +3611,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(IMemoryCache)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => new ConstructorTestContextWithOC3A(options)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        new ConstructorTestContextWithOC3A(options))
                     .Message
             );
         }
@@ -3656,10 +3640,8 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(IMemoryCache)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContextWithOC3A>())
                     .Message
             );
         }
@@ -4188,13 +4170,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NonGenericOptions(nameof(NonGenericOptions2)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            serviceScope.ServiceProvider.GetService<NonGenericOptions1>();
-                            serviceScope.ServiceProvider.GetService<NonGenericOptions2>();
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        serviceScope.ServiceProvider.GetService<NonGenericOptions1>();
+                        serviceScope.ServiceProvider.GetService<NonGenericOptions2>();
+                    })
                     .Message
             );
         }

@@ -229,9 +229,8 @@ namespace System.Web.Http.Cors
             request.SetRouteData(route.GetRouteData("/", request));
 
             Assert.True(request.GetCorsRequestContext().IsPreflight);
-            Assert.Throws<HttpResponseException>(
-                () => providerFactory.GetCorsPolicyProvider(request)
-            );
+            Assert.Throws<HttpResponseException>(() =>
+                providerFactory.GetCorsPolicyProvider(request));
         }
 
         [Fact]

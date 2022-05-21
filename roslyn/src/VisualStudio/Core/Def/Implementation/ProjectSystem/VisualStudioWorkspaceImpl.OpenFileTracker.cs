@@ -499,14 +499,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         nameof(QueueCheckForFilesBeingOpen)
                     );
 
-                    Task.Run(
-                            async () =>
-                            {
-                                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    Task.Run(async () =>
+                        {
+                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                                ProcessQueuedWorkOnUIThread();
-                            }
-                        )
+                            ProcessQueuedWorkOnUIThread();
+                        })
                         .CompletesAsyncOperation(asyncToken);
                 }
             }

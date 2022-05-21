@@ -1742,9 +1742,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json =
                 @"{""Before"":""Before!"",""Coordinates"":[/*hi*/[/*hi*/[1/*hi*/,/*hi*/1/*hi*/,1]/*hi*/,/*hi*/[1,1";
 
-            ExceptionAssert.Throws<JsonException>(
-                () => JsonConvert.DeserializeObject<Array3D>(json)
-            );
+            ExceptionAssert.Throws<JsonException>(() =>
+                JsonConvert.DeserializeObject<Array3D>(json));
         }
 
         [Test]
@@ -1752,9 +1751,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json = @"{""Before"":""Before!"",""Coordinates"":[/*hi*/[/*hi*/";
 
-            ExceptionAssert.Throws<JsonException>(
-                () => JsonConvert.DeserializeObject<Array3D>(json)
-            );
+            ExceptionAssert.Throws<JsonException>(() =>
+                JsonConvert.DeserializeObject<Array3D>(json));
         }
 
         [Test]

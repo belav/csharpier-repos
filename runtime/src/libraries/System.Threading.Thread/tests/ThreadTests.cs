@@ -83,9 +83,8 @@ namespace System.Threading.Threads.Tests
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null));
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null, 0));
             Assert.Throws<ArgumentNullException>(() => new Thread((ParameterizedThreadStart)null));
-            Assert.Throws<ArgumentNullException>(
-                () => new Thread((ParameterizedThreadStart)null, 0)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new Thread((ParameterizedThreadStart)null, 0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(() => { }, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(state => { }, -1));
@@ -222,17 +221,15 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Windows()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
-                        AssertExtensions.ThrowsContains<InvalidOperationException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA),
-                            "MTA"
-                        );
-                        Thread.CurrentThread.SetApartmentState(ApartmentState.MTA);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
+                    AssertExtensions.ThrowsContains<InvalidOperationException>(
+                        () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA),
+                        "MTA"
+                    );
+                    Thread.CurrentThread.SetApartmentState(ApartmentState.MTA);
+                })
                 .Dispose();
         }
 
@@ -241,18 +238,12 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Unix()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Equal(
-                            ApartmentState.Unknown,
-                            Thread.CurrentThread.GetApartmentState()
-                        );
-                        Assert.Throws<PlatformNotSupportedException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.MTA)
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Equal(ApartmentState.Unknown, Thread.CurrentThread.GetApartmentState());
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.MTA));
+                })
                 .Dispose();
         }
 
@@ -264,15 +255,12 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_DefaultState_Nano()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Throws<InvalidOperationException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
-                        );
-                        Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Throws<InvalidOperationException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.STA));
+                    Assert.Equal(ApartmentState.MTA, Thread.CurrentThread.GetApartmentState());
+                })
                 .Dispose();
         }
 
@@ -281,14 +269,11 @@ namespace System.Threading.Threads.Tests
         public static void ApartmentState_NoAttributePresent_STA_Unix()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Throws<PlatformNotSupportedException>(
-                            () => Thread.CurrentThread.SetApartmentState(ApartmentState.STA)
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        Thread.CurrentThread.SetApartmentState(ApartmentState.STA));
+                })
                 .Dispose();
         }
 
@@ -307,20 +292,18 @@ namespace System.Threading.Threads.Tests
             int setType /* 0 = ApartmentState setter, 1 = SetApartmentState, 2 = TrySetApartmentState */
         )
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    var t = Thread.CurrentThread;
-                    Assert.Equal(1, setApartmentState(t, ApartmentState.STA - 1));
-                    Assert.Equal(1, setApartmentState(t, ApartmentState.Unknown + 1));
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                var t = Thread.CurrentThread;
+                Assert.Equal(1, setApartmentState(t, ApartmentState.STA - 1));
+                Assert.Equal(1, setApartmentState(t, ApartmentState.Unknown + 1));
 
-                    Assert.Equal(ApartmentState.MTA, getApartmentState(t));
-                    Assert.Equal(0, setApartmentState(t, ApartmentState.MTA));
-                    Assert.Equal(ApartmentState.MTA, getApartmentState(t));
-                    Assert.Equal(setType == 0 ? 0 : 2, setApartmentState(t, ApartmentState.STA)); // cannot be changed after thread is started
-                    Assert.Equal(ApartmentState.MTA, getApartmentState(t));
-                }
-            );
+                Assert.Equal(ApartmentState.MTA, getApartmentState(t));
+                Assert.Equal(0, setApartmentState(t, ApartmentState.MTA));
+                Assert.Equal(ApartmentState.MTA, getApartmentState(t));
+                Assert.Equal(setType == 0 ? 0 : 2, setApartmentState(t, ApartmentState.STA)); // cannot be changed after thread is started
+                Assert.Equal(ApartmentState.MTA, getApartmentState(t));
+            });
         }
 
         [ConditionalTheory(
@@ -415,20 +398,18 @@ namespace System.Threading.Threads.Tests
             CultureInfo uiCulture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
 
             ExceptionDispatchInfo exceptionFromThread = null;
-            var t = new Thread(
-                () =>
+            var t = new Thread(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        Assert.Same(culture, Thread.CurrentThread.CurrentCulture);
-                        Assert.Same(uiCulture, Thread.CurrentThread.CurrentUICulture);
-                    }
-                    catch (Exception e)
-                    {
-                        exceptionFromThread = ExceptionDispatchInfo.Capture(e);
-                    }
+                    Assert.Same(culture, Thread.CurrentThread.CurrentCulture);
+                    Assert.Same(uiCulture, Thread.CurrentThread.CurrentUICulture);
                 }
-            );
+                catch (Exception e)
+                {
+                    exceptionFromThread = ExceptionDispatchInfo.Capture(e);
+                }
+            });
 
             // We allow setting thread culture of unstarted threads to ease .NET Framework migration. It is pattern used
             // in real world .NET Framework apps.
@@ -442,18 +423,14 @@ namespace System.Threading.Threads.Tests
             t.Start();
             // Cannot access culture properties on a thread object from a different thread once the thread is started
             // .NET Framework allowed this, but it did not work reliably. .NET Core throws instead.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    t.CurrentCulture = culture;
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    t.CurrentUICulture = uiCulture;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                t.CurrentCulture = culture;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                t.CurrentUICulture = uiCulture;
+            });
             Assert.Throws<InvalidOperationException>(() => t.CurrentCulture);
             Assert.Throws<InvalidOperationException>(() => t.CurrentUICulture);
             t.Join();
@@ -464,45 +441,43 @@ namespace System.Threading.Threads.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void CurrentCultureTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    var t = Thread.CurrentThread;
-                    var originalCulture = CultureInfo.CurrentCulture;
-                    var originalUICulture = CultureInfo.CurrentUICulture;
-                    var otherCulture = CultureInfo.InvariantCulture;
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                var t = Thread.CurrentThread;
+                var originalCulture = CultureInfo.CurrentCulture;
+                var originalUICulture = CultureInfo.CurrentUICulture;
+                var otherCulture = CultureInfo.InvariantCulture;
 
-                    // Culture properties return the same value as those on CultureInfo
+                // Culture properties return the same value as those on CultureInfo
+                Assert.Equal(originalCulture, t.CurrentCulture);
+                Assert.Equal(originalUICulture, t.CurrentUICulture);
+
+                try
+                {
+                    // Changing culture properties on CultureInfo causes the values of properties on the current thread to change
+                    CultureInfo.CurrentCulture = otherCulture;
+                    CultureInfo.CurrentUICulture = otherCulture;
+                    Assert.Equal(otherCulture, t.CurrentCulture);
+                    Assert.Equal(otherCulture, t.CurrentUICulture);
+
+                    // Changing culture properties on the current thread causes new values to be returned, and causes the values of
+                    // properties on CultureInfo to change
+                    t.CurrentCulture = originalCulture;
+                    t.CurrentUICulture = originalUICulture;
                     Assert.Equal(originalCulture, t.CurrentCulture);
                     Assert.Equal(originalUICulture, t.CurrentUICulture);
-
-                    try
-                    {
-                        // Changing culture properties on CultureInfo causes the values of properties on the current thread to change
-                        CultureInfo.CurrentCulture = otherCulture;
-                        CultureInfo.CurrentUICulture = otherCulture;
-                        Assert.Equal(otherCulture, t.CurrentCulture);
-                        Assert.Equal(otherCulture, t.CurrentUICulture);
-
-                        // Changing culture properties on the current thread causes new values to be returned, and causes the values of
-                        // properties on CultureInfo to change
-                        t.CurrentCulture = originalCulture;
-                        t.CurrentUICulture = originalUICulture;
-                        Assert.Equal(originalCulture, t.CurrentCulture);
-                        Assert.Equal(originalUICulture, t.CurrentUICulture);
-                        Assert.Equal(originalCulture, CultureInfo.CurrentCulture);
-                        Assert.Equal(originalUICulture, CultureInfo.CurrentUICulture);
-                    }
-                    finally
-                    {
-                        CultureInfo.CurrentCulture = originalCulture;
-                        CultureInfo.CurrentUICulture = originalUICulture;
-                    }
-
-                    Assert.Throws<ArgumentNullException>(() => t.CurrentCulture = null);
-                    Assert.Throws<ArgumentNullException>(() => t.CurrentUICulture = null);
+                    Assert.Equal(originalCulture, CultureInfo.CurrentCulture);
+                    Assert.Equal(originalUICulture, CultureInfo.CurrentUICulture);
                 }
-            );
+                finally
+                {
+                    CultureInfo.CurrentCulture = originalCulture;
+                    CultureInfo.CurrentUICulture = originalUICulture;
+                }
+
+                Assert.Throws<ArgumentNullException>(() => t.CurrentCulture = null);
+                Assert.Throws<ArgumentNullException>(() => t.CurrentUICulture = null);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -514,96 +489,80 @@ namespace System.Threading.Threads.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void CurrentPrincipalTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    var originalPrincipal = Thread.CurrentPrincipal;
-                    var otherPrincipal = new GenericPrincipal(
-                        new GenericIdentity(string.Empty, string.Empty),
-                        new string[] { string.Empty }
-                    );
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                var originalPrincipal = Thread.CurrentPrincipal;
+                var otherPrincipal = new GenericPrincipal(
+                    new GenericIdentity(string.Empty, string.Empty),
+                    new string[] { string.Empty }
+                );
 
-                    Thread.CurrentPrincipal = otherPrincipal;
-                    Assert.Equal(otherPrincipal, Thread.CurrentPrincipal);
+                Thread.CurrentPrincipal = otherPrincipal;
+                Assert.Equal(otherPrincipal, Thread.CurrentPrincipal);
 
-                    Thread.CurrentPrincipal = originalPrincipal;
-                    Assert.Equal(originalPrincipal, Thread.CurrentPrincipal);
-                }
-            );
+                Thread.CurrentPrincipal = originalPrincipal;
+                Assert.Equal(originalPrincipal, Thread.CurrentPrincipal);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void CurrentPrincipalContextFlowTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                async () =>
+            ThreadTestHelpers.RunTestInBackgroundThread(async () =>
+            {
+                Thread.CurrentPrincipal = new ClaimsPrincipal();
+
+                await Task.Run(async () =>
                 {
-                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
 
-                    await Task.Run(
-                        async () =>
+                    await Task.Run(async () =>
+                    {
+                        Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+
+                        Thread.CurrentPrincipal = new GenericPrincipal(
+                            new GenericIdentity("name"),
+                            new string[0]
+                        );
+
+                        await Task.Run(() =>
                         {
-                            Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+                            Assert.IsType<GenericPrincipal>(Thread.CurrentPrincipal);
+                        });
 
-                            await Task.Run(
-                                async () =>
-                                {
-                                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
-
-                                    Thread.CurrentPrincipal = new GenericPrincipal(
-                                        new GenericIdentity("name"),
-                                        new string[0]
-                                    );
-
-                                    await Task.Run(
-                                        () =>
-                                        {
-                                            Assert.IsType<GenericPrincipal>(
-                                                Thread.CurrentPrincipal
-                                            );
-                                        }
-                                    );
-
-                                    Assert.IsType<GenericPrincipal>(Thread.CurrentPrincipal);
-                                }
-                            );
-
-                            Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
-                        }
-                    );
+                        Assert.IsType<GenericPrincipal>(Thread.CurrentPrincipal);
+                    });
 
                     Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
-                }
-            );
+                });
+
+                Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void CurrentPrincipalContextFlowTest_NotFlow()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                async () =>
+            ThreadTestHelpers.RunTestInBackgroundThread(async () =>
+            {
+                Thread.CurrentPrincipal = new ClaimsPrincipal();
+
+                Task task;
+                using (ExecutionContext.SuppressFlow())
                 {
-                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.True(ExecutionContext.IsFlowSuppressed());
 
-                    Task task;
-                    using (ExecutionContext.SuppressFlow())
+                    task = Task.Run(() =>
                     {
-                        Assert.True(ExecutionContext.IsFlowSuppressed());
-
-                        task = Task.Run(
-                            () =>
-                            {
-                                Assert.Null(Thread.CurrentPrincipal);
-                                Assert.False(ExecutionContext.IsFlowSuppressed());
-                            }
-                        );
-                    }
-
-                    Assert.False(ExecutionContext.IsFlowSuppressed());
-
-                    await task;
+                        Assert.Null(Thread.CurrentPrincipal);
+                        Assert.False(ExecutionContext.IsFlowSuppressed());
+                    });
                 }
-            );
+
+                Assert.False(ExecutionContext.IsFlowSuppressed());
+
+                await task;
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -612,26 +571,24 @@ namespace System.Threading.Threads.Tests
             // We run test on remote process because we need to set same principal policy
             // On .NET Framework default principal policy is PrincipalPolicy.UnauthenticatedPrincipal
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = null;
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = new ClaimsPrincipal();
-                        Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = null;
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Thread.CurrentPrincipal = null;
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        Thread.CurrentPrincipal = new ClaimsPrincipal();
-                        Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
-                    }
-                )
+                    Thread.CurrentPrincipal = new ClaimsPrincipal();
+                    Assert.IsType<ClaimsPrincipal>(Thread.CurrentPrincipal);
+                })
                 .Dispose();
         }
 
@@ -654,10 +611,8 @@ namespace System.Threading.Threads.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ExecutionContextTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                    Assert.Equal(ExecutionContext.Capture(), Thread.CurrentThread.ExecutionContext)
-            );
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+                Assert.Equal(ExecutionContext.Capture(), Thread.CurrentThread.ExecutionContext));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -701,12 +656,10 @@ namespace System.Threading.Threads.Tests
         {
             var isThreadPoolThread = false;
             Thread t = null;
-            t = new Thread(
-                () =>
-                {
-                    isThreadPoolThread = t.IsThreadPoolThread;
-                }
-            );
+            t = new Thread(() =>
+            {
+                isThreadPoolThread = t.IsThreadPoolThread;
+            });
             t.IsBackground = true;
             Assert.False(t.IsThreadPoolThread);
 
@@ -769,21 +722,19 @@ namespace System.Threading.Threads.Tests
             t.Start();
             waitForThread();
 
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    var ct = Thread.CurrentThread;
-                    Assert.Null(ct.Name);
-                    ct.Name = name;
-                    Assert.Equal(name, ct.Name);
-                    ct.Name = name + "xyz";
-                    Assert.Equal(name + "xyz", ct.Name);
-                    ct.Name = null;
-                    Assert.Null(ct.Name);
-                    ct.Name = name;
-                    Assert.Equal(name, ct.Name);
-                }
-            );
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                var ct = Thread.CurrentThread;
+                Assert.Null(ct.Name);
+                ct.Name = name;
+                Assert.Equal(name, ct.Name);
+                ct.Name = name + "xyz";
+                Assert.Equal(name + "xyz", ct.Name);
+                ct.Name = null;
+                Assert.Null(ct.Name);
+                ct.Name = name;
+                Assert.Equal(name, ct.Name);
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -792,15 +743,13 @@ namespace System.Threading.Threads.Tests
             // On Linux, changing the main thread name affects ProcessName.
             // To avoid that, .NET ignores requests to change the main thread name.
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        const string ThreadName = "my-thread";
-                        Thread.CurrentThread.Name = ThreadName;
-                        Assert.Equal(ThreadName, Thread.CurrentThread.Name);
-                        Assert.NotEqual(ThreadName, Process.GetCurrentProcess().ProcessName);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    const string ThreadName = "my-thread";
+                    Thread.CurrentThread.Name = ThreadName;
+                    Assert.Equal(ThreadName, Thread.CurrentThread.Name);
+                    Assert.NotEqual(ThreadName, Process.GetCurrentProcess().ProcessName);
+                })
                 .Dispose();
         }
 
@@ -841,14 +790,12 @@ namespace System.Threading.Threads.Tests
             Assert.Equal(ThreadState.Unstarted | ThreadState.Background, t.ThreadState);
 
             t.Start();
-            ThreadTestHelpers.WaitForCondition(
-                () => t.ThreadState == (ThreadState.WaitSleepJoin | ThreadState.Background)
-            );
+            ThreadTestHelpers.WaitForCondition(() =>
+                t.ThreadState == (ThreadState.WaitSleepJoin | ThreadState.Background));
 
             e0.Set();
-            ThreadTestHelpers.WaitForCondition(
-                () => t.ThreadState == (ThreadState.Running | ThreadState.Background)
-            );
+            ThreadTestHelpers.WaitForCondition(() =>
+                t.ThreadState == (ThreadState.Running | ThreadState.Background));
 
             e1.Set();
             waitForThread();
@@ -1081,9 +1028,8 @@ namespace System.Threading.Threads.Tests
                 () =>
                 {
                     threadReady.Set();
-                    ThreadTestHelpers.WaitForConditionWithoutBlocking(
-                        () => Volatile.Read(ref continueThreadBool)
-                    );
+                    ThreadTestHelpers.WaitForConditionWithoutBlocking(() =>
+                        Volatile.Read(ref continueThreadBool));
                     threadReady.Set();
                     Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait());
                 }
@@ -1119,9 +1065,8 @@ namespace System.Threading.Threads.Tests
             );
             t.IsBackground = true;
             t.Start();
-            ThreadTestHelpers.WaitForCondition(
-                () => (t.ThreadState & ThreadState.WaitSleepJoin) != 0
-            );
+            ThreadTestHelpers.WaitForCondition(() =>
+                (t.ThreadState & ThreadState.WaitSleepJoin) != 0);
             t.Interrupt();
             waitForThread();
         }
@@ -1147,9 +1092,8 @@ namespace System.Threading.Threads.Tests
                     try { }
                     finally
                     {
-                        Assert.Throws<ThreadInterruptedException>(
-                            () => continueThread.CheckedWait()
-                        );
+                        Assert.Throws<ThreadInterruptedException>(() =>
+                            continueThread.CheckedWait());
                     }
                 }
             );
@@ -1178,15 +1122,13 @@ namespace System.Threading.Threads.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => t.Join(-2));
             Assert.Throws<ArgumentOutOfRangeException>(() => t.Join(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => t.Join(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                t.Join(TimeSpan.FromMilliseconds((double)int.MaxValue + 1)));
 
             Assert.Throws<ThreadStateException>(() => t.Join());
             Assert.Throws<ThreadStateException>(() => t.Join(UnexpectedTimeoutMilliseconds));
-            Assert.Throws<ThreadStateException>(
-                () => t.Join(TimeSpan.FromMilliseconds(UnexpectedTimeoutMilliseconds))
-            );
+            Assert.Throws<ThreadStateException>(() =>
+                t.Join(TimeSpan.FromMilliseconds(UnexpectedTimeoutMilliseconds)));
 
             t.Start();
             threadReady.CheckedWait();
@@ -1203,12 +1145,10 @@ namespace System.Threading.Threads.Tests
         public static void SleepTest()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Thread.Sleep(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Thread.Sleep(TimeSpan.FromMilliseconds(-2))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Thread.Sleep(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Thread.Sleep(TimeSpan.FromMilliseconds(-2)));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Thread.Sleep(TimeSpan.FromMilliseconds((double)int.MaxValue + 1)));
 
             Thread.Sleep(0);
 
@@ -1351,12 +1291,10 @@ namespace System.Threading.Threads.Tests
             Thread.EndThreadAffinity();
 
 #pragma warning disable SYSLIB0003 // obsolete members
-            Assert.Throws<InvalidOperationException>(
-                () => Thread.CurrentThread.GetCompressedStack()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Thread.CurrentThread.SetCompressedStack(CompressedStack.Capture())
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Thread.CurrentThread.GetCompressedStack());
+            Assert.Throws<InvalidOperationException>(() =>
+                Thread.CurrentThread.SetCompressedStack(CompressedStack.Capture()));
 #pragma warning restore SYSLIB0003 // obsolete members
 
             Thread.MemoryBarrier();
@@ -1378,18 +1316,14 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Windows()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
-                        Assert.Equal(
-                            Environment.UserDomainName + @"\" + Environment.UserName,
-                            Thread.CurrentPrincipal.Identity.Name
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                    Assert.Equal(
+                        Environment.UserDomainName + @"\" + Environment.UserName,
+                        Thread.CurrentPrincipal.Identity.Name
+                    );
+                })
                 .Dispose();
         }
 
@@ -1404,27 +1338,23 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Windows_NewThreads()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
-                        IPrincipal currentPrincipal = Thread.CurrentPrincipal;
+                    IPrincipal currentPrincipal = Thread.CurrentPrincipal;
 
-                        Assert.NotNull(currentPrincipal);
-                        Assert.True(currentPrincipal.Identity.IsAuthenticated);
+                    Assert.NotNull(currentPrincipal);
+                    Assert.True(currentPrincipal.Identity.IsAuthenticated);
 
-                        var first = new Thread(CheckPrincipal);
-                        first.Start(currentPrincipal);
-                        first.Join();
+                    var first = new Thread(CheckPrincipal);
+                    first.Start(currentPrincipal);
+                    first.Join();
 
-                        var second = new Thread(CheckPrincipal);
-                        second.Start(currentPrincipal);
-                        second.Join();
-                    }
-                )
+                    var second = new Thread(CheckPrincipal);
+                    second.Start(currentPrincipal);
+                    second.Join();
+                })
                 .Dispose();
 
             static void CheckPrincipal(object principal)
@@ -1439,22 +1369,20 @@ namespace System.Threading.Threads.Tests
         public static void NoPrincipalPolicyTest_NewThreads()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        first.Start();
-                        first.Join();
+                    var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    first.Start();
+                    first.Join();
 
-                        var second = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        second.Start();
-                        second.Join();
-                    }
-                )
+                    var second = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    second.Start();
+                    second.Join();
+                })
                 .Dispose();
         }
 
@@ -1469,26 +1397,22 @@ namespace System.Threading.Threads.Tests
         public static void NoPrincipalToWindowsPrincipalPolicyTest_Windows_NewThreads()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.NoPrincipal);
 
-                        Assert.Null(Thread.CurrentPrincipal);
+                    Assert.Null(Thread.CurrentPrincipal);
 
-                        var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
-                        first.Start();
-                        first.Join();
+                    var first = new Thread(() => Assert.Null(Thread.CurrentPrincipal));
+                    first.Start();
+                    first.Join();
 
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
-                        var second = new Thread(CheckPrincipal);
-                        second.Start(Thread.CurrentPrincipal);
-                        second.Join();
-                    }
-                )
+                    var second = new Thread(CheckPrincipal);
+                    second.Start(Thread.CurrentPrincipal);
+                    second.Join();
+                })
                 .Dispose();
 
             static void CheckPrincipal(object principal)
@@ -1504,15 +1428,11 @@ namespace System.Threading.Threads.Tests
         public static void WindowsPrincipalPolicyTest_Unix()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
-                        Assert.Throws<PlatformNotSupportedException>(() => Thread.CurrentPrincipal);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                    Assert.Throws<PlatformNotSupportedException>(() => Thread.CurrentPrincipal);
+                })
                 .Dispose();
         }
 
@@ -1520,15 +1440,13 @@ namespace System.Threading.Threads.Tests
         public static void UnauthenticatedPrincipalTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.UnauthenticatedPrincipal
-                        );
-                        Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetPrincipalPolicy(
+                        PrincipalPolicy.UnauthenticatedPrincipal
+                    );
+                    Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
+                })
                 .Dispose();
         }
 
@@ -1536,12 +1454,10 @@ namespace System.Threading.Threads.Tests
         public static void DefaultPrincipalPolicyTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Null(Thread.CurrentPrincipal);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Null(Thread.CurrentPrincipal);
+                })
                 .Dispose();
         }
 

@@ -75,9 +75,8 @@ namespace System.Threading.Tests
             Assert.Throws<ObjectDisposedException>(() => t.Change(1, 1));
             Assert.Throws<ObjectDisposedException>(() => t.Change(1L, 1L));
             Assert.Throws<ObjectDisposedException>(() => t.Change(1u, 1u));
-            Assert.Throws<ObjectDisposedException>(
-                () => t.Change(TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(1))
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                t.Change(TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(1)));
         }
 
         [ConditionalTheory(

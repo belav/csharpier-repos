@@ -34,28 +34,26 @@ public class Program
 
         Console.WriteLine("Connected");
 
-        var sending = Task.Run(
-            async () =>
+        var sending = Task.Run(async () =>
+        {
+            string line;
+            while ((line = Console.ReadLine()) != null)
             {
-                string line;
-                while ((line = Console.ReadLine()) != null)
-                {
-                    var bytes = Encoding.UTF8.GetBytes(line);
-                    await ws.SendAsync(
-                        new ArraySegment<byte>(bytes),
-                        WebSocketMessageType.Text,
-                        endOfMessage: true,
-                        cancellationToken: CancellationToken.None
-                    );
-                }
-
-                await ws.CloseOutputAsync(
-                    WebSocketCloseStatus.NormalClosure,
-                    "",
-                    CancellationToken.None
+                var bytes = Encoding.UTF8.GetBytes(line);
+                await ws.SendAsync(
+                    new ArraySegment<byte>(bytes),
+                    WebSocketMessageType.Text,
+                    endOfMessage: true,
+                    cancellationToken: CancellationToken.None
                 );
             }
-        );
+
+            await ws.CloseOutputAsync(
+                WebSocketCloseStatus.NormalClosure,
+                "",
+                CancellationToken.None
+            );
+        });
 
         var receiving = Receiving(ws);
 

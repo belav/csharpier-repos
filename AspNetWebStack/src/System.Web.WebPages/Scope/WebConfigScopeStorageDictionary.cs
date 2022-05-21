@@ -18,19 +18,17 @@ namespace System.Web.WebPages.Scope
 
         public WebConfigScopeDictionary(NameValueCollection appSettings)
         {
-            _items = new Lazy<Dictionary<object, object>>(
-                () =>
+            _items = new Lazy<Dictionary<object, object>>(() =>
+            {
+                Dictionary<object, object> items = new Dictionary<object, object>(
+                    ScopeStorageComparer.Instance
+                );
+                foreach (string key in appSettings.AllKeys)
                 {
-                    Dictionary<object, object> items = new Dictionary<object, object>(
-                        ScopeStorageComparer.Instance
-                    );
-                    foreach (string key in appSettings.AllKeys)
-                    {
-                        items[key] = appSettings[key];
-                    }
-                    return items;
+                    items[key] = appSettings[key];
                 }
-            );
+                return items;
+            });
         }
 
         private IDictionary<object, object> Items

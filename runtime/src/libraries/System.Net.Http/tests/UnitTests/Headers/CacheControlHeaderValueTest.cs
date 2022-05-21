@@ -57,12 +57,10 @@ namespace System.Net.Http.Tests
                     cacheControl.NoCacheHeaders.Add(null);
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    cacheControl.NoCacheHeaders.Add("invalid token");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                cacheControl.NoCacheHeaders.Add("invalid token");
+            });
             cacheControl.NoCacheHeaders.Add("token");
             Assert.Equal(1, cacheControl.NoCacheHeaders.Count);
             Assert.Equal("token", cacheControl.NoCacheHeaders.First());
@@ -75,24 +73,20 @@ namespace System.Net.Http.Tests
                     cacheControl.PrivateHeaders.Add(null);
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    cacheControl.PrivateHeaders.Add("invalid token");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                cacheControl.PrivateHeaders.Add("invalid token");
+            });
             cacheControl.PrivateHeaders.Add("token");
             Assert.Equal(1, cacheControl.PrivateHeaders.Count);
             Assert.Equal("token", cacheControl.PrivateHeaders.First());
 
             // NameValueHeaderValue collection property
             Assert.NotNull(cacheControl.Extensions);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    cacheControl.Extensions.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                cacheControl.Extensions.Add(null);
+            });
             cacheControl.Extensions.Add(new NameValueHeaderValue("name", "value"));
             Assert.Equal(1, cacheControl.Extensions.Count);
             Assert.Equal(
@@ -178,28 +172,26 @@ namespace System.Net.Http.Tests
         public void ToString_NegativeValues_UsesMinusSignRegardlessOfCurrentCulture()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    var cacheControl = new CacheControlHeaderValue()
                     {
-                        var cacheControl = new CacheControlHeaderValue()
-                        {
-                            MaxAge = new TimeSpan(0, 0, -1),
-                            MaxStale = true,
-                            MaxStaleLimit = new TimeSpan(0, 0, -2),
-                            MinFresh = new TimeSpan(0, 0, -3),
-                            SharedMaxAge = new TimeSpan(0, 0, -4)
-                        };
+                        MaxAge = new TimeSpan(0, 0, -1),
+                        MaxStale = true,
+                        MaxStaleLimit = new TimeSpan(0, 0, -2),
+                        MinFresh = new TimeSpan(0, 0, -3),
+                        SharedMaxAge = new TimeSpan(0, 0, -4)
+                    };
 
-                        var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                        ci.NumberFormat.NegativeSign = "n";
-                        CultureInfo.CurrentCulture = ci;
+                    var ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                    ci.NumberFormat.NegativeSign = "n";
+                    CultureInfo.CurrentCulture = ci;
 
-                        Assert.Equal(
-                            "max-age=-1, s-maxage=-4, max-stale=-2, min-fresh=-3",
-                            cacheControl.ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(
+                        "max-age=-1, s-maxage=-4, max-stale=-2, min-fresh=-3",
+                        cacheControl.ToString()
+                    );
+                })
                 .Dispose();
         }
 
@@ -815,12 +807,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input, int startIndex)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    CacheControlHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                CacheControlHeaderValue.Parse(input);
+            });
         }
 
         private void CheckValidTryParse(string input, CacheControlHeaderValue expectedResult)

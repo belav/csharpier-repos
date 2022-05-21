@@ -119,9 +119,8 @@ namespace System.Net.Sockets.Tests
 
                 socketPairs[indexToDispose].Key.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(
-                    () => Socket.Select(reads, writes, errors, 1_000)
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    Socket.Select(reads, writes, errors, 1_000));
 
                 for (int i = 0; i < socketPairs.Length; i++)
                 {
@@ -368,12 +367,10 @@ namespace System.Net.Sockets.Tests
 
                 listenSocket.Listen(5);
 
-                Task t = Task.Run(
-                    () =>
-                    {
-                        DoAccept(listenSocket, 5);
-                    }
-                );
+                Task t = Task.Run(() =>
+                {
+                    DoAccept(listenSocket, 5);
+                });
 
                 // Loop, doing connections and pausing between
                 for (int i = 0; i < 5; i++)

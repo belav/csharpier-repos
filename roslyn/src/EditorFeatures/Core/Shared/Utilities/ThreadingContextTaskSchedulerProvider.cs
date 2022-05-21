@@ -41,13 +41,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
             protected override void QueueTask(Task task)
             {
-                _joinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        await _joinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true);
-                        TryExecuteTask(task);
-                    }
-                );
+                _joinableTaskFactory.RunAsync(async () =>
+                {
+                    await _joinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true);
+                    TryExecuteTask(task);
+                });
             }
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)

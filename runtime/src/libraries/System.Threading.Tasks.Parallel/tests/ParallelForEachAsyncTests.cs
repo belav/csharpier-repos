@@ -163,9 +163,8 @@ namespace System.Threading.Tasks.Tests
             void AssertCanceled(Task t)
             {
                 Assert.True(t.IsCanceled);
-                var oce = Assert.ThrowsAny<OperationCanceledException>(
-                    () => t.GetAwaiter().GetResult()
-                );
+                var oce = Assert.ThrowsAny<OperationCanceledException>(() =>
+                    t.GetAwaiter().GetResult());
                 Assert.Equal(cts.Token, oce.CancellationToken);
             }
 
@@ -704,17 +703,15 @@ namespace System.Threading.Tasks.Tests
 
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        Parallel.ForEachAsync(
-                            Infinite(),
-                            cts.Token,
-                            async (item, cancellationToken) =>
-                            {
-                                await Task.Yield();
-                            }
-                        )
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Parallel.ForEachAsync(
+                        Infinite(),
+                        cts.Token,
+                        async (item, cancellationToken) =>
+                        {
+                            await Task.Yield();
+                        }
+                    ));
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -733,17 +730,15 @@ namespace System.Threading.Tasks.Tests
 
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        Parallel.ForEachAsync(
-                            InfiniteAsync(),
-                            cts.Token,
-                            async (item, cancellationToken) =>
-                            {
-                                await Task.Yield();
-                            }
-                        )
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Parallel.ForEachAsync(
+                        InfiniteAsync(),
+                        cts.Token,
+                        async (item, cancellationToken) =>
+                        {
+                            await Task.Yield();
+                        }
+                    ));
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1168,42 +1163,38 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            await Assert.ThrowsAsync<Exception>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<Exception>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                        if (item == 1000)
                         {
-                            await Task.Yield();
-                            if (item == 1000)
-                            {
-                                throw new Exception();
-                            }
+                            throw new Exception();
                         }
-                    )
-            );
+                    }
+                ));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        new ParallelOptions { MaxDegreeOfParallelism = 2 },
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 },
+                    async (item, cancellationToken) =>
+                    {
+                        if (item == 0)
                         {
-                            if (item == 0)
-                            {
-                                throw new FormatException();
-                            }
-                            else
-                            {
-                                Assert.Equal(1, item);
-                                var tcs = new TaskCompletionSource();
-                                cancellationToken.Register(() => tcs.SetResult());
-                                await tcs.Task;
-                            }
+                            throw new FormatException();
                         }
-                    )
-            );
+                        else
+                        {
+                            Assert.Equal(1, item);
+                            var tcs = new TaskCompletionSource();
+                            cancellationToken.Register(() => tcs.SetResult());
+                            await tcs.Task;
+                        }
+                    }
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1219,42 +1210,38 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            await Assert.ThrowsAsync<Exception>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<Exception>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                        if (item == 1000)
                         {
-                            await Task.Yield();
-                            if (item == 1000)
-                            {
-                                throw new Exception();
-                            }
+                            throw new Exception();
                         }
-                    )
-            );
+                    }
+                ));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        new ParallelOptions { MaxDegreeOfParallelism = 2 },
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 },
+                    async (item, cancellationToken) =>
+                    {
+                        if (item == 0)
                         {
-                            if (item == 0)
-                            {
-                                throw new FormatException();
-                            }
-                            else
-                            {
-                                Assert.Equal(1, item);
-                                var tcs = new TaskCompletionSource();
-                                cancellationToken.Register(() => tcs.SetResult());
-                                await tcs.Task;
-                            }
+                            throw new FormatException();
                         }
-                    )
-            );
+                        else
+                        {
+                            Assert.Equal(1, item);
+                            var tcs = new TaskCompletionSource();
+                            cancellationToken.Register(() => tcs.SetResult());
+                            await tcs.Task;
+                        }
+                    }
+                ));
         }
 
         [ConditionalTheory(

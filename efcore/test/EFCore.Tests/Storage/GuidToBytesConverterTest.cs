@@ -144,63 +144,57 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    converter(
-                        new byte[]
-                        {
-                            180,
-                            39,
-                            238,
-                            150,
-                            139,
-                            134,
-                            73,
-                            64,
-                            186,
-                            103,
-                            203,
-                            184,
-                            60,
-                            229,
-                            180,
-                            98,
-                            0
-                        }
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                converter(
+                    new byte[]
+                    {
+                        180,
+                        39,
+                        238,
+                        150,
+                        139,
+                        134,
+                        73,
+                        64,
+                        186,
+                        103,
+                        203,
+                        184,
+                        60,
+                        229,
+                        180,
+                        98,
+                        0
+                    }
+                ));
 
-            Assert.Throws<ArgumentException>(
-                () => converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
-            );
+            Assert.Throws<ArgumentException>(() =>
+                converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    converter(
-                        new byte[]
-                        {
-                            180,
-                            39,
-                            238,
-                            150,
-                            139,
-                            134,
-                            73,
-                            64,
-                            186,
-                            103,
-                            203,
-                            184,
-                            60,
-                            229,
-                            180
-                        }
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                converter(
+                    new byte[]
+                    {
+                        180,
+                        39,
+                        238,
+                        150,
+                        139,
+                        134,
+                        73,
+                        64,
+                        186,
+                        103,
+                        203,
+                        184,
+                        60,
+                        229,
+                        180
+                    }
+                ));
 
-            Assert.Throws<ArgumentException>(
-                () => converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 })
-            );
+            Assert.Throws<ArgumentException>(() =>
+                converter(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
 
             Assert.Throws<ArgumentNullException>(() => converter(null));
         }

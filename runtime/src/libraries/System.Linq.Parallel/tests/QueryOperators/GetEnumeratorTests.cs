@@ -131,13 +131,11 @@ namespace System.Linq.Parallel.Tests
                     source.Cancel();
             };
 
-            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(
-                () =>
-                {
-                    foreach (var i in labeled.Item.WithCancellation(source.Token))
-                        cancel();
-                }
-            );
+            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
+            {
+                foreach (var i in labeled.Item.WithCancellation(source.Token))
+                    cancel();
+            });
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 
@@ -154,20 +152,16 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            Assert.Throws<OperationCanceledException>(
-                () =>
+            Assert.Throws<OperationCanceledException>(() =>
+            {
+                foreach (
+                    var i in labeled.Item.WithCancellation(new CancellationToken(canceled: true))
+                )
                 {
-                    foreach (
-                        var i in labeled.Item.WithCancellation(
-                            new CancellationToken(canceled: true)
-                        )
-                    )
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                    ;
+                    throw new ShouldNotBeInvokedException();
                 }
-            );
+                ;
+            });
         }
 
         [Theory]

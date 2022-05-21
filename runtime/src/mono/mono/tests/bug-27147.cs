@@ -1015,13 +1015,11 @@ public class Test
 
     public static int Main()
     {
-        var t = new Thread(
-            () =>
-            {
-                refs = new LotsaRefs();
-                refs.referee = new Referee();
-            }
-        );
+        var t = new Thread(() =>
+        {
+            refs = new LotsaRefs();
+            refs.referee = new Referee();
+        });
         t.Start();
         t.Join();
         for (var i = 0; i < 100000000; ++i)

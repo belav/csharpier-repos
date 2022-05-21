@@ -255,15 +255,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 var excerptService = document.Services.GetService<IDocumentExcerptService>();
                 if (excerptService != null)
                 {
-                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            excerptService.TryExcerptAsync(
-                                document,
-                                sourceSpan,
-                                ExcerptMode.Tooltip,
-                                CancellationToken.None
-                            )
-                    );
+                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(() =>
+                        excerptService.TryExcerptAsync(
+                            document,
+                            sourceSpan,
+                            ExcerptMode.Tooltip,
+                            CancellationToken.None
+                        ));
                     if (excerpt != null)
                     {
                         // get tooltip from excerpt service

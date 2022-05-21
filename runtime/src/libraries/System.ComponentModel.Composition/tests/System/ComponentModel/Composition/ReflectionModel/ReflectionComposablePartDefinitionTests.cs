@@ -167,12 +167,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void CreatePart_DoesntLoadType()
         {
             Type expectedType = typeof(TestPart);
-            Lazy<Type> expectedLazyType = new Lazy<Type>(
-                () =>
-                {
-                    throw new NotImplementedException(); /*"Part should not be loaded" */
-                }
-            );
+            Lazy<Type> expectedLazyType = new Lazy<Type>(() =>
+            {
+                throw new NotImplementedException(); /*"Part should not be loaded" */
+            });
             IDictionary<string, object> expectedMetadata = new Dictionary<string, object>();
             expectedMetadata["Key1"] = 1;
             expectedMetadata["Key2"] = "Value2";

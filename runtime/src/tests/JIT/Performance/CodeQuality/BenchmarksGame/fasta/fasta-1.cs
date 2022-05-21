@@ -96,26 +96,20 @@ namespace BenchmarksGame
 
             var bufferCount = Environment.ProcessorCount + 4;
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                var len = LineLength * 40;
+                var buffers = Enumerable.Range(0, bufferCount).Select(i => new int[len]).ToArray();
+                var index = 0;
+                for (var i = 0; i < n; i += len)
                 {
-                    var len = LineLength * 40;
-                    var buffers = Enumerable
-                        .Range(0, bufferCount)
-                        .Select(i => new int[len])
-                        .ToArray();
-                    var index = 0;
-                    for (var i = 0; i < n; i += len)
-                    {
-                        var buffer =
-                            n - i < len ? new int[n - i] : buffers[index++ % buffers.Length];
+                    var buffer = n - i < len ? new int[n - i] : buffers[index++ % buffers.Length];
 
-                        FillRandom(buffer);
-                        queue.Add(buffer);
-                    }
-                    queue.CompleteAdding();
+                    FillRandom(buffer);
+                    queue.Add(buffer);
                 }
-            );
+                queue.CompleteAdding();
+            });
 
             byte[] descStr = Encoding.ASCII.GetBytes(">" + id + " " + desc + "\n");
             s.Write(descStr, 0, descStr.Length);

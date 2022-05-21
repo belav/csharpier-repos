@@ -1294,9 +1294,8 @@ namespace Microsoft.VisualBasic.Tests
             CompareMethod compare
         )
         {
-            Assert.Throws<ArgumentException>(
-                () => Strings.Replace(expression, find, replacement, start, length, compare)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Strings.Replace(expression, find, replacement, start, length, compare));
         }
 
         [Theory]
@@ -1347,9 +1346,8 @@ namespace Microsoft.VisualBasic.Tests
             CompareMethod compare
         )
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () => Strings.Split(expression, delimiter, limit, compare)
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                Strings.Split(expression, delimiter, limit, compare));
         }
 
         [Theory]
@@ -1390,9 +1388,8 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Strings.StrConv(str, conversion, localeID)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Strings.StrConv(str, conversion, localeID));
             }
         }
 

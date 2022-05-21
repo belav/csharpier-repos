@@ -29,92 +29,66 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                 selector.Select(entityType.FindProperty("Custom"), entityType)
             );
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Id"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Long"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Short"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Byte"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Id"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Long"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Short"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Byte"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableInt"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableLong"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableShort"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableByte"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableInt"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableLong"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableShort"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableByte"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("UInt"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("ULong"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("UShort"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("SByte"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("UInt"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("ULong"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("UShort"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("SByte"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableUInt"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableULong"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableUShort"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableSByte"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableUInt"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableULong"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableUShort"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableSByte"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Decimal"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableDecimal"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Decimal"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableDecimal"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Float"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableFloat"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Float"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableFloat"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("Double"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableDouble"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("Double"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableDouble"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("DateTime"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableDateTime"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("DateTime"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableDateTime"), entityType));
 
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("DateTimeOffset"), entityType)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => selector.Select(entityType.FindProperty("NullableDateTimeOffset"), entityType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("DateTimeOffset"), entityType));
+            Assert.Throws<NotSupportedException>(() =>
+                selector.Select(entityType.FindProperty("NullableDateTimeOffset"), entityType));
 
             Assert.IsType<StringValueGenerator>(
                 selector.Select(entityType.FindProperty("String"), entityType)
@@ -145,9 +119,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             Assert.Equal(
                 CoreStrings.NoValueGenerator("Random", "AnEntity", "char"),
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => selector.Select(entityType.FindProperty("Random"), entityType)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        selector.Select(entityType.FindProperty("Random"), entityType))
                     .Message
             );
         }

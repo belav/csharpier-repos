@@ -40,12 +40,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.NotAProviderService("IConcurrencyDetector"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            builder.TryAddProviderSpecificServices(
-                                s => s.TryAddScoped<IConcurrencyDetector, FakeConcurrencyDetector>()
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAddProviderSpecificServices(
+                            s => s.TryAddScoped<IConcurrencyDetector, FakeConcurrencyDetector>()
+                        ))
                     .Message
             );
         }
@@ -128,9 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.SingletonRequired("Scoped", nameof(IConcurrencyDetector)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => builder.TryAdd<IConcurrencyDetector>(new FakeConcurrencyDetector())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd<IConcurrencyDetector>(new FakeConcurrencyDetector()))
                     .Message
             );
         }
@@ -143,13 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.SingletonRequired("Scoped", nameof(IConcurrencyDetector)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            builder.TryAdd(
-                                typeof(IConcurrencyDetector),
-                                new FakeConcurrencyDetector()
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd(typeof(IConcurrencyDetector), new FakeConcurrencyDetector()))
                     .Message
             );
         }
@@ -317,9 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.ImplementationTypeRequired(nameof(IResettableService)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => builder.TryAdd<IResettableService>(p => new FakeResetableService())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd<IResettableService>(p => new FakeResetableService()))
                     .Message
             );
         }
@@ -345,14 +336,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.ImplementationTypeRequired(nameof(IResettableService)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            builder.TryAdd(
-                                typeof(IResettableService),
-                                typeof(IResettableService),
-                                p => new FakeResetableService()
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd(
+                            typeof(IResettableService),
+                            typeof(IResettableService),
+                            p => new FakeResetableService()
+                        ))
                     .Message
             );
         }
@@ -365,14 +354,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.ImplementationTypeRequired(nameof(IResettableService)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            builder.TryAdd(
-                                typeof(IResettableService),
-                                typeof(object),
-                                p => new FakeResetableService()
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd(
+                            typeof(IResettableService),
+                            typeof(object),
+                            p => new FakeResetableService()
+                        ))
                     .Message
             );
         }
@@ -385,9 +372,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.SingletonRequired("Scoped", nameof(IResettableService)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => builder.TryAdd<IResettableService>(new FakeResetableService())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd<IResettableService>(new FakeResetableService()))
                     .Message
             );
         }
@@ -400,9 +386,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Equal(
                 CoreStrings.SingletonRequired("Scoped", nameof(IResettableService)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => builder.TryAdd(typeof(IResettableService), new FakeResetableService())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.TryAdd(typeof(IResettableService), new FakeResetableService()))
                     .Message
             );
         }

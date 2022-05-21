@@ -402,10 +402,8 @@ namespace System.ComponentModel.Composition.Hosting
                 new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
             );
 
-            atomicComposition.AddCompleteAction(
-                () =>
-                    OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null))
-            );
+            atomicComposition.AddCompleteAction(() =>
+                OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null)));
         }
 
         private Export CreateExport(ComposablePart part, ExportDefinition export)

@@ -32,9 +32,8 @@ public class ViewDataOfTTest
         ViewDataDictionary viewData = viewDataOfT;
 
         // Act and Assert
-        Exception ex = Assert.Throws<InvalidOperationException>(
-            () => viewData.Model = DateTime.UtcNow
-        );
+        Exception ex = Assert.Throws<InvalidOperationException>(() =>
+            viewData.Model = DateTime.UtcNow);
         Assert.Equal(
             "The model item passed into the ViewDataDictionary is of type 'System.DateTime', but this ViewDataDictionary instance requires a model item of type 'System.String'.",
             ex.Message

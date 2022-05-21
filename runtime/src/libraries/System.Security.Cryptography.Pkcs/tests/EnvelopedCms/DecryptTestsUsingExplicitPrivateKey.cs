@@ -36,9 +36,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
             using (ECDsa ecdsa = ECDsa.Create())
             {
-                Assert.Throws<CryptographicException>(
-                    () => ecms.Decrypt(ecms.RecipientInfos[0], ecdsa)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    ecms.Decrypt(ecms.RecipientInfos[0], ecdsa));
             }
         }
 
@@ -63,14 +62,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             byte[] content = "68690D0A".HexToByteArray();
             ContentInfo expectedContentInfo = new ContentInfo(new Oid(Oids.Pkcs7Data), content);
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    VerifySimpleDecrypt(
-                        encodedMessage,
-                        Certificates.RSASha256KeyTransfer1,
-                        expectedContentInfo
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                VerifySimpleDecrypt(
+                    encodedMessage,
+                    Certificates.RSASha256KeyTransfer1,
+                    expectedContentInfo
+                ));
         }
     }
 }

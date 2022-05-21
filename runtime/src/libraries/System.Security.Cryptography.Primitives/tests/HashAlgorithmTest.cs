@@ -65,9 +65,8 @@ namespace System.Security.Cryptography.Hashing.Tests
             using (PositionValueStream stream = new SlowPositionValueStream(10000))
             using (HashAlgorithm hash = new SummingTestHashAlgorithm())
             {
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => hash.ComputeHashAsync(stream, cancellationSource.Token)
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    hash.ComputeHashAsync(stream, cancellationSource.Token));
             }
         }
 
@@ -79,13 +78,11 @@ namespace System.Security.Cryptography.Hashing.Tests
             {
                 hash.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        // Not returning or awaiting the Task, it never got created.
-                        hash.ComputeHashAsync(stream);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    // Not returning or awaiting the Task, it never got created.
+                    hash.ComputeHashAsync(stream);
+                });
             }
         }
 

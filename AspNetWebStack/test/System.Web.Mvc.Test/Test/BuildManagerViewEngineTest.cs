@@ -100,37 +100,35 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FileExistsReturnsTrueForExistingPath_VPPRegistrationChanging()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // Arrange
-                    AppDomainUtils.SetAppData();
-                    new HostingEnvironment();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange
+                AppDomainUtils.SetAppData();
+                new HostingEnvironment();
 
-                    // Expect null beforeProvider since hosting environment hasn't been initialized
-                    VirtualPathProvider beforeProvider = HostingEnvironment.VirtualPathProvider;
-                    string testPath = "/Path.txt";
-                    VirtualPathProvider afterProvider = CreatePathProvider(testPath);
-                    Mock<VirtualPathProvider> mockProvider = Mock.Get(afterProvider);
+                // Expect null beforeProvider since hosting environment hasn't been initialized
+                VirtualPathProvider beforeProvider = HostingEnvironment.VirtualPathProvider;
+                string testPath = "/Path.txt";
+                VirtualPathProvider afterProvider = CreatePathProvider(testPath);
+                Mock<VirtualPathProvider> mockProvider = Mock.Get(afterProvider);
 
-                    TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine();
+                TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine();
 
-                    // Act
-                    VirtualPathProvider beforeEngineProvider = engine.VirtualPathProvider;
-                    HostingEnvironment.RegisterVirtualPathProvider(afterProvider);
+                // Act
+                VirtualPathProvider beforeEngineProvider = engine.VirtualPathProvider;
+                HostingEnvironment.RegisterVirtualPathProvider(afterProvider);
 
-                    bool result = engine.FileExists(testPath);
-                    VirtualPathProvider afterEngineProvider = engine.VirtualPathProvider;
+                bool result = engine.FileExists(testPath);
+                VirtualPathProvider afterEngineProvider = engine.VirtualPathProvider;
 
-                    // Assert
-                    Assert.True(result);
-                    Assert.Equal(beforeProvider, beforeEngineProvider);
-                    Assert.Equal(afterProvider, afterEngineProvider);
+                // Assert
+                Assert.True(result);
+                Assert.Equal(beforeProvider, beforeEngineProvider);
+                Assert.Equal(afterProvider, afterEngineProvider);
 
-                    mockProvider.Verify();
-                    mockProvider.Verify(c => c.FileExists(It.IsAny<String>()), Times.Once());
-                }
-            );
+                mockProvider.Verify();
+                mockProvider.Verify(c => c.FileExists(It.IsAny<String>()), Times.Once());
+            });
         }
 
         [Fact]

@@ -265,9 +265,8 @@ namespace System.Linq.Tests
                 return value;
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () => source.ToDictionary(keySelector, valueSelector)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                source.ToDictionary(keySelector, valueSelector));
         }
 
         [Fact]

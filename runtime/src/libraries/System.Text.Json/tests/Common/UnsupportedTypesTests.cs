@@ -46,21 +46,19 @@ namespace System.Text.Json.Serialization.Tests
                 Type type = GetNullableOfTUnderlyingType(typeof(T), out bool isNullableOfT);
                 string fullName = type.FullName;
 
-                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    async () => await JsonSerializerWrapperForString.DeserializeWrapper<T>(json)
-                );
+                NotSupportedException ex =
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await JsonSerializerWrapperForString.DeserializeWrapper<T>(json));
                 string exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$", exAsStr);
 
                 json = $@"{{""Prop"":{json}}}";
 
-                ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    async () =>
-                        await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithType<T>>(
-                            json
-                        )
-                );
+                ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithType<T>>(
+                        json
+                    ));
                 exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$.Prop", exAsStr);
@@ -100,18 +98,17 @@ namespace System.Text.Json.Serialization.Tests
                 Type type = GetNullableOfTUnderlyingType(typeof(T), out bool isNullableOfT);
                 string fullName = type.FullName;
 
-                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    async () => await JsonSerializerWrapperForString.SerializeWrapper(value)
-                );
+                NotSupportedException ex =
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await JsonSerializerWrapperForString.SerializeWrapper(value));
                 string exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$", exAsStr);
 
                 ClassWithType<T> obj = new ClassWithType<T> { Prop = value };
 
-                ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
-                );
+                ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(obj));
                 exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
 

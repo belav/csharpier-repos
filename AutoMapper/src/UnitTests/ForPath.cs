@@ -182,9 +182,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            new Action(
-                () => Mapper.Map<Order>(new OrderDto())
-            ).ShouldThrowException<AutoMapperMappingException>(
+            new Action(() =>
+                Mapper.Map<Order>(new OrderDto())).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
                     ex.InnerException?.Message.ShouldBe(
                         "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
@@ -308,27 +307,23 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_throw_exception()
         {
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    var cfg = new MapperConfiguration(
-                        config =>
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                var cfg = new MapperConfiguration(
+                    config =>
+                    {
+                        Assert.Throws<ArgumentNullException>(() =>
                         {
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    config
-                                        .CreateMap<SourceModel, DestinationModel>()
-                                        .ForPath(
-                                            sourceModel => sourceModel.Name,
-                                            opts => opts.MapFrom<string>(null)
-                                        );
-                                }
-                            );
-                        }
-                    );
-                }
-            );
+                            config
+                                .CreateMap<SourceModel, DestinationModel>()
+                                .ForPath(
+                                    sourceModel => sourceModel.Name,
+                                    opts => opts.MapFrom<string>(null)
+                                );
+                        });
+                    }
+                );
+            });
         }
     }
 

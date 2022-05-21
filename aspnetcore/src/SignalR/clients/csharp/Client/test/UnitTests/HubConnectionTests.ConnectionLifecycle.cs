@@ -612,9 +612,8 @@ public partial class HubConnectionTests
                     hubConnection.HandshakeTimeout = TimeSpan.FromMilliseconds(1);
 
                     await Assert
-                        .ThrowsAnyAsync<OperationCanceledException>(
-                            () => hubConnection.StartAsync()
-                        )
+                        .ThrowsAnyAsync<OperationCanceledException>(() =>
+                            hubConnection.StartAsync())
                         .DefaultTimeout();
                     Assert.Equal(HubConnectionState.Disconnected, hubConnection.State);
                 }
@@ -634,20 +633,17 @@ public partial class HubConnectionTests
             using (StartVerifiableLog())
             {
                 var onStartCalled = false;
-                var connection = new TestConnection(
-                    onStart: () =>
-                    {
-                        onStartCalled = true;
-                        return Task.CompletedTask;
-                    }
-                );
+                var connection = new TestConnection(onStart: () =>
+                {
+                    onStartCalled = true;
+                    return Task.CompletedTask;
+                });
                 var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
                 try
                 {
                     await Assert
-                        .ThrowsAsync<TaskCanceledException>(
-                            () => hubConnection.StartAsync(new CancellationToken(canceled: true))
-                        )
+                        .ThrowsAsync<TaskCanceledException>(() =>
+                            hubConnection.StartAsync(new CancellationToken(canceled: true)))
                         .DefaultTimeout();
                     Assert.False(onStartCalled);
                 }

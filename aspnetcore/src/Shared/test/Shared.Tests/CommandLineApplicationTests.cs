@@ -21,13 +21,11 @@ public class CommandLineApplicationTests
             "test",
             c =>
             {
-                c.OnExecute(
-                    () =>
-                    {
-                        called = true;
-                        return 5;
-                    }
-                );
+                c.OnExecute(() =>
+                {
+                    called = true;
+                    return 5;
+                });
             }
         );
 
@@ -78,9 +76,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var ex = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", "one", "two", "three")
-        );
+        var ex = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", "one", "two", "three"));
 
         Assert.Contains("three", ex.Message);
     }
@@ -127,9 +124,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var ex = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test2", "one", "two", "three")
-        );
+        var ex = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test2", "one", "two", "three"));
 
         Assert.Contains("test2", ex.Message);
     }
@@ -195,9 +191,8 @@ public class CommandLineApplicationTests
     {
         var app = new CommandLineApplication();
         app.Argument("first", "First argument", multipleValues: true);
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => app.Argument("second", "Second argument")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            app.Argument("second", "Second argument"));
 
         Assert.Contains(
             $"The last argument 'first' accepts multiple values. No more argument can be added.",
@@ -328,9 +323,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", unexpectedArg)
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", unexpectedArg));
         Assert.Equal($"Unrecognized command or argument '{unexpectedArg}'", exception.Message);
     }
 
@@ -514,9 +508,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", unexpectedOption)
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", unexpectedOption));
         Assert.Equal($"Unrecognized option '{unexpectedOption}'", exception.Message);
     }
 
@@ -743,9 +736,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", unexpectedOption)
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", unexpectedOption));
         Assert.Equal($"Unrecognized option '{unexpectedOption}'", exception.Message);
     }
 
@@ -784,9 +776,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", unexpectedOption)
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", unexpectedOption));
         Assert.Equal($"Unrecognized option '{unexpectedOption}'", exception.Message);
     }
 
@@ -827,9 +818,8 @@ public class CommandLineApplicationTests
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("k", unexpectedOption, "run")
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("k", unexpectedOption, "run"));
         Assert.Equal($"Unrecognized option '{unexpectedOption}'", exception.Message);
     }
 
@@ -892,13 +882,11 @@ public class CommandLineApplicationTests
         app.Command(
             "run",
             c =>
-                c.OnExecute(
-                    () =>
-                    {
-                        commandRan = true;
-                        return 0;
-                    }
-                )
+                c.OnExecute(() =>
+                {
+                    commandRan = true;
+                    return 0;
+                })
         );
         app.OnExecute(() => 0);
 
@@ -920,13 +908,11 @@ public class CommandLineApplicationTests
         app.Command(
             "run",
             c =>
-                c.OnExecute(
-                    () =>
-                    {
-                        commandRan = true;
-                        return 0;
-                    }
-                )
+                c.OnExecute(() =>
+                {
+                    commandRan = true;
+                    return 0;
+                })
         );
         app.OnExecute(() => 0);
 
@@ -955,13 +941,11 @@ public class CommandLineApplicationTests
             "subcmd",
             c =>
             {
-                c.OnExecute(
-                    () =>
-                    {
-                        optionAValue = optionA.Value();
-                        return 0;
-                    }
-                );
+                c.OnExecute(() =>
+                {
+                    optionAValue = optionA.Value();
+                    return 0;
+                });
             }
         );
 
@@ -1058,15 +1042,13 @@ public class CommandLineApplicationTests
                             inherited: true
                         );
                         s2.HelpOption("-h|--help");
-                        s2.OnExecute(
-                            () =>
-                            {
-                                globalOptionValue = g.Value();
-                                nest1OptionValue = n1.Value();
-                                nest2OptionValue = n2.Value();
-                                return 0;
-                            }
-                        );
+                        s2.OnExecute(() =>
+                        {
+                            globalOptionValue = g.Value();
+                            nest1OptionValue = n1.Value();
+                            nest2OptionValue = n2.Value();
+                            return 0;
+                        });
                     }
                 );
             }
@@ -1084,12 +1066,10 @@ public class CommandLineApplicationTests
         Assert.Contains(subcmd2.GetOptions(), o => o.LongName == "nest1");
         Assert.Contains(subcmd2.GetOptions(), o => o.LongName == "global");
 
-        Assert.Throws<CommandParsingException>(
-            () => app.Execute("--nest2", "N2", "--nest1", "N1", "-g", "G")
-        );
-        Assert.Throws<CommandParsingException>(
-            () => app.Execute("lvl1", "--nest2", "N2", "--nest1", "N1", "-g", "G")
-        );
+        Assert.Throws<CommandParsingException>(() =>
+            app.Execute("--nest2", "N2", "--nest1", "N1", "-g", "G"));
+        Assert.Throws<CommandParsingException>(() =>
+            app.Execute("lvl1", "--nest2", "N2", "--nest1", "N1", "-g", "G"));
 
         app.Execute("lvl1", "lvl2", "--nest2", "N2", "-g", "G", "--nest1", "N1");
         Assert.Equal("G", globalOptionValue);
@@ -1471,9 +1451,8 @@ Examples:
             }
         );
 
-        var exception = Assert.Throws<CommandParsingException>(
-            () => app.Execute("test", firstOption)
-        );
+        var exception = Assert.Throws<CommandParsingException>(() =>
+            app.Execute("test", firstOption));
 
         Assert.Equal($"Unrecognized option '{firstOption}'", exception.Message);
     }

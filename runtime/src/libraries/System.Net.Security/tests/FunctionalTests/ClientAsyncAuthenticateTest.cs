@@ -44,14 +44,12 @@ namespace System.Net.Security.Tests
         public async Task ClientAsyncAuthenticate_ServerNoEncryption_NoConnect()
         {
             // Don't use Tls13 since we are trying to use NullEncryption
-            await Assert.ThrowsAsync<AuthenticationException>(
-                () =>
-                    ClientAsyncSslHelper(
-                        EncryptionPolicy.NoEncryption,
-                        SslProtocolSupport.DefaultSslProtocols,
-                        SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12
-                    )
-            );
+            await Assert.ThrowsAsync<AuthenticationException>(() =>
+                ClientAsyncSslHelper(
+                    EncryptionPolicy.NoEncryption,
+                    SslProtocolSupport.DefaultSslProtocols,
+                    SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12
+                ));
         }
 
         [Theory]
@@ -85,9 +83,8 @@ namespace System.Net.Security.Tests
             Type expectedException
         )
         {
-            Exception e = await Record.ExceptionAsync(
-                () => ClientAsyncSslHelper(serverProtocol, clientProtocol)
-            );
+            Exception e = await Record.ExceptionAsync(() =>
+                ClientAsyncSslHelper(serverProtocol, clientProtocol));
             Assert.NotNull(e);
             Assert.IsAssignableFrom(expectedException, e);
         }

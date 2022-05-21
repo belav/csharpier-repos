@@ -16,37 +16,30 @@ namespace System.Xml.XmlResolver.Tests
             var xmlResolver = new XmlPreloadedResolver();
             Assert.Throws<ArgumentNullException>(() => xmlResolver.Add(null, new byte[22]));
 
-            Assert.Throws<ArgumentNullException>(
-                () => xmlResolver.Add(new Uri("https://html"), null as byte[])
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlResolver.Add(new Uri("https://html"), null as byte[]));
 
             Assert.Throws<ArgumentNullException>(() => xmlResolver.Add(null, null, 0, 0));
-            Assert.Throws<ArgumentNullException>(
-                () => xmlResolver.Add(new Uri("https://html"), null, 0, 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => xmlResolver.Add(new Uri("https://html"), new byte[22], -1, 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => xmlResolver.Add(new Uri("https://html"), new byte[22], 0, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => xmlResolver.Add(new Uri("https://html"), new byte[11], 5, 20)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlResolver.Add(new Uri("https://html"), null, 0, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                xmlResolver.Add(new Uri("https://html"), new byte[22], -1, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                xmlResolver.Add(new Uri("https://html"), new byte[22], 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                xmlResolver.Add(new Uri("https://html"), new byte[11], 5, 20));
 
             //No Exception should be thrown for the below cases as these are border cases
             xmlResolver.Add(new Uri("https://html"), new byte[0], 0, 0);
             xmlResolver.Add(new Uri("https://html"), new byte[5], 0, 5);
 
             Assert.Throws<ArgumentNullException>(() => xmlResolver.Add(null, new MemoryStream()));
-            Assert.Throws<ArgumentNullException>(
-                () => xmlResolver.Add(new Uri("https://html"), null as MemoryStream)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlResolver.Add(new Uri("https://html"), null as MemoryStream));
 
             Assert.Throws<ArgumentNullException>(() => xmlResolver.Add(null, string.Empty));
-            Assert.Throws<ArgumentNullException>(
-                () => xmlResolver.Add(new Uri("https://html"), null as string)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlResolver.Add(new Uri("https://html"), null as string));
         }
 
         [Fact]

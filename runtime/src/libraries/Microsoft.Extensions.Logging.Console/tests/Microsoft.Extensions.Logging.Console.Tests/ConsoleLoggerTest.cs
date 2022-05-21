@@ -408,9 +408,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var logger = (ILogger)t.Logger;
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(
-                () => logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                logger.Log<object>(LogLevel.Trace, 1, "empty", new Exception(), null));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1516,9 +1515,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void ConsoleLoggerOptions_InvalidFormat_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConsoleLoggerOptions() { Format = (ConsoleLoggerFormat)10 });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

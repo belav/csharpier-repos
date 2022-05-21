@@ -107,9 +107,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => handler.MaxAutomaticRedirections = redirects
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    handler.MaxAutomaticRedirections = redirects);
             }
         }
 
@@ -123,9 +122,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => handler.MaxRequestContentBufferSize = value
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    handler.MaxRequestContentBufferSize = value);
             }
         }
 #endif
@@ -417,9 +415,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.GetStringAsync(uri)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.GetStringAsync(uri));
                     }
                 },
                 server =>
@@ -1308,9 +1305,8 @@ namespace System.Net.Http.Functional.Tests
             req.Headers.TransferEncodingChunked = true;
             using (HttpClient c = CreateHttpClient())
             {
-                HttpRequestException error = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => c.SendAsync(TestAsync, req)
-                );
+                HttpRequestException error = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    c.SendAsync(TestAsync, req));
                 Assert.IsType<InvalidOperationException>(error.InnerException);
             }
         }
@@ -1455,36 +1451,28 @@ namespace System.Net.Http.Functional.Tests
                             );
 
                             // Not supported operations
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.BeginWrite(new byte[1], 0, 1, null, null)
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.BeginWrite(new byte[1], 0, 1, null, null));
                             if (!responseStream.CanSeek)
                             {
                                 Assert.Throws<NotSupportedException>(() => responseStream.Length);
                                 Assert.Throws<NotSupportedException>(() => responseStream.Position);
-                                Assert.Throws<NotSupportedException>(
-                                    () => responseStream.Position = 0
-                                );
-                                Assert.Throws<NotSupportedException>(
-                                    () => responseStream.Seek(0, SeekOrigin.Begin)
-                                );
+                                Assert.Throws<NotSupportedException>(() =>
+                                    responseStream.Position = 0);
+                                Assert.Throws<NotSupportedException>(() =>
+                                    responseStream.Seek(0, SeekOrigin.Begin));
                             }
                             Assert.Throws<NotSupportedException>(() => responseStream.SetLength(0));
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.Write(new byte[1], 0, 1)
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.Write(new byte[1], 0, 1));
 #if !NETFRAMEWORK
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.Write(new Span<byte>(new byte[1]))
-                            );
-                            await Assert.ThrowsAsync<NotSupportedException>(
-                                async () =>
-                                    await responseStream.WriteAsync(new Memory<byte>(new byte[1]))
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.Write(new Span<byte>(new byte[1])));
+                            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                                await responseStream.WriteAsync(new Memory<byte>(new byte[1])));
 #endif
-                            await Assert.ThrowsAsync<NotSupportedException>(
-                                async () => await responseStream.WriteAsync(new byte[1], 0, 1)
-                            );
+                            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                                await responseStream.WriteAsync(new byte[1], 0, 1));
                             Assert.Throws<NotSupportedException>(() => responseStream.WriteByte(1));
 
                             // Invalid arguments
@@ -1492,105 +1480,73 @@ namespace System.Net.Http.Functional.Tests
                             var disposedStream = new MemoryStream();
                             disposedStream.Dispose();
                             Assert.Throws<ArgumentNullException>(() => responseStream.CopyTo(null));
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.CopyTo(Stream.Null, 0)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, 0, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, -1, default);
-                                }
-                            );
-                            Assert.Throws<NotSupportedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(nonWritableStream, 100, default);
-                                }
-                            );
-                            Assert.Throws<ObjectDisposedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(disposedStream, 100, default);
-                                }
-                            );
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.CopyTo(Stream.Null, 0));
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, 0, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, -1, default);
+                            });
+                            Assert.Throws<NotSupportedException>(() =>
+                            {
+                                responseStream.CopyToAsync(nonWritableStream, 100, default);
+                            });
+                            Assert.Throws<ObjectDisposedException>(() =>
+                            {
+                                responseStream.CopyToAsync(disposedStream, 100, default);
+                            });
                             if (PlatformDetection.IsNotBrowser)
                             {
-                                Assert.Throws<ArgumentNullException>(
-                                    () => responseStream.Read(null, 0, 100)
-                                );
-                                Assert.Throws<ArgumentOutOfRangeException>(
-                                    () => responseStream.Read(new byte[1], -1, 1)
-                                );
-                                Assert.ThrowsAny<ArgumentException>(
-                                    () => responseStream.Read(new byte[1], 2, 1)
-                                );
-                                Assert.Throws<ArgumentOutOfRangeException>(
-                                    () => responseStream.Read(new byte[1], 0, -1)
-                                );
-                                Assert.ThrowsAny<ArgumentException>(
-                                    () => responseStream.Read(new byte[1], 0, 2)
-                                );
+                                Assert.Throws<ArgumentNullException>(() =>
+                                    responseStream.Read(null, 0, 100));
+                                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    responseStream.Read(new byte[1], -1, 1));
+                                Assert.ThrowsAny<ArgumentException>(() =>
+                                    responseStream.Read(new byte[1], 2, 1));
+                                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    responseStream.Read(new byte[1], 0, -1));
+                                Assert.ThrowsAny<ArgumentException>(() =>
+                                    responseStream.Read(new byte[1], 0, 2));
                             }
-                            Assert.Throws<ArgumentNullException>(
-                                () => responseStream.BeginRead(null, 0, 100, null, null)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.BeginRead(new byte[1], -1, 1, null, null)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.BeginRead(new byte[1], 2, 1, null, null)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.BeginRead(new byte[1], 0, -1, null, null)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.BeginRead(new byte[1], 0, 2, null, null)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () => responseStream.EndRead(null)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(null, 0, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], -1, 1, default);
-                                }
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 2, 1, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 0, -1, default);
-                                }
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 0, 2, default);
-                                }
-                            );
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.BeginRead(null, 0, 100, null, null));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.BeginRead(new byte[1], -1, 1, null, null));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.BeginRead(new byte[1], 2, 1, null, null));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.BeginRead(new byte[1], 0, -1, null, null));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.BeginRead(new byte[1], 0, 2, null, null));
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.EndRead(null));
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.ReadAsync(null, 0, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], -1, 1, default);
+                            });
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 2, 1, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 0, -1, default);
+                            });
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 0, 2, default);
+                            });
 
                             // Various forms of reading
                             var buffer = new byte[1];
@@ -1827,36 +1783,28 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Equal(PlatformDetection.IsBrowser, responseStream.CanSeek);
 
                             // Not supported operations
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.BeginWrite(new byte[1], 0, 1, null, null)
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.BeginWrite(new byte[1], 0, 1, null, null));
                             if (!responseStream.CanSeek)
                             {
                                 Assert.Throws<NotSupportedException>(() => responseStream.Length);
                                 Assert.Throws<NotSupportedException>(() => responseStream.Position);
-                                Assert.Throws<NotSupportedException>(
-                                    () => responseStream.Position = 0
-                                );
-                                Assert.Throws<NotSupportedException>(
-                                    () => responseStream.Seek(0, SeekOrigin.Begin)
-                                );
+                                Assert.Throws<NotSupportedException>(() =>
+                                    responseStream.Position = 0);
+                                Assert.Throws<NotSupportedException>(() =>
+                                    responseStream.Seek(0, SeekOrigin.Begin));
                             }
                             Assert.Throws<NotSupportedException>(() => responseStream.SetLength(0));
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.Write(new byte[1], 0, 1)
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.Write(new byte[1], 0, 1));
 #if !NETFRAMEWORK
-                            Assert.Throws<NotSupportedException>(
-                                () => responseStream.Write(new Span<byte>(new byte[1]))
-                            );
-                            await Assert.ThrowsAsync<NotSupportedException>(
-                                async () =>
-                                    await responseStream.WriteAsync(new Memory<byte>(new byte[1]))
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                responseStream.Write(new Span<byte>(new byte[1])));
+                            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                                await responseStream.WriteAsync(new Memory<byte>(new byte[1])));
 #endif
-                            await Assert.ThrowsAsync<NotSupportedException>(
-                                async () => await responseStream.WriteAsync(new byte[1], 0, 1)
-                            );
+                            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                                await responseStream.WriteAsync(new byte[1], 0, 1));
                             Assert.Throws<NotSupportedException>(() => responseStream.WriteByte(1));
 
                             // Invalid arguments
@@ -1864,108 +1812,74 @@ namespace System.Net.Http.Functional.Tests
                             var disposedStream = new MemoryStream();
                             disposedStream.Dispose();
                             Assert.Throws<ArgumentNullException>(() => responseStream.CopyTo(null));
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.CopyTo(Stream.Null, 0)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, 0, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, -1, default);
-                                }
-                            );
-                            Assert.Throws<NotSupportedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(nonWritableStream, 100, default);
-                                }
-                            );
-                            Assert.Throws<ObjectDisposedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(disposedStream, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () => responseStream.Read(null, 0, 100)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.Read(new byte[1], -1, 1)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.Read(new byte[1], 2, 1)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.Read(new byte[1], 0, -1)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.Read(new byte[1], 0, 2)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () => responseStream.BeginRead(null, 0, 100, null, null)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.BeginRead(new byte[1], -1, 1, null, null)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.BeginRead(new byte[1], 2, 1, null, null)
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () => responseStream.BeginRead(new byte[1], 0, -1, null, null)
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () => responseStream.BeginRead(new byte[1], 0, 2, null, null)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () => responseStream.EndRead(null)
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyTo(null);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.Read(null, 0, 100);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(null, 0, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.BeginRead(null, 0, 100, null, null);
-                                }
-                            );
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.CopyTo(Stream.Null, 0));
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, 0, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, -1, default);
+                            });
+                            Assert.Throws<NotSupportedException>(() =>
+                            {
+                                responseStream.CopyToAsync(nonWritableStream, 100, default);
+                            });
+                            Assert.Throws<ObjectDisposedException>(() =>
+                            {
+                                responseStream.CopyToAsync(disposedStream, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.Read(null, 0, 100));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.Read(new byte[1], -1, 1));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.Read(new byte[1], 2, 1));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.Read(new byte[1], 0, -1));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.Read(new byte[1], 0, 2));
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.BeginRead(null, 0, 100, null, null));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.BeginRead(new byte[1], -1, 1, null, null));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.BeginRead(new byte[1], 2, 1, null, null));
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                responseStream.BeginRead(new byte[1], 0, -1, null, null));
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                                responseStream.BeginRead(new byte[1], 0, 2, null, null));
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.EndRead(null));
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyTo(null);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.Read(null, 0, 100);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.ReadAsync(null, 0, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.BeginRead(null, 0, 100, null, null);
+                            });
 
                             // Empty reads
                             var buffer = new byte[1];
@@ -2099,12 +2013,10 @@ namespace System.Net.Http.Functional.Tests
                                     } // Dispose the handler while requests are still outstanding
 
                                     // Requests 1 and 2 should be canceled as we haven't finished receiving their headers
-                                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                                        () => get1
-                                    );
-                                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                                        () => get2
-                                    );
+                                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                                        get1);
+                                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                                        get2);
 
                                     // Request 3 should still be active, and we should be able to receive all of the data.
                                     unblockServers.SetResult(true);
@@ -2535,13 +2447,11 @@ namespace System.Net.Http.Functional.Tests
                         {
                             Version = UseVersion
                         };
-                        initialMessage.Content = new ThrowingContent(
-                            () => new ThrowingContentException()
-                        );
+                        initialMessage.Content = new ThrowingContent(() =>
+                            new ThrowingContentException());
                         initialMessage.Headers.ExpectContinue = true;
-                        await Assert.ThrowsAsync<ThrowingContentException>(
-                            () => client.SendAsync(TestAsync, initialMessage)
-                        );
+                        await Assert.ThrowsAsync<ThrowingContentException>(() =>
+                            client.SendAsync(TestAsync, initialMessage));
 
                         clientFinished.SetResult(true);
                     }
@@ -2740,9 +2650,8 @@ namespace System.Net.Http.Functional.Tests
 
                         Assert.Same(
                             error,
-                            await Assert.ThrowsAsync<FormatException>(
-                                () => client.PostAsync(uri, content)
-                            )
+                            await Assert.ThrowsAsync<FormatException>(() =>
+                                client.PostAsync(uri, content))
                         );
                     }
                 }
@@ -2966,9 +2875,8 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient())
             {
                 await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(invalidUri));
-                await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetStringAsync(invalidUri)
-                );
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetStringAsync(invalidUri));
             }
         }
 
@@ -2982,22 +2890,19 @@ namespace System.Net.Http.Functional.Tests
             using var invoker = new HttpMessageInvoker(CreateHttpClientHandler());
 
             var request = new HttpRequestMessage(HttpMethod.Get, (Uri)null);
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => invoker.SendAsync(request, CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                invoker.SendAsync(request, CancellationToken.None));
 
             request = new HttpRequestMessage(
                 HttpMethod.Get,
                 new Uri("/relative", UriKind.Relative)
             );
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => invoker.SendAsync(request, CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                invoker.SendAsync(request, CancellationToken.None));
 
             request = new HttpRequestMessage(HttpMethod.Get, new Uri("foo://foo.bar"));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => invoker.SendAsync(request, CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                invoker.SendAsync(request, CancellationToken.None));
         }
     }
 }

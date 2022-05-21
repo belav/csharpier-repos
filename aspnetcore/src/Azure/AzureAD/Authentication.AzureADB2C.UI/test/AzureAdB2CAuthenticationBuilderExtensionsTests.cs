@@ -254,9 +254,8 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme));
 
         Assert.Equal("A scheme with the name 'AzureADB2C' was already added.", exception.Message);
     }
@@ -281,9 +280,8 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
             + "The Open ID Connect scheme 'AzureADB2COpenID' is already mapped to the Azure Active Directory B2C scheme 'AzureADB2C'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme));
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -308,9 +306,8 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
             + "The cookie scheme 'AzureADB2CCookie' is already mapped to the Azure Active Directory B2C scheme 'AzureADB2C'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme));
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -477,9 +474,8 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
         var azureADB2COptionsMonitor = provider.GetService<IOptionsMonitor<AzureADB2COptions>>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme));
 
         Assert.Equal(
             "A scheme with the name 'AzureADB2CBearer' was already added.",
@@ -511,9 +507,8 @@ public class AzureADB2CAuthenticationBuilderExtensionsTests
             + "The JSON Web Token Bearer scheme 'AzureADB2CJwtBearer' is already mapped to the Azure Active Directory B2C scheme 'AzureADB2CBearer'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            azureADB2COptionsMonitor.Get(AzureADB2CDefaults.AuthenticationScheme));
 
         Assert.Equal(expectedMessage, exception.Message);
     }

@@ -5736,19 +5736,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Children), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await collectionEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                collectionEntry.Load();
-                            }
+                            await collectionEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            collectionEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5776,19 +5774,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Children), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await collectionEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                collectionEntry.Load();
-                            }
+                            await collectionEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            collectionEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5816,19 +5812,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Children), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await collectionEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                collectionEntry.Load();
-                            }
+                            await collectionEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            collectionEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5856,19 +5850,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Child.Parent), nameof(Child)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5896,19 +5888,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Child.Parent), nameof(Child)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5936,19 +5926,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Child.Parent), nameof(Child)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -5976,19 +5964,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Single), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -6016,19 +6002,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Single), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }
@@ -6056,19 +6040,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(Parent.Single), nameof(Parent)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await referenceEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                referenceEntry.Load();
-                            }
+                            await referenceEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            referenceEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }

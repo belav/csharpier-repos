@@ -156,9 +156,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act & Assert
                 server = await CreateServerAsync(port, transferMode);
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri));
             }
         }
 
@@ -201,9 +200,8 @@ namespace System.Web.Http.SelfHost
             {
                 // Arrange & Act & Assert
                 server = await CreateServerAsync(port, transferMode);
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    new HttpClient(server).GetAsync(BaseUri(port, transferMode) + uri));
             }
         }
 
@@ -439,12 +437,10 @@ namespace System.Web.Http.SelfHost
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
-                return Task.Factory.StartNew(
-                    () =>
-                    {
-                        throw new InvalidOperationException("ThrowBeforeWrite");
-                    }
-                );
+                return Task.Factory.StartNew(() =>
+                {
+                    throw new InvalidOperationException("ThrowBeforeWrite");
+                });
             }
         }
 
@@ -455,14 +451,12 @@ namespace System.Web.Http.SelfHost
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
-                return Task.Factory.StartNew(
-                    () =>
-                    {
-                        byte[] buffer = Encoding.UTF8.GetBytes("ThrowAfterWrite");
-                        stream.Write(buffer, 0, buffer.Length);
-                        throw new InvalidOperationException("ThrowAfterWrite");
-                    }
-                );
+                return Task.Factory.StartNew(() =>
+                {
+                    byte[] buffer = Encoding.UTF8.GetBytes("ThrowAfterWrite");
+                    stream.Write(buffer, 0, buffer.Length);
+                    throw new InvalidOperationException("ThrowAfterWrite");
+                });
             }
         }
 

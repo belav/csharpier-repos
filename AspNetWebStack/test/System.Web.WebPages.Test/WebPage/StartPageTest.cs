@@ -409,35 +409,33 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void ExecuteWithinInitTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                Utils.CreateHttpRuntime("/subfolder1/website1");
+                new HostingEnvironment();
+                var stringSet = Activator.CreateInstance(
+                    typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
+                    true
+                );
+                typeof(BuildManager)
+                    .GetField(
+                        "_forbiddenTopLevelDirectories",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
+                    .SetValue(new MockInitPage().GetBuildManager(), stringSet);
+                ;
+
+                var init = new MockInitPage()
                 {
-                    Utils.CreateHttpRuntime("/subfolder1/website1");
-                    new HostingEnvironment();
-                    var stringSet = Activator.CreateInstance(
-                        typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
-                        true
-                    );
-                    typeof(BuildManager)
-                        .GetField(
-                            "_forbiddenTopLevelDirectories",
-                            BindingFlags.Instance | BindingFlags.NonPublic
-                        )
-                        .SetValue(new MockInitPage().GetBuildManager(), stringSet);
-                    ;
+                    VirtualPath = "~/_pagestart.cshtml",
+                    ExecuteAction = p => { },
+                };
+                var page = Utils.CreatePage(p => { });
 
-                    var init = new MockInitPage()
-                    {
-                        VirtualPath = "~/_pagestart.cshtml",
-                        ExecuteAction = p => { },
-                    };
-                    var page = Utils.CreatePage(p => { });
+                Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
 
-                    Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
-
-                    var result = Utils.RenderWebPage(page);
-                }
-            );
+                var result = Utils.RenderWebPage(page);
+            });
         }
 
         [Fact]

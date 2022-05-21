@@ -64,60 +64,55 @@ namespace System.Net.Test.Common
 
         private void Start()
         {
-            Task.Run(
-                async () =>
+            Task.Run(async () =>
+            {
+                var activeTasks = new ConcurrentDictionary<Task, int>();
+
+                try
                 {
-                    var activeTasks = new ConcurrentDictionary<Task, int>();
-
-                    try
+                    while (true)
                     {
-                        while (true)
+                        Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
+
+                        var connectionTask = Task.Run(async () =>
                         {
-                            Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
+                            try
+                            {
+                                await ProcessConnection(s).ConfigureAwait(false);
+                            }
+                            catch (Exception ex)
+                            {
+                                EventSourceTestLogging.Log.TestAncillaryError(ex);
+                            }
+                        });
 
-                            var connectionTask = Task.Run(
-                                async () =>
-                                {
-                                    try
-                                    {
-                                        await ProcessConnection(s).ConfigureAwait(false);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        EventSourceTestLogging.Log.TestAncillaryError(ex);
-                                    }
-                                }
-                            );
-
-                            activeTasks.TryAdd(connectionTask, 0);
-                            _ = connectionTask.ContinueWith(
-                                t => activeTasks.TryRemove(connectionTask, out _),
-                                TaskContinuationOptions.ExecuteSynchronously
-                            );
-                        }
+                        activeTasks.TryAdd(connectionTask, 0);
+                        _ = connectionTask.ContinueWith(
+                            t => activeTasks.TryRemove(connectionTask, out _),
+                            TaskContinuationOptions.ExecuteSynchronously
+                        );
                     }
-                    catch (SocketException ex)
-                        when (ex.SocketErrorCode == SocketError.OperationAborted)
-                    {
-                        // caused during Dispose() to cancel the loop. ignore.
-                    }
-                    catch (Exception ex)
-                    {
-                        EventSourceTestLogging.Log.TestAncillaryError(ex);
-                    }
-
-                    try
-                    {
-                        await Task.WhenAll(activeTasks.Keys).ConfigureAwait(false);
-                    }
-                    catch (Exception ex)
-                    {
-                        EventSourceTestLogging.Log.TestAncillaryError(ex);
-                    }
-
-                    _serverStopped.Set();
                 }
-            );
+                catch (SocketException ex) when (ex.SocketErrorCode == SocketError.OperationAborted)
+                {
+                    // caused during Dispose() to cancel the loop. ignore.
+                }
+                catch (Exception ex)
+                {
+                    EventSourceTestLogging.Log.TestAncillaryError(ex);
+                }
+
+                try
+                {
+                    await Task.WhenAll(activeTasks.Keys).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    EventSourceTestLogging.Log.TestAncillaryError(ex);
+                }
+
+                _serverStopped.Set();
+            });
         }
 
         private async Task ProcessConnection(Socket s)
@@ -278,35 +273,31 @@ namespace System.Net.Test.Common
             NetworkStream serverStream = new NetworkStream(serverSocket);
 
             // Relay traffic to/from client and destination server.
-            Task clientCopyTask = Task.Run(
-                async () =>
+            Task clientCopyTask = Task.Run(async () =>
+            {
+                try
                 {
-                    try
-                    {
-                        await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
-                        serverSocket.Shutdown(SocketShutdown.Send);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleExceptions(ex);
-                    }
+                    await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
+                    serverSocket.Shutdown(SocketShutdown.Send);
                 }
-            );
+                catch (Exception ex)
+                {
+                    HandleExceptions(ex);
+                }
+            });
 
-            Task serverCopyTask = Task.Run(
-                async () =>
+            Task serverCopyTask = Task.Run(async () =>
+            {
+                try
                 {
-                    try
-                    {
-                        await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
-                        clientSocket.Shutdown(SocketShutdown.Send);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleExceptions(ex);
-                    }
+                    await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
+                    clientSocket.Shutdown(SocketShutdown.Send);
                 }
-            );
+                catch (Exception ex)
+                {
+                    HandleExceptions(ex);
+                }
+            });
 
             await Task.WhenAll(new[] { clientCopyTask, serverCopyTask }).ConfigureAwait(false);
 

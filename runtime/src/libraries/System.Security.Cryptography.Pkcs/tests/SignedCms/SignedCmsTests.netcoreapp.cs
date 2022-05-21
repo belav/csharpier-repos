@@ -600,12 +600,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 CmsSigner signer = new CmsSigner(cert);
                 signer.DigestAlgorithm = new Oid(Oids.RsaPkcs1Sha256);
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        cms.ComputeSignature(signer);
-                    }
-                );
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    cms.ComputeSignature(signer);
+                });
             }
         }
 

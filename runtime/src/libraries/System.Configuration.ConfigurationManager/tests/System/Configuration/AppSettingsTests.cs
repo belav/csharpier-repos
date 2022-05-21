@@ -194,9 +194,8 @@ namespace System.ConfigurationTests
             using (var tempConfig = new TempConfig(TestData.EmptyConfig))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(tempConfig.ExePath);
-                Assert.ThrowsAny<Exception>(
-                    () => config.AppSettings.SectionInformation.ConfigSource = configPath
-                );
+                Assert.ThrowsAny<Exception>(() =>
+                    config.AppSettings.SectionInformation.ConfigSource = configPath);
             }
         }
     }

@@ -77,9 +77,8 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
         using var serviceProvider = services.BuildServiceProvider();
 
         // Act and Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => serviceProvider.GetRequiredService<IValidationKeysStore>()
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            serviceProvider.GetRequiredService<IValidationKeysStore>());
 
         Assert.Equal(
             "No signing credential is configured by the 'IdentityServer:Key' configuration section.",

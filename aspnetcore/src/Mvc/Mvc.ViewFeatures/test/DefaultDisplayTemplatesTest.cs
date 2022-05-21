@@ -489,12 +489,10 @@ public class DefaultDisplayTemplatesTest
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
             .Returns(
-                Task.Run(
-                    () =>
-                    {
-                        throw new ArgumentException(expectedMessage);
-                    }
-                )
+                Task.Run(() =>
+                {
+                    throw new ArgumentException(expectedMessage);
+                })
             );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine

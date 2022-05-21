@@ -395,9 +395,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // Fetch the compilation, and then wait for it to be GC'ed, then fetch it again. This ensures that
             // finalizing a compilation more than once doesn't recreate things incorrectly or run the generator more than once.
             generatorRan = false;
-            var compilationReference = ObjectReference.CreateFromFactory(
-                () => project.GetCompilationAsync().Result
-            );
+            var compilationReference = ObjectReference.CreateFromFactory(() =>
+                project.GetCompilationAsync().Result);
             compilationReference.AssertReleased();
             var secondCompilation = await project.GetRequiredCompilationAsync(
                 CancellationToken.None
@@ -959,9 +958,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .Project;
 
             // Ensure generators are ran
-            var compilationReference = ObjectReference.CreateFromFactory(
-                () => project.GetCompilationAsync().Result
-            );
+            var compilationReference = ObjectReference.CreateFromFactory(() =>
+                project.GetCompilationAsync().Result);
 
             Assert.True(generatorRan);
             generatorRan = false;

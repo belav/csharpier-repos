@@ -279,22 +279,18 @@ namespace System.Net.Quic.Tests
                 {
                     await new[]
                     {
-                        Task.Run(
-                            async () =>
-                            {
-                                await serverFunction(serverConnection);
-                                serverFinished.Release();
-                                await clientFinished.WaitAsync();
-                            }
-                        ),
-                        Task.Run(
-                            async () =>
-                            {
-                                await clientFunction(clientConnection);
-                                clientFinished.Release();
-                                await serverFinished.WaitAsync();
-                            }
-                        )
+                        Task.Run(async () =>
+                        {
+                            await serverFunction(serverConnection);
+                            serverFinished.Release();
+                            await clientFinished.WaitAsync();
+                        }),
+                        Task.Run(async () =>
+                        {
+                            await clientFunction(clientConnection);
+                            clientFinished.Release();
+                            await serverFinished.WaitAsync();
+                        })
                     }.WhenAllOrAnyFailed(millisecondsTimeout);
                     await serverConnection.CloseAsync(ServerCloseErrorCode);
                     await clientConnection.CloseAsync(ClientCloseErrorCode);

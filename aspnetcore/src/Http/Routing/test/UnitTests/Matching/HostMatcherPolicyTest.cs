@@ -100,12 +100,10 @@ public class HostMatcherPolicyTest
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                policy.AppliesToEndpoints(endpoints);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            policy.AppliesToEndpoints(endpoints);
+        });
     }
 
     [Fact]
@@ -205,12 +203,10 @@ public class HostMatcherPolicyTest
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                policy.AppliesToEndpoints(endpoints);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            policy.AppliesToEndpoints(endpoints);
+        });
     }
 
     [Fact]

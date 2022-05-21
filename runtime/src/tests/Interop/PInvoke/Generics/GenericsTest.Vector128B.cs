@@ -130,27 +130,25 @@ unsafe partial class GenericsTest
 {
     private static void TestVector128B()
     {
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                GenericsNative.GetVector128B(
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false
-                )
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector128B(
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false
+            ));
 
         Vector128<bool> value2;
         GenericsNative.GetVector128BOut(
@@ -190,28 +188,26 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue2.GetElement(14), 1);
         Assert.Equal(tValue2.GetElement(15), 0);
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                GenericsNative.GetVector128BOut(
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    out Vector128<bool> value3
-                )
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector128BOut(
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                out Vector128<bool> value3
+            ));
 
         Vector128<bool>* value4 = GenericsNative.GetVector128BPtr(
             true,
@@ -249,31 +245,28 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue4->GetElement(14), 1);
         Assert.Equal(tValue4->GetElement(15), 0);
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                GenericsNative.GetVector128BRef(
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false,
-                    true,
-                    false
-                )
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector128BRef(
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false
+            ));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector128B(default, default)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128B(default, default));
 
         Vector128<bool>[] values = new Vector128<bool>[]
         {
@@ -284,22 +277,18 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            fixed (Vector128<bool>* pValues = &values[0])
             {
-                fixed (Vector128<bool>* pValues = &values[0])
-                {
-                    GenericsNative.AddVector128Bs(pValues, values.Length);
-                }
+                GenericsNative.AddVector128Bs(pValues, values.Length);
             }
-        );
+        });
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector128Bs(values, values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128Bs(values, values.Length));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector128Bs(in values[0], values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128Bs(in values[0], values.Length));
     }
 }

@@ -17,9 +17,9 @@ namespace System.Web.Http.Tracing
         private TraceKind _traceKind;
         private TraceLevel _traceLevel;
 
-        private Lazy<Dictionary<object, object>> _properties = new Lazy<Dictionary<object, object>>(
-            () => new Dictionary<object, object>()
-        );
+        private Lazy<Dictionary<object, object>> _properties = new Lazy<
+            Dictionary<object, object>
+        >(() => new Dictionary<object, object>());
 
         public TraceRecord(HttpRequestMessage request, string category, TraceLevel level)
         {

@@ -144,28 +144,18 @@ namespace System.IO.Pipes.Tests
             string hostName;
             Assert.True(InteropTest.TryGetHostName(out hostName));
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new NamedPipeClientStream("foobar" + hostName, "foobar")
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    new NamedPipeClientStream(
-                        hostName,
-                        "foobar" + Path.GetInvalidFileNameChars()[0]
-                    )
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new NamedPipeClientStream(hostName, "/tmp/foo\0bar")
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new NamedPipeClientStream(hostName, "/tmp/foobar/")
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new NamedPipeClientStream(hostName, "/")
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new NamedPipeClientStream(hostName, "\0")
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream("foobar" + hostName, "foobar"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream(hostName, "foobar" + Path.GetInvalidFileNameChars()[0]));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream(hostName, "/tmp/foo\0bar"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream(hostName, "/tmp/foobar/"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream(hostName, "/"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeClientStream(hostName, "\0"));
         }
 
         [Theory]
@@ -295,9 +285,8 @@ namespace System.IO.Pipes.Tests
                     IntPtr handle = safeHandle.DangerousGetHandle();
 
                     SafePipeHandle fakePipeHandle = new SafePipeHandle(handle, ownsHandle: false);
-                    Assert.Throws<IOException>(
-                        () => new NamedPipeClientStream(direction, false, true, fakePipeHandle)
-                    );
+                    Assert.Throws<IOException>(() =>
+                        new NamedPipeClientStream(direction, false, true, fakePipeHandle));
                 }
                 finally
                 {

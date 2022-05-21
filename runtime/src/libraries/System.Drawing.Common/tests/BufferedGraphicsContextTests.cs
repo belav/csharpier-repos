@@ -258,12 +258,10 @@ namespace System.Drawing.Tests
                         context.MaximumBuffer.Width + 1,
                         context.MaximumBuffer.Height + 1
                     );
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.Allocate(graphics, largeRectangle)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.Allocate(graphics, Rectangle.Empty)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        context.Allocate(graphics, largeRectangle));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        context.Allocate(graphics, Rectangle.Empty));
                 }
                 finally
                 {

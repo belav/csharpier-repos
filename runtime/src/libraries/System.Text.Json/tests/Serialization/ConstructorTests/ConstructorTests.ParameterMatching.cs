@@ -42,9 +42,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public Task JsonExceptionWhenAssigningNullToStruct()
         {
-            return Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D_With_ExtData>("null")
-            );
+            return Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D_With_ExtData>("null"));
         }
 
         [Fact]
@@ -329,18 +328,14 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task Null_AsArgument_To_ParameterThat_CanNotBeNull()
         {
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWrapper_For_Int_Point_3D_String>(
-                        @"{""MyInt"":null,""MyString"":""1""}"
-                    )
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWrapper_For_Int_Point_3D_String>(
-                        @"{""MyPoint3DStruct"":null,""MyString"":""1""}"
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWrapper_For_Int_Point_3D_String>(
+                    @"{""MyInt"":null,""MyString"":""1""}"
+                ));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWrapper_For_Int_Point_3D_String>(
+                    @"{""MyPoint3DStruct"":null,""MyString"":""1""}"
+                ));
         }
 
         [Fact]
@@ -394,105 +389,71 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Throw JsonException when null applied to types that can't be null. Behavior should align with properties deserialized with setters.
 
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}"
-                    )
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}"
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}"
+                ));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}"
+                ));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<NullArgTester>(@"{""Point3DStruct"":null}")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null}"
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(@"{""Point3DStruct"":null}"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(@"{""Point3DStruct"":null}"));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<NullArgTester>(@"{""Int"":null}")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<NullArgTester_Mutable>(@"{""Int"":null}")
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(@"{""Int"":null}"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(@"{""Int"":null}"));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<NullArgTester>(@"{""ImmutableArray"":null}")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""ImmutableArray"":null}"
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(@"{""ImmutableArray"":null}"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(@"{""ImmutableArray"":null}"));
 
             // Throw even when IgnoreNullValues is true for symmetry with property deserialization,
             // until https://github.com/dotnet/runtime/issues/30795 is addressed.
 
             var options = new JsonSerializerOptions { IgnoreNullValues = true };
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
-                        options
-                    )
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
+                    options
+                ));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
+                    options
+                ));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester>(
-                        @"{""Point3DStruct"":null}",
-                        options
-                    )
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(@"{""Point3DStruct"":null}", options));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
+                    options
+                ));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<NullArgTester>(@"{""Int"":null}", options)
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(@"{""Int"":null}", options));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
+                    options
+                ));
 
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester>(
-                        @"{""ImmutableArray"":null}",
-                        options
-                    )
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<NullArgTester_Mutable>(
-                        @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
-                        options
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester>(
+                    @"{""ImmutableArray"":null}",
+                    options
+                ));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<NullArgTester_Mutable>(
+                    @"{""Point3DStruct"":null,""Int"":null,""ImmutableArray"":null}",
+                    options
+                ));
         }
 
         [Fact]
@@ -663,12 +624,8 @@ namespace System.Text.Json.Serialization.Tests
             // More than seven arguments needs special casing and can be revisted.
             // Newtonsoft.Json fails in the same way.
             json = JsonSerializer.Serialize(Tuple.Create(1, 2, 3, 4, 5, 6, 7, 8));
-            await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(
-                        json
-                    )
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(json));
 
             // Invalid JSON representing a tuple with more than seven items yields an ArgumentException from the constructor.
             // System.ArgumentException : The last element of an eight element tuple must be a Tuple.
@@ -676,12 +633,10 @@ namespace System.Text.Json.Serialization.Tests
             // Fixing this needs special casing. Newtonsoft behaves the same way.
             string invalidJson =
                 @"{""Item1"":1,""Item2"":2,""Item3"":3,""Item4"":4,""Item5"":5,""Item6"":6,""Item7"":7,""Item1"":8}";
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(
-                        invalidJson
-                    )
-            );
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(
+                    invalidJson
+                ));
         }
 
         [Fact]
@@ -711,12 +666,10 @@ namespace System.Text.Json.Serialization.Tests
             // System.ArgumentException : The last element of an eight element tuple must be a Tuple.
             // We pass the number 8, not a new Tuple<int>(default(int)).
             // Fixing this needs special casing. Newtonsoft behaves the same way.
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    Serializer.DeserializeWrapper<
-                        Tuple<int, string, int, string, string, int, Point_3D_Struct, int>
-                    >(input)
-            );
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                Serializer.DeserializeWrapper<
+                    Tuple<int, string, int, string, string, int, Point_3D_Struct, int>
+                >(input));
         }
 
         [Fact]
@@ -924,16 +877,14 @@ namespace System.Text.Json.Serialization.Tests
 
                 string ctorAsString = sb.ToString();
 
-                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    () => Serializer.DeserializeWrapper<T>(input)
-                );
+                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    Serializer.DeserializeWrapper<T>(input));
                 string strEx = ex.ToString();
                 Assert.Contains(ctorAsString, strEx);
                 Assert.Contains(type.ToString(), strEx);
 
-                ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    () => Serializer.DeserializeWrapper<T>("{}")
-                );
+                ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    Serializer.DeserializeWrapper<T>("{}"));
                 strEx = ex.ToString();
                 Assert.Contains(ctorAsString, strEx);
                 Assert.Contains(type.ToString(), strEx);
@@ -949,9 +900,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Null(
                 await Serializer.DeserializeWrapper<Class_With_Ctor_With_65_Params>("null")
             );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Struct_With_Ctor_With_65_Params>("null")
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Struct_With_Ctor_With_65_Params>("null"));
         }
 
         [Fact]
@@ -1169,9 +1119,8 @@ namespace System.Text.Json.Serialization.Tests
                 PropertyNamingPolicy = new NullNamingPolicy()
             };
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper<Point_ExtendedPropNames>("{}", options)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Point_ExtendedPropNames>("{}", options));
         }
 
         [Fact]
@@ -1262,29 +1211,22 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task InvalidJsonFails()
         {
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D>("{1")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D>("{x")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D>("{{")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D>("{true")
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D>("{1"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D>("{x"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D>("{{"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D>("{true"));
 
             // Also test deserialization of objects with parameterless ctors
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D_Struct>("{1")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D_Struct>("{x")
-            );
-            await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<Point_2D_Struct>("{true")
-            );
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D_Struct>("{1"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D_Struct>("{x"));
+            await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Point_2D_Struct>("{true"));
         }
 
         [Fact]

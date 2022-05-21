@@ -277,9 +277,8 @@ namespace System.Collections.Specialized.Tests
 
             // As explicit interface implementation
             Assert.Throws<ArgumentNullException>(() => ((ICollection)collection).CopyTo(null, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((ICollection)collection).CopyTo(data, -1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((ICollection)collection).CopyTo(data, -1));
             if (data.Length > 0)
             {
                 AssertExtensions.Throws<ArgumentException>(
@@ -431,25 +430,21 @@ namespace System.Collections.Specialized.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = ElementNotPresent);
             Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = null);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => collection[data.Length] = ElementNotPresent
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                collection[data.Length] = ElementNotPresent);
             Assert.Throws<ArgumentOutOfRangeException>(() => collection[data.Length] = null);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => collection[data.Length]);
 
             // As explicitly implementing the interface
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((IList)collection)[-1] = ElementNotPresent
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection)[-1] = ElementNotPresent);
             Assert.Throws<ArgumentOutOfRangeException>(() => ((IList)collection)[-1] = null);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((IList)collection)[data.Length] = ElementNotPresent
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((IList)collection)[data.Length] = null
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection)[data.Length] = ElementNotPresent);
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection)[data.Length] = null);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => ((IList)collection)[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => ((IList)collection)[data.Length]);
@@ -561,20 +556,16 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(StringCollection_Duplicates_Data))]
         public static void Insert_ArgumentInvalidTest(StringCollection collection, string[] data)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => collection.Insert(-1, ElementNotPresent)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => collection.Insert(data.Length + 1, ElementNotPresent)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                collection.Insert(-1, ElementNotPresent));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                collection.Insert(data.Length + 1, ElementNotPresent));
 
             // And as explicit interface implementation
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((IList)collection).Insert(-1, ElementNotPresent)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ((IList)collection).Insert(data.Length + 1, ElementNotPresent)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection).Insert(-1, ElementNotPresent));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection).Insert(data.Length + 1, ElementNotPresent));
         }
 
         [Fact]

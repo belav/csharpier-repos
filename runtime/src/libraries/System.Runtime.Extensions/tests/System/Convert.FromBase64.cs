@@ -191,12 +191,10 @@ namespace System.Tests
             string input = "test";
             char[] inputChars = input.ToCharArray();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Convert.FromBase64CharArray(inputChars, -1, inputChars.Length)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Convert.FromBase64CharArray(inputChars, inputChars.Length, inputChars.Length)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, -1, inputChars.Length));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, inputChars.Length, inputChars.Length));
         }
 
         [Fact]
@@ -205,15 +203,12 @@ namespace System.Tests
             string input = "test";
             char[] inputChars = input.ToCharArray();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Convert.FromBase64CharArray(inputChars, 0, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Convert.FromBase64CharArray(inputChars, 0, inputChars.Length + 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Convert.FromBase64CharArray(inputChars, 1, inputChars.Length)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, inputChars.Length + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Convert.FromBase64CharArray(inputChars, 1, inputChars.Length));
         }
 
         [Fact]
@@ -310,9 +305,8 @@ namespace System.Tests
         private static void VerifyInvalidInput(string input)
         {
             char[] inputChars = input.ToCharArray();
-            Assert.Throws<FormatException>(
-                () => Convert.FromBase64CharArray(inputChars, 0, inputChars.Length)
-            );
+            Assert.Throws<FormatException>(() =>
+                Convert.FromBase64CharArray(inputChars, 0, inputChars.Length));
             Assert.Throws<FormatException>(() => Convert.FromBase64String(input));
         }
 

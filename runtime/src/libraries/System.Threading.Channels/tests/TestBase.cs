@@ -13,9 +13,8 @@ namespace System.Threading.Channels.Tests
         protected void AssertSynchronouslyCanceled(Task task, CancellationToken token)
         {
             Assert.Equal(TaskStatus.Canceled, task.Status);
-            OperationCanceledException oce = Assert.ThrowsAny<OperationCanceledException>(
-                () => task.GetAwaiter().GetResult()
-            );
+            OperationCanceledException oce = Assert.ThrowsAny<OperationCanceledException>(() =>
+                task.GetAwaiter().GetResult());
             if (PlatformDetection.IsNetCore)
             {
                 // Earlier netstandard versions didn't have the APIs to always make this possible.

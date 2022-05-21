@@ -52,12 +52,10 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    CustomAttributeExtensions.IsDefined(piWithAttributes, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                CustomAttributeExtensions.IsDefined(piWithAttributes, null);
+            });
         }
 
         [Fact]
@@ -90,15 +88,13 @@ namespace System.Reflection.Tests
                 );
             Assert.NotNull(attribute);
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute =
-                        CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_P>(
-                            piWithAttributes
-                        );
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute =
+                    CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_P>(
+                        piWithAttributes
+                    );
+            });
         }
 
         [Fact]
@@ -169,15 +165,13 @@ namespace System.Reflection.Tests
             );
             Assert.NotNull(attribute);
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        piWithAttributes,
-                        typeof(MyAttribute_AllowMultiple_P)
-                    );
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    piWithAttributes,
+                    typeof(MyAttribute_AllowMultiple_P)
+                );
+            });
 
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -190,15 +184,10 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        piWithAttributes,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(piWithAttributes, null);
+            });
         }
 
         [Fact]
@@ -252,15 +241,10 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    attributes = CustomAttributeExtensions.GetCustomAttributes(
-                        piWithAttributes,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                attributes = CustomAttributeExtensions.GetCustomAttributes(piWithAttributes, null);
+            });
         }
 
         [Fact]

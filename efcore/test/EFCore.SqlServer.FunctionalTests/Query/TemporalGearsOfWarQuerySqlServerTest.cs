@@ -407,9 +407,8 @@ WHERE [g0].[Discriminator] = N'Officer'"
                 .Concat(ctx.Set<Gear>().TemporalAsOf(date2));
 
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => async ? query.ToListAsync() : Task.FromResult(query.ToList())
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    async ? query.ToListAsync() : Task.FromResult(query.ToList()))
             ).Message;
 
             Assert.Equal(

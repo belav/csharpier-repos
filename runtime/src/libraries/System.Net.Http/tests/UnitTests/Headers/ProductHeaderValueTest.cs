@@ -42,43 +42,31 @@ namespace System.Net.Http.Tests
                     new ProductHeaderValue(string.Empty);
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue(" x");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue("x ");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue("x y");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue(" x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue("x ");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue("x y");
+            });
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue("x", " y");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue("x", "y ");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductHeaderValue("x", "y z");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue("x", " y");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue("x", "y ");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductHeaderValue("x", "y z");
+            });
         }
 
         [Fact]
@@ -217,12 +205,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    ProductHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                ProductHeaderValue.Parse(input);
+            });
 
             Assert.False(ProductHeaderValue.TryParse(input, out ProductHeaderValue result));
             Assert.Null(result);

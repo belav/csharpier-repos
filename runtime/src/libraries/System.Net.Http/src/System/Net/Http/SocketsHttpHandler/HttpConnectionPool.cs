@@ -2397,44 +2397,40 @@ namespace System.Net.Http
             if (NetEventSource.Log.IsEnabled())
                 connection.Trace("");
 
-            Task.Run(
-                async () =>
+            Task.Run(async () =>
+            {
+                bool usable = await connection.WaitForAvailableStreamsAsync().ConfigureAwait(false);
+
+                if (NetEventSource.Log.IsEnabled())
+                    connection.Trace(
+                        $"WaitForAvailableStreamsAsync completed, {nameof(usable)}={usable}"
+                    );
+
+                if (usable)
                 {
-                    bool usable = await connection
-                        .WaitForAvailableStreamsAsync()
-                        .ConfigureAwait(false);
+                    ReturnHttp2Connection(connection, isNewConnection: false);
+                }
+                else
+                {
+                    // Connection has shut down.
+                    lock (SyncObj)
+                    {
+                        Debug.Assert(
+                            _availableHttp2Connections is null
+                                || !_availableHttp2Connections.Contains(connection)
+                        );
+                        Debug.Assert(_associatedHttp2ConnectionCount > 0);
+
+                        _associatedHttp2ConnectionCount--;
+
+                        CheckForHttp2ConnectionInjection();
+                    }
 
                     if (NetEventSource.Log.IsEnabled())
-                        connection.Trace(
-                            $"WaitForAvailableStreamsAsync completed, {nameof(usable)}={usable}"
-                        );
-
-                    if (usable)
-                    {
-                        ReturnHttp2Connection(connection, isNewConnection: false);
-                    }
-                    else
-                    {
-                        // Connection has shut down.
-                        lock (SyncObj)
-                        {
-                            Debug.Assert(
-                                _availableHttp2Connections is null
-                                    || !_availableHttp2Connections.Contains(connection)
-                            );
-                            Debug.Assert(_associatedHttp2ConnectionCount > 0);
-
-                            _associatedHttp2ConnectionCount--;
-
-                            CheckForHttp2ConnectionInjection();
-                        }
-
-                        if (NetEventSource.Log.IsEnabled())
-                            connection.Trace("HTTP2 connection no longer usable");
-                        connection.Dispose();
-                    }
+                        connection.Trace("HTTP2 connection no longer usable");
+                    connection.Dispose();
                 }
-            );
+            });
         }
 
         public void InvalidateHttp3Connection(Http3Connection connection)

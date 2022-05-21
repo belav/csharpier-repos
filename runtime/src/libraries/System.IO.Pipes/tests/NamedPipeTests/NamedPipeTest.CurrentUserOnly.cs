@@ -204,35 +204,33 @@ namespace System.IO.Pipes.Tests
             for (int i = 0; i < 3; i++)
             {
                 tasks.Add(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        var name = PipeStreamConformanceTests.GetUniquePipeName();
+                        using (
+                            var server = new NamedPipeServerStream(
+                                name,
+                                PipeDirection.InOut,
+                                1,
+                                PipeTransmissionMode.Byte,
+                                PipeOptions.CurrentUserOnly
+                            )
+                        )
                         {
-                            var name = PipeStreamConformanceTests.GetUniquePipeName();
                             using (
-                                var server = new NamedPipeServerStream(
+                                var client = new NamedPipeClientStream(
+                                    ".",
                                     name,
                                     PipeDirection.InOut,
-                                    1,
-                                    PipeTransmissionMode.Byte,
                                     PipeOptions.CurrentUserOnly
                                 )
                             )
                             {
-                                using (
-                                    var client = new NamedPipeClientStream(
-                                        ".",
-                                        name,
-                                        PipeDirection.InOut,
-                                        PipeOptions.CurrentUserOnly
-                                    )
-                                )
-                                {
-                                    // Should not fail to connect since both, the server and client have the same owner.
-                                    client.Connect();
-                                }
+                                // Should not fail to connect since both, the server and client have the same owner.
+                                client.Connect();
                             }
                         }
-                    )
+                    })
                 );
             }
 

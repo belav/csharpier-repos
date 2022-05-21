@@ -170,12 +170,10 @@ namespace Microsoft.Extensions.Hosting.Tests
                 )
                 .Build();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    host.Services.GetRequiredService<ServiceA>();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                host.Services.GetRequiredService<ServiceA>();
+            });
         }
 
         [Fact]

@@ -122,22 +122,20 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
         string expectedEncoding
     )
     {
-        var response = await aspNetProcess.SendRequest(
-            () =>
-            {
-                var request = new HttpRequestMessage(
-                    HttpMethod.Get,
-                    new Uri(aspNetProcess.ListeningUri, "/_framework/blazor.boot.json")
-                );
-                // These are the same as chrome
-                request.Headers.AcceptEncoding.Clear();
-                request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
-                request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
-                request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("br"));
+        var response = await aspNetProcess.SendRequest(() =>
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                new Uri(aspNetProcess.ListeningUri, "/_framework/blazor.boot.json")
+            );
+            // These are the same as chrome
+            request.Headers.AcceptEncoding.Clear();
+            request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
+            request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
+            request.Headers.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("br"));
 
-                return request;
-            }
-        );
+            return request;
+        });
         Assert.Equal(expectedEncoding, response.Content.Headers.ContentEncoding.Single());
     }
 

@@ -144,12 +144,10 @@ namespace Castle.Core.Internal.Tests
         {
             CreateDictionary();
 
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    var dummy = Dictionary[OtherItem.Key];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                var dummy = Dictionary[OtherItem.Key];
+            });
         }
 
         [Test]
@@ -557,12 +555,10 @@ namespace Castle.Core.Internal.Tests
             AddItem();
             RemoveItem();
 
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    var dummy = Dictionary[Item.Key];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                var dummy = Dictionary[Item.Key];
+            });
         }
 
         [Test]

@@ -213,9 +213,8 @@ public class RendererTest
 
         // Act
         var componentId = renderer.AssignRootComponentId(component);
-        var renderTask = renderer.Dispatcher.InvokeAsync(
-            () => renderer.RenderRootComponentAsync(componentId)
-        );
+        var renderTask = renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(componentId));
 
         // Assert
         Assert.False(renderTask.IsCompleted);
@@ -274,74 +273,72 @@ public class RendererTest
         // Act/Assert
         var componentId = renderer.AssignRootComponentId(component);
         var log = new ConcurrentQueue<(int id, NestedAsyncComponent.EventType @event)>();
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderRootComponentAsync(
-                    componentId,
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
+        await renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(
+                componentId,
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        [EventActionsName] = new Dictionary<
+                            int,
+                            IList<NestedAsyncComponent.ExecutionAction>
+                        >
                         {
-                            [EventActionsName] = new Dictionary<
-                                int,
-                                IList<NestedAsyncComponent.ExecutionAction>
-                            >
+                            [0] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [1] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                }
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
                             },
-                            [WhatToRenderName] = new Dictionary<
-                                int,
-                                Func<NestedAsyncComponent, RenderFragment>
-                            >
+                            [1] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = CreateRenderFactory(new[] { 1 }),
-                                [1] = CreateRenderFactory(Array.Empty<int>())
-                            },
-                            [LogName] = log
-                        }
-                    )
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
+                            }
+                        },
+                        [WhatToRenderName] = new Dictionary<
+                            int,
+                            Func<NestedAsyncComponent, RenderFragment>
+                        >
+                        {
+                            [0] = CreateRenderFactory(new[] { 1 }),
+                            [1] = CreateRenderFactory(Array.Empty<int>())
+                        },
+                        [LogName] = log
+                    }
                 )
-        );
+            ));
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -412,18 +409,16 @@ public class RendererTest
         var component1Id = renderer.AssignRootComponentId(component1);
 
         // Act/Assert 1: Its SetParametersAsync task remains incomplete
-        var renderTask1 = renderer.Dispatcher.InvokeAsync(
-            () => renderer.RenderRootComponentAsync(component1Id)
-        );
+        var renderTask1 = renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(component1Id));
         Assert.False(renderTask1.IsCompleted);
 
         // Arrange/Act 2: Can add a second root component while not quiescent
         var tcs2 = new TaskCompletionSource();
         var component2 = new AsyncComponent(tcs2.Task, 1);
         var component2Id = renderer.AssignRootComponentId(component2);
-        var renderTask2 = renderer.Dispatcher.InvokeAsync(
-            () => renderer.RenderRootComponentAsync(component2Id)
-        );
+        var renderTask2 = renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(component2Id));
 
         // Assert 2
         Assert.False(renderTask1.IsCompleted);
@@ -434,9 +429,8 @@ public class RendererTest
 
         // renderTask1 should not complete until we finish tcs2.
         // We can't really prove that absolutely, but at least show it doesn't happen during a certain time period.
-        await Assert.ThrowsAsync<TimeoutException>(
-            () => renderTask1.WaitAsync(TimeSpan.FromMilliseconds(250))
-        );
+        await Assert.ThrowsAsync<TimeoutException>(() =>
+            renderTask1.WaitAsync(TimeSpan.FromMilliseconds(250)));
         Assert.False(renderTask1.IsCompleted);
         Assert.False(renderTask2.IsCompleted);
 
@@ -473,9 +467,8 @@ public class RendererTest
         componentId = renderer.AssignRootComponentId(component);
 
         // Act
-        var renderTask = renderer.Dispatcher.InvokeAsync(
-            () => renderer.RenderRootComponentAsync(componentId.Value)
-        );
+        var renderTask = renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(componentId.Value));
 
         // Assert
         Assert.False(renderTask.IsCompleted);
@@ -493,72 +486,70 @@ public class RendererTest
         // Act/Assert
         var componentId = renderer.AssignRootComponentId(component);
         var log = new ConcurrentQueue<(int id, NestedAsyncComponent.EventType @event)>();
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderRootComponentAsync(
-                    componentId,
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
+        await renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(
+                componentId,
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        [EventActionsName] = new Dictionary<
+                            int,
+                            IList<NestedAsyncComponent.ExecutionAction>
+                        >
                         {
-                            [EventActionsName] = new Dictionary<
-                                int,
-                                IList<NestedAsyncComponent.ExecutionAction>
-                            >
+                            [0] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [1] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync
-                                    ),
-                                }
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
                             },
-                            [WhatToRenderName] = new Dictionary<
-                                int,
-                                Func<NestedAsyncComponent, RenderFragment>
-                            >
+                            [1] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = CreateRenderFactory(new[] { 1 }),
-                                [1] = CreateRenderFactory(Array.Empty<int>())
-                            },
-                            [LogName] = log
-                        }
-                    )
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync
+                                ),
+                            }
+                        },
+                        [WhatToRenderName] = new Dictionary<
+                            int,
+                            Func<NestedAsyncComponent, RenderFragment>
+                        >
+                        {
+                            [0] = CreateRenderFactory(new[] { 1 }),
+                            [1] = CreateRenderFactory(Array.Empty<int>())
+                        },
+                        [LogName] = log
+                    }
                 )
-        );
+            ));
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -577,73 +568,71 @@ public class RendererTest
         // Act/Assert
         var componentId = renderer.AssignRootComponentId(component);
         var log = new ConcurrentQueue<(int id, NestedAsyncComponent.EventType @event)>();
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderRootComponentAsync(
-                    componentId,
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
+        await renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(
+                componentId,
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        [EventActionsName] = new Dictionary<
+                            int,
+                            IList<NestedAsyncComponent.ExecutionAction>
+                        >
                         {
-                            [EventActionsName] = new Dictionary<
-                                int,
-                                IList<NestedAsyncComponent.ExecutionAction>
-                            >
+                            [0] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [1] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync
-                                    ),
-                                }
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
                             },
-                            [WhatToRenderName] = new Dictionary<
-                                int,
-                                Func<NestedAsyncComponent, RenderFragment>
-                            >
+                            [1] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = CreateRenderFactory(new[] { 1 }),
-                                [1] = CreateRenderFactory(Array.Empty<int>())
-                            },
-                            [LogName] = log
-                        }
-                    )
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync
+                                ),
+                            }
+                        },
+                        [WhatToRenderName] = new Dictionary<
+                            int,
+                            Func<NestedAsyncComponent, RenderFragment>
+                        >
+                        {
+                            [0] = CreateRenderFactory(new[] { 1 }),
+                            [1] = CreateRenderFactory(Array.Empty<int>())
+                        },
+                        [LogName] = log
+                    }
                 )
-        );
+            ));
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForChild = log.Where(l => l.id == 1).ToArray();
@@ -662,118 +651,116 @@ public class RendererTest
         // Act/Assert
         var componentId = renderer.AssignRootComponentId(component);
         var log = new ConcurrentQueue<(int id, NestedAsyncComponent.EventType @event)>();
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderRootComponentAsync(
-                    componentId,
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
+        await renderer.Dispatcher.InvokeAsync(() =>
+            renderer.RenderRootComponentAsync(
+                componentId,
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        [EventActionsName] = new Dictionary<
+                            int,
+                            IList<NestedAsyncComponent.ExecutionAction>
+                        >
                         {
-                            [EventActionsName] = new Dictionary<
-                                int,
-                                IList<NestedAsyncComponent.ExecutionAction>
-                            >
+                            [0] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        0,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [1] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        1,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [2] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        2,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        2,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        2,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        2,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                },
-                                [3] = new List<NestedAsyncComponent.ExecutionAction>
-                                {
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        3,
-                                        NestedAsyncComponent.EventType.OnInit
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        3,
-                                        NestedAsyncComponent.EventType.OnInitAsyncAsync,
-                                        async: true
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        3,
-                                        NestedAsyncComponent.EventType.OnParametersSet
-                                    ),
-                                    NestedAsyncComponent.ExecutionAction.On(
-                                        3,
-                                        NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
-                                        async: true
-                                    ),
-                                }
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    0,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
                             },
-                            [WhatToRenderName] = new Dictionary<
-                                int,
-                                Func<NestedAsyncComponent, RenderFragment>
-                            >
+                            [1] = new List<NestedAsyncComponent.ExecutionAction>
                             {
-                                [0] = CreateRenderFactory(new[] { 1, 2 }),
-                                [1] = CreateRenderFactory(new[] { 3 }),
-                                [2] = CreateRenderFactory(Array.Empty<int>()),
-                                [3] = CreateRenderFactory(Array.Empty<int>())
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    1,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
                             },
-                            [LogName] = log
-                        }
-                    )
+                            [2] = new List<NestedAsyncComponent.ExecutionAction>
+                            {
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    2,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    2,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    2,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    2,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
+                            },
+                            [3] = new List<NestedAsyncComponent.ExecutionAction>
+                            {
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    3,
+                                    NestedAsyncComponent.EventType.OnInit
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    3,
+                                    NestedAsyncComponent.EventType.OnInitAsyncAsync,
+                                    async: true
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    3,
+                                    NestedAsyncComponent.EventType.OnParametersSet
+                                ),
+                                NestedAsyncComponent.ExecutionAction.On(
+                                    3,
+                                    NestedAsyncComponent.EventType.OnParametersSetAsyncAsync,
+                                    async: true
+                                ),
+                            }
+                        },
+                        [WhatToRenderName] = new Dictionary<
+                            int,
+                            Func<NestedAsyncComponent, RenderFragment>
+                        >
+                        {
+                            [0] = CreateRenderFactory(new[] { 1, 2 }),
+                            [1] = CreateRenderFactory(new[] { 3 }),
+                            [2] = CreateRenderFactory(Array.Empty<int>()),
+                            [3] = CreateRenderFactory(Array.Empty<int>())
+                        },
+                        [LogName] = log
+                    }
                 )
-        );
+            ));
 
         var logForParent = log.Where(l => l.id == 0).ToArray();
         var logForFirstChild = log.Where(l => l.id == 1).ToArray();
@@ -916,9 +903,8 @@ public class RendererTest
             .AttributeEventHandlerId;
 
         // Assert: Cannot determine event args type
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => renderer.GetEventArgsType(eventHandlerId)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            renderer.GetEventArgsType(eventHandlerId));
         Assert.Contains("declares more than one parameter", ex.Message);
     }
 
@@ -941,9 +927,8 @@ public class RendererTest
             .AttributeEventHandlerId;
 
         // Assert: Cannot determine event args type
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => renderer.GetEventArgsType(eventHandlerId)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            renderer.GetEventArgsType(eventHandlerId));
         Assert.Contains($"must inherit from {typeof(EventArgs).FullName}", ex.Message);
     }
 
@@ -2402,12 +2387,10 @@ public class RendererTest
         var renderer = new TestRenderer();
 
         // Act/Assert
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(0, new EventArgs());
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(0, new EventArgs());
+        });
     }
 
     [Fact]
@@ -2718,12 +2701,10 @@ public class RendererTest
 
         // Act/Assert: If a disposed component requests a render, it's a no-op
         var renderHandle = ((FakeComponent)childComponent3).RenderHandle;
-        renderHandle.Dispatcher.InvokeAsync(
-            () =>
-                renderHandle.Render(
-                    builder => throw new NotImplementedException("Should not be invoked")
-                )
-        );
+        renderHandle.Dispatcher.InvokeAsync(() =>
+            renderHandle.Render(
+                builder => throw new NotImplementedException("Should not be invoked")
+            ));
         Assert.Equal(2, renderer.Batches.Count);
     }
 
@@ -3220,12 +3201,10 @@ public class RendererTest
         component.TriggerRender();
 
         // Act/Assert 2: Can no longer fire the original event, but can fire the new event
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(origEventHandlerId, args: null);
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(origEventHandlerId, args: null);
+        });
 
         Assert.Equal(1, eventCount);
         Assert.Equal(0, newEventCount);
@@ -3266,12 +3245,10 @@ public class RendererTest
         component.TriggerRender();
 
         // Act/Assert 2: Can no longer fire the original event
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(origEventHandlerId, args: null);
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(origEventHandlerId, args: null);
+        });
         Assert.Equal(1, eventCount);
     }
 
@@ -3322,12 +3299,10 @@ public class RendererTest
         component.TriggerRender();
 
         // Act/Assert 2: Can no longer fire the original event
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(eventHandlerId, args: null);
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(eventHandlerId, args: null);
+        });
         Assert.Equal(1, eventCount);
     }
 
@@ -3362,12 +3337,10 @@ public class RendererTest
         component.TriggerRender();
 
         // Act/Assert 2: Can no longer fire the original event
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(origEventHandlerId, args: null);
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(origEventHandlerId, args: null);
+        });
         Assert.Equal(1, eventCount);
     }
 
@@ -3974,12 +3947,10 @@ public class RendererTest
         var awaitableTask = render1TCS.Task.ContinueWith(_ => Task.Delay(1000)).Unwrap();
         render1TCS.SetResult(null);
         await awaitableTask;
-        var ex = await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return renderer.DispatchEventAsync(eventHandlerId, new EventArgs());
-            }
-        );
+        var ex = await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return renderer.DispatchEventAsync(eventHandlerId, new EventArgs());
+        });
         Assert.Contains(
             $"There is no event handler associated with this event. EventId: '{eventHandlerId}'.",
             ex.Message
@@ -5063,22 +5034,19 @@ public class RendererTest
     {
         // Arrange
         var renderer = new InvalidRecursiveRenderer();
-        var component = new CallbackOnRenderComponent(
-            () =>
-            {
-                // The renderer disallows one batch to be started inside another, because that
-                // would violate all kinds of state tracking invariants. It's not something that
-                // would ever happen except if you subclass the renderer and do something unsupported
-                // that commences batches from inside each other.
-                renderer.ProcessPendingRender();
-            }
-        );
+        var component = new CallbackOnRenderComponent(() =>
+        {
+            // The renderer disallows one batch to be started inside another, because that
+            // would violate all kinds of state tracking invariants. It's not something that
+            // would ever happen except if you subclass the renderer and do something unsupported
+            // that commences batches from inside each other.
+            renderer.ProcessPendingRender();
+        });
         var componentId = renderer.AssignRootComponentId(component);
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => renderer.RenderRootComponent(componentId)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            renderer.RenderRootComponent(componentId));
         Assert.Contains("Cannot start a batch when one is already in progress.", ex.Message);
     }
 
@@ -5113,16 +5081,13 @@ public class RendererTest
         // All public APIs on capturingComponent should be electrified now
         // Internal APIs don't have to be, because we won't call them at the wrong time
         Assert.Throws<InvalidOperationException>(() => parameterView.GetEnumerator());
-        Assert.Throws<InvalidOperationException>(
-            () => parameterView.GetValueOrDefault<object>("anything")
-        );
-        Assert.Throws<InvalidOperationException>(
-            () => parameterView.SetParameterProperties(new object())
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            parameterView.GetValueOrDefault<object>("anything"));
+        Assert.Throws<InvalidOperationException>(() =>
+            parameterView.SetParameterProperties(new object()));
         Assert.Throws<InvalidOperationException>(() => parameterView.ToDictionary());
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameterView.TryGetValue<object>("anything", out _)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameterView.TryGetValue<object>("anything", out _));
 
         // It's enough to assert about one of the messages
         Assert.Equal(
@@ -5184,9 +5149,8 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(component);
 
         // Act/Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => renderer.RenderRootComponentAsync(rootComponentId)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            renderer.RenderRootComponentAsync(rootComponentId));
         Assert.StartsWith(
             $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Element' was left unclosed.",
             ex.Message
@@ -5604,18 +5568,15 @@ public class RendererTest
         );
 
         // Assert: it's no longer known as a component
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-            {
-                var ex = Assert.Throws<ArgumentException>(
-                    () => renderer.RemoveRootComponent(rootComponentId)
-                );
-                Assert.Equal(
-                    $"The renderer does not have a component with ID {rootComponentId}.",
-                    ex.Message
-                );
-            }
-        );
+        await renderer.Dispatcher.InvokeAsync(() =>
+        {
+            var ex = Assert.Throws<ArgumentException>(() =>
+                renderer.RemoveRootComponent(rootComponentId));
+            Assert.Equal(
+                $"The renderer does not have a component with ID {rootComponentId}.",
+                ex.Message
+            );
+        });
     }
 
     [Fact]
@@ -5633,22 +5594,19 @@ public class RendererTest
 
         // Act/Assert
         var didRunTestLogic = false; // Don't just trust the dispatcher here - verify it runs our callback
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-            {
-                renderer.RemoveRootComponent(rootComponentId);
+        await renderer.Dispatcher.InvokeAsync(() =>
+        {
+            renderer.RemoveRootComponent(rootComponentId);
 
-                // Even though we didn't await anything, it's synchronously unavailable for re-removal
-                var ex = Assert.Throws<ArgumentException>(
-                    () => renderer.RemoveRootComponent(rootComponentId)
-                );
-                Assert.Equal(
-                    $"The renderer does not have a component with ID {rootComponentId}.",
-                    ex.Message
-                );
-                didRunTestLogic = true;
-            }
-        );
+            // Even though we didn't await anything, it's synchronously unavailable for re-removal
+            var ex = Assert.Throws<ArgumentException>(() =>
+                renderer.RemoveRootComponent(rootComponentId));
+            Assert.Equal(
+                $"The renderer does not have a component with ID {rootComponentId}.",
+                ex.Message
+            );
+            didRunTestLogic = true;
+        });
 
         Assert.True(didRunTestLogic);
     }
@@ -5674,15 +5632,12 @@ public class RendererTest
         var nestedComponent = (DisposableComponent)nestedComponentFrame.Component;
 
         // Act/Assert
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-            {
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => renderer.RemoveRootComponent(nestedComponentFrame.ComponentId)
-                );
-                Assert.Equal("The specified component is not a root component", ex.Message);
-            }
-        );
+        await renderer.Dispatcher.InvokeAsync(() =>
+        {
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                renderer.RemoveRootComponent(nestedComponentFrame.ComponentId));
+            Assert.Equal("The specified component is not a root component", ex.Message);
+        });
 
         Assert.False(nestedComponent.Disposed);
     }
@@ -5890,9 +5845,8 @@ public class RendererTest
 
         public void TriggerRender()
         {
-            var t = _renderHandle.Dispatcher.InvokeAsync(
-                () => _renderHandle.Render(_renderFragment)
-            );
+            var t = _renderHandle.Dispatcher.InvokeAsync(() =>
+                _renderHandle.Render(_renderFragment));
             // This should always be run synchronously
             Assert.True(t.IsCompleted);
             if (t.IsFaulted)
@@ -6154,18 +6108,13 @@ public class RendererTest
         {
             foreach (var renderHandle in _renderHandles)
             {
-                renderHandle.Dispatcher.InvokeAsync(
-                    () =>
-                        renderHandle.Render(
-                            builder =>
-                            {
-                                builder.AddContent(
-                                    0,
-                                    $"Hello from {nameof(MultiRendererComponent)}"
-                                );
-                            }
-                        )
-                );
+                renderHandle.Dispatcher.InvokeAsync(() =>
+                    renderHandle.Render(
+                        builder =>
+                        {
+                            builder.AddContent(0, $"Hello from {nameof(MultiRendererComponent)}");
+                        }
+                    ));
             }
         }
     }

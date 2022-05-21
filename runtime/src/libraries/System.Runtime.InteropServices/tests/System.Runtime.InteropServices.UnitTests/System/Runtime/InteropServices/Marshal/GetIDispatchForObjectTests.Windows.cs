@@ -51,9 +51,8 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void GetIDispatchForObject_ManagedIInspectableObject_Fail()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetIDispatchForObject(new IInspectableManagedObject())
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetIDispatchForObject(new IInspectableManagedObject()));
         }
     }
 }

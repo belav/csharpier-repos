@@ -569,20 +569,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                         .ConfigureAwait(false);
 
                     // Kick off diagnostic re-analysis for affected projects so that diagnostics gets refreshed.
-                    _ = Task.Run(
-                        () =>
-                        {
-                            var reanalyzeDocuments = diagnosticsToFix
-                                .Where(d => d.DocumentId != null)
-                                .Select(d => d.DocumentId)
-                                .Distinct();
-                            _diagnosticService.Reanalyze(
-                                _workspace,
-                                documentIds: reanalyzeDocuments,
-                                highPriority: true
-                            );
-                        }
-                    );
+                    _ = Task.Run(() =>
+                    {
+                        var reanalyzeDocuments = diagnosticsToFix
+                            .Where(d => d.DocumentId != null)
+                            .Select(d => d.DocumentId)
+                            .Distinct();
+                        _diagnosticService.Reanalyze(
+                            _workspace,
+                            documentIds: reanalyzeDocuments,
+                            highPriority: true
+                        );
+                    });
                 }
             }
             catch (OperationCanceledException) { }

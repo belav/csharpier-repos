@@ -65,9 +65,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using var handler = CreateHttpClientHandler();
                     using HttpClient client = CreateHttpClient(handler);
-                    HttpRequestException exception = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.GetAsync(uri)
-                    );
+                    HttpRequestException exception =
+                        await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(uri));
                     _output.WriteLine(exception.Message + exception.StatusCode);
                 },
                 async server =>

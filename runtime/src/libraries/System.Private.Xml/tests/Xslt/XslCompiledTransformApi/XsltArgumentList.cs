@@ -8790,9 +8790,8 @@ namespace System.Xml.Tests
 
             m_xsltArg.AddExtensionObject(szDefaultNS, obj);
             LoadXSL("MyObject_CaseSensitive.xsl", xslInputType, readerType);
-            var e = Assert.ThrowsAny<XsltException>(
-                () => Transform_ArgList("fruits.xml", outputType, navType)
-            );
+            var e = Assert.ThrowsAny<XsltException>(() =>
+                Transform_ArgList("fruits.xml", outputType, navType));
             var exceptionSourceAssembly = PlatformDetection.IsNetFramework
                 ? "System.Data.SqlXml"
                 : "System.Xml";
@@ -12373,23 +12372,21 @@ namespace System.Xml.Tests
         [Fact]
         public void NodeIter1()
         {
-            var e = Assert.ThrowsAny<XsltException>(
-                () =>
-                {
-                    XslCompiledTransform xslt = new XslCompiledTransform();
+            var e = Assert.ThrowsAny<XsltException>(() =>
+            {
+                XslCompiledTransform xslt = new XslCompiledTransform();
 
-                    XsltArgumentList xslArg = new XsltArgumentList();
-                    XmlUrlResolver ur = new XmlUrlResolver();
-                    Uri uriSource = ur.ResolveUri(null, FullFilePath("sample.xsd"));
-                    xslArg.AddParam("sourceUri", string.Empty, uriSource.ToString());
+                XsltArgumentList xslArg = new XsltArgumentList();
+                XmlUrlResolver ur = new XmlUrlResolver();
+                Uri uriSource = ur.ResolveUri(null, FullFilePath("sample.xsd"));
+                xslArg.AddParam("sourceUri", string.Empty, uriSource.ToString());
 
-                    xslt.Load(
-                        FullFilePath("xsd2cs1.xsl"),
-                        new XsltSettings(true, true),
-                        new XmlUrlResolver()
-                    );
-                }
-            );
+                xslt.Load(
+                    FullFilePath("xsd2cs1.xsl"),
+                    new XsltSettings(true, true),
+                    new XmlUrlResolver()
+                );
+            });
 
             Assert.Equal(
                 "Compiling JScript/CSharp scripts is not supported",
@@ -12401,23 +12398,21 @@ namespace System.Xml.Tests
         [Fact]
         public void NodeIter2()
         {
-            var e = Assert.ThrowsAny<XsltException>(
-                () =>
-                {
-                    XslCompiledTransform xslt = new XslCompiledTransform();
+            var e = Assert.ThrowsAny<XsltException>(() =>
+            {
+                XslCompiledTransform xslt = new XslCompiledTransform();
 
-                    XsltArgumentList xslArg = new XsltArgumentList();
-                    XmlUrlResolver ur = new XmlUrlResolver();
-                    Uri uriSource = ur.ResolveUri(null, FullFilePath("sample.xsd"));
-                    xslArg.AddParam("sourceUri", string.Empty, uriSource.ToString());
+                XsltArgumentList xslArg = new XsltArgumentList();
+                XmlUrlResolver ur = new XmlUrlResolver();
+                Uri uriSource = ur.ResolveUri(null, FullFilePath("sample.xsd"));
+                xslArg.AddParam("sourceUri", string.Empty, uriSource.ToString());
 
-                    xslt.Load(
-                        FullFilePath("xsd2cs2.xsl"),
-                        new XsltSettings(true, true),
-                        new XmlUrlResolver()
-                    );
-                }
-            );
+                xslt.Load(
+                    FullFilePath("xsd2cs2.xsl"),
+                    new XsltSettings(true, true),
+                    new XmlUrlResolver()
+                );
+            });
 
             Assert.Equal(
                 "Compiling JScript/CSharp scripts is not supported",

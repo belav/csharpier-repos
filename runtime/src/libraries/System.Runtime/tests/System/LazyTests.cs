@@ -255,24 +255,20 @@ namespace System.Tests
         {
             int counter = 0; // set in test function
 
-            var fint = new Func<int>(
-                () =>
-                {
-                    if (++counter < 5)
-                        throw new Exception();
-                    else
-                        return counter;
-                }
-            );
-            var fobj = new Func<string>(
-                () =>
-                {
-                    if (++counter < 5)
-                        throw new Exception();
-                    else
-                        return counter.ToString();
-                }
-            );
+            var fint = new Func<int>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter;
+            });
+            var fobj = new Func<string>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter.ToString();
+            });
 
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint), ref counter, 0);
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, true), ref counter, 0);
@@ -337,12 +333,10 @@ namespace System.Tests
         {
             yield return new object[]
             {
-                new Lazy<int>(
-                    () =>
-                    {
-                        throw new MyException(99);
-                    }
-                )
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                })
             };
             yield return new object[]
             {
@@ -468,12 +462,10 @@ namespace System.Tests
         {
             yield return new object[]
             {
-                new Lazy<int>(
-                    () =>
-                    {
-                        throw new MyException(99);
-                    }
-                )
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                })
             };
             yield return new object[]
             {
@@ -687,9 +679,8 @@ namespace System.Tests
         {
             // Func based initialization (nulls not permitted).
             string e = null;
-            Assert.Throws<InvalidOperationException>(
-                () => LazyInitializer.EnsureInitialized(ref e, () => null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                LazyInitializer.EnsureInitialized(ref e, () => null));
 
             // Activator.CreateInstance (for a type without a default ctor).
             NoDefaultCtor ndc = null;
@@ -795,9 +786,8 @@ namespace System.Tests
             NoDefaultCtor ndc = null;
             bool ndcInit = false;
             object ndcLock = null;
-            Assert.Throws<MissingMemberException>(
-                () => LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock)
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock));
         }
 
         [Fact]
@@ -897,9 +887,8 @@ namespace System.Tests
         {
             string target = null;
             object syncLock = null;
-            Assert.Throws<InvalidOperationException>(
-                () => LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null));
         }
 
         private static void VerifyLazy<T>(

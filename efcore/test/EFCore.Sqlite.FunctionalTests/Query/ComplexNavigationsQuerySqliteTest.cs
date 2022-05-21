@@ -18,9 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Let_let_contains_from_outer_let(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Let_let_contains_from_outer_let(async))
                 ).Message
             );
 
@@ -28,9 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Prune_does_not_throw_null_ref(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Prune_does_not_throw_null_ref(async))
                 ).Message
             );
     }

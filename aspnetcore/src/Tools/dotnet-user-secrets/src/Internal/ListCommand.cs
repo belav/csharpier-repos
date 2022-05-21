@@ -22,12 +22,10 @@ internal class ListCommand : ICommand
             CommandOptionType.NoValue
         );
 
-        command.OnExecute(
-            () =>
-            {
-                options.Command = new ListCommand(optJson.HasValue());
-            }
-        );
+        command.OnExecute(() =>
+        {
+            options.Command = new ListCommand(optJson.HasValue());
+        });
     }
 
     public ListCommand(bool jsonOutput)

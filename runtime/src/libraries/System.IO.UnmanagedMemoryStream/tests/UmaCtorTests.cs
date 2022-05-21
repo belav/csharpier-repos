@@ -27,15 +27,13 @@ namespace System.IO.Tests
                 Assert.False(duma.IsOpen);
                 duma.Initialize(fakeBuffer, 0, (long)fakeBuffer.ByteLength, FileAccess.ReadWrite);
                 Assert.True(duma.IsOpen);
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        duma.Initialize(
-                            fakeBuffer,
-                            0,
-                            (long)fakeBuffer.ByteLength,
-                            FileAccess.ReadWrite
-                        )
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    duma.Initialize(
+                        fakeBuffer,
+                        0,
+                        (long)fakeBuffer.ByteLength,
+                        FileAccess.ReadWrite
+                    ));
             }
         }
 
@@ -45,22 +43,17 @@ namespace System.IO.Tests
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);
             FakeSafeBuffer nullBuffer = null;
 
-            Assert.Throws<ArgumentNullException>(
-                () => new UnmanagedMemoryAccessor(nullBuffer, 0, 0)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new UnmanagedMemoryAccessor(nullBuffer, 0, 0));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryAccessor(fakeBuffer, 2, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryAccessor(fakeBuffer, -1, 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)(-1))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)42)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 2, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, -1, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)(-1)));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)42));
 
             AssertExtensions.Throws<ArgumentException>(
                 null,

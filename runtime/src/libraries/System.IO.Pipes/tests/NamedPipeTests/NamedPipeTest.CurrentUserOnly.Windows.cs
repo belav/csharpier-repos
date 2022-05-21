@@ -188,28 +188,25 @@ namespace System.IO.Pipes.Tests
             {
                 Task serverTask = server.WaitForConnectionAsync(cts.Token);
 
-                _testAccountImpersonator.RunImpersonated(
-                    () =>
-                    {
-                        using (
-                            var client = new NamedPipeClientStream(
-                                ".",
-                                name,
-                                PipeDirection.InOut,
-                                clientPipeOptions
-                            )
+                _testAccountImpersonator.RunImpersonated(() =>
+                {
+                    using (
+                        var client = new NamedPipeClientStream(
+                            ".",
+                            name,
+                            PipeDirection.InOut,
+                            clientPipeOptions
                         )
-                        {
-                            Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
-                        }
+                    )
+                    {
+                        Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
                     }
-                );
+                });
 
                 // Server is expected to not have received any request.
                 cts.Cancel();
-                AggregateException e = Assert.Throws<AggregateException>(
-                    () => serverTask.Wait(10_000)
-                );
+                AggregateException e = Assert.Throws<AggregateException>(() =>
+                    serverTask.Wait(10_000));
                 Assert.IsType<TaskCanceledException>(e.InnerException);
             }
         }
@@ -231,15 +228,13 @@ namespace System.IO.Pipes.Tests
             {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 
-                _testAccountImpersonator.RunImpersonated(
-                    () =>
+                _testAccountImpersonator.RunImpersonated(() =>
+                {
+                    using (var client = new NamedPipeClientStream(".", name, PipeDirection.In))
                     {
-                        using (var client = new NamedPipeClientStream(".", name, PipeDirection.In))
-                        {
-                            client.Connect(10_000);
-                        }
+                        client.Connect(10_000);
                     }
-                );
+                });
 
                 Assert.True(serverTask.Wait(10_000));
             }

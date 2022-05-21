@@ -36,36 +36,34 @@ namespace Microsoft.Extensions.Hosting.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void BuildFiresEvents()
         {
-            using var _ = RemoteExecutor.Invoke(
-                () =>
-                {
-                    IHostBuilder hostBuilderFromEvent = null;
-                    IHost hostFromEvent = null;
+            using var _ = RemoteExecutor.Invoke(() =>
+            {
+                IHostBuilder hostBuilderFromEvent = null;
+                IHost hostFromEvent = null;
 
-                    var listener = new HostingListener(
-                        (pair) =>
+                var listener = new HostingListener(
+                    (pair) =>
+                    {
+                        if (pair.Key == "HostBuilding")
                         {
-                            if (pair.Key == "HostBuilding")
-                            {
-                                hostBuilderFromEvent = (IHostBuilder)pair.Value;
-                            }
-
-                            if (pair.Key == "HostBuilt")
-                            {
-                                hostFromEvent = (IHost)pair.Value;
-                            }
+                            hostBuilderFromEvent = (IHostBuilder)pair.Value;
                         }
-                    );
 
-                    using var sub = DiagnosticListener.AllListeners.Subscribe(listener);
+                        if (pair.Key == "HostBuilt")
+                        {
+                            hostFromEvent = (IHost)pair.Value;
+                        }
+                    }
+                );
 
-                    var hostBuilder = new HostBuilder();
-                    var host = hostBuilder.Build();
+                using var sub = DiagnosticListener.AllListeners.Subscribe(listener);
 
-                    Assert.Same(hostBuilder, hostBuilderFromEvent);
-                    Assert.Same(host, hostFromEvent);
-                }
-            );
+                var hostBuilder = new HostBuilder();
+                var host = hostBuilder.Build();
+
+                Assert.Same(hostBuilder, hostBuilderFromEvent);
+                Assert.Same(host, hostFromEvent);
+            });
         }
 
         [Fact]
@@ -557,12 +555,10 @@ namespace Microsoft.Extensions.Hosting.Tests
                 );
             using (var host = hostBuilder.Build())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        host.Services.GetRequiredService<ServiceC>();
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    host.Services.GetRequiredService<ServiceC>();
+                });
             }
         }
 

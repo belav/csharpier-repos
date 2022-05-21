@@ -32,9 +32,8 @@ public class UpgradeTests : LoggedTest
                     var feature = context.Features.Get<IHttpUpgradeFeature>();
                     var stream = await feature.UpgradeAsync();
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.Body.WriteAsync(new byte[1], 0, 1)
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.Body.WriteAsync(new byte[1], 0, 1));
                     Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, ex.Message);
 
                     using (var writer = new StreamWriter(stream))
@@ -179,9 +178,8 @@ public class UpgradeTests : LoggedTest
             }
         }
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await upgradeTcs.Task.DefaultTimeout()
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await upgradeTcs.Task.DefaultTimeout());
         Assert.Equal(CoreStrings.UpgradeCannotBeCalledMultipleTimes, ex.Message);
     }
 
@@ -414,9 +412,8 @@ public class UpgradeTests : LoggedTest
             }
         }
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await upgradeTcs.Task.TimeoutAfter(TimeSpan.FromSeconds(60))
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await upgradeTcs.Task.TimeoutAfter(TimeSpan.FromSeconds(60)));
         Assert.Equal(CoreStrings.UpgradedConnectionLimitReached, exception.Message);
     }
 

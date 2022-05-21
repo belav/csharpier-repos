@@ -54,12 +54,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Single_Empty()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Single()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Single(x => true)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Single());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Single(x => true));
         }
 
         [Theory]
@@ -69,9 +67,8 @@ namespace System.Linq.Parallel.Tests
         public static void Single_NoMatch(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Range(0, count).Single(x => !seen.Add(x))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, count).Single(x => !seen.Add(x)));
             seen.AssertComplete();
         }
 
@@ -109,9 +106,8 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Single_AllMatch(int count)
         {
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Range(0, count).Single(x => true)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, count).Single(x => true));
         }
 
         [Fact]
@@ -126,9 +122,8 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void SingleOrDefault_AllMatch(int count)
         {
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Range(0, count).SingleOrDefault(x => true)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, count).SingleOrDefault(x => true));
         }
 
         [Fact]
@@ -285,28 +280,24 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Single_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Single(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .SingleOrDefault(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
-            );
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Single(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .SingleOrDefault(
+                        x =>
+                        {
+                            throw new DeliberateTestException();
+                        }
+                    ));
         }
 
         [Fact]

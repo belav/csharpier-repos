@@ -140,9 +140,8 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new EmptyFileResult("application/my-type");
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => result.ExecuteResultAsync(actionContext)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                result.ExecuteResultAsync(actionContext));
         }
 
         public static TheoryData<string, string> ContentDispositionData

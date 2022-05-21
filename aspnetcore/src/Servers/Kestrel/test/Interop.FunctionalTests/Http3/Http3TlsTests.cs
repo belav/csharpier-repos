@@ -321,9 +321,8 @@ public class Http3TlsTests : LoggedTest
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
         // https://github.com/dotnet/runtime/issues/57308, optional client certs aren't supported.
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => client.SendAsync(request, CancellationToken.None).DefaultTimeout()
-        );
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            client.SendAsync(request, CancellationToken.None).DefaultTimeout());
         Assert.StartsWith("Connection has been shutdown by transport.", ex.Message);
 
         await host.StopAsync().DefaultTimeout();
@@ -359,9 +358,8 @@ public class Http3TlsTests : LoggedTest
         using var host = builder.Build();
         using var client = Http3Helpers.CreateClient();
 
-        var exception = await Assert.ThrowsAsync<NotSupportedException>(
-            () => host.StartAsync().DefaultTimeout()
-        );
+        var exception = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            host.StartAsync().DefaultTimeout());
         Assert.Equal(
             "The OnAuthenticate callback is not supported with HTTP/3.",
             exception.Message

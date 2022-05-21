@@ -29,13 +29,11 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource<int>(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await httpContext.Response.StartAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);
@@ -72,13 +70,11 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource<int>(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await httpContext.Response.CompleteAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);
@@ -305,9 +301,8 @@ public class ResponseBodyTests
             )
         )
         {
-            await Assert.ThrowsAsync<HttpRequestException>(
-                async () => await SendRequestAsync(address)
-            );
+            await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                await SendRequestAsync(address));
         }
     }
 
@@ -323,9 +318,8 @@ public class ResponseBodyTests
                 {
                     httpContext.Response.Headers["Content-lenGth"] = " 10 ";
                     await httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => httpContext.Response.Body.WriteAsync(new byte[6], 0, 6)
-                    );
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        httpContext.Response.Body.WriteAsync(new byte[6], 0, 6));
                     completed = true;
                 }
             )

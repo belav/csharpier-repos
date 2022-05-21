@@ -113,20 +113,18 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var serverListenSource = new TaskCompletionSource<bool>();
             var cts = new CancellationTokenSource();
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
-            var task = Task.Run(
-                () =>
-                {
-                    BuildServerController.CreateAndRunServer(
-                        pipeName,
-                        compilerServerHost,
-                        clientConnectionHost,
-                        listener,
-                        keepAlive: keepAlive,
-                        cancellationToken: cts.Token
-                    );
-                    return listener;
-                }
-            );
+            var task = Task.Run(() =>
+            {
+                BuildServerController.CreateAndRunServer(
+                    pipeName,
+                    compilerServerHost,
+                    clientConnectionHost,
+                    listener,
+                    keepAlive: keepAlive,
+                    cancellationToken: cts.Token
+                );
+                return listener;
+            });
 
             return new ServerData(cts, pipeName, logger, task);
         }

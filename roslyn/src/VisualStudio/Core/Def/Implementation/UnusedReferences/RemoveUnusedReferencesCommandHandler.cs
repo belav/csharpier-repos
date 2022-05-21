@@ -52,9 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             _workspace = workspace;
             _globalOptions = globalOptions;
 
-            _lazyReferenceCleanupService = new(
-                () => workspace.Services.GetRequiredService<IReferenceCleanupService>()
-            );
+            _lazyReferenceCleanupService = new(() =>
+                workspace.Services.GetRequiredService<IReferenceCleanupService>());
         }
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -257,25 +256,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    var projectReferences = await _lazyReferenceCleanupService.Value
-                        .GetProjectReferencesAsync(projectFilePath, cancellationToken)
-                        .ConfigureAwait(true);
-                    var unusedReferenceAnalysisService =
-                        solution.Workspace.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
-                    return await unusedReferenceAnalysisService
-                        .GetUnusedReferencesAsync(
-                            solution,
-                            projectFilePath,
-                            projectAssetsFile,
-                            projectReferences,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(true);
-                }
-            );
+            var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                var projectReferences = await _lazyReferenceCleanupService.Value
+                    .GetProjectReferencesAsync(projectFilePath, cancellationToken)
+                    .ConfigureAwait(true);
+                var unusedReferenceAnalysisService =
+                    solution.Workspace.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
+                return await unusedReferenceAnalysisService
+                    .GetUnusedReferencesAsync(
+                        solution,
+                        projectFilePath,
+                        projectAssetsFile,
+                        projectReferences,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
+            });
 
             var referenceUpdates = unusedReferences
                 .Select(
@@ -297,15 +294,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            ThreadHelper.JoinableTaskFactory.Run(
-                () =>
-                    UnusedReferencesRemover.UpdateReferencesAsync(
-                        solution,
-                        projectFilePath,
-                        referenceUpdates,
-                        cancellationToken
-                    )
-            );
+            ThreadHelper.JoinableTaskFactory.Run(() =>
+                UnusedReferencesRemover.UpdateReferencesAsync(
+                    solution,
+                    projectFilePath,
+                    referenceUpdates,
+                    cancellationToken
+                ));
         }
 
         private static bool TryGetPropertyValue(

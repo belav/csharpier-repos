@@ -282,13 +282,11 @@ namespace System.Collections.ObjectModel.Tests
                 new IReadOnlyDictionary_T_Test<int, string>();
             IDictionary<int, string> dictAsIDictionary = dictionary;
 
-            Assert.Throws<NotSupportedException>(
-                () => dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven"))
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                dictAsIDictionary.Add(new KeyValuePair<int, string>(7, "seven")));
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Add(7, "seven"));
-            Assert.Throws<NotSupportedException>(
-                () => dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one"))
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                dictAsIDictionary.Remove(new KeyValuePair<int, string>(1, "one")));
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Remove(1));
             Assert.Throws<NotSupportedException>(() => dictAsIDictionary.Clear());
 
@@ -358,13 +356,11 @@ namespace System.Collections.ObjectModel.Tests
         )]
         public static void DebuggerAttribute_NullDictionary_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                () =>
-                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                        typeof(ReadOnlyDictionary<int, int>),
-                        null
-                    )
-            );
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(ReadOnlyDictionary<int, int>),
+                    null
+                ));
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );
@@ -380,14 +376,12 @@ namespace System.Collections.ObjectModel.Tests
         )]
         public static void DebuggerAttribute_NullDictionaryKeys_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                () =>
-                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                        typeof(ReadOnlyDictionary<int, int>.KeyCollection),
-                        new Type[] { typeof(int) },
-                        null
-                    )
-            );
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(ReadOnlyDictionary<int, int>.KeyCollection),
+                    new Type[] { typeof(int) },
+                    null
+                ));
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );
@@ -775,12 +769,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             // Verify get_Item with non-existing on Collection
             TKey nonExistingKey = _generateItem().Key;
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    TValue itemValue = _collection[nonExistingKey];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                TValue itemValue = _collection[nonExistingKey];
+            });
 
             //Verify that the collection was not mutated
             VerifyCollection(_collection, _expectedItems);

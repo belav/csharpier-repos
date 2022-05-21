@@ -185,12 +185,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             OSPlatform randomObj = OSPlatform.Create("random");
             OSPlatform defaultObj = default(OSPlatform);
             OSPlatform conObj = new OSPlatform();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    OSPlatform nullObj = OSPlatform.Create(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                OSPlatform nullObj = OSPlatform.Create(null);
+            });
             AssertExtensions.Throws<ArgumentException>(
                 "osPlatform",
                 () =>

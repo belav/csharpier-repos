@@ -46,9 +46,8 @@ public class ConsumesAttributeTests
         var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
 
         // Assert
-        var ex = Assert.Throws<FormatException>(
-            () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
         Assert.Equal(
             "The header contains invalid values at index 0: '"
                 + (invalidContentType ?? "<null>")
@@ -70,9 +69,8 @@ public class ConsumesAttributeTests
         var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
 
         // Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
 
         Assert.Equal(
             string.Format(

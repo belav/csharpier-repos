@@ -153,12 +153,10 @@ namespace System.Text.Json.Serialization.Tests
             ClassWithNullableAndWithoutJsonConverterAttribute obj;
 
             // The json is not valid with the default converter.
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
-                        Json
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
+                    Json
+                ));
 
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new JsonNullableDateTimeOffsetConverter());

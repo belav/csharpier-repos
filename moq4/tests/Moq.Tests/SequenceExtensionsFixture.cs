@@ -39,9 +39,8 @@ namespace Moq.Tests
 
             Assert.Equal(2, mock.Object.DoAsync().Result);
             Assert.Equal(3, mock.Object.DoAsync().Result);
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await mock.Object.DoAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await mock.Object.DoAsync());
         }
 
         [Fact]
@@ -56,9 +55,8 @@ namespace Moq.Tests
 
             Assert.Equal(2, mock.Object.DoValueAsync().Result);
             Assert.Equal(3, mock.Object.DoValueAsync().Result);
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await mock.Object.DoValueAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await mock.Object.DoValueAsync());
         }
 
         [Fact]
@@ -73,9 +71,8 @@ namespace Moq.Tests
 
             await mock.Object.DoVoidAsync();
             await mock.Object.DoVoidAsync();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await mock.Object.DoVoidAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await mock.Object.DoVoidAsync());
         }
 
         [Fact]
@@ -90,9 +87,8 @@ namespace Moq.Tests
 
             await mock.Object.DoValueVoidAsync();
             await mock.Object.DoValueVoidAsync();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await mock.Object.DoValueVoidAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await mock.Object.DoValueVoidAsync());
         }
 
         [Fact]

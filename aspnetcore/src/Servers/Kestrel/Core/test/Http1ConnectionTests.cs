@@ -51,9 +51,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(extendedAsciiEncoding.GetBytes("\r\n\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined));
     }
 
     [Fact]
@@ -66,9 +65,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"{headerLine}\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(CoreStrings.BadRequest_HeadersExceedMaxTotalSize, exception.Message);
@@ -84,9 +82,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"{headerLines}\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeMessageHeaders(readableBuffer, trailers: false, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(CoreStrings.BadRequest_TooManyHeaders, exception.Message);
@@ -296,10 +293,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         // Assert
         Assert.True(_http1Connection.HasResponseStarted);
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                ((IHttpResponseFeature)_http1Connection).StatusCode = StatusCodes.Status404NotFound
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            ((IHttpResponseFeature)_http1Connection).StatusCode = StatusCodes.Status404NotFound);
     }
 
     [Fact]
@@ -310,9 +305,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         // Assert
         Assert.True(_http1Connection.HasResponseStarted);
-        Assert.Throws<InvalidOperationException>(
-            () => ((IHttpResponseFeature)_http1Connection).ReasonPhrase = "Reason phrase"
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            ((IHttpResponseFeature)_http1Connection).ReasonPhrase = "Reason phrase");
     }
 
     [Fact]
@@ -322,9 +316,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         // Act/Assert
         Assert.True(_http1Connection.HasResponseStarted);
-        Assert.Throws<InvalidOperationException>(
-            () => ((IHttpResponseFeature)_http1Connection).OnStarting(_ => Task.CompletedTask, null)
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            ((IHttpResponseFeature)_http1Connection).OnStarting(_ => Task.CompletedTask, null));
     }
 
     [Theory]
@@ -484,9 +477,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(requestLineBytes);
 
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(CoreStrings.BadRequest_RequestLineTooLong, exception.Message);
@@ -500,9 +492,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(
@@ -518,9 +509,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(
@@ -538,9 +528,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(requestLine));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(
@@ -560,9 +549,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"GET {target} HTTP/1.1\r\n"));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(
@@ -580,9 +568,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(requestLine));
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+        var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(
@@ -603,11 +590,9 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(
-            () =>
+        var exception = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                TakeStartLine(readableBuffer, out _consumed, out _examined)
-        );
+            TakeStartLine(readableBuffer, out _consumed, out _examined));
         _transport.Input.AdvanceTo(_consumed, _examined);
 
         Assert.Equal(405, exception.StatusCode);
@@ -638,9 +623,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         ((IHttpResponseFeature)_http1Connection).StatusCode = StatusCodes.Status304NotModified;
 
         // Act/Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => _http1Connection.WriteAsync(new ArraySegment<byte>(new byte[1]))
-        );
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            _http1Connection.WriteAsync(new ArraySegment<byte>(new byte[1])));
     }
 
     [Fact]
@@ -651,13 +635,11 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         ((IHttpResponseFeature)_http1Connection).StatusCode = StatusCodes.Status304NotModified;
 
         // Act/Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                _http1Connection.WriteAsync(
-                    new ArraySegment<byte>(new byte[1]),
-                    default(CancellationToken)
-                )
-        );
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            _http1Connection.WriteAsync(
+                new ArraySegment<byte>(new byte[1]),
+                default(CancellationToken)
+            ));
     }
 
     [Fact]
@@ -898,9 +880,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
             await _application.Output.WriteAsync(Encoding.ASCII.GetBytes($"GET /%00 HTTP/1.1\r\n"));
             var readableBuffer = (await _transport.Input.ReadAsync()).Buffer;
 
-            var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(
-                () => TakeStartLine(readableBuffer, out _consumed, out _examined)
-            );
+            var exception = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+                TakeStartLine(readableBuffer, out _consumed, out _examined));
             _transport.Input.AdvanceTo(_consumed, _examined);
 
             Assert.Equal(
@@ -1012,9 +993,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
 
         // Assert
         Assert.True(((IHttpMaxRequestBodySizeFeature)_http1Connection).IsReadOnly);
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ((IHttpMaxRequestBodySizeFeature)_http1Connection).MaxRequestBodySize = 1
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ((IHttpMaxRequestBodySizeFeature)_http1Connection).MaxRequestBodySize = 1);
         Assert.Equal(CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead, ex.Message);
     }
 
@@ -1022,9 +1002,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     public void ThrowsWhenMaxRequestBodySizeIsSetToANegativeValue()
     {
         // Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => ((IHttpMaxRequestBodySizeFeature)_http1Connection).MaxRequestBodySize = -1
-        );
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            ((IHttpMaxRequestBodySizeFeature)_http1Connection).MaxRequestBodySize = -1);
         Assert.StartsWith(CoreStrings.NonNegativeNumberOrNullRequired, ex.Message);
     }
 
@@ -1088,9 +1067,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     {
         _http1Connection.HttpVersion = "HTTP/1.0";
         _http1Connection.RequestHeaders.Host = "a=b";
-        var ex = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => _http1Connection.EnsureHostHeaderExists()
-        );
+        var ex = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            _http1Connection.EnsureHostHeaderExists());
         Assert.Equal(CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"), ex.Message);
     }
 
@@ -1099,9 +1077,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     {
         _http1Connection.HttpVersion = "HTTP/1.1";
         _http1Connection.RequestHeaders.Host = "a=b";
-        var ex = Assert.ThrowsAny<Http.BadHttpRequestException>(
-            () => _http1Connection.EnsureHostHeaderExists()
-        );
+        var ex = Assert.ThrowsAny<Http.BadHttpRequestException>(() =>
+            _http1Connection.EnsureHostHeaderExists());
         Assert.Equal(CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"), ex.Message);
     }
 

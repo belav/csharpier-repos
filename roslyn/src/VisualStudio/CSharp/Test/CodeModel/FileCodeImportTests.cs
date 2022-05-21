@@ -32,12 +32,10 @@ using Goo = System.Data;"
         public void Name()
         {
             var import = GetCodeImport(1);
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    var value = import.Name;
-                }
-            );
+            Assert.Throws<COMException>(() =>
+            {
+                var value = import.Name;
+            });
         }
 
         [WpfFact]
@@ -45,12 +43,10 @@ using Goo = System.Data;"
         public void FullName()
         {
             var import = GetCodeImport(1);
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    var value = import.FullName;
-                }
-            );
+            Assert.Throws<COMException>(() =>
+            {
+                var value = import.FullName;
+            });
         }
 
         [WpfFact]
@@ -85,9 +81,8 @@ using Goo = System.Data;"
         public void GetStartPoint_Attributes()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartAttributes)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartAttributes));
         }
 
         [WpfFact]
@@ -95,9 +90,8 @@ using Goo = System.Data;"
         public void GetStartPoint_AttributesWithDelimiter()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<COMException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
-            );
+            Assert.Throws<COMException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
         }
 
         [WpfFact]
@@ -113,9 +107,8 @@ using Goo = System.Data;"
         public void GetStartPoint_BodyWithDelimiter()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
         }
 
         [WpfFact]
@@ -123,9 +116,8 @@ using Goo = System.Data;"
         public void GetStartPoint_Header()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartHeader)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartHeader));
         }
 
         [WpfFact]
@@ -133,9 +125,8 @@ using Goo = System.Data;"
         public void GetStartPoint_HeaderWithAttributes()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
         }
 
         [WpfFact]
@@ -143,9 +134,8 @@ using Goo = System.Data;"
         public void GetStartPoint_Name()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartName)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartName));
         }
 
         [WpfFact]
@@ -164,9 +154,8 @@ using Goo = System.Data;"
         public void GetStartPoint_Whole()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetStartPoint(vsCMPart.vsCMPartWhole)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartWhole));
         }
 
         [WpfFact]
@@ -185,9 +174,8 @@ using Goo = System.Data;"
         public void GetEndPoint_Attributes()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartAttributes)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartAttributes));
         }
 
         [WpfFact]
@@ -195,9 +183,8 @@ using Goo = System.Data;"
         public void GetEndPoint_AttributesWithDelimiter()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<COMException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter)
-            );
+            Assert.Throws<COMException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartAttributesWithDelimiter));
         }
 
         [WpfFact]
@@ -213,9 +200,8 @@ using Goo = System.Data;"
         public void GetEndPoint_BodyWithDelimiter()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter));
         }
 
         [WpfFact]
@@ -223,9 +209,8 @@ using Goo = System.Data;"
         public void GetEndPoint_Header()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartHeader)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartHeader));
         }
 
         [WpfFact]
@@ -233,9 +218,8 @@ using Goo = System.Data;"
         public void GetEndPoint_HeaderWithAttributes()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes));
         }
 
         [WpfFact]
@@ -263,9 +247,8 @@ using Goo = System.Data;"
         public void GetEndPoint_Whole()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(
-                () => import.GetEndPoint(vsCMPart.vsCMPartWhole)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartWhole));
         }
 
         [WpfFact]

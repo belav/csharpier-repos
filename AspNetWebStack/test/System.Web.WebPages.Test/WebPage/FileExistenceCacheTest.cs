@@ -137,21 +137,19 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void FileExistsTimeExceededTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var path = "~/index.cshtml";
-                    Utils.SetupVirtualPathInAppDomain(path, "");
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var path = "~/index.cshtml";
+                Utils.SetupVirtualPathInAppDomain(path, "");
 
-                    var cache = new FileExistenceCache(GetVpp(path));
-                    var cacheInternal = cache.CacheInternal;
-                    cache.MilliSecondsBeforeReset = 5;
-                    Thread.Sleep(300);
-                    Assert.True(cache.FileExists(path));
-                    Assert.False(cache.FileExists("~/test.cshtml"));
-                    Assert.NotEqual(cacheInternal, cache.CacheInternal);
-                }
-            );
+                var cache = new FileExistenceCache(GetVpp(path));
+                var cacheInternal = cache.CacheInternal;
+                cache.MilliSecondsBeforeReset = 5;
+                Thread.Sleep(300);
+                Assert.True(cache.FileExists(path));
+                Assert.False(cache.FileExists("~/test.cshtml"));
+                Assert.NotEqual(cacheInternal, cache.CacheInternal);
+            });
         }
 
         private static VirtualPathProvider GetVpp(params string[] files)

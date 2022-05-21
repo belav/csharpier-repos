@@ -70,9 +70,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         private static void InvalidFormatterArguments(AsymmetricKeyExchangeFormatter formatter)
         {
             Assert.Throws<ArgumentNullException>(() => formatter.SetKey(null));
-            Assert.Throws<CryptographicUnexpectedOperationException>(
-                () => formatter.CreateKeyExchange(new byte[] { 0, 1, 2, 3 })
-            );
+            Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                formatter.CreateKeyExchange(new byte[] { 0, 1, 2, 3 }));
         }
 
         private static void InvalidDeformatterArguments(
@@ -80,9 +79,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         )
         {
             Assert.Throws<ArgumentNullException>(() => deformatter.SetKey(null));
-            Assert.Throws<CryptographicUnexpectedOperationException>(
-                () => deformatter.DecryptKeyExchange(new byte[] { 0, 1, 2 })
-            );
+            Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                deformatter.DecryptKeyExchange(new byte[] { 0, 1, 2 }));
         }
     }
 }

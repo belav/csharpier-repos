@@ -41,19 +41,15 @@ public partial class FunctionPtr
             Assert.Equal("Invoke", del.Method.Name);
 
             // Round trip of a native function pointer is never legal for a non-concrete Delegate type
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(Delegate));
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(Delegate));
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(MulticastDelegate));
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Marshal.GetDelegateForFunctionPointer(fcnptr, typeof(MulticastDelegate));
+            });
         }
 
         void VoidVoidMethod()

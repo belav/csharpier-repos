@@ -165,9 +165,8 @@ namespace System.IO.Pipelines.Tests
 
             _pipe.Reader.Complete();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => _pipe.Reader.AdvanceTo(buffer.End)
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                _pipe.Reader.AdvanceTo(buffer.End));
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
         }
 
@@ -237,16 +236,15 @@ namespace System.IO.Pipelines.Tests
             );
 
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await _pipe.Reader.ReadAsync()
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await _pipe.Reader.ReadAsync());
 
             Assert.Equal("Writer exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await _pipe.Reader.ReadAsync()
-            );
+            invalidOperationException =
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await _pipe.Reader.ReadAsync());
             Assert.Equal("Writer exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
@@ -270,16 +268,15 @@ namespace System.IO.Pipelines.Tests
             );
 
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await _pipe.Writer.WriteAsync(new byte[1])
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await _pipe.Writer.WriteAsync(new byte[1]));
 
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await _pipe.Writer.WriteAsync(new byte[1])
-            );
+            invalidOperationException =
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await _pipe.Writer.WriteAsync(new byte[1]));
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
         }
@@ -459,12 +456,10 @@ namespace System.IO.Pipelines.Tests
                 pipe.Reader
                     .ReadAsync()
                     .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -529,12 +524,10 @@ namespace System.IO.Pipelines.Tests
                 pipe.Writer
                     .FlushAsync()
                     .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -567,28 +560,22 @@ namespace System.IO.Pipelines.Tests
         public async Task ReadingCanBeCanceled()
         {
             var cts = new CancellationTokenSource();
-            cts.Token.Register(
-                () =>
-                {
-                    _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
-                }
-            );
+            cts.Token.Register(() =>
+            {
+                _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
+            });
 
-            Task ignore = Task.Run(
-                async () =>
-                {
-                    await Task.Delay(1000);
-                    cts.Cancel();
-                }
-            );
+            Task ignore = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                cts.Cancel();
+            });
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () =>
-                {
-                    ReadResult result = await _pipe.Reader.ReadAsync();
-                    ReadOnlySequence<byte> buffer = result.Buffer;
-                }
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                ReadResult result = await _pipe.Reader.ReadAsync();
+                ReadOnlySequence<byte> buffer = result.Buffer;
+            });
         }
 
         [Fact]
@@ -654,9 +641,8 @@ namespace System.IO.Pipelines.Tests
         {
             _pipe.Reader.Complete();
 
-            Assert.Throws<InvalidOperationException>(
-                () => _pipe.Reader.TryRead(out ReadResult result)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                _pipe.Reader.TryRead(out ReadResult result));
         }
 
         [Fact]
@@ -740,9 +726,8 @@ namespace System.IO.Pipelines.Tests
             ReadResult readResult = await _pipe.Reader.ReadAsync();
             _pipe.Reader.AdvanceTo(readResult.Buffer.Start);
 
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
-                () => _pipe.Reader.AdvanceTo(readResult.Buffer.End)
-            );
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
+                _pipe.Reader.AdvanceTo(readResult.Buffer.End));
             Assert.Equal("No reading operation to complete.", exception.Message);
         }
 

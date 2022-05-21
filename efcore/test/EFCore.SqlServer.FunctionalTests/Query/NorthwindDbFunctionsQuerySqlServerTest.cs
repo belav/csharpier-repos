@@ -141,12 +141,10 @@ WHERE FREETEXT([e].[Title], N'Representative')"
         [ConditionalFact]
         public void FreeText_client_eval_throws()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.FreeText("teststring", "teststring")
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.FreeText("teststring", "teststring", 1033)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.FreeText("teststring", "teststring"));
+            Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.FreeText("teststring", "teststring", 1033));
         }
 
         [ConditionalFact]
@@ -249,12 +247,8 @@ WHERE FREETEXT([e].[City], N'London') AND FREETEXT([e].[Title], N'Manager', LANG
         public void FreeText_throws_for_no_FullText_index()
         {
             using var context = CreateContext();
-            Assert.Throws<SqlException>(
-                () =>
-                    context.Employees
-                        .Where(c => EF.Functions.FreeText(c.FirstName, "Fred"))
-                        .ToArray()
-            );
+            Assert.Throws<SqlException>(() =>
+                context.Employees.Where(c => EF.Functions.FreeText(c.FirstName, "Fred")).ToArray());
         }
 
         [ConditionalFact]
@@ -312,26 +306,20 @@ WHERE (FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Tit
         public async Task FreeText_throws_when_using_non_parameter_or_constant_for_freetext_string()
         {
             using var context = CreateContext();
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.FreeText(e.City, e.FirstName)
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.FreeText(e.City, e.FirstName)
+                ));
 
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.FreeText(e.City, "")
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.FreeText(e.City, "")
+                ));
 
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.FreeText(e.City, e.FirstName.ToUpper())
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.FreeText(e.City, e.FirstName.ToUpper())
+                ));
         }
 
         [ConditionalFact]
@@ -339,46 +327,38 @@ WHERE (FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Tit
         public async Task FreeText_throws_when_using_non_column_for_property_reference()
         {
             using var context = CreateContext();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.FreeText(e.City + "1", "President")
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.FreeText(e.City + "1", "President")
+                ));
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.FreeText(e.City.ToLower(), "President")
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.FreeText(e.City.ToLower(), "President")
+                ));
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await (
-                        from e1 in context.Employees
-                        join m1 in context.Employees.OrderBy(e => e.EmployeeID).Skip(0)
-                            on e1.ReportsTo equals m1.EmployeeID
-                        where EF.Functions.FreeText(m1.Title, "President")
-                        select e1
-                    ).LastOrDefaultAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await (
+                    from e1 in context.Employees
+                    join m1 in context.Employees.OrderBy(e => e.EmployeeID).Skip(0)
+                        on e1.ReportsTo equals m1.EmployeeID
+                    where EF.Functions.FreeText(m1.Title, "President")
+                    select e1
+                ).LastOrDefaultAsync());
         }
 
         [ConditionalFact]
         public void Contains_should_throw_on_client_eval()
         {
-            var exNoLang = Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.Contains("teststring", "teststring")
-            );
+            var exNoLang = Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.Contains("teststring", "teststring"));
             Assert.Equal(
                 CoreStrings.FunctionOnClient(nameof(SqlServerDbFunctionsExtensions.Contains)),
                 exNoLang.Message
             );
 
-            var exLang = Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.Contains("teststring", "teststring", 1033)
-            );
+            var exLang = Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.Contains("teststring", "teststring", 1033));
             Assert.Equal(
                 CoreStrings.FunctionOnClient(nameof(SqlServerDbFunctionsExtensions.Contains)),
                 exLang.Message
@@ -390,26 +370,20 @@ WHERE (FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Tit
         public async Task Contains_should_throw_when_using_non_parameter_or_constant_for_contains_string()
         {
             using var context = CreateContext();
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.Contains(e.City, e.FirstName)
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.Contains(e.City, e.FirstName)
+                ));
 
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.Contains(e.City, "")
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.Contains(e.City, "")
+                ));
 
-            await Assert.ThrowsAsync<SqlException>(
-                async () =>
-                    await context.Employees.FirstOrDefaultAsync(
-                        e => EF.Functions.Contains(e.City, e.FirstName.ToUpper())
-                    )
-            );
+            await Assert.ThrowsAsync<SqlException>(async () =>
+                await context.Employees.FirstOrDefaultAsync(
+                    e => EF.Functions.Contains(e.City, e.FirstName.ToUpper())
+                ));
         }
 
         [ConditionalFact]
@@ -417,12 +391,8 @@ WHERE (FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Tit
         public void Contains_should_throw_for_no_FullText_index()
         {
             using var context = CreateContext();
-            Assert.Throws<SqlException>(
-                () =>
-                    context.Employees
-                        .Where(c => EF.Functions.Contains(c.FirstName, "Fred"))
-                        .ToArray()
-            );
+            Assert.Throws<SqlException>(() =>
+                context.Employees.Where(c => EF.Functions.Contains(c.FirstName, "Fred")).ToArray());
         }
 
         [ConditionalFact]
@@ -853,9 +823,8 @@ WHERE CAST(ISDATE(COALESCE([o].[CustomerID], N'') + CAST([o].[OrderID] AS nchar(
         [ConditionalFact]
         public void IsDate_should_throw_on_client_eval()
         {
-            var exIsDate = Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.IsDate("#ISDATE#")
-            );
+            var exIsDate = Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.IsDate("#ISDATE#"));
 
             Assert.Equal(
                 CoreStrings.FunctionOnClient(nameof(SqlServerDbFunctionsExtensions.IsDate)),
@@ -931,9 +900,8 @@ WHERE ISNUMERIC(COALESCE([o].[CustomerID], N'') + CAST([o].[OrderID] AS nchar(5)
         [ConditionalFact]
         public void IsNumeric_should_throw_on_client_eval()
         {
-            var exIsDate = Assert.Throws<InvalidOperationException>(
-                () => EF.Functions.IsNumeric("#ISNUMERIC#")
-            );
+            var exIsDate = Assert.Throws<InvalidOperationException>(() =>
+                EF.Functions.IsNumeric("#ISNUMERIC#"));
 
             Assert.Equal(
                 CoreStrings.FunctionOnClient(nameof(SqlServerDbFunctionsExtensions.IsNumeric)),

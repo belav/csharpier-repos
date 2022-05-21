@@ -88,46 +88,42 @@ namespace Tracing.Tests.ReverseValidation
                 },
                 duringExecution: async (int pid) =>
                 {
-                    Task reverseTask = Task.Run(
-                        async () =>
-                        {
-                            Logger.logger.Log($"Waiting for reverse connection");
-                            Stream reverseStream = await server.AcceptAsync();
-                            Logger.logger.Log("Got reverse connection");
-                            IpcAdvertise advertise = IpcAdvertise.Parse(reverseStream);
-                            Logger.logger.Log(advertise.ToString());
-                        }
-                    );
+                    Task reverseTask = Task.Run(async () =>
+                    {
+                        Logger.logger.Log($"Waiting for reverse connection");
+                        Stream reverseStream = await server.AcceptAsync();
+                        Logger.logger.Log("Got reverse connection");
+                        IpcAdvertise advertise = IpcAdvertise.Parse(reverseStream);
+                        Logger.logger.Log(advertise.ToString());
+                    });
 
-                    Task regularTask = Task.Run(
-                        async () =>
-                        {
-                            var config = new SessionConfiguration(
-                                circularBufferSizeMB: 1000,
-                                format: EventPipeSerializationFormat.NetTrace,
-                                providers: new List<Provider>
-                                {
-                                    new Provider("Microsoft-DotNETCore-SampleProfiler")
-                                }
-                            );
-                            Logger.logger.Log("Starting EventPipeSession over standard connection");
-                            using Stream stream = EventPipeClient.CollectTracing(
-                                pid,
-                                config,
-                                out var sessionId
-                            );
-                            Logger.logger.Log(
-                                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                            );
-                            using var source = new EventPipeEventSource(stream);
-                            Task readerTask = Task.Run(() => source.Process());
-                            await Task.Delay(500);
-                            Logger.logger.Log("Stopping EventPipeSession over standard connection");
-                            EventPipeClient.StopTracing(pid, sessionId);
-                            await readerTask;
-                            Logger.logger.Log("Stopped EventPipeSession over standard connection");
-                        }
-                    );
+                    Task regularTask = Task.Run(async () =>
+                    {
+                        var config = new SessionConfiguration(
+                            circularBufferSizeMB: 1000,
+                            format: EventPipeSerializationFormat.NetTrace,
+                            providers: new List<Provider>
+                            {
+                                new Provider("Microsoft-DotNETCore-SampleProfiler")
+                            }
+                        );
+                        Logger.logger.Log("Starting EventPipeSession over standard connection");
+                        using Stream stream = EventPipeClient.CollectTracing(
+                            pid,
+                            config,
+                            out var sessionId
+                        );
+                        Logger.logger.Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                        );
+                        using var source = new EventPipeEventSource(stream);
+                        Task readerTask = Task.Run(() => source.Process());
+                        await Task.Delay(500);
+                        Logger.logger.Log("Stopping EventPipeSession over standard connection");
+                        EventPipeClient.StopTracing(pid, sessionId);
+                        await readerTask;
+                        Logger.logger.Log("Stopped EventPipeSession over standard connection");
+                    });
 
                     await Task.WhenAll(reverseTask, regularTask);
                 }

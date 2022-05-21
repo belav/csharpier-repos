@@ -190,9 +190,8 @@ public abstract class LoginTests<TStartup, TContext>
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await Assert.ThrowsAnyAsync<XunitException>(
-            () => UserStories.LoginExistingUserAsync(newClient, userName, password)
-        );
+        await Assert.ThrowsAnyAsync<XunitException>(() =>
+            UserStories.LoginExistingUserAsync(newClient, userName, password));
     }
 
     [Fact]
@@ -220,9 +219,8 @@ public abstract class LoginTests<TStartup, TContext>
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await Assert.ThrowsAnyAsync<XunitException>(
-            () => UserStories.LoginExistingUserAsync(newClient, userName, password)
-        );
+        await Assert.ThrowsAnyAsync<XunitException>(() =>
+            UserStories.LoginExistingUserAsync(newClient, userName, password));
     }
 
     [Fact]

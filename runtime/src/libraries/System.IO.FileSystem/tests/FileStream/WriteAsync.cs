@@ -27,18 +27,15 @@ namespace System.IO.Tests
             using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create))
             {
                 fs.Dispose();
-                Assert.Throws<ObjectDisposedException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1))
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1)));
                 // even for noop WriteAsync
-                Assert.Throws<ObjectDisposedException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 0))
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 0)));
 
                 // out of bounds checking happens first
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[2], 1, 2))
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[2], 1, 2)));
             }
         }
 
@@ -50,20 +47,17 @@ namespace System.IO.Tests
 
             using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
-                Assert.Throws<NotSupportedException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1))
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1)));
 
                 fs.Dispose();
                 // Disposed checking happens first
-                Assert.Throws<ObjectDisposedException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1))
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[1], 0, 1)));
 
                 // out of bounds checking happens first
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[2], 1, 2))
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    FSAssert.CompletesSynchronously(WriteAsync(fs, new byte[2], 1, 2)));
             }
         }
 
@@ -495,12 +489,10 @@ namespace System.IO.Tests
                 );
 
                 // out of bounds checking happens first
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                        FSAssert.CompletesSynchronously(
-                            WriteAsync(fs, new byte[2], 1, 2, cancelledToken)
-                        )
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    FSAssert.CompletesSynchronously(
+                        WriteAsync(fs, new byte[2], 1, 2, cancelledToken)
+                    ));
 
                 // count is checked prior
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(

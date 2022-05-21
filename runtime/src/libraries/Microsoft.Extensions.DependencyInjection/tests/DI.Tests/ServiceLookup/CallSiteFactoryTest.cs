@@ -1408,9 +1408,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                             )
                         };
 
-                        Assert.Throws<ArgumentException>(
-                            () => new CallSiteFactory(serviceDescriptors)
-                        );
+                        Assert.Throws<ArgumentException>(() =>
+                            new CallSiteFactory(serviceDescriptors));
                     }
 
                     (Type, Type)[] validTestCases = new[]

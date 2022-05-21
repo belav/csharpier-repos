@@ -134,12 +134,10 @@ namespace System.Reflection.Emit.Tests
             );
             type.CreateTypeInfo().AsType();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    eventBuilder.SetRemoveOnMethod(method);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                eventBuilder.SetRemoveOnMethod(method);
+            });
         }
     }
 }

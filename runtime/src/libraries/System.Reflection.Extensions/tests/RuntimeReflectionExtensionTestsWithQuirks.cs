@@ -23,12 +23,10 @@ namespace System.Reflection.Tests
         {
             var types = GetTypes();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    RuntimeReflectionExtensions.GetRuntimeProperties(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                RuntimeReflectionExtensions.GetRuntimeProperties(null);
+            });
 
             List<string> properties = new List<string>();
 
@@ -60,12 +58,10 @@ namespace System.Reflection.Tests
         {
             var types = GetTypes();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    RuntimeReflectionExtensions.GetRuntimeEvents(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                RuntimeReflectionExtensions.GetRuntimeEvents(null);
+            });
 
             List<string> events = new List<string>();
 

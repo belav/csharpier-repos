@@ -711,20 +711,18 @@ namespace System.Data.Tests
         [Fact]
         public void DetachedRowItemException()
         {
-            Assert.Throws<RowNotInTableException>(
-                () =>
-                {
-                    DataTable dt = new DataTable("table");
-                    dt.Columns.Add("col");
-                    dt.Rows.Add((new object[] { "val" }));
+            Assert.Throws<RowNotInTableException>(() =>
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col");
+                dt.Rows.Add((new object[] { "val" }));
 
-                    DataRow dr = dt.NewRow();
-                    Assert.Equal(DataRowState.Detached, dr.RowState);
-                    dr.CancelEdit();
-                    Assert.Equal(DataRowState.Detached, dr.RowState);
-                    object o = dr["col"];
-                }
-            );
+                DataRow dr = dt.NewRow();
+                Assert.Equal(DataRowState.Detached, dr.RowState);
+                dr.CancelEdit();
+                Assert.Equal(DataRowState.Detached, dr.RowState);
+                object o = dr["col"];
+            });
         }
 
         [Fact]
@@ -829,9 +827,8 @@ namespace System.Data.Tests
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 
-            Assert.Throws<InvalidConstraintException>(
-                () => childRow1.SetParentRow(parent1Row, relation2)
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+                childRow1.SetParentRow(parent1Row, relation2));
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 

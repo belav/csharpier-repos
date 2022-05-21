@@ -70,13 +70,11 @@ namespace System.Net.Mime.Tests
         public void SmtpDateTime_InvalidInput_ShouldThrowException(string input)
         {
             var smtpDt = new SmtpDateTime(DateTime.Now);
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    string timeZoneOffset;
-                    DateTime results = smtpDt.ParseValue(input, out timeZoneOffset);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                string timeZoneOffset;
+                DateTime results = smtpDt.ParseValue(input, out timeZoneOffset);
+            });
         }
 
         [Fact]
@@ -245,42 +243,34 @@ namespace System.Net.Mime.Tests
                 out minutes
             );
 
-            Assert.Throws<FormatException>(
-                () =>
-                    smtpDt.ValidateAndGetTimeZoneOffsetValues(
-                        "+0080",
-                        out positive,
-                        out hours,
-                        out minutes
-                    )
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    smtpDt.ValidateAndGetTimeZoneOffsetValues(
-                        "+-0045",
-                        out positive,
-                        out hours,
-                        out minutes
-                    )
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    smtpDt.ValidateAndGetTimeZoneOffsetValues(
-                        "+10000",
-                        out positive,
-                        out hours,
-                        out minutes
-                    )
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    smtpDt.ValidateAndGetTimeZoneOffsetValues(
-                        "-A000",
-                        out positive,
-                        out hours,
-                        out minutes
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                smtpDt.ValidateAndGetTimeZoneOffsetValues(
+                    "+0080",
+                    out positive,
+                    out hours,
+                    out minutes
+                ));
+            Assert.Throws<FormatException>(() =>
+                smtpDt.ValidateAndGetTimeZoneOffsetValues(
+                    "+-0045",
+                    out positive,
+                    out hours,
+                    out minutes
+                ));
+            Assert.Throws<FormatException>(() =>
+                smtpDt.ValidateAndGetTimeZoneOffsetValues(
+                    "+10000",
+                    out positive,
+                    out hours,
+                    out minutes
+                ));
+            Assert.Throws<FormatException>(() =>
+                smtpDt.ValidateAndGetTimeZoneOffsetValues(
+                    "-A000",
+                    out positive,
+                    out hours,
+                    out minutes
+                ));
         }
 
         [Fact]

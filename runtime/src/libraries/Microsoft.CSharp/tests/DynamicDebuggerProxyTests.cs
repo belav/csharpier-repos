@@ -76,9 +76,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.NotNull(message);
 
             // ignoreException: false
-            Assert.Throws<MissingMemberException>(
-                () => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false)));
         }
 
         private static Type GetType(string typeName)

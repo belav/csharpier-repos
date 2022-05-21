@@ -110,25 +110,23 @@ namespace System.Data.Tests
         [Fact]
         public void AddException3()
         {
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    DataRelationCollection drcol = _dataset.Relations;
-                    DataRelation dr1 = new DataRelation(
-                        "DuplicateName",
-                        _dataset.Tables["Customer"].Columns["custid"],
-                        _dataset.Tables["Order"].Columns["custid"]
-                    );
-                    DataRelation dr2 = new DataRelation(
-                        "DuplicateName",
-                        _dataset.Tables["Item"].Columns["itemid"],
-                        _dataset.Tables["Order"].Columns["custid"]
-                    );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                DataRelationCollection drcol = _dataset.Relations;
+                DataRelation dr1 = new DataRelation(
+                    "DuplicateName",
+                    _dataset.Tables["Customer"].Columns["custid"],
+                    _dataset.Tables["Order"].Columns["custid"]
+                );
+                DataRelation dr2 = new DataRelation(
+                    "DuplicateName",
+                    _dataset.Tables["Item"].Columns["itemid"],
+                    _dataset.Tables["Order"].Columns["custid"]
+                );
 
-                    drcol.Add(dr1);
-                    drcol.Add(dr2);
-                }
-            );
+                drcol.Add(dr1);
+                drcol.Add(dr2);
+            });
         }
 
         [Fact]

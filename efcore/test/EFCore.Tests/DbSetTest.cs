@@ -82,18 +82,16 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => set.AddAsync(new Category()).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        set.AddAsync(new Category()).AsTask())
                 ).Message
             );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => set.FindAsync(77).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        set.FindAsync(77).AsTask())
                 ).Message
             );
 
@@ -144,18 +142,16 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => set.AddAsync(new Category()).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        set.AddAsync(new Category()).AsTask())
                 ).Message
             );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => set.FindAsync(77).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        set.FindAsync(77).AsTask())
                 ).Message
             );
 
@@ -186,9 +182,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 Assert
-                    .Throws<ObjectDisposedException>(
-                        () => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")
-                    )
+                    .Throws<ObjectDisposedException>(() =>
+                        context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName"))
                     .Message
             );
         }
@@ -980,9 +975,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.DataBindingWithIListSource,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ((IListSource)context.Gus.Distinct()).GetList()
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ((IListSource)context.Gus.Distinct()).GetList())
                     .Message
             );
         }

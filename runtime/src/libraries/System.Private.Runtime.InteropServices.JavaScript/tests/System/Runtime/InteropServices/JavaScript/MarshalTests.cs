@@ -853,15 +853,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void PassUintEnumByNameIsNotImplemented()
         {
             HelperMarshal._enumValue = TestEnum.Zero;
-            var exc = Assert.Throws<JSException>(
-                () =>
-                    Runtime.InvokeJS(
-                        @$"
+            var exc = Assert.Throws<JSException>(() =>
+                Runtime.InvokeJS(
+                    @$"
                     var set_enum = INTERNAL.mono_bind_static_method (""{HelperMarshal.INTEROP_CLASS}SetEnumValue"", ""j"");
                     set_enum (""BigValue"");
                 "
-                    )
-            );
+                ));
             Assert.StartsWith(
                 "Error: Expected numeric value for enum argument, got 'BigValue'",
                 exc.Message
@@ -871,15 +869,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void CannotUnboxUint64()
         {
-            var exc = Assert.Throws<JSException>(
-                () =>
-                    Runtime.InvokeJS(
-                        @$"
+            var exc = Assert.Throws<JSException>(() =>
+                Runtime.InvokeJS(
+                    @$"
                     var get_u64 = INTERNAL.mono_bind_static_method (""{HelperMarshal.INTEROP_CLASS}GetUInt64"", """");
                     var u64 = get_u64();
                 "
-                    )
-            );
+                ));
             Assert.StartsWith("Error: int64 not available", exc.Message);
         }
 

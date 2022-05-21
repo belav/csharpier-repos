@@ -43,9 +43,8 @@ namespace System.IO.Pipes.Tests
                 var ctx = new CancellationTokenSource();
                 Assert.Throws<TimeoutException>(() => client.Connect(60)); // 60 to be over internal 50 interval
                 await Assert.ThrowsAsync<TimeoutException>(() => client.ConnectAsync(50));
-                await Assert.ThrowsAsync<TimeoutException>(
-                    () => client.ConnectAsync(60, ctx.Token)
-                ); // testing Token overload; ctx is not canceled in this test
+                await Assert.ThrowsAsync<TimeoutException>(() =>
+                    client.ConnectAsync(60, ctx.Token)); // testing Token overload; ctx is not canceled in this test
             }
         }
 
@@ -61,9 +60,8 @@ namespace System.IO.Pipes.Tests
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => clientConnectToken);
 
                 ctx.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => client.ConnectAsync(ctx.Token)
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    client.ConnectAsync(ctx.Token));
             }
         }
 
@@ -162,26 +160,23 @@ namespace System.IO.Pipes.Tests
             using (new NamedPipeServerStream(name, PipeDirection.InOut, 1))
             {
                 // NPSS was created with max of 1, so creating another fails.
-                Assert.Throws<IOException>(
-                    () => new NamedPipeServerStream(name, PipeDirection.InOut, 1)
-                );
+                Assert.Throws<IOException>(() =>
+                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
             }
 
             using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
             {
                 // NPSS was created with max of 3, but NPSS not only validates against the original max but also
                 // against the max of the stream being created, so since there's already 1 and this specifies max == 1, it fails.
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => new NamedPipeServerStream(name, PipeDirection.InOut, 1)
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 2)) // lower max ignored
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 4)) // higher max ignored
                 {
                     // NPSS was created with a max of 3, and we're creating a 4th, so it fails.
-                    Assert.Throws<IOException>(
-                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 3)
-                    );
+                    Assert.Throws<IOException>(() =>
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 3));
                 }
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
@@ -189,12 +184,10 @@ namespace System.IO.Pipes.Tests
                 {
                     // NPSS was created with a max of 3, and we've already created 3, so it fails,
                     // even if the new stream tries to raise it.
-                    Assert.Throws<IOException>(
-                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 4)
-                    );
-                    Assert.Throws<IOException>(
-                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 2)
-                    );
+                    Assert.Throws<IOException>(() =>
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 4));
+                    Assert.Throws<IOException>(() =>
+                        new NamedPipeServerStream(name, PipeDirection.InOut, 2));
                 }
             }
         }
@@ -306,89 +299,85 @@ namespace System.IO.Pipes.Tests
 
                     client.Connect();
 
-                    Task clientTask = Task.Run(
-                        () =>
+                    Task clientTask = Task.Run(() =>
+                    {
+                        client.Write(msg1, 0, msg1.Length);
+                        client.Write(msg2, 0, msg2.Length);
+                        client.Write(msg1, 0, msg1.Length);
+
+                        client.Write(msg1, 0, msg1.Length);
+                        client.Write(msg2, 0, msg2.Length);
+                        client.Write(msg1, 0, msg1.Length);
+
+                        int serverCount = client.NumberOfServerInstances;
+                        Assert.Equal(1, serverCount);
+                    });
+
+                    Task serverTask = Task.Run(async () =>
+                    {
+                        server.WaitForConnection();
+
+                        int len1 = server.Read(received1, 0, msg1.Length);
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1.Length, len1);
+                        Assert.Equal(msg1, received1);
+
+                        int len2 = server.Read(received2, 0, msg2.Length);
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg2.Length, len2);
+                        Assert.Equal(msg2, received2);
+
+                        int expectedRead = msg1.Length - 1;
+                        int len3 = server.Read(received3, 0, expectedRead); // read one less than message
+                        Assert.False(server.IsMessageComplete);
+                        Assert.Equal(expectedRead, len3);
+                        for (int i = 0; i < expectedRead; ++i)
                         {
-                            client.Write(msg1, 0, msg1.Length);
-                            client.Write(msg2, 0, msg2.Length);
-                            client.Write(msg1, 0, msg1.Length);
-
-                            client.Write(msg1, 0, msg1.Length);
-                            client.Write(msg2, 0, msg2.Length);
-                            client.Write(msg1, 0, msg1.Length);
-
-                            int serverCount = client.NumberOfServerInstances;
-                            Assert.Equal(1, serverCount);
+                            Assert.Equal(msg1[i], received3[i]);
                         }
-                    );
 
-                    Task serverTask = Task.Run(
-                        async () =>
+                        expectedRead = msg1.Length - expectedRead;
+                        Assert.Equal(expectedRead, server.Read(received3, len3, expectedRead));
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received3);
+
+                        Assert.Equal(
+                            msg1.Length,
+                            await server.ReadAsync(received4, 0, msg1.Length)
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received4);
+
+                        Assert.Equal(
+                            msg2.Length,
+                            await server.ReadAsync(received5, 0, msg2.Length)
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg2, received5);
+
+                        expectedRead = msg1.Length - 1;
+                        Assert.Equal(
+                            expectedRead,
+                            await server.ReadAsync(received6, 0, expectedRead)
+                        ); // read one less than message
+                        Assert.False(server.IsMessageComplete);
+                        for (int i = 0; i < expectedRead; ++i)
                         {
-                            server.WaitForConnection();
-
-                            int len1 = server.Read(received1, 0, msg1.Length);
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1.Length, len1);
-                            Assert.Equal(msg1, received1);
-
-                            int len2 = server.Read(received2, 0, msg2.Length);
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg2.Length, len2);
-                            Assert.Equal(msg2, received2);
-
-                            int expectedRead = msg1.Length - 1;
-                            int len3 = server.Read(received3, 0, expectedRead); // read one less than message
-                            Assert.False(server.IsMessageComplete);
-                            Assert.Equal(expectedRead, len3);
-                            for (int i = 0; i < expectedRead; ++i)
-                            {
-                                Assert.Equal(msg1[i], received3[i]);
-                            }
-
-                            expectedRead = msg1.Length - expectedRead;
-                            Assert.Equal(expectedRead, server.Read(received3, len3, expectedRead));
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received3);
-
-                            Assert.Equal(
-                                msg1.Length,
-                                await server.ReadAsync(received4, 0, msg1.Length)
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received4);
-
-                            Assert.Equal(
-                                msg2.Length,
-                                await server.ReadAsync(received5, 0, msg2.Length)
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg2, received5);
-
-                            expectedRead = msg1.Length - 1;
-                            Assert.Equal(
-                                expectedRead,
-                                await server.ReadAsync(received6, 0, expectedRead)
-                            ); // read one less than message
-                            Assert.False(server.IsMessageComplete);
-                            for (int i = 0; i < expectedRead; ++i)
-                            {
-                                Assert.Equal(msg1[i], received6[i]);
-                            }
-
-                            expectedRead = msg1.Length - expectedRead;
-                            Assert.Equal(
-                                expectedRead,
-                                await server.ReadAsync(
-                                    received6,
-                                    msg1.Length - expectedRead,
-                                    expectedRead
-                                )
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received6);
+                            Assert.Equal(msg1[i], received6[i]);
                         }
-                    );
+
+                        expectedRead = msg1.Length - expectedRead;
+                        Assert.Equal(
+                            expectedRead,
+                            await server.ReadAsync(
+                                received6,
+                                msg1.Length - expectedRead,
+                                expectedRead
+                            )
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received6);
+                    });
 
                     Assert.True(
                         Task.WaitAll(new[] { clientTask, serverTask }, TimeSpan.FromSeconds(15))
@@ -526,15 +515,13 @@ namespace System.IO.Pipes.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix currently doesn't support message mode
         public void Unix_MessagePipeTransmissionMode()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    new NamedPipeServerStream(
-                        PipeStreamConformanceTests.GetUniquePipeName(),
-                        PipeDirection.InOut,
-                        1,
-                        PipeTransmissionMode.Message
-                    )
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new NamedPipeServerStream(
+                    PipeStreamConformanceTests.GetUniquePipeName(),
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Message
+                ));
         }
 
         [Theory]
@@ -692,9 +679,8 @@ namespace System.IO.Pipes.Tests
                 clientConnect.Wait();
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => server.ReadMode = PipeTransmissionMode.Byte
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    server.ReadMode = PipeTransmissionMode.Byte);
                 client.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -714,9 +700,8 @@ namespace System.IO.Pipes.Tests
                 clientConnect.Wait();
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => client.ReadMode = PipeTransmissionMode.Byte
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    client.ReadMode = PipeTransmissionMode.Byte);
                 server.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -841,12 +826,10 @@ namespace System.IO.Pipes.Tests
                 server.WaitForConnection();
                 clientConnect.Wait();
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => server.ReadMode = (PipeTransmissionMode)999
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => client.ReadMode = (PipeTransmissionMode)999
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    server.ReadMode = (PipeTransmissionMode)999);
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    client.ReadMode = (PipeTransmissionMode)999);
             }
         }
 
@@ -915,12 +898,10 @@ namespace System.IO.Pipes.Tests
             using (NamedPipeClientStream client = new NamedPipeClientStream(pipeName))
             {
                 Task waitingClient = client.ConnectAsync(92, cancellationToken);
-                await Assert.ThrowsAsync<TimeoutException>(
-                    () =>
-                    {
-                        return waitingClient;
-                    }
-                );
+                await Assert.ThrowsAsync<TimeoutException>(() =>
+                {
+                    return waitingClient;
+                });
             }
         }
 
@@ -970,12 +951,10 @@ namespace System.IO.Pipes.Tests
                 Assert.True(Task.WaitAll(clientAndServerTasks, timeout));
 
                 Task waitingClient = secondClient.ConnectAsync(94, cancellationToken);
-                await Assert.ThrowsAsync<TimeoutException>(
-                    () =>
-                    {
-                        return waitingClient;
-                    }
-                );
+                await Assert.ThrowsAsync<TimeoutException>(() =>
+                {
+                    return waitingClient;
+                });
             }
         }
 

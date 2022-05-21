@@ -1904,15 +1904,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.RelationshipCannotBeInverted,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<OrderDetails>()
-                                    .HasOne(e => e.Order)
-                                    .WithOne(e => e.Details)
-                                    .HasForeignKey<OrderDetails>(e => e.OrderId)
-                                    .HasPrincipalKey<OrderDetails>(e => e.OrderId)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<OrderDetails>()
+                                .HasOne(e => e.Order)
+                                .WithOne(e => e.Details)
+                                .HasForeignKey<OrderDetails>(e => e.OrderId)
+                                .HasPrincipalKey<OrderDetails>(e => e.OrderId))
                         .Message
                 );
             }
@@ -1988,15 +1986,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.RelationshipCannotBeInverted,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<OrderDetails>()
-                                    .HasOne(e => e.Order)
-                                    .WithOne(e => e.Details)
-                                    .HasPrincipalKey<OrderDetails>(e => e.OrderId)
-                                    .HasForeignKey<OrderDetails>(e => e.OrderId)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<OrderDetails>()
+                                .HasOne(e => e.Order)
+                                .WithOne(e => e.Details)
+                                .HasPrincipalKey<OrderDetails>(e => e.OrderId)
+                                .HasForeignKey<OrderDetails>(e => e.OrderId))
                         .Message
                 );
             }
@@ -2060,13 +2056,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "{'OrderId'}"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<OrderDetails>()
-                                    .Navigation(e => e.Order)
-                                    .IsRequired()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<OrderDetails>()
+                                .Navigation(e => e.Order)
+                                .IsRequired())
                         .Message
                 );
 
@@ -2077,10 +2071,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "{'OrderId'}"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder.Entity<Order>().Navigation(e => e.Details).IsRequired()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Order>().Navigation(e => e.Details).IsRequired())
                         .Message
                 );
             }
@@ -2110,9 +2102,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         modelBuilder.GetDisplayName(typeof(OrderCombination))
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => relationship.HasForeignKey<OrderCombination>(e => e.OrderId)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            relationship.HasForeignKey<OrderCombination>(e => e.OrderId))
                         .Message
                 );
 
@@ -2123,9 +2114,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         modelBuilder.GetDisplayName(typeof(OrderCombination))
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => relationship.HasPrincipalKey<OrderCombination>(e => e.OrderId)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            relationship.HasPrincipalKey<OrderCombination>(e => e.OrderId))
                         .Message
                 );
             }
@@ -3054,13 +3044,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(SelfRef).Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<SelfRef>()
-                                    .HasOne(e => e.SelfRef1)
-                                    .WithOne(e => e.SelfRef1)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<SelfRef>()
+                                .HasOne(e => e.SelfRef1)
+                                .WithOne(e => e.SelfRef1))
                         .Message
                 );
             }
@@ -3305,15 +3293,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Customer>()
-                                    .HasOne(c => c.Details)
-                                    .WithOne(d => d.Customer)
-                                    .HasPrincipalKey<Customer>("Id")
-                                    .HasForeignKey<CustomerDetails>("GuidProperty")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(c => c.Details)
+                                .WithOne(d => d.Customer)
+                                .HasPrincipalKey<Customer>("Id")
+                                .HasForeignKey<CustomerDetails>("GuidProperty"))
                         .Message
                 );
             }
@@ -3364,15 +3350,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Customer>()
-                                    .HasOne(c => c.Details)
-                                    .WithOne(d => d.Customer)
-                                    .HasForeignKey<CustomerDetails>("GuidProperty")
-                                    .HasPrincipalKey<Customer>("Id")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(c => c.Details)
+                                .WithOne(d => d.Customer)
+                                .HasForeignKey<CustomerDetails>("GuidProperty")
+                                .HasPrincipalKey<Customer>("Id"))
                         .Message
                 );
             }
@@ -3425,15 +3409,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Customer>()
-                                    .HasOne(c => c.Details)
-                                    .WithOne(d => d.Customer)
-                                    .HasPrincipalKey<Customer>("Id")
-                                    .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(c => c.Details)
+                                .WithOne(d => d.Customer)
+                                .HasPrincipalKey<Customer>("Id")
+                                .HasForeignKey<CustomerDetails>("Id", "GuidProperty"))
                         .Message
                 );
             }
@@ -3487,15 +3469,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Customer>()
-                                    .HasOne(c => c.Details)
-                                    .WithOne(d => d.Customer)
-                                    .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
-                                    .HasPrincipalKey<Customer>("Id")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(c => c.Details)
+                                .WithOne(d => d.Customer)
+                                .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
+                                .HasPrincipalKey<Customer>("Id"))
                         .Message
                 );
             }
@@ -3715,9 +3695,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         principalType.DisplayName() + "." + nameof(Hob.Nob)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob))
                         .Message
                 );
             }
@@ -3778,9 +3757,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         dependentType.DisplayName() + "." + nameof(Nob.Hob)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob))
                         .Message
                 );
             }
@@ -4095,9 +4073,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Nob).Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => foreignKeyBuilder.HasForeignKey<Nob>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            foreignKeyBuilder.HasForeignKey<Nob>())
                         .Message
                 );
             }
@@ -4333,9 +4310,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "'AlphaOne', 'AlphaTwo'"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Zeta>().HasOne<Alpha>().WithOne()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Zeta>().HasOne<Alpha>().WithOne())
                         .Message
                 );
             }

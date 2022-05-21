@@ -329,21 +329,19 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                serverOptions
-                    .Configure(config)
-                    .Endpoint(
-                        "End1",
-                        opt =>
-                        {
-                            Assert.True(opt.IsHttps);
-                        }
-                    )
-                    .Load();
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            serverOptions
+                .Configure(config)
+                .Endpoint(
+                    "End1",
+                    opt =>
+                    {
+                        Assert.True(opt.IsHttps);
+                    }
+                )
+                .Load();
+        });
     }
 
     [Fact]
@@ -370,21 +368,19 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                serverOptions
-                    .Configure(config)
-                    .Endpoint(
-                        "End1",
-                        opt =>
-                        {
-                            Assert.True(opt.IsHttps);
-                        }
-                    )
-                    .Load();
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            serverOptions
+                .Configure(config)
+                .Endpoint(
+                    "End1",
+                    opt =>
+                    {
+                        Assert.True(opt.IsHttps);
+                    }
+                )
+                .Load();
+        });
     }
 
     [Fact]
@@ -411,21 +407,19 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<CryptographicException>(
-            () =>
-            {
-                serverOptions
-                    .Configure(config)
-                    .Endpoint(
-                        "End1",
-                        opt =>
-                        {
-                            Assert.True(opt.IsHttps);
-                        }
-                    )
-                    .Load();
-            }
-        );
+        var ex = Assert.Throws<CryptographicException>(() =>
+        {
+            serverOptions
+                .Configure(config)
+                .Endpoint(
+                    "End1",
+                    opt =>
+                    {
+                        Assert.True(opt.IsHttps);
+                    }
+                )
+                .Load();
+        });
     }
 
     [Fact]
@@ -451,21 +445,19 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                serverOptions
-                    .Configure(config)
-                    .Endpoint(
-                        "End1",
-                        opt =>
-                        {
-                            Assert.True(opt.IsHttps);
-                        }
-                    )
-                    .Load();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            serverOptions
+                .Configure(config)
+                .Endpoint(
+                    "End1",
+                    opt =>
+                    {
+                        Assert.True(opt.IsHttps);
+                    }
+                )
+                .Load();
+        });
         Assert.StartsWith("Error getting private key from", ex.Message);
         Assert.IsAssignableFrom<CryptographicException>(ex.InnerException);
     }
@@ -638,9 +630,8 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => serverOptions.Configure(config).Load()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            serverOptions.Configure(config).Load());
         Assert.Equal(
             CoreStrings.FormatEndpointHasUnusedHttpsConfig("End1", "Certificate"),
             ex.Message

@@ -39,20 +39,16 @@ namespace System.Security.Cryptography.Dsa.Tests
                 var deformatter = new DSASignatureDeformatter(dsa);
 
                 // Unlike RSA, DSA will throw during SetHashAlgorithm
-                Assert.Throws<CryptographicUnexpectedOperationException>(
-                    () => formatter.SetHashAlgorithm("INVALIDVALUE")
-                );
-                Assert.Throws<CryptographicUnexpectedOperationException>(
-                    () => deformatter.SetHashAlgorithm("INVALIDVALUE")
-                );
+                Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                    formatter.SetHashAlgorithm("INVALIDVALUE"));
+                Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                    deformatter.SetHashAlgorithm("INVALIDVALUE"));
 
                 // Currently anything other than SHA1 fails
-                Assert.Throws<CryptographicUnexpectedOperationException>(
-                    () => formatter.SetHashAlgorithm("SHA256")
-                );
-                Assert.Throws<CryptographicUnexpectedOperationException>(
-                    () => deformatter.SetHashAlgorithm("SHA256")
-                );
+                Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                    formatter.SetHashAlgorithm("SHA256"));
+                Assert.Throws<CryptographicUnexpectedOperationException>(() =>
+                    deformatter.SetHashAlgorithm("SHA256"));
             }
         }
 

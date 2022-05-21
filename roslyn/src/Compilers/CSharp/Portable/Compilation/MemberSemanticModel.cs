@@ -92,9 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _parentRemappedSymbolsOpt = parentRemappedSymbolsOpt;
             _speculatedPosition = speculatedPosition;
 
-            _operationFactory = new Lazy<CSharpOperationFactory>(
-                () => new CSharpOperationFactory(this)
-            );
+            _operationFactory = new Lazy<CSharpOperationFactory>(() =>
+                new CSharpOperationFactory(this));
         }
 
         public override CSharpCompilation Compilation

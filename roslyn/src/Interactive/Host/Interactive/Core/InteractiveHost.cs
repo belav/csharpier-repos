@@ -182,19 +182,17 @@ namespace Microsoft.CodeAnalysis.Interactive
             // without deadlocks with other operations.
             // This could happen, for example, for writers provided by the Interactive Window,
             // and in the case where the window is being disposed.
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                lock (guard)
                 {
-                    lock (guard)
+                    writer.WriteLine(firstLine);
+                    if (secondLine != null)
                     {
-                        writer.WriteLine(firstLine);
-                        if (secondLine != null)
-                        {
-                            writer.WriteLine(secondLine);
-                        }
+                        writer.WriteLine(secondLine);
                     }
                 }
-            );
+            });
         }
 
         private LazyRemoteService CreateRemoteService(

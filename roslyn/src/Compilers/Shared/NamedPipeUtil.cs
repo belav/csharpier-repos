@@ -69,12 +69,10 @@ namespace Microsoft.CodeAnalysis
                 var serverIdentity = getIdentity();
 
                 (string name, bool admin) clientIdentity = default;
-                pipeStream.RunAsClient(
-                    () =>
-                    {
-                        clientIdentity = getIdentity();
-                    }
-                );
+                pipeStream.RunAsClient(() =>
+                {
+                    clientIdentity = getIdentity();
+                });
 
                 return StringComparer.OrdinalIgnoreCase.Equals(
                         serverIdentity.name,

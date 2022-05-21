@@ -86,12 +86,10 @@ namespace System.Web.Mvc.Async.Test
             bool wasCalled = false;
 
             // Act
-            helper.Sync(
-                () =>
-                {
-                    wasCalled = true;
-                }
-            );
+            helper.Sync(() =>
+            {
+                wasCalled = true;
+            });
 
             // Assert
             Assert.True(wasCalled);

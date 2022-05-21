@@ -2290,9 +2290,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Action<ModelBuilder> buildSourceAction,
             Action<ModelBuilder> buildTargetAction
         ) where T : Exception =>
-            Assert.ThrowsAsync<T>(
-                () => Test(buildCommonAction, buildSourceAction, buildTargetAction, asserter: null)
-            );
+            Assert.ThrowsAsync<T>(() =>
+                Test(buildCommonAction, buildSourceAction, buildTargetAction, asserter: null));
 
         protected virtual void AssertSql(params string[] expected) =>
             Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

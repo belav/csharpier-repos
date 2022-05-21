@@ -16,15 +16,13 @@ class Test
         ThreadPool.QueueUserWorkItem(
             unused =>
             {
-                domain.DoCallBack(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("key", "checked");
+                domain.DoCallBack(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("key", "checked");
 
-                        // This will get a ThreadAbortedException
-                        Thread.Sleep(10000);
-                    }
-                );
+                    // This will get a ThreadAbortedException
+                    Thread.Sleep(10000);
+                });
             }
         );
 

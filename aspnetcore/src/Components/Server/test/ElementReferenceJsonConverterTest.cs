@@ -92,14 +92,12 @@ public class ElementReferenceJsonConverterTest
         var bytes = Encoding.UTF8.GetBytes(json);
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () =>
-            {
-                var reader = new Utf8JsonReader(bytes);
-                reader.Read();
-                Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
-            }
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+        {
+            var reader = new Utf8JsonReader(bytes);
+            reader.Read();
+            Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+        });
 
         // Assert
         Assert.Equal("Unexpected JSON property 'id'.", ex.Message);
@@ -113,14 +111,12 @@ public class ElementReferenceJsonConverterTest
         var bytes = Encoding.UTF8.GetBytes(json);
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () =>
-            {
-                var reader = new Utf8JsonReader(bytes);
-                reader.Read();
-                Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
-            }
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+        {
+            var reader = new Utf8JsonReader(bytes);
+            reader.Read();
+            Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+        });
 
         // Assert
         Assert.Equal("__internalId is required.", ex.Message);

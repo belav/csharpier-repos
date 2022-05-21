@@ -55,9 +55,8 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions();
             options.MaxDepth = maxDepth;
-            JsonException ex = Assert.Throws<JsonException>(
-                () => JsonSerializer.Serialize(rootObj, options)
-            );
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Serialize(rootObj, options));
 
             // Exception should contain the path and MaxDepth.
             // Since the last Parent property is null, the serializer moves onto the Children property.

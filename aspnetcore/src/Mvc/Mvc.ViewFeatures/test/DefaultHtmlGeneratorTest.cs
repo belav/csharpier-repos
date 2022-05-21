@@ -560,15 +560,13 @@ public class DefaultHtmlGeneratorTest
         viewContext.ViewData[nameof(Model.Name)] = value;
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                htmlGenerator.GetCurrentValues(
-                    viewContext,
-                    modelExplorer: null,
-                    expression: nameof(Model.Name),
-                    allowMultiple: true
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            htmlGenerator.GetCurrentValues(
+                viewContext,
+                modelExplorer: null,
+                expression: nameof(Model.Name),
+                allowMultiple: true
+            ));
         Assert.Equal(
             "The parameter 'expression' must evaluate to an IEnumerable when multiple selection is allowed.",
             exception.Message
@@ -1131,17 +1129,15 @@ public class DefaultHtmlGeneratorTest
         var antiforgery = new Mock<IAntiforgery>();
         antiforgery
             .Setup(mock => mock.GetAndStoreTokens(It.IsAny<DefaultHttpContext>()))
-            .Returns(
-                () =>
-                {
-                    return new AntiforgeryTokenSet(
-                        "requestToken",
-                        "cookieToken",
-                        "formFieldName",
-                        "headerName"
-                    );
-                }
-            );
+            .Returns(() =>
+            {
+                return new AntiforgeryTokenSet(
+                    "requestToken",
+                    "cookieToken",
+                    "formFieldName",
+                    "headerName"
+                );
+            });
 
         var attributeProvider = new DefaultValidationHtmlAttributeProvider(
             mvcViewOptionsAccessor.Object,

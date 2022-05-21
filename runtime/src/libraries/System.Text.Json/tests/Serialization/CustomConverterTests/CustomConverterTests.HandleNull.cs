@@ -57,19 +57,12 @@ namespace System.Text.Json.Serialization.Tests
 
             // Serializer throws JsonException if null is assigned to value that can't be null.
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>("null", options));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ClassWithInt>(@"{""MyInt"":null}", options)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<List<int>>("[null]", options)
-            );
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<Dictionary<string, int>>(
-                        @"{""MyInt"":null}",
-                        options
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithInt>(@"{""MyInt"":null}", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<List<int>>("[null]", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<string, int>>(@"{""MyInt"":null}", options));
         }
 
         private class Int32NullConverter_OptOut : Int32NullConverter_SpecialCaseNull
@@ -146,29 +139,22 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new PointStructConverter_OptOut());
 
             // Serializer throws JsonException if null is assigned to value that can't be null.
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<Point_2D_Struct>("null", options)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ClassWithPoint>(@"{""MyPoint"":null}", options)
-            );
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<ImmutableClassWithPoint>(
-                        @"{""MyPoint"":null}",
-                        options
-                    )
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<List<Point_2D_Struct>>("[null]", options)
-            );
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<Dictionary<string, Point_2D_Struct>>(
-                        @"{""MyPoint"":null}",
-                        options
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Point_2D_Struct>("null", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithPoint>(@"{""MyPoint"":null}", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ImmutableClassWithPoint>(
+                    @"{""MyPoint"":null}",
+                    options
+                ));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<List<Point_2D_Struct>>("[null]", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<string, Point_2D_Struct>>(
+                    @"{""MyPoint"":null}",
+                    options
+                ));
         }
 
         private class PointStructConverter_OptOut : PointStructConverter_SpecialCaseNull
@@ -487,9 +473,8 @@ namespace System.Text.Json.Serialization.Tests
                 )
             )
             {
-                Assert.Throws<JsonException>(
-                    () => JsonSerializer.Serialize(writer, new ClassWithUri(), options)
-                );
+                Assert.Throws<JsonException>(() =>
+                    JsonSerializer.Serialize(writer, new ClassWithUri(), options));
             }
 
             using (
@@ -499,9 +484,8 @@ namespace System.Text.Json.Serialization.Tests
                 )
             )
             {
-                Assert.Throws<JsonException>(
-                    () => JsonSerializer.Serialize(new StructWithObject(), options)
-                );
+                Assert.Throws<JsonException>(() =>
+                    JsonSerializer.Serialize(new StructWithObject(), options));
             }
         }
 

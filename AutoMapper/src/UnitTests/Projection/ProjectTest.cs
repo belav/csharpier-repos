@@ -71,9 +71,8 @@ namespace AutoMapper.UnitTests.Projection
 
             IList<Unmapped> projected = null;
 
-            typeof(InvalidOperationException).ShouldBeThrownBy(
-                () => projected = customers.ProjectTo<Unmapped>(_config).ToList()
-            );
+            typeof(InvalidOperationException).ShouldBeThrownBy(() =>
+                projected = customers.ProjectTo<Unmapped>(_config).ToList());
 
             projected.ShouldBeNull();
         }

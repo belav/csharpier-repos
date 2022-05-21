@@ -237,14 +237,12 @@ public class StreamSourceDocumentTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                new StreamSourceDocument(
-                    content,
-                    Encoding.UTF8,
-                    RazorSourceDocumentProperties.Default
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new StreamSourceDocument(
+                content,
+                Encoding.UTF8,
+                RazorSourceDocumentProperties.Default
+            ));
         Assert.Equal(expectedMessage, exception.Message);
     }
 

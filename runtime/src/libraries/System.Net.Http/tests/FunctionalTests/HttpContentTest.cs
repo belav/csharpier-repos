@@ -72,12 +72,10 @@ namespace System.Net.Http.Functional.Tests
             );
 
             var m = new MemoryStream();
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
         }
 
         [Fact]
@@ -115,12 +113,10 @@ namespace System.Net.Http.Functional.Tests
 
             // The HttpContent derived class (MockContent in our case) must return a Task object when WriteToAsync()
             // is called. If not, HttpContent will throw.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
         }
 
         [Fact]
@@ -154,9 +150,8 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.CopyToAsync(ms, cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.CopyToAsync(ms, cts.Token));
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);
         }
@@ -171,9 +166,8 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.CopyToAsync(ms, cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.CopyToAsync(ms, cts.Token));
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);
         }
@@ -495,12 +489,10 @@ namespace System.Net.Http.Functional.Tests
                 MockOptions.ThrowInAsyncSerializeMethods
             );
 
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    content.LoadIntoBufferAsync();
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                content.LoadIntoBufferAsync();
+            });
         }
 
         [Fact]
@@ -671,48 +663,34 @@ namespace System.Net.Http.Functional.Tests
 
             var m = new MemoryStream();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.CopyTo(m, null, default);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsByteArrayAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStringAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStreamAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStream();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.LoadIntoBufferAsync();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.CopyTo(m, null, default);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsByteArrayAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStringAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStreamAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStream();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.LoadIntoBufferAsync();
+            });
 
             // Note that we don't throw when users access the Headers property. This is useful e.g. to be able to
             // read the headers of a content, even though the content is already disposed. Note that the .NET guidelines
@@ -765,9 +743,8 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsStringAsync(cts.Token)
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsStringAsync(cts.Token));
                 },
                 async server =>
                 {
@@ -795,9 +772,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpCompletionOption.ResponseHeadersRead
                     );
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsStringAsync(cts.Token)
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsStringAsync(cts.Token));
                 },
                 async server =>
                 {
@@ -867,9 +843,8 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsByteArrayAsync(cts.Token)
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsByteArrayAsync(cts.Token));
                 },
                 async server =>
                 {
@@ -897,9 +872,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpCompletionOption.ResponseHeadersRead
                     );
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => response.Content.ReadAsByteArrayAsync(cts.Token)
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        response.Content.ReadAsByteArrayAsync(cts.Token));
                 },
                 async server =>
                 {
@@ -1012,9 +986,8 @@ namespace System.Net.Http.Functional.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => content.ReadAsStreamAsync(cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.ReadAsStreamAsync(cts.Token));
         }
 
         [Fact]
@@ -1165,13 +1138,11 @@ namespace System.Net.Http.Functional.Tests
                     throw _customException;
                 }
 
-                return Task.Run(
-                    () =>
-                    {
-                        CheckThrow();
-                        return stream.WriteAsync(_mockData, 0, _mockData.Length);
-                    }
-                );
+                return Task.Run(() =>
+                {
+                    CheckThrow();
+                    return stream.WriteAsync(_mockData, 0, _mockData.Length);
+                });
             }
 
             protected override Stream CreateContentReadStream(CancellationToken cancellationToken)

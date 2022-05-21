@@ -47,9 +47,8 @@ public class AttributeRoutingTest
         var routeContext = new RouteContext(new DefaultHttpContext());
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            () => route.RouteAsync(routeContext)
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(() =>
+            route.RouteAsync(routeContext));
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -75,12 +74,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -115,12 +112,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -158,12 +153,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }

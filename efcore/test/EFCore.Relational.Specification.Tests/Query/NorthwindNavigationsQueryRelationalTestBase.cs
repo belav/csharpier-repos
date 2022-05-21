@@ -14,9 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override Task Where_subquery_on_navigation_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () => base.Where_subquery_on_navigation_client_eval(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Where_subquery_on_navigation_client_eval(async));
         }
 
         protected virtual bool CanExecuteQueryString => false;

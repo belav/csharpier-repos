@@ -133,25 +133,23 @@ public class AssemblyTestLog : IDisposable
             logStart.ToString("s", CultureInfo.InvariantCulture)
         );
 
-        return new Disposable(
-            () =>
-            {
-                stopwatch.Stop();
-                _globalLogger.LogInformation(
-                    "Finished test {testName} in {duration}s",
-                    testName,
-                    stopwatch.Elapsed.TotalSeconds
-                );
-                logger.LogInformation(
-                    "Finished test {testName} in {duration}s",
-                    testName,
-                    stopwatch.Elapsed.TotalSeconds
-                );
-                scope.Dispose();
-                factory.Dispose();
-                (serviceProvider as IDisposable)?.Dispose();
-            }
-        );
+        return new Disposable(() =>
+        {
+            stopwatch.Stop();
+            _globalLogger.LogInformation(
+                "Finished test {testName} in {duration}s",
+                testName,
+                stopwatch.Elapsed.TotalSeconds
+            );
+            logger.LogInformation(
+                "Finished test {testName} in {duration}s",
+                testName,
+                stopwatch.Elapsed.TotalSeconds
+            );
+            scope.Dispose();
+            factory.Dispose();
+            (serviceProvider as IDisposable)?.Dispose();
+        });
     }
 
     [SuppressMessage(

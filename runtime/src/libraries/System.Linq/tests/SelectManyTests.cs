@@ -230,12 +230,10 @@ namespace System.Linq.Tests
                 (e, i) => Enumerable.Empty<int>()
             );
             using (var en = selected.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]

@@ -257,9 +257,8 @@ namespace System.Text.Json.Tests
             using Utf8JsonWriter writer = new(ms);
             Assert.Throws<ArgumentNullException>(() => writer.WriteRawValue(json: default(string)));
             Assert.Throws<ArgumentException>(() => writer.WriteRawValue(json: ""));
-            Assert.Throws<ArgumentException>(
-                () => writer.WriteRawValue(json: default(ReadOnlySpan<char>))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                writer.WriteRawValue(json: default(ReadOnlySpan<char>)));
             Assert.Throws<ArgumentException>(() => writer.WriteRawValue(utf8Json: default));
         }
 
@@ -289,9 +288,8 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => writer.WriteRawValue(@"{}", skipInputValidation)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        writer.WriteRawValue(@"{}", skipInputValidation));
                 }
             }
         }
@@ -311,9 +309,8 @@ namespace System.Text.Json.Tests
 
                 if (expectFail)
                 {
-                    Assert.ThrowsAny<JsonException>(
-                        () => writer.WriteRawValue(json, skipInputValidation)
-                    );
+                    Assert.ThrowsAny<JsonException>(() =>
+                        writer.WriteRawValue(json, skipInputValidation));
                 }
                 else
                 {
@@ -388,9 +385,8 @@ namespace System.Text.Json.Tests
 
                 // Next write forces a grow beyond max array length
 
-                Assert.Throws<OutOfMemoryException>(
-                    () => writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes))
-                );
+                Assert.Throws<OutOfMemoryException>(() =>
+                    writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes)));
 
                 Assert.Equal(2_100_097_542, writer.BytesPending);
 
@@ -521,12 +517,10 @@ namespace System.Text.Json.Tests
             using Utf8JsonWriter writer = new(ms);
 
             // UTF-16 overloads not compatible with this length.
-            Assert.Throws<ArgumentException>(
-                () => WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar)
-            );
-            Assert.Throws<ArgumentException>(
-                () => WriteRawValueWithSetting(writer, payload, OverloadParamType.String)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar));
+            Assert.Throws<ArgumentException>(() =>
+                WriteRawValueWithSetting(writer, payload, OverloadParamType.String));
 
             // UTF-8 overload is okay.
             WriteRawValueWithSetting(writer, payload, OverloadParamType.ByteArray);

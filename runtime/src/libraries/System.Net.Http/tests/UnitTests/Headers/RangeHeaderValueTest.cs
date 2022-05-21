@@ -13,12 +13,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_InvalidRange_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new RangeHeaderValue(5, 2);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeHeaderValue(5, 2);
+            });
         }
 
         [Fact]
@@ -42,24 +40,18 @@ namespace System.Net.Http.Tests
                     range.Unit = "";
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = " x";
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = "x ";
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    range.Unit = "x y";
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = " x";
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x ";
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x y";
+            });
         }
 
         [Fact]
@@ -215,12 +207,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    RangeHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                RangeHeaderValue.Parse(input);
+            });
 
             Assert.False(RangeHeaderValue.TryParse(input, out RangeHeaderValue result));
             Assert.Null(result);

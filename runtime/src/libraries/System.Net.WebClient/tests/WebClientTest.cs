@@ -1133,9 +1133,8 @@ namespace System.Net.Tests
         {
             var wc = new WebClient();
             wc.Headers[headerName] = headerValue;
-            await Assert.ThrowsAsync<WebException>(
-                () => wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
-            );
+            await Assert.ThrowsAsync<WebException>(() =>
+                wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer));
         }
 
         public static IEnumerable<object[]> RequestHeaders_AddHostHeaderAndSendRequest_ExpectedResult_MemberData()
@@ -1156,9 +1155,8 @@ namespace System.Net.Tests
             wc.Headers["Host"] = hostHeaderValue;
             if (throwsWebException)
             {
-                await Assert.ThrowsAsync<WebException>(
-                    () => wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer)
-                );
+                await Assert.ThrowsAsync<WebException>(() =>
+                    wc.DownloadStringTaskAsync(Configuration.Http.RemoteEchoServer));
             }
             else
             {
@@ -1195,132 +1193,90 @@ namespace System.Net.Tests
                 {
                     var wc = new WebClient();
                     Task ignored = wc.DownloadDataTaskAsync(url); // won't complete
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadData(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadDataAsync(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadDataTaskAsync(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadString(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadStringAsync(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadStringTaskAsync(url);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadFile(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadFileAsync(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.DownloadFileTaskAsync(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadData(url, new byte[42]);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadDataAsync(url, new byte[42]);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadDataTaskAsync(url, new byte[42]);
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadString(url, "42");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadStringAsync(url, "42");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadStringTaskAsync(url, "42");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadFile(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadFileAsync(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadFileTaskAsync(url, "path");
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadValues(url, new NameValueCollection());
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadValuesAsync(url, new NameValueCollection());
-                        }
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            wc.UploadValuesTaskAsync(url, new NameValueCollection());
-                        }
-                    );
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadData(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadDataAsync(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadDataTaskAsync(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadString(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadStringAsync(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadStringTaskAsync(url);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadFile(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadFileAsync(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.DownloadFileTaskAsync(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadData(url, new byte[42]);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadDataAsync(url, new byte[42]);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadDataTaskAsync(url, new byte[42]);
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadString(url, "42");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadStringAsync(url, "42");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadStringTaskAsync(url, "42");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadFile(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadFileAsync(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadFileTaskAsync(url, "path");
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadValues(url, new NameValueCollection());
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadValuesAsync(url, new NameValueCollection());
+                    });
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        wc.UploadValuesTaskAsync(url, new NameValueCollection());
+                    });
                     return Task.CompletedTask;
                 }
             );

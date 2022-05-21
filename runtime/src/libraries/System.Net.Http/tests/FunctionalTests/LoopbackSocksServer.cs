@@ -45,36 +45,32 @@ namespace System.Net.Http.Functional.Tests
             var ep = (IPEndPoint)_listener.LocalEndPoint;
             Port = ep.Port;
 
-            Task.Run(
-                async () =>
+            Task.Run(async () =>
+            {
+                while (true)
                 {
-                    while (true)
+                    try
                     {
-                        try
-                        {
-                            Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
+                        Socket s = await _listener.AcceptAsync().ConfigureAwait(false);
 
-                            _connectionTasks.Add(
-                                Task.Run(
-                                    async () =>
-                                    {
-                                        using (var ns = new NetworkStream(s, ownsSocket: true))
-                                        {
-                                            await ProcessRequest(s, ns).ConfigureAwait(false);
-                                        }
-                                    }
-                                )
-                            );
-                        }
-                        catch
-                        {
-                            break;
-                        }
+                        _connectionTasks.Add(
+                            Task.Run(async () =>
+                            {
+                                using (var ns = new NetworkStream(s, ownsSocket: true))
+                                {
+                                    await ProcessRequest(s, ns).ConfigureAwait(false);
+                                }
+                            })
+                        );
                     }
-
-                    _serverStopped.SetResult();
+                    catch
+                    {
+                        break;
+                    }
                 }
-            );
+
+                _serverStopped.SetResult();
+            });
         }
 
         private async Task ProcessRequest(Socket clientSocket, NetworkStream ns)
@@ -247,35 +243,31 @@ namespace System.Net.Http.Functional.Tests
             var serverStream = new NetworkStream(serverSocket);
 
             // Relay traffic to/from client and destination server.
-            Task clientCopyTask = Task.Run(
-                async () =>
+            Task clientCopyTask = Task.Run(async () =>
+            {
+                try
                 {
-                    try
-                    {
-                        await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
-                        serverSocket.Shutdown(SocketShutdown.Send);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleExceptions(ex);
-                    }
+                    await clientStream.CopyToAsync(serverStream).ConfigureAwait(false);
+                    serverSocket.Shutdown(SocketShutdown.Send);
                 }
-            );
+                catch (Exception ex)
+                {
+                    HandleExceptions(ex);
+                }
+            });
 
-            Task serverCopyTask = Task.Run(
-                async () =>
+            Task serverCopyTask = Task.Run(async () =>
+            {
+                try
                 {
-                    try
-                    {
-                        await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
-                        clientSocket.Shutdown(SocketShutdown.Send);
-                    }
-                    catch (Exception ex)
-                    {
-                        HandleExceptions(ex);
-                    }
+                    await serverStream.CopyToAsync(clientStream).ConfigureAwait(false);
+                    clientSocket.Shutdown(SocketShutdown.Send);
                 }
-            );
+                catch (Exception ex)
+                {
+                    HandleExceptions(ex);
+                }
+            });
 
             await Task.WhenAll(new[] { clientCopyTask, serverCopyTask }).ConfigureAwait(false);
 

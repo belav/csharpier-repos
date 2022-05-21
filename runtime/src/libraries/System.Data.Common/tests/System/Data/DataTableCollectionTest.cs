@@ -100,14 +100,12 @@ namespace System.Data.Tests
         [Fact]
         public void AddException1()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    DataTableCollection tbcol = _dataset[0].Tables;
-                    DataTable tb = null;
-                    tbcol.Add(tb);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                DataTable tb = null;
+                tbcol.Add(tb);
+            });
         }
 
         [Fact]
@@ -128,27 +126,23 @@ namespace System.Data.Tests
         [Fact]
         public void AddException3()
         {
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    DataTableCollection tbcol = _dataset[0].Tables;
-                    tbcol.Add(new DataTable("SameTableName"));
-                    tbcol.Add(new DataTable("SameTableName"));
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                tbcol.Add(new DataTable("SameTableName"));
+                tbcol.Add(new DataTable("SameTableName"));
+            });
         }
 
         [Fact]
         public void AddException4()
         {
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    DataTableCollection tbcol = _dataset[0].Tables;
-                    tbcol.Add("SameTableName");
-                    tbcol.Add("SameTableName");
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                tbcol.Add("SameTableName");
+                tbcol.Add("SameTableName");
+            });
         }
 
         [Fact]

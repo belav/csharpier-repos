@@ -920,9 +920,8 @@ public class ResponseCachingMiddlewareTests
         ResponseCachingMiddleware.AddResponseCachingFeature(httpContext);
 
         // Should throw
-        Assert.ThrowsAny<InvalidOperationException>(
-            () => ResponseCachingMiddleware.AddResponseCachingFeature(httpContext)
-        );
+        Assert.ThrowsAny<InvalidOperationException>(() =>
+            ResponseCachingMiddleware.AddResponseCachingFeature(httpContext));
     }
 
     private class FakeResponseFeature : HttpResponseFeature

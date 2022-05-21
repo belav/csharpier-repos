@@ -91,9 +91,8 @@ public static partial class OverlappedTests
         try
         {
             Assert.True(nativeOverlapped != null);
-            Assert.Throws<InvalidOperationException>(
-                () => ov.Pack(new IOCompletionCallback(callback), null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ov.Pack(new IOCompletionCallback(callback), null));
         }
         finally
         {
@@ -115,9 +114,8 @@ public static partial class OverlappedTests
         try
         {
             Assert.True(nativeOverlapped != null);
-            Assert.Throws<InvalidOperationException>(
-                () => ov.Pack(new IOCompletionCallback(callback))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ov.Pack(new IOCompletionCallback(callback)));
         }
         finally
         {

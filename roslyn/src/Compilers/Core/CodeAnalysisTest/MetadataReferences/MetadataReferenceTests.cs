@@ -34,48 +34,40 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new AssemblyName { Name = "A" },
                 System.Reflection.Emit.AssemblyBuilderAccess.Run
             );
-            Assert.Throws<NotSupportedException>(
-                () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly));
 
             var inMemoryAssembly = Assembly.Load(TestResources.General.C1);
             Assert.Equal("", inMemoryAssembly.Location);
-            Assert.Throws<NotSupportedException>(
-                () => MetadataReference.CreateFromAssemblyInternal(inMemoryAssembly)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                MetadataReference.CreateFromAssemblyInternal(inMemoryAssembly));
         }
 
         [Fact]
         public void CreateFrom_Errors()
         {
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromImage(null));
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReference.CreateFromImage(default(ImmutableArray<byte>))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReference.CreateFromImage(default(ImmutableArray<byte>)));
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromFile(null));
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReference.CreateFromFile(null, default(MetadataReferenceProperties))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReference.CreateFromFile(null, default(MetadataReferenceProperties)));
             Assert.Throws<ArgumentNullException>(() => MetadataReference.CreateFromStream(null));
 
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReference.CreateFromAssemblyInternal(null)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    MetadataReference.CreateFromAssemblyInternal(
-                        typeof(object).Assembly,
-                        new MetadataReferenceProperties(MetadataImageKind.Module)
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReference.CreateFromAssemblyInternal(null));
+            Assert.Throws<ArgumentException>(() =>
+                MetadataReference.CreateFromAssemblyInternal(
+                    typeof(object).Assembly,
+                    new MetadataReferenceProperties(MetadataImageKind.Module)
+                ));
 
             var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 new AssemblyName { Name = "Goo" },
                 System.Reflection.Emit.AssemblyBuilderAccess.Run
             );
-            Assert.Throws<NotSupportedException>(
-                () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                MetadataReference.CreateFromAssemblyInternal(dynamicAssembly));
         }
 #endif
 
@@ -374,9 +366,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(new[] { "x" }, r3.Properties.Aliases);
             Assert.Equal(MetadataImageKind.Assembly, r3.Properties.Kind);
 
-            Assert.Throws<ArgumentException>(
-                () => r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module)));
         }
 
         [Fact]
@@ -413,9 +404,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(new[] { "x" }, r3.Properties.Aliases);
             Assert.Equal(MetadataImageKind.Assembly, r3.Properties.Kind);
 
-            Assert.Throws<ArgumentException>(
-                () => r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                r.WithProperties(new MetadataReferenceProperties(MetadataImageKind.Module)));
         }
 
         [Fact]

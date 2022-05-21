@@ -432,18 +432,16 @@ namespace System.Text.RegularExpressions.Tests
 
                     if (expected == "BADBR")
                     {
-                        await Assert.ThrowsAnyAsync<ArgumentException>(
-                            async () => await RegexHelpers.GetRegexAsync(engine, pattern, options)
-                        );
+                        await Assert.ThrowsAnyAsync<ArgumentException>(async () =>
+                            await RegexHelpers.GetRegexAsync(engine, pattern, options));
                         return;
                     }
 
                     if (nonBacktracking && nonBacktrackingCaptures == "NONBACKTRACKINGINCOMPATIBLE")
                     {
                         // In particular: backreferences are not supported in NonBacktracking mode
-                        await Assert.ThrowsAnyAsync<NotSupportedException>(
-                            () => RegexHelpers.GetRegexAsync(engine, pattern, options)
-                        );
+                        await Assert.ThrowsAnyAsync<NotSupportedException>(() =>
+                            RegexHelpers.GetRegexAsync(engine, pattern, options));
                         return;
                     }
 

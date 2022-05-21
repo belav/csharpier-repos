@@ -71,9 +71,8 @@ namespace System.Drawing.Printing.Tests
                     Rectangle.Empty,
                     null
                 );
-                Assert.Throws<NullReferenceException>(
-                    () => controller.OnStartPage(document, printEventArgs)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    controller.OnStartPage(document, printEventArgs));
             }
         }
 
@@ -145,9 +144,8 @@ namespace System.Drawing.Printing.Tests
         public void OnStartPrint_InvokeNullDocument_ThrowsNullReferenceException()
         {
             var controller = new PreviewPrintController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.OnStartPrint(null, new PrintEventArgs())
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.OnStartPrint(null, new PrintEventArgs()));
         }
 
         [Theory]

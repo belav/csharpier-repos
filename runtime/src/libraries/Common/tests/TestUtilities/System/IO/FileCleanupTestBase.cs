@@ -11,9 +11,8 @@ namespace System.IO
     /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
     public abstract class FileCleanupTestBase : IDisposable
     {
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
-            () => AdminHelpers.IsProcessElevated()
-        );
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() =>
+            AdminHelpers.IsProcessElevated());
 
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
 
@@ -159,44 +158,42 @@ namespace System.IO
         /// </summary>
         protected static bool CanCreateSymbolicLinks => s_canCreateSymbolicLinks.Value;
 
-        private static readonly Lazy<bool> s_canCreateSymbolicLinks = new Lazy<bool>(
-            () =>
+        private static readonly Lazy<bool> s_canCreateSymbolicLinks = new Lazy<bool>(() =>
+        {
+            bool success = true;
+
+            // Verify file symlink creation
+            string path = Path.GetTempFileName();
+            string linkPath = path + ".link";
+            success = CreateSymLink(path, linkPath, isDirectory: false);
+            try
             {
-                bool success = true;
-
-                // Verify file symlink creation
-                string path = Path.GetTempFileName();
-                string linkPath = path + ".link";
-                success = CreateSymLink(path, linkPath, isDirectory: false);
-                try
-                {
-                    File.Delete(path);
-                }
-                catch { }
-                try
-                {
-                    File.Delete(linkPath);
-                }
-                catch { }
-
-                // Verify directory symlink creation
-                path = Path.GetTempFileName();
-                linkPath = path + ".link";
-                success = success && CreateSymLink(path, linkPath, isDirectory: true);
-                try
-                {
-                    Directory.Delete(path);
-                }
-                catch { }
-                try
-                {
-                    Directory.Delete(linkPath);
-                }
-                catch { }
-
-                return success;
+                File.Delete(path);
             }
-        );
+            catch { }
+            try
+            {
+                File.Delete(linkPath);
+            }
+            catch { }
+
+            // Verify directory symlink creation
+            path = Path.GetTempFileName();
+            linkPath = path + ".link";
+            success = success && CreateSymLink(path, linkPath, isDirectory: true);
+            try
+            {
+                Directory.Delete(path);
+            }
+            catch { }
+            try
+            {
+                Directory.Delete(linkPath);
+            }
+            catch { }
+
+            return success;
+        });
 
         protected static bool CreateSymLink(string targetPath, string linkPath, bool isDirectory)
         {

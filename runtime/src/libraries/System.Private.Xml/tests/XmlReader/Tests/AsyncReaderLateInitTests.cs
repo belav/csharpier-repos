@@ -101,9 +101,8 @@ namespace System.Xml.Tests
                 )
             )
             {
-                Assert.Throws<System.Net.Http.HttpRequestException>(
-                    () => reader.ReadAsync().GetAwaiter().GetResult()
-                );
+                Assert.Throws<System.Net.Http.HttpRequestException>(() =>
+                    reader.ReadAsync().GetAwaiter().GetResult());
             }
         }
 
@@ -124,46 +123,39 @@ namespace System.Xml.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void InitializationWithUriOnNonAsyncReaderThrows()
         {
-            Assert.Throws<System.Net.Http.HttpRequestException>(
-                () =>
-                    XmlReader.Create(
-                        "http://test.test/test.html",
-                        new XmlReaderSettings() { Async = false }
-                    )
-            );
+            Assert.Throws<System.Net.Http.HttpRequestException>(() =>
+                XmlReader.Create(
+                    "http://test.test/test.html",
+                    new XmlReaderSettings() { Async = false }
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/53987", TestRuntimes.Mono)]
         public static void SynchronizationContextCurrent_NotUsedForAsyncOperations()
         {
-            Task.Run(
-                    () =>
-                    {
-                        var sc = new TrackingSynchronizationContext();
-                        SynchronizationContext.SetSynchronizationContext(sc);
+            Task.Run(() =>
+                {
+                    var sc = new TrackingSynchronizationContext();
+                    SynchronizationContext.SetSynchronizationContext(sc);
 
-                        using (
-                            XmlReader reader = XmlReader.Create(
-                                new DribbleReadXmlAsyncStream(_dummyXml),
-                                new XmlReaderSettings { Async = true, }
-                            )
+                    using (
+                        XmlReader reader = XmlReader.Create(
+                            new DribbleReadXmlAsyncStream(_dummyXml),
+                            new XmlReaderSettings { Async = true, }
                         )
-                        {
-                            while (reader.ReadAsync().GetAwaiter().GetResult())
-                                ;
-                        }
-
-                        Assert.True(
-                            sc.CallStacks.Count == 0,
-                            "Sync Ctx used: "
-                                + string.Join(
-                                    Environment.NewLine + Environment.NewLine,
-                                    sc.CallStacks
-                                )
-                        );
+                    )
+                    {
+                        while (reader.ReadAsync().GetAwaiter().GetResult())
+                            ;
                     }
-                )
+
+                    Assert.True(
+                        sc.CallStacks.Count == 0,
+                        "Sync Ctx used: "
+                            + string.Join(Environment.NewLine + Environment.NewLine, sc.CallStacks)
+                    );
+                })
                 .GetAwaiter()
                 .GetResult();
         }
@@ -181,18 +173,16 @@ namespace System.Xml.Tests
                 int count,
                 CancellationToken cancellationToken
             ) =>
-                Task.Run(
-                    () => // to dribble out a byte at a time
+                Task.Run(() => // to dribble out a byte at a time
+                {
+                    if (count <= 0 || _pos >= _bytes.Length)
                     {
-                        if (count <= 0 || _pos >= _bytes.Length)
-                        {
-                            return 0;
-                        }
-
-                        buffer[offset] = _bytes[_pos++];
-                        return 1;
+                        return 0;
                     }
-                );
+
+                    buffer[offset] = _bytes[_pos++];
+                    return 1;
+                });
 
             public override int Read(byte[] buffer, int offset, int count) =>
                 ReadAsync(buffer, offset, count).GetAwaiter().GetResult();

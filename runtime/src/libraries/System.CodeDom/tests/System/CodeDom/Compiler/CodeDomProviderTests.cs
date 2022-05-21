@@ -191,23 +191,20 @@ namespace System.CodeDom.Compiler.Tests
             string language
         )
         {
-            Exception ex1 = Assert.ThrowsAny<Exception>(
-                () => CodeDomProvider.CreateProvider(language)
-            );
+            Exception ex1 = Assert.ThrowsAny<Exception>(() =>
+                CodeDomProvider.CreateProvider(language));
             AssertIsConfigurationErrorsException(ex1);
 
-            Exception ex2 = Assert.ThrowsAny<Exception>(
-                () => CodeDomProvider.CreateProvider(language, new Dictionary<string, string>())
-            );
+            Exception ex2 = Assert.ThrowsAny<Exception>(() =>
+                CodeDomProvider.CreateProvider(language, new Dictionary<string, string>()));
             AssertIsConfigurationErrorsException(ex2);
         }
 
         [Fact]
         public void CreateProvider_SerializeConfigurationErrorsException_ThrowsPlatformNotSupportedException()
         {
-            Exception ex = Assert.ThrowsAny<Exception>(
-                () => CodeDomProvider.CreateProvider(string.Empty)
-            );
+            Exception ex = Assert.ThrowsAny<Exception>(() =>
+                CodeDomProvider.CreateProvider(string.Empty));
             AssertIsConfigurationErrorsException(ex);
 
             BinaryFormatterHelpers.AssertExceptionDeserializationFails(ex.GetType());
@@ -271,9 +268,8 @@ namespace System.CodeDom.Compiler.Tests
             string extension
         )
         {
-            Exception ex = Assert.ThrowsAny<Exception>(
-                () => CodeDomProvider.GetLanguageFromExtension(extension)
-            );
+            Exception ex = Assert.ThrowsAny<Exception>(() =>
+                CodeDomProvider.GetLanguageFromExtension(extension));
             AssertIsConfigurationErrorsException(ex);
         }
 
@@ -335,9 +331,8 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("no-such-extension")]
         public void GetCompilerInfo_NoSuchExtension_ThrowsKeyNotFoundException(string language)
         {
-            Exception ex = Assert.ThrowsAny<Exception>(
-                () => CodeDomProvider.GetCompilerInfo(language)
-            );
+            Exception ex = Assert.ThrowsAny<Exception>(() =>
+                CodeDomProvider.GetCompilerInfo(language));
             AssertIsConfigurationErrorsException(ex);
         }
 
@@ -353,9 +348,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromDom_NullCompiler_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().CompileAssemblyFromDom(new CompilerParameters())
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().CompileAssemblyFromDom(new CompilerParameters()));
         }
 
         [Fact]
@@ -370,9 +364,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromFile_NullCompiler_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().CompileAssemblyFromFile(new CompilerParameters())
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().CompileAssemblyFromFile(new CompilerParameters()));
         }
 
         [Fact]
@@ -387,9 +380,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromSource_NullCompiler_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().CompileAssemblyFromSource(new CompilerParameters())
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().CompileAssemblyFromSource(new CompilerParameters()));
         }
 
         [Fact]
@@ -404,9 +396,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CreateEscapedIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().CreateEscapedIdentifier("value")
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().CreateEscapedIdentifier("value"));
         }
 
         [Fact]
@@ -421,9 +412,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CreateValidIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().CreateValidIdentifier("value")
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().CreateValidIdentifier("value"));
         }
 
         [Fact]
@@ -443,179 +433,153 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void GenerateCodeFromCompileUnit_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromCompileUnit(
-                        new CodeCompileUnit(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromCompileUnit(
+                    new CodeCompileUnit(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromExpression_CallsGeneratorMethod()
         {
-            Assert.Throws<ArithmeticException>(
-                () =>
-                    new CustomProvider().GenerateCodeFromExpression(
-                        new CodeExpression(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<ArithmeticException>(() =>
+                new CustomProvider().GenerateCodeFromExpression(
+                    new CodeExpression(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromExpression_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromExpression(
-                        new CodeExpression(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromExpression(
+                    new CodeExpression(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromNamespace_CallsGeneratorMethod()
         {
-            Assert.Throws<ArrayTypeMismatchException>(
-                () =>
-                    new CustomProvider().GenerateCodeFromNamespace(
-                        new CodeNamespace(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                new CustomProvider().GenerateCodeFromNamespace(
+                    new CodeNamespace(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromNamespace_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromNamespace(
-                        new CodeNamespace(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromNamespace(
+                    new CodeNamespace(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromStatement_CallsGeneratorMethod()
         {
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new CustomProvider().GenerateCodeFromStatement(
-                        new CodeStatement(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new CustomProvider().GenerateCodeFromStatement(
+                    new CodeStatement(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromStatement_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromStatement(
-                        new CodeStatement(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromStatement(
+                    new CodeStatement(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromType_CallsGeneratorMethod()
         {
-            Assert.Throws<CannotUnloadAppDomainException>(
-                () =>
-                    new CustomProvider().GenerateCodeFromType(
-                        new CodeTypeDeclaration(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<CannotUnloadAppDomainException>(() =>
+                new CustomProvider().GenerateCodeFromType(
+                    new CodeTypeDeclaration(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GenerateCodeFromType_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromType(
-                        new CodeTypeDeclaration(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromType(
+                    new CodeTypeDeclaration(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
         public void GetTypeOutput_CallsGeneratorMethod()
         {
-            Assert.Throws<DataMisalignedException>(
-                () => new CustomProvider().GetTypeOutput(new CodeTypeReference())
-            );
+            Assert.Throws<DataMisalignedException>(() =>
+                new CustomProvider().GetTypeOutput(new CodeTypeReference()));
         }
 
         [Fact]
         public void GetTypeOutput_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().GetTypeOutput(new CodeTypeReference())
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GetTypeOutput(new CodeTypeReference()));
         }
 
         [Fact]
         public void IsValidIdentifier_CallsGeneratorMethod()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () => new CustomProvider().IsValidIdentifier("value")
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                new CustomProvider().IsValidIdentifier("value"));
         }
 
         [Fact]
         public void IsValidIdentifier_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().IsValidIdentifier("value")
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().IsValidIdentifier("value"));
         }
 
         [Fact]
         public void Supports_CallsGeneratorMethod()
         {
-            Assert.Throws<DivideByZeroException>(
-                () => new CustomProvider().Supports(GeneratorSupport.ArraysOfArrays)
-            );
+            Assert.Throws<DivideByZeroException>(() =>
+                new CustomProvider().Supports(GeneratorSupport.ArraysOfArrays));
         }
 
         [Fact]
         public void Supports_NullGenerator_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().Supports(GeneratorSupport.ArraysOfArrays)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().Supports(GeneratorSupport.ArraysOfArrays));
         }
 
         [Fact]
         public void GenerateCodeFromMember_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () =>
-                    new NullProvider().GenerateCodeFromMember(
-                        new CodeTypeMember(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().GenerateCodeFromMember(
+                    new CodeTypeMember(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                ));
         }
 
         [Fact]
@@ -630,9 +594,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void Parse_NullParser_ThrowsNotImplementedException()
         {
-            Assert.Throws<NotImplementedException>(
-                () => new NullProvider().Parse(new StringReader("abc"))
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                new NullProvider().Parse(new StringReader("abc")));
         }
 
         private static void AssertIsConfigurationErrorsException(Exception ex)

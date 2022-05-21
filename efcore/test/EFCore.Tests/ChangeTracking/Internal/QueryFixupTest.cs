@@ -975,16 +975,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(
                 CoreStrings.OwnedEntitiesCannotBeTrackedWithoutTheirOwner,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            var subDependent1 = context
-                                .Set<Order>()
-                                .Include(a => a.OrderDetails.BillingAddress.OrderDetails.Order)
-                                .Select(o => o.OrderDetails.BillingAddress)
-                                .Single();
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        var subDependent1 = context
+                            .Set<Order>()
+                            .Include(a => a.OrderDetails.BillingAddress.OrderDetails.Order)
+                            .Select(o => o.OrderDetails.BillingAddress)
+                            .Single();
+                    })
                     .Message
             );
 

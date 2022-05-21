@@ -72,14 +72,10 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivide");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyDivideString(
-                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivide"
-                        );
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivide");
+                });
             }
         }
 
@@ -96,14 +92,10 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivide");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyDivideString(
-                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivide"
-                        );
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivide");
+                });
             }
         }
 

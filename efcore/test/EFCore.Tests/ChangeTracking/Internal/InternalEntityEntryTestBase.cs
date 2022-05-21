@@ -57,9 +57,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(
                 CoreStrings.ValueCannotBeNull("Id", "SomeSimpleEntityBase", "int"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entry.SetStoreGeneratedValue(keyProperty, null)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entry.SetStoreGeneratedValue(keyProperty, null))
                     .Message
             );
         }
@@ -254,9 +253,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.False(entry.IsModified(nonKeyProperty));
 
             // Can't change the key...
-            Assert.Throws<InvalidOperationException>(
-                () => entry.SetTemporaryValue(keyProperty, -1)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                entry.SetTemporaryValue(keyProperty, -1));
             entry.SetTemporaryValue(nonKeyProperty, "Temp");
 
             Assert.True(entry.HasTemporaryValue(keyProperty));

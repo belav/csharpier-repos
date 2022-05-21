@@ -72,12 +72,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Ctor_NotConnected_Throws()
         {
-            Assert.Throws<IOException>(
-                () =>
-                    new NetworkStream(
-                        new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                    )
-            );
+            Assert.Throws<IOException>(() =>
+                new NetworkStream(
+                    new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                ));
         }
 
         [Fact]
@@ -302,30 +300,28 @@ namespace System.Net.Sockets.Tests
                 {
                     for (int i = 0; i < 2; i++) // Verify closing the streams doesn't close the sockets
                     {
-                        Exception e = await Record.ExceptionAsync(
-                            async () =>
+                        Exception e = await Record.ExceptionAsync(async () =>
+                        {
+                            using (var serverStream = new NetworkStream(server, ownsSocket))
+                            using (var clientStream = new NetworkStream(client, ownsSocket))
                             {
-                                using (var serverStream = new NetworkStream(server, ownsSocket))
-                                using (var clientStream = new NetworkStream(client, ownsSocket))
-                                {
-                                    Assert.True(serverStream.CanWrite && serverStream.CanRead);
-                                    Assert.True(clientStream.CanWrite && clientStream.CanRead);
-                                    Assert.False(serverStream.CanSeek && clientStream.CanSeek);
-                                    Assert.True(serverStream.CanTimeout && clientStream.CanTimeout);
+                                Assert.True(serverStream.CanWrite && serverStream.CanRead);
+                                Assert.True(clientStream.CanWrite && clientStream.CanRead);
+                                Assert.False(serverStream.CanSeek && clientStream.CanSeek);
+                                Assert.True(serverStream.CanTimeout && clientStream.CanTimeout);
 
-                                    // Verify Read and Write on both streams
-                                    byte[] buffer = new byte[1];
+                                // Verify Read and Write on both streams
+                                byte[] buffer = new byte[1];
 
-                                    await serverStream.WriteAsync(new byte[] { (byte)'a' }, 0, 1);
-                                    Assert.Equal(1, await clientStream.ReadAsync(buffer, 0, 1));
-                                    Assert.Equal('a', (char)buffer[0]);
+                                await serverStream.WriteAsync(new byte[] { (byte)'a' }, 0, 1);
+                                Assert.Equal(1, await clientStream.ReadAsync(buffer, 0, 1));
+                                Assert.Equal('a', (char)buffer[0]);
 
-                                    await clientStream.WriteAsync(new byte[] { (byte)'b' }, 0, 1);
-                                    Assert.Equal(1, await serverStream.ReadAsync(buffer, 0, 1));
-                                    Assert.Equal('b', (char)buffer[0]);
-                                }
+                                await clientStream.WriteAsync(new byte[] { (byte)'b' }, 0, 1);
+                                Assert.Equal(1, await serverStream.ReadAsync(buffer, 0, 1));
+                                Assert.Equal('b', (char)buffer[0]);
                             }
-                        );
+                        });
                         if (i == 0)
                         {
                             Assert.Null(e);
@@ -393,31 +389,23 @@ namespace System.Net.Sockets.Tests
                             Assert.Equal(1, await clientStream.ReadAsync(buffer, 0, 1));
                             Assert.Equal('a', (char)buffer[0]);
 
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    serverStream.BeginRead(buffer, 0, 1, null, null);
-                                }
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    clientStream.BeginWrite(buffer, 0, 1, null, null);
-                                }
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                serverStream.BeginRead(buffer, 0, 1, null, null);
+                            });
+                            Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                clientStream.BeginWrite(buffer, 0, 1, null, null);
+                            });
 
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    serverStream.ReadAsync(buffer, 0, 1);
-                                }
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    clientStream.WriteAsync(buffer, 0, 1);
-                                }
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                serverStream.ReadAsync(buffer, 0, 1);
+                            });
+                            Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                clientStream.WriteAsync(buffer, 0, 1);
+                            });
                         }
                     }
                 }
@@ -555,18 +543,14 @@ namespace System.Net.Sockets.Tests
                 ExpectIOException(() => server.BeginRead(new byte[1], 0, 1, null, null));
                 ExpectIOException(() => server.BeginWrite(new byte[1], 0, 1, null, null));
 
-                ExpectIOException(
-                    () =>
-                    {
-                        _ = server.ReadAsync(new byte[1], 0, 1);
-                    }
-                );
-                ExpectIOException(
-                    () =>
-                    {
-                        _ = server.WriteAsync(new byte[1], 0, 1);
-                    }
-                );
+                ExpectIOException(() =>
+                {
+                    _ = server.ReadAsync(new byte[1], 0, 1);
+                });
+                ExpectIOException(() =>
+                {
+                    _ = server.WriteAsync(new byte[1], 0, 1);
+                });
             }
 
             static void ExpectIOException(Action action)
@@ -629,9 +613,8 @@ namespace System.Net.Sockets.Tests
                     serverStream.Readable = false;
                     Assert.False(serverStream.Readable);
                     Assert.False(serverStream.CanRead);
-                    Assert.Throws<InvalidOperationException>(
-                        () => serverStream.Read(new byte[1], 0, 1)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        serverStream.Read(new byte[1], 0, 1));
 
                     serverStream.Readable = true;
                     Assert.True(serverStream.Readable);
@@ -645,9 +628,8 @@ namespace System.Net.Sockets.Tests
                     serverStream.Writeable = false;
                     Assert.False(serverStream.Writeable);
                     Assert.False(serverStream.CanWrite);
-                    Assert.Throws<InvalidOperationException>(
-                        () => serverStream.Write(new byte[1], 0, 1)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        serverStream.Write(new byte[1], 0, 1));
 
                     serverStream.Writeable = true;
                     Assert.True(serverStream.Writeable);
@@ -688,12 +670,10 @@ namespace System.Net.Sockets.Tests
                     );
 
                     // Copying after disposing the stream
-                    Assert.Throws<ObjectDisposedException>(
-                        () =>
-                        {
-                            stream.CopyToAsync(new MemoryStream());
-                        }
-                    );
+                    Assert.Throws<ObjectDisposedException>(() =>
+                    {
+                        stream.CopyToAsync(new MemoryStream());
+                    });
                 }
             );
         }
@@ -705,12 +685,10 @@ namespace System.Net.Sockets.Tests
                 (stream, _) =>
                 {
                     // Copying from non-readable stream
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            stream.CopyToAsync(new MemoryStream());
-                        }
-                    );
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        stream.CopyToAsync(new MemoryStream());
+                    });
                     return Task.CompletedTask;
                 },
                 serverAccess: FileAccess.Write

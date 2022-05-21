@@ -21,15 +21,13 @@ class Driver
 
             ManualResetEvent mre = new ManualResetEvent(false);
 
-            Task t = Task.Run(
-                () =>
-                {
-                    mre.Set();
-                    p.BeginOutputReadLine();
-                    if (!p.WaitForExit(10000))
-                        Environment.Exit(1);
-                }
-            );
+            Task t = Task.Run(() =>
+            {
+                mre.Set();
+                p.BeginOutputReadLine();
+                if (!p.WaitForExit(10000))
+                    Environment.Exit(1);
+            });
 
             if (!mre.WaitOne(10000))
                 Environment.Exit(2);

@@ -26,12 +26,10 @@ namespace System.Net.Security.Tests
             await WithVirtualConnection(
                 async (server, client) =>
                 {
-                    Task clientJob = Task.Run(
-                        () =>
-                        {
-                            client.AuthenticateAsClient(hostName);
-                        }
-                    );
+                    Task clientJob = Task.Run(() =>
+                    {
+                        client.AuthenticateAsClient(hostName);
+                    });
 
                     SslServerAuthenticationOptions options = DefaultServerOptions();
 
@@ -113,16 +111,14 @@ namespace System.Net.Security.Tests
                     client = new SslStream(stream2, leaveInnerStreamOpen: false, validationCallback)
             )
             {
-                Task clientJob = Task.Run(
-                    () =>
-                    {
-                        client.AuthenticateAsClient(hostName);
-                        Assert.True(
-                            false,
-                            "RemoteCertificateValidationCallback called when AuthenticateAsServerAsync was expected to fail."
-                        );
-                    }
-                );
+                Task clientJob = Task.Run(() =>
+                {
+                    client.AuthenticateAsClient(hostName);
+                    Assert.True(
+                        false,
+                        "RemoteCertificateValidationCallback called when AuthenticateAsServerAsync was expected to fail."
+                    );
+                });
 
                 SslServerAuthenticationOptions options = DefaultServerOptions();
                 options.ServerCertificateSelectionCallback = (sender, actualHostName) =>
@@ -132,9 +128,8 @@ namespace System.Net.Security.Tests
                     return serverCert;
                 };
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => server.AuthenticateAsServerAsync(options, CancellationToken.None)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    server.AuthenticateAsServerAsync(options, CancellationToken.None));
 
                 Assert.Equal(0, timesCallbackCalled);
             }
@@ -186,12 +181,10 @@ namespace System.Net.Security.Tests
                     client = new SslStream(stream2, leaveInnerStreamOpen: false, validationCallback)
             )
             {
-                Task clientJob = Task.Run(
-                    () =>
-                    {
-                        client.AuthenticateAsClient(hostName);
-                    }
-                );
+                Task clientJob = Task.Run(() =>
+                {
+                    client.AuthenticateAsClient(hostName);
+                });
 
                 SslServerAuthenticationOptions options = DefaultServerOptions();
                 options.ServerCertificate = serverCert;
@@ -219,12 +212,10 @@ namespace System.Net.Security.Tests
             await WithVirtualConnection(
                 async (server, client) =>
                 {
-                    Task clientJob = Task.Run(
-                        () =>
-                        {
-                            Assert.Throws<IOException>(() => client.AuthenticateAsClient("test"));
-                        }
-                    );
+                    Task clientJob = Task.Run(() =>
+                    {
+                        Assert.Throws<IOException>(() => client.AuthenticateAsClient("test"));
+                    });
 
                     int timesCallbackCalled = 0;
                     SslServerAuthenticationOptions options = DefaultServerOptions();
@@ -236,9 +227,8 @@ namespace System.Net.Security.Tests
 
                     var cts = new CancellationTokenSource();
                     await Assert.ThrowsAsync<AuthenticationException>(
-                        WithAggregateExceptionUnwrapping(
-                            async () => await server.AuthenticateAsServerAsync(options, cts.Token)
-                        )
+                        WithAggregateExceptionUnwrapping(async () =>
+                            await server.AuthenticateAsServerAsync(options, cts.Token))
                     );
 
                     // to break connection so that client is not waiting

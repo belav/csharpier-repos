@@ -384,9 +384,8 @@ namespace System.Drawing.Tests
         {
             using (var image = new Bitmap(10, 10, format))
             {
-                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(
-                    () => Graphics.FromImage(image)
-                );
+                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(() =>
+                    Graphics.FromImage(image));
                 if (exception is ArgumentException argumentException)
                     Assert.Equal("image", argumentException.ParamName);
             }
@@ -501,9 +500,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.CompositingMode);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.CompositingMode = CompositingMode.SourceCopy
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CompositingMode = CompositingMode.SourceCopy);
                 }
                 finally
                 {
@@ -628,9 +626,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.CompositingQuality);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.CompositingQuality = CompositingQuality.AssumeLinear
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CompositingQuality = CompositingQuality.AssumeLinear);
                 }
                 finally
                 {
@@ -779,9 +776,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.Flush());
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.Flush(FlushIntention.Sync)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.Flush(FlushIntention.Sync));
                 }
                 finally
                 {
@@ -869,9 +865,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.InterpolationMode);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBilinear);
                 }
                 finally
                 {
@@ -1017,9 +1012,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.PageUnit);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.PageUnit = GraphicsUnit.Document
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.PageUnit = GraphicsUnit.Document);
                 }
                 finally
                 {
@@ -1101,9 +1095,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.PixelOffsetMode);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.PixelOffsetMode = PixelOffsetMode.Default
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.PixelOffsetMode = PixelOffsetMode.Default);
                 }
                 finally
                 {
@@ -1199,9 +1192,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.RenderingOrigin);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.RenderingOrigin = Point.Empty
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.RenderingOrigin = Point.Empty);
                 }
                 finally
                 {
@@ -1286,9 +1278,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.SmoothingMode);
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.SmoothingMode = SmoothingMode.AntiAlias
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.SmoothingMode = SmoothingMode.AntiAlias);
                 }
                 finally
                 {
@@ -1422,10 +1413,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.TextRenderingHint);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit);
                 }
                 finally
                 {
@@ -1716,12 +1705,10 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.MultiplyTransform(matrix)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.MultiplyTransform(matrix, MatrixOrder.Append)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.MultiplyTransform(matrix));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.MultiplyTransform(matrix, MatrixOrder.Append));
                 }
                 finally
                 {
@@ -1816,12 +1803,10 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.TranslateTransform(0, 0)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.TranslateTransform(0, 0, MatrixOrder.Append)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.TranslateTransform(0, 0));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.TranslateTransform(0, 0, MatrixOrder.Append));
                 }
                 finally
                 {
@@ -1930,9 +1915,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.ScaleTransform(0, 0));
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.ScaleTransform(0, 0, MatrixOrder.Append)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.ScaleTransform(0, 0, MatrixOrder.Append));
                 }
                 finally
                 {
@@ -2028,9 +2012,8 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.RotateTransform(0));
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.RotateTransform(0, MatrixOrder.Append)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.RotateTransform(0, MatrixOrder.Append));
                 }
                 finally
                 {
@@ -2232,9 +2215,8 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                Assert.ThrowsAny<ArgumentException>(
-                    () => graphics.CopyFromScreen(1, 2, 3, 4, Size.Empty, copyPixelOperation)
-                );
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    graphics.CopyFromScreen(1, 2, 3, 4, Size.Empty, copyPixelOperation));
             }
         }
 
@@ -2249,32 +2231,26 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.CopyFromScreen(
-                                0,
-                                0,
-                                0,
-                                0,
-                                Size.Empty,
-                                CopyPixelOperation.DestinationInvert
-                            )
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.CopyFromScreen(
-                                Point.Empty,
-                                Point.Empty,
-                                Size.Empty,
-                                CopyPixelOperation.DestinationInvert
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CopyFromScreen(
+                            0,
+                            0,
+                            0,
+                            0,
+                            Size.Empty,
+                            CopyPixelOperation.DestinationInvert
+                        ));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.CopyFromScreen(
+                            Point.Empty,
+                            Point.Empty,
+                            Size.Empty,
+                            CopyPixelOperation.DestinationInvert
+                        ));
                 }
                 finally
                 {
@@ -2639,22 +2615,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.TransformPoints(
-                                CoordinateSpace.Page,
-                                CoordinateSpace.Page,
-                                new Point[] { Point.Empty }
-                            )
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.TransformPoints(
-                                CoordinateSpace.Page,
-                                CoordinateSpace.Page,
-                                new PointF[] { PointF.Empty }
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new Point[] { Point.Empty }
+                        ));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new PointF[] { PointF.Empty }
+                        ));
                 }
                 finally
                 {
@@ -2735,9 +2707,8 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.GetNearestColor(Color.Red)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.GetNearestColor(Color.Red));
                 }
                 finally
                 {
@@ -2882,18 +2853,14 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90));
                 }
                 finally
                 {
@@ -2987,15 +2954,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawRectangle(pen, 0, 0, 1, 1)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawRectangle(pen, 0, 0, 1, 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f));
                 }
                 finally
                 {
@@ -3112,12 +3076,10 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawRectangles(pen, new Rectangle[2])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawRectangles(pen, new RectangleF[2])
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawRectangles(pen, new Rectangle[2]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawRectangles(pen, new RectangleF[2]));
                 }
                 finally
                 {
@@ -3210,18 +3172,14 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawEllipse(pen, 0, 0, 1, 1)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawEllipse(pen, 0, 0, 1, 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f));
                 }
                 finally
                 {
@@ -3376,18 +3334,14 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90));
                 }
                 finally
                 {
@@ -3510,12 +3464,10 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPolygon(pen, new Point[2])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPolygon(pen, new PointF[2])
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPolygon(pen, new Point[2]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPolygon(pen, new PointF[2]));
                 }
                 finally
                 {
@@ -3618,9 +3570,8 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawPath(pen, graphicsPath)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawPath(pen, graphicsPath));
                 }
                 finally
                 {
@@ -3844,27 +3795,20 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new Point[2])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new PointF[2])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new Point[2], 1)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new PointF[2], 1)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new PointF[2], 0, 2)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new Point[2]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new PointF[2]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new Point[2], 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new PointF[2], 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new PointF[2], 0, 2));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new Point[2], 0, 2, 1));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawCurve(pen, new PointF[2], 0, 2, 1));
                 }
                 finally
                 {
@@ -4032,18 +3976,14 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawClosedCurve(pen, new Point[3])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawClosedCurve(pen, new PointF[3])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawClosedCurve(pen, new Point[3]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawClosedCurve(pen, new PointF[3]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding));
                 }
                 finally
                 {

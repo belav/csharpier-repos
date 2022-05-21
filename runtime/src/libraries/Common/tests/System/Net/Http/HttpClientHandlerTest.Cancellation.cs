@@ -141,26 +141,24 @@ namespace System.Net.Http.Functional.Tests
                             }
                         );
 
-                        await ValidateClientCancellationAsync(
-                            async () =>
+                        await ValidateClientCancellationAsync(async () =>
+                        {
+                            var req = new HttpRequestMessage(HttpMethod.Get, url)
                             {
-                                var req = new HttpRequestMessage(HttpMethod.Get, url)
-                                {
-                                    Version = UseVersion
-                                };
-                                req.Headers.ConnectionClose = connectionClose;
+                                Version = UseVersion
+                            };
+                            req.Headers.ConnectionClose = connectionClose;
 
-                                Task<HttpResponseMessage> getResponse = client.SendAsync(
-                                    TestAsync,
-                                    req,
-                                    HttpCompletionOption.ResponseHeadersRead,
-                                    cts.Token
-                                );
-                                await partialResponseHeadersSent.Task;
-                                Cancel(mode, client, cts);
-                                await getResponse;
-                            }
-                        );
+                            Task<HttpResponseMessage> getResponse = client.SendAsync(
+                                TestAsync,
+                                req,
+                                HttpCompletionOption.ResponseHeadersRead,
+                                cts.Token
+                            );
+                            await partialResponseHeadersSent.Task;
+                            Cancel(mode, client, cts);
+                            await getResponse;
+                        });
 
                         try
                         {
@@ -228,27 +226,25 @@ namespace System.Net.Http.Functional.Tests
                             }
                         );
 
-                        await ValidateClientCancellationAsync(
-                            async () =>
+                        await ValidateClientCancellationAsync(async () =>
+                        {
+                            var req = new HttpRequestMessage(HttpMethod.Get, url)
                             {
-                                var req = new HttpRequestMessage(HttpMethod.Get, url)
-                                {
-                                    Version = UseVersion
-                                };
-                                req.Headers.ConnectionClose = connectionClose;
+                                Version = UseVersion
+                            };
+                            req.Headers.ConnectionClose = connectionClose;
 
-                                Task<HttpResponseMessage> getResponse = client.SendAsync(
-                                    TestAsync,
-                                    req,
-                                    HttpCompletionOption.ResponseContentRead,
-                                    cts.Token
-                                );
-                                await responseHeadersSent.Task;
-                                await Task.Delay(1); // make it more likely that client will have started processing response body
-                                Cancel(mode, client, cts);
-                                await getResponse;
-                            }
-                        );
+                            Task<HttpResponseMessage> getResponse = client.SendAsync(
+                                TestAsync,
+                                req,
+                                HttpCompletionOption.ResponseContentRead,
+                                cts.Token
+                            );
+                            await responseHeadersSent.Task;
+                            await Task.Delay(1); // make it more likely that client will have started processing response body
+                            Cancel(mode, client, cts);
+                            await getResponse;
+                        });
 
                         try
                         {
@@ -328,22 +324,20 @@ namespace System.Net.Http.Functional.Tests
                             HttpCompletionOption.ResponseHeadersRead,
                             cts.Token
                         );
-                        await ValidateClientCancellationAsync(
-                            async () =>
-                            {
-                                // This 'using' shouldn't be necessary in general. However, HTTP3 does not remove the request stream from the
-                                // active stream table until the user disposes the response (or it gets finalized).
-                                // This means the connection will fail to shut down promptly.
-                                // See https://github.com/dotnet/runtime/issues/58072
-                                using HttpResponseMessage resp = await getResponse;
-                                Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync);
-                                Task readTask = readOrCopyToAsync
-                                    ? respStream.ReadAsync(new byte[1], 0, 1, cts.Token)
-                                    : respStream.CopyToAsync(Stream.Null, 10, cts.Token);
-                                cts.Cancel();
-                                await readTask;
-                            }
-                        );
+                        await ValidateClientCancellationAsync(async () =>
+                        {
+                            // This 'using' shouldn't be necessary in general. However, HTTP3 does not remove the request stream from the
+                            // active stream table until the user disposes the response (or it gets finalized).
+                            // This means the connection will fail to shut down promptly.
+                            // See https://github.com/dotnet/runtime/issues/58072
+                            using HttpResponseMessage resp = await getResponse;
+                            Stream respStream = await resp.Content.ReadAsStreamAsync(TestAsync);
+                            Task readTask = readOrCopyToAsync
+                                ? respStream.ReadAsync(new byte[1], 0, 1, cts.Token)
+                                : respStream.CopyToAsync(Stream.Null, 10, cts.Token);
+                            cts.Cancel();
+                            await readTask;
+                        });
 
                         try
                         {
@@ -512,12 +506,10 @@ namespace System.Net.Http.Functional.Tests
                         await serverAboutToBlock.Task;
 
                         var cts = new CancellationTokenSource();
-                        Task get2 = ValidateClientCancellationAsync(
-                            () => client.GetAsync(url, cts.Token)
-                        );
-                        Task get3 = ValidateClientCancellationAsync(
-                            () => client.GetAsync(url, cts.Token)
-                        );
+                        Task get2 = ValidateClientCancellationAsync(() =>
+                            client.GetAsync(url, cts.Token));
+                        Task get3 = ValidateClientCancellationAsync(() =>
+                            client.GetAsync(url, cts.Token));
 
                         Task get4 = client.GetAsync(url);
 

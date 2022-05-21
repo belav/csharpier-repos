@@ -86,15 +86,13 @@ namespace System.IO.Tests
         public void GetTempPath_SetEnvVar()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
                     {
-                        foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
-                        {
-                            GetTempPath_SetEnvVar_Helper("TMP", tempPath[0], tempPath[1]);
-                        }
+                        GetTempPath_SetEnvVar_Helper("TMP", tempPath[0], tempPath[1]);
                     }
-                )
+                })
                 .Dispose();
         }
 
@@ -174,9 +172,8 @@ namespace System.IO.Tests
         [Fact]
         public void GetFullPath_PathTooLong()
         {
-            Assert.Throws<PathTooLongException>(
-                () => Path.GetFullPath(@"C:\" + new string('a', short.MaxValue) + @"\")
-            );
+            Assert.Throws<PathTooLongException>(() =>
+                Path.GetFullPath(@"C:\" + new string('a', short.MaxValue) + @"\"));
         }
 
         [
@@ -287,9 +284,8 @@ namespace System.IO.Tests
             if (PathFeatures.IsUsingLegacyPathNormalization())
             {
                 // Legacy Path doesn't support any of these paths.
-                AssertExtensions.ThrowsAny<ArgumentException, NotSupportedException>(
-                    () => Path.GetFullPath(path)
-                );
+                AssertExtensions.ThrowsAny<ArgumentException, NotSupportedException>(() =>
+                    Path.GetFullPath(path));
                 return;
             }
 

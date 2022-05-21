@@ -70,17 +70,15 @@ namespace System.Threading.Tests
             var obj = new object();
             var b = new Barrier(2);
 
-            Task t = Task.Run(
-                () =>
+            Task t = Task.Run(() =>
+            {
+                lock (obj)
                 {
-                    lock (obj)
-                    {
-                        b.SignalAndWait();
-                        Assert.True(Monitor.IsEntered(obj));
-                        b.SignalAndWait();
-                    }
+                    b.SignalAndWait();
+                    Assert.True(Monitor.IsEntered(obj));
+                    b.SignalAndWait();
                 }
-            );
+            });
 
             b.SignalAndWait();
             Assert.False(Monitor.IsEntered(obj));
@@ -137,16 +135,14 @@ namespace System.Threading.Tests
             var obj = new object();
             var b = new Barrier(2);
 
-            Task t = Task.Run(
-                () =>
+            Task t = Task.Run(() =>
+            {
+                lock (obj)
                 {
-                    lock (obj)
-                    {
-                        b.SignalAndWait();
-                        b.SignalAndWait();
-                    }
+                    b.SignalAndWait();
+                    b.SignalAndWait();
                 }
-            );
+            });
 
             b.SignalAndWait();
             Assert.Throws<SynchronizationLockException>(() => Monitor.Exit(obj));
@@ -199,14 +195,12 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, 1));
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, 1, ref lockTaken));
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>(
-                () => Monitor.TryEnter(null, TimeSpan.Zero, ref lockTaken)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Monitor.TryEnter(null, TimeSpan.Zero, ref lockTaken));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => Monitor.TryEnter(obj, -2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Monitor.TryEnter(obj, -2, ref lockTaken)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Monitor.TryEnter(obj, -2, ref lockTaken));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "timeout",
                 () => Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2))
@@ -524,18 +518,16 @@ namespace System.Threading.Tests
                 () => Monitor.Wait(obj, TimeSpan.FromMilliseconds(FailTimeoutMilliseconds), true),
             };
 
-            var t = new Thread(
-                () =>
+            var t = new Thread(() =>
+            {
+                Monitor.Enter(obj);
+                for (int i = 0; i < waitTests.Length; ++i)
                 {
-                    Monitor.Enter(obj);
-                    for (int i = 0; i < waitTests.Length; ++i)
-                    {
-                        Monitor.Pulse(obj);
-                        Monitor.Wait(obj, FailTimeoutMilliseconds);
-                    }
-                    Monitor.Exit(obj);
+                    Monitor.Pulse(obj);
+                    Monitor.Wait(obj, FailTimeoutMilliseconds);
                 }
-            );
+                Monitor.Exit(obj);
+            });
             t.IsBackground = true;
 
             Monitor.Enter(obj);

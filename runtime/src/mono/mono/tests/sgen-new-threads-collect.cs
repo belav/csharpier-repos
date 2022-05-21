@@ -14,17 +14,15 @@ class Driver
             TimeSpan.FromSeconds(TestTimeout.IsStressTest ? 60 : 5)
         );
 
-        Thread gcThread = new Thread(
-            () =>
+        Thread gcThread = new Thread(() =>
+        {
+            while (timeout.HaveTimeLeft)
             {
-                while (timeout.HaveTimeLeft)
-                {
-                    GC.Collect();
-                    gcCount++;
-                    Thread.Sleep(1);
-                }
+                GC.Collect();
+                gcCount++;
+                Thread.Sleep(1);
             }
-        );
+        });
 
         gcThread.Start();
 
@@ -36,33 +34,29 @@ class Driver
                 128
             );
 
-            Thread joinThread = new Thread(
-                () =>
+            Thread joinThread = new Thread(() =>
+            {
+                for (int i = 0; ; ++i)
                 {
-                    for (int i = 0; ; ++i)
-                    {
-                        Thread t = threads.Take();
-                        if (t == null)
-                            break;
-                        t.Join();
+                    Thread t = threads.Take();
+                    if (t == null)
+                        break;
+                    t.Join();
 
-                        // Uncomment this and run with MONO_LOG_LEVEL=info MONO_LOG_MASK=gc
-                        // to see GC/join balance in real time
-                        //Console.Write ("*");
-                    }
+                    // Uncomment this and run with MONO_LOG_LEVEL=info MONO_LOG_MASK=gc
+                    // to see GC/join balance in real time
+                    //Console.Write ("*");
                 }
-            );
+            });
             joinThread.Start();
 
             const int makeThreads = 10 * 1000;
             for (int i = 0; i < makeThreads; ++i)
             {
-                Thread t = new Thread(
-                    () =>
-                    {
-                        Thread.Yield();
-                    }
-                );
+                Thread t = new Thread(() =>
+                {
+                    Thread.Yield();
+                });
                 t.Start();
 
                 threads.Add(t);

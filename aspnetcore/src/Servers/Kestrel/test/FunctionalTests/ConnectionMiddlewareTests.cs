@@ -36,18 +36,16 @@ public class ConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 // Will throw because the exception in the connection adapter will close the connection.
-                await Assert.ThrowsAnyAsync<IOException>(
-                    async () =>
-                    {
-                        await connection.Send("POST / HTTP/1.0", "Content-Length: 1000", "\r\n");
+                await Assert.ThrowsAnyAsync<IOException>(async () =>
+                {
+                    await connection.Send("POST / HTTP/1.0", "Content-Length: 1000", "\r\n");
 
-                        for (var i = 0; i < 1000; i++)
-                        {
-                            await connection.Send("a");
-                            await Task.Delay(5);
-                        }
+                    for (var i = 0; i < 1000; i++)
+                    {
+                        await connection.Send("a");
+                        await Task.Delay(5);
                     }
-                );
+                });
             }
         }
     }

@@ -36,9 +36,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_only_map_internal_ctor()
         {
-            Should.Throw<AutoMapperConfigurationException>(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            Should.Throw<AutoMapperConfigurationException>(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -74,9 +73,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_only_map_private_ctor()
         {
-            Should.Throw<AutoMapperConfigurationException>(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            Should.Throw<AutoMapperConfigurationException>(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -112,9 +110,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_only_map_public_ctor()
         {
-            Should.Throw<AutoMapperConfigurationException>(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            Should.Throw<AutoMapperConfigurationException>(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -175,9 +172,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_ignore_static_constructor()
         {
-            Should.Throw<AutoMapperConfigurationException>(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            Should.Throw<AutoMapperConfigurationException>(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 
@@ -210,9 +206,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_ignore_implicit_static_constructor()
         {
-            Should.Throw<AutoMapperConfigurationException>(
-                () => Configuration.AssertConfigurationIsValid()
-            );
+            Should.Throw<AutoMapperConfigurationException>(() =>
+                Configuration.AssertConfigurationIsValid());
         }
     }
 }

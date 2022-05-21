@@ -27,12 +27,10 @@ namespace AutoMapper.UnitTests
                 .Range(0, 5)
                 .Select(
                     i =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                new MapperConfiguration(c => c.CreateMap<Source, Destination>());
-                            }
-                        )
+                        Task.Factory.StartNew(() =>
+                        {
+                            new MapperConfiguration(c => c.CreateMap<Source, Destination>());
+                        })
                 )
                 .ToArray();
             try

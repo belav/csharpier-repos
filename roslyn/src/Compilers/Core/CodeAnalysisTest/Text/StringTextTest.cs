@@ -66,35 +66,29 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void FromString_Errors()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => SourceText.From((string)null, Encoding.UTF8)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                SourceText.From((string)null, Encoding.UTF8));
         }
 
         [Fact]
         public void FromStream_Errors()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => SourceText.From((Stream)null, Encoding.UTF8)
-            );
-            Assert.Throws<ArgumentException>(
-                () => SourceText.From(new TestStream(canRead: false, canSeek: true), Encoding.UTF8)
-            );
-            Assert.Throws<NotImplementedException>(
-                () => SourceText.From(new TestStream(canRead: true, canSeek: false), Encoding.UTF8)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                SourceText.From((Stream)null, Encoding.UTF8));
+            Assert.Throws<ArgumentException>(() =>
+                SourceText.From(new TestStream(canRead: false, canSeek: true), Encoding.UTF8));
+            Assert.Throws<NotImplementedException>(() =>
+                SourceText.From(new TestStream(canRead: true, canSeek: false), Encoding.UTF8));
         }
 
         [Fact]
         public void Indexer1()
         {
             var data = SourceText.From(string.Empty, Encoding.UTF8);
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    var value = data[-1];
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var value = data[-1];
+            });
         }
 
         private void CheckEqualLine(TextLine first, TextLine second)

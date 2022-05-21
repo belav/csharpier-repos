@@ -18,15 +18,13 @@ public class MapSignalRTests
     [Fact]
     public void MapSignalRFailsForInvalidHub()
     {
-        var ex = Assert.Throws<NotSupportedException>(
-            () =>
+        var ex = Assert.Throws<NotSupportedException>(() =>
+        {
+            using (var host = BuildWebHost(routes => routes.MapHub<InvalidHub>("/overloads")))
             {
-                using (var host = BuildWebHost(routes => routes.MapHub<InvalidHub>("/overloads")))
-                {
-                    host.Start();
-                }
+                host.Start();
             }
-        );
+        });
 
         Assert.Equal(
             "Duplicate definitions of 'OverloadedMethod'. Overloading is not supported.",
@@ -56,18 +54,16 @@ public class MapSignalRTests
                         {
                             executedConfigure = true;
 
-                            var ex = Assert.Throws<InvalidOperationException>(
-                                () =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
-                                        {
-                                            endpoints.MapHub<AuthHub>("/overloads");
-                                        }
-                                    );
-                                }
-                            );
+                            var ex = Assert.Throws<InvalidOperationException>(() =>
+                            {
+                                app.UseRouting();
+                                app.UseEndpoints(
+                                    endpoints =>
+                                    {
+                                        endpoints.MapHub<AuthHub>("/overloads");
+                                    }
+                                );
+                            });
 
                             Assert.Equal(
                                 "Unable to find the required services. Please add all the required services by calling "

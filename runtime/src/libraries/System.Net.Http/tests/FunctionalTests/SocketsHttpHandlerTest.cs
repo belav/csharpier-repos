@@ -35,16 +35,14 @@ namespace System.Net.Http.Functional.Tests
         {
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 uri =>
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        using (ExecutionContext.SuppressFlow())
+                        using (HttpClient client = CreateHttpClient())
                         {
-                            using (ExecutionContext.SuppressFlow())
-                            using (HttpClient client = CreateHttpClient())
-                            {
-                                client.GetStringAsync(uri).GetAwaiter().GetResult();
-                            }
+                            client.GetStringAsync(uri).GetAwaiter().GetResult();
                         }
-                    ),
+                    }),
                 async server =>
                 {
                     await server.AcceptConnectionSendResponseAndCloseAsync();
@@ -439,9 +437,8 @@ namespace System.Net.Http.Functional.Tests
                 handler.ResponseDrainTimeout = TimeSpan.FromSeconds(42);
                 client.GetAsync("http://" + Guid.NewGuid().ToString("N")); // ignoring failure
                 Assert.Equal(TimeSpan.FromSeconds(42), handler.ResponseDrainTimeout);
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.ResponseDrainTimeout = TimeSpan.FromSeconds(42)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.ResponseDrainTimeout = TimeSpan.FromSeconds(42));
             }
         }
 
@@ -1357,9 +1354,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var handler = new SocketsHttpHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => handler.ConnectTimeout = TimeSpan.FromMilliseconds(ms)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(ms));
             }
         }
 
@@ -1386,9 +1382,8 @@ namespace System.Net.Http.Functional.Tests
                 handler.ConnectTimeout = TimeSpan.FromMilliseconds(int.MaxValue);
                 client.GetAsync("http://" + Guid.NewGuid().ToString("N")); // ignoring failure
                 Assert.Equal(TimeSpan.FromMilliseconds(int.MaxValue), handler.ConnectTimeout);
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.ConnectTimeout = TimeSpan.FromMilliseconds(1)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.ConnectTimeout = TimeSpan.FromMilliseconds(1));
             }
         }
 
@@ -1408,9 +1403,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var handler = new SocketsHttpHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(ms)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(ms));
             }
         }
 
@@ -1440,9 +1434,8 @@ namespace System.Net.Http.Functional.Tests
                     TimeSpan.FromMilliseconds(int.MaxValue),
                     handler.Expect100ContinueTimeout
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(1)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.Expect100ContinueTimeout = TimeSpan.FromMilliseconds(1));
             }
         }
     }
@@ -1509,126 +1502,85 @@ namespace System.Net.Http.Functional.Tests
 
                                     // Not supported operations
                                     Assert.Throws<NotSupportedException>(() => clientStream.Length);
-                                    Assert.Throws<NotSupportedException>(
-                                        () => clientStream.Position
-                                    );
-                                    Assert.Throws<NotSupportedException>(
-                                        () => clientStream.Position = 0
-                                    );
-                                    Assert.Throws<NotSupportedException>(
-                                        () => clientStream.Seek(0, SeekOrigin.Begin)
-                                    );
-                                    Assert.Throws<NotSupportedException>(
-                                        () => clientStream.SetLength(0)
-                                    );
+                                    Assert.Throws<NotSupportedException>(() =>
+                                        clientStream.Position);
+                                    Assert.Throws<NotSupportedException>(() =>
+                                        clientStream.Position = 0);
+                                    Assert.Throws<NotSupportedException>(() =>
+                                        clientStream.Seek(0, SeekOrigin.Begin));
+                                    Assert.Throws<NotSupportedException>(() =>
+                                        clientStream.SetLength(0));
 
                                     // Invalid arguments
                                     var nonWritableStream = new MemoryStream(new byte[1], false);
                                     var disposedStream = new MemoryStream();
                                     disposedStream.Dispose();
-                                    Assert.Throws<ArgumentNullException>(
-                                        () => clientStream.CopyTo(null)
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () => clientStream.CopyTo(Stream.Null, 0)
-                                    );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(null, 100, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(Stream.Null, 0, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(Stream.Null, -1, default);
-                                        }
-                                    );
-                                    Assert.Throws<NotSupportedException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(
-                                                nonWritableStream,
-                                                100,
-                                                default
-                                            );
-                                        }
-                                    );
-                                    Assert.Throws<ObjectDisposedException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(disposedStream, 100, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () => clientStream.Read(null, 0, 100)
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () => clientStream.Read(new byte[1], -1, 1)
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () => clientStream.Read(new byte[1], 2, 1)
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () => clientStream.Read(new byte[1], 0, -1)
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () => clientStream.Read(new byte[1], 0, 2)
-                                    );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () => clientStream.BeginRead(null, 0, 100, null, null)
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () => clientStream.BeginRead(new byte[1], -1, 1, null, null)
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () => clientStream.BeginRead(new byte[1], 2, 1, null, null)
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () => clientStream.BeginRead(new byte[1], 0, -1, null, null)
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () => clientStream.BeginRead(new byte[1], 0, 2, null, null)
-                                    );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () => clientStream.EndRead(null)
-                                    );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(null, 0, 100, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], -1, 1, default);
-                                        }
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 2, 1, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 0, -1, default);
-                                        }
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 0, 2, default);
-                                        }
-                                    );
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                        clientStream.CopyTo(null));
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                        clientStream.CopyTo(Stream.Null, 0));
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(null, 100, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(Stream.Null, 0, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(Stream.Null, -1, default);
+                                    });
+                                    Assert.Throws<NotSupportedException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(nonWritableStream, 100, default);
+                                    });
+                                    Assert.Throws<ObjectDisposedException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(disposedStream, 100, default);
+                                    });
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                        clientStream.Read(null, 0, 100));
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                        clientStream.Read(new byte[1], -1, 1));
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                        clientStream.Read(new byte[1], 2, 1));
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                        clientStream.Read(new byte[1], 0, -1));
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                        clientStream.Read(new byte[1], 0, 2));
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                        clientStream.BeginRead(null, 0, 100, null, null));
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                        clientStream.BeginRead(new byte[1], -1, 1, null, null));
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                        clientStream.BeginRead(new byte[1], 2, 1, null, null));
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                        clientStream.BeginRead(new byte[1], 0, -1, null, null));
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                        clientStream.BeginRead(new byte[1], 0, 2, null, null));
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                        clientStream.EndRead(null));
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                    {
+                                        clientStream.ReadAsync(null, 0, 100, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], -1, 1, default);
+                                    });
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 2, 1, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 0, -1, default);
+                                    });
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 0, 2, default);
+                                    });
 
                                     // Validate writing APIs on clientStream
 
@@ -2142,9 +2094,8 @@ namespace System.Net.Http.Functional.Tests
             // to maintain a reference to the supplied IWebProxy.  As such, we provide a proxy
             // that when finalized will set our event, so that we can determine the state associated
             // with a handler has gone away.
-            IWebProxy p = new PassthroughProxyWithFinalizerCallback(
-                () => setOnFinalized.TrySetResult()
-            );
+            IWebProxy p = new PassthroughProxyWithFinalizerCallback(() =>
+                setOnFinalized.TrySetResult());
 
             // Make a bunch of requests and drop the associated HttpClient instances after making them, without disposal.
             Task.WaitAll(
@@ -2326,12 +2277,10 @@ namespace System.Net.Http.Functional.Tests
             handler.KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests;
             Assert.Equal(HttpKeepAlivePingPolicy.WithActiveRequests, handler.KeepAlivePingPolicy);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => handler.KeepAlivePingTimeout = invalidTimeSpanValue
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => handler.KeepAlivePingDelay = invalidTimeSpanValue
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                handler.KeepAlivePingTimeout = invalidTimeSpanValue);
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                handler.KeepAlivePingDelay = invalidTimeSpanValue);
         }
 
         [Fact]
@@ -2622,9 +2571,8 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             using var handler = new SocketsHttpHandler();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => handler.InitialHttp2StreamWindowSize = value
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                handler.InitialHttp2StreamWindowSize = value);
         }
 
         [Theory]
@@ -2643,16 +2591,14 @@ namespace System.Net.Http.Functional.Tests
                 else
                 {
                     using (var c = new HttpMessageInvoker(handler, disposeHandler: false))
-                        await Assert.ThrowsAnyAsync<Exception>(
-                            () =>
-                                c.SendAsync(
-                                    new HttpRequestMessage(
-                                        HttpMethod.Get,
-                                        new Uri("/shouldquicklyfail", UriKind.Relative)
-                                    ),
-                                    default
-                                )
-                        );
+                        await Assert.ThrowsAnyAsync<Exception>(() =>
+                            c.SendAsync(
+                                new HttpRequestMessage(
+                                    HttpMethod.Get,
+                                    new Uri("/shouldquicklyfail", UriKind.Relative)
+                                ),
+                                default
+                            ));
                     expectedExceptionType = typeof(InvalidOperationException);
                 }
 
@@ -3607,45 +3553,38 @@ namespace System.Net.Http.Functional.Tests
 
             GenericLoopbackOptions options = new GenericLoopbackOptions() { UseSsl = useSsl };
 
-            Task serverTask = Task.Run(
-                async () =>
-                {
-                    using GenericLoopbackConnection loopbackConnection =
-                        await LoopbackServerFactory.CreateConnectionAsync(
-                            socket: null,
-                            serverStream,
-                            options
-                        );
-                    await loopbackConnection.InitializeConnectionAsync();
-
-                    HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
-                    await loopbackConnection.SendResponseAsync(content: "foo");
-
-                    Assert.Equal("/foo", requestData.Path);
-                }
-            );
-
-            Task clientTask = Task.Run(
-                async () =>
-                {
-                    using HttpClientHandler handler = CreateHttpClientHandler();
-                    handler.ServerCertificateCustomValidationCallback =
-                        TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
+            Task serverTask = Task.Run(async () =>
+            {
+                using GenericLoopbackConnection loopbackConnection =
+                    await LoopbackServerFactory.CreateConnectionAsync(
+                        socket: null,
+                        serverStream,
+                        options
                     );
-                    socketsHandler.ConnectCallback = (context, token) =>
-                        new ValueTask<Stream>(clientStream);
+                await loopbackConnection.InitializeConnectionAsync();
 
-                    using HttpClient client = CreateHttpClient(handler);
-                    client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
+                await loopbackConnection.SendResponseAsync(content: "foo");
 
-                    string response = await client.GetStringAsync(
-                        $"{(options.UseSsl ? "https" : "http")}://nowhere.invalid/foo"
-                    );
-                    Assert.Equal("foo", response);
-                }
-            );
+                Assert.Equal("/foo", requestData.Path);
+            });
+
+            Task clientTask = Task.Run(async () =>
+            {
+                using HttpClientHandler handler = CreateHttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = TestHelper.AllowAllCertificates;
+                var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
+                socketsHandler.ConnectCallback = (context, token) =>
+                    new ValueTask<Stream>(clientStream);
+
+                using HttpClient client = CreateHttpClient(handler);
+                client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+
+                string response = await client.GetStringAsync(
+                    $"{(options.UseSsl ? "https" : "http")}://nowhere.invalid/foo"
+                );
+                Assert.Equal("foo", response);
+            });
 
             await new[] { serverTask, clientTask }.WhenAllOrAnyFailed(60_000);
         }
@@ -3829,12 +3768,10 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient(handler);
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                async () =>
-                    await client.GetStringAsync(
-                        $"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"
-                    )
-            );
+            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                await client.GetStringAsync(
+                    $"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"
+                ));
 
             Debug.Assert(disposeCalled);
         }
@@ -3859,10 +3796,8 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient(handler);
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                async () =>
-                    await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo")
-            );
+            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"));
             Assert.Equal(e, hre.InnerException);
         }
 
@@ -3882,10 +3817,8 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient(handler);
             client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                async () =>
-                    await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo")
-            );
+            HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                await client.GetAsync($"{(useSsl ? "https" : "http")}://nowhere.invalid/foo"));
         }
 
         private static bool PlatformSupportsUnixDomainSockets => Socket.OSSupportsUnixDomainSockets;
@@ -4044,97 +3977,90 @@ namespace System.Net.Http.Functional.Tests
             listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
             listenSocket.Listen();
 
-            Task clientTask = Task.Run(
-                async () =>
+            Task clientTask = Task.Run(async () =>
+            {
+                using HttpClientHandler handler = CreateHttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = TestHelper.AllowAllCertificates;
+                var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
+                socketsHandler.PlaintextStreamFilter = async (context, token) =>
                 {
-                    using HttpClientHandler handler = CreateHttpClientHandler();
-                    handler.ServerCertificateCustomValidationCallback =
-                        TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
-                    socketsHandler.PlaintextStreamFilter = async (context, token) =>
-                    {
-                        await context.PlaintextStream.WriteAsync(RequestPrefix);
+                    await context.PlaintextStream.WriteAsync(RequestPrefix);
 
-                        byte[] buffer = new byte[ResponsePrefix.Length];
-                        await context.PlaintextStream.ReadAsync(buffer);
-                        Assert.True(buffer.SequenceEqual(ResponsePrefix));
+                    byte[] buffer = new byte[ResponsePrefix.Length];
+                    await context.PlaintextStream.ReadAsync(buffer);
+                    Assert.True(buffer.SequenceEqual(ResponsePrefix));
 
-                        return context.PlaintextStream;
-                    };
+                    return context.PlaintextStream;
+                };
 
-                    using HttpClient client = CreateHttpClient(handler);
-                    client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                using HttpClient client = CreateHttpClient(handler);
+                client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                    string response = await client.GetStringAsync(
-                        $"{(useSsl ? "https" : "http")}://{listenSocket.LocalEndPoint}/foo"
-                    );
-                    Assert.Equal("foo", response);
-                }
-            );
+                string response = await client.GetStringAsync(
+                    $"{(useSsl ? "https" : "http")}://{listenSocket.LocalEndPoint}/foo"
+                );
+                Assert.Equal("foo", response);
+            });
 
-            Task serverTask = Task.Run(
-                async () =>
+            Task serverTask = Task.Run(async () =>
+            {
+                Socket serverSocket = await listenSocket.AcceptAsync();
+                Stream serverStream = new NetworkStream(serverSocket, ownsSocket: true);
+
+                if (useSsl)
                 {
-                    Socket serverSocket = await listenSocket.AcceptAsync();
-                    Stream serverStream = new NetworkStream(serverSocket, ownsSocket: true);
-
-                    if (useSsl)
-                    {
-                        var sslStream = new SslStream(
-                            serverStream,
-                            false,
-                            delegate
-                            {
-                                return true;
-                            }
-                        );
-
-                        using (
-                            X509Certificate2 cert =
-                                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
-                        )
+                    var sslStream = new SslStream(
+                        serverStream,
+                        false,
+                        delegate
                         {
-                            SslServerAuthenticationOptions options =
-                                new SslServerAuthenticationOptions();
-
-                            options.EnabledSslProtocols = SslProtocols.Tls12;
-
-                            var protocols = new List<SslApplicationProtocol>();
-                            protocols.Add(SslApplicationProtocol.Http2);
-                            options.ApplicationProtocols = protocols;
-
-                            options.ServerCertificate = cert;
-
-                            await sslStream
-                                .AuthenticateAsServerAsync(options, CancellationToken.None)
-                                .ConfigureAwait(false);
+                            return true;
                         }
+                    );
 
-                        serverStream = sslStream;
+                    using (
+                        X509Certificate2 cert =
+                            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                    )
+                    {
+                        SslServerAuthenticationOptions options =
+                            new SslServerAuthenticationOptions();
+
+                        options.EnabledSslProtocols = SslProtocols.Tls12;
+
+                        var protocols = new List<SslApplicationProtocol>();
+                        protocols.Add(SslApplicationProtocol.Http2);
+                        options.ApplicationProtocols = protocols;
+
+                        options.ServerCertificate = cert;
+
+                        await sslStream
+                            .AuthenticateAsServerAsync(options, CancellationToken.None)
+                            .ConfigureAwait(false);
                     }
 
-                    byte[] buffer = new byte[RequestPrefix.Length];
-                    await serverStream.ReadAsync(buffer);
-                    Assert.True(buffer.SequenceEqual(RequestPrefix));
-
-                    await serverStream.WriteAsync(ResponsePrefix);
-
-                    using GenericLoopbackConnection loopbackConnection =
-                        await LoopbackServerFactory.CreateConnectionAsync(
-                            socket: null,
-                            serverStream,
-                            new GenericLoopbackOptions() { UseSsl = false }
-                        );
-                    await loopbackConnection.InitializeConnectionAsync();
-
-                    HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
-                    Assert.Equal("/foo", requestData.Path);
-
-                    await loopbackConnection.SendResponseAsync(content: "foo");
+                    serverStream = sslStream;
                 }
-            );
+
+                byte[] buffer = new byte[RequestPrefix.Length];
+                await serverStream.ReadAsync(buffer);
+                Assert.True(buffer.SequenceEqual(RequestPrefix));
+
+                await serverStream.WriteAsync(ResponsePrefix);
+
+                using GenericLoopbackConnection loopbackConnection =
+                    await LoopbackServerFactory.CreateConnectionAsync(
+                        socket: null,
+                        serverStream,
+                        new GenericLoopbackOptions() { UseSsl = false }
+                    );
+                await loopbackConnection.InitializeConnectionAsync();
+
+                HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
+                Assert.Equal("/foo", requestData.Path);
+
+                await loopbackConnection.SendResponseAsync(content: "foo");
+            });
 
             await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed();
         }
@@ -4169,9 +4095,9 @@ namespace System.Net.Http.Functional.Tests
 
                     using HttpClient client = CreateHttpClient(handler);
 
-                    HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                        async () => await client.SendAsync(requestMessage)
-                    );
+                    HttpRequestException hre =
+                        await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                            await client.SendAsync(requestMessage));
                     Assert.Equal(e, hre.InnerException);
                 },
                 async server =>
@@ -4212,9 +4138,9 @@ namespace System.Net.Http.Functional.Tests
 
                     using HttpClient client = CreateHttpClient(handler);
 
-                    HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                        async () => await client.SendAsync(requestMessage)
-                    );
+                    HttpRequestException hre =
+                        await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                            await client.SendAsync(requestMessage));
                 },
                 async server =>
                 {
@@ -4696,9 +4622,8 @@ namespace System.Net.Http.Functional.Tests
             }
             else
             {
-                return Assert.Throws<TException>(
-                    () => invoker.Send(request, CancellationToken.None)
-                );
+                return Assert.Throws<TException>(() =>
+                    invoker.Send(request, CancellationToken.None));
             }
         }
     }

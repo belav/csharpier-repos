@@ -1139,9 +1139,8 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(
-                () => dr[new DataColumn("ZZZ")]
-            );
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
+                dr[new DataColumn("ZZZ")]);
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1185,16 +1184,14 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
-                () => dr[(DataColumn)null]
-            );
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
+                dr[(DataColumn)null]);
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("column", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
-                () => dr[(DataColumn)null] = personB
-            );
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
+                dr[(DataColumn)null] = personB);
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("column", ex2.ParamName);
@@ -1606,9 +1603,8 @@ namespace System.Data.Tests
             Assert.Matches(@"\b" + "Persons" + @"\b", ex1.Message);
             Assert.Null(ex1.ParamName);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(
-                () => dr[string.Empty] = personB
-            );
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
+                dr[string.Empty] = personB);
             // Column '' does not belong to table Persons
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1637,16 +1633,14 @@ namespace System.Data.Tests
 
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
-                () => dr[(string)null]
-            );
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
+                dr[(string)null]);
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("name", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
-                () => dr[(string)null] = personB
-            );
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
+                dr[(string)null] = personB);
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("name", ex2.ParamName);
@@ -1843,9 +1837,8 @@ namespace System.Data.Tests
             dtA.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dtA.Rows[0];
 
-            ArgumentException ex1 = Assert.Throws<ArgumentException>(
-                () => dr[dcB1, DataRowVersion.Default]
-            );
+            ArgumentException ex1 = Assert.Throws<ArgumentException>(() =>
+                dr[dcB1, DataRowVersion.Default]);
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
@@ -1855,9 +1848,8 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(
-                () => dr[new DataColumn("ZZZ"), DataRowVersion.Default]
-            );
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
+                dr[new DataColumn("ZZZ"), DataRowVersion.Default]);
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1869,9 +1861,8 @@ namespace System.Data.Tests
 
             dtA.Columns.Remove(dcA2);
 
-            ArgumentException ex3 = Assert.Throws<ArgumentException>(
-                () => dr[dcA2, DataRowVersion.Default]
-            );
+            ArgumentException ex3 = Assert.Throws<ArgumentException>(() =>
+                dr[dcA2, DataRowVersion.Default]);
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex3.InnerException);
             Assert.NotNull(ex3.Message);
@@ -1898,9 +1889,8 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () => dr[(DataColumn)null, DataRowVersion.Default]
-            );
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                dr[(DataColumn)null, DataRowVersion.Default]);
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("column", ex.ParamName);
@@ -1945,17 +1935,15 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(
-                () => dr[dc0, DataRowVersion.Original]
-            );
+            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(() =>
+                dr[dc0, DataRowVersion.Original]);
             // There is no Original data to access
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Contains("Original", ex1.Message);
 
-            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(
-                () => dr[dc0, DataRowVersion.Proposed]
-            );
+            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(() =>
+                dr[dc0, DataRowVersion.Proposed]);
             // There is no Proposed data to access
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -2414,33 +2402,29 @@ namespace System.Data.Tests
         [Fact]
         public void DataRow_RowError2()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateUniqueConstraint();
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataTable dt1 = DataProvider.CreateUniqueConstraint();
 
-                    dt1.BeginLoadData();
+                dt1.BeginLoadData();
 
-                    DataRow dr = dt1.NewRow();
-                    dr[0] = 3;
-                    dt1.Rows.Add(dr);
-                    dt1.EndLoadData();
-                }
-            );
+                DataRow dr = dt1.NewRow();
+                dr[0] = 3;
+                dt1.Rows.Add(dr);
+                dt1.EndLoadData();
+            });
         }
 
         [Fact]
         public void DataRow_RowError3()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataSet ds = DataProvider.CreateForeignConstraint();
-                    ds.Tables[0].BeginLoadData();
-                    ds.Tables[0].Rows[0][0] = 10;
-                    ds.Tables[0].EndLoadData(); //Foreign constraint violation
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataSet ds = DataProvider.CreateForeignConstraint();
+                ds.Tables[0].BeginLoadData();
+                ds.Tables[0].Rows[0][0] = 10;
+                ds.Tables[0].EndLoadData(); //Foreign constraint violation
+            });
         }
 
         [Fact]
@@ -2609,20 +2593,18 @@ namespace System.Data.Tests
             drArrResult = drChild.GetParentRows(dRel, DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
 
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    DataTable dtOtherParent = DataProvider.CreateParentDataTable();
-                    DataTable dtOtherChild = DataProvider.CreateChildDataTable();
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                DataTable dtOtherParent = DataProvider.CreateParentDataTable();
+                DataTable dtOtherChild = DataProvider.CreateChildDataTable();
 
-                    DataRelation drl = new DataRelation(
-                        "newRelation",
-                        dtOtherParent.Columns[0],
-                        dtOtherChild.Columns[0]
-                    );
-                    drChild.GetParentRows(drl, DataRowVersion.Current);
-                }
-            );
+                DataRelation drl = new DataRelation(
+                    "newRelation",
+                    dtOtherParent.Columns[0],
+                    dtOtherChild.Columns[0]
+                );
+                drChild.GetParentRows(drl, DataRowVersion.Current);
+            });
         }
 
         [Fact]
@@ -2701,31 +2683,27 @@ namespace System.Data.Tests
 
             DataTable dt1 = DataProvider.CreateUniqueConstraint();
 
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    dt1.BeginLoadData();
+            Assert.Throws<ConstraintException>(() =>
+            {
+                dt1.BeginLoadData();
 
-                    dr = dt1.NewRow();
-                    dr[0] = 3;
-                    dt1.Rows.Add(dr);
-                    dt1.EndLoadData();
-                }
-            );
+                dr = dt1.NewRow();
+                dr[0] = 3;
+                dt1.Rows.Add(dr);
+                dt1.EndLoadData();
+            });
             Assert.Equal(2, dt1.GetErrors().Length);
             Assert.True(dt1.GetErrors()[0].RowError.Length > 10);
             Assert.True(dt1.GetErrors()[1].RowError.Length > 10);
 
             DataSet ds = DataProvider.CreateForeignConstraint();
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    ds.Tables[0].BeginLoadData();
-                    ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
-                    //ds.Tables[0].AcceptChanges();
-                    ds.Tables[0].EndLoadData();
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                ds.Tables[0].BeginLoadData();
+                ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
+                //ds.Tables[0].AcceptChanges();
+                ds.Tables[0].EndLoadData();
+            });
             Assert.Equal(3, ds.Tables[1].GetErrors().Length);
             for (int index = 0; index < 3; index++)
             {

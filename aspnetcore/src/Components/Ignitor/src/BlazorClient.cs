@@ -31,12 +31,10 @@ public class BlazorClient : IAsyncDisposable
         CancellationToken = CancellationTokenSource.Token;
         TaskCompletionSource = new TaskCompletionSource<object?>();
 
-        CancellationTokenSource.Token.Register(
-            () =>
-            {
-                TaskCompletionSource.TrySetCanceled();
-            }
-        );
+        CancellationTokenSource.Token.Register(() =>
+        {
+            TaskCompletionSource.TrySetCanceled();
+        });
     }
 
     public TimeSpan? DefaultConnectionTimeout { get; set; } =
@@ -589,18 +587,16 @@ public class BlazorClient : IAsyncDisposable
         string argsJson
     )
     {
-        await ExpectDotNetInterop(
-            () =>
-                HubConnection.InvokeAsync(
-                    "BeginInvokeDotNetFromJS",
-                    callId?.ToString(),
-                    assemblyName,
-                    methodIdentifier,
-                    dotNetObjectId ?? 0,
-                    argsJson,
-                    CancellationToken
-                )
-        );
+        await ExpectDotNetInterop(() =>
+            HubConnection.InvokeAsync(
+                "BeginInvokeDotNetFromJS",
+                callId?.ToString(),
+                assemblyName,
+                methodIdentifier,
+                dotNetObjectId ?? 0,
+                argsJson,
+                CancellationToken
+            ));
     }
 
     public async Task<string> GetPrerenderDescriptors(Uri uri)

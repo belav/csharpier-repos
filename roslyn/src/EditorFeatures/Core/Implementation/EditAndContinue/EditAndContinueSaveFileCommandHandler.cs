@@ -49,13 +49,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                         var proxy = new RemoteEditAndContinueServiceProxy(workspace);
 
                         // fire and forget
-                        _ = Task.Run(
-                                () =>
-                                    proxy.OnSourceFileUpdatedAsync(
-                                        currentDocument,
-                                        CancellationToken.None
-                                    )
-                            )
+                        _ = Task.Run(() =>
+                                proxy.OnSourceFileUpdatedAsync(
+                                    currentDocument,
+                                    CancellationToken.None
+                                ))
                             .ReportNonFatalErrorAsync();
                     }
                 }

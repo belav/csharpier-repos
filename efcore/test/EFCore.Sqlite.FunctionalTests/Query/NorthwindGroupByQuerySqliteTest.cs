@@ -29,12 +29,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(
+                            async
+                        ))
                 ).Message
             );
 
@@ -42,9 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_uncorrelated_collection_with_groupby_works(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_uncorrelated_collection_with_groupby_works(async))
                 ).Message
             );
 
@@ -54,12 +51,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
+                            async
+                        ))
                 ).Message
             );
 
@@ -67,9 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.AsEnumerable_in_subquery_for_GroupBy(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.AsEnumerable_in_subquery_for_GroupBy(async))
                 ).Message
             );
 
@@ -77,9 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Complex_query_with_groupBy_in_subquery1(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_with_groupBy_in_subquery1(async))
                 ).Message
             );
 
@@ -87,9 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Complex_query_with_groupBy_in_subquery2(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_with_groupBy_in_subquery2(async))
                 ).Message
             );
 
@@ -97,9 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Complex_query_with_groupBy_in_subquery3(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_with_groupBy_in_subquery3(async))
                 ).Message
             );
 
@@ -107,9 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_nested_collection_with_groupby(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_nested_collection_with_groupby(async))
                 ).Message
             );
 
@@ -117,15 +107,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Complex_query_with_group_by_in_subquery5(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_with_group_by_in_subquery5(async))
                 ).Message
             );
 
         public override async Task Odata_groupby_empty_key(bool async) =>
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => base.Odata_groupby_empty_key(async)
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                base.Odata_groupby_empty_key(async));
     }
 }

@@ -19,32 +19,30 @@ internal abstract class ComponentRenderingScenarioBase : CommandLineApplication
         var cyclesOption = new CommandOption("--cycles", CommandOptionType.SingleValue);
         Options.Add(cyclesOption);
 
-        OnExecute(
-            () =>
-            {
-                var numCycles = cyclesOption.HasValue()
-                    ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture)
-                    : 1;
+        OnExecute(() =>
+        {
+            var numCycles = cyclesOption.HasValue()
+                ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture)
+                : 1;
 
-                var serviceCollection = new ServiceCollection();
-                PopulateServiceCollection(serviceCollection);
-                var serviceProvider = serviceCollection.BuildServiceProvider();
+            var serviceCollection = new ServiceCollection();
+            PopulateServiceCollection(serviceCollection);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
-                var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-                var renderer = new ConsoleHostRenderer(serviceProvider, loggerFactory);
+            var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+            var renderer = new ConsoleHostRenderer(serviceProvider, loggerFactory);
 
-                var startTime = DateTime.Now;
-                ExecuteAsync(renderer, numCycles).Wait();
+            var startTime = DateTime.Now;
+            ExecuteAsync(renderer, numCycles).Wait();
 
-                var duration = DateTime.Now - startTime;
-                var durationPerCycle = (duration / numCycles).TotalMilliseconds;
-                Console.WriteLine(
-                    $"{Name}: {durationPerCycle:F1}ms per cycle (cycles tested: {numCycles})"
-                );
+            var duration = DateTime.Now - startTime;
+            var durationPerCycle = (duration / numCycles).TotalMilliseconds;
+            Console.WriteLine(
+                $"{Name}: {durationPerCycle:F1}ms per cycle (cycles tested: {numCycles})"
+            );
 
-                return 0;
-            }
-        );
+            return 0;
+        });
     }
 
     protected virtual void PopulateServiceCollection(IServiceCollection serviceCollection)

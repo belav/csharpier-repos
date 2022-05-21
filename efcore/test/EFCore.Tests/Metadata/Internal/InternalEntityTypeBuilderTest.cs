@@ -118,15 +118,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            principalEntityBuilder.HasRelationship(
-                                dependentEntityBuilder.Metadata,
-                                Customer.OrdersProperty,
-                                ConfigurationSource.DataAnnotation,
-                                targetIsPrincipal: true
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        principalEntityBuilder.HasRelationship(
+                            dependentEntityBuilder.Metadata,
+                            Customer.OrdersProperty,
+                            ConfigurationSource.DataAnnotation,
+                            targetIsPrincipal: true
+                        ))
                     .Message
             );
         }
@@ -375,14 +373,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NoPropertyType("ShadowCustomerId", nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntityBuilder.HasRelationship(
-                                customerEntityBuilder.Metadata.Name,
-                                new[] { "ShadowCustomerId", "ShadowCustomerUnique" },
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntityBuilder.HasRelationship(
+                            customerEntityBuilder.Metadata.Name,
+                            new[] { "ShadowCustomerId", "ShadowCustomerUnique" },
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -908,15 +904,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            Assert.Null(
-                                principalEntityBuilder.HasNoRelationship(
-                                    relationshipBuilder.Metadata,
-                                    ConfigurationSource.DataAnnotation
-                                )
+                    .Throws<InvalidOperationException>(() =>
+                        Assert.Null(
+                            principalEntityBuilder.HasNoRelationship(
+                                relationshipBuilder.Metadata,
+                                ConfigurationSource.DataAnnotation
                             )
-                    )
+                        ))
                     .Message
             );
         }
@@ -1323,14 +1317,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.HasIndex(
-                                new[] { Order.CustomerIdProperty, Order.IdProperty },
-                                "NamedIndex",
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.HasIndex(
+                            new[] { Order.CustomerIdProperty, Order.IdProperty },
+                            "NamedIndex",
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -1369,14 +1361,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            derivedEntityBuilder.HasIndex(
-                                new[] { Order.CustomerIdProperty, Order.IdProperty },
-                                "NamedIndex",
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        derivedEntityBuilder.HasIndex(
+                            new[] { Order.CustomerIdProperty, Order.IdProperty },
+                            "NamedIndex",
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -1415,14 +1405,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(SpecialOrder).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            baseEntityBuilder.HasIndex(
-                                new[] { Order.CustomerIdProperty, Order.IdProperty },
-                                "NamedIndex",
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        baseEntityBuilder.HasIndex(
+                            new[] { Order.CustomerIdProperty, Order.IdProperty },
+                            "NamedIndex",
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -1944,13 +1932,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NoPropertyType(Customer.UniqueProperty.Name, nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.HasKey(
-                                new[] { Customer.UniqueProperty.Name },
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.HasKey(
+                            new[] { Customer.UniqueProperty.Name },
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -1977,13 +1963,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.DerivedEntityTypeKey(typeof(SpecialOrder).Name, typeof(Order).Name),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            derivedEntityBuilder.HasKey(
-                                new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
-                                ConfigurationSource.DataAnnotation
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        derivedEntityBuilder.HasKey(
+                            new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
+                            ConfigurationSource.DataAnnotation
+                        ))
                     .Message
             );
         }
@@ -2010,13 +1994,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.DerivedEntityCannotHaveKeys(typeof(SpecialOrder).Name),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            derivedEntityBuilder.HasBaseType(
-                                entityBuilder.Metadata,
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        derivedEntityBuilder.HasBaseType(
+                            entityBuilder.Metadata,
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -2036,13 +2018,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order) + " (Dictionary<string, object>)"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.HasKey(
-                                new[] { Order.IdProperty.Name },
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.HasKey(
+                            new[] { Order.IdProperty.Name },
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -2302,9 +2282,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.KeylessTypeExistingKey(nameof(Order), "{'CustomerId'}"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityBuilder.HasNoKey(ConfigurationSource.Explicit)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.HasNoKey(ConfigurationSource.Explicit))
                     .Message
             );
             Assert.NotEmpty(entityType.GetKeys());
@@ -2444,13 +2423,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NoPropertyType(Customer.UniqueProperty.Name, nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.PrimaryKey(
-                                new[] { Customer.UniqueProperty.Name },
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.PrimaryKey(
+                            new[] { Customer.UniqueProperty.Name },
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -2470,13 +2447,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order) + " (Dictionary<string, object>)"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.PrimaryKey(
-                                new[] { Order.IdProperty.Name },
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.PrimaryKey(
+                            new[] { Order.IdProperty.Name },
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -2503,13 +2478,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.DerivedEntityTypeKey(typeof(SpecialOrder).Name, typeof(Order).Name),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            derivedEntityBuilder.PrimaryKey(
-                                new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
-                                ConfigurationSource.DataAnnotation
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        derivedEntityBuilder.PrimaryKey(
+                            new[] { Order.IdProperty.Name, Order.CustomerIdProperty.Name },
+                            ConfigurationSource.DataAnnotation
+                        ))
                     .Message
             );
         }
@@ -3015,14 +2988,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(string).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityBuilder.IndexerProperty(
-                                typeof(string),
-                                IndexedClass.IndexerPropertyName,
-                                ConfigurationSource.Convention
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.IndexerProperty(
+                            typeof(string),
+                            IndexedClass.IndexerPropertyName,
+                            ConfigurationSource.Convention
+                        ))
                     .Message
             );
         }
@@ -3056,13 +3027,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.PropertyCalledOnNavigation(nameof(Order.Customer), nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            dependentEntityBuilder.Property(
-                                Order.CustomerProperty,
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        dependentEntityBuilder.Property(
+                            Order.CustomerProperty,
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -3076,9 +3045,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NoPropertyType("Shadow", nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityBuilder.Property("Shadow", ConfigurationSource.DataAnnotation)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityBuilder.Property("Shadow", ConfigurationSource.DataAnnotation))
                     .Message
             );
         }
@@ -3560,13 +3528,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             typeof(SpecialOrder).ShortDisplayName()
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                    ignoredEntityTypeBuilder.Ignore(
-                                        memberToIgnore,
-                                        ignoreConfigurationSource
-                                    )
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                ignoredEntityTypeBuilder.Ignore(
+                                    memberToIgnore,
+                                    ignoreConfigurationSource
+                                ))
                             .Message
                     );
                     return;
@@ -3604,16 +3570,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         typeof(SpecialOrder).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelValidator.Validate(
-                                    modelBuilder.Metadata,
-                                    new TestLogger<
-                                        DbLoggerCategory.Model.Validation,
-                                        TestLoggingDefinitions
-                                    >()
-                                )
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelValidator.Validate(
+                                modelBuilder.Metadata,
+                                new TestLogger<
+                                    DbLoggerCategory.Model.Validation,
+                                    TestLoggingDefinitions
+                                >()
+                            ))
                         .Message
                 );
 
@@ -4513,14 +4477,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Assert.Equal(
                     message,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                ConfigureMember(
-                                    secondEntityTypeBuilder,
-                                    secondMemberType,
-                                    secondSource
-                                )
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            ConfigureMember(
+                                secondEntityTypeBuilder,
+                                secondMemberType,
+                                secondSource
+                            ))
                         .Message
                 );
 
@@ -4552,9 +4514,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 nameof(Order.Products)
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => ConfigureOrdersHierarchy(modelBuilder)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    ConfigureOrdersHierarchy(modelBuilder))
                                 .Message
                         );
                     }
@@ -4570,9 +4531,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 nameof(Order.Products)
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => ConfigureOrdersHierarchy(modelBuilder)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    ConfigureOrdersHierarchy(modelBuilder))
                                 .Message
                         );
                     }
@@ -5284,13 +5244,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            derivedDependentEntityBuilder.HasBaseType(
-                                dependentEntityBuilder.Metadata,
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        derivedDependentEntityBuilder.HasBaseType(
+                            dependentEntityBuilder.Metadata,
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -5845,9 +5803,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "Splot (Dictionary<string, object>)"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => discriminatorBuilder.HasValue(nonDerivedTypeBuilder.Metadata, "1")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        discriminatorBuilder.HasValue(nonDerivedTypeBuilder.Metadata, "1"))
                     .Message
             );
         }

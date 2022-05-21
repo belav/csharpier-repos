@@ -124,9 +124,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     changeTrackingStrategy
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entry.SetEntityState(EntityState.Unchanged)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entry.SetEntityState(EntityState.Unchanged))
                     .Message
             );
         }

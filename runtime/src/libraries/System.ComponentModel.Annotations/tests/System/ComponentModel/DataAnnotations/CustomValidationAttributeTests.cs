@@ -321,9 +321,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 validatorType,
                 method
             );
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Does not matter", s_testValidationContext)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Does not matter", s_testValidationContext));
         }
 
         [Theory]
@@ -346,13 +345,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
             CustomValidationAttribute attribute = GetAttribute(
                 nameof(CustomValidator.CorrectValidationMethodOneArgInt)
             );
-            Assert.Throws<ArithmeticException>(
-                () =>
-                    attribute.Validate(
-                        new IConvertibleImplementor() { IntThrow = new ArithmeticException() },
-                        s_testValidationContext
-                    )
-            );
+            Assert.Throws<ArithmeticException>(() =>
+                attribute.Validate(
+                    new IConvertibleImplementor() { IntThrow = new ArithmeticException() },
+                    s_testValidationContext
+                ));
         }
 
         [Fact]

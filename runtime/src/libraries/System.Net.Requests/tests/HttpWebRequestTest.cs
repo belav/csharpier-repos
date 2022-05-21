@@ -599,21 +599,17 @@ namespace System.Net.Tests
                     await server.AcceptConnectionSendResponseAndCloseAsync();
                     using (WebResponse response = await getResponse)
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.AutomaticDecompression = DecompressionMethods.Deflate
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.AutomaticDecompression = DecompressionMethods.Deflate);
                         Assert.Throws<InvalidOperationException>(() => request.ContentLength = 255);
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.ContinueTimeout = 255
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.ContinueTimeout = 255);
                         Assert.Throws<InvalidOperationException>(() => request.Host = "localhost");
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.MaximumResponseHeadersLength = 255
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.MaximumResponseHeadersLength = 255);
                         Assert.Throws<InvalidOperationException>(() => request.SendChunked = true);
-                        Assert.Throws<InvalidOperationException>(
-                            () => request.Proxy = WebRequest.DefaultWebProxy
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.Proxy = WebRequest.DefaultWebProxy);
                         Assert.Throws<InvalidOperationException>(() => request.Headers = null);
                     }
                 }
@@ -771,9 +767,8 @@ namespace System.Net.Tests
                     request.Timeout = 30; // ms.
 
                     var sw = Stopwatch.StartNew();
-                    WebException exception = Assert.Throws<WebException>(
-                        () => request.GetResponse()
-                    );
+                    WebException exception = Assert.Throws<WebException>(() =>
+                        request.GetResponse());
                     sw.Stop();
 
                     _output.WriteLine(exception.ToString());
@@ -1079,29 +1074,27 @@ namespace System.Net.Tests
         public void DefaultMaximumResponseHeadersLength_SetAndGetLength_ValuesMatch()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int defaultMaximumResponseHeadersLength =
-                            HttpWebRequest.DefaultMaximumResponseHeadersLength;
-                        const int NewDefaultMaximumResponseHeadersLength = 255;
+                .Invoke(() =>
+                {
+                    int defaultMaximumResponseHeadersLength =
+                        HttpWebRequest.DefaultMaximumResponseHeadersLength;
+                    const int NewDefaultMaximumResponseHeadersLength = 255;
 
-                        try
-                        {
-                            HttpWebRequest.DefaultMaximumResponseHeadersLength =
-                                NewDefaultMaximumResponseHeadersLength;
-                            Assert.Equal(
-                                NewDefaultMaximumResponseHeadersLength,
-                                HttpWebRequest.DefaultMaximumResponseHeadersLength
-                            );
-                        }
-                        finally
-                        {
-                            HttpWebRequest.DefaultMaximumResponseHeadersLength =
-                                defaultMaximumResponseHeadersLength;
-                        }
+                    try
+                    {
+                        HttpWebRequest.DefaultMaximumResponseHeadersLength =
+                            NewDefaultMaximumResponseHeadersLength;
+                        Assert.Equal(
+                            NewDefaultMaximumResponseHeadersLength,
+                            HttpWebRequest.DefaultMaximumResponseHeadersLength
+                        );
                     }
-                )
+                    finally
+                    {
+                        HttpWebRequest.DefaultMaximumResponseHeadersLength =
+                            defaultMaximumResponseHeadersLength;
+                    }
+                })
                 .Dispose();
         }
 
@@ -1109,29 +1102,27 @@ namespace System.Net.Tests
         public void DefaultMaximumErrorResponseLength_SetAndGetLength_ValuesMatch()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int defaultMaximumErrorsResponseLength =
-                            HttpWebRequest.DefaultMaximumErrorResponseLength;
-                        const int NewDefaultMaximumErrorsResponseLength = 255;
+                .Invoke(() =>
+                {
+                    int defaultMaximumErrorsResponseLength =
+                        HttpWebRequest.DefaultMaximumErrorResponseLength;
+                    const int NewDefaultMaximumErrorsResponseLength = 255;
 
-                        try
-                        {
-                            HttpWebRequest.DefaultMaximumErrorResponseLength =
-                                NewDefaultMaximumErrorsResponseLength;
-                            Assert.Equal(
-                                NewDefaultMaximumErrorsResponseLength,
-                                HttpWebRequest.DefaultMaximumErrorResponseLength
-                            );
-                        }
-                        finally
-                        {
-                            HttpWebRequest.DefaultMaximumErrorResponseLength =
-                                defaultMaximumErrorsResponseLength;
-                        }
+                    try
+                    {
+                        HttpWebRequest.DefaultMaximumErrorResponseLength =
+                            NewDefaultMaximumErrorsResponseLength;
+                        Assert.Equal(
+                            NewDefaultMaximumErrorsResponseLength,
+                            HttpWebRequest.DefaultMaximumErrorResponseLength
+                        );
                     }
-                )
+                    finally
+                    {
+                        HttpWebRequest.DefaultMaximumErrorResponseLength =
+                            defaultMaximumErrorsResponseLength;
+                    }
+                })
                 .Dispose();
         }
 
@@ -1139,28 +1130,26 @@ namespace System.Net.Tests
         public void DefaultCachePolicy_SetAndGetPolicyReload_ValuesMatch()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        RequestCachePolicy requestCachePolicy = HttpWebRequest.DefaultCachePolicy;
+                .Invoke(() =>
+                {
+                    RequestCachePolicy requestCachePolicy = HttpWebRequest.DefaultCachePolicy;
 
-                        try
-                        {
-                            RequestCachePolicy newRequestCachePolicy = new RequestCachePolicy(
-                                RequestCacheLevel.Reload
-                            );
-                            HttpWebRequest.DefaultCachePolicy = newRequestCachePolicy;
-                            Assert.Equal(
-                                newRequestCachePolicy.Level,
-                                HttpWebRequest.DefaultCachePolicy.Level
-                            );
-                        }
-                        finally
-                        {
-                            HttpWebRequest.DefaultCachePolicy = requestCachePolicy;
-                        }
+                    try
+                    {
+                        RequestCachePolicy newRequestCachePolicy = new RequestCachePolicy(
+                            RequestCacheLevel.Reload
+                        );
+                        HttpWebRequest.DefaultCachePolicy = newRequestCachePolicy;
+                        Assert.Equal(
+                            newRequestCachePolicy.Level,
+                            HttpWebRequest.DefaultCachePolicy.Level
+                        );
                     }
-                )
+                    finally
+                    {
+                        HttpWebRequest.DefaultCachePolicy = requestCachePolicy;
+                    }
+                })
                 .Dispose();
         }
 
@@ -1401,18 +1390,14 @@ namespace System.Net.Tests
         public void ReadWriteTimeout_NegativeOrZeroValue_Fail()
         {
             HttpWebRequest request = WebRequest.CreateHttp("http://test");
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    request.ReadWriteTimeout = 0;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    request.ReadWriteTimeout = -10;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                request.ReadWriteTimeout = 0;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                request.ReadWriteTimeout = -10;
+            });
         }
 
         [OuterLoop("Uses timeout")]
@@ -1432,65 +1417,59 @@ namespace System.Net.Tests
             var tcs = new TaskCompletionSource();
             await LoopbackServer.CreateClientAndServerAsync(
                 uri =>
-                    Task.Run(
-                        async () =>
+                    Task.Run(async () =>
+                    {
+                        try
                         {
-                            try
+                            HttpWebRequest request = WebRequest.CreateHttp(uri);
+                            request.ReadWriteTimeout = 100;
+                            Exception e = await Assert.ThrowsAnyAsync<Exception>(async () =>
                             {
-                                HttpWebRequest request = WebRequest.CreateHttp(uri);
-                                request.ReadWriteTimeout = 100;
-                                Exception e = await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
-                                    {
-                                        using WebResponse response = await GetResponseAsync(
-                                            request
-                                        );
-                                        using (Stream myStream = response.GetResponseStream())
-                                        {
-                                            while (myStream.ReadByte() != -1)
-                                                ;
-                                        }
-                                    }
-                                );
+                                using WebResponse response = await GetResponseAsync(request);
+                                using (Stream myStream = response.GetResponseStream())
+                                {
+                                    while (myStream.ReadByte() != -1)
+                                        ;
+                                }
+                            });
 
-                                // If the timeout occurs while we're reading on the stream, we'll get an IOException.
-                                // If the timeout occurs while we're reading/writing the request/response headers,
-                                // that IOException will be wrapped in an HttpRequestException wrapped in a WebException.
-                                // (Note that this differs slightly from .NET Framework, where exceptions from the stream
-                                // are wrapped in a WebException as  well, but in .NET Core, HttpClient's response Stream
-                                // is passed back through the WebResponse without being wrapped.)
-                                Assert.True(
-                                    e
-                                        is WebException
+                            // If the timeout occurs while we're reading on the stream, we'll get an IOException.
+                            // If the timeout occurs while we're reading/writing the request/response headers,
+                            // that IOException will be wrapped in an HttpRequestException wrapped in a WebException.
+                            // (Note that this differs slightly from .NET Framework, where exceptions from the stream
+                            // are wrapped in a WebException as  well, but in .NET Core, HttpClient's response Stream
+                            // is passed back through the WebResponse without being wrapped.)
+                            Assert.True(
+                                e
+                                    is WebException
+                                    {
+                                        InnerException: HttpRequestException
                                         {
-                                            InnerException: HttpRequestException
-                                            {
-                                                InnerException: IOException
-                                                {
-                                                    InnerException: SocketException
-                                                    {
-                                                        SocketErrorCode: SocketError.TimedOut
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        || e
-                                            is IOException
+                                            InnerException: IOException
                                             {
                                                 InnerException: SocketException
                                                 {
                                                     SocketErrorCode: SocketError.TimedOut
                                                 }
-                                            },
-                                    e.ToString()
-                                );
-                            }
-                            finally
-                            {
-                                tcs.SetResult();
-                            }
+                                            }
+                                        }
+                                    }
+                                    || e
+                                        is IOException
+                                        {
+                                            InnerException: SocketException
+                                            {
+                                                SocketErrorCode: SocketError.TimedOut
+                                            }
+                                        },
+                                e.ToString()
+                            );
                         }
-                    ),
+                        finally
+                        {
+                            tcs.SetResult();
+                        }
+                    }),
                 async server =>
                 {
                     try
@@ -1579,12 +1558,10 @@ namespace System.Net.Tests
         )
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            Assert.Throws<ProtocolViolationException>(
-                () =>
-                {
-                    request.BeginGetRequestStream(null, null);
-                }
-            );
+            Assert.Throws<ProtocolViolationException>(() =>
+            {
+                request.BeginGetRequestStream(null, null);
+            });
         }
 
         [Theory, MemberData(nameof(EchoServers))]
@@ -1594,12 +1571,10 @@ namespace System.Net.Tests
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Head.Method;
-            Assert.Throws<ProtocolViolationException>(
-                () =>
-                {
-                    request.BeginGetRequestStream(null, null);
-                }
-            );
+            Assert.Throws<ProtocolViolationException>(() =>
+            {
+                request.BeginGetRequestStream(null, null);
+            });
         }
 
         [Theory, MemberData(nameof(EchoServers))]
@@ -1609,12 +1584,10 @@ namespace System.Net.Tests
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = "CONNECT";
-            Assert.Throws<ProtocolViolationException>(
-                () =>
-                {
-                    request.BeginGetRequestStream(null, null);
-                }
-            );
+            Assert.Throws<ProtocolViolationException>(() =>
+            {
+                request.BeginGetRequestStream(null, null);
+            });
         }
 
         [Theory, MemberData(nameof(EchoServers))]
@@ -1625,9 +1598,8 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(
-                () => request.BeginGetRequestStream(null, null)
-            );
+            WebException ex = Assert.Throws<WebException>(() =>
+                request.BeginGetRequestStream(null, null));
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }
 
@@ -1640,12 +1612,10 @@ namespace System.Net.Tests
             request.Method = "POST";
 
             request.BeginGetRequestStream(null, null);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    request.BeginGetRequestStream(null, null);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                request.BeginGetRequestStream(null, null);
+            });
         }
 
         [Fact]
@@ -1657,12 +1627,10 @@ namespace System.Net.Tests
                     HttpWebRequest request = HttpWebRequest.CreateHttp(url);
 
                     request.BeginGetResponse(null, null);
-                    Assert.Throws<ProtocolViolationException>(
-                        () =>
-                        {
-                            request.BeginGetRequestStream(null, null);
-                        }
-                    );
+                    Assert.Throws<ProtocolViolationException>(() =>
+                    {
+                        request.BeginGetRequestStream(null, null);
+                    });
 
                     return Task.CompletedTask;
                 }
@@ -1677,9 +1645,8 @@ namespace System.Net.Tests
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(url);
                     request.BeginGetResponse(null, null);
-                    Assert.Throws<InvalidOperationException>(
-                        () => request.BeginGetResponse(null, null)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        request.BeginGetResponse(null, null));
                     return Task.FromResult<object>(null);
                 }
             );
@@ -1691,9 +1658,8 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(
-                () => request.BeginGetResponse(null, null)
-            );
+            WebException ex = Assert.Throws<WebException>(() =>
+                request.BeginGetResponse(null, null));
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }
 
@@ -1706,9 +1672,8 @@ namespace System.Net.Tests
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
                     request.AllowAutoRedirect = true;
                     request.MaximumAutomaticRedirections = 1;
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        async () => await GetResponseAsync(request)
-                    );
+                    WebException ex = await Assert.ThrowsAsync<WebException>(async () =>
+                        await GetResponseAsync(request));
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
                 server => server.HandleRequestAsync(HttpStatusCode.Redirect)
@@ -1741,9 +1706,8 @@ namespace System.Net.Tests
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
                     request.AllowAutoRedirect = false;
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        async () => await GetResponseAsync(request)
-                    );
+                    WebException ex = await Assert.ThrowsAsync<WebException>(async () =>
+                        await GetResponseAsync(request));
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
                 server => server.HandleRequestAsync(HttpStatusCode.BadRequest)
@@ -1947,9 +1911,8 @@ namespace System.Net.Tests
         {
             string serverUrl = string.Format("http://www.{0}.com/", Guid.NewGuid().ToString());
             HttpWebRequest request = WebRequest.CreateHttp(serverUrl);
-            WebException ex = await Assert.ThrowsAsync<WebException>(
-                () => GetResponseAsync(request)
-            );
+            WebException ex = await Assert.ThrowsAsync<WebException>(() =>
+                GetResponseAsync(request));
             Assert.Equal(WebExceptionStatus.NameResolutionFailure, ex.Status);
         }
 
@@ -1960,9 +1923,8 @@ namespace System.Net.Tests
                 async uri =>
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(uri);
-                    WebException ex = await Assert.ThrowsAsync<WebException>(
-                        () => GetResponseAsync(request)
-                    );
+                    WebException ex = await Assert.ThrowsAsync<WebException>(() =>
+                        GetResponseAsync(request));
                     Assert.Equal(WebExceptionStatus.ProtocolError, ex.Status);
                 },
                 server =>
@@ -2741,9 +2703,8 @@ namespace System.Net.Tests
             request.CachePolicy = isHttpCachePolicy
                 ? new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheOnly)
                 : new RequestCachePolicy(RequestCacheLevel.CacheOnly);
-            WebException exception = await Assert.ThrowsAsync<WebException>(
-                () => GetResponseAsync(request)
-            );
+            WebException exception = await Assert.ThrowsAsync<WebException>(() =>
+                GetResponseAsync(request));
             Assert.Equal(SR.CacheEntryNotFound, exception.Message);
         }
 
@@ -2751,40 +2712,38 @@ namespace System.Net.Tests
         public void SendHttpGetRequest_WithGlobalCachePolicyBypassCache_DoNotAddCacheHeaders()
         {
             RemoteExecutor
-                .Invoke(
-                    async () =>
-                    {
-                        await LoopbackServer.CreateServerAsync(
-                            async (server, uri) =>
-                            {
-                                HttpWebRequest.DefaultCachePolicy = new RequestCachePolicy(
-                                    RequestCacheLevel.BypassCache
-                                );
-                                HttpWebRequest request = WebRequest.CreateHttp(uri);
-                                Task<WebResponse> getResponse = request.GetResponseAsync();
+                .Invoke(async () =>
+                {
+                    await LoopbackServer.CreateServerAsync(
+                        async (server, uri) =>
+                        {
+                            HttpWebRequest.DefaultCachePolicy = new RequestCachePolicy(
+                                RequestCacheLevel.BypassCache
+                            );
+                            HttpWebRequest request = WebRequest.CreateHttp(uri);
+                            Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                                await server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        List<string> headers =
-                                            await connection.ReadRequestHeaderAndSendResponseAsync();
-
-                                        foreach (string header in headers)
-                                        {
-                                            Assert.DoesNotContain("Pragma", header);
-                                            Assert.DoesNotContain("Cache-Control", header);
-                                        }
-                                    }
-                                );
-
-                                using (var response = (HttpWebResponse)await getResponse)
+                            await server.AcceptConnectionAsync(
+                                async connection =>
                                 {
-                                    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                                    List<string> headers =
+                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+
+                                    foreach (string header in headers)
+                                    {
+                                        Assert.DoesNotContain("Pragma", header);
+                                        Assert.DoesNotContain("Cache-Control", header);
+                                    }
                                 }
+                            );
+
+                            using (var response = (HttpWebResponse)await getResponse)
+                            {
+                                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                             }
-                        );
-                    }
-                )
+                        }
+                    );
+                })
                 .Dispose();
         }
 
@@ -2929,9 +2888,8 @@ namespace System.Net.Tests
                 // System.Runtime.Serialization.SerializationException:
                 //  Type 'System.Net.HttpWebRequest' in Assembly 'System.Net.Requests, Version=4.0.0.
                 //        0, Culture=neutral, PublicKeyToken=b77a5c561934e089' is not marked as serializable.
-                Assert.Throws<System.Runtime.Serialization.SerializationException>(
-                    () => formatter.Serialize(fs, hwr)
-                );
+                Assert.Throws<System.Runtime.Serialization.SerializationException>(() =>
+                    formatter.Serialize(fs, hwr));
             }
         }
     }

@@ -356,12 +356,10 @@ namespace System.Threading.Tasks.Tests
             // Run a Task synchronously on scTS, make sure that it completes
             //
             sideEffect = false;
-            Task syncTask = new Task(
-                () =>
-                {
-                    sideEffect = true;
-                }
-            );
+            Task syncTask = new Task(() =>
+            {
+                sideEffect = true;
+            });
 
             ex = null;
             try
@@ -403,12 +401,10 @@ namespace System.Threading.Tasks.Tests
             // Test exceptions on construction of SCTaskScheduler
             //
             SetSynchronizationContext(null);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TaskScheduler.FromCurrentSynchronizationContext();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TaskScheduler.FromCurrentSynchronizationContext();
+            });
         }
 
         [Fact]

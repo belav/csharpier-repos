@@ -38,12 +38,10 @@ namespace System.Net.Http.Tests
             TimeSpanHeaderParser parser = TimeSpanHeaderParser.Parser;
             int index = 0;
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue("a", null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("a", null, ref index);
+            });
         }
 
         [Fact]
@@ -52,12 +50,10 @@ namespace System.Net.Http.Tests
             TimeSpanHeaderParser parser = TimeSpanHeaderParser.Parser;
             int index = 0;
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue(null, null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue(null, null, ref index);
+            });
         }
 
         [Fact]

@@ -63,9 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             );
 
             var logger = SpecializedCollections.SingletonEnumerable(
-                new Lazy<IErrorLoggerService>(
-                    () => workspace.Services.GetRequiredService<IErrorLoggerService>()
-                )
+                new Lazy<IErrorLoggerService>(() =>
+                    workspace.Services.GetRequiredService<IErrorLoggerService>())
             );
             var fixService = new CodeFixService(
                 diagnosticService,
@@ -794,9 +793,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             );
 
             var logger = SpecializedCollections.SingletonEnumerable(
-                new Lazy<IErrorLoggerService>(
-                    () => workspace.Services.GetRequiredService<IErrorLoggerService>()
-                )
+                new Lazy<IErrorLoggerService>(() =>
+                    workspace.Services.GetRequiredService<IErrorLoggerService>())
             );
             var fixService = new CodeFixService(
                 diagnosticService,

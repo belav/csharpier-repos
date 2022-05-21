@@ -177,9 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     // This needs to run under threading context otherwise, we can deadlock on VS
                     var statusService =
                         state.Target.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
-                    ThreadingContext.JoinableTaskFactory.Run(
-                        () => statusService.WaitUntilFullyLoadedAsync(cancellationToken)
-                    );
+                    ThreadingContext.JoinableTaskFactory.Run(() =>
+                        statusService.WaitUntilFullyLoadedAsync(cancellationToken));
                 }
 
                 using (

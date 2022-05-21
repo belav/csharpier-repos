@@ -58,12 +58,10 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "b/");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
+                });
             }
 
             // Divide Method - One small BigIntegers and zero
@@ -73,12 +71,10 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "b/");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
+                });
             }
         }
 

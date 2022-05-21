@@ -430,12 +430,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             {
                 Assert.ThrowsAny<ArgumentException>(() => new TextureBrush(image, wrapMode));
-                Assert.ThrowsAny<ArgumentException>(
-                    () => new TextureBrush(image, wrapMode, RectangleF.Empty)
-                );
-                Assert.ThrowsAny<ArgumentException>(
-                    () => new TextureBrush(image, wrapMode, Rectangle.Empty)
-                );
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    new TextureBrush(image, wrapMode, RectangleF.Empty));
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    new TextureBrush(image, wrapMode, Rectangle.Empty));
             }
         }
 
@@ -459,19 +457,15 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             {
                 Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, rectangle));
-                Assert.Throws<OutOfMemoryException>(
-                    () => new TextureBrush(image, (RectangleF)rectangle)
-                );
-                Assert.Throws<OutOfMemoryException>(
-                    () => new TextureBrush(image, WrapMode.Tile, rectangle)
-                );
-                Assert.Throws<OutOfMemoryException>(
-                    () => new TextureBrush(image, WrapMode.Tile, (RectangleF)rectangle)
-                );
+                Assert.Throws<OutOfMemoryException>(() =>
+                    new TextureBrush(image, (RectangleF)rectangle));
+                Assert.Throws<OutOfMemoryException>(() =>
+                    new TextureBrush(image, WrapMode.Tile, rectangle));
+                Assert.Throws<OutOfMemoryException>(() =>
+                    new TextureBrush(image, WrapMode.Tile, (RectangleF)rectangle));
                 Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, rectangle, null));
-                Assert.Throws<OutOfMemoryException>(
-                    () => new TextureBrush(image, (RectangleF)rectangle, null)
-                );
+                Assert.Throws<OutOfMemoryException>(() =>
+                    new TextureBrush(image, (RectangleF)rectangle, null));
             }
         }
 

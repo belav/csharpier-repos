@@ -505,12 +505,10 @@ namespace System.IO.Ports.Tests
                     charactersToWrite[i] = (char)('A' + (i % ('Z' - 'A' + 1)));
                 }
 
-                var writeToCom2Task = new Task(
-                    () =>
-                    {
-                        com1.Write(charactersToWrite, 0, numberOfCharsToWrite);
-                    }
-                );
+                var writeToCom2Task = new Task(() =>
+                {
+                    com1.Write(charactersToWrite, 0, numberOfCharsToWrite);
+                });
 
                 com1.BaudRate = 115200;
                 com2.BaudRate = 115200;

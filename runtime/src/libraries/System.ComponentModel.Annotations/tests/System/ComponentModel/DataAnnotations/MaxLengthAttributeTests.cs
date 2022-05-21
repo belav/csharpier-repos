@@ -140,9 +140,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )]
         public void Validate_ICollection_NetCore_Invalid(MaxLengthAttribute attribute, object value)
         {
-            Assert.Throws<ValidationException>(
-                () => attribute.Validate(value, new ValidationContext(new object()))
-            );
+            Assert.Throws<ValidationException>(() =>
+                attribute.Validate(value, new ValidationContext(new object())));
             Assert.False(attribute.IsValid(value));
         }
 
@@ -158,9 +157,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             object value
         )
         {
-            Assert.Throws<InvalidCastException>(
-                () => attribute.Validate(value, new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                attribute.Validate(value, new ValidationContext(new object())));
             Assert.Throws<InvalidCastException>(() => attribute.IsValid(value));
         }
 
@@ -172,33 +170,28 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )
         {
             var attribute = new MaxLengthAttribute(length);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Twoflower", new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Twoflower", new ValidationContext(new object())));
         }
 
         [Fact]
         public static void GetValidationResult_ValueNotStringOrICollection_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    new MaxLengthAttribute().GetValidationResult(
-                        new Random(),
-                        new ValidationContext(new object())
-                    )
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                new MaxLengthAttribute().GetValidationResult(
+                    new Random(),
+                    new ValidationContext(new object())
+                ));
         }
 
         [Fact]
         public static void GetValidationResult_ValueGenericIEnumerable_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    new MaxLengthAttribute().GetValidationResult(
-                        new GenericIEnumerableClass(),
-                        new ValidationContext(new object())
-                    )
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                new MaxLengthAttribute().GetValidationResult(
+                    new GenericIEnumerableClass(),
+                    new ValidationContext(new object())
+                ));
         }
     }
 

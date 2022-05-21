@@ -60,12 +60,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeVariable AddMember(string name, object value, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddEnumMember(LookupNode(), name, value, position);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddEnumMember(LookupNode(), name, value, position);
+            });
         }
     }
 }

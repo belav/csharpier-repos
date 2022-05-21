@@ -69,20 +69,18 @@ public class UploadHub : Hub
     {
         var output = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            while (await source.WaitToReadAsync())
             {
-                while (await source.WaitToReadAsync())
+                while (source.TryRead(out var item))
                 {
-                    while (source.TryRead(out var item))
-                    {
-                        Debug.WriteLine($"Echoing '{item}'.");
-                        await output.Writer.WriteAsync("echo:" + item);
-                    }
+                    Debug.WriteLine($"Echoing '{item}'.");
+                    await output.Writer.WriteAsync("echo:" + item);
                 }
-                output.Writer.Complete();
             }
-        );
+            output.Writer.Complete();
+        });
 
         return output.Reader;
     }

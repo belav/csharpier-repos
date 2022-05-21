@@ -118,13 +118,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         )
         {
             // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
-            _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    CaptureClassificationSpans();
-                }
-            );
+            _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                CaptureClassificationSpans();
+            });
         }
 
         public IInteractiveWindow? CurrentWindow
@@ -144,9 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 _lazyInteractiveWindow = value ?? throw new ArgumentNullException(nameof(value));
                 _workspace.Window = value;
 
-                Task.Run(
-                    () => _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter)
-                );
+                Task.Run(() =>
+                    _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter));
 
                 value.SubmissionBufferAdded += SubmissionBufferAdded;
                 _lazyInteractiveCommands = _commandsFactory.CreateInteractiveCommands(

@@ -50,63 +50,53 @@ namespace System.Numerics.Tests
         [Fact]
         public void ConstructorReadOnlySpanByteTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    ReadOnlySpan<byte> values = stackalloc byte[32];
-                    _ = new Vector<bool>(values);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                ReadOnlySpan<byte> values = stackalloc byte[32];
+                _ = new Vector<bool>(values);
+            });
         }
 
         [Fact]
         public void ConstructorReadOnlySpanTTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    ReadOnlySpan<bool> values = stackalloc bool[32];
-                    _ = new Vector<bool>(values);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                ReadOnlySpan<bool> values = stackalloc bool[32];
+                _ = new Vector<bool>(values);
+            });
         }
 
         [Fact]
         public void ConstructorSpanTTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Span<bool> values = stackalloc bool[32];
-                    _ = new Vector<bool>(values);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Span<bool> values = stackalloc bool[32];
+                _ = new Vector<bool>(values);
+            });
         }
 
         [Fact]
         public void CopyToSpanByteTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Vector<bool> vector = default;
-                    Span<byte> destination = stackalloc byte[32];
-                    vector.CopyTo(destination);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Vector<bool> vector = default;
+                Span<byte> destination = stackalloc byte[32];
+                vector.CopyTo(destination);
+            });
         }
 
         [Fact]
         public void CopyToSpanTTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Vector<bool> vector = default;
-                    Span<bool> destination = stackalloc bool[32];
-                    vector.CopyTo(destination);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Vector<bool> vector = default;
+                Span<bool> destination = stackalloc bool[32];
+                vector.CopyTo(destination);
+            });
         }
 
         [Fact]
@@ -173,35 +163,30 @@ namespace System.Numerics.Tests
         public void ToStringFormatFormatProviderTest()
         {
             Vector<bool> vector = default;
-            Assert.Throws<NotSupportedException>(
-                () => vector.ToString("G", CultureInfo.InvariantCulture)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                vector.ToString("G", CultureInfo.InvariantCulture));
         }
 
         [Fact]
         public void TryCopyToSpanByteTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Vector<bool> vector = default;
-                    Span<byte> destination = stackalloc byte[32];
-                    vector.TryCopyTo(destination);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Vector<bool> vector = default;
+                Span<byte> destination = stackalloc byte[32];
+                vector.TryCopyTo(destination);
+            });
         }
 
         [Fact]
         public void TryCopyToSpanTTest()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Vector<bool> vector = default;
-                    Span<bool> destination = stackalloc bool[32];
-                    vector.TryCopyTo(destination);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Vector<bool> vector = default;
+                Span<bool> destination = stackalloc bool[32];
+                vector.TryCopyTo(destination);
+            });
         }
 
         [Fact]

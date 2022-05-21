@@ -391,27 +391,25 @@ namespace System.Security.AccessControl.Tests
             );
 
             //Case 4, null sid
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    accessControlType = 1;
-                    accessMask = 1;
-                    sid = "BA";
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.RemoveAccessSpecific(
-                        (AccessControlType)accessControlType,
-                        null,
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                accessControlType = 1;
+                accessMask = 1;
+                sid = "BA";
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.RemoveAccessSpecific(
+                    (AccessControlType)accessControlType,
+                    null,
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 5, all the ACEs in the Dacl are non-qualified ACE, no remove
 
@@ -433,53 +431,49 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestRemoveAccessSpecific(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestRemoveAccessSpecific(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 7, Remove Specific Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
 
-                    inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    accessControlType = 100;
-                    sid = "BA";
-                    accessMask = 1;
+                accessControlType = 100;
+                sid = "BA";
+                accessMask = 1;
 
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.RemoveAccessSpecific(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                discretionaryAcl.RemoveAccessSpecific(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
         }
     }
 }

@@ -245,20 +245,16 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterReadLock(-2));
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => rwls.TryEnterUpgradeableReadLock(-3)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterUpgradeableReadLock(-3));
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterWriteLock(-4));
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => rwls.TryEnterReadLock(TimeSpan.MaxValue)
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue)
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2))
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterReadLock(TimeSpan.MaxValue));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2)));
             }
         }
 
@@ -269,25 +265,21 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 Task.WaitAll(
-                    Task.Run(
-                        () =>
-                        {
-                            rwls.EnterWriteLock();
-                            barrier.SignalAndWait();
-                            Assert.True(rwls.IsWriteLockHeld);
-                            barrier.SignalAndWait();
-                            rwls.ExitWriteLock();
-                        }
-                    ),
-                    Task.Run(
-                        () =>
-                        {
-                            barrier.SignalAndWait();
-                            Assert.False(rwls.TryEnterReadLock(0));
-                            Assert.False(rwls.IsReadLockHeld);
-                            barrier.SignalAndWait();
-                        }
-                    )
+                    Task.Run(() =>
+                    {
+                        rwls.EnterWriteLock();
+                        barrier.SignalAndWait();
+                        Assert.True(rwls.IsWriteLockHeld);
+                        barrier.SignalAndWait();
+                        rwls.ExitWriteLock();
+                    }),
+                    Task.Run(() =>
+                    {
+                        barrier.SignalAndWait();
+                        Assert.False(rwls.TryEnterReadLock(0));
+                        Assert.False(rwls.IsReadLockHeld);
+                        barrier.SignalAndWait();
+                    })
                 );
             }
         }
@@ -299,25 +291,21 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 Task.WaitAll(
-                    Task.Run(
-                        () =>
-                        {
-                            rwls.EnterWriteLock();
-                            barrier.SignalAndWait();
-                            Assert.True(rwls.IsWriteLockHeld);
-                            barrier.SignalAndWait();
-                            rwls.ExitWriteLock();
-                        }
-                    ),
-                    Task.Run(
-                        () =>
-                        {
-                            barrier.SignalAndWait();
-                            Assert.False(rwls.TryEnterWriteLock(0));
-                            Assert.False(rwls.IsReadLockHeld);
-                            barrier.SignalAndWait();
-                        }
-                    )
+                    Task.Run(() =>
+                    {
+                        rwls.EnterWriteLock();
+                        barrier.SignalAndWait();
+                        Assert.True(rwls.IsWriteLockHeld);
+                        barrier.SignalAndWait();
+                        rwls.ExitWriteLock();
+                    }),
+                    Task.Run(() =>
+                    {
+                        barrier.SignalAndWait();
+                        Assert.False(rwls.TryEnterWriteLock(0));
+                        Assert.False(rwls.IsReadLockHeld);
+                        barrier.SignalAndWait();
+                    })
                 );
             }
         }
@@ -330,32 +318,28 @@ namespace System.Threading.Tests
             {
                 Assert.Equal(0, rwls.CurrentReadCount);
                 Task.WaitAll(
-                    Task.Run(
-                        () =>
-                        {
-                            rwls.EnterReadLock();
-                            barrier.SignalAndWait(); // 1
-                            Assert.True(rwls.IsReadLockHeld);
-                            barrier.SignalAndWait(); // 2
-                            Assert.Equal(2, rwls.CurrentReadCount);
-                            barrier.SignalAndWait(); // 3
-                            barrier.SignalAndWait(); // 4
-                            rwls.ExitReadLock();
-                        }
-                    ),
-                    Task.Run(
-                        () =>
-                        {
-                            barrier.SignalAndWait(); // 1
-                            rwls.EnterReadLock();
-                            barrier.SignalAndWait(); // 2
-                            Assert.True(rwls.IsReadLockHeld);
-                            Assert.Equal(0, rwls.WaitingReadCount);
-                            barrier.SignalAndWait(); // 3
-                            rwls.ExitReadLock();
-                            barrier.SignalAndWait(); // 4
-                        }
-                    )
+                    Task.Run(() =>
+                    {
+                        rwls.EnterReadLock();
+                        barrier.SignalAndWait(); // 1
+                        Assert.True(rwls.IsReadLockHeld);
+                        barrier.SignalAndWait(); // 2
+                        Assert.Equal(2, rwls.CurrentReadCount);
+                        barrier.SignalAndWait(); // 3
+                        barrier.SignalAndWait(); // 4
+                        rwls.ExitReadLock();
+                    }),
+                    Task.Run(() =>
+                    {
+                        barrier.SignalAndWait(); // 1
+                        rwls.EnterReadLock();
+                        barrier.SignalAndWait(); // 2
+                        Assert.True(rwls.IsReadLockHeld);
+                        Assert.Equal(0, rwls.WaitingReadCount);
+                        barrier.SignalAndWait(); // 3
+                        rwls.ExitReadLock();
+                        barrier.SignalAndWait(); // 4
+                    })
                 );
                 Assert.Equal(0, rwls.CurrentReadCount);
             }
@@ -451,25 +435,23 @@ namespace System.Threading.Tests
                 Thread writeWaiterThread;
                 using (var beforeTryEnterWriteLock = new ManualResetEvent(false))
                 {
-                    writeWaiterThread = new Thread(
-                        () =>
+                    writeWaiterThread = new Thread(() =>
+                    {
+                        // Typical order of execution: 1
+
+                        // Add a writer to the wait list for enough time to allow successive readers to enter the wait list while this
+                        // writer is waiting
+                        beforeTryEnterWriteLock.Set();
+                        if (rwls.TryEnterWriteLock(1000))
                         {
-                            // Typical order of execution: 1
-
-                            // Add a writer to the wait list for enough time to allow successive readers to enter the wait list while this
-                            // writer is waiting
-                            beforeTryEnterWriteLock.Set();
-                            if (rwls.TryEnterWriteLock(1000))
-                            {
-                                // The typical order of execution is not guaranteed, as sleep times are not guaranteed. For
-                                // instance, before this write lock is added to the wait list, the two new read locks may be
-                                // acquired. In that case, the test may complete before or while the write lock is taken.
-                                rwls.ExitWriteLock();
-                            }
-
-                            // Typical order of execution: 4
+                            // The typical order of execution is not guaranteed, as sleep times are not guaranteed. For
+                            // instance, before this write lock is added to the wait list, the two new read locks may be
+                            // acquired. In that case, the test may complete before or while the write lock is taken.
+                            rwls.ExitWriteLock();
                         }
-                    );
+
+                        // Typical order of execution: 4
+                    });
                     writeWaiterThread.IsBackground = true;
                     writeWaiterThread.Start();
                     beforeTryEnterWriteLock.WaitOne();
@@ -521,15 +503,13 @@ namespace System.Threading.Tests
                 var threads = new Thread[2];
                 using (var beforeEnterWriteLock = new ManualResetEvent(false))
                 {
-                    var thread = new Thread(
-                        () =>
-                        {
-                            beforeEnterWriteLock.Set();
-                            rwls.EnterWriteLock();
-                            // Typical order of execution: 3
-                            rwls.ExitWriteLock();
-                        }
-                    );
+                    var thread = new Thread(() =>
+                    {
+                        beforeEnterWriteLock.Set();
+                        rwls.EnterWriteLock();
+                        // Typical order of execution: 3
+                        rwls.ExitWriteLock();
+                    });
                     thread.IsBackground = true;
                     thread.Start();
                     threads[0] = thread;
@@ -539,15 +519,13 @@ namespace System.Threading.Tests
                 // Add a waiting reader
                 using (var beforeEnterReadLock = new ManualResetEvent(false))
                 {
-                    var thread = new Thread(
-                        () =>
-                        {
-                            beforeEnterReadLock.Set();
-                            rwls.EnterReadLock();
-                            // Typical order of execution: 4
-                            rwls.ExitReadLock();
-                        }
-                    );
+                    var thread = new Thread(() =>
+                    {
+                        beforeEnterReadLock.Set();
+                        rwls.EnterReadLock();
+                        // Typical order of execution: 4
+                        rwls.ExitReadLock();
+                    });
                     thread.IsBackground = true;
                     thread.Start();
                     threads[1] = thread;

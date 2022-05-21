@@ -77,9 +77,8 @@ namespace System.Composition.UnitTests
         public void MissingTopLevelNamedExportMessageIsInformative()
         {
             var cc = CreateContainer();
-            var x = Assert.Throws<CompositionFailedException>(
-                () => cc.GetExport<Unregistered>("unregistered")
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<Unregistered>("unregistered"));
             Assert.Equal(
                 "No export was found for the contract 'Unregistered \"unregistered\"'.",
                 x.Message
@@ -90,9 +89,8 @@ namespace System.Composition.UnitTests
         public void MissingDependencyMessageIsInformative()
         {
             var cc = CreateContainer(typeof(UserOfUnregistered));
-            var x = Assert.Throws<CompositionFailedException>(
-                () => cc.GetExport<UserOfUnregistered>()
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<UserOfUnregistered>());
             Assert.Equal(
                 "No export was found for the contract 'Unregistered'"
                     + Environment.NewLine
@@ -131,9 +129,8 @@ namespace System.Composition.UnitTests
                 typeof(ButThereIsAnother),
                 typeof(RequiresOnlyOne)
             );
-            var x = Assert.Throws<CompositionFailedException>(
-                () => cc.GetExport<RequiresOnlyOne>()
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<RequiresOnlyOne>());
             Assert.Equal(
                 "Only one export for the contract 'ShouldBeOne' is allowed, but the following parts: 'ButThereIsAnother', 'ShouldBeOne' export it."
                     + Environment.NewLine

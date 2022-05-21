@@ -162,56 +162,52 @@ namespace System.Security.AccessControl.Tests
             //case 7, 1 explicit CustomAce
 
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    revision = 127;
-                    capacity = 1;
-                    rawAcl = new RawAcl(revision, capacity);
-                    aceType = AceType.MaxDefinedAceType + 1;
-                    //199 has all aceflags but inheritedonly and inherited
-                    aceFlag = (AceFlags)199;
-                    opaque = null;
-                    gAce = new CustomAce(aceType, aceFlag, opaque);
-                    rawAcl.InsertAce(0, gAce);
-                    isContainer = false;
-                    isDS = false;
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    sid = new SecurityIdentifier(
-                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                    );
-                    aceCount = 1;
-                    //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
-                    //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-                    TestPurge(systemAcl, sid, aceCount);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                revision = 127;
+                capacity = 1;
+                rawAcl = new RawAcl(revision, capacity);
+                aceType = AceType.MaxDefinedAceType + 1;
+                //199 has all aceflags but inheritedonly and inherited
+                aceFlag = (AceFlags)199;
+                opaque = null;
+                gAce = new CustomAce(aceType, aceFlag, opaque);
+                rawAcl.InsertAce(0, gAce);
+                isContainer = false;
+                isDS = false;
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                sid = new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                );
+                aceCount = 1;
+                //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
+                //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
+                TestPurge(systemAcl, sid, aceCount);
+            });
             //case 8,  1 explicit CompoundAce
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    revision = 127;
-                    capacity = 1;
-                    rawAcl = new RawAcl(revision, capacity);
-                    //207 has all AceFlags but inherited
-                    aceFlag = (AceFlags)207;
-                    accessMask = 1;
-                    compoundAceType = CompoundAceType.Impersonation;
-                    sid = new SecurityIdentifier(
-                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                    );
-                    gAce = new CompoundAce(aceFlag, accessMask, compoundAceType, sid);
-                    rawAcl.InsertAce(0, gAce);
-                    isContainer = true;
-                    isDS = false;
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    aceCount = 0;
-                    //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
-                    //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-                    TestPurge(systemAcl, sid, aceCount);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                revision = 127;
+                capacity = 1;
+                rawAcl = new RawAcl(revision, capacity);
+                //207 has all AceFlags but inherited
+                aceFlag = (AceFlags)207;
+                accessMask = 1;
+                compoundAceType = CompoundAceType.Impersonation;
+                sid = new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                );
+                gAce = new CompoundAce(aceFlag, accessMask, compoundAceType, sid);
+                rawAcl.InsertAce(0, gAce);
+                isContainer = true;
+                isDS = false;
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                aceCount = 0;
+                //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
+                //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
+                TestPurge(systemAcl, sid, aceCount);
+            });
             //case 9, 1 explicit ObjectAce
 
 
@@ -262,18 +258,16 @@ namespace System.Security.AccessControl.Tests
             //case 1, null Sid
 
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    revision = 127;
-                    capacity = 1;
-                    rawAcl = new RawAcl(revision, capacity);
-                    isContainer = true;
-                    isDS = false;
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.Purge(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                revision = 127;
+                capacity = 1;
+                rawAcl = new RawAcl(revision, capacity);
+                isContainer = true;
+                isDS = false;
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.Purge(null);
+            });
         }
 
         private static bool TestPurge(SystemAcl systemAcl, SecurityIdentifier sid, int aceCount)

@@ -198,27 +198,25 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     .Range(0, s_dop)
                     .Select(
                         _ =>
-                            Task.Run(
-                                () =>
+                            Task.Run(() =>
+                            {
+                                ce.Signal();
+                                ce.Wait();
+                                for (int iteration = 0; iteration < iterationCount; iteration++)
                                 {
-                                    ce.Signal();
-                                    ce.Wait();
-                                    for (int iteration = 0; iteration < iterationCount; iteration++)
-                                    {
-                                        var result = method(arg);
-                                        Assert.True(
-                                            result.Equals(expected),
-                                            string.Format(
-                                                "{0} {1}. {2}!={3}",
-                                                blockName,
-                                                methodName,
-                                                result,
-                                                expected
-                                            )
-                                        );
-                                    }
+                                    var result = method(arg);
+                                    Assert.True(
+                                        result.Equals(expected),
+                                        string.Format(
+                                            "{0} {1}. {2}!={3}",
+                                            blockName,
+                                            methodName,
+                                            result,
+                                            expected
+                                        )
+                                    );
                                 }
-                            )
+                            })
                     )
             );
         }

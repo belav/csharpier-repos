@@ -37,11 +37,9 @@ public sealed class BlazorWindowRootComponents : IJSComponentConfiguration
             parameters == null ? ParameterView.Empty : ParameterView.FromDictionary(parameters);
 
         // Dispatch because this is going to be async, and we want to catch any errors
-        _ = _manager.Dispatcher.InvokeAsync(
-            async () =>
-            {
-                await _manager.AddRootComponentAsync(typeof(TComponent), selector, parameterView);
-            }
-        );
+        _ = _manager.Dispatcher.InvokeAsync(async () =>
+        {
+            await _manager.AddRootComponentAsync(typeof(TComponent), selector, parameterView);
+        });
     }
 }

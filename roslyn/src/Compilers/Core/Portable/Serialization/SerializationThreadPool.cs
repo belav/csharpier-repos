@@ -75,35 +75,33 @@ namespace Roslyn.Utilities
                 static void createThread()
                 {
                     // Create a new background thread to run the work.
-                    var t = new Thread(
-                        () =>
+                    var t = new Thread(() =>
+                    {
+                        // Repeatedly get the next item and invoke it, setting its TCS when we're done.
+                        // This will wait for up to the idle time before giving up and exiting.
+                        while (tryDequeue(out var item))
                         {
-                            // Repeatedly get the next item and invoke it, setting its TCS when we're done.
-                            // This will wait for up to the idle time before giving up and exiting.
-                            while (tryDequeue(out var item))
+                            try
                             {
-                                try
+                                if (item.function is Func<object?, object?> callbackWithState)
                                 {
-                                    if (item.function is Func<object?, object?> callbackWithState)
-                                    {
-                                        item.tcs.SetResult(callbackWithState(item.state));
-                                    }
-                                    else
-                                    {
-                                        item.tcs.SetResult(((Func<object?>)item.function)());
-                                    }
+                                    item.tcs.SetResult(callbackWithState(item.state));
                                 }
-                                catch (OperationCanceledException ex)
+                                else
                                 {
-                                    item.tcs.TrySetCanceled(ex.CancellationToken);
-                                }
-                                catch (Exception ex)
-                                {
-                                    item.tcs.TrySetException(ex);
+                                    item.tcs.SetResult(((Func<object?>)item.function)());
                                 }
                             }
+                            catch (OperationCanceledException ex)
+                            {
+                                item.tcs.TrySetCanceled(ex.CancellationToken);
+                            }
+                            catch (Exception ex)
+                            {
+                                item.tcs.TrySetException(ex);
+                            }
                         }
-                    );
+                    });
                     t.IsBackground = true;
                     t.Start();
                 }

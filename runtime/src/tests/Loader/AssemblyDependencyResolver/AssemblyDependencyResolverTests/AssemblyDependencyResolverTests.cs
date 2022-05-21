@@ -58,15 +58,12 @@ namespace AssemblyDependencyResolverTests
                     };
 
                     string message = Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                AssemblyDependencyResolver resolver =
-                                    new AssemblyDependencyResolver(
-                                        Path.Combine(TestBasePath, _componentAssemblyPath)
-                                    );
-                            }
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                        {
+                            AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
+                                Path.Combine(TestBasePath, _componentAssemblyPath)
+                            );
+                        })
                         .Message;
 
                     Assert.Contains("134", message);
@@ -103,14 +100,12 @@ namespace AssemblyDependencyResolverTests
                         HostPolicyMock.Mock_corehost_resolve_component_dependencies(134, "", "", "")
                 )
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
-                                Path.Combine(TestBasePath, _componentAssemblyPath)
-                            );
-                        }
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        AssemblyDependencyResolver resolver = new AssemblyDependencyResolver(
+                            Path.Combine(TestBasePath, _componentAssemblyPath)
+                        );
+                    });
 
                     // After everything is done, the error writer should be reset to the original value.
                     Assert.Equal(previousWriter, errorWriterMock.LastSetErrorWriterPtr);

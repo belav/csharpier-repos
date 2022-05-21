@@ -169,18 +169,14 @@ namespace Microsoft.Extensions.Primitives
         public void IsReadOnly_True(StringValues stringValues)
         {
             Assert.True(((IList<string>)stringValues).IsReadOnly);
-            Assert.Throws<NotSupportedException>(
-                () => ((IList<string>)stringValues)[0] = string.Empty
-            );
-            Assert.Throws<NotSupportedException>(
-                () => ((ICollection<string>)stringValues).Add(string.Empty)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => ((IList<string>)stringValues).Insert(0, string.Empty)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => ((ICollection<string>)stringValues).Remove(string.Empty)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                ((IList<string>)stringValues)[0] = string.Empty);
+            Assert.Throws<NotSupportedException>(() =>
+                ((ICollection<string>)stringValues).Add(string.Empty));
+            Assert.Throws<NotSupportedException>(() =>
+                ((IList<string>)stringValues).Insert(0, string.Empty));
+            Assert.Throws<NotSupportedException>(() =>
+                ((ICollection<string>)stringValues).Remove(string.Empty));
             Assert.Throws<NotSupportedException>(() => ((IList<string>)stringValues).RemoveAt(0));
             Assert.Throws<NotSupportedException>(() => ((ICollection<string>)stringValues).Clear());
         }
@@ -464,9 +460,8 @@ namespace Microsoft.Extensions.Primitives
             if (collection.Count > 0)
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(actual, -1));
-                Assert.Throws<ArgumentException>(
-                    () => collection.CopyTo(actual, actual.Length + 1)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    collection.CopyTo(actual, actual.Length + 1));
             }
             collection.CopyTo(actual, 0);
             Assert.Equal(expected, actual);

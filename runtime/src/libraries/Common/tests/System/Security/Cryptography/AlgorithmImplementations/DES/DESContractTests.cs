@@ -37,12 +37,10 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.ThrowsAny<CryptographicException>(
-                        () =>
-                        {
-                            des.FeedbackSize = feedbackSize;
-                        }
-                    );
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                    {
+                        des.FeedbackSize = feedbackSize;
+                    });
                 }
                 else
                 {
@@ -51,18 +49,14 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     // however, for CFB only few sizes are valid. Those should throw in the
                     // actual DES instantiation.
 
-                    Assert.ThrowsAny<CryptographicException>(
-                        () =>
-                        {
-                            return des.CreateDecryptor();
-                        }
-                    );
-                    Assert.ThrowsAny<CryptographicException>(
-                        () =>
-                        {
-                            return des.CreateEncryptor();
-                        }
-                    );
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                    {
+                        return des.CreateDecryptor();
+                    });
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                    {
+                        return des.CreateEncryptor();
+                    });
                 }
             }
         }
@@ -90,12 +84,10 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(
-                        () =>
-                        {
-                            des.FeedbackSize = feedbackSize;
-                        }
-                    );
+                    Assert.Throws<CryptographicException>(() =>
+                    {
+                        des.FeedbackSize = feedbackSize;
+                    });
                 }
                 else
                 {

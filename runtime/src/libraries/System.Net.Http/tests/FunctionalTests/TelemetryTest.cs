@@ -129,13 +129,11 @@ namespace System.Net.Http.Functional.Tests
                                                     {
                                                         buffersResponse = false;
                                                         HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead
-                                                                    )
-                                                            );
+                                                            await Task.Run(() =>
+                                                                client.Send(
+                                                                    request,
+                                                                    HttpCompletionOption.ResponseHeadersRead
+                                                                ));
                                                         response.Content.CopyTo(
                                                             Stream.Null,
                                                             null,
@@ -200,13 +198,11 @@ namespace System.Net.Http.Functional.Tests
                                                     {
                                                         buffersResponse = false;
                                                         HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(
-                                                                        request,
-                                                                        cancellationToken: default
-                                                                    )
-                                                            );
+                                                            await Task.Run(() =>
+                                                                invoker.Send(
+                                                                    request,
+                                                                    cancellationToken: default
+                                                                ));
                                                         await response.Content.CopyToAsync(
                                                             Stream.Null
                                                         );
@@ -326,105 +322,76 @@ namespace System.Net.Http.Functional.Tests
                                             switch (testMethod)
                                             {
                                                 case "GetAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetAsync(uri, cts.Token)
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.GetAsync(uri, cts.Token));
                                                     break;
 
                                                 case "Send":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(request, cts.Token)
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await Task.Run(() =>
+                                                            client.Send(request, cts.Token)));
                                                     break;
 
                                                 case "UnbufferedSend":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead,
-                                                                        cts.Token
-                                                                    )
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "SendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.SendAsync(
-                                                                request,
-                                                                cts.Token
-                                                            )
-                                                    );
-                                                    break;
-
-                                                case "UnbufferedSendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.SendAsync(
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await Task.Run(() =>
+                                                            client.Send(
                                                                 request,
                                                                 HttpCompletionOption.ResponseHeadersRead,
                                                                 cts.Token
-                                                            )
-                                                    );
+                                                            )));
+                                                    break;
+
+                                                case "SendAsync":
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.SendAsync(request, cts.Token));
+                                                    break;
+
+                                                case "UnbufferedSendAsync":
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.SendAsync(
+                                                            request,
+                                                            HttpCompletionOption.ResponseHeadersRead,
+                                                            cts.Token
+                                                        ));
                                                     break;
 
                                                 case "GetStringAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetStringAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.GetStringAsync(
+                                                            uri,
+                                                            cts.Token
+                                                        ));
                                                     break;
 
                                                 case "GetByteArrayAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetByteArrayAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.GetByteArrayAsync(
+                                                            uri,
+                                                            cts.Token
+                                                        ));
                                                     break;
 
                                                 case "GetStreamAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await client.GetStreamAsync(
-                                                                uri,
-                                                                cts.Token
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await client.GetStreamAsync(
+                                                            uri,
+                                                            cts.Token
+                                                        ));
                                                     break;
 
                                                 case "InvokerSend":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(request, cts.Token)
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await Task.Run(() =>
+                                                            invoker.Send(request, cts.Token)));
                                                     break;
 
                                                 case "InvokerSendAsync":
-                                                    await Assert.ThrowsAsync<TaskCanceledException>(
-                                                        async () =>
-                                                            await invoker.SendAsync(
-                                                                request,
-                                                                cts.Token
-                                                            )
-                                                    );
+                                                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                                                        await invoker.SendAsync(
+                                                            request,
+                                                            cts.Token
+                                                        ));
                                                     break;
                                             }
 
@@ -550,13 +517,11 @@ namespace System.Net.Http.Functional.Tests
 
                                                 case "InvokerSend":
                                                     HttpResponseMessage syncResponse =
-                                                        await Task.Run(
-                                                            () =>
-                                                                invoker.Send(
-                                                                    request,
-                                                                    cancellationToken: default
-                                                                )
-                                                        );
+                                                        await Task.Run(() =>
+                                                            invoker.Send(
+                                                                request,
+                                                                cancellationToken: default
+                                                            ));
                                                     await syncResponse.Content.CopyToAsync(
                                                         Stream.Null
                                                     );

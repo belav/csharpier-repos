@@ -33,12 +33,10 @@ namespace System.Security.AccessControl.Tests
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    dAcl.GetBinaryForm(binaryForm, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                dAcl.GetBinaryForm(binaryForm, 0);
+            });
 
             //Case 2, offset is negative
             binaryForm = new byte[100];
@@ -56,12 +54,10 @@ namespace System.Security.AccessControl.Tests
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dAcl.GetBinaryForm(binaryForm, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dAcl.GetBinaryForm(binaryForm, -1);
+            });
 
             //Case 3, offset is equal to binaryForm length
             binaryForm = new byte[100];
@@ -78,12 +74,10 @@ namespace System.Security.AccessControl.Tests
             );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dAcl.GetBinaryForm(binaryForm, binaryForm.Length);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dAcl.GetBinaryForm(binaryForm, binaryForm.Length);
+            });
 
             //Case 4, offset is a big possitive number
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
@@ -123,12 +117,10 @@ namespace System.Security.AccessControl.Tests
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dAcl.GetBinaryForm(binaryForm, 0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dAcl.GetBinaryForm(binaryForm, 0);
+            });
         }
     }
 }

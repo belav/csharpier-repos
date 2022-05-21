@@ -15,12 +15,10 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream ms = new MemoryStream();
             ZipArchive z = new ZipArchive(ms, ZipArchiveMode.Create);
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var x = z.Entries;
-                }
-            ); //"Entries not applicable on Create"
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var x = z.Entries;
+            }); //"Entries not applicable on Create"
             Assert.Throws<NotSupportedException>(() => z.GetEntry("dirka")); //"GetEntry not applicable on Create"
 
             ZipArchiveEntry e = z.CreateEntry("hey");
@@ -30,26 +28,20 @@ namespace System.IO.Compression.Tests
             Assert.Throws<NotSupportedException>(() => s.ReadByte()); //"Can't read on new entry"
             Assert.Throws<NotSupportedException>(() => s.Seek(0, SeekOrigin.Begin)); //"Can't seek on new entry"
             Assert.Throws<NotSupportedException>(() => s.Position = 0); //"Can't set position on new entry"
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var x = s.Length;
-                }
-            ); //"Can't get length on new entry"
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var x = s.Length;
+            }); //"Can't get length on new entry"
 
             Assert.Throws<IOException>(() => e.LastWriteTime = new DateTimeOffset()); //"Can't get LastWriteTime on new entry"
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var x = e.Length;
-                }
-            ); //"Can't get length on new entry"
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var x = e.CompressedLength;
-                }
-            ); //"can't get CompressedLength on new entry"
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.Length;
+            }); //"Can't get length on new entry"
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.CompressedLength;
+            }); //"can't get CompressedLength on new entry"
 
             Assert.Throws<IOException>(() => z.CreateEntry("bad"));
             s.Dispose();
@@ -58,18 +50,14 @@ namespace System.IO.Compression.Tests
 
             Assert.Throws<IOException>(() => e.Open());
             Assert.Throws<IOException>(() => e.LastWriteTime = new DateTimeOffset());
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var x = e.Length;
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var x = e.CompressedLength;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.Length;
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var x = e.CompressedLength;
+            });
 
             ZipArchiveEntry e1 = z.CreateEntry("e1");
             ZipArchiveEntry e2 = z.CreateEntry("e2");

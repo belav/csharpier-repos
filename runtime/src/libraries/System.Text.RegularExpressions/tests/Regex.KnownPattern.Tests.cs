@@ -1647,12 +1647,10 @@ namespace System.Text.RegularExpressions.Tests
             Regex re = new Regex(rawregex, RegexHelpers.RegexOptionNonBacktracking, ts);
 
             // It takes over 4min with backtracking, so test that 1sec timeout happens
-            Assert.Throws<RegexMatchTimeoutException>(
-                () =>
-                {
-                    reC.Match(input);
-                }
-            );
+            Assert.Throws<RegexMatchTimeoutException>(() =>
+            {
+                reC.Match(input);
+            });
 
             // NonBacktracking needs way less than 1s
             Assert.False(re.Match(input).Success);

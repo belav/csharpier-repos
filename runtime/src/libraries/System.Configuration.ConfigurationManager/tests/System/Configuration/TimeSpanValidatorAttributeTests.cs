@@ -121,9 +121,9 @@ namespace System.ConfigurationTests
                 TimeSpanValidatorAttribute attribute = new TimeSpanValidatorAttribute();
 
                 attribute.MaxValueString = new TimeSpan(2, 2, 2, 2).ToString();
-                ArgumentOutOfRangeException result = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => attribute.MinValueString = new TimeSpan(3, 3, 3, 3).ToString()
-                );
+                ArgumentOutOfRangeException result =
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        attribute.MinValueString = new TimeSpan(3, 3, 3, 3).ToString());
                 ArgumentOutOfRangeException expectedException = new ArgumentOutOfRangeException(
                     "value",
                     SR.Validator_min_greater_than_max
@@ -140,9 +140,9 @@ namespace System.ConfigurationTests
                 TimeSpanValidatorAttribute attribute = new TimeSpanValidatorAttribute();
 
                 attribute.MinValueString = new TimeSpan(2, 2, 2, 2).ToString();
-                ArgumentOutOfRangeException result = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => attribute.MaxValueString = new TimeSpan(1, 1, 1, 1).ToString()
-                );
+                ArgumentOutOfRangeException result =
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        attribute.MaxValueString = new TimeSpan(1, 1, 1, 1).ToString());
                 ArgumentOutOfRangeException expectedException = new ArgumentOutOfRangeException(
                     "value",
                     SR.Validator_min_greater_than_max

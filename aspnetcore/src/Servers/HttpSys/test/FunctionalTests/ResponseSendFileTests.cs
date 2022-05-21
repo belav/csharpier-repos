@@ -237,15 +237,13 @@ public class ResponseSendFileTests
                 async httpContext =>
                 {
                     var sendFile = httpContext.Features.Get<IHttpResponseBodyFeature>();
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                        () =>
-                            sendFile.SendFileAsync(
-                                AbsoluteFilePath,
-                                1234567,
-                                null,
-                                CancellationToken.None
-                            )
-                    );
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                        sendFile.SendFileAsync(
+                            AbsoluteFilePath,
+                            1234567,
+                            null,
+                            CancellationToken.None
+                        ));
                     completed = true;
                 }
             )
@@ -268,15 +266,13 @@ public class ResponseSendFileTests
                 async httpContext =>
                 {
                     var sendFile = httpContext.Features.Get<IHttpResponseBodyFeature>();
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                        () =>
-                            sendFile.SendFileAsync(
-                                AbsoluteFilePath,
-                                0,
-                                1234567,
-                                CancellationToken.None
-                            )
-                    );
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                        sendFile.SendFileAsync(
+                            AbsoluteFilePath,
+                            0,
+                            1234567,
+                            CancellationToken.None
+                        ));
                     completed = true;
                 }
             )
@@ -742,31 +738,27 @@ public class ResponseSendFileTests
                         // before it throws an IOException, but there's a race depending on when the disconnect is noticed.
                         // Passing our own token to skip that.
                         using var cts = new CancellationTokenSource();
-                        await Assert.ThrowsAsync<IOException>(
-                            async () =>
+                        await Assert.ThrowsAsync<IOException>(async () =>
+                        {
+                            // It can take several tries before Send notices the disconnect.
+                            for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                // It can take several tries before Send notices the disconnect.
-                                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                                {
-                                    await httpContext.Response.SendFileAsync(
-                                        AbsoluteFilePath,
-                                        0,
-                                        null,
-                                        cts.Token
-                                    );
-                                }
-                            }
-                        );
-
-                        await Assert.ThrowsAsync<ObjectDisposedException>(
-                            () =>
-                                httpContext.Response.SendFileAsync(
+                                await httpContext.Response.SendFileAsync(
                                     AbsoluteFilePath,
                                     0,
                                     null,
                                     cts.Token
-                                )
-                        );
+                                );
+                            }
+                        });
+
+                        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                            httpContext.Response.SendFileAsync(
+                                AbsoluteFilePath,
+                                0,
+                                null,
+                                cts.Token
+                            ));
 
                         testComplete.SetResult(0);
                     }
@@ -879,21 +871,19 @@ public class ResponseSendFileTests
 
                     try
                     {
-                        await Assert.ThrowsAsync<IOException>(
-                            async () =>
+                        await Assert.ThrowsAsync<IOException>(async () =>
+                        {
+                            // It can take several tries before Write notices the disconnect.
+                            for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                // It can take several tries before Write notices the disconnect.
-                                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                                {
-                                    await httpContext.Response.SendFileAsync(
-                                        AbsoluteFilePath,
-                                        0,
-                                        null,
-                                        cts.Token
-                                    );
-                                }
+                                await httpContext.Response.SendFileAsync(
+                                    AbsoluteFilePath,
+                                    0,
+                                    null,
+                                    cts.Token
+                                );
                             }
-                        );
+                        });
 
                         testComplete.SetResult(0);
                     }

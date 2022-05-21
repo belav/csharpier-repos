@@ -463,13 +463,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Product)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Category>()
-                                    .HasMany(o => o.Products)
-                                    .WithMany(c => c.Categories)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Category>()
+                                .HasMany(o => o.Products)
+                                .WithMany(c => c.Categories))
                         .Message
                 );
             }
@@ -492,13 +490,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Product)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Product>()
-                                    .HasMany(o => o.Categories)
-                                    .WithMany(c => c.Products)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<Product>()
+                                .HasMany(o => o.Categories)
+                                .WithMany(c => c.Products))
                         .Message
                 );
             }
@@ -514,14 +510,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(NavDependent)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<ManyToManyNavPrincipal>()
-                                    .HasMany<NavDependent>( /* leaving empty causes the exception */
-                                    )
-                                    .WithMany(d => d.ManyToManyPrincipals)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<ManyToManyNavPrincipal>()
+                                .HasMany<NavDependent>( /* leaving empty causes the exception */
+                                )
+                                .WithMany(d => d.ManyToManyPrincipals))
                         .Message
                 );
             }
@@ -564,13 +558,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(SelfRefManyToOne.SelfRef2)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<SelfRefManyToOne>()
-                                    .HasMany(e => e.SelfRef2)
-                                    .WithMany(e => e.SelfRef2)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<SelfRefManyToOne>()
+                                .HasMany(e => e.SelfRef2)
+                                .WithMany(e => e.SelfRef2))
                         .Message
                 );
             }
@@ -751,13 +743,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(ManyToManyNavPrincipal.Dependents)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<ManyToManyNavPrincipal>()
-                                    .Navigation(p => p.Dependents)
-                                    .IsRequired()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<ManyToManyNavPrincipal>()
+                                .Navigation(p => p.Dependents)
+                                .IsRequired())
                         .Message
                 );
             }
@@ -833,9 +823,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 
@@ -913,9 +902,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 
@@ -999,9 +987,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 
@@ -1070,9 +1057,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 
@@ -1149,9 +1135,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 

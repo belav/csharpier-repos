@@ -48,13 +48,11 @@ namespace System.IO.Tests
 
         [Fact]
         public Task NonExistentPathAsync() =>
-            Assert.ThrowsAsync<DirectoryNotFoundException>(
-                async () =>
-                    await WriteAsync(
-                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
-                        "Text"
-                    )
-            );
+            Assert.ThrowsAsync<DirectoryNotFoundException>(async () =>
+                await WriteAsync(
+                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                    "Text"
+                ));
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task NullContent_CreatesFileAsync()
@@ -140,9 +138,8 @@ namespace System.IO.Tests
 
         [Fact]
         public Task Read_FileNotFoundAsync() =>
-            Assert.ThrowsAsync<FileNotFoundException>(
-                async () => await ReadAsync(GetTestFilePath())
-            );
+            Assert.ThrowsAsync<FileNotFoundException>(async () =>
+                await ReadAsync(GetTestFilePath()));
 
         /// <summary>
         /// On Unix, modifying a file that is ReadOnly will fail under normal permissions.
@@ -165,9 +162,8 @@ namespace System.IO.Tests
                     Assert.Equal("text", await ReadAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
-                        async () => await WriteAsync(path, "text")
-                    );
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+                        await WriteAsync(path, "text"));
             }
             finally
             {
@@ -183,9 +179,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.WriteAllTextAsync(path, "", token));
         }
 
         [Theory]
@@ -286,9 +281,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", Encoding.UTF8, token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.WriteAllTextAsync(path, "", Encoding.UTF8, token));
         }
     }
 }

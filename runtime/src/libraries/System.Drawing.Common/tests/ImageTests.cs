@@ -448,9 +448,8 @@ namespace System.Drawing.Tests
                 null,
                 () => bitmap.GetPropertyItem(PropertyTagChrominanceTable)
             );
-            Assert.Throws<ExternalException>(
-                () => bitmap.RemovePropertyItem(PropertyTagChrominanceTable)
-            );
+            Assert.Throws<ExternalException>(() =>
+                bitmap.RemovePropertyItem(PropertyTagChrominanceTable));
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -489,9 +488,8 @@ namespace System.Drawing.Tests
                 null,
                 () => bitmap.GetPropertyItem(PropertyTagChrominanceTable)
             );
-            Assert.Throws<ExternalException>(
-                () => bitmap.RemovePropertyItem(PropertyTagChrominanceTable)
-            );
+            Assert.Throws<ExternalException>(() =>
+                bitmap.RemovePropertyItem(PropertyTagChrominanceTable));
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -1599,9 +1597,8 @@ namespace System.Drawing.Tests
             using (var file = TempFile.Create(bytes))
             {
                 Assert.Throws<OutOfMemoryException>(() => Image.FromFile(file.Path));
-                Assert.Throws<OutOfMemoryException>(
-                    () => Image.FromFile(file.Path, useEmbeddedColorManagement: true)
-                );
+                Assert.Throws<OutOfMemoryException>(() =>
+                    Image.FromFile(file.Path, useEmbeddedColorManagement: true));
             }
         }
 
@@ -1639,18 +1636,16 @@ namespace System.Drawing.Tests
                 string fileName = new string('a', 261);
 
                 Assert.Throws<PathTooLongException>(() => Image.FromFile(fileName));
-                Assert.Throws<PathTooLongException>(
-                    () => Image.FromFile(fileName, useEmbeddedColorManagement: true)
-                );
+                Assert.Throws<PathTooLongException>(() =>
+                    Image.FromFile(fileName, useEmbeddedColorManagement: true));
             }
             else
             {
                 string fileName = new string('a', 261);
 
                 Assert.Throws<FileNotFoundException>(() => Image.FromFile(fileName));
-                Assert.Throws<FileNotFoundException>(
-                    () => Image.FromFile(fileName, useEmbeddedColorManagement: true)
-                );
+                Assert.Throws<FileNotFoundException>(() =>
+                    Image.FromFile(fileName, useEmbeddedColorManagement: true));
             }
         }
 
@@ -1658,9 +1653,8 @@ namespace System.Drawing.Tests
         public void FromFile_NoSuchFile_ThrowsFileNotFoundException()
         {
             Assert.Throws<FileNotFoundException>(() => Image.FromFile("NoSuchFile"));
-            Assert.Throws<FileNotFoundException>(
-                () => Image.FromFile("NoSuchFile", useEmbeddedColorManagement: true)
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                Image.FromFile("NoSuchFile", useEmbeddedColorManagement: true));
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]

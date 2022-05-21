@@ -217,12 +217,10 @@ public class TagHelperScopeManagerTest
         );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                scopeManager.End();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            scopeManager.End();
+        });
 
         Assert.Equal(expectedError, ex.Message);
     }

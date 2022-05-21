@@ -130,17 +130,14 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             // Index < 0
-            Assert.Throws<IndexOutOfRangeException>(
-                () => collection.CopyTo(new object[collection.Count], -1)
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count], -1));
 
             // Invalid index + length
-            Assert.Throws<IndexOutOfRangeException>(
-                () => collection.CopyTo(new object[collection.Count], 1)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => collection.CopyTo(new object[collection.Count + 1], 2)
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count], 1));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count + 1], 2));
         }
 
         private static CaptureCollection CreateCollection()

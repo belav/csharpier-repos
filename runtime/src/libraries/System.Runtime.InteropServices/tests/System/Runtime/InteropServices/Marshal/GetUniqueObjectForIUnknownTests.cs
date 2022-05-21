@@ -58,9 +58,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetUniqueObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetUniqueObjectForIUnknown(IntPtr.Zero)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetUniqueObjectForIUnknown(IntPtr.Zero));
         }
 
         [Fact]

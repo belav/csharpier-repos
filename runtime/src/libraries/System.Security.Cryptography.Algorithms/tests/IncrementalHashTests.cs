@@ -116,9 +116,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                     () => incrementalHash.AppendData(new byte[1], 0, 2)
                 );
 
-                Assert.Throws<ArgumentException>(
-                    () => incrementalHash.AppendData(new byte[2], 1, 2)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    incrementalHash.AppendData(new byte[2], 1, 2));
             }
         }
 
@@ -404,18 +403,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
         [Fact]
         public static void UnknownDigestAlgorithm()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => IncrementalHash.CreateHash(new HashAlgorithmName("SHA0"))
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                IncrementalHash.CreateHash(new HashAlgorithmName("SHA0")));
         }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void UnknownHmacAlgorithm()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => IncrementalHash.CreateHMAC(new HashAlgorithmName("SHA0"), Array.Empty<byte>())
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                IncrementalHash.CreateHMAC(new HashAlgorithmName("SHA0"), Array.Empty<byte>()));
         }
 
         [Theory]
@@ -637,21 +634,18 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.AppendData(tmpDest));
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.AppendData(tmpDest, 0, 0));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.AppendData(new ReadOnlySpan<byte>(tmpDest))
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.AppendData(new ReadOnlySpan<byte>(tmpDest)));
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetHashAndReset());
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetHashAndReset(tmpDest));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.TryGetHashAndReset(tmpDest, out int _)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.TryGetHashAndReset(tmpDest, out int _));
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetCurrentHash());
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetCurrentHash(tmpDest));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.TryGetCurrentHash(tmpDest, out int _)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.TryGetCurrentHash(tmpDest, out int _));
         }
 
         [Theory]
@@ -670,21 +664,18 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.AppendData(tmpDest));
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.AppendData(tmpDest, 0, 0));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.AppendData(new ReadOnlySpan<byte>(tmpDest))
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.AppendData(new ReadOnlySpan<byte>(tmpDest)));
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetHashAndReset());
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetHashAndReset(tmpDest));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.TryGetHashAndReset(tmpDest, out int _)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.TryGetHashAndReset(tmpDest, out int _));
 
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetCurrentHash());
             Assert.Throws<ObjectDisposedException>(() => incrementalHash.GetCurrentHash(tmpDest));
-            Assert.Throws<ObjectDisposedException>(
-                () => incrementalHash.TryGetCurrentHash(tmpDest, out int _)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                incrementalHash.TryGetCurrentHash(tmpDest, out int _));
         }
 
         [Theory]

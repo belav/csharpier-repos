@@ -121,19 +121,17 @@ public abstract class WebViewManager : IAsyncDisposable
         // add it when the page attaches later.
         if (_currentPageContext != null)
         {
-            return Dispatcher.InvokeAsync(
-                () =>
-                {
-                    rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
-                        componentType,
-                        selector
-                    );
-                    return _currentPageContext.Renderer.RenderRootComponentAsync(
-                        rootComponent.ComponentId.Value,
-                        rootComponent.Parameters
-                    );
-                }
-            );
+            return Dispatcher.InvokeAsync(() =>
+            {
+                rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
+                    componentType,
+                    selector
+                );
+                return _currentPageContext.Renderer.RenderRootComponentAsync(
+                    rootComponent.ComponentId.Value,
+                    rootComponent.Parameters
+                );
+            });
         }
         else
         {
@@ -158,12 +156,8 @@ public abstract class WebViewManager : IAsyncDisposable
         // enough to have updated the dictionary.
         if (_currentPageContext != null && rootComponent.ComponentId.HasValue)
         {
-            return Dispatcher.InvokeAsync(
-                () =>
-                    _currentPageContext.Renderer.RemoveRootComponent(
-                        rootComponent.ComponentId.Value
-                    )
-            );
+            return Dispatcher.InvokeAsync(() =>
+                _currentPageContext.Renderer.RemoveRootComponent(rootComponent.ComponentId.Value));
         }
         else
         {
@@ -185,23 +179,21 @@ public abstract class WebViewManager : IAsyncDisposable
             return;
         }
 
-        _ = _dispatcher.InvokeAsync(
-            async () =>
+        _ = _dispatcher.InvokeAsync(async () =>
+        {
+            // TODO: Verify this produces the correct exception-surfacing behaviors.
+            // For example, JS interop exceptions should flow back into JS, whereas
+            // renderer exceptions should be fatal.
+            try
             {
-                // TODO: Verify this produces the correct exception-surfacing behaviors.
-                // For example, JS interop exceptions should flow back into JS, whereas
-                // renderer exceptions should be fatal.
-                try
-                {
-                    await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
-                }
-                catch (Exception ex)
-                {
-                    _ipcSender.NotifyUnhandledException(ex);
-                    throw;
-                }
+                await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
             }
-        );
+            catch (Exception ex)
+            {
+                _ipcSender.NotifyUnhandledException(ex);
+                throw;
+            }
+        });
     }
 
     /// <summary>

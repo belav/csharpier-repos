@@ -1060,13 +1060,11 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent mre = new ManualResetEvent(false);
                 Task task;
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(
-                        () =>
-                        {
-                            mre.WaitOne();
-                            return "";
-                        }
-                    );
+                    task = Task<string>.Factory.StartNew(() =>
+                    {
+                        mre.WaitOne();
+                        return "";
+                    });
                 else
                     task = Task.Factory.StartNew(
                         delegate

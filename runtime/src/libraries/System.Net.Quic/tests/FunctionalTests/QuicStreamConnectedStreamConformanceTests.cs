@@ -97,37 +97,33 @@ namespace System.Net.Quic.Tests
             QuicStream stream1 = null,
                 stream2 = null;
             await WhenAllOrAnyFailed(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    connection1 = await listener.AcceptConnectionAsync();
+                    stream1 = await connection1.AcceptStreamAsync();
+                    Assert.Equal(1, await stream1.ReadAsync(buffer));
+                }),
+                Task.Run(async () =>
+                {
+                    try
                     {
-                        connection1 = await listener.AcceptConnectionAsync();
-                        stream1 = await connection1.AcceptStreamAsync();
-                        Assert.Equal(1, await stream1.ReadAsync(buffer));
+                        connection2 = new QuicConnection(
+                            provider,
+                            listener.ListenEndPoint,
+                            GetSslClientAuthenticationOptions()
+                        );
+                        await connection2.ConnectAsync();
+                        stream2 = connection2.OpenBidirectionalStream();
+                        // OpenBidirectionalStream only allocates ID. We will force stream opening
+                        // by Writing there and receiving data on the other side.
+                        await stream2.WriteAsync(buffer);
                     }
-                ),
-                Task.Run(
-                    async () =>
+                    catch (Exception ex)
                     {
-                        try
-                        {
-                            connection2 = new QuicConnection(
-                                provider,
-                                listener.ListenEndPoint,
-                                GetSslClientAuthenticationOptions()
-                            );
-                            await connection2.ConnectAsync();
-                            stream2 = connection2.OpenBidirectionalStream();
-                            // OpenBidirectionalStream only allocates ID. We will force stream opening
-                            // by Writing there and receiving data on the other side.
-                            await stream2.WriteAsync(buffer);
-                        }
-                        catch (Exception ex)
-                        {
-                            _output?.WriteLine($"Failed to {ex.Message}");
-                            throw;
-                        }
+                        _output?.WriteLine($"Failed to {ex.Message}");
+                        throw;
                     }
-                )
+                })
             );
 
             // No need to keep the listener once we have connected connection and streams

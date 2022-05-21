@@ -35,22 +35,18 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetReadOnlySpanF(1.0f));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetReadOnlySpanFOut(1.0f, out ReadOnlySpan<float> value3)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetReadOnlySpanFOut(1.0f, out ReadOnlySpan<float> value3));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetReadOnlySpanFRef(1.0f));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddReadOnlySpanF(default, default)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddReadOnlySpanF(default, default));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-            {
-                ReadOnlySpan<float> value = default;
-                GenericsNative.AddReadOnlySpanFs(in value, 1);
-            }
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            ReadOnlySpan<float> value = default;
+            GenericsNative.AddReadOnlySpanFs(in value, 1);
+        });
     }
 }

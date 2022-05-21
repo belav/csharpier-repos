@@ -47,9 +47,8 @@ namespace System.Net.Sockets.Tests
                 Offset = offset
             }.ToActual();
 
-            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
-                () => SendToAsync(socket, buffer, GetGetDummyTestEndpoint())
-            );
+            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(() =>
+                SendToAsync(socket, buffer, GetGetDummyTestEndpoint()));
         }
 
         [Fact]
@@ -59,9 +58,8 @@ namespace System.Net.Sockets.Tests
                 return;
             using var socket = CreateSocket();
 
-            await AssertThrowsSynchronously<ArgumentNullException>(
-                () => SendToAsync(socket, null, GetGetDummyTestEndpoint())
-            );
+            await AssertThrowsSynchronously<ArgumentNullException>(() =>
+                SendToAsync(socket, null, GetGetDummyTestEndpoint()));
         }
 
         [Fact]
@@ -70,15 +68,13 @@ namespace System.Net.Sockets.Tests
             using Socket socket = CreateSocket();
             if (UsesEap)
             {
-                await AssertThrowsSynchronously<ArgumentException>(
-                    () => SendToAsync(socket, new byte[1], null)
-                );
+                await AssertThrowsSynchronously<ArgumentException>(() =>
+                    SendToAsync(socket, new byte[1], null));
             }
             else
             {
-                await AssertThrowsSynchronously<ArgumentNullException>(
-                    () => SendToAsync(socket, new byte[1], null)
-                );
+                await AssertThrowsSynchronously<ArgumentNullException>(() =>
+                    SendToAsync(socket, new byte[1], null));
             }
         }
 
@@ -123,9 +119,8 @@ namespace System.Net.Sockets.Tests
             );
             byte[] buffer = new byte[32];
 
-            var e = await Assert.ThrowsAnyAsync<SocketException>(
-                () => SendToAsync(socket, new ArraySegment<byte>(buffer), invalidEndpoint)
-            );
+            var e = await Assert.ThrowsAnyAsync<SocketException>(() =>
+                SendToAsync(socket, new ArraySegment<byte>(buffer), invalidEndpoint));
             Assert.Equal(SocketError.AccessDenied, e.SocketErrorCode);
             Assert.Null(socket.LocalEndPoint);
         }
@@ -140,9 +135,8 @@ namespace System.Net.Sockets.Tests
             );
             socket.Dispose();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () => SendToAsync(socket, new byte[1], GetGetDummyTestEndpoint())
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                SendToAsync(socket, new byte[1], GetGetDummyTestEndpoint()));
         }
     }
 
@@ -221,8 +215,8 @@ namespace System.Net.Sockets.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             cts.Cancel();
 
-            OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
+            OperationCanceledException ex =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
                     sender
                         .SendToAsync(
                             new byte[1],
@@ -230,8 +224,7 @@ namespace System.Net.Sockets.Tests
                             GetGetDummyTestEndpoint(),
                             cts.Token
                         )
-                        .AsTask()
-            );
+                        .AsTask());
 
             Assert.Equal(cts.Token, ex.CancellationToken);
         }

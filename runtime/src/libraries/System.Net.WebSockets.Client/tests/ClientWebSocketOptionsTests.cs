@@ -345,13 +345,12 @@ namespace System.Net.WebSockets.Client.Tests
                     using (var cws = new ClientWebSocket())
                     {
                         cws.Options.Proxy = new WebProxy(proxyUri);
-                        WebSocketException wse = await Assert.ThrowsAnyAsync<WebSocketException>(
-                            async () =>
+                        WebSocketException wse =
+                            await Assert.ThrowsAnyAsync<WebSocketException>(async () =>
                                 await cws.ConnectAsync(
                                     new Uri($"{scheme}://doesntmatter.invalid"),
                                     default
-                                )
-                        );
+                                ));
 
                         // Inner exception should indicate proxy connect failure with the error code we send (403)
                         HttpRequestException hre = Assert.IsType<HttpRequestException>(

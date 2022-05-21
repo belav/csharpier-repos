@@ -193,23 +193,21 @@ namespace System.Net.Security.Tests
                 string serverHost = serverCertificate.GetNameInfo(X509NameType.SimpleName, false);
                 var clientCertificates = new X509CertificateCollection() { clientCertificate };
 
-                await Assert.ThrowsAnyAsync<Exception>(
-                    () =>
-                        TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                            AuthenticateClientAsync(
-                                serverHost,
-                                clientCertificates,
-                                checkCertificateRevocation: false,
-                                protocols: clientProtocols
-                            ),
-                            AuthenticateServerAsync(
-                                serverCertificate,
-                                clientCertificateRequired: true,
-                                checkCertificateRevocation: false,
-                                protocols: serverProtocols
-                            )
+                await Assert.ThrowsAnyAsync<Exception>(() =>
+                    TestConfiguration.WhenAllOrAnyFailedWithTimeout(
+                        AuthenticateClientAsync(
+                            serverHost,
+                            clientCertificates,
+                            checkCertificateRevocation: false,
+                            protocols: clientProtocols
+                        ),
+                        AuthenticateServerAsync(
+                            serverCertificate,
+                            clientCertificateRequired: true,
+                            checkCertificateRevocation: false,
+                            protocols: serverProtocols
                         )
-                );
+                    ));
             }
         }
 
@@ -277,28 +275,26 @@ namespace System.Net.Security.Tests
             bool checkCertificateRevocation,
             SslProtocols? protocols
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                if (protocols.HasValue)
                 {
-                    if (protocols.HasValue)
-                    {
-                        _clientStream.AuthenticateAsClient(
-                            targetHost,
-                            clientCertificates,
-                            protocols.Value,
-                            checkCertificateRevocation
-                        );
-                    }
-                    else
-                    {
-                        _clientStream.AuthenticateAsClient(
-                            targetHost,
-                            clientCertificates,
-                            checkCertificateRevocation
-                        );
-                    }
+                    _clientStream.AuthenticateAsClient(
+                        targetHost,
+                        clientCertificates,
+                        protocols.Value,
+                        checkCertificateRevocation
+                    );
                 }
-            );
+                else
+                {
+                    _clientStream.AuthenticateAsClient(
+                        targetHost,
+                        clientCertificates,
+                        checkCertificateRevocation
+                    );
+                }
+            });
 
         protected override Task AuthenticateServerAsync(
             X509Certificate serverCertificate,
@@ -306,28 +302,26 @@ namespace System.Net.Security.Tests
             bool checkCertificateRevocation,
             SslProtocols? protocols
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                if (protocols.HasValue)
                 {
-                    if (protocols.HasValue)
-                    {
-                        _serverStream.AuthenticateAsServer(
-                            serverCertificate,
-                            clientCertificateRequired,
-                            protocols.Value,
-                            checkCertificateRevocation
-                        );
-                    }
-                    else
-                    {
-                        _serverStream.AuthenticateAsServer(
-                            serverCertificate,
-                            clientCertificateRequired,
-                            checkCertificateRevocation
-                        );
-                    }
+                    _serverStream.AuthenticateAsServer(
+                        serverCertificate,
+                        clientCertificateRequired,
+                        protocols.Value,
+                        checkCertificateRevocation
+                    );
                 }
-            );
+                else
+                {
+                    _serverStream.AuthenticateAsServer(
+                        serverCertificate,
+                        clientCertificateRequired,
+                        checkCertificateRevocation
+                    );
+                }
+            });
     }
 
     public sealed class ApmSslStreamSystemDefaultTest : SslStreamSystemDefaultTest

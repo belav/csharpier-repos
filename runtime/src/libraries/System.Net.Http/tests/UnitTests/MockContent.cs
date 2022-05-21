@@ -125,13 +125,11 @@ namespace System.Net.Http.Tests
                 throw _customException;
             }
 
-            return Task.Run(
-                () =>
-                {
-                    CheckThrow();
-                    return stream.WriteAsync(_mockData, 0, _mockData.Length);
-                }
-            );
+            return Task.Run(() =>
+            {
+                CheckThrow();
+                return stream.WriteAsync(_mockData, 0, _mockData.Length);
+            });
         }
 
         protected override Task<Stream> CreateContentReadStreamAsync()

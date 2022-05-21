@@ -64,25 +64,20 @@ partial class Test_VariantTest
         }
         else
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Marshal_ByValue_Object(new object());
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Marshal_ByValue_Object_IUnknown(new UnknownWrapper(new object()));
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Marshal_ByValue_Object(new object());
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Marshal_ByValue_Object_IUnknown(new UnknownWrapper(new object()));
+            });
         }
 
         Assert.Throws<ArgumentException>(() => Marshal_ByValue_Invalid(TimeSpan.Zero));
         Assert.Throws<NotSupportedException>(() => Marshal_ByValue_Invalid(new CustomStruct()));
-        Assert.Throws<ArgumentException>(
-            () => Marshal_ByValue_Invalid(new VariantWrapper(CharValue))
-        );
+        Assert.Throws<ArgumentException>(() =>
+            Marshal_ByValue_Invalid(new VariantWrapper(CharValue)));
     }
 
     private unsafe static void TestByRef(bool hasComSupport)
@@ -165,20 +160,16 @@ partial class Test_VariantTest
         }
         else
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    obj = new object();
-                    Marshal_ByRef_Object(ref obj);
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    obj = new UnknownWrapper(new object());
-                    Marshal_ByRef_Object_IUnknown(ref obj);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                obj = new object();
+                Marshal_ByRef_Object(ref obj);
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                obj = new UnknownWrapper(new object());
+                Marshal_ByRef_Object_IUnknown(ref obj);
+            });
         }
 
         obj = DecimalValue;
@@ -274,20 +265,16 @@ partial class Test_VariantTest
         }
         else
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    wrapper.value = new object();
-                    Marshal_Struct_ByValue_Object(wrapper);
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    wrapper.value = new UnknownWrapper(new object());
-                    Marshal_Struct_ByValue_Object_IUnknown(wrapper);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                wrapper.value = new object();
+                Marshal_Struct_ByValue_Object(wrapper);
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                wrapper.value = new UnknownWrapper(new object());
+                Marshal_Struct_ByValue_Object_IUnknown(wrapper);
+            });
         }
     }
 
@@ -371,20 +358,16 @@ partial class Test_VariantTest
         }
         else
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    wrapper.value = new object();
-                    Marshal_Struct_ByRef_Object(ref wrapper);
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    wrapper.value = new UnknownWrapper(new object());
-                    Marshal_Struct_ByRef_Object_IUnknown(ref wrapper);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                wrapper.value = new object();
+                Marshal_Struct_ByRef_Object(ref wrapper);
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                wrapper.value = new UnknownWrapper(new object());
+                Marshal_Struct_ByRef_Object_IUnknown(ref wrapper);
+            });
         }
     }
 }

@@ -113,15 +113,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             _errorLoggers = loggers;
             _diagnosticService = diagnosticAnalyzerService;
 
-            _lazyFixerToMetadataMap = new(
-                () =>
-                    fixers
-                        .Where(service => service.IsValueCreated)
-                        .ToImmutableDictionary(
-                            service => service.Value,
-                            service => service.Metadata
-                        )
-            );
+            _lazyFixerToMetadataMap = new(() =>
+                fixers
+                    .Where(service => service.IsValueCreated)
+                    .ToImmutableDictionary(service => service.Value, service => service.Metadata));
             var fixersPerLanguageMap = fixers.ToPerLanguageMapWithMultipleLanguages();
             var configurationProvidersPerLanguageMap =
                 configurationProviders.ToPerLanguageMapWithMultipleLanguages();
@@ -1348,9 +1343,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             >();
             foreach (var languageKindAndFixers in configurationProvidersPerLanguage)
             {
-                var lazyConfigurationFixers = new Lazy<ImmutableArray<IConfigurationFixProvider>>(
-                    () => GetConfigurationFixProviders(languageKindAndFixers.Value)
-                );
+                var lazyConfigurationFixers = new Lazy<
+                    ImmutableArray<IConfigurationFixProvider>
+                >(() => GetConfigurationFixProviders(languageKindAndFixers.Value));
                 configurationFixerMap = configurationFixerMap.Add(
                     languageKindAndFixers.Key,
                     lazyConfigurationFixers

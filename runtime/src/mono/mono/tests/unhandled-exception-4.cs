@@ -16,19 +16,17 @@ class Driver
         ManualResetEvent mre = new ManualResetEvent(false);
 
         var t = Task.Factory.StartNew(
-            new Action(
-                () =>
+            new Action(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        throw new CustomException();
-                    }
-                    finally
-                    {
-                        mre.Set();
-                    }
+                    throw new CustomException();
                 }
-            )
+                finally
+                {
+                    mre.Set();
+                }
+            })
         );
 
         if (!mre.WaitOne(5000))

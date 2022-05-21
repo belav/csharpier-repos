@@ -292,13 +292,11 @@ namespace System
             }
         }
 
-        private static readonly Lazy<bool> m_isInvariant = new Lazy<bool>(
-            () =>
-                GetStaticNonPublicBooleanPropertyValue(
-                    "System.Globalization.GlobalizationMode",
-                    "Invariant"
-                )
-        );
+        private static readonly Lazy<bool> m_isInvariant = new Lazy<bool>(() =>
+            GetStaticNonPublicBooleanPropertyValue(
+                "System.Globalization.GlobalizationMode",
+                "Invariant"
+            ));
 
         private static bool GetStaticNonPublicBooleanPropertyValue(
             string typeName,
@@ -378,13 +376,11 @@ namespace System
             );
         }
 
-        private static readonly Lazy<bool> s_fileLockingDisabled = new Lazy<bool>(
-            () =>
-                GetStaticNonPublicBooleanPropertyValue(
-                    "Microsoft.Win32.SafeHandles.SafeFileHandle",
-                    "DisableFileLocking"
-                )
-        );
+        private static readonly Lazy<bool> s_fileLockingDisabled = new Lazy<bool>(() =>
+            GetStaticNonPublicBooleanPropertyValue(
+                "Microsoft.Win32.SafeHandles.SafeFileHandle",
+                "DisableFileLocking"
+            ));
 
         public static bool IsFileLockingEnabled => IsWindows || !s_fileLockingDisabled.Value;
 

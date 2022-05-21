@@ -291,9 +291,8 @@ namespace Microsoft.Data.Sqlite
                     Assert.True(hasData);
 
                     var buffer = new char[1];
-                    var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                        () => reader.GetChars(0, 5, buffer, 0, buffer.Length)
-                    );
+                    var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        reader.GetChars(0, 5, buffer, 0, buffer.Length));
                     Assert.Equal("dataOffset", ex.ParamName);
                 }
             }
@@ -773,9 +772,8 @@ namespace Microsoft.Data.Sqlite
 
                 using (var reader = connection.ExecuteReader("SELECT 1;"))
                 {
-                    var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                        () => reader.GetDataTypeName(1)
-                    );
+                    var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        reader.GetDataTypeName(1));
 
                     Assert.Equal("ordinal", ex.ParamName);
                     Assert.Equal(1, ex.ActualValue);
@@ -1108,9 +1106,8 @@ namespace Microsoft.Data.Sqlite
 
                 using (var reader = connection.ExecuteReader("SELECT 1;"))
                 {
-                    var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                        () => reader.GetFieldType(1)
-                    );
+                    var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        reader.GetFieldType(1));
 
                     Assert.Equal("ordinal", ex.ParamName);
                     Assert.Equal(1, ex.ActualValue);
@@ -1293,9 +1290,8 @@ namespace Microsoft.Data.Sqlite
 
                 using (var reader = connection.ExecuteReader("SELECT 1;"))
                 {
-                    var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                        () => reader.GetOrdinal("Name")
-                    );
+                    var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        reader.GetOrdinal("Name"));
                     Assert.NotNull(ex.Message);
                     Assert.Equal("name", ex.ParamName);
                     Assert.Equal("Name", ex.ActualValue);

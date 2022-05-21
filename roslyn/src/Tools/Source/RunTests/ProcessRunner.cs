@@ -140,26 +140,24 @@ namespace RunTests
                 );
             };
 
-            var registration = cancellationToken.Register(
-                () =>
+            var registration = cancellationToken.Register(() =>
+            {
+                if (tcs.TrySetCanceled())
                 {
-                    if (tcs.TrySetCanceled())
+                    // If the underlying process is still running, we should kill it
+                    if (!process.HasExited)
                     {
-                        // If the underlying process is still running, we should kill it
-                        if (!process.HasExited)
+                        try
                         {
-                            try
-                            {
-                                process.Kill();
-                            }
-                            catch (InvalidOperationException)
-                            {
-                                // Ignore, since the process is already dead
-                            }
+                            process.Kill();
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // Ignore, since the process is already dead
                         }
                     }
                 }
-            );
+            });
 
             process.Start();
             onProcessStartHandler?.Invoke(process);

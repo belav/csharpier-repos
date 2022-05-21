@@ -133,155 +133,141 @@ namespace System.Resources.ResourceWriterTests
         [Fact]
         public static void ExceptionforResourceReaderNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    MemoryStream ms2 = null;
-                    var rw = new ResourceReader(ms2);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MemoryStream ms2 = null;
+                var rw = new ResourceReader(ms2);
+            });
         }
 
         [Fact]
         public static void ExceptionforResourceReaderDispose01()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            rr1.Dispose();
-                            var s_found_list = new List<string>();
-                            foreach (DictionaryEntry entry in rr1)
-                            {
-                                string key = (string)entry.Key;
-                                string value = (string)entry.Value;
-                                string found = s_dict[key];
-                                Assert.True(
-                                    string.Compare(value, found) == 0,
-                                    "expected: " + value + ", but got : " + found
-                                );
-                                s_found_list.Add(key);
-                            }
+                        rr1.Dispose();
+                        var s_found_list = new List<string>();
+                        foreach (DictionaryEntry entry in rr1)
+                        {
+                            string key = (string)entry.Key;
+                            string value = (string)entry.Value;
+                            string found = s_dict[key];
+                            Assert.True(
+                                string.Compare(value, found) == 0,
+                                "expected: " + value + ", but got : " + found
+                            );
+                            s_found_list.Add(key);
                         }
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public static void Exception_Enumarator_Current_Dispose()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            IDictionaryEnumerator enumarator = rr1.GetEnumerator();
-                            rr1.Dispose();
-                            var shouldnotgethere = enumarator.Current;
-                        }
+                        IDictionaryEnumerator enumarator = rr1.GetEnumerator();
+                        rr1.Dispose();
+                        var shouldnotgethere = enumarator.Current;
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public static void Exception_Enumarator_Entry()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            IDictionaryEnumerator enumarator = rr1.GetEnumerator();
-                            rr1.Dispose();
-                            var shouldnotgethere = enumarator.Entry;
-                        }
+                        IDictionaryEnumerator enumarator = rr1.GetEnumerator();
+                        rr1.Dispose();
+                        var shouldnotgethere = enumarator.Entry;
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public static void Exception_Enumerator_Key()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            IDictionaryEnumerator enumarator = rr1.GetEnumerator();
-                            rr1.Dispose();
-                            var shouldnotgethere = enumarator.Key;
-                        }
+                        IDictionaryEnumerator enumarator = rr1.GetEnumerator();
+                        rr1.Dispose();
+                        var shouldnotgethere = enumarator.Key;
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public static void Exception_Enumerator_Reset()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            IDictionaryEnumerator enumarator = rr1.GetEnumerator();
-                            rr1.Dispose();
-                            enumarator.Reset();
-                        }
+                        IDictionaryEnumerator enumarator = rr1.GetEnumerator();
+                        rr1.Dispose();
+                        enumarator.Reset();
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public static void Exception_Enumerator_Value()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var ms2 = new MemoryStream())
                 {
-                    using (var ms2 = new MemoryStream())
+                    using (var rw = GenerateResourceStream(s_dict, ms2))
                     {
-                        using (var rw = GenerateResourceStream(s_dict, ms2))
-                        {
-                            ms2.Seek(0L, SeekOrigin.Begin);
-                            var rr1 = new ResourceReader(ms2);
+                        ms2.Seek(0L, SeekOrigin.Begin);
+                        var rr1 = new ResourceReader(ms2);
 
-                            IDictionaryEnumerator enumarator = rr1.GetEnumerator();
-                            rr1.Dispose();
-                            var shouldnotgethere = enumarator.Value;
-                        }
+                        IDictionaryEnumerator enumarator = rr1.GetEnumerator();
+                        rr1.Dispose();
+                        var shouldnotgethere = enumarator.Value;
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2224,16 +2210,14 @@ namespace System.Resources.ResourceWriterTests
                 using (var reader = new ResourceReader(ms2))
                 {
                     var s_found_list = new List<string>();
-                    Assert.Throws<FormatException>(
-                        () =>
+                    Assert.Throws<FormatException>(() =>
+                    {
+                        foreach (DictionaryEntry entry in reader)
                         {
-                            foreach (DictionaryEntry entry in reader)
-                            {
-                                string key = (string)entry.Key;
-                                s_found_list.Add(key);
-                            }
+                            string key = (string)entry.Key;
+                            s_found_list.Add(key);
                         }
-                    );
+                    });
                 }
             }
         }
@@ -2515,17 +2499,15 @@ namespace System.Resources.ResourceWriterTests
                 using (var reader = new ResourceReader(ms2))
                 {
                     var s_found_list = new List<DictionaryEntry>();
-                    Assert.Throws<BadImageFormatException>(
-                        () =>
-                        {
-                            var enume = reader.GetEnumerator();
+                    Assert.Throws<BadImageFormatException>(() =>
+                    {
+                        var enume = reader.GetEnumerator();
 
-                            while (enume.MoveNext())
-                            {
-                                s_found_list.Add(enume.Entry);
-                            }
+                        while (enume.MoveNext())
+                        {
+                            s_found_list.Add(enume.Entry);
                         }
-                    );
+                    });
                 }
             }
         }
@@ -2557,12 +2539,10 @@ namespace System.Resources.ResourceWriterTests
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {
-                Assert.Throws<BadImageFormatException>(
-                    () =>
-                    {
-                        using (var rw = new ResourceReader(ms2)) { }
-                    }
-                );
+                Assert.Throws<BadImageFormatException>(() =>
+                {
+                    using (var rw = new ResourceReader(ms2)) { }
+                });
             }
         }
 

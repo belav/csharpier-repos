@@ -28,9 +28,8 @@ namespace System.Net.WebSockets.Client.Tests
                 var ub = new UriBuilder(server);
                 ub.Query = PlatformDetection.IsBrowser ? "delay20sec" : "delay10sec";
 
-                var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => cws.ConnectAsync(ub.Uri, cts.Token)
-                );
+                var ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    cws.ConnectAsync(ub.Uri, cts.Token));
                 Assert.True(WebSocketState.Closed == cws.State, $"Actual {cws.State} when {ex}");
             }
         }
@@ -239,9 +238,8 @@ namespace System.Net.WebSockets.Client.Tests
                 cts.Cancel();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => receive);
 
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
-                    () => cws.ReceiveAsync(segment, CancellationToken.None)
-                );
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
+                    cws.ReceiveAsync(segment, CancellationToken.None));
                 Assert.Equal(
                     ResourceHelper.GetExceptionMessage(
                         "net_WebSockets_InvalidState",

@@ -151,13 +151,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    IOUtilities.PerformIO(
-                        () =>
-                        {
-                            var filePath = sfd.FileName;
-                            File.WriteAllText(filePath, editorconfig.ToString());
-                        }
-                    );
+                    IOUtilities.PerformIO(() =>
+                    {
+                        var filePath = sfd.FileName;
+                        File.WriteAllText(filePath, editorconfig.ToString());
+                    });
                 }
             }
         }

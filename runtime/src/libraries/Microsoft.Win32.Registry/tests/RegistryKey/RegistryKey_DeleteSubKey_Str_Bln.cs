@@ -28,9 +28,8 @@ namespace Microsoft.Win32.RegistryTests
             using (var rk = TestRegistryKey.CreateSubKey(name))
             {
                 rk.CreateSubKey(name);
-                Assert.Throws<InvalidOperationException>(
-                    () => TestRegistryKey.DeleteSubKey(name, false)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    TestRegistryKey.DeleteSubKey(name, false));
             }
 
             // Should throw because RegistryKey is readonly
@@ -40,13 +39,11 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw if RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.DeleteSubKey(name, false);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.DeleteSubKey(name, false);
+            });
         }
 
         [Fact]

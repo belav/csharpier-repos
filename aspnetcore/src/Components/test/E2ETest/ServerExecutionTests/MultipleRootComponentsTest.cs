@@ -50,17 +50,15 @@ public class MultipleComponentsTest
         BeginInteractivity();
         Browser.Exists(By.CssSelector("h3.interactive"));
 
-        Browser.True(
-            () =>
-            {
-                var logs = Browser.Manage().Logs.GetLog(LogType.Browser).ToArray();
-                var curatedLogs = logs.Where(l => l.Timestamp > LastLogTimeStamp);
+        Browser.True(() =>
+        {
+            var logs = Browser.Manage().Logs.GetLog(LogType.Browser).ToArray();
+            var curatedLogs = logs.Where(l => l.Timestamp > LastLogTimeStamp);
 
-                return curatedLogs.Count(
-                        e => e.Message.Contains("Starting up Blazor server-side application")
-                    ) == 1;
-            }
-        );
+            return curatedLogs.Count(
+                    e => e.Message.Contains("Starting up Blazor server-side application")
+                ) == 1;
+        });
     }
 
     [Fact]

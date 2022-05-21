@@ -77,9 +77,8 @@ namespace Wasm.Build.Tests
             Console.WriteLine(
                 $"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}"
             );
-            return Task.Run(
-                async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)
-            ).Result;
+            return Task.Run(async () =>
+                await ExecuteAsyncInternal(resolvedCommand, fullArgs)).Result;
         }
 
         protected virtual string GetFullArgs(params string[] args) => string.Join(" ", args);

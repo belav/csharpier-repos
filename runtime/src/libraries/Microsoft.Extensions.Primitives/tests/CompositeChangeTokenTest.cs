@@ -170,21 +170,17 @@ namespace Microsoft.Extensions.Primitives
             compositeChangeToken.RegisterChangeCallback(callback, null);
 
             // Act
-            var firstChange = Task.Run(
-                () =>
-                {
-                    event2.WaitOne(5000);
-                    cancellationTokenSource.Cancel();
-                }
-            );
-            var secondChange = Task.Run(
-                () =>
-                {
-                    event3.WaitOne(5000);
-                    cancellationTokenSource.Cancel();
-                    event1.Set();
-                }
-            );
+            var firstChange = Task.Run(() =>
+            {
+                event2.WaitOne(5000);
+                cancellationTokenSource.Cancel();
+            });
+            var secondChange = Task.Run(() =>
+            {
+                event3.WaitOne(5000);
+                cancellationTokenSource.Cancel();
+                event1.Set();
+            });
 
             event2.Set();
 

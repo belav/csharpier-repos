@@ -570,17 +570,15 @@ namespace System.Threading.Tests
             for (int i = 0; i < 1000; i++)
             {
                 threads.Add(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < 1000; j++)
                         {
-                            for (int j = 0; j < 1000; j++)
-                            {
-                                var cookie = asymmetricLock.Enter();
-                                count++;
-                                cookie.Exit();
-                            }
+                            var cookie = asymmetricLock.Enter();
+                            count++;
+                            cookie.Exit();
                         }
-                    )
+                    })
                 );
             }
             Task.WaitAll(threads.ToArray());

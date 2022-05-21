@@ -19,9 +19,8 @@ namespace System.SpanTests
                 span[new Index(span.Length - 2, fromEnd: true)]
             );
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () => "Hello".AsSpan()[new Index(0, fromEnd: true)]
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                "Hello".AsSpan()[new Index(0, fromEnd: true)]);
 
             Span<char> span1 = new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' });
             Assert.Equal('e', span1[new Index(1, fromEnd: false)]);
@@ -31,12 +30,10 @@ namespace System.SpanTests
                 span1[new Index(span.Length - 2, fromEnd: true)]
             );
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                    new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' })[
-                        new Index(0, fromEnd: true)
-                    ]
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' })[
+                    new Index(0, fromEnd: true)
+                ]);
         }
 
         [Fact]
@@ -48,14 +45,12 @@ namespace System.SpanTests
             ];
             Assert.True(span.Slice(1, 3) == sliced);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    ReadOnlySpan<char> s = "Hello".AsSpan()[
-                        new Range(new Index(1, fromEnd: true), new Index(1, fromEnd: false))
-                    ];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                ReadOnlySpan<char> s = "Hello".AsSpan()[
+                    new Range(new Index(1, fromEnd: true), new Index(1, fromEnd: false))
+                ];
+            });
 
             Span<char> span1 = new Span<char>(new char[] { 'H', 'e', 'l', 'l', 'o' });
             Span<char> sliced1 = span1[
@@ -63,14 +58,12 @@ namespace System.SpanTests
             ];
             Assert.True(span1.Slice(2, 2) == sliced1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Span<char> s = new Span<char>(new char[] { 'H', 'i' })[
-                        new Range(new Index(0, fromEnd: true), new Index(1, fromEnd: false))
-                    ];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<char> s = new Span<char>(new char[] { 'H', 'i' })[
+                    new Range(new Index(0, fromEnd: true), new Index(1, fromEnd: false))
+                ];
+            });
         }
 
         [Fact]

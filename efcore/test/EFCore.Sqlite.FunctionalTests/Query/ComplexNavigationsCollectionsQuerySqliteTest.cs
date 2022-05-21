@@ -19,9 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Include_inside_subquery(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Include_inside_subquery(async))
                 ).Message
             );
 
@@ -31,12 +30,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_after_different_filtered_include_different_level(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_after_different_filtered_include_different_level(
+                            async
+                        ))
                 ).Message
             );
 
@@ -46,9 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Filtered_include_outer_parameter_used_inside_filter(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_outer_parameter_used_inside_filter(async))
                 ).Message
             );
 
@@ -58,12 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_and_non_filtered_include_followed_by_then_include_on_same_navigation(
+                            async
+                        ))
                 ).Message
             );
 
@@ -73,12 +67,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_multiple_multi_level_includes_with_first_level_using_filter_include_on_one_of_the_chains_only(
+                            async
+                        ))
                 ).Message
             );
 
@@ -88,12 +80,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_same_filter_set_on_same_navigation_twice_followed_by_ThenIncludes(
+                            async
+                        ))
                 ).Message
             );
 
@@ -103,12 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_complex_three_level_with_middle_having_filter1(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_complex_three_level_with_middle_having_filter1(async))
                 ).Message
             );
 
@@ -118,12 +104,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_complex_three_level_with_middle_having_filter2(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_complex_three_level_with_middle_having_filter2(async))
                 ).Message
             );
 
@@ -133,10 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Complex_query_with_let_collection_projection_FirstOrDefault(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_with_let_collection_projection_FirstOrDefault(async))
                 ).Message
             );
 
@@ -144,9 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Take_Select_collection_Take(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Take_Select_collection_Take(async))
                 ).Message
             );
 
@@ -154,9 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Skip_Take_Select_collection_Skip_Take(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Skip_Take_Select_collection_Skip_Take(async))
                 ).Message
             );
 
@@ -166,9 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Filtered_include_Take_with_another_Take_on_top_level(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_Take_with_another_Take_on_top_level(async))
                 ).Message
             );
 
@@ -178,12 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_Skip_Take_with_another_Skip_Take_on_top_level(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_Skip_Take_with_another_Skip_Take_on_top_level(async))
                 ).Message
             );
 
@@ -191,9 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Skip_Take_Distinct_on_grouping_element(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Skip_Take_Distinct_on_grouping_element(async))
                 ).Message
             );
 
@@ -203,9 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Skip_Take_on_grouping_element_inside_collection_projection(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Skip_Take_on_grouping_element_inside_collection_projection(async))
                 ).Message
             );
 
@@ -215,9 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Skip_Take_on_grouping_element_with_collection_include(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Skip_Take_on_grouping_element_with_collection_include(async))
                 ).Message
             );
 
@@ -227,9 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Skip_Take_on_grouping_element_with_reference_include(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Skip_Take_on_grouping_element_with_reference_include(async))
                 ).Message
             );
 
@@ -239,12 +208,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_FirstOrDefault_on_top_level(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_FirstOrDefault_on_top_level(
+                            async
+                        ))
                 ).Message
             );
 
@@ -254,12 +221,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_unordered_Take_on_top_level(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Filtered_include_with_Take_without_order_by_followed_by_ThenInclude_and_unordered_Take_on_top_level(
+                            async
+                        ))
                 ).Message
             );
 
@@ -269,12 +234,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.SelectMany_with_predicate_and_DefaultIfEmpty_projecting_root_collection_element_and_another_collection(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_with_predicate_and_DefaultIfEmpty_projecting_root_collection_element_and_another_collection(
+                            async
+                        ))
                 ).Message
             );
 
@@ -282,9 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Complex_query_issue_21665(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Complex_query_issue_21665(async))
                 ).Message
             );
     }

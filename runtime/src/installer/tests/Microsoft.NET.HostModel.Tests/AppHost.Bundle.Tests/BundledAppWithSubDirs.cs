@@ -179,9 +179,8 @@ namespace AppHost.Bundle.Tests
             // compression must be off when targeting 5.0
             var options = BundleOptions.EnableCompression;
 
-            Assert.Throws<ArgumentException>(
-                () => BundleHelper.BundleApp(fixture, options, new Version(5, 0))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                BundleHelper.BundleApp(fixture, options, new Version(5, 0)));
         }
 
         [Fact]

@@ -306,9 +306,8 @@ namespace System.Formats.Cbor.Tests
         {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthTextString();
-            Assert.Throws<InvalidOperationException>(
-                () => writer.WriteEncodedValue(new byte[] { 0x01 })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01 }));
         }
 
         [Fact]
@@ -316,9 +315,8 @@ namespace System.Formats.Cbor.Tests
         {
             var writer = new CborWriter();
             writer.WriteInt64(0);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.WriteEncodedValue(new byte[] { 0x01 })
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01 }));
         }
 
         [Theory]
@@ -350,9 +348,8 @@ namespace System.Formats.Cbor.Tests
         public static void WriteEncodedValue_ValidPayloadWithTrailingBytes_ShouldThrowArgumentException()
         {
             var writer = new CborWriter();
-            Assert.Throws<ArgumentException>(
-                () => writer.WriteEncodedValue(new byte[] { 0x01, 0x01 })
-            );
+            Assert.Throws<ArgumentException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01, 0x01 }));
         }
 
         [Theory]

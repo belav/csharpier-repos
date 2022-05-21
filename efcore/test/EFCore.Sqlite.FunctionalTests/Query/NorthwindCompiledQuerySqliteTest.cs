@@ -25,9 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     "DbSet<Customer>()    .Where(c => c.CustomerID == (string)(__parameters[0]))"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => base.MakeBinary_does_not_throw_for_unsupported_operator()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        base.MakeBinary_does_not_throw_for_unsupported_operator())
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -47,9 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => query(context, new[] { "ALFKI" }).First().CustomerID
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            query(context, new[] { "ALFKI" }).First().CustomerID)
                         .Message.Replace("\r", "")
                         .Replace("\n", "")
                 );
@@ -62,9 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => query(context, new[] { "ANATR" }).First().CustomerID
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            query(context, new[] { "ANATR" }).First().CustomerID)
                         .Message.Replace("\r", "")
                         .Replace("\n", "")
                 );
@@ -85,9 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
                     ),
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => Enumerate(query(context, new[] { "ALFKI" }))
-                        )
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            Enumerate(query(context, new[] { "ALFKI" })))
                     ).Message
                         .Replace("\r", "")
                         .Replace("\n", "")
@@ -101,9 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
                     ),
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => Enumerate(query(context, new[] { "ANATR" }))
-                        )
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            Enumerate(query(context, new[] { "ANATR" })))
                     ).Message
                         .Replace("\r", "")
                         .Replace("\n", "")

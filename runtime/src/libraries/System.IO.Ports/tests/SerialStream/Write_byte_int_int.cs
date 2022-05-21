@@ -257,9 +257,8 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com1.BreakState = true;
 
-                Assert.Throws<InvalidOperationException>(
-                    () => com1.BaseStream.Write(new byte[8], 0, 8)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    com1.BaseStream.Write(new byte[8], 0, 8));
             }
         }
 
@@ -305,13 +304,11 @@ namespace System.IO.Ports.Tests
                     0x64
                 };
 
-                Task writingTask = Task.Run(
-                    () =>
-                    {
-                        com1.BaseStream.Write(msg, 0, msg.Length);
-                        com1.BaseStream.Flush();
-                    }
-                );
+                Task writingTask = Task.Run(() =>
+                {
+                    com1.BaseStream.Write(msg, 0, msg.Length);
+                    com1.BaseStream.Flush();
+                });
 
                 byte[] bytes = new byte[msg.Length];
                 int totalBytesRead = 0;

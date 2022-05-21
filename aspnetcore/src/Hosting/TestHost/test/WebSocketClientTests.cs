@@ -147,9 +147,8 @@ public class WebSocketClientTests
                                 var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
                                 Assert.NotNull(upgradeFeature);
                                 Assert.False(upgradeFeature.IsUpgradableRequest);
-                                await Assert.ThrowsAsync<NotSupportedException>(
-                                    () => upgradeFeature.UpgradeAsync()
-                                );
+                                await Assert.ThrowsAsync<NotSupportedException>(() =>
+                                    upgradeFeature.UpgradeAsync());
 
                                 var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
                                 Assert.NotNull(webSocketFeature);

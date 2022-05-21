@@ -22,12 +22,10 @@ namespace System.Net.Http.Tests
         {
             ByteArrayHeaderParser parser = ByteArrayHeaderParser.Parser;
             int index = 0;
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue(null, null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue(null, null, ref index);
+            });
         }
 
         [Fact]

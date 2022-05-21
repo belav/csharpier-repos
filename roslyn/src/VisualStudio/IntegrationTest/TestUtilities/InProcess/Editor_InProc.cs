@@ -467,24 +467,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public ClassifiedToken[] GetLightbulbPreviewClassifications(string menuText)
         {
-            return ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            return ThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var view = GetActiveTextView();
-                    var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                    var classifierAggregatorService =
-                        GetComponentModelService<IViewClassifierAggregatorService>();
-                    return await GetLightbulbPreviewClassificationsAsync(
-                            menuText,
-                            broker,
-                            view,
-                            classifierAggregatorService
-                        )
-                        .ConfigureAwait(false);
-                }
-            );
+                var view = GetActiveTextView();
+                var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                var classifierAggregatorService =
+                    GetComponentModelService<IViewClassifierAggregatorService>();
+                return await GetLightbulbPreviewClassificationsAsync(
+                        menuText,
+                        broker,
+                        view,
+                        classifierAggregatorService
+                    )
+                    .ConfigureAwait(false);
+            });
         }
 
         private async Task<ClassifiedToken[]> GetLightbulbPreviewClassificationsAsync(

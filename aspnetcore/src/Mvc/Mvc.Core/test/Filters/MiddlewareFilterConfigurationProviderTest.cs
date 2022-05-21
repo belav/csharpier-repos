@@ -23,9 +23,8 @@ public class MiddlewareFilterConfigurationProviderTest
         var provider = new MiddlewareFilterConfigurationProvider();
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => provider.CreateConfigureDelegate(configurationType)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            provider.CreateConfigureDelegate(configurationType));
 
         // Assert
         Assert.Equal(
@@ -79,12 +78,10 @@ public class MiddlewareFilterConfigurationProviderTest
             $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                provider.CreateConfigureDelegate(type);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            provider.CreateConfigureDelegate(type);
+        });
         Assert.Equal(expected, exception.Message);
     }
 
@@ -98,12 +95,10 @@ public class MiddlewareFilterConfigurationProviderTest
             $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                provider.CreateConfigureDelegate(type);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            provider.CreateConfigureDelegate(type);
+        });
         Assert.Equal(expected, exception.Message);
     }
 

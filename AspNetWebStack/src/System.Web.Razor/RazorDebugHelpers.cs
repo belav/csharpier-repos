@@ -66,38 +66,31 @@ namespace System.Web.Razor
                 return;
             }
 
-            RunTask(
-                () =>
+            RunTask(() =>
+            {
+                string extension = Path.GetExtension(sourceFile);
+                RazorCodeLanguage language = RazorCodeLanguage.GetLanguageByExtension(extension);
+                CodeDomProvider provider = CodeDomProvider.CreateProvider(language.LanguageName);
+
+                using (var writer = new StringWriter())
                 {
-                    string extension = Path.GetExtension(sourceFile);
-                    RazorCodeLanguage language = RazorCodeLanguage.GetLanguageByExtension(
-                        extension
-                    );
-                    CodeDomProvider provider = CodeDomProvider.CreateProvider(
-                        language.LanguageName
+                    // Trim the html part of cshtml or vbhtml
+                    string outputExtension = extension.Substring(0, 3);
+                    string outputFileName = Normalize(sourceFile) + "_generated" + outputExtension;
+                    string outputPath = Path.Combine(
+                        Path.GetDirectoryName(sourceFile),
+                        outputFileName
                     );
 
-                    using (var writer = new StringWriter())
-                    {
-                        // Trim the html part of cshtml or vbhtml
-                        string outputExtension = extension.Substring(0, 3);
-                        string outputFileName =
-                            Normalize(sourceFile) + "_generated" + outputExtension;
-                        string outputPath = Path.Combine(
-                            Path.GetDirectoryName(sourceFile),
-                            outputFileName
-                        );
-
-                        // REVIEW: Do these options need to be tweaked?
-                        provider.GenerateCodeFromCompileUnit(
-                            codeCompileUnit,
-                            writer,
-                            new CodeGeneratorOptions()
-                        );
-                        File.WriteAllText(outputPath, writer.ToString());
-                    }
+                    // REVIEW: Do these options need to be tweaked?
+                    provider.GenerateCodeFromCompileUnit(
+                        codeCompileUnit,
+                        writer,
+                        new CodeGeneratorOptions()
+                    );
+                    File.WriteAllText(outputPath, writer.ToString());
                 }
-            );
+            });
         }
 
         internal static void WriteDebugTree(
@@ -114,57 +107,48 @@ namespace System.Web.Razor
                 return;
             }
 
-            RunTask(
-                () =>
-                {
-                    string outputFileName = Normalize(sourceFile) + "_tree";
-                    string outputPath = Path.Combine(
-                        Path.GetDirectoryName(sourceFile),
-                        outputFileName
-                    );
+            RunTask(() =>
+            {
+                string outputFileName = Normalize(sourceFile) + "_tree";
+                string outputPath = Path.Combine(Path.GetDirectoryName(sourceFile), outputFileName);
 
-                    var treeBuilder = new StringBuilder();
-                    WriteTree(document, treeBuilder);
-                    treeBuilder.AppendLine();
+                var treeBuilder = new StringBuilder();
+                WriteTree(document, treeBuilder);
+                treeBuilder.AppendLine();
+                treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Last Change: {0}", change);
+                treeBuilder.AppendLine();
+                treeBuilder.AppendFormat(
+                    CultureInfo.CurrentCulture,
+                    "Normalized To: {0}",
+                    change.Normalize()
+                );
+                treeBuilder.AppendLine();
+                treeBuilder.AppendFormat(
+                    CultureInfo.CurrentCulture,
+                    "Partial Parse Result: {0}",
+                    result
+                );
+                treeBuilder.AppendLine();
+                if (result.HasFlag(PartialParseResult.Rejected))
+                {
                     treeBuilder.AppendFormat(
                         CultureInfo.CurrentCulture,
-                        "Last Change: {0}",
-                        change
+                        "Tree Structure Changed: {0}",
+                        treeStructureChanged
                     );
                     treeBuilder.AppendLine();
-                    treeBuilder.AppendFormat(
-                        CultureInfo.CurrentCulture,
-                        "Normalized To: {0}",
-                        change.Normalize()
-                    );
-                    treeBuilder.AppendLine();
-                    treeBuilder.AppendFormat(
-                        CultureInfo.CurrentCulture,
-                        "Partial Parse Result: {0}",
-                        result
-                    );
-                    treeBuilder.AppendLine();
-                    if (result.HasFlag(PartialParseResult.Rejected))
-                    {
-                        treeBuilder.AppendFormat(
-                            CultureInfo.CurrentCulture,
-                            "Tree Structure Changed: {0}",
-                            treeStructureChanged
-                        );
-                        treeBuilder.AppendLine();
-                    }
-                    if (result.HasFlag(PartialParseResult.AutoCompleteBlock))
-                    {
-                        treeBuilder.AppendFormat(
-                            CultureInfo.CurrentCulture,
-                            "Auto Complete Insert String: \"{0}\"",
-                            parser.GetAutoCompleteString()
-                        );
-                        treeBuilder.AppendLine();
-                    }
-                    File.WriteAllText(outputPath, treeBuilder.ToString());
                 }
-            );
+                if (result.HasFlag(PartialParseResult.AutoCompleteBlock))
+                {
+                    treeBuilder.AppendFormat(
+                        CultureInfo.CurrentCulture,
+                        "Auto Complete Insert String: \"{0}\"",
+                        parser.GetAutoCompleteString()
+                    );
+                    treeBuilder.AppendLine();
+                }
+                File.WriteAllText(outputPath, treeBuilder.ToString());
+            });
         }
 
         private static void WriteTree(SyntaxTreeNode node, StringBuilder treeBuilder, int depth = 0)
@@ -210,19 +194,17 @@ namespace System.Web.Razor
         )]
         private static void RunTask(Action action)
         {
-            Task.Factory.StartNew(
-                () =>
+            Task.Factory.StartNew(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        action();
-                    }
-                    catch
-                    {
-                        // Catch all errors since this is just a debug helper
-                    }
+                    action();
                 }
-            );
+                catch
+                {
+                    // Catch all errors since this is just a debug helper
+                }
+            });
         }
 
         private static void WriteIndent(StringBuilder sb, int depth)

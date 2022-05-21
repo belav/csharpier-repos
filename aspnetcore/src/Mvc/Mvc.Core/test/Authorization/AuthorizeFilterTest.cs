@@ -70,9 +70,8 @@ public class AuthorizeFilterTest
             + "IAuthorizationPolicyProvider.";
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => authorizeFilter.OnAuthorizationAsync(authorizationContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            authorizeFilter.OnAuthorizationAsync(authorizationContext));
         Assert.Equal(expected, ex.Message);
     }
 
@@ -88,9 +87,8 @@ public class AuthorizeFilterTest
             + "IAuthorizationPolicyProvider.";
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => authorizeFilter.OnAuthorizationAsync(authorizationContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            authorizeFilter.OnAuthorizationAsync(authorizationContext));
         Assert.Equal(expected, ex.Message);
     }
 

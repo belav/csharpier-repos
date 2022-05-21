@@ -144,15 +144,13 @@ namespace System.Tests
         public static void ExpensiveFinalizerDoesNotBlockShutdown()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        for (int i = 0; i < 100000; i++)
-                            GC.KeepAlive(new ObjectWithExpensiveFinalizer());
-                        GC.Collect();
-                        Thread.Sleep(100); // Give the finalizer thread a chance to start running
-                    }
-                )
+                .Invoke(() =>
+                {
+                    for (int i = 0; i < 100000; i++)
+                        GC.KeepAlive(new ObjectWithExpensiveFinalizer());
+                    GC.Collect();
+                    Thread.Sleep(100); // Give the finalizer thread a chance to start running
+                })
                 .Dispose();
         }
 
@@ -549,28 +547,21 @@ namespace System.Tests
         [Fact]
         public static void GCNotificationNegTests()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(-1, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(100, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(-1, 100)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(-1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(100, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(-1, 100));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(10, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(-1, 10)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(100, 10)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GC.RegisterForFullGCNotification(10, 100)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(10, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(-1, 10));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(100, 10));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GC.RegisterForFullGCNotification(10, 100));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCApproach(-2));
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCComplete(-2));
@@ -664,9 +655,8 @@ namespace System.Tests
                     () =>
                     {
                         Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
-                        Assert.Throws<InvalidOperationException>(
-                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget)
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget));
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -686,9 +676,8 @@ namespace System.Tests
                     () =>
                     {
                         Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
-                        Assert.Throws<InvalidOperationException>(
-                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget, true)
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -710,9 +699,8 @@ namespace System.Tests
                         Assert.True(
                             GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
                         );
-                        Assert.Throws<InvalidOperationException>(
-                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget));
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -734,14 +722,8 @@ namespace System.Tests
                         Assert.True(
                             GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true)
                         );
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                GC.TryStartNoGCRegion(
-                                    NoGCRequestedBudget,
-                                    NoGCRequestedBudget,
-                                    true
-                                )
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true));
 
                         Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
                     },
@@ -767,9 +749,8 @@ namespace System.Tests
                         // In addition to this, the Assert.Throws xunit combinator tends to also allocate a lot.
                         Assert.True(GC.TryStartNoGCRegion(4000 * 1024, true));
                         Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                        Assert.Throws<InvalidOperationException>(
-                            () => GCSettings.LatencyMode = GCLatencyMode.LowLatency
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            GCSettings.LatencyMode = GCLatencyMode.LowLatency);
 
                         GC.EndNoGCRegion();
                     },
@@ -994,95 +975,88 @@ namespace System.Tests
         public static void GetGCMemoryInfo()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    // Allows to update the value returned by GC.GetGCMemoryInfo
+                    GC.Collect();
+
+                    GCMemoryInfo memoryInfo1 = GC.GetGCMemoryInfo();
+
+                    long maxVirtualSpaceSize = (IntPtr.Size == 4) ? uint.MaxValue : long.MaxValue;
+
+                    Assert.InRange(
+                        memoryInfo1.HighMemoryLoadThresholdBytes,
+                        1,
+                        maxVirtualSpaceSize
+                    );
+                    Assert.InRange(memoryInfo1.MemoryLoadBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.TotalAvailableMemoryBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.HeapSizeBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.FragmentedBytes, 0, maxVirtualSpaceSize);
+
+                    GCHandle[] gch = new GCHandle[64 * 1024];
+                    for (int i = 0; i < gch.Length * 2; ++i)
                     {
-                        // Allows to update the value returned by GC.GetGCMemoryInfo
-                        GC.Collect();
-
-                        GCMemoryInfo memoryInfo1 = GC.GetGCMemoryInfo();
-
-                        long maxVirtualSpaceSize =
-                            (IntPtr.Size == 4) ? uint.MaxValue : long.MaxValue;
-
-                        Assert.InRange(
-                            memoryInfo1.HighMemoryLoadThresholdBytes,
-                            1,
-                            maxVirtualSpaceSize
-                        );
-                        Assert.InRange(memoryInfo1.MemoryLoadBytes, 1, maxVirtualSpaceSize);
-                        Assert.InRange(
-                            memoryInfo1.TotalAvailableMemoryBytes,
-                            1,
-                            maxVirtualSpaceSize
-                        );
-                        Assert.InRange(memoryInfo1.HeapSizeBytes, 1, maxVirtualSpaceSize);
-                        Assert.InRange(memoryInfo1.FragmentedBytes, 0, maxVirtualSpaceSize);
-
-                        GCHandle[] gch = new GCHandle[64 * 1024];
-                        for (int i = 0; i < gch.Length * 2; ++i)
+                        byte[] arr = new byte[64];
+                        if (i % 2 == 0)
                         {
-                            byte[] arr = new byte[64];
-                            if (i % 2 == 0)
-                            {
-                                gch[i / 2] = GCHandle.Alloc(arr, GCHandleType.Pinned);
-                            }
-                        }
-
-                        // Allows to update the value returned by GC.GetGCMemoryInfo
-                        GC.Collect();
-
-                        GCMemoryInfo memoryInfo2 = GC.GetGCMemoryInfo();
-
-                        string scenario = null;
-                        try
-                        {
-                            scenario = nameof(memoryInfo2.HighMemoryLoadThresholdBytes);
-                            Assert.Equal(
-                                memoryInfo2.HighMemoryLoadThresholdBytes,
-                                memoryInfo1.HighMemoryLoadThresholdBytes
-                            );
-
-                            // Even though we have allocated, the overall load may decrease or increase depending what other processes are doing.
-                            // It cannot go above total available though.
-                            scenario = nameof(memoryInfo2.MemoryLoadBytes);
-                            Assert.InRange(
-                                memoryInfo2.MemoryLoadBytes,
-                                1,
-                                memoryInfo1.TotalAvailableMemoryBytes
-                            );
-
-                            scenario = nameof(memoryInfo2.TotalAvailableMemoryBytes);
-                            Assert.Equal(
-                                memoryInfo2.TotalAvailableMemoryBytes,
-                                memoryInfo1.TotalAvailableMemoryBytes
-                            );
-
-                            scenario = nameof(memoryInfo2.HeapSizeBytes);
-                            Assert.InRange(
-                                memoryInfo2.HeapSizeBytes,
-                                memoryInfo1.HeapSizeBytes + 1,
-                                maxVirtualSpaceSize
-                            );
-
-                            scenario = nameof(memoryInfo2.FragmentedBytes);
-                            Assert.InRange(
-                                memoryInfo2.FragmentedBytes,
-                                memoryInfo1.FragmentedBytes + 1,
-                                maxVirtualSpaceSize
-                            );
-
-                            scenario = null;
-                        }
-                        finally
-                        {
-                            if (scenario != null)
-                            {
-                                System.Console.WriteLine("FAILED: " + scenario);
-                            }
+                            gch[i / 2] = GCHandle.Alloc(arr, GCHandleType.Pinned);
                         }
                     }
-                )
+
+                    // Allows to update the value returned by GC.GetGCMemoryInfo
+                    GC.Collect();
+
+                    GCMemoryInfo memoryInfo2 = GC.GetGCMemoryInfo();
+
+                    string scenario = null;
+                    try
+                    {
+                        scenario = nameof(memoryInfo2.HighMemoryLoadThresholdBytes);
+                        Assert.Equal(
+                            memoryInfo2.HighMemoryLoadThresholdBytes,
+                            memoryInfo1.HighMemoryLoadThresholdBytes
+                        );
+
+                        // Even though we have allocated, the overall load may decrease or increase depending what other processes are doing.
+                        // It cannot go above total available though.
+                        scenario = nameof(memoryInfo2.MemoryLoadBytes);
+                        Assert.InRange(
+                            memoryInfo2.MemoryLoadBytes,
+                            1,
+                            memoryInfo1.TotalAvailableMemoryBytes
+                        );
+
+                        scenario = nameof(memoryInfo2.TotalAvailableMemoryBytes);
+                        Assert.Equal(
+                            memoryInfo2.TotalAvailableMemoryBytes,
+                            memoryInfo1.TotalAvailableMemoryBytes
+                        );
+
+                        scenario = nameof(memoryInfo2.HeapSizeBytes);
+                        Assert.InRange(
+                            memoryInfo2.HeapSizeBytes,
+                            memoryInfo1.HeapSizeBytes + 1,
+                            maxVirtualSpaceSize
+                        );
+
+                        scenario = nameof(memoryInfo2.FragmentedBytes);
+                        Assert.InRange(
+                            memoryInfo2.FragmentedBytes,
+                            memoryInfo1.FragmentedBytes + 1,
+                            maxVirtualSpaceSize
+                        );
+
+                        scenario = null;
+                    }
+                    finally
+                    {
+                        if (scenario != null)
+                        {
+                            System.Console.WriteLine("FAILED: " + scenario);
+                        }
+                    }
+                })
                 .Dispose();
         }
 
@@ -1263,12 +1237,10 @@ namespace System.Tests
         {
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(-1));
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(negValue));
-            Assert.Throws<OverflowException>(
-                () => GC.AllocateUninitializedArray<byte>(-1, pinned: true)
-            );
-            Assert.Throws<OverflowException>(
-                () => GC.AllocateUninitializedArray<byte>(negValue, pinned: true)
-            );
+            Assert.Throws<OverflowException>(() =>
+                GC.AllocateUninitializedArray<byte>(-1, pinned: true));
+            Assert.Throws<OverflowException>(() =>
+                GC.AllocateUninitializedArray<byte>(negValue, pinned: true));
         }
 
         [ConditionalFact(
@@ -1277,21 +1249,18 @@ namespace System.Tests
         )]
         private static void AllocateArrayTooLarge()
         {
-            Assert.Throws<OutOfMemoryException>(
-                () => GC.AllocateUninitializedArray<double>(int.MaxValue)
-            );
-            Assert.Throws<OutOfMemoryException>(
-                () => GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true)
-            );
+            Assert.Throws<OutOfMemoryException>(() =>
+                GC.AllocateUninitializedArray<double>(int.MaxValue));
+            Assert.Throws<OutOfMemoryException>(() =>
+                GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true));
         }
 
         [Fact]
         private static void AllocateArrayRefType()
         {
             GC.AllocateUninitializedArray<string>(100);
-            Assert.Throws<ArgumentException>(
-                () => GC.AllocateUninitializedArray<string>(100, pinned: true)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                GC.AllocateUninitializedArray<string>(100, pinned: true));
         }
 
         [Fact]

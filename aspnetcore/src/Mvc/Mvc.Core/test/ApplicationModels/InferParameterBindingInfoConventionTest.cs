@@ -52,9 +52,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action));
         Assert.Equal(expected, ex.Message);
     }
 
@@ -75,9 +74,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action));
         Assert.Equal(expected, ex.Message);
     }
 
@@ -98,9 +96,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action));
         Assert.Equal(expected, ex.Message);
     }
 

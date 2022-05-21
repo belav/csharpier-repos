@@ -412,9 +412,8 @@ namespace System.IO.Pipelines.Tests
                 Assert.Equal(3, pool.CurrentlyRentedBlocks);
                 Assert.Equal(0, pool.DisposedBlocks);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await writer.FlushAsync()
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await writer.FlushAsync());
 
                 Assert.Equal(2, pool.CurrentlyRentedBlocks);
                 Assert.Equal(1, pool.DisposedBlocks);
@@ -516,12 +515,10 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public void InvalidMinimumBufferSize_ThrowsArgException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeWriterOptions(minimumBufferSize: 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StreamPipeWriterOptions(minimumBufferSize: -2)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeWriterOptions(minimumBufferSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeWriterOptions(minimumBufferSize: -2));
         }
 
         [Fact]
@@ -631,9 +628,8 @@ namespace System.IO.Pipelines.Tests
         {
             PipeWriter writer = PipeWriter.Create(new ThrowsOperationCanceledExceptionStream());
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () => await writer.WriteAsync(new byte[1])
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                await writer.WriteAsync(new byte[1]));
         }
 
         [Fact]

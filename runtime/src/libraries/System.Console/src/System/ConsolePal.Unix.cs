@@ -1144,9 +1144,8 @@ namespace System
                 get { return s_instance.Value; }
             }
             private static readonly Lazy<TerminalFormatStrings> s_instance =
-                new Lazy<TerminalFormatStrings>(
-                    () => new TerminalFormatStrings(TermInfo.Database.ReadActiveDatabase())
-                );
+                new Lazy<TerminalFormatStrings>(() =>
+                    new TerminalFormatStrings(TermInfo.Database.ReadActiveDatabase()));
 
             /// <summary>The format string to use to change the foreground color.</summary>
             public readonly string? Foreground;

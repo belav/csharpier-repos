@@ -34,40 +34,33 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public unsafe void FromMetadataImage_BadArgs()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReaderProvider.FromMetadataImage(null, 10)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReaderProvider.FromMetadataImage(null, 10));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* p = new byte[] { 0 })
-                        MetadataReaderProvider.FromMetadataImage(p, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* p = new byte[] { 0 })
+                    MetadataReaderProvider.FromMetadataImage(p, -1);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReaderProvider.FromMetadataImage(default(ImmutableArray<byte>))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReaderProvider.FromMetadataImage(default(ImmutableArray<byte>)));
         }
 
         [Fact]
         public void FromMetadataStream1()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => MetadataReaderProvider.FromMetadataStream(null, MetadataStreamOptions.Default)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                MetadataReaderProvider.FromMetadataStream(null, MetadataStreamOptions.Default));
 
             var invalid = new MemoryStream(new byte[] { 1, 2, 3, 4 });
 
             // the stream should not be disposed if the arguments are bad
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    MetadataReaderProvider.FromMetadataStream(
-                        invalid,
-                        (MetadataStreamOptions)int.MaxValue
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                MetadataReaderProvider.FromMetadataStream(
+                    invalid,
+                    (MetadataStreamOptions)int.MaxValue
+                ));
             Assert.True(invalid.CanRead);
 
             // prefetching metadata doesn't create a reader yet, so no exception is thrown:
@@ -174,10 +167,8 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(MetadataReaderOptions.ApplyWindowsRuntimeProjections, reader5.Options);
 
             provider.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    provider.GetMetadataReader(MetadataReaderOptions.ApplyWindowsRuntimeProjections)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                provider.GetMetadataReader(MetadataReaderOptions.ApplyWindowsRuntimeProjections));
             Assert.Throws<ObjectDisposedException>(() => provider.GetMetadataReader());
         }
 

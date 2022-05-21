@@ -49,67 +49,65 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                         CommandOptionType.NoValue
                     );
 
-                    cmd.OnExecute(
-                        async () =>
+                    cmd.OnExecute(async () =>
+                    {
+                        if (!targetUrlOption.HasValue())
                         {
-                            if (!targetUrlOption.HasValue())
-                            {
-                                return MissingRequiredArg(targetUrlOption);
-                            }
-
-                            var numberOfWorkers = Defaults.NumberOfWorkers;
-                            var numberOfConnections = Defaults.NumberOfConnections;
-                            var sendDurationInSeconds = Defaults.SendDurationInSeconds;
-                            var transportType = Defaults.TransportType;
-
-                            if (
-                                numberOfWorkersOption.HasValue()
-                                && !int.TryParse(numberOfWorkersOption.Value(), out numberOfWorkers)
-                            )
-                            {
-                                return MissingRequiredArg(numberOfWorkersOption);
-                            }
-
-                            if (
-                                numberOfConnectionsOption.HasValue()
-                                && !int.TryParse(
-                                    numberOfConnectionsOption.Value(),
-                                    out numberOfConnections
-                                )
-                            )
-                            {
-                                return InvalidArg(numberOfConnectionsOption);
-                            }
-
-                            if (
-                                sendDurationInSecondsOption.HasValue()
-                                && !int.TryParse(
-                                    sendDurationInSecondsOption.Value(),
-                                    out sendDurationInSeconds
-                                )
-                            )
-                            {
-                                return InvalidArg(sendDurationInSecondsOption);
-                            }
-
-                            if (
-                                transportTypeOption.HasValue()
-                                && !Enum.TryParse(transportTypeOption.Value(), out transportType)
-                            )
-                            {
-                                return InvalidArg(transportTypeOption);
-                            }
-
-                            return await Execute(
-                                targetUrlOption.Value(),
-                                numberOfWorkers,
-                                numberOfConnections,
-                                sendDurationInSeconds,
-                                transportType,
-                                workerWaitForDebuggerOption.HasValue()
-                            );
+                            return MissingRequiredArg(targetUrlOption);
                         }
-                    );
+
+                        var numberOfWorkers = Defaults.NumberOfWorkers;
+                        var numberOfConnections = Defaults.NumberOfConnections;
+                        var sendDurationInSeconds = Defaults.SendDurationInSeconds;
+                        var transportType = Defaults.TransportType;
+
+                        if (
+                            numberOfWorkersOption.HasValue()
+                            && !int.TryParse(numberOfWorkersOption.Value(), out numberOfWorkers)
+                        )
+                        {
+                            return MissingRequiredArg(numberOfWorkersOption);
+                        }
+
+                        if (
+                            numberOfConnectionsOption.HasValue()
+                            && !int.TryParse(
+                                numberOfConnectionsOption.Value(),
+                                out numberOfConnections
+                            )
+                        )
+                        {
+                            return InvalidArg(numberOfConnectionsOption);
+                        }
+
+                        if (
+                            sendDurationInSecondsOption.HasValue()
+                            && !int.TryParse(
+                                sendDurationInSecondsOption.Value(),
+                                out sendDurationInSeconds
+                            )
+                        )
+                        {
+                            return InvalidArg(sendDurationInSecondsOption);
+                        }
+
+                        if (
+                            transportTypeOption.HasValue()
+                            && !Enum.TryParse(transportTypeOption.Value(), out transportType)
+                        )
+                        {
+                            return InvalidArg(transportTypeOption);
+                        }
+
+                        return await Execute(
+                            targetUrlOption.Value(),
+                            numberOfWorkers,
+                            numberOfConnections,
+                            sendDurationInSeconds,
+                            transportType,
+                            workerWaitForDebuggerOption.HasValue()
+                        );
+                    });
                 }
             );
         }

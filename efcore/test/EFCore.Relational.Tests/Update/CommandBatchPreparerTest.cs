@@ -436,13 +436,11 @@ namespace Microsoft.EntityFrameworkCore.Update
             Assert.Equal(
                 CoreStrings.TempValue(nameof(FakeEntity.Value), nameof(FakeEntity)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entry.SetTemporaryValue(
-                                entry.EntityType.FindProperty(nameof(FakeEntity.Value)),
-                                "Test"
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entry.SetTemporaryValue(
+                            entry.EntityType.FindProperty(nameof(FakeEntity.Value)),
+                            "Test"
+                        ))
                     .Message
             );
         }
@@ -483,15 +481,13 @@ ForeignKey { 'RelatedId' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabl
                     ListLoggerFactory.NormalizeLineEndings(expectedCycle)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            CreateCommandBatchPreparer(
-                                    updateAdapter: modelData,
-                                    sensitiveLogging: sensitiveLogging
-                                )
-                                .BatchCommands(new[] { fakeEntry, relatedFakeEntry }, modelData)
-                                .ToArray()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreateCommandBatchPreparer(
+                                updateAdapter: modelData,
+                                sensitiveLogging: sensitiveLogging
+                            )
+                            .BatchCommands(new[] { fakeEntry, relatedFakeEntry }, modelData)
+                            .ToArray())
                     .Message
             );
         }
@@ -548,18 +544,16 @@ Index { 'UniqueValue' } FakeEntity [Added]" + CoreStrings.SensitiveDataDisabled;
                     ListLoggerFactory.NormalizeLineEndings(expectedCycle)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            CreateCommandBatchPreparer(
-                                    updateAdapter: modelData,
-                                    sensitiveLogging: sensitiveLogging
-                                )
-                                .BatchCommands(
-                                    new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
-                                    modelData
-                                )
-                                .ToArray()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreateCommandBatchPreparer(
+                                updateAdapter: modelData,
+                                sensitiveLogging: sensitiveLogging
+                            )
+                            .BatchCommands(
+                                new[] { fakeEntry, relatedFakeEntry, fakeEntry2 },
+                                modelData
+                            )
+                            .ToArray())
                     .Message
             );
         }
@@ -603,19 +597,17 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                     ListLoggerFactory.NormalizeLineEndings(expectedCycle)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            CreateCommandBatchPreparer(
-                                    updateAdapter: modelData,
-                                    sensitiveLogging: sensitiveLogging
-                                )
-                                .BatchCommands(
-                                    // Order is important for this test. Entry which is not part of cycle but tail should come first.
-                                    new[] { anotherFakeEntry, fakeEntry, relatedFakeEntry },
-                                    modelData
-                                )
-                                .ToArray()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreateCommandBatchPreparer(
+                                updateAdapter: modelData,
+                                sensitiveLogging: sensitiveLogging
+                            )
+                            .BatchCommands(
+                                // Order is important for this test. Entry which is not part of cycle but tail should come first.
+                                new[] { anotherFakeEntry, fakeEntry, relatedFakeEntry },
+                                modelData
+                            )
+                            .ToArray())
                     .Message
             );
         }
@@ -844,15 +836,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         EntityState.Added
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: true
-                                    )
-                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                    .ToArray()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateCommandBatchPreparer(
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: true
+                                )
+                                .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                .ToArray())
                         .Message
                 );
             }
@@ -866,15 +856,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                         EntityState.Added
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                CreateCommandBatchPreparer(
-                                        updateAdapter: modelData,
-                                        sensitiveLogging: false
-                                    )
-                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                    .ToArray()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateCommandBatchPreparer(
+                                    updateAdapter: modelData,
+                                    sensitiveLogging: false
+                                )
+                                .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                .ToArray())
                         .Message
                 );
             }
@@ -931,15 +919,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             "RelatedId"
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                    CreateCommandBatchPreparer(
-                                            updateAdapter: modelData,
-                                            sensitiveLogging: true
-                                        )
-                                        .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                        .ToArray()
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                CreateCommandBatchPreparer(
+                                        updateAdapter: modelData,
+                                        sensitiveLogging: true
+                                    )
+                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                    .ToArray())
                             .Message
                     );
                 }
@@ -954,15 +940,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             "RelatedId"
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                    CreateCommandBatchPreparer(
-                                            updateAdapter: modelData,
-                                            sensitiveLogging: false
-                                        )
-                                        .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                        .ToArray()
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                CreateCommandBatchPreparer(
+                                        updateAdapter: modelData,
+                                        sensitiveLogging: false
+                                    )
+                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                    .ToArray())
                             .Message
                     );
                 }
@@ -981,15 +965,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             "RelatedId"
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                    CreateCommandBatchPreparer(
-                                            updateAdapter: modelData,
-                                            sensitiveLogging: true
-                                        )
-                                        .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                        .ToArray()
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                CreateCommandBatchPreparer(
+                                        updateAdapter: modelData,
+                                        sensitiveLogging: true
+                                    )
+                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                    .ToArray())
                             .Message
                     );
                 }
@@ -1004,15 +986,13 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                             "RelatedId"
                         ),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
-                                    CreateCommandBatchPreparer(
-                                            updateAdapter: modelData,
-                                            sensitiveLogging: false
-                                        )
-                                        .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
-                                        .ToArray()
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                CreateCommandBatchPreparer(
+                                        updateAdapter: modelData,
+                                        sensitiveLogging: false
+                                    )
+                                    .BatchCommands(new[] { firstEntry, secondEntry }, modelData)
+                                    .ToArray())
                             .Message
                     );
                 }
@@ -1064,9 +1044,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 Assert.Equal(
                     "4",
                     Assert
-                        .Throws<EqualException>(
-                            () => Assert.Equal(5, command.ColumnModifications.Count)
-                        )
+                        .Throws<EqualException>(() =>
+                            Assert.Equal(5, command.ColumnModifications.Count))
                         .Actual
                 );
             }

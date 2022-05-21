@@ -19,13 +19,11 @@ namespace System.Linq.Tests
 
             var rst = q.Cast<long>();
 
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    foreach (var t in rst)
-                        ;
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                foreach (var t in rst)
+                    ;
+            });
         }
 
         [Fact]
@@ -34,13 +32,11 @@ namespace System.Linq.Tests
             var q = from x in new byte[] { 0, 255, 127, 128, 1, 33, 99 } select x;
 
             var rst = q.Cast<ushort>();
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    foreach (var t in rst)
-                        ;
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                foreach (var t in rst)
+                    ;
+            });
         }
 
         [Fact]

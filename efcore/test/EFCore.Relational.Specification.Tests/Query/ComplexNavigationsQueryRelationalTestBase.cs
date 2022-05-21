@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () => base.Complex_query_with_optional_navigations_and_client_side_evaluation(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Complex_query_with_optional_navigations_and_client_side_evaluation(async));
         }
 
         protected virtual bool CanExecuteQueryString => false;

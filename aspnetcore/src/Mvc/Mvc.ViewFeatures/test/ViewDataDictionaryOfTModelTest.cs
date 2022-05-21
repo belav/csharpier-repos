@@ -205,14 +205,12 @@ public class ViewDataDictionaryOfTModelTest
         var source = new ViewDataDictionary<int>(metadataProvider) { Model = 23, };
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => new ViewDataDictionary<string>(source)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new ViewDataDictionary<string>(source));
         Assert.Equal(expectedMessage, exception.Message);
 
-        exception = Assert.Throws<InvalidOperationException>(
-            () => new ViewDataDictionary<string>(source, model: 24)
-        );
+        exception = Assert.Throws<InvalidOperationException>(() =>
+            new ViewDataDictionary<string>(source, model: 24));
         Assert.Equal(expectedMessage, exception.Message);
     }
 

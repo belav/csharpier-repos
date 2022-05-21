@@ -353,29 +353,27 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(
-                                        l1 =>
-                                            l1.OneToMany_Optional1
-                                                .Where(x => x.Name != "Foo")
-                                                .OrderBy(x => x.Id)
-                                                .Take(3)
-                                    )
-                                    .Include(
-                                        l1 =>
-                                            l1.OneToMany_Optional1
-                                                .Where(x => x.Name != "Bar")
-                                                .OrderByDescending(x => x.Name)
-                                                .Take(3)
-                                    )
-                                    .AsSplitQuery()
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(
+                                    l1 =>
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Foo")
+                                            .OrderBy(x => x.Id)
+                                            .Take(3)
+                                )
+                                .Include(
+                                    l1 =>
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Bar")
+                                            .OrderByDescending(x => x.Name)
+                                            .Take(3)
+                                )
+                                .AsSplitQuery()
+                    ))
             ).Message;
         }
 
@@ -386,23 +384,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(
-                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
-                                    )
-                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
-                                    .Include(
-                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
-                                    )
-                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
-                                    .AsSplitQuery()
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
+                                .ThenInclude(l2 => l2.OneToMany_Optional2)
+                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
+                                .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                                .AsSplitQuery()
+                    ))
             ).Message;
         }
 
@@ -786,23 +778,20 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Select(
-                                    l1 =>
-                                        ss.Set<Level2>()
-                                            .Include(
-                                                l2 =>
-                                                    l2.OneToMany_Optional2.Where(x => x.Id != l2.Id)
-                                            )
-                                )
-                                .AsSplitQuery()
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Level1>()
+                            .Select(
+                                l1 =>
+                                    ss.Set<Level2>()
+                                        .Include(
+                                            l2 => l2.OneToMany_Optional2.Where(x => x.Id != l2.Id)
+                                        )
+                            )
+                            .AsSplitQuery()
+                ));
         }
 
         [ConditionalFact(Skip = "Issue#21234")]
@@ -849,16 +838,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_include_with_Distinct_throws_split(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(l1 => l1.OneToMany_Optional1.Distinct())
-                                    .AsSplitQuery()
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(l1 => l1.OneToMany_Optional1.Distinct())
+                                .AsSplitQuery()
+                    ))
             ).Message;
         }
 
@@ -869,17 +856,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(l1 => l1.OneToMany_Optional1)
-                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
-                                    .AsSplitQuery()
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(l1 => l1.OneToMany_Optional1)
+                                .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                                .AsSplitQuery()
+                    ))
             ).Message;
         }
 
@@ -887,9 +872,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () => base.Complex_query_with_optional_navigations_and_client_side_evaluation(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Complex_query_with_optional_navigations_and_client_side_evaluation(async));
         }
 
         protected virtual bool CanExecuteQueryString => false;

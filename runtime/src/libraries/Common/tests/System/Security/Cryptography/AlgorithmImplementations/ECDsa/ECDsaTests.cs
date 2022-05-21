@@ -87,19 +87,15 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 () => ecdsa.SignData(new byte[10], 0, 10, new HashAlgorithmName(""))
             );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.SignData(new byte[0], new HashAlgorithmName(Guid.NewGuid().ToString("N")))
-            );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.SignData(
-                        new byte[0],
-                        0,
-                        0,
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.SignData(new byte[0], new HashAlgorithmName(Guid.NewGuid().ToString("N"))));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.SignData(
+                    new byte[0],
+                    0,
+                    0,
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -158,24 +154,20 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 () => ecdsa.VerifyData(new byte[10], 0, 10, new byte[0], new HashAlgorithmName(""))
             );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.VerifyData(
-                        new byte[0],
-                        new byte[0],
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.VerifyData(
-                        new byte[0],
-                        0,
-                        0,
-                        new byte[0],
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.VerifyData(
+                    new byte[0],
+                    new byte[0],
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.VerifyData(
+                    new byte[0],
+                    0,
+                    0,
+                    new byte[0],
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -241,13 +233,11 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 "hashAlgorithm",
                 () => ecdsa.SignData(new MemoryStream(), default(HashAlgorithmName))
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.SignData(
-                        new MemoryStream(),
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.SignData(
+                    new MemoryStream(),
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -269,14 +259,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 "hashAlgorithm",
                 () => ecdsa.VerifyData(new MemoryStream(), new byte[0], new HashAlgorithmName(""))
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.VerifyData(
-                        new MemoryStream(),
-                        new byte[0],
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.VerifyData(
+                    new MemoryStream(),
+                    new byte[0],
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
     }
 
@@ -347,34 +335,28 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
             if (!(PlatformDetection.IsNetFramework && ecdsa.GetType().Name.EndsWith("Cng")))
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () => ecdsa.GenerateKey(ECCurve.NamedCurves.nistP256)
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    ecdsa.GenerateKey(ECCurve.NamedCurves.nistP256));
 
-                Assert.Throws<ObjectDisposedException>(
-                    () => ecdsa.ImportParameters(EccTestData.GetNistP256ReferenceKey())
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    ecdsa.ImportParameters(EccTestData.GetNistP256ReferenceKey()));
             }
 
             // Either set_KeySize or SignData should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    ecdsa.KeySize = 384;
-                    SignData(ecdsa, data, HashAlgorithmName.SHA256);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                ecdsa.KeySize = 384;
+                SignData(ecdsa, data, HashAlgorithmName.SHA256);
+            });
         }
 
         protected virtual void UseAfterDispose(ECDsa ecdsa, byte[] data, byte[] sig)
         {
-            Assert.Throws<ObjectDisposedException>(
-                () => SignData(ecdsa, data, HashAlgorithmName.SHA256)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                SignData(ecdsa, data, HashAlgorithmName.SHA256));
 
-            Assert.Throws<ObjectDisposedException>(
-                () => VerifyData(ecdsa, data, sig, HashAlgorithmName.SHA256)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                VerifyData(ecdsa, data, sig, HashAlgorithmName.SHA256));
         }
 
         [Theory]

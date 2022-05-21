@@ -346,165 +346,163 @@ public class TestRunner
 
         for (int j = 0; j < concurrency; ++j)
         {
-            Thread thread = new Thread(
-                () =>
+            Thread thread = new Thread(() =>
+            {
+                while (true)
                 {
-                    while (true)
+                    TestInfo ti;
+
+                    lock (monitor)
                     {
-                        TestInfo ti;
+                        if (test_info.Count == 0)
+                            break;
+                        ti = test_info.Dequeue();
+                    }
+
+                    var output = new StringWriter();
+
+                    string test = ti.test;
+                    string opt_set = ti.opt_set;
+
+                    if (verbose)
+                    {
+                        output.Write(String.Format("{{0,-{0}}} ", output_width), test);
+                    }
+                    else
+                    {
+                        Console.Write(".");
+                    }
+
+                    /* Spawn a new process */
+
+                    string process_args = "";
+
+                    if (opt_set != null)
+                        process_args += " -O=" + opt_set;
+                    if (runtime_args != null)
+                        process_args += " " + runtime_args;
+
+                    process_args += " " + test;
+
+                    ProcessStartInfo info = new ProcessStartInfo(runtime, process_args);
+                    info.UseShellExecute = false;
+                    info.RedirectStandardOutput = true;
+                    info.RedirectStandardError = true;
+                    info.EnvironmentVariables[ENV_TIMEOUT] = timeout.ToString();
+                    if (config != null)
+                        info.EnvironmentVariables["MONO_CONFIG"] = config;
+                    if (mono_path != null)
+                        info.EnvironmentVariables[MONO_PATH] = mono_path;
+                    if (mono_gac_prefix != null)
+                        info.EnvironmentVariables[MONO_GAC_PREFIX] = mono_gac_prefix;
+                    Process p = new Process();
+                    p.StartInfo = info;
+
+                    ProcessData data = new ProcessData();
+                    data.test = test;
+
+                    string log_prefix = "";
+                    if (opt_set != null)
+                        log_prefix = "." + opt_set.Replace("-", "no").Replace(",", "_");
+
+                    data.stdoutName = test + log_prefix + ".stdout";
+                    data.stdout = new StringBuilder();
+
+                    data.stderrName = test + log_prefix + ".stderr";
+                    data.stderr = new StringBuilder();
+
+                    p.OutputDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                    {
+                        lock (data.stdoutLock)
+                        {
+                            if (e.Data != null)
+                                data.stdout.AppendLine(e.Data);
+                        }
+                    };
+
+                    p.ErrorDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                    {
+                        lock (data.stderrLock)
+                        {
+                            if (e.Data != null)
+                                data.stderr.AppendLine(e.Data);
+                        }
+                    };
+
+                    var start = DateTime.UtcNow;
+
+                    p.Start();
+
+                    p.BeginOutputReadLine();
+                    p.BeginErrorReadLine();
+
+                    if (!p.WaitForExit(timeout * 1000))
+                    {
+                        var end = DateTime.UtcNow;
+                        data.duration = end - start;
 
                         lock (monitor)
                         {
-                            if (test_info.Count == 0)
-                                break;
-                            ti = test_info.Dequeue();
+                            timedout.Add(data);
                         }
 
-                        var output = new StringWriter();
-
-                        string test = ti.test;
-                        string opt_set = ti.opt_set;
+                        // Force the process to print a thread dump
+                        TryThreadDump(p.Id, data);
 
                         if (verbose)
                         {
-                            output.Write(String.Format("{{0,-{0}}} ", output_width), test);
-                        }
-                        else
-                        {
-                            Console.Write(".");
+                            output.Write($"timed out ({timeout}s)");
                         }
 
-                        /* Spawn a new process */
-
-                        string process_args = "";
-
-                        if (opt_set != null)
-                            process_args += " -O=" + opt_set;
-                        if (runtime_args != null)
-                            process_args += " " + runtime_args;
-
-                        process_args += " " + test;
-
-                        ProcessStartInfo info = new ProcessStartInfo(runtime, process_args);
-                        info.UseShellExecute = false;
-                        info.RedirectStandardOutput = true;
-                        info.RedirectStandardError = true;
-                        info.EnvironmentVariables[ENV_TIMEOUT] = timeout.ToString();
-                        if (config != null)
-                            info.EnvironmentVariables["MONO_CONFIG"] = config;
-                        if (mono_path != null)
-                            info.EnvironmentVariables[MONO_PATH] = mono_path;
-                        if (mono_gac_prefix != null)
-                            info.EnvironmentVariables[MONO_GAC_PREFIX] = mono_gac_prefix;
-                        Process p = new Process();
-                        p.StartInfo = info;
-
-                        ProcessData data = new ProcessData();
-                        data.test = test;
-
-                        string log_prefix = "";
-                        if (opt_set != null)
-                            log_prefix = "." + opt_set.Replace("-", "no").Replace(",", "_");
-
-                        data.stdoutName = test + log_prefix + ".stdout";
-                        data.stdout = new StringBuilder();
-
-                        data.stderrName = test + log_prefix + ".stderr";
-                        data.stderr = new StringBuilder();
-
-                        p.OutputDataReceived += delegate(object sender, DataReceivedEventArgs e)
+                        try
                         {
-                            lock (data.stdoutLock)
-                            {
-                                if (e.Data != null)
-                                    data.stdout.AppendLine(e.Data);
-                            }
-                        };
-
-                        p.ErrorDataReceived += delegate(object sender, DataReceivedEventArgs e)
-                        {
-                            lock (data.stderrLock)
-                            {
-                                if (e.Data != null)
-                                    data.stderr.AppendLine(e.Data);
-                            }
-                        };
-
-                        var start = DateTime.UtcNow;
-
-                        p.Start();
-
-                        p.BeginOutputReadLine();
-                        p.BeginErrorReadLine();
-
-                        if (!p.WaitForExit(timeout * 1000))
-                        {
-                            var end = DateTime.UtcNow;
-                            data.duration = end - start;
-
-                            lock (monitor)
-                            {
-                                timedout.Add(data);
-                            }
-
-                            // Force the process to print a thread dump
-                            TryThreadDump(p.Id, data);
-
-                            if (verbose)
-                            {
-                                output.Write($"timed out ({timeout}s)");
-                            }
-
-                            try
-                            {
-                                p.Kill();
-                            }
-                            catch { }
+                            p.Kill();
                         }
-                        else if (p.ExitCode != expectedExitCode)
-                        {
-                            var end = DateTime.UtcNow;
-                            data.duration = end - start;
-
-                            lock (monitor)
-                            {
-                                failed.Add(data);
-                            }
-
-                            if (verbose)
-                                output.Write(
-                                    "failed, time: {0}, exit code: {1}",
-                                    data.duration.ToString(TEST_TIME_FORMAT),
-                                    p.ExitCode
-                                );
-                        }
-                        else
-                        {
-                            var end = DateTime.UtcNow;
-                            data.duration = end - start;
-
-                            lock (monitor)
-                            {
-                                passed.Add(data);
-                            }
-
-                            if (verbose)
-                                output.Write(
-                                    "passed, time: {0}",
-                                    data.duration.ToString(TEST_TIME_FORMAT)
-                                );
-                        }
-
-                        p.Close();
+                        catch { }
+                    }
+                    else if (p.ExitCode != expectedExitCode)
+                    {
+                        var end = DateTime.UtcNow;
+                        data.duration = end - start;
 
                         lock (monitor)
                         {
-                            if (verbose)
-                                Console.WriteLine(output.ToString());
+                            failed.Add(data);
                         }
+
+                        if (verbose)
+                            output.Write(
+                                "failed, time: {0}, exit code: {1}",
+                                data.duration.ToString(TEST_TIME_FORMAT),
+                                p.ExitCode
+                            );
+                    }
+                    else
+                    {
+                        var end = DateTime.UtcNow;
+                        data.duration = end - start;
+
+                        lock (monitor)
+                        {
+                            passed.Add(data);
+                        }
+
+                        if (verbose)
+                            output.Write(
+                                "passed, time: {0}",
+                                data.duration.ToString(TEST_TIME_FORMAT)
+                            );
+                    }
+
+                    p.Close();
+
+                    lock (monitor)
+                    {
+                        if (verbose)
+                            Console.WriteLine(output.ToString());
                     }
                 }
-            );
+            });
 
             thread.Start();
 

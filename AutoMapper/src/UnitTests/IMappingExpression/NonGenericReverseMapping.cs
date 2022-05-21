@@ -70,9 +70,8 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_show_valid()
             {
-                typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-                    () => Configuration.AssertConfigurationIsValid()
-                );
+                typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
+                    Configuration.AssertConfigurationIsValid());
             }
         }
 

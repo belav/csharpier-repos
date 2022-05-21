@@ -51,57 +51,50 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.AddAnnotation("foo", "bar")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.AddAnnotation("foo", "bar"))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.AddServiceProperty(A.GProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.AddServiceProperty(A.GProperty))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityTypeA.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangingAndChangedNotifications
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        ))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetDiscriminatorMappingComplete(true)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetDiscriminatorMappingComplete(true))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetDiscriminatorProperty(null)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetDiscriminatorProperty(null))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetDiscriminatorValue(null)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetDiscriminatorValue(null))
                     .Message
             );
 
@@ -115,18 +108,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetNavigationAccessMode(PropertyAccessMode.Field)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetNavigationAccessMode(PropertyAccessMode.Field))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetPropertyAccessMode(PropertyAccessMode.Field)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetPropertyAccessMode(PropertyAccessMode.Field))
                     .Message
             );
 
@@ -227,9 +218,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityTypeA.ClrType
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetQueryFilter(badExpression1)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetQueryFilter(badExpression1))
                     .Message
             );
 
@@ -242,9 +232,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityTypeA.ClrType
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityTypeA.SetQueryFilter(badExpression2)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityTypeA.SetQueryFilter(badExpression2))
                     .Message
             );
         }
@@ -451,9 +440,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddKey(new[] { idProperty, nameProperty })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddKey(new[] { idProperty, nameProperty }))
                     .Message
             );
         }
@@ -471,9 +459,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Customer.IdProperty.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddKey(new[] { idProperty, idProperty })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddKey(new[] { idProperty, idProperty }))
                     .Message
             );
         }
@@ -492,9 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddKey(new[] { idProperty })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddKey(new[] { idProperty }))
                     .Message
             );
         }
@@ -516,9 +502,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddKey(new[] { idProperty, nameProperty })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddKey(new[] { idProperty, nameProperty }))
                     .Message
             );
         }
@@ -602,9 +587,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderType.RemoveKey(customerKey.Properties)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.RemoveKey(customerKey.Properties))
                     .Message
             );
         }
@@ -629,9 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerType.RemoveKey(customerKey.Properties)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerType.RemoveKey(customerKey.Properties))
                     .Message
             );
         }
@@ -725,9 +708,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Save)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        nameProperty.SetAfterSaveBehavior(PropertySaveBehavior.Save))
                     .Message
             );
         }
@@ -838,9 +820,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderType.AddForeignKey(customerFk1, customerKey, customerType)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.AddForeignKey(customerFk1, customerKey, customerType))
                     .Message
             );
         }
@@ -870,14 +851,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Order.CustomerIdProperty.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderType.AddForeignKey(
-                                new[] { customerFk1, customerFk1 },
-                                customerKey,
-                                customerType
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.AddForeignKey(
+                            new[] { customerFk1, customerFk1 },
+                            customerKey,
+                            customerType
+                        ))
                     .Message
             );
         }
@@ -897,14 +876,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType1.AddForeignKey(
-                                new[] { fkProperty },
-                                entityType2.AddKey(idProperty),
-                                entityType2
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType1.AddForeignKey(
+                            new[] { fkProperty },
+                            entityType2.AddKey(idProperty),
+                            entityType2
+                        ))
                     .Message
             );
         }
@@ -922,9 +899,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ForeignKeyPropertiesWrongEntity("{'fk'}", typeof(Customer).Name),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddForeignKey(new[] { fkProperty }, key, entityType))
                     .Message
             );
         }
@@ -980,9 +956,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddForeignKey(new[] { fkProperty }, key, entityType)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddForeignKey(new[] { fkProperty }, key, entityType))
                     .Message
             );
         }
@@ -998,14 +973,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.EntityTypeModelMismatch(nameof(Customer), nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            dependentEntityType.AddForeignKey(
-                                new[] { fkProperty },
-                                principalEntityType.AddKey(idProperty),
-                                principalEntityType
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        dependentEntityType.AddForeignKey(
+                            new[] { fkProperty },
+                            principalEntityType.AddKey(idProperty),
+                            principalEntityType
+                        ))
                     .Message
             );
         }
@@ -1156,9 +1129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => joinEntity.RemoveForeignKey(foreignKey)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        joinEntity.RemoveForeignKey(foreignKey))
                     .Message
             );
         }
@@ -1329,9 +1301,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerForeignKey.SetDependentToPrincipal("Customer")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetDependentToPrincipal("Customer"))
                     .Message
             );
         }
@@ -1360,9 +1331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerForeignKey.SetDependentToPrincipal(nameof(Order.Customer))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetDependentToPrincipal(nameof(Order.Customer)))
                     .Message
             );
         }
@@ -1408,9 +1378,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "Dictionary<string, object>"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetDependentToPrincipal(Order.CustomerProperty))
                     .Message
             );
         }
@@ -1438,12 +1407,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            customerForeignKey.SetPrincipalToDependent(
-                                Customer.NotCollectionOrdersProperty
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetPrincipalToDependent(
+                            Customer.NotCollectionOrdersProperty
+                        ))
                     .Message
             );
         }
@@ -1471,12 +1438,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            customerForeignKey.SetPrincipalToDependent(
-                                SpecialCustomer.DerivedOrdersProperty
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetPrincipalToDependent(
+                            SpecialCustomer.DerivedOrdersProperty
+                        ))
                     .Message
             );
         }
@@ -1532,9 +1497,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerForeignKey.SetDependentToPrincipal(Order.RelatedOrderProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetDependentToPrincipal(Order.RelatedOrderProperty))
                     .Message
             );
         }
@@ -1562,12 +1526,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            customerForeignKey.SetDependentToPrincipal(
-                                SpecialOrder.DerivedCustomerProperty
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerForeignKey.SetDependentToPrincipal(
+                            SpecialOrder.DerivedCustomerProperty
+                        ))
                     .Message
             );
         }
@@ -1636,9 +1598,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(SelfRef).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => fk.SetDependentToPrincipal(SelfRef.SelfRef1Property)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        fk.SetDependentToPrincipal(SelfRef.SelfRef1Property))
                     .Message
             );
         }
@@ -1753,9 +1714,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => customerEntity.RemoveSkipNavigation(productsNavigation)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        customerEntity.RemoveSkipNavigation(productsNavigation))
                     .Message
             );
 
@@ -1809,16 +1769,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                null,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -1857,16 +1815,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                null,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -1898,16 +1854,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                null,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -1939,16 +1893,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                null,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -1980,16 +1932,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "Dictionary<string, object>"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                Order.ProductsProperty,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            Order.ProductsProperty,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -2016,16 +1966,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NoClrNavigation(nameof(Order.Products), nameof(Product)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            productEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                Order.ProductsProperty,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        productEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            Order.ProductsProperty,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -2057,16 +2005,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                Order.ProductsProperty,
-                                orderEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            Order.ProductsProperty,
+                            orderEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -2098,16 +2044,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                Order.ProductsProperty,
-                                orderEntity,
-                                false,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            Order.ProductsProperty,
+                            orderEntity,
+                            false,
+                            false
+                        ))
                     .Message
             );
         }
@@ -2137,16 +2081,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.RelatedOrder)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            orderEntity.AddSkipNavigation(
-                                nameof(Order.Products),
-                                Order.RelatedOrderProperty,
-                                productEntity,
-                                true,
-                                false
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            Order.RelatedOrderProperty,
+                            productEntity,
+                            true,
+                            false
+                        ))
                     .Message
             );
         }
@@ -2216,9 +2158,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType2.AddIndex(new[] { property1, property2 })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType2.AddIndex(new[] { property1, property2 }))
                     .Message
             );
         }
@@ -2239,9 +2180,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddIndex(new[] { property1, property2 })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddIndex(new[] { property1, property2 }))
                     .Message
             );
         }
@@ -2263,9 +2203,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddIndex(new[] { property2 }, "NamedIndex")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddIndex(new[] { property2 }, "NamedIndex"))
                     .Message
             );
         }
@@ -2483,9 +2422,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddProperty(Customer.NameProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddProperty(Customer.NameProperty))
                     .Message
             );
         }
@@ -2516,9 +2454,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(int).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddProperty(nameof(Customer.Name), typeof(int))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddProperty(nameof(Customer.Name), typeof(int)))
                     .Message
             );
         }
@@ -2535,14 +2472,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer.Name)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.AddProperty(
-                                nameof(Customer.Id),
-                                typeof(int),
-                                Customer.NameProperty
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddProperty(
+                            nameof(Customer.Id),
+                            typeof(int),
+                            Customer.NameProperty
+                        ))
                     .Message
             );
         }
@@ -2590,9 +2525,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.PropertyInUseKey("Id", typeof(Customer).Name, "{'Id'}"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.RemoveProperty(property.Name)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.RemoveProperty(property.Name))
                     .Message
             );
         }
@@ -2609,9 +2543,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.PropertyInUseKey("Id", typeof(Customer).Name, "{'Id'}"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.RemoveProperty(property.Name)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.RemoveProperty(property.Name))
                     .Message
             );
         }
@@ -2637,9 +2570,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderType.RemoveProperty(customerFk.Name)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.RemoveProperty(customerFk.Name))
                     .Message
             );
         }
@@ -2661,9 +2593,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.RemoveProperty(property.Name)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.RemoveProperty(property.Name))
                     .Message
             );
         }
@@ -2847,9 +2778,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderType.AddServiceProperty(Order.CustomerProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.AddServiceProperty(Order.CustomerProperty))
                     .Message
             );
         }
@@ -2868,9 +2798,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddServiceProperty(Customer.OrdersProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddServiceProperty(Customer.OrdersProperty))
                     .Message
             );
         }
@@ -2899,9 +2828,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderType.AddServiceProperty(Order.CustomerProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderType.AddServiceProperty(Order.CustomerProperty))
                     .Message
             );
         }
@@ -2920,9 +2848,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddServiceProperty(Customer.OrdersProperty)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddServiceProperty(Customer.OrdersProperty))
                     .Message
             );
         }
@@ -2997,9 +2924,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(string).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddIndexerProperty("Nation", typeof(string))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddIndexerProperty("Nation", typeof(string)))
                     .Message
             );
 
@@ -3010,13 +2936,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(string).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            ((IConventionEntityType)entityType).AddIndexerProperty(
-                                "Nation",
-                                typeof(string)
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        ((IConventionEntityType)entityType).AddIndexerProperty(
+                            "Nation",
+                            typeof(string)
+                        ))
                     .Message
             );
         }
@@ -3035,18 +2959,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityType.DisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddIndexerProperty("Nation", typeof(string))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddIndexerProperty("Nation", typeof(string)))
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyClashingNonIndexer("Name", entityType.DisplayName()),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => entityType.AddIndexerProperty("Name", typeof(string))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.AddIndexerProperty("Name", typeof(string)))
                     .Message
             );
         }
@@ -3090,9 +3012,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.StoreGenValue("Prop1", nameof(Level1)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => internalEntityEntry.SetStoreGeneratedValue(property, null)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        internalEntityEntry.SetStoreGeneratedValue(property, null))
                     .Message
             );
         }
@@ -3517,12 +3438,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "INotifyPropertyChanging"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangingAndChangedNotifications
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        ))
                     .Message
             );
 
@@ -3533,12 +3452,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "INotifyPropertyChanging"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        ))
                     .Message
             );
         }
@@ -3565,12 +3482,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "INotifyPropertyChanged"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangedNotifications
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangedNotifications
+                        ))
                     .Message
             );
 
@@ -3581,12 +3496,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "INotifyPropertyChanged"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangingAndChangedNotifications
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotifications
+                        ))
                     .Message
             );
 
@@ -3597,12 +3510,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "INotifyPropertyChanged"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            entityType.SetChangeTrackingStrategy(
-                                ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                            )
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        entityType.SetChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        ))
                     .Message
             );
         }

@@ -97,9 +97,8 @@ public class EventTests
         );
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob"));
         Assert.Equal("InvalidBlob", ex.Message);
         Assert.Equal(1, eventInvoked);
     }
@@ -150,9 +149,8 @@ public class EventTests
         );
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<Exception>(
-            () => SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError")
-        );
+        var ex = await Assert.ThrowsAsync<Exception>(() =>
+            SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError"));
         Assert.Equal("A test other error occurred", ex.Message);
         Assert.Equal(1, eventInvoked);
     }

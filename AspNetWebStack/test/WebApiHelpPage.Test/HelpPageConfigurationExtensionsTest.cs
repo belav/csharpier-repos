@@ -169,12 +169,10 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
             faultyGenerator
                 .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
-                .Returns(
-                    () =>
-                    {
-                        throw new InvalidOperationException("This is a faulty sample generator.");
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new InvalidOperationException("This is a faulty sample generator.");
+                });
             config.SetHelpPageSampleGenerator(faultyGenerator.Object);
             HelpPageApiModel model = config.GetHelpPageApiModel("Get-Values");
             Assert.NotNull(model);
@@ -218,14 +216,12 @@ namespace WebApiHelpPageWebHost.UnitTest
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
             faultyGenerator
                 .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
-                .Returns(
-                    () =>
-                    {
-                        throw new AggregateException(
-                            new InvalidOperationException("Sample generator failed.")
-                        );
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new AggregateException(
+                        new InvalidOperationException("Sample generator failed.")
+                    );
+                });
             config.SetHelpPageSampleGenerator(faultyGenerator.Object);
             HelpPageApiModel model = config.GetHelpPageApiModel("Get-Values");
             Assert.NotNull(model);

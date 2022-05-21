@@ -1183,12 +1183,10 @@ public class DefaultObjectValidatorTests
         var model = new ThrowingProperty();
 
         // Act & Assert
-        Assert.Throws<InvalidTimeZoneException>(
-            () =>
-            {
-                validator.Validate(actionContext, validationState, string.Empty, model);
-            }
-        );
+        Assert.Throws<InvalidTimeZoneException>(() =>
+        {
+            validator.Validate(actionContext, validationState, string.Empty, model);
+        });
     }
 
     // We use the reference equality comparer for breaking cycles
@@ -1369,9 +1367,8 @@ public class DefaultObjectValidatorTests
         };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => validator.Validate(actionContext, validationState, prefix: string.Empty, model)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            validator.Validate(actionContext, validationState, prefix: string.Empty, model));
         Assert.Equal(expected, ex.Message);
         Assert.Equal("https://aka.ms/AA21ue1", ex.HelpLink);
     }

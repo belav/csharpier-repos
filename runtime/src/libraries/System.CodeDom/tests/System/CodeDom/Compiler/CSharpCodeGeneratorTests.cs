@@ -2692,14 +2692,12 @@ namespace System.CodeDom.Compiler.Tests
             int callCount = 0;
             writer.OnWrite = () =>
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        generator.GenerateCodeFromExpression(
-                            new CodeBaseReferenceExpression(),
-                            new StringWriter(),
-                            new CodeGeneratorOptions()
-                        )
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    generator.GenerateCodeFromExpression(
+                        new CodeBaseReferenceExpression(),
+                        new StringWriter(),
+                        new CodeGeneratorOptions()
+                    ));
                 callCount++;
             };
             generator.GenerateCodeFromExpression(e, writer, new CodeGeneratorOptions());
@@ -4022,14 +4020,12 @@ namespace System.CodeDom.Compiler.Tests
             int callCount = 0;
             writer.OnWrite = () =>
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        generator.GenerateCodeFromStatement(
-                            new CodeExpressionStatement(new CodeBaseReferenceExpression()),
-                            new StringWriter(),
-                            new CodeGeneratorOptions()
-                        )
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    generator.GenerateCodeFromStatement(
+                        new CodeExpressionStatement(new CodeBaseReferenceExpression()),
+                        new StringWriter(),
+                        new CodeGeneratorOptions()
+                    ));
                 callCount++;
             };
             generator.GenerateCodeFromStatement(e, writer, new CodeGeneratorOptions());
@@ -7673,14 +7669,12 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
             int callCount = 0;
             writer.OnWrite = () =>
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        generator.GenerateCodeFromType(
-                            new CodeTypeDeclaration("type"),
-                            new StringWriter(),
-                            new CodeGeneratorOptions()
-                        )
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    generator.GenerateCodeFromType(
+                        new CodeTypeDeclaration("type"),
+                        new StringWriter(),
+                        new CodeGeneratorOptions()
+                    ));
                 callCount++;
             };
             generator.GenerateCodeFromType(e, writer, new CodeGeneratorOptions());

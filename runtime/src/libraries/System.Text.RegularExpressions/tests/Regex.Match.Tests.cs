@@ -2472,12 +2472,10 @@ namespace System.Text.RegularExpressions.Tests
                 RegexOptions.None,
                 TimeSpan.FromMilliseconds(10)
             );
-            Assert.Throws<RegexMatchTimeoutException>(
-                () =>
-                {
-                    re.Match(input);
-                }
-            );
+            Assert.Throws<RegexMatchTimeoutException>(() =>
+            {
+                re.Match(input);
+            });
         }
 
         [Theory]
@@ -2532,83 +2530,60 @@ namespace System.Text.RegularExpressions.Tests
                             == RegexOptions.None
                         )
                         {
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).Match(input)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).IsMatch(input)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => new Regex(Pattern).Matches(input).Count
-                            );
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                new Regex(Pattern).Match(input));
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                new Regex(Pattern).IsMatch(input));
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                new Regex(Pattern).Matches(input).Count);
 
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.Match(input, Pattern)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.IsMatch(input, Pattern)
-                            );
-                            Assert.Throws<RegexMatchTimeoutException>(
-                                () => Regex.Matches(input, Pattern).Count
-                            );
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                Regex.Match(input, Pattern));
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                Regex.IsMatch(input, Pattern));
+                            Assert.Throws<RegexMatchTimeoutException>(() =>
+                                Regex.Matches(input, Pattern).Count);
                         }
 
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)
-                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
-                                ).Match(input)
-                        );
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)
-                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
-                                ).IsMatch(input)
-                        );
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                new Regex(
-                                    Pattern,
-                                    (RegexOptions)
-                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
-                                )
-                                    .Matches(input)
-                                    .Count
-                        );
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            ).Match(input));
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            ).IsMatch(input));
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            new Regex(
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            )
+                                .Matches(input)
+                                .Count);
 
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex.Match(
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            Regex.Match(
+                                input,
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            ));
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            Regex.IsMatch(
+                                input,
+                                Pattern,
+                                (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
+                            ));
+                        Assert.Throws<RegexMatchTimeoutException>(() =>
+                            Regex
+                                .Matches(
                                     input,
                                     Pattern,
                                     (RegexOptions)
                                         int.Parse(optionsString, CultureInfo.InvariantCulture)
                                 )
-                        );
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex.IsMatch(
-                                    input,
-                                    Pattern,
-                                    (RegexOptions)
-                                        int.Parse(optionsString, CultureInfo.InvariantCulture)
-                                )
-                        );
-                        Assert.Throws<RegexMatchTimeoutException>(
-                            () =>
-                                Regex
-                                    .Matches(
-                                        input,
-                                        Pattern,
-                                        (RegexOptions)
-                                            int.Parse(optionsString, CultureInfo.InvariantCulture)
-                                    )
-                                    .Count
-                        );
+                                .Count);
                     },
                     ((int)options).ToString(CultureInfo.InvariantCulture)
                 )
@@ -2628,15 +2603,13 @@ namespace System.Text.RegularExpressions.Tests
                 Regex.IsMatch("", PatternLeadingToLotsOfBacktracking, options, TimeSpan.FromDays(1))
             );
             var sw = Stopwatch.StartNew();
-            Assert.Throws<RegexMatchTimeoutException>(
-                () =>
-                    Regex.IsMatch(
-                        "An input string that takes a very very very very very very very very very very very long time!",
-                        PatternLeadingToLotsOfBacktracking,
-                        options,
-                        TimeSpan.FromMilliseconds(1)
-                    )
-            );
+            Assert.Throws<RegexMatchTimeoutException>(() =>
+                Regex.IsMatch(
+                    "An input string that takes a very very very very very very very very very very very long time!",
+                    PatternLeadingToLotsOfBacktracking,
+                    options,
+                    TimeSpan.FromMilliseconds(1)
+                ));
             Assert.InRange(sw.Elapsed.TotalSeconds, 0, 10); // arbitrary upper bound that should be well above what's needed with a 1ms timeout
         }
 
@@ -3283,9 +3256,8 @@ namespace System.Text.RegularExpressions.Tests
             Match match = Regex.Match("foo", "foo");
             AssertExtensions.Throws<ArgumentNullException>("replacement", () => match.Result(null));
 
-            Assert.Throws<NotSupportedException>(
-                () => RegularExpressions.Match.Empty.Result("any")
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                RegularExpressions.Match.Empty.Result("any"));
         }
 
         [Theory]

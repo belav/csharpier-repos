@@ -96,107 +96,83 @@ namespace MonoTests.System.Runtime.Caching
         public void ConstructorParameters()
         {
             MemoryCache mc;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc = new MemoryCache(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc = new MemoryCache(null);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache(string.Empty);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache(string.Empty);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("default");
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("default");
+            });
 
             var config = new NameValueCollection();
             config.Add("CacheMemoryLimitMegabytes", "invalid");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", "invalid");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PollingInterval", "invalid");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("CacheMemoryLimitMegabytes", "-1");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("CacheMemoryLimitMegabytes", UInt64.MaxValue.ToString());
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", "-1");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", UInt64.MaxValue.ToString());
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", UInt32.MaxValue.ToString());
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", "-10");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", "0");
@@ -205,12 +181,10 @@ namespace MonoTests.System.Runtime.Caching
 
             config.Clear();
             config.Add("PhysicalMemoryLimitPercentage", "101");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc = new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc = new MemoryCache("MyCache", config);
+            });
 
             // Just make sure it doesn't throw any exception
             config.Clear();
@@ -224,12 +198,10 @@ namespace MonoTests.System.Runtime.Caching
         {
             var config = new NameValueCollection();
             config.Add("PhysicalMemoryLimitPercentage", "99");
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                {
-                    new MemoryCache("MyCache", config);
-                }
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
+                new MemoryCache("MyCache", config);
+            });
         }
 
         [Fact]
@@ -301,26 +273,20 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc[null] = "value";
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc[null] = "value";
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    object v = mc[null];
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                object v = mc[null];
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc["key"] = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc["key"] = null;
+            });
 
             mc.Calls.Clear();
             mc["key"] = "value";
@@ -345,12 +311,10 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        var val = mc["key"];
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    var val = mc["key"];
+                });
             }
             else
             {
@@ -364,19 +328,15 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Contains(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Contains(null);
+            });
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.Contains("key", "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.Contains("key", "region");
+            });
 
             mc.Set("key", "value", ObjectCache.InfiniteAbsoluteExpiration);
             Assert.True(mc.Contains("key"));
@@ -397,12 +357,10 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        mc.Contains("key");
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Contains("key");
+                });
             }
             else
             {
@@ -415,33 +373,25 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = new PokerMemoryCache("MyCache");
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.CreateCacheEntryChangeMonitor(new string[] { "key" }, "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.CreateCacheEntryChangeMonitor(new string[] { "key" }, "region");
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.CreateCacheEntryChangeMonitor(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.CreateCacheEntryChangeMonitor(null);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.CreateCacheEntryChangeMonitor(new string[] { });
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.CreateCacheEntryChangeMonitor(new string[] { });
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.CreateCacheEntryChangeMonitor(new string[] { "key", null });
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.CreateCacheEntryChangeMonitor(new string[] { "key", null });
+            });
 
             mc.Set("key1", "value1", ObjectCache.InfiniteAbsoluteExpiration);
             mc.Set("key2", "value2", ObjectCache.InfiniteAbsoluteExpiration);
@@ -481,26 +431,20 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(null, "value", DateTimeOffset.Now);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.AddOrGetExisting(null, "value", DateTimeOffset.Now);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key", null, DateTimeOffset.Now);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.AddOrGetExisting("key", null, DateTimeOffset.Now);
+            });
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key", "value", DateTimeOffset.Now, "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.AddOrGetExisting("key", "value", DateTimeOffset.Now, "region");
+            });
 
             object value = mc.AddOrGetExisting(
                 "key3_A2-1",
@@ -529,26 +473,22 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        value = mc.AddOrGetExisting(
-                            "key3_A2-1",
-                            "value3",
-                            DateTimeOffset.Now.AddMinutes(1)
-                        );
-                    }
-                );
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        value = mc.AddOrGetExisting(
-                            "not-key3_A2-1",
-                            "value4",
-                            DateTimeOffset.Now.AddMinutes(1)
-                        );
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.AddOrGetExisting(
+                        "key3_A2-1",
+                        "value3",
+                        DateTimeOffset.Now.AddMinutes(1)
+                    );
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.AddOrGetExisting(
+                        "not-key3_A2-1",
+                        "value4",
+                        DateTimeOffset.Now.AddMinutes(1)
+                    );
+                });
             }
             else
             {
@@ -566,64 +506,50 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = new PokerMemoryCache("MyCache");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(null, "value", null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.AddOrGetExisting(null, "value", null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key", null, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.AddOrGetExisting("key", null, null);
+            });
 
             var cip = new CacheItemPolicy();
             cip.AbsoluteExpiration = DateTime.Now.AddMinutes(1);
             cip.SlidingExpiration = TimeSpan.FromMinutes(1);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.AddOrGetExisting("key", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.MinValue;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key3", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting("key3", "value", cip);
+            });
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key", "value", null, "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.AddOrGetExisting("key", "value", null, "region");
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromDays(500);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key3", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting("key3", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.Priority = (CacheItemPriority)20;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting("key3", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting("key3", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromTicks(0L);
@@ -666,12 +592,10 @@ namespace MonoTests.System.Runtime.Caching
             CacheItem ci,
                 ci2;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ci = mc.AddOrGetExisting(null, new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ci = mc.AddOrGetExisting(null, new CacheItemPolicy());
+            });
 
             ci = new CacheItem("key", "value");
             ci2 = mc.AddOrGetExisting(ci, null);
@@ -690,13 +614,11 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Equal(ci.Value, ci2.Value);
             Assert.Equal(ci.Key, ci2.Key);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ci = new CacheItem(null, "value");
-                    ci2 = mc.AddOrGetExisting(ci, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ci = new CacheItem(null, "value");
+                ci2 = mc.AddOrGetExisting(ci, null);
+            });
 
             ci = new CacheItem(string.Empty, "value");
             ci2 = mc.AddOrGetExisting(ci, null);
@@ -713,43 +635,35 @@ namespace MonoTests.System.Runtime.Caching
             // at System.Runtime.Caching.MemoryCache.AddOrGetExistingInternal(String key, Object value, CacheItemPolicy policy)
             // at System.Runtime.Caching.MemoryCache.AddOrGetExisting(CacheItem item, CacheItemPolicy policy)
             // at MonoTests.System.Runtime.Caching.MemoryCacheTest.AddOrGetExisting_CacheItem_CacheItemPolicy() in C:\Users\grendel\documents\visual studio 2010\Projects\System.Runtime.Caching.Test\System.Runtime.Caching.Test\System.Runtime.Caching\MemoryCacheTest.cs:line 211
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ci2 = mc.AddOrGetExisting(ci, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ci2 = mc.AddOrGetExisting(ci, null);
+            });
 
             ci = new CacheItem("key3", "value");
             var cip = new CacheItemPolicy();
             cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    ci2 = mc.AddOrGetExisting(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                ci2 = mc.AddOrGetExisting(ci, cip);
+            });
 
             ci = new CacheItem("key3", "value");
             cip = new CacheItemPolicy();
             cip.AbsoluteExpiration = DateTimeOffset.Now;
             cip.SlidingExpiration = TimeSpan.FromTicks(DateTime.Now.Ticks);
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.AddOrGetExisting(ci, cip);
+            });
 
             ci = new CacheItem("key3", "value");
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.MinValue;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting(ci, cip);
+            });
 
             ci = new CacheItem("key4_#B4-2", "value");
             cip = new CacheItemPolicy();
@@ -760,12 +674,10 @@ namespace MonoTests.System.Runtime.Caching
             ci = new CacheItem("key3", "value");
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromDays(500);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting(ci, cip);
+            });
 
             ci = new CacheItem("key5_#B5-2", "value");
             cip = new CacheItemPolicy();
@@ -776,12 +688,10 @@ namespace MonoTests.System.Runtime.Caching
             ci = new CacheItem("key3", "value");
             cip = new CacheItemPolicy();
             cip.Priority = (CacheItemPriority)20;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.AddOrGetExisting(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.AddOrGetExisting(ci, cip);
+            });
 
             ci = new CacheItem("key3_B7", "value");
             cip = new CacheItemPolicy();
@@ -820,45 +730,35 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.Set("key", "value", new CacheItemPolicy(), "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.Set("key", "value", new CacheItemPolicy(), "region");
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set(null, "value", new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set(null, "value", new CacheItemPolicy());
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set("key", null, new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set("key", null, new CacheItemPolicy());
+            });
 
             var cip = new CacheItemPolicy();
             cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
             cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.Set("key", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.Set("key", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.MinValue;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set("key", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set("key", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromTicks(0L);
@@ -867,12 +767,10 @@ namespace MonoTests.System.Runtime.Caching
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromDays(500);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set("key", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set("key", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromDays(365);
@@ -881,12 +779,10 @@ namespace MonoTests.System.Runtime.Caching
 
             cip = new CacheItemPolicy();
             cip.Priority = (CacheItemPriority)20;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set("key", "value", cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set("key", "value", cip);
+            });
 
             cip = new CacheItemPolicy();
             cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
@@ -920,12 +816,10 @@ namespace MonoTests.System.Runtime.Caching
             {
                 cip = new CacheItemPolicy();
                 cip.AbsoluteExpiration = DateTimeOffset.MaxValue;
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        mc.Set("key_A6", "value_A6", cip);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Set("key_A6", "value_A6", cip);
+                });
             }
             else
             {
@@ -941,26 +835,20 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = new PokerMemoryCache("MyCache");
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.Set("key", "value", DateTimeOffset.MaxValue, "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.Set("key", "value", DateTimeOffset.MaxValue, "region");
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set(null, "value", DateTimeOffset.MaxValue);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set(null, "value", DateTimeOffset.MaxValue);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set("key", null, DateTimeOffset.MaxValue);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set("key", null, DateTimeOffset.MaxValue);
+            });
 
             // The entry is never inserted as its expiration date is before now
             mc.Set("key_A2", "value_A2", DateTimeOffset.MinValue);
@@ -985,50 +873,40 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = new PokerMemoryCache("MyCache");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set(null, new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set(null, new CacheItemPolicy());
+            });
 
             // Actually thrown from the Set (string, object, CacheItemPolicy, string) overload
             var ci = new CacheItem(null, "value");
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set(ci, new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set(ci, new CacheItemPolicy());
+            });
 
             ci = new CacheItem("key", null);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Set(ci, new CacheItemPolicy());
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Set(ci, new CacheItemPolicy());
+            });
 
             ci = new CacheItem("key", "value");
             var cip = new CacheItemPolicy();
             cip.UpdateCallback = (CacheEntryUpdateArguments arguments) => { };
             cip.RemovedCallback = (CacheEntryRemovedArguments arguments) => { };
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.Set(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.Set(ci, cip);
+            });
 
             ci = new CacheItem("key", "value");
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.MinValue;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set(ci, cip);
+            });
 
             ci = new CacheItem("key_A1-6", "value");
             cip = new CacheItemPolicy();
@@ -1039,12 +917,10 @@ namespace MonoTests.System.Runtime.Caching
             ci = new CacheItem("key", "value");
             cip = new CacheItemPolicy();
             cip.SlidingExpiration = TimeSpan.FromDays(500);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set(ci, cip);
+            });
 
             ci = new CacheItem("key_A1-8", "value");
             cip = new CacheItemPolicy();
@@ -1055,12 +931,10 @@ namespace MonoTests.System.Runtime.Caching
             ci = new CacheItem("key", "value");
             cip = new CacheItemPolicy();
             cip.Priority = (CacheItemPriority)20;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mc.Set(ci, cip);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mc.Set(ci, cip);
+            });
 
             ci = new CacheItem("key_A2", "value_A2");
             cip = new CacheItemPolicy();
@@ -1097,19 +971,15 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.Remove("key", "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.Remove("key", "region");
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.Remove(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.Remove(null);
+            });
 
             bool callbackInvoked;
             CacheEntryRemovedReason reason = (CacheEntryRemovedReason)1000;
@@ -1195,12 +1065,10 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        value = mc.Remove("key");
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.Remove("key");
+                });
             }
             else
             {
@@ -1215,26 +1083,20 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = CreatePokerMemoryCache("MyCache", throwOnDisposed);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.GetValues((string[])null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.GetValues((string[])null);
+            });
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.GetValues(new string[] { }, "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.GetValues(new string[] { }, "region");
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    mc.GetValues(new string[] { "key", null });
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                mc.GetValues(new string[] { "key", null });
+            });
 
             IDictionary<string, object> value = mc.GetValues(new string[] { });
             Assert.Null(value);
@@ -1268,12 +1130,10 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        mc.GetValues(new string[] { "key1", "key3" });
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.GetValues(new string[] { "key1", "key3" });
+                });
             }
             else
             {
@@ -1314,12 +1174,10 @@ namespace MonoTests.System.Runtime.Caching
             cip.ChangeMonitors.Add(monitor);
 
             // Thrown by ChangeMonitor.NotifyOnChanged
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    mc.Set("key1", "value1", cip);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                mc.Set("key1", "value1", cip);
+            });
 
             Assert.False(onChangedCalled);
         }
@@ -1369,12 +1227,10 @@ namespace MonoTests.System.Runtime.Caching
             mc.Dispose();
             if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        mc.Trim(50);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Trim(50);
+                });
             }
             else
             {
@@ -1661,19 +1517,15 @@ namespace MonoTests.System.Runtime.Caching
         {
             var mc = new PokerMemoryCache("MyCache");
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    mc.GetCacheItem("key", "region");
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                mc.GetCacheItem("key", "region");
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mc.GetCacheItem(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mc.GetCacheItem(null);
+            });
 
             CacheItem value;
             mc.Set("key", "value", null);

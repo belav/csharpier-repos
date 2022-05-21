@@ -407,22 +407,20 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
         [ConditionalFact]
         public virtual void AlterColumnOperation_add_identity_legacy()
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                    Generate(
-                        modelBuilder =>
-                            modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, "1.1.0"),
-                        new AlterColumnOperation
-                        {
-                            Table = "Person",
-                            Name = "Id",
-                            ClrType = typeof(int),
-                            [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                                SqlServerValueGenerationStrategy.IdentityColumn,
-                            OldColumn = new AddColumnOperation { ClrType = typeof(int) }
-                        }
-                    )
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                Generate(
+                    modelBuilder =>
+                        modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, "1.1.0"),
+                    new AlterColumnOperation
+                    {
+                        Table = "Person",
+                        Name = "Id",
+                        ClrType = typeof(int),
+                        [SqlServerAnnotationNames.ValueGenerationStrategy] =
+                            SqlServerValueGenerationStrategy.IdentityColumn,
+                        OldColumn = new AddColumnOperation { ClrType = typeof(int) }
+                    }
+                ));
 
             Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
         }
@@ -430,25 +428,23 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
         [ConditionalFact]
         public virtual void AlterColumnOperation_remove_identity_legacy()
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                    Generate(
-                        modelBuilder =>
-                            modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, "1.1.0"),
-                        new AlterColumnOperation
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                Generate(
+                    modelBuilder =>
+                        modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, "1.1.0"),
+                    new AlterColumnOperation
+                    {
+                        Table = "Person",
+                        Name = "Id",
+                        ClrType = typeof(int),
+                        OldColumn = new AddColumnOperation
                         {
-                            Table = "Person",
-                            Name = "Id",
                             ClrType = typeof(int),
-                            OldColumn = new AddColumnOperation
-                            {
-                                ClrType = typeof(int),
-                                [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                                    SqlServerValueGenerationStrategy.IdentityColumn
-                            }
+                            [SqlServerAnnotationNames.ValueGenerationStrategy] =
+                                SqlServerValueGenerationStrategy.IdentityColumn
                         }
-                    )
-            );
+                    }
+                ));
 
             Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
         }
@@ -646,9 +642,8 @@ DROP DATABASE [Northwind];
 
             migrationBuilder.DropIndex(name: "IX_Name");
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => Generate(migrationBuilder.Operations.ToArray())
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                Generate(migrationBuilder.Operations.ToArray()));
 
             Assert.Equal(SqlServerStrings.IndexTableRequired, ex.Message);
         }
@@ -696,9 +691,8 @@ DROP DATABASE [Northwind];
 
             migrationBuilder.RenameIndex(name: "IX_OldIndex", newName: "IX_NewIndex");
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => Generate(migrationBuilder.Operations.ToArray())
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                Generate(migrationBuilder.Operations.ToArray()));
 
             Assert.Equal(SqlServerStrings.IndexTableRequired, ex.Message);
         }

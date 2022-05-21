@@ -179,17 +179,15 @@ namespace Microsoft.CodeAnalysis
             // corefx. We also open the file for reading with FileShare mode read/write/delete so that
             // we do not lock this file.
             using (
-                var stream = FileUtilities.RethrowExceptionsAsIOException(
-                    () =>
-                        new FileStream(
-                            Path,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite | FileShare.Delete,
-                            bufferSize: 1,
-                            useAsync: true
-                        )
-                )
+                var stream = FileUtilities.RethrowExceptionsAsIOException(() =>
+                    new FileStream(
+                        Path,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite | FileShare.Delete,
+                        bufferSize: 1,
+                        useAsync: true
+                    ))
             )
             {
                 var version = VersionStamp.Create(prevLastWriteTime);
@@ -239,17 +237,15 @@ namespace Microsoft.CodeAnalysis
 
             // Open file for reading with FileShare mode read/write/delete so that we do not lock this file.
             using (
-                var stream = FileUtilities.RethrowExceptionsAsIOException(
-                    () =>
-                        new FileStream(
-                            Path,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite | FileShare.Delete,
-                            bufferSize: 4096,
-                            useAsync: false
-                        )
-                )
+                var stream = FileUtilities.RethrowExceptionsAsIOException(() =>
+                    new FileStream(
+                        Path,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite | FileShare.Delete,
+                        bufferSize: 4096,
+                        useAsync: false
+                    ))
             )
             {
                 var version = VersionStamp.Create(prevLastWriteTime);

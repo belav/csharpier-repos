@@ -344,9 +344,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<ClassWithPropertyNamingConflictWhichThrows>(json)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithPropertyNamingConflictWhichThrows>(json));
         }
 
         [Fact]
@@ -358,12 +357,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithPropertyFieldNamingConflictWhichThrows>(json));
         }
 
         [Fact]
@@ -380,12 +375,10 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyNamingConflictWhichThrows>(
-                        json
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassInheritedWithPropertyNamingConflictWhichThrows>(
+                    json
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -406,12 +399,10 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(
+                    json
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -433,12 +424,10 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(
-                        json
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(
+                    json
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -460,12 +449,10 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(
+                    json
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -486,13 +473,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassWithPropertyPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithPropertyPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
         }
 
         [Fact]
@@ -509,13 +494,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassWithPropertyFieldPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithPropertyFieldPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
         }
 
         [Fact]
@@ -538,13 +521,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassInheritedWithPropertyPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -571,13 +552,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -605,13 +584,11 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -639,13 +616,11 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldPolicyConflictWhichThrows>(
-                        json,
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldPolicyConflictWhichThrows>(
+                    json,
+                    options
+                ));
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -714,9 +689,8 @@ namespace System.Text.Json.Serialization.Tests
             // Conflicts at different type-hierarchy levels that are not caused by
             // deriving or the new keyword are allowed. Properties on more derived types win.
             // This is invalid in System.Text.Json.
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(new DerivedClass_WithConflictingPropertyName())
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(new DerivedClass_WithConflictingPropertyName()));
 
             serialized = JsonSerializer.Serialize(new FurtherDerivedClass_With_IgnoredOverride());
             Assert.Equal(@"{""MyProp"":null}", serialized);
@@ -1252,9 +1226,8 @@ namespace System.Text.Json.Serialization.Tests
                     }";
 
             // Unsupported collections will throw on deserialize by default.
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<ClassWithUnsupportedDictionary>(json)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ClassWithUnsupportedDictionary>(json));
 
             // Using new options instance to prevent using previously cached metadata.
             JsonSerializerOptions options = new JsonSerializerOptions();
@@ -1284,13 +1257,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Unsupported collections will throw on deserialize by default if they contain elements.
             options = new JsonSerializerOptions();
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Deserialize<WrapperForClassWithUnsupportedDictionary>(
-                        wrapperJson,
-                        options
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<WrapperForClassWithUnsupportedDictionary>(
+                    wrapperJson,
+                    options
+                ));
 
             options = new JsonSerializerOptions();
             // Unsupported collections will throw on serialize by default if they contain elements.
@@ -1339,18 +1310,15 @@ namespace System.Text.Json.Serialization.Tests
             string wrapperJson = @"{""MyClass"":{""MyBigInteger"":1}}";
 
             // Unsupported types will throw by default.
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ClassWithUnsupportedBigInteger>(json)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithUnsupportedBigInteger>(json));
             // Using new options instance to prevent using previously cached metadata.
             JsonSerializerOptions options = new JsonSerializerOptions();
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer.Deserialize<WrapperForClassWithUnsupportedBigInteger>(
-                        wrapperJson,
-                        options
-                    )
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<WrapperForClassWithUnsupportedBigInteger>(
+                    wrapperJson,
+                    options
+                ));
 
             // When ignored, we can serialize and deserialize without exceptions.
             options = new JsonSerializerOptions();
@@ -2627,18 +2595,16 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(StructWithBadIgnoreAttribute))]
         public static void JsonIgnoreCondition_WhenWritingNull_OnValueType_Fail(Type type)
         {
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize("", type)
-            );
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("", type));
             string exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);
             Assert.Contains("JsonIgnoreCondition.WhenWritingDefault", exAsStr);
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(Activator.CreateInstance(type))
-            );
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(Activator.CreateInstance(type)));
             exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
@@ -2745,15 +2711,13 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonIgnoreCondition_ConverterCalledOnDeserialize()
         {
             // Verify converter is called.
-            Assert.Throws<NotImplementedException>(
-                () => JsonSerializer.Deserialize<MyValueTypeWithProperties>("{}")
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                JsonSerializer.Deserialize<MyValueTypeWithProperties>("{}"));
 
             var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
-            Assert.Throws<NotImplementedException>(
-                () => JsonSerializer.Deserialize<MyValueTypeWithProperties>("{}", options)
-            );
+            Assert.Throws<NotImplementedException>(() =>
+                JsonSerializer.Deserialize<MyValueTypeWithProperties>("{}", options));
         }
 
         [Fact]

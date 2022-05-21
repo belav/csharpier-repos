@@ -31,16 +31,14 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
 
         // Act
         var ex = await Assert
-            .ThrowsAsync<InvalidOperationException>(
-                () =>
-                    quicTransportFactory
-                        .BindAsync(
-                            new IPEndPoint(0, 0),
-                            features: null,
-                            cancellationToken: CancellationToken.None
-                        )
-                        .AsTask()
-            )
+            .ThrowsAsync<InvalidOperationException>(() =>
+                quicTransportFactory
+                    .BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: null,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .AsTask())
             .DefaultTimeout();
 
         // Assert
@@ -62,16 +60,14 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
 
         // Act
         var ex = await Assert
-            .ThrowsAsync<InvalidOperationException>(
-                () =>
-                    quicTransportFactory
-                        .BindAsync(
-                            new IPEndPoint(0, 0),
-                            features: features,
-                            cancellationToken: CancellationToken.None
-                        )
-                        .AsTask()
-            )
+            .ThrowsAsync<InvalidOperationException>(() =>
+                quicTransportFactory
+                    .BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: features,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .AsTask())
             .DefaultTimeout();
 
         // Assert

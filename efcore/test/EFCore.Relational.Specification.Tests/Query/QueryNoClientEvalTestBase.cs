@@ -151,37 +151,32 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            AssertTranslationFailed(
-                () => (from c1 in context.Customers from i in new[] { 1, 2, 3 } select c1).ToList()
-            );
+            AssertTranslationFailed(() =>
+                (from c1 in context.Customers from i in new[] { 1, 2, 3 } select c1).ToList());
         }
 
         [ConditionalFact]
         public virtual void Throws_when_join()
         {
             using var context = CreateContext();
-            AssertTranslationFailed(
-                () =>
-                    (
-                        from e1 in context.Employees
-                        join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i
-                        select e1
-                    ).ToList()
-            );
+            AssertTranslationFailed(() =>
+                (
+                    from e1 in context.Employees
+                    join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i
+                    select e1
+                ).ToList());
         }
 
         [ConditionalFact]
         public virtual void Throws_when_group_join()
         {
             using var context = CreateContext();
-            AssertTranslationFailed(
-                () =>
-                    (
-                        from e1 in context.Employees
-                        join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i into g
-                        select e1
-                    ).ToList()
-            );
+            AssertTranslationFailed(() =>
+                (
+                    from e1 in context.Employees
+                    join i in new uint[] { 1, 2, 3 } on e1.EmployeeID equals i into g
+                    select e1
+                ).ToList());
         }
 
         [ConditionalFact(Skip = "Issue#18923")]

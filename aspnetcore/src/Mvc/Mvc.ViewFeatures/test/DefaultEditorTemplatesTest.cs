@@ -1730,12 +1730,10 @@ public class DefaultEditorTemplatesTest
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
             .Returns(
-                Task.Run(
-                    () =>
-                    {
-                        throw new FormatException(expectedMessage);
-                    }
-                )
+                Task.Run(() =>
+                {
+                    throw new FormatException(expectedMessage);
+                })
             );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine

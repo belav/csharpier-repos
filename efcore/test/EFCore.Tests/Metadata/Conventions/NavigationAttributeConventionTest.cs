@@ -582,9 +582,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(SelfReferencingEntity.AnotherEntity)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => RunEntityTypeConventions(entityTypeBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        RunEntityTypeConventions(entityTypeBuilder))
                     .Message
             );
         }
@@ -602,9 +601,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(Principal)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => RunEntityTypeConventions(entityTypeBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        RunEntityTypeConventions(entityTypeBuilder))
                     .Message
             );
         }
@@ -622,9 +620,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(Principal)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => RunEntityTypeConventions(entityTypeBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        RunEntityTypeConventions(entityTypeBuilder))
                     .Message
             );
         }
@@ -642,9 +639,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(Principal)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => RunEntityTypeConventions(entityTypeBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        RunEntityTypeConventions(entityTypeBuilder))
                     .Message
             );
         }
@@ -1062,12 +1058,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(FkPropertyNavigationMismatch)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            useNavigation
-                                ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                                : RunForeignKeyAttributeConvention(relationshipBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder))
                     .Message
             );
         }
@@ -1097,12 +1091,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 CoreStrings.CompositeFkOnProperty("Principal", nameof(CompositeFkOnProperty)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            useNavigation
-                                ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                                : RunForeignKeyAttributeConvention(relationshipBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder))
                     .Message
             );
         }
@@ -1136,12 +1128,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "PrincipalId1,,PrincipalId2"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            useNavigation
-                                ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                                : RunForeignKeyAttributeConvention(relationshipBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder))
                     .Message
             );
         }
@@ -1175,12 +1165,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "'One', 'Two'"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            useNavigation
-                                ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
-                                : RunForeignKeyAttributeConvention(relationshipBuilder)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        useNavigation
+                            ? RunForeignKeyAttributeConvention(relationshipBuilder, navigation)
+                            : RunForeignKeyAttributeConvention(relationshipBuilder))
                     .Message
             );
         }

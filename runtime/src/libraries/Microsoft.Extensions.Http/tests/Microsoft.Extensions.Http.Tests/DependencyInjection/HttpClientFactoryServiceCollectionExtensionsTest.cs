@@ -691,9 +691,8 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>());
 
             // Assert
             Assert.Equal(
@@ -1209,12 +1208,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    services.GetRequiredService<TypedClientWithScopedService>();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                services.GetRequiredService<TypedClientWithScopedService>();
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1373,40 +1370,34 @@ namespace Microsoft.Extensions.DependencyInjection
                 var serviceCollection = new ServiceCollection();
                 serviceCollection
                     .AddHttpClient("example.com")
-                    .ConfigurePrimaryHttpMessageHandler(
-                        () =>
-                        {
-                            var mockHandler = new Mock<HttpMessageHandler>();
-                            mockHandler
-                                .Protected()
-                                .Setup<Task<HttpResponseMessage>>(
-                                    "SendAsync",
-                                    ItExpr.IsAny<HttpRequestMessage>(),
-                                    ItExpr.IsAny<CancellationToken>()
-                                )
-                                .Returns(
-                                    async () =>
-                                    {
-                                        await Task.Delay(1).ConfigureAwait(false);
-                                        return new HttpResponseMessage(HttpStatusCode.OK);
-                                    }
-                                );
-                            return mockHandler.Object;
-                        }
-                    );
+                    .ConfigurePrimaryHttpMessageHandler(() =>
+                    {
+                        var mockHandler = new Mock<HttpMessageHandler>();
+                        mockHandler
+                            .Protected()
+                            .Setup<Task<HttpResponseMessage>>(
+                                "SendAsync",
+                                ItExpr.IsAny<HttpRequestMessage>(),
+                                ItExpr.IsAny<CancellationToken>()
+                            )
+                            .Returns(async () =>
+                            {
+                                await Task.Delay(1).ConfigureAwait(false);
+                                return new HttpResponseMessage(HttpStatusCode.OK);
+                            });
+                        return mockHandler.Object;
+                    });
 
                 var services = serviceCollection.BuildServiceProvider();
                 var factory = services.GetRequiredService<IHttpClientFactory>();
                 var client = factory.CreateClient("example.com");
                 var hangs = true;
-                SingleThreadedSynchronizationContext.Run(
-                    () =>
-                    {
-                        // Act
-                        client.GetAsync("http://example.com", token).GetAwaiter().GetResult();
-                        hangs = false;
-                    }
-                );
+                SingleThreadedSynchronizationContext.Run(() =>
+                {
+                    // Act
+                    client.GetAsync("http://example.com", token).GetAwaiter().GetResult();
+                    hangs = false;
+                });
 
                 // Assert
                 Assert.False(hangs);

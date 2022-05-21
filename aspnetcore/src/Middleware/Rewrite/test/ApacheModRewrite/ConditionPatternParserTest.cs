@@ -144,9 +144,8 @@ public class ConditionPatternParserTest
         string expected
     )
     {
-        var ex = Assert.Throws<FormatException>(
-            () => new ConditionPatternParser().ParseActionCondition(input)
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+            new ConditionPatternParser().ParseActionCondition(input));
         Assert.Equal(expected, ex.Message);
     }
 

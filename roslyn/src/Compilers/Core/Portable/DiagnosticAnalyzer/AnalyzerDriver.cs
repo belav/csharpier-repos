@@ -857,13 +857,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (_initializeSucceeded)
                 {
                     _lazyCompilationEventQueue = eventQueue;
-                    _lazyQueueRegistration = cancellationToken.Register(
-                        () =>
-                        {
-                            this.CompilationEventQueue.TryComplete();
-                            this.DiagnosticQueue.TryComplete();
-                        }
-                    );
+                    _lazyQueueRegistration = cancellationToken.Register(() =>
+                    {
+                        this.CompilationEventQueue.TryComplete();
+                        this.DiagnosticQueue.TryComplete();
+                    });
 
                     _lazyPrimaryTask = ExecutePrimaryAnalysisTaskAsync(
                             analysisScope,
@@ -1895,16 +1893,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     for (int i = 0; i < workerCount; i++)
                     {
                         // Create separate worker tasks to process all compilation events - we do not want to process any events on the main thread.
-                        workerTasks[i] = Task.Run(
-                            async () =>
-                                await ProcessCompilationEventsCoreAsync(
-                                        analysisScope,
-                                        analysisState,
-                                        prePopulatedEventQueue,
-                                        cancellationToken
-                                    )
-                                    .ConfigureAwait(false)
-                        );
+                        workerTasks[i] = Task.Run(async () =>
+                            await ProcessCompilationEventsCoreAsync(
+                                    analysisScope,
+                                    analysisState,
+                                    prePopulatedEventQueue,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false));
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();

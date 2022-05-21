@@ -49,9 +49,8 @@ public class ResponseCacheAttributeTest
         cacheProfiles.Add("Test", new CacheProfile { Duration = 20 });
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => responseCache.CreateInstance(GetServiceProvider(cacheProfiles))
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            responseCache.CreateInstance(GetServiceProvider(cacheProfiles)));
         Assert.Equal("The 'HelloWorld' cache profile is not defined.", ex.Message);
     }
 
@@ -393,12 +392,10 @@ public class ResponseCacheAttributeTest
         var context = GetActionExecutingContext(filter);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                filter.OnActionExecuting(context);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            filter.OnActionExecuting(context);
+        });
         Assert.Equal(
             "If the 'NoStore' property is not set to true, 'Duration' property must be specified.",
             exception.Message

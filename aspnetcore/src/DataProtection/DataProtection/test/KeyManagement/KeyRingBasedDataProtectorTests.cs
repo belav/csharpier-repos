@@ -143,9 +143,8 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Protect(new byte[0])
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Protect(new byte[0]));
         Assert.IsAssignableFrom<MockException>(ex.InnerException);
     }
 
@@ -182,9 +181,8 @@ public class KeyRingBasedDataProtectorTests
         badProtectedPayload = badProtectedPayload.Take(badProtectedPayload.Length - 1).ToArray(); // chop off the last byte
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(badProtectedPayload)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(badProtectedPayload));
         Assert.Equal(Resources.ProtectionProvider_BadMagicHeader, ex.Message);
     }
 
@@ -203,9 +201,8 @@ public class KeyRingBasedDataProtectorTests
         badProtectedPayload[0]++; // corrupt the magic header
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(badProtectedPayload)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(badProtectedPayload));
         Assert.Equal(Resources.ProtectionProvider_BadMagicHeader, ex.Message);
     }
 
@@ -224,9 +221,8 @@ public class KeyRingBasedDataProtectorTests
         badProtectedPayload[3]++; // bump the version payload
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(badProtectedPayload)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(badProtectedPayload));
         Assert.Equal(Resources.ProtectionProvider_BadVersion, ex.Message);
     }
 
@@ -268,9 +264,8 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(protectedData)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(protectedData));
         Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
     }
 
@@ -344,9 +339,8 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(protectedData)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(protectedData));
         Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
     }
 
@@ -412,9 +406,8 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(protectedData)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(protectedData));
         Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
     }
 
@@ -553,9 +546,8 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(
-            () => protector.Unprotect(protectedData)
-        );
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
+            protector.Unprotect(protectedData));
         Assert.Equal(Error.Common_KeyRevoked(keyId).Message, ex.Message);
     }
 

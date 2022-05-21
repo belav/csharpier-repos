@@ -394,16 +394,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Customer)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                customerBuilder.OwnsOne(
-                                    c => c.Details,
-                                    r =>
-                                    {
-                                        r.HasOne(d => d.Customer).WithMany();
-                                    }
-                                )
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            customerBuilder.OwnsOne(
+                                c => c.Details,
+                                r =>
+                                {
+                                    r.HasOne(d => d.Customer).WithMany();
+                                }
+                            ))
                         .Message
                 );
             }
@@ -1926,9 +1924,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.ClashingNonOwnedEntityType(nameof(CustomerDetails)),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<SpecialCustomer>().OwnsOne(c => c.Details)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<SpecialCustomer>().OwnsOne(c => c.Details))
                         .Message
                 );
             }
@@ -1944,9 +1941,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.ClashingOwnedEntityType(nameof(CustomerDetails)),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<SpecialCustomer>().HasOne(c => c.Details)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<SpecialCustomer>().HasOne(c => c.Details))
                         .Message
                 );
             }
@@ -1974,9 +1970,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         ? CoreStrings.ClashingSharedType(nameof(BookLabel))
                         : CoreStrings.ClashingOwnedEntityType(nameof(BookLabel)),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<AnotherBookLabel>().HasBaseType<BookLabel>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<AnotherBookLabel>().HasBaseType<BookLabel>())
                         .Message
                 );
             }
@@ -1996,9 +1991,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(AnotherBookLabel)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Book>().OwnsOne(c => c.Label)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Book>().OwnsOne(c => c.Label))
                         .Message
                 );
             }
@@ -2194,12 +2188,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(OneToOneNavPrincipalOwner).Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<OneToOneNavPrincipalOwner>()
-                                    .OwnsMany<OwnedNavDependent>("OwnedDependent")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<OneToOneNavPrincipalOwner>()
+                                .OwnsMany<OwnedNavDependent>("OwnedDependent"))
                         .Message
                 );
             }
@@ -2216,12 +2208,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(OneToManyNavPrincipalOwner).Name
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<OneToManyNavPrincipalOwner>()
-                                    .OwnsOne<OwnedOneToManyNavDependent>("OwnedDependents")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder
+                                .Entity<OneToManyNavPrincipalOwner>()
+                                .OwnsOne<OwnedOneToManyNavDependent>("OwnedDependents"))
                         .Message
                 );
             }
@@ -2315,9 +2305,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 nameof(OwnerOfSharedType.Collection)
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.OwnsMany("Shared1", e => e.Collection)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.OwnsMany("Shared1", e => e.Collection))
                                 .Message
                         );
                     }

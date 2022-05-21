@@ -62,17 +62,15 @@ namespace BenchmarksGame
             var initialLength = sequences.Length;
             sequences = Regex.Replace(sequences, ">.*\n|\n", "");
 
-            var magicTask = Task.Run(
-                () =>
-                {
-                    var newseq = regex("tHa[Nt]").Replace(sequences, "<4>");
-                    newseq = regex("aND|caN|Ha[DS]|WaS").Replace(newseq, "<3>");
-                    newseq = regex("a[NSt]|BY").Replace(newseq, "<2>");
-                    newseq = regex("<[^>]*>").Replace(newseq, "|");
-                    newseq = regex("\\|[^|][^|]*\\|").Replace(newseq, "-");
-                    return newseq.Length;
-                }
-            );
+            var magicTask = Task.Run(() =>
+            {
+                var newseq = regex("tHa[Nt]").Replace(sequences, "<4>");
+                newseq = regex("aND|caN|Ha[DS]|WaS").Replace(newseq, "<3>");
+                newseq = regex("a[NSt]|BY").Replace(newseq, "<2>");
+                newseq = regex("<[^>]*>").Replace(newseq, "|");
+                newseq = regex("\\|[^|][^|]*\\|").Replace(newseq, "-");
+                return newseq.Length;
+            });
 
             var variant2 = Task.Run(() => regexCount(sequences, "[cgt]gggtaaa|tttaccc[acg]"));
             var variant3 = Task.Run(() => regexCount(sequences, "a[act]ggtaaa|tttacc[agt]t"));

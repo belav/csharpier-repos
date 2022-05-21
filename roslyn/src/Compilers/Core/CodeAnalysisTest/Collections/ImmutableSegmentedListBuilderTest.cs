@@ -155,9 +155,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 1, 2, 3, 4, 5, 6 }, mutable);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(-1, new int[0]));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => mutable.InsertRange(mutable.Count + 1, new int[0])
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                mutable.InsertRange(mutable.Count + 1, new int[0]));
         }
 
         [Fact]
@@ -387,9 +386,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Type proxyType = DebuggerAttributes.GetProxyType(
                 ImmutableSegmentedList.CreateBuilder<string>()
             );
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(proxyType, (object)null!)
-            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object)null!));
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

@@ -300,13 +300,11 @@ namespace System.Resources.ResourceWriterTests
         [Fact]
         public static void ExceptionforResWriter01()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    MemoryStream ms2 = null;
-                    var rw = new ResourceWriter(ms2);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MemoryStream ms2 = null;
+                var rw = new ResourceWriter(ms2);
+            });
         }
 
         [Fact]
@@ -359,19 +357,17 @@ namespace System.Resources.ResourceWriterTests
         [Fact]
         public static void ExceptionforResWriter05()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                byte[] buffer = new byte[_RefBuffer.Length];
+                using (var ms2 = new MemoryStream(buffer, true))
                 {
-                    byte[] buffer = new byte[_RefBuffer.Length];
-                    using (var ms2 = new MemoryStream(buffer, true))
-                    {
-                        var rw1 = new ResourceWriter(ms2);
-                        rw1.AddResource("key2", "args");
-                        rw1.Dispose();
-                        rw1.AddResource("key2", "args");
-                    }
+                    var rw1 = new ResourceWriter(ms2);
+                    rw1.AddResource("key2", "args");
+                    rw1.Dispose();
+                    rw1.AddResource("key2", "args");
                 }
-            );
+            });
         }
 
         [Fact]

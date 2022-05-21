@@ -641,14 +641,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (var writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        formatter.WriteItemEntryPoint(
-                            null,
-                            new SyndicationItem(),
-                            new Uri("http://microsoft.com")
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemEntryPoint(
+                        null,
+                        new SyndicationItem(),
+                        new Uri("http://microsoft.com")
+                    ));
             }
         }
 
@@ -659,10 +657,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (var writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com"))
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com")));
             }
         }
 
@@ -739,10 +735,8 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { new SyndicationItem() };
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com"))
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com")));
             }
         }
 
@@ -754,14 +748,8 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { null };
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        formatter.WriteItemsEntryPoint(
-                            writer,
-                            items,
-                            new Uri("http://microsoft.com")
-                        )
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemsEntryPoint(writer, items, new Uri("http://microsoft.com")));
             }
         }
 

@@ -53,13 +53,11 @@ namespace System.IO.Pipes.Tests
 
                 bool ran = false;
                 uint ranAs = 0;
-                outbound.RunAsClient(
-                    () =>
-                    {
-                        ran = true;
-                        ranAs = geteuid();
-                    }
-                );
+                outbound.RunAsClient(() =>
+                {
+                    ran = true;
+                    ranAs = geteuid();
+                });
                 Assert.True(ran, "Expected delegate to have been invoked");
                 Assert.Equal(pairID, ranAs);
             }

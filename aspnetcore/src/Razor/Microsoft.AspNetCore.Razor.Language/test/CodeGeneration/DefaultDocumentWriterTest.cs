@@ -135,12 +135,10 @@ public class DefaultDocumentWriterTest
         var writer = new DefaultDocumentWriter(target, options);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var result = writer.WriteDocument(codeDocument, document);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            var result = writer.WriteDocument(codeDocument, document);
+        });
         Assert.Equal(
             "The hash algorithm 'SHA3' is not supported for checksum generation. Supported algorithms are: 'SHA1 SHA256'. "
                 + "Set 'RazorCodeGenerationOptions.SuppressChecksum' to 'True' to suppress automatic checksum generation.",

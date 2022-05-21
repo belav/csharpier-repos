@@ -101,12 +101,10 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public void Create_InvalidName()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    CreateNamedPipe(pipeName: "", GetBasicPipeSecurity());
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                CreateNamedPipe(pipeName: "", GetBasicPipeSecurity());
+            });
 
             Assert.Throws<ArgumentNullException>(
                 "pipeName",
@@ -129,17 +127,15 @@ namespace System.IO.Pipes.Tests
         [MemberData(nameof(Create_InvalidPipeDirection_MemberData))]
         public void Create_InvalidPipeDirection(PipeDirection direction)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            direction: direction
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        direction: direction
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
@@ -201,51 +197,45 @@ namespace System.IO.Pipes.Tests
         [MemberData(nameof(Create_InvalidBufferSize_MemberData))]
         public void Create_InvalidInBufferSize(int inBufferSize)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            inBufferSize: inBufferSize
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        inBufferSize: inBufferSize
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidBufferSize_MemberData))]
         public void Create_InvalidOutBufferSize(int outBufferSize)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            outBufferSize: outBufferSize
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        outBufferSize: outBufferSize
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidInheritability_MemberData))]
         public void Create_InvalidInheritability(HandleInheritability inheritability)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            inheritability: inheritability
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        inheritability: inheritability
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
@@ -271,12 +261,10 @@ namespace System.IO.Pipes.Tests
             // - WriteData (0x2): Same value as PIPE_ACCESS_OUTBOUND
 
             // Any other value will throw with the message 'The parameter is incorrect.'
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    Create_AdditionalAccessRights(additionalAccessRights).Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                Create_AdditionalAccessRights(additionalAccessRights).Dispose();
+            });
         }
 
         [Theory]
@@ -290,24 +278,20 @@ namespace System.IO.Pipes.Tests
             // Neither CreateNewInstance (0x4) nor Delete (0x10000) collide with any of the dwOpenMode values that get into the bitwise combination:
             // PipeOptions, PipeDirection, Interop.Kernel32.FileOperations.FILE_FLAG_FIRST_PIPE_INSTANCE
             // But Windows does not accept them anyway
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    Create_AdditionalAccessRights(additionalAccessRights).Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                Create_AdditionalAccessRights(additionalAccessRights).Dispose();
+            });
         }
 
         [Fact]
         public void Create_NotEnoughPrivilegesAdditionalAccessRights()
         {
             // Exception message: "A required privilege is not held by the client"
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    Create_AdditionalAccessRights(PipeAccessRights.AccessSystemSecurity).Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                Create_AdditionalAccessRights(PipeAccessRights.AccessSystemSecurity).Dispose();
+            });
         }
 
         [Theory]

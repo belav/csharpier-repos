@@ -93,14 +93,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 }
                 else
                 {
-                    return _threadingContext.JoinableTaskFactory.Run(
-                        async () =>
-                        {
-                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    return _threadingContext.JoinableTaskFactory.Run(async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            return EnsureDocument(filePath);
-                        }
-                    );
+                        return EnsureDocument(filePath);
+                    });
                 }
             }
         }
@@ -161,15 +159,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     ProjectGuid = projectGuid
                 };
 
-                project = _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
-                            name,
-                            StringConstants.XamlLanguageName,
-                            projectInfo,
-                            CancellationToken.None
-                        )
-                );
+                project = _threadingContext.JoinableTaskFactory.Run(() =>
+                    _visualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
+                        name,
+                        StringConstants.XamlLanguageName,
+                        projectInfo,
+                        CancellationToken.None
+                    ));
                 _xamlProjects.Add(hierarchy, project);
             }
 

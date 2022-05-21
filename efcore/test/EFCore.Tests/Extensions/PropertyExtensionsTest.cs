@@ -87,9 +87,8 @@ namespace Microsoft.EntityFrameworkCore
                     "int"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => property1.SetValueConverter(new CastingConverter<long, decimal>())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        property1.SetValueConverter(new CastingConverter<long, decimal>()))
                     .Message
             );
         }

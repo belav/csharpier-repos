@@ -192,9 +192,8 @@ public class LongPollingTransportTests : VerifiableLoggedTest
             var longPollingTransport = new LongPollingTransport(httpClient);
             try
             {
-                var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => longPollingTransport.StartAsync(TestUri, TransferFormat.Binary)
-                );
+                var exception = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    longPollingTransport.StartAsync(TestUri, TransferFormat.Binary));
                 Assert.Contains(" 500 ", exception.Message);
             }
             finally
@@ -236,17 +235,15 @@ public class LongPollingTransportTests : VerifiableLoggedTest
             {
                 await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
 
-                var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    async () =>
+                var exception = await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                {
+                    async Task ReadAsync()
                     {
-                        async Task ReadAsync()
-                        {
-                            await longPollingTransport.Input.ReadAsync();
-                        }
-
-                        await ReadAsync().DefaultTimeout();
+                        await longPollingTransport.Input.ReadAsync();
                     }
-                );
+
+                    await ReadAsync().DefaultTimeout();
+                });
                 Assert.Contains(" 500 ", exception.Message);
             }
             finally
@@ -359,9 +356,8 @@ public class LongPollingTransportTests : VerifiableLoggedTest
 
                 await longPollingTransport.Running.DefaultTimeout();
 
-                var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    async () => await longPollingTransport.Input.ReadAllAsync().DefaultTimeout()
-                );
+                var exception = await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                    await longPollingTransport.Input.ReadAllAsync().DefaultTimeout());
                 Assert.Contains(" 500 ", exception.Message);
 
                 Assert.True(stopped);
@@ -743,9 +739,8 @@ public class LongPollingTransportTests : VerifiableLoggedTest
         using (var httpClient = new HttpClient(mockHttpHandler.Object))
         {
             var longPollingTransport = new LongPollingTransport(httpClient);
-            var exception = await Assert.ThrowsAsync<ArgumentException>(
-                () => longPollingTransport.StartAsync(TestUri, transferFormat)
-            );
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                longPollingTransport.StartAsync(TestUri, transferFormat));
 
             Assert.Contains(
                 $"The '{transferFormat}' transfer format is not supported by this transport.",

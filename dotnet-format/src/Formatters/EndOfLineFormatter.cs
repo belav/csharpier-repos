@@ -28,43 +28,41 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             CancellationToken cancellationToken
         )
         {
-            return Task.Run(
-                () =>
+            return Task.Run(() =>
+            {
+                if (!TryGetEndOfLine(analyzerConfigOptions, out var endOfLine))
                 {
-                    if (!TryGetEndOfLine(analyzerConfigOptions, out var endOfLine))
-                    {
-                        return sourceText;
-                    }
-
-                    var newSourceText = sourceText;
-                    for (var lineIndex = 0; lineIndex < newSourceText.Lines.Count; lineIndex++)
-                    {
-                        var line = newSourceText.Lines[lineIndex];
-                        var lineEndingSpan = new TextSpan(
-                            line.End,
-                            line.EndIncludingLineBreak - line.End
-                        );
-
-                        // Check for end of file
-                        if (lineEndingSpan.IsEmpty)
-                        {
-                            break;
-                        }
-
-                        var lineEnding = newSourceText.ToString(lineEndingSpan);
-
-                        if (lineEnding == endOfLine)
-                        {
-                            continue;
-                        }
-
-                        var newLineChange = new TextChange(lineEndingSpan, endOfLine);
-                        newSourceText = newSourceText.WithChanges(newLineChange);
-                    }
-
-                    return newSourceText;
+                    return sourceText;
                 }
-            );
+
+                var newSourceText = sourceText;
+                for (var lineIndex = 0; lineIndex < newSourceText.Lines.Count; lineIndex++)
+                {
+                    var line = newSourceText.Lines[lineIndex];
+                    var lineEndingSpan = new TextSpan(
+                        line.End,
+                        line.EndIncludingLineBreak - line.End
+                    );
+
+                    // Check for end of file
+                    if (lineEndingSpan.IsEmpty)
+                    {
+                        break;
+                    }
+
+                    var lineEnding = newSourceText.ToString(lineEndingSpan);
+
+                    if (lineEnding == endOfLine)
+                    {
+                        continue;
+                    }
+
+                    var newLineChange = new TextChange(lineEndingSpan, endOfLine);
+                    newSourceText = newSourceText.WithChanges(newLineChange);
+                }
+
+                return newSourceText;
+            });
         }
 
         public static bool TryGetEndOfLine(

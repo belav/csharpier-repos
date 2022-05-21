@@ -360,9 +360,8 @@ namespace IDynamicInterfaceCastableTests
                 ITestImpl.GetNumberStaticReturnValue,
                 testObj.CallImplemented(ImplementationToCall.InterfaceStatic)
             );
-            Assert.Throws<InvalidCastException>(
-                () => testObj.CallImplemented(ImplementationToCall.ImplInterfacePublic)
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                testObj.CallImplemented(ImplementationToCall.ImplInterfacePublic));
 
             Console.WriteLine(" -- Validate delegate call");
             Func<ITest> func = new Func<ITest>(testObj.ReturnThis);
@@ -421,12 +420,10 @@ namespace IDynamicInterfaceCastableTests
                 $"Should not be castable to {nameof(ITestGeneric<bool, bool>)} via is"
             );
             Assert.Null(castableObj as ITestGeneric<bool, bool>);
-            var ex = Assert.Throws<DynamicInterfaceCastableException>(
-                () =>
-                {
-                    var _ = (ITestGeneric<bool, bool>)castableObj;
-                }
-            );
+            var ex = Assert.Throws<DynamicInterfaceCastableException>(() =>
+            {
+                var _ = (ITestGeneric<bool, bool>)castableObj;
+            });
             Assert.Equal(
                 string.Format(
                     DynamicInterfaceCastableException.ErrorFormat,
@@ -516,12 +513,10 @@ namespace IDynamicInterfaceCastableTests
                 $"Should not be castable to {nameof(INotImplemented)} via is"
             );
             Assert.Null(castableObj as INotImplemented);
-            var ex = Assert.Throws<DynamicInterfaceCastableException>(
-                () =>
-                {
-                    var _ = (INotImplemented)castableObj;
-                }
-            );
+            var ex = Assert.Throws<DynamicInterfaceCastableException>(() =>
+            {
+                var _ = (INotImplemented)castableObj;
+            });
             Assert.Equal(
                 string.Format(
                     DynamicInterfaceCastableException.ErrorFormat,
@@ -621,12 +616,10 @@ namespace IDynamicInterfaceCastableTests
             castableObj.InvalidImplementation = BadDynamicInterfaceCastable
                 .InvalidReturn
                 .ThrowException;
-            ex = Assert.Throws<DynamicInterfaceCastableException>(
-                () =>
-                {
-                    var _ = (ITest)castableObj;
-                }
-            );
+            ex = Assert.Throws<DynamicInterfaceCastableException>(() =>
+            {
+                var _ = (ITest)castableObj;
+            });
             Assert.Equal(
                 string.Format(DynamicInterfaceCastableException.ErrorFormat, typeof(ITest)),
                 ex.Message
@@ -637,24 +630,20 @@ namespace IDynamicInterfaceCastableTests
             castableObj.InvalidImplementation = BadDynamicInterfaceCastable
                 .InvalidReturn
                 .ReabstractedImplementation;
-            ex = Assert.Throws<EntryPointNotFoundException>(
-                () =>
-                {
-                    testObj.ReturnThis();
-                }
-            );
+            ex = Assert.Throws<EntryPointNotFoundException>(() =>
+            {
+                testObj.ReturnThis();
+            });
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate diamond inheritance case");
             castableObj.InvalidImplementation = BadDynamicInterfaceCastable
                 .InvalidReturn
                 .DiamondImplementation;
-            ex = Assert.Throws<System.Runtime.AmbiguousImplementationException>(
-                () =>
-                {
-                    testObj.ReturnThis();
-                }
-            );
+            ex = Assert.Throws<System.Runtime.AmbiguousImplementationException>(() =>
+            {
+                testObj.ReturnThis();
+            });
             Console.WriteLine($" ---- {ex.GetType().Name}: {ex.Message}");
 
             Console.WriteLine(" -- Validate return default handle");

@@ -369,17 +369,14 @@ public partial class ThreadPoolBoundHandleTests
         ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle();
         handle.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(
-            () => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256])
-        );
-        Assert.Throws<ObjectDisposedException>(
-            () =>
-                handle.UnsafeAllocateNativeOverlapped(
-                    (_, __, ___) => { },
-                    new object(),
-                    new byte[256]
-                )
-        );
+        Assert.Throws<ObjectDisposedException>(() =>
+            handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]));
+        Assert.Throws<ObjectDisposedException>(() =>
+            handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                new byte[256]
+            ));
     }
 
     [Theory]

@@ -335,12 +335,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 SerializationContext.Default.StructWithCustomConverterProperty.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => SerializationContext.Default.ClassWithBadCustomConverter.SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => SerializationContext.Default.StructWithBadCustomConverter.SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationContext.Default.ClassWithBadCustomConverter.SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationContext.Default.StructWithBadCustomConverter.SerializeHandler);
         }
 
         [Fact]
@@ -902,20 +900,16 @@ namespace System.Text.Json.SourceGeneration.Tests
                     .StructWithCustomConverterPropertyFactory
                     .SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    SerializationWithPerTypeAttributeContext
-                        .Default
-                        .ClassWithBadCustomConverter
-                        .SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    SerializationWithPerTypeAttributeContext
-                        .Default
-                        .StructWithBadCustomConverter
-                        .SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithBadCustomConverter
+                    .SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithBadCustomConverter
+                    .SerializeHandler);
         }
     }
 }

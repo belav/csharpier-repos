@@ -189,9 +189,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         [Fact]
         public void DecodesIndexedHeaderField_OutOfRange_Error()
         {
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(_indexedHeaderDynamic, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(_indexedHeaderDynamic, endHeaders: true, handler: _handler));
             Assert.Equal(SR.Format(SR.net_http_hpack_invalid_index, 62), exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }
@@ -267,9 +266,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             // 11 1110 (Indexed Name - Index 62 encoded with 6-bit prefix - see http://httpwg.org/specs/rfc7541.html#integer.representation)
             // Index 62 is the first entry in the dynamic table. If there's nothing there, the decoder should throw.
 
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(new byte[] { 0x7e }, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(new byte[] { 0x7e }, endHeaders: true, handler: _handler));
             Assert.Equal(SR.Format(SR.net_http_hpack_invalid_index, 62), exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }
@@ -345,10 +343,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             // 1111 0010 1111 (Indexed Name - Index 62 encoded with 4-bit prefix - see http://httpwg.org/specs/rfc7541.html#integer.representation)
             // Index 62 is the first entry in the dynamic table. If there's nothing there, the decoder should throw.
 
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () =>
-                    _decoder.Decode(new byte[] { 0x0f, 0x2f }, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(new byte[] { 0x0f, 0x2f }, endHeaders: true, handler: _handler));
             Assert.Equal(SR.Format(SR.net_http_hpack_invalid_index, 62), exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }
@@ -443,10 +439,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             // 1111 0010 1111 (Indexed Name - Index 62 encoded with 4-bit prefix - see http://httpwg.org/specs/rfc7541.html#integer.representation)
             // Index 62 is the first entry in the dynamic table. If there's nothing there, the decoder should throw.
 
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () =>
-                    _decoder.Decode(new byte[] { 0x1f, 0x2f }, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(new byte[] { 0x1f, 0x2f }, endHeaders: true, handler: _handler));
             Assert.Equal(SR.Format(SR.net_http_hpack_invalid_index, 62), exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }
@@ -474,9 +468,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             Assert.Equal(DynamicTableInitialMaxSize, _dynamicTable.MaxSize);
 
             byte[] data = _indexedHeaderStatic.Concat(new byte[] { 0x3e }).ToArray();
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(data, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(data, endHeaders: true, handler: _handler));
             Assert.Equal(SR.net_http_hpack_late_dynamic_table_size_update, exception.Message);
         }
 
@@ -491,9 +484,8 @@ namespace System.Net.Http.Unit.Tests.HPack
             // 001   (Dynamic Table Size Update)
             // 11110 (30 encoded with 5-bit prefix - see http://httpwg.org/specs/rfc7541.html#integer.representation)
             byte[] data = new byte[] { 0x3e };
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(data, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(data, endHeaders: true, handler: _handler));
             Assert.Equal(SR.net_http_hpack_late_dynamic_table_size_update, exception.Message);
         }
 
@@ -520,14 +512,12 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             Assert.Equal(DynamicTableInitialMaxSize, _dynamicTable.MaxSize);
 
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () =>
-                    _decoder.Decode(
-                        new byte[] { 0x3f, 0xe2, 0x1f },
-                        endHeaders: true,
-                        handler: _handler
-                    )
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(
+                    new byte[] { 0x3f, 0xe2, 0x1f },
+                    endHeaders: true,
+                    handler: _handler
+                ));
             Assert.Equal(
                 SR.Format(
                     SR.net_http_hpack_large_table_size_update,
@@ -546,9 +536,8 @@ namespace System.Net.Http.Unit.Tests.HPack
                 .Concat(new byte[] { 0xff, 0x82, 0x3f }) // 8193 encoded with 7-bit prefix
                 .ToArray();
 
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(encoded, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(encoded, endHeaders: true, handler: _handler));
             Assert.Equal(
                 SR.Format(SR.net_http_headers_exceeded_length, MaxHeaderFieldSize),
                 exception.Message
@@ -695,9 +684,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         [MemberData(nameof(_incompleteHeaderBlockData))]
         public void DecodesIncompleteHeaderBlock_Error(byte[] encoded)
         {
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(encoded, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(encoded, endHeaders: true, handler: _handler));
             Assert.Equal(SR.net_http_hpack_incomplete_header_block, exception.Message);
             Assert.Empty(_handler.DecodedHeaders);
         }
@@ -726,9 +714,8 @@ namespace System.Net.Http.Unit.Tests.HPack
         [MemberData(nameof(_huffmanDecodingErrorData))]
         public void WrapsHuffmanDecodingExceptionInHPackDecodingException(byte[] encoded)
         {
-            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(
-                () => _decoder.Decode(encoded, endHeaders: true, handler: _handler)
-            );
+            HPackDecodingException exception = Assert.Throws<HPackDecodingException>(() =>
+                _decoder.Decode(encoded, endHeaders: true, handler: _handler));
             Assert.Equal(SR.net_http_hpack_huffman_decode_failed, exception.Message);
             Assert.IsType<HuffmanDecodingException>(exception.InnerException);
             Assert.Empty(_handler.DecodedHeaders);

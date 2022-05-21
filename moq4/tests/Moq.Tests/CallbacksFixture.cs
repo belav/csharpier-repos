@@ -47,11 +47,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    mock.Setup(x => x.Submit(It.IsAny<string>()))
-                        .Callback((string s1, string s2) => System.Console.WriteLine(s1 + s2))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                mock.Setup(x => x.Submit(It.IsAny<string>()))
+                    .Callback((string s1, string s2) => System.Console.WriteLine(s1 + s2)));
         }
 
         [Fact]
@@ -636,27 +634,21 @@ namespace Moq.Tests
             bool afterCalled = false;
 
             mock.Setup(foo => foo.Execute("ping"))
-                .Callback(
-                    () =>
-                    {
-                        Assert.False(returnsCalled);
-                        beforeCalled = true;
-                    }
-                )
-                .Returns(
-                    () =>
-                    {
-                        returnsCalled = true;
-                        return "ack";
-                    }
-                )
-                .Callback(
-                    () =>
-                    {
-                        Assert.True(returnsCalled);
-                        afterCalled = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    Assert.False(returnsCalled);
+                    beforeCalled = true;
+                })
+                .Returns(() =>
+                {
+                    returnsCalled = true;
+                    return "ack";
+                })
+                .Callback(() =>
+                {
+                    Assert.True(returnsCalled);
+                    afterCalled = true;
+                });
 
             Assert.Equal("ack", mock.Object.Execute("ping"));
 
@@ -672,13 +664,11 @@ namespace Moq.Tests
 
             mock.Setup(foo => foo.Execute(It.IsAny<string>()))
                 .Callback<string>(s => Assert.False(returnsCalled))
-                .Returns(
-                    () =>
-                    {
-                        returnsCalled = true;
-                        return "ack";
-                    }
-                )
+                .Returns(() =>
+                {
+                    returnsCalled = true;
+                    return "ack";
+                })
                 .Callback<string>(s => Assert.True(returnsCalled));
 
             mock.Object.Execute("ping");

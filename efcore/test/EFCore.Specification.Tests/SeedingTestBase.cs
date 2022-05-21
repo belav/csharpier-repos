@@ -39,16 +39,14 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public virtual async Task Seeding_keyless_entity_throws_exception(bool async)
         {
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var context = CreateKeylessContextWithEmptyDatabase();
-                    TestStore.Clean(context);
-                    var _ = async
-                        ? await context.Database.EnsureCreatedResilientlyAsync()
-                        : context.Database.EnsureCreatedResiliently();
-                }
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var context = CreateKeylessContextWithEmptyDatabase();
+                TestStore.Clean(context);
+                var _ = async
+                    ? await context.Database.EnsureCreatedResilientlyAsync()
+                    : context.Database.EnsureCreatedResiliently();
+            });
             Assert.Equal(CoreStrings.SeedKeylessEntity(nameof(KeylessSeed)), exception.Message);
         }
 

@@ -45,56 +45,46 @@ namespace ObjectiveCMarshalAPI
                 out trackedObjectEnteredFinalization
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ObjectiveCMarshal.Initialize(
-                        null,
-                        isReferencedCallback,
-                        trackedObjectEnteredFinalization,
-                        OnUnhandledExceptionPropagationHandler
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ObjectiveCMarshal.Initialize(
-                        beginEndCallback,
-                        null,
-                        trackedObjectEnteredFinalization,
-                        OnUnhandledExceptionPropagationHandler
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ObjectiveCMarshal.Initialize(
-                        beginEndCallback,
-                        isReferencedCallback,
-                        null,
-                        OnUnhandledExceptionPropagationHandler
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ObjectiveCMarshal.Initialize(
-                        beginEndCallback,
-                        isReferencedCallback,
-                        trackedObjectEnteredFinalization,
-                        null
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ObjectiveCMarshal.CreateReferenceTrackingHandle(null, out _);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ObjectiveCMarshal.Initialize(
+                    null,
+                    isReferencedCallback,
+                    trackedObjectEnteredFinalization,
+                    OnUnhandledExceptionPropagationHandler
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ObjectiveCMarshal.Initialize(
+                    beginEndCallback,
+                    null,
+                    trackedObjectEnteredFinalization,
+                    OnUnhandledExceptionPropagationHandler
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ObjectiveCMarshal.Initialize(
+                    beginEndCallback,
+                    isReferencedCallback,
+                    null,
+                    OnUnhandledExceptionPropagationHandler
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ObjectiveCMarshal.Initialize(
+                    beginEndCallback,
+                    isReferencedCallback,
+                    trackedObjectEnteredFinalization,
+                    null
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ObjectiveCMarshal.CreateReferenceTrackingHandle(null, out _);
+            });
         }
 
         // The expectation here is during reference tracking handle creation
@@ -215,25 +205,18 @@ namespace ObjectiveCMarshalAPI
             var handles = new List<GCHandle>();
 
             // Attempting to create handle prior to initialization.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ObjectiveCMarshal.CreateReferenceTrackingHandle(new Base(), out _);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ObjectiveCMarshal.CreateReferenceTrackingHandle(new Base(), out _);
+            });
 
             InitializeObjectiveCMarshal();
 
             // Type attributed but no finalizer.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ObjectiveCMarshal.CreateReferenceTrackingHandle(
-                        new AttributedNoFinalizer(),
-                        out _
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ObjectiveCMarshal.CreateReferenceTrackingHandle(new AttributedNoFinalizer(), out _);
+            });
 
             // Provide the minimum number of times the reference callback should run.
             // See IsRefCb() in NativeObjCMarshalTests.cpp for usage logic.
@@ -379,12 +362,10 @@ namespace ObjectiveCMarshalAPI
         {
             Console.WriteLine($"Running {nameof(Validate_Initialize_FailsOnSecondAttempt)}...");
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    InitializeObjectiveCMarshal();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                InitializeObjectiveCMarshal();
+            });
         }
 
         static int Main(string[] doNotUse)

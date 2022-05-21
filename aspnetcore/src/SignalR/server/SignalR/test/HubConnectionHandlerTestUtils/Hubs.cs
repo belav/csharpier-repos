@@ -644,16 +644,14 @@ public class StreamingHub : TestHub
     {
         var channel = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    await channel.Writer.WriteAsync(i.ToString(CultureInfo.InvariantCulture));
-                }
-                channel.Writer.Complete();
+                await channel.Writer.WriteAsync(i.ToString(CultureInfo.InvariantCulture));
             }
-        );
+            channel.Writer.Complete();
+        });
 
         return channel.Reader;
     }
@@ -728,20 +726,18 @@ public class StreamingHub : TestHub
     {
         Channel<string> output = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            while (await source.WaitToReadAsync())
             {
-                while (await source.WaitToReadAsync())
+                while (source.TryRead(out string item))
                 {
-                    while (source.TryRead(out string item))
-                    {
-                        await output.Writer.WriteAsync("echo:" + item);
-                    }
+                    await output.Writer.WriteAsync("echo:" + item);
                 }
-
-                output.Writer.TryComplete();
             }
-        );
+
+            output.Writer.TryComplete();
+        });
 
         return output.Reader;
     }
@@ -969,15 +965,13 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            async () =>
-            {
-                _tcsService.StartedMethod.SetResult(null);
-                await token.WaitForCancellationAsync();
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(null);
-            }
-        );
+        Task.Run(async () =>
+        {
+            _tcsService.StartedMethod.SetResult(null);
+            await token.WaitForCancellationAsync();
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(null);
+        });
 
         return channel.Reader;
     }
@@ -990,15 +984,13 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            async () =>
-            {
-                _tcsService.StartedMethod.SetResult(null);
-                await token.WaitForCancellationAsync();
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(null);
-            }
-        );
+        Task.Run(async () =>
+        {
+            _tcsService.StartedMethod.SetResult(null);
+            await token.WaitForCancellationAsync();
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(null);
+        });
 
         return channel.Reader;
     }
@@ -1011,15 +1003,13 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            async () =>
-            {
-                _tcsService.StartedMethod.SetResult(x);
-                await token.WaitForCancellationAsync();
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(y);
-            }
-        );
+        Task.Run(async () =>
+        {
+            _tcsService.StartedMethod.SetResult(x);
+            await token.WaitForCancellationAsync();
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(y);
+        });
 
         return channel.Reader;
     }
@@ -1028,15 +1018,13 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            () =>
-            {
-                _tcsService.StartedMethod.SetResult(x);
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(input);
-                return Task.CompletedTask;
-            }
-        );
+        Task.Run(() =>
+        {
+            _tcsService.StartedMethod.SetResult(x);
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(input);
+            return Task.CompletedTask;
+        });
 
         return channel.Reader;
     }
@@ -1049,15 +1037,13 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            async () =>
-            {
-                _tcsService.StartedMethod.SetResult(null);
-                await token.WaitForCancellationAsync();
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(null);
-            }
-        );
+        Task.Run(async () =>
+        {
+            _tcsService.StartedMethod.SetResult(null);
+            await token.WaitForCancellationAsync();
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(null);
+        });
 
         return channel.Reader;
     }
@@ -1095,20 +1081,18 @@ public class LongRunningHub : Hub
     {
         var channel = Channel.CreateBounded<int>(10);
 
-        Task.Run(
-            async () =>
+        Task.Run(async () =>
+        {
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < count; i++)
-                {
-                    await Task.Yield();
-                    await channel.Writer.WriteAsync(i);
-                }
-                _tcsService.StartedMethod.SetResult(null);
-                await token.WaitForCancellationAsync();
-                channel.Writer.TryComplete();
-                _tcsService.EndMethod.SetResult(null);
+                await Task.Yield();
+                await channel.Writer.WriteAsync(i);
             }
-        );
+            _tcsService.StartedMethod.SetResult(null);
+            await token.WaitForCancellationAsync();
+            channel.Writer.TryComplete();
+            _tcsService.EndMethod.SetResult(null);
+        });
 
         return channel.Reader;
     }
@@ -1212,12 +1196,10 @@ public class ErrorInAbortedTokenHub : Hub
     {
         Context.Items[nameof(OnConnectedAsync)] = true;
 
-        Context.ConnectionAborted.Register(
-            () =>
-            {
-                throw new InvalidOperationException("BOOM");
-            }
-        );
+        Context.ConnectionAborted.Register(() =>
+        {
+            throw new InvalidOperationException("BOOM");
+        });
 
         return base.OnConnectedAsync();
     }
@@ -1243,12 +1225,10 @@ public class ConnectionLifetimeHub : Hub
     {
         _state.TokenStateInConnected = Context.ConnectionAborted.IsCancellationRequested;
 
-        Context.ConnectionAborted.Register(
-            () =>
-            {
-                _state.TokenCallbackTriggered = true;
-            }
-        );
+        Context.ConnectionAborted.Register(() =>
+        {
+            _state.TokenCallbackTriggered = true;
+        });
 
         return base.OnConnectedAsync();
     }

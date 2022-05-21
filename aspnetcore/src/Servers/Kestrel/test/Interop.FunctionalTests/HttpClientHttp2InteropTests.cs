@@ -947,19 +947,16 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync().DefaultTimeout()
-        );
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync().DefaultTimeout());
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<IOException>(
-            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
-        );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => clientEcho.Task.DefaultTimeout()
-        );
+        await Assert.ThrowsAsync<IOException>(() =>
+            streamingContent.SendAsync("Hello World").DefaultTimeout());
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            clientEcho.Task.DefaultTimeout());
 
         await host.StopAsync().DefaultTimeout();
     }
@@ -1038,19 +1035,16 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal(HttpVersion.Version20, response.Version);
 
         await serverReset.Task.DefaultTimeout();
-        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync().DefaultTimeout()
-        );
+        var responseEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync().DefaultTimeout());
         Assert.Contains(
             "The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8)",
             responseEx.ToString()
         );
-        await Assert.ThrowsAsync<IOException>(
-            () => streamingContent.SendAsync("Hello World").DefaultTimeout()
-        );
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => clientEcho.Task.DefaultTimeout()
-        );
+        await Assert.ThrowsAsync<IOException>(() =>
+            streamingContent.SendAsync("Hello World").DefaultTimeout());
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            clientEcho.Task.DefaultTimeout());
 
         await host.StopAsync().DefaultTimeout();
     }
@@ -1203,9 +1197,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context.RequestAborted.Register(
-                                            () => serverResult.SetResult(0)
-                                        );
+                                        context.RequestAborted.Register(() =>
+                                            serverResult.SetResult(0));
                                         requestReceived.SetResult(0);
                                         await serverResult.Task.DefaultTimeout();
                                         await context.Response
@@ -1257,9 +1250,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context.RequestAborted.Register(
-                                            () => serverResult.SetResult(0)
-                                        );
+                                        context.RequestAborted.Register(() =>
+                                            serverResult.SetResult(0));
                                         await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();
@@ -1314,9 +1306,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                                 {
                                     try
                                     {
-                                        context.RequestAborted.Register(
-                                            () => serverResult.SetResult(0)
-                                        );
+                                        context.RequestAborted.Register(() =>
+                                            serverResult.SetResult(0));
                                         await context.Response
                                             .WriteAsync("Hello World")
                                             .DefaultTimeout();

@@ -1158,12 +1158,10 @@ namespace System.Net.NetworkInformation.Tests
         {
             Ping p = new Ping();
             p.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    p.Send(TestSettings.LocalHost);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                p.Send(TestSettings.LocalHost);
+            });
         }
 
         [Fact]
@@ -1171,12 +1169,10 @@ namespace System.Net.NetworkInformation.Tests
         {
             Ping p = new Ping();
             p.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    p.SendPingAsync(TestSettings.LocalHost);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                p.SendPingAsync(TestSettings.LocalHost);
+            });
         }
 
         private static readonly int s_pingcount = 4;

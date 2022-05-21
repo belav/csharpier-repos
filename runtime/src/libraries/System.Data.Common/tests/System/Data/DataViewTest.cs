@@ -378,13 +378,11 @@ namespace System.Data.Tests
         [Fact]
         public void AddNew_1()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    _dataView.AllowNew = false;
-                    DataRowView drv = _dataView.AddNew();
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                _dataView.AllowNew = false;
+                DataRowView drv = _dataView.AddNew();
+            });
         }
 
         [Fact]
@@ -637,53 +635,45 @@ namespace System.Data.Tests
         [Fact]
         public void TestDelete()
         {
-            Assert.Throws<DeletedRowInaccessibleException>(
-                () =>
-                {
-                    DataView TestView = new DataView(_dataTable);
-                    TestView.Delete(0);
-                    DataRow r = TestView.Table.Rows[0];
-                    Assert.NotEqual("item 1", (string)r["itemId"]);
-                }
-            );
+            Assert.Throws<DeletedRowInaccessibleException>(() =>
+            {
+                DataView TestView = new DataView(_dataTable);
+                TestView.Delete(0);
+                DataRow r = TestView.Table.Rows[0];
+                Assert.NotEqual("item 1", (string)r["itemId"]);
+            });
         }
 
         [Fact]
         public void TestDeleteOutOfBounds()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    DataView TestView = new DataView(_dataTable);
-                    TestView.Delete(100);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                DataView TestView = new DataView(_dataTable);
+                TestView.Delete(100);
+            });
         }
 
         [Fact]
         public void TestDeleteNotAllowed()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    DataView TestView = new DataView(_dataTable);
-                    TestView.AllowDelete = false;
-                    TestView.Delete(0);
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                DataView TestView = new DataView(_dataTable);
+                TestView.AllowDelete = false;
+                TestView.Delete(0);
+            });
         }
 
         [Fact]
         public void TestDeleteClosed()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    DataView TestView = new DataView(_dataTable);
-                    TestView.Dispose(); // Close the table
-                    TestView.Delete(0); // cannot access to item at 0.
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                DataView TestView = new DataView(_dataTable);
+                TestView.Dispose(); // Close the table
+                TestView.Delete(0); // cannot access to item at 0.
+            });
         }
 
         [Fact]

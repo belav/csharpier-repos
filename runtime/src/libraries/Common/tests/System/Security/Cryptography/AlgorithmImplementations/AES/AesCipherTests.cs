@@ -2225,24 +2225,22 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 aes.Key = s_aes256Key;
                 aes.IV = s_aes256CbcIv;
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        using (MemoryStream input = new MemoryStream(encryptedBytes))
-                        using (
-                            CryptoStream cryptoStream = new CryptoStream(
-                                input,
-                                aes.CreateDecryptor(),
-                                CryptoStreamMode.Read
-                            )
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    using (MemoryStream input = new MemoryStream(encryptedBytes))
+                    using (
+                        CryptoStream cryptoStream = new CryptoStream(
+                            input,
+                            aes.CreateDecryptor(),
+                            CryptoStreamMode.Read
                         )
-                        using (MemoryStream output = new MemoryStream())
-                        {
-                            cryptoStream.CopyTo(output);
-                            decryptedBytes = output.ToArray();
-                        }
+                    )
+                    using (MemoryStream output = new MemoryStream())
+                    {
+                        cryptoStream.CopyTo(output);
+                        decryptedBytes = output.ToArray();
                     }
-                );
+                });
             }
         }
 
@@ -2366,24 +2364,22 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 aes.Mode = CipherMode.ECB;
                 aes.Key = key;
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        using (MemoryStream input = new MemoryStream(encryptedBytes))
-                        using (
-                            CryptoStream cryptoStream = new CryptoStream(
-                                input,
-                                aes.CreateDecryptor(),
-                                CryptoStreamMode.Read
-                            )
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    using (MemoryStream input = new MemoryStream(encryptedBytes))
+                    using (
+                        CryptoStream cryptoStream = new CryptoStream(
+                            input,
+                            aes.CreateDecryptor(),
+                            CryptoStreamMode.Read
                         )
-                        using (MemoryStream output = new MemoryStream())
-                        {
-                            cryptoStream.CopyTo(output);
-                            decryptedBytes = output.ToArray();
-                        }
+                    )
+                    using (MemoryStream output = new MemoryStream())
+                    {
+                        cryptoStream.CopyTo(output);
+                        decryptedBytes = output.ToArray();
                     }
-                );
+                });
             }
         }
 
@@ -2406,18 +2402,16 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         public static void VerifyKnownTransform_CFB128_128_NoPadding_4_Fails()
         {
-            Assert.Throws<CryptographicException>(
-                () =>
-                    TestAesTransformDirectKey(
-                        CipherMode.CFB,
-                        PaddingMode.None,
-                        key: "5d5e7f20e0a66d3e09e0e5a9912f8a46".HexToByteArray(),
-                        iv: "052d7ea0ad1f2956a23b27afe1d87b6b".HexToByteArray(),
-                        plainBytes: "b84a90fc6d".HexToByteArray(),
-                        cipherBytes: "1a9a61c307".HexToByteArray(),
-                        feedbackSize: 128
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                TestAesTransformDirectKey(
+                    CipherMode.CFB,
+                    PaddingMode.None,
+                    key: "5d5e7f20e0a66d3e09e0e5a9912f8a46".HexToByteArray(),
+                    iv: "052d7ea0ad1f2956a23b27afe1d87b6b".HexToByteArray(),
+                    plainBytes: "b84a90fc6d".HexToByteArray(),
+                    cipherBytes: "1a9a61c307".HexToByteArray(),
+                    feedbackSize: 128
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
@@ -3104,9 +3098,8 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 // 3 blocks of 0x00
                 byte[] input = new byte[3 * (alg.BlockSize / 8)];
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => xform.TransformBlock(input, 0, input.Length, output, 0)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    xform.TransformBlock(input, 0, input.Length, output, 0));
 
                 Assert.Equal(new byte[output.Length], output);
             }

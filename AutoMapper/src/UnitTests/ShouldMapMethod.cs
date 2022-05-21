@@ -56,9 +56,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_unmapped_property()
         {
-            new Action(
-                () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
+            new Action(() =>
+                Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(
                 ex =>
                 {
                     ex.Errors.ShouldNotBeNull();
@@ -132,9 +131,8 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_report_unmapped_property()
         {
-            new Action(
-                () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
+            new Action(() =>
+                Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(
                 ex =>
                 {
                     ex.Errors.ShouldNotBeNull();

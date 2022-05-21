@@ -64,9 +64,8 @@ namespace System.Net.Tests
         public void GetRequestStream_MethodGet_ThrowsProtocolViolation()
         {
             WebRequest request = WebRequest.Create("file://anything");
-            Assert.Throws<ProtocolViolationException>(
-                () => request.BeginGetRequestStream(null, null)
-            );
+            Assert.Throws<ProtocolViolationException>(() =>
+                request.BeginGetRequestStream(null, null));
         }
 
         [Fact]
@@ -201,9 +200,8 @@ namespace System.Net.Tests
                 request.Method = WebRequestMethods.File.UploadFile;
                 using (WebResponse response = await GetResponseAsync(request))
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => GetRequestStreamAsync(request)
-                    );
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        GetRequestStreamAsync(request));
                 }
             }
             finally

@@ -255,9 +255,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(
                     RelationalStrings.CannotChangeWhenOpen,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => context.Database.SetDbConnection(newConnection)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            context.Database.SetDbConnection(newConnection))
                         .Message
                 );
             }

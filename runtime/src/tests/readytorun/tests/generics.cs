@@ -284,48 +284,46 @@ class Program
         );
 
         Thread t = new Thread(
-            new ThreadStart(
-                () =>
-                {
-                    GenBase<MyIdClass0, int>.SetFieldsTest(
-                        fobj1,
-                        new MyIdClass0("11"),
-                        new MyIdClass0("22"),
-                        new MyIdClass0("33"),
-                        11,
-                        22,
-                        33
-                    );
-                    GenBase<MyIdClass1, int>.SetFieldsTest(
-                        fobj2,
-                        new MyIdClass1("11"),
-                        new MyIdClass1("22"),
-                        new MyIdClass1("33"),
-                        11,
-                        22,
-                        33
-                    );
+            new ThreadStart(() =>
+            {
+                GenBase<MyIdClass0, int>.SetFieldsTest(
+                    fobj1,
+                    new MyIdClass0("11"),
+                    new MyIdClass0("22"),
+                    new MyIdClass0("33"),
+                    11,
+                    22,
+                    33
+                );
+                GenBase<MyIdClass1, int>.SetFieldsTest(
+                    fobj2,
+                    new MyIdClass1("11"),
+                    new MyIdClass1("22"),
+                    new MyIdClass1("33"),
+                    11,
+                    22,
+                    33
+                );
 
-                    GenBase<MyIdClass0, int>.GetFieldsTest(
-                        fobj1,
-                        "MyIdClass0=11",
-                        "MyIdClass0=22",
-                        "MyIdClass0=33",
-                        11,
-                        22,
-                        33
-                    );
-                    GenBase<MyIdClass1, int>.GetFieldsTest(
-                        fobj2,
-                        "MyIdClass1=11",
-                        "MyIdClass1=22",
-                        "MyIdClass1=33",
-                        11,
-                        22,
-                        33
-                    );
-                }
-            )
+                GenBase<MyIdClass0, int>.GetFieldsTest(
+                    fobj1,
+                    "MyIdClass0=11",
+                    "MyIdClass0=22",
+                    "MyIdClass0=33",
+                    11,
+                    22,
+                    33
+                );
+                GenBase<MyIdClass1, int>.GetFieldsTest(
+                    fobj2,
+                    "MyIdClass1=11",
+                    "MyIdClass1=22",
+                    "MyIdClass1=33",
+                    11,
+                    22,
+                    33
+                );
+            })
         );
         t.Start();
         t.Join();

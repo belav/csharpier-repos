@@ -610,26 +610,24 @@ namespace System.Web.Http.Tracing
             bool invoked = false;
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            invoked = true;
-                        },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        invoked = true;
+                    },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -673,26 +671,24 @@ namespace System.Web.Http.Tracing
             bool invoked = false;
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -708,26 +704,24 @@ namespace System.Web.Http.Tracing
             bool invoked = false;
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -743,26 +737,24 @@ namespace System.Web.Http.Tracing
             bool invoked = false;
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -876,32 +868,30 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "testCategory",
-                        TraceLevel.Info,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "testCategory",
+                    TraceLevel.Info,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -940,32 +930,30 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = Assert.Throws<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "testCategory",
-                        TraceLevel.Error,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            Exception thrown = Assert.Throws<HttpResponseException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "testCategory",
+                    TraceLevel.Error,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1005,29 +993,27 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = Assert.Throws<AggregateException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "testCategory",
-                        TraceLevel.Error,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
-                        {
-                            throw aggregateException;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: null
-                    )
-            );
+            Exception thrown = Assert.Throws<AggregateException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "testCategory",
+                    TraceLevel.Error,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        throw aggregateException;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: null
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1047,26 +1033,24 @@ namespace System.Web.Http.Tracing
             Exception exception = new HttpResponseException(Net.HttpStatusCode.NotFound);
 
             // Act & Assert
-            Exception thrown = Assert.Throws<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEnd(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) =>
-                        {
-                            invoked = true;
-                        },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            Exception thrown = Assert.Throws<HttpResponseException>(() =>
+                traceWriter.TraceBeginEnd(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) =>
+                    {
+                        invoked = true;
+                    },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
             Assert.Same(thrown, exception);
@@ -1230,32 +1214,30 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "testCategory",
-                        TraceLevel.Info,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "testCategory",
+                    TraceLevel.Info,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1275,23 +1257,21 @@ namespace System.Web.Http.Tracing
             Exception exception = new HttpResponseException(Net.HttpStatusCode.NotFound);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) =>
-                        {
-                            invoked = true;
-                        },
-                        execute: () => TaskHelpers.FromError(exception),
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) =>
+                    {
+                        invoked = true;
+                    },
+                    execute: () => TaskHelpers.FromError(exception),
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
             Assert.Same(thrown, exception);
@@ -1366,23 +1346,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr) =>
-                        {
-                            invoked = true;
-                        },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr) =>
+                    {
+                        invoked = true;
+                    },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1428,23 +1406,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1462,23 +1438,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1496,23 +1470,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -1626,29 +1598,27 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "testCategory",
-                        TraceLevel.Info,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () => TaskHelpers.Canceled(),
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "testCategory",
+                    TraceLevel.Info,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () => TaskHelpers.Canceled(),
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1691,40 +1661,36 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<AggregateException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "testCategory",
-                        TraceLevel.Error,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
+            Exception thrown = await Assert.ThrowsAsync<AggregateException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "testCategory",
+                    TraceLevel.Error,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        if (isExThrownAtExecution)
                         {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
+                            throw aggregateException;
+                        }
+                        Task task = new Task(() =>
                         {
-                            if (isExThrownAtExecution)
-                            {
-                                throw aggregateException;
-                            }
-                            Task task = new Task(
-                                () =>
-                                {
-                                    throw aggregateException;
-                                }
-                            );
-                            task.Start();
-                            return task;
-                        },
-                        endTrace: (tr) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: null
-                    )
-            );
+                            throw aggregateException;
+                        });
+                        task.Start();
+                        return task;
+                    },
+                    endTrace: (tr) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: null
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1763,8 +1729,8 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            InvalidOperationException thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
+            InvalidOperationException thrown =
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     traceWriter.TraceBeginEndAsync(
                         request,
                         "testCategory",
@@ -1784,8 +1750,7 @@ namespace System.Web.Http.Tracing
                         {
                             tr.Message = "errorMessage";
                         }
-                    )
-            );
+                    ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1923,32 +1888,30 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "testCategory",
-                        TraceLevel.Error,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
-                        {
-                            throw exception;
-                        },
-                        endTrace: (tr, result) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "testCategory",
+                    TraceLevel.Error,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        throw exception;
+                    },
+                    endTrace: (tr, result) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -1992,40 +1955,36 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<AggregateException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "testCategory",
-                        TraceLevel.Error,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
+            Exception thrown = await Assert.ThrowsAsync<AggregateException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "testCategory",
+                    TraceLevel.Error,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () =>
+                    {
+                        if (isExThrownAtExecution)
                         {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () =>
+                            throw aggregateException;
+                        }
+                        Task<int> task = new Task<int>(() =>
                         {
-                            if (isExThrownAtExecution)
-                            {
-                                throw aggregateException;
-                            }
-                            Task<int> task = new Task<int>(
-                                () =>
-                                {
-                                    throw aggregateException;
-                                }
-                            );
-                            task.Start();
-                            return task;
-                        },
-                        endTrace: (tr, result) =>
-                        {
-                            tr.Message = "won't Happen";
-                        },
-                        errorTrace: null
-                    )
-            );
+                            throw aggregateException;
+                        });
+                        task.Start();
+                        return task;
+                    },
+                    endTrace: (tr, result) =>
+                    {
+                        tr.Message = "won't Happen";
+                    },
+                    errorTrace: null
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -2044,26 +2003,24 @@ namespace System.Web.Http.Tracing
             bool invoked = false;
 
             // Act & Assert
-            await Assert.ThrowsAsync<HttpResponseException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) =>
-                        {
-                            invoked = true;
-                        },
-                        execute: () =>
-                            TaskHelpers.FromError(
-                                new HttpResponseException(Net.HttpStatusCode.NotFound)
-                            ),
-                        endTrace: (tr) => { },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            await Assert.ThrowsAsync<HttpResponseException>(() =>
+                traceWriter.TraceBeginEndAsync(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) =>
+                    {
+                        invoked = true;
+                    },
+                    execute: () =>
+                        TaskHelpers.FromError(
+                            new HttpResponseException(Net.HttpStatusCode.NotFound)
+                        ),
+                    endTrace: (tr) => { },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Empty(traceWriter.Traces);
         }
@@ -2170,23 +2127,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr, value) =>
-                        {
-                            invoked = true;
-                        },
-                        errorTrace: (tr) => { }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr, value) =>
+                    {
+                        invoked = true;
+                    },
+                    errorTrace: (tr) => { }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2232,23 +2187,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "",
-                        TraceLevel.Off,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "",
+                    TraceLevel.Off,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr, value) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2266,23 +2219,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr, value) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.False(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2300,23 +2251,21 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "",
-                        TraceLevel.Info,
-                        "",
-                        "",
-                        beginTrace: (tr) => { },
-                        execute: () => tcs.Task,
-                        endTrace: (tr, value) => { },
-                        errorTrace: (tr) =>
-                        {
-                            invoked = true;
-                        }
-                    )
-            );
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "",
+                    TraceLevel.Info,
+                    "",
+                    "",
+                    beginTrace: (tr) => { },
+                    execute: () => tcs.Task,
+                    endTrace: (tr, value) => { },
+                    errorTrace: (tr) =>
+                    {
+                        invoked = true;
+                    }
+                ));
             Assert.True(invoked);
             Assert.Same(exception, thrown);
         }
@@ -2430,29 +2379,27 @@ namespace System.Web.Http.Tracing
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    traceWriter.TraceBeginEndAsync<int>(
-                        request,
-                        "testCategory",
-                        TraceLevel.Info,
-                        "tester",
-                        "testOp",
-                        beginTrace: (tr) =>
-                        {
-                            tr.Message = "beginMessage";
-                        },
-                        execute: () => TaskHelpers.Canceled<int>(),
-                        endTrace: (tr, value) =>
-                        {
-                            tr.Message = "won't happen";
-                        },
-                        errorTrace: (tr) =>
-                        {
-                            tr.Message = "errorMessage";
-                        }
-                    )
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                traceWriter.TraceBeginEndAsync<int>(
+                    request,
+                    "testCategory",
+                    TraceLevel.Info,
+                    "tester",
+                    "testOp",
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = "beginMessage";
+                    },
+                    execute: () => TaskHelpers.Canceled<int>(),
+                    endTrace: (tr, value) =>
+                    {
+                        tr.Message = "won't happen";
+                    },
+                    errorTrace: (tr) =>
+                    {
+                        tr.Message = "errorMessage";
+                    }
+                ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,
@@ -2490,8 +2437,8 @@ namespace System.Web.Http.Tracing
             tcs.TrySetException(exception);
 
             // Act & Assert
-            InvalidOperationException thrown = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
+            InvalidOperationException thrown =
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     traceWriter.TraceBeginEndAsync<int>(
                         request,
                         "testCategory",
@@ -2511,8 +2458,7 @@ namespace System.Web.Http.Tracing
                         {
                             tr.Message = "errorMessage";
                         }
-                    )
-            );
+                    ));
             Assert.Equal<TraceRecord>(
                 expectedTraces,
                 traceWriter.Traces,

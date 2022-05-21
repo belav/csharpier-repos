@@ -282,9 +282,8 @@ public class WebSocketsTransportTests : FunctionalTestBase
                 LoggerFactory,
                 accessTokenProvider: null
             );
-            var exception = await Assert.ThrowsAsync<ArgumentException>(
-                () => webSocketsTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat)
-            );
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
+                webSocketsTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat));
 
             Assert.Contains(
                 $"The '{transferFormat}' transfer format is not supported by this transport.",

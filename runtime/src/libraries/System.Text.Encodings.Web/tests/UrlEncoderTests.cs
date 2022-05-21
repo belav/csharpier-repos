@@ -242,12 +242,10 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             UrlEncoder encoder = UrlEncoder.Default;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    encoder.Encode(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

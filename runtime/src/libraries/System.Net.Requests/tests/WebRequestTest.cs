@@ -41,15 +41,13 @@ namespace System.Net.Tests
         public void DefaultWebProxy_SetThenGet_ValuesMatch()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        IWebProxy p = new WebProxy();
+                .Invoke(() =>
+                {
+                    IWebProxy p = new WebProxy();
 
-                        WebRequest.DefaultWebProxy = p;
-                        Assert.Same(p, WebRequest.DefaultWebProxy);
-                    }
-                )
+                    WebRequest.DefaultWebProxy = p;
+                    Assert.Same(p, WebRequest.DefaultWebProxy);
+                })
                 .Dispose();
         }
 
@@ -130,9 +128,8 @@ namespace System.Net.Tests
         [Fact]
         public void CreateHttp_InvalidScheme_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => WebRequest.CreateHttp(new Uri("ftp://microsoft.com"))
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                WebRequest.CreateHttp(new Uri("ftp://microsoft.com")));
         }
 
         [Fact]
@@ -179,9 +176,8 @@ namespace System.Net.Tests
         [Fact]
         public void RegisterPrefix_PrefixOrCreatorNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => WebRequest.RegisterPrefix(null, new FakeRequestFactory())
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                WebRequest.RegisterPrefix(null, new FakeRequestFactory()));
             Assert.Throws<ArgumentNullException>(() => WebRequest.RegisterPrefix("http://", null));
         }
 
@@ -257,40 +253,38 @@ namespace System.Net.Tests
         public void SendGetRequest_WithGlobalCachePolicyBypassCache_DoNotAddCacheHeaders()
         {
             RemoteExecutor
-                .Invoke(
-                    async () =>
-                    {
-                        await LoopbackServer.CreateServerAsync(
-                            async (server, uri) =>
-                            {
-                                WebRequest.DefaultCachePolicy = new RequestCachePolicy(
-                                    RequestCacheLevel.BypassCache
-                                );
-                                WebRequest request = WebRequest.Create(uri);
-                                Task<WebResponse> getResponse = request.GetResponseAsync();
+                .Invoke(async () =>
+                {
+                    await LoopbackServer.CreateServerAsync(
+                        async (server, uri) =>
+                        {
+                            WebRequest.DefaultCachePolicy = new RequestCachePolicy(
+                                RequestCacheLevel.BypassCache
+                            );
+                            WebRequest request = WebRequest.Create(uri);
+                            Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                                await server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        List<string> headers =
-                                            await connection.ReadRequestHeaderAndSendResponseAsync();
-
-                                        foreach (string header in headers)
-                                        {
-                                            Assert.DoesNotContain("Pragma", header);
-                                            Assert.DoesNotContain("Cache-Control", header);
-                                        }
-                                    }
-                                );
-
-                                using (var response = (HttpWebResponse)await getResponse)
+                            await server.AcceptConnectionAsync(
+                                async connection =>
                                 {
-                                    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                                    List<string> headers =
+                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+
+                                    foreach (string header in headers)
+                                    {
+                                        Assert.DoesNotContain("Pragma", header);
+                                        Assert.DoesNotContain("Cache-Control", header);
+                                    }
                                 }
+                            );
+
+                            using (var response = (HttpWebResponse)await getResponse)
+                            {
+                                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                             }
-                        );
-                    }
-                )
+                        }
+                    );
+                })
                 .Dispose();
         }
 

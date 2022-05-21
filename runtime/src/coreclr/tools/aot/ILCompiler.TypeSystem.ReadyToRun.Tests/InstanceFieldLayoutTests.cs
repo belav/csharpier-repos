@@ -116,16 +116,14 @@ namespace TypeSystemTests
         {
             {
                 DefType type = _testModule.GetType("Explicit", "MisalignedPointer");
-                Assert.Throws<TypeSystemException.TypeLoadException>(
-                    () => type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields)
-                );
+                Assert.Throws<TypeSystemException.TypeLoadException>(() =>
+                    type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields));
             }
 
             {
                 DefType type = _testModule.GetType("Explicit", "MisalignedByRef");
-                Assert.Throws<TypeSystemException.TypeLoadException>(
-                    () => type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields)
-                );
+                Assert.Throws<TypeSystemException.TypeLoadException>(() =>
+                    type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields));
             }
         }
 
@@ -872,23 +870,20 @@ namespace TypeSystemTests
         {
             {
                 DefType type = _ilTestModule.GetType("IsByRefLike", "InvalidClass1");
-                Assert.Throws<TypeSystemException.TypeLoadException>(
-                    () => type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields)
-                );
+                Assert.Throws<TypeSystemException.TypeLoadException>(() =>
+                    type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields));
             }
 
             {
                 DefType type = _ilTestModule.GetType("IsByRefLike", "InvalidClass2");
-                Assert.Throws<TypeSystemException.TypeLoadException>(
-                    () => type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields)
-                );
+                Assert.Throws<TypeSystemException.TypeLoadException>(() =>
+                    type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields));
             }
 
             {
                 DefType type = _ilTestModule.GetType("IsByRefLike", "InvalidStruct");
-                Assert.Throws<TypeSystemException.TypeLoadException>(
-                    () => type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields)
-                );
+                Assert.Throws<TypeSystemException.TypeLoadException>(() =>
+                    type.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields));
             }
         }
     }

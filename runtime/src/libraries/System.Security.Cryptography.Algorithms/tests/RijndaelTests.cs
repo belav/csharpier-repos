@@ -375,9 +375,8 @@ namespace System.Security.Cryptography.Encryption.Rijndael.Tests
                 // 3 blocks of 0x00
                 byte[] input = new byte[3 * (alg.BlockSize / 8)];
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => xform.TransformBlock(input, 0, input.Length, output, 0)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    xform.TransformBlock(input, 0, input.Length, output, 0));
 
                 Assert.Equal(new byte[output.Length], output);
             }

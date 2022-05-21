@@ -23,9 +23,8 @@ namespace System.Runtime.Loader.Tests
             alc.Unload();
 
             // Check that any attempt to load an assembly after an explicit Unload will fail
-            Assert.Throws<InvalidOperationException>(
-                () => alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll"))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                alc.LoadFromAssemblyPath(Path.GetFullPath("none.dll")));
         }
 
         [Fact]
@@ -446,9 +445,8 @@ namespace System.Runtime.Loader.Tests
 
             Assert.NotNull(asm);
 
-            ReflectionTypeLoadException exception = Assert.Throws<ReflectionTypeLoadException>(
-                () => asm.DefinedTypes
-            );
+            ReflectionTypeLoadException exception = Assert.Throws<ReflectionTypeLoadException>(() =>
+                asm.DefinedTypes);
 
             // Expecting two exceptions:
             //  Collectible type 'System.Runtime.Loader.Tests.TestClassNotSupported_FixedAddressValueType' has unsupported FixedAddressValueTypeAttribute applied to a field

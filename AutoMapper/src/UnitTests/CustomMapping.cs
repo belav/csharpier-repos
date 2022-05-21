@@ -458,9 +458,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_propagate_exception()
         {
-            new Action(
-                () => Mapper.Map<Destination>(new Source())
-            ).ShouldThrowException<AutoMapperMappingException>(e => e.InnerException.ShouldBe(_ex));
+            new Action(() =>
+                Mapper.Map<Destination>(
+                    new Source()
+                )).ShouldThrowException<AutoMapperMappingException>(
+                e => e.InnerException.ShouldBe(_ex)
+            );
         }
     }
 
@@ -1542,19 +1545,17 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_fail_with_an_exception_during_configuration()
         {
-            typeof(ArgumentException).ShouldBeThrownBy(
-                () =>
-                {
-                    var config = new MapperConfiguration(
-                        cfg =>
-                            cfg.CreateMap<Source, Destination>()
-                                .ForMember(
-                                    dest => dest.Dest.Value,
-                                    opt => opt.MapFrom(src => src.Value)
-                                )
-                    );
-                }
-            );
+            typeof(ArgumentException).ShouldBeThrownBy(() =>
+            {
+                var config = new MapperConfiguration(
+                    cfg =>
+                        cfg.CreateMap<Source, Destination>()
+                            .ForMember(
+                                dest => dest.Dest.Value,
+                                opt => opt.MapFrom(src => src.Value)
+                            )
+                );
+            });
         }
     }
 

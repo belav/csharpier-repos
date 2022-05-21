@@ -49,85 +49,71 @@ namespace ReverseStartupTests
             }
 
             string serverName = ReverseServer.MakeServerAddress();
-            Task backgroundTask = Task.Run(
-                () =>
+            Task backgroundTask = Task.Run(() =>
+            {
+                ReverseServer server = null;
+                try
                 {
-                    ReverseServer server = null;
-                    try
+                    Task task = Task.Run(async () =>
                     {
-                        Task task = Task.Run(
-                            async () =>
+                        server = new ReverseServer(serverName);
+                        using (Stream serverStream = await server.AcceptAsync())
+                        {
+                            IpcAdvertise advertise = IpcAdvertise.Parse(serverStream);
+                            Console.WriteLine($"Got IpcAdvertise: {advertise}");
+
+                            int processId = (int)advertise.ProcessId;
+
+                            // While we are paused in startup send the profiler startup command
+                            string profilerPath = GetProfilerPath();
+                            DiagnosticsIPCWorkaround client = new DiagnosticsIPCWorkaround(
+                                processId
+                            );
+                            client.SetStartupProfiler(ReverseStartupProfilerGuid, profilerPath);
+
+                            if (
+                                !client.SetEnvironmentVariable(
+                                    "ReverseServerTest_OverwriteMe",
+                                    "Overwritten"
+                                )
+                            )
                             {
-                                server = new ReverseServer(serverName);
-                                using (Stream serverStream = await server.AcceptAsync())
-                                {
-                                    IpcAdvertise advertise = IpcAdvertise.Parse(serverStream);
-                                    Console.WriteLine($"Got IpcAdvertise: {advertise}");
-
-                                    int processId = (int)advertise.ProcessId;
-
-                                    // While we are paused in startup send the profiler startup command
-                                    string profilerPath = GetProfilerPath();
-                                    DiagnosticsIPCWorkaround client = new DiagnosticsIPCWorkaround(
-                                        processId
-                                    );
-                                    client.SetStartupProfiler(
-                                        ReverseStartupProfilerGuid,
-                                        profilerPath
-                                    );
-
-                                    if (
-                                        !client.SetEnvironmentVariable(
-                                            "ReverseServerTest_OverwriteMe",
-                                            "Overwritten"
-                                        )
-                                    )
-                                    {
-                                        throw new Exception("Failed setting environment variable.");
-                                    }
-
-                                    if (
-                                        !client.SetEnvironmentVariable(
-                                            "ReverseServerTest_ClearMe",
-                                            null
-                                        )
-                                    )
-                                    {
-                                        throw new Exception(
-                                            "Failed clearing environment variable."
-                                        );
-                                    }
-
-                                    // Resume runtime message
-                                    IpcMessage resumeMessage = new IpcMessage(0x04, 0x01);
-                                    Console.WriteLine(
-                                        $"Sent resume runtime message: {resumeMessage.ToString()}"
-                                    );
-                                    IpcMessage resumeResponse = IpcClient.SendMessage(
-                                        serverStream,
-                                        resumeMessage
-                                    );
-                                    Logger.logger.Log($"Received: {resumeResponse.ToString()}");
-                                }
+                                throw new Exception("Failed setting environment variable.");
                             }
-                        );
 
-                        task.Wait();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"ReverseServer saw exception {e.Message}");
-                        Console.WriteLine(e.StackTrace);
+                            if (!client.SetEnvironmentVariable("ReverseServerTest_ClearMe", null))
+                            {
+                                throw new Exception("Failed clearing environment variable.");
+                            }
 
-                        Console.WriteLine($"Inner exception {e.InnerException?.Message}");
-                        Console.WriteLine(e.InnerException?.StackTrace);
-                    }
-                    finally
-                    {
-                        server?.Shutdown();
-                    }
+                            // Resume runtime message
+                            IpcMessage resumeMessage = new IpcMessage(0x04, 0x01);
+                            Console.WriteLine(
+                                $"Sent resume runtime message: {resumeMessage.ToString()}"
+                            );
+                            IpcMessage resumeResponse = IpcClient.SendMessage(
+                                serverStream,
+                                resumeMessage
+                            );
+                            Logger.logger.Log($"Received: {resumeResponse.ToString()}");
+                        }
+                    });
+
+                    task.Wait();
                 }
-            );
+                catch (Exception e)
+                {
+                    Console.WriteLine($"ReverseServer saw exception {e.Message}");
+                    Console.WriteLine(e.StackTrace);
+
+                    Console.WriteLine($"Inner exception {e.InnerException?.Message}");
+                    Console.WriteLine(e.InnerException?.StackTrace);
+                }
+                finally
+                {
+                    server?.Shutdown();
+                }
+            });
 
             Dictionary<string, string> envVars = new Dictionary<string, string>()
             {

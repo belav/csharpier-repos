@@ -233,20 +233,16 @@ namespace System.Text.Json.SourceGeneration.Tests
                     .StructWithCustomConverterPropertyFactory
                     .SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    MetadataWithPerTypeAttributeContext
-                        .Default
-                        .ClassWithBadCustomConverter
-                        .SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    MetadataWithPerTypeAttributeContext
-                        .Default
-                        .StructWithBadCustomConverter
-                        .SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithBadCustomConverter
+                    .SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithBadCustomConverter
+                    .SerializeHandler);
         }
     }
 
@@ -354,12 +350,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 MetadataContext.Default.StructWithCustomConverterPropertyFactory.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler);
         }
 
         [Fact]

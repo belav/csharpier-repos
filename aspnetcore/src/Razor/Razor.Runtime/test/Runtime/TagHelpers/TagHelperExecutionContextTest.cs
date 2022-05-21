@@ -35,9 +35,8 @@ public class TagHelperExecutionContextTest
         );
 
         // Act & Assert
-        await Assert.ThrowsAsync<Exception>(
-            async () => await executionContext.SetOutputContentAsync()
-        );
+        await Assert.ThrowsAsync<Exception>(async () =>
+            await executionContext.SetOutputContentAsync());
         Assert.True(calledEnd);
     }
 
@@ -61,10 +60,8 @@ public class TagHelperExecutionContextTest
         );
 
         // Act & Assert
-        await Assert.ThrowsAsync<Exception>(
-            async () =>
-                await executionContext.GetChildContentAsync(useCachedResult: false, encoder: null)
-        );
+        await Assert.ThrowsAsync<Exception>(async () =>
+            await executionContext.GetChildContentAsync(useCachedResult: false, encoder: null));
         Assert.True(calledEnd);
     }
 

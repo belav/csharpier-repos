@@ -342,9 +342,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.DefaultIfEmpty_in_subquery_nested_filter_order_comparison(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.DefaultIfEmpty_in_subquery_nested_filter_order_comparison(async))
                 ).Message
             );
 
@@ -352,9 +351,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_subquery_recursive_trivial(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_subquery_recursive_trivial(async))
                 ).Message
             );
 
@@ -362,9 +360,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_correlated_subquery_ordered(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_correlated_subquery_ordered(async))
                 ).Message
             );
 
@@ -374,12 +371,10 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
+                            async
+                        ))
                 ).Message
             );
 
@@ -389,24 +384,20 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
+                            async
+                        ))
                 ).Message
             );
 
         [ConditionalFact]
         public async Task Single_Predicate_Cancellation()
         {
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () =>
-                    await Single_Predicate_Cancellation_test(
-                        Fixture.TestSqlLoggerFactory.CancelQuery()
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await Single_Predicate_Cancellation_test(
+                    Fixture.TestSqlLoggerFactory.CancelQuery()
+                ));
         }
 
         private void AssertSql(params string[] expected) =>

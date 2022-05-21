@@ -113,9 +113,8 @@ namespace System.Threading.Tests
             try
             {
                 ExecutionContext ec = ExecutionContext.Capture();
-                Assert.Throws<InvalidOperationException>(
-                    () => ExecutionContext.Run(ec, _ => { }, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    ExecutionContext.Run(ec, _ => { }, null));
             }
             finally
             {
@@ -387,63 +386,57 @@ namespace System.Threading.Tests
             als.Value = 2;
             Assert.Equal(tls.Value, als.Value);
 
-            await Run(
-                async () =>
+            await Run(async () =>
+            {
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(2, als.Value);
+
+                als.Value = 3;
+                Assert.Equal(tls.Value, als.Value);
+
+                Task t = Run(async () =>
                 {
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(2, als.Value);
-
-                    als.Value = 3;
-                    Assert.Equal(tls.Value, als.Value);
-
-                    Task t = Run(
-                        async () =>
-                        {
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(3, als.Value);
-
-                            als.Value = 4;
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(4, als.Value);
-
-                            await Task.Run(
-                                () =>
-                                {
-                                    Assert.Equal(tls.Value, als.Value);
-                                    Assert.Equal(4, als.Value);
-
-                                    als.Value = 5;
-
-                                    Assert.Equal(tls.Value, als.Value);
-                                    Assert.Equal(5, als.Value);
-                                }
-                            );
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(4, als.Value);
-
-                            als.Value = 6;
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(6, als.Value);
-                        }
-                    );
-
-                    Assert.Equal(tls.Value, als.Value);
                     Assert.Equal(3, als.Value);
 
-                    await Task.Yield();
+                    als.Value = 4;
 
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(3, als.Value);
+                    Assert.Equal(4, als.Value);
 
-                    await t;
+                    await Task.Run(() =>
+                    {
+                        Assert.Equal(tls.Value, als.Value);
+                        Assert.Equal(4, als.Value);
+
+                        als.Value = 5;
+
+                        Assert.Equal(tls.Value, als.Value);
+                        Assert.Equal(5, als.Value);
+                    });
 
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(3, als.Value);
-                }
-            );
+                    Assert.Equal(4, als.Value);
+
+                    als.Value = 6;
+
+                    Assert.Equal(tls.Value, als.Value);
+                    Assert.Equal(6, als.Value);
+                });
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+
+                await Task.Yield();
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+
+                await t;
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+            });
 
             Assert.Equal(tls.Value, als.Value);
             Assert.Equal(2, als.Value);
@@ -466,13 +459,11 @@ namespace System.Threading.Tests
             local.Value = 1;
             Assert.Equal(1, local.Value);
 
-            await Run(
-                async () =>
-                {
-                    local.Value = 3;
-                    valueToSet = 4;
-                }
-            );
+            await Run(async () =>
+            {
+                local.Value = 3;
+                valueToSet = 4;
+            });
 
             Assert.Equal(4, local.Value);
         }
@@ -484,14 +475,12 @@ namespace System.Threading.Tests
 
             local.Value = 42;
 
-            await Run(
-                async () =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-                    Assert.Equal(42, local.Value);
-                    local.Value = 12;
-                }
-            );
+            await Run(async () =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+                Assert.Equal(42, local.Value);
+                local.Value = 12;
+            });
 
             Assert.Equal(42, local.Value);
         }

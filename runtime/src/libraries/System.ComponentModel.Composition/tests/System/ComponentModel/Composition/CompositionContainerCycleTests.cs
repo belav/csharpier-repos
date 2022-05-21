@@ -84,21 +84,17 @@ namespace System.ComponentModel.Composition
         {
             var exportA = GetExport("A", partADependency, partBDependency);
 
-            Assert.Throws<CompositionException>(
-                () =>
-                {
-                    var value = exportA.Value;
-                }
-            );
+            Assert.Throws<CompositionException>(() =>
+            {
+                var value = exportA.Value;
+            });
 
             var exportB = GetExport("B", partADependency, partBDependency);
 
-            Assert.Throws<CompositionException>(
-                () =>
-                {
-                    var value = exportB.Value;
-                }
-            );
+            Assert.Throws<CompositionException>(() =>
+            {
+                var value = exportB.Value;
+            });
         }
 
         private static void AssertNotCycle(Dependency partADependency, Dependency partBDependency)

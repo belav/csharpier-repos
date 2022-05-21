@@ -727,9 +727,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
             else
             {
-                Assert.Throws<CryptographicException>(
-                    () => request.ProcessResponse(inputBytes, out bytesRead)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    request.ProcessResponse(inputBytes, out bytesRead));
             }
         }
 

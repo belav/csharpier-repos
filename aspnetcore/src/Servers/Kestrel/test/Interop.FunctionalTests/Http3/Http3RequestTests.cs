@@ -374,13 +374,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received cancellation");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received cancellation");
+                    cancelledTcs.SetResult();
+                });
 
                 var body = context.Request.Body;
 
@@ -579,9 +577,8 @@ public class Http3RequestTests : LoggedTest
 
             // Act
             var ex = await Assert
-                .ThrowsAnyAsync<HttpRequestException>(
-                    () => client.SendAsync(request, CancellationToken.None)
-                )
+                .ThrowsAnyAsync<HttpRequestException>(() =>
+                    client.SendAsync(request, CancellationToken.None))
                 .DefaultTimeout();
 
             // Assert
@@ -761,13 +758,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received request aborted.");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received request aborted.");
+                    cancelledTcs.SetResult();
+                });
 
                 var requestBody = context.Request.Body;
                 var responseBody = context.Response.Body;
@@ -979,13 +974,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received request aborted.");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received request aborted.");
+                    cancelledTcs.SetResult();
+                });
 
                 var responseBody = context.Response.Body;
                 await responseBody.WriteAsync(TestData);
@@ -1393,9 +1386,8 @@ public class Http3RequestTests : LoggedTest
                                 return context =>
                                 {
                                     connectionStartedTcs.SetResult();
-                                    context.ConnectionClosed.Register(
-                                        () => connectionClosedTcs.SetResult()
-                                    );
+                                    context.ConnectionClosed.Register(() =>
+                                        connectionClosedTcs.SetResult());
                                     return next(context);
                                 };
                             }

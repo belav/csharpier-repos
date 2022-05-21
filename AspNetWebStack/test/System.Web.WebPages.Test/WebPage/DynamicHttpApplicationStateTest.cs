@@ -29,12 +29,10 @@ namespace System.Web.WebPages.Test
             Assert.Equal("bar", d.Foo);
             Assert.Null(d.XYZ);
             Assert.Null(d["xyz"]);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var x = d[5];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var x = d[5];
+            });
             var a = d.Baz = 42;
             Assert.Equal(42, a);
             var b = d["test"] = 666;

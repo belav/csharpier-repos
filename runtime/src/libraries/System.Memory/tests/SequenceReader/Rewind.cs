@@ -81,9 +81,8 @@ namespace System.Memory.Tests.SequenceReader
             );
 
             // Can't go negative
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new SequenceReader<byte>(bytes).Rewind(-1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new SequenceReader<byte>(bytes).Rewind(-1));
 
             // Can't pull more than we consumed
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);

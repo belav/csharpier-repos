@@ -189,9 +189,8 @@ namespace System.IO.Compression.Tests
         public void InvalidConstructors()
         {
             //out of range enum values
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => ZipFile.Open("bad file", (ZipArchiveMode)(10))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ZipFile.Open("bad file", (ZipArchiveMode)(10)));
         }
 
         [Fact]
@@ -202,14 +201,12 @@ namespace System.IO.Compression.Tests
                 TempFile testArchive = CreateTempCopyFile(bad("EOCDmissing.zip"), GetTestFilePath())
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
-            Assert.Throws<InvalidDataException>(
-                () => ZipFile.OpenRead(bad("CDoffsetOutOfBounds.zip"))
-            );
+            Assert.Throws<InvalidDataException>(() =>
+                ZipFile.OpenRead(bad("CDoffsetOutOfBounds.zip")));
             using (
                 TempFile testArchive = CreateTempCopyFile(
                     bad("CDoffsetOutOfBounds.zip"),
@@ -217,19 +214,16 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("CDoffsetInBoundsWrong.zip")))
             {
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        var x = archive.Entries;
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    var x = archive.Entries;
+                });
             }
 
             using (
@@ -239,19 +233,16 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("numberOfEntriesDifferent.zip")))
             {
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        var x = archive.Entries;
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    var x = archive.Entries;
+                });
             }
             using (
                 TempFile testArchive = CreateTempCopyFile(
@@ -260,9 +251,8 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
             //read mode on empty file
@@ -285,9 +275,8 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
             //compressed data offset + compressed size out of bounds
@@ -304,9 +293,8 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
 
             //signature wrong
@@ -323,9 +311,8 @@ namespace System.IO.Compression.Tests
                 )
             )
             {
-                Assert.Throws<InvalidDataException>(
-                    () => ZipFile.Open(testArchive.Path, ZipArchiveMode.Update)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    ZipFile.Open(testArchive.Path, ZipArchiveMode.Update));
             }
         }
 
@@ -429,9 +416,8 @@ namespace System.IO.Compression.Tests
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(
-                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
-            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
         }
 
         [Fact]
@@ -452,9 +438,8 @@ namespace System.IO.Compression.Tests
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(
-                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
-            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
         }
 
         [Fact]
@@ -485,9 +470,8 @@ namespace System.IO.Compression.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
         public void Unix_ZipWithInvalidFileNames_ThrowsArgumentException(string zipName)
         {
-            Assert.Throws<ArgumentException>(
-                () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath())
-            );
+            Assert.Throws<ArgumentException>(() =>
+                ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath()));
         }
 
         [Fact]
@@ -595,9 +579,8 @@ namespace System.IO.Compression.Tests
         )
         {
             if (paramName == null)
-                Assert.Throws<IOException>(
-                    () => ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath())
-                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(compat(zipName) + ".zip", GetTestFilePath()));
             else
                 AssertExtensions.Throws<ArgumentException>(
                     paramName,

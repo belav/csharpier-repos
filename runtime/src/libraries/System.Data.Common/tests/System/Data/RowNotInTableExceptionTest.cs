@@ -46,20 +46,16 @@ namespace System.Data.Tests
             ds.AcceptChanges();
 
             // RowNotInTableException - AcceptChanges
-            Assert.Throws<RowNotInTableException>(
-                () =>
-                {
-                    drParent.AcceptChanges();
-                }
-            );
+            Assert.Throws<RowNotInTableException>(() =>
+            {
+                drParent.AcceptChanges();
+            });
 
             // RowNotInTableException - GetChildRows
-            Assert.Throws<RowNotInTableException>(
-                () =>
-                {
-                    drParent.GetChildRows("myRelation");
-                }
-            );
+            Assert.Throws<RowNotInTableException>(() =>
+            {
+                drParent.GetChildRows("myRelation");
+            });
 
             // RowNotInTableException - ItemArray
             Assert.Throws<RowNotInTableException>(() => drParent.ItemArray);

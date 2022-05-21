@@ -419,64 +419,60 @@ namespace System.Security.AccessControl.Tests
             //Case 5, null sid
 
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    auditFlags = 1;
-                    accessMask = 1;
-                    sid = "BA";
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.RemoveAuditSpecific(
-                        (AuditFlags)auditFlags,
-                        null,
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                auditFlags = 1;
+                accessMask = 1;
+                sid = "BA";
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.RemoveAuditSpecific(
+                    (AuditFlags)auditFlags,
+                    null,
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
             //Case 6, all the ACEs in the Sacl are non-qualified ACE, no remove
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    auditFlags = 3;
-                    sid = "BA";
-                    accessMask = 1;
-                    rawAcl = new RawAcl(0, 1);
-                    opaque = new byte[4];
-                    gAce = new CustomAce(
-                        AceType.MaxDefinedAceType + 1,
-                        AceFlags.InheritanceFlags | AceFlags.AuditFlags,
-                        opaque
-                    );
-                    rawAcl.InsertAce(0, gAce);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
-                    //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-                    TestRemoveAuditSpecific(
-                        systemAcl,
-                        rawAcl,
-                        (AuditFlags)auditFlags,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                auditFlags = 3;
+                sid = "BA";
+                accessMask = 1;
+                rawAcl = new RawAcl(0, 1);
+                opaque = new byte[4];
+                gAce = new CustomAce(
+                    AceType.MaxDefinedAceType + 1,
+                    AceFlags.InheritanceFlags | AceFlags.AuditFlags,
+                    opaque
+                );
+                rawAcl.InsertAce(0, gAce);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
+                //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
+                TestRemoveAuditSpecific(
+                    systemAcl,
+                    rawAcl,
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
         }
     }
 }

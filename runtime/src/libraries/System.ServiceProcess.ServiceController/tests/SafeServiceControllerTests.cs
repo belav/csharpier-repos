@@ -133,9 +133,8 @@ namespace System.ServiceProcess.Tests
         public static void NonExistentService_GetDisplayName()
         {
             var controller = new ServiceController(Guid.NewGuid().ToString("N"));
-            Exception exception = Assert.Throws<InvalidOperationException>(
-                () => controller.DisplayName
-            );
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.DisplayName);
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -153,9 +152,8 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController();
             controller.ServiceName = Guid.NewGuid().ToString("N");
-            Exception exception = Assert.Throws<InvalidOperationException>(
-                () => controller.DisplayName
-            );
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.DisplayName);
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -173,9 +171,8 @@ namespace System.ServiceProcess.Tests
         {
             var controller = new ServiceController();
             controller.DisplayName = Guid.NewGuid().ToString("N");
-            Exception exception = Assert.Throws<InvalidOperationException>(
-                () => controller.ServiceName
-            );
+            Exception exception = Assert.Throws<InvalidOperationException>(() =>
+                controller.ServiceName);
             Assert.IsType<Win32Exception>(exception.InnerException);
         }
 
@@ -235,9 +232,8 @@ namespace System.ServiceProcess.Tests
         public static void WaitForStatusTimeout()
         {
             var controller = new ServiceController(KeyIsoSvcName);
-            Assert.Throws<System.ServiceProcess.TimeoutException>(
-                () => controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero)
-            );
+            Assert.Throws<System.ServiceProcess.TimeoutException>(() =>
+                controller.WaitForStatus(ServiceControllerStatus.Paused, TimeSpan.Zero));
         }
     }
 }

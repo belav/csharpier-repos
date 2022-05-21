@@ -43,9 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
 
             var message = Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Bird>().FromSqlRaw("Select * from Birds")
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Bird>().FromSqlRaw("Select * from Birds"))
                 .Message;
 
             Assert.Equal(
@@ -54,9 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
 
             message = Assert
-                .Throws<InvalidOperationException>(
-                    () => context.Set<Bird>().FromSqlInterpolated($"Select * from Birds")
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<Bird>().FromSqlInterpolated($"Select * from Birds"))
                 .Message;
 
             Assert.Equal(

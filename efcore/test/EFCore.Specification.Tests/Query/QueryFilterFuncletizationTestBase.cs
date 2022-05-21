@@ -89,9 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(
-                () => context.Set<PropertyChainFilter>().ToList()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                context.Set<PropertyChainFilter>().ToList());
 
             context.IndirectionFlag = new Indirection { Enabled = false };
             var entity = Assert.Single(context.Set<PropertyChainFilter>().ToList());
@@ -107,9 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(
-                () => context.Set<PropertyMethodCallFilter>().ToList()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                context.Set<PropertyMethodCallFilter>().ToList());
 
             context.IndirectionFlag = new Indirection();
             var entity = Assert.Single(context.Set<PropertyMethodCallFilter>().ToList());
@@ -198,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(
-                () => context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
 
             context.IndirectionFlag = new Indirection { Enabled = false };
             var entity = Assert.Single(
@@ -246,9 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(
-                () => context.Set<RemoteMethodParamsFilter>().ToList()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                context.Set<RemoteMethodParamsFilter>().ToList());
 
             context.IndirectionFlag = new Indirection();
             var entity = Assert.Single(context.Set<RemoteMethodParamsFilter>().ToList());
@@ -273,9 +269,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(
-                () => context.Set<ExtensionContextFilter>().ToList()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                context.Set<ExtensionContextFilter>().ToList());
 
             context.IndirectionFlag = new Indirection { Enabled = false };
             var entity = Assert.Single(context.Set<ExtensionContextFilter>().ToList());
@@ -338,9 +333,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.Set<LocalVariableErrorFilter>().ToList()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        context.Set<LocalVariableErrorFilter>().ToList())
                     .Message
             );
         }

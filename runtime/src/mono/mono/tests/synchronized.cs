@@ -136,12 +136,10 @@ class Tests
             return 1;
 
         Monitor.Enter(typeof(Gen<>));
-        Thread t = new Thread(
-            () =>
-            {
-                Gen<object>.Run();
-            }
-        );
+        Thread t = new Thread(() =>
+        {
+            Gen<object>.Run();
+        });
         t.Start();
         t.Join();
         Monitor.Exit(typeof(Gen<>));

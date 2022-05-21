@@ -57,38 +57,32 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // convert set of all code refactoring providers into a map from language to a lazy initialized list of ordered providers.
             _lazyLanguageToProvidersMap = new Lazy<
                 ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>
-            >(
-                () =>
-                    ImmutableDictionary.CreateRange(
-                        DistributeLanguages(providers)
-                            .GroupBy(lz => lz.Metadata.Language)
-                            .Select(
-                                grp =>
-                                    new KeyValuePair<
-                                        string,
-                                        Lazy<ImmutableArray<CodeRefactoringProvider>>
-                                    >(
-                                        grp.Key,
-                                        new Lazy<ImmutableArray<CodeRefactoringProvider>>(
-                                            () =>
-                                                ExtensionOrderer
-                                                    .Order(grp)
-                                                    .Select(lz => lz.Value)
-                                                    .ToImmutableArray()
-                                        )
-                                    )
-                            )
-                    )
-            );
-            _lazyRefactoringToMetadataMap = new(
-                () =>
-                    providers
-                        .Where(provider => provider.IsValueCreated)
-                        .ToImmutableDictionary(
-                            provider => provider.Value,
-                            provider => provider.Metadata
+            >(() =>
+                ImmutableDictionary.CreateRange(
+                    DistributeLanguages(providers)
+                        .GroupBy(lz => lz.Metadata.Language)
+                        .Select(
+                            grp =>
+                                new KeyValuePair<
+                                    string,
+                                    Lazy<ImmutableArray<CodeRefactoringProvider>>
+                                >(
+                                    grp.Key,
+                                    new Lazy<ImmutableArray<CodeRefactoringProvider>>(() =>
+                                        ExtensionOrderer
+                                            .Order(grp)
+                                            .Select(lz => lz.Value)
+                                            .ToImmutableArray())
+                                )
                         )
-            );
+                ));
+            _lazyRefactoringToMetadataMap = new(() =>
+                providers
+                    .Where(provider => provider.IsValueCreated)
+                    .ToImmutableDictionary(
+                        provider => provider.Value,
+                        provider => provider.Metadata
+                    ));
         }
 
         private static IEnumerable<

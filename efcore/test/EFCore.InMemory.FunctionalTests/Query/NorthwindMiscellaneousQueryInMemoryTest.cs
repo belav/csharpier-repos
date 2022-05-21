@@ -28,47 +28,40 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Task Where_query_composition_entity_equality_one_element_Single(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_query_composition_entity_equality_one_element_Single(async)
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_one_element_Single(async));
 
         public override Task Where_query_composition_entity_equality_one_element_First(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_query_composition_entity_equality_one_element_First(async)
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_one_element_First(async));
 
         public override Task Where_query_composition_entity_equality_no_elements_Single(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_query_composition_entity_equality_no_elements_Single(async)
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_no_elements_Single(async));
 
         public override Task Where_query_composition_entity_equality_no_elements_First(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_query_composition_entity_equality_no_elements_First(async)
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_no_elements_First(async));
 
         public override Task Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
-                        async
-                    )
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
+                    async
+                ));
 
         public override Task Where_query_composition_entity_equality_multiple_elements_Single(
             bool async
         ) =>
-            Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Where_query_composition_entity_equality_multiple_elements_Single(async)
-            );
+            Assert.ThrowsAsync<InvalidOperationException>(() =>
+                base.Where_query_composition_entity_equality_multiple_elements_Single(async));
 
         // Sending client code to server
         [ConditionalFact(Skip = "Issue#17050")]

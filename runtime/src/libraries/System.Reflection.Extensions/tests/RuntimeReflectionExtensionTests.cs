@@ -175,12 +175,10 @@ namespace System.Reflection.Tests
                     // Slight duplication of code her to allow use of Assert.Throws
                     if (exceptionExpected == true)
                     {
-                        Assert.Throws<AmbiguousMatchException>(
-                            () =>
-                            {
-                                PropertyInfo pi = type.AsType().GetRuntimeProperty(propertyName);
-                            }
-                        );
+                        Assert.Throws<AmbiguousMatchException>(() =>
+                        {
+                            PropertyInfo pi = type.AsType().GetRuntimeProperty(propertyName);
+                        });
                     }
                     else
                     {
@@ -376,9 +374,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetRuntimeBaseDefinition()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => default(MethodInfo).GetRuntimeBaseDefinition()
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                default(MethodInfo).GetRuntimeBaseDefinition());
 
             MethodInfo derivedFoo = typeof(TestDerived).GetMethod(nameof(TestDerived.Foo));
             MethodInfo baseFoo = typeof(TestBase).GetMethod(nameof(TestBase.Foo));
@@ -397,12 +394,10 @@ namespace System.Reflection.Tests
                 "ifaceType",
                 () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(null)
             );
-            Assert.Throws<ArgumentException>(
-                () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(ICloneable))
-            );
-            Assert.Throws<ArgumentException>(
-                () => typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(string))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(ICloneable)));
+            Assert.Throws<ArgumentException>(() =>
+                typeof(TestType).GetTypeInfo().GetRuntimeInterfaceMap(typeof(string)));
 
             InterfaceMapping map = typeof(TestType)
                 .GetTypeInfo()

@@ -168,24 +168,20 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(1, 1)]
         public void Ctor_EqualPoints_ThrowsOutOfMemoryException(int x, int y)
         {
-            Assert.Throws<OutOfMemoryException>(
-                () =>
-                    new LinearGradientBrush(
-                        new Point(x, y),
-                        new Point(x, y),
-                        Color.Fuchsia,
-                        Color.GhostWhite
-                    )
-            );
-            Assert.Throws<OutOfMemoryException>(
-                () =>
-                    new LinearGradientBrush(
-                        new PointF(x, y),
-                        new PointF(x, y),
-                        Color.Fuchsia,
-                        Color.GhostWhite
-                    )
-            );
+            Assert.Throws<OutOfMemoryException>(() =>
+                new LinearGradientBrush(
+                    new Point(x, y),
+                    new Point(x, y),
+                    Color.Fuchsia,
+                    Color.GhostWhite
+                ));
+            Assert.Throws<OutOfMemoryException>(() =>
+                new LinearGradientBrush(
+                    new PointF(x, y),
+                    new PointF(x, y),
+                    Color.Fuchsia,
+                    Color.GhostWhite
+                ));
         }
 
         public static IEnumerable<object[]> Ctor_Rectangle_LinearGradientMode_TestData()
@@ -604,24 +600,20 @@ namespace System.Drawing.Drawing2D.Tests
             LinearGradientMode linearGradientMode
         )
         {
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                    new LinearGradientBrush(
-                        new Rectangle(1, 2, 3, 4),
-                        Color.Empty,
-                        Color.Empty,
-                        linearGradientMode
-                    )
-            );
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                    new LinearGradientBrush(
-                        new RectangleF(1, 2, 3, 4),
-                        Color.Empty,
-                        Color.Empty,
-                        linearGradientMode
-                    )
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+                new LinearGradientBrush(
+                    new Rectangle(1, 2, 3, 4),
+                    Color.Empty,
+                    Color.Empty,
+                    linearGradientMode
+                ));
+            Assert.ThrowsAny<ArgumentException>(() =>
+                new LinearGradientBrush(
+                    new RectangleF(1, 2, 3, 4),
+                    Color.Empty,
+                    Color.Empty,
+                    linearGradientMode
+                ));
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -769,9 +761,8 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                Assert.Throws<NullReferenceException>(
-                    () => brush.Blend = new Blend { Factors = null }
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    brush.Blend = new Blend { Factors = null });
             }
         }
 
@@ -988,9 +979,8 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                Assert.Throws<NullReferenceException>(
-                    () => brush.InterpolationColors = new ColorBlend { Colors = null }
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    brush.InterpolationColors = new ColorBlend { Colors = null });
             }
         }
 
@@ -1035,14 +1025,12 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                Assert.Throws<NullReferenceException>(
-                    () =>
-                        brush.InterpolationColors = new ColorBlend
-                        {
-                            Colors = new Color[2],
-                            Positions = null
-                        }
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    brush.InterpolationColors = new ColorBlend
+                    {
+                        Colors = new Color[2],
+                        Positions = null
+                    });
             }
         }
 
@@ -1240,9 +1228,8 @@ namespace System.Drawing.Drawing2D.Tests
                 )
             )
             {
-                Assert.Throws<IndexOutOfRangeException>(
-                    () => brush.LinearColors = new Color[length]
-                );
+                Assert.Throws<IndexOutOfRangeException>(() =>
+                    brush.LinearColors = new Color[length]);
             }
         }
 

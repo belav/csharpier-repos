@@ -24,12 +24,10 @@ public class EphemeralDataProtectionProviderTests
         // Act & assert
         // Each instance of the EphemeralDataProtectionProvider has its own unique KDK, so payloads can't be shared.
         byte[] protectedBytes = dataProtector1.Protect(bytes);
-        Assert.ThrowsAny<CryptographicException>(
-            () =>
-            {
-                byte[] unprotectedBytes = dataProtector2.Unprotect(protectedBytes);
-            }
-        );
+        Assert.ThrowsAny<CryptographicException>(() =>
+        {
+            byte[] unprotectedBytes = dataProtector2.Unprotect(protectedBytes);
+        });
     }
 
     [Fact]
@@ -45,12 +43,10 @@ public class EphemeralDataProtectionProviderTests
 
         // Act & assert
         byte[] protectedBytes = dataProtector1.Protect(bytes);
-        Assert.ThrowsAny<CryptographicException>(
-            () =>
-            {
-                byte[] unprotectedBytes = dataProtector2.Unprotect(protectedBytes);
-            }
-        );
+        Assert.ThrowsAny<CryptographicException>(() =>
+        {
+            byte[] unprotectedBytes = dataProtector2.Unprotect(protectedBytes);
+        });
     }
 
     [Fact]

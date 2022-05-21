@@ -382,14 +382,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Min_no_data(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertMin(
-                        async,
-                        ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                        selector: o => o.OrderID
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertMin(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                ));
         }
 
         [ConditionalTheory]
@@ -430,14 +428,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Max_no_data(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertMax(
-                        async,
-                        ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                        selector: o => o.OrderID
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertMax(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                ));
         }
 
         [ConditionalTheory]
@@ -478,14 +474,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Average_no_data(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertAverage(
-                        async,
-                        ss => ss.Set<Order>().Where(o => o.OrderID == -1),
-                        selector: o => o.OrderID
-                    )
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertAverage(
+                    async,
+                    ss => ss.Set<Order>().Where(o => o.OrderID == -1),
+                    selector: o => o.OrderID
+                ));
         }
 
         [ConditionalTheory]
@@ -695,110 +689,91 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Where_OrderBy_Count_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .Where(o => ClientEvalPredicate(o))
-                                .OrderBy(o => ClientEvalSelectorStateless())
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .Where(o => ClientEvalPredicate(o))
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Where_Count_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .OrderBy(o => ClientEvalSelectorStateless())
-                                .Where(o => ClientEvalPredicate(o))
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                            .Where(o => ClientEvalPredicate(o))
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Where_Count_client_eval_mixed(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .Where(o => ClientEvalPredicate(o))
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o))
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Count_with_predicate_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss => ss.Set<Order>().OrderBy(o => ClientEvalSelectorStateless()),
-                        predicate: o => ClientEvalPredicate(o)
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => ClientEvalSelectorStateless()),
+                    predicate: o => ClientEvalPredicate(o)
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Count_with_predicate_client_eval_mixed(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss => ss.Set<Order>().OrderBy(o => o.OrderID),
-                        predicate: o => ClientEvalPredicate(o)
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss => ss.Set<Order>().OrderBy(o => o.OrderID),
+                    predicate: o => ClientEvalPredicate(o)
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Where_Count_with_predicate_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .OrderBy(o => ClientEvalSelectorStateless())
-                                .Where(o => ClientEvalPredicate(o)),
-                        predicate: o => ClientEvalPredicate(o)
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .OrderBy(o => ClientEvalSelectorStateless())
+                            .Where(o => ClientEvalPredicate(o)),
+                    predicate: o => ClientEvalPredicate(o)
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_Where_Count_with_predicate_client_eval_mixed(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertCount(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .Where(o => ClientEvalPredicate(o)),
-                        predicate: o => o.CustomerID != "ALFKI"
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertCount(
+                    async,
+                    ss =>
+                        ss.Set<Order>().OrderBy(o => o.OrderID).Where(o => ClientEvalPredicate(o)),
+                    predicate: o => o.CustomerID != "ALFKI"
+                ));
         }
 
         [ConditionalTheory]
@@ -908,9 +883,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Single_Throws(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await AssertSingle(async, ss => ss.Set<Customer>())
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await AssertSingle(async, ss => ss.Set<Customer>()));
         }
 
         [ConditionalTheory]
@@ -940,9 +914,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SingleOrDefault_Throws(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await AssertSingleOrDefault(async, ss => ss.Set<Customer>())
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await AssertSingleOrDefault(async, ss => ss.Set<Customer>()));
         }
 
         [ConditionalTheory]

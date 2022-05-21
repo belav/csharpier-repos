@@ -358,15 +358,13 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekOffset_InvalidOffset()
         {
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    SequenceReader<T> reader = new SequenceReader<T>(
-                        Factory.CreateWithContent(GetInputData(10))
-                    );
-                    reader.TryPeek(-1, out _);
-                }
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                SequenceReader<T> reader = new SequenceReader<T>(
+                    Factory.CreateWithContent(GetInputData(10))
+                );
+                reader.TryPeek(-1, out _);
+            });
 
             Assert.Equal("offset", exception.ParamName);
         }

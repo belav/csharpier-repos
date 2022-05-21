@@ -32,44 +32,37 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             protected override void OnStartSearch()
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    foreach (var control in _controls)
                     {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        foreach (var control in _controls)
-                        {
-                            _ = control.SetFilter(
-                                string.Empty,
-                                new SearchFilter(SearchQuery, control)
-                            );
-                        }
-
-                        await TaskScheduler.Default;
-                        uint resultCount = 0;
-                        foreach (var control in _controls)
-                        {
-                            var results = await control.ForceUpdateAsync().ConfigureAwait(false);
-                            resultCount += (uint)results.FilteredAndSortedEntries.Count;
-                        }
-
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        SearchCallback.ReportComplete(this, dwResultsFound: resultCount);
+                        _ = control.SetFilter(string.Empty, new SearchFilter(SearchQuery, control));
                     }
-                );
+
+                    await TaskScheduler.Default;
+                    uint resultCount = 0;
+                    foreach (var control in _controls)
+                    {
+                        var results = await control.ForceUpdateAsync().ConfigureAwait(false);
+                        resultCount += (uint)results.FilteredAndSortedEntries.Count;
+                    }
+
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    SearchCallback.ReportComplete(this, dwResultsFound: resultCount);
+                });
             }
 
             protected override void OnStopSearch()
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    foreach (var control in _controls)
                     {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        foreach (var control in _controls)
-                        {
-                            _ = control.SetFilter(string.Empty, null);
-                        }
+                        _ = control.SetFilter(string.Empty, null);
                     }
-                );
+                });
             }
         }
     }

@@ -48,51 +48,43 @@ namespace System.Data.Tests
 
             //update to value which is not exists in Parent table
             // InvalidConstraintException - update child row
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    dtChild.Rows[0]["ParentId"] = 99;
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                dtChild.Rows[0]["ParentId"] = 99;
+            });
 
             //Add another relation to the same column of the existing relation in child table
             // InvalidConstraintException - Add Relation Child
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    ds.Relations.Add(
-                        new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                ds.Relations.Add(
+                    new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
+                );
+            });
 
             //Attempt to clear rows from parent table
             // InvalidConstraintException - RowsCollection.Clear
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    dtParent.Rows.Clear();
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                dtParent.Rows.Clear();
+            });
 
             //try to run commands on two different datasets
             DataSet ds1 = new DataSet();
             ds1.Tables.Add(dtParent.Copy());
 
             // InvalidConstraintException - Add relation with two DataSets
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    ds.Relations.Add(
-                        new DataRelation(
-                            "myRelation",
-                            ds1.Tables[0].Columns[0],
-                            dtChild.Columns[0],
-                            true
-                        )
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                ds.Relations.Add(
+                    new DataRelation(
+                        "myRelation",
+                        ds1.Tables[0].Columns[0],
+                        dtChild.Columns[0],
+                        true
+                    )
+                );
+            });
         }
     }
 }

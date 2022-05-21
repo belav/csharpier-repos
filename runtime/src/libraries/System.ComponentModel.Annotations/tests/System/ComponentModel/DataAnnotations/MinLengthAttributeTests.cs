@@ -118,9 +118,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         )]
         public void Validate_ICollection_NetCore_Invalid(MinLengthAttribute attribute, object value)
         {
-            Assert.Throws<ValidationException>(
-                () => attribute.Validate(value, new ValidationContext(new object()))
-            );
+            Assert.Throws<ValidationException>(() =>
+                attribute.Validate(value, new ValidationContext(new object())));
             Assert.False(attribute.IsValid(value));
         }
 
@@ -136,9 +135,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             object value
         )
         {
-            Assert.Throws<InvalidCastException>(
-                () => attribute.Validate(value, new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                attribute.Validate(value, new ValidationContext(new object())));
             Assert.Throws<InvalidCastException>(() => attribute.IsValid(value));
         }
 
@@ -146,34 +144,28 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void GetValidationResult_InvalidLength_ThrowsInvalidOperationException()
         {
             var attribute = new MinLengthAttribute(-1);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    attribute.GetValidationResult("Rincewind", new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.GetValidationResult("Rincewind", new ValidationContext(new object())));
         }
 
         [Fact]
         public static void GetValidationResult_ValueNotStringOrICollection_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    new MinLengthAttribute(0).GetValidationResult(
-                        new Random(),
-                        new ValidationContext(new object())
-                    )
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                new MinLengthAttribute(0).GetValidationResult(
+                    new Random(),
+                    new ValidationContext(new object())
+                ));
         }
 
         [Fact]
         public static void GetValidationResult_ValueGenericIEnumerable_ThrowsInvalidCastException()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    new MinLengthAttribute(0).GetValidationResult(
-                        new GenericIEnumerableClass(),
-                        new ValidationContext(new object())
-                    )
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                new MinLengthAttribute(0).GetValidationResult(
+                    new GenericIEnumerableClass(),
+                    new ValidationContext(new object())
+                ));
         }
     }
 }

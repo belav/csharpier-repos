@@ -156,12 +156,10 @@ namespace System.Linq.Tests
         public void ToArray_FailOnExtremelyLargeCollection()
         {
             var largeSeq = new FastInfiniteEnumerator<byte>();
-            var thrownException = Assert.ThrowsAny<Exception>(
-                () =>
-                {
-                    largeSeq.ToArray();
-                }
-            );
+            var thrownException = Assert.ThrowsAny<Exception>(() =>
+            {
+                largeSeq.ToArray();
+            });
             Assert.True(
                 thrownException.GetType() == typeof(OverflowException)
                     || thrownException.GetType() == typeof(OutOfMemoryException)

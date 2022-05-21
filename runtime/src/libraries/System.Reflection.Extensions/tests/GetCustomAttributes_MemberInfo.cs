@@ -46,12 +46,10 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    CustomAttributeExtensions.IsDefined(s_typeTestClass.GetTypeInfo(), null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                CustomAttributeExtensions.IsDefined(s_typeTestClass.GetTypeInfo(), null);
+            });
         }
 
         [Fact]
@@ -74,15 +72,13 @@ namespace System.Reflection.Tests
                 );
             Assert.NotNull(attribute);
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute =
-                        CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_Inherited>(
-                            s_typeTestClass.GetTypeInfo()
-                        );
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute =
+                    CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_Inherited>(
+                        s_typeTestClass.GetTypeInfo()
+                    );
+            });
         }
 
         [Fact]
@@ -138,15 +134,13 @@ namespace System.Reflection.Tests
             );
             Assert.NotNull(attribute);
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        s_typeTestClass.GetTypeInfo(),
-                        typeof(MyAttribute_AllowMultiple_Inherited)
-                    );
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    s_typeTestClass.GetTypeInfo(),
+                    typeof(MyAttribute_AllowMultiple_Inherited)
+                );
+            });
 
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -159,15 +153,13 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        s_typeTestClass.GetTypeInfo(),
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    s_typeTestClass.GetTypeInfo(),
+                    null
+                );
+            });
         }
 
         [Fact]
@@ -196,15 +188,13 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    attributes = CustomAttributeExtensions.GetCustomAttributes(
-                        s_typeTestClass.GetTypeInfo(),
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                attributes = CustomAttributeExtensions.GetCustomAttributes(
+                    s_typeTestClass.GetTypeInfo(),
+                    null
+                );
+            });
         }
 
         [Fact]

@@ -198,12 +198,10 @@ namespace System.Web.Http.Tracing.Tracers
             InvalidOperationException exception = new InvalidOperationException("test");
             mockAttr
                 .Setup(a => a.OnException(It.IsAny<HttpActionExecutedContext>()))
-                .Callback(
-                    () =>
-                    {
-                        throw exception;
-                    }
-                );
+                .Callback(() =>
+                {
+                    throw exception;
+                });
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
                 CallBase = true

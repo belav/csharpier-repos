@@ -146,9 +146,8 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
 
         // Send a bogus sign in
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(
-            () => server.SendAsync("https://example.com/signin-twitter")
-        );
+        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
+            server.SendAsync("https://example.com/signin-twitter"));
         Assert.Equal("Invalid state cookie.", error.GetBaseException().Message);
     }
 
@@ -346,12 +345,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         );
         using var server = host.GetTestServer();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-            {
-                await server.SendAsync("http://example.com/challenge");
-            }
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+        {
+            await server.SendAsync("http://example.com/challenge");
+        });
 
         var expectedErrorMessage =
             "An error has occurred while calling the Twitter API, error's returned:"
@@ -382,12 +379,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         );
         using var server = host.GetTestServer();
 
-        await Assert.ThrowsAsync<HttpRequestException>(
-            async () =>
-            {
-                await server.SendAsync("http://example.com/challenge");
-            }
-        );
+        await Assert.ThrowsAsync<HttpRequestException>(async () =>
+        {
+            await server.SendAsync("http://example.com/challenge");
+        });
     }
 
     [Fact]
@@ -669,25 +664,21 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                                         var res = context.Response;
                                         if (req.Path == new PathString("/signIn"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () =>
-                                                    context.SignInAsync(
-                                                        "Twitter",
-                                                        new ClaimsPrincipal()
-                                                    )
-                                            );
+                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                                context.SignInAsync(
+                                                    "Twitter",
+                                                    new ClaimsPrincipal()
+                                                ));
                                         }
                                         else if (req.Path == new PathString("/signOut"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.SignOutAsync("Twitter")
-                                            );
+                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                                context.SignOutAsync("Twitter"));
                                         }
                                         else if (req.Path == new PathString("/forbid"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.ForbidAsync("Twitter")
-                                            );
+                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                                context.ForbidAsync("Twitter"));
                                         }
                                         else if (req.Path == new PathString("/me"))
                                         {

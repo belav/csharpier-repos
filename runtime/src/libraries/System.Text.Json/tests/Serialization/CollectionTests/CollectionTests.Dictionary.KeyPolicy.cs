@@ -203,13 +203,11 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             // A naming policy that returns null is not allowed.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new Dictionary<string, int> { { "onlyKey", 1 } },
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(
+                    new Dictionary<string, int> { { "onlyKey", 1 } },
+                    options
+                ));
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int> obj = JsonSerializer.Deserialize<Dictionary<string, int>>(
@@ -256,13 +254,11 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             // A naming policy that returns null is not allowed.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new Dictionary<string, int?> { { "onlyKey", 1 } },
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(
+                    new Dictionary<string, int?> { { "onlyKey", 1 } },
+                    options
+                ));
 
             // We don't use policy on deserialize, so we populate dictionary.
             Dictionary<string, int?> obj = JsonSerializer.Deserialize<Dictionary<string, int?>>(

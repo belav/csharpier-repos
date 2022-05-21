@@ -330,9 +330,8 @@ public class ObjectResultExecutorTest
         var result = new ObjectResult("some value");
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => executor.ExecuteAsync(actionContext, result)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            executor.ExecuteAsync(actionContext, result));
         Assert.Equal(expected, exception.Message);
     }
 
@@ -369,9 +368,8 @@ public class ObjectResultExecutorTest
         var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext() };
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => executor.ExecuteAsync(actionContext, result)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            executor.ExecuteAsync(actionContext, result));
 
         var expectedMessage = string.Format(
             CultureInfo.CurrentCulture,

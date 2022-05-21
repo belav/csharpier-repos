@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             {
                 await DidOpen(testLspServer, locationTyped.Uri);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => DidOpen(testLspServer, locationTyped.Uri)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    DidOpen(testLspServer, locationTyped.Uri));
             }
         }
 
@@ -127,9 +126,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             using (testLspServer)
             {
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => DidClose(testLspServer, locationTyped.Uri)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    DidClose(testLspServer, locationTyped.Uri));
             }
         }
 
@@ -149,9 +147,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             using (testLspServer)
             {
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => DidChange(testLspServer, locationTyped.Uri, (0, 0, "goo"))
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    DidChange(testLspServer, locationTyped.Uri, (0, 0, "goo")));
             }
         }
 

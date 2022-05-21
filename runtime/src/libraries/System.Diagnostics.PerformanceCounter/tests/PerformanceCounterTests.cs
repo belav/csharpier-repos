@@ -88,9 +88,8 @@ namespace System.Diagnostics.Tests
             );
 
             using (
-                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
-                    () => new PerformanceCounter(categoryName, counterName, instanceName)
-                )
+                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(() =>
+                    new PerformanceCounter(categoryName, counterName, instanceName))
             )
             {
                 Assert.Equal(counterName, counterSample.CounterName);
@@ -119,9 +118,8 @@ namespace System.Diagnostics.Tests
             Helpers.CreateCategory(categoryName, PerformanceCounterCategoryType.SingleInstance);
 
             using (
-                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
-                    () => new PerformanceCounter(categoryName, counterName)
-                )
+                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(() =>
+                    new PerformanceCounter(categoryName, counterName))
             )
             {
                 counterSample.ReadOnly = false;
@@ -489,9 +487,8 @@ namespace System.Diagnostics.Tests
 
             string counterName = categoryName.Replace("_Category", "_Counter");
 
-            PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
-                () => new PerformanceCounter(categoryName, counterName, readOnly)
-            );
+            PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(() =>
+                new PerformanceCounter(categoryName, counterName, readOnly));
 
             return counterSample;
         }

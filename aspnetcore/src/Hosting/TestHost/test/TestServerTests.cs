@@ -793,9 +793,8 @@ public class TestServerTests
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         server.Dispose();
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => server.CreateClient().GetAsync("/")
-        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            server.CreateClient().GetAsync("/"));
     }
 
     [Fact]
@@ -816,12 +815,10 @@ public class TestServerTests
         );
         var server = new TestServer(builder);
 
-        await Assert.ThrowsAsync<TaskCanceledException>(
-            async () =>
-            {
-                string result = await server.CreateClient().GetStringAsync("/path");
-            }
-        );
+        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+        {
+            string result = await server.CreateClient().GetStringAsync("/path");
+        });
     }
 
     [Fact]

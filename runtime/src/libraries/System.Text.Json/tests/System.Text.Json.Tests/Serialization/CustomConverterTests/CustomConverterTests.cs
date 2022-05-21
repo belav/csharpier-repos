@@ -209,9 +209,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void GetConverterTypeToConvertNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => (new JsonSerializerOptions()).GetConverter(typeToConvert: null!)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                (new JsonSerializerOptions()).GetConverter(typeToConvert: null!));
         }
     }
 }

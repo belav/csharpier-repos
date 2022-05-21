@@ -2278,21 +2278,19 @@ namespace System.Globalization.Tests
         public void ClearCachedDataTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        CultureInfo ci = CultureInfo.GetCultureInfo("ja-JP");
-                        Assert.True(
-                            (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
-                            "Expected getting same object reference"
-                        );
-                        ci.ClearCachedData();
-                        Assert.False(
-                            (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
-                            "expected to get a new object reference"
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    CultureInfo ci = CultureInfo.GetCultureInfo("ja-JP");
+                    Assert.True(
+                        (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
+                        "Expected getting same object reference"
+                    );
+                    ci.ClearCachedData();
+                    Assert.False(
+                        (object)ci == (object)CultureInfo.GetCultureInfo("ja-JP"),
+                        "expected to get a new object reference"
+                    );
+                })
                 .Dispose();
         }
 

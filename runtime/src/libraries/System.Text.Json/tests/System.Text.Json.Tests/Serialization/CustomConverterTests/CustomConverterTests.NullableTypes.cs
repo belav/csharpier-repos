@@ -117,9 +117,8 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new JsonTestStructThrowingConverter());
 
             // Chooses JsonTestStructThrowingConverter on options, which will throw.
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<TestStruct?>("1", options)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<TestStruct?>("1", options));
 
             // Chooses JsonTestStructConverter on attribute, which will not throw.
             TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(
@@ -132,12 +131,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullableCustomValueTypeNegativeTest()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":null}")
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":1}")
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":null}"));
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":1}"));
         }
 
         [Fact]
@@ -341,23 +338,17 @@ namespace System.Text.Json.Serialization.Tests
             string structTypeAsStr = typeof(TestStruct).ToString();
             string nullableStructTypeAsStr = typeof(TestStruct?).ToString();
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new ClassWithNullableStruct_ConverterOnProperty
-                        {
-                            MyStruct = new TestStruct()
-                        }
-                    )
-            );
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(
+                    new ClassWithNullableStruct_ConverterOnProperty { MyStruct = new TestStruct() }
+                ));
             string exAsStr = ex.ToString();
             Assert.Contains(converterTypeAsStr, exAsStr);
             Assert.Contains(structTypeAsStr, exAsStr);
             Assert.Contains(nullableStructTypeAsStr, exAsStr);
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnProperty>("")
-            );
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnProperty>(""));
             exAsStr = ex.ToString();
             Assert.Contains(converterTypeAsStr, exAsStr);
             Assert.Contains(structTypeAsStr, exAsStr);
@@ -390,17 +381,14 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { new JsonTestStructValueChangingConverter() }
             };
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new ClassWithNullableStruct { MyStruct = new TestStruct() },
-                        options
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(
+                    new ClassWithNullableStruct { MyStruct = new TestStruct() },
+                    options
+                ));
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<ClassWithNullableStruct>("", options)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<ClassWithNullableStruct>("", options));
         }
 
         [Fact]
@@ -428,9 +416,8 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(obj, options));
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<TestStruct?>("", options)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<TestStruct?>("", options));
         }
 
         private class ClassWithNullableStruct_ConverterOnProperty

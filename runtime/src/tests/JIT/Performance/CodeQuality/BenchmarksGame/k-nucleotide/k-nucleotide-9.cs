@@ -175,32 +175,30 @@ namespace BenchmarksGame
 
         static Task<string> count(int l, long mask, Func<Dictionary<long, Wrapper>, string> summary)
         {
-            return Task.Run(
-                () =>
+            return Task.Run(() =>
+            {
+                long rollingKey = 0;
+                var firstBlock = threeBlocks[0];
+                var start = threeStart;
+                while (--l > 0)
+                    rollingKey = (rollingKey << 2) | firstBlock[start++];
+                var dict = new Dictionary<long, Wrapper>();
+                for (int i = start; i < firstBlock.Length; i++)
+                    check(dict, ref rollingKey, firstBlock[i], mask);
+
+                int lastBlockId = threeBlocks.Count - 1;
+                for (int bl = 1; bl < lastBlockId; bl++)
                 {
-                    long rollingKey = 0;
-                    var firstBlock = threeBlocks[0];
-                    var start = threeStart;
-                    while (--l > 0)
-                        rollingKey = (rollingKey << 2) | firstBlock[start++];
-                    var dict = new Dictionary<long, Wrapper>();
-                    for (int i = start; i < firstBlock.Length; i++)
-                        check(dict, ref rollingKey, firstBlock[i], mask);
-
-                    int lastBlockId = threeBlocks.Count - 1;
-                    for (int bl = 1; bl < lastBlockId; bl++)
-                    {
-                        var bytes = threeBlocks[bl];
-                        for (int i = 0; i < bytes.Length; i++)
-                            check(dict, ref rollingKey, bytes[i], mask);
-                    }
-
-                    var lastBlock = threeBlocks[lastBlockId];
-                    for (int i = 0; i < threeEnd; i++)
-                        check(dict, ref rollingKey, lastBlock[i], mask);
-                    return summary(dict);
+                    var bytes = threeBlocks[bl];
+                    for (int i = 0; i < bytes.Length; i++)
+                        check(dict, ref rollingKey, bytes[i], mask);
                 }
-            );
+
+                var lastBlock = threeBlocks[lastBlockId];
+                for (int i = 0; i < threeEnd; i++)
+                    check(dict, ref rollingKey, lastBlock[i], mask);
+                return summary(dict);
+            });
         }
 
         static Dictionary<long, Wrapper> countEnding(int l, long mask, byte b)

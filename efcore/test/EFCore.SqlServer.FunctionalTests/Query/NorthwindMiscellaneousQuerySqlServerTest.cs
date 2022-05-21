@@ -5805,12 +5805,10 @@ ORDER BY [c].[CustomerID]"
         [ConditionalFact]
         public async Task Single_Predicate_Cancellation()
         {
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () =>
-                    await Single_Predicate_Cancellation_test(
-                        Fixture.TestSqlLoggerFactory.CancelQuery()
-                    )
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await Single_Predicate_Cancellation_test(
+                    Fixture.TestSqlLoggerFactory.CancelQuery()
+                ));
         }
 
         [ConditionalFact]
@@ -5822,32 +5820,29 @@ ORDER BY [c].[CustomerID]"
 
             for (var i = 0; i < threadCount; i++)
             {
-                tasks[i] = Task.Run(
-                    () =>
-                    {
-                        using var context = CreateContext();
-                        using (
-                            (
-                                from c in context.Customers
-                                where c.City == "London"
-                                orderby c.CustomerID
+                tasks[i] = Task.Run(() =>
+                {
+                    using var context = CreateContext();
+                    using (
+                        (
+                            from c in context.Customers
+                            where c.City == "London"
+                            orderby c.CustomerID
+                            select (
+                                from o1 in context.Orders
+                                where
+                                    o1.CustomerID == c.CustomerID && o1.OrderDate.Value.Year == 1997
+                                orderby o1.OrderID
                                 select (
-                                    from o1 in context.Orders
-                                    where
-                                        o1.CustomerID == c.CustomerID
-                                        && o1.OrderDate.Value.Year == 1997
-                                    orderby o1.OrderID
-                                    select (
-                                        from o2 in context.Orders
-                                        where o1.CustomerID == c.CustomerID
-                                        orderby o2.OrderID
-                                        select o1.OrderID
-                                    ).ToList()
+                                    from o2 in context.Orders
+                                    where o1.CustomerID == c.CustomerID
+                                    orderby o2.OrderID
+                                    select o1.OrderID
                                 ).ToList()
-                            ).GetEnumerator()
-                        ) { }
-                    }
-                );
+                            ).ToList()
+                        ).GetEnumerator()
+                    ) { }
+                });
             }
 
             return Task.WhenAll(tasks);
@@ -5863,9 +5858,8 @@ ORDER BY [c].[CustomerID]"
                 task = context.Customers;
             }
 
-            return Assert.ThrowsAsync<ObjectDisposedException>(
-                () => task.SingleAsync(c => c.CustomerID == "ALFKI")
-            );
+            return Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                task.SingleAsync(c => c.CustomerID == "ALFKI"));
         }
 
         [ConditionalFact]

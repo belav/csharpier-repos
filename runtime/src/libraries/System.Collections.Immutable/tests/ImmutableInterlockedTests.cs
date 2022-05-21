@@ -121,16 +121,14 @@ namespace System.Collections.Immutable.Tests
                 func =>
                 {
                     ImmutableList<int> list = ImmutableList.Create(1);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            func(
-                                ref list,
-                                l =>
-                                {
-                                    throw new InvalidOperationException();
-                                }
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        func(
+                            ref list,
+                            l =>
+                            {
+                                throw new InvalidOperationException();
+                            }
+                        ));
                 }
             );
         }
@@ -142,9 +140,8 @@ namespace System.Collections.Immutable.Tests
                 func =>
                 {
                     ImmutableArray<int> array = ImmutableArray.Create(42);
-                    Assert.Throws<InvalidOperationException>(
-                        () => func(ref array, l => throw new InvalidOperationException())
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        func(ref array, l => throw new InvalidOperationException()));
                 }
             );
         }

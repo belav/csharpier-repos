@@ -51,12 +51,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager();
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.Initialize(baseUri, absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.Initialize(baseUri, absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
@@ -72,12 +70,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.ToBaseRelativePath(absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.ToBaseRelativePath(absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
@@ -96,12 +92,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.ToBaseRelativePath(absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.ToBaseRelativePath(absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
@@ -185,9 +179,8 @@ public class NavigationManagerTest
         var baseUri = "scheme://host/";
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => navigationManager.GetUriWithQueryParameter(name, "test")
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            navigationManager.GetUriWithQueryParameter(name, "test"));
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
@@ -256,9 +249,8 @@ public class NavigationManagerTest
             ["value"] = new { Value = 3 }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => navigationManager.GetUriWithQueryParameters(unsupportedParameterValues)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            navigationManager.GetUriWithQueryParameters(unsupportedParameterValues));
         Assert.StartsWith("Cannot format query parameters with values of type", exception.Message);
     }
 
@@ -274,9 +266,8 @@ public class NavigationManagerTest
             [string.Empty] = "value2",
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => navigationManager.GetUriWithQueryParameters(values)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            navigationManager.GetUriWithQueryParameters(values));
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 

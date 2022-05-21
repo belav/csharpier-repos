@@ -52,9 +52,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<ArgumentException>(
-                () => Interaction.CallByName(instance, methodName, useCallType, args)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Interaction.CallByName(instance, methodName, useCallType, args));
         }
 
         [Theory]
@@ -66,9 +65,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<MissingMemberException>(
-                () => Interaction.CallByName(instance, methodName, useCallType, args)
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                Interaction.CallByName(instance, methodName, useCallType, args));
         }
 
         public static IEnumerable<object[]> CallByName_TestData()
@@ -224,15 +222,13 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(
-                    () => Interaction.DeleteSetting(AppName: "", Section: null, Key: null)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    Interaction.DeleteSetting(AppName: "", Section: null, Key: null));
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Interaction.DeleteSetting(AppName: "", Section: null, Key: null)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Interaction.DeleteSetting(AppName: "", Section: null, Key: null));
             }
             // Not tested: valid arguments.
         }
@@ -299,15 +295,13 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(
-                    () => Interaction.GetAllSettings(AppName: "", Section: "")
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    Interaction.GetAllSettings(AppName: "", Section: ""));
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Interaction.GetAllSettings(AppName: "", Section: "")
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Interaction.GetAllSettings(AppName: "", Section: ""));
             }
             // Not tested: valid arguments.
         }
@@ -318,15 +312,13 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(
-                    () => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: "")
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: ""));
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: "")
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: ""));
             }
             // Not tested: valid arguments.
         }
@@ -344,25 +336,15 @@ namespace Microsoft.VisualBasic.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void InputBox()
         {
-            InvokeMissingMethod(
-                () =>
-                    Interaction.InputBox(
-                        "Prompt",
-                        Title: "",
-                        DefaultResponse: "",
-                        XPos: -1,
-                        YPos: -1
-                    )
-            );
+            InvokeMissingMethod(() =>
+                Interaction.InputBox("Prompt", Title: "", DefaultResponse: "", XPos: -1, YPos: -1));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void MsgBox()
         {
-            InvokeMissingMethod(
-                () =>
-                    Interaction.MsgBox("Prompt", Buttons: MsgBoxStyle.ApplicationModal, Title: null)
-            );
+            InvokeMissingMethod(() =>
+                Interaction.MsgBox("Prompt", Buttons: MsgBoxStyle.ApplicationModal, Title: null));
         }
 
         [Theory]
@@ -416,9 +398,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(0, 1, 100, 0)] // Interval < 1
         public void Partition_Invalid(long Number, long Start, long Stop, long Interval)
         {
-            Assert.Throws<ArgumentException>(
-                () => Interaction.Partition(Number, Start, Stop, Interval)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Interaction.Partition(Number, Start, Stop, Interval));
         }
 
         [Theory]
@@ -428,9 +409,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(long.MaxValue - 1, long.MaxValue - 1, long.MaxValue, 1)]
         public void Partition_Overflow(long Number, long Start, long Stop, long Interval)
         {
-            Assert.Throws<OverflowException>(
-                () => Interaction.Partition(Number, Start, Stop, Interval)
-            );
+            Assert.Throws<OverflowException>(() =>
+                Interaction.Partition(Number, Start, Stop, Interval));
         }
 
         [Fact]
@@ -439,15 +419,13 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(
-                    () => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: "")
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: ""));
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: "")
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: ""));
             }
             // Not tested: valid arguments.
         }
@@ -455,15 +433,13 @@ namespace Microsoft.VisualBasic.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void Shell()
         {
-            InvokeMissingMethod(
-                () =>
-                    Interaction.Shell(
-                        "MyPath",
-                        Style: AppWinStyle.NormalFocus,
-                        Wait: false,
-                        Timeout: -1
-                    )
-            );
+            InvokeMissingMethod(() =>
+                Interaction.Shell(
+                    "MyPath",
+                    Style: AppWinStyle.NormalFocus,
+                    Wait: false,
+                    Timeout: -1
+                ));
         }
 
         [Theory]

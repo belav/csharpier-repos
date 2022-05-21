@@ -113,12 +113,10 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         public async Task EnsureProjectsLoadedAsync(CancellationToken cancellationToken)
         {
             using (
-                var token = cancellationToken.Register(
-                    () =>
-                    {
-                        _projectsLoadedTaskCompletionSource.SetCanceled();
-                    }
-                )
+                var token = cancellationToken.Register(() =>
+                {
+                    _projectsLoadedTaskCompletionSource.SetCanceled();
+                })
             )
             {
                 await _projectsLoadedTaskCompletionSource.Task.ConfigureAwait(false);

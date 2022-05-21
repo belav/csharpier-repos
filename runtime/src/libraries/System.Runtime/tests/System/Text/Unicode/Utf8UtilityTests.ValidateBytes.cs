@@ -515,36 +515,34 @@ namespace System.Text.Unicode.Tests
 
         private static Lazy<GetPointerToFirstInvalidByteDel> CreateGetPointerToFirstInvalidByteFn()
         {
-            return new Lazy<GetPointerToFirstInvalidByteDel>(
-                () =>
+            return new Lazy<GetPointerToFirstInvalidByteDel>(() =>
+            {
+                Type utf8UtilityType = typeof(Utf8).Assembly.GetType(
+                    "System.Text.Unicode.Utf8Utility"
+                );
+
+                if (utf8UtilityType is null)
                 {
-                    Type utf8UtilityType = typeof(Utf8).Assembly.GetType(
-                        "System.Text.Unicode.Utf8Utility"
+                    throw new Exception(
+                        "Couldn't find Utf8Utility type in System.Private.CoreLib."
                     );
-
-                    if (utf8UtilityType is null)
-                    {
-                        throw new Exception(
-                            "Couldn't find Utf8Utility type in System.Private.CoreLib."
-                        );
-                    }
-
-                    MethodInfo methodInfo = utf8UtilityType.GetMethod(
-                        "GetPointerToFirstInvalidByte",
-                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
-                    );
-
-                    if (methodInfo is null)
-                    {
-                        throw new Exception(
-                            "Couldn't find GetPointerToFirstInvalidByte method on Utf8Utility."
-                        );
-                    }
-
-                    return (GetPointerToFirstInvalidByteDel)
-                        methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidByteDel));
                 }
-            );
+
+                MethodInfo methodInfo = utf8UtilityType.GetMethod(
+                    "GetPointerToFirstInvalidByte",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                );
+
+                if (methodInfo is null)
+                {
+                    throw new Exception(
+                        "Couldn't find GetPointerToFirstInvalidByte method on Utf8Utility."
+                    );
+                }
+
+                return (GetPointerToFirstInvalidByteDel)
+                    methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidByteDel));
+            });
         }
     }
 }

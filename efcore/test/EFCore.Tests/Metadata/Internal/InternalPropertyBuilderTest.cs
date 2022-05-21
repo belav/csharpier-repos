@@ -630,9 +630,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.CannotBeNullable(nameof(Customer.Id), typeof(Customer).Name, "int"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => builder.IsRequired(false, ConfigurationSource.Explicit)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        builder.IsRequired(false, ConfigurationSource.Explicit))
                     .Message
             );
         }

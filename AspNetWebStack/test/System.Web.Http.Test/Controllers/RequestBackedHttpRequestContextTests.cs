@@ -269,9 +269,8 @@ namespace System.Web.Http.Controllers
             using (HttpRequestMessage request = CreateRequest())
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(
-                    () => expected
-                );
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
+                    expected);
 
                 // Act
                 bool actual = context.IncludeErrorDetail;
@@ -293,9 +292,8 @@ namespace System.Web.Http.Controllers
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IncludeErrorDetail = expectedIncludeErrorDetail;
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(
-                    () => !expectedIncludeErrorDetail
-                );
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
+                    !expectedIncludeErrorDetail);
 
                 // Act
                 bool includeErrorDetail = context.IncludeErrorDetail;
@@ -363,9 +361,8 @@ namespace System.Web.Http.Controllers
             {
                 HttpRequestContext context = CreateProductUnderTest(request);
                 context.IsLocal = expectedIsLocal;
-                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(
-                    () => !expectedIsLocal
-                );
+                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(() =>
+                    !expectedIsLocal);
 
                 // Act
                 bool isLocal = context.IsLocal;

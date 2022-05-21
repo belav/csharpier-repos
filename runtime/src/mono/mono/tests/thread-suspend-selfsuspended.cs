@@ -10,24 +10,22 @@ class Driver
 
         Thread t1 = Thread.CurrentThread;
 
-        Thread t2 = new Thread(
-            () =>
+        Thread t2 = new Thread(() =>
+        {
+            while (!finished)
             {
-                while (!finished)
+                if (start_gc.WaitOne(0))
+                    GC.Collect();
+
+                try
                 {
-                    if (start_gc.WaitOne(0))
-                        GC.Collect();
-
-                    try
-                    {
-                        t1.Resume();
-                    }
-                    catch (ThreadStateException) { }
-
-                    Thread.Yield();
+                    t1.Resume();
                 }
+                catch (ThreadStateException) { }
+
+                Thread.Yield();
             }
-        );
+        });
 
         t2.Start();
 

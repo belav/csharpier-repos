@@ -37,9 +37,8 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 additionalData[0] ^= 1;
 
                 byte[] decrypted = new byte[dataLength];
-                Assert.Throws<CryptographicException>(
-                    () => aesCcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    aesCcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData));
             }
         }
 
@@ -215,12 +214,10 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentException>(
-                    () => aesCcm.Encrypt(nonce, plaintext, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentException>(
-                    () => aesCcm.Decrypt(nonce, ciphertext, tag, plaintext)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    aesCcm.Encrypt(nonce, plaintext, ciphertext, tag));
+                Assert.Throws<ArgumentException>(() =>
+                    aesCcm.Decrypt(nonce, ciphertext, tag, plaintext));
             }
         }
 
@@ -418,16 +415,14 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
                 byte[] plaintext = new byte[testCase.Plaintext.Length];
                 RandomNumberGenerator.Fill(plaintext);
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        aesCcm.Decrypt(
-                            testCase.Nonce,
-                            ciphertext,
-                            tag,
-                            plaintext,
-                            testCase.AssociatedData
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    aesCcm.Decrypt(
+                        testCase.Nonce,
+                        ciphertext,
+                        tag,
+                        plaintext,
+                        testCase.AssociatedData
+                    ));
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }
@@ -458,16 +453,14 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
                 byte[] plaintext = new byte[testCase.Plaintext.Length];
                 RandomNumberGenerator.Fill(plaintext);
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        aesCcm.Decrypt(
-                            testCase.Nonce,
-                            ciphertext,
-                            tag,
-                            plaintext,
-                            testCase.AssociatedData
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    aesCcm.Decrypt(
+                        testCase.Nonce,
+                        ciphertext,
+                        tag,
+                        plaintext,
+                        testCase.AssociatedData
+                    ));
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }

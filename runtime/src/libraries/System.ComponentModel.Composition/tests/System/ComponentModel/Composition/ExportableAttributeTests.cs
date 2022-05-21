@@ -94,12 +94,10 @@ namespace System.ComponentModel.Composition
             );
             ExportDefinition export = part.ExportDefinitions.First();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+            {
+                var metadata = export.Metadata;
+            });
 
             Assert.Contains("Bar", ex.Message);
         }
@@ -141,12 +139,10 @@ namespace System.ComponentModel.Composition
 
             // Should throw InvalidOperationException during discovery because
             // the person class is an invalid metadata type
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var metadata = export.Metadata;
+            });
         }
 
         [AttributeUsage(AttributeTargets.All)]
@@ -176,12 +172,10 @@ namespace System.ComponentModel.Composition
 
             // Should throw InvalidOperationException during discovery because
             // the person class is an invalid metadata type
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var metadata = export.Metadata;
+            });
         }
 
         [MetadataAttribute]

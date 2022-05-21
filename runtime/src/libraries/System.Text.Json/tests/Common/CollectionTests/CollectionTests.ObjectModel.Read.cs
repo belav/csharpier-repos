@@ -39,34 +39,26 @@ namespace System.Text.Json.Serialization.Tests
         public async Task Read_ObjectModelCollection_Throws()
         {
             // No default constructor.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<
-                        ReadOnlyCollection<bool>
-                    >("[true,false]")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<ReadOnlyCollection<bool>>(
+                    "[true,false]"
+                ));
             // No default constructor.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<
-                        ReadOnlyObservableCollection<bool>
-                    >("[true,false]")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<
+                    ReadOnlyObservableCollection<bool>
+                >("[true,false]"));
             // No default constructor.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<
-                        ReadOnlyDictionary<string, bool>
-                    >(@"{""true"":false}")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<
+                    ReadOnlyDictionary<string, bool>
+                >(@"{""true"":false}"));
 
             // Abstract types can't be instantiated. This means there's no default constructor, so the type is not supported for deserialization.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<
-                        KeyedCollection<string, bool>
-                    >("[true]")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<
+                    KeyedCollection<string, bool>
+                >("[true]"));
         }
 
         public class SimpleKeyedCollection : KeyedCollection<string, bool>

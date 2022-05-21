@@ -222,9 +222,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 typeof(TindersticksIIVinyl),
                 typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenIII").DeclaringType
             );
-            Assert.Throws<AmbiguousMatchException>(
-                () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+                typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
 
             Assert.Same(
                 typeof(TindersticksIICd),
@@ -282,9 +281,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 typeof(TindersticksIICd),
                 typeof(TindersticksIICd).GetAnyProperty("VertrauenIII").DeclaringType
             );
-            Assert.Throws<AmbiguousMatchException>(
-                () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+                typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
         }
 
         public class TindersticksII

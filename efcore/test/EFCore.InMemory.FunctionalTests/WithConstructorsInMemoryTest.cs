@@ -36,12 +36,8 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder
                     .Entity<BlogQuery>()
                     .HasNoKey()
-                    .ToInMemoryQuery(
-                        () =>
-                            context
-                                .Set<Blog>()
-                                .Select(b => new BlogQuery(b.Title, b.MonthlyRevenue))
-                    );
+                    .ToInMemoryQuery(() =>
+                        context.Set<Blog>().Select(b => new BlogQuery(b.Title, b.MonthlyRevenue)));
             }
         }
     }

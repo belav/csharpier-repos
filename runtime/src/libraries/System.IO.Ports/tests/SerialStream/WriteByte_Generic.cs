@@ -185,9 +185,8 @@ namespace System.IO.Ports.Tests
                 com.WriteTimeout = 200;
 
                 // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
-                Task task = Task.Run(
-                    () => WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount)
-                );
+                Task task = Task.Run(() =>
+                    WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount));
                 TCSupport.WaitForTaskToStart(task);
 
                 TCSupport.WaitForWriteBufferToLoad(com, TCSupport.MinimumBlockingByteCount);
@@ -249,9 +248,8 @@ namespace System.IO.Ports.Tests
                 com.Open();
 
                 // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
-                Task task = Task.Run(
-                    () => WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount)
-                );
+                Task task = Task.Run(() =>
+                    WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount));
 
                 TCSupport.WaitForTaskToStart(task);
 
@@ -411,9 +409,8 @@ namespace System.IO.Ports.Tests
                 com1.BaseStream.BeginWrite(new byte[] { (byte)'A' }, 0, 1, null, null);
                 Thread.Sleep(250);
 
-                Assert.Throws<TimeoutException>(
-                    () => Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
-                );
+                Assert.Throws<TimeoutException>(() =>
+                    Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}"));
 
                 // Setup to ensure write will succeed
                 if (rts)
@@ -428,9 +425,8 @@ namespace System.IO.Ports.Tests
                 }
 
                 Assert.Equal((byte)'A', com2.ReadByte());
-                Assert.Throws<TimeoutException>(
-                    () => Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}")
-                );
+                Assert.Throws<TimeoutException>(() =>
+                    Console.WriteLine($"Read unexpected byte: {com2.ReadByte()}"));
                 Assert.Equal(0, com1.BytesToWrite);
 
                 // Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is used

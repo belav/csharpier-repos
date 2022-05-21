@@ -160,9 +160,8 @@ namespace System.Net.Security.Tests
         public async Task NegotiateStream_ClientAuthenticationRemote_Fails(object credentialObject)
         {
             var credential = (NetworkCredential)credentialObject;
-            await Assert.ThrowsAsync<AuthenticationException>(
-                () => VerifyClientAuthentication(credential)
-            );
+            await Assert.ThrowsAsync<AuthenticationException>(() =>
+                VerifyClientAuthentication(credential));
         }
 
         private async Task VerifyClientAuthentication(NetworkCredential credential)

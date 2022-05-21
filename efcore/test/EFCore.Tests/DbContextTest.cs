@@ -42,9 +42,8 @@ namespace Microsoft.EntityFrameworkCore
         public void Set_throws_for_type_not_in_model_same_type_with_different_namespace()
         {
             using var context = new EarlyLearningCenter();
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => context.Set<Microsoft.EntityFrameworkCore.DifferentNamespace.Category>().Local
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                context.Set<Microsoft.EntityFrameworkCore.DifferentNamespace.Category>().Local);
 
             Assert.Equal(
                 CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
@@ -818,27 +817,24 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => context.SaveChangesAsync()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        context.SaveChangesAsync())
                 ).Message
             );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => context.AddAsync(new object()).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        context.AddAsync(new object()).AsTask())
                 ).Message
             );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 (
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        () => context.FindAsync(typeof(Random), 77).AsTask()
-                    )
+                    await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                        context.FindAsync(typeof(Random), 77).AsTask())
                 ).Message
             );
 
@@ -866,9 +862,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 Assert
-                    .Throws<ObjectDisposedException>(
-                        () => context.GetService<IDesignTimeModel>().Model
-                    )
+                    .Throws<ObjectDisposedException>(() =>
+                        context.GetService<IDesignTimeModel>().Model)
                     .Message
             );
 
@@ -891,9 +886,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
                 Assert
-                    .Throws<ObjectDisposedException>(
-                        () => ((IInfrastructure<IServiceProvider>)context).Instance
-                    )
+                    .Throws<ObjectDisposedException>(() =>
+                        ((IInfrastructure<IServiceProvider>)context).Instance)
                     .Message
             );
         }

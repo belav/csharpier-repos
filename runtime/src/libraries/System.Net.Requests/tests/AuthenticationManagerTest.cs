@@ -15,12 +15,10 @@ namespace System.Net.Tests
         public void Authenticate_NotSupported()
         {
 #pragma warning disable SYSLIB0009 // The methods are obsolete
-            Assert.Throws<PlatformNotSupportedException>(
-                () => AuthenticationManager.Authenticate(null, null, null)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => AuthenticationManager.PreAuthenticate(null, null)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.Authenticate(null, null, null));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.PreAuthenticate(null, null));
 #pragma warning restore SYSLIB0009
         }
 
@@ -33,28 +31,24 @@ namespace System.Net.Tests
         [Fact]
         public void Unregister_Null_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => AuthenticationManager.Unregister((IAuthenticationModule)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => AuthenticationManager.Unregister((string)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((IAuthenticationModule)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((string)null));
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Register_Unregister_ModuleCountUnchanged()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int initialCount = GetModuleCount();
-                        IAuthenticationModule module = new CustomModule();
-                        AuthenticationManager.Register(module);
-                        AuthenticationManager.Unregister(module);
-                        Assert.Equal(initialCount, GetModuleCount());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister(module);
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
                 .Dispose();
         }
 
@@ -62,16 +56,14 @@ namespace System.Net.Tests
         public void Register_UnregisterByScheme_ModuleCountUnchanged()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int initialCount = GetModuleCount();
-                        IAuthenticationModule module = new CustomModule();
-                        AuthenticationManager.Register(module);
-                        AuthenticationManager.Unregister("custom");
-                        Assert.Equal(initialCount, GetModuleCount());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister("custom");
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
                 .Dispose();
         }
 
@@ -91,17 +83,15 @@ namespace System.Net.Tests
             Assert.Null(AuthenticationManager.CredentialPolicy);
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        ICredentialPolicy cp = new DummyCredentialPolicy();
-                        AuthenticationManager.CredentialPolicy = cp;
-                        Assert.Same(cp, AuthenticationManager.CredentialPolicy);
+                .Invoke(() =>
+                {
+                    ICredentialPolicy cp = new DummyCredentialPolicy();
+                    AuthenticationManager.CredentialPolicy = cp;
+                    Assert.Same(cp, AuthenticationManager.CredentialPolicy);
 
-                        AuthenticationManager.CredentialPolicy = null;
-                        Assert.Null(AuthenticationManager.CredentialPolicy);
-                    }
-                )
+                    AuthenticationManager.CredentialPolicy = null;
+                    Assert.Null(AuthenticationManager.CredentialPolicy);
+                })
                 .Dispose();
         }
 
@@ -116,21 +106,19 @@ namespace System.Net.Tests
             );
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        string theKey = "http://www.contoso.com";
-                        string theValue = "HTTP/www.contoso.com";
-                        AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
-                        Assert.Equal(
-                            theValue,
-                            AuthenticationManager.CustomTargetNameDictionary[theKey]
-                        );
+                .Invoke(() =>
+                {
+                    string theKey = "http://www.contoso.com";
+                    string theValue = "HTTP/www.contoso.com";
+                    AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
+                    Assert.Equal(
+                        theValue,
+                        AuthenticationManager.CustomTargetNameDictionary[theKey]
+                    );
 
-                        AuthenticationManager.CustomTargetNameDictionary.Clear();
-                        Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
-                    }
-                )
+                    AuthenticationManager.CustomTargetNameDictionary.Clear();
+                    Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
+                })
                 .Dispose();
         }
 

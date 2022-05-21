@@ -20,17 +20,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             var pattern = builder.Build("**") as IRaggedPattern;
             var context = new PatternContextRaggedInclude(pattern);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    context.Declare(
-                        (segment, last) =>
-                        {
-                            Assert.False(true, "No segment should be declared.");
-                        }
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                context.Declare(
+                    (segment, last) =>
+                    {
+                        Assert.False(true, "No segment should be declared.");
+                    }
+                );
+            });
         }
 
         [Theory]

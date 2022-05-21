@@ -368,12 +368,10 @@ public class QueryParameterValueSupplierTest
     [Fact]
     public void CannotMapSingleQueryParameterToMultipleProperties()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                QueryParameterValueSupplier.ForType(
-                    typeof(MapSingleQueryParameterToMultipleProperties)
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            QueryParameterValueSupplier.ForType(
+                typeof(MapSingleQueryParameterToMultipleProperties)
+            ));
         Assert.Contains(
             "declares more than one mapping for the query parameter 'a'.",
             ex.Message,
@@ -393,9 +391,8 @@ public class QueryParameterValueSupplierTest
     [Fact]
     public void RejectsUnsupportedType()
     {
-        var ex = Assert.Throws<NotSupportedException>(
-            () => QueryParameterValueSupplier.ForType(typeof(UnsupportedType))
-        );
+        var ex = Assert.Throws<NotSupportedException>(() =>
+            QueryParameterValueSupplier.ForType(typeof(UnsupportedType)));
         Assert.Equal("Querystring values cannot be parsed as type 'System.Object'.", ex.Message);
     }
 
@@ -418,9 +415,8 @@ public class QueryParameterValueSupplierTest
     [InlineData(nameof(ValidTypes.NullableLongVal), "this+is+a+long+value", typeof(long?))]
     public void RejectsUnparseableValues(string key, string value, Type targetType)
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => GetSuppliedParameters<ValidTypes>($"?{key}={value}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            GetSuppliedParameters<ValidTypes>($"?{key}={value}"));
         Assert.Equal(
             $"Cannot parse the value '{value.Replace('+', ' ')}' as type '{targetType}' for '{key}'.",
             ex.Message
@@ -471,10 +467,8 @@ public class QueryParameterValueSupplierTest
         Type targetType
     )
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                GetSuppliedParameters<ValidArrayTypes>($"?{key}={validValue}&{key}={invalidValue}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            GetSuppliedParameters<ValidArrayTypes>($"?{key}={validValue}&{key}={invalidValue}"));
         Assert.Equal(
             $"Cannot parse the value '{invalidValue.Replace('+', ' ')}' as type '{targetType}' for '{key}'.",
             ex.Message
@@ -492,12 +486,8 @@ public class QueryParameterValueSupplierTest
     [InlineData(nameof(ValidTypes.LongVal), typeof(long))]
     public void RejectsBlankValuesWhenNotNullable(string key, Type targetType)
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                GetSuppliedParameters<ValidTypes>(
-                    $"?{nameof(ValidTypes.StringVal)}=somevalue&{key}="
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            GetSuppliedParameters<ValidTypes>($"?{nameof(ValidTypes.StringVal)}=somevalue&{key}="));
         Assert.Equal($"Cannot parse the value '' as type '{targetType}' for '{key}'.", ex.Message);
     }
 
@@ -565,12 +555,10 @@ public class QueryParameterValueSupplierTest
     [InlineData(nameof(ValidArrayTypes.LongVals), typeof(long))]
     public void RejectsBlankArrayEntriesWhenNotNullable(string key, Type targetType)
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                GetSuppliedParameters<ValidArrayTypes>(
-                    $"?{nameof(ValidTypes.StringVal)}=somevalue&{key}="
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            GetSuppliedParameters<ValidArrayTypes>(
+                $"?{nameof(ValidTypes.StringVal)}=somevalue&{key}="
+            ));
         Assert.Equal($"Cannot parse the value '' as type '{targetType}' for '{key}'.", ex.Message);
     }
 

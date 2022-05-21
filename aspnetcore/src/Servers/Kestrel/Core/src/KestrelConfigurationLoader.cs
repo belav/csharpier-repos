@@ -143,12 +143,10 @@ public class KestrelConfigurationLoader
             throw new ArgumentNullException(nameof(configure));
         }
 
-        EndpointsToAdd.Add(
-            () =>
-            {
-                Options.Listen(endPoint, configure);
-            }
-        );
+        EndpointsToAdd.Add(() =>
+        {
+            Options.Listen(endPoint, configure);
+        });
 
         return this;
     }
@@ -171,12 +169,10 @@ public class KestrelConfigurationLoader
             throw new ArgumentNullException(nameof(configure));
         }
 
-        EndpointsToAdd.Add(
-            () =>
-            {
-                Options.ListenLocalhost(port, configure);
-            }
-        );
+        EndpointsToAdd.Add(() =>
+        {
+            Options.ListenLocalhost(port, configure);
+        });
 
         return this;
     }
@@ -197,12 +193,10 @@ public class KestrelConfigurationLoader
             throw new ArgumentNullException(nameof(configure));
         }
 
-        EndpointsToAdd.Add(
-            () =>
-            {
-                Options.ListenAnyIP(port, configure);
-            }
-        );
+        EndpointsToAdd.Add(() =>
+        {
+            Options.ListenAnyIP(port, configure);
+        });
 
         return this;
     }
@@ -237,12 +231,10 @@ public class KestrelConfigurationLoader
             throw new ArgumentNullException(nameof(configure));
         }
 
-        EndpointsToAdd.Add(
-            () =>
-            {
-                Options.ListenUnixSocket(socketPath, configure);
-            }
-        );
+        EndpointsToAdd.Add(() =>
+        {
+            Options.ListenUnixSocket(socketPath, configure);
+        });
 
         return this;
     }
@@ -263,12 +255,10 @@ public class KestrelConfigurationLoader
             throw new ArgumentNullException(nameof(configure));
         }
 
-        EndpointsToAdd.Add(
-            () =>
-            {
-                Options.ListenHandle(handle, configure);
-            }
-        );
+        EndpointsToAdd.Add(() =>
+        {
+            Options.ListenHandle(handle, configure);
+        });
 
         return this;
     }

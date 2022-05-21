@@ -117,12 +117,10 @@ namespace System.Xml.Tests
         {
             var xmlDoc = new XmlDocument();
             var nodeReader = new XmlNodeReader(xmlDoc);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    nodeReader.ResolveEntity();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                nodeReader.ResolveEntity();
+            });
             Assert.Equal(string.Empty, nodeReader.ReadString());
         }
 

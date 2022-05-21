@@ -493,9 +493,8 @@ public class XmlDataContractSerializerInputFormatterTest
         var context = GetInputFormatterContext(contentBytes, typeof(TestLevelTwo));
 
         // Act & Assert
-        await Assert.ThrowsAsync<InputFormatterException>(
-            async () => await formatter.ReadAsync(context)
-        );
+        await Assert.ThrowsAsync<InputFormatterException>(async () =>
+            await formatter.ReadAsync(context));
     }
 
     [Fact]
@@ -512,9 +511,8 @@ public class XmlDataContractSerializerInputFormatterTest
         var context = GetInputFormatterContext(contentBytes, typeof(TestLevelTwo));
 
         // Act & Assert
-        await Assert.ThrowsAsync<InputFormatterException>(
-            async () => await formatter.ReadAsync(context)
-        );
+        await Assert.ThrowsAsync<InputFormatterException>(async () =>
+            await formatter.ReadAsync(context));
     }
 
     [Fact]
@@ -715,9 +713,8 @@ public class XmlDataContractSerializerInputFormatterTest
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
 
         // Act & Assert
-        await Assert.ThrowsAsync<InputFormatterException>(
-            async () => await formatter.ReadAsync(context)
-        );
+        await Assert.ThrowsAsync<InputFormatterException>(async () =>
+            await formatter.ReadAsync(context));
     }
 
     [Fact]
@@ -778,9 +775,8 @@ public class XmlDataContractSerializerInputFormatterTest
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
 
         // Act & Assert
-        await Assert.ThrowsAsync<InputFormatterException>(
-            async () => await formatter.ReadAsync(context)
-        );
+        await Assert.ThrowsAsync<InputFormatterException>(async () =>
+            await formatter.ReadAsync(context));
     }
 
     [Fact]

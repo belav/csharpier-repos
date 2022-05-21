@@ -211,9 +211,8 @@ namespace System.Threading.Tasks.Tests
                     customEnumerable,
                     EnumerablePartitionerOptions.NoBuffering
                 );
-                var exception = Assert.Throws<AggregateException>(
-                    () => Parallel.ForEach(partitioner, (index) => { })
-                );
+                var exception = Assert.Throws<AggregateException>(() =>
+                    Parallel.ForEach(partitioner, (index) => { }));
                 VerifyAggregateException(exception, userEx);
                 Assert.True(customEnumerable.AreEnumeratorsDisposed());
             }
@@ -232,15 +231,10 @@ namespace System.Threading.Tasks.Tests
             int[] ds = new int[length];
             for (int i = 0; i < 16; i++)
                 ds[i] = i;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var partitioner = Partitioner.Create<int>(
-                        ds,
-                        (EnumerablePartitionerOptions)0x2
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var partitioner = Partitioner.Create<int>(ds, (EnumerablePartitionerOptions)0x2);
+            });
         }
 
         /// <summary>
@@ -249,15 +243,13 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public static void NullDataSource()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var partitioner = Partitioner.Create<int>(
-                        null,
-                        EnumerablePartitionerOptions.NoBuffering
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var partitioner = Partitioner.Create<int>(
+                    null,
+                    EnumerablePartitionerOptions.NoBuffering
+                );
+            });
         }
 
         #region Helper Methods

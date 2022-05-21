@@ -100,12 +100,10 @@ public class HttpResponseStreamTests
         var stream = new HttpResponseStream(Mock.Of<IHttpBodyControlFeature>(), pipeWriter);
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                stream.WriteAsync(new byte[1], 0, 1);
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            stream.WriteAsync(new byte[1], 0, 1);
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 

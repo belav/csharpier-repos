@@ -129,13 +129,11 @@ namespace System.Web.Http.Dispatcher
             var mockScope = new Mock<IDependencyScope>();
             mockScope
                 .Setup(r => r.GetService(typeof(ControllerWithCtorParams)))
-                .Returns(
-                    () =>
-                    {
-                        count++;
-                        return new ControllerWithCtorParams(42);
-                    }
-                )
+                .Returns(() =>
+                {
+                    count++;
+                    return new ControllerWithCtorParams(42);
+                })
                 .Verifiable();
             var config = new HttpConfiguration();
             var request = new HttpRequestMessage();
@@ -232,10 +230,8 @@ namespace System.Web.Http.Dispatcher
             var activator = new DefaultHttpControllerActivator();
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    activator.Create(request, descriptorSimpleController, typeof(SimpleController))
-            );
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
+                activator.Create(request, descriptorSimpleController, typeof(SimpleController)));
 
             Assert.Equal(
                 "An error occurred when trying to create a controller of type 'SimpleController'. Make sure that the controller has a parameterless public constructor.",

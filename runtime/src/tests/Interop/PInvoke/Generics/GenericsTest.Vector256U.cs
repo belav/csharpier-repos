@@ -90,9 +90,8 @@ unsafe partial class GenericsTest
 {
     private static void TestVector256U()
     {
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetVector256U(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector256U(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u));
 
         Vector256<uint> value2;
         GenericsNative.GetVector256UOut(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u, &value2);
@@ -105,20 +104,18 @@ unsafe partial class GenericsTest
         Assert.Equal(value2.GetElement(6), 7u);
         Assert.Equal(value2.GetElement(7), 8u);
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                GenericsNative.GetVector256UOut(
-                    1u,
-                    2u,
-                    3u,
-                    4u,
-                    5u,
-                    6u,
-                    7u,
-                    8u,
-                    out Vector256<uint> value3
-                )
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector256UOut(
+                1u,
+                2u,
+                3u,
+                4u,
+                5u,
+                6u,
+                7u,
+                8u,
+                out Vector256<uint> value3
+            ));
 
         Vector256<uint>* value4 = GenericsNative.GetVector256UPtr(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u);
         Assert.Equal(value4->GetElement(0), 1u);
@@ -130,13 +127,11 @@ unsafe partial class GenericsTest
         Assert.Equal(value4->GetElement(6), 7u);
         Assert.Equal(value4->GetElement(7), 8u);
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetVector256URef(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector256URef(1u, 2u, 3u, 4u, 5u, 6u, 7u, 8u));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector256U(default, default)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector256U(default, default));
 
         Vector256<uint>[] values = new Vector256<uint>[]
         {
@@ -147,22 +142,18 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            fixed (Vector256<uint>* pValues = &values[0])
             {
-                fixed (Vector256<uint>* pValues = &values[0])
-                {
-                    GenericsNative.AddVector256Us(pValues, values.Length);
-                }
+                GenericsNative.AddVector256Us(pValues, values.Length);
             }
-        );
+        });
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector256Us(values, values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector256Us(values, values.Length));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddVector256Us(in values[0], values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector256Us(in values[0], values.Length));
     }
 }

@@ -154,9 +154,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_1(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_1(async))
                 ).Message
             );
 
@@ -164,9 +163,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_2(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_2(async))
                 ).Message
             );
 
@@ -174,9 +172,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_3(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_3(async))
                 ).Message
             );
 
@@ -184,9 +181,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_4(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_4(async))
                 ).Message
             );
 
@@ -194,9 +190,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_5(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_5(async))
                 ).Message
             );
 
@@ -204,9 +199,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_6(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_6(async))
                 ).Message
             );
 
@@ -214,9 +208,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_correlated_with_outer_7(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_correlated_with_outer_7(async))
                 ).Message
             );
 
@@ -224,9 +217,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.SelectMany_whose_selector_references_outer_source(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.SelectMany_whose_selector_references_outer_source(async))
                 ).Message
             );
 
@@ -234,9 +226,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Projecting_after_navigation_and_distinct(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Projecting_after_navigation_and_distinct(async))
                 ).Message
             );
 
@@ -244,9 +235,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_nested_collection_deep(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_nested_collection_deep(async))
                 ).Message
             );
 
@@ -256,12 +246,10 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
+                            async
+                        ))
                 ).Message
             );
 
@@ -271,12 +259,10 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_after_distinct_not_containing_original_identifier(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_after_distinct_not_containing_original_identifier(
+                            async
+                        ))
                 ).Message
             );
 
@@ -286,12 +272,10 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                            async
+                        ))
                 ).Message
             );
 
@@ -301,12 +285,10 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
+                            async
+                        ))
                 ).Message
             );
 
@@ -316,9 +298,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Select_nested_collection_deep_distinct_no_identifiers(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Select_nested_collection_deep_distinct_no_identifiers(async))
                 ).Message
             );
 
@@ -326,9 +307,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Reverse_in_projection_subquery(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Reverse_in_projection_subquery(async))
                 ).Message
             );
 
@@ -336,9 +316,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Reverse_in_projection_subquery_single_result(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Reverse_in_projection_subquery_single_result(async))
                 ).Message
             );
 
@@ -346,9 +325,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Reverse_in_SelectMany_with_Take(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Reverse_in_SelectMany_with_Take(async))
                 ).Message
             );
 
@@ -364,9 +342,8 @@ FROM ""Orders"" AS ""o"""
 
         public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async)
         {
-            return AssertTranslationFailed(
-                () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
         }
 
         [ConditionalTheory(Skip = "Issue#17230")]
@@ -385,12 +362,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Collection_projection_selecting_outer_element_followed_by_take(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Collection_projection_selecting_outer_element_followed_by_take(async))
                 ).Message
             );
 
@@ -400,12 +373,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            base.Take_on_top_level_and_on_collection_projection_with_outer_apply(
-                                async
-                            )
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Take_on_top_level_and_on_collection_projection_with_outer_apply(async))
                 ).Message
             );
 
@@ -413,9 +382,8 @@ FROM ""Orders"" AS ""o"""
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => base.Take_on_correlated_collection_in_first(async)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        base.Take_on_correlated_collection_in_first(async))
                 ).Message
             );
 

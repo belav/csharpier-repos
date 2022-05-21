@@ -45,9 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(NavigationAsProperty).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }
@@ -86,9 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(int).DisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }
@@ -109,9 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(CancellationToken).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }
@@ -132,9 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(ICollection<Uri>).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }
@@ -179,9 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(PrimitivePropertyEntity).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }
@@ -268,9 +263,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     typeof(IList<INavigationEntity>).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreatePropertyMappingValidator()(modelBuilder.Metadata))
                     .Message
             );
         }

@@ -15,29 +15,27 @@ namespace Crasher
 
             for (int i = 0; i < threads.Length; ++i)
             {
-                threads[i] = new Thread(
-                    () =>
+                threads[i] = new Thread(() =>
+                {
+                    var rnd = new Random();
+                    do
                     {
-                        var rnd = new Random();
-                        do
+                        using (var mutex = new Mutex(false, "Global\\TEST"))
                         {
-                            using (var mutex = new Mutex(false, "Global\\TEST"))
+                            var owner = false;
+                            try
                             {
-                                var owner = false;
-                                try
-                                {
-                                    owner = mutex.WaitOne(TimeSpan.FromMinutes(1));
-                                }
-                                finally
-                                {
-                                    if (owner)
-                                        mutex.ReleaseMutex();
-                                }
+                                owner = mutex.WaitOne(TimeSpan.FromMinutes(1));
                             }
-                            Thread.Sleep(rnd.Next(100, 1000));
-                        } while ((DateTime.Now - start) < TimeSpan.FromSeconds(10));
-                    }
-                );
+                            finally
+                            {
+                                if (owner)
+                                    mutex.ReleaseMutex();
+                            }
+                        }
+                        Thread.Sleep(rnd.Next(100, 1000));
+                    } while ((DateTime.Now - start) < TimeSpan.FromSeconds(10));
+                });
             }
 
             for (int i = 0; i < threads.Length; ++i)

@@ -37,9 +37,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "Microsoft.EntityFrameworkCore.ModelBuilding.ModelBuilderTest+DependentEntity"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => base.OwnedType_can_derive_from_Collection()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            base.OwnedType_can_derive_from_Collection())
                         .Message
                 );
             }
@@ -63,9 +62,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "Dictionary<string, object>"
                     ),
                     Assert
-                        .Throws<EqualException>(
-                            () => base.WithMany_pointing_to_keyless_entity_throws()
-                        )
+                        .Throws<EqualException>(() =>
+                            base.WithMany_pointing_to_keyless_entity_throws())
                         .Actual
                 );
             }

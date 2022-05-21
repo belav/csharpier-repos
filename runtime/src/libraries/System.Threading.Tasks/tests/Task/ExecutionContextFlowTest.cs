@@ -51,18 +51,16 @@ namespace System.Threading.Tasks.Tests
 
             Task t = null;
 
-            Thread runner = new Thread(
-                () =>
+            Thread runner = new Thread(() =>
+            {
+                var state = new InvokeActionOnFinalization
                 {
-                    var state = new InvokeActionOnFinalization
-                    {
-                        Action = () => Volatile.Write(ref finalized, true)
-                    };
-                    var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
-                    t = Task.Run(() => { }); // run a task that'll capture EC
-                    al.Value = null;
-                }
-            )
+                    Action = () => Volatile.Write(ref finalized, true)
+                };
+                var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
+                t = Task.Run(() => { }); // run a task that'll capture EC
+                al.Value = null;
+            })
             {
                 IsBackground = true
             };
@@ -94,28 +92,23 @@ namespace System.Threading.Tasks.Tests
             };
             yield return new object[]
             {
-                new Func<TaskCompletionSource<int>>(
-                    () => new TaskCompletionSource<int>(new object())
-                )
+                new Func<TaskCompletionSource<int>>(() =>
+                    new TaskCompletionSource<int>(new object()))
             };
             yield return new object[]
             {
-                new Func<TaskCompletionSource<int>>(
-                    () =>
-                        new TaskCompletionSource<int>(
-                            TaskCreationOptions.RunContinuationsAsynchronously
-                        )
-                )
+                new Func<TaskCompletionSource<int>>(() =>
+                    new TaskCompletionSource<int>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    ))
             };
             yield return new object[]
             {
-                new Func<TaskCompletionSource<int>>(
-                    () =>
-                        new TaskCompletionSource<int>(
-                            new object(),
-                            TaskCreationOptions.RunContinuationsAsynchronously
-                        )
-                )
+                new Func<TaskCompletionSource<int>>(() =>
+                    new TaskCompletionSource<int>(
+                        new object(),
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    ))
             };
         }
 

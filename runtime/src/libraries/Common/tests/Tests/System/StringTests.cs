@@ -417,43 +417,39 @@ namespace System.Tests
                 // does concats and the other that mutates the array concurrently.  This isn't
                 // guaranteed to trigger the special case, but it typically does.
                 Task.WaitAll(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        b.SignalAndWait();
+                        while (!cts.IsCancellationRequested)
                         {
-                            b.SignalAndWait();
-                            while (!cts.IsCancellationRequested)
+                            string result = string.Concat(inputs);
+                            Assert.True(
+                                result == "abcdef"
+                                    || result == "abc"
+                                    || result == "def"
+                                    || result == "",
+                                $"result == {result}"
+                            );
+                        }
+                    }),
+                    Task.Run(() =>
+                    {
+                        b.SignalAndWait();
+                        try
+                        {
+                            for (int iter = 0; iter < 100000000; iter++)
                             {
-                                string result = string.Concat(inputs);
-                                Assert.True(
-                                    result == "abcdef"
-                                        || result == "abc"
-                                        || result == "def"
-                                        || result == "",
-                                    $"result == {result}"
-                                );
+                                Volatile.Write(ref inputs[0], null);
+                                Volatile.Write(ref inputs[1], null);
+                                Volatile.Write(ref inputs[0], "abc");
+                                Volatile.Write(ref inputs[1], "def");
                             }
                         }
-                    ),
-                    Task.Run(
-                        () =>
+                        finally
                         {
-                            b.SignalAndWait();
-                            try
-                            {
-                                for (int iter = 0; iter < 100000000; iter++)
-                                {
-                                    Volatile.Write(ref inputs[0], null);
-                                    Volatile.Write(ref inputs[1], null);
-                                    Volatile.Write(ref inputs[0], "abc");
-                                    Volatile.Write(ref inputs[1], "def");
-                                }
-                            }
-                            finally
-                            {
-                                cts.Cancel();
-                            }
+                            cts.Cancel();
                         }
-                    )
+                    })
                 );
             }
         }
@@ -2151,26 +2147,19 @@ namespace System.Tests
         public static void CompareToUnknownComparisonType_StringComparison()
         {
             string value = "456";
-            Assert.Throws<ArgumentException>(
-                () => string.Compare(value, value, StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => string.Compare(value, value, StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => string.Compare(value, value, (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                string.Compare(value, value, StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                string.Compare(value, value, StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                string.Compare(value, value, (StringComparison)6));
 
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
         }
 
         [Fact]
@@ -2591,16 +2580,12 @@ namespace System.Tests
         public static void ContainsUnknownComparisonType_StringComparison()
         {
             string value = "456";
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
         }
 
         [Fact]
@@ -3619,24 +3604,18 @@ namespace System.Tests
         {
             string value = "456";
 
-            Assert.Throws<ArgumentException>(
-                () => value.EndsWith(value, StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => value.EndsWith(value, StringComparison.OrdinalIgnoreCase + 1)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                value.EndsWith(value, StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.EndsWith(value, StringComparison.OrdinalIgnoreCase + 1));
             Assert.Throws<ArgumentException>(() => value.EndsWith(value, (StringComparison)6));
 
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                value.AsSpan().CompareTo(value.AsSpan(), (StringComparison)6));
         }
 
         [ConditionalFact(
@@ -4205,12 +4184,10 @@ namespace System.Tests
             Assert.Throws<FormatException>(() => string.Format("{-1}", obj1, obj2, obj3, obj4));
             Assert.Throws<FormatException>(() => string.Format(formatter, "{-1}", obj1));
             Assert.Throws<FormatException>(() => string.Format(formatter, "{-1}", obj1, obj2));
-            Assert.Throws<FormatException>(
-                () => string.Format(formatter, "{-1}", obj1, obj2, obj3)
-            );
-            Assert.Throws<FormatException>(
-                () => string.Format(formatter, "{-1}", obj1, obj2, obj3, obj4)
-            );
+            Assert.Throws<FormatException>(() =>
+                string.Format(formatter, "{-1}", obj1, obj2, obj3));
+            Assert.Throws<FormatException>(() =>
+                string.Format(formatter, "{-1}", obj1, obj2, obj3, obj4));
 #pragma warning disable IDE0043 // Format string contains invalid placeholder - the purpose of this is to test the functions
             // Format has out of range value
             Assert.Throws<FormatException>(() => string.Format("{1}", obj1));
@@ -4220,9 +4197,8 @@ namespace System.Tests
             Assert.Throws<FormatException>(() => string.Format(formatter, "{1}", obj1));
             Assert.Throws<FormatException>(() => string.Format(formatter, "{2}", obj1, obj2));
             Assert.Throws<FormatException>(() => string.Format(formatter, "{3}", obj1, obj2, obj3));
-            Assert.Throws<FormatException>(
-                () => string.Format(formatter, "{4}", obj1, obj2, obj3, obj4)
-            );
+            Assert.Throws<FormatException>(() =>
+                string.Format(formatter, "{4}", obj1, obj2, obj3, obj4));
 #pragma warning restore IDE0043 // Format string contains invalid placeholder
         }
 
@@ -9802,33 +9778,25 @@ namespace System.Tests
         public static void StartsWithUnknownComparisonType_StringComparison()
         {
             string s1 = "456";
-            Assert.Throws<ArgumentException>(
-                () => s1.StartsWith(s1, StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => s1.StartsWith(s1, StringComparison.OrdinalIgnoreCase + 1)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                s1.StartsWith(s1, StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                s1.StartsWith(s1, StringComparison.OrdinalIgnoreCase + 1));
             Assert.Throws<ArgumentException>(() => s1.StartsWith(s1, (StringComparison)6));
 
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().StartsWith(s1.AsSpan(), (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().StartsWith(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().StartsWith(s1.AsSpan(), (StringComparison)6));
 
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.CurrentCulture - 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1)
-            );
-            Assert.Throws<ArgumentException>(
-                () => s1.AsSpan().CompareTo(s1.AsSpan(), (StringComparison)6)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.CurrentCulture - 1));
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().CompareTo(s1.AsSpan(), StringComparison.OrdinalIgnoreCase + 1));
+            Assert.Throws<ArgumentException>(() =>
+                s1.AsSpan().CompareTo(s1.AsSpan(), (StringComparison)6));
         }
 
         [ConditionalFact(

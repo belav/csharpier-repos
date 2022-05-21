@@ -78,17 +78,15 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void FailWithPrivateConstructorPlusParameterizedAndDefault()
         {
-            ExceptionAssert.Throws<Exception>(
-                () =>
-                {
-                    string json = @"{Name:""Name!""}";
+            ExceptionAssert.Throws<Exception>(() =>
+            {
+                string json = @"{Name:""Name!""}";
 
-                    PrivateConstructorWithPublicParameterizedConstructorTestClass c =
-                        JsonConvert.DeserializeObject<PrivateConstructorWithPublicParameterizedConstructorTestClass>(
-                            json
-                        );
-                }
-            );
+                PrivateConstructorWithPublicParameterizedConstructorTestClass c =
+                    JsonConvert.DeserializeObject<PrivateConstructorWithPublicParameterizedConstructorTestClass>(
+                        json
+                    );
+            });
         }
 
         [Test]

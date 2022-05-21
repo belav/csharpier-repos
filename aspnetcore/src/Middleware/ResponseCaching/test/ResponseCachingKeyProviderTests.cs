@@ -68,9 +68,8 @@ public class ResponseCachingKeyProviderTests
         var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
         var context = TestUtils.CreateTestContext();
 
-        Assert.Throws<InvalidOperationException>(
-            () => cacheKeyProvider.CreateStorageVaryByKey(context)
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            cacheKeyProvider.CreateStorageVaryByKey(context));
     }
 
     [Fact]

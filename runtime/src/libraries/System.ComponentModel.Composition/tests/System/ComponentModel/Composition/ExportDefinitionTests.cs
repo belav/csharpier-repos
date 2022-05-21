@@ -23,12 +23,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new DerivedExportDefinition();
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -81,12 +79,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new ExportDefinition("Contract", (IDictionary<string, object>)null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -94,12 +90,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new ExportDefinition("Contract", new Dictionary<string, object>());
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -120,12 +114,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new DerivedExportDefinition();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    var contractName = definition.ContractName;
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                var contractName = definition.ContractName;
+            });
         }
 
         [Fact]
@@ -133,12 +125,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new DerivedExportDefinition();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    definition.ToString();
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                definition.ToString();
+            });
         }
 
         [Fact]

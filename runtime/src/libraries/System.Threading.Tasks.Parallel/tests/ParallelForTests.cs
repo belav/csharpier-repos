@@ -1616,13 +1616,8 @@ namespace System.Threading.Tasks.Tests
 
             // And check that the use of OrderablePartitioner w/o dynamic support is rejected
             var mop = Partitioner.Create(baselist, false);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Parallel.ForEach(
-                        mop,
-                        delegate(int item, ParallelLoopState state, long index) { }
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Parallel.ForEach(mop, delegate(int item, ParallelLoopState state, long index) { }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1855,12 +1850,10 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < numActions; i++)
                 actions[i] = a2;
 
-            Assert.Throws<OperationCanceledException>(
-                () =>
-                {
-                    Parallel.Invoke(parallelOptions, actions);
-                }
-            );
+            Assert.Throws<OperationCanceledException>(() =>
+            {
+                Parallel.Invoke(parallelOptions, actions);
+            });
 
             Debug.WriteLine(
                 "Saw counter get incremented to " + counter + " with 2 degrees of parallelism"
@@ -1891,12 +1884,10 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < numActions; i++)
                 actions[i] = a3;
 
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    Parallel.Invoke(parallelOptions, actions);
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                Parallel.Invoke(parallelOptions, actions);
+            });
 
             Assert.False(
                 counter == numActions,
@@ -1914,12 +1905,10 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < numActions; i++)
                 actions[i] = a4;
 
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    Parallel.Invoke(actions);
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                Parallel.Invoke(actions);
+            });
 
             Assert.True(
                 counter == numActions,
@@ -1982,12 +1971,10 @@ namespace System.Threading.Tasks.Tests
             // Common logic for running a test
             Action<Action> runtest = delegate(Action body)
             {
-                Assert.Throws<OperationCanceledException>(
-                    () =>
-                    {
-                        body();
-                    }
-                );
+                Assert.Throws<OperationCanceledException>(() =>
+                {
+                    body();
+                });
 
                 Assert.False(
                     counter == iterations,

@@ -315,17 +315,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     .Services
                     .ThreadingPolicy;
 
-                var result = threadingService.ExecuteSynchronously(
-                    async () =>
-                    {
-                        var configuredProject = await browseObjectContext.UnconfiguredProject
-                            .GetSuggestedConfiguredProjectAsync()
-                            .ConfigureAwait(false);
-                        return await configuredProject!.Services.PackageReferences!
-                            .AddAsync(packageName, version)
-                            .ConfigureAwait(false);
-                    }
-                );
+                var result = threadingService.ExecuteSynchronously(async () =>
+                {
+                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                        .GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    return await configuredProject!.Services.PackageReferences!
+                        .AddAsync(packageName, version)
+                        .ConfigureAwait(false);
+                });
             }
             else
             {
@@ -347,17 +345,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     .Services
                     .ThreadingPolicy;
 
-                threadingService.ExecuteSynchronously(
-                    async () =>
-                    {
-                        var configuredProject = await browseObjectContext.UnconfiguredProject
-                            .GetSuggestedConfiguredProjectAsync()
-                            .ConfigureAwait(false);
-                        await configuredProject!.Services.PackageReferences!
-                            .RemoveAsync(packageName)
-                            .ConfigureAwait(false);
-                    }
-                );
+                threadingService.ExecuteSynchronously(async () =>
+                {
+                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                        .GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    await configuredProject!.Services.PackageReferences!
+                        .RemoveAsync(packageName)
+                        .ConfigureAwait(false);
+                });
             }
             else
             {

@@ -30,27 +30,23 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             Assert.True(m.TryGetNewNode(x1, out var n));
             Assert.Equal(n, x2);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TestTreeComparer.Instance.ComputeMatch(
-                        oldRoot,
-                        newRoot,
-                        new[] { KeyValuePairUtil.Create(x1, x1) }
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                TestTreeComparer.Instance.ComputeMatch(
+                    oldRoot,
+                    newRoot,
+                    new[] { KeyValuePairUtil.Create(x1, x1) }
+                ));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TestTreeComparer.Instance.ComputeMatch(
-                        oldRoot,
-                        newRoot,
-                        new[]
-                        {
-                            KeyValuePairUtil.Create(x1, x2),
-                            KeyValuePairUtil.Create(x1, new TestNode(0, 0))
-                        }
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                TestTreeComparer.Instance.ComputeMatch(
+                    oldRoot,
+                    newRoot,
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(x1, x2),
+                        KeyValuePairUtil.Create(x1, new TestNode(0, 0))
+                    }
+                ));
         }
 
         [Fact]

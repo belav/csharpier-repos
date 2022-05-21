@@ -365,9 +365,8 @@ namespace System.Collections.Tests
         )
         {
             var stack = GenericStackFactory();
-            AssertExtensions.Throws<OutOfMemoryException>(
-                () => stack.EnsureCapacity(requestedCapacity)
-            );
+            AssertExtensions.Throws<OutOfMemoryException>(() =>
+                stack.EnsureCapacity(requestedCapacity));
         }
 
         [Theory]

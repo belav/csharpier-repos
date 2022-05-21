@@ -890,9 +890,8 @@ namespace System.Linq.Expressions.Tests
                 new OverloadedIndexersBothMatchString()
             );
             ConstantExpression index = Expression.Constant("");
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Property(instance, "Item", index)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Property(instance, "Item", index));
         }
 
         [Fact]

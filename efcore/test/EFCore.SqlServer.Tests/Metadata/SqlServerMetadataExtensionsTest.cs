@@ -328,12 +328,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 SqlServerStrings.SequenceBadType("Name", nameof(Customer), "string"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            property.SetValueGenerationStrategy(
-                                SqlServerValueGenerationStrategy.SequenceHiLo
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.SequenceHiLo
+                        ))
                     .Message
             );
         }
@@ -348,12 +346,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 SqlServerStrings.IdentityBadType("Name", nameof(Customer), "string"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            property.SetValueGenerationStrategy(
-                                SqlServerValueGenerationStrategy.IdentityColumn
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        property.SetValueGenerationStrategy(
+                            SqlServerValueGenerationStrategy.IdentityColumn
+                        ))
                     .Message
             );
         }

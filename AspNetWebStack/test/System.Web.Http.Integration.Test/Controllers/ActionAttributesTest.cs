@@ -71,14 +71,12 @@ namespace System.Web.Http
                 controllerType
             );
 
-            var exception = Assert.Throws<HttpResponseException>(
-                () =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
-                }
-            );
+            var exception = Assert.Throws<HttpResponseException>(() =>
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -121,14 +119,12 @@ namespace System.Web.Http
                 controllerType
             );
 
-            var exception = Assert.Throws<HttpResponseException>(
-                () =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
-                }
-            );
+            var exception = Assert.Throws<HttpResponseException>(() =>
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.NotFound, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -209,14 +205,12 @@ namespace System.Web.Http
                 controllerType
             );
 
-            var exception = Assert.Throws<HttpResponseException>(
-                () =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
-                }
-            );
+            var exception = Assert.Throws<HttpResponseException>(() =>
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);

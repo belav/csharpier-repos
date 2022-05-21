@@ -66,12 +66,10 @@ namespace System.Web.Http.Filters
             bool onActionExecutingInvoked = false;
             filterMock
                 .Setup(f => f.OnAuthorization(It.IsAny<HttpActionContext>()))
-                .Callback(
-                    () =>
-                    {
-                        onActionExecutingInvoked = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    onActionExecutingInvoked = true;
+                });
             bool? flagWhenContinuationInvoked = null;
             Func<Task<HttpResponseMessage>> continuation = () =>
             {
@@ -148,18 +146,16 @@ namespace System.Web.Http.Filters
             bool continuationCalled = false;
 
             // Act & Assert
-            Exception exception = await Assert.ThrowsAsync<Exception>(
-                () =>
-                    filter.ExecuteAuthorizationFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () =>
-                        {
-                            continuationCalled = true;
-                            return null;
-                        }
-                    )
-            );
+            Exception exception = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteAuthorizationFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () =>
+                    {
+                        continuationCalled = true;
+                        return null;
+                    }
+                ));
 
             // Assert
             Assert.Same(expectedException, exception);
@@ -204,14 +200,12 @@ namespace System.Web.Http.Filters
             var filter = (IAuthorizationFilter)filterMock.Object;
 
             // Act & Assert
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    filter.ExecuteAuthorizationFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => TaskHelpers.Canceled<HttpResponseMessage>()
-                    )
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                filter.ExecuteAuthorizationFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () => TaskHelpers.Canceled<HttpResponseMessage>()
+                ));
         }
 
         [Fact]
@@ -252,14 +246,12 @@ namespace System.Web.Http.Filters
             Exception expectedException = new Exception();
 
             // Act
-            var exception = await Assert.ThrowsAsync<Exception>(
-                () =>
-                    filter.ExecuteAuthorizationFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
-                    )
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteAuthorizationFilterAsync(
+                    context,
+                    CancellationToken.None,
+                    () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
+                ));
 
             // Assert
             Assert.Same(expectedException, exception);

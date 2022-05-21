@@ -183,12 +183,10 @@ public class AttributeRouteModelTests
         );
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                AttributeRouteModel.ReplaceTokens(template, values);
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            AttributeRouteModel.ReplaceTokens(template, values);
+        });
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -217,12 +215,10 @@ public class AttributeRouteModelTests
             + "route or within a constraint, use '[[' or ']]' instead.";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                AttributeRouteModel.ReplaceTokens(template, values);
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            AttributeRouteModel.ReplaceTokens(template, values);
+        });
 
         // Assert
         Assert.Equal(expected, ex.Message);

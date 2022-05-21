@@ -118,54 +118,52 @@ namespace System.Net.Http.Functional.Tests
 
             await LoopbackServer.CreateClientAndServerAsync(
                 uri =>
-                    Task.Run(
-                        () =>
-                        {
-                            var psi = new ProcessStartInfo();
-                            psi.Environment.Add("http_proxy", $"http://{uri.Host}:{uri.Port}");
+                    Task.Run(() =>
+                    {
+                        var psi = new ProcessStartInfo();
+                        psi.Environment.Add("http_proxy", $"http://{uri.Host}:{uri.Port}");
 
-                            RemoteExecutor
-                                .Invoke(
-                                    async (useProxyString, useVersionString, uriString) =>
+                        RemoteExecutor
+                            .Invoke(
+                                async (useProxyString, useVersionString, uriString) =>
+                                {
+                                    using (
+                                        HttpClientHandler handler = CreateHttpClientHandler(
+                                            useVersionString
+                                        )
+                                    )
+                                    using (
+                                        HttpClient client = CreateHttpClient(
+                                            handler,
+                                            useVersionString
+                                        )
+                                    )
                                     {
-                                        using (
-                                            HttpClientHandler handler = CreateHttpClientHandler(
-                                                useVersionString
-                                            )
-                                        )
-                                        using (
-                                            HttpClient client = CreateHttpClient(
-                                                handler,
-                                                useVersionString
-                                            )
-                                        )
-                                        {
-                                            var creds = new NetworkCredential(
-                                                ExpectedUsername,
-                                                ExpectedPassword
-                                            );
-                                            handler.DefaultProxyCredentials = creds;
-                                            handler.UseProxy = bool.Parse(useProxyString);
+                                        var creds = new NetworkCredential(
+                                            ExpectedUsername,
+                                            ExpectedPassword
+                                        );
+                                        handler.DefaultProxyCredentials = creds;
+                                        handler.UseProxy = bool.Parse(useProxyString);
 
-                                            HttpResponseMessage response = await client.GetAsync(
-                                                uriString
-                                            );
-                                            // Correctness of user and password is done in server part.
-                                            Assert.True(response.StatusCode == HttpStatusCode.OK);
-                                        }
-                                        ;
-                                    },
-                                    useProxy.ToString(),
-                                    UseVersion.ToString(),
-                                    // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
-                                    useProxy
-                                        ? Configuration.Http.RemoteEchoServer.ToString()
-                                        : uri.ToString(),
-                                    new RemoteInvokeOptions { StartInfo = psi }
-                                )
-                                .Dispose();
-                        }
-                    ),
+                                        HttpResponseMessage response = await client.GetAsync(
+                                            uriString
+                                        );
+                                        // Correctness of user and password is done in server part.
+                                        Assert.True(response.StatusCode == HttpStatusCode.OK);
+                                    }
+                                    ;
+                                },
+                                useProxy.ToString(),
+                                UseVersion.ToString(),
+                                // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
+                                useProxy
+                                    ? Configuration.Http.RemoteEchoServer.ToString()
+                                    : uri.ToString(),
+                                new RemoteInvokeOptions { StartInfo = psi }
+                            )
+                            .Dispose();
+                    }),
                 server =>
                     server.AcceptConnectionAsync(
                         async connection =>

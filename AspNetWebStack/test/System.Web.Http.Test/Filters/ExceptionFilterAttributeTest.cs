@@ -54,9 +54,8 @@ namespace System.Web.Http.Filters
             IExceptionFilter filter = mockFilter.Object;
 
             // Act & Assert
-            var thrownException = await Assert.ThrowsAsync<Exception>(
-                () => filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None)
-            );
+            var thrownException = await Assert.ThrowsAsync<Exception>(() =>
+                filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None));
             Assert.Same(exception, thrownException);
         }
 

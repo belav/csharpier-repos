@@ -110,9 +110,8 @@ namespace System.Formats.Cbor.Tests
         )
         {
             var writer = new CborWriter(conformanceMode, convertIndefiniteLengthEncodings: false);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.WriteStartIndefiniteLengthByteString()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.WriteStartIndefiniteLengthByteString());
         }
     }
 }

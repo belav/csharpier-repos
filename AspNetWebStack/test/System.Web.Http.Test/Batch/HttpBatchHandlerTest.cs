@@ -169,17 +169,15 @@ namespace System.Web.Http
                 .Setup(
                     h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new HttpResponseException(
-                            new HttpResponseMessage(HttpStatusCode.BadRequest)
-                            {
-                                Content = new StringContent("HttpResponseException Error.")
-                            }
-                        );
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new HttpResponseException(
+                        new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        {
+                            Content = new StringContent("HttpResponseException Error.")
+                        }
+                    );
+                });
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
             var response = await invoker.SendAsync(
@@ -221,9 +219,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
-                );
+                await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken));
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -287,9 +284,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () => product.SendAsync(expectedRequest, cancellationToken)
-                );
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    product.SendAsync(expectedRequest, cancellationToken));
             }
         }
 
@@ -332,9 +328,8 @@ namespace System.Web.Http
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                var exception = await Assert.ThrowsAsync<Exception>(
-                    () => product.SendAsync(request, cancellationToken)
-                );
+                var exception = await Assert.ThrowsAsync<Exception>(() =>
+                    product.SendAsync(request, cancellationToken));
 
                 // Assert
                 Assert.Same(expectedException, exception);
@@ -402,12 +397,10 @@ namespace System.Web.Http
                 .Setup(
                     h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new InvalidOperationException();
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new InvalidOperationException();
+                });
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
             var response = await invoker.SendAsync(

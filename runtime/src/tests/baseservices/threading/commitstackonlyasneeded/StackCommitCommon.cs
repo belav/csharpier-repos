@@ -241,17 +241,15 @@ namespace StackCommitTest
             bool result = false;
             ManualResetEventSlim mre = new ManualResetEventSlim();
 
-            runOnThread(
-                () =>
-                {
-                    result = Utility.ValidateStack(
-                        threadName,
-                        shouldBePreCommitted,
-                        expectedThreadSize
-                    );
-                    mre.Set();
-                }
-            );
+            runOnThread(() =>
+            {
+                result = Utility.ValidateStack(
+                    threadName,
+                    shouldBePreCommitted,
+                    expectedThreadSize
+                );
+                mre.Set();
+            });
 
             mre.Wait();
             return result;

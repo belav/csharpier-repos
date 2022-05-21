@@ -141,19 +141,17 @@ namespace System.Data.Tests
         [Fact]
         public void ItemException()
         {
-            Assert.Throws<RowNotInTableException>(
-                () =>
-                {
-                    DataTable dt = new DataTable("table");
-                    dt.Columns.Add("col");
-                    dt.Rows.Add((new object[] { "val" }));
-                    DataView dv = new DataView(dt);
-                    DataRowView drv = dv.AddNew();
-                    drv.Row["col"] = "test";
-                    drv.Row.CancelEdit();
-                    object o = drv["col"];
-                }
-            );
+            Assert.Throws<RowNotInTableException>(() =>
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col");
+                dt.Rows.Add((new object[] { "val" }));
+                DataView dv = new DataView(dt);
+                DataRowView drv = dv.AddNew();
+                drv.Row["col"] = "test";
+                drv.Row.CancelEdit();
+                object o = drv["col"];
+            });
         }
 
         [Fact]

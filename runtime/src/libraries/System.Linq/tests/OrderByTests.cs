@@ -319,9 +319,8 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstOnEmptyOrderedThrows()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().OrderBy(i => i).First()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().OrderBy(i => i).First());
         }
 
         [Fact]
@@ -361,16 +360,14 @@ namespace System.Linq.Tests
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    orderBy.First(
-                        i =>
-                        {
-                            counter++;
-                            return false;
-                        }
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                orderBy.First(
+                    i =>
+                    {
+                        counter++;
+                        return false;
+                    }
+                ));
             Assert.Equal(10, counter);
 
             counter = 0;
@@ -400,16 +397,14 @@ namespace System.Linq.Tests
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    orderByDescending.First(
-                        i =>
-                        {
-                            counter++;
-                            return false;
-                        }
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                orderByDescending.First(
+                    i =>
+                    {
+                        counter++;
+                        return false;
+                    }
+                ));
             Assert.Equal(10, counter);
         }
 
@@ -554,9 +549,8 @@ namespace System.Linq.Tests
         [Fact]
         public void LastOnEmptyOrderedThrows()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Enumerable.Empty<int>().OrderBy(i => i).Last()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().OrderBy(i => i).Last());
         }
 
         [Fact]

@@ -170,14 +170,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            using var context = new NoServicesAndNoConfigBlogContext();
-                            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
-                            context.SaveChanges();
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        using var context = new NoServicesAndNoConfigBlogContext();
+                        context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
+                        context.SaveChanges();
+                    })
                     .Message
             );
         }
@@ -200,16 +198,14 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            using var context = new ImplicitConfigButNoServicesBlogContext(
-                                serviceProvider
-                            );
-                            context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
-                            context.SaveChanges();
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        using var context = new ImplicitConfigButNoServicesBlogContext(
+                            serviceProvider
+                        );
+                        context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
+                        context.SaveChanges();
+                    })
                     .Message
             );
         }

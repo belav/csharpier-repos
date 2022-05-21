@@ -23,9 +23,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         private readonly RoslynEventSource _source = RoslynEventSource.Instance;
 
         public EtwLogger(IGlobalOptionService globalOptions) =>
-            _isEnabledPredicate = new Lazy<Func<FunctionId, bool>>(
-                () => Logger.GetLoggingChecker(globalOptions)
-            );
+            _isEnabledPredicate = new Lazy<Func<FunctionId, bool>>(() =>
+                Logger.GetLoggingChecker(globalOptions));
 
         public EtwLogger(Func<FunctionId, bool> isEnabledPredicate) =>
             _isEnabledPredicate = new Lazy<Func<FunctionId, bool>>(() => isEnabledPredicate);

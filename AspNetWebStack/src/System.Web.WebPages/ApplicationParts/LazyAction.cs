@@ -14,13 +14,11 @@ namespace System.Web.WebPages.ApplicationParts
             Debug.Assert(action != null, "action should not be null");
             // Setup the lazy object to run our action and just return null
             // since we don't care about the value
-            _lazyAction = new Lazy<object>(
-                () =>
-                {
-                    action();
-                    return null;
-                }
-            );
+            _lazyAction = new Lazy<object>(() =>
+            {
+                action();
+                return null;
+            });
         }
 
         public object EnsurePerformed()

@@ -80,17 +80,15 @@ public class ServerSentEventsParserTests
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var ex = Assert.Throws<FormatException>(
-            () =>
-            {
-                parser.ParseMessage(
-                    readableBuffer,
-                    out var consumed,
-                    out var examined,
-                    out var message
-                );
-            }
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+        {
+            parser.ParseMessage(
+                readableBuffer,
+                out var consumed,
+                out var examined,
+                out var message
+            );
+        });
         Assert.Equal(expectedExceptionMessage, ex.Message);
     }
 
@@ -252,9 +250,8 @@ public class ServerSentEventsParserTests
         await pipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(encodedMessagePart2));
         result = await pipe.Reader.ReadAsync();
 
-        var ex = Assert.Throws<FormatException>(
-            () => parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer)
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+            parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer));
         Assert.Equal(expectedMessage, ex.Message);
     }
 

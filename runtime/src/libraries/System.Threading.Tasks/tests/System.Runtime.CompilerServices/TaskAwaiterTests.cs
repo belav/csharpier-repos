@@ -403,18 +403,14 @@ namespace System.Threading.Tasks.Tests
             Assert.Throws<TaskCanceledException>(() => canceled.GetAwaiter().GetResult());
 
             // w/ ConfigureAwait false and true
-            Assert.Throws<TaskCanceledException>(
-                () => ((Task)canceled).ConfigureAwait(false).GetAwaiter().GetResult()
-            );
-            Assert.Throws<TaskCanceledException>(
-                () => ((Task)canceled).ConfigureAwait(true).GetAwaiter().GetResult()
-            );
-            Assert.Throws<TaskCanceledException>(
-                () => canceled.ConfigureAwait(false).GetAwaiter().GetResult()
-            );
-            Assert.Throws<TaskCanceledException>(
-                () => canceled.ConfigureAwait(true).GetAwaiter().GetResult()
-            );
+            Assert.Throws<TaskCanceledException>(() =>
+                ((Task)canceled).ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<TaskCanceledException>(() =>
+                ((Task)canceled).ConfigureAwait(true).GetAwaiter().GetResult());
+            Assert.Throws<TaskCanceledException>(() =>
+                canceled.ConfigureAwait(false).GetAwaiter().GetResult());
+            Assert.Throws<TaskCanceledException>(() =>
+                canceled.ConfigureAwait(true).GetAwaiter().GetResult());
         }
 
         [Fact]
@@ -685,60 +681,40 @@ namespace System.Threading.Tasks.Tests
                 await Task.FromResult(42).WaitAsync(TimeSpan.Zero, new CancellationToken(true))
             );
 
-            await Assert.ThrowsAsync<FormatException>(
-                () => Task.FromException(new FormatException()).WaitAsync(TimeSpan.Zero)
-            );
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Task.FromException(new FormatException()).WaitAsync(new CancellationToken(true))
-            );
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Task.FromException(new FormatException())
-                        .WaitAsync(TimeSpan.Zero, new CancellationToken(true))
-            );
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException(new FormatException()).WaitAsync(TimeSpan.Zero));
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException(new FormatException()).WaitAsync(new CancellationToken(true)));
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException(new FormatException())
+                    .WaitAsync(TimeSpan.Zero, new CancellationToken(true)));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () => Task.FromException<int>(new FormatException()).WaitAsync(TimeSpan.Zero)
-            );
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Task.FromException<int>(new FormatException())
-                        .WaitAsync(new CancellationToken(true))
-            );
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Task.FromException<int>(new FormatException())
-                        .WaitAsync(TimeSpan.Zero, new CancellationToken(true))
-            );
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException<int>(new FormatException()).WaitAsync(TimeSpan.Zero));
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException<int>(new FormatException())
+                    .WaitAsync(new CancellationToken(true)));
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Task.FromException<int>(new FormatException())
+                    .WaitAsync(TimeSpan.Zero, new CancellationToken(true)));
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => Task.FromCanceled(new CancellationToken(true)).WaitAsync(TimeSpan.Zero)
-            );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    Task.FromCanceled(new CancellationToken(true))
-                        .WaitAsync(new CancellationToken(true))
-            );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    Task.FromCanceled(new CancellationToken(true))
-                        .WaitAsync(TimeSpan.Zero, new CancellationToken(true))
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled(new CancellationToken(true)).WaitAsync(TimeSpan.Zero));
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled(new CancellationToken(true))
+                    .WaitAsync(new CancellationToken(true)));
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled(new CancellationToken(true))
+                    .WaitAsync(TimeSpan.Zero, new CancellationToken(true)));
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => Task.FromCanceled<int>(new CancellationToken(true)).WaitAsync(TimeSpan.Zero)
-            );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    Task.FromCanceled<int>(new CancellationToken(true))
-                        .WaitAsync(new CancellationToken(true))
-            );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    Task.FromCanceled<int>(new CancellationToken(true))
-                        .WaitAsync(TimeSpan.Zero, new CancellationToken(true))
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled<int>(new CancellationToken(true)).WaitAsync(TimeSpan.Zero));
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled<int>(new CancellationToken(true))
+                    .WaitAsync(new CancellationToken(true)));
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                Task.FromCanceled<int>(new CancellationToken(true))
+                    .WaitAsync(TimeSpan.Zero, new CancellationToken(true)));
         }
 
         [Fact]
@@ -747,36 +723,27 @@ namespace System.Threading.Tasks.Tests
             var tcs = new TaskCompletionSource<int>();
             var cts = new CancellationTokenSource();
 
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => ((Task)tcs.Task).WaitAsync(TimeSpan.Zero)
-            );
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(1))
-            );
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(1), cts.Token)
-            );
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                ((Task)tcs.Task).WaitAsync(TimeSpan.Zero));
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(1)));
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(1), cts.Token));
 
             await Assert.ThrowsAsync<TimeoutException>(() => tcs.Task.WaitAsync(TimeSpan.Zero));
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(1))
-            );
-            await Assert.ThrowsAsync<TimeoutException>(
-                () => tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(1), cts.Token)
-            );
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(1)));
+            await Assert.ThrowsAsync<TimeoutException>(() =>
+                tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(1), cts.Token));
 
-            Task assert1 = Assert.ThrowsAsync<TaskCanceledException>(
-                () => ((Task)tcs.Task).WaitAsync(cts.Token)
-            );
-            Task assert2 = Assert.ThrowsAsync<TaskCanceledException>(
-                () => ((Task)tcs.Task).WaitAsync(Timeout.InfiniteTimeSpan, cts.Token)
-            );
-            Task assert3 = Assert.ThrowsAsync<TaskCanceledException>(
-                () => tcs.Task.WaitAsync(cts.Token)
-            );
-            Task assert4 = Assert.ThrowsAsync<TaskCanceledException>(
-                () => tcs.Task.WaitAsync(Timeout.InfiniteTimeSpan, cts.Token)
-            );
+            Task assert1 = Assert.ThrowsAsync<TaskCanceledException>(() =>
+                ((Task)tcs.Task).WaitAsync(cts.Token));
+            Task assert2 = Assert.ThrowsAsync<TaskCanceledException>(() =>
+                ((Task)tcs.Task).WaitAsync(Timeout.InfiniteTimeSpan, cts.Token));
+            Task assert3 = Assert.ThrowsAsync<TaskCanceledException>(() =>
+                tcs.Task.WaitAsync(cts.Token));
+            Task assert4 = Assert.ThrowsAsync<TaskCanceledException>(() =>
+                tcs.Task.WaitAsync(Timeout.InfiniteTimeSpan, cts.Token));
             Assert.False(assert1.IsCompleted);
             Assert.False(assert2.IsCompleted);
             Assert.False(assert3.IsCompleted);
@@ -870,14 +837,12 @@ namespace System.Threading.Tasks.Tests
 
                         bool ranOnScheduler = false;
                         bool ranWithoutSyncCtx = false;
-                        awaiter.OnCompleted(
-                            () =>
-                            {
-                                ranOnScheduler = (TaskScheduler.Current == quwi);
-                                ranWithoutSyncCtx = SynchronizationContext.Current == null;
-                                mres.Set();
-                            }
-                        );
+                        awaiter.OnCompleted(() =>
+                        {
+                            ranOnScheduler = (TaskScheduler.Current == quwi);
+                            ranWithoutSyncCtx = SynchronizationContext.Current == null;
+                            mres.Set();
+                        });
                         Assert.False(mres.IsSet, "Callback should not yet have run.");
 
                         Task.Run(
@@ -911,9 +876,8 @@ namespace System.Threading.Tasks.Tests
         )
         {
             _ = lineNumber;
-            var caught = Assert.ThrowsAny<OperationCanceledException>(
-                () => task.GetAwaiter().GetResult()
-            );
+            var caught = Assert.ThrowsAny<OperationCanceledException>(() =>
+                task.GetAwaiter().GetResult());
             Assert.Same(expected, caught);
         }
 
@@ -924,13 +888,11 @@ namespace System.Threading.Tasks.Tests
 
             // Scheduled Task
             Task<int> generic = Task.Run<int>(
-                new Func<int>(
-                    () =>
-                    {
-                        cts.Cancel();
-                        throw oce;
-                    }
-                ),
+                new Func<int>(() =>
+                {
+                    cts.Cancel();
+                    throw oce;
+                }),
                 cts.Token
             );
             yield return new object[] { LineNumber(), generic, oce };
@@ -1030,22 +992,20 @@ namespace System.Threading.Tasks.Tests
             public override void Post(SendOrPostCallback d, object state)
             {
                 Interlocked.Increment(ref PostCount);
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    SetSynchronizationContext(this);
+                    try
                     {
-                        SetSynchronizationContext(this);
-                        try
-                        {
-                            t_isPostedInContext = true;
-                            d(state);
-                        }
-                        finally
-                        {
-                            t_isPostedInContext = false;
-                            SetSynchronizationContext(null);
-                        }
+                        t_isPostedInContext = true;
+                        d(state);
                     }
-                );
+                    finally
+                    {
+                        t_isPostedInContext = false;
+                        SetSynchronizationContext(null);
+                    }
+                });
             }
 
             public override void Send(SendOrPostCallback d, object state)

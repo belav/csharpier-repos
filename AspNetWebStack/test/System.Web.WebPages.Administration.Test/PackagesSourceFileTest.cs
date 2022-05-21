@@ -129,9 +129,8 @@ namespace System.Web.WebPages.Administration.Test
             string xml = new StreamReader(stream).ReadToEnd().TrimEnd('\0');
 
             // Act
-            var result = PackageSourceFile.ReadFeeds(
-                () => new MemoryStream(Encoding.Default.GetBytes(xml))
-            );
+            var result = PackageSourceFile.ReadFeeds(() =>
+                new MemoryStream(Encoding.Default.GetBytes(xml)));
 
             // Assert
             Assert.Equal(2, result.Count());

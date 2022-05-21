@@ -59,16 +59,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             using var cancellationTokenSource = new CancellationTokenSource(
                 Helper.HangMitigatingTimeout
             );
-            var operation = JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationTokenSource.Token
-                    );
+            var operation = JoinableTaskFactory.RunAsync(async () =>
+            {
+                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
 
-                    action(cancellationTokenSource.Token);
-                }
-            );
+                action(cancellationTokenSource.Token);
+            });
 
             operation.Task.Wait(cancellationTokenSource.Token);
         }
@@ -78,16 +74,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             using var cancellationTokenSource = new CancellationTokenSource(
                 Helper.HangMitigatingTimeout
             );
-            var operation = JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationTokenSource.Token
-                    );
+            var operation = JoinableTaskFactory.RunAsync(async () =>
+            {
+                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationTokenSource.Token);
 
-                    return action(cancellationTokenSource.Token);
-                }
-            );
+                return action(cancellationTokenSource.Token);
+            });
 
             operation.Task.Wait(cancellationTokenSource.Token);
             return operation.Task.Result;

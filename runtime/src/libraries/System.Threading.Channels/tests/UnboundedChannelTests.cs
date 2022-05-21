@@ -236,30 +236,26 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             Task.WaitAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    int received = 0;
+                    while (await c.Reader.WaitToReadAsync())
                     {
-                        int received = 0;
-                        while (await c.Reader.WaitToReadAsync())
+                        while (c.Reader.TryRead(out int i))
                         {
-                            while (c.Reader.TryRead(out int i))
-                            {
-                                Assert.Equal(received, i);
-                                received++;
-                            }
+                            Assert.Equal(received, i);
+                            received++;
                         }
                     }
-                ),
-                Task.Run(
-                    () =>
+                }),
+                Task.Run(() =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            Assert.True(c.Writer.TryWrite(i));
-                        }
-                        c.Writer.Complete();
+                        Assert.True(c.Writer.TryWrite(i));
                     }
-                )
+                    c.Writer.Complete();
+                })
             );
         }
     }

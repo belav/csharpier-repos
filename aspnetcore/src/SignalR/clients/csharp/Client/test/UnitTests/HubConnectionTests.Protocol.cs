@@ -534,9 +534,8 @@ public partial class HubConnectionTests
                 var handlerTask = handlerCalled.Task;
 
                 // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
-                var ex = Assert.ThrowsAsync<TimeoutException>(
-                    async () => await handlerTask.DefaultTimeout(2000)
-                );
+                var ex = Assert.ThrowsAsync<TimeoutException>(async () =>
+                    await handlerTask.DefaultTimeout(2000));
 
                 // Ensure that the task from the WhenAny is not the handler task
                 Assert.False(handlerCalled.Task.IsCompleted);
@@ -577,9 +576,8 @@ public partial class HubConnectionTests
                 subscription.Dispose();
 
                 // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
-                var ex = Assert.ThrowsAsync<TimeoutException>(
-                    async () => await handlerTask.DefaultTimeout(2000)
-                );
+                var ex = Assert.ThrowsAsync<TimeoutException>(async () =>
+                    await handlerTask.DefaultTimeout(2000));
 
                 // Ensure that the task from the WhenAny is not the handler task
                 Assert.False(handlerCalled.Task.IsCompleted);

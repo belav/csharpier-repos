@@ -32,9 +32,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
 
         // Assert
         await Assert
-            .ThrowsAsync<ObjectDisposedException>(
-                () => connectionListener.AcceptAndAddFeatureAsync().AsTask()
-            )
+            .ThrowsAsync<ObjectDisposedException>(() =>
+                connectionListener.AcceptAndAddFeatureAsync().AsTask())
             .DefaultTimeout();
     }
 
@@ -137,9 +136,8 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
         using var clientConnection = new QuicConnection(options);
 
-        var qex = await Assert.ThrowsAsync<QuicException>(
-            async () => await clientConnection.ConnectAsync().DefaultTimeout()
-        );
+        var qex = await Assert.ThrowsAsync<QuicException>(async () =>
+            await clientConnection.ConnectAsync().DefaultTimeout());
         Assert.StartsWith("Connection has been shutdown by transport.", qex.Message);
     }
 }

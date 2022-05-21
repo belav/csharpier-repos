@@ -12,13 +12,11 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TestRegistryKey.OpenSubKey(
-                        name: null,
-                        permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.OpenSubKey(
+                    name: null,
+                    permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
+                ));
 
             // Should throw if subkey name greater than 255 chars
             AssertExtensions.Throws<ArgumentException>(
@@ -65,16 +63,11 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw if RegistryKey closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.OpenSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.Default
-                    );
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.OpenSubKey(TestRegistryKeyName, RegistryKeyPermissionCheck.Default);
+            });
         }
 
         [Fact]

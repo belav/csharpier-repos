@@ -1707,16 +1707,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Include_after_Select(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Select(l1 => l1.OneToOne_Optional_FK1)
-                                    .Include(l2 => l2.OneToMany_Optional2)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Select(l1 => l1.OneToOne_Optional_FK1)
+                                .Include(l2 => l2.OneToMany_Optional2)
+                    ))
             ).Message;
 
             Expression<Func<Level2, ICollection<Level3>>> expr = l2 => l2.OneToMany_Optional2;
@@ -1728,17 +1726,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Include_after_SelectMany_and_reference_navigation(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .SelectMany(l1 => l1.OneToMany_Required1)
-                                    .Select(l2 => l2.OneToOne_Optional_FK2)
-                                    .Include(l3 => l3.OneToMany_Optional3)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .SelectMany(l1 => l1.OneToMany_Required1)
+                                .Select(l2 => l2.OneToOne_Optional_FK2)
+                                .Include(l3 => l3.OneToMany_Optional3)
+                    ))
             ).Message;
 
             Expression<Func<Level3, ICollection<Level4>>> expr = l3 => l3.OneToMany_Optional3;
@@ -2528,28 +2524,26 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(
-                                        l1 =>
-                                            l1.OneToMany_Optional1
-                                                .Where(x => x.Name != "Foo")
-                                                .OrderBy(x => x.Id)
-                                                .Take(3)
-                                    )
-                                    .Include(
-                                        l1 =>
-                                            l1.OneToMany_Optional1
-                                                .Where(x => x.Name != "Bar")
-                                                .OrderByDescending(x => x.Name)
-                                                .Take(3)
-                                    )
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(
+                                    l1 =>
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Foo")
+                                            .OrderBy(x => x.Id)
+                                            .Take(3)
+                                )
+                                .Include(
+                                    l1 =>
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Bar")
+                                            .OrderByDescending(x => x.Name)
+                                            .Take(3)
+                                )
+                    ))
             ).Message;
         }
 
@@ -2560,22 +2554,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(
-                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
-                                    )
-                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
-                                    .Include(
-                                        l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
-                                    )
-                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
+                                .ThenInclude(l2 => l2.OneToMany_Optional2)
+                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
+                                .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                    ))
             ).Message;
         }
 
@@ -2995,22 +2983,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Select(
-                                    l1 =>
-                                        ss.Set<Level2>()
-                                            .Include(
-                                                l2 =>
-                                                    l2.OneToMany_Optional2.Where(x => x.Id != l2.Id)
-                                            )
-                                )
-                    )
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Level1>()
+                            .Select(
+                                l1 =>
+                                    ss.Set<Level2>()
+                                        .Include(
+                                            l2 => l2.OneToMany_Optional2.Where(x => x.Id != l2.Id)
+                                        )
+                            )
+                ));
         }
 
         [ConditionalTheory]
@@ -3078,13 +3063,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_include_with_Distinct_throws(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
+                    ))
             ).Message;
         }
 
@@ -3095,16 +3078,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Level1>()
-                                    .Include(l1 => l1.OneToMany_Optional1)
-                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<Level1>()
+                                .Include(l1 => l1.OneToMany_Optional1)
+                                .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                    ))
             ).Message;
         }
 
@@ -3508,44 +3489,40 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_over_conditional_null_source(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQueryScalar(
-                        async,
-                        ss =>
-                            ss.Set<Level2>()
-                                .SelectMany(
-                                    l2 =>
-                                        l2.Id == 1
-                                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                e => e.Id
-                                            )
-                                            : null
-                                )
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        ss.Set<Level2>()
+                            .SelectMany(
+                                l2 =>
+                                    l2.Id == 1
+                                        ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
+                                            e => e.Id
+                                        )
+                                        : null
+                            )
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task SelectMany_over_conditional_empty_source(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQueryScalar(
-                        async,
-                        ss =>
-                            ss.Set<Level2>()
-                                .SelectMany(
-                                    l2 =>
-                                        l2.Id == 1
-                                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                e => e.Id
-                                            )
-                                            : Enumerable.Empty<int>()
-                                )
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQueryScalar(
+                    async,
+                    ss =>
+                        ss.Set<Level2>()
+                            .SelectMany(
+                                l2 =>
+                                    l2.Id == 1
+                                        ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
+                                            e => e.Id
+                                        )
+                                        : Enumerable.Empty<int>()
+                            )
+                ));
         }
 
         [ConditionalTheory]

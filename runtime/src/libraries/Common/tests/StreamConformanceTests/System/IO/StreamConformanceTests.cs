@@ -589,18 +589,14 @@ namespace System.IO.Tests
                 // Disposed destination stream
                 var disposedDestination = new MemoryStream(new byte[1]);
                 disposedDestination.Dispose();
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        stream.CopyTo(disposedDestination);
-                    }
-                );
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        stream.CopyToAsync(disposedDestination);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    stream.CopyTo(disposedDestination);
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    stream.CopyToAsync(disposedDestination);
+                });
             }
             else
             {
@@ -790,38 +786,30 @@ namespace System.IO.Tests
                     }
                 )
                 {
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.Write(oneByteBuffer, invalidOffset, invalidCount);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount, default);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.EndWrite(
-                                stream.BeginWrite(
-                                    oneByteBuffer,
-                                    invalidOffset,
-                                    invalidCount,
-                                    iar => { },
-                                    new object()
-                                )
-                            );
-                        }
-                    );
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.Write(oneByteBuffer, invalidOffset, invalidCount);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.WriteAsync(oneByteBuffer, invalidOffset, invalidCount, default);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.EndWrite(
+                            stream.BeginWrite(
+                                oneByteBuffer,
+                                invalidOffset,
+                                invalidCount,
+                                iar => { },
+                                new object()
+                            )
+                        );
+                    });
                 }
 
                 // Unknown arguments
@@ -886,54 +874,38 @@ namespace System.IO.Tests
             Assert.Equal(CanSeek, stream.CanSeek);
             if (stream.CanSeek)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        stream.Position = -1;
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        stream.Seek(-1, SeekOrigin.Begin);
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        stream.Seek(-stream.Position - 1, SeekOrigin.Current);
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        stream.Seek(-stream.Length - 1, SeekOrigin.End);
-                    }
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        stream.Seek(0, (SeekOrigin)(-1));
-                    }
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        stream.Seek(0, (SeekOrigin)3);
-                    }
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        stream.Seek(0, ~SeekOrigin.Begin);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        stream.SetLength(-1);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    stream.Position = -1;
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-1, SeekOrigin.Begin);
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-stream.Position - 1, SeekOrigin.Current);
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    stream.Seek(-stream.Length - 1, SeekOrigin.End);
+                });
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    stream.Seek(0, (SeekOrigin)(-1));
+                });
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    stream.Seek(0, (SeekOrigin)3);
+                });
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    stream.Seek(0, ~SeekOrigin.Begin);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    stream.SetLength(-1);
+                });
             }
             else
             {
@@ -942,24 +914,18 @@ namespace System.IO.Tests
                 {
                     Assert.Throws<NotSupportedException>(() => stream.Position);
                 }
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        stream.Position = 0;
-                    }
-                );
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        stream.SetLength(1);
-                    }
-                );
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        stream.Seek(0, SeekOrigin.Begin);
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.Position = 0;
+                });
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.SetLength(1);
+                });
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                });
             }
 
             Assert.Equal(CanTimeout, stream.CanTimeout);
@@ -987,73 +953,53 @@ namespace System.IO.Tests
             stream.DisposeAsync().AsTask().GetAwaiter().GetResult();
             stream.Close();
 
-            AssertDisposed(
-                () =>
-                {
-                    stream.ReadByte();
-                }
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.Read(new Span<byte>(new byte[1]));
-                }
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.Read(new byte[1], 0, 1);
-                }
-            );
+            AssertDisposed(() =>
+            {
+                stream.ReadByte();
+            });
+            AssertDisposed(() =>
+            {
+                stream.Read(new Span<byte>(new byte[1]));
+            });
+            AssertDisposed(() =>
+            {
+                stream.Read(new byte[1], 0, 1);
+            });
             await AssertDisposedAsync(async () => await stream.ReadAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(
-                async () => await stream.ReadAsync(new Memory<byte>(new byte[1]))
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.EndRead(stream.BeginRead(new byte[1], 0, 1, null, null));
-                }
-            );
+            await AssertDisposedAsync(async () =>
+                await stream.ReadAsync(new Memory<byte>(new byte[1])));
+            AssertDisposed(() =>
+            {
+                stream.EndRead(stream.BeginRead(new byte[1], 0, 1, null, null));
+            });
 
-            AssertDisposed(
-                () =>
-                {
-                    stream.WriteByte(1);
-                }
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.Write(new Span<byte>(new byte[1]));
-                }
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.Write(new byte[1], 0, 1);
-                }
-            );
+            AssertDisposed(() =>
+            {
+                stream.WriteByte(1);
+            });
+            AssertDisposed(() =>
+            {
+                stream.Write(new Span<byte>(new byte[1]));
+            });
+            AssertDisposed(() =>
+            {
+                stream.Write(new byte[1], 0, 1);
+            });
             await AssertDisposedAsync(async () => await stream.WriteAsync(new byte[1], 0, 1));
-            await AssertDisposedAsync(
-                async () => await stream.WriteAsync(new Memory<byte>(new byte[1]))
-            );
-            AssertDisposed(
-                () =>
-                {
-                    stream.EndWrite(stream.BeginWrite(new byte[1], 0, 1, null, null));
-                }
-            );
+            await AssertDisposedAsync(async () =>
+                await stream.WriteAsync(new Memory<byte>(new byte[1])));
+            AssertDisposed(() =>
+            {
+                stream.EndWrite(stream.BeginWrite(new byte[1], 0, 1, null, null));
+            });
 
             AssertDisposed(() => stream.Flush(), successAllowed: true);
             await AssertDisposedAsync(() => stream.FlushAsync(), successAllowed: true);
 
-            AssertDisposed(
-                () =>
-                {
-                    stream.CopyTo(new MemoryStream());
-                }
-            );
+            AssertDisposed(() =>
+            {
+                stream.CopyTo(new MemoryStream());
+            });
             await AssertDisposedAsync(async () => await stream.CopyToAsync(new MemoryStream()));
 
             AssertDisposed(() => _ = stream.Length);
@@ -2406,27 +2352,25 @@ namespace System.IO.Tests
                 byte[] writerBytes = RandomNumberGenerator.GetBytes(42);
                 var readerBytes = new byte[writerBytes.Length];
 
-                Task writes = Task.Run(
-                    () =>
+                Task writes = Task.Run(() =>
+                {
+                    foreach (byte b in writerBytes)
                     {
-                        foreach (byte b in writerBytes)
-                        {
-                            writeable.WriteByte(b);
-                        }
+                        writeable.WriteByte(b);
+                    }
 
-                        if (FlushRequiredToWriteData)
+                    if (FlushRequiredToWriteData)
+                    {
+                        if (FlushGuaranteesAllDataWritten)
                         {
-                            if (FlushGuaranteesAllDataWritten)
-                            {
-                                writeable.Flush();
-                            }
-                            else
-                            {
-                                writeable.Dispose();
-                            }
+                            writeable.Flush();
+                        }
+                        else
+                        {
+                            writeable.Dispose();
                         }
                     }
-                );
+                });
 
                 for (int i = 0; i < readerBytes.Length; i++)
                 {
@@ -2504,31 +2448,29 @@ namespace System.IO.Tests
                     byte[] writerBytes = RandomNumberGenerator.GetBytes(writeSize);
                     var readerBytes = new byte[writerBytes.Length];
 
-                    Task writes = Task.Run(
-                        async () =>
-                        {
-                            await WriteAsync(
-                                mode,
-                                writeable,
-                                writerBytes,
-                                0,
-                                writerBytes.Length,
-                                nonCanceledToken
-                            );
+                    Task writes = Task.Run(async () =>
+                    {
+                        await WriteAsync(
+                            mode,
+                            writeable,
+                            writerBytes,
+                            0,
+                            writerBytes.Length,
+                            nonCanceledToken
+                        );
 
-                            if (FlushRequiredToWriteData)
+                        if (FlushRequiredToWriteData)
+                        {
+                            if (FlushGuaranteesAllDataWritten)
                             {
-                                if (FlushGuaranteesAllDataWritten)
-                                {
-                                    await writeable.FlushAsync();
-                                }
-                                else
-                                {
-                                    await writeable.DisposeAsync();
-                                }
+                                await writeable.FlushAsync();
+                            }
+                            else
+                            {
+                                await writeable.DisposeAsync();
                             }
                         }
-                    );
+                    });
 
                     int n = 0;
                     while (n < readerBytes.Length)
@@ -2590,23 +2532,21 @@ namespace System.IO.Tests
                     // Repeatedly write then read a message smaller in size than the read buffer
                     for (int i = 0; i < 5; i++)
                     {
-                        Task writes = Task.Run(
-                            async () =>
+                        Task writes = Task.Run(async () =>
+                        {
+                            await WriteAsync(
+                                mode,
+                                writeable,
+                                writerBytes,
+                                0,
+                                writerBytes.Length,
+                                nonCanceledToken
+                            );
+                            if (FlushRequiredToWriteData)
                             {
-                                await WriteAsync(
-                                    mode,
-                                    writeable,
-                                    writerBytes,
-                                    0,
-                                    writerBytes.Length,
-                                    nonCanceledToken
-                                );
-                                if (FlushRequiredToWriteData)
-                                {
-                                    await writeable.FlushAsync();
-                                }
+                                await writeable.FlushAsync();
                             }
-                        );
+                        });
 
                         int n = 0;
                         while (n < writerBytes.Length)
@@ -2649,13 +2589,11 @@ namespace System.IO.Tests
             Task write;
             if (dataAvailableFirst)
             {
-                write = Task.Run(
-                    async () =>
-                    {
-                        await writeable.WriteAsync(Encoding.UTF8.GetBytes("hello"));
-                        await writeable.DisposeAsync();
-                    }
-                );
+                write = Task.Run(async () =>
+                {
+                    await writeable.WriteAsync(Encoding.UTF8.GetBytes("hello"));
+                    await writeable.DisposeAsync();
+                });
             }
             else
             {
@@ -2694,13 +2632,11 @@ namespace System.IO.Tests
             int offset = 2;
             byte value = 42;
 
-            Task write = Task.Run(
-                () =>
-                {
-                    writeable.WriteByte(value);
-                    writeable.Dispose();
-                }
-            );
+            Task write = Task.Run(() =>
+            {
+                writeable.WriteByte(value);
+                writeable.Dispose();
+            });
 
             Assert.Equal(
                 1,
@@ -2743,13 +2679,11 @@ namespace System.IO.Tests
             const int Offset = 2,
                 Count = 5;
 
-            Task write = Task.Run(
-                async () =>
-                {
-                    await WriteAsync(mode, writeable, buffer, Offset, Count);
-                    writeable.Dispose();
-                }
-            );
+            Task write = Task.Run(async () =>
+            {
+                await WriteAsync(mode, writeable, buffer, Offset, Count);
+                writeable.Dispose();
+            });
 
             using StreamReader reader = new StreamReader(readable);
             Assert.Equal("hello", reader.ReadToEnd());
@@ -2775,23 +2709,19 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.Write(buffer));
             Assert.Throws<IOException>(() => writeable.Write(buffer, 0, buffer.Length));
             await Assert.ThrowsAsync<IOException>(() => writeable.WriteAsync(buffer).AsTask());
-            await Assert.ThrowsAsync<IOException>(
-                () => writeable.WriteAsync(buffer, 0, buffer.Length)
-            );
-            Assert.Throws<IOException>(
-                () => writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null))
-            );
-            await Assert.ThrowsAsync<IOException>(
-                () =>
-                    Task.Factory.FromAsync(
-                        writeable.BeginWrite,
-                        writeable.EndWrite,
-                        buffer,
-                        0,
-                        buffer.Length,
-                        null
-                    )
-            );
+            await Assert.ThrowsAsync<IOException>(() =>
+                writeable.WriteAsync(buffer, 0, buffer.Length));
+            Assert.Throws<IOException>(() =>
+                writeable.EndWrite(writeable.BeginWrite(buffer, 0, buffer.Length, null, null)));
+            await Assert.ThrowsAsync<IOException>(() =>
+                Task.Factory.FromAsync(
+                    writeable.BeginWrite,
+                    writeable.EndWrite,
+                    buffer,
+                    0,
+                    buffer.Length,
+                    null
+                ));
             Assert.Throws<IOException>(() => writeable.Flush());
         }
 
@@ -2819,9 +2749,8 @@ namespace System.IO.Tests
 
                 await Assert.ThrowsAsync<InvalidOperationException>(async () => await r);
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().IsCompleted);
-                Assert.Throws<InvalidOperationException>(
-                    () => r.GetAwaiter().OnCompleted(() => { })
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    r.GetAwaiter().OnCompleted(() => { }));
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().GetResult());
             }
         }
@@ -2840,9 +2769,8 @@ namespace System.IO.Tests
                 var b = new byte[1];
                 ValueTask<int> r = readable.ReadAsync(b);
                 r.GetAwaiter().OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(
-                    () => r.GetAwaiter().OnCompleted(() => { })
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    r.GetAwaiter().OnCompleted(() => { }));
             }
         }
 
@@ -3069,31 +2997,28 @@ namespace System.IO.Tests
             {
                 for (int iter = 0; iter < 2; iter++)
                 {
-                    Task<int> zeroByteRead = Task.Run(
-                        () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
-                    );
+                    Task<int> zeroByteRead = Task.Run(() =>
+                        ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0));
 
                     if (BlocksOnZeroByteReads)
                     {
                         Assert.False(zeroByteRead.IsCompleted);
 
-                        Task write = Task.Run(
-                            async () =>
+                        Task write = Task.Run(async () =>
+                        {
+                            await writeable.WriteAsync(Encoding.UTF8.GetBytes("hello"));
+                            if (FlushRequiredToWriteData)
                             {
-                                await writeable.WriteAsync(Encoding.UTF8.GetBytes("hello"));
-                                if (FlushRequiredToWriteData)
+                                if (FlushGuaranteesAllDataWritten)
                                 {
-                                    if (FlushGuaranteesAllDataWritten)
-                                    {
-                                        await writeable.FlushAsync();
-                                    }
-                                    else
-                                    {
-                                        await writeable.DisposeAsync();
-                                    }
+                                    await writeable.FlushAsync();
+                                }
+                                else
+                                {
+                                    await writeable.DisposeAsync();
                                 }
                             }
-                        );
+                        });
                         Assert.Equal(0, await zeroByteRead);
 
                         // Perform a second zero-byte read.
@@ -3149,15 +3074,13 @@ namespace System.IO.Tests
             using StreamPair streams = await CreateConnectedStreamsAsync();
             foreach ((Stream writeable, Stream readable) in GetReadWritePairs(streams))
             {
-                Task writes = Task.Run(
-                    async () =>
+                Task writes = Task.Run(async () =>
+                {
+                    foreach (byte[] buffer in buffers)
                     {
-                        foreach (byte[] buffer in buffers)
-                        {
-                            await WriteAsync(mode, writeable, buffer, 0, buffer.Length);
-                        }
+                        await WriteAsync(mode, writeable, buffer, 0, buffer.Length);
                     }
-                );
+                });
 
                 if (FlushRequiredToWriteData)
                 {
@@ -3302,26 +3225,24 @@ namespace System.IO.Tests
                 {
                     await WhenAllOrAnyFailed(
                         client.WriteAsync(sendBuffer, 0, sendBuffer.Length),
-                        Task.Run(
-                            async () =>
+                        Task.Run(async () =>
+                        {
+                            int received = 0,
+                                bytesRead = 0;
+                            while (
+                                received < readBuffer.Length
+                                && (
+                                    bytesRead = await server.ReadAsync(
+                                        readBuffer.AsMemory(received)
+                                    )
+                                ) > 0
+                            )
                             {
-                                int received = 0,
-                                    bytesRead = 0;
-                                while (
-                                    received < readBuffer.Length
-                                    && (
-                                        bytesRead = await server.ReadAsync(
-                                            readBuffer.AsMemory(received)
-                                        )
-                                    ) > 0
-                                )
-                                {
-                                    received += bytesRead;
-                                }
-                                Assert.InRange(bytesRead, 1, int.MaxValue);
-                                Assert.Equal(Text, Encoding.UTF8.GetString(readBuffer));
+                                received += bytesRead;
                             }
-                        )
+                            Assert.InRange(bytesRead, 1, int.MaxValue);
+                            Assert.Equal(Text, Encoding.UTF8.GetString(readBuffer));
+                        })
                     );
                 }
             };
@@ -3385,15 +3306,13 @@ namespace System.IO.Tests
                     .Range(0, 20)
                     .Select(
                         _ =>
-                            Task.Run(
-                                async () =>
-                                {
-                                    await CopyToAsync_AllDataCopied(
-                                        byteCount: 10 * 1024,
-                                        useAsync: true
-                                    );
-                                }
-                            )
+                            Task.Run(async () =>
+                            {
+                                await CopyToAsync_AllDataCopied(
+                                    byteCount: 10 * 1024,
+                                    useAsync: true
+                                );
+                            })
                     )
             );
         }
@@ -3557,34 +3476,27 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => writeable.WriteByte(1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1], 0, 1));
             Assert.Throws<IOException>(() => writeable.Write(new byte[1]));
-            Assert.Throws<IOException>(
-                () => writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null))
-            );
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
-                {
-                    await writeable.WriteAsync(new byte[1], 0, 1);
-                }
-            );
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
-                {
-                    await writeable.WriteAsync(new byte[1]);
-                }
-            );
-            await Assert.ThrowsAsync<IOException>(
-                async () =>
-                {
-                    await Task.Factory.FromAsync(
-                        writeable.BeginWrite,
-                        writeable.EndWrite,
-                        new byte[1],
-                        0,
-                        1,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<IOException>(() =>
+                writeable.EndWrite(writeable.BeginWrite(new byte[1], 0, 1, null, null)));
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await writeable.WriteAsync(new byte[1], 0, 1);
+            });
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await writeable.WriteAsync(new byte[1]);
+            });
+            await Assert.ThrowsAsync<IOException>(async () =>
+            {
+                await Task.Factory.FromAsync(
+                    writeable.BeginWrite,
+                    writeable.EndWrite,
+                    new byte[1],
+                    0,
+                    1,
+                    null
+                );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -3859,16 +3771,14 @@ namespace System.IO.Tests
                     for (int i = 0; i < 10; i++)
                     {
                         await WhenAllOrAnyFailed(
-                            Task.Run(
-                                () =>
+                            Task.Run(() =>
+                            {
+                                writeable.WriteByte((byte)i);
+                                if (FlushRequiredToWriteData)
                                 {
-                                    writeable.WriteByte((byte)i);
-                                    if (FlushRequiredToWriteData)
-                                    {
-                                        writeable.Flush();
-                                    }
+                                    writeable.Flush();
                                 }
-                            ),
+                            }),
                             Task.Run(() => Assert.Equal(i, readable.ReadByte()))
                         );
                     }
@@ -3878,26 +3788,22 @@ namespace System.IO.Tests
             {
                 (Stream writeable, Stream readable) = GetReadWritePair(wrapper3);
                 await WhenAllOrAnyFailed(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                writeable.WriteByte((byte)i);
-                            }
-                            writeable.Dispose();
+                            writeable.WriteByte((byte)i);
                         }
-                    ),
-                    Task.Run(
-                        () =>
+                        writeable.Dispose();
+                    }),
+                    Task.Run(() =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                Assert.Equal(i, readable.ReadByte());
-                            }
-                            Assert.Equal(-1, readable.ReadByte());
+                            Assert.Equal(i, readable.ReadByte());
                         }
-                    )
+                        Assert.Equal(-1, readable.ReadByte());
+                    })
                 );
             }
         }
@@ -3940,9 +3846,8 @@ namespace System.IO.Tests
                 var signalTask = tracker.WaitForZeroByteReadAsync();
 
                 // Issue zero byte read against wrapper stream.
-                Task<int> zeroByteRead = Task.Run(
-                    () => ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0)
-                );
+                Task<int> zeroByteRead = Task.Run(() =>
+                    ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0));
 
                 // The tracker stream will signal us when the zero byte read actually happens.
                 await signalTask;

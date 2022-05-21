@@ -31,9 +31,8 @@ namespace System.Threading.Tasks.Tests
         private int _threadCount;
         private readonly List<int>[] _sequences; // @TODO: remove if ConcurrentDictionary can be used
 
-        private readonly ThreadLocal<Random> _random = new ThreadLocal<Random>(
-            () => new Random(unchecked((int)(DateTime.Now.Ticks)))
-        ); // Random generator for WorkloadPattern == Random
+        private readonly ThreadLocal<Random> _random = new ThreadLocal<Random>(() =>
+            new Random(unchecked((int)(DateTime.Now.Ticks)))); // Random generator for WorkloadPattern == Random
 
         private static readonly int s_zetaSeedOffset = 10000; // offset to the zeta seed to ensure result converge to the expected
 

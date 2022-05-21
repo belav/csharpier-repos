@@ -113,9 +113,8 @@ public class WebAssemblyHostBuilderTest
 
         // Assert
         Assert.NotNull(host.Services.GetRequiredService<StringBuilder>());
-        Assert.Throws<InvalidOperationException>(
-            () => host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>()
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>());
     }
 
     [Fact]

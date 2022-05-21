@@ -212,18 +212,16 @@ internal static class TestHubMethodsImpl
     {
         var channel = Channel.CreateUnbounded<int>();
 
-        Task.Run(
-            async () =>
+        Task.Run(async () =>
+        {
+            for (var i = 0; i < count; i++)
             {
-                for (var i = 0; i < count; i++)
-                {
-                    await channel.Writer.WriteAsync(i);
-                    await Task.Delay(20);
-                }
-
-                channel.Writer.TryComplete();
+                await channel.Writer.WriteAsync(i);
+                await Task.Delay(20);
             }
-        );
+
+            channel.Writer.TryComplete();
+        });
 
         return channel.Reader;
     }
@@ -238,25 +236,23 @@ internal static class TestHubMethodsImpl
     public static ChannelReader<string> StreamEcho(ChannelReader<string> source)
     {
         var output = Channel.CreateUnbounded<string>();
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            try
             {
-                try
+                while (await source.WaitToReadAsync())
                 {
-                    while (await source.WaitToReadAsync())
+                    while (source.TryRead(out var item))
                     {
-                        while (source.TryRead(out var item))
-                        {
-                            await output.Writer.WriteAsync(item);
-                        }
+                        await output.Writer.WriteAsync(item);
                     }
                 }
-                finally
-                {
-                    output.Writer.TryComplete();
-                }
             }
-        );
+            finally
+            {
+                output.Writer.TryComplete();
+            }
+        });
 
         return output.Reader;
     }
@@ -264,25 +260,23 @@ internal static class TestHubMethodsImpl
     public static ChannelReader<int> StreamEchoInt(ChannelReader<int> source)
     {
         var output = Channel.CreateUnbounded<int>();
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            try
             {
-                try
+                while (await source.WaitToReadAsync())
                 {
-                    while (await source.WaitToReadAsync())
+                    while (source.TryRead(out var item))
                     {
-                        while (source.TryRead(out var item))
-                        {
-                            await output.Writer.WriteAsync(item);
-                        }
+                        await output.Writer.WriteAsync(item);
                     }
                 }
-                finally
-                {
-                    output.Writer.TryComplete();
-                }
             }
-        );
+            finally
+            {
+                output.Writer.TryComplete();
+            }
+        });
 
         return output.Reader;
     }

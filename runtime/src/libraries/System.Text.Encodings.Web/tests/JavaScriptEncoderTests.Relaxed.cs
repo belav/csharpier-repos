@@ -221,12 +221,10 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    encoder.Encode(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

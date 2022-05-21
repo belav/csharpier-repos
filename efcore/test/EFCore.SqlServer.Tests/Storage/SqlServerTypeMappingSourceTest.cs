@@ -1241,9 +1241,8 @@ namespace Microsoft.EntityFrameworkCore
             var property = ((IMutableModel)new Model())
                 .AddEntityType("Entity1")
                 .AddProperty("Strange", typeof(object));
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => CreateRelationalTypeMappingSource().GetMapping((IProperty)property)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                CreateRelationalTypeMappingSource().GetMapping((IProperty)property));
             Assert.Equal(
                 RelationalStrings.UnsupportedPropertyType(
                     "Entity1 (Dictionary<string, object>)",
@@ -1256,18 +1255,16 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 RelationalStrings.UnsupportedType("object"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreateRelationalTypeMappingSource().GetMapping(typeof(object))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreateRelationalTypeMappingSource().GetMapping(typeof(object)))
                     .Message
             );
 
             Assert.Equal(
                 RelationalStrings.UnsupportedStoreType("object"),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => CreateRelationalTypeMappingSource().GetMapping("object")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        CreateRelationalTypeMappingSource().GetMapping("object"))
                     .Message
             );
         }

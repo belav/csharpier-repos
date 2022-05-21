@@ -179,27 +179,23 @@ namespace System.Text.Json.Serialization.Tests
             // Ensure we fail with incomplete data
             data = Encoding.UTF8.GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]");
             stream = new MemoryStream(data);
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer
-                        .DeserializeAsync<JsonElement>(
-                            stream,
-                            new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
-                        )
-                        .Result
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer
+                    .DeserializeAsync<JsonElement>(
+                        stream,
+                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                    )
+                    .Result);
 
             data = Encoding.UTF8.GetBytes(@"[1,true,{""City"":""MyCity""},null,""foo""");
             stream = new MemoryStream(data);
-            Assert.Throws<JsonException>(
-                () =>
-                    JsonSerializer
-                        .DeserializeAsync<JsonElement>(
-                            stream,
-                            new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
-                        )
-                        .Result
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer
+                    .DeserializeAsync<JsonElement>(
+                        stream,
+                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                    )
+                    .Result);
         }
     }
 }

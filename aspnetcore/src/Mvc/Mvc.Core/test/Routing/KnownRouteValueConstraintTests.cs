@@ -195,16 +195,14 @@ public class KnownRouteValueConstraintTests
         var constraint = new KnownRouteValueConstraint(actionDescriptorCollectionProvider);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                constraint.Match(
-                    GetHttpContext(),
-                    Mock.Of<IRouter>(),
-                    "area",
-                    new RouteValueDictionary { { "area", "area" } },
-                    direction
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            constraint.Match(
+                GetHttpContext(),
+                Mock.Of<IRouter>(),
+                "area",
+                new RouteValueDictionary { { "area", "area" } },
+                direction
+            ));
         var providerName = actionDescriptorCollectionProvider.GetType().FullName;
         Assert.Equal(
             $"The 'ActionDescriptors' property of '{providerName}' must not be null.",

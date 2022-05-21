@@ -17,77 +17,61 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestSymbolFilterNone()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.ContainsSymbolsWithName(n => true, SymbolFilter.None);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.ContainsSymbolsWithName(n => true, SymbolFilter.None);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.GetSymbolsWithName(n => true, SymbolFilter.None);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.GetSymbolsWithName(n => true, SymbolFilter.None);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.ContainsSymbolsWithName("", SymbolFilter.None);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.ContainsSymbolsWithName("", SymbolFilter.None);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.GetSymbolsWithName("", SymbolFilter.None);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.GetSymbolsWithName("", SymbolFilter.None);
+            });
         }
 
         [Fact]
         public void TestPredicateNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.ContainsSymbolsWithName(predicate: null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.ContainsSymbolsWithName(predicate: null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.GetSymbolsWithName(predicate: null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.GetSymbolsWithName(predicate: null);
+            });
         }
 
         [Fact]
         public void TestNameNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.ContainsSymbolsWithName(name: null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.ContainsSymbolsWithName(name: null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var compilation = GetTestCompilation();
-                    compilation.GetSymbolsWithName(name: null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var compilation = GetTestCompilation();
+                compilation.GetSymbolsWithName(name: null);
+            });
         }
 
         [Fact]

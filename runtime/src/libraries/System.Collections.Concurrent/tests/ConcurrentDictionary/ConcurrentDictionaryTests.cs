@@ -19,43 +19,39 @@ namespace System.Collections.Concurrent.Tests
             ConcurrentDictionary<int, int> cd = new ConcurrentDictionary<int, int>();
 
             Task[] tks = new Task[2];
-            tks[0] = Task.Run(
-                () =>
+            tks[0] = Task.Run(() =>
+            {
+                var ret = cd.TryAdd(1, 11);
+                if (!ret)
                 {
-                    var ret = cd.TryAdd(1, 11);
-                    if (!ret)
-                    {
-                        ret = cd.TryUpdate(1, 11, 111);
-                        Assert.True(ret);
-                    }
-
-                    ret = cd.TryAdd(2, 22);
-                    if (!ret)
-                    {
-                        ret = cd.TryUpdate(2, 22, 222);
-                        Assert.True(ret);
-                    }
+                    ret = cd.TryUpdate(1, 11, 111);
+                    Assert.True(ret);
                 }
-            );
 
-            tks[1] = Task.Run(
-                () =>
+                ret = cd.TryAdd(2, 22);
+                if (!ret)
                 {
-                    var ret = cd.TryAdd(2, 222);
-                    if (!ret)
-                    {
-                        ret = cd.TryUpdate(2, 222, 22);
-                        Assert.True(ret);
-                    }
-
-                    ret = cd.TryAdd(1, 111);
-                    if (!ret)
-                    {
-                        ret = cd.TryUpdate(1, 111, 11);
-                        Assert.True(ret);
-                    }
+                    ret = cd.TryUpdate(2, 22, 222);
+                    Assert.True(ret);
                 }
-            );
+            });
+
+            tks[1] = Task.Run(() =>
+            {
+                var ret = cd.TryAdd(2, 222);
+                if (!ret)
+                {
+                    ret = cd.TryUpdate(2, 222, 22);
+                    Assert.True(ret);
+                }
+
+                ret = cd.TryAdd(1, 111);
+                if (!ret)
+                {
+                    ret = cd.TryUpdate(1, 111, 11);
+                    Assert.True(ret);
+                }
+            });
 
             Task.WaitAll(tks);
         }
@@ -153,17 +149,15 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < threads; i++)
                 {
                     int ii = i;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < addsPerThread; j++)
                         {
-                            for (int j = 0; j < addsPerThread; j++)
-                            {
-                                dict.Add(j + ii * addsPerThread, -(j + ii * addsPerThread));
-                            }
-                            if (Interlocked.Decrement(ref count) == 0)
-                                mre.Set();
+                            dict.Add(j + ii * addsPerThread, -(j + ii * addsPerThread));
                         }
-                    );
+                        if (Interlocked.Decrement(ref count) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -233,17 +227,15 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < threads; i++)
                 {
                     int ii = i;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 1; j <= updatesPerThread; j++)
                         {
-                            for (int j = 1; j <= updatesPerThread; j++)
-                            {
-                                dict[j] = (ii + 2) * j;
-                            }
-                            if (Interlocked.Decrement(ref running) == 0)
-                                mre.Set();
+                            dict[j] = (ii + 2) * j;
                         }
-                    );
+                        if (Interlocked.Decrement(ref running) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -318,26 +310,24 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < threads; i++)
                 {
                     int ii = i;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < readsPerThread; j++)
                         {
-                            for (int j = 0; j < readsPerThread; j++)
+                            int val = 0;
+                            if (dict.TryGetValue(j, out val))
                             {
-                                int val = 0;
-                                if (dict.TryGetValue(j, out val))
-                                {
-                                    Assert.Equal(0, j % 2);
-                                    Assert.Equal(j, val);
-                                }
-                                else
-                                {
-                                    Assert.Equal(1, j % 2);
-                                }
+                                Assert.Equal(0, j % 2);
+                                Assert.Equal(j, val);
                             }
-                            if (Interlocked.Decrement(ref count) == 0)
-                                mre.Set();
+                            else
+                            {
+                                Assert.Equal(1, j % 2);
+                            }
                         }
-                    );
+                        if (Interlocked.Decrement(ref count) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -376,25 +366,23 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < threads; i++)
                 {
                     int ii = i;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < removesPerThread; j++)
                         {
-                            for (int j = 0; j < removesPerThread; j++)
-                            {
-                                int value;
-                                int key = 2 * (ii + j * threads);
-                                Assert.True(
-                                    dict.TryRemove(key, out value),
-                                    "Failed to remove an element! " + methodparameters
-                                );
+                            int value;
+                            int key = 2 * (ii + j * threads);
+                            Assert.True(
+                                dict.TryRemove(key, out value),
+                                "Failed to remove an element! " + methodparameters
+                            );
 
-                                Assert.Equal(-key, value);
-                            }
-
-                            if (Interlocked.Decrement(ref running) == 0)
-                                mre.Set();
+                            Assert.Equal(-key, value);
                         }
-                    );
+
+                        if (Interlocked.Decrement(ref running) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -456,23 +444,21 @@ namespace System.Collections.Concurrent.Tests
                 for (int t = 0; t < SIZE; t++)
                 {
                     int thread = t;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int key = 0; key < removesPerThread; key++)
                         {
-                            for (int key = 0; key < removesPerThread; key++)
+                            int value;
+                            if (dict.TryRemove(key, out value))
                             {
-                                int value;
-                                if (dict.TryRemove(key, out value))
-                                {
-                                    seen[thread][key] = true;
+                                seen[thread][key] = true;
 
-                                    Assert.Equal(-key, value);
-                                }
+                                Assert.Equal(-key, value);
                             }
-                            if (Interlocked.Decrement(ref running) == 0)
-                                mre.Set();
                         }
-                    );
+                        if (Interlocked.Decrement(ref running) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -617,52 +603,50 @@ namespace System.Collections.Concurrent.Tests
                 for (int i = 0; i < threads; i++)
                 {
                     int ii = i;
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < addsPerThread; j++)
                         {
-                            for (int j = 0; j < addsPerThread; j++)
+                            if (isAdd)
                             {
-                                if (isAdd)
+                                //call one of the overloads of GetOrAdd
+                                switch (j % 3)
                                 {
-                                    //call one of the overloads of GetOrAdd
-                                    switch (j % 3)
-                                    {
-                                        case 0:
-                                            dict.GetOrAdd(j, -j);
-                                            break;
-                                        case 1:
-                                            dict.GetOrAdd(j, x => -x);
-                                            break;
-                                        case 2:
-                                            dict.GetOrAdd(j, (x, m) => x * m, -1);
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (j % 3)
-                                    {
-                                        case 0:
-                                            dict.AddOrUpdate(j, -j, (k, v) => -j);
-                                            break;
-                                        case 1:
-                                            dict.AddOrUpdate(j, (k) => -k, (k, v) => -k);
-                                            break;
-                                        case 2:
-                                            dict.AddOrUpdate(
-                                                j,
-                                                (k, m) => k * m,
-                                                (k, v, m) => k * m,
-                                                -1
-                                            );
-                                            break;
-                                    }
+                                    case 0:
+                                        dict.GetOrAdd(j, -j);
+                                        break;
+                                    case 1:
+                                        dict.GetOrAdd(j, x => -x);
+                                        break;
+                                    case 2:
+                                        dict.GetOrAdd(j, (x, m) => x * m, -1);
+                                        break;
                                 }
                             }
-                            if (Interlocked.Decrement(ref count) == 0)
-                                mre.Set();
+                            else
+                            {
+                                switch (j % 3)
+                                {
+                                    case 0:
+                                        dict.AddOrUpdate(j, -j, (k, v) => -j);
+                                        break;
+                                    case 1:
+                                        dict.AddOrUpdate(j, (k) => -k, (k, v) => -k);
+                                        break;
+                                    case 2:
+                                        dict.AddOrUpdate(
+                                            j,
+                                            (k, m) => k * m,
+                                            (k, v, m) => k * m,
+                                            -1
+                                        );
+                                        break;
+                                }
+                            }
                         }
-                    );
+                        if (Interlocked.Decrement(ref count) == 0)
+                            mre.Set();
+                    });
                 }
                 mre.WaitOne();
             }
@@ -767,9 +751,8 @@ namespace System.Collections.Concurrent.Tests
             Type proxyType = DebuggerAttributes.GetProxyType(
                 new ConcurrentDictionary<string, int>()
             );
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(proxyType, (object)null)
-            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object)null));
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -854,26 +837,21 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public static void TestConstructor_Negative()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new ConcurrentDictionary<int, int>((ICollection<KeyValuePair<int, int>>)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ConcurrentDictionary<int, int>((ICollection<KeyValuePair<int, int>>)null));
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection is passed");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ConcurrentDictionary<int, int>(
-                        (ICollection<KeyValuePair<int, int>>)null,
-                        EqualityComparer<int>.Default
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ConcurrentDictionary<int, int>(
+                    (ICollection<KeyValuePair<int, int>>)null,
+                    EqualityComparer<int>.Default
+                ));
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection and non null IEqualityComparer passed");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ConcurrentDictionary<string, int>(
-                        new[] { new KeyValuePair<string, int>(null, 1) }
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ConcurrentDictionary<string, int>(
+                    new[] { new KeyValuePair<string, int>(null, 1) }
+                ));
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when collection has null key passed");
 
             // Duplicate keys.
@@ -885,19 +863,16 @@ namespace System.Collections.Concurrent.Tests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () => new ConcurrentDictionary<int, int>(1, null, EqualityComparer<int>.Default)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ConcurrentDictionary<int, int>(1, null, EqualityComparer<int>.Default));
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection is passed");
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentDictionary<int, int>(0, 10)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentDictionary<int, int>(0, 10));
             // "TestConstructor:  FAILED.  Constructor didn't throw AORE when <1 concurrencyLevel passed");
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentDictionary<int, int>(-1, 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentDictionary<int, int>(-1, 0));
             // "TestConstructor:  FAILED.  Constructor didn't throw AORE when < 0 capacity passed");
         }
 
@@ -917,19 +892,15 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentNullException>(() => dictionary.TryGetValue(null, out item));
             // "TestExceptions:  FAILED.  TryGetValue didn't throw ANE when null key is passed");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var x = dictionary[null];
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var x = dictionary[null];
+            });
             // "TestExceptions:  FAILED.  this[] didn't throw ANE when null key is passed");
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    var x = dictionary["1"];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                var x = dictionary["1"];
+            });
             // "TestExceptions:  FAILED.  this[] TryGetValue didn't throw KeyNotFoundException!");
 
             Assert.Throws<ArgumentNullException>(() => dictionary[null] = 1);
@@ -946,29 +917,23 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentNullException>(() => dictionary.GetOrAdd(null, 0));
             // "TestExceptions:  FAILED.  GetOrAdd didn't throw ANE when null key is passed");
 
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate(null, (k, m) => 0, (k, v, m) => 0, 42)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate(null, (k, m) => 0, (k, v, m) => 0, 42));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null key is passed");
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate("1", (k, m) => 0, null, 42)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate("1", (k, m) => 0, null, 42));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null updateFactory is passed");
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate("1", null, (k, v, m) => 0, 42)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate("1", null, (k, v, m) => 0, 42));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null addFactory is passed");
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate(null, (k) => 0, (k, v) => 0)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate(null, (k) => 0, (k, v) => 0));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null key is passed");
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate("1", null, (k, v) => 0)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate("1", null, (k, v) => 0));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null updateFactory is passed");
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.AddOrUpdate(null, (k) => 0, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate(null, (k) => 0, null));
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null addFactory is passed");
 
             // Duplicate key.
@@ -1067,12 +1032,10 @@ namespace System.Collections.Concurrent.Tests
             // "TestIDictionary:  FAILED.  Remove didn't throw ANE when null key is passed");
 
             //Test this[]
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    object val = dictionary[null];
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                object val = dictionary[null];
+            });
             // "TestIDictionary:  FAILED.  this[] getter didn't throw ANE when null key is passed");
             Assert.Throws<ArgumentNullException>(() => dictionary[null] = 0);
             // "TestIDictionary:  FAILED.  this[] setter didn't throw ANE when null key is passed");
@@ -1088,9 +1051,8 @@ namespace System.Collections.Concurrent.Tests
         public static void IDictionary_Remove_NullKeyInKeyValuePair_ThrowsArgumentNullException()
         {
             IDictionary<string, int> dictionary = new ConcurrentDictionary<string, int>();
-            Assert.Throws<ArgumentNullException>(
-                () => dictionary.Remove(new KeyValuePair<string, int>(null, 0))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.Remove(new KeyValuePair<string, int>(null, 0)));
         }
 
         [Fact]
@@ -1133,18 +1095,15 @@ namespace System.Collections.Concurrent.Tests
                 "TestICollection:  FAILED.  IsSynchronized returned true!"
             );
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var obj = dictionary.SyncRoot;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var obj = dictionary.SyncRoot;
+            });
             // "TestICollection:  FAILED.  SyncRoot property didn't throw");
             Assert.Throws<ArgumentNullException>(() => dictionary.CopyTo(null, 0));
             // "TestICollection:  FAILED.  CopyTo didn't throw ANE when null Array is passed");
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => dictionary.CopyTo(new object[] { }, -1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dictionary.CopyTo(new object[] { }, -1));
             // "TestICollection:  FAILED.  CopyTo didn't throw AORE when negative index passed");
 
             //add one item to the dictionary
@@ -1290,33 +1249,29 @@ namespace System.Collections.Concurrent.Tests
             var cd = new ConcurrentDictionary<int, KeyValuePair<long, long>>();
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
             Task.WaitAll(
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    for (long i = 0; !cts.IsCancellationRequested; i++)
                     {
-                        for (long i = 0; !cts.IsCancellationRequested; i++)
+                        cd[0] = new KeyValuePair<long, long>(i, i);
+                    }
+                }),
+                Task.Run(() =>
+                {
+                    while (!cts.IsCancellationRequested)
+                    {
+                        cd.TryGetValue(0, out KeyValuePair<long, long> item);
+                        try
                         {
-                            cd[0] = new KeyValuePair<long, long>(i, i);
+                            Assert.Equal(item.Key, item.Value);
+                        }
+                        catch
+                        {
+                            cts.Cancel();
+                            throw;
                         }
                     }
-                ),
-                Task.Run(
-                    () =>
-                    {
-                        while (!cts.IsCancellationRequested)
-                        {
-                            cd.TryGetValue(0, out KeyValuePair<long, long> item);
-                            try
-                            {
-                                Assert.Equal(item.Key, item.Value);
-                            }
-                            catch
-                            {
-                                cts.Cancel();
-                                throw;
-                            }
-                        }
-                    }
-                )
+                })
             );
         }
 

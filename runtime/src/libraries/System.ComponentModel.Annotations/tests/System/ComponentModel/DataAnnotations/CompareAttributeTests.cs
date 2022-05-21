@@ -173,9 +173,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             string oldErrorMessage = attribute.FormatErrorMessage("name");
             Assert.DoesNotContain("CustomDisplayName", oldErrorMessage);
 
-            Assert.Throws<ValidationException>(
-                () => attribute.Validate("test1", new ValidationContext(new CompareObject("test")))
-            );
+            Assert.Throws<ValidationException>(() =>
+                attribute.Validate("test1", new ValidationContext(new CompareObject("test"))));
 
             string newErrorMessage = attribute.FormatErrorMessage("name");
             Assert.NotEqual(oldErrorMessage, newErrorMessage);

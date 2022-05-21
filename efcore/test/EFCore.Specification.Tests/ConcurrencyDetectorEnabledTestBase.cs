@@ -47,9 +47,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (disposer)
             {
-                Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => test(context)
-                );
+                Exception ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    test(context));
 
                 Assert.Equal(CoreStrings.ConcurrentMethodInvocation, ex.Message);
             }

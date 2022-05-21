@@ -1636,25 +1636,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             var exceptions = new List<Exception>();
             for (var i = 0; i < NumThreads; i++)
             {
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    barrier.SignalAndWait();
+                    try
                     {
-                        barrier.SignalAndWait();
-                        try
-                        {
-                            Assert.Equal(expectedValue, await read());
-                        }
-                        catch (Exception ex)
-                        {
-                            lock (exceptions)
-                            {
-                                exceptions.Add(ex);
-                            }
-                        }
-
-                        countdown.Signal();
+                        Assert.Equal(expectedValue, await read());
                     }
-                );
+                    catch (Exception ex)
+                    {
+                        lock (exceptions)
+                        {
+                            exceptions.Add(ex);
+                        }
+                    }
+
+                    countdown.Signal();
+                });
             }
 
             countdown.Wait();

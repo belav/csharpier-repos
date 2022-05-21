@@ -94,12 +94,10 @@ public class JsonPatchDocumentGetPathTest
         var patchDocument = new JsonPatchDocument<SimpleObject>();
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                patchDocument.GetPath(p => p.IntegerValue >= 4, null);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            patchDocument.GetPath(p => p.IntegerValue >= 4, null);
+        });
 
         // Assert
         Assert.Equal(

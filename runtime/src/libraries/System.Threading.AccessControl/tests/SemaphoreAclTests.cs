@@ -34,19 +34,17 @@ namespace System.Threading.Tests
         [InlineData(1, 0)]
         public void Semaphore_Create_InvalidCounts(int initialCount, int maximumCount)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    CreateAndVerifySemaphore(
-                            initialCount,
-                            maximumCount,
-                            name: GetRandomName(),
-                            expectedSecurity: GetBasicSemaphoreSecurity(),
-                            expectedCreatedNew: true
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                CreateAndVerifySemaphore(
+                        initialCount,
+                        maximumCount,
+                        name: GetRandomName(),
+                        expectedSecurity: GetBasicSemaphoreSecurity(),
+                        expectedCreatedNew: true
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
@@ -105,19 +103,17 @@ namespace System.Threading.Tests
 
             if (PlatformDetection.IsNetFramework)
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        CreateAndVerifySemaphore(
-                                DefaultInitialCount,
-                                DefaultMaximumCount,
-                                name,
-                                GetBasicSemaphoreSecurity(),
-                                expectedCreatedNew: true
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    CreateAndVerifySemaphore(
+                            DefaultInitialCount,
+                            DefaultMaximumCount,
+                            name,
+                            GetBasicSemaphoreSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
+                });
             }
             else
             {
@@ -228,12 +224,10 @@ namespace System.Threading.Tests
         public void Semaphore_OpenExisting_NameNotFound()
         {
             string name = "ThisShouldNotExist";
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
+            });
 
             Assert.False(SemaphoreAcl.TryOpenExisting(name, SemaphoreRights.FullControl, out _));
         }
@@ -242,12 +236,10 @@ namespace System.Threading.Tests
         public void Semaphore_OpenExisting_NameInvalid()
         {
             string name = '\0'.ToString();
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
+            });
 
             Assert.False(SemaphoreAcl.TryOpenExisting(name, SemaphoreRights.FullControl, out _));
         }
@@ -256,12 +248,10 @@ namespace System.Threading.Tests
         public void Semaphore_OpenExisting_PathNotFound()
         {
             string name = @"global\foo";
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
+            });
 
             Assert.False(SemaphoreAcl.TryOpenExisting(name, SemaphoreRights.FullControl, out _));
         }
@@ -270,55 +260,43 @@ namespace System.Threading.Tests
         public void Semaphore_OpenExisting_BadPathName()
         {
             string name = @"\\?\Path";
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(name, SemaphoreRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    SemaphoreAcl.TryOpenExisting(name, SemaphoreRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                SemaphoreAcl.TryOpenExisting(name, SemaphoreRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void Semaphore_OpenExisting_NullName()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(null, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(null, SemaphoreRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    SemaphoreAcl.TryOpenExisting(null, SemaphoreRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                SemaphoreAcl.TryOpenExisting(null, SemaphoreRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void Semaphore_OpenExisting_EmptyName()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    SemaphoreAcl.OpenExisting(string.Empty, SemaphoreRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                SemaphoreAcl.OpenExisting(string.Empty, SemaphoreRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    SemaphoreAcl.TryOpenExisting(string.Empty, SemaphoreRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                SemaphoreAcl.TryOpenExisting(string.Empty, SemaphoreRights.FullControl, out _);
+            });
         }
 
         private SemaphoreSecurity GetBasicSemaphoreSecurity()

@@ -101,15 +101,12 @@ namespace System.Net.Http.Functional.Tests
                     Assert.Throws<NotSupportedException>(() => stream.SetLength(12345));
                     Assert.Throws<NotSupportedException>(() => stream.WriteByte(0));
                     Assert.Throws<NotSupportedException>(() => stream.Write(new byte[1], 0, 1));
-                    Assert.Throws<NotSupportedException>(
-                        () => stream.Write(new ReadOnlySpan<byte>(new byte[1]))
-                    );
-                    await Assert.ThrowsAsync<NotSupportedException>(
-                        async () => await stream.WriteAsync(new byte[1], 0, 1)
-                    );
-                    await Assert.ThrowsAsync<NotSupportedException>(
-                        async () => await stream.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]))
-                    );
+                    Assert.Throws<NotSupportedException>(() =>
+                        stream.Write(new ReadOnlySpan<byte>(new byte[1])));
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await stream.WriteAsync(new byte[1], 0, 1));
+                    await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                        await stream.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])));
 
                     // nops
                     stream.Flush();
@@ -280,30 +277,22 @@ namespace System.Net.Http.Functional.Tests
                         () => stream.Read(new byte[1], 0, -1)
                     );
 
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.ReadAsync(new byte[1], 2, 0);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.ReadAsync(new byte[1], 2, 0);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.ReadAsync(new byte[1], 0, 2);
-                        }
-                    );
-                    Assert.ThrowsAny<ArgumentException>(
-                        () =>
-                        {
-                            stream.ReadAsync(new byte[1], 0, 2);
-                        }
-                    );
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.ReadAsync(new byte[1], 2, 0);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.ReadAsync(new byte[1], 2, 0);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.ReadAsync(new byte[1], 0, 2);
+                    });
+                    Assert.ThrowsAny<ArgumentException>(() =>
+                    {
+                        stream.ReadAsync(new byte[1], 0, 2);
+                    });
                 }
             }
         }
@@ -471,24 +460,19 @@ namespace System.Net.Http.Functional.Tests
             {
                 using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
                 {
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        () => stream.ReadAsync(new byte[1], 0, 1, new CancellationToken(true))
-                    );
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await stream.ReadAsync(
-                                new Memory<byte>(new byte[1]),
-                                new CancellationToken(true)
-                            )
-                    );
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await stream.CopyToAsync(
-                                new MemoryStream(),
-                                1,
-                                new CancellationToken(true)
-                            )
-                    );
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                        stream.ReadAsync(new byte[1], 0, 1, new CancellationToken(true)));
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await stream.ReadAsync(
+                            new Memory<byte>(new byte[1]),
+                            new CancellationToken(true)
+                        ));
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await stream.CopyToAsync(
+                            new MemoryStream(),
+                            1,
+                            new CancellationToken(true)
+                        ));
                 }
             }
         }
@@ -586,25 +570,20 @@ namespace System.Net.Http.Functional.Tests
                         }
                     );
 
-                    Assert.Throws<NotSupportedException>(
-                        () => s.CopyTo(new MemoryStream(new byte[1], writable: false))
-                    );
-                    Assert.Throws<NotSupportedException>(
-                        () =>
-                        {
-                            s.CopyToAsync(new MemoryStream(new byte[1], writable: false));
-                        }
-                    );
+                    Assert.Throws<NotSupportedException>(() =>
+                        s.CopyTo(new MemoryStream(new byte[1], writable: false)));
+                    Assert.Throws<NotSupportedException>(() =>
+                    {
+                        s.CopyToAsync(new MemoryStream(new byte[1], writable: false));
+                    });
 
                     var disposedDestination = new MemoryStream();
                     disposedDestination.Dispose();
                     Assert.Throws<ObjectDisposedException>(() => s.CopyTo(disposedDestination));
-                    Assert.Throws<ObjectDisposedException>(
-                        () =>
-                        {
-                            s.CopyToAsync(disposedDestination);
-                        }
-                    );
+                    Assert.Throws<ObjectDisposedException>(() =>
+                    {
+                        s.CopyToAsync(disposedDestination);
+                    });
                 }
             }
         }

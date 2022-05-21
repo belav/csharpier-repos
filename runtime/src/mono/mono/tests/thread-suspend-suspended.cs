@@ -10,28 +10,24 @@ class Driver
         AutoResetEvent start_gc = new AutoResetEvent(false);
         AutoResetEvent finished_gc = new AutoResetEvent(false);
 
-        Thread t1 = new Thread(
-            () =>
-            {
-                while (!Volatile.Read(ref finished)) { }
-            }
-        );
+        Thread t1 = new Thread(() =>
+        {
+            while (!Volatile.Read(ref finished)) { }
+        });
 
-        Thread t2 = new Thread(
-            () =>
+        Thread t2 = new Thread(() =>
+        {
+            while (!Volatile.Read(ref finished))
             {
-                while (!Volatile.Read(ref finished))
+                if (start_gc.WaitOne(0))
                 {
-                    if (start_gc.WaitOne(0))
-                    {
-                        GC.Collect();
-                        finished_gc.Set();
-                    }
-
-                    Thread.Yield();
+                    GC.Collect();
+                    finished_gc.Set();
                 }
+
+                Thread.Yield();
             }
-        );
+        });
 
         t1.Start();
         t2.Start();

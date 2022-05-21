@@ -197,24 +197,18 @@ public class SyncTextReader
                 Assert.Equal(-1, Console.Read()); // We should be at EOF now.
 
                 // Invalid args
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Console.In.ReadBlockAsync(null, 0, 0);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Console.In.ReadBlockAsync(new char[1], -1, 0);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Console.In.ReadBlockAsync(new char[1], 0, -1);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Console.In.ReadBlockAsync(null, 0, 0);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Console.In.ReadBlockAsync(new char[1], -1, 0);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Console.In.ReadBlockAsync(new char[1], 0, -1);
+                });
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>
@@ -246,24 +240,18 @@ public class SyncTextReader
                 Assert.Equal(-1, Console.Read()); // We should be at EOF now.
 
                 // Invalid args
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Console.In.ReadAsync(null, 0, 0);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Console.In.ReadAsync(new char[1], -1, 0);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Console.In.ReadAsync(new char[1], 0, -1);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Console.In.ReadAsync(null, 0, 0);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Console.In.ReadAsync(new char[1], -1, 0);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Console.In.ReadAsync(new char[1], 0, -1);
+                });
                 AssertExtensions.Throws<ArgumentException>(
                     null,
                     () =>

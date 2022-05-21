@@ -181,9 +181,8 @@ public class ExecutorFactoryTest
         };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ExecutorFactory.CreateExecutor(handler)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ExecutorFactory.CreateExecutor(handler));
         Assert.Equal(
             $"Unsupported handler method return type '{methodInfo.ReturnType}'.",
             ex.Message
@@ -255,12 +254,10 @@ public class ExecutorFactoryTest
 
         public async Task VoidTaskReturningHandler()
         {
-            await Task.Run(
-                () =>
-                {
-                    SideEffects = true;
-                }
-            );
+            await Task.Run(() =>
+            {
+                SideEffects = true;
+            });
         }
 
         public Task<IActionResult> GenericTaskHandler() =>
@@ -300,12 +297,10 @@ public class ExecutorFactoryTest
 
         public async Task VoidTaskReturningHandler()
         {
-            await Task.Run(
-                () =>
-                {
-                    SideEffects = true;
-                }
-            );
+            await Task.Run(() =>
+            {
+                SideEffects = true;
+            });
         }
 
         public Task<IActionResult> GenericTaskHandler() =>

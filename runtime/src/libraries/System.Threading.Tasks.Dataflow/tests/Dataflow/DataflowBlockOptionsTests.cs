@@ -10,68 +10,48 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestInvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new DataflowBlockOptions().TaskScheduler = null;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new DataflowBlockOptions().MaxMessagesPerTask = -2;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new DataflowBlockOptions().MaxMessagesPerTask = 0;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new DataflowBlockOptions().BoundedCapacity = -2;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new DataflowBlockOptions().BoundedCapacity = 0;
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new DataflowBlockOptions().NameFormat = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DataflowBlockOptions().TaskScheduler = null;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().MaxMessagesPerTask = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().MaxMessagesPerTask = 0;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().BoundedCapacity = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().BoundedCapacity = 0;
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DataflowBlockOptions().NameFormat = null;
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = -2;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = 0;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = 0;
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new GroupingDataflowBlockOptions().MaxNumberOfGroups = -2;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new GroupingDataflowBlockOptions().MaxNumberOfGroups = 0;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new GroupingDataflowBlockOptions().MaxNumberOfGroups = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new GroupingDataflowBlockOptions().MaxNumberOfGroups = 0;
+            });
         }
 
         [Fact]

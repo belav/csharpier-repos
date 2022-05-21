@@ -45,9 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Contains_with_local_tuple_array_closure(bool async)
         {
-            await AssertTranslationFailed(
-                () => base.Contains_with_local_tuple_array_closure(async)
-            );
+            await AssertTranslationFailed(() =>
+                base.Contains_with_local_tuple_array_closure(async));
         }
 
         public override async Task Array_cast_to_IEnumerable_Contains_with_constant(bool async)
@@ -670,9 +669,8 @@ WHERE [p].[ProductID] < 40"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Sum_over_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Sum_over_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -691,9 +689,8 @@ FROM [Customers] AS [c]"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Sum_over_nested_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Sum_over_nested_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -715,9 +712,8 @@ FROM [Customers] AS [c]"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Sum_over_min_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Sum_over_min_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -837,9 +833,8 @@ WHERE [p].[ProductID] < 40"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Average_over_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Average_over_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -858,9 +853,8 @@ FROM [Customers] AS [c]"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Average_over_nested_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Average_over_nested_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -888,9 +882,8 @@ FROM (
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Average_over_max_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Average_over_max_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -988,9 +981,8 @@ WHERE [p].[ProductID] < 40"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Min_over_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Min_over_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1009,9 +1001,8 @@ FROM [Customers] AS [c]"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Min_over_nested_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Min_over_nested_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1039,9 +1030,8 @@ FROM (
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Min_over_max_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Min_over_max_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1100,9 +1090,8 @@ WHERE [p].[ProductID] < 40"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Max_over_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Max_over_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1121,9 +1110,8 @@ FROM [Customers] AS [c]"
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Max_over_nested_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Max_over_nested_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1151,9 +1139,8 @@ FROM (
             Assert.Equal(
                 130,
                 (
-                    await Assert.ThrowsAsync<SqlException>(
-                        async () => await base.Max_over_sum_subquery_is_client_eval(async)
-                    )
+                    await Assert.ThrowsAsync<SqlException>(async () =>
+                        await base.Max_over_sum_subquery_is_client_eval(async))
                 ).Number
             );
 
@@ -1781,9 +1768,8 @@ END"
         public override async Task Contains_with_local_anonymous_type_array_closure(bool async)
         {
             // Aggregates. Issue #15937.
-            await AssertTranslationFailed(
-                () => base.Contains_with_local_anonymous_type_array_closure(async)
-            );
+            await AssertTranslationFailed(() =>
+                base.Contains_with_local_anonymous_type_array_closure(async));
 
             AssertSql();
         }

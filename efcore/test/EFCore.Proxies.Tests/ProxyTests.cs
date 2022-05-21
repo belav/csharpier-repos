@@ -122,27 +122,24 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.CreateProxy<SharedTypeEntityType>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        context.CreateProxy<SharedTypeEntityType>())
                     .Message
             );
 
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.CreateProxy<SharedTypeEntityType>(_ => { })
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        context.CreateProxy<SharedTypeEntityType>(_ => { }))
                     .Message
             );
 
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => context.CreateProxy(typeof(SharedTypeEntityType))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        context.CreateProxy(typeof(SharedTypeEntityType)))
                     .Message
             );
         }
@@ -314,27 +311,24 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_if_constructor_not_available_to_Castle()
         {
             using var context = new NeweyContextN5();
-            Assert.Throws<InvalidProxyConstructorArgumentsException>(
-                () => context.CreateProxy<RedBullRb3>()
-            );
+            Assert.Throws<InvalidProxyConstructorArgumentsException>(() =>
+                context.CreateProxy<RedBullRb3>());
         }
 
         [ConditionalFact]
         public void CreateProxy_throws_if_constructor_args_do_not_match()
         {
             using var context = new NeweyContext();
-            Assert.Throws<InvalidProxyConstructorArgumentsException>(
-                () => context.CreateProxy<March881>(77, 88)
-            );
+            Assert.Throws<InvalidProxyConstructorArgumentsException>(() =>
+                context.CreateProxy<March881>(77, 88));
         }
 
         [ConditionalFact]
         public void CreateProxy_throws_if_wrong_number_of_constructor_args()
         {
             using var context = new NeweyContext();
-            Assert.Throws<InvalidProxyConstructorArgumentsException>(
-                () => context.CreateProxy<March881>(77, 88, 99)
-            );
+            Assert.Throws<InvalidProxyConstructorArgumentsException>(() =>
+                context.CreateProxy<March881>(77, 88, 99));
         }
 
         [ConditionalFact]
@@ -383,15 +377,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            new EntityType(
-                                proxy.GetType(),
-                                model,
-                                owned: false,
-                                ConfigurationSource.Explicit
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        new EntityType(
+                            proxy.GetType(),
+                            model,
+                            owned: false,
+                            ConfigurationSource.Explicit
+                        ))
                     .Message
             );
         }
@@ -403,13 +395,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                        {
-                            var context = new CannotAddProxyTypeToModel();
-                            context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
-                        }
-                    )
+                    .Throws<ArgumentException>(() =>
+                    {
+                        var context = new CannotAddProxyTypeToModel();
+                        context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
+                    })
                     .Message
             );
         }

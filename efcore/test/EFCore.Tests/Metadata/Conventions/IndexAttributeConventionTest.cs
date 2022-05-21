@@ -97,9 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentIsEmpty("propertyNames"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()
-                    )
+                    .Throws<ArgumentException>(() =>
+                        modelBuilder.Entity<EntityWithInvalidEmptyIndex>())
                     .Message
             );
         }
@@ -117,9 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentHasEmptyElements("propertyNames"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () => modelBuilder.Entity(entityTypeWithInvalidIndex)
-                    )
+                    .Throws<ArgumentException>(() =>
+                        modelBuilder.Entity(entityTypeWithInvalidIndex))
                     .Message
             );
         }

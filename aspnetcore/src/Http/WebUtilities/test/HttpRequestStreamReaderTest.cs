@@ -364,18 +364,16 @@ public class HttpRequestStreamReaderTest
         ArrayPool<char> charPool
     )
     {
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpRequestStreamReader(
-                    stream,
-                    encoding,
-                    1,
-                    bytePool,
-                    charPool
-                );
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            var httpRequestStreamReader = new HttpRequestStreamReader(
+                stream,
+                encoding,
+                1,
+                bytePool,
+                charPool
+            );
+        });
     }
 
     [Theory]
@@ -383,18 +381,16 @@ public class HttpRequestStreamReaderTest
     [InlineData(-1)]
     public static void NegativeOrZeroBufferSize_ExpectArgumentOutOfRangeException(int size)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpRequestStreamReader(
-                    new MemoryStream(),
-                    Encoding.UTF8,
-                    size,
-                    ArrayPool<byte>.Shared,
-                    ArrayPool<char>.Shared
-                );
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            var httpRequestStreamReader = new HttpRequestStreamReader(
+                new MemoryStream(),
+                Encoding.UTF8,
+                size,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            );
+        });
     }
 
     [Fact]
@@ -402,18 +398,16 @@ public class HttpRequestStreamReaderTest
     {
         var mockStream = new Mock<Stream>();
         mockStream.Setup(m => m.CanRead).Returns(false);
-        Assert.Throws<ArgumentException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpRequestStreamReader(
-                    mockStream.Object,
-                    Encoding.UTF8,
-                    1,
-                    ArrayPool<byte>.Shared,
-                    ArrayPool<char>.Shared
-                );
-            }
-        );
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var httpRequestStreamReader = new HttpRequestStreamReader(
+                mockStream.Object,
+                Encoding.UTF8,
+                1,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            );
+        });
     }
 
     [Theory]
@@ -431,12 +425,10 @@ public class HttpRequestStreamReaderTest
         );
         httpRequestStreamReader.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                action(httpRequestStreamReader);
-            }
-        );
+        Assert.Throws<ObjectDisposedException>(() =>
+        {
+            action(httpRequestStreamReader);
+        });
     }
 
     [Theory]

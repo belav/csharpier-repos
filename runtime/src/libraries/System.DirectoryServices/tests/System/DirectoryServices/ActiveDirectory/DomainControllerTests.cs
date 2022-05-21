@@ -44,9 +44,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetDomainController_InvalidName(string name)
         {
             var context = new DirectoryContext(DirectoryContextType.DirectoryServer, name);
-            Exception exception = Record.Exception(
-                () => DomainController.GetDomainController(context)
-            );
+            Exception exception = Record.Exception(() =>
+                DomainController.GetDomainController(context));
             Assert.NotNull(exception);
             Assert.True(
                 exception is ActiveDirectoryObjectNotFoundException
@@ -69,9 +68,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetDomainController_InvalidIPV6()
         {
             var context = new DirectoryContext(DirectoryContextType.DirectoryServer, "[::1]:port");
-            Exception exception = Record.Exception(
-                () => DomainController.GetDomainController(context)
-            );
+            Exception exception = Record.Exception(() =>
+                DomainController.GetDomainController(context));
             Assert.NotNull(exception);
             Assert.True(
                 exception is ActiveDirectoryObjectNotFoundException
@@ -205,9 +203,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var context = new DirectoryContext(DirectoryContextType.Domain);
             if (!PlatformDetection.IsDomainJoinedMachine)
             {
-                Assert.Throws<ActiveDirectoryOperationException>(
-                    () => DomainController.FindAll(context)
-                );
+                Assert.Throws<ActiveDirectoryOperationException>(() =>
+                    DomainController.FindAll(context));
             }
         }
 
@@ -268,9 +265,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindAll_InvalidName_ThrowsActiveDirectoryOperationException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain, "server:port");
-            Assert.Throws<ActiveDirectoryOperationException>(
-                () => DomainController.FindAll(context, "siteName")
-            );
+            Assert.Throws<ActiveDirectoryOperationException>(() =>
+                DomainController.FindAll(context, "siteName"));
         }
 
         [Fact]
@@ -371,18 +367,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.GetReplicationConnectionFailures()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.GetReplicationConnectionFailures());
         }
 
         [Fact]
         public void GetReplicationConnectionFailures_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.GetReplicationConnectionFailures()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.GetReplicationConnectionFailures());
         }
 
         [Fact]
@@ -411,18 +405,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.GetReplicationCursors("partition")
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.GetReplicationCursors("partition"));
         }
 
         [Fact]
         public void GetReplicationCursors_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.GetReplicationCursors("partition")
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.GetReplicationCursors("partition"));
         }
 
         [Fact]
@@ -451,18 +443,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.GetReplicationMetadata("objectPath")
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.GetReplicationMetadata("objectPath"));
         }
 
         [Fact]
         public void GetReplicationMetadata_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.GetReplicationMetadata("objectPath")
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.GetReplicationMetadata("objectPath"));
         }
 
         [Fact]
@@ -491,18 +481,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.GetReplicationNeighbors("partition")
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.GetReplicationNeighbors("partition"));
         }
 
         [Fact]
         public void GetReplicationNeighbors_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.GetReplicationNeighbors("partition")
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.GetReplicationNeighbors("partition"));
         }
 
         [Fact]
@@ -511,18 +499,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.GetReplicationOperationInformation()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.GetReplicationOperationInformation());
         }
 
         [Fact]
         public void GetReplicationOperationInformation_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.GetReplicationOperationInformation()
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.GetReplicationOperationInformation());
         }
 
         [Fact]
@@ -677,21 +663,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SeizeRoleOwnership_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.SeizeRoleOwnership(ActiveDirectoryRole.InfrastructureRole)
-            );
-            Assert.Throws<NullReferenceException>(
-                () => controller.SeizeRoleOwnership(ActiveDirectoryRole.NamingRole)
-            );
-            Assert.Throws<NullReferenceException>(
-                () => controller.SeizeRoleOwnership(ActiveDirectoryRole.PdcRole)
-            );
-            Assert.Throws<NullReferenceException>(
-                () => controller.SeizeRoleOwnership(ActiveDirectoryRole.RidRole)
-            );
-            Assert.Throws<NullReferenceException>(
-                () => controller.SeizeRoleOwnership(ActiveDirectoryRole.SchemaRole)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SeizeRoleOwnership(ActiveDirectoryRole.InfrastructureRole));
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SeizeRoleOwnership(ActiveDirectoryRole.NamingRole));
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SeizeRoleOwnership(ActiveDirectoryRole.PdcRole));
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SeizeRoleOwnership(ActiveDirectoryRole.RidRole));
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SeizeRoleOwnership(ActiveDirectoryRole.SchemaRole));
         }
 
         [Theory]
@@ -749,9 +730,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             controller.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => controller.SyncFromAllServersCallback);
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.SyncFromAllServersCallback = null
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.SyncFromAllServersCallback = null);
         }
 
         [Fact]
@@ -807,18 +787,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.SyncReplicaFromServer("partition", "sourceServer")
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.SyncReplicaFromServer("partition", "sourceServer"));
         }
 
         [Fact]
         public void SyncReplicaFromServer_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.SyncReplicaFromServer("partition", "sourceServer")
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SyncReplicaFromServer("partition", "sourceServer"));
         }
 
         [Fact]
@@ -855,35 +833,30 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    controller.SyncReplicaFromAllServers(
-                        "partition",
-                        SyncFromAllServersOptions.AbortIfServerUnavailable
-                    )
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.SyncReplicaFromAllServers(
+                    "partition",
+                    SyncFromAllServersOptions.AbortIfServerUnavailable
+                ));
         }
 
         [Fact]
         public void SyncReplicaFromAllServers_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () =>
-                    controller.SyncReplicaFromAllServers(
-                        "partition",
-                        SyncFromAllServersOptions.AbortIfServerUnavailable
-                    )
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.SyncReplicaFromAllServers(
+                    "partition",
+                    SyncFromAllServersOptions.AbortIfServerUnavailable
+                ));
         }
 
         [Fact]
         public void TransferRoleOwnership_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.TransferRoleOwnership(ActiveDirectoryRole.NamingRole)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.TransferRoleOwnership(ActiveDirectoryRole.NamingRole));
         }
 
         [Theory]
@@ -926,18 +899,16 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             var controller = new SubController();
             controller.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => controller.TriggerSyncReplicaFromNeighbors("partition")
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                controller.TriggerSyncReplicaFromNeighbors("partition"));
         }
 
         [Fact]
         public void TriggerSyncReplicaFromNeighbors_NoContext_ThrowsNullReferenceException()
         {
             var controller = new SubController();
-            Assert.Throws<NullReferenceException>(
-                () => controller.TriggerSyncReplicaFromNeighbors("partition")
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                controller.TriggerSyncReplicaFromNeighbors("partition"));
         }
 
         private class SubController : DomainController { }

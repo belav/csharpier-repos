@@ -153,12 +153,10 @@ public class SourceChangeTest
         var expected = $"The node '{node}' is not the owner of change '{change}'.";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                change.GetOffset(node);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            change.GetOffset(node);
+        });
         Assert.Equal(expected, exception.Message);
     }
 

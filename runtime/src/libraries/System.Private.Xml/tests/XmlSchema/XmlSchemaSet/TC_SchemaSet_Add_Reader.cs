@@ -20,13 +20,11 @@ namespace System.Xml.Tests
         [Fact]
         public void NullNamespaceAndNullReader()
         {
-            Assert.ThrowsAny<ArgumentNullException>(
-                () =>
-                {
-                    XmlSchemaSet sc = new XmlSchemaSet();
-                    sc.Add((string)null, (XmlReader)null);
-                }
-            );
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+            {
+                XmlSchemaSet sc = new XmlSchemaSet();
+                sc.Add((string)null, (XmlReader)null);
+            });
         }
 
         [Fact]
@@ -54,30 +52,26 @@ namespace System.Xml.Tests
         [Fact]
         public void ValidNamespaceReaderPositionedOnElementButNoXsdSchemaTag()
         {
-            Assert.ThrowsAny<XmlSchemaException>(
-                () =>
-                {
-                    XmlSchemaSet sc = new XmlSchemaSet();
-                    XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
+            Assert.ThrowsAny<XmlSchemaException>(() =>
+            {
+                XmlSchemaSet sc = new XmlSchemaSet();
+                XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
 
-                    while (Reader.Read()) { }
+                while (Reader.Read()) { }
 
-                    sc.Add("xsdauthor", Reader);
-                }
-            );
+                sc.Add("xsdauthor", Reader);
+            });
         }
 
         [Fact]
         public void NamespaceUnmatchingReaderValid()
         {
-            Assert.ThrowsAny<XmlSchemaException>(
-                () =>
-                {
-                    XmlSchemaSet sc = new XmlSchemaSet();
-                    XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
-                    sc.Add("", Reader);
-                }
-            );
+            Assert.ThrowsAny<XmlSchemaException>(() =>
+            {
+                XmlSchemaSet sc = new XmlSchemaSet();
+                XmlTextReader Reader = new XmlTextReader(TestData._XsdAuthor);
+                sc.Add("", Reader);
+            });
         }
 
         [Fact]
@@ -112,31 +106,27 @@ namespace System.Xml.Tests
         [Fact]
         public void AddingReaderOnXDRSchema()
         {
-            Assert.ThrowsAny<XmlSchemaException>(
-                () =>
-                {
-                    XmlSchemaSet sc = new XmlSchemaSet();
-                    XmlTextReader Reader1 = new XmlTextReader(TestData._SchemaXdr);
-                    sc.Add(null, Reader1);
-                }
-            );
+            Assert.ThrowsAny<XmlSchemaException>(() =>
+            {
+                XmlSchemaSet sc = new XmlSchemaSet();
+                XmlTextReader Reader1 = new XmlTextReader(TestData._SchemaXdr);
+                sc.Add(null, Reader1);
+            });
         }
 
         [Fact]
         public void ValidNamespaceReaderPositionedOnANonElementNode()
         {
-            Assert.ThrowsAny<XmlSchemaException>(
-                () =>
-                {
-                    XmlSchemaSet sc = new XmlSchemaSet();
-                    XmlTextReader reader = new XmlTextReader(TestData._FileXSD1);
+            Assert.ThrowsAny<XmlSchemaException>(() =>
+            {
+                XmlSchemaSet sc = new XmlSchemaSet();
+                XmlTextReader reader = new XmlTextReader(TestData._FileXSD1);
 
-                    // positions on a non element (annotation) node
-                    while (reader.LocalName != "annotation")
-                        reader.Read();
-                    sc.Add(null, reader);
-                }
-            );
+                // positions on a non element (annotation) node
+                while (reader.LocalName != "annotation")
+                    reader.Read();
+                sc.Add(null, reader);
+            });
         }
 
         [Fact]

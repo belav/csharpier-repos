@@ -118,9 +118,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             var currentCompilation = await currentProject
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var editorBrowsableInfo = new Lazy<EditorBrowsableInfo>(
-                () => new EditorBrowsableInfo(currentCompilation)
-            );
+            var editorBrowsableInfo = new Lazy<EditorBrowsableInfo>(() =>
+                new EditorBrowsableInfo(currentCompilation));
 
             var cacheResult = await GetCacheForProjectAsync(
                     currentProject,

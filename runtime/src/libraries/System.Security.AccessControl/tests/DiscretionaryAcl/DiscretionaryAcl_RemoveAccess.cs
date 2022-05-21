@@ -545,26 +545,24 @@ namespace System.Security.AccessControl.Tests
             );
 
             //Case 4, null sid
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    accessControlType = 1;
-                    accessMask = 1;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.RemoveAccess(
-                        (AccessControlType)accessControlType,
-                        null,
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                accessControlType = 1;
+                accessMask = 1;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.RemoveAccess(
+                    (AccessControlType)accessControlType,
+                    null,
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 5, all the ACEs in the Dacl are non-qualified ACE, no remove
 
@@ -587,23 +585,21 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestRemoveAccess(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags,
-                        removePossible
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestRemoveAccess(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags,
+                    removePossible
+                );
+            });
 
             //Case 7, Remove Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
@@ -622,20 +618,18 @@ namespace System.Security.AccessControl.Tests
             rawAcl = new RawAcl(0, 1);
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    discretionaryAcl.RemoveAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                discretionaryAcl.RemoveAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
         }
     }
 }

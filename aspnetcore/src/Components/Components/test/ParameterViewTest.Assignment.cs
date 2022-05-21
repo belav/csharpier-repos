@@ -155,9 +155,8 @@ public partial class ParameterViewTest
         var target = new HasCascadingParameter();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -178,9 +177,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(default, target.IntProp);
@@ -202,9 +200,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(default, target.IntProp);
@@ -241,9 +238,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -263,9 +259,8 @@ public partial class ParameterViewTest
         var parameters = builder.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -341,9 +336,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -373,9 +367,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -397,9 +390,8 @@ public partial class ParameterViewTest
         var parameters = new ParameterViewBuilder().Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -423,9 +415,8 @@ public partial class ParameterViewTest
         var parameters = new ParameterViewBuilder().Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -476,9 +467,8 @@ public partial class ParameterViewTest
         var parameters = builder.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -500,9 +490,8 @@ public partial class ParameterViewTest
         var target = new HasInstanceProperties();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -523,9 +512,8 @@ public partial class ParameterViewTest
         }.Build();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -543,9 +531,8 @@ public partial class ParameterViewTest
         var target = new HasParametersVaryingOnlyByCase();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(
@@ -568,9 +555,8 @@ public partial class ParameterViewTest
         var target = new HasParameterClashingWithInherited();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => parameters.SetParameterProperties(target)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            parameters.SetParameterProperties(target));
 
         // Assert
         Assert.Equal(

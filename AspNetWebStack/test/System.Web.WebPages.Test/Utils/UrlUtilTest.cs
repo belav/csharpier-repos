@@ -13,158 +13,143 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void GenerateClientUrl_ResolvesVirtualPath_WithApplicationAtRoot()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                using (
+                    IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
+                        __ = Utils.CreateHttpRuntime("/")
+                )
                 {
-                    using (
-                        IDisposable _ = Utils.CreateHttpContext(
-                                "default.aspx",
-                                "http://localhost/"
-                            ),
-                            __ = Utils.CreateHttpRuntime("/")
-                    )
-                    {
-                        // Arrange
-                        var vpath = "~/";
-                        var href = "~/world/test.aspx";
-                        var expected = "/world/test.aspx";
-                        var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage { VirtualPath = vpath, Context = context };
+                    // Arrange
+                    var vpath = "~/";
+                    var href = "~/world/test.aspx";
+                    var expected = "/world/test.aspx";
+                    var context = new HttpContextWrapper(HttpContext.Current);
+                    var page = new MockPage { VirtualPath = vpath, Context = context };
 
-                        // Act
-                        var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
-                        var actual2 = page.Href(href);
+                    // Act
+                    var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
+                    var actual2 = page.Href(href);
 
-                        // Assert
-                        Assert.Equal(expected, actual1);
-                        Assert.Equal(expected, actual2);
-                    }
+                    // Assert
+                    Assert.Equal(expected, actual1);
+                    Assert.Equal(expected, actual2);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GenerateClientUrl_ResolvesVirtualPathWithSubfolder_WithApplicationPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/subfolder1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
-                    using (
-                        IDisposable _ = Utils.CreateHttpContext(
-                                "default.aspx",
-                                "http://localhost/WebSite1/subfolder1/default.aspx"
-                            ),
-                            __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    )
-                    {
-                        // Arrange
-                        var vpath = "~/subfolder1/default.aspx";
-                        var href = "~/world/test.aspx";
-                        var expected = "/WebSite1/world/test.aspx";
-                        var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                    // Arrange
+                    var vpath = "~/subfolder1/default.aspx";
+                    var href = "~/world/test.aspx";
+                    var expected = "/WebSite1/world/test.aspx";
+                    var context = new HttpContextWrapper(HttpContext.Current);
+                    var page = new MockPage() { VirtualPath = vpath, Context = context };
 
-                        // Act
-                        var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
-                        var actual2 = page.Href(href);
+                    // Act
+                    var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
+                    var actual2 = page.Href(href);
 
-                        // Assert
-                        Assert.Equal(expected, actual1);
-                        Assert.Equal(expected, actual2);
-                    }
+                    // Assert
+                    Assert.Equal(expected, actual1);
+                    Assert.Equal(expected, actual2);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GenerateClientUrl_ResolvesVirtualPath_WithApplicationPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
-                    using (
-                        IDisposable _ = Utils.CreateHttpContext(
-                                "default.aspx",
-                                "http://localhost/WebSite1/default.aspx"
-                            ),
-                            __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    )
-                    {
-                        // Arrange
-                        var vpath = "~/default.aspx";
-                        var href = "~/world/test.aspx";
-                        var expected = "/WebSite1/world/test.aspx";
-                        var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                    // Arrange
+                    var vpath = "~/default.aspx";
+                    var href = "~/world/test.aspx";
+                    var expected = "/WebSite1/world/test.aspx";
+                    var context = new HttpContextWrapper(HttpContext.Current);
+                    var page = new MockPage() { VirtualPath = vpath, Context = context };
 
-                        // Act
-                        var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
-                        var actual2 = page.Href(href);
+                    // Act
+                    var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
+                    var actual2 = page.Href(href);
 
-                        // Assert
-                        Assert.Equal(expected, actual1);
-                        Assert.Equal(expected, actual2);
-                    }
+                    // Assert
+                    Assert.Equal(expected, actual1);
+                    Assert.Equal(expected, actual2);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GenerateClientUrl_ResolvesRelativePathToSubfolder_WithApplicationPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                using (
+                    IDisposable _ = Utils.CreateHttpContext(
+                            "default.aspx",
+                            "http://localhost/WebSite1/subfolder1/default.aspx"
+                        ),
+                        __ = Utils.CreateHttpRuntime("/WebSite1/")
+                )
                 {
-                    using (
-                        IDisposable _ = Utils.CreateHttpContext(
-                                "default.aspx",
-                                "http://localhost/WebSite1/subfolder1/default.aspx"
-                            ),
-                            __ = Utils.CreateHttpRuntime("/WebSite1/")
-                    )
-                    {
-                        // Arrange
-                        var vpath = "~/subfolder1/default.aspx";
-                        var href = "world/test.aspx";
-                        var expected = "/WebSite1/subfolder1/world/test.aspx";
-                        var context = new HttpContextWrapper(HttpContext.Current);
-                        var page = new MockPage() { VirtualPath = vpath, Context = context };
+                    // Arrange
+                    var vpath = "~/subfolder1/default.aspx";
+                    var href = "world/test.aspx";
+                    var expected = "/WebSite1/subfolder1/world/test.aspx";
+                    var context = new HttpContextWrapper(HttpContext.Current);
+                    var page = new MockPage() { VirtualPath = vpath, Context = context };
 
-                        // Act
-                        var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
-                        var actual2 = page.Href(href);
+                    // Act
+                    var actual1 = UrlUtil.GenerateClientUrl(context, vpath, href);
+                    var actual2 = page.Href(href);
 
-                        // Assert
-                        Assert.Equal(expected, actual1);
-                        Assert.Equal(expected, actual2);
-                    }
+                    // Assert
+                    Assert.Equal(expected, actual1);
+                    Assert.Equal(expected, actual2);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GenerateClientUrl_ResolvesVirtualPath_WithUrlRewrite()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // Arrange
-                    var vpath = "~/subfolder1/default.aspx";
-                    var href = "world/test.aspx";
-                    var expected = "/subfolder1/world/test.aspx";
-                    var contextMock = GetMockHttpContext(true);
-                    contextMock.Setup(c => c.Request.RawUrl).Returns("/subfolder1/default.aspx");
-                    contextMock
-                        .Setup(c => c.Request.Path)
-                        .Returns("/myapp/subfolder1/default.aspx");
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange
+                var vpath = "~/subfolder1/default.aspx";
+                var href = "world/test.aspx";
+                var expected = "/subfolder1/world/test.aspx";
+                var contextMock = GetMockHttpContext(true);
+                contextMock.Setup(c => c.Request.RawUrl).Returns("/subfolder1/default.aspx");
+                contextMock.Setup(c => c.Request.Path).Returns("/myapp/subfolder1/default.aspx");
 
-                    // Act
-                    var actual1 = UrlUtil.GenerateClientUrl(contextMock.Object, vpath, href);
+                // Act
+                var actual1 = UrlUtil.GenerateClientUrl(contextMock.Object, vpath, href);
 
-                    // Assert
-                    Assert.Equal(expected, actual1);
-                }
-            );
+                // Assert
+                Assert.Equal(expected, actual1);
+            });
         }
 
         [Fact]
@@ -282,38 +267,33 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void UrlAnonymousObjectTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                using (
+                    IDisposable _ = Utils.CreateHttpContext("default.aspx", "http://localhost/"),
+                        __ = Utils.CreateHttpRuntime("/")
+                )
                 {
-                    using (
-                        IDisposable _ = Utils.CreateHttpContext(
-                                "default.aspx",
-                                "http://localhost/"
-                            ),
-                            __ = Utils.CreateHttpRuntime("/")
-                    )
-                    {
-                        Assert.Equal(
-                            "/world/test.cshtml?Prop1=value1",
-                            UrlUtil.GenerateClientUrl(
-                                new HttpContextWrapper(HttpContext.Current),
-                                "~/world/page.cshtml",
-                                "test.cshtml",
-                                new { Prop1 = "value1" }
-                            )
-                        );
-                        Assert.Equal(
-                            "/world/test.cshtml?Prop1=value1&Prop2=value2",
-                            UrlUtil.GenerateClientUrl(
-                                new HttpContextWrapper(HttpContext.Current),
-                                "~/world/page.cshtml",
-                                "test.cshtml",
-                                new { Prop1 = "value1", Prop2 = "value2" }
-                            )
-                        );
-                    }
+                    Assert.Equal(
+                        "/world/test.cshtml?Prop1=value1",
+                        UrlUtil.GenerateClientUrl(
+                            new HttpContextWrapper(HttpContext.Current),
+                            "~/world/page.cshtml",
+                            "test.cshtml",
+                            new { Prop1 = "value1" }
+                        )
+                    );
+                    Assert.Equal(
+                        "/world/test.cshtml?Prop1=value1&Prop2=value2",
+                        UrlUtil.GenerateClientUrl(
+                            new HttpContextWrapper(HttpContext.Current),
+                            "~/world/page.cshtml",
+                            "test.cshtml",
+                            new { Prop1 = "value1", Prop2 = "value2" }
+                        )
+                    );
                 }
-            );
+            });
         }
 
         [Fact]

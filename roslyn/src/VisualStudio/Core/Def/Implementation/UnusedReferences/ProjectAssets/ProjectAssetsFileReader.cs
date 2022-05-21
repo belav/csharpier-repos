@@ -20,23 +20,20 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             string projectAssetsFilePath
         )
         {
-            var doesProjectAssetsFileExist = IOUtilities.PerformIO(
-                () => File.Exists(projectAssetsFilePath)
-            );
+            var doesProjectAssetsFileExist = IOUtilities.PerformIO(() =>
+                File.Exists(projectAssetsFilePath));
             if (!doesProjectAssetsFileExist)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
             var projectAssetsFileContents = await IOUtilities
-                .PerformIOAsync(
-                    async () =>
-                    {
-                        using var fileStream = File.OpenRead(projectAssetsFilePath);
-                        using var reader = new StreamReader(fileStream);
-                        return await reader.ReadToEndAsync().ConfigureAwait(false);
-                    }
-                )
+                .PerformIOAsync(async () =>
+                {
+                    using var fileStream = File.OpenRead(projectAssetsFilePath);
+                    using var reader = new StreamReader(fileStream);
+                    return await reader.ReadToEndAsync().ConfigureAwait(false);
+                })
                 .ConfigureAwait(false);
 
             if (projectAssetsFileContents is null)

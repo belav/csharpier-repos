@@ -17,9 +17,8 @@ namespace System.ServiceProcess.Tests
         private const int connectionTimeout = 30000;
         private readonly TestServiceProvider _testService;
 
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
-            () => AdminHelpers.IsProcessElevated()
-        );
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() =>
+            AdminHelpers.IsProcessElevated());
         protected static bool IsProcessElevated => s_isElevated.Value;
 
         private bool _disposed;

@@ -54,13 +54,11 @@ namespace System.Diagnostics.Tests
             if (useBookmark)
             {
                 Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: null));
-                Assert.Throws<EventLogException>(
-                    () =>
-                        new EventLogReader(
-                            query,
-                            bookmark: Helpers.GetBookmark("Application", PathType.LogName)
-                        )
-                );
+                Assert.Throws<EventLogException>(() =>
+                    new EventLogReader(
+                        query,
+                        bookmark: Helpers.GetBookmark("Application", PathType.LogName)
+                    ));
             }
             else
             {
@@ -82,13 +80,11 @@ namespace System.Diagnostics.Tests
             if (useBookmark)
             {
                 Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: null));
-                Assert.Throws<EventLogException>(
-                    () =>
-                        new EventLogReader(
-                            query,
-                            bookmark: Helpers.GetBookmark("Application", PathType.LogName)
-                        )
-                );
+                Assert.Throws<EventLogException>(() =>
+                    new EventLogReader(
+                        query,
+                        bookmark: Helpers.GetBookmark("Application", PathType.LogName)
+                    ));
             }
             else
             {

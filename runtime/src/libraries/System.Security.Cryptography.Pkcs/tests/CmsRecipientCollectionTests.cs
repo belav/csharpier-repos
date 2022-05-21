@@ -70,13 +70,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Twoary_Negative()
         {
             object ignore;
-            Assert.Throws<NullReferenceException>(
-                () =>
-                    ignore = new CmsRecipientCollection(
-                        SubjectIdentifierType.IssuerAndSerialNumber,
-                        null
-                    )
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ignore = new CmsRecipientCollection(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    null
+                ));
         }
 
         [Fact]

@@ -16,9 +16,8 @@ namespace System.IO.Tests
         [Theory, MemberData(nameof(TrailingCharacters))]
         public void GetAttributes_MissingFile(char trailingChar)
         {
-            Assert.Throws<FileNotFoundException>(
-                () => GetAttributes(GetTestFilePath() + trailingChar)
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                GetAttributes(GetTestFilePath() + trailingChar));
         }
 
         // Getting only throws for File, not FileInfo
@@ -35,9 +34,8 @@ namespace System.IO.Tests
         [Theory, MemberData(nameof(TrailingCharacters))]
         public void GetAttributes_MissingDirectory(char trailingChar)
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () => GetAttributes(Path.Combine(GetTestFilePath(), "dir" + trailingChar))
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                GetAttributes(Path.Combine(GetTestFilePath(), "dir" + trailingChar)));
         }
     }
 }

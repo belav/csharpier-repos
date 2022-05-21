@@ -89,13 +89,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 },
                 null
             );
-            var t = Task.Run(
-                () =>
-                {
-                    var socket = TestConnection.CreateConnectedLoopbackSocket(port);
-                    socket.Dispose();
-                }
-            );
+            var t = Task.Run(() =>
+            {
+                var socket = TestConnection.CreateConnectedLoopbackSocket(port);
+                socket.Dispose();
+            });
             loop.Run();
             loop.Dispose();
             await t;
@@ -134,17 +132,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 },
                 null
             );
-            var t = Task.Run(
-                async () =>
-                {
-                    var socket = TestConnection.CreateConnectedLoopbackSocket(port);
-                    await socket.SendAsync(
-                        new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5 }) },
-                        SocketFlags.None
-                    );
-                    socket.Dispose();
-                }
-            );
+            var t = Task.Run(async () =>
+            {
+                var socket = TestConnection.CreateConnectedLoopbackSocket(port);
+                await socket.SendAsync(
+                    new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5 }) },
+                    SocketFlags.None
+                );
+                socket.Dispose();
+            });
             loop.Run();
             loop.Dispose();
             await t;
@@ -196,25 +192,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 },
                 null
             );
-            var t = Task.Run(
-                async () =>
+            var t = Task.Run(async () =>
+            {
+                var socket = TestConnection.CreateConnectedLoopbackSocket(port);
+                await socket.SendAsync(
+                    new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5 }) },
+                    SocketFlags.None
+                );
+                socket.Shutdown(SocketShutdown.Send);
+                var buffer = new ArraySegment<byte>(new byte[2048]);
+                while (true)
                 {
-                    var socket = TestConnection.CreateConnectedLoopbackSocket(port);
-                    await socket.SendAsync(
-                        new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5 }) },
-                        SocketFlags.None
-                    );
-                    socket.Shutdown(SocketShutdown.Send);
-                    var buffer = new ArraySegment<byte>(new byte[2048]);
-                    while (true)
-                    {
-                        var count = await socket.ReceiveAsync(new[] { buffer }, SocketFlags.None);
-                        if (count <= 0)
-                            break;
-                    }
-                    socket.Dispose();
+                    var count = await socket.ReceiveAsync(new[] { buffer }, SocketFlags.None);
+                    if (count <= 0)
+                        break;
                 }
-            );
+                socket.Dispose();
+            });
             loop.Run();
             loop.Dispose();
             await t;

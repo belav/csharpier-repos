@@ -25,34 +25,28 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_FromValueNegative_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new RangeItemHeaderValue(-1, null);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(-1, null);
+            });
         }
 
         [Fact]
         public void Ctor_FromGreaterThanToValue_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new RangeItemHeaderValue(2, 1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(2, 1);
+            });
         }
 
         [Fact]
         public void Ctor_ToValueNegative_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new RangeItemHeaderValue(null, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeItemHeaderValue(null, -1);
+            });
         }
 
         [Fact]
@@ -202,12 +196,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string tag)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new EntityTagHeaderValue(tag);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new EntityTagHeaderValue(tag);
+            });
         }
 
         private static void CheckValidGetRangeItemLength(

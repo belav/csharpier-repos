@@ -51,12 +51,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Same_Constructor_Arguments_Are_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(42, "foo", new[] { 1, 2, 3 })
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(42, "foo", new[] { 1, 2, 3 })
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(42, "foo", new[] { 1, 2, 3 }));
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(42, "foo", new[] { 1, 2, 3 }));
 
             Assert.AreEqual(x, y);
             Assert.AreEqual(x.GetHashCode(), y.GetHashCode());
@@ -65,12 +63,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Different_Type_With_Same_Constructor_Arguments_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(42, "foo", new[] { 1, 2, 3 })
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute2(42, "foo", new[] { 1, 2, 3 })
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(42, "foo", new[] { 1, 2, 3 }));
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute2(42, "foo", new[] { 1, 2, 3 }));
 
             Assert.AreNotEqual(x, y);
         }
@@ -78,12 +74,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Constructor_Arguments_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(42, "foo", new[] { 1, 2, 3 })
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(99, "foo", new[] { 1, 2, 3 })
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(42, "foo", new[] { 1, 2, 3 }));
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(99, "foo", new[] { 1, 2, 3 }));
 
             Assert.AreNotEqual(x, y);
         }
@@ -91,12 +85,10 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Constructor_Array_Arguments_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(42, "foo", new[] { 1, 2, 3 })
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () => new MyAttribute1(99, "foo", new[] { 1, 2, 4 })
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(42, "foo", new[] { 1, 2, 3 }));
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1(99, "foo", new[] { 1, 2, 4 }));
 
             Assert.AreNotEqual(x, y);
         }
@@ -104,24 +96,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Same_Properties_Are_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 42,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 42,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 42,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 42,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 3 }
+                });
 
             Assert.AreEqual(x, y);
             Assert.AreEqual(x.GetHashCode(), y.GetHashCode());
@@ -130,24 +118,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Properties_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 42,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 99,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 42,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 99,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 3 }
+                });
 
             Assert.AreNotEqual(x, y);
         }
@@ -155,24 +139,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Array_Properties_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 42,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        IntProperty = 99,
-                        StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 4 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 42,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    IntProperty = 99,
+                    StringProperty = "foo",
+                    ArrayProperty = new[] { 1, 2, 4 }
+                });
 
             Assert.AreNotEqual(x, y);
         }
@@ -180,24 +160,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Same_Fields_Are_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 42,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 42,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 42,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 42,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 3 }
+                });
 
             Assert.AreEqual(x, y);
             Assert.AreEqual(x.GetHashCode(), y.GetHashCode());
@@ -206,24 +182,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Fields_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 42,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 99,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 42,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 99,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 3 }
+                });
 
             Assert.AreNotEqual(x, y);
         }
@@ -231,24 +203,20 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Attributes_Of_Same_Type_With_Different_Array_Fields_Are_Not_Equal()
         {
-            var x = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 42,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
-                    }
-            );
-            var y = CustomAttributeInfo.FromExpression(
-                () =>
-                    new MyAttribute1
-                    {
-                        intField = 99,
-                        stringField = "foo",
-                        arrayField = new[] { 1, 2, 4 }
-                    }
-            );
+            var x = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 42,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 3 }
+                });
+            var y = CustomAttributeInfo.FromExpression(() =>
+                new MyAttribute1
+                {
+                    intField = 99,
+                    stringField = "foo",
+                    arrayField = new[] { 1, 2, 4 }
+                });
 
             Assert.AreNotEqual(x, y);
         }

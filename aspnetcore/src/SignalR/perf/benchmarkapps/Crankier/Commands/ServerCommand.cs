@@ -34,30 +34,28 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                         CommandOptionType.SingleValue
                     );
 
-                    cmd.OnExecute(
-                        () =>
+                    cmd.OnExecute(() =>
+                    {
+                        LogLevel logLevel = Defaults.LogLevel;
+
+                        if (
+                            logLevelOption.HasValue()
+                            && !Enum.TryParse(logLevelOption.Value(), out logLevel)
+                        )
                         {
-                            LogLevel logLevel = Defaults.LogLevel;
-
-                            if (
-                                logLevelOption.HasValue()
-                                && !Enum.TryParse(logLevelOption.Value(), out logLevel)
-                            )
-                            {
-                                return InvalidArg(logLevelOption);
-                            }
-
-                            if (
-                                azureSignalRConnectionString.HasValue()
-                                && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
-                            )
-                            {
-                                return InvalidArg(azureSignalRConnectionString);
-                            }
-
-                            return Execute(logLevel, azureSignalRConnectionString.Value());
+                            return InvalidArg(logLevelOption);
                         }
-                    );
+
+                        if (
+                            azureSignalRConnectionString.HasValue()
+                            && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
+                        )
+                        {
+                            return InvalidArg(azureSignalRConnectionString);
+                        }
+
+                        return Execute(logLevel, azureSignalRConnectionString.Value());
+                    });
                 }
             );
         }

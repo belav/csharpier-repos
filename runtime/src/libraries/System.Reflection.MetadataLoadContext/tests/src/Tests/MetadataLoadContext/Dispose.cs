@@ -56,17 +56,14 @@ namespace System.Reflection.Tests
             );
             lc.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => lc.LoadFromAssemblyName(new AssemblyName("Foo"))
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromAssemblyName(new AssemblyName("Foo")));
             Assert.Throws<ObjectDisposedException>(() => lc.LoadFromAssemblyName("Foo"));
             Assert.Throws<ObjectDisposedException>(() => lc.LoadFromAssemblyPath("Foo"));
-            Assert.Throws<ObjectDisposedException>(
-                () => lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => lc.LoadFromStream(new MemoryStream(TestData.s_SimpleAssemblyImage))
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage));
+            Assert.Throws<ObjectDisposedException>(() =>
+                lc.LoadFromStream(new MemoryStream(TestData.s_SimpleAssemblyImage)));
             Assert.Throws<ObjectDisposedException>(() => lc.CoreAssembly);
             Assert.Throws<ObjectDisposedException>(() => lc.GetAssemblies());
         }

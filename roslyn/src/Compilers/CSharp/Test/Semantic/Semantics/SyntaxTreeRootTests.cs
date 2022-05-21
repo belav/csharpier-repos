@@ -77,21 +77,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
                 SyntaxFactory.Attribute(SyntaxFactory.IdentifierName("Wooh"))
             );
             var parsedTree = SyntaxFactory.ParseSyntaxTree("");
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.Create("Grrr", syntaxTrees: new[] { arbitraryTree })
-            );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.CreateScriptCompilation("Wah").AddSyntaxTrees(arbitraryTree)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CSharpCompilation
-                        .Create("Bahh", syntaxTrees: new[] { parsedTree })
-                        .ReplaceSyntaxTree(parsedTree, arbitraryTree)
-            );
-            Assert.Throws<ArgumentException>(
-                () => CSharpCompilation.Create("Woo").GetSemanticModel(arbitraryTree)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.Create("Grrr", syntaxTrees: new[] { arbitraryTree }));
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.CreateScriptCompilation("Wah").AddSyntaxTrees(arbitraryTree));
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation
+                    .Create("Bahh", syntaxTrees: new[] { parsedTree })
+                    .ReplaceSyntaxTree(parsedTree, arbitraryTree));
+            Assert.Throws<ArgumentException>(() =>
+                CSharpCompilation.Create("Woo").GetSemanticModel(arbitraryTree));
         }
 
         [Fact]
@@ -166,36 +161,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
 
         private void CheckTree(SyntaxTree tree)
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    var _ = (CSharpSyntaxTree)(Object)tree.GetCompilationUnitRoot();
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    tree.GetDiagnostics((CSharpSyntaxNode)null);
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    tree.GetDiagnostics(default(SyntaxToken));
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    tree.GetDiagnostics((SyntaxNode)null);
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    tree.GetDiagnostics(default(SyntaxTrivia));
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                var _ = (CSharpSyntaxTree)(Object)tree.GetCompilationUnitRoot();
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                tree.GetDiagnostics((CSharpSyntaxNode)null);
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                tree.GetDiagnostics(default(SyntaxToken));
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                tree.GetDiagnostics((SyntaxNode)null);
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                tree.GetDiagnostics(default(SyntaxTrivia));
+            });
         }
     }
 }

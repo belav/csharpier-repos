@@ -73,12 +73,10 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder module = Helpers.DynamicModule();
             SignatureHelper helper = SignatureHelper.GetFieldSigHelper(module);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    helper.AddArguments(new Type[] { typeof(char), null }, null, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                helper.AddArguments(new Type[] { typeof(char), null }, null, null);
+            });
         }
 
         [Fact]

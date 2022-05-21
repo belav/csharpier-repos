@@ -74,28 +74,26 @@ public class Program
 
                     command.HelpOption();
 
-                    command.OnExecute(
-                        () =>
+                    command.OnExecute(() =>
+                    {
+                        var reporter = CreateReporter(verbose.HasValue());
+                        if (
+                            string.IsNullOrEmpty(connectionStringArg.Value)
+                            || string.IsNullOrEmpty(schemaNameArg.Value)
+                            || string.IsNullOrEmpty(tableNameArg.Value)
+                        )
                         {
-                            var reporter = CreateReporter(verbose.HasValue());
-                            if (
-                                string.IsNullOrEmpty(connectionStringArg.Value)
-                                || string.IsNullOrEmpty(schemaNameArg.Value)
-                                || string.IsNullOrEmpty(tableNameArg.Value)
-                            )
-                            {
-                                reporter.Error("Invalid input");
-                                command.ShowHelp();
-                                return 2;
-                            }
-
-                            _connectionString = connectionStringArg.Value;
-                            _schemaName = schemaNameArg.Value;
-                            _tableName = tableNameArg.Value;
-
-                            return CreateTableAndIndexes(reporter);
+                            reporter.Error("Invalid input");
+                            command.ShowHelp();
+                            return 2;
                         }
-                    );
+
+                        _connectionString = connectionStringArg.Value;
+                        _schemaName = schemaNameArg.Value;
+                        _tableName = tableNameArg.Value;
+
+                        return CreateTableAndIndexes(reporter);
+                    });
                 }
             );
 
@@ -129,42 +127,38 @@ public class Program
 
                     command.HelpOption();
 
-                    command.OnExecute(
-                        () =>
+                    command.OnExecute(() =>
+                    {
+                        var reporter = CreateReporter(verbose.HasValue());
+                        if (
+                            string.IsNullOrEmpty(schemaNameArg.Value)
+                            || string.IsNullOrEmpty(tableNameArg.Value)
+                        )
                         {
-                            var reporter = CreateReporter(verbose.HasValue());
-                            if (
-                                string.IsNullOrEmpty(schemaNameArg.Value)
-                                || string.IsNullOrEmpty(tableNameArg.Value)
-                            )
-                            {
-                                reporter.Error("Invalid input");
-                                command.ShowHelp();
-                                return 2;
-                            }
-
-                            _schemaName = schemaNameArg.Value;
-                            _tableName = tableNameArg.Value;
-                            _idempotent = idempotentOption.HasValue();
-                            if (outputOption.HasValue())
-                            {
-                                _outputPath = outputOption.Value();
-                            }
-
-                            return ScriptTableAndIndexes(reporter);
+                            reporter.Error("Invalid input");
+                            command.ShowHelp();
+                            return 2;
                         }
-                    );
+
+                        _schemaName = schemaNameArg.Value;
+                        _tableName = tableNameArg.Value;
+                        _idempotent = idempotentOption.HasValue();
+                        if (outputOption.HasValue())
+                        {
+                            _outputPath = outputOption.Value();
+                        }
+
+                        return ScriptTableAndIndexes(reporter);
+                    });
                 }
             );
 
             // Show help information if no subcommand/option was specified.
-            app.OnExecute(
-                () =>
-                {
-                    app.ShowHelp();
-                    return 2;
-                }
-            );
+            app.OnExecute(() =>
+            {
+                app.ShowHelp();
+                return 2;
+            });
 
             return app.Execute(args);
         }

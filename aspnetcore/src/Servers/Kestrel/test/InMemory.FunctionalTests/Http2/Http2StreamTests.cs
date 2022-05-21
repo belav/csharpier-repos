@@ -1259,14 +1259,11 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                thrownEx = await Assert.ThrowsAsync<IOException>(
-                    async () =>
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                thrownEx = await Assert.ThrowsAsync<IOException>(async () =>
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
             }
         );
 
@@ -1307,14 +1304,11 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                thrownEx = await Assert.ThrowsAsync<IOException>(
-                    async () =>
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                thrownEx = await Assert.ThrowsAsync<IOException>(async () =>
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
             }
         );
 
@@ -1355,14 +1349,11 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                thrownEx = await Assert.ThrowsAsync<IOException>(
-                    async () =>
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                thrownEx = await Assert.ThrowsAsync<IOException>(async () =>
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
             }
         );
 
@@ -1404,14 +1395,11 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                thrownEx = await Assert.ThrowsAsync<IOException>(
-                    async () =>
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                thrownEx = await Assert.ThrowsAsync<IOException>(async () =>
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
             }
         );
 
@@ -1734,9 +1722,8 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 await context.Response.StartAsync();
-                ex = Assert.Throws<InvalidOperationException>(
-                    () => context.Response.OnStarting(_ => Task.CompletedTask, null)
-                );
+                ex = Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.OnStarting(_ => Task.CompletedTask, null));
             }
         );
 
@@ -2189,15 +2176,12 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () =>
+                exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
                 ExceptionDispatchInfo.Capture(exception).Throw();
             }
         );
@@ -2295,15 +2279,12 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () =>
+                exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
                 ExceptionDispatchInfo.Capture(exception).Throw();
             }
         );
@@ -2370,15 +2351,12 @@ public class Http2StreamTests : Http2TestBase
                 Assert.False(context.Features.Get<IHttpMaxRequestBodySizeFeature>().IsReadOnly);
                 context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = 17;
 #pragma warning disable CS0618 // Type or member is obsolete
-                exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    async () =>
+                exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    {
-                        var buffer = new byte[100];
-                        while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0)
-                        { }
-                    }
-                );
+                {
+                    var buffer = new byte[100];
+                    while (await context.Request.Body.ReadAsync(buffer, 0, buffer.Length) > 0) { }
+                });
                 Assert.True(context.Features.Get<IHttpMaxRequestBodySizeFeature>().IsReadOnly);
                 ExceptionDispatchInfo.Capture(exception).Throw();
             }
@@ -2480,18 +2458,14 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.ContentType = "Custom 你好 Type"
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom 你好 Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.ContentType = "Custom 你好 Type");
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom 你好 Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom \r Value"));
                 await context.Response.WriteAsync("Hello World");
             }
         );
@@ -2537,12 +2511,10 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(
             async context =>
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom \r Value"));
                 context.Response.ContentType = "Custom 你好 Type";
                 context.Response.Headers.Append("CustomName", "Custom 你好 Value");
                 await context.Response.WriteAsync("Hello World");
@@ -2893,26 +2865,19 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 await context.Response.WriteAsync("Hello World");
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom 你好 Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom 你好 Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom \r Value"));
                 // ETag is one of the few special cased trailers. Accept is not.
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
-                            "Custom 你好 Tag"
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
-                            "Custom 你好 Tag"
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
+                        "Custom 你好 Tag");
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
+                        "Custom 你好 Tag");
             }
         );
 
@@ -2958,12 +2923,10 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 await context.Response.WriteAsync("Hello World");
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom \r Value"));
                 context.Response.AppendTrailer("CustomName", "Custom 你好 Value");
                 // ETag is one of the few special cased trailers. Accept is not.
                 context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
@@ -3367,17 +3330,15 @@ public class Http2StreamTests : Http2TestBase
                 var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
                 var sem = new SemaphoreSlim(0);
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamIdFeature.StreamId);
-                        }
-
-                        sem.Release();
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
                     }
-                );
+
+                    sem.Release();
+                });
 
                 await sem.WaitAsync().DefaultTimeout();
 
@@ -3404,17 +3365,15 @@ public class Http2StreamTests : Http2TestBase
                 var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
                 var sem = new SemaphoreSlim(0);
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamIdFeature.StreamId);
-                        }
-
-                        sem.Release();
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
                     }
-                );
+
+                    sem.Release();
+                });
 
                 await sem.WaitAsync().DefaultTimeout();
 
@@ -3544,17 +3503,15 @@ public class Http2StreamTests : Http2TestBase
 
                 try
                 {
-                    context.RequestAborted.Register(
-                        () =>
+                    context.RequestAborted.Register(() =>
+                    {
+                        lock (_abortedStreamIdsLock)
                         {
-                            lock (_abortedStreamIdsLock)
-                            {
-                                _abortedStreamIds.Add(streamIdFeature.StreamId);
-                            }
-
-                            _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
                         }
-                    );
+
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                     context.Abort();
 
@@ -3592,17 +3549,15 @@ public class Http2StreamTests : Http2TestBase
 
                 try
                 {
-                    context.RequestAborted.Register(
-                        () =>
+                    context.RequestAborted.Register(() =>
+                    {
+                        lock (_abortedStreamIdsLock)
                         {
-                            lock (_abortedStreamIdsLock)
-                            {
-                                _abortedStreamIds.Add(streamIdFeature.StreamId);
-                            }
-
-                            _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
                         }
-                    );
+
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                     await context.Response.Body.WriteAsync(new byte[10], 0, 10);
 
@@ -3652,9 +3607,8 @@ public class Http2StreamTests : Http2TestBase
                 context.Abort();
 
                 var buffer = new byte[100];
-                var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
-                );
+                var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    context.Request.Body.ReadAsync(buffer, 0, buffer.Length));
 
                 Assert.True(thrownExTask.IsCompleted);
 
@@ -3685,9 +3639,8 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 var buffer = new byte[100];
-                var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => context.Request.Body.ReadAsync(buffer, 0, buffer.Length)
-                );
+                var thrownExTask = Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    context.Request.Body.ReadAsync(buffer, 0, buffer.Length));
 
                 Assert.False(thrownExTask.IsCompleted);
 
@@ -3789,9 +3742,8 @@ public class Http2StreamTests : Http2TestBase
                     (int)Http2PeerSettings.DefaultMaxFrameSize
                 );
                 var ex = await Assert
-                    .ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.WriteAsync("Hello World")
-                    )
+                    .ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.WriteAsync("Hello World"))
                     .DefaultTimeout();
                 appFinished.TrySetResult(ex.InnerException.Message);
             }
@@ -3833,9 +3785,8 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 // The cancellation is checked at the start of WriteAsync and no application state is changed.
-                await Assert.ThrowsAsync<OperationCanceledException>(
-                    () => context.Response.WriteAsync("hello,", new CancellationToken(true))
-                );
+                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                    context.Response.WriteAsync("hello,", new CancellationToken(true)));
                 Assert.False(context.Response.HasStarted);
             }
         );
@@ -4766,9 +4717,8 @@ public class Http2StreamTests : Http2TestBase
             async context =>
             {
                 context.Response.BodyWriter.Complete();
-                writeEx = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => context.Response.WriteAsync("")
-                );
+                writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.Response.WriteAsync(""));
             }
         );
 
@@ -4863,13 +4813,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await context.Response.CompleteAsync().DefaultTimeout();
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4936,13 +4884,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
                     await context.Response.CompleteAsync().DefaultTimeout();
@@ -5022,20 +4968,17 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     context.Response.ContentLength = 25;
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.CompleteAsync().DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.CompleteAsync().DefaultTimeout());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully);
@@ -5099,13 +5042,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5187,13 +5128,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await context.Response.CompleteAsync().DefaultTimeout();
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5202,9 +5141,8 @@ public class Http2StreamTests : Http2TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.WriteAsync("2 Hello World").DefaultTimeout());
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -5265,13 +5203,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World").DefaultTimeout();
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5283,9 +5219,8 @@ public class Http2StreamTests : Http2TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.WriteAsync("2 Hello World").DefaultTimeout());
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -5409,13 +5344,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     var buffer = context.Response.BodyWriter.GetMemory();
                     var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
@@ -5512,13 +5445,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5610,13 +5541,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     context.Response.ContentLength = 25;
                     await context.Response.WriteAsync("Hello World");
@@ -5625,9 +5554,8 @@ public class Http2StreamTests : Http2TestBase
 
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.CompleteAsync().DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.CompleteAsync().DefaultTimeout());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
                     Assert.False(
@@ -5706,13 +5634,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     context.Response.ContentLength = 25;
                     await context.Response.WriteAsync("Hello World");
@@ -5721,9 +5647,8 @@ public class Http2StreamTests : Http2TestBase
 
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.BodyWriter.Complete()
-                    );
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.BodyWriter.Complete());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
                     Assert.False(
@@ -5801,13 +5726,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5906,13 +5829,11 @@ public class Http2StreamTests : Http2TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5930,12 +5851,10 @@ public class Http2StreamTests : Http2TestBase
                     Assert.False(context.RequestAborted.CanBeCanceled);
                     context.Abort();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () => await requestBodyTask
-                    );
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(
-                        async () => await context.Request.BodyReader.ReadAsync()
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                        await requestBodyTask);
+                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                        await context.Request.BodyReader.ReadAsync());
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                     await clientTcs.Task.DefaultTimeout();
@@ -6016,13 +5935,11 @@ public class Http2StreamTests : Http2TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -6127,13 +6044,11 @@ public class Http2StreamTests : Http2TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    context.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -6153,12 +6068,10 @@ public class Http2StreamTests : Http2TestBase
                     Assert.NotNull(resetFeature);
                     resetFeature.Reset((int)Http2ErrorCode.NO_ERROR);
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () => await requestBodyTask
-                    );
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(
-                        async () => await context.Request.BodyReader.ReadAsync()
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                        await requestBodyTask);
+                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                        await context.Request.BodyReader.ReadAsync());
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                     await clientTcs.Task.DefaultTimeout();

@@ -194,12 +194,10 @@ namespace System.Web.WebPages.Razor.Test
             provider.Host = host;
 
             // Act
-            Assert.Throws<HttpParseException>(
-                () =>
-                {
-                    CodeCompileUnit ccu = provider.GeneratedCode;
-                }
-            );
+            Assert.Throws<HttpParseException>(() =>
+            {
+                CodeCompileUnit ccu = provider.GeneratedCode;
+            });
         }
 
         [Fact]

@@ -155,9 +155,8 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(
-                    () => FileSystem.Dir(TestDirectory, FileAttribute.Volume)
-                );
+                AssertThrows<PlatformNotSupportedException>(() =>
+                    FileSystem.Dir(TestDirectory, FileAttribute.Volume));
             }
         }
 
@@ -410,9 +409,8 @@ namespace Microsoft.VisualBasic.Tests
             // OpenMode.Input:
             fileNumber = FileSystem.FreeFile();
             fileName = GetTestFilePath();
-            AssertThrows<System.IO.FileNotFoundException>(
-                () => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input)
-            );
+            AssertThrows<System.IO.FileNotFoundException>(() =>
+                FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input));
             System.IO.File.WriteAllText(fileName, "abc123");
             FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input);
             FileSystem.FileClose(fileNumber);
@@ -433,15 +431,13 @@ namespace Microsoft.VisualBasic.Tests
             fileNumber = FileSystem.FreeFile();
             fileName = GetTestFilePath();
             FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append);
-            AssertThrows<System.IO.IOException>(
-                () => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append)
-            );
+            AssertThrows<System.IO.IOException>(() =>
+                FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append));
             FileSystem.FileClose(fileNumber);
 
             // Open an invalid fileNumber.
-            AssertThrows<System.IO.IOException>(
-                () => FileSystem.FileOpen(256, GetTestFilePath(), OpenMode.Append)
-            );
+            AssertThrows<System.IO.IOException>(() =>
+                FileSystem.FileOpen(256, GetTestFilePath(), OpenMode.Append));
         }
 
         // Not tested:
@@ -706,9 +702,8 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(
-                    () => FileSystem.Rename(sourceName, destName)
-                );
+                AssertThrows<PlatformNotSupportedException>(() =>
+                    FileSystem.Rename(sourceName, destName));
                 Assert.True(System.IO.File.Exists(sourceName));
                 Assert.False(System.IO.File.Exists(destName));
                 Assert.Equal("abc", System.IO.File.ReadAllText(sourceName));
@@ -725,9 +720,8 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(
-                    () => FileSystem.Rename(sourceName, destName)
-                );
+                AssertThrows<PlatformNotSupportedException>(() =>
+                    FileSystem.Rename(sourceName, destName));
             }
             Assert.True(System.IO.File.Exists(sourceName));
             Assert.True(System.IO.File.Exists(destName));

@@ -473,16 +473,14 @@ namespace System.Net.WebSockets
             try
             {
                 using (
-                    var receiveRegistration = cancellationToken.Register(
-                        () =>
+                    var receiveRegistration = cancellationToken.Register(() =>
+                    {
+                        // this check makes sure that promiseJSHandle is still valid handle
+                        if (!jsTask.IsCompleted)
                         {
-                            // this check makes sure that promiseJSHandle is still valid handle
-                            if (!jsTask.IsCompleted)
-                            {
-                                JavaScript.Runtime.CancelPromise(promiseJSHandle);
-                            }
+                            JavaScript.Runtime.CancelPromise(promiseJSHandle);
                         }
-                    )
+                    })
                 )
                 {
                     return await jsTask.ConfigureAwait(true);

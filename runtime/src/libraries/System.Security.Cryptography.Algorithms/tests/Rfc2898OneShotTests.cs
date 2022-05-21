@@ -99,16 +99,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Pbkdf2_PasswordBytes_BogusHash()
         {
-            Assert.Throws<CryptographicException>(
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName("BLAH"),
-                        s_extractLength
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName("BLAH"),
+                    s_extractLength
+                ));
         }
 
         [Fact]
@@ -224,16 +222,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Pbkdf2_PasswordString_BogusHash()
         {
-            Assert.Throws<CryptographicException>(
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName("BLAH"),
-                        s_extractLength
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName("BLAH"),
+                    s_extractLength
+                ));
         }
 
         [Fact]
@@ -271,16 +267,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Pbkdf2_PasswordString_InvalidUtf8()
         {
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        "\uD800",
-                        s_salt,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
-            );
+            Assert.Throws<EncoderFallbackException>(() =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    "\uD800",
+                    s_salt,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                ));
         }
 
         [Fact]

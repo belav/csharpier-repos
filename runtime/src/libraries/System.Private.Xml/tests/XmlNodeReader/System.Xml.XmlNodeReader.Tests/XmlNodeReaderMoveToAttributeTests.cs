@@ -70,12 +70,10 @@ namespace System.Xml.Tests
             var nodeReader = new XmlNodeReader(xmlDoc);
             Assert.False(nodeReader.MoveToAttribute(string.Empty));
             Assert.False(nodeReader.MoveToAttribute(string.Empty, string.Empty));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    nodeReader.MoveToAttribute(0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                nodeReader.MoveToAttribute(0);
+            });
         }
 
         [Fact]
@@ -85,12 +83,10 @@ namespace System.Xml.Tests
             Assert.True(nodeReader.Read());
             Assert.False(nodeReader.MoveToAttribute(string.Empty));
             Assert.False(nodeReader.MoveToAttribute(string.Empty, null));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    nodeReader.MoveToAttribute(0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                nodeReader.MoveToAttribute(0);
+            });
         }
 
         [Fact]

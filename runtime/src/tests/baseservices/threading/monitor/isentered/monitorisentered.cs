@@ -102,17 +102,15 @@ public static class MonitorIsHeldTest
         ManualResetEventSlim lockHeldEvent = new ManualResetEventSlim();
         ManualResetEventSlim releaseLockEvent = new ManualResetEventSlim();
 
-        Task otherThread = Task.Factory.StartNew(
-            () =>
+        Task otherThread = Task.Factory.StartNew(() =>
+        {
+            lock (obj)
             {
-                lock (obj)
-                {
-                    Contract.Assert(Monitor.IsEntered(obj));
-                    lockHeldEvent.Set();
-                    releaseLockEvent.Wait();
-                }
+                Contract.Assert(Monitor.IsEntered(obj));
+                lockHeldEvent.Set();
+                releaseLockEvent.Wait();
             }
-        );
+        });
 
         lockHeldEvent.Wait();
 

@@ -246,15 +246,13 @@ namespace System.Net.Http.Internal
             HttpValueCollection collection = CreateInstance();
 
             // Act && Assert
-            Assert.DoesNotThrow(
-                () =>
+            Assert.DoesNotThrow(() =>
+            {
+                for (int i = 0; i < 1001; i++)
                 {
-                    for (int i = 0; i < 1001; i++)
-                    {
-                        collection.Add("key", i.ToString());
-                    }
+                    collection.Add("key", i.ToString());
                 }
-            );
+            });
         }
 #endif
 

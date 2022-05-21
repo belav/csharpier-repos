@@ -133,21 +133,16 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<InvalidOperationException>(() => listener.AcceptSocket());
             Assert.Throws<InvalidOperationException>(() => listener.AcceptTcpClient());
             Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptSocket(null, null));
-            Assert.Throws<InvalidOperationException>(
-                () => listener.BeginAcceptTcpClient(null, null)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    listener.AcceptSocketAsync();
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    listener.AcceptTcpClientAsync();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                listener.BeginAcceptTcpClient(null, null));
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                listener.AcceptSocketAsync();
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                listener.AcceptTcpClientAsync();
+            });
 
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptSocket(null));
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptTcpClient(null));

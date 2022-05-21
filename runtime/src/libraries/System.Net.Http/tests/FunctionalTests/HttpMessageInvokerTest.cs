@@ -23,12 +23,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var invoker = new HttpMessageInvoker(new MockHandler()))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task t = invoker.SendAsync(null, CancellationToken.None);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task t = invoker.SendAsync(null, CancellationToken.None);
+                });
             }
         }
 
@@ -58,12 +56,10 @@ namespace System.Net.Http.Functional.Tests
             invoker.Dispose();
             Assert.Equal(1, handler.DisposeCount);
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
             Assert.Equal(0, handler.SendAsyncCount);
 
             handler = new MockHandler();
@@ -72,12 +68,10 @@ namespace System.Net.Http.Functional.Tests
             invoker.Dispose();
             Assert.Equal(1, handler.DisposeCount);
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
             Assert.Equal(0, handler.SendAsyncCount);
         }
 
@@ -90,12 +84,10 @@ namespace System.Net.Http.Functional.Tests
             invoker.Dispose();
             Assert.Equal(0, handler.DisposeCount);
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            });
             Assert.Equal(0, handler.SendAsyncCount);
         }
 

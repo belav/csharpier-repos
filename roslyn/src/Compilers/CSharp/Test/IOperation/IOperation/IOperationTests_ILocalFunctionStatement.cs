@@ -2033,18 +2033,14 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphD1, graphD2.Parent);
 
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(localFunctionD2)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(localFunctionD2)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(localFunctionD2));
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(localFunctionD2));
 
             IMethodSymbol getLocalFunction(ControlFlowGraph graph)
             {
@@ -2101,9 +2097,8 @@ struct C
             );
             Assert.Same(graphD1, graphD1_FromExtension);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphD2.GetLocalFunctionControlFlowGraph(localFunctionD1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphD2.GetLocalFunctionControlFlowGraph(localFunctionD1));
             graphD1_FromExtension = graphD2.GetLocalFunctionControlFlowGraphInScope(
                 localFunctionD1
             );

@@ -198,32 +198,30 @@ namespace System.IO.Tests
             {
                 Assert.InRange(paths.Length, 1, 5);
 
-                Assert.Throws<T>(
-                    () =>
+                Assert.Throws<T>(() =>
+                {
+                    switch (paths.Length)
                     {
-                        switch (paths.Length)
-                        {
-                            case 0:
-                                Path.Combine();
-                                break;
-                            case 1:
-                                Path.Combine(paths[0]);
-                                break;
-                            case 2:
-                                Path.Combine(paths[0], paths[1]);
-                                break;
-                            case 3:
-                                Path.Combine(paths[0], paths[1], paths[2]);
-                                break;
-                            case 4:
-                                Path.Combine(paths[0], paths[1], paths[2], paths[3]);
-                                break;
-                            case 5:
-                                Path.Combine(paths[0], paths[1], paths[2], paths[3], paths[4]);
-                                break;
-                        }
+                        case 0:
+                            Path.Combine();
+                            break;
+                        case 1:
+                            Path.Combine(paths[0]);
+                            break;
+                        case 2:
+                            Path.Combine(paths[0], paths[1]);
+                            break;
+                        case 3:
+                            Path.Combine(paths[0], paths[1], paths[2]);
+                            break;
+                        case 4:
+                            Path.Combine(paths[0], paths[1], paths[2], paths[3]);
+                            break;
+                        case 5:
+                            Path.Combine(paths[0], paths[1], paths[2], paths[3], paths[4]);
+                            break;
                     }
-                );
+                });
             }
         }
 

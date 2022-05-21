@@ -83,12 +83,10 @@ namespace System.Net.Security.Tests
                     new SslApplicationProtocol(new string('a', 256));
                 }
             );
-            Assert.Throws<EncoderFallbackException>(
-                () =>
-                {
-                    new SslApplicationProtocol("\uDC00");
-                }
-            );
+            Assert.Throws<EncoderFallbackException>(() =>
+            {
+                new SslApplicationProtocol("\uDC00");
+            });
         }
 
         [Fact]

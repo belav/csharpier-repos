@@ -216,9 +216,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 new Oid("1.2.3.4", "1.2.3.4"),
                 cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData
             );
-            Assert.Throws<CryptographicException>(
-                () => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -236,9 +235,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 cms.SignerInfos[0].UnsignedAttributes[0].Oid,
                 cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray()
             );
-            Assert.Throws<CryptographicException>(
-                () => cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                cms.SignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -344,10 +342,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 cms.SignerInfos[0].UnsignedAttributes[0].Oid,
                 cms.SignerInfos[0].UnsignedAttributes[0].Values[0].RawData.Skip(1).ToArray()
             );
-            Assert.Throws<CryptographicException>(
-                () =>
-                    cms.SignerInfos[0].CounterSignerInfos[0].RemoveUnsignedAttribute(fakeAttribute)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                cms.SignerInfos[0].CounterSignerInfos[0].RemoveUnsignedAttribute(fakeAttribute));
 
             Assert.Equal(numberOfAttributes, cms.SignerInfos[0].UnsignedAttributes.Count);
         }
@@ -520,12 +516,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(0, counterSigner.UnsignedAttributes.Count);
 
             AsnEncodedData attribute = CreateTimestampToken(1);
-            Assert.Throws<CryptographicException>(
-                () => counterSigner.AddUnsignedAttribute(attribute)
-            );
-            Assert.Throws<CryptographicException>(
-                () => counterSigner.RemoveUnsignedAttribute(attribute)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                counterSigner.AddUnsignedAttribute(attribute));
+            Assert.Throws<CryptographicException>(() =>
+                counterSigner.RemoveUnsignedAttribute(attribute));
         }
 
         [Fact]
@@ -542,12 +536,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(0, counterSigner.UnsignedAttributes.Count);
 
             AsnEncodedData attribute = CreateTimestampToken(1);
-            Assert.Throws<CryptographicException>(
-                () => counterSigner.AddUnsignedAttribute(attribute)
-            );
-            Assert.Throws<CryptographicException>(
-                () => counterSigner.RemoveUnsignedAttribute(attribute)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                counterSigner.AddUnsignedAttribute(attribute));
+            Assert.Throws<CryptographicException>(() =>
+                counterSigner.RemoveUnsignedAttribute(attribute));
         }
 
         private static void VerifyAttributesContainsAll(

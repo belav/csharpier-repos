@@ -234,17 +234,15 @@ namespace TestNamespace
                     "options"
                 ),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            generator.GenerateModel(
-                                new Model(),
-                                new ModelCodeGenerationOptions
-                                {
-                                    ContextName = null,
-                                    ConnectionString = "Initial Catalog=TestDatabase"
-                                }
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        generator.GenerateModel(
+                            new Model(),
+                            new ModelCodeGenerationOptions
+                            {
+                                ContextName = null,
+                                ConnectionString = "Initial Catalog=TestDatabase"
+                            }
+                        ))
                     .Message
             );
 
@@ -254,17 +252,15 @@ namespace TestNamespace
                     "options"
                 ),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                            generator.GenerateModel(
-                                new Model(),
-                                new ModelCodeGenerationOptions
-                                {
-                                    ContextName = "TestDbContext",
-                                    ConnectionString = null
-                                }
-                            )
-                    )
+                    .Throws<ArgumentException>(() =>
+                        generator.GenerateModel(
+                            new Model(),
+                            new ModelCodeGenerationOptions
+                            {
+                                ContextName = "TestDbContext",
+                                ConnectionString = null
+                            }
+                        ))
                     .Message
             );
         }
@@ -1319,25 +1315,24 @@ namespace TestNamespace
                     "PeriodStart"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            Test(
-                                modelBuilder =>
-                                    modelBuilder.Entity(
-                                        "Customer",
-                                        e =>
-                                        {
-                                            e.Property<int>("Id");
-                                            e.Property<string>("Name");
-                                            e.HasKey("Id");
-                                            e.ToTable(tb => tb.IsTemporal());
-                                        }
-                                    ),
-                                new ModelCodeGenerationOptions { UseDataAnnotations = false },
-                                code =>
-                                {
-                                    AssertFileContents(
-                                        @"using System;
+                    .Throws<InvalidOperationException>(() =>
+                        Test(
+                            modelBuilder =>
+                                modelBuilder.Entity(
+                                    "Customer",
+                                    e =>
+                                    {
+                                        e.Property<int>("Id");
+                                        e.Property<string>("Name");
+                                        e.HasKey("Id");
+                                        e.ToTable(tb => tb.IsTemporal());
+                                    }
+                                ),
+                            new ModelCodeGenerationOptions { UseDataAnnotations = false },
+                            code =>
+                            {
+                                AssertFileContents(
+                                    @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -1362,8 +1357,8 @@ namespace TestNamespace
             if (!optionsBuilder.IsConfigured)
             {
 #warning "
-                                            + DesignStrings.SensitiveInformationWarning
-                                            + @"
+                                        + DesignStrings.SensitiveInformationWarning
+                                        + @"
                 optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
             }
         }
@@ -1393,15 +1388,14 @@ namespace TestNamespace
     }
 }
 ",
-                                        code.ContextFile
-                                    );
-                                },
-                                model =>
-                                {
-                                    // TODO
-                                }
-                            )
-                    )
+                                    code.ContextFile
+                                );
+                            },
+                            model =>
+                            {
+                                // TODO
+                            }
+                        ))
                     .Message
             );
         }

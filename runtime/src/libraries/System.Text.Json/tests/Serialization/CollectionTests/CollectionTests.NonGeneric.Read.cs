@@ -26,12 +26,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // No way to populate this collection.
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Deserialize<GenericIEnumerableWrapper<WrapperForIEnumerable>>(
-                        @"[[1,2],[3,4]]"
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<GenericIEnumerableWrapper<WrapperForIEnumerable>>(
+                    @"[[1,2],[3,4]]"
+                ));
         }
 
         [Fact]
@@ -188,9 +186,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadClassWithStructIListWrapper_NullJson_Throws()
         {
             string json = @"{ ""List"" : null }";
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ClassWithStructIListWrapper>(json)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithStructIListWrapper>(json));
         }
 
         [Fact]
@@ -221,9 +218,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadClassWithStructIDictionaryWrapper_NullJson_Throws()
         {
             string json = @"{ ""Dictionary"" : null }";
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ClassWithStructIDictionaryWrapper>(json)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ClassWithStructIDictionaryWrapper>(json));
         }
 
         [Fact]
@@ -273,12 +269,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // No way to populate this collection.
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Deserialize<GenericICollectionWrapper<WrapperForICollection>>(
-                        @"[[1,2],[3,4]]"
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<GenericICollectionWrapper<WrapperForICollection>>(
+                    @"[[1,2],[3,4]]"
+                ));
         }
 
         [Fact]
@@ -625,9 +619,8 @@ namespace System.Text.Json.Serialization.Tests
             Type exceptionMessageType
         )
         {
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize(json, type)
-            );
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize(json, type));
             Assert.Contains(exceptionMessageType.ToString(), ex.Message);
         }
 
@@ -661,9 +654,8 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(WrapperForIDictionaryInternalConstructor), @"{""Key"":""Value""}")]
         public static void Read_NonGeneric_NoPublicConstructor_Throws(Type type, string json)
         {
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize(json, type)
-            );
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize(json, type));
             Assert.Contains(type.ToString(), ex.Message);
         }
     }

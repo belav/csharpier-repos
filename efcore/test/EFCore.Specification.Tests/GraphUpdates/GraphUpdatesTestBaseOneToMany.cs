@@ -1334,9 +1334,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                     else
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.ChangeTracker.DetectChanges()
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            context.ChangeTracker.DetectChanges());
                     }
                 },
                 context =>
@@ -1489,9 +1488,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                     else
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.ChangeTracker.DetectChanges()
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            context.ChangeTracker.DetectChanges());
                     }
                 },
                 context =>

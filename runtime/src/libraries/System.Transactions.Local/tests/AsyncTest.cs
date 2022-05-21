@@ -27,45 +27,41 @@ namespace System.Transactions.Tests
         [Fact]
         public void AsyncFail1()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    IntResourceManager irm = new IntResourceManager(1);
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
 
-                    CommittableTransaction ct = new CommittableTransaction();
-                    /* Set ambient Tx */
-                    Transaction.Current = ct;
+                CommittableTransaction ct = new CommittableTransaction();
+                /* Set ambient Tx */
+                Transaction.Current = ct;
 
-                    /* Enlist */
-                    irm.Value = 2;
+                /* Enlist */
+                irm.Value = 2;
 
-                    IAsyncResult ar = ct.BeginCommit(null, null);
-                    IAsyncResult ar2 = ct.BeginCommit(null, null);
-                }
-            );
+                IAsyncResult ar = ct.BeginCommit(null, null);
+                IAsyncResult ar2 = ct.BeginCommit(null, null);
+            });
         }
 
         [Fact]
         public void AsyncFail2()
         {
-            Assert.Throws<TransactionAbortedException>(
-                () =>
-                {
-                    IntResourceManager irm = new IntResourceManager(1);
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
 
-                    CommittableTransaction ct = new CommittableTransaction();
-                    /* Set ambient Tx */
-                    Transaction.Current = ct;
+                CommittableTransaction ct = new CommittableTransaction();
+                /* Set ambient Tx */
+                Transaction.Current = ct;
 
-                    /* Enlist */
-                    irm.Value = 2;
-                    irm.FailPrepare = true;
+                /* Enlist */
+                irm.Value = 2;
+                irm.FailPrepare = true;
 
-                    IAsyncResult ar = ct.BeginCommit(null, null);
+                IAsyncResult ar = ct.BeginCommit(null, null);
 
-                    ct.EndCommit(ar);
-                }
-            );
+                ct.EndCommit(ar);
+            });
         }
 
         private AsyncCallback _callback = null;

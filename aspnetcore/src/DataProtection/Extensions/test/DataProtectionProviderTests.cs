@@ -277,9 +277,8 @@ public class DataProtectionProviderTests
                         var keylessUnprotector = DataProtectionProvider
                             .Create(directory)
                             .CreateProtector("purpose");
-                        Assert.Throws<CryptographicException>(
-                            () => keylessUnprotector.Unprotect(data)
-                        );
+                        Assert.Throws<CryptographicException>(() =>
+                            keylessUnprotector.Unprotect(data));
 
                         var unprotector = DataProtectionProvider
                             .Create(

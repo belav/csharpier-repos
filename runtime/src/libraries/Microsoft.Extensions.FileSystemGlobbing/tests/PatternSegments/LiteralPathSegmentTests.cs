@@ -12,15 +12,13 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
         [Fact]
         public void ThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var pathSegment = new LiteralPathSegment(
-                        value: null,
-                        comparisonType: StringComparison.OrdinalIgnoreCase
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var pathSegment = new LiteralPathSegment(
+                    value: null,
+                    comparisonType: StringComparison.OrdinalIgnoreCase
+                );
+            });
         }
 
         [Fact]

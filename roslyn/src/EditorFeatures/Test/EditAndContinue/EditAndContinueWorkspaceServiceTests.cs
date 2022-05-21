@@ -487,21 +487,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         {
             foreach (var reader in readers)
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    if (reader is MetadataReaderProvider md)
                     {
-                        if (reader is MetadataReaderProvider md)
-                        {
-                            md.GetMetadataReader();
-                        }
-                        else
-                        {
-                            (
-                                (DebugInformationReaderProvider)reader
-                            ).CreateEditAndContinueMethodDebugInfoReader();
-                        }
+                        md.GetMetadataReader();
                     }
-                );
+                    else
+                    {
+                        (
+                            (DebugInformationReaderProvider)reader
+                        ).CreateEditAndContinueMethodDebugInfoReader();
+                    }
+                });
             }
         }
 
@@ -3041,12 +3039,10 @@ class G
             // no pending update:
             Assert.Null(debuggingSession.GetTestAccessor().GetPendingSolutionUpdate());
 
-            Assert.Throws<InvalidOperationException>(
-                () => debuggingSession.CommitSolutionUpdate(out var _)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => debuggingSession.DiscardSolutionUpdate()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                debuggingSession.CommitSolutionUpdate(out var _));
+            Assert.Throws<InvalidOperationException>(() =>
+                debuggingSession.DiscardSolutionUpdate());
 
             // no change in non-remappable regions since we didn't have any active statements:
             Assert.Empty(debuggingSession.EditSession.NonRemappableRegions);
@@ -6122,38 +6118,30 @@ class C
             EndDebuggingSession(debuggingSession);
 
             // The folling methods shall not be called after the debugging session ended.
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () =>
-                    await debuggingSession.EmitSolutionUpdateAsync(
-                        solution,
-                        s_noActiveSpans,
-                        CancellationToken.None
-                    )
-            );
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () =>
-                    await debuggingSession.GetCurrentActiveStatementPositionAsync(
-                        solution,
-                        s_noActiveSpans,
-                        instructionId: default,
-                        CancellationToken.None
-                    )
-            );
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () =>
-                    await debuggingSession.IsActiveStatementInExceptionRegionAsync(
-                        solution,
-                        instructionId: default,
-                        CancellationToken.None
-                    )
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => debuggingSession.BreakStateOrCapabilitiesChanged(inBreakState: true, out _)
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await debuggingSession.EmitSolutionUpdateAsync(
+                    solution,
+                    s_noActiveSpans,
+                    CancellationToken.None
+                ));
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await debuggingSession.GetCurrentActiveStatementPositionAsync(
+                    solution,
+                    s_noActiveSpans,
+                    instructionId: default,
+                    CancellationToken.None
+                ));
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await debuggingSession.IsActiveStatementInExceptionRegionAsync(
+                    solution,
+                    instructionId: default,
+                    CancellationToken.None
+                ));
+            Assert.Throws<ObjectDisposedException>(() =>
+                debuggingSession.BreakStateOrCapabilitiesChanged(inBreakState: true, out _));
             Assert.Throws<ObjectDisposedException>(() => debuggingSession.DiscardSolutionUpdate());
-            Assert.Throws<ObjectDisposedException>(
-                () => debuggingSession.CommitSolutionUpdate(out _)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                debuggingSession.CommitSolutionUpdate(out _));
             Assert.Throws<ObjectDisposedException>(() => debuggingSession.EndSession(out _, out _));
 
             // The following methods can be called at any point in time, so we must handle race with dispose gracefully.

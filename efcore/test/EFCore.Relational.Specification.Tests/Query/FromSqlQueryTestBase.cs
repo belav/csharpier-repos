@@ -64,9 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -95,9 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -122,9 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 RelationalStrings.ErrorMaterializingValueInvalidCast(typeof(decimal?), typeof(int)),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -154,9 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -184,9 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -211,9 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 RelationalStrings.ErrorMaterializingValueNullReference(typeof(bool)),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -242,9 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -328,9 +321,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 RelationalStrings.FromSqlMissingColumn("Region"),
                 (
                     async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => query.ToListAsync()
-                        )
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            query.ToListAsync())
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );

@@ -482,9 +482,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.UnconfigurableType("int?", "Ignored", "Property", "int"),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => CreateModelBuilder(c => c.IgnoreAny<int>())
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder(c => c.IgnoreAny<int>()))
                         .Message
                 );
             }
@@ -495,9 +494,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.UnconfigurableType("string", "Ignored", "Property", "object"),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => CreateModelBuilder(c => c.IgnoreAny<object>())
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder(c => c.IgnoreAny<object>()))
                         .Message
                 );
             }
@@ -672,17 +670,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "{'" + nameof(Quarks.Down) + "'}"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                CreateModelBuilder()
-                                    .Entity<Quarks>(
-                                        b =>
-                                        {
-                                            b.HasAlternateKey(e => new { e.Down });
-                                            b.Property(e => e.Down).IsRequired(false);
-                                        }
-                                    )
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder()
+                                .Entity<Quarks>(
+                                    b =>
+                                    {
+                                        b.HasAlternateKey(e => new { e.Down });
+                                        b.Property(e => e.Down).IsRequired(false);
+                                    }
+                                ))
                         .Message
                 );
             }
@@ -698,27 +694,24 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         Assert.Equal(
                             CoreStrings.CannotBeNullable("Up", "Quarks", "int"),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Up).IsRequired(false)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property(e => e.Up).IsRequired(false))
                                 .Message
                         );
 
                         Assert.Equal(
                             CoreStrings.CannotBeNullable("Charm", "Quarks", "int"),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property<int>("Charm").IsRequired(false)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property<int>("Charm").IsRequired(false))
                                 .Message
                         );
 
                         Assert.Equal(
                             CoreStrings.CannotBeNullable("Top", "Quarks", "int"),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property<int>("Top").IsRequired(false)
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property<int>("Top").IsRequired(false))
                                 .Message
                         );
                     }
@@ -1300,9 +1293,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "Ignored"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<WrappedStringEntity>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<WrappedStringEntity>())
                         .Message
                 );
             }
@@ -1318,13 +1310,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         Assert.Equal(
                             CoreStrings.ConverterPropertyMismatch("string", "Quarks", "Up", "int"),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () =>
-                                        b.Property(e => e.Up)
-                                            .HasConversion(
-                                                new StringToBytesConverter(Encoding.UTF8)
-                                            )
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property(e => e.Up)
+                                        .HasConversion(new StringToBytesConverter(Encoding.UTF8)))
                                 .Message
                         );
                     }
@@ -1372,9 +1360,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 nameof(Quarks)
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Down).HasField("_notFound")
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property(e => e.Down).HasField("_notFound"))
                                 .Message
                         );
                     }
@@ -1398,9 +1385,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 "string"
                             ),
                             Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Down).HasField("_forUp")
-                                )
+                                .Throws<InvalidOperationException>(() =>
+                                    b.Property(e => e.Down).HasField("_forUp"))
                                 .Message
                         );
                     }
@@ -1704,9 +1690,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 nameof(ValueGenerator)
                             ),
                             Assert
-                                .Throws<ArgumentException>(
-                                    () => b.Property(e => e.Down).HasValueGenerator(typeof(Random))
-                                )
+                                .Throws<ArgumentException>(() =>
+                                    b.Property(e => e.Down).HasValueGenerator(typeof(Random)))
                                 .Message
                         );
                     }
@@ -1735,10 +1720,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "HasValueGenerator"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                entityType.FindProperty("Up").GetValueGeneratorFactory()(null, null)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            entityType.FindProperty("Up").GetValueGeneratorFactory()(null, null))
                         .Message
                 );
 
@@ -1748,12 +1731,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "HasValueGenerator"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                entityType
-                                    .FindProperty("Down")
-                                    .GetValueGeneratorFactory()(null, null)
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            entityType.FindProperty("Down").GetValueGeneratorFactory()(null, null))
                         .Message
                 );
             }
@@ -1800,9 +1779,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "object"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => CreateModelBuilder(c => c.Properties<object>())
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder(c => c.Properties<object>()))
                         .Message
                 );
             }
@@ -1818,10 +1796,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "Dictionary<string, object>"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                CreateModelBuilder(c => c.Properties<Dictionary<string, object>>())
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder(c => c.Properties<Dictionary<string, object>>()))
                         .Message
                 );
 
@@ -1833,10 +1809,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "IDictionary<string, object>"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                CreateModelBuilder(c => c.Properties<IDictionary<string, object>>())
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            CreateModelBuilder(c => c.Properties<IDictionary<string, object>>()))
                         .Message
                 );
             }
@@ -2575,9 +2549,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         typeof(Dictionary<string, object>).ShortDisplayName()
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Dictionary<string, object>>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Dictionary<string, object>>())
                         .Message
                 );
 
@@ -2613,9 +2586,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.ClashingNonSharedType("Shared1", nameof(Customer)),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.SharedTypeEntity<Customer>("Shared1")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.SharedTypeEntity<Customer>("Shared1"))
                         .Message
                 );
             }

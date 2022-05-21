@@ -21,12 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(
@@ -40,12 +38,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Correlated_collection_with_distinct_not_projecting_identifier_column_also_projecting_complex_expressions(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(
@@ -56,21 +52,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public override async Task Client_eval_followed_by_aggregate_operation(bool async)
         {
-            await AssertTranslationFailed(
-                () => AssertSum(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
-            );
+            await AssertTranslationFailed(() =>
+                AssertSum(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks)));
 
-            await AssertTranslationFailed(
-                () => AssertAverage(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
-            );
+            await AssertTranslationFailed(() =>
+                AssertAverage(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks)));
 
-            await AssertTranslationFailed(
-                () => AssertMin(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
-            );
+            await AssertTranslationFailed(() =>
+                AssertMin(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks)));
 
-            await AssertTranslationFailed(
-                () => AssertMax(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks))
-            );
+            await AssertTranslationFailed(() =>
+                AssertMax(async, ss => ss.Set<Mission>().Select(m => m.Duration.Ticks)));
         }
 
         public override Task Client_member_and_unsupported_string_Equals_in_the_same_query(
@@ -89,19 +81,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () =>
-                    base.Client_side_equality_with_parameter_works_with_optional_navigations(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Client_side_equality_with_parameter_works_with_optional_navigations(async));
         }
 
         public override Task Correlated_collection_order_by_constant_null_of_non_mapped_type(
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () => base.Correlated_collection_order_by_constant_null_of_non_mapped_type(async)
-            );
+            return AssertTranslationFailed(() =>
+                base.Correlated_collection_order_by_constant_null_of_non_mapped_type(async));
         }
 
         public override Task GetValueOrDefault_on_DateTimeOffset(bool async)
@@ -215,9 +204,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override async Task Projecting_correlated_collection_followed_by_Distinct(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Projecting_correlated_collection_followed_by_Distinct(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_correlated_collection_followed_by_Distinct(async))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
@@ -228,12 +216,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_some_properties_as_well_as_correlated_collection_followed_by_Distinct(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
@@ -244,12 +230,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_entity_as_well_as_correlated_collection_followed_by_Distinct(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
@@ -260,12 +244,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_entity_as_well_as_complex_correlated_collection_followed_by_Distinct(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
@@ -276,12 +258,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projecting_entity_as_well_as_correlated_collection_of_scalars_followed_by_Distinct(
+                        async
+                    ))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);
@@ -290,9 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override async Task Correlated_collection_with_distinct_3_levels(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Correlated_collection_with_distinct_3_levels(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Correlated_collection_with_distinct_3_levels(async))
             ).Message;
 
             Assert.Equal(RelationalStrings.DistinctOnCollectionNotSupported, message);

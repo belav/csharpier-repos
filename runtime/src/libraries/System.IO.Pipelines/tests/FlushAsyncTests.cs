@@ -40,16 +40,15 @@ namespace System.IO.Pipelines.Tests
             ThrowTestException();
 
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await Pipe.Writer.FlushAsync()
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await Pipe.Writer.FlushAsync());
 
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains("ThrowTestException", invalidOperationException.StackTrace);
 
-            invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await Pipe.Writer.FlushAsync()
-            );
+            invalidOperationException =
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await Pipe.Writer.FlushAsync());
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains("ThrowTestException", invalidOperationException.StackTrace);
 
@@ -82,12 +81,10 @@ namespace System.IO.Pipelines.Tests
             ValueTask<FlushResult> flushResult1 = Pipe.Writer.FlushAsync();
             ValueTask<FlushResult> flushResult2 = Pipe.Writer.FlushAsync();
 
-            var task1 = Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await flushResult1
-            );
-            var task2 = Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await flushResult2
-            );
+            var task1 = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await flushResult1);
+            var task2 = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await flushResult2);
 
             var exception1 = await task1;
             var exception2 = await task2;

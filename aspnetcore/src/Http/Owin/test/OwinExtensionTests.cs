@@ -24,12 +24,10 @@ using CreateMiddleware = Func<
 public class OwinExtensionTests
 {
     static readonly AppFunc notFound = env =>
-        new Task(
-            () =>
-            {
-                env["owin.ResponseStatusCode"] = 404;
-            }
-        );
+        new Task(() =>
+        {
+            env["owin.ResponseStatusCode"] = 404;
+        });
 
     [Fact]
     public async Task OwinConfigureServiceProviderAddsServices()

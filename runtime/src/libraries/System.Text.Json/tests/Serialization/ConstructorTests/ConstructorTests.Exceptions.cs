@@ -12,12 +12,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task MultipleProperties_Cannot_BindTo_TheSame_ConstructorParameter()
         {
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    Serializer.DeserializeWrapper<Point_MultipleMembers_BindTo_OneConstructorParameter>(
-                        "{}"
-                    )
-            );
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Point_MultipleMembers_BindTo_OneConstructorParameter>(
+                    "{}"
+                ));
 
             string exStr = ex.ToString();
             Assert.Contains("'X'", exStr);
@@ -28,12 +26,10 @@ namespace System.Text.Json.Serialization.Tests
                 exStr
             );
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    Serializer.DeserializeWrapper<Point_MultipleMembers_BindTo_OneConstructorParameter_Variant>(
-                        "{}"
-                    )
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Point_MultipleMembers_BindTo_OneConstructorParameter_Variant>(
+                    "{}"
+                ));
 
             exStr = ex.ToString();
             Assert.Contains("'X'", exStr);
@@ -41,9 +37,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Contains("(Int32)", exStr);
             Assert.Contains("Point_MultipleMembers_BindTo_OneConstructorParameter_Variant", exStr);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper<Url_BindTo_OneConstructorParameter>("{}")
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Url_BindTo_OneConstructorParameter>("{}"));
 
             exStr = ex.ToString();
             Assert.Contains("'URL'", exStr);
@@ -55,17 +50,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task All_ConstructorParameters_MustBindTo_ObjectMembers()
         {
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper<Point_Without_Members>("{}")
-            );
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Point_Without_Members>("{}"));
 
             string exStr = ex.ToString();
             Assert.Contains("(Int32, Int32)", exStr);
             Assert.Contains("System.Text.Json.Serialization.Tests.Point_Without_Members", exStr);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper<Point_With_MismatchedMembers>("{}")
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Point_With_MismatchedMembers>("{}"));
             exStr = ex.ToString();
             Assert.Contains("(Int32, Int32)", exStr);
             Assert.Contains(
@@ -73,12 +66,10 @@ namespace System.Text.Json.Serialization.Tests
                 exStr
             );
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    Serializer.DeserializeWrapper<WrapperFor_Point_With_MismatchedMembers>(
-                        @"{""MyInt"":1,""MyPoint"":{}}"
-                    )
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<WrapperFor_Point_With_MismatchedMembers>(
+                    @"{""MyInt"":1,""MyPoint"":{}}"
+                ));
             exStr = ex.ToString();
             Assert.Contains("(Int32, Int32)", exStr);
             Assert.Contains(
@@ -106,9 +97,8 @@ namespace System.Text.Json.Serialization.Tests
                 ReferenceHandler = ReferenceHandler.Preserve
             };
 
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Serializer.DeserializeWrapper<Employee>(json, options)
-            );
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.DeserializeWrapper<Employee>(json, options));
 
             string exStr = ex.ToString();
             Assert.Contains(
@@ -147,9 +137,8 @@ namespace System.Text.Json.Serialization.Tests
                 ReferenceHandler = ReferenceHandler.Preserve
             };
 
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                () => Serializer.DeserializeWrapper<Employee>(json, options)
-            );
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.DeserializeWrapper<Employee>(json, options));
             string exStr = ex.ToString();
             Assert.Contains(
                 "System.Text.Json.Serialization.Tests.ConstructorTests+Employee",
@@ -161,9 +150,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ExtensionDataProperty_CannotBindTo_CtorParam()
         {
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper<Class_ExtData_CtorParam>("{}")
-            );
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper<Class_ExtData_CtorParam>("{}"));
             string exStr = ex.ToString();
             Assert.Contains(
                 "System.Collections.Generic.Dictionary`2[System.String,System.Text.Json.JsonElement] ExtensionData",
@@ -210,14 +198,12 @@ namespace System.Text.Json.Serialization.Tests
             JsonException e;
 
             // Exception.
-            e = await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(BadJson)
-            );
+            e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(BadJson));
             Assert.Equal(Expected, e.Path);
 
-            e = await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(BadJsonEscaped)
-            );
+            e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(BadJsonEscaped));
             Assert.Equal(Expected, e.Path);
         }
 
@@ -234,9 +220,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task PathForChildPropertyFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () => Serializer.DeserializeWrapper<RootClass>(@"{""Child"":{""MyInt"":bad]}")
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<RootClass>(@"{""Child"":{""MyInt"":bad]}"));
             Assert.Equal("$.Child.MyInt", e.Path);
         }
 
@@ -261,60 +246,48 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task PathForChildListFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<RootClass>(
-                        @"{""Child"":{""MyIntArray"":[1, bad]}"
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<RootClass>(@"{""Child"":{""MyIntArray"":[1, bad]}"));
             Assert.Contains("$.Child.MyIntArray", e.Path);
         }
 
         [Fact]
         public async Task PathForChildDictionaryFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<RootClass>(
-                        @"{""Child"":{""MyDictionary"":{""Key"": bad]"
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<RootClass>(
+                    @"{""Child"":{""MyDictionary"":{""Key"": bad]"
+                ));
             Assert.Equal("$.Child.MyDictionary.Key", e.Path);
         }
 
         [Fact]
         public async Task PathForSpecialCharacterFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<RootClass>(
-                        @"{""Child"":{""MyDictionary"":{""Key1"":{""Children"":[{""MyDictionary"":{""K.e.y"":"""
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<RootClass>(
+                    @"{""Child"":{""MyDictionary"":{""Key1"":{""Children"":[{""MyDictionary"":{""K.e.y"":"""
+                ));
             Assert.Equal("$.Child.MyDictionary.Key1.Children[0].MyDictionary['K.e.y']", e.Path);
         }
 
         [Fact]
         public async Task PathForSpecialCharacterNestedFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<RootClass>(
-                        @"{""Child"":{""Children"":[{}, {""MyDictionary"":{""K.e.y"": {""MyInt"":bad"
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<RootClass>(
+                    @"{""Child"":{""Children"":[{}, {""MyDictionary"":{""K.e.y"": {""MyInt"":bad"
+                ));
             Assert.Equal("$.Child.Children[1].MyDictionary['K.e.y'].MyInt", e.Path);
         }
 
         [Fact]
         public async Task EscapingFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<Parameterized_ClassWithUnicodeProperty>(
-                        "{\"A\u0467\":bad}"
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Parameterized_ClassWithUnicodeProperty>(
+                    "{\"A\u0467\":bad}"
+                ));
             Assert.Equal("$.A\u0467", e.Path);
         }
 
@@ -331,12 +304,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ExtensionPropertyRoundTripFails()
         {
-            JsonException e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<Parameterized_ClassWithExtensionProperty>(
-                        @"{""MyNestedClass"":{""UnknownProperty"":bad}}"
-                    )
-            );
+            JsonException e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<Parameterized_ClassWithExtensionProperty>(
+                    @"{""MyNestedClass"":{""UnknownProperty"":bad}}"
+                ));
 
             Assert.Equal("$.MyNestedClass.UnknownProperty", e.Path);
         }
@@ -386,22 +357,18 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonException e;
 
-            e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWithConstructor_SimpleAndComplexParameters>(
-                        @"{""mydecimal"":bad}",
-                        options
-                    )
-            );
+            e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWithConstructor_SimpleAndComplexParameters>(
+                    @"{""mydecimal"":bad}",
+                    options
+                ));
             Assert.Equal("$.mydecimal", e.Path);
 
-            e = await Assert.ThrowsAsync<JsonException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWithConstructor_SimpleAndComplexParameters>(
-                        @"{""MYDECIMAL"":bad}",
-                        options
-                    )
-            );
+            e = await Assert.ThrowsAsync<JsonException>(() =>
+                Serializer.DeserializeWrapper<ClassWithConstructor_SimpleAndComplexParameters>(
+                    @"{""MYDECIMAL"":bad}",
+                    options
+                ));
             Assert.Equal("$.MYDECIMAL", e.Path);
         }
 
@@ -410,23 +377,17 @@ namespace System.Text.Json.Serialization.Tests
         {
             Exception e;
 
-            e = await Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWithInvalidArray>(
-                        @"{""UnsupportedArray"":[]}"
-                    )
-            );
+            e = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.DeserializeWrapper<ClassWithInvalidArray>(@"{""UnsupportedArray"":[]}"));
             Assert.Contains("System.Int32[,]", e.ToString());
             // The exception for element types do not contain the parent type and the property name
             // since the verification occurs later and is no longer bound to the parent type.
             Assert.DoesNotContain("ClassWithInvalidArray.UnsupportedArray", e.ToString());
 
-            e = await Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    Serializer.DeserializeWrapper<ClassWithInvalidDictionary>(
-                        @"{""UnsupportedDictionary"":{}}"
-                    )
-            );
+            e = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.DeserializeWrapper<ClassWithInvalidDictionary>(
+                    @"{""UnsupportedDictionary"":{}}"
+                ));
             Assert.Contains("System.Int32[,]", e.ToString());
             Assert.DoesNotContain("ClassWithInvalidDictionary.UnsupportedDictionary", e.ToString());
         }

@@ -78,19 +78,16 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadPrimitivesFail()
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int>(Encoding.UTF8.GetBytes(@"a"))
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,a]"))
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int>(Encoding.UTF8.GetBytes(@"a")));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,a]")));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(@"null"));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(@""""""));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DateTime>("\"abc\""));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DateTimeOffset>("\"abc\"")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTimeOffset>("\"abc\""));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<TimeSpan>("\"abc\""));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Guid>("\"abc\""));
 
@@ -154,136 +151,98 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadPrimitiveExtraBytesFail()
         {
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int[]>("[2] {3}"));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[2] {3}"))
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[2] {3}")));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<string>(@"""Hello"" 42"));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<string>(Encoding.UTF8.GetBytes(@"""Hello"" 42"))
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<string>(Encoding.UTF8.GetBytes(@"""Hello"" 42")));
         }
 
         [Fact]
         public static void RangeFail()
         {
             // These have custom code because the reader doesn't natively support:
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<byte>((byte.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<byte>((byte.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<byte?>((byte.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<byte?>((byte.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<byte>((byte.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<byte>((byte.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<byte?>((byte.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<byte?>((byte.MaxValue + 1).ToString()));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<sbyte>((sbyte.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<sbyte>((sbyte.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<sbyte?>((sbyte.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<sbyte?>((sbyte.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte>((sbyte.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte>((sbyte.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte?>((sbyte.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte?>((sbyte.MaxValue + 1).ToString()));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<short>((short.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<short>((short.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<short?>((short.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<short?>((short.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short>((short.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short>((short.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short?>((short.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short?>((short.MaxValue + 1).ToString()));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort>((ushort.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort>((ushort.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort?>((ushort.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort?>((ushort.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort>((ushort.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort>((ushort.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort?>((ushort.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort?>((ushort.MaxValue + 1).ToString()));
 
             // These are natively supported by the reader:
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int>(((long)int.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int>(((long)int.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int?>(((long)int.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<int?>(((long)int.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int>(((long)int.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int>(((long)int.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int?>(((long)int.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<int?>(((long)int.MaxValue + 1).ToString()));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<uint>(((long)uint.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<uint>(((long)uint.MaxValue + 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<uint?>(((long)uint.MinValue - 1).ToString())
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<uint?>(((long)uint.MaxValue + 1).ToString())
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<uint>(((long)uint.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<uint>(((long)uint.MaxValue + 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<uint?>(((long)uint.MinValue - 1).ToString()));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<uint?>(((long)uint.MaxValue + 1).ToString()));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<long>(long.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<long>(long.MaxValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<long?>(long.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<long?>(long.MaxValue.ToString() + "0")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long>(long.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long>(long.MaxValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long?>(long.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long?>(long.MaxValue.ToString() + "0"));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ulong>(ulong.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ulong>(ulong.MaxValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ulong?>(ulong.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ulong?>(ulong.MaxValue.ToString() + "0")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong>(ulong.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong>(ulong.MaxValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong?>(ulong.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong?>(ulong.MaxValue.ToString() + "0"));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal>(decimal.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal>(decimal.MaxValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal?>(decimal.MinValue.ToString() + "0")
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal?>(decimal.MaxValue.ToString() + "0")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal>(decimal.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal>(decimal.MaxValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal?>(decimal.MinValue.ToString() + "0"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal?>(decimal.MaxValue.ToString() + "0"));
         }
 
         [Fact]
@@ -515,26 +474,21 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<byte?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<sbyte>(unexpectedString));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<sbyte?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<short>(unexpectedString));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<short?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ushort?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<float>(unexpectedString));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<float?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<float?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(unexpectedString));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int?>(unexpectedString));
@@ -546,48 +500,36 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<long?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ulong>(unexpectedString));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<ulong?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<decimal?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<double>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<double?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<double>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<double?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DateTime>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DateTime?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTime>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTime?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DateTimeOffset>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<DateTimeOffset?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTimeOffset>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTimeOffset?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<TimeSpan>(unexpectedString)
-            );
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<TimeSpan?>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<TimeSpan>(unexpectedString));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<TimeSpan?>(unexpectedString));
 
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<Version>(unexpectedString)
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Version>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<string>("1"));
 
@@ -811,9 +753,8 @@ namespace System.Text.Json.Serialization.Tests
             string value = "24:00:00";
 
             // 24:00:00 should be invalid because hours can only be up to 23.
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<TimeSpan>($"\"{value}\"")
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<TimeSpan>($"\"{value}\""));
 
             TimeSpan expectedValue = TimeSpan.Parse("24.00:00:00");
 

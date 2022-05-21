@@ -32,9 +32,8 @@ public class ModelBinderFactoryTest
         };
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => factory.CreateBinder(context)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            factory.CreateBinder(context));
         Assert.Equal(expected, exception.Message);
     }
 
@@ -53,9 +52,8 @@ public class ModelBinderFactoryTest
         };
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => factory.CreateBinder(context)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            factory.CreateBinder(context));
         Assert.Equal(
             $"Could not create a model binder for model object of type '{typeof(string).FullName}'.",
             exception.Message

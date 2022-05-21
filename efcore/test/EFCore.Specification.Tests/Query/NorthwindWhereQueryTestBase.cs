@@ -350,13 +350,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             var city = new City();
 
             using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    context
-                        .Set<Customer>()
-                        .Where(c => c.City == city.Nested.InstanceFieldValue)
-                        .ToList()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                context
+                    .Set<Customer>()
+                    .Where(c => c.City == city.Nested.InstanceFieldValue)
+                    .ToList());
         }
 
         [ConditionalFact]
@@ -365,13 +363,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             var city = new City();
 
             using var context = CreateContext();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await context
-                        .Set<Customer>()
-                        .Where(c => c.City == city.Nested.InstanceFieldValue)
-                        .ToListAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await context
+                    .Set<Customer>()
+                    .Where(c => c.City == city.Nested.InstanceFieldValue)
+                    .ToListAsync());
         }
 
         [ConditionalFact]
@@ -380,13 +376,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             var city = new City();
 
             using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    context
-                        .Set<Customer>()
-                        .Where(c => c.City == city.Throw().InstanceFieldValue)
-                        .ToList()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                context
+                    .Set<Customer>()
+                    .Where(c => c.City == city.Throw().InstanceFieldValue)
+                    .ToList());
         }
 
         [ConditionalFact]
@@ -395,13 +389,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             var city = new City();
 
             using var context = CreateContext();
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await context
-                        .Set<Customer>()
-                        .Where(c => c.City == city.Throw().InstanceFieldValue)
-                        .ToListAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await context
+                    .Set<Customer>()
+                    .Where(c => c.City == city.Throw().InstanceFieldValue)
+                    .ToListAsync());
         }
 
         [ConditionalTheory]

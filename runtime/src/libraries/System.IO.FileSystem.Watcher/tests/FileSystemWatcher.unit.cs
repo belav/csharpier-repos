@@ -351,20 +351,15 @@ namespace System.IO.Tests
 
             // These throw InvalidEnumException on .NET Framework, but ArgumentException on K
             Assert.ThrowsAny<ArgumentException>(() => watcher.NotifyFilter = (NotifyFilters)(-1));
-            Assert.ThrowsAny<ArgumentException>(
-                () => watcher.NotifyFilter = (NotifyFilters)int.MinValue
-            );
-            Assert.ThrowsAny<ArgumentException>(
-                () => watcher.NotifyFilter = (NotifyFilters)int.MaxValue
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+                watcher.NotifyFilter = (NotifyFilters)int.MinValue);
+            Assert.ThrowsAny<ArgumentException>(() =>
+                watcher.NotifyFilter = (NotifyFilters)int.MaxValue);
             Assert.ThrowsAny<ArgumentException>(() => watcher.NotifyFilter = allFilters + 1);
 
             // Simulate a bit added to the flags
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                    watcher.NotifyFilter =
-                        allFilters | (NotifyFilters)((int)notifyFilters.Max() << 1)
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+                watcher.NotifyFilter = allFilters | (NotifyFilters)((int)notifyFilters.Max() << 1));
         }
 
         [Fact]
@@ -609,15 +604,13 @@ namespace System.IO.Tests
             // Web path
             Assert.Throws<ArgumentException>(() => watcher.Path = "http://localhost");
             // File protocol
-            Assert.Throws<ArgumentException>(
-                () =>
-                    watcher.Path =
-                        "file:///"
-                        + currentDir.Replace(
-                            Path.DirectorySeparatorChar,
-                            Path.AltDirectorySeparatorChar
-                        )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                watcher.Path =
+                    "file:///"
+                    + currentDir.Replace(
+                        Path.DirectorySeparatorChar,
+                        Path.AltDirectorySeparatorChar
+                    ));
         }
 
         [Fact]
@@ -1252,17 +1245,15 @@ namespace System.IO.Tests
                 watcher.Filters.Add(fileTwo.Name);
 
                 var cts = new CancellationTokenSource();
-                Task modifier = Task.Run(
-                    () =>
+                Task modifier = Task.Run(() =>
+                {
+                    string otherFilter = Guid.NewGuid().ToString("N");
+                    while (!cts.IsCancellationRequested)
                     {
-                        string otherFilter = Guid.NewGuid().ToString("N");
-                        while (!cts.IsCancellationRequested)
-                        {
-                            watcher.Filters.Add(otherFilter);
-                            watcher.Filters.RemoveAt(2);
-                        }
+                        watcher.Filters.Add(otherFilter);
+                        watcher.Filters.RemoveAt(2);
                     }
-                );
+                });
 
                 ExpectEvent(
                     watcher,

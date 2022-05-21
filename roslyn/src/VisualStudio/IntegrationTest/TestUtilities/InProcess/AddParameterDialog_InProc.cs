@@ -23,17 +23,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        dialog.CallsiteValueTextBox.Focus();
-                        dialog.CallsiteValueTextBox.Text = callSiteValue;
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    dialog.CallsiteValueTextBox.Focus();
+                    dialog.CallsiteValueTextBox.Text = callSiteValue;
+                });
             }
         }
 
@@ -45,17 +43,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        dialog.NameContentControl.Focus();
-                        dialog.NameContentControl.Text = parameterName;
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    dialog.NameContentControl.Focus();
+                    dialog.NameContentControl.Text = parameterName;
+                });
             }
         }
 
@@ -67,17 +63,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        dialog.IntroduceErrorRadioButton.Focus();
-                        dialog.IntroduceErrorRadioButton.IsChecked = true;
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    dialog.IntroduceErrorRadioButton.Focus();
+                    dialog.IntroduceErrorRadioButton.IsChecked = true;
+                });
             }
         }
 
@@ -89,17 +83,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        dialog.TypeContentControl.Focus();
-                        dialog.TypeContentControl.Text = typeName;
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    dialog.TypeContentControl.Focus();
+                    dialog.TypeContentControl.Text = typeName;
+                });
             }
         }
 
@@ -111,13 +103,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    () =>
-                        ClickAsync(
-                            testAccessor => testAccessor.OKButton,
-                            cancellationTokenSource.Token
-                        )
-                );
+                JoinableTaskFactory.Run(() =>
+                    ClickAsync(
+                        testAccessor => testAccessor.OKButton,
+                        cancellationTokenSource.Token
+                    ));
             }
         }
 
@@ -129,13 +119,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    () =>
-                        ClickAsync(
-                            testAccessor => testAccessor.CancelButton,
-                            cancellationTokenSource.Token
-                        )
-                );
+                JoinableTaskFactory.Run(() =>
+                    ClickAsync(
+                        testAccessor => testAccessor.CancelButton,
+                        cancellationTokenSource.Token
+                    ));
             }
         }
 

@@ -1896,12 +1896,10 @@ third line",
             };
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            ExceptionAssert.Throws<JsonException>(
-                () =>
-                {
-                    JToken.ReadFrom(reader, settings);
-                }
-            );
+            ExceptionAssert.Throws<JsonException>(() =>
+            {
+                JToken.ReadFrom(reader, settings);
+            });
         }
 
         [Test]

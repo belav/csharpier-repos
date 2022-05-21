@@ -435,9 +435,8 @@ namespace System.Formats.Cbor.Tests
 
                 if (attemptDuplicateWrite)
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => Helpers.WriteValue(writer, dupeKey)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        Helpers.WriteValue(writer, dupeKey));
                 }
 
                 // wrap dupe key in an array to satisfy key sorting & uniqueness constraints

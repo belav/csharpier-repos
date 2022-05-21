@@ -971,13 +971,11 @@ namespace Microsoft.EntityFrameworkCore
                 connection.CommitFailures.Enqueue(new bool?[] { true, true, true, true });
 
                 context.Products.Add(new Product());
-                Assert.Throws<RetryLimitExceededException>(
-                    () =>
-                        new TestSqlServerRetryingExecutionStrategy(
-                            context,
-                            TimeSpan.FromMilliseconds(100)
-                        ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false)
-                );
+                Assert.Throws<RetryLimitExceededException>(() =>
+                    new TestSqlServerRetryingExecutionStrategy(
+                        context,
+                        TimeSpan.FromMilliseconds(100)
+                    ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false));
                 context.ChangeTracker.AcceptAllChanges();
 
                 Assert.Equal(7, connection.OpenCount);

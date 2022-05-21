@@ -46,14 +46,10 @@ namespace Castle.DynamicProxy.Tests
                         }
                     )
                 },
-                target: new WithCallbackSimple(
-                    method: () =>
-                    {
-                        ex = Assert.Throws<InvalidOperationException>(
-                            () => cachedInvocation.Proceed()
-                        );
-                    }
-                )
+                target: new WithCallbackSimple(method: () =>
+                {
+                    ex = Assert.Throws<InvalidOperationException>(() => cachedInvocation.Proceed());
+                })
             );
 
             proxy.Method();

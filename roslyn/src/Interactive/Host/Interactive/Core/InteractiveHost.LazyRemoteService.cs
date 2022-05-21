@@ -114,16 +114,14 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
 
                     bool initializing = true;
-                    cancellationToken.Register(
-                        () =>
+                    cancellationToken.Register(() =>
+                    {
+                        if (initializing)
                         {
-                            if (initializing)
-                            {
-                                // kill the process without triggering auto-reset:
-                                remoteService.Dispose();
-                            }
+                            // kill the process without triggering auto-reset:
+                            remoteService.Dispose();
                         }
-                    );
+                    });
 
                     // try to execute initialization script:
                     var isRestarting = InstanceId > 1;

@@ -87,14 +87,12 @@ namespace Moq
             Exception exception
         )
         {
-            return setup.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    tcs.SetException(exception);
-                    return tcs.Task;
-                }
-            );
+            return setup.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                tcs.SetException(exception);
+                return tcs.Task;
+            });
         }
 
         /// <summary>
@@ -105,14 +103,12 @@ namespace Moq
             Exception exception
         )
         {
-            return setup.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    tcs.SetException(exception);
-                    return new ValueTask<TResult>(tcs.Task);
-                }
-            );
+            return setup.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                tcs.SetException(exception);
+                return new ValueTask<TResult>(tcs.Task);
+            });
         }
 
         /// <summary>
@@ -123,14 +119,12 @@ namespace Moq
             Exception exception
         )
         {
-            return setup.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<object>();
-                    tcs.SetException(exception);
-                    return tcs.Task;
-                }
-            );
+            return setup.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<object>();
+                tcs.SetException(exception);
+                return tcs.Task;
+            });
         }
 
         /// <summary>
@@ -141,14 +135,12 @@ namespace Moq
             Exception exception
         )
         {
-            return setup.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<object>();
-                    tcs.SetException(exception);
-                    return new ValueTask(tcs.Task);
-                }
-            );
+            return setup.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<object>();
+                tcs.SetException(exception);
+                return new ValueTask(tcs.Task);
+            });
         }
     }
 }

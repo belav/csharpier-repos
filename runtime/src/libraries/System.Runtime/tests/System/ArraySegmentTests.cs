@@ -115,23 +115,18 @@ namespace System.Tests
         public void CopyTo_Default_ThrowsInvalidOperationException()
         {
             // Source is default
-            Assert.Throws<InvalidOperationException>(
-                () => default(ArraySegment<T>).CopyTo(new T[0])
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => default(ArraySegment<T>).CopyTo(new T[0], 0)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ((ICollection<T>)default(ArraySegment<T>)).CopyTo(new T[0], 0)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => default(ArraySegment<T>).CopyTo(new ArraySegment<T>(new T[0]))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new T[0]));
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new T[0], 0));
+            Assert.Throws<InvalidOperationException>(() =>
+                ((ICollection<T>)default(ArraySegment<T>)).CopyTo(new T[0], 0));
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new ArraySegment<T>(new T[0])));
 
             // Destination is default
-            Assert.Throws<InvalidOperationException>(
-                () => new ArraySegment<T>(new T[0]).CopyTo(default(ArraySegment<T>))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                new ArraySegment<T>(new T[0]).CopyTo(default(ArraySegment<T>)));
         }
 
         [Fact]
@@ -176,9 +171,8 @@ namespace System.Tests
         [Fact]
         public void GetEnumerator_Default_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => default(ArraySegment<T>).GetEnumerator()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).GetEnumerator());
         }
 
         [Fact]
@@ -765,12 +759,10 @@ namespace System.Tests
             int[] array = arraySegment.Array;
 
             // Before array start
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => arraySegment[-arraySegment.Offset - 1]
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => arraySegment[-arraySegment.Offset - 1] = default(int)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset - 1]);
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset - 1] = default(int));
 
             // After array start (if Offset > 0), before start
             Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-1]);
@@ -778,17 +770,14 @@ namespace System.Tests
 
             // Before array end (if Offset + Count < Array.Length), after end
             Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[arraySegment.Count]);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => arraySegment[arraySegment.Count] = default(int)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[arraySegment.Count] = default(int));
 
             // After array end
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => arraySegment[-arraySegment.Offset + array.Length]
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => arraySegment[-arraySegment.Offset + array.Length] = default(int)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset + array.Length]);
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset + array.Length] = default(int));
         }
 
         [Theory]

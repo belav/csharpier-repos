@@ -47,9 +47,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoEfServices,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>())
                     .Message
             );
         }
@@ -932,9 +931,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 RelationalStrings.NoProviderConfigured,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => new FakeRelationalConnection(CreateOptions())
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        new FakeRelationalConnection(CreateOptions()))
                     .Message
             );
         }
@@ -945,15 +943,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 RelationalStrings.MultipleProvidersConfigured,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            new FakeRelationalConnection(
-                                CreateOptions(
-                                    new FakeRelationalOptionsExtension(),
-                                    new AnotherFakeRelationalOptionsExtension()
-                                )
+                    .Throws<InvalidOperationException>(() =>
+                        new FakeRelationalConnection(
+                            CreateOptions(
+                                new FakeRelationalOptionsExtension(),
+                                new AnotherFakeRelationalOptionsExtension()
                             )
-                    )
+                        ))
                     .Message
             );
         }

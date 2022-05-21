@@ -75,12 +75,10 @@ namespace System.Net.Http.Tests
             ContentDispositionHeaderValue contentDisposition = new ContentDispositionHeaderValue(
                 "inline"
             );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    contentDisposition.Parameters.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                contentDisposition.Parameters.Add(null);
+            });
         }
 
         [Fact]
@@ -392,12 +390,10 @@ namespace System.Net.Http.Tests
             Assert.Null(contentDisposition.Size);
 
             // Negatives not allowed
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    contentDisposition.Size = -279172874240;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                contentDisposition.Size = -279172874240;
+            });
 
             Assert.Null(contentDisposition.Size);
             Assert.Equal(1, contentDisposition.Parameters.Count);
@@ -1819,12 +1815,10 @@ namespace System.Net.Http.Tests
             }
             else
             {
-                Assert.Throws<FormatException>(
-                    () =>
-                    {
-                        header = ContentDispositionHeaderValue.Parse(cd.Value);
-                    }
-                );
+                Assert.Throws<FormatException>(() =>
+                {
+                    header = ContentDispositionHeaderValue.Parse(cd.Value);
+                });
             }
 
             return header;
@@ -1879,12 +1873,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    ContentDispositionHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                ContentDispositionHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 ContentDispositionHeaderValue.TryParse(
@@ -1898,12 +1890,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string contentDisposition)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ContentDispositionHeaderValue(contentDisposition);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ContentDispositionHeaderValue(contentDisposition);
+            });
         }
         #endregion
     }

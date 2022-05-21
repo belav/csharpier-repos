@@ -713,13 +713,11 @@ class Program
             var program = staticProgramField.Declaration.Type;
             var model = compilation.GetSemanticModel(tree1);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // tree2 not in the compilation
-                    var lookup = model.GetSymbolInfo(program);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // tree2 not in the compilation
+                var lookup = model.GetSymbolInfo(program);
+            });
         }
 
         [Fact]
@@ -2564,56 +2562,44 @@ class C
             var attribute = methodDecl.AttributeLists[0].Attributes[0];
 
             SemanticModel speculativeModel;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        statement.SpanStart,
-                        statement: null,
-                        speculativeModel: out speculativeModel
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        statement.SpanStart,
-                        constructorInitializer: (ConstructorInitializerSyntax)null,
-                        speculativeModel: out speculativeModel
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        statement.SpanStart,
-                        attribute: null,
-                        speculativeModel: out speculativeModel
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    statement.SpanStart,
+                    statement: null,
+                    speculativeModel: out speculativeModel
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    statement.SpanStart,
+                    constructorInitializer: (ConstructorInitializerSyntax)null,
+                    speculativeModel: out speculativeModel
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    statement.SpanStart,
+                    attribute: null,
+                    speculativeModel: out speculativeModel
+                ));
 
             // Speculate on a node from the same syntax tree.
-            Assert.Throws<ArgumentException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        statement.SpanStart,
-                        statement: statement,
-                        speculativeModel: out speculativeModel
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        ctorInitializer.SpanStart,
-                        constructorInitializer: ctorInitializer,
-                        speculativeModel: out speculativeModel
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    model.TryGetSpeculativeSemanticModel(
-                        attribute.SpanStart,
-                        attribute: attribute,
-                        speculativeModel: out speculativeModel
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    statement.SpanStart,
+                    statement: statement,
+                    speculativeModel: out speculativeModel
+                ));
+            Assert.Throws<ArgumentException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    ctorInitializer.SpanStart,
+                    constructorInitializer: ctorInitializer,
+                    speculativeModel: out speculativeModel
+                ));
+            Assert.Throws<ArgumentException>(() =>
+                model.TryGetSpeculativeSemanticModel(
+                    attribute.SpanStart,
+                    attribute: attribute,
+                    speculativeModel: out speculativeModel
+                ));
 
             // Chaining speculative semantic model is not supported.
             var speculatedStatement = statement.ReplaceNode(
@@ -2625,14 +2611,12 @@ class C
                 speculatedStatement,
                 speculativeModel: out speculativeModel
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    speculativeModel.TryGetSpeculativeSemanticModel(
-                        speculatedStatement.SpanStart,
-                        speculatedStatement,
-                        speculativeModel: out speculativeModel
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                speculativeModel.TryGetSpeculativeSemanticModel(
+                    speculatedStatement.SpanStart,
+                    speculatedStatement,
+                    speculativeModel: out speculativeModel
+                ));
         }
 
         [Fact]
@@ -2686,26 +2670,22 @@ class C
                 SyntaxFactory.ParseExpression("1.1")
             );
             SemanticModel newModel;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    speculativeModel.TryGetSpeculativeSemanticModel(
-                        speculatedStatement.SpanStart,
-                        newSpeculatedStatement,
-                        out newModel
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                speculativeModel.TryGetSpeculativeSemanticModel(
+                    speculatedStatement.SpanStart,
+                    newSpeculatedStatement,
+                    out newModel
+                ));
 
             // (b) Statement
             newSpeculatedStatement = (LocalDeclarationStatementSyntax)
                 SyntaxFactory.ParseStatement(@"int z = 0;");
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    speculativeModel.TryGetSpeculativeSemanticModel(
-                        speculatedStatement.SpanStart,
-                        newSpeculatedStatement,
-                        out newModel
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                speculativeModel.TryGetSpeculativeSemanticModel(
+                    speculatedStatement.SpanStart,
+                    newSpeculatedStatement,
+                    out newModel
+                ));
         }
 
         [Fact]

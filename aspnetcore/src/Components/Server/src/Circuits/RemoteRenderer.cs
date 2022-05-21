@@ -304,17 +304,15 @@ internal partial class RemoteRenderer : WebRenderer
             // missing.
 
             // We return the task in here, but the caller doesn't await it.
-            return Dispatcher.InvokeAsync(
-                () =>
+            return Dispatcher.InvokeAsync(() =>
+            {
+                // Now we're on the sync context, check again whether we got disposed since this
+                // work item was queued. If so there's nothing to do.
+                if (!_disposing)
                 {
-                    // Now we're on the sync context, check again whether we got disposed since this
-                    // work item was queued. If so there's nothing to do.
-                    if (!_disposing)
-                    {
-                        ProcessPendingRender();
-                    }
+                    ProcessPendingRender();
                 }
-            );
+            });
         }
     }
 

@@ -789,15 +789,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    modelBuilder
-                        .Entity(typeof(Customer))
-                        .HasIndex("Name")
-                        .HasFillFactor(fillFactor);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                modelBuilder.Entity(typeof(Customer)).HasIndex("Name").HasFillFactor(fillFactor);
+            });
         }
 
         private void AssertIsGeneric(EntityTypeBuilder<Customer> _) { }

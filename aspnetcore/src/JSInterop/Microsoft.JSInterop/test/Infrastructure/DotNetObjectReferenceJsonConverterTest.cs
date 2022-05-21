@@ -21,13 +21,11 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(
-            () =>
-                JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
-                    json,
-                    JsonSerializerOptions
-                )
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            ));
         Assert.Equal("Required property __dotNetObject not found.", ex.Message);
     }
 
@@ -41,13 +39,11 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = "{\"foo\":2}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(
-            () =>
-                JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
-                    json,
-                    JsonSerializerOptions
-                )
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            ));
         Assert.Equal("Unexpected JSON property foo.", ex.Message);
     }
 
@@ -62,13 +58,11 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId}";
 
         // Act & Assert
-        var ex = Record.Exception(
-            () =>
-                JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
-                    json,
-                    JsonSerializerOptions
-                )
-        );
+        var ex = Record.Exception(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            ));
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -83,13 +77,11 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId},\"__dotNetObject\":{objectId}}}";
 
         // Act & Assert
-        var ex = Record.Exception(
-            () =>
-                JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
-                    json,
-                    JsonSerializerOptions
-                )
-        );
+        var ex = Record.Exception(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            ));
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 

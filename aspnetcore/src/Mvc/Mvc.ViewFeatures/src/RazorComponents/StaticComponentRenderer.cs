@@ -37,9 +37,8 @@ internal class StaticComponentRenderer
         ComponentRenderedText result = default;
         try
         {
-            result = await _renderer.Dispatcher.InvokeAsync(
-                () => _renderer.RenderComponentAsync(componentType, parameters)
-            );
+            result = await _renderer.Dispatcher.InvokeAsync(() =>
+                _renderer.RenderComponentAsync(componentType, parameters));
         }
         catch (NavigationException navigationException)
         {

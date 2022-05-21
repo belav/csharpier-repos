@@ -180,135 +180,123 @@ namespace System.Security.AccessControl.Tests
             // case 1, no ACE, get index at -1
 
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = -1;
-                    systemAcl = new SystemAcl(false, false, rawAcl);
-                    verifierGAce = systemAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = -1;
+                systemAcl = new SystemAcl(false, false, rawAcl);
+                verifierGAce = systemAcl[index];
+            });
 
             //case 2, no ACE, get index at Count
 
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    systemAcl = new SystemAcl(false, false, rawAcl);
-                    index = systemAcl.Count;
-                    verifierGAce = systemAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                systemAcl = new SystemAcl(false, false, rawAcl);
+                index = systemAcl.Count;
+                verifierGAce = systemAcl[index];
+            });
 
             //case 3, no ACE, set index at -1
 
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    systemAcl = new SystemAcl(false, false, rawAcl);
-                    index = -1;
-                    owner = "BA";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    systemAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                systemAcl = new SystemAcl(false, false, rawAcl);
+                index = -1;
+                owner = "BA";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                systemAcl[index] = gAce;
+            });
 
             //case 4, no ACE, set index at Count
 
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    systemAcl = new SystemAcl(true, false, rawAcl);
-                    index = systemAcl.Count;
-                    owner = "BA";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    systemAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                systemAcl = new SystemAcl(true, false, rawAcl);
+                index = systemAcl.Count;
+                owner = "BA";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                systemAcl[index] = gAce;
+            });
             //case 5, set null Ace
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    gAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, gAce);
-                    systemAcl = new SystemAcl(false, false, rawAcl);
-                    index = 0;
-                    gAce = null;
-                    systemAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, gAce);
+                systemAcl = new SystemAcl(false, false, rawAcl);
+                index = 0;
+                gAce = null;
+                systemAcl[index] = gAce;
+            });
             //case 6, set index at 0
 
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    owner = "BA";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, gAce);
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                owner = "BA";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, gAce);
 
-                    systemAcl = new SystemAcl(false, false, rawAcl);
-                    index = 0;
-                    owner = "BA";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    systemAcl[index] = gAce;
-                }
-            );
+                systemAcl = new SystemAcl(false, false, rawAcl);
+                index = 0;
+                owner = "BA";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                systemAcl[index] = gAce;
+            });
         }
 
         private static bool TestIndex(GenericAce gAce, GenericAce verifierGAce)

@@ -31,9 +31,8 @@ public partial class WebHostTests
     [Fact]
     public async Task WebHostThrowsWithNoServer()
     {
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => CreateBuilder().Build().StartAsync()
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            CreateBuilder().Build().StartAsync());
         Assert.Equal(
             "No service for type 'Microsoft.AspNetCore.Hosting.Server.IServer' has been registered.",
             ex.Message
@@ -211,12 +210,10 @@ public partial class WebHostTests
             .Returns<CancellationToken>(
                 token =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            token.WaitHandle.WaitOne();
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        token.WaitHandle.WaitOne();
+                    });
                 }
             );
 
@@ -256,12 +253,10 @@ public partial class WebHostTests
             .Returns<CancellationToken>(
                 token =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            token.WaitHandle.WaitOne();
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        token.WaitHandle.WaitOne();
+                    });
                 }
             );
 
@@ -298,12 +293,10 @@ public partial class WebHostTests
             .Returns<CancellationToken>(
                 token =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            token.WaitHandle.WaitOne();
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        token.WaitHandle.WaitOne();
+                    });
                 }
             );
 
@@ -348,45 +341,37 @@ public partial class WebHostTests
             var applicationStoppingCompletedBeforeApplicationStopped = false;
             var applicationStoppedCompletedBeforeRunCompleted = false;
 
-            lifetime.ApplicationStarted.Register(
-                () =>
-                {
-                    applicationStartedEvent.Set();
-                }
-            );
+            lifetime.ApplicationStarted.Register(() =>
+            {
+                applicationStartedEvent.Set();
+            });
 
-            lifetime.ApplicationStopping.Register(
-                () =>
-                {
-                    // Check whether the applicationStartedEvent has been set
-                    applicationStartedCompletedBeforeApplicationStopping =
-                        applicationStartedEvent.IsSet;
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                // Check whether the applicationStartedEvent has been set
+                applicationStartedCompletedBeforeApplicationStopping =
+                    applicationStartedEvent.IsSet;
 
-                    // Simulate work.
-                    Thread.Sleep(1000);
+                // Simulate work.
+                Thread.Sleep(1000);
 
-                    applicationStoppingEvent.Set();
-                }
-            );
+                applicationStoppingEvent.Set();
+            });
 
-            lifetime.ApplicationStopped.Register(
-                () =>
-                {
-                    // Check whether the applicationStoppingEvent has been set
-                    applicationStoppingCompletedBeforeApplicationStopped =
-                        applicationStoppingEvent.IsSet;
-                    applicationStoppedEvent.Set();
-                }
-            );
+            lifetime.ApplicationStopped.Register(() =>
+            {
+                // Check whether the applicationStoppingEvent has been set
+                applicationStoppingCompletedBeforeApplicationStopped =
+                    applicationStoppingEvent.IsSet;
+                applicationStoppedEvent.Set();
+            });
 
-            var runHostAndVerifyApplicationStopped = Task.Run(
-                async () =>
-                {
-                    await host.RunAsync();
-                    // Check whether the applicationStoppingEvent has been set
-                    applicationStoppedCompletedBeforeRunCompleted = applicationStoppedEvent.IsSet;
-                }
-            );
+            var runHostAndVerifyApplicationStopped = Task.Run(async () =>
+            {
+                await host.RunAsync();
+                // Check whether the applicationStoppingEvent has been set
+                applicationStoppedCompletedBeforeRunCompleted = applicationStoppedEvent.IsSet;
+            });
 
             // Wait until application has started to shut down the host
             Assert.True(applicationStartedEvent.Wait(5000));
@@ -1056,9 +1041,8 @@ public partial class WebHostTests
             Assert.NotNull(capturedRequest);
 
             Assert.Throws<ObjectDisposedException>(() => capturedContext.TraceIdentifier);
-            Assert.Throws<ObjectDisposedException>(
-                () => capturedContext.Features.Get<IHttpRequestIdentifierFeature>()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                capturedContext.Features.Get<IHttpRequestIdentifierFeature>());
 
             Assert.Throws<ObjectDisposedException>(() => capturedRequest.Scheme);
         }

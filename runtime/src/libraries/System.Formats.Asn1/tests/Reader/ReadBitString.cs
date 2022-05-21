@@ -84,26 +84,22 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[inputData.Length],
-                        out int unusedBitCount,
-                        out int written
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[inputData.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
@@ -125,26 +121,22 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[input.Length],
-                        out int unusedBitCount,
-                        out int written
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[input.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
@@ -275,16 +267,14 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        Span<byte>.Empty,
-                        out int unusedBitCount,
-                        out int bytesWritten
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    Span<byte>.Empty,
+                    out int unusedBitCount,
+                    out int bytesWritten
+                );
+            });
         }
 
         private static void ReadBitString_Throws(AsnEncodingRules ruleSet, byte[] input)
@@ -593,14 +583,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.TryReadPrimitiveBitString(
-                        out _,
-                        out _,
-                        new Asn1Tag(TagClass.ContextSpecific, 0)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveBitString(
+                    out _,
+                    out _,
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                ));
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -644,28 +632,23 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveBitString(out _, out _)
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveBitString(out _, out _));
             Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _));
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag1)
-            );
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadBitString(output, out _, out _, wrongTag1)
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveBitString(out _, out _, wrongTag1));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadBitString(output, out _, out _, wrongTag1));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag1));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag2)
-            );
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadBitString(output, out _, out _, wrongTag2)
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveBitString(out _, out _, wrongTag2));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadBitString(output, out _, out _, wrongTag2));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag2));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

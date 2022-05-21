@@ -33,25 +33,18 @@ namespace System.Text.Json.Serialization.Tests
         public static void Read_ObjectModelCollection_Throws()
         {
             // No default constructor.
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<ReadOnlyCollection<bool>>("[true,false]")
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ReadOnlyCollection<bool>>("[true,false]"));
             // No default constructor.
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<ReadOnlyObservableCollection<bool>>("[true,false]")
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ReadOnlyObservableCollection<bool>>("[true,false]"));
             // No default constructor.
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Deserialize<ReadOnlyDictionary<string, bool>>(
-                        @"{""true"":false}"
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ReadOnlyDictionary<string, bool>>(@"{""true"":false}"));
 
             // Abstract types can't be instantiated. This means there's no default constructor, so the type is not supported for deserialization.
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize<KeyedCollection<string, bool>>("[true]")
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<KeyedCollection<string, bool>>("[true]"));
         }
 
         public class SimpleKeyedCollection : KeyedCollection<string, bool>

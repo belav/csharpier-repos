@@ -36,9 +36,8 @@ public class DefaultRazorProjectEngineTest
         var items = new[] { projectItem.Object };
 
         // Act & Assert
-        var exception = Assert.Throws<IOException>(
-            () => DefaultRazorProjectEngine.GetImportSourceDocuments(items)
-        );
+        var exception = Assert.Throws<IOException>(() =>
+            DefaultRazorProjectEngine.GetImportSourceDocuments(items));
         Assert.Equal("Couldn't read file.", exception.Message);
     }
 

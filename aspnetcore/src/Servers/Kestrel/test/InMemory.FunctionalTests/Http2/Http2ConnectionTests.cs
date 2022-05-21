@@ -3547,16 +3547,14 @@ public class Http2ConnectionTests : Http2TestBase
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
                     }
-                );
+                });
 
                 try
                 {
@@ -3689,16 +3687,14 @@ public class Http2ConnectionTests : Http2TestBase
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
                     }
-                );
+                });
 
                 try
                 {
@@ -4727,16 +4723,14 @@ public class Http2ConnectionTests : Http2TestBase
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
                     }
-                );
+                });
 
                 try
                 {
@@ -4851,16 +4845,14 @@ public class Http2ConnectionTests : Http2TestBase
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-                context.RequestAborted.Register(
-                    () =>
+                context.RequestAborted.Register(() =>
+                {
+                    lock (_abortedStreamIdsLock)
                     {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
                     }
-                );
+                });
 
                 try
                 {

@@ -528,40 +528,34 @@ namespace Microsoft.Extensions.Caching.Memory
 
             cache.Set(key, new Guid());
 
-            var task0 = Task.Run(
-                () =>
+            var task0 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        cache.Set(key, Guid.NewGuid());
-                    }
+                    cache.Set(key, Guid.NewGuid());
                 }
-            );
+            });
 
-            var task1 = Task.Run(
-                () =>
+            var task1 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        cache.Set(key, Guid.NewGuid());
-                    }
+                    cache.Set(key, Guid.NewGuid());
                 }
-            );
+            });
 
-            var task2 = Task.Run(
-                () =>
+            var task2 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
+                    if (cache.Get(key) == null)
                     {
-                        if (cache.Get(key) == null)
-                        {
-                            // Stop this task and update flag for assertion
-                            readValueIsNull = true;
-                            break;
-                        }
+                        // Stop this task and update flag for assertion
+                        readValueIsNull = true;
+                        break;
                     }
                 }
-            );
+            });
 
             var task3 = Task.Delay(TimeSpan.FromSeconds(7));
 
@@ -682,50 +676,44 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var random = new Random();
 
-            var task0 = Task.Run(
-                () =>
+            var task0 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        var entrySize = random.Next(0, 5);
-                        cache.Set(
-                            random.Next(0, 10),
-                            entrySize,
-                            new MemoryCacheEntryOptions { Size = entrySize }
-                        );
-                    }
+                    var entrySize = random.Next(0, 5);
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
-            );
+            });
 
-            var task1 = Task.Run(
-                () =>
+            var task1 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        var entrySize = random.Next(0, 5);
-                        cache.Set(
-                            random.Next(0, 10),
-                            entrySize,
-                            new MemoryCacheEntryOptions { Size = entrySize }
-                        );
-                    }
+                    var entrySize = random.Next(0, 5);
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
-            );
+            });
 
-            var task2 = Task.Run(
-                () =>
+            var task2 = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
                 {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        var entrySize = random.Next(0, 5);
-                        cache.Set(
-                            random.Next(0, 10),
-                            entrySize,
-                            new MemoryCacheEntryOptions { Size = entrySize }
-                        );
-                    }
+                    var entrySize = random.Next(0, 5);
+                    cache.Set(
+                        random.Next(0, 10),
+                        entrySize,
+                        new MemoryCacheEntryOptions { Size = entrySize }
+                    );
                 }
-            );
+            });
 
             cts.CancelAfter(TimeSpan.FromSeconds(5));
             var task3 = Task.Delay(TimeSpan.FromSeconds(7));
@@ -767,9 +755,8 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cache = CreateCache();
             var value = new object();
-            Assert.Throws<ArgumentNullException>(
-                () => cache.Set(null, value, expirationToken: null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                cache.Set(null, value, expirationToken: null));
         }
 
         [Fact]
@@ -790,9 +777,8 @@ namespace Microsoft.Extensions.Caching.Memory
         public async Task GetOrCreateAsyncFromCacheWithNullKeyThrows()
         {
             var cache = CreateCache();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                async () => await cache.GetOrCreateAsync<object>(null, null)
-            );
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await cache.GetOrCreateAsync<object>(null, null));
         }
 
         private class TestKey

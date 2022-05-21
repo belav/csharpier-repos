@@ -101,16 +101,14 @@ namespace System.CommandLine.Tests.Invocation
         public void When_command_handler_throws_then_InvokeAsync_does_not_handle_the_exception()
         {
             var command = new Command("the-command");
-            command.Handler = CommandHandler.Create(
-                () =>
-                {
-                    throw new Exception("oops!");
-                    // Help the compiler pick a CommandHandler.Create overload.
+            command.Handler = CommandHandler.Create(() =>
+            {
+                throw new Exception("oops!");
+                // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                    return 0;
+                return 0;
 #pragma warning restore CS0162
-                }
-            );
+            });
 
             var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 
@@ -127,16 +125,14 @@ namespace System.CommandLine.Tests.Invocation
         public void When_command_handler_throws_then_Invoke_does_not_handle_the_exception()
         {
             var command = new Command("the-command");
-            command.Handler = CommandHandler.Create(
-                () =>
-                {
-                    throw new Exception("oops!");
-                    // Help the compiler pick a CommandHandler.Create overload.
+            command.Handler = CommandHandler.Create(() =>
+            {
+                throw new Exception("oops!");
+                // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                    return 0;
+                return 0;
 #pragma warning restore CS0162
-                }
-            );
+            });
 
             var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 

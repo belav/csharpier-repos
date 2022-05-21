@@ -89,15 +89,13 @@ internal class UploadSample
     {
         var channel = Channel.CreateUnbounded<string>();
 
-        _ = Task.Run(
-            async () =>
+        _ = Task.Run(async () =>
+        {
+            foreach (var phrase in new[] { "one fish", "two fish", "red fish", "blue fish" })
             {
-                foreach (var phrase in new[] { "one fish", "two fish", "red fish", "blue fish" })
-                {
-                    await channel.Writer.WriteAsync(phrase);
-                }
+                await channel.Writer.WriteAsync(phrase);
             }
-        );
+        });
 
         var outputs = await connection.StreamAsChannelAsync<string>("StreamEcho", channel.Reader);
 

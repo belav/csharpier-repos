@@ -313,28 +313,22 @@ namespace System.Numerics.Tests
             Assert.Throws<OverflowException>(() => new BigInteger(float.NegativeInfinity));
 
             // ctor(Single): Single.PositiveInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(float.PositiveInfinity);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(float.PositiveInfinity);
+            });
 
             // ctor(Single): Single.NaN
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(float.NaN);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(float.NaN);
+            });
 
             // ctor(Single): Single.NaN 2
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(ConvertInt32ToSingle(0x7FC00000));
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(ConvertInt32ToSingle(0x7FC00000));
+            });
 
             // ctor(Single): Smallest Exponent
             VerifyCtorSingle((float)Math.Pow(2, -126));
@@ -503,36 +497,28 @@ namespace System.Numerics.Tests
             VerifyCtorDouble(double.Epsilon);
 
             // ctor(Double): Double.NegativeInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(double.NegativeInfinity);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(double.NegativeInfinity);
+            });
 
             // ctor(Double): Double.PositiveInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(double.PositiveInfinity);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(double.PositiveInfinity);
+            });
 
             // ctor(Double): Double.NaN
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(double.NaN);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(double.NaN);
+            });
 
             // ctor(Double): Double.NaN 2
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = new BigInteger(ConvertInt64ToDouble(0x7FF8000000000000));
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = new BigInteger(ConvertInt64ToDouble(0x7FF8000000000000));
+            });
 
             // ctor(Double): Smallest Exponent
             VerifyCtorDouble((double)Math.Pow(2, -1022));
@@ -713,12 +699,10 @@ namespace System.Numerics.Tests
             byte[] tempByteArray;
 
             // ctor(byte[]): array is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    BigInteger bigInteger = new BigInteger((byte[])null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                BigInteger bigInteger = new BigInteger((byte[])null);
+            });
 
             // ctor(byte[]): array is empty
             VerifyCtorByteArray(new byte[0], 0);

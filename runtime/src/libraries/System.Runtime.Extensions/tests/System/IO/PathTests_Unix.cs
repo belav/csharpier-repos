@@ -59,15 +59,13 @@ namespace System.IO.Tests
         public void GetTempPath_SetEnvVar_Unix()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
                     {
-                        foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
-                        {
-                            GetTempPath_SetEnvVar_Helper("TMPDIR", tempPath[0], tempPath[1]);
-                        }
+                        GetTempPath_SetEnvVar_Helper("TMPDIR", tempPath[0], tempPath[1]);
                     }
-                )
+                })
                 .Dispose();
         }
 

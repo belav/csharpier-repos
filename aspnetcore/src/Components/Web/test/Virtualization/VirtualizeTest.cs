@@ -32,9 +32,8 @@ public class VirtualizeTest
         var testRenderer = new TestRenderer(serviceProvider);
         var componentId = testRenderer.AssignRootComponentId(rootComponent);
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await testRenderer.RenderRootComponentAsync(componentId)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await testRenderer.RenderRootComponentAsync(componentId));
         Assert.Contains("requires a positive value for parameter", ex.Message);
     }
 
@@ -53,9 +52,8 @@ public class VirtualizeTest
         var testRenderer = new TestRenderer(serviceProvider);
         var componentId = testRenderer.AssignRootComponentId(rootComponent);
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await testRenderer.RenderRootComponentAsync(componentId)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await testRenderer.RenderRootComponentAsync(componentId));
         Assert.Contains("can only accept one item source from its parameters", ex.Message);
     }
 
@@ -74,9 +72,8 @@ public class VirtualizeTest
         var testRenderer = new TestRenderer(serviceProvider);
         var componentId = testRenderer.AssignRootComponentId(rootComponent);
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await testRenderer.RenderRootComponentAsync(componentId)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await testRenderer.RenderRootComponentAsync(componentId));
         Assert.Contains("parameters to be specified and non-null", ex.Message);
     }
 
@@ -111,9 +108,8 @@ public class VirtualizeTest
         ((IVirtualizeJsCallbacks)renderedVirtualize).OnAfterSpacerVisible(10f, 50f, 100f);
 
         // Validate that the exception is dispatched through the renderer.
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await testRenderer.RenderRootComponentAsync(componentId)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await testRenderer.RenderRootComponentAsync(componentId));
         Assert.Equal("Thrown from items provider.", ex.Message);
     }
 

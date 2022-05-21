@@ -235,12 +235,10 @@ namespace System.Numerics.Tests
             float value;
 
             // Single Explicit Cast to BigInteger: Single.NegativeInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)float.NegativeInfinity;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.NegativeInfinity;
+            });
 
             // Single Explicit Cast to BigInteger: Single.MinValue
             VerifySingleExplicitCastToBigInteger(float.MinValue);
@@ -286,40 +284,32 @@ namespace System.Numerics.Tests
             VerifySingleExplicitCastToBigInteger(float.MaxValue);
 
             // Single Explicit Cast to BigInteger: Single.PositiveInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)float.PositiveInfinity;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.PositiveInfinity;
+            });
 
             // double.IsInfinity(float.MaxValue * 2.0f) == false, but we don't want this odd behavior here
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)(float.MaxValue * 2.0f);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)(float.MaxValue * 2.0f);
+            });
 
             // Single Explicit Cast to BigInteger: Single.Epsilon
             VerifySingleExplicitCastToBigInteger(float.Epsilon);
 
             // Single Explicit Cast to BigInteger: Single.NaN
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)float.NaN;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.NaN;
+            });
 
             //There are multiple ways to represent a NaN just try another one
             // Single Explicit Cast to BigInteger: Single.NaN 2
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)ConvertInt32ToSingle(0x7FC00000);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)ConvertInt32ToSingle(0x7FC00000);
+            });
 
             // Single Explicit Cast to BigInteger: Smallest Exponent
             VerifySingleExplicitCastToBigInteger((float)Math.Pow(2, -126));
@@ -355,12 +345,10 @@ namespace System.Numerics.Tests
             double value;
 
             // Double Explicit Cast to BigInteger: Double.NegativeInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)double.NegativeInfinity;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.NegativeInfinity;
+            });
 
             // Double Explicit Cast to BigInteger: Double.MinValue
             VerifyDoubleExplicitCastToBigInteger(double.MinValue);
@@ -406,32 +394,26 @@ namespace System.Numerics.Tests
             VerifyDoubleExplicitCastToBigInteger(double.MaxValue);
 
             // Double Explicit Cast to BigInteger: Double.PositiveInfinity
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)double.PositiveInfinity;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.PositiveInfinity;
+            });
 
             // Double Explicit Cast to BigInteger: Double.Epsilon
             VerifyDoubleExplicitCastToBigInteger(double.Epsilon);
 
             // Double Explicit Cast to BigInteger: Double.NaN
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)double.NaN;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.NaN;
+            });
 
             //There are multiple ways to represent a NaN just try another one
             // Double Explicit Cast to BigInteger: Double.NaN 2
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    BigInteger temp = (BigInteger)ConvertInt64ToDouble(0x7FF8000000000000);
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)ConvertInt64ToDouble(0x7FF8000000000000);
+            });
 
             // Double Explicit Cast to BigInteger: Smallest Exponent
             VerifyDoubleExplicitCastToBigInteger((double)Math.Pow(2, -1022));

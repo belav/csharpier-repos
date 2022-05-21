@@ -207,9 +207,8 @@ public class MvcNewtonsoftJsonOptionsExtensionsTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => options.UseCamelCasing(processDictionaryKeys: false)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            options.UseCamelCasing(processDictionaryKeys: false));
         Assert.Equal(expectedMessage, actual: exception.Message);
     }
 

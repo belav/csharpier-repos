@@ -1295,13 +1295,11 @@ public class SignInManagerTest
         var lockedout = false;
         manager
             .Setup(m => m.AccessFailedAsync(user))
-            .Returns(
-                () =>
-                {
-                    lockedout = true;
-                    return Task.FromResult(IdentityResult.Success);
-                }
-            )
+            .Returns(() =>
+            {
+                lockedout = true;
+                return Task.FromResult(IdentityResult.Success);
+            })
             .Verifiable();
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
         manager.Setup(m => m.IsLockedOutAsync(user)).Returns(() => Task.FromResult(lockedout));
@@ -1335,13 +1333,11 @@ public class SignInManagerTest
         var lockedout = false;
         manager
             .Setup(m => m.AccessFailedAsync(user))
-            .Returns(
-                () =>
-                {
-                    lockedout = true;
-                    return Task.FromResult(IdentityResult.Success);
-                }
-            )
+            .Returns(() =>
+            {
+                lockedout = true;
+                return Task.FromResult(IdentityResult.Success);
+            })
             .Verifiable();
         manager.Setup(m => m.SupportsUserLockout).Returns(true).Verifiable();
         manager.Setup(m => m.IsLockedOutAsync(user)).Returns(() => Task.FromResult(lockedout));

@@ -232,12 +232,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFrom_Exception(string value)
         {
             var conv = new ColorConverter();
-            AssertExtensions.Throws<ArgumentException, Exception>(
-                () =>
-                {
-                    conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException, Exception>(() =>
+            {
+                conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
+            });
         }
 
         public static IEnumerable<object[]> ConvertFrom_NotsupportedExceptionData =>
@@ -255,12 +253,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFrom_NotSupportedException(object value)
         {
             var conv = new ColorConverter();
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
+            });
         }
 
         [Fact]
@@ -330,12 +326,10 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var conv = new ColorConverter();
             var col = Color.Red;
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    conv.ConvertTo(null, CultureInfo.InvariantCulture, col, type);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                conv.ConvertTo(null, CultureInfo.InvariantCulture, col, type);
+            });
         }
 
         [Fact]
@@ -427,12 +421,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromInvariantString_NotNumber()
         {
             var conv = new ColorConverter();
-            var ex = AssertExtensions.Throws<ArgumentException, Exception>(
-                () =>
-                {
-                    conv.ConvertFromInvariantString("hello");
-                }
-            );
+            var ex = AssertExtensions.Throws<ArgumentException, Exception>(() =>
+            {
+                conv.ConvertFromInvariantString("hello");
+            });
             Assert.NotNull(ex.InnerException);
             Assert.IsType<FormatException>(ex.InnerException);
         }
@@ -490,12 +482,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromString_NotNumber()
         {
             var conv = new ColorConverter();
-            var ex = AssertExtensions.Throws<ArgumentException, Exception>(
-                () =>
-                {
-                    conv.ConvertFromString("hello");
-                }
-            );
+            var ex = AssertExtensions.Throws<ArgumentException, Exception>(() =>
+            {
+                conv.ConvertFromString("hello");
+            });
             Assert.NotNull(ex.InnerException);
             Assert.IsType<FormatException>(ex.InnerException);
         }

@@ -140,9 +140,8 @@ public class BodyModelBinderTests
                 d =>
                 {
                     d.BindingSource = BindingSource.Body;
-                    d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
-                        () => "Customized error message"
-                    );
+                    d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() =>
+                        "Customized error message");
                 }
             );
 
@@ -513,9 +512,8 @@ public class BodyModelBinderTests
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<IOException>(
-            () => binder.BindModelAsync(bindingContext)
-        );
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            binder.BindModelAsync(bindingContext));
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 
@@ -604,9 +602,8 @@ public class BodyModelBinderTests
         var binder = CreateBinder(new[] { formatter }, new MvcOptions());
 
         // Act
-        var exception = await Assert.ThrowsAsync<IOException>(
-            () => binder.BindModelAsync(bindingContext)
-        );
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            binder.BindModelAsync(bindingContext));
         Assert.Equal("Unable to read input stream!!", exception.Message);
     }
 

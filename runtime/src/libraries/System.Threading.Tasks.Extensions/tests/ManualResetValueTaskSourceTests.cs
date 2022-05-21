@@ -33,27 +33,13 @@ namespace System.Threading.Tasks.Sources.Tests
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(0));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(0));
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    mrvts.OnCompleted(
-                        _ => { },
-                        new object(),
-                        0,
-                        ValueTaskSourceOnCompletedFlags.None
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, new object(), 0, ValueTaskSourceOnCompletedFlags.None));
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(2));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(2));
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    mrvts.OnCompleted(
-                        _ => { },
-                        new object(),
-                        2,
-                        ValueTaskSourceOnCompletedFlags.None
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, new object(), 2, ValueTaskSourceOnCompletedFlags.None));
         }
 
         [Fact]
@@ -286,9 +272,8 @@ namespace System.Threading.Tasks.Sources.Tests
         {
             var mrvts = new ManualResetValueTaskSource<int>();
             mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None);
-            Assert.Throws<InvalidOperationException>(
-                () => mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None));
         }
 
         [Fact]
@@ -392,42 +377,40 @@ namespace System.Threading.Tasks.Sources.Tests
             bool setBeforeOnCompleted
         )
         {
-            await Task.Run(
-                async () => // escape xunit sync ctx
+            await Task.Run(async () => // escape xunit sync ctx
+            {
+                var mrvts = new ManualResetValueTaskSource<int>()
                 {
-                    var mrvts = new ManualResetValueTaskSource<int>()
-                    {
-                        RunContinuationsAsynchronously = runContinuationsAsynchronously
-                    };
+                    RunContinuationsAsynchronously = runContinuationsAsynchronously
+                };
 
-                    if (setBeforeOnCompleted)
-                    {
-                        mrvts.SetResult(42);
-                    }
-
-                    var tcs = new TaskCompletionSource();
-                    var sc = new TrackingSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(sc);
-                    Assert.Equal(0, sc.Posts);
-                    mrvts.OnCompleted(
-                        _ => tcs.SetResult(),
-                        null,
-                        0,
-                        captureSyncCtx
-                            ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                            : ValueTaskSourceOnCompletedFlags.None
-                    );
-                    SynchronizationContext.SetSynchronizationContext(null);
-
-                    if (!setBeforeOnCompleted)
-                    {
-                        mrvts.SetResult(42);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(captureSyncCtx ? 1 : 0, sc.Posts);
+                if (setBeforeOnCompleted)
+                {
+                    mrvts.SetResult(42);
                 }
-            );
+
+                var tcs = new TaskCompletionSource();
+                var sc = new TrackingSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(sc);
+                Assert.Equal(0, sc.Posts);
+                mrvts.OnCompleted(
+                    _ => tcs.SetResult(),
+                    null,
+                    0,
+                    captureSyncCtx
+                        ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                        : ValueTaskSourceOnCompletedFlags.None
+                );
+                SynchronizationContext.SetSynchronizationContext(null);
+
+                if (!setBeforeOnCompleted)
+                {
+                    mrvts.SetResult(42);
+                }
+
+                await tcs.Task;
+                Assert.Equal(captureSyncCtx ? 1 : 0, sc.Posts);
+            });
         }
 
         [Theory]
@@ -445,48 +428,46 @@ namespace System.Threading.Tasks.Sources.Tests
             bool setBeforeOnCompleted
         )
         {
-            await Task.Run(
-                async () => // escape xunit sync ctx
+            await Task.Run(async () => // escape xunit sync ctx
+            {
+                var mrvts = new ManualResetValueTaskSource<int>()
                 {
-                    var mrvts = new ManualResetValueTaskSource<int>()
-                    {
-                        RunContinuationsAsynchronously = runContinuationsAsynchronously
-                    };
+                    RunContinuationsAsynchronously = runContinuationsAsynchronously
+                };
 
-                    if (setBeforeOnCompleted)
-                    {
-                        mrvts.SetResult(42);
-                    }
-
-                    var tcs = new TaskCompletionSource();
-                    var ts = new TrackingTaskScheduler();
-                    Assert.Equal(0, ts.QueueTasks);
-                    await Task.Factory.StartNew(
-                        () =>
-                        {
-                            mrvts.OnCompleted(
-                                _ => tcs.SetResult(),
-                                null,
-                                0,
-                                captureTaskScheduler
-                                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                    : ValueTaskSourceOnCompletedFlags.None
-                            );
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        ts
-                    );
-
-                    if (!setBeforeOnCompleted)
-                    {
-                        mrvts.SetResult(42);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(captureTaskScheduler ? 2 : 1, ts.QueueTasks);
+                if (setBeforeOnCompleted)
+                {
+                    mrvts.SetResult(42);
                 }
-            );
+
+                var tcs = new TaskCompletionSource();
+                var ts = new TrackingTaskScheduler();
+                Assert.Equal(0, ts.QueueTasks);
+                await Task.Factory.StartNew(
+                    () =>
+                    {
+                        mrvts.OnCompleted(
+                            _ => tcs.SetResult(),
+                            null,
+                            0,
+                            captureTaskScheduler
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    ts
+                );
+
+                if (!setBeforeOnCompleted)
+                {
+                    mrvts.SetResult(42);
+                }
+
+                await tcs.Task;
+                Assert.Equal(captureTaskScheduler ? 2 : 1, ts.QueueTasks);
+            });
         }
 
         private sealed class TrackingSynchronizationContext : SynchronizationContext

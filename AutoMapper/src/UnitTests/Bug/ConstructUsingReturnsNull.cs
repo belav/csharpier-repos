@@ -27,9 +27,10 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_throw_when_construct_using_returns_null()
         {
-            new Action(
-                () => Mapper.Map<Source, Destination>(new Source())
-            ).ShouldThrowException<AutoMapperMappingException>(
+            new Action(() =>
+                Mapper.Map<Source, Destination>(
+                    new Source()
+                )).ShouldThrowException<AutoMapperMappingException>(
                 ex => ex.InnerException.ShouldBeOfType<NullReferenceException>()
             );
         }

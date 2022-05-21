@@ -126,9 +126,8 @@ public class RazorCompiledItemFeatureProviderTest
         var feature = new ViewsFeature();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => featureProvider.PopulateFeature(new[] { part1, part2.Object }, feature)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            featureProvider.PopulateFeature(new[] { part1, part2.Object }, feature));
         Assert.Equal(expected, ex.Message);
     }
 

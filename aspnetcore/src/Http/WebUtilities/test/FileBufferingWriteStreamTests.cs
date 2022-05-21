@@ -29,9 +29,8 @@ public class FileBufferingWriteStreamTests : IDisposable
     public void Write_BuffersContentToMemory()
     {
         // Arrange
-        using var bufferingStream = new FileBufferingWriteStream(
-            tempFileDirectoryAccessor: () => TempDirectory
-        );
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory);
         var input = Encoding.UTF8.GetBytes("Hello world");
 
         // Act
@@ -158,9 +157,8 @@ public class FileBufferingWriteStreamTests : IDisposable
     public async Task WriteAsync_BuffersContentToMemory()
     {
         // Arrange
-        using var bufferingStream = new FileBufferingWriteStream(
-            tempFileDirectoryAccessor: () => TempDirectory
-        );
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory);
         var input = Encoding.UTF8.GetBytes("Hello world");
 
         // Act
@@ -293,9 +291,8 @@ public class FileBufferingWriteStreamTests : IDisposable
         );
 
         // Act
-        var exception = Assert.Throws<IOException>(
-            () => bufferingStream.Write(input, 0, input.Length)
-        );
+        var exception = Assert.Throws<IOException>(() =>
+            bufferingStream.Write(input, 0, input.Length));
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         Assert.True(bufferingStream.Disposed);
@@ -314,9 +311,8 @@ public class FileBufferingWriteStreamTests : IDisposable
 
         // Act
         bufferingStream.Write(input, 0, input.Length);
-        var exception = Assert.Throws<IOException>(
-            () => bufferingStream.Write(input, 0, input.Length)
-        );
+        var exception = Assert.Throws<IOException>(() =>
+            bufferingStream.Write(input, 0, input.Length));
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         // Verify we return the buffer.
@@ -353,9 +349,8 @@ public class FileBufferingWriteStreamTests : IDisposable
         );
 
         // Act
-        var exception = await Assert.ThrowsAsync<IOException>(
-            () => bufferingStream.WriteAsync(input, 0, input.Length)
-        );
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            bufferingStream.WriteAsync(input, 0, input.Length));
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         Assert.True(bufferingStream.Disposed);
@@ -374,9 +369,8 @@ public class FileBufferingWriteStreamTests : IDisposable
 
         // Act
         await bufferingStream.WriteAsync(input, 0, input.Length);
-        var exception = await Assert.ThrowsAsync<IOException>(
-            () => bufferingStream.WriteAsync(input, 0, input.Length)
-        );
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            bufferingStream.WriteAsync(input, 0, input.Length));
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         // Verify we return the buffer.
@@ -406,9 +400,8 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[] { 1, 2, 3, 4, 5 };
-        using var bufferingStream = new FileBufferingWriteStream(
-            tempFileDirectoryAccessor: () => TempDirectory
-        );
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory);
         bufferingStream.Write(input, 0, input.Length);
         var memoryStream = new MemoryStream();
 

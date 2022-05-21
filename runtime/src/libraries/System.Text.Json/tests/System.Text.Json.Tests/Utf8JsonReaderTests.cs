@@ -5638,17 +5638,15 @@ namespace System.Text.Json.Tests
         [InlineData(new byte[] { 0xEF, 0xBB, 0xBF }, false)]
         public static void TestBOMWithSingleJsonValue(byte[] utf8BomAndValue, bool isFinalBlock)
         {
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    var json = new Utf8JsonReader(
-                        utf8BomAndValue,
-                        isFinalBlock: isFinalBlock,
-                        state: default
-                    );
-                    json.Read();
-                }
-            );
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                var json = new Utf8JsonReader(
+                    utf8BomAndValue,
+                    isFinalBlock: isFinalBlock,
+                    state: default
+                );
+                json.Read();
+            });
         }
 
         public static IEnumerable<object[]> TestCases

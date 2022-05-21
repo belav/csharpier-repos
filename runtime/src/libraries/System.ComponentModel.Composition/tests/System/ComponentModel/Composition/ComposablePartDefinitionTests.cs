@@ -74,12 +74,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = PartDefinitionFactory.Create();
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    definition.Metadata["Value"] = "Value";
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                definition.Metadata["Value"] = "Value";
+            });
         }
     }
 }

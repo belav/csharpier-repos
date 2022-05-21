@@ -80,13 +80,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             );
 
             _fileTrackingMetadataAsSourceService = fileTrackingMetadataAsSourceService;
-            _lazyTextManager = new Lazy<IVsTextManager>(
-                () =>
-                {
-                    _foregroundThreadAffinitization.AssertIsForeground();
-                    return (IVsTextManager)serviceProvider.GetService(typeof(SVsTextManager));
-                }
-            );
+            _lazyTextManager = new Lazy<IVsTextManager>(() =>
+            {
+                _foregroundThreadAffinitization.AssertIsForeground();
+                return (IVsTextManager)serviceProvider.GetService(typeof(SVsTextManager));
+            });
 
             var runningDocumentTable = (IVsRunningDocumentTable)
                 serviceProvider.GetService(typeof(SVsRunningDocumentTable));

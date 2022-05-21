@@ -145,9 +145,8 @@ public class ViewDataDictionaryTest
         );
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => viewData.SetModelPublic(model)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            viewData.SetModelPublic(model));
         Assert.Equal(
             $"The model item passed into the ViewDataDictionary is of type '{model.GetType()}', but this "
                 + $"ViewDataDictionary instance requires a model item of type '{typeof(TestModel)}'.",
@@ -394,9 +393,8 @@ public class ViewDataDictionaryTest
         var viewData = new TestViewDataDictionary(new EmptyModelMetadataProvider(), typeof(int));
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => viewData.SetModelPublic(value: null)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            viewData.SetModelPublic(value: null));
         Assert.Equal(
             "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item "
                 + $"of type '{typeof(int)}'.",

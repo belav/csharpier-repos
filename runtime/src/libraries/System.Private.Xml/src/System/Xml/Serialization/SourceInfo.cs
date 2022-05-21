@@ -25,12 +25,10 @@ namespace System.Xml.Serialization
             "[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]"
         );
 
-        private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(
-            () =>
-            {
-                return typeof(IList).GetMethod("get_Item", new Type[] { typeof(int) })!;
-            }
-        );
+        private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(() =>
+        {
+            return typeof(IList).GetMethod("get_Item", new Type[] { typeof(int) })!;
+        });
 
         public string Source;
         public readonly string Arg;

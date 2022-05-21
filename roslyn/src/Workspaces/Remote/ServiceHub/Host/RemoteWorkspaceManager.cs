@@ -50,9 +50,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             var resolver = new Resolver(SimpleAssemblyLoader.Instance);
             var discovery = new AttributedPartDiscovery(resolver, isNonPublicSupported: true);
-            var parts = Task.Run(
-                    async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
-                )
+            var parts = Task.Run(async () =>
+                    await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false))
                 .GetAwaiter()
                 .GetResult();
             return ComposableCatalog.Create(resolver).AddParts(parts);

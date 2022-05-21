@@ -178,28 +178,24 @@ namespace System.IO.Tests
                 if (PlatformDetection.IsWindows10Version1903OrGreater)
                 {
                     // On 1903 the filename is immediately released after delete is called
-                    Assert.Throws<FileNotFoundException>(
-                        () =>
-                            CreateFileStream(
-                                fileName,
-                                FileMode.Open,
-                                FileAccess.Read,
-                                FileShare.Delete | FileShare.ReadWrite
-                            )
-                    );
+                    Assert.Throws<FileNotFoundException>(() =>
+                        CreateFileStream(
+                            fileName,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Delete | FileShare.ReadWrite
+                        ));
                 }
                 else
                 {
                     // Any attempt to reopen a file in pending-delete state will return Access-denied
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () =>
-                            CreateFileStream(
-                                fileName,
-                                FileMode.Open,
-                                FileAccess.Read,
-                                FileShare.Delete | FileShare.ReadWrite
-                            )
-                    );
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        CreateFileStream(
+                            fileName,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Delete | FileShare.ReadWrite
+                        ));
                     Assert.True(
                         File.Exists(fileName),
                         $"'{fileName}' should still exist after calling delete with inner filestream closed."

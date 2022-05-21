@@ -44,33 +44,31 @@ namespace System.Net.Security.Tests
             }
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "Private.InternalDiagnostics.System.Net.Security",
-                                EventLevel.Verbose
-                            )
+                .Invoke(() =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "Private.InternalDiagnostics.System.Net.Security",
+                            EventLevel.Verbose
                         )
-                        {
-                            var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                            listener.RunWithCallback(
-                                events.Enqueue,
-                                () =>
-                                {
-                                    // Invoke tests that'll cause some events to be generated
-                                    var test = new SslStreamStreamToStreamTest_Async();
-                                    test.SslStream_StreamToStream_Authentication_Success()
-                                        .GetAwaiter()
-                                        .GetResult();
-                                }
-                            );
-                            Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
-                            Assert.InRange(events.Count, 1, int.MaxValue);
-                        }
+                    )
+                    {
+                        var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                        listener.RunWithCallback(
+                            events.Enqueue,
+                            () =>
+                            {
+                                // Invoke tests that'll cause some events to be generated
+                                var test = new SslStreamStreamToStreamTest_Async();
+                                test.SslStream_StreamToStream_Authentication_Success()
+                                    .GetAwaiter()
+                                    .GetResult();
+                            }
+                        );
+                        Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
+                        Assert.InRange(events.Count, 1, int.MaxValue);
                     }
-                )
+                })
                 .Dispose();
         }
     }

@@ -40,13 +40,11 @@ namespace System.Net.Http.Functional.Tests
         public void Ctor_InvalidStatusCodeRange_Throw()
         {
             int x = -1;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new HttpResponseMessage((HttpStatusCode)x)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x));
             x = 1000;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new HttpResponseMessage((HttpStatusCode)x)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x));
         }
 
         [Fact]
@@ -62,30 +60,22 @@ namespace System.Net.Http.Functional.Tests
                 rm.Dispose(); // Multiple calls don't throw.
 
                 Assert.True(content.IsDisposed);
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        rm.StatusCode = HttpStatusCode.BadRequest;
-                    }
-                );
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        rm.ReasonPhrase = "Bad Request";
-                    }
-                );
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        rm.Version = new Version(1, 0);
-                    }
-                );
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        rm.Content = null;
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.StatusCode = HttpStatusCode.BadRequest;
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.ReasonPhrase = "Bad Request";
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.Version = new Version(1, 0);
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.Content = null;
+                });
 
                 // Property getters should still work after disposing.
                 Assert.Equal(HttpStatusCode.OK, rm.StatusCode);
@@ -202,12 +192,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        rm.Version = null;
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    rm.Version = null;
+                });
             }
         }
 
@@ -216,12 +204,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<FormatException>(
-                    () =>
-                    {
-                        rm.ReasonPhrase = "text\rtext";
-                    }
-                );
+                Assert.Throws<FormatException>(() =>
+                {
+                    rm.ReasonPhrase = "text\rtext";
+                });
             }
         }
 
@@ -230,12 +216,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<FormatException>(
-                    () =>
-                    {
-                        rm.ReasonPhrase = "text\ntext";
-                    }
-                );
+                Assert.Throws<FormatException>(() =>
+                {
+                    rm.ReasonPhrase = "text\ntext";
+                });
             }
         }
 
@@ -292,19 +276,15 @@ namespace System.Net.Http.Functional.Tests
             using (var rm = new HttpResponseMessage())
             {
                 int x = -1;
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        rm.StatusCode = (HttpStatusCode)x;
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    rm.StatusCode = (HttpStatusCode)x;
+                });
                 x = 1000;
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        rm.StatusCode = (HttpStatusCode)x;
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    rm.StatusCode = (HttpStatusCode)x;
+                });
             }
         }
 
@@ -334,9 +314,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Throws<NotSupportedException>(() => s.WriteByte(0));
             Assert.Throws<NotSupportedException>(() => s.Write(new byte[1], 0, 1));
             await Assert.ThrowsAsync<NotSupportedException>(() => s.WriteAsync(new byte[1], 0, 1));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]))
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])));
         }
 
         [Fact]

@@ -332,13 +332,11 @@ namespace System.Net.Mime.Tests
         public void SetCreateDateViaParameters_WithInvalidDate_ShouldThrow()
         {
             var cd = new ContentDisposition("inline");
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    cd.Parameters["creation-date"] = InvalidDate;
-                    //string date = cd.Parameters["creation-date"];
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                cd.Parameters["creation-date"] = InvalidDate;
+                //string date = cd.Parameters["creation-date"];
+            });
         }
 
         [Fact]

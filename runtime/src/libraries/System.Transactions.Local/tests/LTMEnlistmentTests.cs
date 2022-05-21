@@ -211,12 +211,10 @@ namespace System.Transactions.Tests
                         expectedDurableOutcome
                     );
                     // This needs to change once we have promotion support.
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => // Creation of two phase durable enlistment attempts to promote to MSDTC
-                        {
-                            tx.EnlistDurable(Guid.NewGuid(), durable, durableEnlistmentOption);
-                        }
-                    );
+                    Assert.Throws<PlatformNotSupportedException>(() => // Creation of two phase durable enlistment attempts to promote to MSDTC
+                    {
+                        tx.EnlistDurable(Guid.NewGuid(), durable, durableEnlistmentOption);
+                    });
 
                     if (commit)
                     {
@@ -385,17 +383,15 @@ namespace System.Transactions.Tests
                 Assert.Equal(TransactionStatus.Aborted, expectedTxStatus);
             }
 
-            Task.Run(
-                    () => // in case current thread is STA thread, where WaitHandle.WaitAll isn't supported
-                    {
-                        Assert.True(
-                            WaitHandle.WaitAll(
-                                outcomeEvents,
-                                TimeSpan.FromSeconds(MaxTransactionCommitTimeoutInSeconds)
-                            )
-                        );
-                    }
-                )
+            Task.Run(() => // in case current thread is STA thread, where WaitHandle.WaitAll isn't supported
+                {
+                    Assert.True(
+                        WaitHandle.WaitAll(
+                            outcomeEvents,
+                            TimeSpan.FromSeconds(MaxTransactionCommitTimeoutInSeconds)
+                        )
+                    );
+                })
                 .GetAwaiter()
                 .GetResult();
 

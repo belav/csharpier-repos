@@ -46,19 +46,17 @@ namespace System.Numerics.Tests
             {
                 for (int j = 0; j <= 2; j++)
                 {
-                    Assert.Throws<DivideByZeroException>(
-                        () =>
-                        {
-                            VerifyModPowString(
-                                BigInteger.Zero.ToString()
-                                    + " "
-                                    + j.ToString()
-                                    + " "
-                                    + i.ToString()
-                                    + " tModPow"
-                            );
-                        }
-                    );
+                    Assert.Throws<DivideByZeroException>(() =>
+                    {
+                        VerifyModPowString(
+                            BigInteger.Zero.ToString()
+                                + " "
+                                + j.ToString()
+                                + " "
+                                + i.ToString()
+                                + " tModPow"
+                        );
+                    });
                 }
             }
 
@@ -71,19 +69,17 @@ namespace System.Numerics.Tests
                     {
                         if (k != 0)
                         {
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    VerifyModPowString(
-                                        k.ToString()
-                                            + " "
-                                            + j.ToString()
-                                            + " "
-                                            + i.ToString()
-                                            + " tModPow"
-                                    );
-                                }
-                            );
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                VerifyModPowString(
+                                    k.ToString()
+                                        + " "
+                                        + j.ToString()
+                                        + " "
+                                        + i.ToString()
+                                        + " tModPow"
+                                );
+                            });
                         }
                     }
                 }
@@ -95,17 +91,15 @@ namespace System.Numerics.Tests
                 tempByteArray1 = GetRandomByteArray(s_random);
                 tempByteArray2 = GetRandomNegByteArray(s_random, 2);
                 tempByteArray3 = GetRandomByteArray(s_random);
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        VerifyModPowString(
-                            Print(tempByteArray3)
-                                + Print(tempByteArray2)
-                                + Print(tempByteArray1)
-                                + "tModPow"
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    VerifyModPowString(
+                        Print(tempByteArray3)
+                            + Print(tempByteArray2)
+                            + Print(tempByteArray1)
+                            + "tModPow"
+                    );
+                });
             }
 
             // ModPow Method - Zero Modulus
@@ -113,18 +107,16 @@ namespace System.Numerics.Tests
             {
                 tempByteArray1 = GetRandomByteArray(s_random);
                 tempByteArray2 = GetRandomPosByteArray(s_random, 1);
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyModPowString(
-                            BigInteger.Zero.ToString()
-                                + " "
-                                + Print(tempByteArray2)
-                                + Print(tempByteArray1)
-                                + "tModPow"
-                        );
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyModPowString(
+                        BigInteger.Zero.ToString()
+                            + " "
+                            + Print(tempByteArray2)
+                            + Print(tempByteArray1)
+                            + "tModPow"
+                    );
+                });
             }
         }
 

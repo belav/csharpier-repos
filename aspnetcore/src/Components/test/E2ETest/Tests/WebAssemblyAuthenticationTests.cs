@@ -375,9 +375,8 @@ public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFix
         Browser.Exists(By.CssSelector("button.nav-link.btn.btn-link")).Click();
 
         Browser.Contains("/authentication/logged-out", () => Browser.Url);
-        Browser.True(
-            () => Browser.FindElements(By.TagName("p")).Any(e => e.Text == "You are logged out.")
-        );
+        Browser.True(() =>
+            Browser.FindElements(By.TagName("p")).Any(e => e.Text == "You are logged out."));
     }
 
     private void ValidateFetchData()

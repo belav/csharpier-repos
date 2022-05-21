@@ -116,9 +116,8 @@ public class DefaultViewComponentSelectorTest
             + "Name: 'Namespace2.Ambiguous'";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => selector.SelectComponent("Ambiguous")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            selector.SelectComponent("Ambiguous"));
 
         // Assert
         Assert.Equal(expected, ex.Message);

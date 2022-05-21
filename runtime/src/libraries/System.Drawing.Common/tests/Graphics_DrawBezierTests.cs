@@ -285,29 +285,24 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawBezier(pen, 1, 2, 3, 4, 5, 6, 7, 8)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.DrawBezier(
-                                pen,
-                                Point.Empty,
-                                Point.Empty,
-                                Point.Empty,
-                                Point.Empty
-                            )
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            graphics.DrawBezier(
-                                pen,
-                                PointF.Empty,
-                                PointF.Empty,
-                                PointF.Empty,
-                                PointF.Empty
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawBezier(pen, 1, 2, 3, 4, 5, 6, 7, 8));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawBezier(
+                            pen,
+                            Point.Empty,
+                            Point.Empty,
+                            Point.Empty,
+                            Point.Empty
+                        ));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawBezier(
+                            pen,
+                            PointF.Empty,
+                            PointF.Empty,
+                            PointF.Empty,
+                            PointF.Empty
+                        ));
                 }
                 finally
                 {
@@ -430,12 +425,10 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawBeziers(pen, new Point[2])
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => graphics.DrawBeziers(pen, new PointF[2])
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawBeziers(pen, new Point[2]));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        graphics.DrawBeziers(pen, new PointF[2]));
                 }
                 finally
                 {

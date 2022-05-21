@@ -653,10 +653,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     {
                         var disposalToken = stateRef.Target.DisposalToken;
 
-                        this.ThreadingContext.JoinableTaskFactory.Run(
-                            () =>
-                                this.RecomputeTagsForegroundAsync(initialTags: true, disposalToken)
-                        );
+                        this.ThreadingContext.JoinableTaskFactory.Run(() =>
+                            this.RecomputeTagsForegroundAsync(initialTags: true, disposalToken));
                     }
                 }
 

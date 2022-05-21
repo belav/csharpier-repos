@@ -25,14 +25,12 @@ namespace System.Web.WebPages
         public WebPageHttpHandler(WebPage webPage)
             : this(
                 webPage,
-                new Lazy<WebPageRenderingBase>(
-                    () =>
-                        System.Web.WebPages.StartPage.GetStartPage(
-                            webPage,
-                            StartPageFileName,
-                            GetRegisteredExtensions()
-                        )
-                )
+                new Lazy<WebPageRenderingBase>(() =>
+                    System.Web.WebPages.StartPage.GetStartPage(
+                        webPage,
+                        StartPageFileName,
+                        GetRegisteredExtensions()
+                    ))
             ) { }
 
         internal WebPageHttpHandler(WebPage webPage, Lazy<WebPageRenderingBase> startPage)

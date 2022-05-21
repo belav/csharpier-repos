@@ -273,12 +273,10 @@ namespace System.Security.Cryptography.EcDsa.OpenSsl.Tests
         [Fact]
         public void LookupCurveByOidWithInvalidThrowsPlatformNotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                {
-                    new ECDsaOpenSsl(ECCurve.CreateFromFriendlyName("Invalid"));
-                }
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
+                new ECDsaOpenSsl(ECCurve.CreateFromFriendlyName("Invalid"));
+            });
         }
 
         [Fact]

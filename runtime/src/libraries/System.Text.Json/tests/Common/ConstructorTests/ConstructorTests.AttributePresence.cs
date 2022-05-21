@@ -13,9 +13,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}")
-                );
+                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    JsonSerializerWrapperForString.DeserializeWrapper<T>("{}"));
                 Assert.Contains("JsonConstructorAttribute", ex.ToString());
             }
 
@@ -101,12 +100,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public Task Class_MultiplePublicParameterizedCtors_NoPublicParameterlessCtor_NoAttribute_NotSupported()
         {
-            return Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor>(
-                        @"{""MyInt"":1,""MyString"":""1""}"
-                    )
-            );
+            return Assert.ThrowsAsync<NotSupportedException>(() =>
+                JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                ));
         }
 
         [Fact]
@@ -171,9 +168,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}")
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    JsonSerializerWrapperForString.DeserializeWrapper<T>("{}"));
             }
 
             await RunTestAsync<MultiplePublicParameterizedCtor_WithMultipleAttributes>();
@@ -193,9 +189,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                await Assert.ThrowsAsync<NotSupportedException>(
-                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("[]")
-                );
+                await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    JsonSerializerWrapperForString.DeserializeWrapper<T>("[]"));
             }
 
             await RunTestAsync<Parameterized_StackWrapper>();

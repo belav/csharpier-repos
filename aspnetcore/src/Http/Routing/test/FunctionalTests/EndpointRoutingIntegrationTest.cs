@@ -190,9 +190,8 @@ public class EndpointRoutingIntegrationTest
 
         await host.StartAsync();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.CreateRequest("/").SendAsync("GET")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.CreateRequest("/").SendAsync("GET"));
         Assert.Equal(AuthErrorMessage, ex.Message);
     }
 
@@ -274,9 +273,8 @@ public class EndpointRoutingIntegrationTest
 
         await host.StartAsync();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.CreateRequest("/").SendAsync("GET")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.CreateRequest("/").SendAsync("GET"));
         Assert.Equal(AuthErrorMessage, ex.Message);
     }
 
@@ -320,9 +318,8 @@ public class EndpointRoutingIntegrationTest
 
         await host.StartAsync();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.CreateRequest("/").SendAsync("GET")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.CreateRequest("/").SendAsync("GET"));
         Assert.Equal(AuthErrorMessage, ex.Message);
     }
 
@@ -405,9 +402,8 @@ public class EndpointRoutingIntegrationTest
 
         await host.StartAsync();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.CreateRequest("/").SendAsync("GET")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.CreateRequest("/").SendAsync("GET"));
         Assert.Equal(CORSErrorMessage, ex.Message);
     }
 }

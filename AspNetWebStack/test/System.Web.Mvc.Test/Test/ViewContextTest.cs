@@ -196,50 +196,48 @@ namespace System.Web.Mvc.Test
         public void ViewContextGlobalValidationMessageElementAffectsLocalOne()
         {
             // Arrange
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var httpContext = new Mock<HttpContextBase>();
+                ScopeStorageDictionary localScope = null;
+                var globalViewContext = new ViewContext
                 {
-                    var httpContext = new Mock<HttpContextBase>();
-                    ScopeStorageDictionary localScope = null;
-                    var globalViewContext = new ViewContext
+                    ScopeThunk = () => ScopeStorage.GlobalScope,
+                    HttpContext = httpContext.Object
+                };
+                var localViewContext = new ViewContext
+                {
+                    ScopeThunk = () =>
                     {
-                        ScopeThunk = () => ScopeStorage.GlobalScope,
-                        HttpContext = httpContext.Object
-                    };
-                    var localViewContext = new ViewContext
-                    {
-                        ScopeThunk = () =>
+                        if (localScope == null)
                         {
-                            if (localScope == null)
-                            {
-                                localScope = new ScopeStorageDictionary(ScopeStorage.GlobalScope);
-                            }
-                            ;
-                            return localScope;
-                        },
-                        HttpContext = httpContext.Object
-                    };
-                    // A ScopeCache object will be stored into the hash table but the ScopeCache class is private,
-                    // so we cannot get the validation message element from it for Assert.
-                    httpContext.Setup(c => c.Items).Returns(new Hashtable());
+                            localScope = new ScopeStorageDictionary(ScopeStorage.GlobalScope);
+                        }
+                        ;
+                        return localScope;
+                    },
+                    HttpContext = httpContext.Object
+                };
+                // A ScopeCache object will be stored into the hash table but the ScopeCache class is private,
+                // so we cannot get the validation message element from it for Assert.
+                httpContext.Setup(c => c.Items).Returns(new Hashtable());
 
-                    // Act
-                    globalViewContext.ValidationMessageElement = "label";
+                // Act
+                globalViewContext.ValidationMessageElement = "label";
 
-                    // Assert
-                    // Global element was changed from "span" to "label".
-                    Assert.Equal("label", HtmlHelper.ValidationMessageElement);
-                    Assert.Equal("label", globalViewContext.ValidationMessageElement);
-                    object value;
-                    ScopeStorage.GlobalScope.TryGetValue("ValidationMessageElement", out value);
-                    Assert.Equal("label", value);
+                // Assert
+                // Global element was changed from "span" to "label".
+                Assert.Equal("label", HtmlHelper.ValidationMessageElement);
+                Assert.Equal("label", globalViewContext.ValidationMessageElement);
+                object value;
+                ScopeStorage.GlobalScope.TryGetValue("ValidationMessageElement", out value);
+                Assert.Equal("label", value);
 
-                    // Local element was also changed to "label".
-                    Assert.Equal("label", localViewContext.ValidationMessageElement);
-                    localScope.TryGetValue("ValidationMessageElement", out value);
-                    Assert.Equal("label", value);
-                }
-            );
+                // Local element was also changed to "label".
+                Assert.Equal("label", localViewContext.ValidationMessageElement);
+                localScope.TryGetValue("ValidationMessageElement", out value);
+                Assert.Equal("label", value);
+            });
         }
 
         [Fact]

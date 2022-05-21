@@ -60,12 +60,10 @@ namespace System.Net.Http.Tests
                 "name"
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    nameValue.Parameters.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                nameValue.Parameters.Add(null);
+            });
         }
 
         [Fact]
@@ -303,12 +301,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    NameValueWithParametersHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                NameValueWithParametersHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 NameValueWithParametersHeaderValue.TryParse(

@@ -164,18 +164,14 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(0, result.Count());
 
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableListWrapper>(
-                        @"[""1"",""2""]"
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableListWrapper>(
-                        @"[]"
-                    )
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableListWrapper>(
+                    @"[""1"",""2""]"
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableListWrapper>(
+                    @"[]"
+                ));
         }
 
         [Fact]
@@ -253,18 +249,14 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(0, result.Count());
 
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableStackWrapper>(
-                        @"[""1"",""2""]"
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableStackWrapper>(
-                        @"[]"
-                    )
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableStackWrapper>(
+                    @"[""1"",""2""]"
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableStackWrapper>(
+                    @"[]"
+                ));
         }
 
         [Fact]
@@ -338,18 +330,14 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(0, result.Count());
 
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableQueueWrapper>(
-                        @"[""1"",""2""]"
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableQueueWrapper>(
-                        @"[]"
-                    )
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableQueueWrapper>(
+                    @"[""1"",""2""]"
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableQueueWrapper>(
+                    @"[]"
+                ));
         }
 
         [Fact]
@@ -431,18 +419,14 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.Equal(0, result.Count());
 
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableSetWrapper>(
-                        @"[""1"",""2""]"
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableSetWrapper>(
-                        @"[]"
-                    )
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableSetWrapper>(
+                    @"[""1"",""2""]"
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<StringIImmutableSetWrapper>(
+                    @"[]"
+                ));
         }
 
         [Fact]
@@ -787,36 +771,26 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ReadSimpleTestClass_ImmutableCollectionWrappers_Throws()
         {
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithIImmutableDictionaryWrapper>(
-                        SimpleTestClassWithIImmutableDictionaryWrapper.s_json
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableListWrapper>(
-                        SimpleTestClassWithImmutableListWrapper.s_json
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableStackWrapper>(
-                        SimpleTestClassWithImmutableStackWrapper.s_json
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableQueueWrapper>(
-                        SimpleTestClassWithImmutableQueueWrapper.s_json
-                    )
-            );
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableSetWrapper>(
-                        SimpleTestClassWithImmutableSetWrapper.s_json
-                    )
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithIImmutableDictionaryWrapper>(
+                    SimpleTestClassWithIImmutableDictionaryWrapper.s_json
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableListWrapper>(
+                    SimpleTestClassWithImmutableListWrapper.s_json
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableStackWrapper>(
+                    SimpleTestClassWithImmutableStackWrapper.s_json
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableQueueWrapper>(
+                    SimpleTestClassWithImmutableQueueWrapper.s_json
+                ));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await JsonSerializerWrapperForString.DeserializeWrapper<SimpleTestClassWithImmutableSetWrapper>(
+                    SimpleTestClassWithImmutableSetWrapper.s_json
+                ));
         }
     }
 }

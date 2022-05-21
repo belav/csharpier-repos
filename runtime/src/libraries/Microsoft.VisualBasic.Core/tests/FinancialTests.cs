@@ -69,9 +69,8 @@ namespace Microsoft.VisualBasic.Tests
             double Factor
         )
         {
-            Assert.Throws<ArgumentException>(
-                () => Financial.DDB(Cost, Salvage, Life, Period, Factor)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Financial.DDB(Cost, Salvage, Life, Period, Factor));
         }
 
         [Theory]
@@ -253,9 +252,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(new double[] { 70000, 22000, 25000, 28000, 31000 }, 0.1, 0.12)]
         public void MIRR_Invalid(double[] ValueArray, double FinanceRate, double ReinvestRate)
         {
-            Assert.Throws<DivideByZeroException>(
-                () => Financial.MIRR(ref ValueArray, FinanceRate, ReinvestRate)
-            );
+            Assert.Throws<DivideByZeroException>(() =>
+                Financial.MIRR(ref ValueArray, FinanceRate, ReinvestRate));
         }
 
         [Theory]

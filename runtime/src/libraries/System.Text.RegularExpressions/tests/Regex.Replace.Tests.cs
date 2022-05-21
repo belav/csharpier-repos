@@ -1419,14 +1419,12 @@ namespace System.Text.RegularExpressions.Tests
             if (PlatformDetection.IsNetCore)
             {
                 // Substitutions not supported in NonBacktracking mode
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        new Regex("pattern", RegexHelpers.RegexOptionNonBacktracking).Replace(
-                            "input",
-                            "$1",
-                            -1
-                        )
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex("pattern", RegexHelpers.RegexOptionNonBacktracking).Replace(
+                        "input",
+                        "$1",
+                        -1
+                    ));
             }
         }
 
@@ -1567,12 +1565,10 @@ namespace System.Text.RegularExpressions.Tests
         {
             if (opt == RegexHelpers.RegexOptionNonBacktracking)
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Regex.Replace(input, pattern, replacement, opt)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex(pattern, opt).Replace(input, replacement, -1)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    Regex.Replace(input, pattern, replacement, opt));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex(pattern, opt).Replace(input, replacement, -1));
             }
             else
             {

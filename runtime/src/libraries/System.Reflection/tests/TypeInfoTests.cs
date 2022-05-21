@@ -878,9 +878,8 @@ namespace System.Reflection.Tests
                 "value",
                 () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumName("")
             );
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(IntEnum).GetTypeInfo().GetEnumName(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(IntEnum).GetTypeInfo().GetEnumName(null));
         }
 
         public static IEnumerable<object[]> GetEnumNames_TestData()
@@ -974,15 +973,10 @@ namespace System.Reflection.Tests
                 "enumType",
                 () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().IsEnumDefined("10")
             );
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(IntEnum).GetTypeInfo().IsEnumDefined(null)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    typeof(IntEnum)
-                        .GetTypeInfo()
-                        .IsEnumDefined(new NonGenericClassWithNoInterfaces())
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(IntEnum).GetTypeInfo().IsEnumDefined(null));
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(IntEnum).GetTypeInfo().IsEnumDefined(new NonGenericClassWithNoInterfaces()));
         }
 
         [Theory]
@@ -1286,18 +1280,16 @@ namespace System.Reflection.Tests
             Assert.False(T.IsAssignableTo(nubOfT));
 
             // illegal type construction due to T->T?
-            Assert.Throws<ArgumentException>(
-                () => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                typeof(G<,>).MakeGenericType(typeof(int), typeof(int?)));
 
             // Test trivial object casts
             s_boxedInt32 = (object)1234;
             Assert.True((s_boxedInt32 is int?) && (int?)s_boxedInt32 == 1234);
 
             // test construction again to catch caching issues
-            Assert.Throws<ArgumentException>(
-                () => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                typeof(G<,>).MakeGenericType(typeof(int), typeof(int?)));
         }
 
         interface IFace { }
@@ -1598,18 +1590,14 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetMethod_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(MembersClass).GetTypeInfo().GetMethod(null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(MembersClass).GetTypeInfo().GetMethod("p", null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    typeof(MembersClass)
-                        .GetTypeInfo()
-                        .GetMethod("p", new Type[] { typeof(int), null })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(MembersClass).GetTypeInfo().GetMethod(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(MembersClass).GetTypeInfo().GetMethod("p", null));
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(MembersClass)
+                    .GetTypeInfo()
+                    .GetMethod("p", new Type[] { typeof(int), null }));
         }
 
         [Theory]
@@ -1755,9 +1743,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEvent_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(MembersClass).GetTypeInfo().GetEvent(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(MembersClass).GetTypeInfo().GetEvent(null));
         }
 
         [Theory]
@@ -1812,9 +1799,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetField_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(MembersClass).GetTypeInfo().GetField(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(MembersClass).GetTypeInfo().GetField(null));
         }
 
         [Theory]
@@ -1885,25 +1871,22 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetDeclaredEvent_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredEvent(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(TI_BaseClass).GetTypeInfo().GetDeclaredEvent(null));
         }
 
         [Fact]
         public void GetDeclaredField_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredField(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(TI_BaseClass).GetTypeInfo().GetDeclaredField(null));
         }
 
         [Fact]
         public void GetDeclaredMethod_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredMethod(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(TI_BaseClass).GetTypeInfo().GetDeclaredMethod(null));
         }
 
         [Theory]
@@ -1921,9 +1904,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetDeclaredNestedType_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredNestedType(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                typeof(TI_BaseClass).GetTypeInfo().GetDeclaredNestedType(null));
         }
 
         [Theory]
@@ -2610,15 +2592,12 @@ namespace System.Reflection.Tests
             Assert.IsAssignableFrom<MethodInfo>(toString);
             Assert.Equal("ToString", toString.Name);
 
-            Assert.Throws<ArgumentNullException>(
-                () => openGenericType.GetMemberWithSameMetadataDefinitionAs(null)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    openGenericType.GetMemberWithSameMetadataDefinitionAs(
-                        typeof(string).GetMethod("get_Length")
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                openGenericType.GetMemberWithSameMetadataDefinitionAs(null));
+            Assert.Throws<ArgumentException>(() =>
+                openGenericType.GetMemberWithSameMetadataDefinitionAs(
+                    typeof(string).GetMethod("get_Length")
+                ));
         }
 
 #pragma warning disable 0067, 0169

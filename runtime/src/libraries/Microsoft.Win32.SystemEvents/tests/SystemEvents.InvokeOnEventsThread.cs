@@ -48,13 +48,11 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotEqual(-1, expectedThreadId);
 
                 SystemEvents.InvokeOnEventsThread(
-                    new Action(
-                        () =>
-                        {
-                            actualThreadId = Environment.CurrentManagedThreadId;
-                            invoked.Set();
-                        }
-                    )
+                    new Action(() =>
+                    {
+                        actualThreadId = Environment.CurrentManagedThreadId;
+                        invoked.Set();
+                    })
                 );
                 Assert.True(invoked.WaitOne(PostMessageWait));
                 Assert.Equal(expectedThreadId, actualThreadId);
@@ -80,34 +78,30 @@ namespace Microsoft.Win32.SystemEventsTests
         public void RegisterFromSTAThreadThatGoesAway_MessageStillDelivered()
         {
             RemoteExecutor
-                .Invoke(
-                    () => // to ensure no one has registered for any events before
+                .Invoke(() => // to ensure no one has registered for any events before
+                {
+                    bool changing = false,
+                        changed = false;
+
+                    // Register for the events on an STA thread that then immediately exits
+                    var thread = new Thread(() =>
                     {
-                        bool changing = false,
-                            changed = false;
+                        SystemEvents.DisplaySettingsChanging += (o, e) => changing = true;
+                        SystemEvents.DisplaySettingsChanged += (o, e) => changed = true;
+                    });
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start();
+                    thread.Join();
 
-                        // Register for the events on an STA thread that then immediately exits
-                        var thread = new Thread(
-                            () =>
-                            {
-                                SystemEvents.DisplaySettingsChanging += (o, e) => changing = true;
-                                SystemEvents.DisplaySettingsChanged += (o, e) => changed = true;
-                            }
-                        );
-                        thread.SetApartmentState(ApartmentState.STA);
-                        thread.Start();
-                        thread.Join();
+                    SendMessage(
+                        User32.WM_REFLECT + User32.WM_DISPLAYCHANGE,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
 
-                        SendMessage(
-                            User32.WM_REFLECT + User32.WM_DISPLAYCHANGE,
-                            IntPtr.Zero,
-                            IntPtr.Zero
-                        );
-
-                        Assert.True(changing);
-                        Assert.True(changed);
-                    }
-                )
+                    Assert.True(changing);
+                    Assert.True(changed);
+                })
                 .Dispose();
         }
     }

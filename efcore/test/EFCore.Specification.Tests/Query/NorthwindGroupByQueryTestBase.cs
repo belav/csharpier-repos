@@ -3010,19 +3010,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task GroupBy_aggregate_SelectMany(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                from o in ss.Set<Order>()
-                                group o by o.CustomerID into g
-                                let id = g.Min(x => x.OrderID)
-                                from o in ss.Set<Order>()
-                                where o.OrderID == id
-                                select o
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from o in ss.Set<Order>()
+                            group o by o.CustomerID into g
+                            let id = g.Min(x => x.OrderID)
+                            from o in ss.Set<Order>()
+                            where o.OrderID == id
+                            select o
+                    ))
             ).Message;
 
             Assert.Contains(
@@ -3316,89 +3314,75 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_as_final_operator(bool async)
         {
-            return AssertTranslationFailed(
-                () => AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City))
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City)));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_Where_with_grouping_result(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .GroupBy(c => c.City)
-                                .Where(e => e.Key.StartsWith("s"))
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().GroupBy(c => c.City).Where(e => e.Key.StartsWith("s"))
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_OrderBy_with_grouping_result(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Customer>().GroupBy(c => c.City).OrderBy(e => e.Key),
-                        assertOrder: true
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().GroupBy(c => c.City).OrderBy(e => e.Key),
+                    assertOrder: true
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_SelectMany(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g),
-                        entryCount: 91
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g),
+                    entryCount: 91
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_GroupBy_SelectMany(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .GroupBy(o => o.CustomerID)
-                                .SelectMany(g => g),
-                        entryCount: 830
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .OrderBy(o => o.OrderID)
+                            .GroupBy(o => o.CustomerID)
+                            .SelectMany(g => g),
+                    entryCount: 830
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task OrderBy_GroupBy_SelectMany_shadow(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Employee>()
-                                .OrderBy(e => e.EmployeeID)
-                                .GroupBy(e => e.EmployeeID)
-                                .SelectMany(g => g)
-                                .Select(g => EF.Property<string>(g, "Title"))
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Employee>()
+                            .OrderBy(e => e.EmployeeID)
+                            .GroupBy(e => e.EmployeeID)
+                            .SelectMany(g => g)
+                            .Select(g => EF.Property<string>(g, "Title"))
+                ));
         }
 
         [ConditionalTheory]
@@ -3407,36 +3391,31 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Order>()
-                                .GroupBy(o => o.CustomerID)
-                                .OrderBy(g => g.Key)
-                                .Take(5)
-                                .Skip(3)
-                                .Distinct()
-                                .Select(g => g.Key),
-                        assertOrder: true,
-                        entryCount: 31
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        ss.Set<Order>()
+                            .GroupBy(o => o.CustomerID)
+                            .OrderBy(g => g.Key)
+                            .Take(5)
+                            .Skip(3)
+                            .Distinct()
+                            .Select(g => g.Key),
+                    assertOrder: true,
+                    entryCount: 31
+                ));
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task GroupBy_Distinct(bool async)
         {
-            return AssertTranslationFailed(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Order>().GroupBy(o => o.CustomerID).Distinct().Select(g => g.Key)
-                    )
-            );
+            return AssertTranslationFailed(() =>
+                AssertQuery(
+                    async,
+                    ss => ss.Set<Order>().GroupBy(o => o.CustomerID).Distinct().Select(g => g.Key)
+                ));
         }
 
         #endregion

@@ -76,9 +76,8 @@ namespace System.Runtime.InteropServices.Tests
             var secureString = new SecureString();
             secureString.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => Marshal.SecureStringToCoTaskMemAnsi(secureString)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                Marshal.SecureStringToCoTaskMemAnsi(secureString));
         }
 
         private static SecureString ToSecureString(string data)

@@ -1191,9 +1191,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(
             bool async
         ) =>
-            AssertTranslationFailed(
-                () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
-            );
+            AssertTranslationFailed(() =>
+                base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
 
         [ConditionalTheory(Skip = "Issue#17246")]
         public override Task Filtered_collection_projection_is_tracked(bool async) =>
@@ -1414,9 +1413,8 @@ OFFSET 0 LIMIT @__p_0"
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Projection_skip_projection_doesnt_project_intermittent_column(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Projection_skip_projection_doesnt_project_intermittent_column(async))
             ).Message;
 
             Assert.Equal(CosmosStrings.OffsetRequiresLimit, message);
@@ -1548,9 +1546,8 @@ ORDER BY c[""OrderID""]"
         public override async Task Reverse_after_orderBy_and_take(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Reverse_after_orderBy_and_take(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Reverse_after_orderBy_and_take(async))
             ).Message;
 
             Assert.Equal(CosmosStrings.ReverseAfterSkipTakeNotSupported, message);

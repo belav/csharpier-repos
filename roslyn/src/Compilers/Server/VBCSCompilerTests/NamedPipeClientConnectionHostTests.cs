@@ -52,9 +52,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         )]
         public async Task CallBeforeListen()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => _host.GetNextClientConnectionAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                _host.GetNextClientConnectionAsync());
         }
 
         [ConditionalFact(

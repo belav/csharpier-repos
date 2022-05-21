@@ -77,18 +77,16 @@ namespace System.IO.Tests
         public virtual void NegativePreallocationSizeThrows()
         {
             string filePath = GetTestFilePath();
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    CreateFileStream(
-                        filePath,
-                        FileMode.CreateNew,
-                        FileAccess.Write,
-                        FileShare.None,
-                        bufferSize: 1,
-                        FileOptions.None,
-                        preallocationSize: -1
-                    )
-            );
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                CreateFileStream(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: -1
+                ));
         }
 
         [Theory]
@@ -98,18 +96,16 @@ namespace System.IO.Tests
         [InlineData(FileMode.Truncate)]
         public void PreallocationSizeThrowsForFileModesThatOpenExistingFiles(FileMode mode)
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CreateFileStream(
-                        GetTestFilePath(),
-                        mode,
-                        FileAccess.Write,
-                        FileShare.None,
-                        bufferSize: 1,
-                        FileOptions.None,
-                        preallocationSize: 20
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                CreateFileStream(
+                    GetTestFilePath(),
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 20
+                ));
         }
 
         [Theory]
@@ -117,18 +113,16 @@ namespace System.IO.Tests
         [InlineData(FileMode.CreateNew)]
         public void PreallocationSizeThrowsForReadOnlyAccess(FileMode mode)
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                    CreateFileStream(
-                        GetTestFilePath(),
-                        mode,
-                        FileAccess.Read,
-                        FileShare.None,
-                        bufferSize: 1,
-                        FileOptions.None,
-                        preallocationSize: 20
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                CreateFileStream(
+                    GetTestFilePath(),
+                    mode,
+                    FileAccess.Read,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 20
+                ));
         }
 
         [Theory]
@@ -222,18 +216,16 @@ namespace System.IO.Tests
 
             string filePath = GetTestFilePath();
 
-            IOException ex = Assert.Throws<IOException>(
-                () =>
-                    CreateFileStream(
-                        filePath,
-                        mode,
-                        FileAccess.Write,
-                        FileShare.None,
-                        bufferSize: 1,
-                        FileOptions.None,
-                        tooMuch
-                    )
-            );
+            IOException ex = Assert.Throws<IOException>(() =>
+                CreateFileStream(
+                    filePath,
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    tooMuch
+                ));
             Assert.Contains(filePath, ex.Message);
             Assert.Contains(tooMuch.ToString(), ex.Message);
 

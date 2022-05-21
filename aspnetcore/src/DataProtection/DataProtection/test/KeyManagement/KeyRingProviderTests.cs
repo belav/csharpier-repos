@@ -279,9 +279,8 @@ public class KeyRingProviderTests
         );
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => keyRingProvider.GetCacheableKeyRing(now)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            keyRingProvider.GetCacheableKeyRing(now));
 
         // Assert
         Assert.Equal(
@@ -601,35 +600,30 @@ public class KeyRingProviderTests
             new ManualResetEventSlim();
         ManualResetEventSlim mreForegroundThreadIsCallingGetCurrentKeyRing =
             new ManualResetEventSlim();
-        var backgroundGetKeyRingTask = Task.Run(
-            () =>
-            {
-                mockCacheableKeyRingProvider
-                    .Setup(o => o.GetCacheableKeyRing(now))
-                    .Returns(
-                        () =>
-                        {
-                            mreBackgroundThreadHasCalledGetCurrentKeyRing.Set();
-                            Assert.True(
-                                mreForegroundThreadIsCallingGetCurrentKeyRing.Wait(testTimeout),
-                                "Test timed out."
-                            );
-                            SpinWait.SpinUntil(
-                                () =>
-                                    (foregroundThread.ThreadState & ThreadState.WaitSleepJoin) != 0,
-                                testTimeout
-                            );
-                            return new CacheableKeyRing(
-                                expirationToken: CancellationToken.None,
-                                expirationTime: StringToDateTime("2015-03-02 00:00:00Z"),
-                                keyRing: expectedKeyRing
-                            );
-                        }
+        var backgroundGetKeyRingTask = Task.Run(() =>
+        {
+            mockCacheableKeyRingProvider
+                .Setup(o => o.GetCacheableKeyRing(now))
+                .Returns(() =>
+                {
+                    mreBackgroundThreadHasCalledGetCurrentKeyRing.Set();
+                    Assert.True(
+                        mreForegroundThreadIsCallingGetCurrentKeyRing.Wait(testTimeout),
+                        "Test timed out."
                     );
+                    SpinWait.SpinUntil(
+                        () => (foregroundThread.ThreadState & ThreadState.WaitSleepJoin) != 0,
+                        testTimeout
+                    );
+                    return new CacheableKeyRing(
+                        expirationToken: CancellationToken.None,
+                        expirationTime: StringToDateTime("2015-03-02 00:00:00Z"),
+                        keyRing: expectedKeyRing
+                    );
+                });
 
-                return keyRingProvider.GetCurrentKeyRingCore(now);
-            }
-        );
+            return keyRingProvider.GetCurrentKeyRingCore(now);
+        });
 
         Assert.True(
             mreBackgroundThreadHasCalledGetCurrentKeyRing.Wait(testTimeout),
@@ -682,13 +676,12 @@ public class KeyRingProviderTests
                 dto =>
                 {
                     // at this point we're inside the critical section - spawn the background thread now
-                    var backgroundGetKeyRingTask = Task.Run(
-                        () =>
-                        {
-                            keyRingReturnedToBackgroundThread =
-                                keyRingProvider.GetCurrentKeyRingCore(updatedKeyRingTime);
-                        }
-                    );
+                    var backgroundGetKeyRingTask = Task.Run(() =>
+                    {
+                        keyRingReturnedToBackgroundThread = keyRingProvider.GetCurrentKeyRingCore(
+                            updatedKeyRingTime
+                        );
+                    });
                     Assert.True(backgroundGetKeyRingTask.Wait(testTimeout), "Test timed out.");
 
                     return new CacheableKeyRing(
@@ -782,26 +775,22 @@ public class KeyRingProviderTests
         var mockKeyManager = new Mock<IKeyManager>(MockBehavior.Strict);
         mockKeyManager
             .Setup(o => o.GetCacheExpirationToken())
-            .Returns(
-                () =>
-                {
-                    callSequence.Add("GetCacheExpirationToken");
-                    getCacheExpirationTokenReturnValuesEnumerator.MoveNext();
-                    return getCacheExpirationTokenReturnValuesEnumerator.Current;
-                }
-            );
+            .Returns(() =>
+            {
+                callSequence.Add("GetCacheExpirationToken");
+                getCacheExpirationTokenReturnValuesEnumerator.MoveNext();
+                return getCacheExpirationTokenReturnValuesEnumerator.Current;
+            });
 
         var getAllKeysReturnValuesEnumerator = getAllKeysReturnValues.GetEnumerator();
         mockKeyManager
             .Setup(o => o.GetAllKeys())
-            .Returns(
-                () =>
-                {
-                    callSequence.Add("GetAllKeys");
-                    getAllKeysReturnValuesEnumerator.MoveNext();
-                    return getAllKeysReturnValuesEnumerator.Current;
-                }
-            );
+            .Returns(() =>
+            {
+                callSequence.Add("GetAllKeys");
+                getAllKeysReturnValuesEnumerator.MoveNext();
+                return getAllKeysReturnValuesEnumerator.Current;
+            });
 
         if (createNewKeyCallbacks != null)
         {

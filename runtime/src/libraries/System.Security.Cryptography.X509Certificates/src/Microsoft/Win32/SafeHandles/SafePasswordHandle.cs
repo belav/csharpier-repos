@@ -87,13 +87,11 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         public static SafePasswordHandle InvalidHandle =>
-            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(
-                () =>
-                {
-                    var handle = new SafePasswordHandle((string?)null);
-                    handle.handle = (IntPtr)(-1);
-                    return handle;
-                }
-            );
+            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(() =>
+            {
+                var handle = new SafePasswordHandle((string?)null);
+                handle.handle = (IntPtr)(-1);
+                return handle;
+            });
     }
 }

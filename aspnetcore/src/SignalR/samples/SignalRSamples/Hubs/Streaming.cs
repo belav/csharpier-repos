@@ -35,18 +35,16 @@ public class Streaming : Hub
     {
         var channel = Channel.CreateUnbounded<int>();
 
-        Task.Run(
-            async () =>
+        Task.Run(async () =>
+        {
+            for (var i = 0; i < count; i++)
             {
-                for (var i = 0; i < count; i++)
-                {
-                    await channel.Writer.WriteAsync(i);
-                    await Task.Delay(delay);
-                }
-
-                channel.Writer.TryComplete();
+                await channel.Writer.WriteAsync(i);
+                await Task.Delay(delay);
             }
-        );
+
+            channel.Writer.TryComplete();
+        });
 
         return channel.Reader;
     }

@@ -20,13 +20,11 @@ namespace System.Web.Http.Cors.Tracing
                 new Mock<ICorsPolicyProviderFactory>();
             policyProviderFactoryMock
                 .Setup(f => f.GetCorsPolicyProvider(It.IsAny<HttpRequestMessage>()))
-                .Returns(
-                    () =>
-                    {
-                        innerIsCalled = true;
-                        return new Mock<ICorsPolicyProvider>().Object;
-                    }
-                );
+                .Returns(() =>
+                {
+                    innerIsCalled = true;
+                    return new Mock<ICorsPolicyProvider>().Object;
+                });
             CorsPolicyProviderFactoryTracer tracer = new CorsPolicyProviderFactoryTracer(
                 policyProviderFactoryMock.Object,
                 traceWriterMock.Object

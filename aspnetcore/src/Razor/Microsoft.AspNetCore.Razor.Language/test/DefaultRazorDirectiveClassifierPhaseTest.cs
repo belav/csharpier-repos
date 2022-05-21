@@ -70,25 +70,21 @@ public class DefaultRazorDirectiveClassifierPhaseTest
         firstPass.SetupProperty(m => m.Engine);
         firstPass
             .Setup(m => m.Execute(codeDocument, originalNode))
-            .Callback(
-                () =>
-                {
-                    originalNode.Children.Add(firstPassNode);
-                }
-            );
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
         var secondPass = new Mock<IRazorDirectiveClassifierPass>(MockBehavior.Strict);
         secondPass.SetupGet(m => m.Order).Returns(1);
         secondPass.SetupProperty(m => m.Engine);
         secondPass
             .Setup(m => m.Execute(codeDocument, originalNode))
-            .Callback(
-                () =>
-                {
-                    // Works only when the first pass has run before this.
-                    originalNode.Children[0].Children.Add(secondPassNode);
-                }
-            );
+            .Callback(() =>
+            {
+                // Works only when the first pass has run before this.
+                originalNode.Children[0].Children.Add(secondPassNode);
+            });
 
         var phase = new DefaultRazorDirectiveClassifierPhase();
 

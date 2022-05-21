@@ -24,9 +24,8 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "text/json";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await context.Request.ReadFromJsonAsync<int>()
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync<int>());
 
         // Assert
         var exceptedMessage =
@@ -42,9 +41,8 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json";
 
         // Act
-        var ex = await Assert.ThrowsAsync<JsonException>(
-            async () => await context.Request.ReadFromJsonAsync<int>()
-        );
+        var ex = await Assert.ThrowsAsync<JsonException>(async () =>
+            await context.Request.ReadFromJsonAsync<int>());
 
         // Assert
         var exceptedMessage =
@@ -145,9 +143,8 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json; charset=invalid";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await context.Request.ReadFromJsonAsync<object>()
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync<object>());
 
         // Assert
         Assert.Equal(
@@ -197,9 +194,8 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json; charset=invalid";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await context.Request.ReadFromJsonAsync(typeof(object))
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync(typeof(object)));
 
         // Assert
         Assert.Equal(

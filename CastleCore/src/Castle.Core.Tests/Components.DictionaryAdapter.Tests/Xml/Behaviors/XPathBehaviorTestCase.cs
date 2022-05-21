@@ -436,12 +436,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo> <X>x</X> <Y>y</Y> </Foo>");
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var a = foo.A;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var a = foo.A;
+                });
             }
 
             [Test]
@@ -450,12 +448,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 var xml = Xml("<Foo> <X>x</X> <Y>y</Y> </Foo>");
                 var foo = Create<IFoo>(xml);
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        foo.A = Create<IBar>();
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    foo.A = Create<IBar>();
+                });
             }
         }
 

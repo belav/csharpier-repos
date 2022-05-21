@@ -60,22 +60,20 @@ namespace System.Security.AccessControl.Tests
             CommonSecurityDescriptor sd = null;
 
             // test case 1: sid is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    sd = new CommonSecurityDescriptor(
-                        true,
-                        false,
-                        (ControlFlags)0,
-                        null,
-                        null,
-                        null,
-                        null
-                    );
-                    sd.PurgeAccessControl(null);
-                    // expect to throw exception but not
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                sd = new CommonSecurityDescriptor(
+                    true,
+                    false,
+                    (ControlFlags)0,
+                    null,
+                    null,
+                    null,
+                    null
+                );
+                sd.PurgeAccessControl(null);
+                // expect to throw exception but not
+            });
         }
 
         [Theory]

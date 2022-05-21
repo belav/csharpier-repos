@@ -93,17 +93,15 @@ public class KestrelWebSocketHelpers
         host.Start();
         port = host.GetPort();
 
-        return new Disposable(
-            async () =>
+        return new Disposable(async () =>
+        {
+            await host.StopAsync();
+            host.Dispose();
+            if (exceptionFromApp is not null)
             {
-                await host.StopAsync();
-                host.Dispose();
-                if (exceptionFromApp is not null)
-                {
-                    ExceptionDispatchInfo.Throw(exceptionFromApp);
-                }
+                ExceptionDispatchInfo.Throw(exceptionFromApp);
             }
-        );
+        });
     }
 
     private class Disposable : IAsyncDisposable

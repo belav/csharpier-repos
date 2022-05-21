@@ -48,12 +48,10 @@ namespace System.Text.Json.Tests
                 {
                     foreach (JsonProperty property in root.EnumerateObject())
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                property.WriteTo(writer);
-                            }
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                        {
+                            property.WriteTo(writer);
+                        });
                     }
                     writer.Flush();
                     AssertContents("", buffer);

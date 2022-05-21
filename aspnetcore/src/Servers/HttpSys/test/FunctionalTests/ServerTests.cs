@@ -476,9 +476,8 @@ public class ServerTests
         using (var server = Utilities.CreatePump())
         {
             Assert.Null(server.Listener.Options.MaxConnections);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => server.Listener.Options.MaxConnections = -2
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                server.Listener.Options.MaxConnections = -2);
             Assert.Null(server.Listener.Options.MaxConnections);
             server.Listener.Options.MaxConnections = null;
             server.Listener.Options.MaxConnections = 3;

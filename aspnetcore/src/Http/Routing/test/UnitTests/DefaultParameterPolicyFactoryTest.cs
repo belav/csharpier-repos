@@ -21,17 +21,15 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory();
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                factory.Create(
-                    RoutePatternFactory.ParameterPart(
-                        "id",
-                        @default: null,
-                        RoutePatternParameterKind.Optional
-                    ),
-                    @"notpresent(\d+)"
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            factory.Create(
+                RoutePatternFactory.ParameterPart(
+                    "id",
+                    @default: null,
+                    RoutePatternParameterKind.Optional
+                ),
+                @"notpresent(\d+)"
+            ));
 
         // Assert
         Assert.Equal(
@@ -53,9 +51,8 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var exception = Assert.Throws<RouteCreationException>(
-            () => factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad")
-        );
+        var exception = Assert.Throws<RouteCreationException>(() =>
+            factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad"));
 
         // Assert
         Assert.Equal(
@@ -381,10 +378,8 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var exception = Assert.Throws<RouteCreationException>(
-            () =>
-                factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)")
-        );
+        var exception = Assert.Throws<RouteCreationException>(() =>
+            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)"));
 
         // Assert
         Assert.Equal(
@@ -433,13 +428,8 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var exception = Assert.Throws<RouteCreationException>(
-            () =>
-                factory.Create(
-                    RoutePatternFactory.ParameterPart("id"),
-                    "customConstraintPolicy(20)"
-                )
-        );
+        var exception = Assert.Throws<RouteCreationException>(() =>
+            factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20)"));
 
         // Assert
         var inner = Assert.IsType<InvalidOperationException>(exception.InnerException);

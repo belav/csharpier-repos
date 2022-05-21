@@ -523,12 +523,10 @@ namespace System.ComponentModel.Composition
             // Rejection causes the part in the catalog whose imports cannot be
             // satisfied to be ignored, resulting in a cardinality mismatch instead of a
             // composition exception
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>("ExportMyString");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<string>("ExportMyString");
+            });
         }
 
         [Fact]

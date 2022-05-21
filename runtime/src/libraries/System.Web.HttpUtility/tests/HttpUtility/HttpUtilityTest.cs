@@ -65,12 +65,10 @@ namespace System.Web.Tests
         [Fact]
         public void HtmlAttributeEncode_TextWriter_null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    HttpUtility.HtmlAttributeEncode("", null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                HttpUtility.HtmlAttributeEncode("", null);
+            });
         }
 
         [Theory]
@@ -347,12 +345,10 @@ namespace System.Web.Tests
         [Fact]
         public void HtmlDecode_TextWriter_null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    HttpUtility.HtmlDecode("", null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                HttpUtility.HtmlDecode("", null);
+            });
         }
 
         [Theory]
@@ -438,12 +434,10 @@ namespace System.Web.Tests
         [Fact]
         public void HtmlEncode_TextWriter_null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    HttpUtility.HtmlEncode("string", null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                HttpUtility.HtmlEncode("string", null);
+            });
         }
 
         #endregion HtmlEncode
@@ -645,23 +639,19 @@ namespace System.Web.Tests
         [Fact]
         public void ParseQueryString_null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    HttpUtility.ParseQueryString(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                HttpUtility.ParseQueryString(null);
+            });
         }
 
         [Fact]
         public void ParseQueryString_Encoding_null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    HttpUtility.ParseQueryString("", null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                HttpUtility.ParseQueryString("", null);
+            });
         }
 
         [Fact]

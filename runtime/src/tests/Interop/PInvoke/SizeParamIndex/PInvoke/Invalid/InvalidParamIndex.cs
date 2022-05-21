@@ -22,9 +22,8 @@ class Program
     static int Main()
     {
         Assert.Throws<MarshalDirectiveException>(() => SizeParamIndexTooBig(out var _, out var _));
-        Assert.Throws<MarshalDirectiveException>(
-            () => SizeParamIndexWrongType(out var _, out var _)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            SizeParamIndexWrongType(out var _, out var _));
 
         return 100;
     }

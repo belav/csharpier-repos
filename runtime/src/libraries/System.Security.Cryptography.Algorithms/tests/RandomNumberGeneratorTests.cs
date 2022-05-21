@@ -100,17 +100,15 @@ namespace System.Security.Cryptography.RNG.Tests
                     taskArrays[iTask] = new byte[RandomSize];
                     byte[] taskLocal = taskArrays[iTask];
 
-                    tasks[iTask] = Task.Run(
-                        () =>
-                        {
-                            sync.WaitOne();
+                    tasks[iTask] = Task.Run(() =>
+                    {
+                        sync.WaitOne();
 
-                            for (int i = 0; i < PerTaskIterationCount; i++)
-                            {
-                                rng.GetBytes(taskLocal);
-                            }
+                        for (int i = 0; i < PerTaskIterationCount; i++)
+                        {
+                            rng.GetBytes(taskLocal);
                         }
-                    );
+                    });
                 }
 
                 // Ready? Set() Go!
@@ -406,9 +404,8 @@ namespace System.Security.Cryptography.RNG.Tests
         [InlineData(-10, -11)]
         public static void GetInt32_LowerAndUpper_InvalidRange(int fromInclusive, int toExclusive)
         {
-            Assert.Throws<ArgumentException>(
-                () => RandomNumberGenerator.GetInt32(fromInclusive, toExclusive)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                RandomNumberGenerator.GetInt32(fromInclusive, toExclusive));
         }
 
         [Theory]
@@ -416,9 +413,8 @@ namespace System.Security.Cryptography.RNG.Tests
         [InlineData(-10)]
         public static void GetInt32_Upper_InvalidRange(int toExclusive)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => RandomNumberGenerator.GetInt32(toExclusive)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                RandomNumberGenerator.GetInt32(toExclusive));
         }
 
         [Theory]

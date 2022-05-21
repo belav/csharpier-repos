@@ -46,12 +46,10 @@ namespace System.Net.Http.Tests
             int index = 0;
 
             // only one value allowed.
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue("text/plain; charset=utf-8, next/mediatype", null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("text/plain; charset=utf-8, next/mediatype", null, ref index);
+            });
         }
 
         [Fact]
@@ -60,12 +58,10 @@ namespace System.Net.Http.Tests
             MediaTypeHeaderParser parser = MediaTypeHeaderParser.SingleValueParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue(null, null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue(null, null, ref index);
+            });
         }
 
         [Fact]

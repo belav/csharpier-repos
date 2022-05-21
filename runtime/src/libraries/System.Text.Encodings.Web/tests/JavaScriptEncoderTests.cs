@@ -16,12 +16,10 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void Factory_NullArgs_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => JavaScriptEncoder.Create((TextEncoderSettings)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => JavaScriptEncoder.Create((UnicodeRange)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JavaScriptEncoder.Create((TextEncoderSettings)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JavaScriptEncoder.Create((UnicodeRange)null));
         }
 
         [Theory]
@@ -970,12 +968,10 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.Default;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    encoder.Encode(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

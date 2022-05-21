@@ -19,9 +19,8 @@ namespace AutoMapper.UnitTests.Projection
             );
 
             // Act
-            var exception = Assert.Throws<AutoMapperMappingException>(
-                () => new EntitySource[0].AsQueryable().ProjectTo<EntityDestination>(config)
-            );
+            var exception = Assert.Throws<AutoMapperMappingException>(() =>
+                new EntitySource[0].AsQueryable().ProjectTo<EntityDestination>(config));
 
             // Assert
             Assert.Contains(

@@ -79,26 +79,20 @@ namespace System.Net.Sockets.Tests
                 ProtocolType.Tcp
             );
 
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    sock.LingerState = new LingerOption(true, short.MaxValue);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                sock.LingerState = new LingerOption(true, short.MaxValue);
+            });
 
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    sock.LingerState = new LingerOption(true, short.MaxValue + 1);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                sock.LingerState = new LingerOption(true, short.MaxValue + 1);
+            });
 
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    sock.LingerState = new LingerOption(true, ushort.MaxValue);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                sock.LingerState = new LingerOption(true, ushort.MaxValue);
+            });
         }
 
         [OuterLoop]

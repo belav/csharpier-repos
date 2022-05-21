@@ -86,13 +86,11 @@ namespace System
             bool returned = false;
             try
             {
-                return Assert.Throws<TException>(
-                    () =>
-                    {
-                        result = func();
-                        returned = true;
-                    }
-                );
+                return Assert.Throws<TException>(() =>
+                {
+                    result = func();
+                    returned = true;
+                });
             }
             catch (Exception ex) when (returned)
             {

@@ -39,9 +39,8 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(ConcurrentBag<string>), @"[""1""]")] // Not supported. Not IList, and we don't detect the add method for this collection.
         public static void Read_ConcurrentCollection_Throws(Type type, string json)
         {
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize(json, type)
-            );
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize(json, type));
             Assert.Contains(type.ToString(), ex.Message);
         }
 
@@ -55,9 +54,8 @@ namespace System.Text.Json.Serialization.Tests
             string json
         )
         {
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Deserialize(json, type)
-            );
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize(json, type));
             Assert.Contains(type.ToString(), ex.Message);
         }
     }

@@ -66,14 +66,12 @@ namespace System.ComponentModel.Composition
             );
             var container = new CompositionContainer(rootCatalog);
 
-            Assert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    ClassRequiresICompositionService service =
-                        container.GetExportedValue<ClassRequiresICompositionService>();
-                    Assert.Null(service.CompositionService);
-                }
-            );
+            Assert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                ClassRequiresICompositionService service =
+                    container.GetExportedValue<ClassRequiresICompositionService>();
+                Assert.Null(service.CompositionService);
+            });
         }
 
         [Fact]
@@ -135,13 +133,11 @@ namespace System.ComponentModel.Composition
             CompositionScopeDefinition scope = rootCatalog.AsScope(childCatalog.AsScope());
             var container = new CompositionContainer(scope);
 
-            Assert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    FromRoot fromRoot = container.GetExportedValue<FromRoot>();
-                    Assert.Null(fromRoot);
-                }
-            );
+            Assert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                FromRoot fromRoot = container.GetExportedValue<FromRoot>();
+                Assert.Null(fromRoot);
+            });
         }
 
         [Fact]

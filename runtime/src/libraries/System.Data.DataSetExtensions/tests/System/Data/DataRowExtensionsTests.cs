@@ -62,9 +62,8 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(
-                () => DataRowExtensions.Field<int>(row, columnIndex: -1)
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.Field<int>(row, columnIndex: -1));
         }
 
         [Fact]
@@ -86,14 +85,12 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                    DataRowExtensions.Field<int>(
-                        row,
-                        columnIndex: -1,
-                        version: DataRowVersion.Default
-                    )
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.Field<int>(
+                    row,
+                    columnIndex: -1,
+                    version: DataRowVersion.Default
+                ));
         }
 
         [Fact]
@@ -184,9 +181,8 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(
-                () => DataRowExtensions.SetField(row, columnIndex: -1, value: 0)
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.SetField(row, columnIndex: -1, value: 0));
         }
 
         [Fact]

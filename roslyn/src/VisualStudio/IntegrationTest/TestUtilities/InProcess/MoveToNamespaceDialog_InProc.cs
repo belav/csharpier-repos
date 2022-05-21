@@ -52,13 +52,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    () =>
-                        ClickAsync(
-                            testAccessor => testAccessor.OKButton,
-                            cancellationTokenSource.Token
-                        )
-                );
+                JoinableTaskFactory.Run(() =>
+                    ClickAsync(
+                        testAccessor => testAccessor.OKButton,
+                        cancellationTokenSource.Token
+                    ));
             }
         }
 
@@ -70,13 +68,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    () =>
-                        ClickAsync(
-                            testAccessor => testAccessor.CancelButton,
-                            cancellationTokenSource.Token
-                        )
-                );
+                JoinableTaskFactory.Run(() =>
+                    ClickAsync(
+                        testAccessor => testAccessor.CancelButton,
+                        cancellationTokenSource.Token
+                    ));
             }
         }
 
@@ -90,22 +86,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 var cancellationToken = cancellationTokenSource.Token;
 
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                        var testAccessor = GetAccessor(await TryGetDialogAsync(cancellationToken));
-                        var success = await testAccessor.NamespaceBox.SimulateSelectItemAsync(
-                            JoinableTaskFactory,
-                            @namespace,
-                            mustExist: false
-                        );
-                        Contract.ThrowIfFalse(success);
-                    }
-                );
+                    var testAccessor = GetAccessor(await TryGetDialogAsync(cancellationToken));
+                    var success = await testAccessor.NamespaceBox.SimulateSelectItemAsync(
+                        JoinableTaskFactory,
+                        @namespace,
+                        mustExist: false
+                    );
+                    Contract.ThrowIfFalse(success);
+                });
             }
         }
     }

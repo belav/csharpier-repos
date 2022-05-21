@@ -68,29 +68,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                     nameof(EntityOne.ThreeSkipPayloadFullShared)
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            AssertQuery(
-                                async,
-                                ss =>
-                                    ss.Set<EntityThree>()
-                                        .AsNoTracking()
-                                        .Include(e => e.OneSkipPayloadFullShared)
-                                        .ThenInclude(e => e.ThreeSkipPayloadFullShared),
-                                elementAsserter: (e, a) =>
-                                    AssertInclude(
-                                        e,
-                                        a,
-                                        new ExpectedInclude<EntityThree>(
-                                            et => et.OneSkipPayloadFullShared
-                                        ),
-                                        new ExpectedInclude<EntityOne>(
-                                            et => et.ThreeSkipPayloadFullShared,
-                                            "OneSkipPayloadFullShared"
-                                        )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<EntityThree>()
+                                    .AsNoTracking()
+                                    .Include(e => e.OneSkipPayloadFullShared)
+                                    .ThenInclude(e => e.ThreeSkipPayloadFullShared),
+                            elementAsserter: (e, a) =>
+                                AssertInclude(
+                                    e,
+                                    a,
+                                    new ExpectedInclude<EntityThree>(
+                                        et => et.OneSkipPayloadFullShared
+                                    ),
+                                    new ExpectedInclude<EntityOne>(
+                                        et => et.ThreeSkipPayloadFullShared,
+                                        "OneSkipPayloadFullShared"
                                     )
-                            )
-                    )
+                                )
+                        ))
                 ).Message
             );
         }

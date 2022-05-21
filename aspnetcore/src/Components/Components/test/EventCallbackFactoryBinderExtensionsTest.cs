@@ -59,12 +59,10 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, 17);
 
         // Act
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () =>
-            {
-                return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
-            }
-        );
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+        {
+            return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
+        });
 
         Assert.Equal(1, component.Count);
     }
@@ -641,9 +639,8 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => EventCallback.Factory.CreateBinder(component, setter, value)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            EventCallback.Factory.CreateBinder(component, setter, value));
 
         Assert.Equal(
             $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. "

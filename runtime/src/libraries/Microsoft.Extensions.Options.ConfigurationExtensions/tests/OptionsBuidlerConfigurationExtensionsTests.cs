@@ -61,12 +61,10 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             _ = optionsBuilder.BindConfiguration("Test");
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            Assert.ThrowsAny<InvalidOperationException>(
-                () =>
-                {
-                    _ = serviceProvider.GetRequiredService<IOptions<FakeOptions>>();
-                }
-            );
+            Assert.ThrowsAny<InvalidOperationException>(() =>
+            {
+                _ = serviceProvider.GetRequiredService<IOptions<FakeOptions>>();
+            });
         }
 
         [Fact]

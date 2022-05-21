@@ -128,9 +128,8 @@ namespace MonoTests.System.Configuration
         {
             TimeSpanSecondsOrInfiniteConverter cv = new TimeSpanSecondsOrInfiniteConverter();
 
-            Assert.Throws<NullReferenceException>(
-                () => cv.ConvertTo(null, null, null, typeof(string))
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                cv.ConvertTo(null, null, null, typeof(string)));
         }
 
         [Fact]

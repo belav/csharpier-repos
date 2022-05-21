@@ -75,20 +75,15 @@ namespace System.Transactions.Tests
         [Fact]
         public void TransactionScopeCompleted1()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        scope.Complete();
-                        /* Can't access ambient transaction after scope.Complete */
-                        TransactionStatus status = Transaction
-                            .Current
-                            .TransactionInformation
-                            .Status;
-                    }
+                    scope.Complete();
+                    /* Can't access ambient transaction after scope.Complete */
+                    TransactionStatus status = Transaction.Current.TransactionInformation.Status;
                 }
-            );
+            });
         }
 
         [Fact]
@@ -97,28 +92,24 @@ namespace System.Transactions.Tests
             using (TransactionScope scope = new TransactionScope())
             {
                 scope.Complete();
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        Transaction.Current = Transaction.Current;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    Transaction.Current = Transaction.Current;
+                });
             }
         }
 
         [Fact]
         public void TransactionScopeCompleted3()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        scope.Complete();
-                        scope.Complete();
-                    }
+                    scope.Complete();
+                    scope.Complete();
                 }
-            );
+            });
         }
 
         #region NestedTransactionScope tests
@@ -446,33 +437,31 @@ namespace System.Transactions.Tests
         [Fact]
         public void NestedTransactionScope10()
         {
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
+
+                Assert.Null(Transaction.Current);
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    IntResourceManager irm = new IntResourceManager(1);
+                    irm.Value = 2;
 
-                    Assert.Null(Transaction.Current);
-                    using (TransactionScope scope = new TransactionScope())
+                    using (TransactionScope scope2 = new TransactionScope())
                     {
-                        irm.Value = 2;
+                        irm.Value = 4;
+                        /* Not completing this, so the transaction will
+                         * get aborted
+                        scope2.Complete (); */
+                    }
 
-                        using (TransactionScope scope2 = new TransactionScope())
-                        {
-                            irm.Value = 4;
-                            /* Not completing this, so the transaction will
-                             * get aborted
-                            scope2.Complete (); */
-                        }
-
-                        using (TransactionScope scope3 = new TransactionScope())
-                        {
-                            /* Aborted transaction cannot be used for another
-                             * TransactionScope
-                             */
-                        }
+                    using (TransactionScope scope3 = new TransactionScope())
+                    {
+                        /* Aborted transaction cannot be used for another
+                         * TransactionScope
+                         */
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -510,28 +499,26 @@ namespace System.Transactions.Tests
         [Fact]
         public void NestedTransactionScope13()
         {
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
+
+                Assert.Null(Transaction.Current);
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    IntResourceManager irm = new IntResourceManager(1);
+                    irm.Value = 2;
 
-                    Assert.Null(Transaction.Current);
-                    using (TransactionScope scope = new TransactionScope())
+                    using (TransactionScope scope2 = new TransactionScope())
                     {
-                        irm.Value = 2;
-
-                        using (TransactionScope scope2 = new TransactionScope())
-                        {
-                            irm.Value = 4;
-                            /* Not completing this, so the transaction will
-                             * get aborted
-                            scope2.Complete (); */
-                        }
-
-                        scope.Complete();
+                        irm.Value = 4;
+                        /* Not completing this, so the transaction will
+                         * get aborted
+                        scope2.Complete (); */
                     }
+
+                    scope.Complete();
                 }
-            );
+            });
         }
         #endregion
 
@@ -578,29 +565,27 @@ namespace System.Transactions.Tests
             IntResourceManager irm3 = new IntResourceManager(12);
 
             Assert.Null(Transaction.Current);
-            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(
-                () =>
-                {
-                    using (
-                        TransactionScope scope = new TransactionScope(
-                            TransactionScopeOption.Required,
-                            new TimeSpan(0, 0, 10)
-                        )
+            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (
+                    TransactionScope scope = new TransactionScope(
+                        TransactionScopeOption.Required,
+                        new TimeSpan(0, 0, 10)
                     )
-                    {
-                        irm.Value = 2;
-                        irm2.Value = 20;
-                        irm3.Value = 24;
+                )
+                {
+                    irm.Value = 2;
+                    irm2.Value = 20;
+                    irm3.Value = 24;
 
-                        /* irm2 won't call Prepared or ForceRollback in
-                         * its Prepare (), so TransactionManager will timeout
-                         * waiting for it
-                         */
-                        irm2.IgnorePrepare = true;
-                        scope.Complete();
-                    }
+                    /* irm2 won't call Prepared or ForceRollback in
+                     * its Prepare (), so TransactionManager will timeout
+                     * waiting for it
+                     */
+                    irm2.IgnorePrepare = true;
+                    scope.Complete();
                 }
-            );
+            });
 
             Assert.NotNull(e.InnerException);
             Assert.IsType<TimeoutException>(e.InnerException);
@@ -832,38 +817,34 @@ namespace System.Transactions.Tests
         [Fact]
         public void ExplicitTransaction6()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    CommittableTransaction ct = new CommittableTransaction();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                CommittableTransaction ct = new CommittableTransaction();
 
-                    IntResourceManager irm = new IntResourceManager(1);
-                    irm.Value = 2;
-                    ct.Commit();
+                IntResourceManager irm = new IntResourceManager(1);
+                irm.Value = 2;
+                ct.Commit();
 
-                    ct.Commit();
-                }
-            );
+                ct.Commit();
+            });
         }
 
         [Fact]
         public void ExplicitTransaction6a()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    CommittableTransaction ct = new CommittableTransaction();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                CommittableTransaction ct = new CommittableTransaction();
 
-                    IntResourceManager irm = new IntResourceManager(1);
-                    irm.Value = 2;
-                    ct.Commit();
+                IntResourceManager irm = new IntResourceManager(1);
+                irm.Value = 2;
+                ct.Commit();
 
-                    /* Using an already committed transaction in a new
-                     * TransactionScope
-                     */
-                    TransactionScope scope = new TransactionScope(ct);
-                }
-            );
+                /* Using an already committed transaction in a new
+                 * TransactionScope
+                 */
+                TransactionScope scope = new TransactionScope(ct);
+            });
         }
 
         [Fact]
@@ -969,18 +950,16 @@ namespace System.Transactions.Tests
         [Fact]
         public void ExplicitTransaction7()
         {
-            Assert.Throws<TransactionException>(
-                () =>
-                {
-                    CommittableTransaction ct = new CommittableTransaction();
+            Assert.Throws<TransactionException>(() =>
+            {
+                CommittableTransaction ct = new CommittableTransaction();
 
-                    IntResourceManager irm = new IntResourceManager(1);
-                    irm.Value = 2;
-                    ct.Commit();
-                    /* Cannot accept any new work now, so TransactionException */
-                    ct.Rollback();
-                }
-            );
+                IntResourceManager irm = new IntResourceManager(1);
+                irm.Value = 2;
+                ct.Commit();
+                /* Cannot accept any new work now, so TransactionException */
+                ct.Rollback();
+            });
         }
 
         [Fact]
@@ -1015,16 +994,14 @@ namespace System.Transactions.Tests
         [Fact]
         public void ExplicitTransaction9()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    CommittableTransaction ct = new CommittableTransaction();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                CommittableTransaction ct = new CommittableTransaction();
 
-                    IntResourceManager irm = new IntResourceManager(1);
-                    ct.BeginCommit(null, null);
-                    ct.BeginCommit(null, null);
-                }
-            );
+                IntResourceManager irm = new IntResourceManager(1);
+                ct.BeginCommit(null, null);
+                ct.BeginCommit(null, null);
+            });
         }
 
         [Fact]
@@ -1172,17 +1149,15 @@ namespace System.Transactions.Tests
             Transaction.Current = ct;
             try
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        using (TransactionScope scope = new TransactionScope())
-                        {
-                            irm.Value = 2;
-                            Transaction.Current = new CommittableTransaction();
-                            irm2.Value = 6;
-                        }
+                        irm.Value = 2;
+                        Transaction.Current = new CommittableTransaction();
+                        irm2.Value = 6;
                     }
-                );
+                });
                 irm.Check(0, 0, 1, 0, "irm");
                 irm2.Check(0, 0, 1, 0, "irm2");
             }

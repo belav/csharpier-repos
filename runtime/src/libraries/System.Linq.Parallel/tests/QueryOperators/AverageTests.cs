@@ -91,22 +91,17 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_Long_Overflow()
         {
-            AssertThrows.Wrapped<OverflowException>(
-                () => UnorderedSources.Default(2).Select(x => x == 0 ? 1 : long.MaxValue).Average()
-            );
-            AssertThrows.Wrapped<OverflowException>(
-                () =>
-                    UnorderedSources
-                        .Default(2)
-                        .Select(x => x == 0 ? (long?)1 : long.MaxValue)
-                        .Average()
-            );
-            AssertThrows.Wrapped<OverflowException>(
-                () => UnorderedSources.Default(2).Average(x => x == 0 ? -1 : long.MinValue)
-            );
-            AssertThrows.Wrapped<OverflowException>(
-                () => UnorderedSources.Default(2).Average(x => x == 0 ? (long?)-1 : long.MinValue)
-            );
+            AssertThrows.Wrapped<OverflowException>(() =>
+                UnorderedSources.Default(2).Select(x => x == 0 ? 1 : long.MaxValue).Average());
+            AssertThrows.Wrapped<OverflowException>(() =>
+                UnorderedSources
+                    .Default(2)
+                    .Select(x => x == 0 ? (long?)1 : long.MaxValue)
+                    .Average());
+            AssertThrows.Wrapped<OverflowException>(() =>
+                UnorderedSources.Default(2).Average(x => x == 0 ? -1 : long.MinValue));
+            AssertThrows.Wrapped<OverflowException>(() =>
+                UnorderedSources.Default(2).Average(x => x == 0 ? (long?)-1 : long.MinValue));
         }
 
         [Theory]
@@ -292,36 +287,26 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_InvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Average()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Average(x => x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<long>().Average()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<long>().Average(x => x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<float>().Average()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<float>().Average(x => x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<double>().Average()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<double>().Average(x => x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<decimal>().Average()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<decimal>().Average(x => x)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Average());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Average(x => x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<long>().Average());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<long>().Average(x => x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<float>().Average());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<float>().Average(x => x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<double>().Average());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<double>().Average(x => x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<decimal>().Average());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<decimal>().Average(x => x));
             // Nullables return null when empty
             Assert.Null(ParallelEnumerable.Empty<int?>().Average());
             Assert.Null(ParallelEnumerable.Empty<int?>().Average(x => x));
@@ -680,140 +665,120 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Average(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                UnorderedSources
+                    .Default(1)
+                    .Average(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
         }
 
         [Fact]

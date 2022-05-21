@@ -524,18 +524,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                     if (fault)
                     {
-                        Assert.Throws<ArgumentNullException>(
-                            () => ((IDataflowBlock)bb).Fault(null)
-                        );
+                        Assert.Throws<ArgumentNullException>(() =>
+                            ((IDataflowBlock)bb).Fault(null));
                         ((IDataflowBlock)bb).Fault(new InvalidCastException());
                         await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
                     }
                     else
                     {
                         cts.Cancel();
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                            () => bb.Completion
-                        );
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                            bb.Completion);
                     }
 
                     await Task.WhenAll(sends);
@@ -570,21 +568,19 @@ namespace System.Threading.Tasks.Dataflow.Tests
             bb.Fault(new InvalidCastException());
             await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    bb.LinkTo(
-                        new DelegatePropagator<int, int>
+            Assert.Throws<FormatException>(() =>
+            {
+                bb.LinkTo(
+                    new DelegatePropagator<int, int>
+                    {
+                        FaultDelegate = delegate
                         {
-                            FaultDelegate = delegate
-                            {
-                                throw new FormatException();
-                            }
-                        },
-                        new DataflowLinkOptions { PropagateCompletion = true }
-                    );
-                }
-            );
+                            throw new FormatException();
+                        }
+                    },
+                    new DataflowLinkOptions { PropagateCompletion = true }
+                );
+            });
         }
 
         [Fact]

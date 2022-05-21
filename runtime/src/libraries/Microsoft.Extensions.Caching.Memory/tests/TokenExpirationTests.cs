@@ -233,14 +233,12 @@ namespace Microsoft.Extensions.Caching.Memory
             var value = new object();
             var callbackInvoked = new ManualResetEvent(false);
             var expirationToken = new TestToken(callbackInvoked);
-            var task = Task.Run(
-                () =>
-                    cache.Set(
-                        key,
-                        value,
-                        new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
-                    )
-            );
+            var task = Task.Run(() =>
+                cache.Set(
+                    key,
+                    value,
+                    new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                ));
             callbackInvoked.WaitOne(TimeSpan.FromSeconds(30));
             var result = task.Result;
 

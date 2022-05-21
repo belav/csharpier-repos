@@ -48,22 +48,18 @@ namespace System.Data.Tests
             Assert.Equal(DBNull.Value, dt.Rows[0][0]);
 
             // set AllowDBNull=false
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    dc.AllowDBNull = false; //the existing row contains null value
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                dc.AllowDBNull = false; //the existing row contains null value
+            });
 
             dt.Rows.Clear();
             dc.AllowDBNull = false;
             // AllowDBNull=false - adding new row with null value
-            Assert.Throws<NoNullAllowedException>(
-                () =>
-                {
-                    dt.Rows.Add(dt.NewRow());
-                }
-            );
+            Assert.Throws<NoNullAllowedException>(() =>
+            {
+                dt.Rows.Add(dt.NewRow());
+            });
 
             dc.AutoIncrement = true;
             int iRowCount = dt.Rows.Count;
@@ -543,14 +539,12 @@ namespace System.Data.Tests
                 }
             );
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Columns[0].Expression =
-                        "CONVERT(" + dt1.Columns[1].ColumnName + ",'System.Int32')";
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Columns[0].Expression =
+                    "CONVERT(" + dt1.Columns[1].ColumnName + ",'System.Int32')";
+            });
 
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -562,23 +556,19 @@ namespace System.Data.Tests
                 }
             );
 
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Columns[1].Expression =
-                        "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Columns[1].Expression =
+                    "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
+            });
 
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Columns[1].Expression =
-                        "SUBSTRING(" + dt1.Columns[2].ColumnName + ",60000000000,2)";
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Columns[1].Expression =
+                    "SUBSTRING(" + dt1.Columns[2].ColumnName + ",60000000000,2)";
+            });
         }
 
         [Fact]
@@ -768,9 +758,8 @@ namespace System.Data.Tests
         {
             DataColumn col = new DataColumn("col", typeof(int));
             Assert.Equal(DataSetDateTime.UnspecifiedLocal, col.DateTimeMode);
-            Assert.Throws<InvalidOperationException>(
-                () => col.DateTimeMode = DataSetDateTime.Local
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                col.DateTimeMode = DataSetDateTime.Local);
 
             col = new DataColumn("col", typeof(DateTime));
             col.DateTimeMode = DataSetDateTime.Utc;
@@ -783,13 +772,11 @@ namespace System.Data.Tests
         public void DateTimeMode_InvalidValues()
         {
             DataColumn col = new DataColumn("col", typeof(DateTime));
-            Assert.Throws<InvalidEnumArgumentException>(
-                () => col.DateTimeMode = (DataSetDateTime)(-1)
-            );
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                col.DateTimeMode = (DataSetDateTime)(-1));
 
-            Assert.Throws<InvalidEnumArgumentException>(
-                () => col.DateTimeMode = (DataSetDateTime)5
-            );
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                col.DateTimeMode = (DataSetDateTime)5);
         }
 
         [Fact]
@@ -804,13 +791,11 @@ namespace System.Data.Tests
             table.Columns[0].DateTimeMode = DataSetDateTime.Unspecified;
             table.Columns[0].DateTimeMode = DataSetDateTime.UnspecifiedLocal;
 
-            Assert.Throws<InvalidOperationException>(
-                () => table.Columns[0].DateTimeMode = DataSetDateTime.Local
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                table.Columns[0].DateTimeMode = DataSetDateTime.Local);
 
-            Assert.Throws<InvalidOperationException>(
-                () => table.Columns[0].DateTimeMode = DataSetDateTime.Utc
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                table.Columns[0].DateTimeMode = DataSetDateTime.Utc);
         }
 
         [Fact]

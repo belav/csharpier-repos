@@ -52,9 +52,8 @@ public class ComponentTagHelperTest
         var output = GetTagHelperOutput();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
         Assert.Equal(
             "A value for the 'render-mode' attribute must be supplied to the 'component' tag helper.",
             ex.Message

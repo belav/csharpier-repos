@@ -461,12 +461,10 @@ namespace System.ServiceModel.Syndication.Tests
             string file = "TestFeeds/FailureFeeds/diff_atom_ns.xml";
             using (XmlReader reader = XmlReader.Create(file))
             {
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        SyndicationItem.Load(reader);
-                    }
-                );
+                Assert.Throws<XmlException>(() =>
+                {
+                    SyndicationItem.Load(reader);
+                });
             }
         }
 
@@ -476,12 +474,10 @@ namespace System.ServiceModel.Syndication.Tests
             string file = "TestFeeds/FailureFeeds/diff_rss_ns.xml";
             using (XmlReader reader = XmlReader.Create(file))
             {
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        SyndicationItem.Load(reader);
-                    }
-                );
+                Assert.Throws<XmlException>(() =>
+                {
+                    SyndicationItem.Load(reader);
+                });
             }
         }
 
@@ -491,12 +487,10 @@ namespace System.ServiceModel.Syndication.Tests
             string file = "TestFeeds/FailureFeeds/diff_rss_version.xml";
             using (XmlReader reader = XmlReader.Create(file))
             {
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        SyndicationItem.Load(reader);
-                    }
-                );
+                Assert.Throws<XmlException>(() =>
+                {
+                    SyndicationItem.Load(reader);
+                });
             }
         }
 
@@ -506,12 +500,10 @@ namespace System.ServiceModel.Syndication.Tests
             string file = "TestFeeds/FailureFeeds/no_rss_version.xml";
             using (XmlReader reader = XmlReader.Create(file))
             {
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        SyndicationItem.Load(reader);
-                    }
-                );
+                Assert.Throws<XmlException>(() =>
+                {
+                    SyndicationItem.Load(reader);
+                });
             }
         }
 

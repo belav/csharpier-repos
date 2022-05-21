@@ -55,9 +55,8 @@ namespace System.IO.Tests
             );
             handle.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                MethodUnderTest(handle, Array.Empty<byte>(), 0));
         }
 
         [Fact]
@@ -72,9 +71,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(
-                    () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    MethodUnderTest(handle, Array.Empty<byte>(), 0));
             }
         }
 

@@ -29,20 +29,17 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetSpanC('1'));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.GetSpanCOut('1', out Span<char> value3)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetSpanCOut('1', out Span<char> value3));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetSpanCRef('1'));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddSpanC(default, default));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-            {
-                Span<char> value = default;
-                GenericsNative.AddSpanCs(in value, 1);
-            }
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            Span<char> value = default;
+            GenericsNative.AddSpanCs(in value, 1);
+        });
     }
 }

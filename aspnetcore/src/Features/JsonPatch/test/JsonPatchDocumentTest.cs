@@ -16,12 +16,10 @@ public class JsonPatchDocumentTest
         var patchDocument = new JsonPatchDocument();
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.Add("//NewInt", 1);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.Add("//NewInt", 1);
+        });
 
         // Assert
         Assert.Equal("The provided string '//NewInt' is an invalid path.", exception.Message);
@@ -34,12 +32,10 @@ public class JsonPatchDocumentTest
         var patchDocument = new JsonPatchDocument();
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.Add("NewInt//", 1);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.Add("NewInt//", 1);
+        });
 
         // Assert
         Assert.Equal("The provided string 'NewInt//' is an invalid path.", exception.Message);
@@ -129,12 +125,10 @@ public class JsonPatchDocumentTest
             "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
 
         // Act
-        var exception = Assert.Throws<JsonSerializationException>(
-            () =>
-            {
-                var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument>(serialized);
-            }
-        );
+        var exception = Assert.Throws<JsonSerializationException>(() =>
+        {
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument>(serialized);
+        });
 
         // Assert
         Assert.Equal(
@@ -151,14 +145,12 @@ public class JsonPatchDocumentTest
             "{\"Operations\": [{ \"op\": \"replace\", \"path\": \"/title\", \"value\": \"New Title\"}]}";
 
         // Act
-        var exception = Assert.Throws<JsonSerializationException>(
-            () =>
-            {
-                var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
-                    serialized
-                );
-            }
-        );
+        var exception = Assert.Throws<JsonSerializationException>(() =>
+        {
+            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
+                serialized
+            );
+        });
 
         // Assert
         Assert.Equal(

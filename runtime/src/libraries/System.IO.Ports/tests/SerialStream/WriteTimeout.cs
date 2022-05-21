@@ -203,14 +203,12 @@ namespace System.IO.Ports.Tests
                     stream.WriteTimeout
                 );
 
-                Assert.Throws<TimeoutException>(
-                    () =>
-                        stream.Write(
-                            new byte[s_DEFAULT_WRITE_BYTE_ARRAY_SIZE],
-                            0,
-                            s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
-                        )
-                );
+                Assert.Throws<TimeoutException>(() =>
+                    stream.Write(
+                        new byte[s_DEFAULT_WRITE_BYTE_ARRAY_SIZE],
+                        0,
+                        s_DEFAULT_WRITE_BYTE_ARRAY_SIZE
+                    ));
 
                 VerifyTimeout(Write_byte_int_int, stream);
             }
@@ -442,12 +440,10 @@ namespace System.IO.Ports.Tests
 
         private void VerifyLongTimeout(WriteMethodDelegate writeMethod, SerialPort com1)
         {
-            var t = new Task(
-                () =>
-                {
-                    writeMethod(com1.BaseStream);
-                }
-            );
+            var t = new Task(() =>
+            {
+                writeMethod(com1.BaseStream);
+            });
 
             t.Start();
             Thread.Sleep(DEFAULT_WAIT_LONG_TIMEOUT);

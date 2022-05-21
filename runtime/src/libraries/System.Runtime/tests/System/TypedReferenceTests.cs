@@ -62,18 +62,14 @@ namespace System.Tests
                 oneStruct = new OneStruct { field = "field", b = 2343 }
             };
             Type dataType = data.GetType();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    TypedReference.MakeTypedReference(null, dataType.GetFields());
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    TypedReference.MakeTypedReference(data, null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypedReference.MakeTypedReference(null, dataType.GetFields());
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypedReference.MakeTypedReference(data, null);
+            });
             AssertExtensions.Throws<ArgumentException>(
                 "flds",
                 null,

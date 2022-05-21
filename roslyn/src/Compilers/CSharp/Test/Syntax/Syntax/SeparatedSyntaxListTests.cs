@@ -46,15 +46,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void EnumeratorEquality()
         {
-            Assert.Throws<NotSupportedException>(
-                () => default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode()
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
-                        default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode());
+            Assert.Throws<NotSupportedException>(() =>
+                default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
+                    default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)
+                ));
         }
 
         [WorkItem(308077, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/308077")]
@@ -262,24 +259,19 @@ c,b",
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.InsertRange(list.Count + 1, new[] { nodeD })
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(list.Count + 1, new[] { nodeD }));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count + 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Replace(nodeD, nodeE));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.ReplaceRange(nodeD, new[] { nodeE })
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => list.AddRange((IEnumerable<SyntaxNode>)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.ReplaceRange(nodeD, new[] { nodeE }));
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null));
         }
 
         [Fact]
@@ -322,13 +314,11 @@ c,b",
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { nodeD }));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(
-                () => list.AddRange((IEnumerable<SyntaxNode>)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null));
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
-            Assert.Throws<ArgumentNullException>(
-                () => list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
         }
 
         [Fact]

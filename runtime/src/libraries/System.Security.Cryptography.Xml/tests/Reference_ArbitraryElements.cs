@@ -147,9 +147,8 @@ namespace System.Security.Cryptography.Xml.Tests
                             || includeURI.LastIndexOf("U") != includeURI.IndexOf("U")
                             || includeType.LastIndexOf("T") != includeType.IndexOf("T");
                         if (throwsXmlException)
-                            Assert.Throws<XmlException>(
-                                () => Helpers.VerifyCryptoExceptionOnLoad(xml, false)
-                            );
+                            Assert.Throws<XmlException>(() =>
+                                Helpers.VerifyCryptoExceptionOnLoad(xml, false));
                         else
                             Assert.Equal(
                                 includeID == "" && includeURI != "" && includeType == "",

@@ -37,9 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.NavigationToKeylessType(nameof(B.ManyAs), nameof(A)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => fk.SetPrincipalToDependent(nameof(B.ManyAs))
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        fk.SetPrincipalToDependent(nameof(B.ManyAs)))
                     .Message
             );
         }

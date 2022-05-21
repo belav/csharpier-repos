@@ -70,9 +70,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CreateAdapter_NoPrefixWithMethod_ThrowsException()
         {
-            Assert.Throws<TypeLoadException>(
-                () => factory.GetAdapter<IPersonWithMethod>(dictionary)
-            );
+            Assert.Throws<TypeLoadException>(() =>
+                factory.GetAdapter<IPersonWithMethod>(dictionary));
         }
 
         [Test]
@@ -1308,9 +1307,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var container = factory.GetAdapter<IItemContainer<IPerson>>(dictionary);
             container.Positions = new[] { 2, 4, 6, 8 };
-            container.ReducePositions = new DynamicValueDelegate<int>(
-                () => container.Positions.Sum()
-            );
+            container.ReducePositions = new DynamicValueDelegate<int>(() =>
+                container.Positions.Sum());
             Assert.AreEqual(20, container.ReducePositions.Value);
 
             container.Positions = new[] { 1, 2, 3, 4 };
@@ -1322,9 +1320,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var notifyCalled = false;
             var container = factory.GetAdapter<IItemContainer<IPerson>>(dictionary);
-            container.ReducePositions = new DynamicValueDelegate<int>(
-                () => container.Positions.Sum()
-            );
+            container.ReducePositions = new DynamicValueDelegate<int>(() =>
+                container.Positions.Sum());
 
             container.PropertyChanged += (s, e) =>
             {

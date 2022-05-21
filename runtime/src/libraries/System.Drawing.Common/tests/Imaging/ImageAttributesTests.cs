@@ -2161,12 +2161,10 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => imageAttr.SetOutputChannelColorProfile(null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => imageAttr.SetOutputChannelColorProfile(null, ColorAdjustType.Default)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(null, ColorAdjustType.Default));
             }
         }
 
@@ -2176,16 +2174,10 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<ArgumentException>(
-                    () => imageAttr.SetOutputChannelColorProfile(string.Empty)
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        imageAttr.SetOutputChannelColorProfile(
-                            string.Empty,
-                            ColorAdjustType.Default
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(string.Empty));
+                Assert.Throws<ArgumentException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(string.Empty, ColorAdjustType.Default));
             }
         }
 
@@ -2195,16 +2187,10 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<OutOfMemoryException>(
-                    () => imageAttr.SetOutputChannelColorProfile("invalidPath")
-                );
-                Assert.Throws<OutOfMemoryException>(
-                    () =>
-                        imageAttr.SetOutputChannelColorProfile(
-                            "invalidPath",
-                            ColorAdjustType.Default
-                        )
-                );
+                Assert.Throws<OutOfMemoryException>(() =>
+                    imageAttr.SetOutputChannelColorProfile("invalidPath"));
+                Assert.Throws<OutOfMemoryException>(() =>
+                    imageAttr.SetOutputChannelColorProfile("invalidPath", ColorAdjustType.Default));
             }
         }
 
@@ -2215,16 +2201,13 @@ namespace System.Drawing.Imaging.Tests
             string fileNameTooLong = new string('a', short.MaxValue);
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<PathTooLongException>(
-                    () => imageAttr.SetOutputChannelColorProfile(fileNameTooLong)
-                );
-                Assert.Throws<PathTooLongException>(
-                    () =>
-                        imageAttr.SetOutputChannelColorProfile(
-                            fileNameTooLong,
-                            ColorAdjustType.Default
-                        )
-                );
+                Assert.Throws<PathTooLongException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(fileNameTooLong));
+                Assert.Throws<PathTooLongException>(() =>
+                    imageAttr.SetOutputChannelColorProfile(
+                        fileNameTooLong,
+                        ColorAdjustType.Default
+                    ));
             }
         }
 
@@ -2442,9 +2425,8 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<NullReferenceException>(
-                    () => imageAttr.SetRemapTable(null, ColorAdjustType.Default)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    imageAttr.SetRemapTable(null, ColorAdjustType.Default));
             }
         }
 
@@ -2453,9 +2435,8 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<NullReferenceException>(
-                    () => imageAttr.SetRemapTable(new ColorMap[1] { null }, ColorAdjustType.Default)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    imageAttr.SetRemapTable(new ColorMap[1] { null }, ColorAdjustType.Default));
             }
         }
 
@@ -2590,9 +2571,8 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var imageAttr = new ImageAttributes())
             {
-                Assert.Throws<NullReferenceException>(
-                    () => imageAttr.GetAdjustedPalette(null, ColorAdjustType.Default)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    imageAttr.GetAdjustedPalette(null, ColorAdjustType.Default));
             }
         }
 

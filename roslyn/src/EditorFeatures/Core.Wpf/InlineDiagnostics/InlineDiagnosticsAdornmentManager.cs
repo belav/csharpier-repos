@@ -70,16 +70,14 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             BatchedTagsChangedEventArgs e
         )
         {
-            TextView.QueuePostLayoutAction(
-                () =>
-                {
-                    var allSpans = e.Spans.SelectMany(span => span.GetSpans(TextView.TextBuffer));
-                    UpdateSpans_CallOnlyOnUIThread(
-                        new NormalizedSnapshotSpanCollection(allSpans),
-                        removeOldTags: true
-                    );
-                }
-            );
+            TextView.QueuePostLayoutAction(() =>
+            {
+                var allSpans = e.Spans.SelectMany(span => span.GetSpans(TextView.TextBuffer));
+                UpdateSpans_CallOnlyOnUIThread(
+                    new NormalizedSnapshotSpanCollection(allSpans),
+                    removeOldTags: true
+                );
+            });
         }
 
         /// <summary>

@@ -571,9 +571,8 @@ public class AnchorTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => anchorTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            anchorTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -612,9 +611,8 @@ public class AnchorTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => anchorTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            anchorTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -654,9 +652,8 @@ public class AnchorTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => anchorTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            anchorTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -696,9 +693,8 @@ public class AnchorTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => anchorTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            anchorTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }

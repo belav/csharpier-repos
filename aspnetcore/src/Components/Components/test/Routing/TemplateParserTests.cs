@@ -140,9 +140,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_WithRepeatedParameter()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("{p1}/literal/{p1}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("{p1}/literal/{p1}"));
 
         var expectedMessage =
             "Invalid template '{p1}/literal/{p1}'. The parameter '{p1}' appears multiple times.";
@@ -179,9 +178,8 @@ public class TemplateParserTests
     )]
     public void InvalidTemplate_WithMismatchedBraces(string template, string expectedMessage)
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate(template)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate(template));
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -214,9 +212,8 @@ public class TemplateParserTests
     )
     {
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate(template)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate(template));
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -224,9 +221,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_InvalidParameterNameWithEmptyNameThrows()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("{a}/{}/{z}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("{a}/{}/{z}"));
 
         var expectedMessage =
             "Invalid template '{a}/{}/{z}'. Empty parameter name in segment '{}' is not allowed.";
@@ -237,9 +233,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_ConsecutiveSeparatorsSlashSlashThrows()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("{a}//{z}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("{a}//{z}"));
 
         var expectedMessage = "Invalid template '{a}//{z}'. Empty segments are not allowed.";
 
@@ -249,9 +244,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_LiteralAfterOptionalParam()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("/test/{a?}/test")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("/test/{a?}/test"));
 
         var expectedMessage =
             "Invalid template 'test/{a?}/test'. Non-optional parameters or literal routes cannot appear after optional parameters.";
@@ -262,9 +256,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_NonOptionalParamAfterOptionalParam()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("/test/{a?}/{b}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("/test/{a?}/{b}"));
 
         var expectedMessage =
             "Invalid template 'test/{a?}/{b}'. Non-optional parameters or literal routes cannot appear after optional parameters.";
@@ -275,9 +268,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_CatchAllParamWithMultipleAsterisks()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("/test/{a}/{**b}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("/test/{a}/{**b}"));
 
         var expectedMessage =
             "Invalid template '/test/{a}/{**b}'. A catch-all parameter may only have one '*' at the beginning of the segment.";
@@ -288,9 +280,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_CatchAllParamNotLast()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TemplateParser.ParseTemplate("/test/{*a}/{b}")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TemplateParser.ParseTemplate("/test/{*a}/{b}"));
 
         var expectedMessage =
             "Invalid template 'test/{*a}/{b}'. A catch-all parameter can only appear as the last segment of the route template.";
@@ -301,9 +292,8 @@ public class TemplateParserTests
     [Fact]
     public void InvalidTemplate_BadOptionalCharacterPosition()
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () => TemplateParser.ParseTemplate("/test/{a?bc}/{b}")
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            TemplateParser.ParseTemplate("/test/{a?bc}/{b}"));
 
         var expectedMessage =
             "Malformed parameter 'a?bc' in route '/test/{a?bc}/{b}'. '?' character can only appear at the end of parameter name.";

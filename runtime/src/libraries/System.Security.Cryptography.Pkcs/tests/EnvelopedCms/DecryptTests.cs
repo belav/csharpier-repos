@@ -196,14 +196,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "650304012A0410280AC7A629BFC9FD6FB24F8A42F094B4"
             ).HexToByteArray();
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    VerifySimpleDecrypt(
-                        message,
-                        Certificates.RSASha512KeyTransfer1,
-                        new ContentInfo(content)
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                VerifySimpleDecrypt(
+                    message,
+                    Certificates.RSASha512KeyTransfer1,
+                    new ContentInfo(content)
+                ));
         }
 
         [Fact]
@@ -817,14 +815,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             byte[] content = "68690D0A".HexToByteArray();
             ContentInfo expectedContentInfo = new ContentInfo(new Oid(Oids.Pkcs7Data), content);
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    VerifySimpleDecrypt(
-                        encodedMessage,
-                        Certificates.RSASha256KeyTransfer1,
-                        expectedContentInfo
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                VerifySimpleDecrypt(
+                    encodedMessage,
+                    Certificates.RSASha256KeyTransfer1,
+                    expectedContentInfo
+                ));
         }
 
         [Fact]
@@ -848,14 +844,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             byte[] content = "68690D0A".HexToByteArray();
             ContentInfo expectedContentInfo = new ContentInfo(new Oid(Oids.Pkcs7Data), content);
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    VerifySimpleDecrypt(
-                        encodedMessage,
-                        Certificates.RSASha256KeyTransfer1,
-                        expectedContentInfo
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                VerifySimpleDecrypt(
+                    encodedMessage,
+                    Certificates.RSASha256KeyTransfer1,
+                    expectedContentInfo
+                ));
         }
 
         [Fact]

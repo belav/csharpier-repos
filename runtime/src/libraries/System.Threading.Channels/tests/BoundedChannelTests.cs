@@ -600,24 +600,20 @@ namespace System.Threading.Channels.Tests
 
             const int NumItems = 10000;
             Task.WaitAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            await c.Writer.WriteAsync(i);
-                        }
+                        await c.Writer.WriteAsync(i);
                     }
-                ),
-                Task.Run(
-                    async () =>
+                }),
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < NumItems; i++)
                     {
-                        for (int i = 0; i < NumItems; i++)
-                        {
-                            Assert.Equal(i, await c.Reader.ReadAsync());
-                        }
+                        Assert.Equal(i, await c.Reader.ReadAsync());
                     }
-                )
+                })
             );
         }
 
@@ -646,41 +642,37 @@ namespace System.Threading.Channels.Tests
 
             for (int i = 0; i < NumReaders; i++)
             {
-                tasks[i] = Task.Run(
-                    async () =>
+                tasks[i] = Task.Run(async () =>
+                {
+                    try
                     {
-                        try
+                        while (true)
                         {
-                            while (true)
-                            {
-                                Interlocked.Add(ref readTotal, await c.Reader.ReadAsync());
-                            }
+                            Interlocked.Add(ref readTotal, await c.Reader.ReadAsync());
                         }
-                        catch (ChannelClosedException) { }
                     }
-                );
+                    catch (ChannelClosedException) { }
+                });
             }
 
             for (int i = 0; i < NumWriters; i++)
             {
-                tasks[NumReaders + i] = Task.Run(
-                    async () =>
+                tasks[NumReaders + i] = Task.Run(async () =>
+                {
+                    while (true)
                     {
-                        while (true)
+                        int value = Interlocked.Decrement(ref remainingItems);
+                        if (value < 0)
                         {
-                            int value = Interlocked.Decrement(ref remainingItems);
-                            if (value < 0)
-                            {
-                                break;
-                            }
-                            await c.Writer.WriteAsync(value + 1);
+                            break;
                         }
-                        if (Interlocked.Decrement(ref remainingWriters) == 0)
-                        {
-                            c.Writer.Complete();
-                        }
+                        await c.Writer.WriteAsync(value + 1);
                     }
-                );
+                    if (Interlocked.Decrement(ref remainingWriters) == 0)
+                    {
+                        c.Writer.Complete();
+                    }
+                });
             }
 
             Task.WaitAll(tasks);

@@ -16,12 +16,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.Advance(1);
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.Advance(1);
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 
@@ -31,12 +29,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.GetMemory();
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.GetMemory();
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 
@@ -46,12 +42,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.GetSpan();
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.GetSpan();
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 
@@ -61,12 +55,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.Complete();
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.Complete();
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 
@@ -76,12 +68,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.FlushAsync();
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.FlushAsync();
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 
@@ -91,12 +81,10 @@ public class HttpResponsePipeWriterTests
         var pipeWriter = CreateHttpResponsePipeWriter();
         pipeWriter.StartAcceptingWrites();
         pipeWriter.StopAcceptingWritesAsync();
-        var ex = Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                pipeWriter.WriteAsync(new Memory<byte>());
-            }
-        );
+        var ex = Assert.Throws<ObjectDisposedException>(() =>
+        {
+            pipeWriter.WriteAsync(new Memory<byte>());
+        });
         Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
     }
 

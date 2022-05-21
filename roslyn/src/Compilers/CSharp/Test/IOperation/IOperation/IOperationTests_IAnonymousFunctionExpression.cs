@@ -942,18 +942,14 @@ struct C
 
             IFlowAnonymousFunctionOperation lambdaD1 = getLambda(graphM);
 
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol));
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol));
 
             var graphD1 = graphM.GetAnonymousFunctionControlFlowGraph(lambdaD1);
             Assert.NotNull(graphD1);
@@ -968,18 +964,14 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphD1, graphD2.Parent);
 
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetAnonymousFunctionControlFlowGraph(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetAnonymousFunctionControlFlowGraph(lambdaD2)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetAnonymousFunctionControlFlowGraphInScope(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD2)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetAnonymousFunctionControlFlowGraph(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetAnonymousFunctionControlFlowGraph(lambdaD2));
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetAnonymousFunctionControlFlowGraphInScope(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD2));
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
@@ -1027,18 +1019,14 @@ struct C
             IFlowAnonymousFunctionOperation lambdaD2 = getLambda(graphM, index: 1);
             Assert.NotNull(lambdaD2);
 
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol));
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol));
 
             var graphD1 = graphM.GetAnonymousFunctionControlFlowGraph(lambdaD1);
             Assert.NotNull(graphD1);
@@ -1052,9 +1040,8 @@ struct C
             );
             Assert.Same(graphD1, graphD1_FromExtension);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => graphD2.GetAnonymousFunctionControlFlowGraph(lambdaD1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                graphD2.GetAnonymousFunctionControlFlowGraph(lambdaD1));
             graphD1_FromExtension = graphD2.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
             Assert.Same(graphD1, graphD1_FromExtension);
 

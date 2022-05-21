@@ -330,23 +330,21 @@ namespace System.Web.Http
 
             // This would result in ambiguous match because complex parameter is not considered for matching.
             // Therefore, PostUserByNameAndAddress(string name, Address address) would conflicts with PostUserByName(string name)
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    HttpControllerContext context = ApiControllerHelper.CreateControllerContext(
-                        httpMethod,
-                        requestUrl,
-                        routeUrl,
-                        routeDefault
-                    );
-                    context.ControllerDescriptor = new HttpControllerDescriptor(
-                        context.Configuration,
-                        "test",
-                        typeof(TestController)
-                    );
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(context);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                HttpControllerContext context = ApiControllerHelper.CreateControllerContext(
+                    httpMethod,
+                    requestUrl,
+                    routeUrl,
+                    routeDefault
+                );
+                context.ControllerDescriptor = new HttpControllerDescriptor(
+                    context.Configuration,
+                    "test",
+                    typeof(TestController)
+                );
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(context);
+            });
         }
 
         [Fact]
@@ -357,23 +355,21 @@ namespace System.Web.Http
             string requestUrl = "Test/GetUsers";
             string httpMethod = "POST";
 
-            var exception = Assert.Throws<HttpResponseException>(
-                () =>
-                {
-                    HttpControllerContext context = ApiControllerHelper.CreateControllerContext(
-                        httpMethod,
-                        requestUrl,
-                        routeUrl,
-                        routeDefault
-                    );
-                    context.ControllerDescriptor = new HttpControllerDescriptor(
-                        context.Configuration,
-                        "test",
-                        typeof(TestController)
-                    );
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(context);
-                }
-            );
+            var exception = Assert.Throws<HttpResponseException>(() =>
+            {
+                HttpControllerContext context = ApiControllerHelper.CreateControllerContext(
+                    httpMethod,
+                    requestUrl,
+                    routeUrl,
+                    routeDefault
+                );
+                context.ControllerDescriptor = new HttpControllerDescriptor(
+                    context.Configuration,
+                    "test",
+                    typeof(TestController)
+                );
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(context);
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -409,23 +405,21 @@ namespace System.Web.Http
 
             // When you have the HttpMethod attribute, the convention should not be applied.
             httpMethod = "PUT";
-            var exception = Assert.Throws<HttpResponseException>(
-                () =>
-                {
-                    context = ApiControllerHelper.CreateControllerContext(
-                        httpMethod,
-                        requestUrl,
-                        routeUrl,
-                        routeDefault
-                    );
-                    context.ControllerDescriptor = new HttpControllerDescriptor(
-                        context.Configuration,
-                        "test",
-                        typeof(TestController)
-                    );
-                    ApiControllerHelper.SelectAction(context);
-                }
-            );
+            var exception = Assert.Throws<HttpResponseException>(() =>
+            {
+                context = ApiControllerHelper.CreateControllerContext(
+                    httpMethod,
+                    requestUrl,
+                    routeUrl,
+                    routeDefault
+                );
+                context.ControllerDescriptor = new HttpControllerDescriptor(
+                    context.Configuration,
+                    "test",
+                    typeof(TestController)
+                );
+                ApiControllerHelper.SelectAction(context);
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);

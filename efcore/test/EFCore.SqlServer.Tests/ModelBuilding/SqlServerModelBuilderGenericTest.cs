@@ -443,12 +443,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(ChildBase)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () =>
-                                modelBuilder
-                                    .Entity<Child>()
-                                    .HasCheckConstraint("LargeId", "Id > 1000")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Child>().HasCheckConstraint("LargeId", "Id > 1000"))
                         .Message
                 );
             }
@@ -472,9 +468,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(ChildBase)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => modelBuilder.Entity<Child>().HasBaseType<ChildBase>()
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            modelBuilder.Entity<Child>().HasBaseType<ChildBase>())
                         .Message
                 );
             }

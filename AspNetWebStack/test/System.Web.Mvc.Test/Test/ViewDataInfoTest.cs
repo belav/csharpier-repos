@@ -12,13 +12,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             bool called = false;
-            ViewDataInfo vdi = new ViewDataInfo(
-                () =>
-                {
-                    called = true;
-                    return 21;
-                }
-            );
+            ViewDataInfo vdi = new ViewDataInfo(() =>
+            {
+                called = true;
+                return 21;
+            });
 
             // Act & Assert
             Assert.False(called);
@@ -32,13 +30,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             int callCount = 0;
-            ViewDataInfo vdi = new ViewDataInfo(
-                () =>
-                {
-                    ++callCount;
-                    return null;
-                }
-            );
+            ViewDataInfo vdi = new ViewDataInfo(() =>
+            {
+                ++callCount;
+                return null;
+            });
 
             // Act & Assert
             Assert.Equal(0, callCount);
@@ -54,13 +50,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             bool called = false;
-            ViewDataInfo vdi = new ViewDataInfo(
-                () =>
-                {
-                    called = true;
-                    return null;
-                }
-            );
+            ViewDataInfo vdi = new ViewDataInfo(() =>
+            {
+                called = true;
+                return null;
+            });
 
             // Act & Assert
             Assert.False(called);

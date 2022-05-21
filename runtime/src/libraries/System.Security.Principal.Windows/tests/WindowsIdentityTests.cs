@@ -159,9 +159,8 @@ public class WindowsIdentityTests
             try
             {
                 handle = new SafeAccessTokenHandle(mutex.SafeWaitHandle.DangerousGetHandle());
-                Assert.Throws<ArgumentException>(
-                    () => WindowsIdentity.RunImpersonated(handle, () => { })
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    WindowsIdentity.RunImpersonated(handle, () => { }));
             }
             finally
             {
@@ -199,22 +198,20 @@ public class WindowsIdentityTests
                 token,
                 () =>
                 {
-                    testInfo.task = Task.Run(
-                        async () =>
+                    testInfo.task = Task.Run(async () =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                Task<bool> task = testInfo.continueTask.WaitAsync(
-                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                );
-                                Assert.True(await task.ConfigureAwait(false));
-                            }
-                            catch (Exception ex)
-                            {
-                                testInfo.exception = ex;
-                            }
+                            Task<bool> task = testInfo.continueTask.WaitAsync(
+                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                            );
+                            Assert.True(await task.ConfigureAwait(false));
                         }
-                    );
+                        catch (Exception ex)
+                        {
+                            testInfo.exception = ex;
+                        }
+                    });
                 }
             );
         }

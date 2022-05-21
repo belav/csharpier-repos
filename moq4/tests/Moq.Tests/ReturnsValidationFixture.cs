@@ -27,12 +27,10 @@ namespace Moq.Tests
         {
             Action<object> delegateWithoutReturnValue = (arg) => { };
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.setup.Returns(delegateWithoutReturnValue);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.setup.Returns(delegateWithoutReturnValue);
+            });
 
             Assert.IsType<ArgumentException>(ex);
         }
@@ -42,12 +40,10 @@ namespace Moq.Tests
         {
             Func<string> delegateWithWrongReturnType = () => "42";
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.setup.Returns(delegateWithWrongReturnType);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.setup.Returns(delegateWithWrongReturnType);
+            });
 
             Assert.IsType<ArgumentException>(ex);
         }
@@ -58,12 +54,10 @@ namespace Moq.Tests
             Func<IType> delegateWithoutParameters = () => default(IType);
             this.setupNoArgs.Returns(delegateWithoutParameters);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.MethodNoArgs();
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.mock.Object.MethodNoArgs();
+            });
 
             Assert.Null(ex);
         }
@@ -74,12 +68,10 @@ namespace Moq.Tests
             Func<IType> delegateWithoutParameters = () => default(IType);
             this.setup.Returns(delegateWithoutParameters);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.Method(42, 3);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.mock.Object.Method(42, 3);
+            });
 
             Assert.Null(ex);
         }
@@ -93,12 +85,10 @@ namespace Moq.Tests
                 arg3
             ) => default(IType);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.setup.Returns(delegateWithWrongParameterCount);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.setup.Returns(delegateWithWrongParameterCount);
+            });
 
             Assert.IsType<ArgumentException>(ex);
         }
@@ -110,12 +100,10 @@ namespace Moq.Tests
                 default(IType);
             this.setup.Returns(delegateWithWrongParameterType);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    mock.Object.Method(42, 7);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                mock.Object.Method(42, 7);
+            });
 
             Assert.IsType<ArgumentException>(ex);
 
@@ -141,12 +129,10 @@ namespace Moq.Tests
                 default(IType);
             this.setup.Returns(delegateWithWrongParameterType);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    mock.Object.Method(null, null);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                mock.Object.Method(null, null);
+            });
 
             Assert.Null(ex);
         }
@@ -158,12 +144,10 @@ namespace Moq.Tests
                 new ReturnsValidationFixture().ExtensionMethodNoArgs;
             this.setupNoArgs.Returns(delegateWithoutParameters);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.MethodNoArgs();
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.mock.Object.MethodNoArgs();
+            });
 
             Assert.Null(ex);
         }
@@ -175,12 +159,10 @@ namespace Moq.Tests
                 new ReturnsValidationFixture().ExtensionMethodNoArgs;
             this.setup.Returns(delegateWithoutParameters);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.Method(42, 5);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.mock.Object.Method(42, 5);
+            });
 
             Assert.Null(ex);
         }
@@ -191,12 +173,10 @@ namespace Moq.Tests
             Func<object, object, IType> delegateWithWrongParameterCount =
                 new ReturnsValidationFixture().ExtensionMethod;
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.setupNoArgs.Returns(delegateWithWrongParameterCount);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.setupNoArgs.Returns(delegateWithWrongParameterCount);
+            });
 
             Assert.IsType<ArgumentException>(ex);
         }
@@ -208,12 +188,10 @@ namespace Moq.Tests
                 new ReturnsValidationFixture().ExtensionMethod;
             this.setup.Returns(delegateWithCorrectParameterCount);
 
-            var ex = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.Method(42, 5);
-                }
-            );
+            var ex = Record.Exception(() =>
+            {
+                this.mock.Object.Method(42, 5);
+            });
 
             Assert.Null(ex);
         }

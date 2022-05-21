@@ -31,9 +31,8 @@ namespace System.Collections.Concurrent.Tests
         public static void IntFromNotGreaterThanTo(int from, int to, int rangesize)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Partitioner.Create(from, to));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Partitioner.Create(from, to, rangesize)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Partitioner.Create(from, to, rangesize));
         }
 
         /// <summary>
@@ -45,9 +44,8 @@ namespace System.Collections.Concurrent.Tests
         public static void LongFromNotGreaterThanTo(long from, long to, int rangesize)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => Partitioner.Create(from, to));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Partitioner.Create(from, to, rangesize)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Partitioner.Create(from, to, rangesize));
         }
 
         /// <summary>
@@ -58,9 +56,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(899, 9000, -10)]
         public static void InvalidIntRangeSize(int from, int to, int rangesize)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Partitioner.Create(from, to, rangesize)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Partitioner.Create(from, to, rangesize));
         }
 
         /// <summary>
@@ -71,9 +68,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(899, 9000, -10)]
         public static void InvalidLongRangeSize(long from, long to, long rangesize)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Partitioner.Create(from, to, rangesize)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Partitioner.Create(from, to, rangesize));
         }
     }
 }

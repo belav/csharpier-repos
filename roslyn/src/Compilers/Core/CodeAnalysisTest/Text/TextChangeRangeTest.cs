@@ -16,12 +16,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Ctor1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var notUsed = new TextChangeRange(new TextSpan(), -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var notUsed = new TextChangeRange(new TextSpan(), -1);
+            });
         }
 
         [Fact]

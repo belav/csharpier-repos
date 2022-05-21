@@ -161,15 +161,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     Hierarchy = project.Hierarchy,
                     ProjectGuid = project.Guid,
                 };
-                project.VisualStudioProject = this.ThreadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _projectFactory.CreateAndAddToWorkspaceAsync(
-                            project.ProjectSystemName,
-                            project.Language,
-                            creationInfo,
-                            CancellationToken.None
-                        )
-                );
+                project.VisualStudioProject = this.ThreadingContext.JoinableTaskFactory.Run(() =>
+                    _projectFactory.CreateAndAddToWorkspaceAsync(
+                        project.ProjectSystemName,
+                        project.Language,
+                        creationInfo,
+                        CancellationToken.None
+                    ));
                 project.UpdateVisualStudioProjectProperties();
             }
             else

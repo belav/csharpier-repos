@@ -340,139 +340,108 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Extension_methods_throw_on_non_async_source()
         {
             await SourceNonAsyncQueryableTest(() => Source().AllAsync(e => true));
-            await SourceNonAsyncQueryableTest(
-                () => Source().AllAsync(e => true, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().AllAsync(e => true, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().AnyAsync());
             await SourceNonAsyncQueryableTest(() => Source().AnyAsync(e => true));
             await SourceNonAsyncQueryableTest(() => Source<int>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<int>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<int>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<int>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<int>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<int>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<int?>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<int?>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<int?>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<int?>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<int?>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<int?>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<long>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<long>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<long>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<long>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<long>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<long>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<long?>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<long?>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<long?>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<long?>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<long?>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<long?>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<float>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<float>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<float>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<float>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<float>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<float>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<float?>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<float?>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<float?>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<float?>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<float?>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<float?>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<double>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<double>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<double>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<double>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<double>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<double>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<double?>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<double?>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<double?>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<double?>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<double?>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<double?>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<decimal>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<decimal>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<decimal>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<decimal>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<decimal>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<decimal>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<decimal?>().AverageAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source<decimal?>().AverageAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<decimal?>().AverageAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source<decimal?>().AverageAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source<decimal?>().AverageAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source<decimal?>().AverageAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().ContainsAsync(0));
-            await SourceNonAsyncQueryableTest(
-                () => Source().ContainsAsync(0, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().ContainsAsync(0, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().CountAsync());
             await SourceNonAsyncQueryableTest(() => Source().CountAsync(e => true));
             await SourceNonAsyncQueryableTest(() => Source().FirstAsync());
             await SourceNonAsyncQueryableTest(() => Source().FirstAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().FirstAsync(e => true));
-            await SourceNonAsyncQueryableTest(
-                () => Source().FirstAsync(e => true, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().FirstAsync(e => true, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().FirstOrDefaultAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source().FirstOrDefaultAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().FirstOrDefaultAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().FirstOrDefaultAsync(e => true));
-            await SourceNonAsyncQueryableTest(
-                () => Source().FirstOrDefaultAsync(e => true, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().FirstOrDefaultAsync(e => true, new CancellationToken()));
             await SourceNonAsyncEnumerableTest<int>(() => Source().ForEachAsync(e => { }));
-            await SourceNonAsyncEnumerableTest<int>(
-                () => Source().ForEachAsync(e => { }, new CancellationToken())
-            );
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source().ForEachAsync(e => { }, new CancellationToken()));
             await SourceNonAsyncEnumerableTest<int>(() => Source().LoadAsync());
-            await SourceNonAsyncEnumerableTest<int>(
-                () => Source().LoadAsync(new CancellationToken())
-            );
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source().LoadAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().LongCountAsync());
-            await SourceNonAsyncQueryableTest(
-                () => Source().LongCountAsync(new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().LongCountAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().LongCountAsync(e => true));
-            await SourceNonAsyncQueryableTest(
-                () => Source().LongCountAsync(e => true, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().LongCountAsync(e => true, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().MaxAsync());
             await SourceNonAsyncQueryableTest(() => Source().MaxAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().MaxAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source().MaxAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().MaxAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().MinAsync());
             await SourceNonAsyncQueryableTest(() => Source().MinAsync(new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().MinAsync(e => e));
-            await SourceNonAsyncQueryableTest(
-                () => Source().MinAsync(e => e, new CancellationToken())
-            );
+            await SourceNonAsyncQueryableTest(() =>
+                Source().MinAsync(e => e, new CancellationToken()));
             await SourceNonAsyncQueryableTest(() => Source().SingleAsync());
             await SourceNonAsyncQueryableTest(() => Source().SingleAsync(e => true));
             await SourceNonAsyncQueryableTest(() => Source().SingleOrDefaultAsync());
@@ -498,30 +467,23 @@ namespace Microsoft.EntityFrameworkCore
             await SourceNonAsyncQueryableTest(() => Source<decimal?>().SumAsync());
             await SourceNonAsyncQueryableTest(() => Source<decimal?>().SumAsync(e => e));
             await SourceNonAsyncEnumerableTest<int>(() => Source().ToDictionaryAsync(e => e));
-            await SourceNonAsyncEnumerableTest<int>(
-                () => Source().ToDictionaryAsync(e => e, e => e)
-            );
-            await SourceNonAsyncEnumerableTest<int>(
-                () => Source().ToDictionaryAsync(e => e, LegacyReferenceEqualityComparer.Instance)
-            );
-            await SourceNonAsyncEnumerableTest<int>(
-                () => Source().ToDictionaryAsync(e => e, LegacyReferenceEqualityComparer.Instance)
-            );
-            await SourceNonAsyncEnumerableTest<int>(
-                () =>
-                    Source()
-                        .ToDictionaryAsync(e => e, e => e, LegacyReferenceEqualityComparer.Instance)
-            );
-            await SourceNonAsyncEnumerableTest<int>(
-                () =>
-                    Source()
-                        .ToDictionaryAsync(
-                            e => e,
-                            e => e,
-                            LegacyReferenceEqualityComparer.Instance,
-                            new CancellationToken()
-                        )
-            );
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source().ToDictionaryAsync(e => e, e => e));
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source().ToDictionaryAsync(e => e, LegacyReferenceEqualityComparer.Instance));
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source().ToDictionaryAsync(e => e, LegacyReferenceEqualityComparer.Instance));
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source()
+                    .ToDictionaryAsync(e => e, e => e, LegacyReferenceEqualityComparer.Instance));
+            await SourceNonAsyncEnumerableTest<int>(() =>
+                Source()
+                    .ToDictionaryAsync(
+                        e => e,
+                        e => e,
+                        LegacyReferenceEqualityComparer.Instance,
+                        new CancellationToken()
+                    ));
             await SourceNonAsyncEnumerableTest<int>(() => Source().ToListAsync());
 
             Assert.Equal(

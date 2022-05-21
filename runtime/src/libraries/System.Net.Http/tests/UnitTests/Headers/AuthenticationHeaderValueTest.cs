@@ -33,24 +33,18 @@ namespace System.Net.Http.Tests
                     new AuthenticationHeaderValue("", "x");
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new AuthenticationHeaderValue(" x", "x");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new AuthenticationHeaderValue("x ", "x");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new AuthenticationHeaderValue("x y", "x");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue(" x", "x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue("x ", "x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new AuthenticationHeaderValue("x y", "x");
+            });
         }
 
         [Fact]
@@ -128,12 +122,10 @@ namespace System.Net.Http.Tests
             string input =
                 "D\rigest qop=\"auth\",algorithm=MD5-sess,charset=utf-8,realm=\"Digest\"";
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    AuthenticationHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                AuthenticationHeaderValue.Parse(input);
+            });
         }
 
         [Fact]
@@ -154,12 +146,10 @@ namespace System.Net.Http.Tests
                 "Digest algorithm=MD5-sess,nonce=\"+Upgraded+v109e309640b\",charset=utf-8,realm=\"Digest\", ";
 
             HttpRequestMessage request = new HttpRequestMessage();
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    request.Headers.Add(HttpKnownHeaderNames.Authorization, input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                request.Headers.Add(HttpKnownHeaderNames.Authorization, input);
+            });
         }
 
         [Fact]

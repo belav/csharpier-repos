@@ -160,50 +160,42 @@ namespace System.Security.AccessControl.Tests
 
             //Case 1, null byte array
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
-                    commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
-                    binaryForm = null;
-                    commonSecurityDescriptor.GetBinaryForm(binaryForm, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
+                commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
+                binaryForm = null;
+                commonSecurityDescriptor.GetBinaryForm(binaryForm, 0);
+            });
 
             //case 2, empty byte array
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
-                    commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
-                    binaryForm = new byte[0];
-                    commonSecurityDescriptor.GetBinaryForm(binaryForm, 0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
+                commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
+                binaryForm = new byte[0];
+                commonSecurityDescriptor.GetBinaryForm(binaryForm, 0);
+            });
 
             //case 3, negative offset
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
-                    commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
-                    binaryForm = new byte[100];
-                    commonSecurityDescriptor.GetBinaryForm(binaryForm, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
+                commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
+                binaryForm = new byte[100];
+                commonSecurityDescriptor.GetBinaryForm(binaryForm, -1);
+            });
             //case 4, binaryForm.Length - offset < BinaryLength
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
-                    commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
-                    binaryForm = new byte[commonSecurityDescriptor.BinaryLength];
-                    commonSecurityDescriptor.GetBinaryForm(binaryForm, 8);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                sddl = "O:LAG:SYD:AI(A;ID;FA;;;BA)(A;ID;FA;;;BG)(A;ID;FA;;;SY)";
+                commonSecurityDescriptor = new CommonSecurityDescriptor(true, false, sddl);
+                binaryForm = new byte[commonSecurityDescriptor.BinaryLength];
+                commonSecurityDescriptor.GetBinaryForm(binaryForm, 8);
+            });
         }
 
         [Theory]

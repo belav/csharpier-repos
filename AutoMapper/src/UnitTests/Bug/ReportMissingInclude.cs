@@ -9,15 +9,13 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void ShouldDiscoverMissingMappingsInIncludedType()
         {
-            new Action(
-                () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
-                        }
-                    )
-            ).ShouldThrowException<InvalidOperationException>(
+            new Action(() =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
+                    }
+                )).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
                         $"Missing map from {typeof(object)} to {typeof(ChildType)}."
@@ -38,16 +36,14 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void ShouldDiscoverMissingMappingsInIncludedType()
         {
-            new Action(
-                () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<ReportMissingIncludeCreateMissingMap, BaseType>()
-                                .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
-                        }
-                    )
-            ).ShouldThrowException<InvalidOperationException>(
+            new Action(() =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<ReportMissingIncludeCreateMissingMap, BaseType>()
+                            .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
+                    }
+                )).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
                         $"Missing map from {typeof(ReportMissingIncludeCreateMissingMap)} to {typeof(ChildType)}."
@@ -68,15 +64,13 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void ShouldDiscoverMissingMappingsInIncludedType()
         {
-            new Action(
-                () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
-                        }
-                    )
-            ).ShouldThrowException<InvalidOperationException>(
+            new Action(() =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
+                    }
+                )).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
                         $"Missing map from {typeof(object)} to {typeof(BaseType)}."
@@ -97,16 +91,14 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void ShouldDiscoverMissingMappingsInIncludedType()
         {
-            new Action(
-                () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<ReportMissingIncludeBaseCreateMissingMap, ChildType>()
-                                .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
-                        }
-                    )
-            ).ShouldThrowException<InvalidOperationException>(
+            new Action(() =>
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<ReportMissingIncludeBaseCreateMissingMap, ChildType>()
+                            .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
+                    }
+                )).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
                         $"Missing map from {typeof(ReportMissingIncludeBaseCreateMissingMap)} to {typeof(BaseType)}."

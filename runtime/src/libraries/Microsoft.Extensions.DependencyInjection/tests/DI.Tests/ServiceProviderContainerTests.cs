@@ -29,9 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = CreateServiceProvider(serviceCollection);
 
-            var ex1 = Assert.Throws<Exception>(
-                () => provider.GetService<ClassWithThrowingEmptyCtor>()
-            );
+            var ex1 = Assert.Throws<Exception>(() =>
+                provider.GetService<ClassWithThrowingEmptyCtor>());
             Assert.Equal(nameof(ClassWithThrowingEmptyCtor), ex1.Message);
 
             var ex2 = Assert.Throws<Exception>(() => provider.GetService<ClassWithThrowingCtor>());
@@ -51,9 +50,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetServices<ClassDependsOnPrivateConstructorClass>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetServices<ClassDependsOnPrivateConstructorClass>());
             Assert.Equal(expectedMessage, ex.Message);
         }
 
@@ -66,9 +64,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var provider = CreateServiceProvider(collection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => provider.GetService<DependOnNonexistentService>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                provider.GetService<DependOnNonexistentService>());
             Assert.Equal(
                 $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting to activate "
                     + $"'{typeof(DependOnNonexistentService)}'.",
@@ -85,9 +82,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var provider = CreateServiceProvider(collection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => provider.GetService<IEnumerable<DependOnNonexistentService>>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                provider.GetService<IEnumerable<DependOnNonexistentService>>());
             Assert.Equal(
                 $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting to activate "
                     + $"'{typeof(DependOnNonexistentService)}'.",
@@ -182,9 +178,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient(serviceType, implementationType);
 
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(
-                () => CreateServiceProvider(serviceCollection)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                CreateServiceProvider(serviceCollection));
             Assert.Equal(
                 $"Cannot instantiate implementation type '{implementationType}' for service type '{serviceType}'.",
                 exception.Message
@@ -204,9 +199,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient(serviceType, implementationType);
 
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(
-                () => CreateServiceProvider(serviceCollection)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                CreateServiceProvider(serviceCollection));
             Assert.StartsWith(errorMessage, exception.Message);
         }
 
@@ -384,9 +378,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = provider.CreateScope();
             ((IDisposable)provider).Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => scope.ServiceProvider.GetService<IFakeService>()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                scope.ServiceProvider.GetService<IFakeService>());
         }
 
         [Fact]
@@ -399,9 +392,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = provider.CreateScope();
             scope.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => scope.ServiceProvider.GetService<IFakeService>()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                scope.ServiceProvider.GetService<IFakeService>());
             //Check that resolution from root works
             Assert.NotNull(provider.CreateScope());
         }
@@ -412,13 +404,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var services = new ServiceCollection();
             services.AddSingleton<DisposeServiceProviderInCtor>();
             IServiceProvider sp = CreateServiceProvider(services);
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    // ctor disposes ServiceProvider
-                    var service = sp.GetRequiredService<DisposeServiceProviderInCtor>();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                // ctor disposes ServiceProvider
+                var service = sp.GetRequiredService<DisposeServiceProviderInCtor>();
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -432,25 +422,19 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             );
 
             var sp = CreateServiceProvider(services);
-            bool doesNotHang = Task.Run(
-                    () =>
+            bool doesNotHang = Task.Run(() =>
+                {
+                    SingleThreadedSynchronizationContext.Run(() =>
                     {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
+                        // Act
+                        Assert.Throws<ObjectDisposedException>(() =>
+                        {
+                            // ctor disposes ServiceProvider
+                            var service =
+                                sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
+                        });
+                    });
+                })
                 .Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
@@ -468,25 +452,19 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             );
 
             var sp = CreateServiceProvider(services);
-            bool doesNotHang = Task.Run(
-                    () =>
+            bool doesNotHang = Task.Run(() =>
+                {
+                    SingleThreadedSynchronizationContext.Run(() =>
                     {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
+                        // Act
+                        Assert.Throws<ObjectDisposedException>(() =>
+                        {
+                            // ctor disposes ServiceProvider
+                            var service =
+                                sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
+                        });
+                    });
+                })
                 .Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
@@ -625,25 +603,21 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
                 sp = CreateServiceProvider(services);
 
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        outerSingleton = sp.GetRequiredService<OuterSingleton>();
-                    }
-                );
+                var t1 = Task.Run(() =>
+                {
+                    outerSingleton = sp.GetRequiredService<OuterSingleton>();
+                });
 
                 // Wait until mre2 gets set in InnerSingleton ctor
                 mreForThread2.WaitOne();
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        mreForThread3.Set();
+                var t2 = Task.Run(() =>
+                {
+                    mreForThread3.Set();
 
-                        // This waits on InnerSingleton singleton lock that is taken in thread 1
-                        innerSingleton = sp.GetRequiredService<InnerSingleton>();
-                    }
-                );
+                    // This waits on InnerSingleton singleton lock that is taken in thread 1
+                    innerSingleton = sp.GetRequiredService<InnerSingleton>();
+                });
 
                 mreForThread3.WaitOne();
 
@@ -692,20 +666,18 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 // Arrange
                 var services = new ServiceCollection();
 
-                var lazy = new Lazy<Thing1>(
-                    () =>
-                    {
-                        sb.Append("3");
-                        mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
+                var lazy = new Lazy<Thing1>(() =>
+                {
+                    sb.Append("3");
+                    mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
 
-                        // by this time, Thread 2 is holding a singleton lock for Thing2,
-                        // and Thread one holds the lazy lock
-                        // the call below to resolve Thing0 does not hang
-                        // since singletons do not share the same lock upon resolve anymore.
-                        thing0 = sp.GetRequiredService<Thing0>();
-                        return new Thing1(thing0);
-                    }
-                );
+                    // by this time, Thread 2 is holding a singleton lock for Thing2,
+                    // and Thread one holds the lazy lock
+                    // the call below to resolve Thing0 does not hang
+                    // since singletons do not share the same lock upon resolve anymore.
+                    thing0 = sp.GetRequiredService<Thing0>();
+                    return new Thing1(thing0);
+                });
 
                 services.AddSingleton<Thing0>();
                 services.AddTransient(
@@ -729,26 +701,22 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
                 sp = CreateServiceProvider(services);
 
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 1;
-                        using var scope1 = sp.CreateScope();
-                        mreForThread1.WaitOne(); // [a] Waits until thread 2 reaches the transient call to ensure it holds Thing2 singleton lock
+                var t1 = Task.Run(() =>
+                {
+                    ThreadId = 1;
+                    using var scope1 = sp.CreateScope();
+                    mreForThread1.WaitOne(); // [a] Waits until thread 2 reaches the transient call to ensure it holds Thing2 singleton lock
 
-                        sb.Append("2");
-                        thing1 = scope1.ServiceProvider.GetRequiredService<Thing1>();
-                    }
-                );
+                    sb.Append("2");
+                    thing1 = scope1.ServiceProvider.GetRequiredService<Thing1>();
+                });
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 2;
-                        using var scope2 = sp.CreateScope();
-                        thing2 = scope2.ServiceProvider.GetRequiredService<Thing2>();
-                    }
-                );
+                var t2 = Task.Run(() =>
+                {
+                    ThreadId = 2;
+                    using var scope2 = sp.CreateScope();
+                    thing2 = scope2.ServiceProvider.GetRequiredService<Thing2>();
+                });
 
                 // Act
                 await t1;
@@ -788,16 +756,14 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                     typeof(FakeOpenGenericService<>)
                 );
 
-                var lazy = new Lazy<Thing4>(
-                    () =>
-                    {
-                        sb.Append("3");
-                        mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
+                var lazy = new Lazy<Thing4>(() =>
+                {
+                    sb.Append("3");
+                    mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
 
-                        thing3 = sp.GetRequiredService<Thing3>();
-                        return new Thing4(thing3);
-                    }
-                );
+                    thing3 = sp.GetRequiredService<Thing3>();
+                    return new Thing4(thing3);
+                });
 
                 services.AddTransient(
                     sp =>
@@ -821,32 +787,24 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 sp = CreateServiceProvider(services);
 
                 // Act
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 1;
-                        using var scope1 = sp.CreateScope();
-                        mreForThread1.WaitOne(); // Waits until thread 2 reaches the transient call to ensure it holds Thing4 singleton lock
+                var t1 = Task.Run(() =>
+                {
+                    ThreadId = 1;
+                    using var scope1 = sp.CreateScope();
+                    mreForThread1.WaitOne(); // Waits until thread 2 reaches the transient call to ensure it holds Thing4 singleton lock
 
-                        sb.Append("2");
-                        constrainedThing4Services = sp.GetServices<
-                            IFakeOpenGenericService<Thing4>
-                        >()
-                            .ToList();
-                    }
-                );
+                    sb.Append("2");
+                    constrainedThing4Services = sp.GetServices<IFakeOpenGenericService<Thing4>>()
+                        .ToList();
+                });
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 2;
-                        using var scope2 = sp.CreateScope();
-                        constrainedThing5Services = sp.GetServices<
-                            IFakeOpenGenericService<Thing5>
-                        >()
-                            .ToList();
-                    }
-                );
+                var t2 = Task.Run(() =>
+                {
+                    ThreadId = 2;
+                    using var scope2 = sp.CreateScope();
+                    constrainedThing5Services = sp.GetServices<IFakeOpenGenericService<Thing5>>()
+                        .ToList();
+                });
 
                 // Act
                 await t1;
@@ -1097,9 +1055,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = CreateServiceProvider(serviceCollection);
             var disposable = serviceProvider.GetService<AsyncDisposable>();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => (serviceProvider as IDisposable).Dispose()
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                (serviceProvider as IDisposable).Dispose());
             Assert.Equal(
                 "'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderContainerTests+AsyncDisposable' type only implements IAsyncDisposable. Use DisposeAsync to dispose the container.",
                 exception.Message
@@ -1161,9 +1118,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = serviceProvider.CreateScope();
             var disposable = scope.ServiceProvider.GetService<AsyncDisposable>();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => (scope as IDisposable).Dispose()
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                (scope as IDisposable).Dispose());
             Assert.Equal(
                 "'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderContainerTests+AsyncDisposable' type only implements IAsyncDisposable. Use DisposeAsync to dispose the container.",
                 exception.Message

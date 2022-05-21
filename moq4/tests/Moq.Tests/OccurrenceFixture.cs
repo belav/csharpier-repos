@@ -30,18 +30,16 @@ namespace Moq.Tests
             mock.Setup(foo => foo.Execute("ping")).Returns("ack").AtMost(5);
 
             var calls = 0;
-            MockException mex = Assert.Throws<MockException>(
-                () =>
+            MockException mex = Assert.Throws<MockException>(() =>
+            {
+                while (calls <= repeat + 1)
                 {
-                    while (calls <= repeat + 1)
-                    {
-                        mock.Object.Execute("ping");
-                        calls++;
-                    }
-
-                    Assert.True(false, "should fail on two calls");
+                    mock.Object.Execute("ping");
+                    calls++;
                 }
-            );
+
+                Assert.True(false, "should fail on two calls");
+            });
 
             Assert.Equal(MockExceptionReasons.MoreThanNCalls, mex.Reasons);
             Assert.Equal(calls, repeat);

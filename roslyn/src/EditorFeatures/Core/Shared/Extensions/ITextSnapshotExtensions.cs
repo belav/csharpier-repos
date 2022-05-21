@@ -134,12 +134,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-                        operationContext
-                    )
-            );
+            return threadingContext.JoinableTaskFactory.Run(() =>
+                snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                    operationContext
+                ));
         }
     }
 }

@@ -761,14 +761,12 @@ public class RuntimeViewCompilerTest
 
         // Act
         var task1 = Task.Run(() => compiler.CompileAsync(path));
-        var task2 = Task.Run(
-            () =>
-            {
-                // Event 4
-                Assert.True(resetEvent2.WaitOne(waitDuration));
-                return compiler.CompileAsync(path);
-            }
-        );
+        var task2 = Task.Run(() =>
+        {
+            // Event 4
+            Assert.True(resetEvent2.WaitOne(waitDuration));
+            return compiler.CompileAsync(path);
+        });
 
         // Event 1
         resetEvent1.Set();
@@ -792,17 +790,15 @@ public class RuntimeViewCompilerTest
         compiler.Compile = _ => throw exception;
 
         // Act and Assert - 1
-        var actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => compiler.CompileAsync(path)
-        );
+        var actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            compiler.CompileAsync(path));
         Assert.Same(exception, actual);
 
         // Act and Assert - 2
         compiler.Compile = _ => throw new Exception("Shouldn't be called");
 
-        actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => compiler.CompileAsync(path)
-        );
+        actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            compiler.CompileAsync(path));
         Assert.Same(exception, actual);
     }
 
@@ -852,9 +848,8 @@ this should fail";
         );
 
         // Act & Assert
-        var ex = Assert.Throws<CompilationFailedException>(
-            () => compiler.CompileAndEmit(codeDocument, content)
-        );
+        var ex = Assert.Throws<CompilationFailedException>(() =>
+            compiler.CompileAndEmit(codeDocument, content));
 
         var compilationFailure = Assert.Single(ex.CompilationFailures);
         Assert.Equal(viewPath, compilationFailure.SourceFilePath);
@@ -875,9 +870,8 @@ this should fail";
         );
 
         // Act & Assert
-        var ex = Assert.Throws<CompilationFailedException>(
-            () => compiler.CompileAndEmit(codeDocument, content)
-        );
+        var ex = Assert.Throws<CompilationFailedException>(() =>
+            compiler.CompileAndEmit(codeDocument, content));
 
         var compilationFailure = Assert.Single(ex.CompilationFailures);
         Assert.Equal("Generated Code", compilationFailure.SourceFilePath);

@@ -115,41 +115,37 @@ namespace System.Data.Tests
         [Fact]
         public void InvalidConstraintException()
         {
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    // Parent Columns and Child Columns don't have type-matching columns.
-                    DataRelation relation = new DataRelation(
-                        "Rel",
-                        _mom.Columns[1],
-                        _child.Columns[1],
-                        true
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                // Parent Columns and Child Columns don't have type-matching columns.
+                DataRelation relation = new DataRelation(
+                    "Rel",
+                    _mom.Columns[1],
+                    _child.Columns[1],
+                    true
+                );
+            });
         }
 
         [Fact]
         public void InvalidConstraintException2()
         {
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    // Parent Columns and Child Columns don't have type-matching columns.
-                    _child.Columns[1].DataType = _mom.Columns[1].DataType;
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                // Parent Columns and Child Columns don't have type-matching columns.
+                _child.Columns[1].DataType = _mom.Columns[1].DataType;
 
-                    DataRelation Relation = new DataRelation(
-                        "Rel",
-                        _mom.Columns[1],
-                        _child.Columns[1],
-                        true
-                    );
-                    _set.Relations.Add(Relation);
-                    Assert.Equal(1, _set.Relations.Count);
+                DataRelation Relation = new DataRelation(
+                    "Rel",
+                    _mom.Columns[1],
+                    _child.Columns[1],
+                    true
+                );
+                _set.Relations.Add(Relation);
+                Assert.Equal(1, _set.Relations.Count);
 
-                    _child.Columns[1].DataType = Type.GetType("System.Double");
-                }
-            );
+                _child.Columns[1].DataType = Type.GetType("System.Double");
+            });
         }
 
         [Fact]
@@ -253,9 +249,8 @@ namespace System.Data.Tests
             childs[0] = col4;
             childs[1] = col7;
 
-            Assert.Throws<InvalidConstraintException>(
-                () => new DataRelation("Rel", Parents, childs)
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+                new DataRelation("Rel", Parents, childs));
 
             childs[1] = col6;
 
@@ -334,9 +329,8 @@ namespace System.Data.Tests
             );
 
             Assert.Throws<NullReferenceException>(() => _set.Relations.Add(relation));
-            Assert.Throws<NullReferenceException>(
-                () => _set.Relations.AddRange(new DataRelation[] { relation })
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                _set.Relations.AddRange(new DataRelation[] { relation }));
 
             _set.BeginInit();
             _set.Relations.AddRange(new DataRelation[] { relation });

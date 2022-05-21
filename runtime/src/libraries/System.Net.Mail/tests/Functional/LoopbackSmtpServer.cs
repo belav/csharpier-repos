@@ -75,18 +75,16 @@ namespace Systen.Net.Mail.Tests
             Port = ((IPEndPoint)_listenSocket.LocalEndPoint).Port;
             _listenSocket.Listen(1);
 
-            _ = Task.Run(
-                async () =>
+            _ = Task.Run(async () =>
+            {
+                do
                 {
-                    do
-                    {
-                        var socket = await _listenSocket.AcceptAsync();
-                        _socketsToDispose.Add(socket);
-                        ConnectionCount++;
-                        _ = Task.Run(async () => await HandleConnectionAsync(socket));
-                    } while (ReceiveMultipleConnections);
-                }
-            );
+                    var socket = await _listenSocket.AcceptAsync();
+                    _socketsToDispose.Add(socket);
+                    ConnectionCount++;
+                    _ = Task.Run(async () => await HandleConnectionAsync(socket));
+                } while (ReceiveMultipleConnections);
+            });
         }
 
         private async Task HandleConnectionAsync(Socket socket)

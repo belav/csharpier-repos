@@ -782,14 +782,12 @@ class C3
             var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
             {
-                tasks[i] = Task.Run(
-                    () =>
-                        compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
-                            model,
-                            null,
-                            CancellationToken.None
-                        )
-                );
+                tasks[i] = Task.Run(() =>
+                    compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
+                        model,
+                        null,
+                        CancellationToken.None
+                    ));
             }
 
             await Task.WhenAll(tasks);
@@ -855,14 +853,12 @@ class C3
             var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
             {
-                tasks[i] = Task.Run(
-                    () =>
-                        compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
-                            model,
-                            null,
-                            CancellationToken.None
-                        )
-                );
+                tasks[i] = Task.Run(() =>
+                    compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
+                        model,
+                        null,
+                        CancellationToken.None
+                    ));
             }
 
             await Task.WhenAll(tasks);
@@ -892,13 +888,11 @@ class C3
             );
 
             // First call into analyzer mimics cancellation.
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () =>
-                    compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
-                        tree,
-                        analyzer.CancellationToken
-                    )
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
+                    tree,
+                    analyzer.CancellationToken
+                ));
 
             // Second call into analyzer reports diagnostic.
             var diagnostics = await compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(

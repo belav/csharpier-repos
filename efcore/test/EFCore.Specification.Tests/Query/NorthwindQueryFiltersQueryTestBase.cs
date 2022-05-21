@@ -61,9 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 RemoveNewLines(
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => AssertFilteredQuery(async, ss => ss.Set<Product>())
-                        )
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            AssertFilteredQuery(async, ss => ss.Set<Product>()))
                     ).Message
                 )
             );
@@ -213,13 +212,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ),
                 RemoveNewLines(
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            () =>
-                                AssertFilteredQuery(
-                                    async,
-                                    ss => ss.Set<Product>().Include(p => p.OrderDetails)
-                                )
-                        )
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            AssertFilteredQuery(
+                                async,
+                                ss => ss.Set<Product>().Include(p => p.OrderDetails)
+                            ))
                     ).Message
                 )
             );

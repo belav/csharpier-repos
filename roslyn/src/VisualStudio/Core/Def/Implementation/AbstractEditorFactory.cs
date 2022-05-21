@@ -331,15 +331,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             CancellationToken cancellationToken
         )
         {
-            Microsoft.VisualStudio.Shell.ThreadHelper.JoinableTaskFactory.Run(
-                () =>
-                    FormatDocumentCreatedFromTemplateAsync(
-                        hierarchy,
-                        itemid,
-                        filePath,
-                        cancellationToken
-                    )
-            );
+            Microsoft.VisualStudio.Shell.ThreadHelper.JoinableTaskFactory.Run(() =>
+                FormatDocumentCreatedFromTemplateAsync(
+                    hierarchy,
+                    itemid,
+                    filePath,
+                    cancellationToken
+                ));
         }
 
         // NOTE: This function has been created to hide IWinFormsEditorFactory type in non-WinForms scenarios (e.g. editing .cs or .vb file)
@@ -487,18 +485,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
             }
 
-            IOUtilities.PerformIO(
-                () =>
-                {
-                    using var textWriter = new StreamWriter(
-                        filePath,
-                        append: false,
-                        encoding: formattedText.Encoding
-                    );
-                    // We pass null here for cancellation, since cancelling in the middle of the file write would leave the file corrupted
-                    formattedText.Write(textWriter, cancellationToken: CancellationToken.None);
-                }
-            );
+            IOUtilities.PerformIO(() =>
+            {
+                using var textWriter = new StreamWriter(
+                    filePath,
+                    append: false,
+                    encoding: formattedText.Encoding
+                );
+                // We pass null here for cancellation, since cancelling in the middle of the file write would leave the file corrupted
+                formattedText.Write(textWriter, cancellationToken: CancellationToken.None);
+            });
         }
     }
 }

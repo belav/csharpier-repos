@@ -18,9 +18,8 @@ public class DataProtectionEntityFrameworkTests
     [Fact]
     public void CreateRepository_ThrowsIf_ContextIsNull()
     {
-        Assert.Throws<ArgumentNullException>(
-            () => new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(null, null)
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(null, null));
     }
 
     [Fact]

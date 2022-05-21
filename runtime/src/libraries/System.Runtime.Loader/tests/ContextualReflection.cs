@@ -270,12 +270,10 @@ namespace System.Runtime.Loader.Tests
         public void CurrentContextualReflectionContextInitialValueNull()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);
+                })
                 .Dispose();
         }
 

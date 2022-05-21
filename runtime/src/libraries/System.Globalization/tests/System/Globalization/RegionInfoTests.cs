@@ -77,21 +77,19 @@ namespace System.Globalization.Tests
         public void CurrentRegion_Windows()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        RegionInfo ri = RegionInfo.CurrentRegion;
-                        CultureInfo.CurrentCulture.ClearCachedData(); // clear the current region cached data
+                .Invoke(() =>
+                {
+                    RegionInfo ri = RegionInfo.CurrentRegion;
+                    CultureInfo.CurrentCulture.ClearCachedData(); // clear the current region cached data
 
-                        CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ja-JP");
+                    CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ja-JP");
 
-                        // Changing the current culture shouldn't affect the default current region as we get it from Windows settings.
-                        Assert.Equal(
-                            ri.TwoLetterISORegionName,
-                            RegionInfo.CurrentRegion.TwoLetterISORegionName
-                        );
-                    }
-                )
+                    // Changing the current culture shouldn't affect the default current region as we get it from Windows settings.
+                    Assert.Equal(
+                        ri.TwoLetterISORegionName,
+                        RegionInfo.CurrentRegion.TwoLetterISORegionName
+                    );
+                })
                 .Dispose();
         }
 

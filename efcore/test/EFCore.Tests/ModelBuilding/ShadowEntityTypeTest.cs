@@ -149,9 +149,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     "Dictionary<string, object>"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderEntityType.HasOne("Customer", "Customer")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntityType.HasOne("Customer", "Customer"))
                     .Message
             );
         }
@@ -165,9 +164,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             Assert.Equal(
                 CoreStrings.NoClrNavigation("CustomerNavigation", typeof(Order).ShortDisplayName()),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        orderEntityType.HasOne(typeof(Customer), "CustomerNavigation"))
                     .Message
             );
         }

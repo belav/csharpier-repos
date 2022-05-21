@@ -542,12 +542,10 @@ public class AttributeRouteTest
         var route = CreateRoute(CreateHandler().Object, actionDescriptorProvider.Object);
 
         // Act & Assert
-        var exception = Assert.Throws<RouteCreationException>(
-            () =>
-            {
-                route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
-            }
-        );
+        var exception = Assert.Throws<RouteCreationException>(() =>
+        {
+            route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
+        });
         Assert.Equal(expectedErrorMessage, exception.Message);
         Assert.IsType<RouteCreationException>(exception.InnerException);
     }

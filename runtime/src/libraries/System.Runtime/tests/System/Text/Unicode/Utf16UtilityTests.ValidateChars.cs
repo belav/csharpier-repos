@@ -381,36 +381,34 @@ namespace System.Text.Unicode.Tests
 
         private static Lazy<GetPointerToFirstInvalidCharDel> CreateGetPointerToFirstInvalidCharFn()
         {
-            return new Lazy<GetPointerToFirstInvalidCharDel>(
-                () =>
+            return new Lazy<GetPointerToFirstInvalidCharDel>(() =>
+            {
+                Type utf16UtilityType = typeof(Utf8).Assembly.GetType(
+                    "System.Text.Unicode.Utf16Utility"
+                );
+
+                if (utf16UtilityType is null)
                 {
-                    Type utf16UtilityType = typeof(Utf8).Assembly.GetType(
-                        "System.Text.Unicode.Utf16Utility"
+                    throw new Exception(
+                        "Couldn't find Utf16Utility type in System.Private.CoreLib."
                     );
-
-                    if (utf16UtilityType is null)
-                    {
-                        throw new Exception(
-                            "Couldn't find Utf16Utility type in System.Private.CoreLib."
-                        );
-                    }
-
-                    MethodInfo methodInfo = utf16UtilityType.GetMethod(
-                        "GetPointerToFirstInvalidChar",
-                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
-                    );
-
-                    if (methodInfo is null)
-                    {
-                        throw new Exception(
-                            "Couldn't find GetPointerToFirstInvalidChar method on Utf8Utility."
-                        );
-                    }
-
-                    return (GetPointerToFirstInvalidCharDel)
-                        methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidCharDel));
                 }
-            );
+
+                MethodInfo methodInfo = utf16UtilityType.GetMethod(
+                    "GetPointerToFirstInvalidChar",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                );
+
+                if (methodInfo is null)
+                {
+                    throw new Exception(
+                        "Couldn't find GetPointerToFirstInvalidChar method on Utf8Utility."
+                    );
+                }
+
+                return (GetPointerToFirstInvalidCharDel)
+                    methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidCharDel));
+            });
         }
 
         private static string ProcessInput(string input)

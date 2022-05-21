@@ -1109,9 +1109,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 Assert.Equal(
                     CosmosStrings.InvalidResourceId,
                     Assert
-                        .Throws<InvalidOperationException>(
-                            () => context.Set<CustomerWithResourceId>().Find(1, "")
-                        )
+                        .Throws<InvalidOperationException>(() =>
+                            context.Set<CustomerWithResourceId>().Find(1, ""))
                         .Message
                 );
             }
@@ -1763,9 +1762,8 @@ OFFSET 0 LIMIT 1"
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
                     (
-                        await Assert.ThrowsAsync<CosmosException>(
-                            () => context.Set<Customer>().SingleAsync()
-                        )
+                        await Assert.ThrowsAsync<CosmosException>(() =>
+                            context.Set<Customer>().SingleAsync())
                     ).Message
                 );
             }
@@ -1777,16 +1775,14 @@ OFFSET 0 LIMIT 1"
             var options = Fixture.CreateOptions();
 
             using var context = new ConflictingIncompatibleIdContext(options);
-            await Assert.ThrowsAnyAsync<Exception>(
-                async () =>
-                {
-                    await context.Database.EnsureCreatedAsync();
+            await Assert.ThrowsAnyAsync<Exception>(async () =>
+            {
+                await context.Database.EnsureCreatedAsync();
 
-                    context.Add(new ConflictingIncompatibleId { id = 42 });
+                context.Add(new ConflictingIncompatibleId { id = 42 });
 
-                    await context.SaveChangesAsync();
-                }
-            );
+                await context.SaveChangesAsync();
+            });
         }
 
         private class ConflictingIncompatibleId

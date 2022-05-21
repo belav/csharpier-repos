@@ -136,18 +136,16 @@ namespace System.Web.WebPages.Administration.PackageManager
         /// <returns>Warnings encountered when installing the package.</returns>
         public IEnumerable<string> InstallPackage(IPackage package, AppDomain appDomain)
         {
-            IEnumerable<string> result = PerformLoggedAction(
-                () =>
-                {
-                    _projectManager.AddPackageReference(
-                        package.Id,
-                        package.Version,
-                        ignoreDependencies: false,
-                        allowPrereleaseVersions: false
-                    );
-                    AddBindingRedirects(appDomain);
-                }
-            );
+            IEnumerable<string> result = PerformLoggedAction(() =>
+            {
+                _projectManager.AddPackageReference(
+                    package.Id,
+                    package.Version,
+                    ignoreDependencies: false,
+                    allowPrereleaseVersions: false
+                );
+                AddBindingRedirects(appDomain);
+            });
             return result;
         }
 
@@ -162,18 +160,16 @@ namespace System.Web.WebPages.Administration.PackageManager
         /// <returns>Warnings encountered when updating the package.</returns>
         public IEnumerable<string> UpdatePackage(IPackage package, AppDomain appDomain)
         {
-            return PerformLoggedAction(
-                () =>
-                {
-                    _projectManager.UpdatePackageReference(
-                        package.Id,
-                        package.Version,
-                        updateDependencies: true,
-                        allowPrereleaseVersions: false
-                    );
-                    AddBindingRedirects(appDomain);
-                }
-            );
+            return PerformLoggedAction(() =>
+            {
+                _projectManager.UpdatePackageReference(
+                    package.Id,
+                    package.Version,
+                    updateDependencies: true,
+                    allowPrereleaseVersions: false
+                );
+                AddBindingRedirects(appDomain);
+            });
         }
 
         /// <summary>
@@ -182,16 +178,14 @@ namespace System.Web.WebPages.Administration.PackageManager
         /// <returns>Warnings encountered when uninstalling the package.</returns>
         public IEnumerable<string> UninstallPackage(IPackage package, bool removeDependencies)
         {
-            return PerformLoggedAction(
-                () =>
-                {
-                    _projectManager.RemovePackageReference(
-                        package.Id,
-                        forceRemove: false,
-                        removeDependencies: removeDependencies
-                    );
-                }
-            );
+            return PerformLoggedAction(() =>
+            {
+                _projectManager.RemovePackageReference(
+                    package.Id,
+                    forceRemove: false,
+                    removeDependencies: removeDependencies
+                );
+            });
         }
 
         [SuppressMessage(

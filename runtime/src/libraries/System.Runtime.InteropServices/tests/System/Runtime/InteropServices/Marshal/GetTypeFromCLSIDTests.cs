@@ -76,9 +76,8 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Null(Marshal.GetTypeFromCLSID(Guid.Empty));
             Assert.Null(Type.GetTypeFromCLSID(Guid.Empty, throwOnError: false));
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Type.GetTypeFromCLSID(Guid.Empty, throwOnError: true)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Type.GetTypeFromCLSID(Guid.Empty, throwOnError: true));
         }
 
         [Fact]
@@ -86,9 +85,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypeFromProgID_Unix()
         {
             Assert.Null(Type.GetTypeFromProgID(TestProgID, throwOnError: false));
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Type.GetTypeFromProgID(TestProgID, throwOnError: true)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Type.GetTypeFromProgID(TestProgID, throwOnError: true));
         }
 
         [Fact]

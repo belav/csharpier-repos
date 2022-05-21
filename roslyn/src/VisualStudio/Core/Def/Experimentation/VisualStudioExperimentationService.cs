@@ -44,31 +44,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
             MethodInfo isCachedFlightEnabledInfo = null;
             IVsFeatureFlags featureFlags = null;
 
-            threadingContext.JoinableTaskFactory.Run(
-                async () =>
+            threadingContext.JoinableTaskFactory.Run(async () =>
+            {
+                try
                 {
-                    try
-                    {
-                        featureFlags = (IVsFeatureFlags)
-                            await ((IAsyncServiceProvider)serviceProvider)
-                                .GetServiceAsync(typeof(SVsFeatureFlags))
-                                .ConfigureAwait(false);
-                        experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider)
-                            .GetServiceAsync(typeof(SVsExperimentationService))
+                    featureFlags = (IVsFeatureFlags)
+                        await ((IAsyncServiceProvider)serviceProvider)
+                            .GetServiceAsync(typeof(SVsFeatureFlags))
                             .ConfigureAwait(false);
-                        if (experimentationServiceOpt != null)
-                        {
-                            isCachedFlightEnabledInfo = experimentationServiceOpt
-                                .GetType()
-                                .GetMethod(
-                                    "IsCachedFlightEnabled",
-                                    BindingFlags.Public | BindingFlags.Instance
-                                );
-                        }
+                    experimentationServiceOpt = await ((IAsyncServiceProvider)serviceProvider)
+                        .GetServiceAsync(typeof(SVsExperimentationService))
+                        .ConfigureAwait(false);
+                    if (experimentationServiceOpt != null)
+                    {
+                        isCachedFlightEnabledInfo = experimentationServiceOpt
+                            .GetType()
+                            .GetMethod(
+                                "IsCachedFlightEnabled",
+                                BindingFlags.Public | BindingFlags.Instance
+                            );
                     }
-                    catch { }
                 }
-            );
+                catch { }
+            });
 
             _featureFlags = featureFlags;
             _experimentationServiceOpt = experimentationServiceOpt;

@@ -40,23 +40,21 @@ namespace System.Threading.Tasks.Tests
                 mres.Reset();
                 for (int i = 0; i < concurrencyLevel; i++)
                 {
-                    threads[i] = new Task(
-                        () =>
-                        {
-                            bool sawFailure = false;
-                            bool sawError = false;
-                            mres.WaitOne();
-                            if (!tcs.TrySetResult(10))
-                                sawFailure = true;
-                            if (tcs.Task.Result != 10)
-                                sawError = true;
+                    threads[i] = new Task(() =>
+                    {
+                        bool sawFailure = false;
+                        bool sawError = false;
+                        mres.WaitOne();
+                        if (!tcs.TrySetResult(10))
+                            sawFailure = true;
+                        if (tcs.Task.Result != 10)
+                            sawError = true;
 
-                            if (sawFailure)
-                                Interlocked.Increment(ref failureCount);
-                            if (sawError)
-                                Interlocked.Increment(ref errorCount);
-                        }
-                    );
+                        if (sawFailure)
+                            Interlocked.Increment(ref failureCount);
+                        if (sawError)
+                            Interlocked.Increment(ref errorCount);
+                    });
                 }
                 for (int i = 0; i < concurrencyLevel; i++)
                     threads[i].Start();
@@ -113,23 +111,21 @@ namespace System.Threading.Tasks.Tests
                 mres.Reset();
                 for (int i = 0; i < concurrencyLevel; i++)
                 {
-                    threads[i] = new Task(
-                        () =>
-                        {
-                            bool sawFailure = false;
-                            bool sawError = false;
-                            mres.WaitOne();
-                            if (!tcs.TrySetCanceled())
-                                sawFailure = true;
-                            if (!tcs.Task.IsCanceled)
-                                sawError = true;
+                    threads[i] = new Task(() =>
+                    {
+                        bool sawFailure = false;
+                        bool sawError = false;
+                        mres.WaitOne();
+                        if (!tcs.TrySetCanceled())
+                            sawFailure = true;
+                        if (!tcs.Task.IsCanceled)
+                            sawError = true;
 
-                            if (sawFailure)
-                                Interlocked.Increment(ref failureCount);
-                            if (sawError)
-                                Interlocked.Increment(ref errorCount);
-                        }
-                    );
+                        if (sawFailure)
+                            Interlocked.Increment(ref failureCount);
+                        if (sawError)
+                            Interlocked.Increment(ref errorCount);
+                    });
                 }
                 for (int i = 0; i < concurrencyLevel; i++)
                     threads[i].Start();
@@ -188,19 +184,17 @@ namespace System.Threading.Tasks.Tests
                 mres.Reset();
                 for (int i = 0; i < concurrencyLevel; i++)
                 {
-                    threads[i] = new Task(
-                        () =>
-                        {
-                            mres.WaitOne();
-                            bool sawFailure = !tcs.TrySetException(new Exception("some exception"));
-                            bool sawError = (tcs.Task.Exception == null);
+                    threads[i] = new Task(() =>
+                    {
+                        mres.WaitOne();
+                        bool sawFailure = !tcs.TrySetException(new Exception("some exception"));
+                        bool sawError = (tcs.Task.Exception == null);
 
-                            if (sawFailure)
-                                Interlocked.Increment(ref failureCount);
-                            if (sawError)
-                                Interlocked.Increment(ref errorCount);
-                        }
-                    );
+                        if (sawFailure)
+                            Interlocked.Increment(ref failureCount);
+                        if (sawError)
+                            Interlocked.Increment(ref errorCount);
+                    });
                 }
                 for (int i = 0; i < concurrencyLevel; i++)
                     threads[i].Start();
@@ -297,12 +291,10 @@ namespace System.Threading.Tasks.Tests
                 Assert.Throws<InvalidOperationException>(() => tcs.SetResult(10));
                 Assert.Throws<InvalidOperationException>(() => tcs.SetCanceled());
                 Assert.Throws<InvalidOperationException>(() => tcs.SetCanceled());
-                Assert.Throws<InvalidOperationException>(
-                    () => tcs.SetException(new Exception("some other exception"))
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => tcs.SetException(new[] { new Exception("some other exception") })
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    tcs.SetException(new Exception("some other exception")));
+                Assert.Throws<InvalidOperationException>(() =>
+                    tcs.SetException(new[] { new Exception("some other exception") }));
             }
         }
 
@@ -761,13 +753,11 @@ namespace System.Threading.Tasks.Tests
                         }
                         else
                         {
-                            f1 = new Task<int>(
-                                () =>
-                                {
-                                    sideEffect = true;
-                                    return 42;
-                                }
-                            );
+                            f1 = new Task<int>(() =>
+                            {
+                                sideEffect = true;
+                                return 42;
+                            });
                         }
                         f1.Start();
                     }
@@ -786,13 +776,11 @@ namespace System.Threading.Tasks.Tests
                         }
                         else
                         {
-                            f1 = Task<int>.Factory.StartNew(
-                                () =>
-                                {
-                                    sideEffect = true;
-                                    return 42;
-                                }
-                            );
+                            f1 = Task<int>.Factory.StartNew(() =>
+                            {
+                                sideEffect = true;
+                                return 42;
+                            });
                         }
                     }
 
@@ -1218,53 +1206,41 @@ namespace System.Threading.Tasks.Tests
             //
 
             // Test exceptional conditions
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new Task<int>((Func<int>)null);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new Task<int>((Func<object, int>)null, new object());
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task<int>.Factory.StartNew((Func<int>)null);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task<int>.Factory.StartNew(
-                        (Func<int>)null,
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task<int>.Factory.StartNew((Func<object, int>)null, new object());
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task<int>.Factory.StartNew(
-                        (obj) => 42,
-                        new object(),
-                        CancellationToken.None,
-                        TaskCreationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new Task<int>((Func<int>)null);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new Task<int>((Func<object, int>)null, new object());
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task<int>.Factory.StartNew((Func<int>)null);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task<int>.Factory.StartNew(
+                    (Func<int>)null,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task<int>.Factory.StartNew((Func<object, int>)null, new object());
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task<int>.Factory.StartNew(
+                    (obj) => 42,
+                    new object(),
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1796,16 +1772,13 @@ namespace System.Threading.Tasks.Tests
                 "tasks",
                 () => Task.WaitAny(new Task[] { null })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Task.WaitAny(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    Task.WaitAny(
-                        new Task[] { Task.Factory.StartNew(() => { }) },
-                        TimeSpan.FromMilliseconds(-2)
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Task.WaitAny(new Task[] { Task.Factory.StartNew(() => { }) }, -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Task.WaitAny(
+                    new Task[] { Task.Factory.StartNew(() => { }) },
+                    TimeSpan.FromMilliseconds(-2)
+                ));
         }
 
         private static void CoreWaitAnyTest(
@@ -1909,9 +1882,8 @@ namespace System.Threading.Tasks.Tests
             var tokenSrc = new CancellationTokenSource();
             var task1 = Task.Factory.StartNew(() => mre.WaitOne());
             var task2 = Task.Factory.StartNew(() => mre.WaitOne());
-            var waiterTask = Task.Factory.StartNew(
-                () => Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token)
-            );
+            var waiterTask = Task.Factory.StartNew(() =>
+                Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token));
             tokenSrc.Cancel();
             Assert.Throws<AggregateException>(() => waiterTask.Wait());
             mre.Set();
@@ -2030,16 +2002,13 @@ namespace System.Threading.Tasks.Tests
                 "tasks",
                 () => Task.WaitAll(new Task[] { null })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Task.WaitAll(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    Task.WaitAll(
-                        new Task[] { Task.Factory.StartNew(() => { }) },
-                        TimeSpan.FromMilliseconds(-2)
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Task.WaitAll(new Task[] { Task.Factory.StartNew(() => { }) }, -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Task.WaitAll(
+                    new Task[] { Task.Factory.StartNew(() => { }) },
+                    TimeSpan.FromMilliseconds(-2)
+                ));
 
             ThreadPoolHelpers.EnsureMinThreadsAtLeast(10);
             RunTaskWaitAllTest(false, 1);
@@ -3951,19 +3920,17 @@ namespace System.Threading.Tasks.Tests
             // wait on a task that has children
             int numChildren = 10;
             CountdownEvent cntEv = new CountdownEvent(numChildren);
-            t = Task.Factory.StartNew(
-                () =>
-                {
-                    for (int i = 0; i < numChildren; i++)
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                cntEv.Signal();
-                            },
-                            TaskCreationOptions.AttachedToParent
-                        );
-                }
-            );
+            t = Task.Factory.StartNew(() =>
+            {
+                for (int i = 0; i < numChildren; i++)
+                    Task.Factory.StartNew(
+                        () =>
+                        {
+                            cntEv.Signal();
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
+            });
 
             t.Wait();
             if (!cntEv.IsSet)
@@ -3986,12 +3953,10 @@ namespace System.Threading.Tasks.Tests
             // test exceptions
             var task = Task.Factory.StartNew(() => { });
             Assert.Throws<ArgumentOutOfRangeException>(() => task.Wait(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => task.Wait(TimeSpan.FromMilliseconds(-2))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => task.Wait(TimeSpan.FromMilliseconds(uint.MaxValue))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                task.Wait(TimeSpan.FromMilliseconds(-2)));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                task.Wait(TimeSpan.FromMilliseconds(uint.MaxValue)));
 
             // wait on a task that gets canceled
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -4040,12 +4005,10 @@ namespace System.Threading.Tasks.Tests
             }
 
             // wait on a task that throws
-            t = Task.Factory.StartNew(
-                () =>
-                {
-                    throw new Exception(exceptionMsg);
-                }
-            );
+            t = Task.Factory.StartNew(() =>
+            {
+                throw new Exception(exceptionMsg);
+            });
             try
             {
                 t.Wait();
@@ -4075,18 +4038,16 @@ namespace System.Threading.Tasks.Tests
 
             // wait on a task that has an exceptional child task
             Task childTask = null;
-            t = Task.Factory.StartNew(
-                () =>
-                {
-                    childTask = Task.Factory.StartNew(
-                        () =>
-                        {
-                            throw new Exception(exceptionMsg);
-                        },
-                        TaskCreationOptions.AttachedToParent
-                    );
-                }
-            );
+            t = Task.Factory.StartNew(() =>
+            {
+                childTask = Task.Factory.StartNew(
+                    () =>
+                    {
+                        throw new Exception(exceptionMsg);
+                    },
+                    TaskCreationOptions.AttachedToParent
+                );
+            });
 
             try
             {
@@ -4450,12 +4411,10 @@ namespace System.Threading.Tasks.Tests
         {
             // Start a task, but make sure that it does not complete
             ManualResetEvent mre = new ManualResetEvent(false);
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                }
-            );
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
 
             // Make sure that waiting on an uncompleted Task's AsyncWaitHandle does not succeed
             WaitHandle wh = ((IAsyncResult)t1).AsyncWaitHandle;

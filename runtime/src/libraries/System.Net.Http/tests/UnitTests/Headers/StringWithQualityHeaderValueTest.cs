@@ -30,12 +30,10 @@ namespace System.Net.Http.Tests
                     new StringWithQualityHeaderValue("");
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new StringWithQualityHeaderValue("in valid");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new StringWithQualityHeaderValue("in valid");
+            });
         }
 
         [Fact]
@@ -59,25 +57,19 @@ namespace System.Net.Http.Tests
                     new StringWithQualityHeaderValue("", 0.1);
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new StringWithQualityHeaderValue("in valid", 0.1);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new StringWithQualityHeaderValue("in valid", 0.1);
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new StringWithQualityHeaderValue("t", 1.1);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new StringWithQualityHeaderValue("t", -0.1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new StringWithQualityHeaderValue("t", 1.1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new StringWithQualityHeaderValue("t", -0.1);
+            });
         }
 
         [Fact]
@@ -277,12 +269,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    StringWithQualityHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                StringWithQualityHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 StringWithQualityHeaderValue.TryParse(

@@ -140,40 +140,30 @@ namespace System.Text.RegularExpressions.Tests
             if (PlatformDetection.IsNetCore)
             {
                 // NonBacktracking option is not supported together with these other options
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        new Regex(
-                            "abc",
-                            RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking
-                        )
-                );
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        new Regex(
-                            "abc",
-                            RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking
-                        )
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex(
+                        "abc",
+                        RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking
+                    ));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex(
+                        "abc",
+                        RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking
+                    ));
 
                 // NonBacktracking option is not supported for these constructs
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking)
-                );
-                Assert.Throws<NotSupportedException>(
-                    () => new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(() =>
+                    new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking));
             }
 
             // Pattern is null
@@ -341,18 +331,14 @@ namespace System.Text.RegularExpressions.Tests
         public static void StaticCtor_InvalidTimeoutObject_ExceptionThrown()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData(
-                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                            true
-                        );
-                        Assert.Throws<TypeInitializationException>(
-                            () => Regex.InfiniteMatchTimeout
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData(
+                        RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                        true
+                    );
+                    Assert.Throws<TypeInitializationException>(() => Regex.InfiniteMatchTimeout);
+                })
                 .Dispose();
         }
 
@@ -360,18 +346,14 @@ namespace System.Text.RegularExpressions.Tests
         public static void StaticCtor_InvalidTimeoutRange_ExceptionThrown()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData(
-                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                            TimeSpan.Zero
-                        );
-                        Assert.Throws<TypeInitializationException>(
-                            () => Regex.InfiniteMatchTimeout
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData(
+                        RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                        TimeSpan.Zero
+                    );
+                    Assert.Throws<TypeInitializationException>(() => Regex.InfiniteMatchTimeout);
+                })
                 .Dispose();
         }
 
@@ -446,12 +428,10 @@ namespace System.Text.RegularExpressions.Tests
         public void Serialization_ThrowsNotSupported()
         {
             var r = new SerializableDerivedRegex();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new SerializableDerivedRegex(default, default)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ((ISerializable)r).GetObjectData(default, default)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new SerializableDerivedRegex(default, default));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ((ISerializable)r).GetObjectData(default, default));
         }
 
         [Serializable]
@@ -468,25 +448,23 @@ namespace System.Text.RegularExpressions.Tests
         public void Ctor_PatternInName()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        // Just make sure setting the environment variable doesn't cause problems.
-                        Environment.SetEnvironmentVariable(
-                            "DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME",
-                            "1"
-                        );
+                .Invoke(() =>
+                {
+                    // Just make sure setting the environment variable doesn't cause problems.
+                    Environment.SetEnvironmentVariable(
+                        "DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME",
+                        "1"
+                    );
 
-                        // Short pattern
-                        var r = new Regex("abc", RegexOptions.Compiled);
-                        Assert.True(r.IsMatch("123abc456"));
+                    // Short pattern
+                    var r = new Regex("abc", RegexOptions.Compiled);
+                    Assert.True(r.IsMatch("123abc456"));
 
-                        // Long pattern
-                        string pattern = string.Concat(Enumerable.Repeat("1234567890", 20));
-                        r = new Regex(pattern, RegexOptions.Compiled);
-                        Assert.True(r.IsMatch("abc" + pattern + "abc"));
-                    }
-                )
+                    // Long pattern
+                    string pattern = string.Concat(Enumerable.Repeat("1234567890", 20));
+                    r = new Regex(pattern, RegexOptions.Compiled);
+                    Assert.True(r.IsMatch("abc" + pattern + "abc"));
+                })
                 .Dispose();
         }
     }

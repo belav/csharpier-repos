@@ -387,23 +387,21 @@ public class TestClientTests
         Assert.Equal("POST Response", Encoding.UTF8.GetString(buffer, 0, length));
 
         // Send large content and block on back pressure
-        var writeTask = Task.Run(
-            async () =>
+        var writeTask = Task.Run(async () =>
+        {
+            try
             {
-                try
-                {
-                    await requestStream
-                        .WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50)))
-                        .AsTask()
-                        .DefaultTimeout();
-                    requestStreamTcs.SetResult(null);
-                }
-                catch (Exception ex)
-                {
-                    requestStreamTcs.SetException(ex);
-                }
+                await requestStream
+                    .WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50)))
+                    .AsTask()
+                    .DefaultTimeout();
+                requestStreamTcs.SetResult(null);
             }
-        );
+            catch (Exception ex)
+            {
+                requestStreamTcs.SetException(ex);
+            }
+        });
 
         responseEndingSyncPoint.Continue();
 
@@ -457,13 +455,11 @@ public class TestClientTests
         Assert.Equal("true", response.Headers.GetValues("test-header").Single());
 
         // Read response
-        var ex = await Assert.ThrowsAsync<IOException>(
-            async () =>
-            {
-                byte[] buffer = new byte[1024];
-                var length = await responseContent.ReadAsync(buffer).AsTask().DefaultTimeout();
-            }
-        );
+        var ex = await Assert.ThrowsAsync<IOException>(async () =>
+        {
+            byte[] buffer = new byte[1024];
+            var length = await responseContent.ReadAsync(buffer).AsTask().DefaultTimeout();
+        });
         Assert.Equal(
             "An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.",
             ex.InnerException.Message
@@ -847,9 +843,8 @@ public class TestClientTests
         tokenSource.Cancel();
 
         // Assert
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token)
-        );
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token));
     }
 
     private class VerifierLogger : ILogger<IWebHost>
@@ -900,13 +895,11 @@ public class TestClientTests
             CancellationToken.None
         );
         var buffer = new byte[1024];
-        await Assert.ThrowsAsync<IOException>(
-            async () =>
-                await clientSocket.ReceiveAsync(
-                    new System.ArraySegment<byte>(buffer),
-                    CancellationToken.None
-                )
-        );
+        await Assert.ThrowsAsync<IOException>(async () =>
+            await clientSocket.ReceiveAsync(
+                new System.ArraySegment<byte>(buffer),
+                CancellationToken.None
+            ));
 
         clientSocket.Dispose();
     }
@@ -1011,9 +1004,8 @@ public class TestClientTests
         response.Dispose();
 
         // Assert
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await tcs.Task
-        );
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await tcs.Task);
     }
 
     [Fact]
@@ -1042,13 +1034,11 @@ public class TestClientTests
         using var server = new TestServer(builder);
         using var client = server.CreateClient();
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
-        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => client.GetAsync("http://localhost:12345", cts.Token)
-        );
+        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            client.GetAsync("http://localhost:12345", cts.Token));
 
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await tcs.Task
-        );
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await tcs.Task);
     }
 
     [Fact]
@@ -1203,9 +1193,8 @@ public class TestClientTests
                                 // Feature needs to exist for SignalR to verify that the server supports WebSockets
                                 Assert.NotNull(upgradeFeature);
                                 Assert.False(upgradeFeature.IsUpgradableRequest);
-                                await Assert.ThrowsAsync<NotSupportedException>(
-                                    () => upgradeFeature.UpgradeAsync()
-                                );
+                                await Assert.ThrowsAsync<NotSupportedException>(() =>
+                                    upgradeFeature.UpgradeAsync());
 
                                 var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
                                 Assert.NotNull(webSocketFeature);

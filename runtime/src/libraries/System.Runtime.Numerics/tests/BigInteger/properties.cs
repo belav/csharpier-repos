@@ -38,12 +38,10 @@ namespace System.Numerics.Tests
                 Assert.Equal(bigInteger, bigInteger + BigInteger.Zero);
                 Assert.Equal(bigInteger, BigInteger.Zero + bigInteger);
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        BigInteger tempBigInteger = bigInteger / BigInteger.Zero;
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    BigInteger tempBigInteger = bigInteger / BigInteger.Zero;
+                });
 
                 if (!MyBigIntImp.IsZero(tempByteArray))
                 {

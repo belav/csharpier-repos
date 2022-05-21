@@ -157,9 +157,8 @@ namespace System.Security.Cryptography.Dsa.Tests
 
             Assert.Throws<ObjectDisposedException>(() => key.ExportParameters(false));
             Assert.Throws<ObjectDisposedException>(() => key.ExportParameters(true));
-            Assert.Throws<ObjectDisposedException>(
-                () => key.ImportParameters(DSATestData.GetDSA1024Params())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.ImportParameters(DSATestData.GetDSA1024Params()));
         }
 
         internal static void AssertKeyEquals(in DSAParameters expected, in DSAParameters actual)

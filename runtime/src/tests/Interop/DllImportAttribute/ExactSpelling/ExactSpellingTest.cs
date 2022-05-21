@@ -116,9 +116,8 @@ class ExactSpellingTest
 
         Console.WriteLine("Method Unicode.MarshalPointer_Int_InOut2: ExactSpelling = false");
         int int6 = intManaged;
-        Assert.Throws<EntryPointNotFoundException>(
-            () => Unicode.MarshalPointer_Int_InOut2(ref int6)
-        );
+        Assert.Throws<EntryPointNotFoundException>(() =>
+            Unicode.MarshalPointer_Int_InOut2(ref int6));
 
         Console.WriteLine("Method Ansi.Marshal_Int_InOut2: ExactSpelling = false");
         int int7 = intManaged;

@@ -145,11 +145,9 @@ public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
 
         var projectDir = _fixture.CreateProject(null);
 
-        Assert.Throws<ArgumentException>(
-            () =>
-            {
-                new InitCommand(secretId, null).Execute(MakeCommandContext(), projectDir);
-            }
-        );
+        Assert.Throws<ArgumentException>(() =>
+        {
+            new InitCommand(secretId, null).Execute(MakeCommandContext(), projectDir);
+        });
     }
 }

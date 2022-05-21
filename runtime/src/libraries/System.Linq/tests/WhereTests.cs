@@ -1164,12 +1164,10 @@ namespace System.Linq.Tests
         {
             var infiniteWhere = new FastInfiniteEnumerator<int>().Where((e, i) => true);
             using (var en = infiniteWhere.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]

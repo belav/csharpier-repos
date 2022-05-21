@@ -40,36 +40,32 @@ namespace System.Collections.Concurrent.Tests
             var q = new ConcurrentQueue<int>();
 
             // Consumer dequeues items until it gets as many as it expects
-            Task consumer = Task.Run(
-                () =>
+            Task consumer = Task.Run(() =>
+            {
+                int lastReceived = 0;
+                int item;
+                while (true)
                 {
-                    int lastReceived = 0;
-                    int item;
-                    while (true)
+                    if (q.TryDequeue(out item))
                     {
-                        if (q.TryDequeue(out item))
-                        {
-                            Assert.Equal(lastReceived + 1, item);
-                            lastReceived = item;
-                            if (item == items)
-                                break;
-                        }
-                        else
-                        {
-                            Assert.Equal(0, item);
-                        }
+                        Assert.Equal(lastReceived + 1, item);
+                        lastReceived = item;
+                        if (item == items)
+                            break;
+                    }
+                    else
+                    {
+                        Assert.Equal(0, item);
                     }
                 }
-            );
+            });
 
             // Producer queues the expected number of items
-            Task producer = Task.Run(
-                () =>
-                {
-                    for (int i = 1; i <= items; i++)
-                        q.Enqueue(i);
-                }
-            );
+            Task producer = Task.Run(() =>
+            {
+                for (int i = 1; i <= items; i++)
+                    q.Enqueue(i);
+            });
 
             Task.WaitAll(producer, consumer);
         }
@@ -82,34 +78,30 @@ namespace System.Collections.Concurrent.Tests
             var q = new ConcurrentQueue<int>();
 
             // Consumer peeks and then dequeues the expected number of items
-            Task consumer = Task.Run(
-                () =>
+            Task consumer = Task.Run(() =>
+            {
+                int lastReceived = 0;
+                int item;
+                while (true)
                 {
-                    int lastReceived = 0;
-                    int item;
-                    while (true)
+                    if (q.TryPeek(out item))
                     {
-                        if (q.TryPeek(out item))
-                        {
-                            Assert.Equal(lastReceived + 1, item);
-                            Assert.True(q.TryDequeue(out item));
-                            Assert.Equal(lastReceived + 1, item);
-                            lastReceived = item;
-                            if (item == items)
-                                break;
-                        }
+                        Assert.Equal(lastReceived + 1, item);
+                        Assert.True(q.TryDequeue(out item));
+                        Assert.Equal(lastReceived + 1, item);
+                        lastReceived = item;
+                        if (item == items)
+                            break;
                     }
                 }
-            );
+            });
 
             // Producer queues the expected number of items
-            Task producer = Task.Run(
-                () =>
-                {
-                    for (int i = 1; i <= items; i++)
-                        q.Enqueue(i);
-                }
-            );
+            Task producer = Task.Run(() =>
+            {
+                for (int i = 1; i <= items; i++)
+                    q.Enqueue(i);
+            });
 
             Task.WaitAll(producer, consumer);
         }
@@ -429,41 +421,39 @@ namespace System.Collections.Concurrent.Tests
             Task.WaitAll(
                 (
                     from i in Enumerable.Range(0, threadsCount)
-                    select Task.Run(
-                        () =>
+                    select Task.Run(() =>
+                    {
+                        var random = new Random();
+                        for (int j = 0; j < itemsPerThread; j++)
                         {
-                            var random = new Random();
-                            for (int j = 0; j < itemsPerThread; j++)
+                            switch (random.Next(7))
                             {
-                                switch (random.Next(7))
-                                {
-                                    case 0:
-                                        int c = q.Count;
-                                        break;
-                                    case 1:
-                                        bool e = q.IsEmpty;
-                                        break;
-                                    case 2:
-                                        q.Enqueue(random.Next(int.MaxValue));
-                                        break;
-                                    case 3:
-                                        q.ToArray();
-                                        break;
-                                    case 4:
-                                        int d;
-                                        q.TryDequeue(out d);
-                                        break;
-                                    case 5:
-                                        int p;
-                                        q.TryPeek(out p);
-                                        break;
-                                    case 6:
-                                        q.Clear();
-                                        break;
-                                }
+                                case 0:
+                                    int c = q.Count;
+                                    break;
+                                case 1:
+                                    bool e = q.IsEmpty;
+                                    break;
+                                case 2:
+                                    q.Enqueue(random.Next(int.MaxValue));
+                                    break;
+                                case 3:
+                                    q.ToArray();
+                                    break;
+                                case 4:
+                                    int d;
+                                    q.TryDequeue(out d);
+                                    break;
+                                case 5:
+                                    int p;
+                                    q.TryPeek(out p);
+                                    break;
+                                case 6:
+                                    q.Clear();
+                                    break;
                             }
                         }
-                    )
+                    })
                 ).ToArray()
             );
         }

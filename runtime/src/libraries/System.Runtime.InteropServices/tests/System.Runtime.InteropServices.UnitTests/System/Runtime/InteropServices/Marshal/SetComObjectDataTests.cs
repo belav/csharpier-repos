@@ -11,9 +11,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void SetComObjectData_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.SetComObjectData(null, null, null)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.SetComObjectData(null, null, null));
         }
 
         [Fact]

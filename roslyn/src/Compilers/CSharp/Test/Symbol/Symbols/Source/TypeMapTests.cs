@@ -207,17 +207,10 @@ class C1<C1T1, C1T2>
 
             Assert.Equal("C1<System.Byte, System.Char>", c1OfByteChar.ToTestDisplayString());
             var c1OfByteChar_c2 = (NamedTypeSymbol)(c1OfByteChar.GetMembers()[0]);
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    var c1OfByteChar_c2OfIntInt = c1OfByteChar_c2.Construct(
-                        _byte,
-                        _char,
-                        _int,
-                        _int
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var c1OfByteChar_c2OfIntInt = c1OfByteChar_c2.Construct(_byte, _char, _int, _int);
+            });
         }
     }
 }
