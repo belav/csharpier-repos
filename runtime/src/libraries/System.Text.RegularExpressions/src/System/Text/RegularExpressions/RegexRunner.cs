@@ -20,47 +20,50 @@ namespace System.Text.RegularExpressions
 {
     public abstract class RegexRunner
     {
-        protected internal int runtextbeg;         // beginning of text to search
-        protected internal int runtextend;         // end of text to search
-        protected internal int runtextstart;       // starting point for search
+        protected internal int runtextbeg; // beginning of text to search
+        protected internal int runtextend; // end of text to search
+        protected internal int runtextstart; // starting point for search
 
-        protected internal string? runtext;        // text to search
-        protected internal int runtextpos;         // current position in text
+        protected internal string? runtext; // text to search
+        protected internal int runtextpos; // current position in text
 
-        protected internal int[]? runtrack;        // The backtracking stack.  Opcodes use this to store data regarding
-        protected internal int runtrackpos;        // what they have matched and where to backtrack to.  Each "frame" on
-                                                   // the stack takes the form of [CodePosition Data1 Data2...], where
-                                                   // CodePosition is the position of the current opcode and
-                                                   // the data values are all optional.  The CodePosition can be negative, and
-                                                   // these values (also called "back2") are used by the BranchMark family of opcodes
-                                                   // to indicate whether they are backtracking after a successful or failed
-                                                   // match.
-                                                   // When we backtrack, we pop the CodePosition off the stack, set the current
-                                                   // instruction pointer to that code position, and mark the opcode
-                                                   // with a backtracking flag ("Back").  Each opcode then knows how to
-                                                   // handle its own data.
+        protected internal int[]? runtrack; // The backtracking stack.  Opcodes use this to store data regarding
+        protected internal int runtrackpos; // what they have matched and where to backtrack to.  Each "frame" on
 
-        protected internal int[]? runstack;        // This stack is used to track text positions across different opcodes.
-        protected internal int runstackpos;        // For example, in /(a*b)+/, the parentheses result in a SetMark/CaptureMark
-                                                   // pair. SetMark records the text position before we match a*b.  Then
-                                                   // CaptureMark uses that position to figure out where the capture starts.
-                                                   // Opcodes which push onto this stack are always paired with other opcodes
-                                                   // which will pop the value from it later.  A successful match should mean
-                                                   // that this stack is empty.
+        // the stack takes the form of [CodePosition Data1 Data2...], where
+        // CodePosition is the position of the current opcode and
+        // the data values are all optional.  The CodePosition can be negative, and
+        // these values (also called "back2") are used by the BranchMark family of opcodes
+        // to indicate whether they are backtracking after a successful or failed
+        // match.
+        // When we backtrack, we pop the CodePosition off the stack, set the current
+        // instruction pointer to that code position, and mark the opcode
+        // with a backtracking flag ("Back").  Each opcode then knows how to
+        // handle its own data.
 
-        protected internal int[]? runcrawl;        // The crawl stack is used to keep track of captures.  Every time a group
-        protected internal int runcrawlpos;        // has a capture, we push its group number onto the runcrawl stack.  In
-                                                   // the case of a balanced match, we push BOTH groups onto the stack.
+        protected internal int[]? runstack; // This stack is used to track text positions across different opcodes.
+        protected internal int runstackpos; // For example, in /(a*b)+/, the parentheses result in a SetMark/CaptureMark
 
-        protected internal int runtrackcount;      // count of states that may do backtracking
+        // pair. SetMark records the text position before we match a*b.  Then
+        // CaptureMark uses that position to figure out where the capture starts.
+        // Opcodes which push onto this stack are always paired with other opcodes
+        // which will pop the value from it later.  A successful match should mean
+        // that this stack is empty.
 
-        protected internal Match? runmatch;        // result object
-        protected internal Regex? runregex;        // regex object
+        protected internal int[]? runcrawl; // The crawl stack is used to keep track of captures.  Every time a group
+        protected internal int runcrawlpos; // has a capture, we push its group number onto the runcrawl stack.  In
+
+        // the case of a balanced match, we push BOTH groups onto the stack.
+
+        protected internal int runtrackcount; // count of states that may do backtracking
+
+        protected internal Match? runmatch; // result object
+        protected internal Regex? runregex; // regex object
 
         // TODO: Expose something as protected internal: https://github.com/dotnet/runtime/issues/59629
-        private protected bool quick;              // false if match details matter, true if only the fact that match occurred matters
+        private protected bool quick; // false if match details matter, true if only the fact that match occurred matters
 
-        private int _timeout;              // timeout in milliseconds (needed for actual)
+        private int _timeout; // timeout in milliseconds (needed for actual)
         private bool _ignoreTimeout;
         private int _timeoutOccursAt;
 
@@ -85,10 +88,26 @@ namespace System.Text.RegularExpressions
         /// and we could use a separate method Skip() that will quickly scan past
         /// any characters that we know can't match.
         /// </summary>
-        protected Match? Scan(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick) =>
-            Scan(regex, text, textbeg, textend, textstart, prevlen, quick, regex.MatchTimeout);
+        protected Match? Scan(
+            Regex regex,
+            string text,
+            int textbeg,
+            int textend,
+            int textstart,
+            int prevlen,
+            bool quick
+        ) => Scan(regex, text, textbeg, textend, textstart, prevlen, quick, regex.MatchTimeout);
 
-        protected internal Match? Scan(Regex regex, string text, int textbeg, int textend, int textstart, int prevlen, bool quick, TimeSpan timeout)
+        protected internal Match? Scan(
+            Regex regex,
+            string text,
+            int textbeg,
+            int textend,
+            int textstart,
+            int prevlen,
+            bool quick,
+            TimeSpan timeout
+        )
         {
             this.quick = quick;
 
@@ -111,7 +130,8 @@ namespace System.Text.RegularExpressions
             // to call FindFirstChar again, as well as the stopping position for the loop.  We generally
             // bump by 1 and stop at textend, but if we're examining right-to-left, we instead bump
             // by -1 and stop at textbeg.
-            int bump = 1, stoppos = textend;
+            int bump = 1,
+                stoppos = textend;
             if (regex.RightToLeft)
             {
                 bump = -1;
@@ -150,7 +170,9 @@ namespace System.Text.RegularExpressions
                 {
                     Debug.WriteLine("");
                     Debug.WriteLine($"Search range: from {runtextbeg} to {runtextend}");
-                    Debug.WriteLine($"Firstchar search starting at {runtextpos} stopping at {stoppos}");
+                    Debug.WriteLine(
+                        $"Firstchar search starting at {runtextpos} stopping at {stoppos}"
+                    );
                 }
 #endif
 
@@ -209,7 +231,8 @@ namespace System.Text.RegularExpressions
                 if (runtextpos == stoppos)
                 {
                     runtext = null; // drop reference to text to avoid keeping it alive in a cache
-                    if (runmatch != null) runmatch.Text = null!;
+                    if (runmatch != null)
+                        runmatch.Text = null!;
                     return Match.Empty;
                 }
 
@@ -223,7 +246,15 @@ namespace System.Text.RegularExpressions
         /// This optionally repeatedly hands out the same Match instance, updated with new information.
         /// <paramref name="reuseMatchObject"/> should be set to false if the Match object is handed out to user code.
         /// </remarks>
-        internal void ScanInternal<TState>(Regex regex, string text, int textstart, ref TState state, MatchCallback<TState> callback, bool reuseMatchObject, TimeSpan timeout)
+        internal void ScanInternal<TState>(
+            Regex regex,
+            string text,
+            int textstart,
+            ref TState state,
+            MatchCallback<TState> callback,
+            bool reuseMatchObject,
+            TimeSpan timeout
+        )
         {
             quick = false;
 
@@ -245,7 +276,8 @@ namespace System.Text.RegularExpressions
             // to call FindFirstChar again, as well as the stopping position for the loop.  We generally
             // bump by 1 and stop at text.Length, but if we're examining right-to-left, we instead bump
             // by -1 and stop at 0.
-            int bump = 1, stoppos = text.Length;
+            int bump = 1,
+                stoppos = text.Length;
             if (regex.RightToLeft)
             {
                 bump = -1;
@@ -269,7 +301,9 @@ namespace System.Text.RegularExpressions
                 {
                     Debug.WriteLine("");
                     Debug.WriteLine($"Search range: from {runtextbeg} to {runtextend}");
-                    Debug.WriteLine($"Firstchar search starting at {runtextpos} stopping at {stoppos}");
+                    Debug.WriteLine(
+                        $"Firstchar search starting at {runtextpos} stopping at {stoppos}"
+                    );
                 }
 #endif
 
@@ -419,7 +453,11 @@ namespace System.Text.RegularExpressions
             }
 #endif
 
-            throw new RegexMatchTimeoutException(runtext!, runregex!.pattern!, TimeSpan.FromMilliseconds(_timeout));
+            throw new RegexMatchTimeoutException(
+                runtext!,
+                runregex!.pattern!,
+                TimeSpan.FromMilliseconds(_timeout)
+            );
         }
 
         /// <summary>
@@ -452,9 +490,24 @@ namespace System.Text.RegularExpressions
             if (runmatch is null)
             {
                 // Use a hashtabled Match object if the capture numbers are sparse
-                runmatch = runregex!.caps is null ?
-                    new Match(runregex, runregex.capsize, runtext!, runtextbeg, runtextend - runtextbeg, runtextstart) :
-                    new MatchSparse(runregex, runregex.caps, runregex.capsize, runtext!, runtextbeg, runtextend - runtextbeg, runtextstart);
+                runmatch = runregex!.caps is null
+                    ? new Match(
+                        runregex,
+                        runregex.capsize,
+                        runtext!,
+                        runtextbeg,
+                        runtextend - runtextbeg,
+                        runtextstart
+                    )
+                    : new MatchSparse(
+                        runregex,
+                        runregex.caps,
+                        runregex.capsize,
+                        runtext!,
+                        runtextbeg,
+                        runtextend - runtextbeg,
+                        runtextstart
+                    );
             }
             else
             {
@@ -521,14 +574,14 @@ namespace System.Text.RegularExpressions
         /// </summary>
         protected bool IsBoundary(int index, int startpos, int endpos)
         {
-            return (index > startpos && RegexCharClass.IsWordChar(runtext![index - 1])) !=
-                   (index < endpos && RegexCharClass.IsWordChar(runtext![index]));
+            return (index > startpos && RegexCharClass.IsWordChar(runtext![index - 1]))
+                != (index < endpos && RegexCharClass.IsWordChar(runtext![index]));
         }
 
         protected bool IsECMABoundary(int index, int startpos, int endpos)
         {
-            return (index > startpos && RegexCharClass.IsECMAWordChar(runtext![index - 1])) !=
-                   (index < endpos && RegexCharClass.IsECMAWordChar(runtext![index]));
+            return (index > startpos && RegexCharClass.IsECMAWordChar(runtext![index - 1]))
+                != (index < endpos && RegexCharClass.IsECMAWordChar(runtext![index]));
         }
 
         protected static bool CharInSet(char ch, string set, string category)

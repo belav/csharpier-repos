@@ -57,10 +57,18 @@ namespace ILCompiler.Logging
         /// <param name="subcategory">Optionally, further categorize this error</param>
         /// <param name="origin">Filename, line, and column where the error was found</param>
         /// <returns>New MessageContainer of 'Error' category</returns>
-        internal static MessageContainer CreateErrorMessage(string text, int code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        internal static MessageContainer CreateErrorMessage(
+            string text,
+            int code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
             if (!(code >= 1000 && code <= 2000))
-                throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the error category, which is in the range of 1000 to 2000 (inclusive).");
+                throw new ArgumentOutOfRangeException(
+                    nameof(code),
+                    $"The provided code '{code}' does not fall into the error category, which is in the range of 1000 to 2000 (inclusive)."
+                );
 
             return new MessageContainer(MessageCategory.Error, text, code, subcategory, origin);
         }
@@ -77,7 +85,13 @@ namespace ILCompiler.Logging
         /// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
         /// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option. </param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        internal static MessageContainer? CreateWarningMessage(Logger context, string text, int code, MessageOrigin origin, string subcategory = MessageSubCategory.None)
+        internal static MessageContainer? CreateWarningMessage(
+            Logger context,
+            string text,
+            int code,
+            MessageOrigin origin,
+            string subcategory = MessageSubCategory.None
+        )
         {
             //if (!(code > 2000 && code <= 6000))
             //    throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the warning category, which is in the range of 2001 to 6000 (inclusive).");
@@ -85,7 +99,13 @@ namespace ILCompiler.Logging
             return CreateWarningMessageContainer(context, text, code, origin, subcategory);
         }
 
-        private static MessageContainer? CreateWarningMessageContainer(Logger context, string text, int code, MessageOrigin origin, string subcategory = MessageSubCategory.None)
+        private static MessageContainer? CreateWarningMessageContainer(
+            Logger context,
+            string text,
+            int code,
+            MessageOrigin origin,
+            string subcategory = MessageSubCategory.None
+        )
         {
             if (context.IsWarningSuppressed(code, origin))
                 return null;
@@ -94,14 +114,28 @@ namespace ILCompiler.Logging
                 return null;
 
             if (context.IsWarningAsError(code))
-                return new MessageContainer(MessageCategory.WarningAsError, text, code, subcategory, origin);
+                return new MessageContainer(
+                    MessageCategory.WarningAsError,
+                    text,
+                    code,
+                    subcategory,
+                    origin
+                );
 
             return new MessageContainer(MessageCategory.Warning, text, code, subcategory, origin);
         }
 
-        private static bool TryLogSingleWarning(Logger context, int code, MessageOrigin origin, string subcategory)
+        private static bool TryLogSingleWarning(
+            Logger context,
+            int code,
+            MessageOrigin origin,
+            string subcategory
+        )
         {
-            if (subcategory != MessageSubCategory.AotAnalysis && subcategory != MessageSubCategory.TrimAnalysis)
+            if (
+                subcategory != MessageSubCategory.AotAnalysis
+                && subcategory != MessageSubCategory.TrimAnalysis
+            )
                 return false;
 
             var declaringType = origin.MemberDefinition switch
@@ -113,7 +147,8 @@ namespace ILCompiler.Logging
                 PropertyPseudoDesc property => property.OwningType,
                 EventPseudoDesc @event => @event.OwningType,
 #endif
-                _ => null,
+                _
+                    => null,
             };
 
             ModuleDesc declaringAssembly = (declaringType as MetadataType)?.Module;
@@ -135,14 +170,24 @@ namespace ILCompiler.Logging
         private static bool IsTrimmableAssembly(ModuleDesc assembly)
         {
             if (assembly is EcmaAssembly ecmaAssembly)
-            {   
-                foreach (var attribute in ecmaAssembly.GetDecodedCustomAttributes("System.Reflection", "AssemblyMetadataAttribute"))
+            {
+                foreach (
+                    var attribute in ecmaAssembly.GetDecodedCustomAttributes(
+                        "System.Reflection",
+                        "AssemblyMetadataAttribute"
+                    )
+                )
                 {
                     if (attribute.FixedArguments.Length != 2)
                         continue;
 
-                    if (!attribute.FixedArguments[0].Type.IsString
-                        || ((string)(attribute.FixedArguments[0].Value)).Equals("IsTrimmable", StringComparison.Ordinal))
+                    if (
+                        !attribute.FixedArguments[0].Type.IsString
+                        || ((string)(attribute.FixedArguments[0].Value)).Equals(
+                            "IsTrimmable",
+                            StringComparison.Ordinal
+                        )
+                    )
                         continue;
 
                     if (!attribute.FixedArguments[1].Type.IsString)
@@ -184,7 +229,13 @@ namespace ILCompiler.Logging
             return new MessageContainer(MessageCategory.Diagnostic, text, null);
         }
 
-        private MessageContainer(MessageCategory category, string text, int? code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        private MessageContainer(
+            MessageCategory category,
+            string text,
+            int? code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
             Code = code;
             Category = category;
@@ -238,7 +289,7 @@ namespace ILCompiler.Logging
             {
                 if (Origin?.MemberDefinition is MethodDesc method)
                     sb.Append(method.GetDisplayName());
-                else 
+                else
                     sb.Append(Origin?.MemberDefinition.ToString());
 
                 sb.Append(": ");

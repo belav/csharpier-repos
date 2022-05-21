@@ -42,7 +42,13 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var addStatus = dictionaryAdapter.TryAdd(dictionary, intKey.ToString(CultureInfo.InvariantCulture), resolver, "James", out var message);
+        var addStatus = dictionaryAdapter.TryAdd(
+            dictionary,
+            intKey.ToString(CultureInfo.InvariantCulture),
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -61,7 +67,13 @@ public class DictionaryAdapterTest
         var dictionary = new Dictionary<int, object>();
 
         // Act
-        var addStatus = dictionaryAdapter.TryAdd(dictionary, key.ToString(CultureInfo.InvariantCulture), resolver, "James", out var message);
+        var addStatus = dictionaryAdapter.TryAdd(
+            dictionary,
+            key.ToString(CultureInfo.InvariantCulture),
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -71,11 +83,20 @@ public class DictionaryAdapterTest
 
         // Act
         var guidKey = new Guid();
-        var getStatus = dictionaryAdapter.TryGet(dictionary, guidKey.ToString(), resolver, out var outValue, out message);
+        var getStatus = dictionaryAdapter.TryGet(
+            dictionary,
+            guidKey.ToString(),
+            resolver,
+            out var outValue,
+            out message
+        );
 
         // Assert
         Assert.False(getStatus);
-        Assert.Equal($"The provided path segment '{guidKey.ToString()}' cannot be converted to the target type.", message);
+        Assert.Equal(
+            $"The provided path segment '{guidKey.ToString()}' cannot be converted to the target type.",
+            message
+        );
         Assert.Null(outValue);
     }
 
@@ -89,7 +110,13 @@ public class DictionaryAdapterTest
         var dictionary = new Dictionary<string, object>(StringComparer.Ordinal);
 
         // Act
-        var addStatus = dictionaryAdapter.TryAdd(dictionary, nameKey, resolver, "James", out var message);
+        var addStatus = dictionaryAdapter.TryAdd(
+            dictionary,
+            nameKey,
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -98,11 +125,20 @@ public class DictionaryAdapterTest
         Assert.Equal("James", dictionary[nameKey]);
 
         // Act
-        var getStatus = dictionaryAdapter.TryGet(dictionary, nameKey.ToUpperInvariant(), resolver, out var outValue, out message);
+        var getStatus = dictionaryAdapter.TryGet(
+            dictionary,
+            nameKey.ToUpperInvariant(),
+            resolver,
+            out var outValue,
+            out message
+        );
 
         // Assert
         Assert.False(getStatus);
-        Assert.Equal("The target location specified by path segment 'NAME' was not found.", message);
+        Assert.Equal(
+            "The target location specified by path segment 'NAME' was not found.",
+            message
+        );
         Assert.Null(outValue);
     }
 
@@ -116,7 +152,13 @@ public class DictionaryAdapterTest
         var dictionary = new Dictionary<string, object>(StringComparer.Ordinal);
 
         // Act
-        var addStatus = dictionaryAdapter.TryAdd(dictionary, nameKey, resolver, "James", out var message);
+        var addStatus = dictionaryAdapter.TryAdd(
+            dictionary,
+            nameKey,
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -125,7 +167,13 @@ public class DictionaryAdapterTest
         Assert.Equal("James", dictionary[nameKey]);
 
         // Act
-        addStatus = dictionaryAdapter.TryGet(dictionary, nameKey, resolver, out var outValue, out message);
+        addStatus = dictionaryAdapter.TryGet(
+            dictionary,
+            nameKey,
+            resolver,
+            out var outValue,
+            out message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -144,7 +192,13 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var replaceStatus = dictionaryAdapter.TryReplace(dictionary, nameKey, resolver, "James", out var message);
+        var replaceStatus = dictionaryAdapter.TryReplace(
+            dictionary,
+            nameKey,
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(replaceStatus);
@@ -164,7 +218,13 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var replaceStatus = dictionaryAdapter.TryReplace(dictionary, guidKey.ToString(), resolver, "James", out var message);
+        var replaceStatus = dictionaryAdapter.TryReplace(
+            dictionary,
+            guidKey.ToString(),
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.True(replaceStatus);
@@ -184,7 +244,13 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var replaceStatus = dictionaryAdapter.TryReplace(dictionary, guidKey.ToString(), resolver, "test", out var message);
+        var replaceStatus = dictionaryAdapter.TryReplace(
+            dictionary,
+            guidKey.ToString(),
+            resolver,
+            "test",
+            out var message
+        );
 
         // Assert
         Assert.False(replaceStatus);
@@ -202,11 +268,20 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var replaceStatus = dictionaryAdapter.TryReplace(dictionary, nameKey, resolver, "Mike", out var message);
+        var replaceStatus = dictionaryAdapter.TryReplace(
+            dictionary,
+            nameKey,
+            resolver,
+            "Mike",
+            out var message
+        );
 
         // Assert
         Assert.False(replaceStatus);
-        Assert.Equal("The target location specified by path segment 'Name' was not found.", message);
+        Assert.Equal(
+            "The target location specified by path segment 'Name' was not found.",
+            message
+        );
         Assert.Empty(dictionary);
     }
 
@@ -220,11 +295,19 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var removeStatus = dictionaryAdapter.TryRemove(dictionary, nameKey, resolver, out var message);
+        var removeStatus = dictionaryAdapter.TryRemove(
+            dictionary,
+            nameKey,
+            resolver,
+            out var message
+        );
 
         // Assert
         Assert.False(removeStatus);
-        Assert.Equal("The target location specified by path segment 'Name' was not found.", message);
+        Assert.Equal(
+            "The target location specified by path segment 'Name' was not found.",
+            message
+        );
         Assert.Empty(dictionary);
     }
 
@@ -239,7 +322,12 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var removeStatus = dictionaryAdapter.TryRemove(dictionary, nameKey, resolver, out var message);
+        var removeStatus = dictionaryAdapter.TryRemove(
+            dictionary,
+            nameKey,
+            resolver,
+            out var message
+        );
 
         //Assert
         Assert.True(removeStatus);
@@ -258,7 +346,12 @@ public class DictionaryAdapterTest
         var resolver = new DefaultContractResolver();
 
         // Act
-        var removeStatus = dictionaryAdapter.TryRemove(dictionary, uriKey.ToString(), resolver, out var message);
+        var removeStatus = dictionaryAdapter.TryRemove(
+            dictionary,
+            uriKey.ToString(),
+            resolver,
+            out var message
+        );
 
         //Assert
         Assert.True(removeStatus);
@@ -272,18 +365,19 @@ public class DictionaryAdapterTest
         // Arrange
         var key = "Name";
         var dictionary = new Dictionary<string, List<object>>();
-        var value = new List<object>()
-            {
-                "James",
-                2,
-                new Customer("James", 25)
-            };
+        var value = new List<object>() { "James", 2, new Customer("James", 25) };
         dictionary[key] = value;
         var dictionaryAdapter = new DictionaryAdapter<string, List<object>>();
         var resolver = new DefaultContractResolver();
 
         // Act
-        var testStatus = dictionaryAdapter.TryTest(dictionary, key, resolver, value, out var message);
+        var testStatus = dictionaryAdapter.TryTest(
+            dictionary,
+            key,
+            resolver,
+            value,
+            out var message
+        );
 
         //Assert
         Assert.True(testStatus);
@@ -299,10 +393,17 @@ public class DictionaryAdapterTest
         dictionary[key] = "James";
         var dictionaryAdapter = new DictionaryAdapter<string, object>();
         var resolver = new DefaultContractResolver();
-        var expectedErrorMessage = "The current value 'James' at path 'Name' is not equal to the test value 'John'.";
+        var expectedErrorMessage =
+            "The current value 'James' at path 'Name' is not equal to the test value 'John'.";
 
         // Act
-        var testStatus = dictionaryAdapter.TryTest(dictionary, key, resolver, "John", out var errorMessage);
+        var testStatus = dictionaryAdapter.TryTest(
+            dictionary,
+            key,
+            resolver,
+            "John",
+            out var errorMessage
+        );
 
         //Assert
         Assert.False(testStatus);

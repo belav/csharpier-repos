@@ -16,27 +16,27 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NotImplementedException : SystemException
     {
-        public NotImplementedException()
-            : base(SR.Arg_NotImplementedException)
-        {
-            HResult = HResults.E_NOTIMPL;
-        }
-        public NotImplementedException(string? message)
-            : base(message)
-        {
-            HResult = HResults.E_NOTIMPL;
-        }
-        public NotImplementedException(string? message, Exception? inner)
-            : base(message, inner)
+        public NotImplementedException() : base(SR.Arg_NotImplementedException)
         {
             HResult = HResults.E_NOTIMPL;
         }
 
-        protected NotImplementedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public NotImplementedException(string? message) : base(message)
         {
+            HResult = HResults.E_NOTIMPL;
         }
+
+        public NotImplementedException(string? message, Exception? inner) : base(message, inner)
+        {
+            HResult = HResults.E_NOTIMPL;
+        }
+
+        protected NotImplementedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

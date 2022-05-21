@@ -22,9 +22,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NonLSPSolutionRequestHandlerProvider()
-        {
-        }
+        public NonLSPSolutionRequestHandlerProvider() { }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {
@@ -43,7 +41,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(TestRequest request) => null;
 
-        public Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Assert.Null(context.Solution);
 

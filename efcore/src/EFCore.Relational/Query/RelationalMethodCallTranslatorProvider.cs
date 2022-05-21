@@ -34,7 +34,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new instance of the <see cref="RelationalMethodCallTranslatorProvider" /> class.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-        public RelationalMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
+        public RelationalMethodCallTranslatorProvider(
+            RelationalMethodCallTranslatorProviderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
 
@@ -55,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     new ComparisonTranslator(sqlExpressionFactory),
                     new ByteArraySequenceEqualTranslator(sqlExpressionFactory),
                     new RandomTranslator(sqlExpressionFactory)
-                });
+                }
+            );
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -70,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             var dbFunction = model.FindDbFunction(method);
             if (dbFunction != null)
@@ -78,10 +82,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (dbFunction.Translation != null)
                 {
                     return dbFunction.Translation.Invoke(
-                        arguments.Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e)).ToList());
+                        arguments
+                            .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
+                            .ToList()
+                    );
                 }
 
-                var argumentsPropagateNullability = dbFunction.Parameters.Select(p => p.PropagatesNullability);
+                var argumentsPropagateNullability = dbFunction.Parameters.Select(
+                    p => p.PropagatesNullability
+                );
 
                 return dbFunction.IsBuiltIn
                     ? _sqlExpressionFactory.Function(
@@ -89,17 +98,20 @@ namespace Microsoft.EntityFrameworkCore.Query
                         arguments,
                         dbFunction.IsNullable,
                         argumentsPropagateNullability,
-                        method.ReturnType.UnwrapNullableType())
+                        method.ReturnType.UnwrapNullableType()
+                    )
                     : _sqlExpressionFactory.Function(
                         dbFunction.Schema,
                         dbFunction.Name,
                         arguments,
                         dbFunction.IsNullable,
                         argumentsPropagateNullability,
-                        method.ReturnType.UnwrapNullableType());
+                        method.ReturnType.UnwrapNullableType()
+                    );
             }
 
-            return _plugins.Concat(_translators)
+            return _plugins
+                .Concat(_translators)
                 .Select(t => t.Translate(instance, method, arguments, logger))
                 .FirstOrDefault(t => t != null);
         }
@@ -108,7 +120,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Adds additional translators which will take priority over existing registered translators.
         /// </summary>
         /// <param name="translators">Translators to add.</param>
-        protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators)
-            => _translators.InsertRange(0, translators);
+        protected virtual void AddTranslators(IEnumerable<IMethodCallTranslator> translators) =>
+            _translators.InsertRange(0, translators);
     }
 }

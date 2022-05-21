@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal static class SyntaxHelpers
     {
-        internal static readonly CSharpParseOptions ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersionFacts.CurrentVersion);
+        internal static readonly CSharpParseOptions ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersionFacts.CurrentVersion);
 
         /// <summary>
         /// Parse expression. Returns null if there are any errors.
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             this string expr,
             DiagnosticBag diagnostics,
             bool allowFormatSpecifiers,
-            out ReadOnlyCollection<string>? formatSpecifiers)
+            out ReadOnlyCollection<string>? formatSpecifiers
+        )
         {
             // Remove trailing semi-colon if any. This is to support copy/paste
             // of (simple cases of) RHS of assignment in Watch window, not to
@@ -42,8 +44,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             if (allowFormatSpecifiers)
             {
                 var builder = ArrayBuilder<string>.GetInstance();
-                if (ParseFormatSpecifiers(builder, expr, syntax.FullWidth, diagnostics) &&
-                    builder.Count > 0)
+                if (
+                    ParseFormatSpecifiers(builder, expr, syntax.FullWidth, diagnostics)
+                    && builder.Count > 0
+                )
                 {
                     formatSpecifiers = new ReadOnlyCollection<string>(builder.ToArray());
                 }
@@ -56,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static ExpressionSyntax? ParseAssignment(
             this string target,
             string expr,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             var text = SourceText.From(expr);
             var expression = ParseDebuggerExpressionInternal(text, consumeFullText: true);
@@ -72,23 +77,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             // Any Diagnostic spans produced in binding will be offset by the length of the "target" expression text.
             // If we want to support live squiggles in debugger windows, SemanticModel, etc, we'll want to address this.
-            var targetSyntax = ParseDebuggerExpressionInternal(SourceText.From(target), consumeFullText: true);
-            Debug.Assert(!targetSyntax.GetDiagnostics().Any(), "The target of an assignment should never contain Diagnostics if we're being allowed to assign to it in the debugger.");
+            var targetSyntax = ParseDebuggerExpressionInternal(
+                SourceText.From(target),
+                consumeFullText: true
+            );
+            Debug.Assert(
+                !targetSyntax.GetDiagnostics().Any(),
+                "The target of an assignment should never contain Diagnostics if we're being allowed to assign to it in the debugger."
+            );
 
             var assignment = InternalSyntax.SyntaxFactory.AssignmentExpression(
                 SyntaxKind.SimpleAssignmentExpression,
                 targetSyntax,
                 InternalSyntax.SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                expression);
+                expression
+            );
             return assignment.MakeDebuggerExpression(SourceText.From(assignment.ToString()));
         }
 
         /// <summary>
         /// Parse statement. Returns null if there are any errors.
         /// </summary>
-        internal static StatementSyntax? ParseStatement(
-            this string expr,
-            DiagnosticBag diagnostics)
+        internal static StatementSyntax? ParseStatement(this string expr, DiagnosticBag diagnostics)
         {
             var syntax = ParseDebuggerStatement(expr);
             diagnostics.AddRange(syntax.GetDiagnostics());
@@ -103,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ArrayBuilder<string> builder,
             string expr,
             int offset,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             bool expectingComma = true;
             int start = -1;
@@ -201,10 +212,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return expression.MakeDebuggerExpression(source);
         }
 
-        private static InternalSyntax.ExpressionSyntax ParseDebuggerExpressionInternal(SourceText source, bool consumeFullText)
+        private static InternalSyntax.ExpressionSyntax ParseDebuggerExpressionInternal(
+            SourceText source,
+            bool consumeFullText
+        )
         {
-            using var lexer = new InternalSyntax.Lexer(source, ParseOptions, allowPreprocessorDirectives: false);
-            using var parser = new InternalSyntax.LanguageParser(lexer, oldTree: null, changes: null, lexerMode: InternalSyntax.LexerMode.DebuggerSyntax);
+            using var lexer = new InternalSyntax.Lexer(
+                source,
+                ParseOptions,
+                allowPreprocessorDirectives: false
+            );
+            using var parser = new InternalSyntax.LanguageParser(
+                lexer,
+                oldTree: null,
+                changes: null,
+                lexerMode: InternalSyntax.LexerMode.DebuggerSyntax
+            );
 
             var node = parser.ParseExpression();
             if (consumeFullText)
@@ -216,34 +239,60 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             var source = SourceText.From(text);
             using var lexer = new InternalSyntax.Lexer(source, ParseOptions);
-            using var parser = new InternalSyntax.LanguageParser(lexer, oldTree: null, changes: null, lexerMode: InternalSyntax.LexerMode.DebuggerSyntax);
+            using var parser = new InternalSyntax.LanguageParser(
+                lexer,
+                oldTree: null,
+                changes: null,
+                lexerMode: InternalSyntax.LexerMode.DebuggerSyntax
+            );
 
             var statement = parser.ParseStatement();
             var syntaxTree = statement.CreateSyntaxTree(source);
             return (StatementSyntax)syntaxTree.GetRoot();
         }
 
-        private static SyntaxTree CreateSyntaxTree(this InternalSyntax.CSharpSyntaxNode root, SourceText text)
+        private static SyntaxTree CreateSyntaxTree(
+            this InternalSyntax.CSharpSyntaxNode root,
+            SourceText text
+        )
         {
-            return CSharpSyntaxTree.CreateForDebugger((CSharpSyntaxNode)root.CreateRed(), text, ParseOptions);
+            return CSharpSyntaxTree.CreateForDebugger(
+                (CSharpSyntaxNode)root.CreateRed(),
+                text,
+                ParseOptions
+            );
         }
 
-        private static ExpressionSyntax MakeDebuggerExpression(this InternalSyntax.ExpressionSyntax expression, SourceText text)
+        private static ExpressionSyntax MakeDebuggerExpression(
+            this InternalSyntax.ExpressionSyntax expression,
+            SourceText text
+        )
         {
-            var syntaxTree = InternalSyntax.SyntaxFactory.ExpressionStatement(attributeLists: default, expression, InternalSyntax.SyntaxFactory.Token(SyntaxKind.SemicolonToken)).CreateSyntaxTree(text);
+            var syntaxTree = InternalSyntax.SyntaxFactory
+                .ExpressionStatement(
+                    attributeLists: default,
+                    expression,
+                    InternalSyntax.SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                )
+                .CreateSyntaxTree(text);
             return ((ExpressionStatementSyntax)syntaxTree.GetRoot()).Expression;
         }
 
         internal static string EscapeKeywordIdentifiers(string identifier)
         {
-            return SyntaxFacts.IsKeywordKind(SyntaxFacts.GetKeywordKind(identifier)) ? "@" + identifier : identifier;
+            return SyntaxFacts.IsKeywordKind(SyntaxFacts.GetKeywordKind(identifier))
+                ? "@" + identifier
+                : identifier;
         }
 
         /// <remarks>
         /// We don't want to use the real lexer because we want to treat keywords as identifiers.
         /// Since the inputs are so simple, we'll just do the lexing ourselves.
         /// </remarks>
-        internal static bool TryParseDottedName(string input, [NotNullWhen(true)] out NameSyntax? output)
+        internal static bool TryParseDottedName(
+            string input,
+            [NotNullWhen(true)] out NameSyntax? output
+        )
         {
             var pooled = PooledStringBuilder.GetInstance();
             try
@@ -269,9 +318,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                         builder.Clear();
 
-                        output = output == null
-                            ? (NameSyntax)identifierName
-                            : SyntaxFactory.QualifiedName(output, identifierName);
+                        output =
+                            output == null
+                                ? (NameSyntax)identifierName
+                                : SyntaxFactory.QualifiedName(output, identifierName);
                     }
                     else if (SyntaxFacts.IsIdentifierPartCharacter(ch))
                     {
@@ -292,9 +342,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 }
 
                 var finalIdentifierName = SyntaxFactory.IdentifierName(builder.ToString());
-                output = output == null
-                    ? (NameSyntax)finalIdentifierName
-                    : SyntaxFactory.QualifiedName(output, finalIdentifierName);
+                output =
+                    output == null
+                        ? (NameSyntax)finalIdentifierName
+                        : SyntaxFactory.QualifiedName(output, finalIdentifierName);
 
                 return true;
             }
@@ -304,17 +355,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        internal static NameSyntax PrependExternAlias(IdentifierNameSyntax externAliasSyntax, NameSyntax nameSyntax)
+        internal static NameSyntax PrependExternAlias(
+            IdentifierNameSyntax externAliasSyntax,
+            NameSyntax nameSyntax
+        )
         {
             if (nameSyntax is QualifiedNameSyntax qualifiedNameSyntax)
             {
                 return SyntaxFactory.QualifiedName(
                     PrependExternAlias(externAliasSyntax, qualifiedNameSyntax.Left),
-                    qualifiedNameSyntax.Right);
+                    qualifiedNameSyntax.Right
+                );
             }
             else
             {
-                return SyntaxFactory.AliasQualifiedName(externAliasSyntax, (SimpleNameSyntax)nameSyntax);
+                return SyntaxFactory.AliasQualifiedName(
+                    externAliasSyntax,
+                    (SimpleNameSyntax)nameSyntax
+                );
             }
         }
     }

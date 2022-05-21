@@ -14,6 +14,7 @@ namespace System.Text.Json.Serialization.Converters
         // Reflect the converter strategy of the element type, since we use the identical contract for Some(_) values.
         internal override ConverterStrategy ConverterStrategy => _converterStrategy;
         internal override Type? ElementType => typeof(TElement);
+
         // 'None' is encoded using 'null' at runtime and serialized as 'null' in JSON.
         public override bool HandleNull => true;
 
@@ -26,8 +27,15 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter = FSharpCoreReflectionProxy.Instance.CreateFSharpOptionValueGetter<TOption, TElement>();
-            _optionConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpOptionSomeConstructor<TOption, TElement>();
+            _optionValueGetter = FSharpCoreReflectionProxy.Instance.CreateFSharpOptionValueGetter<
+                TOption,
+                TElement
+            >();
+            _optionConstructor =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpOptionSomeConstructor<
+                    TOption,
+                    TElement
+                >();
 
             // temporary workaround for JsonConverter base constructor needing to access
             // ConverterStrategy when calculating `CanUseDirectReadOrWrite`.
@@ -36,7 +44,13 @@ namespace System.Text.Json.Serialization.Converters
             CanUseDirectReadOrWrite = _converterStrategy == ConverterStrategy.Value;
         }
 
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, ref ReadStack state, out TOption? value)
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            ref ReadStack state,
+            out TOption? value
+        )
         {
             // `null` values deserialize as `None`
             if (!state.IsContinuation && reader.TokenType == JsonTokenType.Null)
@@ -45,8 +59,20 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
-            if (_elementConverter.TryRead(ref reader, typeof(TElement), options, ref state, out TElement? element))
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
+            if (
+                _elementConverter.TryRead(
+                    ref reader,
+                    typeof(TElement),
+                    options,
+                    ref state,
+                    out TElement? element
+                )
+            )
             {
                 value = _optionConstructor(element);
                 return true;
@@ -56,7 +82,12 @@ namespace System.Text.Json.Serialization.Converters
             return false;
         }
 
-        internal override bool OnTryWrite(Utf8JsonWriter writer, TOption value, JsonSerializerOptions options, ref WriteStack state)
+        internal override bool OnTryWrite(
+            Utf8JsonWriter writer,
+            TOption value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             if (value is null)
             {
@@ -66,14 +97,22 @@ namespace System.Text.Json.Serialization.Converters
             }
 
             TElement element = _optionValueGetter(value);
-            state.Current.DeclaredJsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.DeclaredJsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             return _elementConverter.TryWrite(writer, element, options, ref state);
         }
 
         // Since this is a hybrid converter (ConverterStrategy depends on the element converter),
         // we need to override the value converter Write and Read methods too.
 
-        public override void Write(Utf8JsonWriter writer, TOption value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TOption value,
+            JsonSerializerOptions options
+        )
         {
             if (value is null)
             {
@@ -86,7 +125,11 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        public override TOption? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TOption? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType == JsonTokenType.Null)
             {

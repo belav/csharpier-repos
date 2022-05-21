@@ -10,17 +10,23 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// this lets us have isolated workspace services between solutions such as option services.
-    /// 
+    ///
     /// otherwise, mutating service in one service call such as changing options, can affect result of other service call
     /// </summary>
     internal class TemporaryWorkspace : Workspace
     {
-        public TemporaryWorkspace(HostServices hostServices, string? workspaceKind, SolutionInfo solutionInfo, SerializableOptionSet options)
-            : base(hostServices, workspaceKind)
+        public TemporaryWorkspace(
+            HostServices hostServices,
+            string? workspaceKind,
+            SolutionInfo solutionInfo,
+            SerializableOptionSet options
+        ) : base(hostServices, workspaceKind)
         {
             SetOptions(Options.WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0));
 
-            var documentOptionsProviderFactories = ((IMefHostExportProvider)Services.HostServices).GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
+            var documentOptionsProviderFactories = (
+                (IMefHostExportProvider)Services.HostServices
+            ).GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
 
             RegisterDocumentOptionProviders(documentOptionsProviderFactories);
 

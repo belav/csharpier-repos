@@ -18,9 +18,6 @@ namespace System.Net.Security
     internal abstract class SafeFreeCredentials : SafeHandle
     {
 #endif
-        protected SafeFreeCredentials(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
-        {
-        }
+        protected SafeFreeCredentials(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
     }
-
 }

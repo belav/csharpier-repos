@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class DesignTimeConnectionStringResolver : NamedConnectionStringResolverBase, IDesignTimeConnectionStringResolver
+    public class DesignTimeConnectionStringResolver
+        : NamedConnectionStringResolverBase,
+            IDesignTimeConnectionStringResolver
     {
         private readonly Func<IServiceProvider>? _applicationServiceProviderAccessor;
 
@@ -22,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public DesignTimeConnectionStringResolver(Func<IServiceProvider>? applicationServiceProviderAccessor)
+        public DesignTimeConnectionStringResolver(
+            Func<IServiceProvider>? applicationServiceProviderAccessor
+        )
         {
             _applicationServiceProviderAccessor = applicationServiceProviderAccessor;
         }
@@ -33,7 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override IServiceProvider? ApplicationServiceProvider
-            => _applicationServiceProviderAccessor?.Invoke();
+        protected override IServiceProvider? ApplicationServiceProvider =>
+            _applicationServiceProviderAccessor?.Invoke();
     }
 }

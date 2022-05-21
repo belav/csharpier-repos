@@ -34,6 +34,7 @@ namespace System.Drawing.Tests
         private class SubBrush : Brush
         {
             public override object Clone() => this;
+
             public void PublicSetNativeBrush(IntPtr brush) => SetNativeBrush(brush);
         }
     }

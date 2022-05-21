@@ -13,18 +13,27 @@ using Microsoft.CodeAnalysis.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertIfToSwitch), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertIfToSwitch
+        ),
+        Shared
+    ]
     internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
-        : AbstractConvertIfToSwitchCodeRefactoringProvider<IfStatementSyntax, ExpressionSyntax, BinaryExpressionSyntax, PatternSyntax>
+        : AbstractConvertIfToSwitchCodeRefactoringProvider<
+            IfStatementSyntax,
+            ExpressionSyntax,
+            BinaryExpressionSyntax,
+            PatternSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertIfToSwitchCodeRefactoringProvider()
-        {
-        }
+        public CSharpConvertIfToSwitchCodeRefactoringProvider() { }
 
-        public override string GetTitle(bool forSwitchExpression)
-            => forSwitchExpression
+        public override string GetTitle(bool forSwitchExpression) =>
+            forSwitchExpression
                 ? CSharpFeaturesResources.Convert_to_switch_expression
                 : CSharpFeaturesResources.Convert_to_switch_statement;
 
@@ -32,9 +41,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         {
             var version = ((CSharpParseOptions)options).LanguageVersion;
             var features =
-                (version >= LanguageVersion.CSharp7 ? Feature.SourcePattern | Feature.IsTypePattern | Feature.CaseGuard : 0) |
-                (version >= LanguageVersion.CSharp8 ? Feature.SwitchExpression : 0) |
-                (version.IsCSharp9OrAbove() ? Feature.RelationalPattern | Feature.OrPattern | Feature.AndPattern | Feature.TypePattern : 0);
+                (
+                    version >= LanguageVersion.CSharp7
+                        ? Feature.SourcePattern | Feature.IsTypePattern | Feature.CaseGuard
+                        : 0
+                )
+                | (version >= LanguageVersion.CSharp8 ? Feature.SwitchExpression : 0)
+                | (
+                    version.IsCSharp9OrAbove()
+                        ? Feature.RelationalPattern
+                            | Feature.OrPattern
+                            | Feature.AndPattern
+                            | Feature.TypePattern
+                        : 0
+                );
             return new CSharpAnalyzer(syntaxFacts, features);
         }
     }

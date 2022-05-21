@@ -6,70 +6,113 @@ using Xunit;
 using AutoMapper.Internal;
 using System.ComponentModel;
 using System.Globalization;
+
 namespace AutoMapper.UnitTests.Mappers
 {
     using static TypeDescriptor;
+
     public class When_specifying_mapping_with_the_BCL_type_converter_class : NonValidatingSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.Internal().Mappers.Add(new TypeConverterMapper()));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => cfg.Internal().Mappers.Add(new TypeConverterMapper()));
+
 #if NET461
         public When_specifying_mapping_with_the_BCL_type_converter_class()
         {
             // only needed for the xUnitRunner without AppDomains
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
-                return args.Name == typeof(CustomTypeConverter).Assembly.FullName ? typeof(CustomTypeConverter).Assembly : null;
+                return args.Name == typeof(CustomTypeConverter).Assembly.FullName
+                    ? typeof(CustomTypeConverter).Assembly
+                    : null;
             };
         }
 #endif
+
         [TypeConverter(typeof(CustomTypeConverter))]
         public class Source
         {
             public int Value { get; set; }
         }
+
         public class Destination
         {
             public int OtherValue { get; set; }
         }
+
         public class CustomTypeConverter : TypeConverter
         {
-            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) => destinationType == typeof(Destination);
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) => 
-                new Destination { OtherValue = ((Source)value).Value + 10 };
-            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(Destination);
-            public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) =>
-                new Source { Value = ((Destination)value).OtherValue - 10 };
+            public override bool CanConvertTo(
+                ITypeDescriptorContext context,
+                Type destinationType
+            ) => destinationType == typeof(Destination);
+
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            ) => new Destination { OtherValue = ((Source)value).Value + 10 };
+
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+                sourceType == typeof(Destination);
+
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value
+            ) => new Source { Value = ((Destination)value).OtherValue - 10 };
         }
+
         [Fact]
-        public void Should_convert_from_type_using_the_custom_type_converter() => Mapper.Map<Source, Destination>(new Source { Value = 5 }).OtherValue.ShouldBe(15);
+        public void Should_convert_from_type_using_the_custom_type_converter() =>
+            Mapper.Map<Source, Destination>(new Source { Value = 5 }).OtherValue.ShouldBe(15);
+
         [Fact]
-        public void Should_convert_to_type_using_the_custom_type_converter() => Mapper.Map<Destination, Source>(new Destination{ OtherValue = 15 }).Value.ShouldBe(5);
+        public void Should_convert_to_type_using_the_custom_type_converter() =>
+            Mapper.Map<Destination, Source>(new Destination { OtherValue = 15 }).Value.ShouldBe(5);
+
         public class TypeConverterMapper : ObjectMapper<object, object>
         {
             public override bool IsMatch(in TypePair context) =>
-                GetConverter(context.SourceType).CanConvertTo(context.DestinationType) || GetConverter(context.DestinationType).CanConvertFrom(context.SourceType);
-            public override object Map(object source, object destination, Type sourceType, Type destinationType, ResolutionContext context)
+                GetConverter(context.SourceType).CanConvertTo(context.DestinationType)
+                || GetConverter(context.DestinationType).CanConvertFrom(context.SourceType);
+
+            public override object Map(
+                object source,
+                object destination,
+                Type sourceType,
+                Type destinationType,
+                ResolutionContext context
+            )
             {
                 var typeConverter = GetConverter(sourceType);
-                return typeConverter.CanConvertTo(destinationType) ? typeConverter.ConvertTo(source, destinationType) : GetConverter(destinationType).ConvertFrom(source);
+                return typeConverter.CanConvertTo(destinationType)
+                    ? typeConverter.ConvertTo(source, destinationType)
+                    : GetConverter(destinationType).ConvertFrom(source);
             }
         }
     }
+
     public class When_adding_a_custom_mapper : NonValidatingSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<ClassA, ClassB>()
-                .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
-            cfg.Internal().Mappers.Add(new TestObjectMapper());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<ClassA, ClassB>()
+                        .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
+                    cfg.Internal().Mappers.Add(new TestObjectMapper());
+                }
+            );
 
         [Fact]
         public void Should_have_valid_configuration()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
+                Configuration.AssertConfigurationIsValid
+            );
         }
-
 
         public class TestObjectMapper : IObjectMapper
         {
@@ -80,12 +123,17 @@ namespace AutoMapper.UnitTests.Mappers
 
             public bool IsMatch(in TypePair context)
             {
-                return context.SourceType == typeof(SourceType) && context.DestinationType == typeof(DestinationType);
+                return context.SourceType == typeof(SourceType)
+                    && context.DestinationType == typeof(DestinationType);
             }
 
-            public Expression MapExpression(IGlobalConfiguration configurationProvider, ProfileMap profileMap,
+            public Expression MapExpression(
+                IGlobalConfiguration configurationProvider,
+                ProfileMap profileMap,
                 MemberMap memberMap,
-                Expression sourceExpression, Expression destExpression)
+                Expression sourceExpression,
+                Expression destExpression
+            )
             {
                 Expression<Func<DestinationType>> expr = () => new DestinationType();
 
@@ -118,12 +166,15 @@ namespace AutoMapper.UnitTests.Mappers
     {
         ClassB _destination;
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<ClassA, ClassB>()
-                .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
-            cfg.Internal().Mappers.Add(new TestObjectMapper());
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<ClassA, ClassB>()
+                        .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
+                    cfg.Internal().Mappers.Add(new TestObjectMapper());
+                }
+            );
 
         protected override void Because_of()
         {
@@ -141,7 +192,13 @@ namespace AutoMapper.UnitTests.Mappers
         {
             public static DestinationType Instance = new DestinationType();
 
-            public override DestinationType Map(SourceType source, DestinationType destination, Type sourceType, Type destinationType, ResolutionContext context)
+            public override DestinationType Map(
+                SourceType source,
+                DestinationType destination,
+                Type sourceType,
+                Type destinationType,
+                ResolutionContext context
+            )
             {
                 source.ShouldNotBeNull();
                 destination.ShouldNotBeNull();
@@ -191,11 +248,18 @@ namespace AutoMapper.UnitTests.Mappers
         {
             public override bool IsMatch(in TypePair types)
             {
-                var underlyingType = Nullable.GetUnderlyingType(types.SourceType) ?? types.SourceType;
+                var underlyingType =
+                    Nullable.GetUnderlyingType(types.SourceType) ?? types.SourceType;
                 return underlyingType.IsEnum && types.DestinationType == typeof(string);
             }
 
-            public override string Map(object source, string destination, Type sourceType, Type destinationType, ResolutionContext context)
+            public override string Map(
+                object source,
+                string destination,
+                Type sourceType,
+                Type destinationType,
+                ResolutionContext context
+            )
             {
                 sourceType.ShouldBe(typeof(ConsoleColor?));
                 destinationType.ShouldBe(typeof(string));
@@ -203,11 +267,14 @@ namespace AutoMapper.UnitTests.Mappers
             }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.Internal().Mappers.Insert(0, new EnumMapper());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.Internal().Mappers.Insert(0, new EnumMapper());
+                }
+            );
 
         protected override void Because_of()
         {

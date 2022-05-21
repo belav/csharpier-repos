@@ -23,7 +23,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 {
-    internal class InlineDiagnosticsAdornmentManager : AbstractAdornmentManager<InlineDiagnosticsTag>
+    internal class InlineDiagnosticsAdornmentManager
+        : AbstractAdornmentManager<InlineDiagnosticsTag>
     {
         private readonly IClassificationTypeRegistryService _classificationRegistryService;
         private readonly IClassificationFormatMap _formatMap;
@@ -38,8 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             string adornmentLayerName,
             IClassificationFormatMapService classificationFormatMapService,
             IClassificationTypeRegistryService classificationTypeRegistryService,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext, textView, tagAggregatorFactoryService, asyncListener, adornmentLayerName)
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                threadingContext,
+                textView,
+                tagAggregatorFactoryService,
+                asyncListener,
+                adornmentLayerName
+            )
         {
             _classificationRegistryService = classificationTypeRegistryService;
             _formatMap = classificationFormatMapService.GetClassificationFormatMap(textView);
@@ -47,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             _globalOptions = globalOptions;
             TextView.ViewportWidthChanged += TextView_ViewportWidthChanged;
 
-            _endLineTagAggregator = tagAggregatorFactoryService.CreateTagAggregator<IEndOfLineAdornmentTag>(textView);
+            _endLineTagAggregator =
+                tagAggregatorFactoryService.CreateTagAggregator<IEndOfLineAdornmentTag>(textView);
             _endLineTagAggregator.BatchedTagsChanged += EndLineTagAggregator_BatchedTagsChanged;
         }
 
@@ -56,13 +65,21 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// based on if they intersect with any IEndOfLineAdornmentTags after the layout change
         /// has completed.
         /// </summary>
-        private void EndLineTagAggregator_BatchedTagsChanged(object sender, BatchedTagsChangedEventArgs e)
+        private void EndLineTagAggregator_BatchedTagsChanged(
+            object sender,
+            BatchedTagsChangedEventArgs e
+        )
         {
-            TextView.QueuePostLayoutAction(() =>
-            {
-                var allSpans = e.Spans.SelectMany(span => span.GetSpans(TextView.TextBuffer));
-                UpdateSpans_CallOnlyOnUIThread(new NormalizedSnapshotSpanCollection(allSpans), removeOldTags: true);
-            });
+            TextView.QueuePostLayoutAction(
+                () =>
+                {
+                    var allSpans = e.Spans.SelectMany(span => span.GetSpans(TextView.TextBuffer));
+                    UpdateSpans_CallOnlyOnUIThread(
+                        new NormalizedSnapshotSpanCollection(allSpans),
+                        removeOldTags: true
+                    );
+                }
+            );
         }
 
         /// <summary>
@@ -86,10 +103,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 return;
             }
 
-            var option = _globalOptions.GetOption(InlineDiagnosticsOptions.Location, document.Project.Language);
+            var option = _globalOptions.GetOption(
+                InlineDiagnosticsOptions.Location,
+                document.Project.Language
+            );
             if (option == InlineDiagnosticsLocations.PlacedAtEndOfEditor)
             {
-                var normalizedCollectionSpan = new NormalizedSnapshotSpanCollection(TextView.TextViewLines.FormattedSpan);
+                var normalizedCollectionSpan = new NormalizedSnapshotSpanCollection(
+                    TextView.TextViewLines.FormattedSpan
+                );
                 UpdateSpans_CallOnlyOnUIThread(normalizedCollectionSpan, removeOldTags: true);
             }
         }
@@ -104,7 +126,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 foreach (var element in AdornmentLayer.Elements)
                 {
                     var tag = (InlineDiagnosticsTag)element.Tag;
-                    var classificationType = _classificationRegistryService.GetClassificationType(InlineDiagnosticsTag.GetClassificationId(tag.ErrorType));
+                    var classificationType = _classificationRegistryService.GetClassificationType(
+                        InlineDiagnosticsTag.GetClassificationId(tag.ErrorType)
+                    );
                     var format = GetFormat(classificationType);
                     InlineDiagnosticsTag.UpdateColor(format, element.Adornment);
                 }
@@ -119,8 +143,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// <summary>
         /// Get the spans located on each line so that it can only display the first one that appears on the line
         /// </summary>
-        private void AddSpansOnEachLine(NormalizedSnapshotSpanCollection changedSpanCollection,
-            Dictionary<int, IMappingTagSpan<InlineDiagnosticsTag>> map)
+        private void AddSpansOnEachLine(
+            NormalizedSnapshotSpanCollection changedSpanCollection,
+            Dictionary<int, IMappingTagSpan<InlineDiagnosticsTag>> map
+        )
         {
             var viewLines = TextView.TextViewLines;
 
@@ -147,7 +173,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                     {
                         map.Add(lineNum, tagMappingSpan);
                     }
-                    else if (value.Tag.ErrorType is not PredefinedErrorTypeNames.SyntaxError && tagMappingSpan.Tag.ErrorType is PredefinedErrorTypeNames.SyntaxError)
+                    else if (
+                        value.Tag.ErrorType is not PredefinedErrorTypeNames.SyntaxError
+                        && tagMappingSpan.Tag.ErrorType is PredefinedErrorTypeNames.SyntaxError
+                    )
                     {
                         // Draw the first instance of an error, if what is stored in the map at a specific line is
                         // not an error, then replace it. Otherwise, just get the first warning on the line.
@@ -161,7 +190,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// Iterates through the mapping of line number to span and draws the diagnostic in the appropriate position on the screen,
         /// as well as adding the tag to the adornment layer.
         /// </summary>
-        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(NormalizedSnapshotSpanCollection changedSpanCollection)
+        protected override void AddAdornmentsToAdornmentLayer_CallOnlyOnUIThread(
+            NormalizedSnapshotSpanCollection changedSpanCollection
+        )
         {
             // this method should only run on UI thread as we do WPF here.
             Contract.ThrowIfFalse(TextView.VisualElement.Dispatcher.CheckAccess());
@@ -171,13 +202,21 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             }
 
             var viewLines = TextView.TextViewLines;
-            using var _ = PooledDictionary<int, IMappingTagSpan<InlineDiagnosticsTag>>.GetInstance(out var map);
+            using var _ = PooledDictionary<int, IMappingTagSpan<InlineDiagnosticsTag>>.GetInstance(
+                out var map
+            );
             AddSpansOnEachLine(changedSpanCollection, map);
             foreach (var (lineNum, tagMappingSpan) in map)
             {
                 // Mapping the IMappingTagSpan back up to the TextView's visual snapshot to ensure there will
                 // be no adornments drawn on disjoint spans.
-                if (!TryMapToSingleSnapshotSpan(tagMappingSpan.Span, TextView.TextSnapshot, out var span))
+                if (
+                    !TryMapToSingleSnapshotSpan(
+                        tagMappingSpan.Span,
+                        TextView.TextSnapshot,
+                        out var span
+                    )
+                )
                 {
                     continue;
                 }
@@ -189,7 +228,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 }
 
                 // Need to get the SnapshotPoint to be able to get the IWpfTextViewLine
-                var point = tagMappingSpan.Span.Start.GetPoint(TextView.TextSnapshot, PositionAffinity.Predecessor);
+                var point = tagMappingSpan.Span.Start.GetPoint(
+                    TextView.TextSnapshot,
+                    PositionAffinity.Predecessor
+                );
                 if (point == null)
                 {
                     continue;
@@ -213,8 +255,14 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 }
 
                 var tag = tagMappingSpan.Tag;
-                var classificationType = _classificationRegistryService.GetClassificationType(InlineDiagnosticsTag.GetClassificationId(tag.ErrorType));
-                var graphicsResult = tag.GetGraphics(TextView, geometry, GetFormat(classificationType));
+                var classificationType = _classificationRegistryService.GetClassificationType(
+                    InlineDiagnosticsTag.GetClassificationId(tag.ErrorType)
+                );
+                var graphicsResult = tag.GetGraphics(
+                    TextView,
+                    geometry,
+                    GetFormat(classificationType)
+                );
 
                 var visualElement = graphicsResult.VisualElement;
                 // Only place the diagnostics if the diagnostic would not intersect with the editor window
@@ -223,19 +271,30 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                     continue;
                 }
 
-                Canvas.SetLeft(visualElement,
-                    tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfCode ? lineView.Right :
-                    tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor ? TextView.ViewportRight - visualElement.DesiredSize.Width :
-                    throw ExceptionUtilities.UnexpectedValue(tag.Location));
+                Canvas.SetLeft(
+                    visualElement,
+                    tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfCode
+                        ? lineView.Right
+                        : tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor
+                            ? TextView.ViewportRight - visualElement.DesiredSize.Width
+                            : throw ExceptionUtilities.UnexpectedValue(tag.Location)
+                );
 
-                Canvas.SetTop(visualElement, geometry.Bounds.Bottom - visualElement.DesiredSize.Height);
+                Canvas.SetTop(
+                    visualElement,
+                    geometry.Bounds.Bottom - visualElement.DesiredSize.Height
+                );
 
                 AdornmentLayer.AddAdornment(
                     behavior: AdornmentPositioningBehavior.TextRelative,
                     visualSpan: lineView.Extent,
                     tag: tag,
                     adornment: visualElement,
-                    removedCallback: delegate { graphicsResult.Dispose(); });
+                    removedCallback: delegate
+                    {
+                        graphicsResult.Dispose();
+                    }
+                );
             }
         }
     }

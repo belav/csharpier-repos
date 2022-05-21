@@ -13,35 +13,47 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class INamespaceOrTypeSymbolExtensions
     {
-        private static readonly ConditionalWeakTable<INamespaceOrTypeSymbol, List<string>> s_namespaceOrTypeToNameMap =
-            new();
-        public static readonly ConditionalWeakTable<INamespaceOrTypeSymbol, List<string>>.CreateValueCallback s_getNamePartsCallBack =
-            namespaceSymbol =>
-            {
-                var result = new List<string>();
-                GetNameParts(namespaceSymbol, result);
-                return result;
-            };
+        private static readonly ConditionalWeakTable<
+            INamespaceOrTypeSymbol,
+            List<string>
+        > s_namespaceOrTypeToNameMap = new();
+        public static readonly ConditionalWeakTable<
+            INamespaceOrTypeSymbol,
+            List<string>
+        >.CreateValueCallback s_getNamePartsCallBack = namespaceSymbol =>
+        {
+            var result = new List<string>();
+            GetNameParts(namespaceSymbol, result);
+            return result;
+        };
 
-        private static readonly SymbolDisplayFormat s_shortNameFormat = new(
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes | SymbolDisplayMiscellaneousOptions.ExpandNullable);
+        private static readonly SymbolDisplayFormat s_shortNameFormat =
+            new(
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    | SymbolDisplayMiscellaneousOptions.ExpandNullable
+            );
 
-        public static string GetShortName(this INamespaceOrTypeSymbol symbol)
-            => symbol.ToDisplayString(s_shortNameFormat);
+        public static string GetShortName(this INamespaceOrTypeSymbol symbol) =>
+            symbol.ToDisplayString(s_shortNameFormat);
 
         public static IEnumerable<IPropertySymbol> GetIndexers(this INamespaceOrTypeSymbol? symbol)
         {
             return symbol == null
                 ? SpecializedCollections.EmptyEnumerable<IPropertySymbol>()
-                : symbol.GetMembers(WellKnownMemberNames.Indexer).OfType<IPropertySymbol>().Where(p => p.IsIndexer);
+                : symbol
+                    .GetMembers(WellKnownMemberNames.Indexer)
+                    .OfType<IPropertySymbol>()
+                    .Where(p => p.IsIndexer);
         }
 
-        public static IReadOnlyList<string> GetNameParts(this INamespaceOrTypeSymbol symbol)
-            => s_namespaceOrTypeToNameMap.GetValue(symbol, s_getNamePartsCallBack);
+        public static IReadOnlyList<string> GetNameParts(this INamespaceOrTypeSymbol symbol) =>
+            s_namespaceOrTypeToNameMap.GetValue(symbol, s_getNamePartsCallBack);
 
         public static int CompareNameParts(
-            IReadOnlyList<string> names1, IReadOnlyList<string> names2,
-            bool placeSystemNamespaceFirst)
+            IReadOnlyList<string> names1,
+            IReadOnlyList<string> names2,
+            bool placeSystemNamespaceFirst
+        )
         {
             for (var i = 0; i < Math.Min(names1.Count, names2.Count); i++)
             {
@@ -73,9 +85,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return names1.Count - names2.Count;
         }
 
-        private static void GetNameParts(INamespaceOrTypeSymbol? namespaceOrTypeSymbol, List<string> result)
+        private static void GetNameParts(
+            INamespaceOrTypeSymbol? namespaceOrTypeSymbol,
+            List<string> result
+        )
         {
-            if (namespaceOrTypeSymbol == null || (namespaceOrTypeSymbol.IsNamespace && ((INamespaceSymbol)namespaceOrTypeSymbol).IsGlobalNamespace))
+            if (
+                namespaceOrTypeSymbol == null
+                || (
+                    namespaceOrTypeSymbol.IsNamespace
+                    && ((INamespaceSymbol)namespaceOrTypeSymbol).IsGlobalNamespace
+                )
+            )
             {
                 return;
             }
@@ -90,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// </summary>
         public static IEnumerable<INamedTypeSymbol> GetAllTypes(
             this INamespaceOrTypeSymbol namespaceOrTypeSymbol,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stack = new Stack<INamespaceOrTypeSymbol>();
             stack.Push(namespaceOrTypeSymbol);

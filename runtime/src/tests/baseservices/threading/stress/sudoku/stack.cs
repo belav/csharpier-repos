@@ -40,12 +40,12 @@ public class Stack<T>
     //Put item at the end
     public void Push(T item)
     {
-        if(size == capacity)
+        if (size == capacity)
         {
             ExpandArray();
         }
         objArray[size] = item;
-        size ++;                
+        size++;
     }
 
     //Pop the last item
@@ -64,15 +64,12 @@ public class Stack<T>
         if (size <= 0)
             throw new System.Exception("Empty stack");
 
-        return objArray[size-1];
+        return objArray[size - 1];
     }
 
     public int Count
     {
-        get
-        {
-            return size;
-        }
+        get { return size; }
     }
 
     //Returns the item in a given position
@@ -101,4 +98,3 @@ public class Stack<T>
         capacity = newCapacity;
     }
 }
-

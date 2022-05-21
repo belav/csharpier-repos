@@ -23,24 +23,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
     internal static class ConvertNamespaceTransform
     {
         public static async Task<Document> ConvertAsync(
-            Document document, BaseNamespaceDeclarationSyntax baseNamespace, CancellationToken cancellationToken)
+            Document document,
+            BaseNamespaceDeclarationSyntax baseNamespace,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             return document.WithSyntaxRoot(root.ReplaceNode(baseNamespace, Convert(baseNamespace)));
         }
 
-        public static BaseNamespaceDeclarationSyntax Convert(BaseNamespaceDeclarationSyntax baseNamespace)
+        public static BaseNamespaceDeclarationSyntax Convert(
+            BaseNamespaceDeclarationSyntax baseNamespace
+        )
         {
             return baseNamespace switch
             {
-                FileScopedNamespaceDeclarationSyntax fileScopedNamespace => ConvertFileScopedNamespace(fileScopedNamespace),
-                NamespaceDeclarationSyntax namespaceDeclaration => ConvertNamespaceDeclaration(namespaceDeclaration),
+                FileScopedNamespaceDeclarationSyntax fileScopedNamespace
+                    => ConvertFileScopedNamespace(fileScopedNamespace),
+                NamespaceDeclarationSyntax namespaceDeclaration
+                    => ConvertNamespaceDeclaration(namespaceDeclaration),
                 _ => throw ExceptionUtilities.UnexpectedValue(baseNamespace.Kind()),
             };
         }
 
-        private static bool HasLeadingBlankLine(
-            SyntaxToken token, out SyntaxToken withoutBlankLine)
+        private static bool HasLeadingBlankLine(SyntaxToken token, out SyntaxToken withoutBlankLine)
         {
             var leadingTrivia = token.LeadingTrivia;
 
@@ -50,7 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 return true;
             }
 
-            if (leadingTrivia.Count >= 2 && leadingTrivia[0].IsKind(SyntaxKind.WhitespaceTrivia) && leadingTrivia[1].IsKind(SyntaxKind.EndOfLineTrivia))
+            if (
+                leadingTrivia.Count >= 2
+                && leadingTrivia[0].IsKind(SyntaxKind.WhitespaceTrivia)
+                && leadingTrivia[1].IsKind(SyntaxKind.EndOfLineTrivia)
+            )
             {
                 withoutBlankLine = token.WithLeadingTrivia(leadingTrivia.Skip(2));
                 return true;
@@ -60,52 +72,76 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             return false;
         }
 
-        private static FileScopedNamespaceDeclarationSyntax ConvertNamespaceDeclaration(NamespaceDeclarationSyntax namespaceDeclaration)
+        private static FileScopedNamespaceDeclarationSyntax ConvertNamespaceDeclaration(
+            NamespaceDeclarationSyntax namespaceDeclaration
+        )
         {
-            var fileScopedNamespace = SyntaxFactory.FileScopedNamespaceDeclaration(
-                namespaceDeclaration.AttributeLists,
-                namespaceDeclaration.Modifiers,
-                namespaceDeclaration.NamespaceKeyword,
-                namespaceDeclaration.Name,
-                SyntaxFactory.Token(SyntaxKind.SemicolonToken).WithTrailingTrivia(namespaceDeclaration.OpenBraceToken.TrailingTrivia),
-                namespaceDeclaration.Externs,
-                namespaceDeclaration.Usings,
-                namespaceDeclaration.Members).WithAdditionalAnnotations(Formatter.Annotation);
+            var fileScopedNamespace = SyntaxFactory
+                .FileScopedNamespaceDeclaration(
+                    namespaceDeclaration.AttributeLists,
+                    namespaceDeclaration.Modifiers,
+                    namespaceDeclaration.NamespaceKeyword,
+                    namespaceDeclaration.Name,
+                    SyntaxFactory
+                        .Token(SyntaxKind.SemicolonToken)
+                        .WithTrailingTrivia(namespaceDeclaration.OpenBraceToken.TrailingTrivia),
+                    namespaceDeclaration.Externs,
+                    namespaceDeclaration.Usings,
+                    namespaceDeclaration.Members
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             // Ensure there's a blank line between the namespace line and the first body member.
             var firstBodyToken = fileScopedNamespace.SemicolonToken.GetNextToken();
-            if (firstBodyToken.Kind() != SyntaxKind.EndOfFileToken &&
-                !HasLeadingBlankLine(firstBodyToken, out _))
+            if (
+                firstBodyToken.Kind() != SyntaxKind.EndOfFileToken
+                && !HasLeadingBlankLine(firstBodyToken, out _)
+            )
             {
                 fileScopedNamespace = fileScopedNamespace.ReplaceToken(
                     firstBodyToken,
-                    firstBodyToken.WithPrependedLeadingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed));
+                    firstBodyToken.WithPrependedLeadingTrivia(
+                        SyntaxFactory.ElasticCarriageReturnLineFeed
+                    )
+                );
             }
 
             return fileScopedNamespace;
         }
 
-        private static NamespaceDeclarationSyntax ConvertFileScopedNamespace(FileScopedNamespaceDeclarationSyntax fileScopedNamespace)
+        private static NamespaceDeclarationSyntax ConvertFileScopedNamespace(
+            FileScopedNamespaceDeclarationSyntax fileScopedNamespace
+        )
         {
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(
-                fileScopedNamespace.AttributeLists,
-                fileScopedNamespace.Modifiers,
-                fileScopedNamespace.NamespaceKeyword,
-                fileScopedNamespace.Name,
-                SyntaxFactory.Token(SyntaxKind.OpenBraceToken).WithTrailingTrivia(fileScopedNamespace.SemicolonToken.TrailingTrivia),
-                fileScopedNamespace.Externs,
-                fileScopedNamespace.Usings,
-                fileScopedNamespace.Members,
-                SyntaxFactory.Token(SyntaxKind.CloseBraceToken),
-                semicolonToken: default).WithAdditionalAnnotations(Formatter.Annotation);
+            var namespaceDeclaration = SyntaxFactory
+                .NamespaceDeclaration(
+                    fileScopedNamespace.AttributeLists,
+                    fileScopedNamespace.Modifiers,
+                    fileScopedNamespace.NamespaceKeyword,
+                    fileScopedNamespace.Name,
+                    SyntaxFactory
+                        .Token(SyntaxKind.OpenBraceToken)
+                        .WithTrailingTrivia(fileScopedNamespace.SemicolonToken.TrailingTrivia),
+                    fileScopedNamespace.Externs,
+                    fileScopedNamespace.Usings,
+                    fileScopedNamespace.Members,
+                    SyntaxFactory.Token(SyntaxKind.CloseBraceToken),
+                    semicolonToken: default
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             // Ensure there is no errant blank line between the open curly and the first body element.
             var firstBodyToken = namespaceDeclaration.OpenBraceToken.GetNextToken();
-            if (firstBodyToken != namespaceDeclaration.CloseBraceToken &&
-                firstBodyToken.Kind() != SyntaxKind.EndOfFileToken &&
-                HasLeadingBlankLine(firstBodyToken, out var firstBodyTokenWithoutBlankLine))
+            if (
+                firstBodyToken != namespaceDeclaration.CloseBraceToken
+                && firstBodyToken.Kind() != SyntaxKind.EndOfFileToken
+                && HasLeadingBlankLine(firstBodyToken, out var firstBodyTokenWithoutBlankLine)
+            )
             {
-                namespaceDeclaration = namespaceDeclaration.ReplaceToken(firstBodyToken, firstBodyTokenWithoutBlankLine);
+                namespaceDeclaration = namespaceDeclaration.ReplaceToken(
+                    firstBodyToken,
+                    firstBodyTokenWithoutBlankLine
+                );
             }
 
             return namespaceDeclaration;

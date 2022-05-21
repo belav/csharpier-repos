@@ -15,18 +15,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 {
     [Export(typeof(IExtractMethodService)), Shared]
     [ExportLanguageService(typeof(IExtractMethodService), LanguageNames.CSharp)]
-    internal class CSharpExtractMethodService : AbstractExtractMethodService<CSharpSelectionValidator, CSharpMethodExtractor, CSharpSelectionResult>
+    internal class CSharpExtractMethodService
+        : AbstractExtractMethodService<
+            CSharpSelectionValidator,
+            CSharpMethodExtractor,
+            CSharpSelectionResult
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpExtractMethodService()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpExtractMethodService() { }
 
-        protected override CSharpSelectionValidator CreateSelectionValidator(SemanticDocument document, TextSpan textSpan, bool localFunction, OptionSet options)
-            => new CSharpSelectionValidator(document, textSpan, localFunction, options);
+        protected override CSharpSelectionValidator CreateSelectionValidator(
+            SemanticDocument document,
+            TextSpan textSpan,
+            bool localFunction,
+            OptionSet options
+        ) => new CSharpSelectionValidator(document, textSpan, localFunction, options);
 
-        protected override CSharpMethodExtractor CreateMethodExtractor(CSharpSelectionResult selectionResult, bool localFunction)
-            => new CSharpMethodExtractor(selectionResult, localFunction);
+        protected override CSharpMethodExtractor CreateMethodExtractor(
+            CSharpSelectionResult selectionResult,
+            bool localFunction
+        ) => new CSharpMethodExtractor(selectionResult, localFunction);
     }
 }

@@ -41,16 +41,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 return connectionString;
             }
 
-            var configuration = ApplicationServiceProvider
-                ?.GetService<IConfiguration>();
+            var configuration = ApplicationServiceProvider?.GetService<IConfiguration>();
 
-            var resolved = configuration?[connectionName]
-                ?? configuration?[DefaultSection + connectionName];
+            var resolved =
+                configuration?[connectionName] ?? configuration?[DefaultSection + connectionName];
 
             if (resolved == null)
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.NamedConnectionStringNotFound(connectionName));
+                    RelationalStrings.NamedConnectionStringNotFound(connectionName)
+                );
             }
 
             return resolved;
@@ -69,8 +69,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 return null;
             }
 
-            return connectionString.Substring(0, firstEquals).Trim().Equals(
-                "name", StringComparison.OrdinalIgnoreCase)
+            return connectionString
+                .Substring(0, firstEquals)
+                .Trim()
+                .Equals("name", StringComparison.OrdinalIgnoreCase)
                 ? connectionString.Substring(firstEquals + 1).Trim()
                 : null;
         }

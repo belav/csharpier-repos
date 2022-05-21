@@ -16,20 +16,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
-    internal class WorkspacePullDiagnosticHandler : AbstractPullDiagnosticHandler<VSInternalWorkspaceDiagnosticsParams, VSInternalWorkspaceDiagnosticReport, VSInternalWorkspaceDiagnosticReport[]>
+    internal class WorkspacePullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport,
+            VSInternalWorkspaceDiagnosticReport[]
+        >
     {
         public override string Method => VSInternalMethods.WorkspacePullDiagnosticName;
 
         public WorkspacePullDiagnosticHandler(IDiagnosticService diagnosticService)
-            : base(diagnosticService)
-        {
-        }
+            : base(diagnosticService) { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalWorkspaceDiagnosticsParams request)
-            => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalWorkspaceDiagnosticsParams request
+        ) => null;
 
-        protected override VSInternalWorkspaceDiagnosticReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics, string? resultId)
-            => new VSInternalWorkspaceDiagnosticReport
+        protected override VSInternalWorkspaceDiagnosticReport CreateReport(
+            TextDocumentIdentifier identifier,
+            VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new VSInternalWorkspaceDiagnosticReport
             {
                 TextDocument = identifier,
                 Diagnostics = diagnostics,
@@ -39,8 +47,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 Identifier = WorkspaceDiagnosticIdentifier,
             };
 
-        protected override ImmutableArray<PreviousResult>? GetPreviousResults(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PreviousResults?.Where(d => d.PreviousResultId != null).Select(d => new PreviousResult(d.PreviousResultId!, d.TextDocument!)).ToImmutableArray();
+        protected override ImmutableArray<PreviousResult>? GetPreviousResults(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) =>
+            diagnosticsParams.PreviousResults
+                ?.Where(d => d.PreviousResultId != null)
+                .Select(d => new PreviousResult(d.PreviousResultId!, d.TextDocument!))
+                .ToImmutableArray();
 
         protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
         {
@@ -55,15 +68,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         }
 
         protected override Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
-            RequestContext context, Document document, Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken)
+            RequestContext context,
+            Document document,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        )
         {
             // For closed files, go to the IDiagnosticService for results.  These won't necessarily be totally up to
             // date.  However, that's fine as these are closed files and won't be in the process of being edited.  So
             // any deviations in the spans of diagnostics shouldn't be impactful for the user.
-            return DiagnosticService.GetPullDiagnosticsAsync(document, includeSuppressedDiagnostics: false, diagnosticMode, cancellationToken).AsTask();
+            return DiagnosticService
+                .GetPullDiagnosticsAsync(
+                    document,
+                    includeSuppressedDiagnostics: false,
+                    diagnosticMode,
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(BufferedProgress<VSInternalWorkspaceDiagnosticReport> progress)
+        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(
+            BufferedProgress<VSInternalWorkspaceDiagnosticReport> progress
+        )
         {
             return progress.GetValues();
         }
@@ -82,7 +108,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             var solution = context.Solution;
 
-            var documentTrackingService = solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService =
+                solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -92,7 +119,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             var visibleDocuments = documentTrackingService.GetVisibleDocuments(solution);
 
             // Now, prioritize the projects related to the active/visible files.
-            AddDocumentsFromProject(activeDocument?.Project, context.SupportedLanguages, isOpen: true);
+            AddDocumentsFromProject(
+                activeDocument?.Project,
+                context.SupportedLanguages,
+                isOpen: true
+            );
             foreach (var doc in visibleDocuments)
                 AddDocumentsFromProject(doc.Project, context.SupportedLanguages, isOpen: true);
 
@@ -104,7 +135,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             result.RemoveDuplicates();
             return result.ToImmutable();
 
-            void AddDocumentsFromProject(Project? project, ImmutableArray<string> supportedLanguages, bool isOpen)
+            void AddDocumentsFromProject(
+                Project? project,
+                ImmutableArray<string> supportedLanguages,
+                bool isOpen
+            )
             {
                 if (project == null)
                     return;
@@ -120,10 +155,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // solution analysis on.
                 if (!isOpen)
                 {
-                    var analysisScope = SolutionCrawlerOptions.GetBackgroundAnalysisScope(solution.Workspace.Options, project.Language);
+                    var analysisScope = SolutionCrawlerOptions.GetBackgroundAnalysisScope(
+                        solution.Workspace.Options,
+                        project.Language
+                    );
                     if (analysisScope != BackgroundAnalysisScope.FullSolution)
                     {
-                        context.TraceInformation($"Skipping project '{project.Name}' as it has no open document and Full Solution Analysis is off");
+                        context.TraceInformation(
+                            $"Skipping project '{project.Name}' as it has no open document and Full Solution Analysis is off"
+                        );
                         return;
                     }
                 }

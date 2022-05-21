@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     public class EntityProjectionExpression : Expression, IPrintableExpression, IAccessExpression
     {
         private readonly Dictionary<IProperty, IAccessExpression> _propertyExpressionsMap = new();
-        private readonly Dictionary<INavigation, IAccessExpression> _navigationExpressionsMap = new();
+        private readonly Dictionary<INavigation, IAccessExpression> _navigationExpressionsMap =
+            new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update(visitor.Visit(AccessExpression));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update(visitor.Visit(AccessExpression));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -96,8 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Expression Update(Expression accessExpression)
-            => accessExpression != AccessExpression
+        public virtual Expression Update(Expression accessExpression) =>
+            accessExpression != AccessExpression
                 ? new EntityProjectionExpression(EntityType, accessExpression)
                 : this;
 
@@ -109,11 +108,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual Expression BindProperty(IProperty property, bool clientEval)
         {
-            if (!EntityType.IsAssignableFrom(property.DeclaringEntityType)
-                && !property.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(property.DeclaringEntityType)
+                && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    CosmosStrings.UnableToBindMemberToEntityProjection("property", property.Name, EntityType.DisplayName()));
+                    CosmosStrings.UnableToBindMemberToEntityProjection(
+                        "property",
+                        property.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             if (!_propertyExpressionsMap.TryGetValue(property, out var expression))
@@ -122,11 +128,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 _propertyExpressionsMap[property] = expression;
             }
 
-            if (!clientEval
+            if (
+                !clientEval
                 // TODO: Remove once __jObject is translated to the access root in a better fashion and
                 // would not otherwise be found to be non-translatable. See issues #17670 and #14121.
                 && property.Name != StoreKeyConvention.JObjectPropertyName
-                && expression.Name.Length == 0)
+                && expression.Name.Length == 0
+            )
             {
                 // Non-persisted property can't be translated
                 return null;
@@ -143,11 +151,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public virtual Expression BindNavigation(INavigation navigation, bool clientEval)
         {
-            if (!EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
-                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
+                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    CosmosStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, EntityType.DisplayName()));
+                    CosmosStrings.UnableToBindMemberToEntityProjection(
+                        "navigation",
+                        navigation.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             if (!_navigationExpressionsMap.TryGetValue(navigation, out var expression))
@@ -156,13 +171,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     ? new ObjectArrayProjectionExpression(navigation, AccessExpression)
                     : new EntityProjectionExpression(
                         navigation.TargetEntityType,
-                        new ObjectAccessExpression(navigation, AccessExpression));
+                        new ObjectAccessExpression(navigation, AccessExpression)
+                    );
 
                 _navigationExpressionsMap[navigation] = expression;
             }
 
-            if (!clientEval
-                && expression.Name.Length == 0)
+            if (!clientEval && expression.Name.Length == 0)
             {
                 // Non-persisted navigation can't be translated
                 return null;
@@ -181,8 +196,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             string name,
             Type entityType,
             bool clientEval,
-            out IPropertyBase propertyBase)
-            => BindMember(MemberIdentity.Create(name), entityType, clientEval, out propertyBase);
+            out IPropertyBase propertyBase
+        ) => BindMember(MemberIdentity.Create(name), entityType, clientEval, out propertyBase);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -194,30 +209,39 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             MemberInfo memberInfo,
             Type entityType,
             bool clientEval,
-            out IPropertyBase propertyBase)
-            => BindMember(MemberIdentity.Create(memberInfo), entityType, clientEval, out propertyBase);
+            out IPropertyBase propertyBase
+        ) =>
+            BindMember(MemberIdentity.Create(memberInfo), entityType, clientEval, out propertyBase);
 
-        private Expression BindMember(MemberIdentity member, Type entityClrType, bool clientEval, out IPropertyBase propertyBase)
+        private Expression BindMember(
+            MemberIdentity member,
+            Type entityClrType,
+            bool clientEval,
+            out IPropertyBase propertyBase
+        )
         {
             var entityType = EntityType;
-            if (entityClrType != null
-                && !entityClrType.IsAssignableFrom(entityType.ClrType))
+            if (entityClrType != null && !entityClrType.IsAssignableFrom(entityType.ClrType))
             {
-                entityType = entityType.GetDerivedTypes().First(e => entityClrType.IsAssignableFrom(e.ClrType));
+                entityType = entityType
+                    .GetDerivedTypes()
+                    .First(e => entityClrType.IsAssignableFrom(e.ClrType));
             }
 
-            var property = member.MemberInfo == null
-                ? entityType.FindProperty(member.Name)
-                : entityType.FindProperty(member.MemberInfo);
+            var property =
+                member.MemberInfo == null
+                    ? entityType.FindProperty(member.Name)
+                    : entityType.FindProperty(member.MemberInfo);
             if (property != null)
             {
                 propertyBase = property;
                 return BindProperty(property, clientEval);
             }
 
-            var navigation = member.MemberInfo == null
-                ? entityType.FindNavigation(member.Name)
-                : entityType.FindNavigation(member.MemberInfo);
+            var navigation =
+                member.MemberInfo == null
+                    ? entityType.FindNavigation(member.Name)
+                    : entityType.FindNavigation(member.MemberInfo);
             if (navigation != null)
             {
                 propertyBase = navigation;
@@ -241,7 +265,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 throw new InvalidOperationException(
                     CosmosStrings.InvalidDerivedTypeInEntityProjection(
-                        derivedType.DisplayName(), EntityType.DisplayName()));
+                        derivedType.DisplayName(),
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             return new EntityProjectionExpression(derivedType, AccessExpression);
@@ -264,15 +291,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is EntityProjectionExpression entityProjectionExpression
-                    && Equals(entityProjectionExpression));
+        public override bool Equals(object obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is EntityProjectionExpression entityProjectionExpression
+                    && Equals(entityProjectionExpression)
+            );
 
-        private bool Equals(EntityProjectionExpression entityProjectionExpression)
-            => Equals(EntityType, entityProjectionExpression.EntityType)
-                && AccessExpression.Equals(entityProjectionExpression.AccessExpression);
+        private bool Equals(EntityProjectionExpression entityProjectionExpression) =>
+            Equals(EntityType, entityProjectionExpression.EntityType)
+            && AccessExpression.Equals(entityProjectionExpression.AccessExpression);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -280,7 +309,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override int GetHashCode()
-            => HashCode.Combine(EntityType, AccessExpression);
+        public override int GetHashCode() => HashCode.Combine(EntityType, AccessExpression);
     }
 }

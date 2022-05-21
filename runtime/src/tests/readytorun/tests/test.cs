@@ -46,27 +46,33 @@ public class MyClass : IMyInterface
 #if V2
     public static Object StaticObjectField2;
 
-    [ThreadStatic] public static String ThreadStaticStringField2;
+    [ThreadStatic]
+    public static String ThreadStaticStringField2;
 
-    [ThreadStatic] public static int ThreadStaticIntField;
+    [ThreadStatic]
+    public static int ThreadStaticIntField;
 
     public static Nullable<Guid> StaticNullableGuidField;
 
     public static Object StaticObjectField;
 
-    [ThreadStatic] public static int ThreadStaticIntField2;
+    [ThreadStatic]
+    public static int ThreadStaticIntField2;
 
     public static long StaticLongField;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField2;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField2;
 
     public static long StaticLongField2;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField;
 
     public static Nullable<Guid> StaticNullableGuidField2;
 
-    [ThreadStatic] public static String ThreadStaticStringField;
+    [ThreadStatic]
+    public static String ThreadStaticStringField;
 #else
     public static Object StaticObjectField;
 
@@ -74,59 +80,58 @@ public class MyClass : IMyInterface
 
     public static Nullable<Guid> StaticNullableGuidField;
 
-    [ThreadStatic] public static String ThreadStaticStringField;
+    [ThreadStatic]
+    public static String ThreadStaticStringField;
 
-    [ThreadStatic] public static int ThreadStaticIntField;
+    [ThreadStatic]
+    public static int ThreadStaticIntField;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField;
 #endif
 
-   public MyClass()
-   {
-   }
+    public MyClass() { }
 
 #if V2
-   public virtual void NewVirtualMethod()
-   {
-   }
+    public virtual void NewVirtualMethod() { }
 
-   public virtual void NewInterfaceMethod()
-   {
-       throw new Exception();
-   }
+    public virtual void NewInterfaceMethod()
+    {
+        throw new Exception();
+    }
 #endif
 
-   public virtual string VirtualMethod()
-   {
-       return "Virtual method result";
-   }
+    public virtual string VirtualMethod()
+    {
+        return "Virtual method result";
+    }
 
-   public virtual string InterfaceMethod(string s)
-   {
-       return "Interface" + s + "result";
-   }
+    public virtual string InterfaceMethod(string s)
+    {
+        return "Interface" + s + "result";
+    }
 
-   public static string TestInterfaceMethod(IMyInterface i, string s)
-   {
-       return i.InterfaceMethod(s);
-   }
+    public static string TestInterfaceMethod(IMyInterface i, string s)
+    {
+        return i.InterfaceMethod(s);
+    }
 
-   public static void TestStaticFields()
-   {
-       StaticObjectField = (int)StaticObjectField + 12345678;
+    public static void TestStaticFields()
+    {
+        StaticObjectField = (int)StaticObjectField + 12345678;
 
-       StaticLongField *= 456;
+        StaticLongField *= 456;
 
-       Assert.AreEqual(StaticNullableGuidField, new Guid("0D7E505F-E767-4FEF-AEEC-3243A3005673"));
-       StaticNullableGuidField = null;
+        Assert.AreEqual(StaticNullableGuidField, new Guid("0D7E505F-E767-4FEF-AEEC-3243A3005673"));
+        StaticNullableGuidField = null;
 
-       ThreadStaticStringField += "World";
+        ThreadStaticStringField += "World";
 
-       ThreadStaticIntField /= 78;
+        ThreadStaticIntField /= 78;
 
-       ThreadStaticDateTimeField = ThreadStaticDateTimeField + new TimeSpan(123);
+        ThreadStaticDateTimeField = ThreadStaticDateTimeField + new TimeSpan(123);
 
-       MyGeneric<int,int>.ThreadStatic = new Object();
+        MyGeneric<int, int>.ThreadStatic = new Object();
 
 #if false // TODO: Enable once LDFTN is supported
        // Do some operations on static fields on a different thread to verify that we are not mixing thread-static and non-static
@@ -144,15 +149,15 @@ public class MyClass : IMyInterface
 
         }).Wait();
 #endif
-   }
+    }
 
-   [DllImport("nativelibrary")]
-   public extern static int NativeMethod();
+    [DllImport("nativelibrary")]
+    public extern static int NativeMethod();
 
-   static public void TestInterop()
-   {
+    static public void TestInterop()
+    {
         NativeMethod();
-   }
+    }
 
 #if V2
     public string MovedToBaseClass()
@@ -167,19 +172,16 @@ public class MyClass : IMyInterface
         return null;
     }
 #else
-   public string ChangedToVirtual()
-   {
-       return "ChangedToVirtual";
-   }
+    public string ChangedToVirtual()
+    {
+        return "ChangedToVirtual";
+    }
 #endif
-
 }
 
 public class MyChildClass : MyClass
 {
-    public MyChildClass()
-    {
-    }
+    public MyChildClass() { }
 
 #if !V2
     public string MovedToBaseClass()
@@ -196,40 +198,35 @@ public class MyChildClass : MyClass
 #endif
 }
 
-
 public struct MyStruct : IDisposable
 {
-   int x;
+    int x;
 
 #if V2
-   void IDisposable.Dispose()
-   {
-   }
+    void IDisposable.Dispose() { }
 #else
-   public void Dispose()
-   {
-   }
+    public void Dispose() { }
 #endif
 }
 
-public class MyGeneric<T,U>
+public class MyGeneric<T, U>
 {
 #if V2
     public object m_unused1;
     public string m_Field1;
-    
+
     public object m_unused2;
     public T m_Field2;
-    
+
     public object m_unused3;
     public List<T> m_Field3;
-    
+
     static public object m_unused4;
     static public KeyValuePair<T, int> m_Field4;
-    
+
     static public object m_unused5;
     static public int m_Field5;
-    
+
     public object m_unused6;
     static public object m_unused7;
 #else
@@ -240,21 +237,23 @@ public class MyGeneric<T,U>
     static public int m_Field5;
 #endif
 
-    [ThreadStatic] public static Object ThreadStatic;
+    [ThreadStatic]
+    public static Object ThreadStatic;
 
-    public MyGeneric()
-    {
-    }
+    public MyGeneric() { }
 
-    public virtual string GenericVirtualMethod<V,W>()
+    public virtual string GenericVirtualMethod<V, W>()
     {
-        return typeof(T).ToString() + typeof(U).ToString() + typeof(V).ToString() + typeof(W).ToString();
+        return typeof(T).ToString()
+            + typeof(U).ToString()
+            + typeof(V).ToString()
+            + typeof(W).ToString();
     }
 
 #if V2
     public string MovedToBaseClass<W>()
     {
-        typeof(Dictionary<W,W>).ToString();
+        typeof(Dictionary<W, W>).ToString();
         return typeof(List<W>).ToString();
     }
 #endif
@@ -277,11 +276,9 @@ public class MyGeneric<T,U>
     }
 }
 
-public class MyChildGeneric<T> : MyGeneric<T,T>
+public class MyChildGeneric<T> : MyGeneric<T, T>
 {
-    public MyChildGeneric()
-    {
-    }
+    public MyChildGeneric() { }
 
 #if !V2
     public string MovedToBaseClass<W>()
@@ -361,6 +358,7 @@ public struct MyChangingHFAStruct
     int x;
     int y;
 #endif
+
     static public MyChangingHFAStruct Construct()
     {
         return new MyChangingHFAStruct() { x = 12, y = 23 };
@@ -395,6 +393,7 @@ public class ByteBaseClass : List<byte>
 {
     public byte BaseByte;
 }
+
 public class ByteChildClass : ByteBaseClass
 {
     public byte ChildByte;

@@ -9,7 +9,13 @@ namespace System.Text.Json.Serialization.Tests
 
         protected JsonSerializerWrapperForStream JsonSerializerWrapperForStream { get; }
 
-        protected SerializerTests(JsonSerializerWrapperForString stringSerializerWrapper, JsonSerializerWrapperForStream? streamSerializerWrapper = null)
-            => (JsonSerializerWrapperForString, JsonSerializerWrapperForStream) = (stringSerializerWrapper, streamSerializerWrapper);
+        protected SerializerTests(
+            JsonSerializerWrapperForString stringSerializerWrapper,
+            JsonSerializerWrapperForStream? streamSerializerWrapper = null
+        ) =>
+            (JsonSerializerWrapperForString, JsonSerializerWrapperForStream) = (
+                stringSerializerWrapper,
+                streamSerializerWrapper
+            );
     }
 }

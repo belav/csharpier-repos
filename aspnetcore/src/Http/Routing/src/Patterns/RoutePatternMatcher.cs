@@ -17,9 +17,7 @@ internal class RoutePatternMatcher
     private readonly bool[] _hasDefaultValue;
     private readonly object[] _defaultValues;
 
-    public RoutePatternMatcher(
-        RoutePattern pattern,
-        RouteValueDictionary defaults)
+    public RoutePatternMatcher(RoutePattern pattern, RouteValueDictionary defaults)
     {
         if (pattern == null)
         {
@@ -86,14 +84,19 @@ internal class RoutePatternMatcher
                 return false;
             }
 
-            var pathSegment = i >= RoutePattern.PathSegments.Count ? null : RoutePattern.PathSegments[i];
+            var pathSegment =
+                i >= RoutePattern.PathSegments.Count ? null : RoutePattern.PathSegments[i];
             if (pathSegment == null && stringSegment.Length > 0)
             {
                 // If pathSegment is null, then we're out of route segments. All we can match is the empty
                 // string.
                 return false;
             }
-            else if (pathSegment.IsSimple && pathSegment.Parts[0] is RoutePatternParameterPart parameter && parameter.IsCatchAll)
+            else if (
+                pathSegment.IsSimple
+                && pathSegment.Parts[0] is RoutePatternParameterPart parameter
+                && parameter.IsCatchAll
+            )
             {
                 // Nothing to validate for a catch-all - it can match any string, including the empty string.
                 //
@@ -175,7 +178,10 @@ internal class RoutePatternMatcher
             Debug.Assert(part.IsParameter);
 
             // It's ok for a catch-all to produce a null value
-            if (part is RoutePatternParameterPart parameter && (parameter.IsCatchAll || _hasDefaultValue[i]))
+            if (
+                part is RoutePatternParameterPart parameter
+                && (parameter.IsCatchAll || _hasDefaultValue[i])
+            )
             {
                 // Don't replace an existing value with a null.
                 var defaultValue = _defaultValues[i];
@@ -190,7 +196,7 @@ internal class RoutePatternMatcher
         foreach (var kvp in Defaults)
         {
 #if RVD_TryAdd
-                values.TryAdd(kvp.Key, kvp.Value);
+            values.TryAdd(kvp.Key, kvp.Value);
 #else
             if (!values.ContainsKey(kvp.Key))
             {
@@ -202,7 +208,11 @@ internal class RoutePatternMatcher
         return true;
     }
 
-    private bool TryMatchLiterals(int index, StringSegment stringSegment, RoutePatternPathSegment pathSegment)
+    private bool TryMatchLiterals(
+        int index,
+        StringSegment stringSegment,
+        RoutePatternPathSegment pathSegment
+    )
     {
         if (pathSegment.IsSimple && !pathSegment.Parts[0].IsParameter)
         {
@@ -230,9 +240,7 @@ internal class RoutePatternMatcher
         {
             // For a parameter, validate that it's a has some length, or we have a default, or it's optional.
             var part = (RoutePatternParameterPart)pathSegment.Parts[0];
-            if (stringSegment.Length == 0 &&
-                !_hasDefaultValue[index] &&
-                !part.IsOptional)
+            if (stringSegment.Length == 0 && !_hasDefaultValue[index] && !part.IsOptional)
             {
                 // There's no value for this parameter, the route can't match.
                 return false;
@@ -247,9 +255,18 @@ internal class RoutePatternMatcher
         return true;
     }
 
-    private bool SavePathSegmentsAsValues(int index, RouteValueDictionary values, StringSegment requestSegment, RoutePatternPathSegment pathSegment)
+    private bool SavePathSegmentsAsValues(
+        int index,
+        RouteValueDictionary values,
+        StringSegment requestSegment,
+        RoutePatternPathSegment pathSegment
+    )
     {
-        if (pathSegment.IsSimple && pathSegment.Parts[0] is RoutePatternParameterPart parameter && parameter.IsCatchAll)
+        if (
+            pathSegment.IsSimple
+            && pathSegment.Parts[0] is RoutePatternParameterPart parameter
+            && parameter.IsCatchAll
+        )
         {
             // A catch-all captures til the end of the string.
             var captured = requestSegment.Buffer.Substring(requestSegment.Offset);
@@ -289,7 +306,8 @@ internal class RoutePatternMatcher
     internal static bool MatchComplexSegment(
         RoutePatternPathSegment routeSegment,
         ReadOnlySpan<char> requestSegment,
-        RouteValueDictionary values)
+        RouteValueDictionary values
+    )
     {
         var indexOfLastSegment = routeSegment.Parts.Count - 1;
 
@@ -302,8 +320,11 @@ internal class RoutePatternMatcher
         // rightmost giving p3 the value of two, then we end up not matching the segment.
         // In this case we start again from p2 to match the request and we succeed giving
         // the value two to p2
-        if (routeSegment.Parts[indexOfLastSegment] is RoutePatternParameterPart parameter && parameter.IsOptional &&
-            routeSegment.Parts[indexOfLastSegment - 1].IsSeparator)
+        if (
+            routeSegment.Parts[indexOfLastSegment] is RoutePatternParameterPart parameter
+            && parameter.IsOptional
+            && routeSegment.Parts[indexOfLastSegment - 1].IsSeparator
+        )
         {
             if (MatchComplexSegmentCore(routeSegment, requestSegment, values, indexOfLastSegment))
             {
@@ -311,22 +332,27 @@ internal class RoutePatternMatcher
             }
             else
             {
-                var separator = (RoutePatternSeparatorPart)routeSegment.Parts[indexOfLastSegment - 1];
-                if (requestSegment.EndsWith(
-                separator.Content,
-                StringComparison.OrdinalIgnoreCase))
+                var separator = (RoutePatternSeparatorPart)
+                    routeSegment.Parts[indexOfLastSegment - 1];
+                if (requestSegment.EndsWith(separator.Content, StringComparison.OrdinalIgnoreCase))
                     return false;
 
                 return MatchComplexSegmentCore(
                     routeSegment,
                     requestSegment,
                     values,
-                    indexOfLastSegment - 2);
+                    indexOfLastSegment - 2
+                );
             }
         }
         else
         {
-            return MatchComplexSegmentCore(routeSegment, requestSegment, values, indexOfLastSegment);
+            return MatchComplexSegmentCore(
+                routeSegment,
+                requestSegment,
+                values,
+                indexOfLastSegment
+            );
         }
     }
 
@@ -334,7 +360,8 @@ internal class RoutePatternMatcher
         RoutePatternPathSegment routeSegment,
         ReadOnlySpan<char> requestSegment,
         RouteValueDictionary values,
-        int indexOfLastSegmentUsed)
+        int indexOfLastSegmentUsed
+    )
     {
         Debug.Assert(routeSegment != null);
         Debug.Assert(routeSegment.Parts.Count > 1);
@@ -378,16 +405,16 @@ internal class RoutePatternMatcher
                 if (part.IsLiteral)
                 {
                     var literal = (RoutePatternLiteralPart)part;
-                    indexOfLiteral = requestSegment.Slice(0, startIndex).LastIndexOf(
-                    literal.Content,
-                    StringComparison.OrdinalIgnoreCase);
+                    indexOfLiteral = requestSegment
+                        .Slice(0, startIndex)
+                        .LastIndexOf(literal.Content, StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
                     var literal = (RoutePatternSeparatorPart)part;
-                    indexOfLiteral = requestSegment.Slice(0, startIndex).LastIndexOf(
-                    literal.Content,
-                    StringComparison.OrdinalIgnoreCase);
+                    indexOfLiteral = requestSegment
+                        .Slice(0, startIndex)
+                        .LastIndexOf(literal.Content, StringComparison.OrdinalIgnoreCase);
                 }
 
                 if (indexOfLiteral == -1)
@@ -401,11 +428,17 @@ internal class RoutePatternMatcher
                 // This check is related to the check we do at the very end of this function.
                 if (indexOfLastSegmentUsed == (routeSegment.Parts.Count - 1))
                 {
-                    if (part is RoutePatternLiteralPart literal && ((indexOfLiteral + literal.Content.Length) != requestSegment.Length))
+                    if (
+                        part is RoutePatternLiteralPart literal
+                        && ((indexOfLiteral + literal.Content.Length) != requestSegment.Length)
+                    )
                     {
                         return false;
                     }
-                    else if (part is RoutePatternSeparatorPart separator && ((indexOfLiteral + separator.Content.Length) != requestSegment.Length))
+                    else if (
+                        part is RoutePatternSeparatorPart separator
+                        && ((indexOfLiteral + separator.Content.Length) != requestSegment.Length)
+                    )
                     {
                         return false;
                     }
@@ -414,8 +447,10 @@ internal class RoutePatternMatcher
                 newLastIndex = indexOfLiteral;
             }
 
-            if ((parameterNeedsValue != null) &&
-                (((lastLiteral != null) && !part.IsParameter) || (indexOfLastSegmentUsed == 0)))
+            if (
+                (parameterNeedsValue != null)
+                && (((lastLiteral != null) && !part.IsParameter) || (indexOfLastSegmentUsed == 0))
+            )
             {
                 // If we have a pending parameter that needs a value, grab that value
 
@@ -431,7 +466,10 @@ internal class RoutePatternMatcher
                     else
                     {
                         parameterStartIndex = newLastIndex;
-                        Debug.Assert(false, "indexOfLastSegementUsed should always be 0 from the check above");
+                        Debug.Assert(
+                            false,
+                            "indexOfLastSegementUsed should always be 0 from the check above"
+                        );
                     }
                     parameterTextLength = lastIndex;
                 }
@@ -459,7 +497,10 @@ internal class RoutePatternMatcher
                     }
                 }
 
-                var parameterValueSpan = requestSegment.Slice(parameterStartIndex, parameterTextLength);
+                var parameterValueSpan = requestSegment.Slice(
+                    parameterStartIndex,
+                    parameterTextLength
+                );
 
                 if (parameterValueSpan.Length == 0)
                 {
@@ -467,7 +508,6 @@ internal class RoutePatternMatcher
                     // For these segments all parameters must have non-empty values. If the parameter
                     // has an empty value it's not a match.
                     return false;
-
                 }
                 else
                 {

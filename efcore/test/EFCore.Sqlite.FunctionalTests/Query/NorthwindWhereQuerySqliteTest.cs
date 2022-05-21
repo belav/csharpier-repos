@@ -8,20 +8,23 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindWhereQuerySqliteTest : NorthwindWhereQueryRelationalTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+    public class NorthwindWhereQuerySqliteTest
+        : NorthwindWhereQueryRelationalTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
     {
-        public NorthwindWhereQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public NorthwindWhereQuerySqliteTest(
+            NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        public override Task Where_datetimeoffset_now_component(bool async)
-            => AssertTranslationFailed(() => base.Where_datetimeoffset_now_component(async));
+        public override Task Where_datetimeoffset_now_component(bool async) =>
+            AssertTranslationFailed(() => base.Where_datetimeoffset_now_component(async));
 
-        public override Task Where_datetimeoffset_utcnow_component(bool async)
-            => AssertTranslationFailed(() => base.Where_datetimeoffset_utcnow_component(async));
+        public override Task Where_datetimeoffset_utcnow_component(bool async) =>
+            AssertTranslationFailed(() => base.Where_datetimeoffset_utcnow_component(async));
 
         public override async Task<string> Where_simple_closure(bool async)
         {
@@ -32,14 +35,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
 SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE ""c"".""City"" = @__city_0");
+WHERE ""c"".""City"" = @__city_0"
+            );
 
             Assert.Equal(
                 @".param set @__city_0 'London'
 
 SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE ""c"".""City"" = @__city_0", queryString, ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
+WHERE ""c"".""City"" = @__city_0",
+                queryString,
+                ignoreLineEndingDifferences: true,
+                ignoreWhiteSpaceDifferences: true
+            );
 
             return null;
         }
@@ -53,7 +61,8 @@ WHERE ""c"".""City"" = @__city_0", queryString, ignoreLineEndingDifferences: tru
 
 SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime'), '0'), '.') <> @__myDatetime_0");
+WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime'), '0'), '.') <> @__myDatetime_0"
+            );
         }
 
         public override async Task Where_datetime_utcnow(bool async)
@@ -65,11 +74,11 @@ WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime'), '0'), '.') 
 
 SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now'), '0'), '.') <> @__myDatetime_0");
+WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now'), '0'), '.') <> @__myDatetime_0"
+            );
         }
 
-        public override Task Where_datetimeoffset_utcnow(bool async)
-            => Task.CompletedTask;
+        public override Task Where_datetimeoffset_utcnow(bool async) => Task.CompletedTask;
 
         public override async Task Where_datetime_today(bool async)
         {
@@ -78,7 +87,8 @@ WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now'), '0'), '.') <> @__myDatet
             AssertSql(
                 @"SELECT ""e"".""EmployeeID"", ""e"".""City"", ""e"".""Country"", ""e"".""FirstName"", ""e"".""ReportsTo"", ""e"".""Title""
 FROM ""Employees"" AS ""e""
-WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime', 'start of day'), '0'), '.') = rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime', 'start of day'), '0'), '.')");
+WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime', 'start of day'), '0'), '.') = rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime', 'start of day'), '0'), '.')"
+            );
         }
 
         public override async Task Where_datetime_date_component(bool async)
@@ -90,7 +100,8 @@ WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now', 'localtime', 'start of da
 
 SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', ""o"".""OrderDate"", 'start of day'), '0'), '.') = @__myDatetime_0");
+WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', ""o"".""OrderDate"", 'start of day'), '0'), '.') = @__myDatetime_0"
+            );
         }
 
         public override async Task Where_datetime_year_component(bool async)
@@ -100,7 +111,8 @@ WHERE rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', ""o"".""OrderDate"", 'start of d
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%Y', ""o"".""OrderDate"") AS INTEGER) = 1998");
+WHERE CAST(strftime('%Y', ""o"".""OrderDate"") AS INTEGER) = 1998"
+            );
         }
 
         public override async Task Where_datetime_month_component(bool async)
@@ -110,7 +122,8 @@ WHERE CAST(strftime('%Y', ""o"".""OrderDate"") AS INTEGER) = 1998");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%m', ""o"".""OrderDate"") AS INTEGER) = 4");
+WHERE CAST(strftime('%m', ""o"".""OrderDate"") AS INTEGER) = 4"
+            );
         }
 
         public override async Task Where_datetime_dayOfYear_component(bool async)
@@ -120,7 +133,8 @@ WHERE CAST(strftime('%m', ""o"".""OrderDate"") AS INTEGER) = 4");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%j', ""o"".""OrderDate"") AS INTEGER) = 68");
+WHERE CAST(strftime('%j', ""o"".""OrderDate"") AS INTEGER) = 68"
+            );
         }
 
         public override async Task Where_datetime_day_component(bool async)
@@ -130,7 +144,8 @@ WHERE CAST(strftime('%j', ""o"".""OrderDate"") AS INTEGER) = 68");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%d', ""o"".""OrderDate"") AS INTEGER) = 4");
+WHERE CAST(strftime('%d', ""o"".""OrderDate"") AS INTEGER) = 4"
+            );
         }
 
         public override async Task Where_datetime_hour_component(bool async)
@@ -140,7 +155,8 @@ WHERE CAST(strftime('%d', ""o"".""OrderDate"") AS INTEGER) = 4");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%H', ""o"".""OrderDate"") AS INTEGER) = 14");
+WHERE CAST(strftime('%H', ""o"".""OrderDate"") AS INTEGER) = 14"
+            );
         }
 
         public override async Task Where_datetime_minute_component(bool async)
@@ -150,7 +166,8 @@ WHERE CAST(strftime('%H', ""o"".""OrderDate"") AS INTEGER) = 14");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%M', ""o"".""OrderDate"") AS INTEGER) = 23");
+WHERE CAST(strftime('%M', ""o"".""OrderDate"") AS INTEGER) = 23"
+            );
         }
 
         public override async Task Where_datetime_second_component(bool async)
@@ -160,7 +177,8 @@ WHERE CAST(strftime('%M', ""o"".""OrderDate"") AS INTEGER) = 23");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(strftime('%S', ""o"".""OrderDate"") AS INTEGER) = 44");
+WHERE CAST(strftime('%S', ""o"".""OrderDate"") AS INTEGER) = 44"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#15586")]
@@ -171,7 +189,8 @@ WHERE CAST(strftime('%S', ""o"".""OrderDate"") AS INTEGER) = 44");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE ((CAST(strftime('%f', ""o"".""OrderDate"") AS REAL) * 1000) % 1000) = 88");
+WHERE ((CAST(strftime('%f', ""o"".""OrderDate"") AS REAL) * 1000) % 1000) = 88"
+            );
         }
 
         public override async Task Where_string_length(bool async)
@@ -181,7 +200,8 @@ WHERE ((CAST(strftime('%f', ""o"".""OrderDate"") AS REAL) * 1000) % 1000) = 88")
             AssertSql(
                 @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE length(""c"".""City"") = 6");
+WHERE length(""c"".""City"") = 6"
+            );
         }
 
         public override async Task Where_string_indexof(bool async)
@@ -191,7 +211,8 @@ WHERE length(""c"".""City"") = 6");
             AssertSql(
                 @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE ((instr(""c"".""City"", 'Sea') - 1) <> -1) OR ""c"".""City"" IS NULL");
+WHERE ((instr(""c"".""City"", 'Sea') - 1) <> -1) OR ""c"".""City"" IS NULL"
+            );
         }
 
         public override async Task Where_string_replace(bool async)
@@ -201,7 +222,8 @@ WHERE ((instr(""c"".""City"", 'Sea') - 1) <> -1) OR ""c"".""City"" IS NULL");
             AssertSql(
                 @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE replace(""c"".""City"", 'Sea', 'Rea') = 'Reattle'");
+WHERE replace(""c"".""City"", 'Sea', 'Rea') = 'Reattle'"
+            );
         }
 
         public override async Task Where_string_substring(bool async)
@@ -211,7 +233,8 @@ WHERE replace(""c"".""City"", 'Sea', 'Rea') = 'Reattle'");
             AssertSql(
                 @"SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
 FROM ""Customers"" AS ""c""
-WHERE substr(""c"".""City"", 1 + 1, 2) = 'ea'");
+WHERE substr(""c"".""City"", 1 + 1, 2) = 'ea'"
+            );
         }
 
         public override async Task Decimal_cast_to_double_works(bool async)
@@ -221,7 +244,8 @@ WHERE substr(""c"".""City"", 1 + 1, 2) = 'ea'");
             AssertSql(
                 @"SELECT ""p"".""ProductID"", ""p"".""Discontinued"", ""p"".""ProductName"", ""p"".""SupplierID"", ""p"".""UnitPrice"", ""p"".""UnitsInStock""
 FROM ""Products"" AS ""p""
-WHERE CAST(""p"".""UnitPrice"" AS REAL) > 100.0");
+WHERE CAST(""p"".""UnitPrice"" AS REAL) > 100.0"
+            );
         }
 
         public override async Task Like_with_non_string_column_using_ToString(bool async)
@@ -231,10 +255,11 @@ WHERE CAST(""p"".""UnitPrice"" AS REAL) > 100.0");
             AssertSql(
                 @"SELECT ""o"".""OrderID"", ""o"".""CustomerID"", ""o"".""EmployeeID"", ""o"".""OrderDate""
 FROM ""Orders"" AS ""o""
-WHERE CAST(""o"".""OrderID"" AS TEXT) LIKE '%20%'");
+WHERE CAST(""o"".""OrderID"" AS TEXT) LIKE '%20%'"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

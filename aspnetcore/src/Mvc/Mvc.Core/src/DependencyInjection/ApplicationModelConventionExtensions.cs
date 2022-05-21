@@ -18,8 +18,9 @@ public static class ApplicationModelConventionExtensions
     /// </summary>
     /// <param name="list">The list of <see cref="IApplicationModelConvention"/>s.</param>
     /// <typeparam name="TApplicationModelConvention">The type to remove.</typeparam>
-    public static void RemoveType<TApplicationModelConvention>(this IList<IApplicationModelConvention> list)
-        where TApplicationModelConvention : IApplicationModelConvention
+    public static void RemoveType<TApplicationModelConvention>(
+        this IList<IApplicationModelConvention> list
+    ) where TApplicationModelConvention : IApplicationModelConvention
     {
         if (list == null)
         {
@@ -65,7 +66,8 @@ public static class ApplicationModelConventionExtensions
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
-        IControllerModelConvention controllerModelConvention)
+        IControllerModelConvention controllerModelConvention
+    )
     {
         if (conventions == null)
         {
@@ -89,7 +91,8 @@ public static class ApplicationModelConventionExtensions
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
-        IActionModelConvention actionModelConvention)
+        IActionModelConvention actionModelConvention
+    )
     {
         if (conventions == null)
         {
@@ -113,7 +116,8 @@ public static class ApplicationModelConventionExtensions
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
-        IParameterModelConvention parameterModelConvention)
+        IParameterModelConvention parameterModelConvention
+    )
     {
         if (conventions == null)
         {
@@ -137,7 +141,8 @@ public static class ApplicationModelConventionExtensions
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
-        IParameterModelBaseConvention parameterModelConvention)
+        IParameterModelBaseConvention parameterModelConvention
+    )
     {
         if (conventions == null)
         {
@@ -156,7 +161,9 @@ public static class ApplicationModelConventionExtensions
     {
         private readonly IParameterModelConvention _parameterModelConvention;
 
-        public ParameterApplicationModelConvention(IParameterModelConvention parameterModelConvention)
+        public ParameterApplicationModelConvention(
+            IParameterModelConvention parameterModelConvention
+        )
         {
             _parameterModelConvention = parameterModelConvention;
         }
@@ -187,12 +194,15 @@ public static class ApplicationModelConventionExtensions
         }
     }
 
-    private class ParameterBaseApplicationModelConvention :
-        IApplicationModelConvention, IParameterModelBaseConvention
+    private class ParameterBaseApplicationModelConvention
+        : IApplicationModelConvention,
+            IParameterModelBaseConvention
     {
         private readonly IParameterModelBaseConvention _parameterBaseModelConvention;
 
-        public ParameterBaseApplicationModelConvention(IParameterModelBaseConvention parameterModelBaseConvention)
+        public ParameterBaseApplicationModelConvention(
+            IParameterModelBaseConvention parameterModelBaseConvention
+        )
         {
             _parameterBaseModelConvention = parameterModelBaseConvention;
         }

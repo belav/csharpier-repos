@@ -64,7 +64,9 @@ public class RouteView : IComponent
 
         if (RouteData == null)
         {
-            throw new InvalidOperationException($"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}.");
+            throw new InvalidOperationException(
+                $"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}."
+            );
         }
 
         _renderHandle.Render(_renderDelegate);
@@ -77,8 +79,8 @@ public class RouteView : IComponent
     /// <param name="builder">The <see cref="RenderTreeBuilder"/>.</param>
     protected virtual void Render(RenderTreeBuilder builder)
     {
-        var pageLayoutType = RouteData.PageType.GetCustomAttribute<LayoutAttribute>()?.LayoutType
-            ?? DefaultLayout;
+        var pageLayoutType =
+            RouteData.PageType.GetCustomAttribute<LayoutAttribute>()?.LayoutType ?? DefaultLayout;
 
         builder.OpenComponent<LayoutView>(0);
         builder.AddAttribute(1, nameof(LayoutView.Layout), pageLayoutType);

@@ -32,12 +32,27 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         // syntax locals and semantic locals are self explanatory.
         // non locals means diagnostics that belong to a tree that are produced by analyzing other files.
         // others means diagnostics that doesnt have locations.
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? _syntaxLocals;
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? _semanticLocals;
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? _nonLocals;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<DiagnosticData>
+        >? _syntaxLocals;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<DiagnosticData>
+        >? _semanticLocals;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<DiagnosticData>
+        >? _nonLocals;
         private readonly ImmutableArray<DiagnosticData> _others;
 
-        private DiagnosticAnalysisResult(ProjectId projectId, VersionStamp version, ImmutableHashSet<DocumentId>? documentIds, bool isEmpty, bool fromBuild)
+        private DiagnosticAnalysisResult(
+            ProjectId projectId,
+            VersionStamp version,
+            ImmutableHashSet<DocumentId>? documentIds,
+            bool isEmpty,
+            bool fromBuild
+        )
         {
             ProjectId = projectId;
             Version = version;
@@ -59,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> nonLocals,
             ImmutableArray<DiagnosticData> others,
             ImmutableHashSet<DocumentId>? documentIds,
-            bool fromBuild)
+            bool fromBuild
+        )
         {
             Debug.Assert(!others.IsDefault);
             Debug.Assert(!syntaxLocals.Values.Any(item => item.IsDefault));
@@ -79,17 +95,24 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             IsEmpty = DocumentIds.IsEmpty && _others.IsEmpty;
         }
 
-        public static DiagnosticAnalysisResult CreateEmpty(ProjectId projectId, VersionStamp version)
+        public static DiagnosticAnalysisResult CreateEmpty(
+            ProjectId projectId,
+            VersionStamp version
+        )
         {
             return new DiagnosticAnalysisResult(
                 projectId,
                 version,
                 documentIds: ImmutableHashSet<DocumentId>.Empty,
                 syntaxLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
-                semanticLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
+                semanticLocals: ImmutableDictionary<
+                    DocumentId,
+                    ImmutableArray<DiagnosticData>
+                >.Empty,
                 nonLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
                 others: ImmutableArray<DiagnosticData>.Empty,
-                fromBuild: false);
+                fromBuild: false
+            );
         }
 
         public static DiagnosticAnalysisResult CreateInitialResult(ProjectId projectId)
@@ -99,10 +122,15 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 version: VersionStamp.Default,
                 documentIds: null,
                 isEmpty: true,
-                fromBuild: false);
+                fromBuild: false
+            );
         }
 
-        public static DiagnosticAnalysisResult CreateFromBuild(Project project, ImmutableArray<DiagnosticData> diagnostics, IEnumerable<DocumentId> initialDocuments)
+        public static DiagnosticAnalysisResult CreateFromBuild(
+            Project project,
+            ImmutableArray<DiagnosticData> diagnostics,
+            IEnumerable<DocumentId> initialDocuments
+        )
         {
             // we can't distinguish locals and non locals from build diagnostics nor determine right snapshot version for the build.
             // so we put everything in as semantic local with default version. this lets us to replace those to live diagnostics when needed easily.
@@ -111,7 +139,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             var documentIds = ImmutableHashSet.CreateBuilder<DocumentId>();
             documentIds.AddRange(initialDocuments);
 
-            var diagnosticsWithDocumentId = PooledDictionary<DocumentId, ArrayBuilder<DiagnosticData>>.GetInstance();
+            var diagnosticsWithDocumentId = PooledDictionary<
+                DocumentId,
+                ArrayBuilder<DiagnosticData>
+            >.GetInstance();
             var diagnosticsWithoutDocumentId = ArrayBuilder<DiagnosticData>.GetInstance();
 
             foreach (var data in diagnostics)
@@ -136,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 semanticLocals: diagnosticsWithDocumentId.ToImmutableMultiDictionaryAndFree(),
                 nonLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
                 others: diagnosticsWithoutDocumentId.ToImmutableAndFree(),
-                fromBuild: true);
+                fromBuild: true
+            );
 
             return result;
         }
@@ -148,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> semanticLocalMap,
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> nonLocalMap,
             ImmutableArray<DiagnosticData> others,
-            ImmutableHashSet<DocumentId>? documentIds)
+            ImmutableHashSet<DocumentId>? documentIds
+        )
         {
             VerifyDocumentMap(project, syntaxLocalMap);
             VerifyDocumentMap(project, semanticLocalMap);
@@ -162,10 +195,13 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 nonLocalMap,
                 others,
                 documentIds,
-                fromBuild: false);
+                fromBuild: false
+            );
         }
 
-        public static DiagnosticAnalysisResult CreateFromBuilder(DiagnosticAnalysisResultBuilder builder)
+        public static DiagnosticAnalysisResult CreateFromBuilder(
+            DiagnosticAnalysisResultBuilder builder
+        )
         {
             return Create(
                 builder.Project,
@@ -174,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 builder.SemanticLocals,
                 builder.NonLocals,
                 builder.Others,
-                builder.DocumentIds);
+                builder.DocumentIds
+            );
         }
 
         // aggregated form means it has aggregated information but no actual data.
@@ -184,10 +221,13 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         public bool IsDefault => DocumentIds == null;
 
         // make sure we don't return null
-        public ImmutableHashSet<DocumentId> DocumentIdsOrEmpty => DocumentIds ?? ImmutableHashSet<DocumentId>.Empty;
+        public ImmutableHashSet<DocumentId> DocumentIdsOrEmpty =>
+            DocumentIds ?? ImmutableHashSet<DocumentId>.Empty;
 
-        private ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? GetMap(AnalysisKind kind)
-            => kind switch
+        private ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? GetMap(
+            AnalysisKind kind
+        ) =>
+            kind switch
             {
                 AnalysisKind.Syntax => _syntaxLocals,
                 AnalysisKind.Semantic => _semanticLocals,
@@ -233,7 +273,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             return builder.ToImmutableAndFree();
         }
 
-        public ImmutableArray<DiagnosticData> GetDocumentDiagnostics(DocumentId documentId, AnalysisKind kind)
+        public ImmutableArray<DiagnosticData> GetDocumentDiagnostics(
+            DocumentId documentId,
+            AnalysisKind kind
+        )
         {
             if (IsAggregatedForm || IsEmpty)
             {
@@ -252,17 +295,27 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             return ImmutableArray<DiagnosticData>.Empty;
         }
 
-        public ImmutableArray<DiagnosticData> GetOtherDiagnostics()
-            => (IsAggregatedForm || IsEmpty) ? ImmutableArray<DiagnosticData>.Empty : _others;
+        public ImmutableArray<DiagnosticData> GetOtherDiagnostics() =>
+            (IsAggregatedForm || IsEmpty) ? ImmutableArray<DiagnosticData>.Empty : _others;
 
-        public DiagnosticAnalysisResult ToAggregatedForm()
-            => new(ProjectId, Version, DocumentIds, IsEmpty, FromBuild);
+        public DiagnosticAnalysisResult ToAggregatedForm() =>
+            new(ProjectId, Version, DocumentIds, IsEmpty, FromBuild);
 
-        public DiagnosticAnalysisResult UpdateAggregatedResult(VersionStamp version, DocumentId documentId, bool fromBuild)
-            => new(ProjectId, version, DocumentIdsOrEmpty.Add(documentId), isEmpty: false, fromBuild: fromBuild);
+        public DiagnosticAnalysisResult UpdateAggregatedResult(
+            VersionStamp version,
+            DocumentId documentId,
+            bool fromBuild
+        ) =>
+            new(
+                ProjectId,
+                version,
+                DocumentIdsOrEmpty.Add(documentId),
+                isEmpty: false,
+                fromBuild: fromBuild
+            );
 
-        public DiagnosticAnalysisResult Reset()
-            => new(ProjectId, VersionStamp.Default, DocumentIds, IsEmpty, FromBuild);
+        public DiagnosticAnalysisResult Reset() =>
+            new(ProjectId, VersionStamp.Default, DocumentIds, IsEmpty, FromBuild);
 
         public DiagnosticAnalysisResult DropExceptSyntax()
         {
@@ -274,20 +327,25 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
 
             // keep only syntax errors
             return new DiagnosticAnalysisResult(
-               ProjectId,
-               Version,
-               _syntaxLocals,
-               semanticLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
-               nonLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
-               others: ImmutableArray<DiagnosticData>.Empty,
-               documentIds: null,
-               fromBuild: false);
+                ProjectId,
+                Version,
+                _syntaxLocals,
+                semanticLocals: ImmutableDictionary<
+                    DocumentId,
+                    ImmutableArray<DiagnosticData>
+                >.Empty,
+                nonLocals: ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty,
+                others: ImmutableArray<DiagnosticData>.Empty,
+                documentIds: null,
+                fromBuild: false
+            );
         }
 
         private static ImmutableHashSet<DocumentId> GetDocumentIds(
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? syntaxLocals,
             ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? semanticLocals,
-            ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? nonLocals)
+            ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>? nonLocals
+        )
         {
             // quick bail out
             var allEmpty = syntaxLocals ?? semanticLocals ?? nonLocals;
@@ -316,7 +374,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         }
 
         [Conditional("DEBUG")]
-        private static void VerifyDocumentMap(Project project, ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> map)
+        private static void VerifyDocumentMap(
+            Project project,
+            ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>> map
+        )
         {
             foreach (var documentId in map.Keys)
             {

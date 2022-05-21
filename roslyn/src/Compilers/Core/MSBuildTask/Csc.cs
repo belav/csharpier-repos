@@ -176,7 +176,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         // Same separators as those used by Process.OutputDataReceived to maintain consistency between csc and VBCSCompiler
         private static readonly string[] s_separators = { "\r\n", "\r", "\n" };
 
-        private protected override void LogCompilerOutput(string output, MessageImportance messageImportance)
+        private protected override void LogCompilerOutput(
+            string output,
+            MessageImportance messageImportance
+        )
         {
             var lines = output.Split(s_separators, StringSplitOptions.RemoveEmptyEntries);
             foreach (string line in lines)
@@ -194,20 +197,23 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// </summary>
         protected override string ToolNameWithoutExtension
         {
-            get
-            {
-                return "csc";
-            }
+            get { return "csc"; }
         }
 
         /// <summary>
         /// Fills the provided CommandLineBuilderExtension with those switches and other information that can go into a response file.
         /// </summary>
-        protected internal override void AddResponseFileCommands(CommandLineBuilderExtension commandLine)
+        protected internal override void AddResponseFileCommands(
+            CommandLineBuilderExtension commandLine
+        )
         {
             commandLine.AppendSwitchIfNotNull("/lib:", AdditionalLibPaths, ",");
             commandLine.AppendPlusOrMinusSwitch("/unsafe", _store, nameof(AllowUnsafeBlocks));
-            commandLine.AppendPlusOrMinusSwitch("/checked", _store, nameof(CheckForOverflowUnderflow));
+            commandLine.AppendPlusOrMinusSwitch(
+                "/checked",
+                _store,
+                nameof(CheckForOverflowUnderflow)
+            );
             commandLine.AppendSwitchWithSplitting("/nowarn:", DisabledWarnings, ",", ';', ',');
             commandLine.AppendSwitchIfNotNull("/generatedfilesout:", GeneratedFilesOutputPath);
             commandLine.AppendWhenTrue("/fullpaths", _store, nameof(GenerateFullPaths));
@@ -219,7 +225,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchWithInteger("/warn:", _store, nameof(WarningLevel));
             commandLine.AppendSwitchIfNotNull("/doc:", DocumentationFile);
             commandLine.AppendSwitchIfNotNull("/baseaddress:", BaseAddress);
-            commandLine.AppendSwitchUnquotedIfNotNull("/define:", GetDefineConstantsSwitch(DefineConstants, Log));
+            commandLine.AppendSwitchUnquotedIfNotNull(
+                "/define:",
+                GetDefineConstantsSwitch(DefineConstants, Log)
+            );
             commandLine.AppendSwitchIfNotNull("/win32res:", Win32Resource);
             commandLine.AppendSwitchIfNotNull("/main:", MainEntryPoint);
             commandLine.AppendSwitchIfNotNull("/appconfig:", ApplicationConfiguration);
@@ -237,7 +246,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
             else if (HostObject != null)
             {
-                throw new InvalidOperationException(string.Format(ErrorString.General_IncorrectHostObject, "Csc", "ICscHostObject"));
+                throw new InvalidOperationException(
+                    string.Format(ErrorString.General_IncorrectHostObject, "Csc", "ICscHostObject")
+                );
             }
             if (!designTime)
             {
@@ -266,10 +277,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             //      /warnaserror-
             // is just shorthand for:
             //      /warnaserror-:<all possible warnings>
-            commandLine.AppendSwitchWithSplitting("/warnaserror+:", WarningsAsErrors, ",", ';', ',');
-            commandLine.AppendSwitchWithSplitting("/warnaserror-:", WarningsNotAsErrors, ",", ';', ',');
+            commandLine.AppendSwitchWithSplitting(
+                "/warnaserror+:",
+                WarningsAsErrors,
+                ",",
+                ';',
+                ','
+            );
+            commandLine.AppendSwitchWithSplitting(
+                "/warnaserror-:",
+                WarningsNotAsErrors,
+                ",",
+                ';',
+                ','
+            );
 
-            // It's a good idea for the response file to be the very last switch passed, just 
+            // It's a good idea for the response file to be the very last switch passed, just
             // from a predictability perspective.  It also solves the problem that a dogfooder
             // ran into, which is described in an email thread attached to bug VSWhidbey 146883.
             // See also bugs 177762 and 118307 for additional bugs related to response file position.
@@ -301,7 +324,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         internal static void AddReferencesToCommandLine(
             CommandLineBuilderExtension commandLine,
             ITaskItem[]? references,
-            bool isInteractive = false)
+            bool isInteractive = false
+        )
         {
             // If there were no references passed in, don't add any /reference: switches
             // on the command-line.
@@ -318,12 +342,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // See if there was an "Alias" attribute on the reference.
                 string aliasString = reference.GetMetadata("Aliases");
 
-
                 string switchName = "/reference:";
                 if (!isInteractive)
                 {
-                    bool embed = Utilities.TryConvertItemMetadataToBool(reference,
-                                                                        "EmbedInteropTypes");
+                    bool embed = Utilities.TryConvertItemMetadataToBool(
+                        reference,
+                        "EmbedInteropTypes"
+                    );
 
                     if (embed)
                     {
@@ -366,12 +391,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             throw Utilities.GetLocalizedArgumentException(
                                 ErrorString.Csc_AssemblyAliasContainsIllegalCharacters,
                                 reference.ItemSpec,
-                                trimmedAlias);
+                                trimmedAlias
+                            );
                         }
 
                         // The alias called "global" is special.  It means that we don't
                         // give it an alias on the command-line.
-                        if (string.Compare("global", trimmedAlias, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare(
+                                "global",
+                                trimmedAlias,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             commandLine.AppendSwitchIfNotNull(switchName, reference.ItemSpec);
                         }
@@ -380,7 +412,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             // We have a valid (and explicit) alias for this reference.  Add
                             // it to the command-line using the syntax:
                             //      /reference:Goo=System.Xml.dll
-                            commandLine.AppendSwitchAliased(switchName, trimmedAlias, reference.ItemSpec);
+                            commandLine.AppendSwitchAliased(
+                                switchName,
+                                trimmedAlias,
+                                reference.ItemSpec
+                            );
                         }
                     }
                 }
@@ -392,16 +428,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// "DefineConstants" property.  It worked fine in the IDE, because it
         /// effectively munged up the string so that it ended up being valid for
         /// the compiler.  We do the equivalent munging here now.
-        /// 
+        ///
         /// Basically, we take the incoming string, and split it on comma/semicolon/space.
         /// Then we look at the resulting list of strings, and remove any that are
         /// illegal identifiers, and pass the remaining ones through to the compiler.
-        /// 
+        ///
         /// Note that CSharp doesn't support assigning a value to the constants ... in
         /// other words, a constant is either defined or not defined ... it can't have
         /// an actual value.
         /// </summary>
-        internal static string? GetDefineConstantsSwitch(string? originalDefineConstants, TaskLoggingHelper log)
+        internal static string? GetDefineConstantsSwitch(
+            string? originalDefineConstants,
+            TaskLoggingHelper log
+        )
         {
             if (originalDefineConstants == null)
             {
@@ -430,7 +469,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 else if (singleIdentifier.Length > 0)
                 {
-                    log.LogWarningWithCodeFromResources("Csc_InvalidParameterWarning", "/define:", singleIdentifier);
+                    log.LogWarningWithCodeFromResources(
+                        "Csc_InvalidParameterWarning",
+                        "/define:",
+                        singleIdentifier
+                    );
                 }
             }
 
@@ -451,7 +494,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         ///
         /// It returns true if everything went according to plan.  It returns false if the
         /// host compiler had a problem with one of the parameters that was passed in.
-        /// 
+        ///
         /// This method also sets the "this.HostCompilerSupportsAllParameters" property
         /// accordingly.
         ///
@@ -477,21 +520,37 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             try
             {
                 // Need to set these separately, because they don't require a CommitChanges to the C# compiler in the IDE.
-                CheckHostObjectSupport(param = nameof(LinkResources), cscHostObject.SetLinkResources(LinkResources));
-                CheckHostObjectSupport(param = nameof(References), cscHostObject.SetReferences(References));
-                CheckHostObjectSupport(param = nameof(Resources), cscHostObject.SetResources(Resources));
+                CheckHostObjectSupport(
+                    param = nameof(LinkResources),
+                    cscHostObject.SetLinkResources(LinkResources)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(References),
+                    cscHostObject.SetReferences(References)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Resources),
+                    cscHostObject.SetResources(Resources)
+                );
                 CheckHostObjectSupport(param = nameof(Sources), cscHostObject.SetSources(Sources));
 
                 // For host objects which support it, pass the list of analyzers.
                 IAnalyzerHostObject? analyzerHostObject = cscHostObject as IAnalyzerHostObject;
                 if (analyzerHostObject != null)
                 {
-                    CheckHostObjectSupport(param = nameof(Analyzers), analyzerHostObject.SetAnalyzers(Analyzers));
+                    CheckHostObjectSupport(
+                        param = nameof(Analyzers),
+                        analyzerHostObject.SetAnalyzers(Analyzers)
+                    );
                 }
             }
             catch (Exception e)
             {
-                Log.LogErrorWithCodeFromResources("General_CouldNotSetHostObjectParameter", param, e.Message);
+                Log.LogErrorWithCodeFromResources(
+                    "General_CouldNotSetHostObjectParameter",
+                    param,
+                    e.Message
+                );
                 return false;
             }
 
@@ -500,80 +559,202 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 param = nameof(cscHostObject.BeginInitialization);
                 cscHostObject.BeginInitialization();
 
-                CheckHostObjectSupport(param = nameof(AdditionalLibPaths), cscHostObject.SetAdditionalLibPaths(AdditionalLibPaths));
-                CheckHostObjectSupport(param = nameof(AddModules), cscHostObject.SetAddModules(AddModules));
-                CheckHostObjectSupport(param = nameof(AllowUnsafeBlocks), cscHostObject.SetAllowUnsafeBlocks(AllowUnsafeBlocks));
-                CheckHostObjectSupport(param = nameof(BaseAddress), cscHostObject.SetBaseAddress(BaseAddress));
-                CheckHostObjectSupport(param = nameof(CheckForOverflowUnderflow), cscHostObject.SetCheckForOverflowUnderflow(CheckForOverflowUnderflow));
-                CheckHostObjectSupport(param = nameof(CodePage), cscHostObject.SetCodePage(CodePage));
+                CheckHostObjectSupport(
+                    param = nameof(AdditionalLibPaths),
+                    cscHostObject.SetAdditionalLibPaths(AdditionalLibPaths)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(AddModules),
+                    cscHostObject.SetAddModules(AddModules)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(AllowUnsafeBlocks),
+                    cscHostObject.SetAllowUnsafeBlocks(AllowUnsafeBlocks)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(BaseAddress),
+                    cscHostObject.SetBaseAddress(BaseAddress)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(CheckForOverflowUnderflow),
+                    cscHostObject.SetCheckForOverflowUnderflow(CheckForOverflowUnderflow)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(CodePage),
+                    cscHostObject.SetCodePage(CodePage)
+                );
 
-                // These two -- EmitDebugInformation and DebugType -- must go together, with DebugType 
+                // These two -- EmitDebugInformation and DebugType -- must go together, with DebugType
                 // getting set last, because it is more specific.
-                CheckHostObjectSupport(param = nameof(EmitDebugInformation), cscHostObject.SetEmitDebugInformation(EmitDebugInformation));
-                CheckHostObjectSupport(param = nameof(DebugType), cscHostObject.SetDebugType(DebugType));
+                CheckHostObjectSupport(
+                    param = nameof(EmitDebugInformation),
+                    cscHostObject.SetEmitDebugInformation(EmitDebugInformation)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DebugType),
+                    cscHostObject.SetDebugType(DebugType)
+                );
 
-                CheckHostObjectSupport(param = nameof(DefineConstants), cscHostObject.SetDefineConstants(GetDefineConstantsSwitch(DefineConstants, Log)));
-                CheckHostObjectSupport(param = nameof(DelaySign), cscHostObject.SetDelaySign((_store["DelaySign"] != null), DelaySign));
-                CheckHostObjectSupport(param = nameof(DisabledWarnings), cscHostObject.SetDisabledWarnings(DisabledWarnings));
-                CheckHostObjectSupport(param = nameof(DocumentationFile), cscHostObject.SetDocumentationFile(DocumentationFile));
-                CheckHostObjectSupport(param = nameof(ErrorReport), cscHostObject.SetErrorReport(ErrorReport));
-                CheckHostObjectSupport(param = nameof(FileAlignment), cscHostObject.SetFileAlignment(FileAlignment));
-                CheckHostObjectSupport(param = nameof(GenerateFullPaths), cscHostObject.SetGenerateFullPaths(GenerateFullPaths));
-                CheckHostObjectSupport(param = nameof(KeyContainer), cscHostObject.SetKeyContainer(KeyContainer));
+                CheckHostObjectSupport(
+                    param = nameof(DefineConstants),
+                    cscHostObject.SetDefineConstants(GetDefineConstantsSwitch(DefineConstants, Log))
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DelaySign),
+                    cscHostObject.SetDelaySign((_store["DelaySign"] != null), DelaySign)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DisabledWarnings),
+                    cscHostObject.SetDisabledWarnings(DisabledWarnings)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(DocumentationFile),
+                    cscHostObject.SetDocumentationFile(DocumentationFile)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(ErrorReport),
+                    cscHostObject.SetErrorReport(ErrorReport)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(FileAlignment),
+                    cscHostObject.SetFileAlignment(FileAlignment)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(GenerateFullPaths),
+                    cscHostObject.SetGenerateFullPaths(GenerateFullPaths)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(KeyContainer),
+                    cscHostObject.SetKeyContainer(KeyContainer)
+                );
                 CheckHostObjectSupport(param = nameof(KeyFile), cscHostObject.SetKeyFile(KeyFile));
-                CheckHostObjectSupport(param = nameof(LangVersion), cscHostObject.SetLangVersion(LangVersion));
-                CheckHostObjectSupport(param = nameof(MainEntryPoint), cscHostObject.SetMainEntryPoint(TargetType, MainEntryPoint));
-                CheckHostObjectSupport(param = nameof(ModuleAssemblyName), cscHostObject.SetModuleAssemblyName(ModuleAssemblyName));
-                CheckHostObjectSupport(param = nameof(NoConfig), cscHostObject.SetNoConfig(NoConfig));
-                CheckHostObjectSupport(param = nameof(NoStandardLib), cscHostObject.SetNoStandardLib(NoStandardLib));
-                CheckHostObjectSupport(param = nameof(Optimize), cscHostObject.SetOptimize(Optimize));
-                CheckHostObjectSupport(param = nameof(OutputAssembly), cscHostObject.SetOutputAssembly(OutputAssembly?.ItemSpec));
+                CheckHostObjectSupport(
+                    param = nameof(LangVersion),
+                    cscHostObject.SetLangVersion(LangVersion)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(MainEntryPoint),
+                    cscHostObject.SetMainEntryPoint(TargetType, MainEntryPoint)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(ModuleAssemblyName),
+                    cscHostObject.SetModuleAssemblyName(ModuleAssemblyName)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(NoConfig),
+                    cscHostObject.SetNoConfig(NoConfig)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(NoStandardLib),
+                    cscHostObject.SetNoStandardLib(NoStandardLib)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Optimize),
+                    cscHostObject.SetOptimize(Optimize)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(OutputAssembly),
+                    cscHostObject.SetOutputAssembly(OutputAssembly?.ItemSpec)
+                );
                 CheckHostObjectSupport(param = nameof(PdbFile), cscHostObject.SetPdbFile(PdbFile));
 
                 // For host objects which support it, set platform with 32BitPreference, HighEntropyVA, and SubsystemVersion
                 ICscHostObject4? cscHostObject4 = cscHostObject as ICscHostObject4;
                 if (cscHostObject4 != null)
                 {
-                    CheckHostObjectSupport(param = nameof(PlatformWith32BitPreference), cscHostObject4.SetPlatformWith32BitPreference(PlatformWith32BitPreference));
-                    CheckHostObjectSupport(param = nameof(HighEntropyVA), cscHostObject4.SetHighEntropyVA(HighEntropyVA));
-                    CheckHostObjectSupport(param = nameof(SubsystemVersion), cscHostObject4.SetSubsystemVersion(SubsystemVersion));
+                    CheckHostObjectSupport(
+                        param = nameof(PlatformWith32BitPreference),
+                        cscHostObject4.SetPlatformWith32BitPreference(PlatformWith32BitPreference)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(HighEntropyVA),
+                        cscHostObject4.SetHighEntropyVA(HighEntropyVA)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(SubsystemVersion),
+                        cscHostObject4.SetSubsystemVersion(SubsystemVersion)
+                    );
                 }
                 else
                 {
-                    CheckHostObjectSupport(param = nameof(Platform), cscHostObject.SetPlatform(Platform));
+                    CheckHostObjectSupport(
+                        param = nameof(Platform),
+                        cscHostObject.SetPlatform(Platform)
+                    );
                 }
 
                 // For host objects which support it, set the analyzer ruleset and additional files.
                 IAnalyzerHostObject? analyzerHostObject = cscHostObject as IAnalyzerHostObject;
                 if (analyzerHostObject != null)
                 {
-                    CheckHostObjectSupport(param = nameof(CodeAnalysisRuleSet), analyzerHostObject.SetRuleSet(CodeAnalysisRuleSet));
-                    CheckHostObjectSupport(param = nameof(AdditionalFiles), analyzerHostObject.SetAdditionalFiles(AdditionalFiles));
+                    CheckHostObjectSupport(
+                        param = nameof(CodeAnalysisRuleSet),
+                        analyzerHostObject.SetRuleSet(CodeAnalysisRuleSet)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(AdditionalFiles),
+                        analyzerHostObject.SetAdditionalFiles(AdditionalFiles)
+                    );
                 }
 
                 // For host objects which support it, set the analyzer config files and potential config files.
                 if (cscHostObject is IAnalyzerConfigFilesHostObject analyzerConfigFilesHostObject)
                 {
-                    CheckHostObjectSupport(param = nameof(AnalyzerConfigFiles), analyzerConfigFilesHostObject.SetAnalyzerConfigFiles(AnalyzerConfigFiles));
-                    CheckHostObjectSupport(param = nameof(PotentialAnalyzerConfigFiles), analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(PotentialAnalyzerConfigFiles));
+                    CheckHostObjectSupport(
+                        param = nameof(AnalyzerConfigFiles),
+                        analyzerConfigFilesHostObject.SetAnalyzerConfigFiles(AnalyzerConfigFiles)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(PotentialAnalyzerConfigFiles),
+                        analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(
+                            PotentialAnalyzerConfigFiles
+                        )
+                    );
                 }
 
                 ICscHostObject5? cscHostObject5 = cscHostObject as ICscHostObject5;
                 if (cscHostObject5 != null)
                 {
-                    CheckHostObjectSupport(param = nameof(ErrorLog), cscHostObject5.SetErrorLog(ErrorLog));
-                    CheckHostObjectSupport(param = nameof(ReportAnalyzer), cscHostObject5.SetReportAnalyzer(ReportAnalyzer));
+                    CheckHostObjectSupport(
+                        param = nameof(ErrorLog),
+                        cscHostObject5.SetErrorLog(ErrorLog)
+                    );
+                    CheckHostObjectSupport(
+                        param = nameof(ReportAnalyzer),
+                        cscHostObject5.SetReportAnalyzer(ReportAnalyzer)
+                    );
                 }
 
-                CheckHostObjectSupport(param = nameof(ResponseFiles), cscHostObject.SetResponseFiles(ResponseFiles));
-                CheckHostObjectSupport(param = nameof(TargetType), cscHostObject.SetTargetType(TargetType));
-                CheckHostObjectSupport(param = nameof(TreatWarningsAsErrors), cscHostObject.SetTreatWarningsAsErrors(TreatWarningsAsErrors));
-                CheckHostObjectSupport(param = nameof(WarningLevel), cscHostObject.SetWarningLevel(WarningLevel));
+                CheckHostObjectSupport(
+                    param = nameof(ResponseFiles),
+                    cscHostObject.SetResponseFiles(ResponseFiles)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(TargetType),
+                    cscHostObject.SetTargetType(TargetType)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(TreatWarningsAsErrors),
+                    cscHostObject.SetTreatWarningsAsErrors(TreatWarningsAsErrors)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(WarningLevel),
+                    cscHostObject.SetWarningLevel(WarningLevel)
+                );
                 // This must come after TreatWarningsAsErrors.
-                CheckHostObjectSupport(param = nameof(WarningsAsErrors), cscHostObject.SetWarningsAsErrors(WarningsAsErrors));
+                CheckHostObjectSupport(
+                    param = nameof(WarningsAsErrors),
+                    cscHostObject.SetWarningsAsErrors(WarningsAsErrors)
+                );
                 // This must come after TreatWarningsAsErrors.
-                CheckHostObjectSupport(param = nameof(WarningsNotAsErrors), cscHostObject.SetWarningsNotAsErrors(WarningsNotAsErrors));
-                CheckHostObjectSupport(param = nameof(Win32Icon), cscHostObject.SetWin32Icon(Win32Icon));
+                CheckHostObjectSupport(
+                    param = nameof(WarningsNotAsErrors),
+                    cscHostObject.SetWarningsNotAsErrors(WarningsNotAsErrors)
+                );
+                CheckHostObjectSupport(
+                    param = nameof(Win32Icon),
+                    cscHostObject.SetWin32Icon(Win32Icon)
+                );
 
                 // In order to maintain compatibility with previous host compilers, we must
                 // light-up for ICscHostObject2/ICscHostObject3
@@ -581,7 +762,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 if (cscHostObject is ICscHostObject2)
                 {
                     ICscHostObject2 cscHostObject2 = (ICscHostObject2)cscHostObject;
-                    CheckHostObjectSupport(param = nameof(Win32Manifest), cscHostObject2.SetWin32Manifest(GetWin32ManifestSwitch(NoWin32Manifest, Win32Manifest)));
+                    CheckHostObjectSupport(
+                        param = nameof(Win32Manifest),
+                        cscHostObject2.SetWin32Manifest(
+                            GetWin32ManifestSwitch(NoWin32Manifest, Win32Manifest)
+                        )
+                    );
                 }
                 else
                 {
@@ -589,17 +775,26 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     // then we need to state that we are falling back to the command line compiler
                     if (!string.IsNullOrEmpty(Win32Manifest))
                     {
-                        CheckHostObjectSupport(param = nameof(Win32Manifest), resultFromHostObjectSetOperation: false);
+                        CheckHostObjectSupport(
+                            param = nameof(Win32Manifest),
+                            resultFromHostObjectSetOperation: false
+                        );
                     }
                 }
 
                 // This must come after Win32Manifest
-                CheckHostObjectSupport(param = nameof(Win32Resource), cscHostObject.SetWin32Resource(Win32Resource));
+                CheckHostObjectSupport(
+                    param = nameof(Win32Resource),
+                    cscHostObject.SetWin32Resource(Win32Resource)
+                );
 
                 if (cscHostObject is ICscHostObject3)
                 {
                     ICscHostObject3 cscHostObject3 = (ICscHostObject3)cscHostObject;
-                    CheckHostObjectSupport(param = nameof(ApplicationConfiguration), cscHostObject3.SetApplicationConfiguration(ApplicationConfiguration));
+                    CheckHostObjectSupport(
+                        param = nameof(ApplicationConfiguration),
+                        cscHostObject3.SetApplicationConfiguration(ApplicationConfiguration)
+                    );
                 }
                 else
                 {
@@ -607,7 +802,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     // then we need to state that we are falling back to the command line compiler
                     if (!string.IsNullOrEmpty(ApplicationConfiguration))
                     {
-                        CheckHostObjectSupport(nameof(ApplicationConfiguration), resultFromHostObjectSetOperation: false);
+                        CheckHostObjectSupport(
+                            nameof(ApplicationConfiguration),
+                            resultFromHostObjectSetOperation: false
+                        );
                     }
                 }
 
@@ -618,14 +816,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // Null is supported because it means that option should be omitted, and compiler default used - obviously always valid.
                 // Explicitly specified name of current locale is also supported, since it is effectively a no-op.
                 // Other options are not supported since in-proc compiler always uses current locale.
-                if (!string.IsNullOrEmpty(PreferredUILang) && !string.Equals(PreferredUILang, System.Globalization.CultureInfo.CurrentUICulture.Name, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !string.IsNullOrEmpty(PreferredUILang)
+                    && !string.Equals(
+                        PreferredUILang,
+                        System.Globalization.CultureInfo.CurrentUICulture.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    CheckHostObjectSupport(nameof(PreferredUILang), resultFromHostObjectSetOperation: false);
+                    CheckHostObjectSupport(
+                        nameof(PreferredUILang),
+                        resultFromHostObjectSetOperation: false
+                    );
                 }
             }
             catch (Exception e)
             {
-                Log.LogErrorWithCodeFromResources("General_CouldNotSetHostObjectParameter", param, e.Message);
+                Log.LogErrorWithCodeFromResources(
+                    "General_CouldNotSetHostObjectParameter",
+                    param,
+                    e.Message
+                );
                 return false;
             }
             finally
@@ -637,21 +849,41 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                 if (HostCompilerSupportsAllParameters)
                 {
-                    // If the host compiler doesn't support everything we need, we're going to end up 
+                    // If the host compiler doesn't support everything we need, we're going to end up
                     // shelling out to the command-line compiler anyway.  That means the command-line
                     // compiler will log the error.  So here, we only log the error if we would've
                     // tried to use the host compiler.
 
-                    // If EndInitialization returns false, then there was an error. If EndInitialization was 
+                    // If EndInitialization returns false, then there was an error. If EndInitialization was
                     // successful, but there is a valid 'errorMessage,' interpret it as a warning.
 
                     if (!success)
                     {
-                        Log.LogError(null, "CS" + errorCode.ToString("D4", CultureInfo.InvariantCulture), null, null, 0, 0, 0, 0, errorMessage);
+                        Log.LogError(
+                            null,
+                            "CS" + errorCode.ToString("D4", CultureInfo.InvariantCulture),
+                            null,
+                            null,
+                            0,
+                            0,
+                            0,
+                            0,
+                            errorMessage
+                        );
                     }
                     else if (errorMessage != null && errorMessage.Length > 0)
                     {
-                        Log.LogWarning(null, "CS" + errorCode.ToString("D4", CultureInfo.InvariantCulture), null, null, 0, 0, 0, 0, errorMessage);
+                        Log.LogWarning(
+                            null,
+                            "CS" + errorCode.ToString("D4", CultureInfo.InvariantCulture),
+                            null,
+                            null,
+                            0,
+                            0,
+                            0,
+                            0,
+                            errorMessage
+                        );
                     }
                 }
             }
@@ -683,11 +915,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 // we can dynamically test for smarter interfaces later..
                 if (HostObject is ICscHostObject hostObjectCOM)
                 {
-                    using (RCWForCurrentContext<ICscHostObject> hostObject = new RCWForCurrentContext<ICscHostObject>(hostObjectCOM))
+                    using (
+                        RCWForCurrentContext<ICscHostObject> hostObject =
+                            new RCWForCurrentContext<ICscHostObject>(hostObjectCOM)
+                    )
                     {
                         ICscHostObject cscHostObject = hostObject.RCW;
 
-                        bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(cscHostObject);
+                        bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(
+                            cscHostObject
+                        );
 
                         // If we're currently only in design-time (as opposed to build-time),
                         // then we're done.  We've initialized the host compiler as best we
@@ -695,11 +932,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // So return true, saying we're done and successful.
                         if (cscHostObject.IsDesignTime())
                         {
-                            // If we are design-time then we do not want to continue the build at 
+                            // If we are design-time then we do not want to continue the build at
                             // this time.
-                            return hostObjectSuccessfullyInitialized ?
-                                HostObjectInitializationStatus.NoActionReturnSuccess :
-                                HostObjectInitializationStatus.NoActionReturnFailure;
+                            return hostObjectSuccessfullyInitialized
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.NoActionReturnFailure;
                         }
 
                         if (!this.HostCompilerSupportsAllParameters)
@@ -710,7 +947,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             // the trouble, and just throw a consistent error ourselves.  This allows us to give
                             // more information than the compiler would, and also make things consistent across
                             // Vbc / Csc / etc.  Actually, the real reason is bug 275726 (ddsuites\src\vs\env\vsproject\refs\ptp3).
-                            // This suite behaves differently in localized builds than on English builds because 
+                            // This suite behaves differently in localized builds than on English builds because
                             // VBC.EXE doesn't localize the word "error" when they emit errors and so we can't scan for it.
                             if (!CheckAllReferencesExistOnDisk())
                             {
@@ -729,9 +966,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         // and in that case, we will inform the caller that no further action is necessary.
                         if (hostObjectSuccessfullyInitialized)
                         {
-                            return cscHostObject.IsUpToDate() ?
-                                HostObjectInitializationStatus.NoActionReturnSuccess :
-                                HostObjectInitializationStatus.UseHostObjectToExecute;
+                            return cscHostObject.IsUpToDate()
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.UseHostObjectToExecute;
                         }
                         else
                         {
@@ -741,7 +978,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 else
                 {
-                    Log.LogErrorWithCodeFromResources("General_IncorrectHostObject", "Csc", "ICscHostObject");
+                    Log.LogErrorWithCodeFromResources(
+                        "General_IncorrectHostObject",
+                        "Csc",
+                        "ICscHostObject"
+                    );
                 }
             }
 
@@ -752,12 +993,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         /// <summary>
         /// This method will get called during Execute() if a host object has been passed into the Csc
-        /// task.  Returns true if the compilation succeeded, otherwise false.  
+        /// task.  Returns true if the compilation succeeded, otherwise false.
         /// </summary>
         /// <owner>RGoel</owner>
         protected override bool CallHostObjectToExecute()
         {
-            Debug.Assert(HostObject != null, "We should not be here if the host object has not been set.");
+            Debug.Assert(
+                HostObject != null,
+                "We should not be here if the host object has not been set."
+            );
 
             ICscHostObject? cscHostObject = HostObject as ICscHostObject;
             RoslynDebug.Assert(cscHostObject != null, "Wrong kind of host object passed in!");

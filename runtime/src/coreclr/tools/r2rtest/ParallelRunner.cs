@@ -64,13 +64,28 @@ public sealed class ParallelRunner
         /// <param name="processCount">Total number of processes being executed (used for displaying progress)</param>
         /// <param name="progressIndex">Number of processes that have already finished (for displaying progress)</param>
         /// <param name="failureCount">Number of pre-existing failures in this parallel build step (for displaying progress)</param>
-        public void Launch(ProcessInfo processInfo, ReadyToRunJittedMethods jittedMethods, int processIndex, int processCount, int progressIndex, int failureCount)
+        public void Launch(
+            ProcessInfo processInfo,
+            ReadyToRunJittedMethods jittedMethods,
+            int processIndex,
+            int processCount,
+            int progressIndex,
+            int failureCount
+        )
         {
             Debug.Assert(_processRunner == null);
-            Console.WriteLine($"{processIndex} / {processCount} ({(progressIndex * 100 / processCount)}%, {failureCount} failed): " +
-                $"launching: {processInfo.Parameters.ProcessPath} {processInfo.Parameters.Arguments}");
+            Console.WriteLine(
+                $"{processIndex} / {processCount} ({(progressIndex * 100 / processCount)}%, {failureCount} failed): "
+                    + $"launching: {processInfo.Parameters.ProcessPath} {processInfo.Parameters.Arguments}"
+            );
 
-            _processRunner = new ProcessRunner(processInfo, processIndex, processCount, jittedMethods, _processExitEvent);
+            _processRunner = new ProcessRunner(
+                processInfo,
+                processIndex,
+                processCount,
+                jittedMethods,
+                _processExitEvent
+            );
         }
 
         public bool IsAvailable(ref int progressIndex, ref int failureCount)
@@ -95,7 +110,11 @@ public sealed class ParallelRunner
     /// </summary>
     /// <param name="processesToRun">Processes to execute in parallel</param>
     /// <param name="degreeOfParallelism">Maximum number of processes to execute in parallel, 0 = logical processor count</param>
-    public static void Run(IEnumerable<ProcessInfo> processesToRun, int degreeOfParallelism = 0, bool measurePerf = false)
+    public static void Run(
+        IEnumerable<ProcessInfo> processesToRun,
+        int degreeOfParallelism = 0,
+        bool measurePerf = false
+    )
     {
         if (degreeOfParallelism == 0)
         {
@@ -114,7 +133,12 @@ public sealed class ParallelRunner
             }
         }
 
-        processList.Sort((a, b) => b.Parameters.CompilationCostHeuristic.CompareTo(a.Parameters.CompilationCostHeuristic));
+        processList.Sort(
+            (a, b) =>
+                b.Parameters.CompilationCostHeuristic.CompareTo(
+                    a.Parameters.CompilationCostHeuristic
+                )
+        );
 
         int processCount = processList.Count;
         if (processCount < degreeOfParallelism)
@@ -132,7 +156,11 @@ public sealed class ParallelRunner
             int etwCollectionBatching = (degreeOfParallelism == 1 ? 1 : 10);
             int failureCount = 0;
 
-            for (int batchStartIndex = 0; batchStartIndex < processCount; batchStartIndex += etwCollectionBatching)
+            for (
+                int batchStartIndex = 0;
+                batchStartIndex < processCount;
+                batchStartIndex += etwCollectionBatching
+            )
             {
                 int batchEndIndex = Math.Min(batchStartIndex + etwCollectionBatching, processCount);
                 BuildEtwProcesses(
@@ -142,9 +170,14 @@ public sealed class ParallelRunner
                     failureCount: failureCount,
                     processList,
                     degreeOfParallelism,
-                    measurePerf);
+                    measurePerf
+                );
 
-                for (int processIndex = batchStartIndex; processIndex < batchEndIndex; processIndex++)
+                for (
+                    int processIndex = batchStartIndex;
+                    processIndex < batchEndIndex;
+                    processIndex++
+                )
                 {
                     if (!processList[processIndex].Succeeded)
                     {
@@ -155,7 +188,15 @@ public sealed class ParallelRunner
         }
         else
         {
-            BuildProjects(startIndex: 0, endIndex: processCount, totalCount: processCount, failureCount: 0, processList, null, degreeOfParallelism);
+            BuildProjects(
+                startIndex: 0,
+                endIndex: processCount,
+                totalCount: processCount,
+                failureCount: 0,
+                processList,
+                null,
+                degreeOfParallelism
+            );
         }
     }
 
@@ -166,11 +207,16 @@ public sealed class ParallelRunner
         int failureCount,
         List<ProcessInfo> processList,
         int degreeOfParallelism,
-        bool measurePerf)
+        bool measurePerf
+    )
     {
         using (TraceEventSession traceEventSession = new TraceEventSession("ReadyToRunTestSession"))
         {
-            traceEventSession.EnableProvider(ClrTraceEventParser.ProviderGuid, TraceEventLevel.Verbose, (ulong)(ClrTraceEventParser.Keywords.Jit | ClrTraceEventParser.Keywords.Loader));
+            traceEventSession.EnableProvider(
+                ClrTraceEventParser.ProviderGuid,
+                TraceEventLevel.Verbose,
+                (ulong)(ClrTraceEventParser.Keywords.Jit | ClrTraceEventParser.Keywords.Loader)
+            );
             int warmupRuns = 0;
             int realRuns = 1;
             PerfEventSourceListener perfMeasurer = null;
@@ -181,33 +227,58 @@ public sealed class ParallelRunner
                 realRuns = 5;
                 perfMeasurer = new PerfEventSourceListener(traceEventSession, warmupRuns, realRuns);
             }
-            using (ReadyToRunJittedMethods jittedMethods = new ReadyToRunJittedMethods(traceEventSession, processList, startIndex, endIndex))
+            using (
+                ReadyToRunJittedMethods jittedMethods = new ReadyToRunJittedMethods(
+                    traceEventSession,
+                    processList,
+                    startIndex,
+                    endIndex
+                )
+            )
             {
-                Task.Run(() =>
-                {
-                    // Warmup runs
-                    if (measurePerf)
+                Task.Run(
+                    () =>
                     {
-                        Console.WriteLine("Warmup runs:");
-                        for (int run = 0; run < warmupRuns; ++run)
+                        // Warmup runs
+                        if (measurePerf)
                         {
-                            BuildProjects(startIndex, endIndex, totalCount, failureCount, processList, jittedMethods, degreeOfParallelism);
+                            Console.WriteLine("Warmup runs:");
+                            for (int run = 0; run < warmupRuns; ++run)
+                            {
+                                BuildProjects(
+                                    startIndex,
+                                    endIndex,
+                                    totalCount,
+                                    failureCount,
+                                    processList,
+                                    jittedMethods,
+                                    degreeOfParallelism
+                                );
+                            }
+                            // Wait for all the warmup events to come in before starting the real run so there is no interference
+                            perfMeasurer.WaitForWarmupFinished();
+                            Console.WriteLine("Real runs:");
                         }
-                        // Wait for all the warmup events to come in before starting the real run so there is no interference
-                        perfMeasurer.WaitForWarmupFinished();
-                        Console.WriteLine("Real runs:");
-                    }
 
-                    for (int run = 0; run < realRuns; ++run)
-                    {
-                        BuildProjects(startIndex, endIndex, totalCount, failureCount, processList, jittedMethods, degreeOfParallelism);
+                        for (int run = 0; run < realRuns; ++run)
+                        {
+                            BuildProjects(
+                                startIndex,
+                                endIndex,
+                                totalCount,
+                                failureCount,
+                                processList,
+                                jittedMethods,
+                                degreeOfParallelism
+                            );
+                        }
+                        if (measurePerf)
+                        {
+                            perfMeasurer.PrintPerfResults();
+                        }
+                        traceEventSession.Stop();
                     }
-                    if (measurePerf)
-                    {
-                        perfMeasurer.PrintPerfResults();
-                    }
-                    traceEventSession.Stop();
-                });
+                );
             }
             traceEventSession.Source.Process();
         }
@@ -218,16 +289,30 @@ public sealed class ParallelRunner
             ProcessInfo processInfo = processList[index];
             if (processInfo.Parameters.CollectJittedMethods)
             {
-                using (StreamWriter processLogWriter = new StreamWriter(processInfo.Parameters.LogPath, append: true))
+                using (
+                    StreamWriter processLogWriter = new StreamWriter(
+                        processInfo.Parameters.LogPath,
+                        append: true
+                    )
+                )
                 {
                     if (processInfo.JittedMethods != null)
                     {
-                        processLogWriter.WriteLine($"Jitted methods ({processInfo.JittedMethods.Sum(moduleMethodsKvp => moduleMethodsKvp.Value.Count)} total):");
-                        foreach (KeyValuePair<string, HashSet<string>> jittedMethodsPerModule in processInfo.JittedMethods)
+                        processLogWriter.WriteLine(
+                            $"Jitted methods ({processInfo.JittedMethods.Sum(moduleMethodsKvp => moduleMethodsKvp.Value.Count)} total):"
+                        );
+                        foreach (
+                            KeyValuePair<
+                                string,
+                                HashSet<string>
+                            > jittedMethodsPerModule in processInfo.JittedMethods
+                        )
                         {
                             foreach (string method in jittedMethodsPerModule.Value)
                             {
-                                processLogWriter.WriteLine(jittedMethodsPerModule.Key + " -> " + method);
+                                processLogWriter.WriteLine(
+                                    jittedMethodsPerModule.Key + " -> " + method
+                                );
                             }
                         }
                     }
@@ -240,7 +325,15 @@ public sealed class ParallelRunner
         }
     }
 
-    private static void BuildProjects(int startIndex, int endIndex, int totalCount, int failureCount, List<ProcessInfo> processList, ReadyToRunJittedMethods jittedMethods, int degreeOfParallelism)
+    private static void BuildProjects(
+        int startIndex,
+        int endIndex,
+        int totalCount,
+        int failureCount,
+        List<ProcessInfo> processList,
+        ReadyToRunJittedMethods jittedMethods,
+        int degreeOfParallelism
+    )
     {
         using (AutoResetEvent processExitEvent = new AutoResetEvent(initialState: false))
         {
@@ -273,10 +366,16 @@ public sealed class ParallelRunner
                         // All slots are busy - wait for a process to finish
                         processExitEvent.WaitOne(200);
                     }
-                }
-                while (freeSlot == null);
+                } while (freeSlot == null);
 
-                freeSlot.Launch(processInfo, jittedMethods, index + 1, totalCount, progressIndex, failureCount);
+                freeSlot.Launch(
+                    processInfo,
+                    jittedMethods,
+                    index + 1,
+                    totalCount,
+                    progressIndex,
+                    failureCount
+                );
             }
 
             // We have launched all the commands, now wait for all processes to finish
@@ -295,8 +394,7 @@ public sealed class ParallelRunner
                 {
                     processExitEvent.WaitOne();
                 }
-            }
-            while (activeProcessesExist);
+            } while (activeProcessesExist);
         }
     }
 }

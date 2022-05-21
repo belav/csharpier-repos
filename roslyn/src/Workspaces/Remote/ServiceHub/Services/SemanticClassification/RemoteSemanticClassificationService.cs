@@ -13,38 +13,55 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteSemanticClassificationService : BrokeredServiceBase, IRemoteSemanticClassificationService
+    internal sealed class RemoteSemanticClassificationService
+        : BrokeredServiceBase,
+            IRemoteSemanticClassificationService
     {
         internal sealed class Factory : FactoryBase<IRemoteSemanticClassificationService>
         {
-            protected override IRemoteSemanticClassificationService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteSemanticClassificationService(arguments);
+            protected override IRemoteSemanticClassificationService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteSemanticClassificationService(arguments);
         }
 
         public RemoteSemanticClassificationService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         public ValueTask<SerializableClassifiedSpans> GetSemanticClassificationsAsync(
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
             TextSpan span,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetDocument(documentId) ?? await solution.GetSourceGeneratedDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
-                Contract.ThrowIfNull(document);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document =
+                        solution.GetDocument(documentId)
+                        ?? await solution
+                            .GetSourceGeneratedDocumentAsync(documentId, cancellationToken)
+                            .ConfigureAwait(false);
+                    Contract.ThrowIfNull(document);
 
-                using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
-                await AbstractClassificationService.AddSemanticClassificationsInCurrentProcessAsync(
-                    document, span, options, temp, cancellationToken).ConfigureAwait(false);
+                    using var _ = ArrayBuilder<ClassifiedSpan>.GetInstance(out var temp);
+                    await AbstractClassificationService
+                        .AddSemanticClassificationsInCurrentProcessAsync(
+                            document,
+                            span,
+                            options,
+                            temp,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                return SerializableClassifiedSpans.Dehydrate(temp.ToImmutable());
-            }, cancellationToken);
+                    return SerializableClassifiedSpans.Dehydrate(temp.ToImmutable());
+                },
+                cancellationToken
+            );
         }
     }
 }

@@ -10,7 +10,6 @@ using System.Runtime.Intrinsics;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-
     public static class Sse2Verify
     {
         public static bool AddSaturate(byte x, byte y, byte z)
@@ -50,7 +49,7 @@ namespace JIT.HardwareIntrinsics.X86
             int value = (int)x - y;
             value = Math.Max(value, 0);
             value = Math.Min(value, byte.MaxValue);
-            return (byte) value != z;
+            return (byte)value != z;
         }
 
         public static bool SubtractSaturate(sbyte x, sbyte y, sbyte z)
@@ -58,7 +57,7 @@ namespace JIT.HardwareIntrinsics.X86
             int value = (int)x - y;
             value = Math.Max(value, sbyte.MinValue);
             value = Math.Min(value, sbyte.MaxValue);
-            return (sbyte) value != z;
+            return (sbyte)value != z;
         }
 
         public static bool SubtractSaturate(ushort x, ushort y, ushort z)
@@ -66,7 +65,7 @@ namespace JIT.HardwareIntrinsics.X86
             int value = (int)x - y;
             value = Math.Max(value, 0);
             value = Math.Min(value, ushort.MaxValue);
-            return (ushort) value != z;
+            return (ushort)value != z;
         }
 
         public static bool SubtractSaturate(short x, short y, short z)
@@ -74,7 +73,7 @@ namespace JIT.HardwareIntrinsics.X86
             int value = (int)x - y;
             value = Math.Max(value, short.MinValue);
             value = Math.Min(value, short.MaxValue);
-            return (short) value != z;
+            return (short)value != z;
         }
     }
 }

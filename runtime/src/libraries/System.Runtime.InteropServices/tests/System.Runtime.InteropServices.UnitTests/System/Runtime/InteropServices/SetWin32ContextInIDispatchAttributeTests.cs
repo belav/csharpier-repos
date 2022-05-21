@@ -8,10 +8,16 @@ namespace System.Runtime.InteropServices.Tests
 {
     public class SetWin32ContextInIDispatchAttributeTests
     {
-        private const string TypeName = "System.Runtime.InteropServices.SetWin32ContextInIDispatchAttribute";
+        private const string TypeName =
+            "System.Runtime.InteropServices.SetWin32ContextInIDispatchAttribute";
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50714", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50714",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public void Ctor_Default_ExistsInSrc()
         {
             Type type = typeof(HandleCollector).Assembly.GetType(TypeName);

@@ -23,10 +23,11 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         /// <summary>
         /// Values for these parameters can be provided (during testing) for mocking purposes.
-        /// </summary> 
+        /// </summary>
         protected AbstractAddImportCodeFixProvider(
             IPackageInstallerService packageInstallerService = null,
-            ISymbolSearchService symbolSearchService = null)
+            ISymbolSearchService symbolSearchService = null
+        )
         {
             _packageInstallerService = packageInstallerService;
             _symbolSearchService = symbolSearchService;
@@ -37,8 +38,8 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// 'smart tag' feature in VS prior to us even having 'light bulbs'.  We want them to be computed
         /// first, ahead of everything else, and the main results should show up at the top of the list.
         /// </summary>
-        private protected override CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.High;
+        private protected override CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.High;
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
@@ -59,30 +60,57 @@ namespace Microsoft.CodeAnalysis.AddImport
             var solution = document.Project.Solution;
             var options = solution.Options;
 
-            var searchReferenceAssemblies = options.GetOption(SymbolSearchOptions.SuggestForTypesInReferenceAssemblies, document.Project.Language);
-            var searchNuGetPackages = options.GetOption(SymbolSearchOptions.SuggestForTypesInNuGetPackages, document.Project.Language);
+            var searchReferenceAssemblies = options.GetOption(
+                SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
+                document.Project.Language
+            );
+            var searchNuGetPackages = options.GetOption(
+                SymbolSearchOptions.SuggestForTypesInNuGetPackages,
+                document.Project.Language
+            );
 
-            var symbolSearchService = searchReferenceAssemblies || searchNuGetPackages
-                ? _symbolSearchService ?? solution.Workspace.Services.GetService<ISymbolSearchService>()
-                : null;
+            var symbolSearchService =
+                searchReferenceAssemblies || searchNuGetPackages
+                    ? _symbolSearchService
+                        ?? solution.Workspace.Services.GetService<ISymbolSearchService>()
+                    : null;
 
             var installerService = GetPackageInstallerService(document);
-            var packageSources = searchNuGetPackages && symbolSearchService != null && installerService?.IsEnabled(document.Project.Id) == true
-                ? installerService.TryGetPackageSources()
-                : ImmutableArray<PackageSource>.Empty;
+            var packageSources =
+                searchNuGetPackages
+                && symbolSearchService != null
+                && installerService?.IsEnabled(document.Project.Id) == true
+                    ? installerService.TryGetPackageSources()
+                    : ImmutableArray<PackageSource>.Empty;
 
-            var fixesForDiagnostic = await addImportService.GetFixesForDiagnosticsAsync(
-                document, span, diagnostics, MaxResults, symbolSearchService, searchReferenceAssemblies, packageSources, cancellationToken).ConfigureAwait(false);
+            var fixesForDiagnostic = await addImportService
+                .GetFixesForDiagnosticsAsync(
+                    document,
+                    span,
+                    diagnostics,
+                    MaxResults,
+                    symbolSearchService,
+                    searchReferenceAssemblies,
+                    packageSources,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var (diagnostic, fixes) in fixesForDiagnostic)
             {
                 // Limit the results returned since this will be displayed to the user
-                var codeActions = addImportService.GetCodeActionsForFixes(document, fixes, installerService, MaxResults);
+                var codeActions = addImportService.GetCodeActionsForFixes(
+                    document,
+                    fixes,
+                    installerService,
+                    MaxResults
+                );
                 context.RegisterFixes(codeActions, diagnostic);
             }
         }
 
-        private IPackageInstallerService GetPackageInstallerService(Document document)
-            => _packageInstallerService ?? document.Project.Solution.Workspace.Services.GetService<IPackageInstallerService>();
+        private IPackageInstallerService GetPackageInstallerService(Document document) =>
+            _packageInstallerService
+            ?? document.Project.Solution.Workspace.Services.GetService<IPackageInstallerService>();
     }
 }

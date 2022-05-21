@@ -46,7 +46,8 @@ internal class ShortFormDictionaryValidationStrategy<TKey, TValue> : IValidation
     /// </param>
     public ShortFormDictionaryValidationStrategy(
         IEnumerable<KeyValuePair<string, TKey>> keyMappings,
-        ModelMetadata valueMetadata)
+        ModelMetadata valueMetadata
+    )
     {
         KeyMappings = keyMappings;
         _valueMetadata = valueMetadata;
@@ -61,7 +62,8 @@ internal class ShortFormDictionaryValidationStrategy<TKey, TValue> : IValidation
     public IEnumerator<ValidationEntry> GetChildren(
         ModelMetadata metadata,
         string key,
-        object model)
+        object model
+    )
     {
         // key is not needed because KeyMappings maps from full ModelState keys to dictionary keys.
         return new Enumerator(_valueMetadata, KeyMappings, (IDictionary<TKey, TValue>)model);
@@ -78,7 +80,8 @@ internal class ShortFormDictionaryValidationStrategy<TKey, TValue> : IValidation
         public Enumerator(
             ModelMetadata metadata,
             IEnumerable<KeyValuePair<string, TKey>> keyMappings,
-            IDictionary<TKey, TValue> model)
+            IDictionary<TKey, TValue> model
+        )
         {
             _metadata = metadata;
             _model = model;
@@ -111,9 +114,7 @@ internal class ShortFormDictionaryValidationStrategy<TKey, TValue> : IValidation
             return true;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         public Interceptors(
             IServiceProvider serviceProvider,
             IEnumerable<IInterceptor> injectedInterceptors,
-            IEnumerable<IInterceptorAggregator> interceptorAggregators)
+            IEnumerable<IInterceptorAggregator> interceptorAggregators
+        )
         {
             _serviceProvider = serviceProvider;
             _injectedInterceptors = injectedInterceptors;
@@ -66,8 +67,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual TInterceptor? Aggregate<TInterceptor>()
-            where TInterceptor : class, IInterceptor
-            => (TInterceptor?)_aggregators[typeof(TInterceptor)].AggregateInterceptors(RegisteredInterceptors);
+            where TInterceptor : class, IInterceptor =>
+            (TInterceptor?)
+                _aggregators[typeof(TInterceptor)].AggregateInterceptors(RegisteredInterceptors);
 
         /// <summary>
         ///     We resolve this lazily because loggers are created very early in the initialization
@@ -75,11 +77,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     This means those loggers can't do interception, but that's okay because nothing
         ///     else is ready for them to do interception anyway.
         /// </summary>
-        private CoreOptionsExtension? CoreOptionsExtension
-            => _coreOptionsExtension ??= _serviceProvider
+        private CoreOptionsExtension? CoreOptionsExtension =>
+            _coreOptionsExtension ??= _serviceProvider
                 .GetRequiredService<IDbContextOptions>()
-                .Extensions
-                .OfType<CoreOptionsExtension>()
+                .Extensions.OfType<CoreOptionsExtension>()
                 .FirstOrDefault();
     }
 }

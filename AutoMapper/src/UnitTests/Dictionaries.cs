@@ -54,7 +54,8 @@ namespace AutoMapper.UnitTests
         //    }
         //}
 
-        public class When_mapping_to_a_generic_dictionary_with_mapped_value_pairs : AutoMapperSpecBase
+        public class When_mapping_to_a_generic_dictionary_with_mapped_value_pairs
+            : AutoMapperSpecBase
         {
             private Destination _result;
 
@@ -78,22 +79,31 @@ namespace AutoMapper.UnitTests
                 public int Value { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => 
-            {
-                cfg.CreateMap<Source, Destination>();
-                cfg.CreateMap<SourceValue, DestinationValue>();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<Source, Destination>();
+                        cfg.CreateMap<SourceValue, DestinationValue>();
+                    }
+                );
 
             protected override void Because_of()
             {
                 var source = new Source
+                {
+                    Values = new Dictionary<string, SourceValue>
                     {
-                        Values = new Dictionary<string, SourceValue>
-                            {
-                                {"Key1", new SourceValue {Value = 5}},
-                                {"Key2", new SourceValue {Value = 10}},
-                            }
-                    };
+                        {
+                            "Key1",
+                            new SourceValue { Value = 5 }
+                        },
+                        {
+                            "Key2",
+                            new SourceValue { Value = 10 }
+                        },
+                    }
+                };
 
                 _result = Mapper.Map<Source, Destination>(source);
             }
@@ -108,7 +118,8 @@ namespace AutoMapper.UnitTests
             }
         }
 
-        public class When_mapping_to_a_generic_dictionary_interface_with_mapped_value_pairs : AutoMapperSpecBase
+        public class When_mapping_to_a_generic_dictionary_interface_with_mapped_value_pairs
+            : AutoMapperSpecBase
         {
             private Destination _result;
 
@@ -124,7 +135,10 @@ namespace AutoMapper.UnitTests
 
             public class Destination
             {
-                public System.Collections.Generic.IDictionary<string, DestinationValue> Values { get; set; }
+                public System.Collections.Generic.IDictionary<
+                    string,
+                    DestinationValue
+                > Values { get; set; }
             }
 
             public class DestinationValue
@@ -132,22 +146,31 @@ namespace AutoMapper.UnitTests
                 public int Value { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>();
-                cfg.CreateMap<SourceValue, DestinationValue>();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<Source, Destination>();
+                        cfg.CreateMap<SourceValue, DestinationValue>();
+                    }
+                );
 
             protected override void Because_of()
             {
                 var source = new Source
+                {
+                    Values = new Dictionary<string, SourceValue>
                     {
-                        Values = new Dictionary<string, SourceValue>
-                            {
-                                {"Key1", new SourceValue {Value = 5}},
-                                {"Key2", new SourceValue {Value = 10}},
-                            }
-                    };
+                        {
+                            "Key1",
+                            new SourceValue { Value = 5 }
+                        },
+                        {
+                            "Key2",
+                            new SourceValue { Value = 10 }
+                        },
+                    }
+                };
 
                 _result = Mapper.Map<Source, Destination>(source);
             }
@@ -176,22 +199,19 @@ namespace AutoMapper.UnitTests
                 public System.Collections.Generic.IDictionary<string, FooDto> Bar { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.AllowNullDestinationValues = false;
-                cfg.CreateMap<Foo, FooDto>();
-                cfg.CreateMap<FooDto, Foo>();
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.AllowNullDestinationValues = false;
+                        cfg.CreateMap<Foo, FooDto>();
+                        cfg.CreateMap<FooDto, Foo>();
+                    }
+                );
 
             protected override void Because_of()
             {
-                var foo1 = new Foo
-                {
-                    Bar = new Dictionary<string, Foo>
-                            {
-                                {"lol", new Foo()}
-                            }
-                };
+                var foo1 = new Foo { Bar = new Dictionary<string, Foo> { { "lol", new Foo() } } };
 
                 _result = Mapper.Map<Foo, FooDto>(foo1);
             }
@@ -204,8 +224,8 @@ namespace AutoMapper.UnitTests
             }
         }
 
-
-        public class When_mapping_to_a_generic_dictionary_that_does_not_use_keyvaluepairs : AutoMapperSpecBase
+        public class When_mapping_to_a_generic_dictionary_that_does_not_use_keyvaluepairs
+            : AutoMapperSpecBase
         {
             private System.Collections.Generic.IDictionary<string, string> _dest;
 
@@ -219,11 +239,14 @@ namespace AutoMapper.UnitTests
                 public System.Collections.Generic.IDictionary<string, string> Items { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<SourceDto, DestDto>()
-                    .ForMember(d => d.Items, opt => opt.MapFrom(s => s.Items));
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<SourceDto, DestDto>()
+                            .ForMember(d => d.Items, opt => opt.MapFrom(s => s.Items));
+                    }
+                );
 
             protected override void Because_of()
             {
@@ -231,14 +254,16 @@ namespace AutoMapper.UnitTests
                 {
                     Items = new GenericWrappedDictionary<string, string>
                     {
-                        {"A", "AAA"},
-                        {"B", "BBB"},
-                        {"C", "CCC"}
+                        { "A", "AAA" },
+                        { "B", "BBB" },
+                        { "C", "CCC" }
                     }
                 };
 
-
-                _dest = Mapper.Map<System.Collections.Generic.IDictionary<string, string>, System.Collections.Generic.IDictionary<string, string>>(source.Items);
+                _dest = Mapper.Map<
+                    System.Collections.Generic.IDictionary<string, string>,
+                    System.Collections.Generic.IDictionary<string, string>
+                >(source.Items);
             }
 
             [Fact]
@@ -256,8 +281,9 @@ namespace AutoMapper.UnitTests
             //
             // This behaviour is demonstrated by NHibernate's PersistentGenericMap
             // (which wraps a nongeneric PersistentMap).
-            public class GenericWrappedDictionary<TKey, TValue> :
-                System.Collections.Generic.IDictionary<TKey, TValue>, System.Collections.IDictionary
+            public class GenericWrappedDictionary<TKey, TValue>
+                : System.Collections.Generic.IDictionary<TKey, TValue>,
+                    System.Collections.IDictionary
             {
                 System.Collections.IDictionary inner = new Dictionary<TKey, TValue>();
 
@@ -293,14 +319,8 @@ namespace AutoMapper.UnitTests
 
                 public TValue this[TKey key]
                 {
-                    get
-                    {
-                        return (TValue)inner[key];
-                    }
-                    set
-                    {
-                        inner[key] = value;
-                    }
+                    get { return (TValue)inner[key]; }
+                    set { inner[key] = value; }
                 }
 
                 public void Add(KeyValuePair<TKey, TValue> item)
@@ -385,14 +405,8 @@ namespace AutoMapper.UnitTests
 
                 public object this[object key]
                 {
-                    get
-                    {
-                        return inner[key];
-                    }
-                    set
-                    {
-                        inner[key] = value;
-                    }
+                    get { return inner[key]; }
+                    set { inner[key] = value; }
                 }
 
                 public void CopyTo(Array array, int index)
@@ -410,10 +424,9 @@ namespace AutoMapper.UnitTests
                     get { throw new NotImplementedException(); }
                 }
             }
-
         }
 
-        public class When_mapping_from_a_list_of_object_to_generic_dictionary : AutoMapperSpecBase    
+        public class When_mapping_from_a_list_of_object_to_generic_dictionary : AutoMapperSpecBase
         {
             private FooObject _result;
 
@@ -433,12 +446,17 @@ namespace AutoMapper.UnitTests
                 public string Value { get; set; }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<FooDto, FooObject>();
-                cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
-                    .ConvertUsing(src => new KeyValuePair<string, string>(src.Key, src.Value));
-            });
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<FooDto, FooObject>();
+                        cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
+                            .ConvertUsing(
+                                src => new KeyValuePair<string, string>(src.Key, src.Value)
+                            );
+                    }
+                );
 
             protected override void Because_of()
             {
@@ -446,8 +464,8 @@ namespace AutoMapper.UnitTests
                 {
                     Values = new List<DestinationValuePair>
                     {
-                        new DestinationValuePair {Key = "Key1", Value = "Value1"},
-                        new DestinationValuePair {Key = "Key2", Value = "Value2"}
+                        new DestinationValuePair { Key = "Key1", Value = "Value1" },
+                        new DestinationValuePair { Key = "Key2", Value = "Value2" }
                     }.ToArray()
                 };
 
@@ -481,7 +499,10 @@ namespace AutoMapper.UnitTests
                 }
             }
 
-            protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.CreateMap<BaseClassWithDictionary, DerivedClassWithDictionary>());
+            protected override MapperConfiguration Configuration { get; } =
+                new MapperConfiguration(
+                    cfg => cfg.CreateMap<BaseClassWithDictionary, DerivedClassWithDictionary>()
+                );
         }
     }
 
@@ -505,22 +526,25 @@ namespace AutoMapper.UnitTests
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<FooDto, FooObject>();
-            cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
-                .ConvertUsing(src => new KeyValuePair<string, string>(src.Key, src.Value));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<FooDto, FooObject>();
+                    cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
+                        .ConvertUsing(src => new KeyValuePair<string, string>(src.Key, src.Value));
+                }
+            );
 
         protected override void Because_of()
         {
             var source = new FooDto
             {
                 Values = new List<DestinationValuePair>
-                    {
-                        new DestinationValuePair {Key = "Key1", Value = "Value1"},
-                        new DestinationValuePair {Key = "Key2", Value = "Value2"}
-                    }.ToArray()
+                {
+                    new DestinationValuePair { Key = "Key1", Value = "Value1" },
+                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
+                }.ToArray()
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);
@@ -556,22 +580,25 @@ namespace AutoMapper.UnitTests
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<FooDto, FooObject>();
-            cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
-                .ConvertUsing(src => new KeyValuePair<string, string>(src.Key, src.Value));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<FooDto, FooObject>();
+                    cfg.CreateMap<DestinationValuePair, KeyValuePair<string, string>>()
+                        .ConvertUsing(src => new KeyValuePair<string, string>(src.Key, src.Value));
+                }
+            );
 
         protected override void Because_of()
         {
             var source = new FooDto
             {
                 Values = new List<DestinationValuePair>
-                    {
-                        new DestinationValuePair {Key = "Key1", Value = "Value1"},
-                        new DestinationValuePair {Key = "Key2", Value = "Value2"}
-                    }.ToArray()
+                {
+                    new DestinationValuePair { Key = "Key1", Value = "Value1" },
+                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
+                }.ToArray()
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);
@@ -586,5 +613,4 @@ namespace AutoMapper.UnitTests
             _result.Values["Key2"].ShouldBe("Value2");
         }
     }
-
 }

@@ -11,11 +11,13 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping : Component
     {
-        private const int DefaultSendBufferSize = 32;  // Same as ping.exe on Windows.
-        private const int DefaultTimeout = 5000;       // 5 seconds: same as ping.exe on Windows.
-        private const int MaxBufferSize = 65500;       // Artificial constraint due to win32 api limitations.
+        private const int DefaultSendBufferSize = 32; // Same as ping.exe on Windows.
+        private const int DefaultTimeout = 5000; // 5 seconds: same as ping.exe on Windows.
+        private const int MaxBufferSize = 65500; // Artificial constraint due to win32 api limitations.
 
-        private readonly ManualResetEventSlim _lockObject = new ManualResetEventSlim(initialState: true); // doubles as the ability to wait on the current operation
+        private readonly ManualResetEventSlim _lockObject = new ManualResetEventSlim(
+            initialState: true
+        ); // doubles as the ability to wait on the current operation
         private SendOrPostCallback? _onPingCompletedDelegate;
         private bool _disposeRequested;
         private byte[]? _defaultSendBuffer;
@@ -102,18 +104,24 @@ namespace System.Net.NetworkInformation
             }
             else
             {
-                Debug.Assert(currentStatus == Disposed, $"Expected currentStatus == Disposed, got {currentStatus}");
+                Debug.Assert(
+                    currentStatus == Disposed,
+                    $"Expected currentStatus == Disposed, got {currentStatus}"
+                );
                 throw new ObjectDisposedException(GetType().FullName);
             }
         }
 
         private static IPAddress GetAddressSnapshot(IPAddress address)
         {
-            IPAddress addressSnapshot = address.AddressFamily == AddressFamily.InterNetwork ?
+            IPAddress addressSnapshot =
+                address.AddressFamily == AddressFamily.InterNetwork
+                    ?
 #pragma warning disable CS0618 // IPAddress.Address is obsoleted, but it's the most efficient way to get the Int32 IPv4 address
-                new IPAddress(address.Address) :
+                    new IPAddress(address.Address)
+                    :
 #pragma warning restore CS0618
-                new IPAddress(address.GetAddressBytes(), address.ScopeId);
+                    new IPAddress(address.GetAddressBytes(), address.ScopeId);
 
             return addressSnapshot;
         }
@@ -197,7 +205,12 @@ namespace System.Net.NetworkInformation
             return Send(address, timeout, buffer, null);
         }
 
-        public PingReply Send(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions? options)
+        public PingReply Send(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             if (string.IsNullOrEmpty(hostNameOrAddress))
             {
@@ -257,7 +270,12 @@ namespace System.Net.NetworkInformation
             SendAsync(address, timeout, DefaultSendBuffer, userToken);
         }
 
-        public void SendAsync(string hostNameOrAddress, int timeout, byte[] buffer, object? userToken)
+        public void SendAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            object? userToken
+        )
         {
             SendAsync(hostNameOrAddress, timeout, buffer, null, userToken);
         }
@@ -267,25 +285,60 @@ namespace System.Net.NetworkInformation
             SendAsync(address, timeout, buffer, null, userToken);
         }
 
-        public void SendAsync(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions? options, object? userToken)
+        public void SendAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options,
+            object? userToken
+        )
         {
-            TranslateTaskToEap(userToken, SendPingAsync(hostNameOrAddress, timeout, buffer, options));
+            TranslateTaskToEap(
+                userToken,
+                SendPingAsync(hostNameOrAddress, timeout, buffer, options)
+            );
         }
 
-        public void SendAsync(IPAddress address, int timeout, byte[] buffer, PingOptions? options, object? userToken)
+        public void SendAsync(
+            IPAddress address,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options,
+            object? userToken
+        )
         {
             TranslateTaskToEap(userToken, SendPingAsync(address, timeout, buffer, options));
         }
 
         private void TranslateTaskToEap(object? userToken, Task<PingReply> pingTask)
         {
-            pingTask.ContinueWith((t, state) =>
-            {
-                var asyncOp = (AsyncOperation)state!;
-                var e = new PingCompletedEventArgs(t.IsCompletedSuccessfully ? t.Result : null, t.Exception, t.IsCanceled, asyncOp.UserSuppliedState);
-                SendOrPostCallback callback = _onPingCompletedDelegate ?? (_onPingCompletedDelegate = new SendOrPostCallback(o => { OnPingCompleted((PingCompletedEventArgs)o!); }));
-                asyncOp.PostOperationCompleted(callback, e);
-            }, AsyncOperationManager.CreateOperation(userToken), CancellationToken.None, TaskContinuationOptions.DenyChildAttach, TaskScheduler.Default);
+            pingTask.ContinueWith(
+                (t, state) =>
+                {
+                    var asyncOp = (AsyncOperation)state!;
+                    var e = new PingCompletedEventArgs(
+                        t.IsCompletedSuccessfully ? t.Result : null,
+                        t.Exception,
+                        t.IsCanceled,
+                        asyncOp.UserSuppliedState
+                    );
+                    SendOrPostCallback callback =
+                        _onPingCompletedDelegate
+                        ?? (
+                            _onPingCompletedDelegate = new SendOrPostCallback(
+                                o =>
+                                {
+                                    OnPingCompleted((PingCompletedEventArgs)o!);
+                                }
+                            )
+                        );
+                    asyncOp.PostOperationCompleted(callback, e);
+                },
+                AsyncOperationManager.CreateOperation(userToken),
+                CancellationToken.None,
+                TaskContinuationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         public Task<PingReply> SendPingAsync(IPAddress address)
@@ -318,13 +371,23 @@ namespace System.Net.NetworkInformation
             return SendPingAsync(hostNameOrAddress, timeout, buffer, null);
         }
 
-        public Task<PingReply> SendPingAsync(IPAddress address, int timeout, byte[] buffer, PingOptions? options)
+        public Task<PingReply> SendPingAsync(
+            IPAddress address,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             CheckArgs(address, timeout, buffer, options);
             return SendPingAsyncInternal(address, timeout, buffer, options);
         }
 
-        private async Task<PingReply> SendPingAsyncInternal(IPAddress address, int timeout, byte[] buffer, PingOptions? options)
+        private async Task<PingReply> SendPingAsyncInternal(
+            IPAddress address,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             // Need to snapshot the address here, so we're sure that it's not changed between now
             // and the operation, and to be sure that IPAddress.ToString() is called and not some override.
@@ -333,7 +396,12 @@ namespace System.Net.NetworkInformation
             CheckStart();
             try
             {
-                Task<PingReply> pingReplyTask = SendPingAsyncCore(addressSnapshot, buffer, timeout, options);
+                Task<PingReply> pingReplyTask = SendPingAsyncCore(
+                    addressSnapshot,
+                    buffer,
+                    timeout,
+                    options
+                );
                 return await pingReplyTask.ConfigureAwait(false);
             }
             catch (Exception e)
@@ -346,7 +414,12 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public Task<PingReply> SendPingAsync(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions? options)
+        public Task<PingReply> SendPingAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             if (string.IsNullOrEmpty(hostNameOrAddress))
             {
@@ -380,7 +453,12 @@ namespace System.Net.NetworkInformation
             _lockObject.Wait();
         }
 
-        private PingReply GetAddressAndSend(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions? options)
+        private PingReply GetAddressAndSend(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             CheckStart();
             try
@@ -398,13 +476,24 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private async Task<PingReply> GetAddressAndSendAsync(string hostNameOrAddress, int timeout, byte[] buffer, PingOptions? options)
+        private async Task<PingReply> GetAddressAndSendAsync(
+            string hostNameOrAddress,
+            int timeout,
+            byte[] buffer,
+            PingOptions? options
+        )
         {
             CheckStart();
             try
             {
-                IPAddress[] addresses = await Dns.GetHostAddressesAsync(hostNameOrAddress).ConfigureAwait(false);
-                Task<PingReply> pingReplyTask = SendPingAsyncCore(addresses[0], buffer, timeout, options);
+                IPAddress[] addresses = await Dns.GetHostAddressesAsync(hostNameOrAddress)
+                    .ConfigureAwait(false);
+                Task<PingReply> pingReplyTask = SendPingAsyncCore(
+                    addresses[0],
+                    buffer,
+                    timeout,
+                    options
+                );
                 return await pingReplyTask.ConfigureAwait(false);
             }
             catch (Exception e)
@@ -420,11 +509,19 @@ namespace System.Net.NetworkInformation
         // Tests if the current machine supports the given ip protocol family.
         private void TestIsIpSupported(IPAddress ip)
         {
-            if (ip.AddressFamily == AddressFamily.InterNetwork && !SocketProtocolSupportPal.OSSupportsIPv4)
+            if (
+                ip.AddressFamily == AddressFamily.InterNetwork
+                && !SocketProtocolSupportPal.OSSupportsIPv4
+            )
             {
                 throw new NotSupportedException(SR.net_ipv4_not_installed);
             }
-            else if ((ip.AddressFamily == AddressFamily.InterNetworkV6 && !SocketProtocolSupportPal.OSSupportsIPv6))
+            else if (
+                (
+                    ip.AddressFamily == AddressFamily.InterNetworkV6
+                    && !SocketProtocolSupportPal.OSSupportsIPv6
+                )
+            )
             {
                 throw new NotSupportedException(SR.net_ipv6_not_installed);
             }

@@ -11,10 +11,7 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public class AppHostUpdateException : Exception
     {
-        internal AppHostUpdateException(string message = null)
-            : base(message)
-        {
-        }
+        internal AppHostUpdateException(string message = null) : base(message) { }
     }
 
     /// <summary>
@@ -23,9 +20,7 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public sealed class AppHostCustomizationUnsupportedOSException : AppHostUpdateException
     {
-        internal AppHostCustomizationUnsupportedOSException()
-        {
-        }
+        internal AppHostCustomizationUnsupportedOSException() { }
     }
 
     /// <summary>
@@ -48,9 +43,7 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public sealed class AppHostNotCUIException : AppHostUpdateException
     {
-        internal AppHostNotCUIException()
-        {
-        }
+        internal AppHostNotCUIException() { }
     }
 
     /// <summary>
@@ -59,9 +52,7 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public sealed class AppHostNotPEFileException : AppHostUpdateException
     {
-        internal AppHostNotPEFileException()
-        {
-        }
+        internal AppHostNotPEFileException() { }
     }
 
     /// <summary>
@@ -72,9 +63,7 @@ namespace Microsoft.NET.HostModel.AppHost
         public readonly int ExitCode;
 
         internal AppHostSigningException(int exitCode, string signingErrorMessage)
-            : base(signingErrorMessage)
-        {
-        }
+            : base(signingErrorMessage) { }
     }
 
     /// <summary>

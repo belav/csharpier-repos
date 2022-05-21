@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["BlendVariable.Byte"] = BlendVariableByte,
                 ["BlendVariable.Double"] = BlendVariableDouble,
                 ["BlendVariable.SByte"] = BlendVariableSByte,

@@ -32,7 +32,9 @@ public class KeyPerFileTests
     [Fact]
     public void ThrowsWhenNotOptionalAndDirectoryDoesntExist()
     {
-        var e = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddKeyPerFile("nonexistent", false).Build());
+        var e = Assert.Throws<ArgumentException>(
+            () => new ConfigurationBuilder().AddKeyPerFile("nonexistent", false).Build()
+        );
         Assert.Contains("The path must be absolute.", e.Message);
     }
 
@@ -41,7 +43,8 @@ public class KeyPerFileTests
     {
         var testFileProvider = new TestFileProvider(
             new TestFile("Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
             .AddKeyPerFile(o => o.FileProvider = testFileProvider)
@@ -57,7 +60,8 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("Secret1", "SecretValue1"),
             new TestFile("Secret2", "SecretValue2"),
-            new TestFile("directory"));
+            new TestFile("directory")
+        );
 
         var config = new ConfigurationBuilder()
             .AddKeyPerFile(o => o.FileProvider = testFileProvider)
@@ -73,7 +77,8 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("Secret0__Secret1__Secret2__Key", "SecretValue2"),
             new TestFile("Secret0__Secret1__Key", "SecretValue1"),
-            new TestFile("Secret0__Key", "SecretValue0"));
+            new TestFile("Secret0__Key", "SecretValue0")
+        );
 
         var config = new ConfigurationBuilder()
             .AddKeyPerFile(o => o.FileProvider = testFileProvider)
@@ -90,14 +95,17 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("Secret0--Secret1--Secret2--Key", "SecretValue2"),
             new TestFile("Secret0--Secret1--Key", "SecretValue1"),
-            new TestFile("Secret0--Key", "SecretValue0"));
+            new TestFile("Secret0--Key", "SecretValue0")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.SectionDelimiter = "--";
-            })
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.SectionDelimiter = "--";
+                }
+            )
             .Build();
 
         Assert.Equal("SecretValue0", config["Secret0:Key"]);
@@ -111,7 +119,8 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("ignore.Secret0", "SecretValue0"),
             new TestFile("ignore.Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
             .AddKeyPerFile(o => o.FileProvider = testFileProvider)
@@ -128,14 +137,17 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("ignore.Secret0", "SecretValue0"),
             new TestFile("ignore.Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.IgnoreCondition = null;
-            })
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnoreCondition = null;
+                }
+            )
             .Build();
 
         Assert.Equal("SecretValue0", config["ignore.Secret0"]);
@@ -149,14 +161,17 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("Secret0", "SecretValue0"),
             new TestFile("Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.IgnoreCondition = s => true;
-            })
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnoreCondition = s => true;
+                }
+            )
             .Build();
 
         Assert.Empty(config.AsEnumerable());
@@ -168,14 +183,17 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("meSecret0", "SecretValue0"),
             new TestFile("meSecret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.IgnorePrefix = "me";
-            })
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnorePrefix = "me";
+                }
+            )
             .Build();
 
         Assert.Null(config["meSecret0"]);
@@ -189,14 +207,17 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider(
             new TestFile("ignore.Secret0", "SecretValue0"),
             new TestFile("ignore.Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.IgnorePrefix = null;
-            })
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.IgnorePrefix = null;
+                }
+            )
             .Build();
 
         Assert.Equal("SecretValue0", config["ignore.Secret0"]);
@@ -209,7 +230,8 @@ public class KeyPerFileTests
     {
         var testFileProvider = new TestFileProvider(
             new TestFile("Number", "-2"),
-            new TestFile("Text", "Foo"));
+            new TestFile("Text", "Foo")
+        );
 
         var config = new ConfigurationBuilder()
             .AddKeyPerFile(o => o.FileProvider = testFileProvider)
@@ -243,22 +265,27 @@ public class KeyPerFileTests
     public void ReloadConfigWhenReloadOnChangeIsTrue()
     {
         var testFileProvider = new TestFileProvider(
-           new TestFile("Secret1", "SecretValue1"),
-           new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret1", "SecretValue1"),
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = true;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                }
+            )
+            .Build();
 
         Assert.Equal("SecretValue1", config["Secret1"]);
         Assert.Equal("SecretValue2", config["Secret2"]);
 
         testFileProvider.ChangeFiles(
             new TestFile("Secret1", "NewSecretValue1"),
-            new TestFile("Secret3", "NewSecretValue3"));
+            new TestFile("Secret3", "NewSecretValue3")
+        );
 
         Assert.Equal("NewSecretValue1", config["Secret1"]);
         Assert.Null(config["NewSecret2"]);
@@ -269,22 +296,27 @@ public class KeyPerFileTests
     public void SameConfigWhenReloadOnChangeIsFalse()
     {
         var testFileProvider = new TestFileProvider(
-           new TestFile("Secret1", "SecretValue1"),
-           new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret1", "SecretValue1"),
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = false;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = false;
+                }
+            )
+            .Build();
 
         Assert.Equal("SecretValue1", config["Secret1"]);
         Assert.Equal("SecretValue2", config["Secret2"]);
 
         testFileProvider.ChangeFiles(
             new TestFile("Secret1", "NewSecretValue1"),
-            new TestFile("Secret3", "NewSecretValue3"));
+            new TestFile("Secret3", "NewSecretValue3")
+        );
 
         Assert.Equal("SecretValue1", config["Secret1"]);
         Assert.Equal("SecretValue2", config["Secret2"]);
@@ -296,18 +328,22 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider();
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = true;
-                o.Optional = true;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                    o.Optional = true;
+                }
+            )
+            .Build();
 
         Assert.Empty(config.AsEnumerable());
 
         testFileProvider.ChangeFiles(
             new TestFile("Secret1", "SecretValue1"),
-            new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         Assert.Equal("SecretValue1", config["Secret1"]);
         Assert.Equal("SecretValue2", config["Secret2"]);
@@ -317,24 +353,31 @@ public class KeyPerFileTests
     public async Task RaiseChangeEventWhenReloadOnChangeIsTrue()
     {
         var testFileProvider = new TestFileProvider(
-           new TestFile("Secret1", "SecretValue1"),
-           new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret1", "SecretValue1"),
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = true;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                }
+            )
+            .Build();
 
         var changeToken = config.GetReloadToken();
         var changeTaskCompletion = new TaskCompletionSource<object>();
-        changeToken.RegisterChangeCallback(state =>
-            ((TaskCompletionSource<object>)state).TrySetResult(null), changeTaskCompletion);
+        changeToken.RegisterChangeCallback(
+            state => ((TaskCompletionSource<object>)state).TrySetResult(null),
+            changeTaskCompletion
+        );
 
         testFileProvider.ChangeFiles(
             new TestFile("Secret1", "NewSecretValue1"),
-            new TestFile("Secret3", "NewSecretValue3"));
+            new TestFile("Secret3", "NewSecretValue3")
+        );
 
         await changeTaskCompletion.Task;
 
@@ -347,20 +390,26 @@ public class KeyPerFileTests
     public async Task RaiseChangeEventWhenDirectoryClearsReloadOnChangeIsTrue()
     {
         var testFileProvider = new TestFileProvider(
-           new TestFile("Secret1", "SecretValue1"),
-           new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret1", "SecretValue1"),
+            new TestFile("Secret2", "SecretValue2")
+        );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = true;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                }
+            )
+            .Build();
 
         var changeToken = config.GetReloadToken();
         var changeTaskCompletion = new TaskCompletionSource<object>();
-        changeToken.RegisterChangeCallback(state =>
-            ((TaskCompletionSource<object>)state).TrySetResult(null), changeTaskCompletion);
+        changeToken.RegisterChangeCallback(
+            state => ((TaskCompletionSource<object>)state).TrySetResult(null),
+            changeTaskCompletion
+        );
 
         testFileProvider.ChangeFiles();
 
@@ -375,17 +424,22 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider();
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(o =>
-            {
-                o.FileProvider = testFileProvider;
-                o.ReloadOnChange = true;
-                o.Optional = true;
-            }).Build();
+            .AddKeyPerFile(
+                o =>
+                {
+                    o.FileProvider = testFileProvider;
+                    o.ReloadOnChange = true;
+                    o.Optional = true;
+                }
+            )
+            .Build();
 
         var changeToken = config.GetReloadToken();
         var changeTaskCompletion = new TaskCompletionSource<object>();
-        changeToken.RegisterChangeCallback(state =>
-            ((TaskCompletionSource<object>)state).TrySetResult(null), changeTaskCompletion);
+        changeToken.RegisterChangeCallback(
+            state => ((TaskCompletionSource<object>)state).TrySetResult(null),
+            changeTaskCompletion
+        );
 
         testFileProvider.ChangeFiles(new TestFile("Secret1", "SecretValue1"));
 
@@ -398,8 +452,9 @@ public class KeyPerFileTests
     public async Task RaiseChangeEventAfterProviderSetToNull()
     {
         var testFileProvider = new TestFileProvider(
-           new TestFile("Secret1", "SecretValue1"),
-           new TestFile("Secret2", "SecretValue2"));
+            new TestFile("Secret1", "SecretValue1"),
+            new TestFile("Secret2", "SecretValue2")
+        );
         var configurationSource = new KeyPerFileConfigurationSource
         {
             FileProvider = testFileProvider,
@@ -410,8 +465,10 @@ public class KeyPerFileTests
 
         var changeToken = config.GetReloadToken();
         var changeTaskCompletion = new TaskCompletionSource<object>();
-        changeToken.RegisterChangeCallback(state =>
-            ((TaskCompletionSource<object>)state).TrySetResult(null), changeTaskCompletion);
+        changeToken.RegisterChangeCallback(
+            state => ((TaskCompletionSource<object>)state).TrySetResult(null),
+            changeTaskCompletion
+        );
 
         configurationSource.FileProvider = null;
         config.Reload();
@@ -507,10 +564,7 @@ class TestFile : IFileInfo
 
     public bool Exists => true;
 
-    public bool IsDirectory
-    {
-        get;
-    }
+    public bool IsDirectory { get; }
 
     public DateTimeOffset LastModified => throw new NotImplementedException();
 

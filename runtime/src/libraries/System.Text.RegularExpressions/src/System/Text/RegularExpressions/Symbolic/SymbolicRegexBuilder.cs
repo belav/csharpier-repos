@@ -44,19 +44,22 @@ namespace System.Text.RegularExpressions.Symbolic
         // states that have been created
         internal HashSet<DfaMatchingState<TElement>> _stateCache = new();
 
-        internal readonly Dictionary<(SymbolicRegexKind,
-            SymbolicRegexNode<TElement>?, // _left
+        internal readonly Dictionary<
+            (SymbolicRegexKind, SymbolicRegexNode<TElement>?, // _left
             SymbolicRegexNode<TElement>?, // _right
-            int, int, TElement?,          // _lower, _upper, _set
-            SymbolicRegexSet<TElement>?,
-            SymbolicRegexInfo), SymbolicRegexNode<TElement>> _nodeCache = new();
+            int, int, TElement?, // _lower, _upper, _set
+            SymbolicRegexSet<TElement>?, SymbolicRegexInfo),
+            SymbolicRegexNode<TElement>
+        > _nodeCache = new();
 
-        internal readonly Dictionary<(TransitionRegexKind, // _kind
-            TElement?,                                     // _test
-            TransitionRegex<TElement>?,                    // _first
-            TransitionRegex<TElement>?,                    // _second
-            SymbolicRegexNode<TElement>?),                 // _leaf
-            TransitionRegex<TElement>> _trCache = new();
+        internal readonly Dictionary<
+            (TransitionRegexKind, // _kind
+            TElement?, // _test
+            TransitionRegex<TElement>?, // _first
+            TransitionRegex<TElement>?, // _second
+            SymbolicRegexNode<TElement>?), // _leaf
+            TransitionRegex<TElement>
+        > _trCache = new();
 
         /// <summary>
         /// Maps state ids to states, initial capacity is 1024 states.
@@ -149,32 +152,47 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Make a disjunction of given regexes, simplify by eliminating any regex that accepts no inputs
         /// </summary>
         internal SymbolicRegexNode<TElement> MkOr(SymbolicRegexSet<TElement> alts) =>
-            alts.IsNothing ? _nothing :
-            alts.IsEverything ? _anyStar :
-            alts.IsSingleton ? alts.GetSingletonElement() :
-            SymbolicRegexNode<TElement>.MkOr(this, alts);
+            alts.IsNothing
+                ? _nothing
+                : alts.IsEverything
+                    ? _anyStar
+                    : alts.IsSingleton
+                        ? alts.GetSingletonElement()
+                        : SymbolicRegexNode<TElement>.MkOr(this, alts);
 
-        internal SymbolicRegexNode<TElement> MkOr2(SymbolicRegexNode<TElement> x, SymbolicRegexNode<TElement> y) =>
-            x == _anyStar || y == _anyStar ? _anyStar :
-            x == _nothing ? y :
-            y == _nothing ? x :
-            SymbolicRegexNode<TElement>.MkOr(this, x, y);
+        internal SymbolicRegexNode<TElement> MkOr2(
+            SymbolicRegexNode<TElement> x,
+            SymbolicRegexNode<TElement> y
+        ) =>
+            x == _anyStar || y == _anyStar
+                ? _anyStar
+                : x == _nothing
+                    ? y
+                    : y == _nothing
+                        ? x
+                        : SymbolicRegexNode<TElement>.MkOr(this, x, y);
 
         /// <summary>
         /// Make a conjunction of given regexes, simplify by eliminating any regex that accepts all inputs,
         /// returns the empty regex if the regex accepts nothing
         /// </summary>
         internal SymbolicRegexNode<TElement> MkAnd(SymbolicRegexSet<TElement> alts) =>
-            alts.IsNothing ? _nothing :
-            alts.IsEverything ? _anyStar :
-            alts.IsSingleton ? alts.GetSingletonElement() :
-            SymbolicRegexNode<TElement>.MkAnd(this, alts);
+            alts.IsNothing
+                ? _nothing
+                : alts.IsEverything
+                    ? _anyStar
+                    : alts.IsSingleton
+                        ? alts.GetSingletonElement()
+                        : SymbolicRegexNode<TElement>.MkAnd(this, alts);
 
         /// <summary>
         /// Make a concatenation of given regexes, if any regex is nothing then return nothing, eliminate
         /// intermediate epsilons, if toplevel and length is fixed, add watchdog at the end
         /// </summary>
-        internal SymbolicRegexNode<TElement> MkConcat(SymbolicRegexNode<TElement>[] regexes, bool topLevel)
+        internal SymbolicRegexNode<TElement> MkConcat(
+            SymbolicRegexNode<TElement>[] regexes,
+            bool topLevel
+        )
         {
             if (regexes.Length == 0)
                 return _epsilon;
@@ -196,7 +214,10 @@ namespace System.Text.RegularExpressions.Symbolic
             return sr;
         }
 
-        internal SymbolicRegexNode<TElement> MkConcat(SymbolicRegexNode<TElement> left, SymbolicRegexNode<TElement> right) => SymbolicRegexNode<TElement>.MkConcat(this, left, right);
+        internal SymbolicRegexNode<TElement> MkConcat(
+            SymbolicRegexNode<TElement> left,
+            SymbolicRegexNode<TElement> right
+        ) => SymbolicRegexNode<TElement>.MkConcat(this, left, right);
 
         private int CalculateFixedLength(SymbolicRegexNode<TElement>[] regexes)
         {
@@ -215,11 +236,15 @@ namespace System.Text.RegularExpressions.Symbolic
             return length;
         }
 
-
         /// <summary>
         /// Make loop regex
         /// </summary>
-        internal SymbolicRegexNode<TElement> MkLoop(SymbolicRegexNode<TElement> regex, bool isLazy, int lower = 0, int upper = int.MaxValue)
+        internal SymbolicRegexNode<TElement> MkLoop(
+            SymbolicRegexNode<TElement> regex,
+            bool isLazy,
+            int lower = 0,
+            int upper = int.MaxValue
+        )
         {
             if (lower == 1 && upper == 1)
             {
@@ -231,7 +256,12 @@ namespace System.Text.RegularExpressions.Symbolic
                 return isLazy ? _epsilon : _eagerEmptyLoop;
             }
 
-            if (!isLazy && lower == 0 && upper == int.MaxValue && regex._kind == SymbolicRegexKind.Singleton)
+            if (
+                !isLazy
+                && lower == 0
+                && upper == int.MaxValue
+                && regex._kind == SymbolicRegexKind.Singleton
+            )
             {
                 Debug.Assert(regex._set is not null);
                 if (_solver.AreEquivalent(_solver.True, regex._set))
@@ -259,7 +289,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>
         /// Make end of sequence marker
         /// </summary>
-        internal SymbolicRegexNode<TElement> MkWatchDog(int length) => SymbolicRegexNode<TElement>.MkWatchDog(this, length);
+        internal SymbolicRegexNode<TElement> MkWatchDog(int length) =>
+            SymbolicRegexNode<TElement>.MkWatchDog(this, length);
 
         /// <summary>
         /// Make a sequence regex, i.e., a concatenation of singletons, with a watchdog at the end
@@ -273,14 +304,14 @@ namespace System.Text.RegularExpressions.Symbolic
             }
             else if (k == 1)
             {
-                return topLevel ?
-                    SymbolicRegexNode<TElement>.MkConcat(this, MkSingleton(seq[0]), MkWatchDog(1)) :
-                    MkSingleton(seq[0]);
+                return topLevel
+                    ? SymbolicRegexNode<TElement>.MkConcat(this, MkSingleton(seq[0]), MkWatchDog(1))
+                    : MkSingleton(seq[0]);
             }
             else
             {
                 var singletons = new SymbolicRegexNode<TElement>[seq.Length];
-                for (int i =0; i < singletons.Length; i++)
+                for (int i = 0; i < singletons.Length; i++)
                 {
                     singletons[i] = MkSingleton(seq[i]);
                 }
@@ -293,9 +324,14 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </summary>
         /// <param name="node">node to be complemented</param>
         /// <returns></returns>
-        internal SymbolicRegexNode<TElement> MkNot(SymbolicRegexNode<TElement> node) => SymbolicRegexNode<TElement>.MkNot(this, node);
+        internal SymbolicRegexNode<TElement> MkNot(SymbolicRegexNode<TElement> node) =>
+            SymbolicRegexNode<TElement>.MkNot(this, node);
 
-        internal SymbolicRegexNode<T> Transform<T>(SymbolicRegexNode<TElement> sr, SymbolicRegexBuilder<T> builderT, Func<TElement, T> predicateTransformer) where T : notnull
+        internal SymbolicRegexNode<T> Transform<T>(
+            SymbolicRegexNode<TElement> sr,
+            SymbolicRegexBuilder<T> builderT,
+            Func<TElement, T> predicateTransformer
+        ) where T : notnull
         {
             if (!StackHelper.TryEnsureSufficientExecutionStack())
             {
@@ -340,7 +376,12 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 case SymbolicRegexKind.Loop:
                     Debug.Assert(sr._left is not null);
-                    return builderT.MkLoop(Transform(sr._left, builderT, predicateTransformer), sr.IsLazy, sr._lower, sr._upper);
+                    return builderT.MkLoop(
+                        Transform(sr._left, builderT, predicateTransformer),
+                        sr.IsLazy,
+                        sr._lower,
+                        sr._upper
+                    );
 
                 case SymbolicRegexKind.Or:
                     Debug.Assert(sr._alts is not null);
@@ -351,15 +392,21 @@ namespace System.Text.RegularExpressions.Symbolic
                     return builderT.MkAnd(sr._alts.Transform(builderT, predicateTransformer));
 
                 case SymbolicRegexKind.Concat:
+                {
+                    List<SymbolicRegexNode<TElement>> sr_elems = sr.ToList();
+                    SymbolicRegexNode<T>[] sr_elems_trasformed = new SymbolicRegexNode<T>[
+                        sr_elems.Count
+                    ];
+                    for (int i = 0; i < sr_elems.Count; i++)
                     {
-                        List<SymbolicRegexNode<TElement>> sr_elems = sr.ToList();
-                        SymbolicRegexNode<T>[] sr_elems_trasformed = new SymbolicRegexNode<T>[sr_elems.Count];
-                        for (int i = 0; i < sr_elems.Count; i++)
-                        {
-                            sr_elems_trasformed[i] = Transform(sr_elems[i], builderT, predicateTransformer);
-                        }
-                        return builderT.MkConcat(sr_elems_trasformed, false);
+                        sr_elems_trasformed[i] = Transform(
+                            sr_elems[i],
+                            builderT,
+                            predicateTransformer
+                        );
                     }
+                    return builderT.MkConcat(sr_elems_trasformed, false);
+                }
 
                 default:
                     Debug.Assert(sr._kind == SymbolicRegexKind.Not);
@@ -371,18 +418,29 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>
         /// Make a state with given node and previous character context
         /// </summary>
-        public DfaMatchingState<TElement> MkState(SymbolicRegexNode<TElement> node, uint prevCharKind, bool antimirov = false)
+        public DfaMatchingState<TElement> MkState(
+            SymbolicRegexNode<TElement> node,
+            uint prevCharKind,
+            bool antimirov = false
+        )
         {
             //first prune the anchors in the node
             TElement WLpred = _wordLetterPredicateForAnchors;
             TElement startSet = node.GetStartSet();
 
             //true if the startset of the node overlaps with some wordletter or the node can be nullable
-            bool contWithWL = node.CanBeNullable || _solver.IsSatisfiable(_solver.And(WLpred, startSet));
+            bool contWithWL =
+                node.CanBeNullable || _solver.IsSatisfiable(_solver.And(WLpred, startSet));
 
             //true if the startset of the node overlaps with some nonwordletter or the node can be nullable
-            bool contWithNWL = node.CanBeNullable || _solver.IsSatisfiable(_solver.And(_solver.Not(WLpred), startSet));
-            SymbolicRegexNode<TElement> pruned_node = node.PruneAnchors(prevCharKind, contWithWL, contWithNWL);
+            bool contWithNWL =
+                node.CanBeNullable
+                || _solver.IsSatisfiable(_solver.And(_solver.Not(WLpred), startSet));
+            SymbolicRegexNode<TElement> pruned_node = node.PruneAnchors(
+                prevCharKind,
+                contWithWL,
+                contWithNWL
+            );
             var s = new DfaMatchingState<TElement>(pruned_node, prevCharKind);
             if (!_stateCache.TryGetValue(s, out DfaMatchingState<TElement>? state))
             {

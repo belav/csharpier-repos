@@ -30,10 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SelectionResult selectionResult,
                     AnalyzerResult analyzerResult,
                     OptionSet options,
-                    bool localFunction)
-                    : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
-                {
-                }
+                    bool localFunction
+                ) : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
+                { }
 
                 public static bool IsExtractMethodOnMultipleStatements(SelectionResult code)
                 {
@@ -45,23 +44,35 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     {
                         var firstUnderContainer = result.GetFirstStatementUnderContainer();
                         var lastUnderContainer = result.GetLastStatementUnderContainer();
-                        Contract.ThrowIfFalse(CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(firstUnderContainer, lastUnderContainer));
+                        Contract.ThrowIfFalse(
+                            CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
+                                firstUnderContainer,
+                                lastUnderContainer
+                            )
+                        );
                         return true;
                     }
 
                     return false;
                 }
 
-                protected override SyntaxToken CreateMethodName() => GenerateMethodNameForStatementGenerators();
+                protected override SyntaxToken CreateMethodName() =>
+                    GenerateMethodNameForStatementGenerators();
 
                 protected override ImmutableArray<StatementSyntax> GetInitialStatementsForMethodDefinitions()
                 {
                     var firstSeen = false;
-                    var firstStatementUnderContainer = CSharpSelectionResult.GetFirstStatementUnderContainer();
-                    var lastStatementUnderContainer = CSharpSelectionResult.GetLastStatementUnderContainer();
+                    var firstStatementUnderContainer =
+                        CSharpSelectionResult.GetFirstStatementUnderContainer();
+                    var lastStatementUnderContainer =
+                        CSharpSelectionResult.GetLastStatementUnderContainer();
 
                     using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var list);
-                    foreach (var statement in GetStatementsFromContainer(firstStatementUnderContainer.Parent))
+                    foreach (
+                        var statement in GetStatementsFromContainer(
+                            firstStatementUnderContainer.Parent
+                        )
+                    )
                     {
                         // reset first seen
                         if (!firstSeen)
@@ -87,16 +98,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return list.ToImmutable();
                 }
 
-                protected override SyntaxNode GetOutermostCallSiteContainerToProcess(CancellationToken cancellationToken)
+                protected override SyntaxNode GetOutermostCallSiteContainerToProcess(
+                    CancellationToken cancellationToken
+                )
                 {
-                    var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(cancellationToken);
+                    var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(
+                        cancellationToken
+                    );
                     if (callSiteContainer != null)
                     {
                         return callSiteContainer;
                     }
                     else
                     {
-                        var firstStatement = CSharpSelectionResult.GetFirstStatementUnderContainer();
+                        var firstStatement =
+                            CSharpSelectionResult.GetFirstStatementUnderContainer();
                         var container = firstStatement.Parent;
                         if (container is GlobalStatementSyntax)
                             return container.Parent;
@@ -105,7 +121,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
                 }
 
-                private static IEnumerable<StatementSyntax> GetStatementsFromContainer(SyntaxNode node)
+                private static IEnumerable<StatementSyntax> GetStatementsFromContainer(
+                    SyntaxNode node
+                )
                 {
                     Contract.ThrowIfNull(node);
                     Contract.ThrowIfFalse(node.IsStatementContainerNode());
@@ -114,21 +132,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     {
                         BlockSyntax blockNode => blockNode.Statements,
                         SwitchSectionSyntax switchSectionNode => switchSectionNode.Statements,
-                        GlobalStatementSyntax globalStatement => ((CompilationUnitSyntax)globalStatement.Parent).Members.OfType<GlobalStatementSyntax>().Select(globalStatement => globalStatement.Statement),
+                        GlobalStatementSyntax globalStatement
+                            => ((CompilationUnitSyntax)globalStatement.Parent).Members
+                                .OfType<GlobalStatementSyntax>()
+                                .Select(globalStatement => globalStatement.Statement),
                         _ => throw ExceptionUtilities.UnexpectedValue(node),
                     };
                 }
 
-                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite()
-                    => CSharpSelectionResult.GetFirstStatementUnderContainer();
+                protected override SyntaxNode GetFirstStatementOrInitializerSelectedAtCallSite() =>
+                    CSharpSelectionResult.GetFirstStatementUnderContainer();
 
-                protected override SyntaxNode GetLastStatementOrInitializerSelectedAtCallSite()
-                    => CSharpSelectionResult.GetLastStatementUnderContainer();
+                protected override SyntaxNode GetLastStatementOrInitializerSelectedAtCallSite() =>
+                    CSharpSelectionResult.GetLastStatementUnderContainer();
 
-                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(CancellationToken cancellationToken)
+                protected override Task<SyntaxNode> GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
+                    CancellationToken cancellationToken
+                )
                 {
                     var statement = GetStatementContainingInvocationToExtractedMethodWorker();
-                    return Task.FromResult<SyntaxNode>(statement.WithAdditionalAnnotations(CallSiteAnnotation));
+                    return Task.FromResult<SyntaxNode>(
+                        statement.WithAdditionalAnnotations(CallSiteAnnotation)
+                    );
                 }
             }
         }

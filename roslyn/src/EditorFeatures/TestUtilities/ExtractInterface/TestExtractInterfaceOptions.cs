@@ -15,14 +15,16 @@ using Microsoft.CodeAnalysis.Notification;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 {
-    [ExportWorkspaceService(typeof(IExtractInterfaceOptionsService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IExtractInterfaceOptionsService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class TestExtractInterfaceOptionsService : IExtractInterfaceOptionsService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtractInterfaceOptionsService()
-        {
-        }
+        public TestExtractInterfaceOptionsService() { }
 
         public IEnumerable<ISymbol> AllExtractableMembers { get; private set; }
         public string DefaultInterfaceName { get; private set; }
@@ -44,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             List<string> conflictingTypeNames,
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
-            string languageName)
+            string languageName
+        )
         {
             this.AllExtractableMembers = extractableMembers;
             this.DefaultInterfaceName = defaultInterfaceName;
@@ -59,7 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                     includedMembers: (ChosenMembers ?? AllExtractableMembers).AsImmutable(),
                     interfaceName: ChosenInterfaceName ?? defaultInterfaceName,
                     fileName: ChosenFileName ?? defaultInterfaceName,
-                    location: SameFile ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile : ExtractInterfaceOptionsResult.ExtractLocation.NewFile);
+                    location: SameFile
+                        ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
+                        : ExtractInterfaceOptionsResult.ExtractLocation.NewFile
+                );
 
             return Task.FromResult(result);
         }

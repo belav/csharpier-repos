@@ -14,10 +14,18 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
     {
         public string Name => PredefinedCodeCleanupProviderNames.Simplification;
 
-        public Task<Document> CleanupAsync(Document document, ImmutableArray<TextSpan> spans, CancellationToken cancellationToken)
-            => Simplifier.ReduceAsync(document, spans, null, cancellationToken);
+        public Task<Document> CleanupAsync(
+            Document document,
+            ImmutableArray<TextSpan> spans,
+            CancellationToken cancellationToken
+        ) => Simplifier.ReduceAsync(document, spans, null, cancellationToken);
 
-        public Task<SyntaxNode> CleanupAsync(SyntaxNode root, ImmutableArray<TextSpan> spans, Workspace workspace, CancellationToken cancellationToken)
+        public Task<SyntaxNode> CleanupAsync(
+            SyntaxNode root,
+            ImmutableArray<TextSpan> spans,
+            Workspace workspace,
+            CancellationToken cancellationToken
+        )
         {
             // Simplifier doesn't work without semantic information
             return Task.FromResult(root);

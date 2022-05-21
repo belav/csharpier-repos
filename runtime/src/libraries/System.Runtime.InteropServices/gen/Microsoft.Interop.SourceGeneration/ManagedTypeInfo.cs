@@ -27,17 +27,32 @@ namespace Microsoft.Interop
             }
             if (type.TypeKind == TypeKind.Enum)
             {
-                return new EnumTypeInfo(typeName, diagonsticFormattedName, ((INamedTypeSymbol)type).EnumUnderlyingType!.SpecialType);
+                return new EnumTypeInfo(
+                    typeName,
+                    diagonsticFormattedName,
+                    ((INamedTypeSymbol)type).EnumUnderlyingType!.SpecialType
+                );
             }
             if (type.TypeKind == TypeKind.Pointer)
             {
-                return new PointerTypeInfo(typeName, diagonsticFormattedName, IsFunctionPointer: false);
+                return new PointerTypeInfo(
+                    typeName,
+                    diagonsticFormattedName,
+                    IsFunctionPointer: false
+                );
             }
             if (type.TypeKind == TypeKind.FunctionPointer)
             {
-                return new PointerTypeInfo(typeName, diagonsticFormattedName, IsFunctionPointer: true);
+                return new PointerTypeInfo(
+                    typeName,
+                    diagonsticFormattedName,
+                    IsFunctionPointer: true
+                );
             }
-            if (type.TypeKind == TypeKind.Array && type is IArrayTypeSymbol { IsSZArray: true } arraySymbol)
+            if (
+                type.TypeKind == TypeKind.Array
+                && type is IArrayTypeSymbol { IsSZArray: true } arraySymbol
+            )
             {
                 return new SzArrayType(CreateTypeInfoForTypeSymbol(arraySymbol.ElementType));
             }
@@ -49,7 +64,11 @@ namespace Microsoft.Interop
         }
     }
 
-    public sealed record SpecialTypeInfo(string FullTypeName, string DiagnosticFormattedName, SpecialType SpecialType) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName)
+    public sealed record SpecialTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        SpecialType SpecialType
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName)
     {
         public static readonly SpecialTypeInfo Int32 = new("int", "int", SpecialType.System_Int32);
         public static readonly SpecialTypeInfo Void = new("void", "void", SpecialType.System_Void);
@@ -65,13 +84,27 @@ namespace Microsoft.Interop
         }
     }
 
-    public sealed record EnumTypeInfo(string FullTypeName, string DiagnosticFormattedName, SpecialType UnderlyingType) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record EnumTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        SpecialType UnderlyingType
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record PointerTypeInfo(string FullTypeName, string DiagnosticFormattedName, bool IsFunctionPointer) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record PointerTypeInfo(
+        string FullTypeName,
+        string DiagnosticFormattedName,
+        bool IsFunctionPointer
+    ) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record SzArrayType(ManagedTypeInfo ElementTypeInfo) : ManagedTypeInfo($"{ElementTypeInfo.FullTypeName}[]", $"{ElementTypeInfo.DiagnosticFormattedName}[]");
+    public sealed record SzArrayType(ManagedTypeInfo ElementTypeInfo)
+        : ManagedTypeInfo(
+            $"{ElementTypeInfo.FullTypeName}[]",
+            $"{ElementTypeInfo.DiagnosticFormattedName}[]"
+        );
 
-    public sealed record DelegateTypeInfo(string FullTypeName, string DiagnosticFormattedName) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record DelegateTypeInfo(string FullTypeName, string DiagnosticFormattedName)
+        : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 
-    public sealed record SimpleManagedTypeInfo(string FullTypeName, string DiagnosticFormattedName) : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
+    public sealed record SimpleManagedTypeInfo(string FullTypeName, string DiagnosticFormattedName)
+        : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);
 }

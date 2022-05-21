@@ -12,7 +12,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
 {
     public ComponentParameterUsageAnalyzerTest()
     {
-        ComponentTestSource = $@"
+        ComponentTestSource =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -30,7 +31,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void ComponentPropertySimpleAssignment_Warns()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -45,23 +47,26 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         }}
     }}" + ComponentTestSource;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
-                Message = "Component parameter 'TestProperty' should not be set outside of its component.",
+                Id = DiagnosticDescriptors
+                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
+                    .Id,
+                Message =
+                    "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 11, 17)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+            }
+        );
     }
 
     [Fact]
     public void ComponentPropertyCoalesceAssignment__Warns()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -76,23 +81,26 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         }}
     }}" + ComponentTestSource;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
-                Message = "Component parameter 'TestProperty' should not be set outside of its component.",
+                Id = DiagnosticDescriptors
+                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
+                    .Id,
+                Message =
+                    "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 11, 17)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+            }
+        );
     }
 
     [Fact]
     public void ComponentPropertyCompoundAssignment__Warns()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -107,23 +115,26 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         }}
     }}" + ComponentTestSource;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
-                Message = "Component parameter 'TestProperty' should not be set outside of its component.",
+                Id = DiagnosticDescriptors
+                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
+                    .Id,
+                Message =
+                    "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 11, 17)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+            }
+        );
     }
 
     [Fact]
     public void ComponentPropertyIncrement_Warns()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -138,23 +149,26 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         }}
     }}" + ComponentTestSource;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
-                Message = "Component parameter 'TestInt' should not be set outside of its component.",
+                Id = DiagnosticDescriptors
+                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
+                    .Id,
+                Message =
+                    "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 11, 17)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+            }
+        );
     }
 
     [Fact]
     public void ComponentPropertyDecrement_Warns()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -169,23 +183,26 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         }}
     }}" + ComponentTestSource;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
-                Id = DiagnosticDescriptors.ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent.Id,
-                Message = "Component parameter 'TestInt' should not be set outside of its component.",
+                Id = DiagnosticDescriptors
+                    .ComponentParametersShouldNotBeSetOutsideOfTheirDeclaredComponent
+                    .Id,
+                Message =
+                    "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 11, 17)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+            }
+        );
     }
 
     [Fact]
     public void ComponentPropertyExpression_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -204,7 +221,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void ComponentPropertyExpressionInStatement_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -226,7 +244,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void RetrievalOfComponentPropertyValueInAssignment_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -248,7 +267,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void ShadowedComponentPropertyAssignment_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -273,7 +293,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void InheritedImplicitComponentPropertyAssignment_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -292,7 +313,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void ImplicitComponentPropertyAssignment_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -313,7 +335,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void ComponentPropertyAssignment_NonParameter_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -334,7 +357,8 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
     [Fact]
     public void NonComponentPropertyAssignment_Ignores()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -356,5 +380,6 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
         VerifyCSharpDiagnostic(test);
     }
 
-    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new ComponentParameterUsageAnalyzer();
+    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() =>
+        new ComponentParameterUsageAnalyzer();
 }

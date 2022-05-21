@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             string? verbosity,
             string? binarylog,
             string? report,
-            IConsole console);
+            IConsole console
+        );
 
         private static readonly FormatWhitespaceHandler s_formattingHandler = new();
 
@@ -50,7 +51,9 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 : null;
         }
 
-        internal static string? EnsureFolderNotSpecifiedWhenLoggingBinlog(CommandResult symbolResult)
+        internal static string? EnsureFolderNotSpecifiedWhenLoggingBinlog(
+            CommandResult symbolResult
+        )
         {
             var folder = symbolResult.GetValueForOption<bool>("--folder");
             var binarylog = symbolResult.GetOptionResult("--binarylog");
@@ -65,13 +68,17 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             {
                 var parseResult = context.ParseResult;
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = context.Console.SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = context.Console.SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Whitespace };
 
-                return await FormatAsync(formatOptions, logger, context.GetCancellationToken()).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, context.GetCancellationToken())
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger);
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        );
     }
 }

@@ -14,26 +14,30 @@ class Foo
     static void Main(string[] args)
     {
         int mem = Int32.MaxValue / 2;
-        if( args.Length > 0 )
+        if (args.Length > 0)
         {
-            if ( !Int32.TryParse( args[0], out mem ) )
+            if (!Int32.TryParse(args[0], out mem))
             {
                 mem = Int32.MaxValue / 2;
             }
         }
 
         int fooCnt = mem / SizeOfFoo;
-        Console.WriteLine( "Creating {0} objects of type 'Foo', each with a size of {1} bytes.", fooCnt, SizeOfFoo );
+        Console.WriteLine(
+            "Creating {0} objects of type 'Foo', each with a size of {1} bytes.",
+            fooCnt,
+            SizeOfFoo
+        );
 
-        Foo[] currFoos = new Foo[ 4 ];
-        for( int i = 0; i < fooCnt; ++i )
+        Foo[] currFoos = new Foo[4];
+        for (int i = 0; i < fooCnt; ++i)
         {
             Foo f = new Foo();
-            if( i < 4 )
+            if (i < 4)
             {
                 currFoos[i] = f;
-            } 
-            else 
+            }
+            else
             {
                 f.F1 = currFoos[0];
                 f.F2 = currFoos[1];
@@ -47,19 +51,19 @@ class Foo
             }
         }
 
-        Random randDel = new Random( 17 );
-        int delCnt = randDel.Next( 5, 100 );
-        Console.WriteLine( "Deleting {0} objects.", delCnt );
+        Random randDel = new Random(17);
+        int delCnt = randDel.Next(5, 100);
+        Console.WriteLine("Deleting {0} objects.", delCnt);
 
         Foo currDelBlock = currFoos[0].F1;
         Foo nextDelBlock = currFoos[0].F1;
-        for( int i = 0; i < delCnt; ++i )
+        for (int i = 0; i < delCnt; ++i)
         {
-            for( int j = 0; j < 10; ++j )
+            for (int j = 0; j < 10; ++j)
             {
                 nextDelBlock = nextDelBlock.F1;
             }
-            for( int k = 0; k < 4; ++k )
+            for (int k = 0; k < 4; ++k)
             {
                 currDelBlock.F1 = null;
                 currDelBlock.F2.F4 = null;
@@ -70,4 +74,3 @@ class Foo
         }
     }
 }
-

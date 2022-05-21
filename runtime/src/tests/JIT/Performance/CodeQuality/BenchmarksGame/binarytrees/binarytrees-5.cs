@@ -7,9 +7,9 @@
 // Best-scoring C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/ 
+   http://benchmarksgame.alioth.debian.org/
 
-   contributed by Marek Safar  
+   contributed by Marek Safar
    *reset*
    concurrency added by Peperud
    minor improvements by Alex Yakunin
@@ -49,27 +49,31 @@ namespace BenchmarksGame
             {
                 var iterationCount = 1 << (maxDepth - depth + MinDepth);
                 var depthCopy = depth; // To make sure closure value doesn't change
-                tasks[ti] = Task.Run(() =>
-                {
-                    var count = 0;
-                    if (depthCopy >= 17)
+                tasks[ti] = Task.Run(
+                    () =>
                     {
-                        // Parallelized computation for relatively large tasks
-                        var miniTasks = new Task<int>[iterationCount];
-                        for (var i = 0; i < iterationCount; i++)
-                            miniTasks[i] = Task.Run(() => TreeNode.CreateTree(depthCopy).CountNodes());
-                        Task.WaitAll(miniTasks);
-                        for (var i = 0; i < iterationCount; i++)
-                            count += miniTasks[i].Result;
+                        var count = 0;
+                        if (depthCopy >= 17)
+                        {
+                            // Parallelized computation for relatively large tasks
+                            var miniTasks = new Task<int>[iterationCount];
+                            for (var i = 0; i < iterationCount; i++)
+                                miniTasks[i] = Task.Run(
+                                    () => TreeNode.CreateTree(depthCopy).CountNodes()
+                                );
+                            Task.WaitAll(miniTasks);
+                            for (var i = 0; i < iterationCount; i++)
+                                count += miniTasks[i].Result;
+                        }
+                        else
+                        {
+                            // Sequential computation for smaller tasks
+                            for (var i = 0; i < iterationCount; i++)
+                                count += TreeNode.CreateTree(depthCopy).CountNodes();
+                        }
+                        return $"{iterationCount}\t trees of depth {depthCopy}\t check: {count}";
                     }
-                    else
-                    {
-                        // Sequential computation for smaller tasks
-                        for (var i = 0; i < iterationCount; i++)
-                            count += TreeNode.CreateTree(depthCopy).CountNodes();
-                    }
-                    return $"{iterationCount}\t trees of depth {depthCopy}\t check: {count}";
-                });
+                );
             }
             Task.WaitAll(tasks);
 
@@ -82,12 +86,22 @@ namespace BenchmarksGame
                     count += int.Parse(s.Substring(s.LastIndexOf(':') + 1).TrimStart());
                 };
 
-                printAndSum(String.Format("stretch tree of depth {0}\t check: {1}",
-                    stretchDepth, stretchDepthTask.Result));
+                printAndSum(
+                    String.Format(
+                        "stretch tree of depth {0}\t check: {1}",
+                        stretchDepth,
+                        stretchDepthTask.Result
+                    )
+                );
                 foreach (var task in tasks)
                     printAndSum(task.Result);
-                printAndSum(String.Format("long lived tree of depth {0}\t check: {1}",
-                    maxDepth, maxDepthTask.Result));
+                printAndSum(
+                    String.Format(
+                        "long lived tree of depth {0}\t check: {1}",
+                        maxDepth,
+                        maxDepthTask.Result
+                    )
+                );
 
                 return count;
             }
@@ -100,7 +114,8 @@ namespace BenchmarksGame
     {
         public sealed class NodeData
         {
-            public TreeNode Left, Right;
+            public TreeNode Left,
+                Right;
 
             public NodeData(TreeNode left, TreeNode right)
             {

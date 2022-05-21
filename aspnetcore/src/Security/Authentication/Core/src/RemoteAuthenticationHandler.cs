@@ -18,8 +18,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// </summary>
 /// <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
 
-public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHandler<TOptions>, IAuthenticationRequestHandler
-    where TOptions : RemoteAuthenticationOptions, new()
+public abstract class RemoteAuthenticationHandler<TOptions>
+    : AuthenticationHandler<TOptions>,
+        IAuthenticationRequestHandler where TOptions : RemoteAuthenticationOptions, new()
 {
     private const string CorrelationProperty = ".xsrf";
     private const string CorrelationMarker = "N";
@@ -47,20 +48,23 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
-    protected RemoteAuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock) { }
-
+    protected RemoteAuthenticationHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    ) : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc />
-    protected override Task<object> CreateEventsAsync()
-        => Task.FromResult<object>(new RemoteAuthenticationEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new RemoteAuthenticationEvents());
 
     /// <summary>
     /// Gets a value that determines if the current authentication request should be handled by <see cref="HandleRequestAsync" />.
     /// </summary>
     /// <returns><see langword="true"/> to handle the operation, otherwise <see langword="false"/>.</returns>
-    public virtual Task<bool> ShouldHandleRequestAsync()
-        => Task.FromResult(Options.CallbackPath == Request.Path);
+    public virtual Task<bool> ShouldHandleRequestAsync() =>
+        Task.FromResult(Options.CallbackPath == Request.Path);
 
     /// <summary>
     /// Handles the current authentication request.
@@ -81,7 +85,9 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
             var authResult = await HandleRemoteAuthenticateAsync();
             if (authResult == null)
             {
-                exception = new InvalidOperationException("Invalid return state, unable to redirect.");
+                exception = new InvalidOperationException(
+                    "Invalid return state, unable to redirect."
+                );
             }
             else if (authResult.Handled)
             {
@@ -93,7 +99,9 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
             }
             else if (!authResult.Succeeded)
             {
-                exception = authResult.Failure ?? new InvalidOperationException("Invalid return state, unable to redirect.");
+                exception =
+                    authResult.Failure
+                    ?? new InvalidOperationException("Invalid return state, unable to redirect.");
                 properties = authResult.Properties;
             }
 
@@ -125,13 +133,19 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
                 }
                 else if (errorContext.Result.Failure != null)
                 {
-                    throw new Exception("An error was returned from the RemoteFailure event.", errorContext.Result.Failure);
+                    throw new Exception(
+                        "An error was returned from the RemoteFailure event.",
+                        errorContext.Result.Failure
+                    );
                 }
             }
 
             if (errorContext.Failure != null)
             {
-                throw new Exception("An error was encountered while handling the remote login.", errorContext.Failure);
+                throw new Exception(
+                    "An error was encountered while handling the remote login.",
+                    errorContext.Failure
+                );
             }
         }
 
@@ -195,23 +209,30 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
 
             // The SignInScheme may be shared with multiple providers, make sure this provider issued the identity.
             var ticket = result.Ticket;
-            if (ticket != null && ticket.Principal != null && ticket.Properties != null
+            if (
+                ticket != null
+                && ticket.Principal != null
+                && ticket.Properties != null
                 && ticket.Properties.Items.TryGetValue(AuthSchemeKey, out var authenticatedScheme)
-                && string.Equals(Scheme.Name, authenticatedScheme, StringComparison.Ordinal))
+                && string.Equals(Scheme.Name, authenticatedScheme, StringComparison.Ordinal)
+            )
             {
-                return AuthenticateResult.Success(new AuthenticationTicket(ticket.Principal,
-                    ticket.Properties, Scheme.Name));
+                return AuthenticateResult.Success(
+                    new AuthenticationTicket(ticket.Principal, ticket.Properties, Scheme.Name)
+                );
             }
 
             return AuthenticateResult.Fail("Not authenticated");
         }
 
-        return AuthenticateResult.Fail("Remote authentication does not directly support AuthenticateAsync");
+        return AuthenticateResult.Fail(
+            "Remote authentication does not directly support AuthenticateAsync"
+        );
     }
 
     /// <inheritdoc />
-    protected override Task HandleForbiddenAsync(AuthenticationProperties properties)
-        => Context.ForbidAsync(SignInScheme);
+    protected override Task HandleForbiddenAsync(AuthenticationProperties properties) =>
+        Context.ForbidAsync(SignInScheme);
 
     /// <summary>
     /// Produces a cookie containing a nonce used to correlate the current remote authentication request.
@@ -284,7 +305,9 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
     /// </summary>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>The <see cref="HandleRequestResult"/>.</returns>
-    protected virtual async Task<HandleRequestResult> HandleAccessDeniedErrorAsync(AuthenticationProperties properties)
+    protected virtual async Task<HandleRequestResult> HandleAccessDeniedErrorAsync(
+        AuthenticationProperties properties
+    )
     {
         Logger.AccessDeniedError();
         var context = new AccessDeniedContext(Context, Scheme, Options)
@@ -315,9 +338,16 @@ public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHand
         if (context.AccessDeniedPath.HasValue)
         {
             string uri = context.AccessDeniedPath;
-            if (!string.IsNullOrEmpty(context.ReturnUrlParameter) && !string.IsNullOrEmpty(context.ReturnUrl))
+            if (
+                !string.IsNullOrEmpty(context.ReturnUrlParameter)
+                && !string.IsNullOrEmpty(context.ReturnUrl)
+            )
             {
-                uri = QueryHelpers.AddQueryString(uri, context.ReturnUrlParameter, context.ReturnUrl);
+                uri = QueryHelpers.AddQueryString(
+                    uri,
+                    context.ReturnUrlParameter,
+                    context.ReturnUrl
+                );
             }
             Response.Redirect(BuildRedirectUri(uri));
 

@@ -7,13 +7,28 @@ using System.Security.Permissions;
 namespace System.Net
 {
 #if NET5_0_OR_GREATER
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class |
-        AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class DnsPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DnsPermissionAttribute(SecurityAction action) : base(action) { }
-        public override IPermission CreatePermission() { return null; }
+
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

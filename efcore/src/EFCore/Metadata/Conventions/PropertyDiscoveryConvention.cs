@@ -13,9 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class PropertyDiscoveryConvention :
-        IEntityTypeAddedConvention,
-        IEntityTypeBaseTypeChangedConvention
+    public class PropertyDiscoveryConvention
+        : IEntityTypeAddedConvention,
+            IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
@@ -38,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             Process(entityTypeBuilder);
         }
@@ -54,11 +55,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
-            if ((newBaseType == null
-                    || oldBaseType != null)
-                && entityTypeBuilder.Metadata.BaseType == newBaseType)
+            if (
+                (newBaseType == null || oldBaseType != null)
+                && entityTypeBuilder.Metadata.BaseType == newBaseType
+            )
             {
                 Process(entityTypeBuilder);
             }
@@ -70,7 +73,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var model = entityType.Model;
             foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
             {
-                if (!Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(propertyInfo, model))
+                if (
+                    !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(propertyInfo, model)
+                )
                 {
                     continue;
                 }

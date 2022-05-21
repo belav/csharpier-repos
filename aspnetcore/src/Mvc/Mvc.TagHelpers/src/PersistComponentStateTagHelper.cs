@@ -62,25 +62,29 @@ public class PersistComponentStateTagHelper : TagHelper
         var renderer = services.GetRequiredService<HtmlRenderer>();
         var store = PersistenceMode switch
         {
-            null => ComponentRenderer.GetPersistStateRenderMode(ViewContext) switch
-            {
-                InvokedRenderModes.Mode.None =>
-                    null,
-                InvokedRenderModes.Mode.WebAssembly =>
-                    new PrerenderComponentApplicationStore(),
-                InvokedRenderModes.Mode.Server =>
-                    new ProtectedPrerenderComponentApplicationStore(services.GetRequiredService<IDataProtectionProvider>()),
-                InvokedRenderModes.Mode.ServerAndWebAssembly =>
-                    throw new InvalidOperationException(
-                        Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(PersistenceModeName)),
-                _ => throw new InvalidOperationException("Invalid InvokedRenderMode.")
-            },
-            TagHelpers.PersistenceMode.Server =>
-                new ProtectedPrerenderComponentApplicationStore(services.GetRequiredService<IDataProtectionProvider>()),
-            TagHelpers.PersistenceMode.WebAssembly =>
-                new PrerenderComponentApplicationStore(),
-            _ =>
-                throw new InvalidOperationException("Invalid persistence mode.")
+            null
+                => ComponentRenderer.GetPersistStateRenderMode(ViewContext) switch
+                {
+                    InvokedRenderModes.Mode.None => null,
+                    InvokedRenderModes.Mode.WebAssembly => new PrerenderComponentApplicationStore(),
+                    InvokedRenderModes.Mode.Server
+                        => new ProtectedPrerenderComponentApplicationStore(
+                            services.GetRequiredService<IDataProtectionProvider>()
+                        ),
+                    InvokedRenderModes.Mode.ServerAndWebAssembly
+                        => throw new InvalidOperationException(
+                            Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(
+                                PersistenceModeName
+                            )
+                        ),
+                    _ => throw new InvalidOperationException("Invalid InvokedRenderMode.")
+                },
+            TagHelpers.PersistenceMode.Server
+                => new ProtectedPrerenderComponentApplicationStore(
+                    services.GetRequiredService<IDataProtectionProvider>()
+                ),
+            TagHelpers.PersistenceMode.WebAssembly => new PrerenderComponentApplicationStore(),
+            _ => throw new InvalidOperationException("Invalid persistence mode.")
         };
 
         output.TagName = null;
@@ -91,7 +95,8 @@ public class PersistComponentStateTagHelper : TagHelper
                 new HtmlContentBuilder()
                     .AppendHtml("<!--Blazor-Component-State:")
                     .AppendHtml(new ComponentStateHtmlContent(store))
-                    .AppendHtml("-->"));
+                    .AppendHtml("-->")
+            );
         }
     }
 

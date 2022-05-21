@@ -26,8 +26,17 @@ public static class BindConverter
 
     private delegate object? BindFormatter<T>(T value, CultureInfo? culture);
 
-    internal delegate bool BindParser<T>(object? obj, CultureInfo? culture, [MaybeNullWhen(false)] out T value);
-    internal delegate bool BindParserWithFormat<T>(object? obj, CultureInfo? culture, string? format, [MaybeNullWhen(false)] out T value);
+    internal delegate bool BindParser<T>(
+        object? obj,
+        CultureInfo? culture,
+        [MaybeNullWhen(false)] out T value
+    );
+    internal delegate bool BindParserWithFormat<T>(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        [MaybeNullWhen(false)] out T value
+    );
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -37,8 +46,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(string? value, CultureInfo? culture = null) => FormatStringValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(string? value, CultureInfo? culture = null) =>
+        FormatStringValueCore(value, culture);
 
     private static string? FormatStringValueCore(string? value, CultureInfo? culture)
     {
@@ -53,7 +67,11 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static bool FormatValue(bool value, CultureInfo? culture = null)
     {
         // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
@@ -77,7 +95,11 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static bool? FormatValue(bool? value, CultureInfo? culture = null)
     {
         // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
@@ -90,7 +112,11 @@ public static class BindConverter
     {
         // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
         // to work.
-        return value == null ? null : value.Value ? BoxedTrue : BoxedFalse;
+        return value == null
+            ? null
+            : value.Value
+                ? BoxedTrue
+                : BoxedFalse;
     }
 
     /// <summary>
@@ -101,8 +127,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(int value, CultureInfo? culture = null) => FormatIntValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(int value, CultureInfo? culture = null) =>
+        FormatIntValueCore(value, culture);
 
     private static string? FormatIntValueCore(int value, CultureInfo? culture)
     {
@@ -117,8 +148,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(int? value, CultureInfo? culture = null) => FormatNullableIntValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(int? value, CultureInfo? culture = null) =>
+        FormatNullableIntValueCore(value, culture);
 
     private static string? FormatNullableIntValueCore(int? value, CultureInfo? culture)
     {
@@ -138,8 +174,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(long value, CultureInfo? culture = null) => FormatLongValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(long value, CultureInfo? culture = null) =>
+        FormatLongValueCore(value, culture);
 
     private static string FormatLongValueCore(long value, CultureInfo? culture)
     {
@@ -154,8 +195,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(long? value, CultureInfo? culture = null) => FormatNullableLongValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(long? value, CultureInfo? culture = null) =>
+        FormatNullableLongValueCore(value, culture);
 
     private static string? FormatNullableLongValueCore(long? value, CultureInfo? culture)
     {
@@ -175,8 +221,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(short value, CultureInfo? culture = null) => FormatShortValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(short value, CultureInfo? culture = null) =>
+        FormatShortValueCore(value, culture);
 
     private static string FormatShortValueCore(short value, CultureInfo? culture)
     {
@@ -191,8 +242,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(short? value, CultureInfo? culture = null) => FormatNullableShortValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(short? value, CultureInfo? culture = null) =>
+        FormatNullableShortValueCore(value, culture);
 
     private static string? FormatNullableShortValueCore(short? value, CultureInfo? culture)
     {
@@ -212,8 +268,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(float value, CultureInfo? culture = null) => FormatFloatValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(float value, CultureInfo? culture = null) =>
+        FormatFloatValueCore(value, culture);
 
     private static string FormatFloatValueCore(float value, CultureInfo? culture)
     {
@@ -228,8 +289,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(float? value, CultureInfo? culture = null) => FormatNullableFloatValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(float? value, CultureInfo? culture = null) =>
+        FormatNullableFloatValueCore(value, culture);
 
     private static string? FormatNullableFloatValueCore(float? value, CultureInfo? culture)
     {
@@ -249,8 +315,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(double value, CultureInfo? culture = null) => FormatDoubleValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(double value, CultureInfo? culture = null) =>
+        FormatDoubleValueCore(value, culture);
 
     private static string FormatDoubleValueCore(double value, CultureInfo? culture)
     {
@@ -265,8 +336,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(double? value, CultureInfo? culture = null) => FormatNullableDoubleValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(double? value, CultureInfo? culture = null) =>
+        FormatNullableDoubleValueCore(value, culture);
 
     private static string? FormatNullableDoubleValueCore(double? value, CultureInfo? culture)
     {
@@ -286,8 +362,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(decimal value, CultureInfo? culture = null) => FormatDecimalValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(decimal value, CultureInfo? culture = null) =>
+        FormatDecimalValueCore(value, culture);
 
     private static string FormatDecimalValueCore(decimal value, CultureInfo? culture)
     {
@@ -302,8 +383,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(decimal? value, CultureInfo? culture = null) => FormatNullableDecimalValueCore(value, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(decimal? value, CultureInfo? culture = null) =>
+        FormatNullableDecimalValueCore(value, culture);
 
     private static string? FormatNullableDecimalValueCore(decimal? value, CultureInfo? culture)
     {
@@ -323,8 +409,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateTime value, CultureInfo? culture = null) => FormatDateTimeValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(DateTime value, CultureInfo? culture = null) =>
+        FormatDateTimeValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -335,10 +426,19 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateTime value, string format, CultureInfo? culture = null) => FormatDateTimeValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(DateTime value, string format, CultureInfo? culture = null) =>
+        FormatDateTimeValueCore(value, format, culture);
 
-    private static string FormatDateTimeValueCore(DateTime value, string? format, CultureInfo? culture)
+    private static string FormatDateTimeValueCore(
+        DateTime value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (format != null)
         {
@@ -361,8 +461,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateTime? value, CultureInfo? culture = null) => FormatNullableDateTimeValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(DateTime? value, CultureInfo? culture = null) =>
+        FormatNullableDateTimeValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -373,10 +478,22 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateTime? value, string? format, CultureInfo? culture = null) => FormatNullableDateTimeValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(
+        DateTime? value,
+        string? format,
+        CultureInfo? culture = null
+    ) => FormatNullableDateTimeValueCore(value, format, culture);
 
-    private static string? FormatNullableDateTimeValueCore(DateTime? value, string? format, CultureInfo? culture)
+    private static string? FormatNullableDateTimeValueCore(
+        DateTime? value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (value == null)
         {
@@ -409,9 +526,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateTimeOffset value, CultureInfo? culture = null) => FormatDateTimeOffsetValueCore(value, format: null, culture);
-
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(DateTimeOffset value, CultureInfo? culture = null) =>
+        FormatDateTimeOffsetValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -422,10 +543,22 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateTimeOffset value, string format, CultureInfo? culture = null) => FormatDateTimeOffsetValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(
+        DateTimeOffset value,
+        string format,
+        CultureInfo? culture = null
+    ) => FormatDateTimeOffsetValueCore(value, format, culture);
 
-    private static string FormatDateTimeOffsetValueCore(DateTimeOffset value, string? format, CultureInfo? culture)
+    private static string FormatDateTimeOffsetValueCore(
+        DateTimeOffset value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (format != null)
         {
@@ -448,8 +581,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateTimeOffset? value, CultureInfo? culture = null) => FormatNullableDateTimeOffsetValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(DateTimeOffset? value, CultureInfo? culture = null) =>
+        FormatNullableDateTimeOffsetValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -460,10 +598,22 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateTimeOffset? value, string format, CultureInfo? culture = null) => FormatNullableDateTimeOffsetValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(
+        DateTimeOffset? value,
+        string format,
+        CultureInfo? culture = null
+    ) => FormatNullableDateTimeOffsetValueCore(value, format, culture);
 
-    private static string? FormatNullableDateTimeOffsetValueCore(DateTimeOffset? value, string? format, CultureInfo? culture)
+    private static string? FormatNullableDateTimeOffsetValueCore(
+        DateTimeOffset? value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (value == null)
         {
@@ -478,7 +628,10 @@ public static class BindConverter
         return value.Value.ToString(culture ?? CultureInfo.CurrentCulture);
     }
 
-    private static string? FormatNullableDateTimeOffsetValueCore(DateTimeOffset? value, CultureInfo? culture)
+    private static string? FormatNullableDateTimeOffsetValueCore(
+        DateTimeOffset? value,
+        CultureInfo? culture
+    )
     {
         if (value == null)
         {
@@ -496,8 +649,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateOnly value, CultureInfo? culture = null) => FormatDateOnlyValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(DateOnly value, CultureInfo? culture = null) =>
+        FormatDateOnlyValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -508,15 +666,26 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(DateOnly value, string format, CultureInfo? culture = null) => FormatDateOnlyValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(DateOnly value, string format, CultureInfo? culture = null) =>
+        FormatDateOnlyValueCore(value, format, culture);
 
-    private static string FormatDateOnlyValueCore(DateOnly value, string? format, CultureInfo? culture)
+    private static string FormatDateOnlyValueCore(
+        DateOnly value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes time information
-            return value.ToDateTime(TimeOnly.MinValue).ToString(format, culture ?? CultureInfo.CurrentCulture);
+            return value
+                .ToDateTime(TimeOnly.MinValue)
+                .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
 
         return value.ToString(culture ?? CultureInfo.CurrentCulture);
@@ -535,8 +704,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateOnly? value, CultureInfo? culture = null) => FormatNullableDateOnlyValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(DateOnly? value, CultureInfo? culture = null) =>
+        FormatNullableDateOnlyValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -547,10 +721,22 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(DateOnly? value, string format, CultureInfo? culture = null) => FormatNullableDateOnlyValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(
+        DateOnly? value,
+        string format,
+        CultureInfo? culture = null
+    ) => FormatNullableDateOnlyValueCore(value, format, culture);
 
-    private static string? FormatNullableDateOnlyValueCore(DateOnly? value, string? format, CultureInfo? culture)
+    private static string? FormatNullableDateOnlyValueCore(
+        DateOnly? value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (value == null)
         {
@@ -560,7 +746,9 @@ public static class BindConverter
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes time information
-            return value.Value.ToDateTime(TimeOnly.MinValue).ToString(format, culture ?? CultureInfo.CurrentCulture);
+            return value.Value
+                .ToDateTime(TimeOnly.MinValue)
+                .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
 
         return value.Value.ToString(culture ?? CultureInfo.CurrentCulture);
@@ -584,8 +772,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(TimeOnly value, CultureInfo? culture = null) => FormatTimeOnlyValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(TimeOnly value, CultureInfo? culture = null) =>
+        FormatTimeOnlyValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -596,15 +789,26 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string FormatValue(TimeOnly value, string format, CultureInfo? culture = null) => FormatTimeOnlyValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string FormatValue(TimeOnly value, string format, CultureInfo? culture = null) =>
+        FormatTimeOnlyValueCore(value, format, culture);
 
-    private static string FormatTimeOnlyValueCore(TimeOnly value, string? format, CultureInfo? culture)
+    private static string FormatTimeOnlyValueCore(
+        TimeOnly value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes date information
-            return DateTime.MinValue.Add(value.ToTimeSpan()).ToString(format, culture ?? CultureInfo.CurrentCulture);
+            return DateTime.MinValue
+                .Add(value.ToTimeSpan())
+                .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
 
         return value.ToString(culture ?? CultureInfo.CurrentCulture);
@@ -623,8 +827,13 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(TimeOnly? value, CultureInfo? culture = null) => FormatNullableTimeOnlyValueCore(value, format: null, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(TimeOnly? value, CultureInfo? culture = null) =>
+        FormatNullableTimeOnlyValueCore(value, format: null, culture);
 
     /// <summary>
     /// Formats the provided <paramref name="value"/> as a <see cref="System.String"/>.
@@ -635,10 +844,22 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static string? FormatValue(TimeOnly? value, string format, CultureInfo? culture = null) => FormatNullableTimeOnlyValueCore(value, format, culture);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static string? FormatValue(
+        TimeOnly? value,
+        string format,
+        CultureInfo? culture = null
+    ) => FormatNullableTimeOnlyValueCore(value, format, culture);
 
-    private static string? FormatNullableTimeOnlyValueCore(TimeOnly? value, string? format, CultureInfo? culture)
+    private static string? FormatNullableTimeOnlyValueCore(
+        TimeOnly? value,
+        string? format,
+        CultureInfo? culture
+    )
     {
         if (value == null)
         {
@@ -648,7 +869,9 @@ public static class BindConverter
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes date information
-            return DateTime.MinValue.Add(value.Value.ToTimeSpan()).ToString(format, culture ?? CultureInfo.CurrentCulture);
+            return DateTime.MinValue
+                .Add(value.Value.ToTimeSpan())
+                .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
 
         return value.Value.ToString(culture ?? CultureInfo.CurrentCulture);
@@ -682,8 +905,14 @@ public static class BindConverter
     /// The <see cref="CultureInfo"/> to use while formatting. Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </param>
     /// <returns>The formatted value.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static object? FormatValue<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(T value, CultureInfo? culture = null)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static object? FormatValue<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+    >(T value, CultureInfo? culture = null)
     {
         var formatter = FormatterDelegateCache.Get<T>();
         return formatter(value, culture);
@@ -744,7 +973,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableBoolCore(object? obj, CultureInfo? culture, out bool? value)
+    private static bool ConvertToNullableBoolCore(
+        object? obj,
+        CultureInfo? culture,
+        out bool? value
+    )
     {
         // We expect the input to already be a bool.
         value = (bool?)obj;
@@ -787,7 +1020,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!int.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !int.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -806,7 +1046,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!int.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !int.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -852,7 +1099,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!long.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !long.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -862,7 +1116,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableLongCore(object? obj, CultureInfo? culture, out long? value)
+    private static bool ConvertToNullableLongCore(
+        object? obj,
+        CultureInfo? culture,
+        out long? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -871,7 +1129,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!long.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !long.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -900,7 +1165,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableShort(object? obj, CultureInfo? culture, out short? value)
+    public static bool TryConvertToNullableShort(
+        object? obj,
+        CultureInfo? culture,
+        out short? value
+    )
     {
         return ConvertToNullableShort(obj, culture, out value);
     }
@@ -917,7 +1186,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!short.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !short.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -927,7 +1203,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableShortCore(object? obj, CultureInfo? culture, out short? value)
+    private static bool ConvertToNullableShortCore(
+        object? obj,
+        CultureInfo? culture,
+        out short? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -936,7 +1216,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!short.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !short.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -965,7 +1252,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableFloat(object? obj, CultureInfo? culture, out float? value)
+    public static bool TryConvertToNullableFloat(
+        object? obj,
+        CultureInfo? culture,
+        out float? value
+    )
     {
         return ConvertToNullableFloatCore(obj, culture, out value);
     }
@@ -982,7 +1273,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!float.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !float.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -998,7 +1296,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableFloatCore(object? obj, CultureInfo? culture, out float? value)
+    private static bool ConvertToNullableFloatCore(
+        object? obj,
+        CultureInfo? culture,
+        out float? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1007,7 +1309,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!float.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !float.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -1042,13 +1351,18 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDouble(object? obj, CultureInfo? culture, out double? value)
+    public static bool TryConvertToNullableDouble(
+        object? obj,
+        CultureInfo? culture,
+        out double? value
+    )
     {
         return ConvertToNullableDoubleCore(obj, culture, out value);
     }
 
     internal static BindParser<double> ConvertToDoubleDelegate = ConvertToDoubleCore;
-    internal static BindParser<double?> ConvertToNullableDoubleDelegate = ConvertToNullableDoubleCore;
+    internal static BindParser<double?> ConvertToNullableDoubleDelegate =
+        ConvertToNullableDoubleCore;
 
     private static bool ConvertToDoubleCore(object? obj, CultureInfo? culture, out double value)
     {
@@ -1059,7 +1373,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!double.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !double.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -1075,7 +1396,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableDoubleCore(object? obj, CultureInfo? culture, out double? value)
+    private static bool ConvertToNullableDoubleCore(
+        object? obj,
+        CultureInfo? culture,
+        out double? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1084,7 +1409,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!double.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !double.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -1119,7 +1451,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDecimal(object? obj, CultureInfo? culture, out decimal? value)
+    public static bool TryConvertToNullableDecimal(
+        object? obj,
+        CultureInfo? culture,
+        out decimal? value
+    )
     {
         return ConvertToNullableDecimalCore(obj, culture, out value);
     }
@@ -1136,7 +1472,14 @@ public static class BindConverter
             return false;
         }
 
-        if (!decimal.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !decimal.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -1146,7 +1489,11 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableDecimalCore(object? obj, CultureInfo? culture, out decimal? value)
+    private static bool ConvertToNullableDecimalCore(
+        object? obj,
+        CultureInfo? culture,
+        out decimal? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1155,7 +1502,14 @@ public static class BindConverter
             return true;
         }
 
-        if (!decimal.TryParse(text, NumberStyles.Number, culture ?? CultureInfo.CurrentCulture, out var converted))
+        if (
+            !decimal.TryParse(
+                text,
+                NumberStyles.Number,
+                culture ?? CultureInfo.CurrentCulture,
+                out var converted
+            )
+        )
         {
             value = default;
             return false;
@@ -1185,7 +1539,12 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToDateTime(object? obj, CultureInfo? culture, string format, out DateTime value)
+    public static bool TryConvertToDateTime(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateTime value
+    )
     {
         return ConvertToDateTimeCore(obj, culture, format, out value);
     }
@@ -1197,7 +1556,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateTime(object? obj, CultureInfo? culture, out DateTime? value)
+    public static bool TryConvertToNullableDateTime(
+        object? obj,
+        CultureInfo? culture,
+        out DateTime? value
+    )
     {
         return ConvertToNullableDateTimeCore(obj, culture, out value);
     }
@@ -1210,22 +1573,34 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateTime(object? obj, CultureInfo? culture, string format, out DateTime? value)
+    public static bool TryConvertToNullableDateTime(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateTime? value
+    )
     {
         return ConvertToNullableDateTimeCore(obj, culture, format, out value);
     }
 
     internal static BindParser<DateTime> ConvertToDateTime = ConvertToDateTimeCore;
-    internal static BindParserWithFormat<DateTime> ConvertToDateTimeWithFormat = ConvertToDateTimeCore;
+    internal static BindParserWithFormat<DateTime> ConvertToDateTimeWithFormat =
+        ConvertToDateTimeCore;
     internal static BindParser<DateTime?> ConvertToNullableDateTime = ConvertToNullableDateTimeCore;
-    internal static BindParserWithFormat<DateTime?> ConvertToNullableDateTimeWithFormat = ConvertToNullableDateTimeCore;
+    internal static BindParserWithFormat<DateTime?> ConvertToNullableDateTimeWithFormat =
+        ConvertToNullableDateTimeCore;
 
     private static bool ConvertToDateTimeCore(object? obj, CultureInfo? culture, out DateTime value)
     {
         return ConvertToDateTimeCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToDateTimeCore(object? obj, CultureInfo? culture, string? format, out DateTime value)
+    private static bool ConvertToDateTimeCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateTime value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1234,12 +1609,29 @@ public static class BindConverter
             return false;
         }
 
-        if (format != null && DateTime.TryParseExact(text, format, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out var converted))
+        if (
+            format != null
+            && DateTime.TryParseExact(
+                text,
+                format,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out var converted
+            )
+        )
         {
             value = converted;
             return true;
         }
-        else if (format == null && DateTime.TryParse(text, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out converted))
+        else if (
+            format == null
+            && DateTime.TryParse(
+                text,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out converted
+            )
+        )
         {
             value = converted;
             return true;
@@ -1249,12 +1641,21 @@ public static class BindConverter
         return false;
     }
 
-    private static bool ConvertToNullableDateTimeCore(object? obj, CultureInfo? culture, out DateTime? value)
+    private static bool ConvertToNullableDateTimeCore(
+        object? obj,
+        CultureInfo? culture,
+        out DateTime? value
+    )
     {
         return ConvertToNullableDateTimeCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToNullableDateTimeCore(object? obj, CultureInfo? culture, string? format, out DateTime? value)
+    private static bool ConvertToNullableDateTimeCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateTime? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1263,12 +1664,29 @@ public static class BindConverter
             return true;
         }
 
-        if (format != null && DateTime.TryParseExact(text, format, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out var converted))
+        if (
+            format != null
+            && DateTime.TryParseExact(
+                text,
+                format,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out var converted
+            )
+        )
         {
             value = converted;
             return true;
         }
-        else if (format == null && DateTime.TryParse(text, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out converted))
+        else if (
+            format == null
+            && DateTime.TryParse(
+                text,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out converted
+            )
+        )
         {
             value = converted;
             return true;
@@ -1285,7 +1703,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToDateTimeOffset(object? obj, CultureInfo? culture, out DateTimeOffset value)
+    public static bool TryConvertToDateTimeOffset(
+        object? obj,
+        CultureInfo? culture,
+        out DateTimeOffset value
+    )
     {
         return ConvertToDateTimeOffsetCore(obj, culture, out value);
     }
@@ -1298,7 +1720,12 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToDateTimeOffset(object? obj, CultureInfo? culture, string format, out DateTimeOffset value)
+    public static bool TryConvertToDateTimeOffset(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateTimeOffset value
+    )
     {
         return ConvertToDateTimeOffsetCore(obj, culture, format, out value);
     }
@@ -1310,7 +1737,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateTimeOffset(object? obj, CultureInfo? culture, out DateTimeOffset? value)
+    public static bool TryConvertToNullableDateTimeOffset(
+        object? obj,
+        CultureInfo? culture,
+        out DateTimeOffset? value
+    )
     {
         return ConvertToNullableDateTimeOffsetCore(obj, culture, out value);
     }
@@ -1323,22 +1754,40 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateTimeOffset(object? obj, CultureInfo? culture, string format, out DateTimeOffset? value)
+    public static bool TryConvertToNullableDateTimeOffset(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateTimeOffset? value
+    )
     {
         return ConvertToNullableDateTimeOffsetCore(obj, culture, format, out value);
     }
 
-    internal static BindParser<DateTimeOffset> ConvertToDateTimeOffset = ConvertToDateTimeOffsetCore;
-    internal static BindParserWithFormat<DateTimeOffset> ConvertToDateTimeOffsetWithFormat = ConvertToDateTimeOffsetCore;
-    internal static BindParser<DateTimeOffset?> ConvertToNullableDateTimeOffset = ConvertToNullableDateTimeOffsetCore;
-    internal static BindParserWithFormat<DateTimeOffset?> ConvertToNullableDateTimeOffsetWithFormat = ConvertToNullableDateTimeOffsetCore;
+    internal static BindParser<DateTimeOffset> ConvertToDateTimeOffset =
+        ConvertToDateTimeOffsetCore;
+    internal static BindParserWithFormat<DateTimeOffset> ConvertToDateTimeOffsetWithFormat =
+        ConvertToDateTimeOffsetCore;
+    internal static BindParser<DateTimeOffset?> ConvertToNullableDateTimeOffset =
+        ConvertToNullableDateTimeOffsetCore;
+    internal static BindParserWithFormat<DateTimeOffset?> ConvertToNullableDateTimeOffsetWithFormat =
+        ConvertToNullableDateTimeOffsetCore;
 
-    private static bool ConvertToDateTimeOffsetCore(object? obj, CultureInfo? culture, out DateTimeOffset value)
+    private static bool ConvertToDateTimeOffsetCore(
+        object? obj,
+        CultureInfo? culture,
+        out DateTimeOffset value
+    )
     {
         return ConvertToDateTimeOffsetCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToDateTimeOffsetCore(object? obj, CultureInfo? culture, string? format, out DateTimeOffset value)
+    private static bool ConvertToDateTimeOffsetCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateTimeOffset value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1347,12 +1796,29 @@ public static class BindConverter
             return false;
         }
 
-        if (format != null && DateTimeOffset.TryParseExact(text, format, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out var converted))
+        if (
+            format != null
+            && DateTimeOffset.TryParseExact(
+                text,
+                format,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out var converted
+            )
+        )
         {
             value = converted;
             return true;
         }
-        else if (format == null && DateTimeOffset.TryParse(text, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out converted))
+        else if (
+            format == null
+            && DateTimeOffset.TryParse(
+                text,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out converted
+            )
+        )
         {
             value = converted;
             return true;
@@ -1362,12 +1828,21 @@ public static class BindConverter
         return false;
     }
 
-    private static bool ConvertToNullableDateTimeOffsetCore(object? obj, CultureInfo? culture, out DateTimeOffset? value)
+    private static bool ConvertToNullableDateTimeOffsetCore(
+        object? obj,
+        CultureInfo? culture,
+        out DateTimeOffset? value
+    )
     {
         return ConvertToNullableDateTimeOffsetCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToNullableDateTimeOffsetCore(object? obj, CultureInfo? culture, string? format, out DateTimeOffset? value)
+    private static bool ConvertToNullableDateTimeOffsetCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateTimeOffset? value
+    )
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1376,12 +1851,29 @@ public static class BindConverter
             return true;
         }
 
-        if (format != null && DateTimeOffset.TryParseExact(text, format, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out var converted))
+        if (
+            format != null
+            && DateTimeOffset.TryParseExact(
+                text,
+                format,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out var converted
+            )
+        )
         {
             value = converted;
             return true;
         }
-        else if (format == null && DateTimeOffset.TryParse(text, culture ?? CultureInfo.CurrentCulture, DateTimeStyles.None, out converted))
+        else if (
+            format == null
+            && DateTimeOffset.TryParse(
+                text,
+                culture ?? CultureInfo.CurrentCulture,
+                DateTimeStyles.None,
+                out converted
+            )
+        )
         {
             value = converted;
             return true;
@@ -1411,7 +1903,12 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToDateOnly(object? obj, CultureInfo? culture, string format, out DateOnly value)
+    public static bool TryConvertToDateOnly(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateOnly value
+    )
     {
         return ConvertToDateOnlyCore(obj, culture, format, out value);
     }
@@ -1423,7 +1920,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateOnly(object? obj, CultureInfo? culture, out DateOnly? value)
+    public static bool TryConvertToNullableDateOnly(
+        object? obj,
+        CultureInfo? culture,
+        out DateOnly? value
+    )
     {
         return ConvertToNullableDateOnlyCore(obj, culture, out value);
     }
@@ -1436,22 +1937,34 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableDateOnly(object? obj, CultureInfo? culture, string format, out DateOnly? value)
+    public static bool TryConvertToNullableDateOnly(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out DateOnly? value
+    )
     {
         return ConvertToNullableDateOnlyCore(obj, culture, format, out value);
     }
 
     internal static BindParser<DateOnly> ConvertToDateOnly = ConvertToDateOnlyCore;
-    internal static BindParserWithFormat<DateOnly> ConvertToDateOnlyWithFormat = ConvertToDateOnlyCore;
+    internal static BindParserWithFormat<DateOnly> ConvertToDateOnlyWithFormat =
+        ConvertToDateOnlyCore;
     internal static BindParser<DateOnly?> ConvertToNullableDateOnly = ConvertToNullableDateOnlyCore;
-    internal static BindParserWithFormat<DateOnly?> ConvertToNullableDateOnlyWithFormat = ConvertToNullableDateOnlyCore;
+    internal static BindParserWithFormat<DateOnly?> ConvertToNullableDateOnlyWithFormat =
+        ConvertToNullableDateOnlyCore;
 
     private static bool ConvertToDateOnlyCore(object? obj, CultureInfo? culture, out DateOnly value)
     {
         return ConvertToDateOnlyCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToDateOnlyCore(object? obj, CultureInfo? culture, string? format, out DateOnly value)
+    private static bool ConvertToDateOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateOnly value
+    )
     {
         // We first convert to a DateTime so conversion doesn't fail if time information is included
         if (ConvertToDateTimeCore(obj, culture, format, out var dateTime))
@@ -1464,12 +1977,21 @@ public static class BindConverter
         return false;
     }
 
-    private static bool ConvertToNullableDateOnlyCore(object? obj, CultureInfo? culture, out DateOnly? value)
+    private static bool ConvertToNullableDateOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        out DateOnly? value
+    )
     {
         return ConvertToNullableDateOnlyCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToNullableDateOnlyCore(object? obj, CultureInfo? culture, string? format, out DateOnly? value)
+    private static bool ConvertToNullableDateOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out DateOnly? value
+    )
     {
         // We first convert to a DateTime so conversion doesn't fail if time information is included
         if (ConvertToDateTimeCore(obj, culture, format, out var dateTime))
@@ -1502,7 +2024,12 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToTimeOnly(object? obj, CultureInfo? culture, string format, out TimeOnly value)
+    public static bool TryConvertToTimeOnly(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out TimeOnly value
+    )
     {
         return ConvertToTimeOnlyCore(obj, culture, format, out value);
     }
@@ -1514,7 +2041,11 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableTimeOnly(object? obj, CultureInfo? culture, out TimeOnly? value)
+    public static bool TryConvertToNullableTimeOnly(
+        object? obj,
+        CultureInfo? culture,
+        out TimeOnly? value
+    )
     {
         return ConvertToNullableTimeOnlyCore(obj, culture, out value);
     }
@@ -1527,22 +2058,34 @@ public static class BindConverter
     /// <param name="format">The format string to use in conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertToNullableTimeOnly(object? obj, CultureInfo? culture, string format, out TimeOnly? value)
+    public static bool TryConvertToNullableTimeOnly(
+        object? obj,
+        CultureInfo? culture,
+        string format,
+        out TimeOnly? value
+    )
     {
         return ConvertToNullableTimeOnlyCore(obj, culture, format, out value);
     }
 
     internal static BindParser<TimeOnly> ConvertToTimeOnly = ConvertToTimeOnlyCore;
-    internal static BindParserWithFormat<TimeOnly> ConvertToTimeOnlyWithFormat = ConvertToTimeOnlyCore;
+    internal static BindParserWithFormat<TimeOnly> ConvertToTimeOnlyWithFormat =
+        ConvertToTimeOnlyCore;
     internal static BindParser<TimeOnly?> ConvertToNullableTimeOnly = ConvertToNullableTimeOnlyCore;
-    internal static BindParserWithFormat<TimeOnly?> ConvertToNullableTimeOnlyWithFormat = ConvertToNullableTimeOnlyCore;
+    internal static BindParserWithFormat<TimeOnly?> ConvertToNullableTimeOnlyWithFormat =
+        ConvertToNullableTimeOnlyCore;
 
     private static bool ConvertToTimeOnlyCore(object? obj, CultureInfo? culture, out TimeOnly value)
     {
         return ConvertToTimeOnlyCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToTimeOnlyCore(object? obj, CultureInfo? culture, string? format, out TimeOnly value)
+    private static bool ConvertToTimeOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out TimeOnly value
+    )
     {
         // We first convert to a DateTime so conversion doesn't fail if time information is included
         if (ConvertToDateTimeCore(obj, culture, format, out var dateTime))
@@ -1555,12 +2098,21 @@ public static class BindConverter
         return false;
     }
 
-    private static bool ConvertToNullableTimeOnlyCore(object? obj, CultureInfo? culture, out TimeOnly? value)
+    private static bool ConvertToNullableTimeOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        out TimeOnly? value
+    )
     {
         return ConvertToNullableTimeOnlyCore(obj, culture, format: null, out value);
     }
 
-    private static bool ConvertToNullableTimeOnlyCore(object? obj, CultureInfo? culture, string? format, out TimeOnly? value)
+    private static bool ConvertToNullableTimeOnlyCore(
+        object? obj,
+        CultureInfo? culture,
+        string? format,
+        out TimeOnly? value
+    )
     {
         // We first convert to a DateTime so conversion doesn't fail if time information is included
         if (ConvertToDateTimeCore(obj, culture, format, out var dateTime))
@@ -1573,7 +2125,8 @@ public static class BindConverter
         return false;
     }
 
-    private static bool ConvertToEnum<T>(object? obj, CultureInfo? culture, out T value) where T : struct, Enum
+    private static bool ConvertToEnum<T>(object? obj, CultureInfo? culture, out T value)
+        where T : struct, Enum
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1598,7 +2151,8 @@ public static class BindConverter
         return true;
     }
 
-    private static bool ConvertToNullableEnum<T>(object? obj, CultureInfo? culture, out T? value) where T : struct, Enum
+    private static bool ConvertToNullableEnum<T>(object? obj, CultureInfo? culture, out T? value)
+        where T : struct, Enum
     {
         var text = (string?)obj;
         if (string.IsNullOrEmpty(text))
@@ -1630,7 +2184,9 @@ public static class BindConverter
     /// <param name="culture">The <see cref="CultureInfo"/> to use for conversion.</param>
     /// <param name="value">The converted value.</param>
     /// <returns><c>true</c> if conversion is successful, otherwise <c>false</c>.</returns>
-    public static bool TryConvertTo<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(object? obj, CultureInfo? culture, [MaybeNullWhen(false)] out T value)
+    public static bool TryConvertTo<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+    >(object? obj, CultureInfo? culture, [MaybeNullWhen(false)] out T value)
     {
         var converter = ParserDelegateCache.Get<T>();
         return converter(obj, culture, out value);
@@ -1638,19 +2194,24 @@ public static class BindConverter
 
     private static class FormatterDelegateCache
     {
-        private static readonly ConcurrentDictionary<Type, Delegate> _cache = new ConcurrentDictionary<Type, Delegate>();
+        private static readonly ConcurrentDictionary<Type, Delegate> _cache =
+            new ConcurrentDictionary<Type, Delegate>();
 
         private static MethodInfo? _makeArrayFormatter;
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2060:MakeGenericMethod",
-            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727")]
+            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727"
+        )]
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2075:MakeGenericMethod",
-            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727")]
-        public static BindFormatter<T> Get<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727"
+        )]
+        public static BindFormatter<T> Get<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             if (!_cache.TryGetValue(typeof(T), out var formatter))
             {
@@ -1730,7 +2291,8 @@ public static class BindConverter
                 }
                 else if (typeof(T) == typeof(DateTimeOffset?))
                 {
-                    formatter = (BindFormatter<DateTimeOffset?>)FormatNullableDateTimeOffsetValueCore;
+                    formatter =
+                        (BindFormatter<DateTimeOffset?>)FormatNullableDateTimeOffsetValueCore;
                 }
                 else if (typeof(T) == typeof(DateOnly))
                 {
@@ -1748,13 +2310,19 @@ public static class BindConverter
                 {
                     formatter = (BindFormatter<TimeOnly?>)FormatNullableTimeOnlyValueCore;
                 }
-                else if (typeof(T).IsEnum || Nullable.GetUnderlyingType(typeof(T)) is Type { IsEnum: true } innerType)
+                else if (
+                    typeof(T).IsEnum
+                    || Nullable.GetUnderlyingType(typeof(T)) is Type { IsEnum: true } innerType
+                )
                 {
                     formatter = (BindFormatter<T>)FormatEnumValueCore<T>;
                 }
                 else if (typeof(T).IsArray)
                 {
-                    var method = _makeArrayFormatter ??= typeof(FormatterDelegateCache).GetMethod(nameof(MakeArrayFormatter), BindingFlags.NonPublic | BindingFlags.Static)!;
+                    var method = _makeArrayFormatter ??= typeof(FormatterDelegateCache).GetMethod(
+                        nameof(MakeArrayFormatter),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!;
                     var elementType = typeof(T).GetElementType()!;
                     formatter = (Delegate)method.MakeGenericMethod(elementType).Invoke(null, null)!;
                 }
@@ -1769,7 +2337,9 @@ public static class BindConverter
             return (BindFormatter<T>)formatter;
         }
 
-        private static BindFormatter<T[]> MakeArrayFormatter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+        private static BindFormatter<T[]> MakeArrayFormatter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             var elementFormatter = Get<T>();
 
@@ -1783,13 +2353,21 @@ public static class BindConverter
                 }
 
                 var builder = new StringBuilder("[\"");
-                builder.Append(JsonEncodedText.Encode(elementFormatter(value[0], culture)?.ToString() ?? string.Empty));
+                builder.Append(
+                    JsonEncodedText.Encode(
+                        elementFormatter(value[0], culture)?.ToString() ?? string.Empty
+                    )
+                );
                 builder.Append('\"');
 
                 for (var i = 1; i < value.Length; i++)
                 {
                     builder.Append(", \"");
-                    builder.Append(JsonEncodedText.Encode(elementFormatter(value[i], culture)?.ToString() ?? string.Empty));
+                    builder.Append(
+                        JsonEncodedText.Encode(
+                            elementFormatter(value[i], culture)?.ToString() ?? string.Empty
+                        )
+                    );
                     builder.Append('\"');
                 }
 
@@ -1799,15 +2377,18 @@ public static class BindConverter
             }
         }
 
-        private static BindFormatter<T> MakeTypeConverterFormatter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+        private static BindFormatter<T> MakeTypeConverterFormatter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             var typeConverter = TypeDescriptor.GetConverter(typeof(T));
             if (typeConverter == null || !typeConverter.CanConvertTo(typeof(string)))
             {
                 throw new InvalidOperationException(
-                    $"The type '{typeof(T).FullName}' does not have an associated {typeof(TypeConverter).Name} that supports " +
-                    $"conversion to a string. " +
-                    $"Apply '{typeof(TypeConverterAttribute).Name}' to the type to register a converter.");
+                    $"The type '{typeof(T).FullName}' does not have an associated {typeof(TypeConverter).Name} that supports "
+                        + $"conversion to a string. "
+                        + $"Apply '{typeof(TypeConverterAttribute).Name}' to the type to register a converter."
+                );
             }
 
             return FormatWithTypeConverter;
@@ -1815,14 +2396,19 @@ public static class BindConverter
             string? FormatWithTypeConverter(T value, CultureInfo? culture)
             {
                 // We intentionally close-over the TypeConverter to cache it. The TypeDescriptor infrastructure is slow.
-                return typeConverter.ConvertToString(context: null, culture ?? CultureInfo.CurrentCulture, value);
+                return typeConverter.ConvertToString(
+                    context: null,
+                    culture ?? CultureInfo.CurrentCulture,
+                    value
+                );
             }
         }
     }
 
     internal static class ParserDelegateCache
     {
-        private static readonly ConcurrentDictionary<Type, Delegate> _cache = new ConcurrentDictionary<Type, Delegate>();
+        private static readonly ConcurrentDictionary<Type, Delegate> _cache =
+            new ConcurrentDictionary<Type, Delegate>();
 
         private static MethodInfo? _convertToEnum;
         private static MethodInfo? _convertToNullableEnum;
@@ -1831,12 +2417,16 @@ public static class BindConverter
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2060:MakeGenericMethod",
-            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727")]
+            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727"
+        )]
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2075:MakeGenericMethod",
-            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727")]
-        public static BindParser<T> Get<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+            Justification = "The referenced methods don't have any DynamicallyAccessedMembers annotations. See https://github.com/mono/linker/issues/1727"
+        )]
+        public static BindParser<T> Get<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             if (!_cache.TryGetValue(typeof(T), out var parser))
             {
@@ -1937,18 +2527,33 @@ public static class BindConverter
                 else if (typeof(T).IsEnum)
                 {
                     // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                    var method = _convertToEnum ??= typeof(BindConverter).GetMethod(nameof(ConvertToEnum), BindingFlags.NonPublic | BindingFlags.Static)!;
-                    parser = method.MakeGenericMethod(typeof(T)).CreateDelegate(typeof(BindParser<T>), target: null);
+                    var method = _convertToEnum ??= typeof(BindConverter).GetMethod(
+                        nameof(ConvertToEnum),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!;
+                    parser = method
+                        .MakeGenericMethod(typeof(T))
+                        .CreateDelegate(typeof(BindParser<T>), target: null);
                 }
-                else if (Nullable.GetUnderlyingType(typeof(T)) is Type innerType && innerType.IsEnum)
+                else if (
+                    Nullable.GetUnderlyingType(typeof(T)) is Type innerType && innerType.IsEnum
+                )
                 {
                     // We have to deal invoke this dynamically to work around the type constraint on Enum.TryParse.
-                    var method = _convertToNullableEnum ??= typeof(BindConverter).GetMethod(nameof(ConvertToNullableEnum), BindingFlags.NonPublic | BindingFlags.Static)!;
-                    parser = method.MakeGenericMethod(innerType).CreateDelegate(typeof(BindParser<T>), target: null);
+                    var method = _convertToNullableEnum ??= typeof(BindConverter).GetMethod(
+                        nameof(ConvertToNullableEnum),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!;
+                    parser = method
+                        .MakeGenericMethod(innerType)
+                        .CreateDelegate(typeof(BindParser<T>), target: null);
                 }
                 else if (typeof(T).IsArray)
                 {
-                    var method = _makeArrayTypeConverter ??= typeof(ParserDelegateCache).GetMethod(nameof(MakeArrayTypeConverter), BindingFlags.NonPublic | BindingFlags.Static)!;
+                    var method = _makeArrayTypeConverter ??= typeof(ParserDelegateCache).GetMethod(
+                        nameof(MakeArrayTypeConverter),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!;
                     var elementType = typeof(T).GetElementType()!;
                     parser = (Delegate)method.MakeGenericMethod(elementType).Invoke(null, null)!;
                 }
@@ -1963,7 +2568,9 @@ public static class BindConverter
             return (BindParser<T>)parser;
         }
 
-        private static BindParser<T[]?> MakeArrayTypeConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+        private static BindParser<T[]?> MakeArrayTypeConverter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             var elementParser = Get<T>();
 
@@ -1993,15 +2600,18 @@ public static class BindConverter
             }
         }
 
-        private static BindParser<T> MakeTypeConverterConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>()
+        private static BindParser<T> MakeTypeConverterConverter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T
+        >()
         {
             var typeConverter = TypeDescriptor.GetConverter(typeof(T));
             if (typeConverter == null || !typeConverter.CanConvertFrom(typeof(string)))
             {
                 throw new InvalidOperationException(
-                    $"The type '{typeof(T).FullName}' does not have an associated {typeof(TypeConverter).Name} that supports " +
-                    $"conversion from a string. " +
-                    $"Apply '{typeof(TypeConverterAttribute).Name}' to the type to register a converter.");
+                    $"The type '{typeof(T).FullName}' does not have an associated {typeof(TypeConverter).Name} that supports "
+                        + $"conversion from a string. "
+                        + $"Apply '{typeof(TypeConverterAttribute).Name}' to the type to register a converter."
+                );
             }
 
             return ConvertWithTypeConverter;
@@ -2014,7 +2624,11 @@ public static class BindConverter
                     value = default!;
                     return true;
                 }
-                var converted = typeConverter.ConvertFrom(context: null, culture ?? CultureInfo.CurrentCulture, obj);
+                var converted = typeConverter.ConvertFrom(
+                    context: null,
+                    culture ?? CultureInfo.CurrentCulture,
+                    obj
+                );
                 if (converted == null)
                 {
                     value = default!;

@@ -17,7 +17,8 @@ using SAsyncServiceProvider = Microsoft.VisualStudio.Shell.Interop.SAsyncService
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
     [Export(typeof(IOptionPersisterProvider))]
-    internal sealed class RoamingVisualStudioProfileOptionPersisterProvider : IOptionPersisterProvider
+    internal sealed class RoamingVisualStudioProfileOptionPersisterProvider
+        : IOptionPersisterProvider
     {
         private readonly IAsyncServiceProvider _serviceProvider;
         private readonly IGlobalOptionService _optionService;
@@ -27,22 +28,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RoamingVisualStudioProfileOptionPersisterProvider(
             [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider,
-            IGlobalOptionService optionService)
+            IGlobalOptionService optionService
+        )
         {
             _serviceProvider = serviceProvider;
             _optionService = optionService;
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (_lazyPersister is not null)
             {
                 return _lazyPersister;
             }
 
-            var settingsManager = (ISettingsManager?)await _serviceProvider.GetServiceAsync(typeof(SVsSettingsPersistenceManager)).ConfigureAwait(true);
+            var settingsManager = (ISettingsManager?)
+                await _serviceProvider
+                    .GetServiceAsync(typeof(SVsSettingsPersistenceManager))
+                    .ConfigureAwait(true);
 
-            _lazyPersister ??= new RoamingVisualStudioProfileOptionPersister(_optionService, settingsManager);
+            _lazyPersister ??= new RoamingVisualStudioProfileOptionPersister(
+                _optionService,
+                settingsManager
+            );
             return _lazyPersister;
         }
     }

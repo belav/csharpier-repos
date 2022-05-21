@@ -14,43 +14,68 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromParameter), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromParameter
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = nameof(CSharpAddParameterCheckCodeRefactoringProvider))]
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.Wrapping)]
-    internal class CSharpInitializeMemberFromParameterCodeRefactoringProvider :
-        AbstractInitializeMemberFromParameterCodeRefactoringProvider<
+    internal class CSharpInitializeMemberFromParameterCodeRefactoringProvider
+        : AbstractInitializeMemberFromParameterCodeRefactoringProvider<
             BaseTypeDeclarationSyntax,
             ParameterSyntax,
             StatementSyntax,
-            ExpressionSyntax>
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpInitializeMemberFromParameterCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpInitializeMemberFromParameterCodeRefactoringProvider() { }
 
-        protected override bool IsFunctionDeclaration(SyntaxNode node)
-            => InitializeParameterHelpers.IsFunctionDeclaration(node);
+        protected override bool IsFunctionDeclaration(SyntaxNode node) =>
+            InitializeParameterHelpers.IsFunctionDeclaration(node);
 
-        protected override SyntaxNode TryGetLastStatement(IBlockOperation blockStatementOpt)
-            => InitializeParameterHelpers.TryGetLastStatement(blockStatementOpt);
+        protected override SyntaxNode TryGetLastStatement(IBlockOperation blockStatementOpt) =>
+            InitializeParameterHelpers.TryGetLastStatement(blockStatementOpt);
 
-        protected override void InsertStatement(SyntaxEditor editor, SyntaxNode functionDeclaration, bool returnsVoid, SyntaxNode statementToAddAfterOpt, StatementSyntax statement)
-            => InitializeParameterHelpers.InsertStatement(editor, functionDeclaration, returnsVoid, statementToAddAfterOpt, statement);
+        protected override void InsertStatement(
+            SyntaxEditor editor,
+            SyntaxNode functionDeclaration,
+            bool returnsVoid,
+            SyntaxNode statementToAddAfterOpt,
+            StatementSyntax statement
+        ) =>
+            InitializeParameterHelpers.InsertStatement(
+                editor,
+                functionDeclaration,
+                returnsVoid,
+                statementToAddAfterOpt,
+                statement
+            );
 
-        protected override bool IsImplicitConversion(Compilation compilation, ITypeSymbol source, ITypeSymbol destination)
-            => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
+        protected override bool IsImplicitConversion(
+            Compilation compilation,
+            ITypeSymbol source,
+            ITypeSymbol destination
+        ) => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
 
         // Fields are always private by default in C#.
-        protected override Accessibility DetermineDefaultFieldAccessibility(INamedTypeSymbol containingType)
-            => Accessibility.Private;
+        protected override Accessibility DetermineDefaultFieldAccessibility(
+            INamedTypeSymbol containingType
+        ) => Accessibility.Private;
 
         // Properties are always private by default in C#.
-        protected override Accessibility DetermineDefaultPropertyAccessibility()
-            => Accessibility.Private;
+        protected override Accessibility DetermineDefaultPropertyAccessibility() =>
+            Accessibility.Private;
 
-        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration)
-            => InitializeParameterHelpers.GetBody(functionDeclaration);
+        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration) =>
+            InitializeParameterHelpers.GetBody(functionDeclaration);
     }
 }

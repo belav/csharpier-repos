@@ -20,25 +20,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(VSInternalMethods.WorkspacePullDiagnosticName)]
-    internal class WorkspacePullDiagnosticHandler : AbstractPullDiagnosticHandler<VSInternalWorkspaceDiagnosticsParams, VSInternalWorkspaceDiagnosticReport>
+    internal class WorkspacePullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspacePullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService)
-            : base(xamlPullDiagnosticService)
-        { }
+        public WorkspacePullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
         public override string Method => VSInternalMethods.WorkspacePullDiagnosticName;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalWorkspaceDiagnosticsParams request) => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalWorkspaceDiagnosticsParams request
+        ) => null;
 
-        protected override VSInternalWorkspaceDiagnosticReport CreateReport(TextDocumentIdentifier? identifier, VSDiagnostic[]? diagnostics, string? resultId)
-            => new VSInternalWorkspaceDiagnosticReport { TextDocument = identifier, Diagnostics = diagnostics, ResultId = resultId };
+        protected override VSInternalWorkspaceDiagnosticReport CreateReport(
+            TextDocumentIdentifier? identifier,
+            VSDiagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new VSInternalWorkspaceDiagnosticReport
+            {
+                TextDocument = identifier,
+                Diagnostics = diagnostics,
+                ResultId = resultId
+            };
 
         /// <summary>
-        /// Collect all the opened documents from solution. 
-        /// In XamlLanguageService, we are only able to retrieve diagnostic information for opened documents. 
+        /// Collect all the opened documents from solution.
+        /// In XamlLanguageService, we are only able to retrieve diagnostic information for opened documents.
         /// So this is the same error experience we have now in full VS scenario.
         /// </summary>
         protected override ImmutableArray<Document> GetDocuments(RequestContext context)
@@ -55,10 +68,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             return result.Distinct().ToImmutableArray();
         }
 
-        protected override VSInternalDiagnosticParams[]? GetPreviousResults(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PreviousResults;
+        protected override VSInternalDiagnosticParams[]? GetPreviousResults(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PreviousResults;
 
-        protected override IProgress<VSInternalWorkspaceDiagnosticReport[]>? GetProgress(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PartialResultToken;
+        protected override IProgress<VSInternalWorkspaceDiagnosticReport[]>? GetProgress(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PartialResultToken;
     }
 }

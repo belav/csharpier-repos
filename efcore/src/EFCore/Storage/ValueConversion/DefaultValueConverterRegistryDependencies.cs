@@ -53,8 +53,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     </para>
         /// </remarks>
         [EntityFrameworkInternal]
-        public ValueConverterSelectorDependencies()
-        {
-        }
+        public ValueConverterSelectorDependencies() { }
     }
 }

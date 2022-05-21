@@ -5,8 +5,7 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
 {
-    public class IdentityUserToken<TKey>
-        where TKey : IEquatable<TKey>
+    public class IdentityUserToken<TKey> where TKey : IEquatable<TKey>
     {
         public virtual TKey UserId { get; set; }
         public virtual string LoginProvider { get; set; }

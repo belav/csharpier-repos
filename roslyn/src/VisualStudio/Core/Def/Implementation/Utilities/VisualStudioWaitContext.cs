@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             string title,
             string message,
             bool allowCancel,
-            bool showProgress)
+            bool showProgress
+        )
         {
             _title = title;
             _message = message;
@@ -50,7 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         }
 
         private IVsThreadedWaitDialog3 CreateDialog(
-            IVsThreadedWaitDialogFactory dialogFactory, bool showProgress)
+            IVsThreadedWaitDialogFactory dialogFactory,
+            bool showProgress
+        )
         {
             Marshal.ThrowExceptionForHR(dialogFactory.CreateInstance(out var dialog2));
             Contract.ThrowIfNull(dialog2);
@@ -70,28 +73,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 fShowProgress: showProgress,
                 iTotalSteps: this.ProgressTracker.TotalItems,
                 iCurrentStep: this.ProgressTracker.CompletedItems,
-                pCallback: callback);
+                pCallback: callback
+            );
 
             return dialog3;
         }
 
         public CancellationToken CancellationToken
         {
-            get
-            {
-                return _allowCancel
-                    ? _cancellationTokenSource.Token
-                    : CancellationToken.None;
-            }
+            get { return _allowCancel ? _cancellationTokenSource.Token : CancellationToken.None; }
         }
 
         public string Message
         {
-            get
-            {
-                return _message;
-            }
-
+            get { return _message; }
             set
             {
                 _message = value;
@@ -101,11 +96,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 
         public bool AllowCancel
         {
-            get
-            {
-                return _allowCancel;
-            }
-
+            get { return _allowCancel; }
             set
             {
                 _allowCancel = value;
@@ -122,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 iCurrentStep: this.ProgressTracker.CompletedItems,
                 iTotalSteps: this.ProgressTracker.TotalItems,
                 fDisableCancel: !_allowCancel,
-                pfCanceled: out _);
+                pfCanceled: out _
+            );
         }
 
         public void Dispose()

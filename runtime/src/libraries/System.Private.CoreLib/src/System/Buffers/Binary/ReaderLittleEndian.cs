@@ -20,9 +20,11 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double ReadDoubleLittleEndian(ReadOnlySpan<byte> source)
         {
-            return !BitConverter.IsLittleEndian ?
-                BitConverter.Int64BitsToDouble(ReverseEndianness(MemoryMarshal.Read<long>(source))) :
-                MemoryMarshal.Read<double>(source);
+            return !BitConverter.IsLittleEndian
+                ? BitConverter.Int64BitsToDouble(
+                    ReverseEndianness(MemoryMarshal.Read<long>(source))
+                )
+                : MemoryMarshal.Read<double>(source);
         }
 
         /// <summary>
@@ -37,9 +39,9 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half ReadHalfLittleEndian(ReadOnlySpan<byte> source)
         {
-            return !BitConverter.IsLittleEndian ?
-                BitConverter.Int16BitsToHalf(ReverseEndianness(MemoryMarshal.Read<short>(source))) :
-                MemoryMarshal.Read<Half>(source);
+            return !BitConverter.IsLittleEndian
+                ? BitConverter.Int16BitsToHalf(ReverseEndianness(MemoryMarshal.Read<short>(source)))
+                : MemoryMarshal.Read<Half>(source);
         }
 
         /// <summary>
@@ -96,9 +98,9 @@ namespace System.Buffers.Binary
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float ReadSingleLittleEndian(ReadOnlySpan<byte> source)
         {
-            return !BitConverter.IsLittleEndian ?
-                BitConverter.Int32BitsToSingle(ReverseEndianness(MemoryMarshal.Read<int>(source))) :
-                MemoryMarshal.Read<float>(source);
+            return !BitConverter.IsLittleEndian
+                ? BitConverter.Int32BitsToSingle(ReverseEndianness(MemoryMarshal.Read<int>(source)))
+                : MemoryMarshal.Read<float>(source);
         }
 
         /// <summary>

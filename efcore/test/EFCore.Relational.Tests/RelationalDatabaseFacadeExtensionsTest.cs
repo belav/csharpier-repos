@@ -43,7 +43,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(dbConnection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                dbConnection
+            );
 
             Assert.Same(dbConnection, context.Database.GetDbConnection());
         }
@@ -53,13 +55,19 @@ namespace Microsoft.EntityFrameworkCore
         {
             var optionsBuilder = new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true))
+                    new ServiceCollection()
+                        .AddEntityFrameworkInMemoryDatabase()
+                        .BuildServiceProvider(validateScopes: true)
+                )
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var context = new DbContext(optionsBuilder.Options);
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
+            );
         }
 
         [ConditionalTheory]
@@ -70,7 +78,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(dbConnection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                dbConnection
+            );
 
             if (async)
             {
@@ -92,7 +102,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(dbConnection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                dbConnection
+            );
 
             if (async)
             {
@@ -115,7 +127,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(dbConnection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                dbConnection
+            );
 
             var transaction = async
                 ? await context.Database.BeginTransactionAsync(IsolationLevel.Chaos)
@@ -130,21 +144,33 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(dbConnection);
+            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
+                dbConnection
+            );
             var transaction = new FakeDbTransaction(dbConnection, IsolationLevel.Chaos);
 
-            Assert.Same(transaction, context.Database.UseTransaction(transaction).GetDbTransaction());
+            Assert.Same(
+                transaction,
+                context.Database.UseTransaction(transaction).GetDbTransaction()
+            );
         }
 
         [ConditionalTheory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task Begin_transaction_ignores_isolation_level_on_non_relational_provider(bool async)
+        public async Task Begin_transaction_ignores_isolation_level_on_non_relational_provider(
+            bool async
+        )
         {
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddScoped<IDbContextTransactionManager, FakeDbContextTransactionManager>());
+                new ServiceCollection().AddScoped<
+                    IDbContextTransactionManager,
+                    FakeDbContextTransactionManager
+                >()
+            );
 
-            var transactionManager = (FakeDbContextTransactionManager)context.GetService<IDbContextTransactionManager>();
+            var transactionManager = (FakeDbContextTransactionManager)
+                context.GetService<IDbContextTransactionManager>();
 
             if (async)
             {
@@ -163,12 +189,10 @@ namespace Microsoft.EntityFrameworkCore
             public int BeginCount { get; set; }
             public int BeginAsyncCount { get; set; }
 
-            public void ResetState()
-            {
-            }
+            public void ResetState() { }
 
-            public Task ResetStateAsync(CancellationToken cancellationToken = default)
-                => Task.CompletedTask;
+            public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
+                Task.CompletedTask;
 
             public IDbContextTransaction BeginTransaction()
             {
@@ -176,33 +200,29 @@ namespace Microsoft.EntityFrameworkCore
                 return new InMemoryTransaction();
             }
 
-            public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+            public Task<IDbContextTransaction> BeginTransactionAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 BeginAsyncCount++;
                 return Task.FromResult<IDbContextTransaction>(new InMemoryTransaction());
             }
 
-            public void CommitTransaction()
-            {
-            }
+            public void CommitTransaction() { }
 
-            public void RollbackTransaction()
-            {
-            }
+            public void RollbackTransaction() { }
 
-            public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-                => Task.CompletedTask;
+            public Task CommitTransactionAsync(CancellationToken cancellationToken = default) =>
+                Task.CompletedTask;
 
-            public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-                => Task.CompletedTask;
+            public Task RollbackTransactionAsync(CancellationToken cancellationToken = default) =>
+                Task.CompletedTask;
 
             public IDbContextTransaction CurrentTransaction { get; }
 
             public Transaction EnlistedTransaction { get; }
 
-            public void EnlistTransaction(Transaction transaction)
-            {
-            }
+            public void EnlistTransaction(Transaction transaction) { }
         }
 
         [ConditionalFact]
@@ -213,19 +233,32 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.UseTransaction(transaction)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.Database.UseTransaction(transaction)
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
         public void GetMigrations_works()
         {
-            var migrations = new[] { "00000000000001_One", "00000000000002_Two", "00000000000003_Three" };
+            var migrations = new[]
+            {
+                "00000000000001_One",
+                "00000000000002_Two",
+                "00000000000003_Three"
+            };
 
-            var migrationsAssembly = new FakeIMigrationsAssembly { Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo)) };
+            var migrationsAssembly = new FakeIMigrationsAssembly
+            {
+                Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
+            };
 
             var db = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly));
+                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
             Assert.Equal(migrations, db.Database.GetMigrations());
         }
@@ -236,11 +269,10 @@ namespace Microsoft.EntityFrameworkCore
             public ModelSnapshot ModelSnapshot { get; }
             public Assembly Assembly { get; }
 
-            public string FindMigrationId(string nameOrId)
-                => throw new NotImplementedException();
+            public string FindMigrationId(string nameOrId) => throw new NotImplementedException();
 
-            public Migration CreateMigration(TypeInfo migrationClass, string activeProvider)
-                => throw new NotImplementedException();
+            public Migration CreateMigration(TypeInfo migrationClass, string activeProvider) =>
+                throw new NotImplementedException();
         }
 
         [ConditionalTheory]
@@ -256,51 +288,48 @@ namespace Microsoft.EntityFrameworkCore
             };
 
             var context = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IHistoryRepository>(repository));
+                new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
+            );
 
             Assert.Equal(
                 migrations,
                 async
                     ? await context.Database.GetAppliedMigrationsAsync()
-                    : context.Database.GetAppliedMigrations());
+                    : context.Database.GetAppliedMigrations()
+            );
         }
 
         private class FakeHistoryRepository : IHistoryRepository
         {
             public List<HistoryRow> AppliedMigrations { get; set; }
 
-            public IReadOnlyList<HistoryRow> GetAppliedMigrations()
-                => AppliedMigrations;
+            public IReadOnlyList<HistoryRow> GetAppliedMigrations() => AppliedMigrations;
 
-            public Task<IReadOnlyList<HistoryRow>> GetAppliedMigrationsAsync(CancellationToken cancellationToken = default)
-                => Task.FromResult<IReadOnlyList<HistoryRow>>(AppliedMigrations);
+            public Task<IReadOnlyList<HistoryRow>> GetAppliedMigrationsAsync(
+                CancellationToken cancellationToken = default
+            ) => Task.FromResult<IReadOnlyList<HistoryRow>>(AppliedMigrations);
 
-            public bool Exists()
-                => throw new NotImplementedException();
+            public bool Exists() => throw new NotImplementedException();
 
-            public Task<bool> ExistsAsync(CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+            public Task<bool> ExistsAsync(CancellationToken cancellationToken = default) =>
+                throw new NotImplementedException();
 
-            public string GetCreateScript()
-                => throw new NotImplementedException();
+            public string GetCreateScript() => throw new NotImplementedException();
 
-            public string GetCreateIfNotExistsScript()
-                => throw new NotImplementedException();
+            public string GetCreateIfNotExistsScript() => throw new NotImplementedException();
 
-            public string GetInsertScript(HistoryRow row)
-                => throw new NotImplementedException();
+            public string GetInsertScript(HistoryRow row) => throw new NotImplementedException();
 
-            public string GetDeleteScript(string migrationId)
-                => throw new NotImplementedException();
+            public string GetDeleteScript(string migrationId) =>
+                throw new NotImplementedException();
 
-            public string GetBeginIfNotExistsScript(string migrationId)
-                => throw new NotImplementedException();
+            public string GetBeginIfNotExistsScript(string migrationId) =>
+                throw new NotImplementedException();
 
-            public string GetBeginIfExistsScript(string migrationId)
-                => throw new NotImplementedException();
+            public string GetBeginIfExistsScript(string migrationId) =>
+                throw new NotImplementedException();
 
-            public string GetEndIfScript()
-                => throw new NotImplementedException();
+            public string GetEndIfScript() => throw new NotImplementedException();
         }
 
         [ConditionalTheory]
@@ -308,27 +337,39 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false)]
         public async Task GetPendingMigrations_works(bool async)
         {
-            var migrations = new[] { "00000000000001_One", "00000000000002_Two", "00000000000003_Three" };
+            var migrations = new[]
+            {
+                "00000000000001_One",
+                "00000000000002_Two",
+                "00000000000003_Three"
+            };
 
             var appliedMigrations = new[] { "00000000000001_One", "00000000000002_Two" };
 
-            var migrationsAssembly = new FakeIMigrationsAssembly { Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo)) };
+            var migrationsAssembly = new FakeIMigrationsAssembly
+            {
+                Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
+            };
 
             var repository = new FakeHistoryRepository
             {
-                AppliedMigrations = appliedMigrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
+                AppliedMigrations = appliedMigrations
+                    .Select(id => new HistoryRow(id, "1.1.0"))
+                    .ToList()
             };
 
             var context = RelationalTestHelpers.Instance.CreateContext(
                 new ServiceCollection()
                     .AddSingleton<IHistoryRepository>(repository)
-                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly));
+                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
             Assert.Equal(
                 new[] { "00000000000003_Three" },
                 async
                     ? await context.Database.GetPendingMigrationsAsync()
-                    : context.Database.GetPendingMigrations());
+                    : context.Database.GetPendingMigrations()
+            );
         }
     }
 }

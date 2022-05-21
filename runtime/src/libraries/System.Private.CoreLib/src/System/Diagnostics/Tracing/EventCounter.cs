@@ -69,9 +69,9 @@ namespace System.Diagnostics.Tracing
         public override string ToString()
         {
             int count = Volatile.Read(ref _count);
-            return count == 0 ?
-                $"EventCounter '{Name}' Count 0" :
-                $"EventCounter '{Name}' Count {count} Mean {_sum / count:n3}";
+            return count == 0
+                ? $"EventCounter '{Name}' Count 0"
+                : $"EventCounter '{Name}' Count {count} Mean {_sum / count:n3}";
         }
 
         #region Statistics Calculation
@@ -98,8 +98,11 @@ namespace System.Diagnostics.Tracing
         }
 
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The DynamicDependency will preserve the properties of CounterPayload")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency will preserve the properties of CounterPayload"
+        )]
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(CounterPayload))]
 #endif
         internal override void WritePayload(float intervalSec, int pollingIntervalMillisec)
@@ -113,7 +116,9 @@ namespace System.Diagnostics.Tracing
                 if (0 < _count)
                 {
                     payload.Mean = _sum / _count;
-                    payload.StandardDeviation = Math.Sqrt(_sumSquared / _count - _sum * _sum / _count / _count);
+                    payload.StandardDeviation = Math.Sqrt(
+                        _sumSquared / _count - _sum * _sum / _count / _count
+                    );
                 }
                 else
                 {
@@ -129,7 +134,11 @@ namespace System.Diagnostics.Tracing
                 payload.DisplayUnits = DisplayUnits ?? "";
                 payload.Name = Name;
                 ResetStatistics();
-                EventSource.Write("EventCounters", new EventSourceOptions() { Level = EventLevel.LogAlways }, new CounterPayloadType(payload));
+                EventSource.Write(
+                    "EventCounters",
+                    new EventSourceOptions() { Level = EventLevel.LogAlways },
+                    new CounterPayloadType(payload)
+                );
             }
         }
 
@@ -159,7 +168,11 @@ namespace System.Diagnostics.Tracing
             int i = _bufferedValuesIndex;
             while (true)
             {
-                double result = Interlocked.CompareExchange(ref _bufferedValues[i], value, UnusedBufferSlotValue);
+                double result = Interlocked.CompareExchange(
+                    ref _bufferedValues[i],
+                    value,
+                    UnusedBufferSlotValue
+                );
                 i++;
                 if (_bufferedValues.Length <= i)
                 {
@@ -195,14 +208,17 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-
     /// <summary>
     /// This is the payload that is sent in the with EventSource.Write
     /// </summary>
     [EventData]
     internal sealed class CounterPayloadType
     {
-        public CounterPayloadType(CounterPayload payload) { Payload = payload; }
+        public CounterPayloadType(CounterPayload payload)
+        {
+            Payload = payload;
+        }
+
         public CounterPayload Payload { get; set; }
     }
 }

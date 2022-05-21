@@ -23,31 +23,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 {
     using static SyntaxFactory;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseTupleSwap), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseTupleSwap
+        ),
+        Shared
+    ]
     internal partial class CSharpUseTupleSwapCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseTupleSwapCodeFixProvider()
-        {
-        }
+        public CSharpUseTupleSwapCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(IDEDiagnosticIds.UseTupleSwapDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.UseTupleSwapDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
                 FixOne(editor, diagnostic, cancellationToken);
@@ -56,12 +64,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
         }
 
         private static void FixOne(
-            SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
-            var localDeclarationStatement = (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
+            var localDeclarationStatement = (LocalDeclarationStatementSyntax)
+                diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
             // `expr_a = expr_b`;
-            var firstAssignmentStatement = (ExpressionStatementSyntax)diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
-            var secondAssignmentStatment = (ExpressionStatementSyntax)diagnostic.AdditionalLocations[2].FindNode(cancellationToken);
+            var firstAssignmentStatement = (ExpressionStatementSyntax)
+                diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
+            var secondAssignmentStatment = (ExpressionStatementSyntax)
+                diagnostic.AdditionalLocations[2].FindNode(cancellationToken);
 
             editor.RemoveNode(firstAssignmentStatement);
             editor.RemoveNode(secondAssignmentStatment);
@@ -70,20 +84,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
             var exprA = assignment.Left.WalkDownParentheses().WithoutTrivia();
             var exprB = assignment.Right.WalkDownParentheses().WithoutTrivia();
 
-            var tupleAssignmentStatement = ExpressionStatement(AssignmentExpression(
-                SyntaxKind.SimpleAssignmentExpression,
-                TupleExpression(SeparatedList(new[] { Argument(exprB), Argument(exprA) })),
-                TupleExpression(SeparatedList(new[] { Argument(exprA), Argument(exprB) }))));
+            var tupleAssignmentStatement = ExpressionStatement(
+                AssignmentExpression(
+                    SyntaxKind.SimpleAssignmentExpression,
+                    TupleExpression(SeparatedList(new[] { Argument(exprB), Argument(exprA) })),
+                    TupleExpression(SeparatedList(new[] { Argument(exprA), Argument(exprB) }))
+                )
+            );
 
-            editor.ReplaceNode(localDeclarationStatement, tupleAssignmentStatement.WithTriviaFrom(localDeclarationStatement));
+            editor.ReplaceNode(
+                localDeclarationStatement,
+                tupleAssignmentStatement.WithTriviaFrom(localDeclarationStatement)
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_tuple_to_swap_values, createChangedDocument, nameof(CSharpAnalyzersResources.Use_tuple_to_swap_values))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_tuple_to_swap_values,
+                    createChangedDocument,
+                    nameof(CSharpAnalyzersResources.Use_tuple_to_swap_values)
+                ) { }
         }
     }
 }

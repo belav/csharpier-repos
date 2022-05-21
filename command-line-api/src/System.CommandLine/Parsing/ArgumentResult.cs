@@ -15,9 +15,7 @@ namespace System.CommandLine.Parsing
     {
         private ArgumentConversionResult? _conversionResult;
 
-        internal ArgumentResult(
-            IArgument argument,
-            SymbolResult? parent) : base(argument, parent)
+        internal ArgumentResult(IArgument argument, SymbolResult? parent) : base(argument, parent)
         {
             Argument = argument;
         }
@@ -35,8 +33,7 @@ namespace System.CommandLine.Parsing
             _conversionResult ??= Convert(Argument);
 
         /// <inheritdoc cref="GetValueOrDefault{T}"/>
-        public object? GetValueOrDefault() =>
-            GetValueOrDefault<object?>();
+        public object? GetValueOrDefault() => GetValueOrDefault<object?>();
 
         /// <summary>
         /// Gets the parsed value or the default value for <see cref="Argument"/>.
@@ -44,9 +41,7 @@ namespace System.CommandLine.Parsing
         /// <returns>The parsed value or the default value for <see cref="Argument"/></returns>
         [return: MaybeNull]
         public T GetValueOrDefault<T>() =>
-            GetArgumentConversionResult()
-                .ConvertIfNeeded(this, typeof(T))
-                .GetValueOrDefault<T>();
+            GetArgumentConversionResult().ConvertIfNeeded(this, typeof(T)).GetValueOrDefault<T>();
 
         /// <summary>
         /// Specifies the maximum number of tokens to consume for the argument. Remaining tokens are passed on and can be consumed by later arguments, or will otherwise be added to <see cref="ParseResult.UnmatchedTokens"/>
@@ -58,7 +53,11 @@ namespace System.CommandLine.Parsing
         {
             if (numberOfTokens < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(numberOfTokens), numberOfTokens, "Value must be at least 1.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(numberOfTokens),
+                    numberOfTokens,
+                    "Value must be at least 1."
+                );
             }
 
             if (PassedOnTokens is { })
@@ -79,7 +78,8 @@ namespace System.CommandLine.Parsing
         }
 
         /// <inheritdoc/>
-        public override string ToString() => $"{GetType().Name} {Argument.Name}: {string.Join(" ", Tokens.Select(t => $"<{t.Value}>"))}";
+        public override string ToString() =>
+            $"{GetType().Name} {Argument.Name}: {string.Join(" ", Tokens.Select(t => $"<{t.Value}>"))}";
 
         internal ParseError? CustomError(Argument argument)
         {
@@ -104,12 +104,17 @@ namespace System.CommandLine.Parsing
 
         private ArgumentConversionResult Convert(IArgument argument)
         {
-            if (ShouldCheckArity() &&
-                Parent is { } &&
-                ArgumentArity.Validate(Parent,
-                                       argument,
-                                       argument.Arity.MinimumNumberOfValues,
-                                       argument.Arity.MaximumNumberOfValues) is FailedArgumentConversionResult failedResult)
+            if (
+                ShouldCheckArity()
+                && Parent is { }
+                && ArgumentArity.Validate(
+                    Parent,
+                    argument,
+                    argument.Arity.MinimumNumberOfValues,
+                    argument.Arity.MaximumNumberOfValues
+                )
+                    is FailedArgumentConversionResult failedResult
+            )
             {
                 return failedResult;
             }
@@ -124,15 +129,11 @@ namespace System.CommandLine.Parsing
 
                     if (string.IsNullOrEmpty(argumentResult.ErrorMessage))
                     {
-                        return ArgumentConversionResult.Success(
-                            arg,
-                            defaultValue);
+                        return ArgumentConversionResult.Success(arg, defaultValue);
                     }
                     else
                     {
-                        return ArgumentConversionResult.Failure(
-                            arg,
-                            argumentResult.ErrorMessage!);
+                        return ArgumentConversionResult.Failure(arg, argumentResult.ErrorMessage!);
                     }
                 }
 
@@ -140,8 +141,16 @@ namespace System.CommandLine.Parsing
                 {
                     return argument.Arity.MaximumNumberOfValues switch
                     {
-                        1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
-                        _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
+                        1
+                            => ArgumentConversionResult.Success(
+                                argument,
+                                Tokens.Select(t => t.Value).SingleOrDefault()
+                            ),
+                        _
+                            => ArgumentConversionResult.Success(
+                                argument,
+                                Tokens.Select(t => t.Value).ToArray()
+                            )
                     };
                 }
 
@@ -159,9 +168,7 @@ namespace System.CommandLine.Parsing
 
                 if (success)
                 {
-                    return ArgumentConversionResult.Success(
-                        arg,
-                        value);
+                    return ArgumentConversionResult.Success(arg, value);
                 }
 
                 if (ErrorMessage is not null)
@@ -175,7 +182,8 @@ namespace System.CommandLine.Parsing
                         argument,
                         itemType,
                         Tokens[0].Value,
-                        LocalizationResources);
+                        LocalizationResources
+                    );
                 }
                 else
                 {
@@ -183,18 +191,26 @@ namespace System.CommandLine.Parsing
                         argument,
                         argument.ValueType,
                         Tokens[0].Value,
-                        LocalizationResources);
+                        LocalizationResources
+                    );
                 }
             }
 
             return argument.Arity.MaximumNumberOfValues switch
             {
-                1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
-                _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
+                1
+                    => ArgumentConversionResult.Success(
+                        argument,
+                        Tokens.Select(t => t.Value).SingleOrDefault()
+                    ),
+                _
+                    => ArgumentConversionResult.Success(
+                        argument,
+                        Tokens.Select(t => t.Value).ToArray()
+                    )
             };
 
-            bool ShouldCheckArity() => 
-                Parent is not OptionResult { IsImplicit: true };
+            bool ShouldCheckArity() => Parent is not OptionResult { IsImplicit: true };
         }
     }
 }

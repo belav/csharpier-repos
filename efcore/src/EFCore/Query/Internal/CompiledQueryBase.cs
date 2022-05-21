@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public abstract class CompiledQueryBase<TContext, TResult>
-        where TContext : DbContext
+    public abstract class CompiledQueryBase<TContext, TResult> where TContext : DbContext
     {
         private readonly LambdaExpression _queryExpression;
 
@@ -41,10 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual TResult ExecuteCore(
-            TContext context,
-            params object?[] parameters)
-            => ExecuteCore(context, default, parameters);
+        protected virtual TResult ExecuteCore(TContext context, params object?[] parameters) =>
+            ExecuteCore(context, default, parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -55,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         protected virtual TResult ExecuteCore(
             TContext context,
             CancellationToken cancellationToken,
-            params object?[] parameters)
+            params object?[] parameters
+        )
         {
             var executor = EnsureExecutor(context);
             var queryContextFactory = context.GetService<IQueryContextFactory>();
@@ -66,8 +64,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             for (var i = 0; i < parameters.Length; i++)
             {
                 queryContext.AddParameter(
-                    QueryCompilationContext.QueryParameterPrefix + _queryExpression.Parameters[i + 1].Name,
-                    parameters[i]);
+                    QueryCompilationContext.QueryParameterPrefix
+                        + _queryExpression.Parameters[i + 1].Name,
+                    parameters[i]
+                );
             }
 
             return executor(queryContext);
@@ -81,21 +81,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         protected abstract Func<QueryContext, TResult> CreateCompiledQuery(
             IQueryCompiler queryCompiler,
-            Expression expression);
+            Expression expression
+        );
 
-        private Func<QueryContext, TResult> EnsureExecutor(TContext context)
-            => NonCapturingLazyInitializer.EnsureInitialized(
+        private Func<QueryContext, TResult> EnsureExecutor(TContext context) =>
+            NonCapturingLazyInitializer.EnsureInitialized(
                 ref _executor,
                 this,
                 context,
                 _queryExpression,
                 static (t, c, q) =>
-                    {
-                        var queryCompiler = c.GetService<IQueryCompiler>();
-                        var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
+                {
+                    var queryCompiler = c.GetService<IQueryCompiler>();
+                    var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
 
-                        return t.CreateCompiledQuery(queryCompiler, expression);
-                    });
+                    return t.CreateCompiledQuery(queryCompiler, expression);
+                }
+            );
 
         private sealed class QueryExpressionRewriter : ExpressionVisitor
         {
@@ -104,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public QueryExpressionRewriter(
                 TContext context,
-                IReadOnlyCollection<ParameterExpression> parameters)
+                IReadOnlyCollection<ParameterExpression> parameters
+            )
             {
                 _context = context;
                 _parameters = parameters;
@@ -120,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return _parameters.Contains(parameterExpression)
                     ? Expression.Parameter(
                         parameterExpression.Type,
-                        QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name)
+                        QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name
+                    )
                     : parameterExpression;
             }
         }

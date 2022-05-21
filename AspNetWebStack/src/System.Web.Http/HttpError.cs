@@ -13,29 +13,33 @@ using System.Xml.Serialization;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Defines a serializable container for storing error information. This information is stored 
-    /// as key/value pairs. The dictionary keys to look up standard error information are available 
+    /// Defines a serializable container for storing error information. This information is stored
+    /// as key/value pairs. The dictionary keys to look up standard error information are available
     /// on the <see cref="HttpErrorKeys"/> type.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This type is only a dictionary to get the right serialization format")]
-    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "DCS does not support IXmlSerializable types that are also marked as [Serializable]")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "This type is only a dictionary to get the right serialization format"
+    )]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2237:MarkISerializableTypesWithSerializable",
+        Justification = "DCS does not support IXmlSerializable types that are also marked as [Serializable]"
+    )]
     [XmlRoot("Error")]
     public sealed class HttpError : Dictionary<string, object>, IXmlSerializable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpError"/> class.
         /// </summary>
-        public HttpError()
-            : base(StringComparer.OrdinalIgnoreCase)
-        {
-        }
+        public HttpError() : base(StringComparer.OrdinalIgnoreCase) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/>.
         /// </summary>
         /// <param name="message">The error message to associate with this instance.</param>
-        public HttpError(string message)
-            : this()
+        public HttpError(string message) : this()
         {
             if (message == null)
             {
@@ -50,8 +54,7 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="exception">The exception to use for error information.</param>
         /// <param name="includeErrorDetail"><c>true</c> to include the exception information in the error; <c>false</c> otherwise</param>
-        public HttpError(Exception exception, bool includeErrorDetail)
-            : this()
+        public HttpError(Exception exception, bool includeErrorDetail) : this()
         {
             if (exception == null)
             {
@@ -67,7 +70,10 @@ namespace System.Web.Http
                 Add(HttpErrorKeys.StackTraceKey, exception.StackTrace);
                 if (exception.InnerException != null)
                 {
-                    Add(HttpErrorKeys.InnerExceptionKey, new HttpError(exception.InnerException, includeErrorDetail));
+                    Add(
+                        HttpErrorKeys.InnerExceptionKey,
+                        new HttpError(exception.InnerException, includeErrorDetail)
+                    );
                 }
             }
         }
@@ -77,8 +83,7 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="modelState">The invalid model state to use for error information.</param>
         /// <param name="includeErrorDetail"><c>true</c> to include exception messages in the error; <c>false</c> otherwise</param>
-        public HttpError(ModelStateDictionary modelState, bool includeErrorDetail)
-            : this()
+        public HttpError(ModelStateDictionary modelState, bool includeErrorDetail) : this()
         {
             if (modelState == null)
             {
@@ -99,17 +104,23 @@ namespace System.Web.Http
                 ModelErrorCollection errors = keyModelStatePair.Value.Errors;
                 if (errors != null && errors.Count > 0)
                 {
-                    IEnumerable<string> errorMessages = errors.Select(error =>
-                    {
-                        if (includeErrorDetail && error.Exception != null)
-                        {
-                            return error.Exception.Message;
-                        }
-                        else
-                        {
-                            return String.IsNullOrEmpty(error.ErrorMessage) ? SRResources.ErrorOccurred : error.ErrorMessage;
-                        }
-                    }).ToArray();
+                    IEnumerable<string> errorMessages = errors
+                        .Select(
+                            error =>
+                            {
+                                if (includeErrorDetail && error.Exception != null)
+                                {
+                                    return error.Exception.Message;
+                                }
+                                else
+                                {
+                                    return String.IsNullOrEmpty(error.ErrorMessage)
+                                        ? SRResources.ErrorOccurred
+                                        : error.ErrorMessage;
+                                }
+                            }
+                        )
+                        .ToArray();
                     modelStateError.Add(key, errorMessages);
                 }
             }
@@ -118,13 +129,12 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/> 
+        /// Initializes a new instance of the <see cref="HttpError"/> class containing error message <paramref name="message"/>
         /// and error message detail <paramref name="messageDetail"/>.
         /// </summary>
         /// <param name="message">The error message to associate with this instance.</param>
         /// <param name="messageDetail">The error message detail to associate with this instance.</param>
-        internal HttpError(string message, string messageDetail)
-            : this(message)
+        internal HttpError(string message, string messageDetail) : this(message)
         {
             if (messageDetail == null)
             {
@@ -135,8 +145,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// The high-level, user-visible message explaining the cause of the error. Information carried in this field 
-        /// should be considered public in that it will go over the wire regardless of the <see cref="IncludeErrorDetailPolicy"/>. 
+        /// The high-level, user-visible message explaining the cause of the error. Information carried in this field
+        /// should be considered public in that it will go over the wire regardless of the <see cref="IncludeErrorDetailPolicy"/>.
         /// As a result care should be taken not to disclose sensitive information about the server or the application.
         /// </summary>
         public string Message
@@ -151,7 +161,7 @@ namespace System.Web.Http
         /// <remarks>
         /// The inclusion of <see cref="System.Exception"/> information carried in the <see cref="ModelState"/> is
         /// controlled by the <see cref="IncludeErrorDetailPolicy"/>. All other information in the <see cref="ModelState"/>
-        /// should be considered public in that it will go over the wire. As a result care should be taken not to 
+        /// should be considered public in that it will go over the wire. As a result care should be taken not to
         /// disclose sensitive information about the server or the application.
         /// </remarks>
         public HttpError ModelState
@@ -163,8 +173,8 @@ namespace System.Web.Http
         /// A detailed description of the error intended for the developer to understand exactly what failed.
         /// </summary>
         /// <remarks>
-        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The 
-        /// field is expected to contain information about the server or the application that should not 
+        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The
+        /// field is expected to contain information about the server or the application that should not
         /// be disclosed broadly.
         /// </remarks>
         public string MessageDetail
@@ -177,8 +187,8 @@ namespace System.Web.Http
         /// The message of the <see cref="System.Exception"/> if available.
         /// </summary>
         /// <remarks>
-        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The 
-        /// field is expected to contain information about the server or the application that should not 
+        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The
+        /// field is expected to contain information about the server or the application that should not
         /// be disclosed broadly.
         /// </remarks>
         public string ExceptionMessage
@@ -191,8 +201,8 @@ namespace System.Web.Http
         /// The type of the <see cref="System.Exception"/> if available.
         /// </summary>
         /// <remarks>
-        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The 
-        /// field is expected to contain information about the server or the application that should not 
+        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The
+        /// field is expected to contain information about the server or the application that should not
         /// be disclosed broadly.
         /// </remarks>
         public string ExceptionType
@@ -205,8 +215,8 @@ namespace System.Web.Http
         /// The stack trace information associated with this instance if available.
         /// </summary>
         /// <remarks>
-        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The 
-        /// field is expected to contain information about the server or the application that should not 
+        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The
+        /// field is expected to contain information about the server or the application that should not
         /// be disclosed broadly.
         /// </remarks>
         public string StackTrace
@@ -219,8 +229,8 @@ namespace System.Web.Http
         /// The inner <see cref="System.Exception"/> associated with this instance if available.
         /// </summary>
         /// <remarks>
-        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The 
-        /// field is expected to contain information about the server or the application that should not 
+        /// The inclusion of this field is controlled by the <see cref="IncludeErrorDetailPolicy"/>. The
+        /// field is expected to contain information about the server or the application that should not
         /// be disclosed broadly.
         /// </remarks>
         public HttpError InnerException

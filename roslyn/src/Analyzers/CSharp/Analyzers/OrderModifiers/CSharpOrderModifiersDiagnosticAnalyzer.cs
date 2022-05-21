@@ -15,18 +15,19 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
     internal class CSharpOrderModifiersDiagnosticAnalyzer : AbstractOrderModifiersDiagnosticAnalyzer
     {
         public CSharpOrderModifiersDiagnosticAnalyzer()
-            : base(CSharpSyntaxFacts.Instance,
-                   CSharpCodeStyleOptions.PreferredModifierOrder,
-                   CSharpOrderModifiersHelper.Instance,
-                   LanguageNames.CSharp)
-        {
-        }
+            : base(
+                CSharpSyntaxFacts.Instance,
+                CSharpCodeStyleOptions.PreferredModifierOrder,
+                CSharpOrderModifiersHelper.Instance,
+                LanguageNames.CSharp
+            ) { }
 
         protected override void Recurse(
             SyntaxTreeAnalysisContext context,
             Dictionary<int, int> preferredOrder,
             ReportDiagnostic severity,
-            SyntaxNode root)
+            SyntaxNode root
+        )
         {
             foreach (var child in root.ChildNodesAndTokens())
             {
@@ -37,9 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
                     {
                         CheckModifiers(context, preferredOrder, severity, memberDeclaration);
 
-                        // Recurse and check children.  Note: we only do this if we're on an actual 
-                        // member declaration.  Once we hit something that isn't, we don't need to 
-                        // keep recursing.  This prevents us from actually entering things like method 
+                        // Recurse and check children.  Note: we only do this if we're on an actual
+                        // member declaration.  Once we hit something that isn't, we don't need to
+                        // keep recursing.  This prevents us from actually entering things like method
                         // bodies.
                         Recurse(context, preferredOrder, severity, node);
                     }

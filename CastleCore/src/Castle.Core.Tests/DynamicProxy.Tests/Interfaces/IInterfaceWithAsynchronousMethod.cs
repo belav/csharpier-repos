@@ -14,10 +14,10 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	using System.Threading.Tasks;
+    using System.Threading.Tasks;
 
-	public interface IInterfaceWithAsynchronousMethod
-	{
-		Task Method();
-	}
+    public interface IInterfaceWithAsynchronousMethod
+    {
+        Task Method();
+    }
 }

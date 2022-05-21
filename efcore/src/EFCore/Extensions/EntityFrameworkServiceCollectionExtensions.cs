@@ -65,9 +65,14 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder>? optionsAction = null,
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-            where TContext : DbContext
-            => AddDbContext<TContext, TContext>(serviceCollection, optionsAction, contextLifetime, optionsLifetime);
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        ) where TContext : DbContext =>
+            AddDbContext<TContext, TContext>(
+                serviceCollection,
+                optionsAction,
+                contextLifetime,
+                optionsLifetime
+            );
 
         /// <summary>
         ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -115,13 +120,14 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder>? optionsAction = null,
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-            where TContextImplementation : DbContext, TContextService
-            => AddDbContext<TContextService, TContextImplementation>(
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        ) where TContextImplementation : DbContext, TContextService =>
+            AddDbContext<TContextService, TContextImplementation>(
                 serviceCollection,
-                optionsAction == null
-                    ? null
-                    : (p, b) => optionsAction(b), contextLifetime, optionsLifetime);
+                optionsAction == null ? null : (p, b) => optionsAction(b),
+                contextLifetime,
+                optionsLifetime
+            );
 
         /// <summary>
         ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -164,9 +170,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextPool<TContext>(
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-            where TContext : DbContext
-            => AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        ) where TContext : DbContext =>
+            AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
         /// <summary>
         ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -210,13 +216,18 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextPool<TContextService, TContextImplementation>(
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        )
             where TContextImplementation : DbContext, TContextService
             where TContextService : class
         {
             Check.NotNull(optionsAction, nameof(optionsAction));
 
-            return AddDbContextPool<TContextService, TContextImplementation>(serviceCollection, (_, ob) => optionsAction(ob), poolSize);
+            return AddDbContextPool<TContextService, TContextImplementation>(
+                serviceCollection,
+                (_, ob) => optionsAction(ob),
+                poolSize
+            );
         }
 
         /// <summary>
@@ -268,9 +279,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextPool<TContext>(
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-            where TContext : DbContext
-            => AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        ) where TContext : DbContext =>
+            AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
         /// <summary>
         ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -323,7 +334,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextPool<TContextService, TContextImplementation>(
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        )
             where TContextImplementation : DbContext, TContextService
             where TContextService : class
         {
@@ -331,15 +343,24 @@ namespace Microsoft.Extensions.DependencyInjection
 
             AddPoolingOptions<TContextImplementation>(serviceCollection, optionsAction, poolSize);
 
-            serviceCollection.TryAddSingleton<IDbContextPool<TContextImplementation>, DbContextPool<TContextImplementation>>();
-            serviceCollection.TryAddScoped<IScopedDbContextLease<TContextImplementation>, ScopedDbContextLease<TContextImplementation>>();
+            serviceCollection.TryAddSingleton<
+                IDbContextPool<TContextImplementation>,
+                DbContextPool<TContextImplementation>
+            >();
+            serviceCollection.TryAddScoped<
+                IScopedDbContextLease<TContextImplementation>,
+                ScopedDbContextLease<TContextImplementation>
+            >();
 
             serviceCollection.TryAddScoped<TContextService>(
-                sp => sp.GetRequiredService<IScopedDbContextLease<TContextImplementation>>().Context);
+                sp => sp.GetRequiredService<IScopedDbContextLease<TContextImplementation>>().Context
+            );
 
             if (typeof(TContextService) != typeof(TContextImplementation))
             {
-                serviceCollection.TryAddScoped(p => (TContextImplementation)p.GetService<TContextService>()!);
+                serviceCollection.TryAddScoped(
+                    p => (TContextImplementation)p.GetService<TContextService>()!
+                );
             }
 
             return serviceCollection;
@@ -348,12 +369,15 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddPoolingOptions<TContext>(
             IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize)
-            where TContext : DbContext
+            int poolSize
+        ) where TContext : DbContext
         {
             if (poolSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(poolSize), CoreStrings.InvalidPoolSize);
+                throw new ArgumentOutOfRangeException(
+                    nameof(poolSize),
+                    CoreStrings.InvalidPoolSize
+                );
             }
 
             CheckContextConstructors<TContext>();
@@ -364,12 +388,15 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     optionsAction(sp, ob);
 
-                    var extension = (ob.Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension())
-                        .WithMaxPoolSize(poolSize);
+                    var extension = (
+                        ob.Options.FindExtension<CoreOptionsExtension>()
+                        ?? new CoreOptionsExtension()
+                    ).WithMaxPoolSize(poolSize);
 
                     ((IDbContextOptionsBuilderInfrastructure)ob).AddOrUpdateExtension(extension);
                 },
-                ServiceLifetime.Singleton);
+                ServiceLifetime.Singleton
+            );
         }
 
         /// <summary>
@@ -400,9 +427,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContext<TContext>(
             this IServiceCollection serviceCollection,
             ServiceLifetime contextLifetime,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-            where TContext : DbContext
-            => AddDbContext<TContext, TContext>(serviceCollection, contextLifetime, optionsLifetime);
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        ) where TContext : DbContext =>
+            AddDbContext<TContext, TContext>(serviceCollection, contextLifetime, optionsLifetime);
 
         /// <summary>
         ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -433,14 +460,16 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContext<TContextService, TContextImplementation>(
             this IServiceCollection serviceCollection,
             ServiceLifetime contextLifetime,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        )
             where TContextImplementation : DbContext, TContextService
-            where TContextService : class
-            => AddDbContext<TContextService, TContextImplementation>(
+            where TContextService : class =>
+            AddDbContext<TContextService, TContextImplementation>(
                 serviceCollection,
                 (Action<IServiceProvider, DbContextOptionsBuilder>?)null,
                 contextLifetime,
-                optionsLifetime);
+                optionsLifetime
+            );
 
         /// <summary>
         ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -502,9 +531,14 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-            where TContext : DbContext
-            => AddDbContext<TContext, TContext>(serviceCollection, optionsAction, contextLifetime, optionsLifetime);
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        ) where TContext : DbContext =>
+            AddDbContext<TContext, TContext>(
+                serviceCollection,
+                optionsAction,
+                contextLifetime,
+                optionsLifetime
+            );
 
         /// <summary>
         ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -562,8 +596,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-            where TContextImplementation : DbContext, TContextService
+            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+        ) where TContextImplementation : DbContext, TContextService
         {
             if (contextLifetime == ServiceLifetime.Singleton)
             {
@@ -575,19 +609,35 @@ namespace Microsoft.Extensions.DependencyInjection
                 CheckContextConstructors<TContextImplementation>();
             }
 
-            AddCoreServices<TContextImplementation>(serviceCollection, optionsAction, optionsLifetime);
+            AddCoreServices<TContextImplementation>(
+                serviceCollection,
+                optionsAction,
+                optionsLifetime
+            );
 
-            if (serviceCollection.Any(d => d.ServiceType == typeof(IDbContextFactorySource<TContextImplementation>)))
+            if (
+                serviceCollection.Any(
+                    d => d.ServiceType == typeof(IDbContextFactorySource<TContextImplementation>)
+                )
+            )
             {
                 // Override registration made by AddDbContextFactory
-                var serviceDescriptor = serviceCollection.FirstOrDefault(d => d.ServiceType == typeof(TContextImplementation));
+                var serviceDescriptor = serviceCollection.FirstOrDefault(
+                    d => d.ServiceType == typeof(TContextImplementation)
+                );
                 if (serviceDescriptor != null)
                 {
                     serviceCollection.Remove(serviceDescriptor);
                 }
             }
 
-            serviceCollection.TryAdd(new ServiceDescriptor(typeof(TContextService), typeof(TContextImplementation), contextLifetime));
+            serviceCollection.TryAdd(
+                new ServiceDescriptor(
+                    typeof(TContextService),
+                    typeof(TContextImplementation),
+                    contextLifetime
+                )
+            );
 
             if (typeof(TContextService) != typeof(TContextImplementation))
             {
@@ -595,7 +645,9 @@ namespace Microsoft.Extensions.DependencyInjection
                     new ServiceDescriptor(
                         typeof(TContextImplementation),
                         p => (TContextImplementation)p.GetService<TContextService>()!,
-                        contextLifetime));
+                        contextLifetime
+                    )
+                );
             }
 
             return serviceCollection;
@@ -659,9 +711,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextFactory<TContext>(
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder>? optionsAction = null,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
-            where TContext : DbContext
-            => AddDbContextFactory<TContext, DbContextFactory<TContext>>(serviceCollection, optionsAction, lifetime);
+            ServiceLifetime lifetime = ServiceLifetime.Singleton
+        ) where TContext : DbContext =>
+            AddDbContextFactory<TContext, DbContextFactory<TContext>>(
+                serviceCollection,
+                optionsAction,
+                lifetime
+            );
 
         /// <summary>
         ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
@@ -726,15 +782,15 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextFactory<TContext, TFactory>(
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder>? optionsAction = null,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
+            ServiceLifetime lifetime = ServiceLifetime.Singleton
+        )
             where TContext : DbContext
-            where TFactory : IDbContextFactory<TContext>
-            => AddDbContextFactory<TContext, TFactory>(
+            where TFactory : IDbContextFactory<TContext> =>
+            AddDbContextFactory<TContext, TFactory>(
                 serviceCollection,
-                optionsAction == null
-                    ? null
-                    : (p, b) => optionsAction(b),
-                lifetime);
+                optionsAction == null ? null : (p, b) => optionsAction(b),
+                lifetime
+            );
 
         /// <summary>
         ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
@@ -802,9 +858,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextFactory<TContext>(
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
-            where TContext : DbContext
-            => AddDbContextFactory<TContext, DbContextFactory<TContext>>(serviceCollection, optionsAction, lifetime);
+            ServiceLifetime lifetime = ServiceLifetime.Singleton
+        ) where TContext : DbContext =>
+            AddDbContextFactory<TContext, DbContextFactory<TContext>>(
+                serviceCollection,
+                optionsAction,
+                lifetime
+            );
 
         /// <summary>
         ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
@@ -877,19 +937,25 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDbContextFactory<TContext, TFactory>(
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
+            ServiceLifetime lifetime = ServiceLifetime.Singleton
+        )
             where TContext : DbContext
             where TFactory : IDbContextFactory<TContext>
         {
             AddCoreServices<TContext>(serviceCollection, optionsAction, lifetime);
 
-            serviceCollection.AddSingleton<IDbContextFactorySource<TContext>, DbContextFactorySource<TContext>>();
+            serviceCollection.AddSingleton<
+                IDbContextFactorySource<TContext>,
+                DbContextFactorySource<TContext>
+            >();
 
             serviceCollection.TryAdd(
                 new ServiceDescriptor(
                     typeof(IDbContextFactory<TContext>),
                     typeof(TFactory),
-                    lifetime));
+                    lifetime
+                )
+            );
 
             serviceCollection.TryAdd(
                 new ServiceDescriptor(
@@ -897,7 +963,9 @@ namespace Microsoft.Extensions.DependencyInjection
                     typeof(TContext),
                     lifetime == ServiceLifetime.Transient
                         ? ServiceLifetime.Transient
-                        : ServiceLifetime.Scoped));
+                        : ServiceLifetime.Scoped
+                )
+            );
 
             return serviceCollection;
         }
@@ -943,12 +1011,16 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddPooledDbContextFactory<TContext>(
             this IServiceCollection serviceCollection,
             Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-            where TContext : DbContext
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        ) where TContext : DbContext
         {
             Check.NotNull(optionsAction, nameof(optionsAction));
 
-            return AddPooledDbContextFactory<TContext>(serviceCollection, (_, ob) => optionsAction(ob), poolSize);
+            return AddPooledDbContextFactory<TContext>(
+                serviceCollection,
+                (_, ob) => optionsAction(ob),
+                poolSize
+            );
         }
 
         /// <summary>
@@ -992,8 +1064,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddPooledDbContextFactory<TContext>(
             this IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-            where TContext : DbContext
+            int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+        ) where TContext : DbContext
         {
             Check.NotNull(optionsAction, nameof(optionsAction));
 
@@ -1001,7 +1073,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             serviceCollection.TryAddSingleton<IDbContextPool<TContext>, DbContextPool<TContext>>();
             serviceCollection.TryAddSingleton<IDbContextFactory<TContext>>(
-                sp => new PooledDbContextFactory<TContext>(sp.GetRequiredService<IDbContextPool<TContext>>()));
+                sp =>
+                    new PooledDbContextFactory<TContext>(
+                        sp.GetRequiredService<IDbContextPool<TContext>>()
+                    )
+            );
 
             return serviceCollection;
         }
@@ -1009,29 +1085,34 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddCoreServices<TContextImplementation>(
             IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-            ServiceLifetime optionsLifetime)
-            where TContextImplementation : DbContext
+            ServiceLifetime optionsLifetime
+        ) where TContextImplementation : DbContext
         {
             serviceCollection.TryAdd(
                 new ServiceDescriptor(
                     typeof(DbContextOptions<TContextImplementation>),
                     p => CreateDbContextOptions<TContextImplementation>(p, optionsAction),
-                    optionsLifetime));
+                    optionsLifetime
+                )
+            );
 
             serviceCollection.Add(
                 new ServiceDescriptor(
                     typeof(DbContextOptions),
                     p => p.GetRequiredService<DbContextOptions<TContextImplementation>>(),
-                    optionsLifetime));
+                    optionsLifetime
+                )
+            );
         }
 
         private static DbContextOptions<TContext> CreateDbContextOptions<TContext>(
             IServiceProvider applicationServiceProvider,
-            Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction)
-            where TContext : DbContext
+            Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction
+        ) where TContext : DbContext
         {
             var builder = new DbContextOptionsBuilder<TContext>(
-                new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>()));
+                new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())
+            );
 
             builder.UseApplicationServiceProvider(applicationServiceProvider);
 
@@ -1040,14 +1121,17 @@ namespace Microsoft.Extensions.DependencyInjection
             return builder.Options;
         }
 
-        private static void CheckContextConstructors<TContext>()
-            where TContext : DbContext
+        private static void CheckContextConstructors<TContext>() where TContext : DbContext
         {
             var declaredConstructors = typeof(TContext).GetTypeInfo().DeclaredConstructors.ToList();
-            if (declaredConstructors.Count == 1
-                && declaredConstructors[0].GetParameters().Length == 0)
+            if (
+                declaredConstructors.Count == 1
+                && declaredConstructors[0].GetParameters().Length == 0
+            )
             {
-                throw new ArgumentException(CoreStrings.DbContextMissingConstructor(typeof(TContext).ShortDisplayName()));
+                throw new ArgumentException(
+                    CoreStrings.DbContextMissingConstructor(typeof(TContext).ShortDisplayName())
+                );
             }
         }
     }

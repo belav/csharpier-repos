@@ -8,7 +8,7 @@ namespace Microsoft.EntityFrameworkCore
 {
     public static class SqliteDatabaseFacadeTestExtensions
     {
-        public static void EnsureClean(this DatabaseFacade databaseFacade)
-            => new SqliteDatabaseCleaner().Clean(databaseFacade);
+        public static void EnsureClean(this DatabaseFacade databaseFacade) =>
+            new SqliteDatabaseCleaner().Clean(databaseFacade);
     }
 }

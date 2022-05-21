@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public ExecutionStrategyDependencies(
             ICurrentDbContext currentContext,
             IDbContextOptions options,
-            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+        )
         {
             Options = options;
             CurrentContext = currentContext;

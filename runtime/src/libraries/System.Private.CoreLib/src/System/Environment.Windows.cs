@@ -17,7 +17,14 @@ namespace System
                 var builder = new ValueStringBuilder(stackalloc char[Interop.Kernel32.MAX_PATH]);
 
                 uint length;
-                while ((length = Interop.Kernel32.GetCurrentDirectory((uint)builder.Capacity, ref builder.GetPinnableReference())) > builder.Capacity)
+                while (
+                    (
+                        length = Interop.Kernel32.GetCurrentDirectory(
+                            (uint)builder.Capacity,
+                            ref builder.GetPinnableReference()
+                        )
+                    ) > builder.Capacity
+                )
                 {
                     builder.EnsureCapacity((int)length);
                 }
@@ -43,8 +50,11 @@ namespace System
                 {
                     int errorCode = Marshal.GetLastPInvokeError();
                     throw Win32Marshal.GetExceptionForWin32Error(
-                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND ? Interop.Errors.ERROR_PATH_NOT_FOUND : errorCode,
-                        value);
+                        errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
+                            ? Interop.Errors.ERROR_PATH_NOT_FOUND
+                            : errorCode,
+                        value
+                    );
                 }
             }
         }
@@ -69,7 +79,15 @@ namespace System
             var builder = new ValueStringBuilder(stackalloc char[128]);
 
             uint length;
-            while ((length = Interop.Kernel32.ExpandEnvironmentStrings(name, ref builder.GetPinnableReference(), (uint)builder.Capacity)) > builder.Capacity)
+            while (
+                (
+                    length = Interop.Kernel32.ExpandEnvironmentStrings(
+                        name,
+                        ref builder.GetPinnableReference(),
+                        (uint)builder.Capacity
+                    )
+                ) > builder.Capacity
+            )
             {
                 builder.EnsureCapacity((int)length);
             }
@@ -83,11 +101,12 @@ namespace System
         }
 
         private static bool Is64BitOperatingSystemWhen32BitProcess =>
-            Interop.Kernel32.IsWow64Process(Interop.Kernel32.GetCurrentProcess(), out bool isWow64) && isWow64;
+            Interop.Kernel32.IsWow64Process(Interop.Kernel32.GetCurrentProcess(), out bool isWow64)
+            && isWow64;
 
         public static string MachineName =>
-            Interop.Kernel32.GetComputerName() ??
-            throw new InvalidOperationException(SR.InvalidOperation_ComputerName);
+            Interop.Kernel32.GetComputerName()
+            ?? throw new InvalidOperationException(SR.InvalidOperation_ComputerName);
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Avoid inlining PInvoke frame into the hot path
         private static int GetProcessId() => unchecked((int)Interop.Kernel32.GetCurrentProcessId());
@@ -97,7 +116,15 @@ namespace System
             var builder = new ValueStringBuilder(stackalloc char[Interop.Kernel32.MAX_PATH]);
 
             uint length;
-            while ((length = Interop.Kernel32.GetModuleFileName(IntPtr.Zero, ref builder.GetPinnableReference(), (uint)builder.Capacity)) >= builder.Capacity)
+            while (
+                (
+                    length = Interop.Kernel32.GetModuleFileName(
+                        IntPtr.Zero,
+                        ref builder.GetPinnableReference(),
+                        (uint)builder.Capacity
+                    )
+                ) >= builder.Capacity
+            )
             {
                 builder.EnsureCapacity((int)length);
             }
@@ -116,11 +143,20 @@ namespace System
                 throw new InvalidOperationException(SR.InvalidOperation_GetVersion);
             }
 
-            var version = new Version((int)osvi.dwMajorVersion, (int)osvi.dwMinorVersion, (int)osvi.dwBuildNumber, 0);
+            var version = new Version(
+                (int)osvi.dwMajorVersion,
+                (int)osvi.dwMinorVersion,
+                (int)osvi.dwBuildNumber,
+                0
+            );
 
-            return osvi.szCSDVersion[0] != '\0' ?
-                new OperatingSystem(PlatformID.Win32NT, version, new string(&osvi.szCSDVersion[0])) :
-                new OperatingSystem(PlatformID.Win32NT, version);
+            return osvi.szCSDVersion[0] != '\0'
+                ? new OperatingSystem(
+                    PlatformID.Win32NT,
+                    version,
+                    new string(&osvi.szCSDVersion[0])
+                )
+                : new OperatingSystem(PlatformID.Win32NT, version);
         }
 
         public static string SystemDirectory
@@ -131,7 +167,14 @@ namespace System
                 var builder = new ValueStringBuilder(stackalloc char[32]);
 
                 uint length;
-                while ((length = Interop.Kernel32.GetSystemDirectoryW(ref builder.GetPinnableReference(), (uint)builder.Capacity)) > builder.Capacity)
+                while (
+                    (
+                        length = Interop.Kernel32.GetSystemDirectoryW(
+                            ref builder.GetPinnableReference(),
+                            (uint)builder.Capacity
+                        )
+                    ) > builder.Capacity
+                )
                 {
                     builder.EnsureCapacity((int)length);
                 }
@@ -154,7 +197,15 @@ namespace System
                 {
                     Interop.User32.USEROBJECTFLAGS flags = default;
                     uint dummy = 0;
-                    if (Interop.User32.GetUserObjectInformationW(handle, Interop.User32.UOI_FLAGS, &flags, (uint)sizeof(Interop.User32.USEROBJECTFLAGS), ref dummy))
+                    if (
+                        Interop.User32.GetUserObjectInformationW(
+                            handle,
+                            Interop.User32.UOI_FLAGS,
+                            &flags,
+                            (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
+                            ref dummy
+                        )
+                    )
                     {
                         return ((flags.dwFlags & Interop.User32.WSF_VISIBLE) != 0);
                     }
@@ -173,7 +224,13 @@ namespace System
                 Interop.Kernel32.PROCESS_MEMORY_COUNTERS memoryCounters = default;
                 memoryCounters.cb = (uint)(sizeof(Interop.Kernel32.PROCESS_MEMORY_COUNTERS));
 
-                if (!Interop.Kernel32.GetProcessMemoryInfo(Interop.Kernel32.GetCurrentProcess(), ref memoryCounters, memoryCounters.cb))
+                if (
+                    !Interop.Kernel32.GetProcessMemoryInfo(
+                        Interop.Kernel32.GetCurrentProcess(),
+                        ref memoryCounters,
+                        memoryCounters.cb
+                    )
+                )
                 {
                     return 0;
                 }

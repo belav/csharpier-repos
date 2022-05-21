@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class DependentsMap<TKey> : IDependentsMap
-        where TKey : notnull
+    public class DependentsMap<TKey> : IDependentsMap where TKey : notnull
     {
         private readonly IForeignKey _foreignKey;
         private readonly IPrincipalKeyValueFactory<TKey> _principalKeyValueFactory;
@@ -32,12 +31,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public DependentsMap(
             IForeignKey foreignKey,
             IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
-            IDependentKeyValueFactory<TKey> dependentKeyValueFactory)
+            IDependentKeyValueFactory<TKey> dependentKeyValueFactory
+        )
         {
             _foreignKey = foreignKey;
             _principalKeyValueFactory = principalKeyValueFactory;
             _dependentKeyValueFactory = dependentKeyValueFactory;
-            _map = new Dictionary<TKey, HashSet<IUpdateEntry>>(principalKeyValueFactory.EqualityComparer);
+            _map = new Dictionary<TKey, HashSet<IUpdateEntry>>(
+                principalKeyValueFactory.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -48,8 +50,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual void Add(IUpdateEntry entry)
         {
-            if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
-                && TryCreateFromCurrentValues(entry, out var key))
+            if (
+                _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
+                && TryCreateFromCurrentValues(entry, out var key)
+            )
             {
                 if (!_map.TryGetValue(key, out var dependents))
                 {
@@ -69,8 +73,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual void Remove(IUpdateEntry entry)
         {
-            if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
-                && TryCreateFromCurrentValues(entry, out var key))
+            if (
+                _foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType)
+                && TryCreateFromCurrentValues(entry, out var key)
+            )
             {
                 if (_map.TryGetValue(key, out var dependents))
                 {
@@ -89,8 +95,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             if (_foreignKey.DeclaringEntityType.IsAssignableFrom(entry.EntityType))
             {
-                if (_dependentKeyValueFactory.TryCreateFromRelationshipSnapshot(entry, out var key)
-                    && _map.TryGetValue(key, out var dependents))
+                if (
+                    _dependentKeyValueFactory.TryCreateFromRelationshipSnapshot(entry, out var key)
+                    && _map.TryGetValue(key, out var dependents)
+                )
                 {
                     dependents.Remove(entry);
                 }
@@ -108,7 +116,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
         }
 
-        private bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+        private bool TryCreateFromCurrentValues(
+            IUpdateEntry entry,
+            [NotNullWhen(true)] out TKey? key
+        )
         {
             // TODO: Move into delegate
             foreach (var property in _foreignKey.Properties)
@@ -131,7 +142,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry)
         {
-            return _map.TryGetValue(_principalKeyValueFactory.CreateFromCurrentValues(principalEntry), out var dependents)
+            return _map.TryGetValue(
+                _principalKeyValueFactory.CreateFromCurrentValues(principalEntry),
+                out var dependents
+            )
                 ? dependents
                 : Enumerable.Empty<IUpdateEntry>();
         }
@@ -142,9 +156,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(IUpdateEntry principalEntry)
+        public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
+            IUpdateEntry principalEntry
+        )
         {
-            return _map.TryGetValue(_principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry), out var dependents)
+            return _map.TryGetValue(
+                _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
+                out var dependents
+            )
                 ? dependents
                 : Enumerable.Empty<IUpdateEntry>();
         }

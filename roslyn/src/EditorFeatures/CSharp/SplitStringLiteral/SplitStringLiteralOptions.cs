@@ -16,15 +16,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SplitStringLiteralOptions()
-        {
-        }
+        public SplitStringLiteralOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            Enabled);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(Enabled);
 
         public static PerLanguageOption2<bool> Enabled =
-            new(nameof(SplitStringLiteralOptions), nameof(Enabled), defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.SplitStringLiterals"));
+            new(
+                nameof(SplitStringLiteralOptions),
+                nameof(Enabled),
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.SplitStringLiterals"
+                )
+            );
     }
 }

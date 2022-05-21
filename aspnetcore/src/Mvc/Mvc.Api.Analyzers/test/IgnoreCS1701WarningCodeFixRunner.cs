@@ -12,6 +12,8 @@ public class IgnoreCS1701WarningCodeFixRunner : CodeFixRunner
     protected override CompilationOptions ConfigureCompilationOptions(CompilationOptions options)
     {
         options = base.ConfigureCompilationOptions(options);
-        return options.WithSpecificDiagnosticOptions(new[] { "CS1701" }.ToDictionary(c => c, _ => ReportDiagnostic.Suppress));
+        return options.WithSpecificDiagnosticOptions(
+            new[] { "CS1701" }.ToDictionary(c => c, _ => ReportDiagnostic.Suppress)
+        );
     }
 }

@@ -7,29 +7,52 @@ using System.Collections.Generic;
 // ReSharper disable MemberHidesStaticFromOuterClass
 namespace Microsoft.EntityFrameworkCore.TestModels
 {
-    public class SnapshotMonsterContext : MonsterContext<
-        SnapshotMonsterContext.Customer, SnapshotMonsterContext.Barcode, SnapshotMonsterContext.IncorrectScan,
-        SnapshotMonsterContext.BarcodeDetail, SnapshotMonsterContext.Complaint, SnapshotMonsterContext.Resolution,
-        SnapshotMonsterContext.Login, SnapshotMonsterContext.SuspiciousActivity, SnapshotMonsterContext.SmartCard,
-        SnapshotMonsterContext.RsaToken, SnapshotMonsterContext.PasswordReset, SnapshotMonsterContext.PageView,
-        SnapshotMonsterContext.LastLogin, SnapshotMonsterContext.Message, SnapshotMonsterContext.AnOrder,
-        SnapshotMonsterContext.OrderNote, SnapshotMonsterContext.OrderQualityCheck, SnapshotMonsterContext.OrderLine,
-        SnapshotMonsterContext.Product, SnapshotMonsterContext.ProductDetail, SnapshotMonsterContext.ProductReview,
-        SnapshotMonsterContext.ProductPhoto, SnapshotMonsterContext.ProductWebFeature, SnapshotMonsterContext.Supplier,
-        SnapshotMonsterContext.SupplierLogo, SnapshotMonsterContext.SupplierInfo, SnapshotMonsterContext.CustomerInfo,
-        SnapshotMonsterContext.Computer, SnapshotMonsterContext.ComputerDetail, SnapshotMonsterContext.Driver,
-        SnapshotMonsterContext.License, SnapshotMonsterContext.ConcurrencyInfo, SnapshotMonsterContext.AuditInfo,
-        SnapshotMonsterContext.ContactDetails, SnapshotMonsterContext.Dimensions, SnapshotMonsterContext.Phone,
-        SnapshotMonsterContext.BackOrderLine, SnapshotMonsterContext.DiscontinuedProduct, SnapshotMonsterContext.ProductPageView>
+    public class SnapshotMonsterContext
+        : MonsterContext<
+            SnapshotMonsterContext.Customer,
+            SnapshotMonsterContext.Barcode,
+            SnapshotMonsterContext.IncorrectScan,
+            SnapshotMonsterContext.BarcodeDetail,
+            SnapshotMonsterContext.Complaint,
+            SnapshotMonsterContext.Resolution,
+            SnapshotMonsterContext.Login,
+            SnapshotMonsterContext.SuspiciousActivity,
+            SnapshotMonsterContext.SmartCard,
+            SnapshotMonsterContext.RsaToken,
+            SnapshotMonsterContext.PasswordReset,
+            SnapshotMonsterContext.PageView,
+            SnapshotMonsterContext.LastLogin,
+            SnapshotMonsterContext.Message,
+            SnapshotMonsterContext.AnOrder,
+            SnapshotMonsterContext.OrderNote,
+            SnapshotMonsterContext.OrderQualityCheck,
+            SnapshotMonsterContext.OrderLine,
+            SnapshotMonsterContext.Product,
+            SnapshotMonsterContext.ProductDetail,
+            SnapshotMonsterContext.ProductReview,
+            SnapshotMonsterContext.ProductPhoto,
+            SnapshotMonsterContext.ProductWebFeature,
+            SnapshotMonsterContext.Supplier,
+            SnapshotMonsterContext.SupplierLogo,
+            SnapshotMonsterContext.SupplierInfo,
+            SnapshotMonsterContext.CustomerInfo,
+            SnapshotMonsterContext.Computer,
+            SnapshotMonsterContext.ComputerDetail,
+            SnapshotMonsterContext.Driver,
+            SnapshotMonsterContext.License,
+            SnapshotMonsterContext.ConcurrencyInfo,
+            SnapshotMonsterContext.AuditInfo,
+            SnapshotMonsterContext.ContactDetails,
+            SnapshotMonsterContext.Dimensions,
+            SnapshotMonsterContext.Phone,
+            SnapshotMonsterContext.BackOrderLine,
+            SnapshotMonsterContext.DiscontinuedProduct,
+            SnapshotMonsterContext.ProductPageView
+        >
     {
-        public SnapshotMonsterContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public SnapshotMonsterContext(DbContextOptions options) : base(options) { }
 
-        public class BackOrderLine2 : BackOrderLine
-        {
-        }
+        public class BackOrderLine2 : BackOrderLine { }
 
         public class BackOrderLine : OrderLine, IBackOrderLine
         {

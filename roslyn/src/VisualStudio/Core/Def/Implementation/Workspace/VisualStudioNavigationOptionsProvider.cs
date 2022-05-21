@@ -18,11 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioNavigationOptionsProvider()
-        {
-        }
+        public VisualStudioNavigationOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            VisualStudioNavigationOptions.NavigateToObjectBrowser);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(VisualStudioNavigationOptions.NavigateToObjectBrowser);
     }
 }

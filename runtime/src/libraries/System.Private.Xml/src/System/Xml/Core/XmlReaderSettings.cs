@@ -12,7 +12,8 @@ namespace System.Xml
     // XmlReaderSettings class specifies basic features of an XmlReader.
     public sealed class XmlReaderSettings
     {
-        internal static readonly XmlReaderSettings s_defaultReaderSettings = new() { ReadOnly = true };
+        internal static readonly XmlReaderSettings s_defaultReaderSettings =
+            new() { ReadOnly = true };
         private bool _useAsync;
         private XmlNameTable? _nameTable;
         private XmlResolver? _xmlResolver;
@@ -35,7 +36,11 @@ namespace System.Xml
         // Creation of validating readers is hidden behind a delegate which is only initialized if the ValidationType
         // property is set. This is for AOT builds where the tree shaker can reduce the validating readers away
         // if nobody calls the ValidationType setter. Might also help with non-AOT build when ILLinker is used.
-        private delegate XmlReader AddValidationFunc(XmlReader reader, XmlResolver? resolver, bool addConformanceWrapper);
+        private delegate XmlReader AddValidationFunc(
+            XmlReader reader,
+            XmlResolver? resolver,
+            bool addConformanceWrapper
+        );
         private AddValidationFunc? _addValidationFunc;
 
         public XmlReaderSettings()
@@ -63,10 +68,7 @@ namespace System.Xml
             }
         }
 
-        internal bool IsXmlResolverSet
-        {
-            get;
-            set; // keep set internal as we need to call it from the schema validation code
+        internal bool IsXmlResolverSet { get; set; // keep set internal as we need to call it from the schema validation code
         }
 
         public XmlResolver? XmlResolver
@@ -89,7 +91,9 @@ namespace System.Xml
         //notice we must keep GetXmlResolver() to avoid dead lock when init System.Config.ConfigurationManager
         internal XmlResolver? GetXmlResolver_CheckConfig()
         {
-            return LocalAppContextSwitches.AllowDefaultResolver || IsXmlResolverSet ? _xmlResolver : null;
+            return LocalAppContextSwitches.AllowDefaultResolver || IsXmlResolverSet
+                ? _xmlResolver
+                : null;
         }
 
         public int LineNumberOffset
@@ -259,11 +263,16 @@ namespace System.Xml
             {
                 CheckReadOnly();
 
-                if ((uint)value > (uint)(XmlSchemaValidationFlags.ProcessInlineSchema
-                                         | XmlSchemaValidationFlags.ProcessSchemaLocation
-                                         | XmlSchemaValidationFlags.ReportValidationWarnings
-                                         | XmlSchemaValidationFlags.ProcessIdentityConstraints
-                                         | XmlSchemaValidationFlags.AllowXmlAttributes))
+                if (
+                    (uint)value
+                    > (uint)(
+                        XmlSchemaValidationFlags.ProcessInlineSchema
+                        | XmlSchemaValidationFlags.ProcessSchemaLocation
+                        | XmlSchemaValidationFlags.ReportValidationWarnings
+                        | XmlSchemaValidationFlags.ProcessIdentityConstraints
+                        | XmlSchemaValidationFlags.AllowXmlAttributes
+                    )
+                )
                 {
                     ThrowArgumentOutOfRangeException(nameof(value));
                 }
@@ -345,14 +354,28 @@ namespace System.Xml
             return reader;
         }
 
-        internal XmlReader CreateReader(Stream input, Uri? baseUri, string? baseUriString, XmlParserContext? inputContext)
+        internal XmlReader CreateReader(
+            Stream input,
+            Uri? baseUri,
+            string? baseUriString,
+            XmlParserContext? inputContext
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
 
             baseUriString ??= baseUri?.ToString() ?? string.Empty;
 
             // create text XML reader
-            XmlReader reader = new XmlTextReaderImpl(input, null, 0, this, baseUri, baseUriString, inputContext, _closeInput);
+            XmlReader reader = new XmlTextReaderImpl(
+                input,
+                null,
+                0,
+                this,
+                baseUri,
+                baseUriString,
+                inputContext,
+                _closeInput
+            );
 
             // wrap with validating reader
             if (ValidationType != ValidationType.None)
@@ -368,7 +391,11 @@ namespace System.Xml
             return reader;
         }
 
-        internal XmlReader CreateReader(TextReader input, string? baseUriString, XmlParserContext? inputContext)
+        internal XmlReader CreateReader(
+            TextReader input,
+            string? baseUriString,
+            XmlParserContext? inputContext
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
 
@@ -445,7 +472,11 @@ namespace System.Xml
                 }
             }
 
-            return AddValidationAndConformanceInternal(reader, resolver, addConformanceWrapper: false);
+            return AddValidationAndConformanceInternal(
+                reader,
+                resolver,
+                addConformanceWrapper: false
+            );
         }
 
         private XmlReader AddValidationAndConformanceWrapper(XmlReader reader)
@@ -456,10 +487,18 @@ namespace System.Xml
                 resolver = GetXmlResolver_CheckConfig();
             }
 
-            return AddValidationAndConformanceInternal(reader, resolver, addConformanceWrapper: true);
+            return AddValidationAndConformanceInternal(
+                reader,
+                resolver,
+                addConformanceWrapper: true
+            );
         }
 
-        private XmlReader AddValidationAndConformanceInternal(XmlReader reader, XmlResolver? resolver, bool addConformanceWrapper)
+        private XmlReader AddValidationAndConformanceInternal(
+            XmlReader reader,
+            XmlResolver? resolver,
+            bool addConformanceWrapper
+        )
         {
             // We have to avoid calling the _addValidationFunc delegate if there's no validation to setup
             // since it would not be initialized (to allow AOT compilers to reduce it away).
@@ -482,7 +521,11 @@ namespace System.Xml
             return reader;
         }
 
-        private XmlReader AddValidationInternal(XmlReader reader, XmlResolver? resolver, bool addConformanceWrapper)
+        private XmlReader AddValidationInternal(
+            XmlReader reader,
+            XmlResolver? resolver,
+            bool addConformanceWrapper
+        )
         {
             // wrap with DTD validating reader
             if (_validationType == ValidationType.DTD)
@@ -507,8 +550,13 @@ namespace System.Xml
 
         private XmlValidatingReaderImpl CreateDtdValidatingReader(XmlReader baseReader)
         {
-            return new XmlValidatingReaderImpl(baseReader, GetEventHandler(), (ValidationFlags & XmlSchemaValidationFlags.ProcessIdentityConstraints) != 0);
+            return new XmlValidatingReaderImpl(
+                baseReader,
+                GetEventHandler(),
+                (ValidationFlags & XmlSchemaValidationFlags.ProcessIdentityConstraints) != 0
+            );
         }
+
         private XmlReader AddConformanceWrapper(XmlReader baseReader)
         {
             XmlReaderSettings? baseReaderSettings = baseReader.Settings;
@@ -523,9 +571,14 @@ namespace System.Xml
             {
 #pragma warning disable 618
 
-                if (_conformanceLevel != ConformanceLevel.Auto && _conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader))
+                if (
+                    _conformanceLevel != ConformanceLevel.Auto
+                    && _conformanceLevel != XmlReader.GetV1ConformanceLevel(baseReader)
+                )
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString())
+                    );
                 }
 
                 // get the V1 XmlTextReader ref
@@ -572,8 +625,16 @@ namespace System.Xml
                     baseDtdProcessing = v1XmlTextReader.DtdProcessing;
                 }
 
-                if ((_dtdProcessing == DtdProcessing.Prohibit && baseDtdProcessing != DtdProcessing.Prohibit) ||
-                    (_dtdProcessing == DtdProcessing.Ignore && baseDtdProcessing == DtdProcessing.Parse))
+                if (
+                    (
+                        _dtdProcessing == DtdProcessing.Prohibit
+                        && baseDtdProcessing != DtdProcessing.Prohibit
+                    )
+                    || (
+                        _dtdProcessing == DtdProcessing.Ignore
+                        && baseDtdProcessing == DtdProcessing.Parse
+                    )
+                )
                 {
                     dtdProc = _dtdProcessing;
                     needWrap = true;
@@ -582,9 +643,14 @@ namespace System.Xml
             }
             else
             {
-                if (_conformanceLevel != baseReaderSettings.ConformanceLevel && _conformanceLevel != ConformanceLevel.Auto)
+                if (
+                    _conformanceLevel != baseReaderSettings.ConformanceLevel
+                    && _conformanceLevel != ConformanceLevel.Auto
+                )
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Xml_IncompatibleConformanceLevel, _conformanceLevel.ToString())
+                    );
                 }
                 if (_checkCharacters && !baseReaderSettings.CheckCharacters)
                 {
@@ -607,8 +673,16 @@ namespace System.Xml
                     needWrap = true;
                 }
 
-                if ((_dtdProcessing == DtdProcessing.Prohibit && baseReaderSettings.DtdProcessing != DtdProcessing.Prohibit) ||
-                    (_dtdProcessing == DtdProcessing.Ignore && baseReaderSettings.DtdProcessing == DtdProcessing.Parse))
+                if (
+                    (
+                        _dtdProcessing == DtdProcessing.Prohibit
+                        && baseReaderSettings.DtdProcessing != DtdProcessing.Prohibit
+                    )
+                    || (
+                        _dtdProcessing == DtdProcessing.Ignore
+                        && baseReaderSettings.DtdProcessing == DtdProcessing.Parse
+                    )
+                )
                 {
                     dtdProc = _dtdProcessing;
                     needWrap = true;
@@ -617,12 +691,27 @@ namespace System.Xml
 
             if (needWrap)
             {
-                if ( baseReader is IXmlNamespaceResolver readerAsNsResolver)
+                if (baseReader is IXmlNamespaceResolver readerAsNsResolver)
                 {
-                    return new XmlCharCheckingReaderWithNS(baseReader, readerAsNsResolver, checkChars, noWhitespace, noComments, noPIs, dtdProc);
+                    return new XmlCharCheckingReaderWithNS(
+                        baseReader,
+                        readerAsNsResolver,
+                        checkChars,
+                        noWhitespace,
+                        noComments,
+                        noPIs,
+                        dtdProc
+                    );
                 }
 
-                return new XmlCharCheckingReader(baseReader, checkChars, noWhitespace, noComments, noPIs, dtdProc);
+                return new XmlCharCheckingReader(
+                    baseReader,
+                    checkChars,
+                    noWhitespace,
+                    noComments,
+                    noPIs,
+                    dtdProc
+                );
             }
 
             return baseReader;

@@ -55,8 +55,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 int valueVal = value.GetValueOrDefault();
                 if (valueVal >= 0)
@@ -146,8 +145,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 long valueVal = value.GetValueOrDefault();
                 if (valueVal >= 0)
@@ -246,8 +244,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 double valueVal = value.GetValueOrDefault();
                 while (double.IsNaN(valueVal))
@@ -339,8 +336,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 float valueVal = value.GetValueOrDefault();
                 while (float.IsNaN(valueVal))
@@ -422,8 +418,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -441,7 +436,8 @@ namespace System.Linq
             return value;
         }
 
-        public static TSource? Max<TSource>(this IEnumerable<TSource> source) => Max(source, comparer: null);
+        public static TSource? Max<TSource>(this IEnumerable<TSource> source) =>
+            Max(source, comparer: null);
 
         /// <summary>Returns the maximum value in a generic sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -455,7 +451,10 @@ namespace System.Linq
         /// <para>If <typeparamref name="TSource" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// <para>In Visual Basic query expression syntax, an `Aggregate Into Max()` clause translates to an invocation of <see cref="O:Enumerable.Max" />.</para>
         /// </remarks>
-        public static TSource? Max<TSource>(this IEnumerable<TSource> source, IComparer<TSource>? comparer)
+        public static TSource? Max<TSource>(
+            this IEnumerable<TSource> source,
+            IComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {
@@ -477,8 +476,7 @@ namespace System.Linq
                         }
 
                         value = e.Current;
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     while (e.MoveNext())
                     {
@@ -536,7 +534,10 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => MaxBy(source, keySelector, null);
+        public static TSource? MaxBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => MaxBy(source, keySelector, null);
 
         /// <summary>Returns the maximum value in a generic sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -550,7 +551,11 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer)
+        public static TSource? MaxBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey>? comparer
+        )
         {
             if (source == null)
             {
@@ -597,8 +602,7 @@ namespace System.Linq
 
                         value = e.Current;
                         key = keySelector(value);
-                    }
-                    while (key == null);
+                    } while (key == null);
                 }
 
                 while (e.MoveNext())
@@ -645,7 +649,10 @@ namespace System.Linq
             return value;
         }
 
-        public static int Max<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
+        public static int Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        )
         {
             if (source == null)
             {
@@ -679,7 +686,10 @@ namespace System.Linq
             return value;
         }
 
-        public static int? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
+        public static int? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        )
         {
             if (source == null)
             {
@@ -702,8 +712,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 int valueVal = value.GetValueOrDefault();
                 if (valueVal >= 0)
@@ -746,7 +755,10 @@ namespace System.Linq
             return value;
         }
 
-        public static long Max<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
+        public static long Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        )
         {
             if (source == null)
             {
@@ -780,7 +792,10 @@ namespace System.Linq
             return value;
         }
 
-        public static long? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
+        public static long? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        )
         {
             if (source == null)
             {
@@ -803,8 +818,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 long valueVal = value.GetValueOrDefault();
                 if (valueVal >= 0)
@@ -841,7 +855,10 @@ namespace System.Linq
             return value;
         }
 
-        public static float Max<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
+        public static float Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        )
         {
             if (source == null)
             {
@@ -885,7 +902,10 @@ namespace System.Linq
             return value;
         }
 
-        public static float? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector)
+        public static float? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        )
         {
             if (source == null)
             {
@@ -908,8 +928,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 float valueVal = value.GetValueOrDefault();
                 while (float.IsNaN(valueVal))
@@ -944,7 +963,10 @@ namespace System.Linq
             return value;
         }
 
-        public static double Max<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
+        public static double Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        )
         {
             if (source == null)
             {
@@ -993,7 +1015,10 @@ namespace System.Linq
             return value;
         }
 
-        public static double? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector)
+        public static double? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        )
         {
             if (source == null)
             {
@@ -1016,8 +1041,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 double valueVal = value.GetValueOrDefault();
                 while (double.IsNaN(valueVal))
@@ -1052,7 +1076,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal Max<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             if (source == null)
             {
@@ -1086,7 +1113,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             if (source == null)
             {
@@ -1109,8 +1139,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -1128,7 +1157,10 @@ namespace System.Linq
             return value;
         }
 
-        public static TResult? Max<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static TResult? Max<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -1153,8 +1185,7 @@ namespace System.Linq
                         }
 
                         value = selector(e.Current);
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     Comparer<TResult> comparer = Comparer<TResult>.Default;
                     while (e.MoveNext())

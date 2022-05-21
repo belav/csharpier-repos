@@ -42,24 +42,21 @@ namespace Microsoft.EntityFrameworkCore
                     var queryable = context.Set<Cruiser>().Include(e => e.UserState);
                     var cruiser = async ? (await queryable.SingleAsync()) : queryable.Single();
                     Assert.Equal(cruiser.IdUserState, cruiser.UserState.AccessStateId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #23043
         [InlineData(false)]
         [InlineData(true)]
-        public virtual async Task Saving_multiple_modified_entities_with_the_same_key_does_not_overflow(bool async)
+        public virtual async Task Saving_multiple_modified_entities_with_the_same_key_does_not_overflow(
+            bool async
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var city = new City
-                    {
-                        Colleges =
-                        {
-                            new()
-                        }
-                    };
+                    var city = new City { Colleges = { new() } };
 
                     if (async)
                     {
@@ -83,20 +80,36 @@ namespace Microsoft.EntityFrameworkCore
                     if (Fixture.ForceClientNoAction)
                     {
                         Assert.Equal(
-                            CoreStrings.RelationshipConceptualNullSensitive(nameof(City), nameof(College), $"{{CityId: {city.Id}}}"),
-                            Assert.Throws<InvalidOperationException>(
-                                () => context.Entry(college).State = EntityState.Modified).Message);
+                            CoreStrings.RelationshipConceptualNullSensitive(
+                                nameof(City),
+                                nameof(College),
+                                $"{{CityId: {city.Id}}}"
+                            ),
+                            Assert
+                                .Throws<InvalidOperationException>(
+                                    () => context.Entry(college).State = EntityState.Modified
+                                )
+                                .Message
+                        );
                     }
                     else
                     {
                         Assert.Equal(
-                            CoreStrings.IdentityConflictSensitive(nameof(College), $"{{Id: {college.Id}}}"),
-                            Assert.Throws<InvalidOperationException>(
-                                () => context.Entry(college).State = EntityState.Modified).Message);
+                            CoreStrings.IdentityConflictSensitive(
+                                nameof(College),
+                                $"{{Id: {college.Id}}}"
+                            ),
+                            Assert
+                                .Throws<InvalidOperationException>(
+                                    () => context.Entry(college).State = EntityState.Modified
+                                )
+                                .Message
+                        );
                     }
 
                     return Task.CompletedTask;
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #22465
@@ -108,7 +121,7 @@ namespace Microsoft.EntityFrameworkCore
                 async context =>
                 {
                     var entityZ = new EntityZ();
-                    var eventZ = new EventDescriptorZ {EntityZ = entityZ};
+                    var eventZ = new EventDescriptorZ { EntityZ = entityZ };
 
                     if (async)
                     {
@@ -128,8 +141,14 @@ namespace Microsoft.EntityFrameworkCore
                     context.Entry(eventZ).State = EntityState.Deleted;
 
                     Assert.Same(entityZ, eventZ.EntityZ);
-                    Assert.Equal(entityZ.Id, context.Entry(eventZ).Property<long>("EntityZId").CurrentValue);
-                    Assert.Equal(entityZ.Id, context.Entry(eventZ).Property<long>("EntityZId").OriginalValue);
+                    Assert.Equal(
+                        entityZ.Id,
+                        context.Entry(eventZ).Property<long>("EntityZId").CurrentValue
+                    );
+                    Assert.Equal(
+                        entityZ.Id,
+                        context.Entry(eventZ).Property<long>("EntityZId").OriginalValue
+                    );
 
                     if (async)
                     {
@@ -154,13 +173,16 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(context.Set<EventDescriptorZ>().Any());
                         Assert.False(context.Set<EntityZ>().Any());
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
         [InlineData(false)]
         [InlineData(true)]
-        public virtual async Task Update_principal_with_shadow_key_owned_collection_throws(bool async)
+        public virtual async Task Update_principal_with_shadow_key_owned_collection_throws(
+            bool async
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
@@ -184,25 +206,31 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                        (async
-                            ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                            : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-                });
+                        (
+                            async
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                    async () => await context.SaveChangesAsync()
+                                )
+                                : Assert.Throws<InvalidOperationException>(
+                                    () => context.SaveChanges()
+                                )
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
         [InlineData(false)]
         [InlineData(true)]
-        public virtual async Task Delete_principal_with_shadow_key_owned_collection_throws(bool async)
+        public virtual async Task Delete_principal_with_shadow_key_owned_collection_throws(
+            bool async
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var owner = new Owner
-                    {
-                        Owned = new(),
-                        OwnedCollection = { new(), new() }
-                    };
+                    var owner = new Owner { Owned = new(), OwnedCollection = { new(), new() } };
 
                     if (async)
                     {
@@ -224,7 +252,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         if (async)
                         {
-                            await Assert.ThrowsAsync<DbUpdateException>(async () => await context.SaveChangesAsync());
+                            await Assert.ThrowsAsync<DbUpdateException>(
+                                async () => await context.SaveChangesAsync()
+                            );
                         }
                         else
                         {
@@ -235,11 +265,19 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                            (async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                                : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
+                            (
+                                async
+                                    ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                        async () => await context.SaveChangesAsync()
+                                    )
+                                    : Assert.Throws<InvalidOperationException>(
+                                        () => context.SaveChanges()
+                                    )
+                            ).Message
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
@@ -251,16 +289,16 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, false, true)]
         [InlineData(true, true, false)]
         [InlineData(true, true, true)]
-        public virtual async Task Clearing_shadow_key_owned_collection_throws(bool async, bool useUpdate, bool addNew)
+        public virtual async Task Clearing_shadow_key_owned_collection_throws(
+            bool async,
+            bool useUpdate,
+            bool addNew
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var owner = new Owner
-                    {
-                        Owned = new(),
-                        OwnedCollection = { new(), new() }
-                    };
+                    var owner = new Owner { Owned = new(), OwnedCollection = { new(), new() } };
 
                     if (async)
                     {
@@ -290,10 +328,18 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                        (async
-                            ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                            : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-                });
+                        (
+                            async
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                    async () => await context.SaveChangesAsync()
+                                )
+                                : Assert.Throws<InvalidOperationException>(
+                                    () => context.SaveChanges()
+                                )
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #26330
@@ -303,50 +349,50 @@ namespace Microsoft.EntityFrameworkCore
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
+                {
+                    var owner = new OwnerWithNonCompositeOwnedCollection();
+                    owner.Owned.Add(new() { Foo = "Milan" });
+
+                    if (async)
                     {
-                        var owner = new OwnerWithNonCompositeOwnedCollection();
-                        owner.Owned.Add(new() { Foo = "Milan" });
+                        await context.AddAsync(owner);
+                        await context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        context.Add(owner);
+                        context.SaveChanges();
+                    }
 
-                        if (async)
-                        {
-                            await context.AddAsync(owner);
-                            await context.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            context.Add(owner);
-                            context.SaveChanges();
-                        }
+                    owner.Owned.Remove(owner.Owned.Single());
+                    owner.Owned.Add(new() { Foo = "Rome" });
 
-                        owner.Owned.Remove(owner.Owned.Single());
-                        owner.Owned.Add(new() { Foo = "Rome" });
-
-                        if (Fixture.ForceClientNoAction)
-                        {
-                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                async () =>
-                                    _ = async
-                                        ? await context.SaveChangesAsync()
-                                        : context.SaveChanges());
-                        }
-                        else
-                        {
-                            _ = async
-                                ? await context.SaveChangesAsync()
-                                : context.SaveChanges();
-                        }
-                    },
+                    if (Fixture.ForceClientNoAction)
+                    {
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () =>
+                                _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                        );
+                    }
+                    else
+                    {
+                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges();
+                    }
+                },
                 async context =>
+                {
+                    if (!Fixture.ForceClientNoAction)
                     {
-                        if (!Fixture.ForceClientNoAction)
-                        {
-                            var owner = async
-                                ? await context.Set<OwnerWithNonCompositeOwnedCollection>().SingleAsync()
-                                : context.Set<OwnerWithNonCompositeOwnedCollection>().Single();
+                        var owner = async
+                            ? await context
+                                .Set<OwnerWithNonCompositeOwnedCollection>()
+                                .SingleAsync()
+                            : context.Set<OwnerWithNonCompositeOwnedCollection>().Single();
 
-                            Assert.Equal("Rome", owner.Owned.Single().Foo);
-                        }
-                    });
+                        Assert.Equal("Rome", owner.Owned.Single().Foo);
+                    }
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
@@ -405,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfSoap"));
                     Assert.Equal(2, owner.OwnedCollectionPrivateKey.Count);
                     Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfGold"));
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
@@ -444,7 +491,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         if (async)
                         {
-                            await Assert.ThrowsAsync<DbUpdateException>(async () => await context.SaveChangesAsync());
+                            await Assert.ThrowsAsync<DbUpdateException>(
+                                async () => await context.SaveChangesAsync()
+                            );
                         }
                         else
                         {
@@ -470,9 +519,11 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(
                             async
                                 ? await context.Set<OwnerWithKeyedCollection>().AnyAsync()
-                                : context.Set<OwnerWithKeyedCollection>().Any());
+                                : context.Set<OwnerWithKeyedCollection>().Any()
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
@@ -484,7 +535,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, false, true)]
         [InlineData(true, true, false)]
         [InlineData(true, true, true)]
-        public virtual async Task Clearing_CLR_key_owned_collection(bool async, bool useUpdate, bool addNew)
+        public virtual async Task Clearing_CLR_key_owned_collection(
+            bool async,
+            bool useUpdate,
+            bool addNew
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
@@ -519,11 +574,19 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     owner.OwnedCollection = addNew
-                        ? new List<OwnedWithKey> { new() { Bar = "OfGold" }, new() { Bar = "OfSoap" } }
+                        ? new List<OwnedWithKey>
+                        {
+                            new() { Bar = "OfGold" },
+                            new() { Bar = "OfSoap" }
+                        }
                         : new List<OwnedWithKey>();
 
                     owner.OwnedCollectionPrivateKey = addNew
-                        ? new List<OwnedWithPrivateKey> { new() { Bar = "OfChocolate" }, new() { Bar = "OfLead" } }
+                        ? new List<OwnedWithPrivateKey>
+                        {
+                            new() { Bar = "OfChocolate" },
+                            new() { Bar = "OfLead" }
+                        }
                         : new List<OwnedWithPrivateKey>();
 
                     if (async)
@@ -547,15 +610,22 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfGold"));
                         Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfSoap"));
                         Assert.Equal(2, owner.OwnedCollectionPrivateKey.Count);
-                        Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfChocolate"));
-                        Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfLead"));
+                        Assert.Equal(
+                            1,
+                            owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfChocolate")
+                        );
+                        Assert.Equal(
+                            1,
+                            owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfLead")
+                        );
                     }
                     else
                     {
                         Assert.False(owner.OwnedCollection.Any());
                         Assert.False(owner.OwnedCollectionPrivateKey.Any());
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #19856
@@ -563,7 +633,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public virtual async Task Update_principal_with_non_generated_shadow_key_owned_collection_throws(bool async, bool delete)
+        public virtual async Task Update_principal_with_non_generated_shadow_key_owned_collection_throws(
+            bool async,
+            bool delete
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
@@ -607,11 +680,21 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         CoreStrings.UnknownShadowKeyValue(
-                            "OwnerNoKeyGeneration.OwnedCollection#OwnedNoKeyGeneration", "OwnedNoKeyGenerationId"),
-                        (async
-                            ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                            : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-                });
+                            "OwnerNoKeyGeneration.OwnedCollection#OwnedNoKeyGeneration",
+                            "OwnedNoKeyGenerationId"
+                        ),
+                        (
+                            async
+                                ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                    async () => await context.SaveChangesAsync()
+                                )
+                                : Assert.Throws<InvalidOperationException>(
+                                    () => context.SaveChanges()
+                                )
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalTheory] // Issue #21206
@@ -622,13 +705,20 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var partner =
-                        async
-                            ? await context.Set<Partner>().SingleAsync()
-                            : context.Set<Partner>().Single();
+                    var partner = async
+                        ? await context.Set<Partner>().SingleAsync()
+                        : context.Set<Partner>().Single();
 
-                    var contract1 = new ProviderContract1 { Partner = partner, Details = "Provider 1 Contract Details" };
-                    var contract2 = new ProviderContract2 { Partner = partner, Details = "Provider 2 Contract Details" };
+                    var contract1 = new ProviderContract1
+                    {
+                        Partner = partner,
+                        Details = "Provider 1 Contract Details"
+                    };
+                    var contract2 = new ProviderContract2
+                    {
+                        Partner = partner,
+                        Details = "Provider 2 Contract Details"
+                    };
 
                     if (async)
                     {
@@ -639,8 +729,14 @@ namespace Microsoft.EntityFrameworkCore
                         context.AddRange(contract1, contract2);
                     }
 
-                    Assert.Equal("prov1", context.Entry(contract1).Property("ProviderId").CurrentValue);
-                    Assert.Equal("prov2", context.Entry(contract2).Property("ProviderId").CurrentValue);
+                    Assert.Equal(
+                        "prov1",
+                        context.Entry(contract1).Property("ProviderId").CurrentValue
+                    );
+                    Assert.Equal(
+                        "prov2",
+                        context.Entry(contract2).Property("ProviderId").CurrentValue
+                    );
 
                     if (async)
                     {
@@ -653,15 +749,15 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var contracts =
-                        async
-                            ? await context.Set<ProviderContract>().ToListAsync()
-                            : context.Set<ProviderContract>().ToList();
+                    var contracts = async
+                        ? await context.Set<ProviderContract>().ToListAsync()
+                        : context.Set<ProviderContract>().ToList();
 
                     Assert.Equal(2, contracts.Count);
                     Assert.Equal(1, contracts.Count(e => e is ProviderContract1));
                     Assert.Equal(1, contracts.Count(e => e is ProviderContract2));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -761,13 +857,16 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(root.Id, parent.RootId);
                         Assert.Null(parent.DependantId);
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
+        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+            bool nullPrincipal
+        )
         {
             ExecuteWithStrategyInTransaction(
                 context =>
@@ -852,7 +951,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(root.Id, dependent.RootId);
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -870,9 +970,16 @@ namespace Microsoft.EntityFrameworkCore
                     propertyEntry.CurrentValue = nameof(OptionalSingle1MoreDerived);
 
                     Assert.Equal(
-                        CoreStrings.PropertyReadOnlyAfterSave("Discriminator", nameof(OptionalSingle1Derived)),
-                        Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
-                });
+                        CoreStrings.PropertyReadOnlyAfterSave(
+                            "Discriminator",
+                            nameof(OptionalSingle1Derived)
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(() => context.SaveChanges())
+                            .Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -900,14 +1007,17 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.IsType<OptionalSingle2>(instance);
                     Assert.Equal(1, propertyEntry.CurrentValue.Value);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Fk)]
         [InlineData((int)ChangeMechanism.Dependent)]
         [InlineData((int)(ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-        public virtual void Changes_to_Added_relationships_are_picked_up(ChangeMechanism changeMechanism)
+        public virtual void Changes_to_Added_relationships_are_picked_up(
+            ChangeMechanism changeMechanism
+        )
         {
             var id = 0;
 
@@ -953,11 +1063,15 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var entity = context.Set<OptionalSingle1>().Include(e => e.Root).Single(e => e.Id == id);
+                    var entity = context
+                        .Set<OptionalSingle1>()
+                        .Include(e => e.Root)
+                        .Single(e => e.Id == id);
 
                     Assert.Null(entity.Root);
                     Assert.Null(entity.RootId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -971,7 +1085,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, null)]
         public virtual void New_FK_is_not_cleared_on_old_dependent_delete(
             bool loadNewParent,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             var childId = 0;
@@ -980,15 +1095,23 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var removed = context.Set<Optional1>().OrderBy(e => e.Id).First();
-                    var child = context.Set<Optional2>().OrderBy(e => e.Id).First(e => e.ParentId == removed.Id);
+                    var child = context
+                        .Set<Optional2>()
+                        .OrderBy(e => e.Id)
+                        .First(e => e.ParentId == removed.Id);
 
                     removedId = removed.Id;
                     childId = child.Id;
 
-                    newFk = context.Set<Optional1>().AsNoTracking().Single(e => e.Id != removed.Id).Id;
+                    newFk = context
+                        .Set<Optional1>()
+                        .AsNoTracking()
+                        .Single(e => e.Id != removed.Id)
+                        .Id;
 
                     var newParent = loadNewParent ? context.Set<Optional1>().Find(newFk) : null;
 
@@ -1024,8 +1147,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && !Fixture.NoStoreCascades)
+                    if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                     {
                         Assert.Null(context.Set<Optional1>().Find(removedId));
 
@@ -1046,7 +1168,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.False(context.ChangeTracker.HasChanges());
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1054,8 +1177,7 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Immediate)]
         [InlineData(CascadeTiming.Never)]
         [InlineData(null)]
-        public virtual void No_fixup_to_Deleted_entities(
-            CascadeTiming? deleteOrphansTiming)
+        public virtual void No_fixup_to_Deleted_entities(CascadeTiming? deleteOrphansTiming)
         {
             using var context = CreateContext();
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
@@ -1102,12 +1224,18 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Unchanged, context.Entry(produce).State);
-                    Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
+                    Assert.NotEqual(
+                        Guid.Empty,
+                        context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+                    );
                     Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
                     context.Remove(produce);
                     Assert.Equal(EntityState.Deleted, context.Entry(produce).State);
-                    Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
+                    Assert.NotEqual(
+                        Guid.Empty,
+                        context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+                    );
                     Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
                     Assert.True(context.ChangeTracker.HasChanges());
@@ -1117,7 +1245,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Detached, context.Entry(produce).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1193,7 +1322,8 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Null(poost1.Bloog);
                         Assert.Null(poost2.Bloog);
                     }
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1286,7 +1416,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.True(root.OptionalChildrenAk.All(e => e.Parent != null));
                     Assert.True(root.RequiredChildrenAk.All(e => e.Parent != null));
                     Assert.True(root.RequiredCompositeChildren.All(e => e.Parent != null));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1372,7 +1503,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.Entry(optionalChildAk).State = EntityState.Detached;
                     context.Entry(requieredChildAk).State = EntityState.Detached;
 
-                    foreach (var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>())
+                    foreach (
+                        var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>()
+                    )
                     {
                         overlappingEntry.State = EntityState.Detached;
                     }
@@ -1422,7 +1555,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(optionalChildAk, root.OptionalChildrenAk);
                     Assert.Contains(requieredChildAk, root.RequiredChildrenAk);
                     Assert.Contains(requiredCompositeChild, root.RequiredCompositeChildren);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1438,7 +1572,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Re_childing_parent_to_new_child_with_delete(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var oldId = 0;
             var newId = 0;
@@ -1446,10 +1581,15 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
+                    var parent = context
+                        .Set<ParentAsAChild>()
+                        .Include(p => p.ChildAsAParent)
+                        .Single();
 
                     var oldChild = parent.ChildAsAParent;
                     oldId = oldChild.Id;
@@ -1482,12 +1622,16 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
+                    var parent = context
+                        .Set<ParentAsAChild>()
+                        .Include(p => p.ChildAsAParent)
+                        .Single();
 
                     Assert.Equal(newId, parent.ChildAsAParentId);
                     Assert.Equal(newId, parent.ChildAsAParent.Id);
                     Assert.Null(context.Set<ChildAsAParent>().Find(oldId));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1526,7 +1670,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(dependent.BadCustomerId);
                     Assert.Null(dependent.BadCustomer);
                     Assert.Empty(principal.BadOrders);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1555,7 +1700,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(quizTask.Choices.Single(), context.Set<TaskChoice>().Single());
 
                     Assert.Empty(context.Set<HiddenAreaTask>().Include(e => e.Choices));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1577,14 +1723,21 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var hiddenAreaTask = context.Set<HiddenAreaTask>().Include(e => e.Choices).Single();
+                    var hiddenAreaTask = context
+                        .Set<HiddenAreaTask>()
+                        .Include(e => e.Choices)
+                        .Single();
 
                     Assert.Equal(hiddenAreaTask.Id, hiddenAreaTask.Choices.Single().QuestTaskId);
 
-                    Assert.Same(hiddenAreaTask.Choices.Single(), context.Set<TaskChoice>().Single());
+                    Assert.Same(
+                        hiddenAreaTask.Choices.Single(),
+                        context.Set<TaskChoice>().Single()
+                    );
 
                     Assert.Empty(context.Set<QuizTask>().Include(e => e.Choices));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -1614,7 +1767,10 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var quizTask = context.Set<QuizTask>().Include(e => e.Choices).Single();
-                    var hiddenAreaTask = context.Set<HiddenAreaTask>().Include(e => e.Choices).Single();
+                    var hiddenAreaTask = context
+                        .Set<HiddenAreaTask>()
+                        .Include(e => e.Choices)
+                        .Single();
 
                     Assert.Equal(2, quizTask.Choices.Count);
                     foreach (var quizTaskChoice in quizTask.Choices)
@@ -1633,9 +1789,11 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(
                             1,
                             quizTask.Choices.Count(e => e.Id == taskChoice.Id)
-                            + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id));
+                                + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id)
+                        );
                     }
-                });
+                }
+            );
         }
     }
 }

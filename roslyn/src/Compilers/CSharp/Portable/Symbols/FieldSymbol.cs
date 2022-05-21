@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        internal FieldSymbol()
-        {
-        }
+        internal FieldSymbol() { }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
@@ -36,18 +34,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public new virtual FieldSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         protected sealed override Symbol OriginalSymbolDefinition
         {
-            get
-            {
-                return this.OriginalDefinition;
-            }
+            get { return this.OriginalDefinition; }
         }
 
         /// <summary>
@@ -55,10 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public TypeWithAnnotations TypeWithAnnotations
         {
-            get
-            {
-                return GetFieldType(ConsList<FieldSymbol>.Empty);
-            }
+            get { return GetFieldType(ConsList<FieldSymbol>.Empty); }
         }
 
         public abstract FlowAnalysisAnnotations FlowAnalysisAnnotations { get; }
@@ -72,20 +61,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this field serves as a backing variable for an automatically generated
-        /// property or a field-like event, returns that 
+        /// property or a field-like event, returns that
         /// property/event. Otherwise returns null.
-        /// Note, the set of possible associated symbols might be expanded in the future to 
+        /// Note, the set of possible associated symbols might be expanded in the future to
         /// reflect changes in the languages.
         /// </summary>
         public abstract Symbol AssociatedSymbol { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "readonly". 
+        /// Returns true if this field was declared as "readonly".
         /// </summary>
         public abstract bool IsReadOnly { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "volatile". 
+        /// Returns true if this field was declared as "volatile".
         /// </summary>
         public abstract bool IsVolatile { get; }
 
@@ -99,7 +88,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Note that for a fixed-size buffer declaration, this.Type will be a pointer type, of which
         /// the pointed-to type will be the declared element type of the fixed-size buffer.
         /// </summary>
-        public virtual bool IsFixedSizeBuffer { get { return false; } }
+        public virtual bool IsFixedSizeBuffer
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// If IsFixedSizeBuffer is true, the value between brackets in the fixed-size-buffer declaration.
@@ -107,7 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Note that for fixed-a size buffer declaration, this.Type will be a pointer type, of which
         /// the pointed-to type will be the declared element type of the fixed-size buffer.
         /// </summary>
-        public virtual int FixedSize { get { return 0; } }
+        public virtual int FixedSize
+        {
+            get { return 0; }
+        }
 
         /// <summary>
         /// If this.IsFixedSizeBuffer is true, returns the underlying implementation type for the
@@ -121,7 +116,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Returns true when field is a backing field for a captured frame pointer (typically "this").
         /// </summary>
-        internal virtual bool IsCapturedFrame { get { return false; } }
+        internal virtual bool IsCapturedFrame
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// Returns true if this field was declared as "const" (i.e. is a constant declaration).
@@ -129,7 +127,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public abstract bool IsConst { get; }
 
-        // Gets a value indicating whether this instance is metadata constant. A constant field is considered to be 
+        // Gets a value indicating whether this instance is metadata constant. A constant field is considered to be
         // metadata constant unless they are of type decimal, because decimals are not regarded as constant by the CLR.
         public bool IsMetadataConstant
         {
@@ -149,7 +147,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                ConstantValue constantValue = GetConstantValue(ConstantFieldsInProgress.Empty, earlyDecodingWellKnownAttributes: false);
+                ConstantValue constantValue = GetConstantValue(
+                    ConstantFieldsInProgress.Empty,
+                    earlyDecodingWellKnownAttributes: false
+                );
                 return constantValue != null && !constantValue.IsBad; //can be null in error scenarios
             }
         }
@@ -167,25 +168,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return null;
                 }
 
-                ConstantValue constantValue = GetConstantValue(ConstantFieldsInProgress.Empty, earlyDecodingWellKnownAttributes: false);
+                ConstantValue constantValue = GetConstantValue(
+                    ConstantFieldsInProgress.Empty,
+                    earlyDecodingWellKnownAttributes: false
+                );
                 return constantValue == null ? null : constantValue.Value; //can be null in error scenarios
             }
         }
 
-        internal abstract ConstantValue GetConstantValue(ConstantFieldsInProgress inProgress, bool earlyDecodingWellKnownAttributes);
+        internal abstract ConstantValue GetConstantValue(
+            ConstantFieldsInProgress inProgress,
+            bool earlyDecodingWellKnownAttributes
+        );
 
         /// <summary>
         /// Gets the kind of this symbol.
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Field;
-            }
+            get { return SymbolKind.Field; }
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitField(this, argument);
         }
@@ -205,10 +212,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -216,10 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -227,10 +228,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -238,10 +236,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -249,10 +244,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -274,18 +266,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// True if this field has a pointer type.
         /// </summary>
         /// <remarks>
-        /// By default we defer to this.Type.IsPointerOrFunctionPointer() 
+        /// By default we defer to this.Type.IsPointerOrFunctionPointer()
         /// However in some cases this may cause circular dependency via binding a
         /// pointer that points to the type that contains the current field.
-        /// Fortunately in those cases we do not need to force binding of the field's type 
+        /// Fortunately in those cases we do not need to force binding of the field's type
         /// and can just check the declaration syntax if the field type is not yet known.
         /// </remarks>
         internal virtual bool HasPointerType
         {
-            get
-            {
-                return this.Type.IsPointerOrFunctionPointer();
-            }
+            get { return this.Type.IsPointerOrFunctionPointer(); }
         }
 
         /// <summary>
@@ -299,8 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns the marshalling type of this field, or 0 if marshalling information isn't available.
         /// </summary>
         /// <remarks>
-        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available. 
-        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted 
+        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available.
+        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted
         /// PE symbols just decode the type from metadata and don't provide full marshalling information.
         /// </remarks>
         internal virtual UnmanagedType MarshallingType
@@ -321,8 +310,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual FieldSymbol AsMember(NamedTypeSymbol newOwner)
         {
             Debug.Assert(this.IsDefinition);
-            Debug.Assert(ReferenceEquals(newOwner.OriginalDefinition, this.ContainingSymbol.OriginalDefinition));
-            return newOwner.IsDefinition ? this : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
+            Debug.Assert(
+                ReferenceEquals(
+                    newOwner.OriginalDefinition,
+                    this.ContainingSymbol.OriginalDefinition
+                )
+            );
+            return newOwner.IsDefinition
+                ? this
+                : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
         }
 
         #region Use-Site Diagnostics
@@ -342,18 +338,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(IsDefinition);
 
             // Check type, custom modifiers
-            if (DeriveUseSiteInfoFromType(ref result, this.TypeWithAnnotations, AllowedRequiredModifierType.System_Runtime_CompilerServices_Volatile))
+            if (
+                DeriveUseSiteInfoFromType(
+                    ref result,
+                    this.TypeWithAnnotations,
+                    AllowedRequiredModifierType.System_Runtime_CompilerServices_Volatile
+                )
+            )
             {
                 return true;
             }
 
-            // If the member is in an assembly with unified references, 
+            // If the member is in an assembly with unified references,
             // we check if its definition depends on a type from a unified reference.
             if (this.ContainingModule.HasUnifiedReferences)
             {
                 HashSet<TypeSymbol> unificationCheckedTypes = null;
                 DiagnosticInfo diagnosticInfo = result.DiagnosticInfo;
-                if (this.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(ref diagnosticInfo, this, ref unificationCheckedTypes))
+                if (
+                    this.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
+                        ref diagnosticInfo,
+                        this,
+                        ref unificationCheckedTypes
+                    )
+                )
                 {
                     result = result.AdjustDiagnosticInfo(diagnosticInfo);
                     return true;
@@ -366,14 +374,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Return error code that has highest priority while calculating use site error for this symbol. 
+        /// Return error code that has highest priority while calculating use site error for this symbol.
         /// </summary>
         protected override int HighestPriorityUseSiteError
         {
-            get
-            {
-                return (int)ErrorCode.ERR_BindToBogus;
-            }
+            get { return (int)ErrorCode.ERR_BindToBogus; }
         }
 
         public sealed override bool HasUnsupportedMetadata
@@ -392,10 +397,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public virtual bool IsVirtualTupleField
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>

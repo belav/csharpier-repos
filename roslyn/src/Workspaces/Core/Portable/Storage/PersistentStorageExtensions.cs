@@ -14,13 +14,20 @@ namespace Microsoft.CodeAnalysis.Storage
 {
     internal static class PersistentStorageExtensions
     {
-        public static IChecksummedPersistentStorageService GetPersistentStorageService(this HostWorkspaceServices services, OptionSet options)
-            => GetPersistentStorageService(services, GetPersistentStorageDatabase(options));
+        public static IChecksummedPersistentStorageService GetPersistentStorageService(
+            this HostWorkspaceServices services,
+            OptionSet options
+        ) => GetPersistentStorageService(services, GetPersistentStorageDatabase(options));
 
-        public static StorageDatabase GetPersistentStorageDatabase(this OptionSet options)
-            => options.GetOption(StorageOptions.CloudCacheFeatureFlag) ? StorageDatabase.CloudCache : options.GetOption(StorageOptions.Database);
+        public static StorageDatabase GetPersistentStorageDatabase(this OptionSet options) =>
+            options.GetOption(StorageOptions.CloudCacheFeatureFlag)
+                ? StorageDatabase.CloudCache
+                : options.GetOption(StorageOptions.Database);
 
-        public static IChecksummedPersistentStorageService GetPersistentStorageService(this HostWorkspaceServices services, StorageDatabase database)
+        public static IChecksummedPersistentStorageService GetPersistentStorageService(
+            this HostWorkspaceServices services,
+            StorageDatabase database
+        )
         {
             var configuration = services.GetRequiredService<IPersistentStorageConfiguration>();
 
@@ -28,12 +35,12 @@ namespace Microsoft.CodeAnalysis.Storage
             {
 #if !DOTNET_BUILD_FROM_SOURCE
                 StorageDatabase.SQLite
-                    => services.GetService<SQLitePersistentStorageService>() ??
-                       NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<SQLitePersistentStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
 #endif
                 StorageDatabase.CloudCache
-                    => services.GetService<ICloudCacheStorageService>() ??
-                       NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<ICloudCacheStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
                 _ => NoOpPersistentStorageService.GetOrThrow(configuration),
             };
         }

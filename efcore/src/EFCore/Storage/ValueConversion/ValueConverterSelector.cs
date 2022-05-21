@@ -29,20 +29,48 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
     /// </remarks>
     public class ValueConverterSelector : IValueConverterSelector
     {
-        private readonly ConcurrentDictionary<(Type ModelClrType, Type ProviderClrType), ValueConverterInfo> _converters = new();
+        private readonly ConcurrentDictionary<
+            (Type ModelClrType, Type ProviderClrType),
+            ValueConverterInfo
+        > _converters = new();
 
-        private static readonly Type[] _signedPreferred = { typeof(sbyte), typeof(short), typeof(int), typeof(long), typeof(decimal) };
+        private static readonly Type[] _signedPreferred =
+        {
+            typeof(sbyte),
+            typeof(short),
+            typeof(int),
+            typeof(long),
+            typeof(decimal)
+        };
 
         private static readonly Type[] _unsignedPreferred =
         {
-            typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(decimal)
+            typeof(byte),
+            typeof(short),
+            typeof(ushort),
+            typeof(int),
+            typeof(uint),
+            typeof(long),
+            typeof(ulong),
+            typeof(decimal)
         };
 
-        private static readonly Type[] _floatingPreferred = { typeof(float), typeof(double), typeof(decimal) };
+        private static readonly Type[] _floatingPreferred =
+        {
+            typeof(float),
+            typeof(double),
+            typeof(decimal)
+        };
 
         private static readonly Type[] _charPreferred =
         {
-            typeof(char), typeof(int), typeof(ushort), typeof(uint), typeof(long), typeof(ulong), typeof(decimal)
+            typeof(char),
+            typeof(int),
+            typeof(ushort),
+            typeof(uint),
+            typeof(long),
+            typeof(ulong),
+            typeof(decimal)
         };
 
         private static readonly Type[] _numerics =
@@ -86,47 +114,57 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <returns>The converters available.</returns>
         public virtual IEnumerable<ValueConverterInfo> Select(
             Type modelClrType,
-            Type? providerClrType = null)
+            Type? providerClrType = null
+        )
         {
             if (modelClrType.IsEnum)
             {
-                foreach (var converterInfo in FindNumericConventions(
-                    modelClrType,
-                    providerClrType,
-                    typeof(EnumToNumberConverter<,>),
-                    EnumToStringOrBytes))
+                foreach (
+                    var converterInfo in FindNumericConventions(
+                        modelClrType,
+                        providerClrType,
+                        typeof(EnumToNumberConverter<,>),
+                        EnumToStringOrBytes
+                    )
+                )
                 {
                     yield return converterInfo;
                 }
             }
             else if (modelClrType == typeof(bool))
             {
-                foreach (var converterInfo in FindNumericConventions(
-                    typeof(bool),
-                    providerClrType,
-                    typeof(BoolToZeroOneConverter<>),
-                    null))
+                foreach (
+                    var converterInfo in FindNumericConventions(
+                        typeof(bool),
+                        providerClrType,
+                        typeof(BoolToZeroOneConverter<>),
+                        null
+                    )
+                )
                 {
                     yield return converterInfo;
                 }
 
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return BoolToStringConverter.DefaultInfo;
                 }
 
-                if (providerClrType == null
-                    || providerClrType == typeof(byte[]))
+                if (providerClrType == null || providerClrType == typeof(byte[]))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        k => new ValueConverterInfo(
-                            modelClrType,
-                            typeof(byte[]),
-                            info => new BoolToZeroOneConverter<byte>().ComposeWith(
-                                NumberToBytesConverter<byte>.DefaultInfo.Create()),
-                            new ConverterMappingHints(size: 1)));
+                        k =>
+                            new ValueConverterInfo(
+                                modelClrType,
+                                typeof(byte[]),
+                                info =>
+                                    new BoolToZeroOneConverter<byte>().ComposeWith(
+                                        NumberToBytesConverter<byte>.DefaultInfo.Create()
+                                    ),
+                                new ConverterMappingHints(size: 1)
+                            )
+                    );
                 }
             }
             else if (modelClrType == typeof(char))
@@ -138,64 +176,71 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             }
             else if (modelClrType == typeof(Guid))
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => GuidToStringConverter.DefaultInfo);
+                        k => GuidToStringConverter.DefaultInfo
+                    );
                 }
 
-                if (providerClrType == null
-                    || providerClrType == typeof(byte[]))
+                if (providerClrType == null || providerClrType == typeof(byte[]))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        k => GuidToBytesConverter.DefaultInfo);
+                        k => GuidToBytesConverter.DefaultInfo
+                    );
                 }
             }
             else if (modelClrType == typeof(byte[]))
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => BytesToStringConverter.DefaultInfo);
+                        k => BytesToStringConverter.DefaultInfo
+                    );
                 }
             }
             else if (modelClrType == typeof(Uri))
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => UriToStringConverter.DefaultInfo);
+                        k => UriToStringConverter.DefaultInfo
+                    );
                 }
             }
             else if (modelClrType == typeof(string))
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(byte[]))
+                if (providerClrType == null || providerClrType == typeof(byte[]))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        k => StringToBytesConverter.DefaultInfo);
+                        k => StringToBytesConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType.IsEnum)
                 {
                     yield return _converters.GetOrAdd(
                         (typeof(string), providerClrType),
-                        k => GetDefaultValueConverterInfo(typeof(StringToEnumConverter<>).MakeGenericType(k.ProviderClrType)));
+                        k =>
+                            GetDefaultValueConverterInfo(
+                                typeof(StringToEnumConverter<>).MakeGenericType(k.ProviderClrType)
+                            )
+                    );
                 }
                 else if (_numerics.Contains(providerClrType))
                 {
-                    foreach (var converterInfo in FindNumericConventions(
-                        typeof(string),
-                        providerClrType,
-                        typeof(StringToNumberConverter<>),
-                        null))
+                    foreach (
+                        var converterInfo in FindNumericConventions(
+                            typeof(string),
+                            providerClrType,
+                            typeof(StringToNumberConverter<>),
+                            null
+                        )
+                    )
                     {
                         yield return converterInfo;
                     }
@@ -204,138 +249,164 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(DateTime)),
-                        k => StringToDateTimeConverter.DefaultInfo);
+                        k => StringToDateTimeConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(DateTimeOffset))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(DateTimeOffset)),
-                        k => StringToDateTimeOffsetConverter.DefaultInfo);
+                        k => StringToDateTimeOffsetConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(TimeSpan))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(TimeSpan)),
-                        k => StringToTimeSpanConverter.DefaultInfo);
+                        k => StringToTimeSpanConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(Guid))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(Guid)),
-                        k => StringToGuidConverter.DefaultInfo);
+                        k => StringToGuidConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(bool))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(bool)),
-                        k => StringToBoolConverter.DefaultInfo);
+                        k => StringToBoolConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(char))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(char)),
-                        k => StringToCharConverter.DefaultInfo);
+                        k => StringToCharConverter.DefaultInfo
+                    );
                 }
                 else if (providerClrType == typeof(Uri))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(Uri)),
-                        k => StringToUriConverter.DefaultInfo);
+                        k => StringToUriConverter.DefaultInfo
+                    );
                 }
             }
-            else if (modelClrType == typeof(DateTime)
+            else if (
+                modelClrType == typeof(DateTime)
                 || modelClrType == typeof(DateTimeOffset)
-                || modelClrType == typeof(TimeSpan))
+                || modelClrType == typeof(TimeSpan)
+            )
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => k.ModelClrType == typeof(DateTime)
-                            ? DateTimeToStringConverter.DefaultInfo
-                            : k.ModelClrType == typeof(DateTimeOffset)
-                                ? DateTimeOffsetToStringConverter.DefaultInfo
-                                : TimeSpanToStringConverter.DefaultInfo);
+                        k =>
+                            k.ModelClrType == typeof(DateTime)
+                                ? DateTimeToStringConverter.DefaultInfo
+                                : k.ModelClrType == typeof(DateTimeOffset)
+                                    ? DateTimeOffsetToStringConverter.DefaultInfo
+                                    : TimeSpanToStringConverter.DefaultInfo
+                    );
                 }
 
-                if (providerClrType == null
-                    || providerClrType == typeof(long))
+                if (providerClrType == null || providerClrType == typeof(long))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(long)),
-                        k => k.ModelClrType == typeof(DateTime)
-                            ? DateTimeToBinaryConverter.DefaultInfo
-                            : k.ModelClrType == typeof(DateTimeOffset)
-                                ? DateTimeOffsetToBinaryConverter.DefaultInfo
-                                : TimeSpanToTicksConverter.DefaultInfo);
+                        k =>
+                            k.ModelClrType == typeof(DateTime)
+                                ? DateTimeToBinaryConverter.DefaultInfo
+                                : k.ModelClrType == typeof(DateTimeOffset)
+                                    ? DateTimeOffsetToBinaryConverter.DefaultInfo
+                                    : TimeSpanToTicksConverter.DefaultInfo
+                    );
                 }
 
-                if (providerClrType == null
-                    || providerClrType == typeof(byte[]))
+                if (providerClrType == null || providerClrType == typeof(byte[]))
                 {
                     yield return modelClrType == typeof(DateTimeOffset)
                         ? _converters.GetOrAdd(
                             (modelClrType, typeof(byte[])),
-                            k => DateTimeOffsetToBytesConverter.DefaultInfo)
+                            k => DateTimeOffsetToBytesConverter.DefaultInfo
+                        )
                         : _converters.GetOrAdd(
                             (modelClrType, typeof(byte[])),
-                            k => new ValueConverterInfo(
-                                modelClrType,
-                                typeof(byte[]),
-                                i => (i.ModelClrType == typeof(DateTime)
-                                        ? DateTimeToBinaryConverter.DefaultInfo.Create()
-                                        : TimeSpanToTicksConverter.DefaultInfo.Create())
-                                    .ComposeWith(
-                                        NumberToBytesConverter<long>.DefaultInfo.Create()),
-                                NumberToBytesConverter<long>.DefaultInfo.MappingHints));
+                            k =>
+                                new ValueConverterInfo(
+                                    modelClrType,
+                                    typeof(byte[]),
+                                    i =>
+                                        (
+                                            i.ModelClrType == typeof(DateTime)
+                                                ? DateTimeToBinaryConverter.DefaultInfo.Create()
+                                                : TimeSpanToTicksConverter.DefaultInfo.Create()
+                                        ).ComposeWith(
+                                            NumberToBytesConverter<long>.DefaultInfo.Create()
+                                        ),
+                                    NumberToBytesConverter<long>.DefaultInfo.MappingHints
+                                )
+                        );
                 }
             }
             else if (modelClrType == typeof(IPAddress) || modelClrType == _readOnlyIPAddressType)
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => IPAddressToStringConverter.DefaultInfo);
+                        k => IPAddressToStringConverter.DefaultInfo
+                    );
                 }
 
                 if (providerClrType == typeof(byte[]))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        k => IPAddressToBytesConverter.DefaultInfo);
+                        k => IPAddressToBytesConverter.DefaultInfo
+                    );
                 }
             }
             else if (modelClrType == typeof(PhysicalAddress))
             {
-                if (providerClrType == null
-                    || providerClrType == typeof(string))
+                if (providerClrType == null || providerClrType == typeof(string))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(string)),
-                        k => PhysicalAddressToStringConverter.DefaultInfo);
+                        k => PhysicalAddressToStringConverter.DefaultInfo
+                    );
                 }
 
                 if (providerClrType == typeof(byte[]))
                 {
                     yield return _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
-                        k => PhysicalAddressToBytesConverter.DefaultInfo);
+                        k => PhysicalAddressToBytesConverter.DefaultInfo
+                    );
                 }
             }
-            else if (_numerics.Contains(modelClrType)
-                && (providerClrType == null
+            else if (
+                _numerics.Contains(modelClrType)
+                && (
+                    providerClrType == null
                     || providerClrType == typeof(byte[])
                     || providerClrType == typeof(string)
-                    || _numerics.Contains(providerClrType)))
+                    || _numerics.Contains(providerClrType)
+                )
+            )
             {
-                foreach (var converterInfo in FindNumericConventions(
-                    modelClrType,
-                    providerClrType,
-                    typeof(CastingConverter<,>),
-                    NumberToStringOrBytes))
+                foreach (
+                    var converterInfo in FindNumericConventions(
+                        modelClrType,
+                        providerClrType,
+                        typeof(CastingConverter<,>),
+                        NumberToStringOrBytes
+                    )
+                )
                 {
                     yield return converterInfo;
                 }
@@ -344,21 +415,25 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
         private IEnumerable<ValueConverterInfo> ForChar(
             Type underlyingModelType,
-            Type? underlyingProviderType)
+            Type? underlyingProviderType
+        )
         {
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(string))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(string)),
-                    k => CharToStringConverter.DefaultInfo);
+                    k => CharToStringConverter.DefaultInfo
+                );
             }
 
-            foreach (var converterInfo in FindNumericConventions(
-                underlyingModelType,
-                underlyingProviderType,
-                typeof(CastingConverter<,>),
-                CharToBytes))
+            foreach (
+                var converterInfo in FindNumericConventions(
+                    underlyingModelType,
+                    underlyingProviderType,
+                    typeof(CastingConverter<,>),
+                    CharToBytes
+                )
+            )
             {
                 yield return converterInfo;
             }
@@ -366,69 +441,89 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
         private IEnumerable<ValueConverterInfo> CharToBytes(
             Type underlyingModelType,
-            Type? underlyingProviderType)
+            Type? underlyingProviderType
+        )
         {
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(byte[]))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(byte[])),
-                    k => NumberToBytesConverter<char>.DefaultInfo);
+                    k => NumberToBytesConverter<char>.DefaultInfo
+                );
             }
         }
 
         private IEnumerable<ValueConverterInfo> EnumToStringOrBytes(
             Type underlyingModelType,
-            Type? underlyingProviderType)
+            Type? underlyingProviderType
+        )
         {
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(string))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(string)),
-                    k => GetDefaultValueConverterInfo(typeof(EnumToStringConverter<>).MakeGenericType(k.ModelClrType)));
+                    k =>
+                        GetDefaultValueConverterInfo(
+                            typeof(EnumToStringConverter<>).MakeGenericType(k.ModelClrType)
+                        )
+                );
             }
 
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(byte[]))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(byte[])),
                     k =>
                     {
                         var toNumber = GetDefaultValueConverterInfo(
-                            typeof(EnumToNumberConverter<,>).MakeGenericType(k.ModelClrType, k.ModelClrType.GetEnumUnderlyingType()));
+                            typeof(EnumToNumberConverter<,>).MakeGenericType(
+                                k.ModelClrType,
+                                k.ModelClrType.GetEnumUnderlyingType()
+                            )
+                        );
 
                         var toBytes = GetDefaultValueConverterInfo(
-                            typeof(NumberToBytesConverter<>).MakeGenericType(k.ModelClrType.GetEnumUnderlyingType()));
+                            typeof(NumberToBytesConverter<>).MakeGenericType(
+                                k.ModelClrType.GetEnumUnderlyingType()
+                            )
+                        );
 
                         return new ValueConverterInfo(
                             underlyingModelType,
                             typeof(byte[]),
                             i => toNumber.Create().ComposeWith(toBytes.Create()),
-                            toBytes.MappingHints);
-                    });
+                            toBytes.MappingHints
+                        );
+                    }
+                );
             }
         }
 
         private IEnumerable<ValueConverterInfo> NumberToStringOrBytes(
             Type underlyingModelType,
-            Type? underlyingProviderType)
+            Type? underlyingProviderType
+        )
         {
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(string))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(string))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(string)),
-                    k => GetDefaultValueConverterInfo(typeof(NumberToStringConverter<>).MakeGenericType(k.ModelClrType)));
+                    k =>
+                        GetDefaultValueConverterInfo(
+                            typeof(NumberToStringConverter<>).MakeGenericType(k.ModelClrType)
+                        )
+                );
             }
 
-            if (underlyingProviderType == null
-                || underlyingProviderType == typeof(byte[]))
+            if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
             {
                 yield return _converters.GetOrAdd(
                     (underlyingModelType, typeof(byte[])),
-                    k => GetDefaultValueConverterInfo(typeof(NumberToBytesConverter<>).MakeGenericType(k.ModelClrType)));
+                    k =>
+                        GetDefaultValueConverterInfo(
+                            typeof(NumberToBytesConverter<>).MakeGenericType(k.ModelClrType)
+                        )
+                );
             }
         }
 
@@ -436,15 +531,22 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type modelType,
             Type? providerType,
             Type converterType,
-            Func<Type, Type?, IEnumerable<ValueConverterInfo>>? afterPreferred)
+            Func<Type, Type?, IEnumerable<ValueConverterInfo>>? afterPreferred
+        )
         {
             var usedTypes = new List<Type> { modelType }; // List not hash because few members
             var underlyingModelType = modelType.UnwrapEnumType();
 
             if (modelType.IsEnum)
             {
-                foreach (var converterInfo in FindPreferredConversions(
-                    new[] { underlyingModelType }, modelType, providerType, converterType))
+                foreach (
+                    var converterInfo in FindPreferredConversions(
+                        new[] { underlyingModelType },
+                        modelType,
+                        providerType,
+                        converterType
+                    )
+                )
                 {
                     yield return converterInfo;
 
@@ -452,8 +554,14 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 }
             }
 
-            foreach (var converterInfo in FindPreferredConversions(
-                _signedPreferred, modelType, providerType, converterType))
+            foreach (
+                var converterInfo in FindPreferredConversions(
+                    _signedPreferred,
+                    modelType,
+                    providerType,
+                    converterType
+                )
+            )
             {
                 if (!usedTypes.Contains(converterInfo.ProviderClrType))
                 {
@@ -463,13 +571,21 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 }
             }
 
-            if (underlyingModelType == typeof(byte)
+            if (
+                underlyingModelType == typeof(byte)
                 || underlyingModelType == typeof(uint)
                 || underlyingModelType == typeof(ulong)
-                || underlyingModelType == typeof(ushort))
+                || underlyingModelType == typeof(ushort)
+            )
             {
-                foreach (var converterInfo in FindPreferredConversions(
-                    _unsignedPreferred, modelType, providerType, converterType))
+                foreach (
+                    var converterInfo in FindPreferredConversions(
+                        _unsignedPreferred,
+                        modelType,
+                        providerType,
+                        converterType
+                    )
+                )
                 {
                     if (!usedTypes.Contains(converterInfo.ProviderClrType))
                     {
@@ -480,11 +596,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 }
             }
 
-            if (underlyingModelType == typeof(float)
-                || underlyingModelType == typeof(double))
+            if (underlyingModelType == typeof(float) || underlyingModelType == typeof(double))
             {
-                foreach (var converterInfo in FindPreferredConversions(
-                    _floatingPreferred, modelType, providerType, converterType))
+                foreach (
+                    var converterInfo in FindPreferredConversions(
+                        _floatingPreferred,
+                        modelType,
+                        providerType,
+                        converterType
+                    )
+                )
                 {
                     yield return converterInfo;
 
@@ -494,8 +615,14 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
             if (underlyingModelType == typeof(char))
             {
-                foreach (var converterInfo in FindPreferredConversions(
-                    _charPreferred, modelType, providerType, converterType))
+                foreach (
+                    var converterInfo in FindPreferredConversions(
+                        _charPreferred,
+                        modelType,
+                        providerType,
+                        converterType
+                    )
+                )
                 {
                     yield return converterInfo;
 
@@ -515,16 +642,23 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
             foreach (var numeric in _numerics)
             {
-                if ((providerType == null
-                        || providerType == numeric)
-                    && !usedTypes.Contains(numeric))
+                if (
+                    (providerType == null || providerType == numeric)
+                    && !usedTypes.Contains(numeric)
+                )
                 {
                     yield return _converters.GetOrAdd(
                         (modelType, numeric),
-                        k => GetDefaultValueConverterInfo(
-                            converterType.GetTypeInfo().GenericTypeParameters.Length == 1
-                                ? converterType.MakeGenericType(k.ProviderClrType)
-                                : converterType.MakeGenericType(k.ModelClrType, k.ProviderClrType)));
+                        k =>
+                            GetDefaultValueConverterInfo(
+                                converterType.GetTypeInfo().GenericTypeParameters.Length == 1
+                                    ? converterType.MakeGenericType(k.ProviderClrType)
+                                    : converterType.MakeGenericType(
+                                        k.ModelClrType,
+                                        k.ProviderClrType
+                                    )
+                            )
+                    );
                 }
             }
         }
@@ -533,7 +667,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type[] candidateTypes,
             Type modelType,
             Type? providerType,
-            Type converterType)
+            Type converterType
+        )
         {
             var underlyingModelType = modelType.UnwrapEnumType();
 
@@ -548,19 +683,25 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
                     for (; i < candidateTypes.Length; i++)
                     {
-                        if (providerType == null
-                            || providerType == candidateTypes[i])
+                        if (providerType == null || providerType == candidateTypes[i])
                         {
                             yield return _converters.GetOrAdd(
                                 (modelType, candidateTypes[i]),
-                                k => GetDefaultValueConverterInfo(converterType.MakeGenericType(k.ModelClrType, k.ProviderClrType)));
+                                k =>
+                                    GetDefaultValueConverterInfo(
+                                        converterType.MakeGenericType(
+                                            k.ModelClrType,
+                                            k.ProviderClrType
+                                        )
+                                    )
+                            );
                         }
                     }
                 }
             }
         }
 
-        private static ValueConverterInfo GetDefaultValueConverterInfo(Type converterTypeInfo)
-            => (ValueConverterInfo)converterTypeInfo.GetAnyProperty("DefaultInfo")!.GetValue(null)!;
+        private static ValueConverterInfo GetDefaultValueConverterInfo(Type converterTypeInfo) =>
+            (ValueConverterInfo)converterTypeInfo.GetAnyProperty("DefaultInfo")!.GetValue(null)!;
     }
 }

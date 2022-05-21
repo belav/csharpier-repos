@@ -11,55 +11,64 @@ namespace System.CommandLine
     public class Option<T> : Option, IValueDescriptor<T>
     {
         /// <inheritdoc/>
-        public Option(
-            string name,
-            string? description = null) 
-            : base(name, description, new Argument<T>())
-        { }
+        public Option(string name, string? description = null)
+            : base(name, description, new Argument<T>()) { }
 
         /// <inheritdoc/>
-        public Option(
-            string[] aliases,
-            string? description = null) 
-            : base(aliases, description, new Argument<T>())
-        { }
+        public Option(string[] aliases, string? description = null)
+            : base(aliases, description, new Argument<T>()) { }
 
         /// <inheritdoc/>
         public Option(
             string name,
             ParseArgument<T> parseArgument,
             bool isDefault = false,
-            string? description = null) 
-            : base(name, description, 
-                  new Argument<T>(parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)), isDefault))
-        { }
+            string? description = null
+        )
+            : base(
+                name,
+                description,
+                new Argument<T>(
+                    parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
+                    isDefault
+                )
+            ) { }
 
         /// <inheritdoc/>
         public Option(
             string[] aliases,
             ParseArgument<T> parseArgument,
             bool isDefault = false,
-            string? description = null) 
-            : base(aliases, description, new Argument<T>(parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)), isDefault))
-        { }
+            string? description = null
+        )
+            : base(
+                aliases,
+                description,
+                new Argument<T>(
+                    parseArgument ?? throw new ArgumentNullException(nameof(parseArgument)),
+                    isDefault
+                )
+            ) { }
 
         /// <inheritdoc/>
-        public Option(
-            string name,
-            Func<T> getDefaultValue,
-            string? description = null) 
-            : base(name, description, 
-                  new Argument<T>(getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))))
-        { }
+        public Option(string name, Func<T> getDefaultValue, string? description = null)
+            : base(
+                name,
+                description,
+                new Argument<T>(
+                    getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))
+                )
+            ) { }
 
         /// <inheritdoc/>
-        public Option(
-            string[] aliases,
-            Func<T> getDefaultValue,
-            string? description = null)
-            : base(aliases, description, new Argument<T>(getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))))
-        {
-        }
+        public Option(string[] aliases, Func<T> getDefaultValue, string? description = null)
+            : base(
+                aliases,
+                description,
+                new Argument<T>(
+                    getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue))
+                )
+            ) { }
 
         /// <inheritdoc/>
         public override IArgumentArity Arity

@@ -17,18 +17,34 @@ namespace System.Net.Http
     {
         /// <summary>Cached string for the last Date header received on this connection.</summary>
         private string? _lastDateHeaderValue;
+
         /// <summary>Cached string for the last Server header received on this connection.</summary>
         private string? _lastServerHeaderValue;
 
         /// <summary>Uses <see cref="HeaderDescriptor.GetHeaderValue"/>, but first special-cases several known headers for which we can use caching.</summary>
-        public string GetResponseHeaderValueWithCaching(HeaderDescriptor descriptor, ReadOnlySpan<byte> value, Encoding? valueEncoding)
+        public string GetResponseHeaderValueWithCaching(
+            HeaderDescriptor descriptor,
+            ReadOnlySpan<byte> value,
+            Encoding? valueEncoding
+        )
         {
-            return
-                ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date) ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding) :
-                ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server) ? GetOrAddCachedValue(ref _lastServerHeaderValue, descriptor, value, valueEncoding) :
-                descriptor.GetHeaderValue(value, valueEncoding);
+            return ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date)
+                ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
+                : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
+                    ? GetOrAddCachedValue(
+                        ref _lastServerHeaderValue,
+                        descriptor,
+                        value,
+                        valueEncoding
+                    )
+                    : descriptor.GetHeaderValue(value, valueEncoding);
 
-            static string GetOrAddCachedValue([NotNull] ref string? cache, HeaderDescriptor descriptor, ReadOnlySpan<byte> value, Encoding? encoding)
+            static string GetOrAddCachedValue(
+                [NotNull] ref string? cache,
+                HeaderDescriptor descriptor,
+                ReadOnlySpan<byte> value,
+                Encoding? encoding
+            )
             {
                 string? lastValue = cache;
                 if (lastValue is null || !ByteArrayHelpers.EqualsOrdinalAscii(lastValue, value))
@@ -47,12 +63,13 @@ namespace System.Net.Http
             if (stream is SslStream sslStream)
             {
                 Trace(
-                    $"{this}. " +
-                    $"SslProtocol:{sslStream.SslProtocol}, NegotiatedApplicationProtocol:{sslStream.NegotiatedApplicationProtocol}, " +
-                    $"NegotiatedCipherSuite:{sslStream.NegotiatedCipherSuite}, CipherAlgorithm:{sslStream.CipherAlgorithm}, CipherStrength:{sslStream.CipherStrength}, " +
-                    $"HashAlgorithm:{sslStream.HashAlgorithm}, HashStrength:{sslStream.HashStrength}, " +
-                    $"KeyExchangeAlgorithm:{sslStream.KeyExchangeAlgorithm}, KeyExchangeStrength:{sslStream.KeyExchangeStrength}, " +
-                    $"LocalCertificate:{sslStream.LocalCertificate}, RemoteCertificate:{sslStream.RemoteCertificate}");
+                    $"{this}. "
+                        + $"SslProtocol:{sslStream.SslProtocol}, NegotiatedApplicationProtocol:{sslStream.NegotiatedApplicationProtocol}, "
+                        + $"NegotiatedCipherSuite:{sslStream.NegotiatedCipherSuite}, CipherAlgorithm:{sslStream.CipherAlgorithm}, CipherStrength:{sslStream.CipherStrength}, "
+                        + $"HashAlgorithm:{sslStream.HashAlgorithm}, HashStrength:{sslStream.HashStrength}, "
+                        + $"KeyExchangeAlgorithm:{sslStream.KeyExchangeAlgorithm}, KeyExchangeStrength:{sslStream.KeyExchangeStrength}, "
+                        + $"LocalCertificate:{sslStream.LocalCertificate}, RemoteCertificate:{sslStream.RemoteCertificate}"
+                );
             }
             else
             {
@@ -74,13 +91,22 @@ namespace System.Net.Http
 
         internal static int ParseStatusCode(ReadOnlySpan<byte> value)
         {
-            byte status1, status2, status3;
-            if (value.Length != 3 ||
-                !IsDigit(status1 = value[0]) ||
-                !IsDigit(status2 = value[1]) ||
-                !IsDigit(status3 = value[2]))
+            byte status1,
+                status2,
+                status3;
+            if (
+                value.Length != 3
+                || !IsDigit(status1 = value[0])
+                || !IsDigit(status2 = value[1])
+                || !IsDigit(status3 = value[2])
+            )
             {
-                throw new HttpRequestException(SR.Format(SR.net_http_invalid_response_status_code, System.Text.Encoding.ASCII.GetString(value)));
+                throw new HttpRequestException(
+                    SR.Format(
+                        SR.net_http_invalid_response_status_code,
+                        System.Text.Encoding.ASCII.GetString(value)
+                    )
+                );
             }
 
             return 100 * (status1 - '0') + 10 * (status2 - '0') + (status3 - '0');
@@ -99,8 +125,14 @@ namespace System.Net.Http
             }
             else
             {
-                task.AsTask().ContinueWith(static t => _ = t.Exception,
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+                task.AsTask()
+                    .ContinueWith(
+                        static t => _ = t.Exception,
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously
+                            | TaskContinuationOptions.OnlyOnFaulted,
+                        TaskScheduler.Default
+                    );
             }
         }
 
@@ -116,15 +148,22 @@ namespace System.Net.Http
             }
             else
             {
-                task.ContinueWith(static (t, state) => LogFaulted((HttpConnectionBase)state!, t), this,
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+                task.ContinueWith(
+                    static (t, state) => LogFaulted((HttpConnectionBase)state!, t),
+                    this,
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously
+                        | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
             }
 
             static void LogFaulted(HttpConnectionBase connection, Task task)
             {
                 Debug.Assert(task.IsFaulted);
                 Exception? e = task.Exception!.InnerException; // Access Exception even if not tracing, to avoid TaskScheduler.UnobservedTaskException firing
-                if (NetEventSource.Log.IsEnabled()) connection.Trace($"Exception from asynchronous processing: {e}");
+                if (NetEventSource.Log.IsEnabled())
+                    connection.Trace($"Exception from asynchronous processing: {e}");
             }
         }
 

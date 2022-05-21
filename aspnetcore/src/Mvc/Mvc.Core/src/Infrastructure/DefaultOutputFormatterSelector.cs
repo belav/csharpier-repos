@@ -36,7 +36,10 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
     /// </summary>
     /// <param name="options">Used to access <see cref="MvcOptions"/>.</param>
     /// <param name="loggerFactory">The logger factory.</param>
-    public DefaultOutputFormatterSelector(IOptions<MvcOptions> options, ILoggerFactory loggerFactory)
+    public DefaultOutputFormatterSelector(
+        IOptions<MvcOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
@@ -56,7 +59,11 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
     }
 
     /// <inheritdoc/>
-    public override IOutputFormatter? SelectFormatter(OutputFormatterCanWriteContext context, IList<IOutputFormatter> formatters, MediaTypeCollection contentTypes)
+    public override IOutputFormatter? SelectFormatter(
+        OutputFormatterCanWriteContext context,
+        IList<IOutputFormatter> formatters,
+        MediaTypeCollection contentTypes
+    )
     {
         if (context == null)
         {
@@ -80,10 +87,13 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
             formatters = _formatters;
             if (formatters.Count == 0)
             {
-                throw new InvalidOperationException(Resources.FormatOutputFormattersAreRequired(
-                    typeof(MvcOptions).FullName,
-                    nameof(MvcOptions.OutputFormatters),
-                    typeof(IOutputFormatter).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatOutputFormattersAreRequired(
+                        typeof(MvcOptions).FullName,
+                        nameof(MvcOptions.OutputFormatters),
+                        typeof(IOutputFormatter).FullName
+                    )
+                );
             }
         }
 
@@ -112,18 +122,23 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
                 selectedFormatter = SelectFormatterUsingSortedAcceptHeaders(
                     context,
                     formatters,
-                    acceptableMediaTypes);
+                    acceptableMediaTypes
+                );
             }
             else
             {
-                _logger.SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(acceptableMediaTypes, contentTypes);
+                _logger.SelectingOutputFormatterUsingAcceptHeaderAndExplicitContentTypes(
+                    acceptableMediaTypes,
+                    contentTypes
+                );
 
                 // Verify that a content type from the context is compatible with the client's request
                 selectedFormatter = SelectFormatterUsingSortedAcceptHeadersAndContentTypes(
                     context,
                     formatters,
                     acceptableMediaTypes,
-                    contentTypes);
+                    contentTypes
+                );
             }
 
             if (selectedFormatter == null)
@@ -143,9 +158,7 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
             {
                 _logger.SelectingOutputFormatterWithoutUsingContentTypes();
 
-                selectedFormatter = SelectFormatterNotUsingContentType(
-                    context,
-                    formatters);
+                selectedFormatter = SelectFormatterNotUsingContentType(context, formatters);
             }
             else
             {
@@ -154,7 +167,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
                 selectedFormatter = SelectFormatterUsingAnyAcceptableContentType(
                     context,
                     formatters,
-                    contentTypes);
+                    contentTypes
+                );
             }
         }
 
@@ -173,7 +187,11 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
         for (var i = 0; i < result.Count; i++)
         {
             var mediaType = new MediaType(result[i].MediaType);
-            if (!_respectBrowserAcceptHeader && mediaType.MatchesAllSubTypes && mediaType.MatchesAllTypes)
+            if (
+                !_respectBrowserAcceptHeader
+                && mediaType.MatchesAllSubTypes
+                && mediaType.MatchesAllTypes
+            )
             {
                 result.Clear();
                 return result;
@@ -187,7 +205,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
 
     private IOutputFormatter? SelectFormatterNotUsingContentType(
         OutputFormatterCanWriteContext formatterContext,
-        IList<IOutputFormatter> formatters)
+        IList<IOutputFormatter> formatters
+    )
     {
         _logger.SelectFirstCanWriteFormatter();
 
@@ -208,7 +227,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
     private IOutputFormatter? SelectFormatterUsingSortedAcceptHeaders(
         OutputFormatterCanWriteContext formatterContext,
         IList<IOutputFormatter> formatters,
-        IList<MediaTypeSegmentWithQuality> sortedAcceptHeaders)
+        IList<MediaTypeSegmentWithQuality> sortedAcceptHeaders
+    )
     {
         for (var i = 0; i < sortedAcceptHeaders.Count; i++)
         {
@@ -233,7 +253,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
     private IOutputFormatter? SelectFormatterUsingAnyAcceptableContentType(
         OutputFormatterCanWriteContext formatterContext,
         IList<IOutputFormatter> formatters,
-        MediaTypeCollection acceptableContentTypes)
+        MediaTypeCollection acceptableContentTypes
+    )
     {
         foreach (var formatter in formatters)
         {
@@ -256,7 +277,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
         OutputFormatterCanWriteContext formatterContext,
         IList<IOutputFormatter> formatters,
         IList<MediaTypeSegmentWithQuality> sortedAcceptableContentTypes,
-        MediaTypeCollection possibleOutputContentTypes)
+        MediaTypeCollection possibleOutputContentTypes
+    )
     {
         for (var i = 0; i < sortedAcceptableContentTypes.Count; i++)
         {
@@ -269,7 +291,9 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
                     for (var k = 0; k < formatters.Count; k++)
                     {
                         var formatter = formatters[k];
-                        formatterContext.ContentType = new StringSegment(possibleOutputContentTypes[j]);
+                        formatterContext.ContentType = new StringSegment(
+                            possibleOutputContentTypes[j]
+                        );
                         formatterContext.ContentTypeIsServerDefined = true;
                         if (formatter.CanWriteResult(formatterContext))
                         {
@@ -294,7 +318,8 @@ public class DefaultOutputFormatterSelector : OutputFormatterSelector
             {
                 var message = Resources.FormatObjectResult_MatchAllContentType(
                     contentType,
-                    nameof(ObjectResult.ContentTypes));
+                    nameof(ObjectResult.ContentTypes)
+                );
                 throw new InvalidOperationException(message);
             }
         }

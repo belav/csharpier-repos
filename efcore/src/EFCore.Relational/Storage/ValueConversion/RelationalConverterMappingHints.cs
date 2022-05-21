@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             int? scale = null,
             bool? unicode = null,
             bool? fixedLength = null,
-            Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null)
-            : base(size, precision, scale, unicode, valueGeneratorFactory)
+            Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null
+        ) : base(size, precision, scale, unicode, valueGeneratorFactory)
         {
             IsFixedLength = fixedLength;
         }
@@ -43,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// </summary>
         /// <param name="hints">The hints to add.</param>
         /// <returns>The combined hints.</returns>
-        public override ConverterMappingHints With(ConverterMappingHints? hints)
-            => hints == null
+        public override ConverterMappingHints With(ConverterMappingHints? hints) =>
+            hints == null
                 ? this
                 : new RelationalConverterMappingHints(
                     hints.Size ?? Size,
@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     hints.Scale ?? Scale,
                     hints.IsUnicode ?? IsUnicode,
                     (hints as RelationalConverterMappingHints)?.IsFixedLength ?? IsFixedLength,
-                    hints.ValueGeneratorFactory ?? ValueGeneratorFactory);
+                    hints.ValueGeneratorFactory ?? ValueGeneratorFactory
+                );
 
         /// <summary>
         ///     Whether or not the mapped data type is fixed length.

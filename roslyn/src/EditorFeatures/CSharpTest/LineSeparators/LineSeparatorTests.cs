@@ -20,13 +20,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
     public class LineSeparatorTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
-        public async Task TestEmptyFile()
-            => await AssertTagsOnBracesOrSemicolonsAsync(contents: string.Empty);
+        public async Task TestEmptyFile() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(contents: string.Empty);
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestEmptyClass()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
 }";
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestClassWithOneMethod()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     void M()
     {
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestClassWithTwoMethods()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     void M()
     {
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestClassWithTwoNonEmptyMethods()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     void M()
     {
@@ -81,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestClassWithMethodAndField()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     void M()
     {
@@ -95,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestEmptyNamespace()
         {
-            var file = @"namespace N
+            var file =
+                @"namespace N
 {
 }";
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
@@ -104,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestNamespaceAndClass()
         {
-            var file = @"namespace N
+            var file =
+                @"namespace N
 {
     class C
     {
@@ -116,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestNamespaceAndTwoClasses()
         {
-            var file = @"namespace N
+            var file =
+                @"namespace N
 {
     class C
     {
@@ -132,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestNamespaceAndTwoClassesAndDelegate()
         {
-            var file = @"namespace N
+            var file =
+                @"namespace N
 {
     class C
     {
@@ -150,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestNestedClass()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     class N
     {
@@ -162,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestTwoNestedClasses()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     class N
     {
@@ -178,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestStruct()
         {
-            var file = @"struct S
+            var file =
+                @"struct S
 {
 }";
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
@@ -187,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestInterface()
         {
-            var file = @"interface I
+            var file =
+                @"interface I
 {
 }";
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
@@ -196,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestEnum()
         {
-            var file = @"enum E
+            var file =
+                @"enum E
 {
 }";
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
@@ -205,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestProperty()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     int Prop
     {
@@ -224,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestPropertyAndField()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     int Prop
     {
@@ -245,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestClassWithFieldAndMethod()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     int field;
 
@@ -259,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task UsingDirective()
         {
-            var file = @"using System;
+            var file =
+                @"using System;
 
 class C
 {
@@ -270,7 +288,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task UsingDirectiveInNamespace()
         {
-            var file = @"namespace N
+            var file =
+                @"namespace N
 {
     using System;
 
@@ -284,7 +303,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task UsingDirectiveInFileScopedNamespace()
         {
-            var file = @"namespace N;
+            var file =
+                @"namespace N;
 
 using System;
 
@@ -298,7 +318,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task PropertyStyleEventDeclaration()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     event EventHandler E
     {
@@ -314,7 +335,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task IndexerDeclaration()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     int this[int i]
     {
@@ -330,7 +352,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task Constructor()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     C()
     {
@@ -344,7 +367,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task Destructor()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     ~C()
     {
@@ -358,7 +382,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task Operator()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     static C operator +(C lhs, C rhs)
     {
@@ -372,7 +397,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task ConversionOperator()
         {
-            var file = @"class C
+            var file =
+                @"class C
 {
     static implicit operator C(int i)
     {
@@ -386,7 +412,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task Bug930292()
         {
-            var file = @"class Program
+            var file =
+                @"class Program
 {
 void A() { }
 void B() { }
@@ -400,7 +427,8 @@ void D() { }
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task Bug930289()
         {
-            var file = @"namespace Roslyn.Compilers.CSharp
+            var file =
+                @"namespace Roslyn.Compilers.CSharp
 {
 internal struct ArrayElement<T>
 {
@@ -416,7 +444,8 @@ public static implicit operator ArrayElement<T>(T value) { return new ArrayEleme
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task TestConsoleApp()
         {
-            var file = @"using System;
+            var file =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -433,28 +462,36 @@ class Program
         [WorkItem(1297, "https://github.com/dotnet/roslyn/issues/1297")]
         public async Task ExpressionBodiedProperty()
         {
-            await AssertTagsOnBracesOrSemicolonsAsync(@"class C
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                @"class C
 {
     int Prop => 3;
 
     void M()
     {
     }
-}", 0, 2);
+}",
+                0,
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         [WorkItem(1297, "https://github.com/dotnet/roslyn/issues/1297")]
         public async Task ExpressionBodiedIndexer()
         {
-            await AssertTagsOnBracesOrSemicolonsAsync(@"class C
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                @"class C
 {
     int this[int i] => 3;
 
     void M()
     {
     }
-}", 0, 2);
+}",
+                0,
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
@@ -463,14 +500,17 @@ class Program
         {
             // This is not valid code, and parses all wrong, but just in case a user writes it.  Note
             // the 3 is because there is a skipped } in the event declaration.
-            await AssertTagsOnBracesOrSemicolonsAsync(@"class C
+            await AssertTagsOnBracesOrSemicolonsAsync(
+                @"class C
 {
     event EventHandler MyEvent => 3;
 
     void M()
     {
     }
-}", 3);
+}",
+                3
+            );
         }
 
         #region Negative (incomplete) tests
@@ -490,12 +530,12 @@ class Program
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
-        public async Task IncompleteMethod()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"void goo() {");
+        public async Task IncompleteMethod() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"void goo() {");
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
-        public async Task IncompleteProperty()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"class C { int P { get; set; void");
+        public async Task IncompleteProperty() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"class C { int P { get; set; void");
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
         public async Task IncompleteEvent()
@@ -515,34 +555,56 @@ class Program
         public async Task IncompleteOperator()
         {
             // top level operators not supported in script code
-            await AssertTagsOnBracesOrSemicolonsTokensAsync(@"C operator +(C lhs, C rhs) {", Array.Empty<int>(), Options.Regular);
+            await AssertTagsOnBracesOrSemicolonsTokensAsync(
+                @"C operator +(C lhs, C rhs) {",
+                Array.Empty<int>(),
+                Options.Regular
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
-        public async Task IncompleteConversionOperator()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"implicit operator C(int i) {");
+        public async Task IncompleteConversionOperator() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"implicit operator C(int i) {");
 
         [Fact, Trait(Traits.Feature, Traits.Features.LineSeparators)]
-        public async Task IncompleteMember()
-            => await AssertTagsOnBracesOrSemicolonsAsync(@"class C { private !C(");
+        public async Task IncompleteMember() =>
+            await AssertTagsOnBracesOrSemicolonsAsync(@"class C { private !C(");
 
         #endregion
 
-        private static async Task AssertTagsOnBracesOrSemicolonsAsync(string contents, params int[] tokenIndices)
+        private static async Task AssertTagsOnBracesOrSemicolonsAsync(
+            string contents,
+            params int[] tokenIndices
+        )
         {
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices);
             await AssertTagsOnBracesOrSemicolonsTokensAsync(contents, tokenIndices, Options.Script);
         }
 
-        private static async Task AssertTagsOnBracesOrSemicolonsTokensAsync(string contents, int[] tokenIndices, CSharpParseOptions? options = null)
+        private static async Task AssertTagsOnBracesOrSemicolonsTokensAsync(
+            string contents,
+            int[] tokenIndices,
+            CSharpParseOptions? options = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
             var root = await document.GetRequiredSyntaxRootAsync(default);
 
-            var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(workspace.Services.GetLanguageServices(LanguageNames.CSharp).GetRequiredService<ILineSeparatorService>());
-            var spans = await lineSeparatorService.GetLineSeparatorsAsync(document, root.FullSpan, CancellationToken.None);
-            var tokens = root.DescendantTokens().Where(t => t.Kind() is SyntaxKind.CloseBraceToken or SyntaxKind.SemicolonToken);
+            var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(
+                workspace.Services
+                    .GetLanguageServices(LanguageNames.CSharp)
+                    .GetRequiredService<ILineSeparatorService>()
+            );
+            var spans = await lineSeparatorService.GetLineSeparatorsAsync(
+                document,
+                root.FullSpan,
+                CancellationToken.None
+            );
+            var tokens = root.DescendantTokens()
+                .Where(t => t.Kind() is SyntaxKind.CloseBraceToken or SyntaxKind.SemicolonToken);
 
             Assert.Equal(tokenIndices.Length, spans.Count());
 
@@ -553,10 +615,12 @@ class Program
 
                 var expectedSpan = expectedToken.Span;
 
-                var message = string.Format("Expected to match curly {0} at span {1}.  Actual span {2}",
-                                            tokenIndices[i],
-                                            expectedSpan,
-                                            span);
+                var message = string.Format(
+                    "Expected to match curly {0} at span {1}.  Actual span {2}",
+                    tokenIndices[i],
+                    expectedSpan,
+                    span
+                );
                 Assert.True(expectedSpan == span, message);
                 ++i;
             }

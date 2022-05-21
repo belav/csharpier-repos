@@ -13,12 +13,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static IQueryable<TEntity> AsTracking<TEntity>(
             this IQueryable<TEntity> source,
-            bool tracking)
-            where TEntity : class
-            => tracking ? source.AsTracking() : source.AsNoTracking();
+            bool tracking
+        ) where TEntity : class => tracking ? source.AsTracking() : source.AsNoTracking();
 
-        public static IEnumerable<T> NullChecked<T>(this IEnumerable<T> enumerable)
-            => enumerable ?? Enumerable.Empty<T>();
+        public static IEnumerable<T> NullChecked<T>(this IEnumerable<T> enumerable) =>
+            enumerable ?? Enumerable.Empty<T>();
 
         public static void ForEach<T>(this IEnumerable<T> @this, Action<T> action)
         {
@@ -35,9 +34,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             foreach (var entityType in model.GetEntityTypes())
             {
                 var clrType = entityType.ClrType;
-                var clonedEntityType = clrType == null
-                    ? modelClone.AddEntityType(entityType.Name)
-                    : modelClone.AddEntityType(clrType);
+                var clonedEntityType =
+                    clrType == null
+                        ? modelClone.AddEntityType(entityType.Name)
+                        : modelClone.AddEntityType(clrType);
 
                 clonedEntityTypes.Add(entityType, clonedEntityType);
             }
@@ -46,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             {
                 if (clonedEntityType.Key.BaseType != null)
                 {
-                    clonedEntityType.Value.BaseType = clonedEntityTypes[clonedEntityType.Key.BaseType];
+                    clonedEntityType.Value.BaseType = clonedEntityTypes[
+                        clonedEntityType.Key.BaseType
+                    ];
                 }
             }
 
@@ -78,7 +80,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return modelClone;
         }
 
-        private static void CloneProperties(IReadOnlyEntityType sourceEntityType, IMutableEntityType targetEntityType)
+        private static void CloneProperties(
+            IReadOnlyEntityType sourceEntityType,
+            IMutableEntityType targetEntityType
+        )
         {
             foreach (var property in sourceEntityType.GetDeclaredProperties())
             {
@@ -88,72 +93,120 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 clonedProperty.ValueGenerated = property.ValueGenerated;
                 clonedProperty.SetBeforeSaveBehavior(property.GetBeforeSaveBehavior());
                 clonedProperty.SetAfterSaveBehavior(property.GetAfterSaveBehavior());
-                property.GetAnnotations().ForEach(annotation => clonedProperty[annotation.Name] = annotation.Value);
+                property
+                    .GetAnnotations()
+                    .ForEach(annotation => clonedProperty[annotation.Name] = annotation.Value);
             }
         }
 
-        private static void CloneKeys(IReadOnlyEntityType sourceEntityType, IMutableEntityType targetEntityType)
+        private static void CloneKeys(
+            IReadOnlyEntityType sourceEntityType,
+            IMutableEntityType targetEntityType
+        )
         {
             foreach (var key in sourceEntityType.GetDeclaredKeys())
             {
                 var clonedKey = targetEntityType.AddKey(
-                    key.Properties.Select(p => targetEntityType.FindProperty(p.Name)).ToList());
+                    key.Properties.Select(p => targetEntityType.FindProperty(p.Name)).ToList()
+                );
                 if (key.IsPrimaryKey())
                 {
                     targetEntityType.SetPrimaryKey(clonedKey.Properties);
                 }
 
-                key.GetAnnotations().ForEach(annotation => clonedKey[annotation.Name] = annotation.Value);
+                key.GetAnnotations()
+                    .ForEach(annotation => clonedKey[annotation.Name] = annotation.Value);
             }
         }
 
-        private static void CloneIndexes(IReadOnlyEntityType sourceEntityType, IMutableEntityType targetEntityType)
+        private static void CloneIndexes(
+            IReadOnlyEntityType sourceEntityType,
+            IMutableEntityType targetEntityType
+        )
         {
             foreach (var index in sourceEntityType.GetDeclaredIndexes())
             {
                 var clonedIndex = targetEntityType.AddIndex(
-                    index.Properties.Select(p => targetEntityType.FindProperty(p.Name)).ToList());
+                    index.Properties.Select(p => targetEntityType.FindProperty(p.Name)).ToList()
+                );
                 clonedIndex.IsUnique = index.IsUnique;
-                index.GetAnnotations().ForEach(annotation => clonedIndex[annotation.Name] = annotation.Value);
+                index
+                    .GetAnnotations()
+                    .ForEach(annotation => clonedIndex[annotation.Name] = annotation.Value);
             }
         }
 
-        private static void CloneForeignKeys(IReadOnlyEntityType sourceEntityType, IMutableEntityType targetEntityType)
+        private static void CloneForeignKeys(
+            IReadOnlyEntityType sourceEntityType,
+            IMutableEntityType targetEntityType
+        )
         {
             foreach (var foreignKey in sourceEntityType.GetDeclaredForeignKeys())
             {
-                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(foreignKey.PrincipalEntityType.Name);
+                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
+                    foreignKey.PrincipalEntityType.Name
+                );
                 var clonedForeignKey = targetEntityType.AddForeignKey(
-                    foreignKey.Properties.Select(p => targetEntityType.FindProperty(p.Name)).ToList(),
+                    foreignKey.Properties
+                        .Select(p => targetEntityType.FindProperty(p.Name))
+                        .ToList(),
                     targetPrincipalEntityType.FindKey(
-                        foreignKey.PrincipalKey.Properties.Select(p => targetPrincipalEntityType.FindProperty(p.Name)).ToList()),
-                    targetPrincipalEntityType);
+                        foreignKey.PrincipalKey.Properties
+                            .Select(p => targetPrincipalEntityType.FindProperty(p.Name))
+                            .ToList()
+                    ),
+                    targetPrincipalEntityType
+                );
                 clonedForeignKey.IsUnique = foreignKey.IsUnique;
                 clonedForeignKey.IsRequired = foreignKey.IsRequired;
-                foreignKey.GetAnnotations().ForEach(annotation => clonedForeignKey[annotation.Name] = annotation.Value);
+                foreignKey
+                    .GetAnnotations()
+                    .ForEach(annotation => clonedForeignKey[annotation.Name] = annotation.Value);
             }
         }
 
-        private static void CloneNavigations(IReadOnlyEntityType sourceEntityType, IMutableEntityType targetEntityType)
+        private static void CloneNavigations(
+            IReadOnlyEntityType sourceEntityType,
+            IMutableEntityType targetEntityType
+        )
         {
             foreach (var navigation in sourceEntityType.GetDeclaredNavigations())
             {
-                var targetDependentEntityType = targetEntityType.Model.FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name);
-                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(navigation.ForeignKey.PrincipalEntityType.Name);
+                var targetDependentEntityType = targetEntityType.Model.FindEntityType(
+                    navigation.ForeignKey.DeclaringEntityType.Name
+                );
+                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
+                    navigation.ForeignKey.PrincipalEntityType.Name
+                );
                 var targetForeignKey = targetDependentEntityType.FindForeignKey(
-                    navigation.ForeignKey.Properties.Select(p => targetDependentEntityType.FindProperty(p.Name)).ToList(),
+                    navigation.ForeignKey.Properties
+                        .Select(p => targetDependentEntityType.FindProperty(p.Name))
+                        .ToList(),
                     targetPrincipalEntityType.FindKey(
-                        navigation.ForeignKey.PrincipalKey.Properties.Select(
-                            p => targetPrincipalEntityType.FindProperty(p.Name)).ToList()),
-                    targetPrincipalEntityType);
+                        navigation.ForeignKey.PrincipalKey.Properties
+                            .Select(p => targetPrincipalEntityType.FindProperty(p.Name))
+                            .ToList()
+                    ),
+                    targetPrincipalEntityType
+                );
                 var clonedNavigation = navigation.IsOnDependent
-                    ? (navigation.GetIdentifyingMemberInfo() != null
-                        ? targetForeignKey.SetDependentToPrincipal(navigation.GetIdentifyingMemberInfo())
-                        : targetForeignKey.SetDependentToPrincipal(navigation.Name))
-                    : (navigation.GetIdentifyingMemberInfo() != null
-                        ? targetForeignKey.SetPrincipalToDependent(navigation.GetIdentifyingMemberInfo())
-                        : targetForeignKey.SetPrincipalToDependent(navigation.Name));
-                navigation.GetAnnotations().ForEach(annotation => clonedNavigation[annotation.Name] = annotation.Value);
+                    ? (
+                        navigation.GetIdentifyingMemberInfo() != null
+                            ? targetForeignKey.SetDependentToPrincipal(
+                                navigation.GetIdentifyingMemberInfo()
+                            )
+                            : targetForeignKey.SetDependentToPrincipal(navigation.Name)
+                    )
+                    : (
+                        navigation.GetIdentifyingMemberInfo() != null
+                            ? targetForeignKey.SetPrincipalToDependent(
+                                navigation.GetIdentifyingMemberInfo()
+                            )
+                            : targetForeignKey.SetPrincipalToDependent(navigation.Name)
+                    );
+                navigation
+                    .GetAnnotations()
+                    .ForEach(annotation => clonedNavigation[annotation.Name] = annotation.Value);
             }
         }
     }

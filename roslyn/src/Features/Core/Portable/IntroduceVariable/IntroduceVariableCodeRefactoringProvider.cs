@@ -16,15 +16,23 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.ConvertAnonymousTypeToClass)]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InvertConditional)]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InvertLogical)]
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.IntroduceVariable), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.IntroduceVariable
+        ),
+        Shared
+    ]
     internal class IntroduceVariableCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public IntroduceVariableCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public IntroduceVariableCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -35,7 +43,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             }
 
             var service = document.GetLanguageService<IIntroduceVariableService>();
-            var action = await service.IntroduceVariableAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var action = await service
+                .IntroduceVariableAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
             if (action != null)
             {
                 context.RegisterRefactoring(action, textSpan);

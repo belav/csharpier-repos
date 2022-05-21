@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
     {
         public static TSymbol AddAnnotationToSymbol<TSymbol>(
             this SyntaxAnnotation annotation,
-            TSymbol symbol)
-            where TSymbol : ISymbol
+            TSymbol symbol
+        ) where TSymbol : ISymbol
         {
             Contract.ThrowIfFalse(symbol is CodeGenerationSymbol);
             var codeGenSymbol = (CodeGenerationSymbol)(object)symbol;
@@ -22,15 +22,25 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         internal static SyntaxAnnotation[] CombineAnnotations(
             SyntaxAnnotation[] originalAnnotations,
-            SyntaxAnnotation[] newAnnotations)
+            SyntaxAnnotation[] newAnnotations
+        )
         {
             if (!originalAnnotations.IsNullOrEmpty())
             {
                 // Make a new array (that includes the new annotations) and copy the original
                 // annotations into it.
                 var finalAnnotations = newAnnotations;
-                Array.Resize(ref finalAnnotations, originalAnnotations.Length + newAnnotations.Length);
-                Array.Copy(originalAnnotations, 0, finalAnnotations, newAnnotations.Length, originalAnnotations.Length);
+                Array.Resize(
+                    ref finalAnnotations,
+                    originalAnnotations.Length + newAnnotations.Length
+                );
+                Array.Copy(
+                    originalAnnotations,
+                    0,
+                    finalAnnotations,
+                    newAnnotations.Length,
+                    originalAnnotations.Length
+                );
 
                 return finalAnnotations;
             }

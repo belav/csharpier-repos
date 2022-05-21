@@ -20,75 +20,155 @@ namespace Microsoft.CodeAnalysis.Structure
         bool ShowOutliningForCodeLevelConstructs,
         bool CollapseRegionsWhenCollapsingToDefinitions,
         int MaximumBannerLength,
-        bool IsMetadataAsSource)
+        bool IsMetadataAsSource
+    )
     {
-        public static BlockStructureOptions From(Project project)
-            => From(project.Solution.Options, project.Language, isMetadataAsSource: project.Solution.Workspace.Kind == WorkspaceKind.MetadataAsSource);
+        public static BlockStructureOptions From(Project project) =>
+            From(
+                project.Solution.Options,
+                project.Language,
+                isMetadataAsSource: project.Solution.Workspace.Kind
+                    == WorkspaceKind.MetadataAsSource
+            );
 
-        public static BlockStructureOptions From(OptionSet options, string language, bool isMetadataAsSource)
-          => new(
-                ShowBlockStructureGuidesForCommentsAndPreprocessorRegions: options.GetOption(Metadata.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions, language),
-                ShowBlockStructureGuidesForDeclarationLevelConstructs: options.GetOption(Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs, language),
-                ShowBlockStructureGuidesForCodeLevelConstructs: options.GetOption(Metadata.ShowBlockStructureGuidesForCodeLevelConstructs, language),
-                ShowOutliningForCommentsAndPreprocessorRegions: options.GetOption(Metadata.ShowOutliningForCommentsAndPreprocessorRegions, language),
-                ShowOutliningForDeclarationLevelConstructs: options.GetOption(Metadata.ShowOutliningForDeclarationLevelConstructs, language),
-                ShowOutliningForCodeLevelConstructs: options.GetOption(Metadata.ShowOutliningForCodeLevelConstructs, language),
-                CollapseRegionsWhenCollapsingToDefinitions: options.GetOption(Metadata.CollapseRegionsWhenCollapsingToDefinitions, language),
+        public static BlockStructureOptions From(
+            OptionSet options,
+            string language,
+            bool isMetadataAsSource
+        ) =>
+            new(
+                ShowBlockStructureGuidesForCommentsAndPreprocessorRegions: options.GetOption(
+                    Metadata.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                    language
+                ),
+                ShowBlockStructureGuidesForDeclarationLevelConstructs: options.GetOption(
+                    Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    language
+                ),
+                ShowBlockStructureGuidesForCodeLevelConstructs: options.GetOption(
+                    Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    language
+                ),
+                ShowOutliningForCommentsAndPreprocessorRegions: options.GetOption(
+                    Metadata.ShowOutliningForCommentsAndPreprocessorRegions,
+                    language
+                ),
+                ShowOutliningForDeclarationLevelConstructs: options.GetOption(
+                    Metadata.ShowOutliningForDeclarationLevelConstructs,
+                    language
+                ),
+                ShowOutliningForCodeLevelConstructs: options.GetOption(
+                    Metadata.ShowOutliningForCodeLevelConstructs,
+                    language
+                ),
+                CollapseRegionsWhenCollapsingToDefinitions: options.GetOption(
+                    Metadata.CollapseRegionsWhenCollapsingToDefinitions,
+                    language
+                ),
                 MaximumBannerLength: options.GetOption(Metadata.MaximumBannerLength, language),
-                IsMetadataAsSource: isMetadataAsSource);
+                IsMetadataAsSource: isMetadataAsSource
+            );
 
         [ExportSolutionOptionProvider, Shared]
         internal sealed class Metadata : IOptionProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Metadata()
-            {
-            }
+            public Metadata() { }
 
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
-                ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                ShowBlockStructureGuidesForCodeLevelConstructs,
-                ShowOutliningForCommentsAndPreprocessorRegions,
-                ShowOutliningForDeclarationLevelConstructs,
-                ShowOutliningForCodeLevelConstructs,
-                CollapseRegionsWhenCollapsingToDefinitions,
-                MaximumBannerLength);
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(
+                    ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                    ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    ShowBlockStructureGuidesForCodeLevelConstructs,
+                    ShowOutliningForCommentsAndPreprocessorRegions,
+                    ShowOutliningForDeclarationLevelConstructs,
+                    ShowOutliningForCodeLevelConstructs,
+                    CollapseRegionsWhenCollapsingToDefinitions,
+                    MaximumBannerLength
+                );
 
             private const string FeatureName = "BlockStructureOptions";
 
-            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForCommentsAndPreprocessorRegions = new(
-                FeatureName, "ShowBlockStructureGuidesForCommentsAndPreprocessorRegions", defaultValue: false,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions"));
+            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForCommentsAndPreprocessorRegions =
+                new(
+                    FeatureName,
+                    "ShowBlockStructureGuidesForCommentsAndPreprocessorRegions",
+                    defaultValue: false,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForDeclarationLevelConstructs = new(
-                FeatureName, "ShowBlockStructureGuidesForDeclarationLevelConstructs", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForDeclarationLevelConstructs"));
+            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForDeclarationLevelConstructs =
+                new(
+                    FeatureName,
+                    "ShowBlockStructureGuidesForDeclarationLevelConstructs",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForDeclarationLevelConstructs"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForCodeLevelConstructs = new(
-                FeatureName, "ShowBlockStructureGuidesForCodeLevelConstructs", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForCodeLevelConstructs"));
+            public static readonly PerLanguageOption2<bool> ShowBlockStructureGuidesForCodeLevelConstructs =
+                new(
+                    FeatureName,
+                    "ShowBlockStructureGuidesForCodeLevelConstructs",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowBlockStructureGuidesForCodeLevelConstructs"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> ShowOutliningForCommentsAndPreprocessorRegions = new(
-                FeatureName, "ShowOutliningForCommentsAndPreprocessorRegions", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowOutliningForCommentsAndPreprocessorRegions"));
+            public static readonly PerLanguageOption2<bool> ShowOutliningForCommentsAndPreprocessorRegions =
+                new(
+                    FeatureName,
+                    "ShowOutliningForCommentsAndPreprocessorRegions",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowOutliningForCommentsAndPreprocessorRegions"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> ShowOutliningForDeclarationLevelConstructs = new(
-                FeatureName, "ShowOutliningForDeclarationLevelConstructs", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowOutliningForDeclarationLevelConstructs"));
+            public static readonly PerLanguageOption2<bool> ShowOutliningForDeclarationLevelConstructs =
+                new(
+                    FeatureName,
+                    "ShowOutliningForDeclarationLevelConstructs",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowOutliningForDeclarationLevelConstructs"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> ShowOutliningForCodeLevelConstructs = new(
-                FeatureName, "ShowOutliningForCodeLevelConstructs", defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowOutliningForCodeLevelConstructs"));
+            public static readonly PerLanguageOption2<bool> ShowOutliningForCodeLevelConstructs =
+                new(
+                    FeatureName,
+                    "ShowOutliningForCodeLevelConstructs",
+                    defaultValue: true,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.ShowOutliningForCodeLevelConstructs"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<bool> CollapseRegionsWhenCollapsingToDefinitions = new(
-                FeatureName, "CollapseRegionsWhenCollapsingToDefinitions", defaultValue: false,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.CollapseRegionsWhenCollapsingToDefinitions"));
+            public static readonly PerLanguageOption2<bool> CollapseRegionsWhenCollapsingToDefinitions =
+                new(
+                    FeatureName,
+                    "CollapseRegionsWhenCollapsingToDefinitions",
+                    defaultValue: false,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.CollapseRegionsWhenCollapsingToDefinitions"
+                    )
+                );
 
-            public static readonly PerLanguageOption2<int> MaximumBannerLength = new(
-                FeatureName, "MaximumBannerLength", defaultValue: 80,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.MaximumBannerLength"));
+            public static readonly PerLanguageOption2<int> MaximumBannerLength =
+                new(
+                    FeatureName,
+                    "MaximumBannerLength",
+                    defaultValue: 80,
+                    storageLocation: new RoamingProfileStorageLocation(
+                        "TextEditor.%LANGUAGE%.Specific.MaximumBannerLength"
+                    )
+                );
         }
     }
 }

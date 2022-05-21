@@ -22,7 +22,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 {
     // GoToDefinition
-    internal abstract class AbstractGoToDefinitionService : AbstractFindDefinitionService, IGoToDefinitionService
+    internal abstract class AbstractGoToDefinitionService
+        : AbstractFindDefinitionService,
+            IGoToDefinitionService
     {
         private readonly IThreadingContext _threadingContext;
 
@@ -33,48 +35,94 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
         protected AbstractGoToDefinitionService(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
 
-        async Task<IEnumerable<INavigableItem>?> IGoToDefinitionService.FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
-            => await FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+        async Task<IEnumerable<INavigableItem>?> IGoToDefinitionService.FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            await FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
 
-        private static bool TryNavigateToSpan(Document document, int position, CancellationToken cancellationToken)
+        private static bool TryNavigateToSpan(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var solution = document.Project.Solution;
             var workspace = solution.Workspace;
             var service = workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
-            var options = solution.Options.WithChangedOption(NavigationOptions.PreferProvisionalTab, true);
+            var options = solution.Options.WithChangedOption(
+                NavigationOptions.PreferProvisionalTab,
+                true
+            );
             options = options.WithChangedOption(NavigationOptions.ActivateTab, true);
 
-            return service.TryNavigateToPosition(workspace, document.Id, position, virtualSpace: 0, options, cancellationToken);
+            return service.TryNavigateToPosition(
+                workspace,
+                document.Id,
+                position,
+                virtualSpace: 0,
+                options,
+                cancellationToken
+            );
         }
 
-        public bool TryGoToDefinition(Document document, int position, CancellationToken cancellationToken)
+        public bool TryGoToDefinition(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-            var targetPositionOfControlFlow = symbolService.GetTargetIfControlFlowAsync(document, position, cancellationToken).WaitAndGetResult(cancellationToken);
+            var targetPositionOfControlFlow = symbolService
+                .GetTargetIfControlFlowAsync(document, position, cancellationToken)
+                .WaitAndGetResult(cancellationToken);
             if (targetPositionOfControlFlow is not null)
             {
-                return TryNavigateToSpan(document, targetPositionOfControlFlow.Value, cancellationToken);
+                return TryNavigateToSpan(
+                    document,
+                    targetPositionOfControlFlow.Value,
+                    cancellationToken
+                );
             }
 
             // Try to compute the referenced symbol and attempt to go to definition for the symbol.
-            var (symbol, _) = symbolService.GetSymbolAndBoundSpanAsync(document, position, includeType: true, cancellationToken).WaitAndGetResult(cancellationToken);
+            var (symbol, _) = symbolService
+                .GetSymbolAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: true,
+                    cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
             if (symbol is null)
                 return false;
 
             // if the symbol only has a single source location, and we're already on it,
             // try to see if there's a better symbol we could navigate to.
-            var remapped = TryGoToAlternativeLocationIfAlreadyOnDefinition(document, position, symbol, cancellationToken);
+            var remapped = TryGoToAlternativeLocationIfAlreadyOnDefinition(
+                document,
+                position,
+                symbol,
+                cancellationToken
+            );
             if (remapped)
                 return true;
 
-            var isThirdPartyNavigationAllowed = IsThirdPartyNavigationAllowed(symbol, position, document, cancellationToken);
+            var isThirdPartyNavigationAllowed = IsThirdPartyNavigationAllowed(
+                symbol,
+                position,
+                document,
+                cancellationToken
+            );
 
             return GoToDefinitionHelpers.TryGoToDefinition(
                 symbol,
@@ -82,12 +130,16 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 _threadingContext,
                 _streamingPresenter,
                 thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
         private bool TryGoToAlternativeLocationIfAlreadyOnDefinition(
-            Document document, int position,
-            ISymbol symbol, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var project = document.Project;
             var solution = project.Solution;
@@ -114,47 +166,80 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             if (interfaceImpls.Length == 0)
                 return false;
 
-            var title = string.Format(EditorFeaturesResources._0_implemented_members,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_implemented_members,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
-            return _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var definitions);
-                foreach (var impl in interfaceImpls)
+            return _threadingContext.JoinableTaskFactory.Run(
+                async () =>
                 {
-                    // Use ConfigureAwait(true) here.  Not for a correctness requirements, but because we're
-                    // already blocking the UI thread by being in a JTF.Run call.  So we might as well try to
-                    // continue to use the blocking UI thread to do as much work as possible instead of making
-                    // it wait for threadpool threads to be available to process the work.
-                    definitions.AddRange(await GoToDefinitionHelpers.GetDefinitionsAsync(
-                        impl, solution, thirdPartyNavigationAllowed: false, cancellationToken).ConfigureAwait(true));
-                }
+                    using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var definitions);
+                    foreach (var impl in interfaceImpls)
+                    {
+                        // Use ConfigureAwait(true) here.  Not for a correctness requirements, but because we're
+                        // already blocking the UI thread by being in a JTF.Run call.  So we might as well try to
+                        // continue to use the blocking UI thread to do as much work as possible instead of making
+                        // it wait for threadpool threads to be available to process the work.
+                        definitions.AddRange(
+                            await GoToDefinitionHelpers
+                                .GetDefinitionsAsync(
+                                    impl,
+                                    solution,
+                                    thirdPartyNavigationAllowed: false,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(true)
+                        );
+                    }
 
-                return await _streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                    _threadingContext, solution.Workspace, title, definitions.ToImmutable(), cancellationToken).ConfigureAwait(true);
-            });
+                    return await _streamingPresenter
+                        .TryNavigateToOrPresentItemsAsync(
+                            _threadingContext,
+                            solution.Workspace,
+                            title,
+                            definitions.ToImmutable(),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true);
+                }
+            );
         }
 
-        private static bool IsThirdPartyNavigationAllowed(ISymbol symbolToNavigateTo, int caretPosition, Document document, CancellationToken cancellationToken)
+        private static bool IsThirdPartyNavigationAllowed(
+            ISymbol symbolToNavigateTo,
+            int caretPosition,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxRoot = document.GetSyntaxRootSynchronously(cancellationToken);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(syntaxRoot, caretPosition);
+            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(
+                syntaxRoot,
+                caretPosition
+            );
 
             if (containingTypeDeclaration != null)
             {
-                var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult(cancellationToken);
+                var semanticModel = document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
                 Debug.Assert(semanticModel != null);
 
                 // Allow third parties to navigate to all symbols except types/constructors
                 // if we are navigating from the corresponding type.
 
-                if (semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken) is ITypeSymbol containingTypeSymbol &&
-                    (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor()))
+                if (
+                    semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken)
+                        is ITypeSymbol containingTypeSymbol
+                    && (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor())
+                )
                 {
-                    var candidateTypeSymbol = symbolToNavigateTo is ITypeSymbol
-                        ? symbolToNavigateTo
-                        : symbolToNavigateTo.ContainingType;
+                    var candidateTypeSymbol =
+                        symbolToNavigateTo is ITypeSymbol
+                            ? symbolToNavigateTo
+                            : symbolToNavigateTo.ContainingType;
 
                     if (Equals(containingTypeSymbol, candidateTypeSymbol))
                     {

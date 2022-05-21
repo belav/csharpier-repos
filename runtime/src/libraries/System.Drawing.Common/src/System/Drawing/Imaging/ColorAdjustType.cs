@@ -13,27 +13,33 @@ namespace System.Drawing.Imaging
         /// adjustment information.
         /// </summary>
         Default = 0,
+
         /// <summary>
         /// Defines color adjustment information for <see cref='Drawing.Bitmap'/>
         /// objects.
         /// </summary>
         Bitmap,
+
         /// <summary>
         /// Defines color adjustment information for <see cref='Drawing.Brush'/> objects.
         /// </summary>
         Brush,
+
         /// <summary>
         /// Defines color adjustment information for <see cref='Drawing.Pen'/> objects.
         /// </summary>
         Pen,
+
         /// <summary>
         /// Defines color adjustment information for text.
         /// </summary>
         Text,
+
         /// <summary>
         /// Specifies the number of types specified.
         /// </summary>
         Count,
+
         /// <summary>
         /// Specifies the number of types specified.
         /// </summary>

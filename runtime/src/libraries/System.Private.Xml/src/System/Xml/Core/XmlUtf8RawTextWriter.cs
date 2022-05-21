@@ -35,12 +35,13 @@ namespace System.Xml
         protected Encoding _encoding;
 
         // buffer positions
-        protected int _bufPos = 1;     // buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
-                                       // close an empty element or in CDATA section detection of double ]; _bufBytes[0] will always be 0
-        protected int _textPos = 1;    // text end position; don't indent first element, pi, or comment
-        protected int _contentPos;     // element content end position
-        protected int _cdataPos;       // cdata end position
-        protected int _attrEndPos;     // end of the last attribute
+        protected int _bufPos = 1; // buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
+
+        // close an empty element or in CDATA section detection of double ]; _bufBytes[0] will always be 0
+        protected int _textPos = 1; // text end position; don't indent first element, pi, or comment
+        protected int _contentPos; // element content end position
+        protected int _cdataPos; // cdata end position
+        protected int _attrEndPos; // end of the last attribute
         protected int _bufLen = BUFSIZE;
 
         // flags
@@ -64,9 +65,9 @@ namespace System.Xml
         //
         // Constants
         //
-        private const int BUFSIZE = 2048 * 3;       // Should be greater than default FileStream size (4096), otherwise the FileStream will try to cache the data
+        private const int BUFSIZE = 2048 * 3; // Should be greater than default FileStream size (4096), otherwise the FileStream will try to cache the data
         private const int ASYNCBUFSIZE = 64 * 1024; // Set async buffer size to 64KB
-        private const int OVERFLOW = 32;            // Allow overflow in order to reduce checks when writing out constant size markup
+        private const int OVERFLOW = 32; // Allow overflow in order to reduce checks when writing out constant size markup
 
         //
         // Constructors
@@ -336,7 +337,6 @@ namespace System.Xml
         // Serialize the end of an attribute value using double quotes: '"'
         public override void WriteEndAttribute()
         {
-
             _bufBytes[_bufPos++] = (byte)'"';
             _inAttributeValue = false;
             _attrEndPos = _bufPos;
@@ -353,10 +353,7 @@ namespace System.Xml
 
         internal override bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override void WriteStartNamespaceDeclaration(string prefix)
@@ -697,17 +694,16 @@ namespace System.Xml
                 // Reset buffer position
                 _textPos = (_textPos == _bufPos) ? 1 : 0;
                 _attrEndPos = (_attrEndPos == _bufPos) ? 1 : 0;
-                _contentPos = 0;    // Needs to be zero, since overwriting '>' character is no longer possible
-                _cdataPos = 0;      // Needs to be zero, since overwriting ']]>' characters is no longer possible
-                _bufPos = 1;        // Buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
-                                   // close an empty element or in CDATA section detection of double ]; _bufBytes[0] will always be 0
+                _contentPos = 0; // Needs to be zero, since overwriting '>' character is no longer possible
+                _cdataPos = 0; // Needs to be zero, since overwriting ']]>' characters is no longer possible
+                _bufPos = 1; // Buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
+                // close an empty element or in CDATA section detection of double ]; _bufBytes[0] will always be 0
             }
         }
 
         private void FlushEncoder()
         {
             // intentionally empty
-
         }
 
         // Serialize text that is part of an attribute value.  The '&', '<', '>', and '"' characters
@@ -727,7 +723,11 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
+                        && ch <= 0x7F
+                    )
                     {
                         *pDst = (byte)ch;
                         pDst++;
@@ -850,7 +850,11 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
+                        && ch <= 0x7F
+                    )
                     {
                         *pDst = (byte)ch;
                         pDst++;
@@ -1043,7 +1047,9 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd && XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch <= 0x7F
+                    )
                     {
                         *pDst = (byte)ch;
                         pDst++;
@@ -1162,7 +1168,12 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsTextChar((char)(ch = *pSrc)) && ch != stopChar && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsTextChar((char)(ch = *pSrc))
+                        && ch != stopChar
+                        && ch <= 0x7F
+                    )
                     {
                         *pDst = (byte)ch;
                         pDst++;
@@ -1312,7 +1323,12 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch != ']' && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
+                        && ch != ']'
+                        && ch <= 0x7F
+                    )
                     {
                         *pDst = (byte)ch;
                         pDst++;
@@ -1341,7 +1357,7 @@ namespace System.Xml
                     {
                         case '>':
                             if (_hadDoubleBracket && pDst[-1] == (byte)']')
-                            {   // pDst[-1] will always correct - there is a padding character at _bufBytes[0]
+                            { // pDst[-1] will always correct - there is a padding character at _bufBytes[0]
                                 // The characters "]]>" were found within the CData text
                                 pDst = RawEndCData(pDst);
                                 pDst = RawStartCData(pDst);
@@ -1351,7 +1367,7 @@ namespace System.Xml
                             break;
                         case ']':
                             if (pDst[-1] == (byte)']')
-                            {   // pDst[-1] will always correct - there is a padding character at _bufBytes[0]
+                            { // pDst[-1] will always correct - there is a padding character at _bufBytes[0]
                                 _hadDoubleBracket = true;
                             }
                             else
@@ -1441,8 +1457,13 @@ namespace System.Xml
                 if (pSrc + 1 < pSrcEnd)
                 {
                     int lowChar = pSrc[1];
-                    if (lowChar >= XmlCharType.SurLowStart &&
-                        (LocalAppContextSwitches.DontThrowOnInvalidSurrogatePairs || lowChar <= XmlCharType.SurLowEnd))
+                    if (
+                        lowChar >= XmlCharType.SurLowStart
+                        && (
+                            LocalAppContextSwitches.DontThrowOnInvalidSurrogatePairs
+                            || lowChar <= XmlCharType.SurLowEnd
+                        )
+                    )
                     {
                         // Calculate Unicode scalar value for easier manipulations (see section 3.7 in Unicode spec)
                         // The scalar value repositions surrogate values to start at 0x10000.
@@ -1523,7 +1544,6 @@ namespace System.Xml
         internal static unsafe byte* EncodeMultibyteUTF8(int ch, byte* pDst)
         {
             Debug.Assert(ch >= 0x80 && !XmlCharType.IsSurrogate(ch));
-
             unchecked
             {
                 /* UTF8-2: If ch is in 0x80-0x7ff range, then use 2 bytes to encode it */
@@ -1678,7 +1698,8 @@ namespace System.Xml
             fixed (char* pSrc = s)
             {
                 char* pS = pSrc;
-                while ((*pDst++ = (byte)*pS++) != 0) ;
+                while ((*pDst++ = (byte)*pS++) != 0)
+                    ;
             }
 
             pDst[-1] = (byte)';';
@@ -1711,13 +1732,19 @@ namespace System.Xml
             return pDst + 3;
         }
 
-        protected void ValidateContentChars(string chars, string propertyName, bool allowOnlyWhitespace)
+        protected void ValidateContentChars(
+            string chars,
+            string propertyName,
+            bool allowOnlyWhitespace
+        )
         {
             if (allowOnlyWhitespace)
             {
                 if (!XmlCharType.IsOnlyWhitespace(chars))
                 {
-                    throw new ArgumentException(SR.Format(SR.Xml_IndentCharsNotWhitespace, propertyName));
+                    throw new ArgumentException(
+                        SR.Format(SR.Xml_IndentCharsNotWhitespace, propertyName)
+                    );
                 }
             }
             else
@@ -1736,7 +1763,10 @@ namespace System.Xml
                             case '<':
                             case '&':
                             case ']':
-                                error = SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(chars, i));
+                                error = SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(chars, i)
+                                );
                                 goto Error;
                             default:
                                 if (XmlCharType.IsHighSurrogate(chars[i]))
@@ -1754,7 +1784,10 @@ namespace System.Xml
                                 }
                                 else if (XmlCharType.IsLowSurrogate(chars[i]))
                                 {
-                                    error = SR.Format(SR.Xml_InvalidSurrogateHighChar, ((uint)chars[i]).ToString("X", CultureInfo.InvariantCulture));
+                                    error = SR.Format(
+                                        SR.Xml_InvalidSurrogateHighChar,
+                                        ((uint)chars[i]).ToString("X", CultureInfo.InvariantCulture)
+                                    );
                                     goto Error;
                                 }
                                 continue;
@@ -1763,8 +1796,10 @@ namespace System.Xml
                 }
                 return;
 
-            Error:
-                throw new ArgumentException(SR.Format(SR.Xml_InvalidCharsInIndent, new string[] { propertyName, error }));
+                Error:
+                throw new ArgumentException(
+                    SR.Format(SR.Xml_InvalidCharsInIndent, new string[] { propertyName, error })
+                );
             }
         }
     }
@@ -1787,7 +1822,8 @@ namespace System.Xml
         //
         // Constructors
         //
-        public XmlUtf8RawTextWriterIndent(Stream stream, XmlWriterSettings settings) : base(stream, settings)
+        public XmlUtf8RawTextWriterIndent(Stream stream, XmlWriterSettings settings)
+            : base(stream, settings)
         {
             Init(settings);
         }
@@ -1823,7 +1859,9 @@ namespace System.Xml
 
         public override void WriteStartElement(string prefix, string localName, string ns)
         {
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             // Add indentation
             if (!_mixedContent && base._textPos != base._bufPos)

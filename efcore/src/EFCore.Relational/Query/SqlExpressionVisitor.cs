@@ -24,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case ShapedQueryExpression shapedQueryExpression:
                     return shapedQueryExpression.Update(
-                        Visit(shapedQueryExpression.QueryExpression), shapedQueryExpression.ShaperExpression);
+                        Visit(shapedQueryExpression.QueryExpression),
+                        shapedQueryExpression.ShaperExpression
+                    );
 
                 case CaseExpression caseExpression:
                     return VisitCase(caseExpression);
@@ -241,7 +243,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="tableValuedFunctionExpression">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-        protected abstract Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression);
+        protected abstract Expression VisitTableValuedFunction(
+            TableValuedFunctionExpression tableValuedFunctionExpression
+        );
 
         /// <summary>
         ///     Visits the children of the row number expression.
@@ -255,7 +259,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="scalarSubqueryExpression">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-        protected abstract Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression);
+        protected abstract Expression VisitScalarSubquery(
+            ScalarSubqueryExpression scalarSubqueryExpression
+        );
 
         /// <summary>
         ///     Visits the children of the select expression.
@@ -297,7 +303,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="sqlParameterExpression">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-        protected abstract Expression VisitSqlParameter(SqlParameterExpression sqlParameterExpression);
+        protected abstract Expression VisitSqlParameter(
+            SqlParameterExpression sqlParameterExpression
+        );
 
         /// <summary>
         ///     Visits the children of the sql unary expression.

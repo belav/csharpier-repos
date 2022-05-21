@@ -15,7 +15,6 @@ public struct ArrayStruct
     }
 }
 
-
 public class intmm
 {
     public static int size;
@@ -27,7 +26,9 @@ public class intmm
 
     public static void Init2DMatrix(out ArrayStruct m, out int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         m = new ArrayStruct(size);
@@ -50,7 +51,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct2D(out int res, ref ArrayStruct a2d, ref ArrayStruct b, int row, int col)
+    public static void InnerProduct2D(
+        out int res,
+        ref ArrayStruct a2d,
+        ref ArrayStruct b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -62,7 +69,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct2DRef(out int res, ref int[][] a2d, ref int[][] b, int row, int col)
+    public static void InnerProduct2DRef(
+        out int res,
+        ref int[][] a2d,
+        ref int[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -76,7 +89,9 @@ public class intmm
 
     public static void Init3DMatrix(ref ArrayStruct m, int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         while (i < size)
@@ -93,7 +108,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct3D(out int res, ref ArrayStruct a3d, ref ArrayStruct b, int row, int col)
+    public static void InnerProduct3D(
+        out int res,
+        ref ArrayStruct a3d,
+        ref ArrayStruct b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -123,7 +144,8 @@ public class intmm
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -133,7 +155,10 @@ public class intmm
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
         Console.WriteLine("Testing inner product of {0} by {0} matrices", size);
         Console.WriteLine("the matrices are members of Struct");
         Console.WriteLine("Matrix element stores random integer");
@@ -173,15 +198,26 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr.a2d[i, j] != refr2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr.a2d[i,j] {2}!=refr2d[i][j] {3}", i, j, imr.a2d[i, j], refr2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr.a2d[i,j] {2}!=refr2d[i][j] {3}",
+                        i,
+                        j,
+                        imr.a2d[i, j],
+                        refr2d[i][j]
+                    );
                     pass = false;
                 }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Testing inner product of one slice of two 3D matrices, size is {0}", size);
-        Console.WriteLine("the matrices are members of Struct, matrix element stores random integer");
+        Console.WriteLine(
+            "Testing inner product of one slice of two 3D matrices, size is {0}",
+            size
+        );
+        Console.WriteLine(
+            "the matrices are members of Struct, matrix element stores random integer"
+        );
 
         ima = new ArrayStruct(size);
         imb = new ArrayStruct(size);
@@ -224,7 +260,13 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr.a3d[i, j, size - 2] != refr3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr.a3d[i,j,size-2] {2}!=refr3d[i][j] {3}", i, j, imr.a3d[i, j, size - 2], refr3d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr.a3d[i,j,size-2] {2}!=refr3d[i][j] {3}",
+                        i,
+                        j,
+                        imr.a3d[i, j, size - 2],
+                        refr3d[i][j]
+                    );
                     pass = false;
                 }
         }

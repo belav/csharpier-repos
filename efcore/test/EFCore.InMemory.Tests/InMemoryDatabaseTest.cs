@@ -26,9 +26,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider();
 
-            var store1 = InMemoryTestHelpers.Instance.CreateContextServices(serviceProvider, CreateModel())
+            var store1 = InMemoryTestHelpers.Instance
+                .CreateContextServices(serviceProvider, CreateModel())
                 .GetRequiredService<IInMemoryDatabase>();
-            var store2 = InMemoryTestHelpers.Instance.CreateContextServices(serviceProvider, CreateModel())
+            var store2 = InMemoryTestHelpers.Instance
+                .CreateContextServices(serviceProvider, CreateModel())
                 .GetRequiredService<IInMemoryDatabase>();
 
             Assert.Same(store1.Store, store2.Store);
@@ -39,9 +41,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider();
 
-            Assert.Same(
-                CreateStore(serviceProvider).Store,
-                CreateStore(serviceProvider).Store);
+            Assert.Same(CreateStore(serviceProvider).Store, CreateStore(serviceProvider).Store);
         }
 
         [ConditionalFact]
@@ -59,15 +59,18 @@ namespace Microsoft.EntityFrameworkCore
             Assert.False(store.EnsureDatabaseCreated());
         }
 
-        private static IInMemoryDatabase CreateStore(IServiceProvider serviceProvider)
-            => CreateContextServices(serviceProvider).GetRequiredService<IInMemoryDatabase>();
+        private static IInMemoryDatabase CreateStore(IServiceProvider serviceProvider) =>
+            CreateContextServices(serviceProvider).GetRequiredService<IInMemoryDatabase>();
 
         private static IServiceProvider CreateContextServices(IServiceProvider serviceProvider)
         {
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 
-            return InMemoryTestHelpers.Instance.CreateContextServices(serviceProvider, optionsBuilder.Options);
+            return InMemoryTestHelpers.Instance.CreateContextServices(
+                serviceProvider,
+                optionsBuilder.Options
+            );
         }
 
         [ConditionalFact]
@@ -75,15 +78,22 @@ namespace Microsoft.EntityFrameworkCore
         {
             var serviceProvider = InMemoryTestHelpers.Instance.CreateContextServices(CreateModel());
             var customer = new Customer { Id = 42, Name = "Unikorn" };
-            var entityEntry = serviceProvider.GetRequiredService<IStateManager>().GetOrCreateEntry(customer);
+            var entityEntry = serviceProvider
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(customer);
             entityEntry.SetEntityState(EntityState.Added);
 
             var inMemoryDatabase = serviceProvider.GetRequiredService<IInMemoryDatabase>();
 
             await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-            Assert.Single(inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows));
-            Assert.Equal(new object[] { 42, "Unikorn" }, inMemoryDatabase.Store.GetTables(entityEntry.EntityType).Single().Rows.Single());
+            Assert.Single(
+                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows)
+            );
+            Assert.Equal(
+                new object[] { 42, "Unikorn" },
+                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).Single().Rows.Single()
+            );
         }
 
         [ConditionalFact]
@@ -92,7 +102,9 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = InMemoryTestHelpers.Instance.CreateContextServices(CreateModel());
 
             var customer = new Customer { Id = 42, Name = "Unikorn" };
-            var entityEntry = serviceProvider.GetRequiredService<IStateManager>().GetOrCreateEntry(customer);
+            var entityEntry = serviceProvider
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(customer);
             entityEntry.SetEntityState(EntityState.Added);
 
             var inMemoryDatabase = serviceProvider.GetRequiredService<IInMemoryDatabase>();
@@ -104,10 +116,13 @@ namespace Microsoft.EntityFrameworkCore
 
             await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-            Assert.Single(inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows));
+            Assert.Single(
+                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows)
+            );
             Assert.Equal(
                 new object[] { 42, "Unikorn, The Return" },
-                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).Single().Rows.Single());
+                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).Single().Rows.Single()
+            );
         }
 
         [ConditionalFact]
@@ -116,7 +131,9 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = InMemoryTestHelpers.Instance.CreateContextServices(CreateModel());
 
             var customer = new Customer { Id = 42, Name = "Unikorn" };
-            var entityEntry = serviceProvider.GetRequiredService<IStateManager>().GetOrCreateEntry(customer);
+            var entityEntry = serviceProvider
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(customer);
             entityEntry.SetEntityState(EntityState.Added);
 
             var inMemoryDatabase = serviceProvider.GetRequiredService<IInMemoryDatabase>();
@@ -131,7 +148,9 @@ namespace Microsoft.EntityFrameworkCore
 
             await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-            Assert.Empty(inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows));
+            Assert.Empty(
+                inMemoryDatabase.Store.GetTables(entityEntry.EntityType).SelectMany(t => t.Rows)
+            );
         }
 
         [ConditionalFact]
@@ -142,20 +161,32 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<ILoggerFactory>(loggerFactory);
 
-            var scopedServices = InMemoryTestHelpers.Instance.CreateContextServices(serviceCollection, CreateModel());
+            var scopedServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                serviceCollection,
+                CreateModel()
+            );
 
             var customer = new Customer { Id = 42, Name = "Unikorn" };
-            var entityEntry = scopedServices.GetRequiredService<IStateManager>().GetOrCreateEntry(customer);
+            var entityEntry = scopedServices
+                .GetRequiredService<IStateManager>()
+                .GetOrCreateEntry(customer);
             entityEntry.SetEntityState(EntityState.Added);
 
             var inMemoryDatabase = scopedServices.GetRequiredService<IInMemoryDatabase>();
 
             await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-            var (Level, _, Message, _, _) = loggerFactory.Log.Single(t => t.Id.Id == InMemoryEventId.ChangesSaved.Id);
+            var (Level, _, Message, _, _) = loggerFactory.Log.Single(
+                t => t.Id.Id == InMemoryEventId.ChangesSaved.Id
+            );
 
             Assert.Equal(LogLevel.Information, Level);
-            Assert.Equal(InMemoryResources.LogSavedChanges(new TestLogger<InMemoryLoggingDefinitions>()).GenerateMessage(1), Message);
+            Assert.Equal(
+                InMemoryResources
+                    .LogSavedChanges(new TestLogger<InMemoryLoggingDefinitions>())
+                    .GenerateMessage(1),
+                Message
+            );
         }
 
         private static IModel CreateModel()
@@ -167,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     b.HasKey(c => c.Id);
                     b.Property(c => c.Name);
-                });
+                }
+            );
 
             return modelBuilder.Model.FinalizeModel();
         }

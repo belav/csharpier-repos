@@ -37,13 +37,19 @@ namespace Internal.TypeSystem
         /// so the algorithm works by computing the uninstantiated form, and then
         /// specializing each interface as needed.
         /// </summary>
-        private DefType[] ComputeRuntimeInterfacesForInstantiatedType(InstantiatedType instantiatedType)
+        private DefType[] ComputeRuntimeInterfacesForInstantiatedType(
+            InstantiatedType instantiatedType
+        )
         {
             MetadataType uninstantiatedType = (MetadataType)instantiatedType.GetTypeDefinition();
 
             DefType[] genericTypeDefinitionInterfaces = uninstantiatedType.RuntimeInterfaces;
 
-            return InstantiatedType.InstantiateTypeArray(uninstantiatedType.RuntimeInterfaces, instantiatedType.Instantiation, new Instantiation());
+            return InstantiatedType.InstantiateTypeArray(
+                uninstantiatedType.RuntimeInterfaces,
+                instantiatedType.Instantiation,
+                new Instantiation()
+            );
         }
 
         /// <summary>
@@ -52,7 +58,10 @@ namespace Internal.TypeSystem
         private DefType[] ComputeRuntimeInterfacesForNonInstantiatedMetadataType(MetadataType type)
         {
             DefType[] explicitInterfaces = type.ExplicitlyImplementedInterfaces;
-            DefType[] baseTypeInterfaces = (type.BaseType != null) ? (type.BaseType.RuntimeInterfaces) : Array.Empty<DefType>();
+            DefType[] baseTypeInterfaces =
+                (type.BaseType != null)
+                    ? (type.BaseType.RuntimeInterfaces)
+                    : Array.Empty<DefType>();
 
             // Optimized case for no interfaces newly defined.
             if (explicitInterfaces.Length == 0)
@@ -72,7 +81,10 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Add an interface and its required interfaces to the interfacesArray
         /// </summary>
-        private void BuildPostOrderInterfaceList(DefType iface, ref ArrayBuilder<DefType> interfacesArray)
+        private void BuildPostOrderInterfaceList(
+            DefType iface,
+            ref ArrayBuilder<DefType> interfacesArray
+        )
         {
             if (interfacesArray.Contains(iface))
                 return;

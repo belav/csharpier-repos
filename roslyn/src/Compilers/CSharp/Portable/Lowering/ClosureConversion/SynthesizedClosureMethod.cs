@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// A method that results from the translation of a single lambda expression.
     /// </summary>
-    internal sealed class SynthesizedClosureMethod : SynthesizedMethodBaseSymbol, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class SynthesizedClosureMethod
+        : SynthesizedMethodBaseSymbol,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly ImmutableArray<NamedTypeSymbol> _structEnvironments;
 
@@ -31,15 +33,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol originalMethod,
             SyntaxReference blockSyntax,
             DebugId lambdaId,
-            TypeCompilationState compilationState)
-            : base(containingType,
-                   originalMethod,
-                   blockSyntax,
-                   originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
-                   originalMethod is LocalFunctionSymbol
-                    ? MakeName(topLevelMethod.Name, originalMethod.Name, topLevelMethodId, closureKind, lambdaId)
+            TypeCompilationState compilationState
+        )
+            : base(
+                containingType,
+                originalMethod,
+                blockSyntax,
+                originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
+                originalMethod is LocalFunctionSymbol
+                    ? MakeName(
+                        topLevelMethod.Name,
+                        originalMethod.Name,
+                        topLevelMethodId,
+                        closureKind,
+                        lambdaId
+                    )
                     : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
-                   MakeDeclarationModifiers(closureKind, originalMethod))
+                MakeDeclarationModifiers(closureKind, originalMethod)
+            )
         {
             TopLevelMethod = topLevelMethod;
             ClosureKind = closureKind;
@@ -59,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this,
                         out typeParameters,
                         out _,
-                        lambdaFrame.OriginalContainingMethodOpt);
+                        lambdaFrame.OriginalContainingMethodOpt
+                    );
                     break;
                 case ClosureKind.ThisOnly: // all type parameters on method
                 case ClosureKind.Static:
@@ -69,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this,
                         out typeParameters,
                         out _,
-                        stopAt: null);
+                        stopAt: null
+                    );
                     break;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(closureKind);
@@ -104,7 +117,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             EnsureAttributesExist(compilationState);
 
             // static local functions should be emitted as static.
-            Debug.Assert(!(originalMethod is LocalFunctionSymbol) || !originalMethod.IsStatic || IsStatic);
+            Debug.Assert(
+                !(originalMethod is LocalFunctionSymbol) || !originalMethod.IsStatic || IsStatic
+            );
         }
 
         private void EnsureAttributesExist(TypeCompilationState compilationState)
@@ -145,9 +160,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterHelpers.EnsureNullableAttributeExists(moduleBuilder, this, Parameters);
         }
 
-        private static DeclarationModifiers MakeDeclarationModifiers(ClosureKind closureKind, MethodSymbol originalMethod)
+        private static DeclarationModifiers MakeDeclarationModifiers(
+            ClosureKind closureKind,
+            MethodSymbol originalMethod
+        )
         {
-            var mods = closureKind == ClosureKind.ThisOnly ? DeclarationModifiers.Private : DeclarationModifiers.Internal;
+            var mods =
+                closureKind == ClosureKind.ThisOnly
+                    ? DeclarationModifiers.Private
+                    : DeclarationModifiers.Internal;
 
             if (closureKind == ClosureKind.Static)
             {
@@ -167,7 +188,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             return mods;
         }
 
-        private static string MakeName(string topLevelMethodName, string localFunctionName, DebugId topLevelMethodId, ClosureKind closureKind, DebugId lambdaId)
+        private static string MakeName(
+            string topLevelMethodName,
+            string localFunctionName,
+            DebugId topLevelMethodId,
+            ClosureKind closureKind,
+            DebugId lambdaId
+        )
         {
             return GeneratedNames.MakeLocalFunctionName(
                 topLevelMethodName,
@@ -175,10 +202,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (closureKind == ClosureKind.General) ? -1 : topLevelMethodId.Ordinal,
                 topLevelMethodId.Generation,
                 lambdaId.Ordinal,
-                lambdaId.Generation);
+                lambdaId.Generation
+            );
         }
 
-        private static string MakeName(string topLevelMethodName, DebugId topLevelMethodId, ClosureKind closureKind, DebugId lambdaId)
+        private static string MakeName(
+            string topLevelMethodName,
+            DebugId topLevelMethodId,
+            ClosureKind closureKind,
+            DebugId lambdaId
+        )
         {
             // Lambda method name must contain the declaring method ordinal to be unique unless the method is emitted into a closure class exclusive to the declaring method.
             // Lambdas that only close over "this" are emitted directly into the top-level method containing type.
@@ -188,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (closureKind == ClosureKind.General) ? -1 : topLevelMethodId.Ordinal,
                 topLevelMethodId.Generation,
                 lambdaId.Ordinal,
-                lambdaId.Generation);
+                lambdaId.Generation
+            );
         }
 
         // The lambda symbol might have declared no parameters in the case
@@ -196,17 +230,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         // D d = delegate {};
         //
         // but there still might be parameters that need to be generated for the
-        // synthetic method. If there are no lambda parameters, try the delegate 
-        // parameters instead. 
-        // 
+        // synthetic method. If there are no lambda parameters, try the delegate
+        // parameters instead.
+        //
         // UNDONE: In the native compiler in this scenario we make up new names for
         // UNDONE: synthetic parameters; in this implementation we use the parameter
         // UNDONE: names from the delegate. Does it really matter?
-        protected override ImmutableArray<ParameterSymbol> BaseMethodParameters => this.BaseMethod.Parameters;
+        protected override ImmutableArray<ParameterSymbol> BaseMethodParameters =>
+            this.BaseMethod.Parameters;
 
-        protected override ImmutableArray<TypeSymbol> ExtraSynthesizedRefParameters
-            => ImmutableArray<TypeSymbol>.CastUp(_structEnvironments);
-        internal int ExtraSynthesizedParameterCount => this._structEnvironments.IsDefault ? 0 : this._structEnvironments.Length;
+        protected override ImmutableArray<TypeSymbol> ExtraSynthesizedRefParameters =>
+            ImmutableArray<TypeSymbol>.CastUp(_structEnvironments);
+        internal int ExtraSynthesizedParameterCount =>
+            this._structEnvironments.IsDefault ? 0 : this._structEnvironments.Length;
 
         internal override bool InheritsBaseMethodAttributes => true;
         internal override bool GenerateDebugInfo => !this.IsAsync;

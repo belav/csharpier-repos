@@ -5,10 +5,8 @@ namespace System.CommandLine.Parsing
 {
     internal class OptionArgumentNode : SyntaxNode
     {
-        public OptionArgumentNode(
-            Token token,
-            IArgument argument,
-            OptionNode parent) : base(token, parent)
+        public OptionArgumentNode(Token token, IArgument argument, OptionNode parent)
+            : base(token, parent)
         {
             if (token.Type != TokenType.Argument)
             {

@@ -35,6 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger);
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        );
     }
 }

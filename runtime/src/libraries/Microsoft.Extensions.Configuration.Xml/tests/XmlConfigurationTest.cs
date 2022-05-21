@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         [Fact]
         public void LoadValidXmlFromStreamProvider()
         {
-            var xml = @"
+            var xml =
+                @"
                 <settings>
                     <Data.Setting>
                         <DefaultConnection>
@@ -30,28 +31,40 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                         </Inventory>
                     </Data.Setting>
                 </settings>";
-            var config = new ConfigurationBuilder().AddXmlStream(TestStreamHelpers.StringToStream(xml)).Build();
+            var config = new ConfigurationBuilder()
+                .AddXmlStream(TestStreamHelpers.StringToStream(xml))
+                .Build();
 
-            Assert.Equal("Test.Connection.String", config["DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING"]);
+            Assert.Equal(
+                "Test.Connection.String",
+                config["DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING"]
+            );
             Assert.Equal("SqlClient", config["DATA.SETTING:DefaultConnection:Provider"]);
-            Assert.Equal("AnotherTestConnectionString", config["data.setting:inventory:connectionstring"]);
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                config["data.setting:inventory:connectionstring"]
+            );
             Assert.Equal("MySql", config["Data.setting:Inventory:Provider"]);
         }
 
         [Fact]
         public void ReloadThrowsFromStreamProvider()
         {
-            var xml = @"
+            var xml =
+                @"
                 <settings>
                 </settings>";
-            var config = new ConfigurationBuilder().AddXmlStream(TestStreamHelpers.StringToStream(xml)).Build();
+            var config = new ConfigurationBuilder()
+                .AddXmlStream(TestStreamHelpers.StringToStream(xml))
+                .Build();
             Assert.Throws<InvalidOperationException>(() => config.Reload());
         }
 
         [Fact]
         public void LoadKeyValuePairsFromValidXml()
         {
-            var xml = @"
+            var xml =
+                @"
                 <settings>
                     <Data.Setting>
                         <DefaultConnection>
@@ -68,16 +81,23 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("Test.Connection.String", xmlConfigSrc.Get("DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING"));
+            Assert.Equal(
+                "Test.Connection.String",
+                xmlConfigSrc.Get("DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("DATA.SETTING:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("data.setting:inventory:connectionstring"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("data.setting:inventory:connectionstring")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data.setting:Inventory:Provider"));
         }
 
         [Fact]
         public void LoadMethodCanHandleEmptyValue()
         {
-            var xml = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+            var xml =
+                @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <?xml-stylesheet type=""text/xsl"" href=""style1.xsl""?>
 <settings>
     <?xml-stylesheet type=""text/xsl"" href=""style2.xsl""?>
@@ -96,7 +116,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void CommonAttributesContributeToKeyValuePairs()
         {
             var xml =
-@"<settings Port=""8008"">
+                @"<settings Port=""8008"">
     <Data>
         <DefaultConnection
             ConnectionString=""TestConnectionString""
@@ -111,9 +131,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("8008", xmlConfigSrc.Get("Port"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -136,9 +162,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("8008", xmlConfigSrc.Get("Port"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -161,10 +193,16 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("DefaultConnection", xmlConfigSrc.Get("Data:DefaultConnection:Name"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
             Assert.Equal("Inventory", xmlConfigSrc.Get("Data:Inventory:Name"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -187,10 +225,16 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("DefaultConnection", xmlConfigSrc.Get("Data:DefaultConnection:Name"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
             Assert.Equal("Inventory", xmlConfigSrc.Get("Data:Inventory:Name"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -213,9 +257,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("Data", xmlConfigSrc.Get("Data:Name"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -223,7 +273,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void NameAttributeCanBeUsedToSimulateArrays()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection Name='0'>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -236,9 +286,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:0:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:1:Provider"));
         }
 
@@ -246,7 +302,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void RepeatedElementsContributeToPrefix()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -259,9 +315,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:0:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:1:Provider"));
         }
 
@@ -269,7 +331,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void RepeatedElementDetectionIsCaseInsensitive()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -282,9 +344,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:0:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:1:Provider"));
         }
 
@@ -292,7 +360,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void RepeatedElementsUnderNameContributeToPrefix()
         {
             var xml =
-              @"<settings Name='Data'>
+                @"<settings Name='Data'>
                   <DefaultConnection>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -306,9 +374,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("Data:DefaultConnection:0:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("Data:DefaultConnection:0:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("Data:DefaultConnection:0:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("Data:DefaultConnection:1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("Data:DefaultConnection:1:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("Data:DefaultConnection:1:Provider"));
         }
 
@@ -316,7 +390,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void RepeatedElementsWithSameNameContributeToPrefix()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection Name='Data'>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -330,9 +404,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:Data:0:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:Data:0:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:Data:0:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:Data:1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:Data:1:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:Data:1:Provider"));
         }
 
@@ -340,7 +420,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void RepeatedElementsWithDifferentNamesContributeToPrefix()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection Name='Data1'>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <Provider>SqlClient1</Provider>
@@ -354,9 +434,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:Data1:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:Data1:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:Data1:Provider"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:Data2:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:Data2:ConnectionString")
+            );
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:Data2:Provider"));
         }
 
@@ -364,7 +450,7 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         public void NestedRepeatedElementsContributeToPrefix()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                   <DefaultConnection>
                       <ConnectionString>TestConnectionString1</ConnectionString>
                       <ConnectionString>TestConnectionString2</ConnectionString>
@@ -378,17 +464,29 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString:0"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString:1"));
-            Assert.Equal("TestConnectionString3", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString:0"));
-            Assert.Equal("TestConnectionString4", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString:1"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString:0")
+            );
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString:1")
+            );
+            Assert.Equal(
+                "TestConnectionString3",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString:0")
+            );
+            Assert.Equal(
+                "TestConnectionString4",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString:1")
+            );
         }
 
         [Fact]
         public void SupportMixingRepeatedElementsWithNonRepeatedElements()
         {
             var xml =
-              @"<settings>
+                @"<settings>
                     <DefaultConnection>
                         <ConnectionString>TestConnectionString1</ConnectionString>
                         <Provider>SqlClient1</Provider>
@@ -409,9 +507,18 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString1", xmlConfigSrc.Get("DefaultConnection:0:ConnectionString"));
-            Assert.Equal("TestConnectionString2", xmlConfigSrc.Get("DefaultConnection:1:ConnectionString"));
-            Assert.Equal("TestConnectionString3", xmlConfigSrc.Get("DefaultConnection:2:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString1",
+                xmlConfigSrc.Get("DefaultConnection:0:ConnectionString")
+            );
+            Assert.Equal(
+                "TestConnectionString2",
+                xmlConfigSrc.Get("DefaultConnection:1:ConnectionString")
+            );
+            Assert.Equal(
+                "TestConnectionString3",
+                xmlConfigSrc.Get("DefaultConnection:2:ConnectionString")
+            );
             Assert.Equal("SqlClient1", xmlConfigSrc.Get("DefaultConnection:0:Provider"));
             Assert.Equal("SqlClient2", xmlConfigSrc.Get("DefaultConnection:1:Provider"));
             Assert.Equal("SqlClient3", xmlConfigSrc.Get("DefaultConnection:2:Provider"));
@@ -435,10 +542,16 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("DefaultConnection", xmlConfigSrc.Get("Data:DefaultConnection:Name"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
             Assert.Equal("Inventory", xmlConfigSrc.Get("Data:Inventory:Name"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -456,7 +569,10 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
             Assert.Equal("DefaultConnection", xmlConfigSrc.Get("data:defaultconnection:name"));
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("data:defaultconnection:connectionstring"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("data:defaultconnection:connectionstring")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("data:defaultconnection:provider"));
         }
 
@@ -498,9 +614,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -525,9 +647,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -554,9 +682,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml));
 
-            Assert.Equal("TestConnectionString", xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString"));
+            Assert.Equal(
+                "TestConnectionString",
+                xmlConfigSrc.Get("Data:DefaultConnection:ConnectionString")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("Data:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("Data:Inventory:ConnectionString"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("Data:Inventory:ConnectionString")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data:Inventory:Provider"));
         }
 
@@ -587,11 +721,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             {
                 var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
                 var isMono = Type.GetType("Mono.Runtime") != null;
-                var expectedMsg = isMono ? "Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10." : "For security reasons DTD is prohibited in this XML document. "
-                    + "To enable DTD processing set the DtdProcessing property on XmlReaderSettings "
-                    + "to Parse and pass the settings into XmlReader.Create method.";
+                var expectedMsg = isMono
+                    ? "Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10."
+                    : "For security reasons DTD is prohibited in this XML document. "
+                        + "To enable DTD processing set the DtdProcessing property on XmlReaderSettings "
+                        + "to Parse and pass the settings into XmlReader.Create method.";
 
-                var exception = Assert.Throws<System.Xml.XmlException>(() => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+                var exception = Assert.Throws<System.Xml.XmlException>(
+                    () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+                );
 
                 Assert.Equal(expectedMsg, exception.Message);
             }
@@ -614,9 +752,14 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                     </MyNameSpace:Data>
                 </settings>";
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
-            var expectedMsg = SR.Format(SR.Error_NamespaceIsNotSupported, SR.Format(SR.Msg_LineInfo, 1, 11));
+            var expectedMsg = SR.Format(
+                SR.Error_NamespaceIsNotSupported,
+                SR.Format(SR.Msg_LineInfo, 1, 11)
+            );
 
-            var exception = Assert.Throws<FormatException>(() => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+            var exception = Assert.Throws<FormatException>(
+                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -626,7 +769,9 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddXmlFile(path: null));
+            var exception = Assert.Throws<ArgumentException>(
+                () => new ConfigurationBuilder().AddXmlFile(path: null)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -636,7 +781,9 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(() => new ConfigurationBuilder().AddXmlFile(string.Empty));
+            var exception = Assert.Throws<ArgumentException>(
+                () => new ConfigurationBuilder().AddXmlFile(string.Empty)
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -657,10 +804,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                     </Data>
                 </settings>";
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
-            var expectedMsg = SR.Format(SR.Error_KeyIsDuplicated, "Data:DefaultConnection:ConnectionString",
-                SR.Format(SR.Msg_LineInfo, 8, 52));
+            var expectedMsg = SR.Format(
+                SR.Error_KeyIsDuplicated,
+                "Data:DefaultConnection:ConnectionString",
+                SR.Format(SR.Msg_LineInfo, 8, 52)
+            );
 
-            var exception = Assert.Throws<FormatException>(() => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+            var exception = Assert.Throws<FormatException>(
+                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -681,10 +833,15 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                     </data>
                 </settings>";
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
-            var expectedMsg = SR.Format(SR.Error_KeyIsDuplicated, "data:defaultconnection:connectionstring",
-                SR.Format(SR.Msg_LineInfo, 8, 52));
+            var expectedMsg = SR.Format(
+                SR.Error_KeyIsDuplicated,
+                "data:defaultconnection:connectionstring",
+                SR.Format(SR.Msg_LineInfo, 8, 52)
+            );
 
-            var exception = Assert.Throws<FormatException>(() => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml)));
+            var exception = Assert.Throws<FormatException>(
+                () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))
+            );
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -693,21 +850,32 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50870", TestPlatforms.Android)]
         public void XmlConfiguration_Throws_On_Missing_Configuration_File()
         {
-            var ex = Assert.Throws<FileNotFoundException>(() => new ConfigurationBuilder().AddXmlFile("NotExistingConfig.xml", optional: false).Build());
-            Assert.StartsWith($"The configuration file 'NotExistingConfig.xml' was not found and is not optional. The expected physical path was '", ex.Message);
+            var ex = Assert.Throws<FileNotFoundException>(
+                () =>
+                    new ConfigurationBuilder()
+                        .AddXmlFile("NotExistingConfig.xml", optional: false)
+                        .Build()
+            );
+            Assert.StartsWith(
+                $"The configuration file 'NotExistingConfig.xml' was not found and is not optional. The expected physical path was '",
+                ex.Message
+            );
         }
 
         [Fact]
         public void XmlConfiguration_Does_Not_Throw_On_Optional_Configuration()
         {
-            var config = new ConfigurationBuilder().AddXmlFile("NotExistingConfig.xml", optional: true).Build();
+            var config = new ConfigurationBuilder()
+                .AddXmlFile("NotExistingConfig.xml", optional: true)
+                .Build();
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/37669", TestPlatforms.Browser)]
         public void LoadKeyValuePairsFromValidEncryptedXml()
         {
-            var xml = @"
+            var xml =
+                @"
                 <settings>
                     <Data.Setting>
                         <DefaultConnection>
@@ -732,27 +900,39 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             var encryptedXml = new EncryptedXml(xmlDocument);
             encryptedXml.AddKeyNameMapping("myKey", aes);
             var elementToEncrypt = (XmlElement)xmlDocument.SelectSingleNode("//Inventory");
-            EncryptedXml.ReplaceElement(elementToEncrypt, encryptedXml.Encrypt(elementToEncrypt, "myKey"), content: false);
+            EncryptedXml.ReplaceElement(
+                elementToEncrypt,
+                encryptedXml.Encrypt(elementToEncrypt, "myKey"),
+                content: false
+            );
 
             // Quick sanity check: the document should no longer contain an 'Inventory' element
             Assert.Null(xmlDocument.SelectSingleNode("//Inventory"));
 
             // Arrange
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
-            xmlConfigSrc.Decryptor = new XmlDocumentDecryptor(doc =>
-            {
-                var innerEncryptedXml = new EncryptedXml(doc);
-                innerEncryptedXml.AddKeyNameMapping("myKey", aes);
-                return innerEncryptedXml;
-            });
+            xmlConfigSrc.Decryptor = new XmlDocumentDecryptor(
+                doc =>
+                {
+                    var innerEncryptedXml = new EncryptedXml(doc);
+                    innerEncryptedXml.AddKeyNameMapping("myKey", aes);
+                    return innerEncryptedXml;
+                }
+            );
 
             // Act
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xmlDocument.OuterXml));
 
             // Assert
-            Assert.Equal("Test.Connection.String", xmlConfigSrc.Get("DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING"));
+            Assert.Equal(
+                "Test.Connection.String",
+                xmlConfigSrc.Get("DATA.SETTING:DEFAULTCONNECTION:CONNECTION.STRING")
+            );
             Assert.Equal("SqlClient", xmlConfigSrc.Get("DATA.SETTING:DefaultConnection:Provider"));
-            Assert.Equal("AnotherTestConnectionString", xmlConfigSrc.Get("data.setting:inventory:connectionstring"));
+            Assert.Equal(
+                "AnotherTestConnectionString",
+                xmlConfigSrc.Get("data.setting:inventory:connectionstring")
+            );
             Assert.Equal("MySql", xmlConfigSrc.Get("Data.setting:Inventory:Provider"));
         }
     }

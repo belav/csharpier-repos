@@ -10,10 +10,32 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json
 {
-    [DebuggerDisplay("Path:{JsonPath()} Current: ConverterStrategy.{Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo.Type.Name}")]
+    [DebuggerDisplay(
+        "Path:{JsonPath()} Current: ConverterStrategy.{Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo.Type.Name}"
+    )]
     internal struct ReadStack
     {
-        internal static readonly char[] SpecialCharacters = { '.', ' ', '\'', '/', '"', '[', ']', '(', ')', '\t', '\n', '\r', '\f', '\b', '\\', '\u0085', '\u2028', '\u2029' };
+        internal static readonly char[] SpecialCharacters =
+        {
+            '.',
+            ' ',
+            '\'',
+            '/',
+            '"',
+            '[',
+            ']',
+            '(',
+            ')',
+            '\t',
+            '\n',
+            '\r',
+            '\f',
+            '\b',
+            '\\',
+            '\u0085',
+            '\u2028',
+            '\u2029'
+        };
 
         /// <summary>
         /// Exposes the stackframe that is currently active.
@@ -97,7 +119,8 @@ namespace System.Text.Json
             Current.NumberHandling = Current.JsonPropertyInfo.NumberHandling;
 
             JsonSerializerOptions options = jsonTypeInfo.Options;
-            bool preserveReferences = options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve;
+            bool preserveReferences =
+                options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve;
             if (preserveReferences)
             {
                 ReferenceResolver = options.ReferenceHandler!.CreateResolver(writing: false);
@@ -120,7 +143,10 @@ namespace System.Text.Json
                 {
                     JsonTypeInfo jsonTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
-                    ConverterStrategy converterStrategy = Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy;
+                    ConverterStrategy converterStrategy = Current
+                        .JsonTypeInfo
+                        .PropertyInfoForTypeInfo
+                        .ConverterStrategy;
 
                     if (converterStrategy == ConverterStrategy.Object)
                     {
@@ -130,7 +156,10 @@ namespace System.Text.Json
                         }
                         else
                         {
-                            jsonTypeInfo = Current.CtorArgumentState!.JsonParameterInfo!.RuntimeTypeInfo;
+                            jsonTypeInfo = Current
+                                .CtorArgumentState!
+                                .JsonParameterInfo!
+                                .RuntimeTypeInfo;
                         }
                     }
                     else if (converterStrategy == ConverterStrategy.Value)
@@ -140,7 +169,12 @@ namespace System.Text.Json
                     }
                     else
                     {
-                        Debug.Assert(((ConverterStrategy.Enumerable | ConverterStrategy.Dictionary) & converterStrategy) != 0);
+                        Debug.Assert(
+                            (
+                                (ConverterStrategy.Enumerable | ConverterStrategy.Dictionary)
+                                & converterStrategy
+                            ) != 0
+                        );
                         jsonTypeInfo = Current.JsonTypeInfo.ElementTypeInfo!;
                     }
 
@@ -152,7 +186,8 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling = numberHandling ?? Current.JsonPropertyInfo.NumberHandling;
+                    Current.NumberHandling =
+                        numberHandling ?? Current.JsonPropertyInfo.NumberHandling;
                 }
             }
             else
@@ -257,9 +292,11 @@ namespace System.Text.Json
                     }
 
                     // For continuation scenarios only, before or after all elements are read, the exception is not within the array.
-                    if (frame.ObjectState == StackFrameObjectState.None ||
-                        frame.ObjectState == StackFrameObjectState.CreatedObject ||
-                        frame.ObjectState == StackFrameObjectState.ReadElements)
+                    if (
+                        frame.ObjectState == StackFrameObjectState.None
+                        || frame.ObjectState == StackFrameObjectState.CreatedObject
+                        || frame.ObjectState == StackFrameObjectState.ReadElements
+                    )
                     {
                         sb.Append('[');
                         sb.Append(GetCount(enumerable));
@@ -320,8 +357,9 @@ namespace System.Text.Json
                     else
                     {
                         // Attempt to get the JSON property name from the JsonPropertyInfo or JsonParameterInfo.
-                        utf8PropertyName = frame.JsonPropertyInfo?.NameAsUtf8Bytes ??
-                            frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
+                        utf8PropertyName =
+                            frame.JsonPropertyInfo?.NameAsUtf8Bytes
+                            ?? frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
                     }
                 }
 
@@ -347,11 +385,16 @@ namespace System.Text.Json
                     var newState = new ArgumentState();
                     _ctorArgStateCache.Add(newState);
 
-                    (Current.CtorArgumentStateIndex, Current.CtorArgumentState) = (_ctorArgStateCache.Count, newState);
+                    (Current.CtorArgumentStateIndex, Current.CtorArgumentState) = (
+                        _ctorArgStateCache.Count,
+                        newState
+                    );
                 }
                 else
                 {
-                    Current.CtorArgumentState = _ctorArgStateCache![Current.CtorArgumentStateIndex - 1];
+                    Current.CtorArgumentState = _ctorArgStateCache![
+                        Current.CtorArgumentStateIndex - 1
+                    ];
                 }
             }
         }

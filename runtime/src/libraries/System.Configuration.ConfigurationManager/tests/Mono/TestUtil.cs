@@ -32,7 +32,6 @@ using System.Reflection;
 
 namespace MonoTests.System.Configuration.Util
 {
-
     public static class TestUtil
     {
         public static void RunWithTempFile(Action<string> action)
@@ -58,17 +57,16 @@ namespace MonoTests.System.Configuration.Util
         {
             get
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    Assembly.GetEntryAssembly().ManifestModule.Name);
+                return Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    Assembly.GetEntryAssembly().ManifestModule.Name
+                );
             }
         }
 
         public static string ThisConfigFileName
         {
-            get
-            {
-                return Assembly.GetEntryAssembly().ManifestModule.Name + ".config";
-            }
+            get { return Assembly.GetEntryAssembly().ManifestModule.Name + ".config"; }
         }
     }
 }

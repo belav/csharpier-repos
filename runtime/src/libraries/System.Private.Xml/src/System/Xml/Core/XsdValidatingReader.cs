@@ -37,7 +37,11 @@ namespace System.Xml
         }
     }
 
-    internal sealed partial class XsdValidatingReader : XmlReader, IXmlSchemaInfo, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XsdValidatingReader
+        : XmlReader,
+            IXmlSchemaInfo,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         private enum ValidatingReaderState
         {
@@ -123,7 +127,12 @@ namespace System.Xml
         private static volatile Type s_typeOfString = null!;
 
         // Constructor
-        internal XsdValidatingReader(XmlReader reader, XmlResolver? xmlResolver, XmlReaderSettings readerSettings, XmlSchemaObject? partialValidationType)
+        internal XsdValidatingReader(
+            XmlReader reader,
+            XmlResolver? xmlResolver,
+            XmlReaderSettings readerSettings,
+            XmlSchemaObject? partialValidationType
+        )
         {
             _coreReader = reader;
             _coreReaderNSResolver = reader as IXmlNamespaceResolver;
@@ -137,7 +146,9 @@ namespace System.Xml
 
             _thisNSResolver = this as IXmlNamespaceResolver;
             _xmlResolver = xmlResolver;
-            _processInlineSchema = (readerSettings.ValidationFlags & XmlSchemaValidationFlags.ProcessInlineSchema) != 0;
+            _processInlineSchema =
+                (readerSettings.ValidationFlags & XmlSchemaValidationFlags.ProcessInlineSchema)
+                != 0;
 
             _validationState = ValidatingReaderState.Init;
             _defaultAttributes = new ArrayList();
@@ -161,14 +172,25 @@ namespace System.Xml
             _validationEvent = readerSettings.GetEventHandler();
         }
 
-        internal XsdValidatingReader(XmlReader reader, XmlResolver? xmlResolver, XmlReaderSettings readerSettings)
-            : this(reader, xmlResolver, readerSettings, null)
-        { }
+        internal XsdValidatingReader(
+            XmlReader reader,
+            XmlResolver? xmlResolver,
+            XmlReaderSettings readerSettings
+        ) : this(reader, xmlResolver, readerSettings, null) { }
 
         [MemberNotNull("_validator")]
-        private void SetupValidator(XmlReaderSettings readerSettings, XmlReader reader, XmlSchemaObject? partialValidationType)
+        private void SetupValidator(
+            XmlReaderSettings readerSettings,
+            XmlReader reader,
+            XmlSchemaObject? partialValidationType
+        )
         {
-            _validator = new XmlSchemaValidator(_coreReaderNameTable, readerSettings.Schemas, _thisNSResolver, readerSettings.ValidationFlags);
+            _validator = new XmlSchemaValidator(
+                _coreReaderNameTable,
+                readerSettings.Schemas,
+                _thisNSResolver,
+                readerSettings.ValidationFlags
+            );
             _validator.XmlResolver = _xmlResolver;
             _validator.SourceUri = XmlConvert.ToUri(reader.BaseURI); // Not using XmlResolver.ResolveUri as it checks for relative Uris,reader.BaseURI will be absolute file paths or string.Empty
             _validator.ValidationEventSender = this;
@@ -223,7 +245,13 @@ namespace System.Xml
                 {
                     XmlNodeType nodeType = _coreReader.NodeType;
                     // Check for significant whitespace
-                    if (nodeType == XmlNodeType.Whitespace && (_validator.CurrentContentType == XmlSchemaContentType.TextOnly || _validator.CurrentContentType == XmlSchemaContentType.Mixed))
+                    if (
+                        nodeType == XmlNodeType.Whitespace
+                        && (
+                            _validator.CurrentContentType == XmlSchemaContentType.TextOnly
+                            || _validator.CurrentContentType == XmlSchemaContentType.Mixed
+                        )
+                    )
                     {
                         return XmlNodeType.SignificantWhitespace;
                     }
@@ -346,19 +374,13 @@ namespace System.Xml
         // Gets the base URI of the current node.
         public override string BaseURI
         {
-            get
-            {
-                return _coreReader.BaseURI;
-            }
+            get { return _coreReader.BaseURI; }
         }
 
         // Gets a value indicating whether the current node is an empty element (for example, <MyElement/>).
         public override bool IsEmptyElement
         {
-            get
-            {
-                return _coreReader.IsEmptyElement;
-            }
+            get { return _coreReader.IsEmptyElement; }
         }
 
         // Gets a value indicating whether the current node is an attribute that was generated from the default value defined
@@ -380,36 +402,24 @@ namespace System.Xml
         // Gets the quotation mark character used to enclose the value of an attribute node.
         public override char QuoteChar
         {
-            get
-            {
-                return _coreReader.QuoteChar;
-            }
+            get { return _coreReader.QuoteChar; }
         }
 
         // Gets the current xml:space scope.
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _coreReader.XmlSpace;
-            }
+            get { return _coreReader.XmlSpace; }
         }
 
         // Gets the current xml:lang scope.
         public override string XmlLang
         {
-            get
-            {
-                return _coreReader.XmlLang;
-            }
+            get { return _coreReader.XmlLang; }
         }
 
         public override IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return this as IXmlSchemaInfo;
-            }
+            get { return this as IXmlSchemaInfo; }
         }
 
         public override System.Type ValueType
@@ -429,7 +439,10 @@ namespace System.Xml
                         goto default;
 
                     case XmlNodeType.Attribute:
-                        if (_attributePSVI != null && AttributeSchemaInfo.ContentType == XmlSchemaContentType.TextOnly)
+                        if (
+                            _attributePSVI != null
+                            && AttributeSchemaInfo.ContentType == XmlSchemaContentType.TextOnly
+                        )
                         {
                             Debug.Assert(AttributeSchemaInfo.SchemaType!.Datatype != null);
                             return AttributeSchemaInfo.SchemaType.Datatype.ValueType;
@@ -461,7 +474,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -475,15 +489,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -495,7 +524,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -509,15 +539,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -529,7 +574,8 @@ namespace System.Xml
             }
 
             object? typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -543,15 +589,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -563,7 +624,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -577,15 +639,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -597,7 +674,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -611,15 +689,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -631,7 +724,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -645,15 +739,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -665,7 +774,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
 
             try
             {
@@ -680,15 +790,30 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -700,7 +825,8 @@ namespace System.Xml
             }
 
             object typedValue = InternalReadContentAsObject();
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
 
             try
             {
@@ -715,19 +841,37 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
-        public override object ReadContentAs(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override object ReadContentAs(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             if (!CanReadContentAs(this.NodeType))
             {
@@ -736,14 +880,18 @@ namespace System.Xml
 
             string originalStringValue;
             object typedValue = InternalReadContentAsObject(false, out originalStringValue);
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
                 {
                     // special-case convertions to DateTimeOffset; typedValue is by default a DateTime
                     // which cannot preserve time zone, so we need to convert from the original string
-                    if (returnType == typeof(DateTimeOffset) && xmlType.Datatype is Datatype_dateTimeBase)
+                    if (
+                        returnType == typeof(DateTimeOffset)
+                        && xmlType.Datatype is Datatype_dateTimeBase
+                    )
                     {
                         typedValue = originalStringValue!;
                     }
@@ -752,20 +900,39 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(typedValue, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -803,15 +970,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Boolean", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Boolean",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -838,15 +1020,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "DateTime", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "DateTime",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -873,15 +1070,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Double", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Double",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -908,15 +1120,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Float", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Float",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -943,15 +1170,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Decimal", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Decimal",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -978,15 +1220,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Int", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Int",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -1013,15 +1270,30 @@ namespace System.Xml
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "Long", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "Long",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -1048,19 +1320,37 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
-        public override object ReadElementContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override object ReadElementContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             if (this.NodeType != XmlNodeType.Element)
             {
@@ -1069,7 +1359,11 @@ namespace System.Xml
 
             XmlSchemaType? xmlType;
             string? originalStringValue;
-            object? typedValue = InternalReadElementContentAsObject(out xmlType, false, out originalStringValue);
+            object? typedValue = InternalReadElementContentAsObject(
+                out xmlType,
+                false,
+                out originalStringValue
+            );
 
             try
             {
@@ -1077,29 +1371,55 @@ namespace System.Xml
                 {
                     // special-case convertions to DateTimeOffset; typedValue is by default a DateTime
                     // which cannot preserve time zone, so we need to convert from the original string
-                    if (returnType == typeof(DateTimeOffset) && xmlType.Datatype is Datatype_dateTimeBase)
+                    if (
+                        returnType == typeof(DateTimeOffset)
+                        && xmlType.Datatype is Datatype_dateTimeBase
+                    )
                     {
                         typedValue = originalStringValue;
                     }
 
-                    return xmlType.ValueConverter.ChangeType(typedValue!, returnType, namespaceResolver);
+                    return xmlType.ValueConverter.ChangeType(
+                        typedValue!,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(typedValue!, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue!,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -1108,10 +1428,7 @@ namespace System.Xml
         // The number of attributes on the current node.
         public override int AttributeCount
         {
-            get
-            {
-                return _attributeCount;
-            }
+            get { return _attributeCount; }
         }
 
         // Gets the value of the attribute with the specified Name.
@@ -1141,7 +1458,8 @@ namespace System.Xml
             if (attValue == null && _attributeCount > 0)
             {
                 // Could be default attribute
-                string? atomizedNamespaceURI = (namespaceURI == null) ? string.Empty : _coreReaderNameTable.Get(namespaceURI);
+                string? atomizedNamespaceURI =
+                    (namespaceURI == null) ? string.Empty : _coreReaderNameTable.Get(namespaceURI);
                 string? atomizedName = _coreReaderNameTable.Get(name);
 
                 if (atomizedName == null || atomizedNamespaceURI == null)
@@ -1150,7 +1468,11 @@ namespace System.Xml
                     return null;
                 }
 
-                ValidatingReaderNodeData? attNode = GetDefaultAttribute(atomizedName, atomizedNamespaceURI, false);
+                ValidatingReaderNodeData? attNode = GetDefaultAttribute(
+                    atomizedName,
+                    atomizedNamespaceURI,
+                    false
+                );
                 if (attNode != null)
                 {
                     return attNode.RawValue;
@@ -1175,7 +1497,8 @@ namespace System.Xml
             else
             {
                 int defaultIndex = i - _coreReaderAttributeCount;
-                ValidatingReaderNodeData attNode = (ValidatingReaderNodeData)_defaultAttributes[defaultIndex]!;
+                ValidatingReaderNodeData attNode = (ValidatingReaderNodeData)
+                    _defaultAttributes[defaultIndex]!;
                 Debug.Assert(attNode != null);
                 return attNode.RawValue;
             }
@@ -1204,7 +1527,7 @@ namespace System.Xml
             }
 
             return false;
-        Found:
+            Found:
             if (_validationState == ValidatingReaderState.OnReadBinaryContent)
             {
                 Debug.Assert(_readBinaryHelper != null);
@@ -1259,7 +1582,7 @@ namespace System.Xml
 
             return false;
 
-        Found:
+            Found:
             if (_validationState == ValidatingReaderState.OnReadBinaryContent)
             {
                 Debug.Assert(_readBinaryHelper != null);
@@ -1340,7 +1663,7 @@ namespace System.Xml
             }
 
             return false;
-        Found:
+            Found:
             if (_validationState == ValidatingReaderState.OnReadBinaryContent)
             {
                 Debug.Assert(_readBinaryHelper != null);
@@ -1382,7 +1705,7 @@ namespace System.Xml
             }
 
             return false;
-        Found:
+            Found:
             if (_validationState == ValidatingReaderState.OnReadBinaryContent)
             {
                 Debug.Assert(_readBinaryHelper != null);
@@ -1486,10 +1809,7 @@ namespace System.Xml
         // Gets a value indicating whether XmlReader is positioned at the end of the stream/TextReader.
         public override bool EOF
         {
-            get
-            {
-                return _coreReader.EOF;
-            }
+            get { return _coreReader.EOF; }
         }
 
         // Closes the stream, changes the ReadState to Closed, and sets all the properties back to zero.
@@ -1504,7 +1824,9 @@ namespace System.Xml
         {
             get
             {
-                return (_validationState == ValidatingReaderState.Init) ? ReadState.Initial : _coreReader.ReadState;
+                return (_validationState == ValidatingReaderState.Init)
+                    ? ReadState.Initial
+                    : _coreReader.ReadState;
             }
         }
 
@@ -1522,7 +1844,10 @@ namespace System.Xml
                     bool callSkipToEndElem = true;
                     // If union and unionValue has been parsed till EndElement, then validator.ValidateEndElement has been called
                     // Hence should not call SkipToEndElement as the current context has already been popped in the validator
-                    if ((_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault) && _coreReader is XsdCachingReader)
+                    if (
+                        (_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault)
+                        && _coreReader is XsdCachingReader
+                    )
                     {
                         callSkipToEndElem = false;
                     }
@@ -1548,10 +1873,7 @@ namespace System.Xml
         // Gets the XmlNameTable associated with this implementation.
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return _coreReaderNameTable;
-            }
+            get { return _coreReaderNameTable; }
         }
 
         // Resolves a namespace prefix in the current element's scope.
@@ -1594,10 +1916,7 @@ namespace System.Xml
 
         public override bool CanReadBinaryContent
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
@@ -1610,7 +1929,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -1637,7 +1959,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -1664,7 +1989,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -1691,7 +2019,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -1920,7 +2251,9 @@ namespace System.Xml
         //
         // IXmlNamespaceResolver members
         //
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             if (_coreReaderNSResolver != null)
             {
@@ -1968,10 +2301,7 @@ namespace System.Xml
 
         private XmlSchemaType? ElementXmlType
         {
-            get
-            {
-                return _xmlSchemaInfo.XmlType;
-            }
+            get { return _xmlSchemaInfo.XmlType; }
         }
 
         private XmlSchemaType? AttributeXmlType
@@ -2018,8 +2348,8 @@ namespace System.Xml
                     _validator.ValidateWhitespace(_valueGetter);
                     break;
 
-                case XmlNodeType.Text:          // text inside a node
-                case XmlNodeType.CDATA:         // <![CDATA[...]]>
+                case XmlNodeType.Text: // text inside a node
+                case XmlNodeType.CDATA: // <![CDATA[...]]>
                     _validator.ValidateText(_valueGetter);
                     break;
 
@@ -2046,14 +2376,23 @@ namespace System.Xml
 
         private void ProcessElementEvent()
         {
-            if (_processInlineSchema && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI) && _coreReader.Depth > 0)
+            if (
+                _processInlineSchema
+                && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI)
+                && _coreReader.Depth > 0
+            )
             {
                 _xmlSchemaInfo.Clear();
                 _attributeCount = _coreReaderAttributeCount = _coreReader.AttributeCount;
                 if (!_coreReader.IsEmptyElement)
                 {
                     // If its not empty schema, then parse else ignore
-                    _inlineSchemaParser = new Parser(SchemaType.XSD, _coreReaderNameTable, _validator.SchemaSet.GetSchemaNames(_coreReaderNameTable), _validationEvent);
+                    _inlineSchemaParser = new Parser(
+                        SchemaType.XSD,
+                        _coreReaderNameTable,
+                        _validator.SchemaSet.GetSchemaNames(_coreReaderNameTable),
+                        _validationEvent
+                    );
                     _inlineSchemaParser.StartParsing(_coreReader, null);
                     _inlineSchemaParser.ParseReaderNode();
                     _validationState = ValidatingReaderState.ParseInlineSchema;
@@ -2113,13 +2452,26 @@ namespace System.Xml
                         if (_manageNamespaces && Ref.Equal(_coreReader.NamespaceURI, _nsXmlNs))
                         {
                             Debug.Assert(_nsManager != null);
-                            _nsManager.AddNamespace(_coreReader.Prefix.Length == 0 ? string.Empty : _coreReader.LocalName, _coreReader.Value);
+                            _nsManager.AddNamespace(
+                                _coreReader.Prefix.Length == 0
+                                    ? string.Empty
+                                    : _coreReader.LocalName,
+                                _coreReader.Value
+                            );
                         }
                     } while (_coreReader.MoveToNextAttribute());
                     _coreReader.MoveToElement();
                 }
 
-                _validator.ValidateElement(_coreReader.LocalName, _coreReader.NamespaceURI, _xmlSchemaInfo, xsiType, xsiNil, xsiSchemaLocation, xsiNoNamespaceSL);
+                _validator.ValidateElement(
+                    _coreReader.LocalName,
+                    _coreReader.NamespaceURI,
+                    _xmlSchemaInfo,
+                    xsiType,
+                    xsiNil,
+                    xsiSchemaLocation,
+                    xsiNoNamespaceSL
+                );
                 ValidateAttributes();
                 _validator.ValidateEndOfAttributes(_xmlSchemaInfo);
                 if (_coreReader.IsEmptyElement)
@@ -2142,7 +2494,13 @@ namespace System.Xml
                 int depth = _coreReader.Depth;
                 _coreReader = GetCachingReader();
                 Debug.Assert(_cachingReader != null);
-                _cachingReader.RecordTextNode(_xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue), _originalAtomicValueString, depth + 1, 0, 0);
+                _cachingReader.RecordTextNode(
+                    _xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue),
+                    _originalAtomicValueString,
+                    depth + 1,
+                    0,
+                    0
+                );
                 _cachingReader.RecordEndElementNode();
                 _cachingReader.SetToReplayMode();
                 _replayCache = true;
@@ -2177,10 +2535,16 @@ namespace System.Xml
                         continue;
                     }
 
-                    attributePSVI.typedAttributeValue = _validator.ValidateAttribute(localName, ns, _valueGetter, attributePSVI.attributeSchemaInfo);
+                    attributePSVI.typedAttributeValue = _validator.ValidateAttribute(
+                        localName,
+                        ns,
+                        _valueGetter,
+                        attributePSVI.attributeSchemaInfo
+                    );
                     if (!attributeInvalid)
                     {
-                        attributeInvalid = attributePSVI.attributeSchemaInfo.Validity == XmlSchemaValidity.Invalid;
+                        attributeInvalid =
+                            attributePSVI.attributeSchemaInfo.Validity == XmlSchemaValidity.Invalid;
                     }
 
                     attIndex++;
@@ -2247,7 +2611,10 @@ namespace System.Xml
                 if (attInfo != null)
                 {
                     // Will be null for invalid attributes
-                    if (Ref.Equal(localName, attInfo.localName) && Ref.Equal(ns, attInfo.namespaceUri))
+                    if (
+                        Ref.Equal(localName, attInfo.localName)
+                        && Ref.Equal(ns, attInfo.namespaceUri)
+                    )
                     {
                         _currentAttrIndex = i;
                         return attInfo;
@@ -2280,7 +2647,11 @@ namespace System.Xml
             return GetDefaultAttribute(attrLocalName, ns, updatePosition);
         }
 
-        private ValidatingReaderNodeData? GetDefaultAttribute(string attrLocalName, string ns, bool updatePosition)
+        private ValidatingReaderNodeData? GetDefaultAttribute(
+            string attrLocalName,
+            string ns,
+            bool updatePosition
+        )
         {
             Debug.Assert(_coreReaderNameTable.Get(attrLocalName) != null);
             Debug.Assert(_coreReaderNameTable.Get(ns) != null);
@@ -2289,7 +2660,10 @@ namespace System.Xml
             for (int i = 0; i < _defaultAttributes.Count; i++)
             {
                 defaultNode = (ValidatingReaderNodeData)_defaultAttributes[i]!;
-                if (Ref.Equal(defaultNode.LocalName, attrLocalName) && Ref.Equal(defaultNode.Namespace, ns))
+                if (
+                    Ref.Equal(defaultNode.LocalName, attrLocalName)
+                    && Ref.Equal(defaultNode.Namespace, ns)
+                )
                 {
                     if (updatePosition)
                     {
@@ -2316,7 +2690,9 @@ namespace System.Xml
             if (attIndex >= _attributePSVINodes.Length - 1)
             {
                 // reached capacity of PSVIInfo array, Need to increase capacity to twice the initial
-                AttributePSVIInfo[] newPSVINodes = new AttributePSVIInfo[_attributePSVINodes.Length * 2];
+                AttributePSVIInfo[] newPSVINodes = new AttributePSVIInfo[
+                    _attributePSVINodes.Length * 2
+                ];
                 Array.Copy(_attributePSVINodes, newPSVINodes, _attributePSVINodes.Length);
                 _attributePSVINodes = newPSVINodes;
             }
@@ -2372,7 +2748,10 @@ namespace System.Xml
             return InternalReadContentAsObject(unwrapTypedValue, out _);
         }
 
-        private object InternalReadContentAsObject(bool unwrapTypedValue, out string originalStringValue)
+        private object InternalReadContentAsObject(
+            bool unwrapTypedValue,
+            out string originalStringValue
+        )
         {
             XmlNodeType nodeType = this.NodeType;
             if (nodeType == XmlNodeType.Attribute)
@@ -2382,11 +2761,20 @@ namespace System.Xml
                 {
                     if (_validationState == ValidatingReaderState.OnDefaultAttribute)
                     {
-                        XmlSchemaAttribute schemaAttr = _attributePSVI.attributeSchemaInfo.SchemaAttribute!;
-                        originalStringValue = (schemaAttr.DefaultValue != null) ? schemaAttr.DefaultValue : schemaAttr.FixedValue!;
+                        XmlSchemaAttribute schemaAttr = _attributePSVI
+                            .attributeSchemaInfo
+                            .SchemaAttribute!;
+                        originalStringValue =
+                            (schemaAttr.DefaultValue != null)
+                                ? schemaAttr.DefaultValue
+                                : schemaAttr.FixedValue!;
                     }
 
-                    return ReturnBoxedValue(_attributePSVI.typedAttributeValue, AttributeSchemaInfo.XmlType!, unwrapTypedValue);
+                    return ReturnBoxedValue(
+                        _attributePSVI.typedAttributeValue,
+                        AttributeSchemaInfo.XmlType!,
+                        unwrapTypedValue
+                    );
                 }
                 else
                 {
@@ -2415,7 +2803,11 @@ namespace System.Xml
                 if (_validator.CurrentContentType == XmlSchemaContentType.TextOnly)
                 {
                     // if current element is of simple type
-                    object? value = ReturnBoxedValue(ReadTillEndElement(), _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                    object? value = ReturnBoxedValue(
+                        ReadTillEndElement(),
+                        _xmlSchemaInfo.XmlType!,
+                        unwrapTypedValue
+                    );
                     originalStringValue = _originalAtomicValueString!;
 
                     return value;
@@ -2441,12 +2833,19 @@ namespace System.Xml
             return InternalReadElementContentAsObject(out xmlType, false);
         }
 
-        private object? InternalReadElementContentAsObject(out XmlSchemaType? xmlType, bool unwrapTypedValue)
+        private object? InternalReadElementContentAsObject(
+            out XmlSchemaType? xmlType,
+            bool unwrapTypedValue
+        )
         {
             return InternalReadElementContentAsObject(out xmlType, unwrapTypedValue, out _);
         }
 
-        private object? InternalReadElementContentAsObject(out XmlSchemaType? xmlType, bool unwrapTypedValue, out string? originalString)
+        private object? InternalReadElementContentAsObject(
+            out XmlSchemaType? xmlType,
+            bool unwrapTypedValue,
+            out string? originalString
+        )
         {
             Debug.Assert(this.NodeType == XmlNodeType.Element);
             object? typedValue = null;
@@ -2454,11 +2853,14 @@ namespace System.Xml
 
             // If its an empty element, can have default/fixed value
             if (this.IsEmptyElement)
-
             {
                 if (_xmlSchemaInfo.ContentType == XmlSchemaContentType.TextOnly)
                 {
-                    typedValue = ReturnBoxedValue(_atomicValue, _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                    typedValue = ReturnBoxedValue(
+                        _atomicValue,
+                        _xmlSchemaInfo.XmlType!,
+                        unwrapTypedValue
+                    );
                 }
                 else
                 {
@@ -2482,7 +2884,11 @@ namespace System.Xml
                 {
                     if (_xmlSchemaInfo.ContentType == XmlSchemaContentType.TextOnly)
                     {
-                        typedValue = ReturnBoxedValue(_atomicValue, _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                        typedValue = ReturnBoxedValue(
+                            _atomicValue,
+                            _xmlSchemaInfo.XmlType!,
+                            unwrapTypedValue
+                        );
                     }
                     else
                     {
@@ -2502,7 +2908,11 @@ namespace System.Xml
             else if (this.NodeType == XmlNodeType.Element)
             {
                 // the first child is again element node
-                throw new XmlException(SR.Xml_MixedReadElementContentAs, string.Empty, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_MixedReadElementContentAs,
+                    string.Empty,
+                    this as IXmlLineInfo
+                );
             }
             else
             {
@@ -2511,7 +2921,11 @@ namespace System.Xml
                 // ReadElementContentAsXXX cannot be called on mixed content, if positioned on node other than EndElement, Error
                 if (this.NodeType != XmlNodeType.EndElement)
                 {
-                    throw new XmlException(SR.Xml_MixedReadElementContentAs, string.Empty, this as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_MixedReadElementContentAs,
+                        string.Empty,
+                        this as IXmlLineInfo
+                    );
                 }
             }
 
@@ -2568,7 +2982,7 @@ namespace System.Xml
                     }
 
                     continue;
-                breakWhile:
+                    breakWhile:
                     break;
                 }
             }
@@ -2606,7 +3020,9 @@ namespace System.Xml
                 switch (_coreReader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        Debug.Fail("Should not happen as the caching reader does not cache elements in simple content");
+                        Debug.Fail(
+                            "Should not happen as the caching reader does not cache elements in simple content"
+                        );
                         break;
 
                     case XmlNodeType.Text:
@@ -2635,14 +3051,17 @@ namespace System.Xml
                         {
                             // The atomicValue returned is a default value
                             Debug.Assert(_cachingReader != null);
-                            _cachingReader.SwitchTextNodeAndEndElement(_xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue), _originalAtomicValueString);
+                            _cachingReader.SwitchTextNodeAndEndElement(
+                                _xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue),
+                                _originalAtomicValueString
+                            );
                         }
 
                         goto breakWhile;
                 }
 
                 continue;
-            breakWhile:
+                breakWhile:
                 break;
             }
         }
@@ -2667,7 +3086,9 @@ namespace System.Xml
                         switch (_coreReader.NodeType)
                         {
                             case XmlNodeType.Element:
-                                Debug.Fail("Should not happen as the caching reader does not cache elements in simple content");
+                                Debug.Fail(
+                                    "Should not happen as the caching reader does not cache elements in simple content"
+                                );
                                 break;
 
                             case XmlNodeType.Text:
@@ -2686,11 +3107,17 @@ namespace System.Xml
 
                             case XmlNodeType.EndElement:
                                 _atomicValue = _validator.ValidateEndElement(_xmlSchemaInfo); //?? pop namespaceManager scope
-                                _originalAtomicValueString = GetOriginalAtomicValueStringOfElement();
+                                _originalAtomicValueString =
+                                    GetOriginalAtomicValueStringOfElement();
                                 if (_xmlSchemaInfo.IsDefault)
                                 {
                                     // The atomicValue returned is a default value
-                                    _cachingReader.SwitchTextNodeAndEndElement(_xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue!), _originalAtomicValueString);
+                                    _cachingReader.SwitchTextNodeAndEndElement(
+                                        _xmlSchemaInfo.XmlType!.ValueConverter.ToString(
+                                            _atomicValue!
+                                        ),
+                                        _originalAtomicValueString
+                                    );
                                 }
 
                                 break;
@@ -2738,7 +3165,11 @@ namespace System.Xml
                         Debug.Assert(listType != null);
                         if (listType.ItemType.Variety == XmlSchemaDatatypeVariety.Union)
                         {
-                            typedValue = xmlType.ValueConverter.ChangeType(typedValue, xmlType.Datatype.ValueType, _thisNSResolver);
+                            typedValue = xmlType.ValueConverter.ChangeType(
+                                typedValue,
+                                xmlType.Datatype.ValueType,
+                                _thisNSResolver
+                            );
                         }
                     }
                 }
@@ -2759,7 +3190,11 @@ namespace System.Xml
         {
             if (_cachingReader == null)
             {
-                _cachingReader = new XsdCachingReader(_coreReader, _lineInfo, new CachingEventHandler(CachingCallBack));
+                _cachingReader = new XsdCachingReader(
+                    _coreReader,
+                    _lineInfo,
+                    new CachingEventHandler(CachingCallBack)
+                );
             }
             else
             {
@@ -2796,7 +3231,9 @@ namespace System.Xml
                 XmlSchemaElement? schemaElem = _xmlSchemaInfo.SchemaElement;
                 if (schemaElem != null)
                 {
-                    return (schemaElem.DefaultValue != null) ? schemaElem.DefaultValue : schemaElem.FixedValue;
+                    return (schemaElem.DefaultValue != null)
+                        ? schemaElem.DefaultValue
+                        : schemaElem.FixedValue;
                 }
             }
             else

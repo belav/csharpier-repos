@@ -5,13 +5,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindQueryFiltersQueryInMemoryTest : NorthwindQueryFiltersQueryTestBase<
-        NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer>>
+    public class NorthwindQueryFiltersQueryInMemoryTest
+        : NorthwindQueryFiltersQueryTestBase<
+            NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer>
+        >
     {
         public NorthwindQueryFiltersQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
         }

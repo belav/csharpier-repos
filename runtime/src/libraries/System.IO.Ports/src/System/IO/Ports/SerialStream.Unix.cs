@@ -16,6 +16,7 @@ namespace System.IO.Ports
     internal sealed partial class SerialStream : Stream
     {
         private const int TimeoutResolution = 30;
+
         // time [ms] loop has to be idle before it stops
         private const int IOLoopIdleTimeout = 2000;
         private bool _ioLoopFinished;
@@ -31,8 +32,10 @@ namespace System.IO.Ports
         private byte[] _tempBuf = new byte[1];
         private Task _ioLoop;
         private object _ioLoopLock = new object();
-        private ConcurrentQueue<SerialStreamIORequest> _readQueue = new ConcurrentQueue<SerialStreamIORequest>();
-        private ConcurrentQueue<SerialStreamIORequest> _writeQueue = new ConcurrentQueue<SerialStreamIORequest>();
+        private ConcurrentQueue<SerialStreamIORequest> _readQueue =
+            new ConcurrentQueue<SerialStreamIORequest>();
+        private ConcurrentQueue<SerialStreamIORequest> _writeQueue =
+            new ConcurrentQueue<SerialStreamIORequest>();
 
         private long _totalBytesRead;
         private long TotalBytesAvailable => _totalBytesRead + BytesToRead;
@@ -52,10 +55,7 @@ namespace System.IO.Ports
                     EnsureIOLoopRunning();
                 }
             }
-            remove
-            {
-                _dataReceived -= value;
-            }
+            remove { _dataReceived -= value; }
         }
 
         // called when any of the pin/ring-related triggers occurs
@@ -72,10 +72,7 @@ namespace System.IO.Ports
                     EnsureIOLoopRunning();
                 }
             }
-            remove
-            {
-                _pinChanged -= value;
-            }
+            remove { _pinChanged -= value; }
         }
 
         // ----SECTION: inherited properties from Stream class ------------*
@@ -90,8 +87,12 @@ namespace System.IO.Ports
             set
             {
                 if (value < 0 && value != SerialPort.InfiniteTimeout)
-                    throw new ArgumentOutOfRangeException(nameof(ReadTimeout), SR.ArgumentOutOfRange_Timeout);
-                if (_handle == null) {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ReadTimeout),
+                        SR.ArgumentOutOfRange_Timeout
+                    );
+                if (_handle == null)
+                {
                     InternalResources.FileNotOpen();
                 }
                 _readTimeout = value;
@@ -104,8 +105,12 @@ namespace System.IO.Ports
             set
             {
                 if (value < 0 && value != SerialPort.InfiniteTimeout)
-                    throw new ArgumentOutOfRangeException(nameof(ReadTimeout), SR.ArgumentOutOfRange_Timeout);
-                if (_handle == null) {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ReadTimeout),
+                        SR.ArgumentOutOfRange_Timeout
+                    );
+                if (_handle == null)
+                {
                     InternalResources.FileNotOpen();
                 }
                 _writeTimeout = value;
@@ -116,16 +121,16 @@ namespace System.IO.Ports
         {
             if (baudRate <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(BaudRate), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(BaudRate),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
         }
 
         internal int BaudRate
         {
-            get
-            {
-                return Interop.Termios.TermiosGetSpeed(_handle);
-            }
+            get { return Interop.Termios.TermiosGetSpeed(_handle); }
             set
             {
                 if (value != _baudRate)
@@ -171,7 +176,10 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDcd);
+                int status = Interop.Termios.TermiosGetSignal(
+                    _handle,
+                    Interop.Termios.Signals.SignalDcd
+                );
                 if (status < 0)
                 {
                     throw GetLastIOError();
@@ -185,7 +193,10 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalCts);
+                int status = Interop.Termios.TermiosGetSignal(
+                    _handle,
+                    Interop.Termios.Signals.SignalCts
+                );
                 if (status < 0)
                 {
                     throw GetLastIOError();
@@ -199,7 +210,10 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDsr);
+                int status = Interop.Termios.TermiosGetSignal(
+                    _handle,
+                    Interop.Termios.Signals.SignalDsr
+                );
                 if (status < 0)
                 {
                     throw GetLastIOError();
@@ -213,7 +227,10 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDtr);
+                int status = Interop.Termios.TermiosGetSignal(
+                    _handle,
+                    Interop.Termios.Signals.SignalDtr
+                );
                 if (status < 0)
                 {
                     throw GetLastIOError();
@@ -221,10 +238,15 @@ namespace System.IO.Ports
 
                 return status == 1;
             }
-
             set
             {
-                if (Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDtr, value ? 1 : 0) != 0)
+                if (
+                    Interop.Termios.TermiosGetSignal(
+                        _handle,
+                        Interop.Termios.Signals.SignalDtr,
+                        value ? 1 : 0
+                    ) != 0
+                )
                 {
                     throw GetLastIOError();
                 }
@@ -233,7 +255,10 @@ namespace System.IO.Ports
 
         private bool RtsEnabledNative()
         {
-            int status = Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalRts);
+            int status = Interop.Termios.TermiosGetSignal(
+                _handle,
+                Interop.Termios.Signals.SignalRts
+            );
             if (status < 0)
             {
                 throw GetLastIOError();
@@ -246,18 +271,33 @@ namespace System.IO.Ports
         {
             get
             {
-                if ((_handshake == Handshake.RequestToSend || _handshake == Handshake.RequestToSendXOnXOff))
+                if (
+                    (
+                        _handshake == Handshake.RequestToSend
+                        || _handshake == Handshake.RequestToSendXOnXOff
+                    )
+                )
                     throw new InvalidOperationException(SR.CantSetRtsWithHandshaking);
 
                 return RtsEnabledNative();
             }
-
             set
             {
-                if ((_handshake == Handshake.RequestToSend || _handshake == Handshake.RequestToSendXOnXOff))
+                if (
+                    (
+                        _handshake == Handshake.RequestToSend
+                        || _handshake == Handshake.RequestToSendXOnXOff
+                    )
+                )
                     throw new InvalidOperationException(SR.CantSetRtsWithHandshaking);
 
-                if (Interop.Termios.TermiosGetSignal(_handle, Interop.Termios.Signals.SignalRts, value ? 1 : 0) != 0)
+                if (
+                    Interop.Termios.TermiosGetSignal(
+                        _handle,
+                        Interop.Termios.Signals.SignalRts,
+                        value ? 1 : 0
+                    ) != 0
+                )
                 {
                     throw GetLastIOError();
                 }
@@ -268,12 +308,23 @@ namespace System.IO.Ports
         {
             set
             {
-                Debug.Assert(!(value < Handshake.None || value > Handshake.RequestToSendXOnXOff),
-                    "An invalid value was passed to Handshake");
+                Debug.Assert(
+                    !(value < Handshake.None || value > Handshake.RequestToSendXOnXOff),
+                    "An invalid value was passed to Handshake"
+                );
 
                 if (value != _handshake)
                 {
-                    if (Interop.Termios.TermiosReset(_handle, _baudRate, _dataBits, _stopBits, _parity, value) != 0)
+                    if (
+                        Interop.Termios.TermiosReset(
+                            _handle,
+                            _baudRate,
+                            _dataBits,
+                            _stopBits,
+                            _parity,
+                            value
+                        ) != 0
+                    )
                     {
                         throw new ArgumentException();
                     }
@@ -287,10 +338,22 @@ namespace System.IO.Ports
         {
             set
             {
-                Debug.Assert(!(value < MinDataBits || value > MaxDataBits), "An invalid value was passed to DataBits");
+                Debug.Assert(
+                    !(value < MinDataBits || value > MaxDataBits),
+                    "An invalid value was passed to DataBits"
+                );
                 if (value != _dataBits)
                 {
-                    if (Interop.Termios.TermiosReset(_handle, _baudRate, value, _stopBits, _parity, _handshake) != 0)
+                    if (
+                        Interop.Termios.TermiosReset(
+                            _handle,
+                            _baudRate,
+                            value,
+                            _stopBits,
+                            _parity,
+                            _handshake
+                        ) != 0
+                    )
                     {
                         throw new ArgumentException();
                     }
@@ -304,11 +367,23 @@ namespace System.IO.Ports
         {
             set
             {
-                Debug.Assert(!(value < Parity.None || value > Parity.Space), "An invalid value was passed to Parity");
+                Debug.Assert(
+                    !(value < Parity.None || value > Parity.Space),
+                    "An invalid value was passed to Parity"
+                );
 
                 if (value != _parity)
                 {
-                    if (Interop.Termios.TermiosReset(_handle, _baudRate, _dataBits, _stopBits, value, _handshake) != 0)
+                    if (
+                        Interop.Termios.TermiosReset(
+                            _handle,
+                            _baudRate,
+                            _dataBits,
+                            _stopBits,
+                            value,
+                            _handshake
+                        ) != 0
+                    )
                     {
                         throw new ArgumentException();
                     }
@@ -322,10 +397,22 @@ namespace System.IO.Ports
         {
             set
             {
-                Debug.Assert(!(value < StopBits.One || value > StopBits.OnePointFive), "An invalid value was passed to StopBits");
+                Debug.Assert(
+                    !(value < StopBits.One || value > StopBits.OnePointFive),
+                    "An invalid value was passed to StopBits"
+                );
                 if (value != _stopBits)
                 {
-                    if (Interop.Termios.TermiosReset(_handle, _baudRate, _dataBits, value, _parity, _handshake) != 0)
+                    if (
+                        Interop.Termios.TermiosReset(
+                            _handle,
+                            _baudRate,
+                            _dataBits,
+                            value,
+                            _parity,
+                            _handshake
+                        ) != 0
+                    )
                     {
                         throw new ArgumentException();
                     }
@@ -353,27 +440,29 @@ namespace System.IO.Ports
 
         internal void DiscardInBuffer()
         {
-            if (_handle == null) InternalResources.FileNotOpen();
+            if (_handle == null)
+                InternalResources.FileNotOpen();
             // This may or may not work depending on hardware.
             Interop.Termios.TermiosDiscard(_handle, Interop.Termios.Queue.ReceiveQueue);
         }
 
         internal void DiscardOutBuffer()
         {
-            if (_handle == null) InternalResources.FileNotOpen();
+            if (_handle == null)
+                InternalResources.FileNotOpen();
             // This may or may not work depending on hardware.
             Interop.Termios.TermiosDiscard(_handle, Interop.Termios.Queue.SendQueue);
         }
 
         internal void SetBufferSizes(int readBufferSize, int writeBufferSize)
         {
-            if (_handle == null) InternalResources.FileNotOpen();
+            if (_handle == null)
+                InternalResources.FileNotOpen();
 
             // Ignore for now.
         }
 
         internal bool IsOpen => _handle != null;
-
 
         // Flush dumps the contents of the serial driver's internal read and write buffers.
         // We actually expose the functionality for each, but fulfilling Stream's contract
@@ -381,7 +470,8 @@ namespace System.IO.Ports
         // Note: Serial driver's write buffer is *already* attempting to write it, so we can only wait until it finishes.
         public override void Flush()
         {
-            if (_handle == null) InternalResources.FileNotOpen();
+            if (_handle == null)
+                InternalResources.FileNotOpen();
 
             SpinWait sw = default;
             while (!_writeQueue.IsEmpty)
@@ -420,10 +510,14 @@ namespace System.IO.Ports
             }
         }
 
-        public override int EndRead(IAsyncResult asyncResult)
-            => EndReadWrite(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) => EndReadWrite(asyncResult);
 
-        public override Task<int> ReadAsync(byte[] array, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] array,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             CheckReadWriteArguments(array, offset, count);
 
@@ -440,7 +534,10 @@ namespace System.IO.Ports
         }
 
 #if !NETFRAMEWORK && !NETSTANDARD2_0
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckHandle();
 
@@ -456,7 +553,12 @@ namespace System.IO.Ports
         }
 #endif
 
-        public override Task WriteAsync(byte[] array, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] array,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             CheckWriteArguments(array, offset, count);
 
@@ -464,7 +566,10 @@ namespace System.IO.Ports
                 return Task.CompletedTask; // return immediately if no bytes to write; no need for overhead.
 
             ReadOnlyMemory<byte> buffer = new ReadOnlyMemory<byte>(array, offset, count);
-            SerialStreamWriteRequest result = new SerialStreamWriteRequest(cancellationToken, buffer);
+            SerialStreamWriteRequest result = new SerialStreamWriteRequest(
+                cancellationToken,
+                buffer
+            );
             _writeQueue.Enqueue(result);
 
             EnsureIOLoopRunning();
@@ -473,14 +578,20 @@ namespace System.IO.Ports
         }
 
 #if !NETFRAMEWORK && !NETSTANDARD2_0
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             CheckWriteArguments();
 
             if (buffer.IsEmpty)
                 return ValueTask.CompletedTask; // return immediately if no bytes to write; no need for overhead.
 
-            SerialStreamWriteRequest result = new SerialStreamWriteRequest(cancellationToken, buffer);
+            SerialStreamWriteRequest result = new SerialStreamWriteRequest(
+                cancellationToken,
+                buffer
+            );
             _writeQueue.Enqueue(result);
 
             EnsureIOLoopRunning();
@@ -489,7 +600,13 @@ namespace System.IO.Ports
         }
 #endif
 
-        public override IAsyncResult BeginRead(byte[] array, int offset, int numBytes, AsyncCallback userCallback, object stateObject)
+        public override IAsyncResult BeginRead(
+            byte[] array,
+            int offset,
+            int numBytes,
+            AsyncCallback userCallback,
+            object stateObject
+        )
         {
             return TaskToApm.Begin(ReadAsync(array, offset, numBytes), userCallback, stateObject);
         }
@@ -497,7 +614,12 @@ namespace System.IO.Ports
         // Will wait `timeout` miliseconds or until reading or writing is possible
         // If no operation is requested it will throw
         // Returns event which has happened
-        private Interop.PollEvents PollEvents(int timeout, bool pollReadEvents, bool pollWriteEvents, out Interop.ErrorInfo? error)
+        private Interop.PollEvents PollEvents(
+            int timeout,
+            bool pollReadEvents,
+            bool pollWriteEvents,
+            out Interop.ErrorInfo? error
+        )
         {
             if (!pollReadEvents && !pollWriteEvents)
             {
@@ -518,13 +640,12 @@ namespace System.IO.Ports
             }
 
             Interop.PollEvents events = Interop.PollEvents.POLLNONE;
-            Interop.Error ret = Interop.Serial.Poll(
-                _handle,
-                eventsToPoll,
-                timeout,
-                out events);
+            Interop.Error ret = Interop.Serial.Poll(_handle, eventsToPoll, timeout, out events);
 
-            error = ret != Interop.Error.SUCCESS ? Interop.Sys.GetLastErrorInfo() : (Interop.ErrorInfo?)null;
+            error =
+                ret != Interop.Error.SUCCESS
+                    ? Interop.Sys.GetLastErrorInfo()
+                    : (Interop.ErrorInfo?)null;
             return events;
         }
 
@@ -545,13 +666,18 @@ namespace System.IO.Ports
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] array, int offset, int count, AsyncCallback userCallback, object stateObject)
+        public override IAsyncResult BeginWrite(
+            byte[] array,
+            int offset,
+            int count,
+            AsyncCallback userCallback,
+            object stateObject
+        )
         {
             return TaskToApm.Begin(WriteAsync(array, offset, count), userCallback, stateObject);
         }
 
-        public override void EndWrite(IAsyncResult asyncResult)
-            => EndReadWrite(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => EndReadWrite(asyncResult);
 
         private int EndReadWrite(IAsyncResult asyncResult)
         {
@@ -566,8 +692,20 @@ namespace System.IO.Ports
         }
 
         // this method is used by SerialPort upon SerialStream's creation
-        internal SerialStream(string portName, int baudRate, Parity parity, int dataBits, StopBits stopBits, int readTimeout, int writeTimeout, Handshake handshake,
-            bool dtrEnable, bool rtsEnable, bool discardNull, byte parityReplace)
+        internal SerialStream(
+            string portName,
+            int baudRate,
+            Parity parity,
+            int dataBits,
+            StopBits stopBits,
+            int readTimeout,
+            int writeTimeout,
+            Handshake handshake,
+            bool dtrEnable,
+            bool rtsEnable,
+            bool discardNull,
+            byte parityReplace
+        )
         {
             if (portName == null)
             {
@@ -593,7 +731,16 @@ namespace System.IO.Ports
                 _stopBits = stopBits;
                 _dataBits = dataBits;
 
-                if (Interop.Termios.TermiosReset(_handle, _baudRate, _dataBits, _stopBits, _parity, _handshake) != 0)
+                if (
+                    Interop.Termios.TermiosReset(
+                        _handle,
+                        _baudRate,
+                        _dataBits,
+                        _stopBits,
+                        _parity,
+                        _handshake
+                    ) != 0
+                )
                 {
                     throw new ArgumentException();
                 }
@@ -615,7 +762,12 @@ namespace System.IO.Ports
                 // now set this.RtsEnable to the specified value.
                 // Handshake takes precedence, this will be a nop if
                 // handshake is either RequestToSend or RequestToSendXOnXOff
-                if ((handshake != Handshake.RequestToSend && handshake != Handshake.RequestToSendXOnXOff))
+                if (
+                    (
+                        handshake != Handshake.RequestToSend
+                        && handshake != Handshake.RequestToSendXOnXOff
+                    )
+                )
                 {
                     try
                     {
@@ -658,7 +810,8 @@ namespace System.IO.Ports
                         IOLoop,
                         CancellationToken.None,
                         TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
             }
         }
@@ -667,16 +820,20 @@ namespace System.IO.Ports
         {
             while (_readQueue.TryDequeue(out SerialStreamIORequest r))
             {
-                r.Complete(error.HasValue ?
-                           Interop.GetIOException(error.Value) :
-                           InternalResources.FileNotOpenException());
+                r.Complete(
+                    error.HasValue
+                        ? Interop.GetIOException(error.Value)
+                        : InternalResources.FileNotOpenException()
+                );
             }
 
             while (_writeQueue.TryDequeue(out SerialStreamIORequest r))
             {
-                r.Complete(error.HasValue ?
-                           Interop.GetIOException(error.Value) :
-                           InternalResources.FileNotOpenException());
+                r.Complete(
+                    error.HasValue
+                        ? Interop.GetIOException(error.Value)
+                        : InternalResources.FileNotOpenException()
+                );
             }
         }
 
@@ -709,10 +866,17 @@ namespace System.IO.Ports
         {
             if (_dataReceived != null)
             {
-                ThreadPool.QueueUserWorkItem(s => {
+                ThreadPool.QueueUserWorkItem(
+                    s =>
+                    {
                         var thisRef = (SerialStream)s;
-                        thisRef._dataReceived?.Invoke(thisRef, new SerialDataReceivedEventArgs(SerialData.Chars));
-                    }, this);
+                        thisRef._dataReceived?.Invoke(
+                            thisRef,
+                            new SerialDataReceivedEventArgs(SerialData.Chars)
+                        );
+                    },
+                    this
+                );
             }
         }
 
@@ -720,10 +884,17 @@ namespace System.IO.Ports
         {
             if (_pinChanged != null)
             {
-                ThreadPool.QueueUserWorkItem(s => {
+                ThreadPool.QueueUserWorkItem(
+                    s =>
+                    {
                         var thisRef = (SerialStream)s;
-                        thisRef._pinChanged?.Invoke(thisRef, new SerialPinChangedEventArgs(pinChanged));
-                    }, this);
+                        thisRef._pinChanged?.Invoke(
+                            thisRef,
+                            new SerialPinChangedEventArgs(pinChanged)
+                        );
+                    },
+                    this
+                );
             }
         }
 
@@ -731,14 +902,18 @@ namespace System.IO.Ports
         {
             if (_dataReceived != null)
             {
-                ThreadPool.QueueUserWorkItem(s => {
+                ThreadPool.QueueUserWorkItem(
+                    s =>
+                    {
                         var thisRef = (SerialStream)s;
                         SerialDataReceivedEventHandler dataReceived = thisRef._dataReceived;
                         if (dataReceived != null)
                         {
                             dataReceived(thisRef, new SerialDataReceivedEventArgs(SerialData.Eof));
                         }
-                    }, this);
+                    },
+                    this
+                );
             }
         }
 
@@ -795,7 +970,10 @@ namespace System.IO.Ports
 
                     // ignore EWOULDBLOCK since we handle timeout elsewhere
                     // numBytes == 0 means that there might be an error
-                    if (lastError.Error != Interop.Error.SUCCESS && lastError.Error != Interop.Error.EWOULDBLOCK)
+                    if (
+                        lastError.Error != Interop.Error.SUCCESS
+                        && lastError.Error != Interop.Error.EWOULDBLOCK
+                    )
                     {
                         r.Complete(Interop.GetIOException(lastError));
                     }
@@ -817,7 +995,10 @@ namespace System.IO.Ports
         }
 
         // returns number of bytes read/written
-        private static int DoIORequest(ConcurrentQueue<SerialStreamIORequest> q, RequestProcessor op)
+        private static int DoIORequest(
+            ConcurrentQueue<SerialStreamIORequest> q,
+            RequestProcessor op
+        )
         {
             // assumes dequeue-ing happens on a single thread
             while (q.TryPeek(out SerialStreamIORequest r))
@@ -851,7 +1032,8 @@ namespace System.IO.Ports
             bool lastIsIdle = false;
             int ticksWhenIdleStarted = 0;
 
-            Signals lastSignals = _pinChanged != null ? Interop.Termios.TermiosGetAllSignals(_handle) : Signals.Error;
+            Signals lastSignals =
+                _pinChanged != null ? Interop.Termios.TermiosGetAllSignals(_handle) : Signals.Error;
 
             bool IsNoEventRegistered() => _dataReceived == null && _pinChanged == null;
 
@@ -880,7 +1062,11 @@ namespace System.IO.Ports
                             lock (_ioLoopLock)
                             {
                                 // double check we are done under lock
-                                if (IsNoEventRegistered() && _readQueue.IsEmpty && _writeQueue.IsEmpty)
+                                if (
+                                    IsNoEventRegistered()
+                                    && _readQueue.IsEmpty
+                                    && _writeQueue.IsEmpty
+                                )
                                 {
                                     _ioLoop = null;
                                     break;
@@ -899,10 +1085,12 @@ namespace System.IO.Ports
                 }
                 else
                 {
-                    Interop.PollEvents events = PollEvents(1,
-                                                               pollReadEvents: hasPendingReads,
-                                                               pollWriteEvents: hasPendingWrites,
-                                                               out Interop.ErrorInfo? error);
+                    Interop.PollEvents events = PollEvents(
+                        1,
+                        pollReadEvents: hasPendingReads,
+                        pollWriteEvents: hasPendingWrites,
+                        out Interop.ErrorInfo? error
+                    );
 
                     if (error.HasValue)
                     {
@@ -910,8 +1098,10 @@ namespace System.IO.Ports
                         break;
                     }
 
-                    if (events.HasFlag(Interop.PollEvents.POLLNVAL) ||
-                        events.HasFlag(Interop.PollEvents.POLLERR))
+                    if (
+                        events.HasFlag(Interop.PollEvents.POLLNVAL)
+                        || events.HasFlag(Interop.PollEvents.POLLERR)
+                    )
                     {
                         // bad descriptor or some other error we can't handle
                         FinishPendingIORequests();
@@ -988,9 +1178,9 @@ namespace System.IO.Ports
 
         private static CancellationTokenSource GetCancellationTokenSourceFromTimeout(int timeoutMs)
         {
-            return timeoutMs == SerialPort.InfiniteTimeout ?
-                null :
-                new CancellationTokenSource(Math.Max(timeoutMs, TimeoutResolution));
+            return timeoutMs == SerialPort.InfiniteTimeout
+                ? null
+                : new CancellationTokenSource(Math.Max(timeoutMs, TimeoutResolution));
         }
 
         private static Exception GetLastIOError()
@@ -1008,7 +1198,10 @@ namespace System.IO.Ports
                 : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _cancellationToken = ct;
-                _cancellationTokenRegistration = ct.Register(s => ((TaskCompletionSource<int>)s).TrySetCanceled(), this);
+                _cancellationTokenRegistration = ct.Register(
+                    s => ((TaskCompletionSource<int>)s).TrySetCanceled(),
+                    this
+                );
             }
 
             internal void Complete(int numBytes)
@@ -1028,8 +1221,7 @@ namespace System.IO.Ports
         {
             public Memory<byte> Buffer { get; private set; }
 
-            public SerialStreamReadRequest(CancellationToken ct, Memory<byte> buffer)
-                : base(ct)
+            public SerialStreamReadRequest(CancellationToken ct, Memory<byte> buffer) : base(ct)
             {
                 Buffer = buffer;
             }

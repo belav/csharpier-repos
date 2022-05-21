@@ -23,35 +23,35 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public IEntityType EntityType { get; }
 
-            public Dictionary<(IForeignKey, bool), Expression> ForeignKeyExpansionMap { get; } = new();
+            public Dictionary<(IForeignKey, bool), Expression> ForeignKeyExpansionMap { get; } =
+                new();
 
             public bool IsOptional { get; private set; }
             public IncludeTreeNode IncludePaths { get; private set; }
             public IncludeTreeNode? LastIncludeTreeNode { get; private set; }
             public QueryRootExpression? QueryRootExpression { get; }
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
 
-            public override Type Type
-                => EntityType.ClrType;
+            public override Type Type => EntityType.ClrType;
 
-            protected override Expression VisitChildren(ExpressionVisitor visitor)
-                => this;
+            protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
             public EntityReference Snapshot()
             {
-                var result = new EntityReference(EntityType, QueryRootExpression) { IsOptional = IsOptional };
+                var result = new EntityReference(EntityType, QueryRootExpression)
+                {
+                    IsOptional = IsOptional
+                };
                 result.IncludePaths = IncludePaths.Snapshot(result);
 
                 return result;
             }
 
-            public void SetLastInclude(IncludeTreeNode lastIncludeTree)
-                => LastIncludeTreeNode = lastIncludeTree;
+            public void SetLastInclude(IncludeTreeNode lastIncludeTree) =>
+                LastIncludeTreeNode = lastIncludeTree;
 
-            public void MarkAsOptional()
-                => IsOptional = true;
+            public void MarkAsOptional() => IsOptional = true;
 
             void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
             {
@@ -96,12 +96,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             private EntityReference? _entityReference;
 
-            public IncludeTreeNode(IEntityType entityType)
-                : this(entityType, null, setLoaded: true)
-            {
-            }
+            public IncludeTreeNode(IEntityType entityType) : this(entityType, null, setLoaded: true)
+            { }
 
-            public IncludeTreeNode(IEntityType entityType, EntityReference? entityReference, bool setLoaded)
+            public IncludeTreeNode(
+                IEntityType entityType,
+                EntityReference? entityReference,
+                bool setLoaded
+            )
             {
                 EntityType = entityType;
                 _entityReference = entityReference;
@@ -127,19 +129,34 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 IncludeTreeNode? nodeToAdd = null;
                 if (_entityReference != null)
                 {
-                    if (navigation is INavigation concreteNavigation
+                    if (
+                        navigation is INavigation concreteNavigation
                         && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                            (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent), out var expansion))
+                            (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
+                            out var expansion
+                        )
+                    )
                     {
                         // Value known to be non-null
                         nodeToAdd = UnwrapEntityReference(expansion)!.IncludePaths;
                     }
-                    else if (navigation is ISkipNavigation skipNavigation
+                    else if (
+                        navigation is ISkipNavigation skipNavigation
                         && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                            (skipNavigation.ForeignKey, skipNavigation.IsOnDependent), out var firstExpansion)
+                            (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
+                            out var firstExpansion
+                        )
                         // Value known to be non-null
-                        && UnwrapEntityReference(firstExpansion)!.ForeignKeyExpansionMap.TryGetValue(
-                            (skipNavigation.Inverse.ForeignKey, !skipNavigation.Inverse.IsOnDependent), out var secondExpansion))
+                        && UnwrapEntityReference(
+                            firstExpansion
+                        )!.ForeignKeyExpansionMap.TryGetValue(
+                            (
+                                skipNavigation.Inverse.ForeignKey,
+                                !skipNavigation.Inverse.IsOnDependent
+                            ),
+                            out var secondExpansion
+                        )
+                    )
                     {
                         // Value known to be non-null
                         nodeToAdd = UnwrapEntityReference(secondExpansion)!.IncludePaths;
@@ -158,7 +175,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public IncludeTreeNode Snapshot(EntityReference? entityReference)
             {
-                var result = new IncludeTreeNode(EntityType, entityReference, SetLoaded) { FilterExpression = FilterExpression };
+                var result = new IncludeTreeNode(EntityType, entityReference, SetLoaded)
+                {
+                    FilterExpression = FilterExpression
+                };
 
                 foreach (var kvp in this)
                 {
@@ -178,17 +198,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
             }
 
-            public void AssignEntityReference(EntityReference entityReference)
-                => _entityReference = entityReference;
+            public void AssignEntityReference(EntityReference entityReference) =>
+                _entityReference = entityReference;
 
-            public void ApplyFilter(LambdaExpression filterExpression)
-                => FilterExpression = filterExpression;
+            public void ApplyFilter(LambdaExpression filterExpression) =>
+                FilterExpression = filterExpression;
 
-            public override bool Equals(object? obj)
-                => obj != null
-                    && (ReferenceEquals(this, obj)
-                        || obj is IncludeTreeNode includeTreeNode
-                        && Equals(includeTreeNode));
+            public override bool Equals(object? obj) =>
+                obj != null
+                && (
+                    ReferenceEquals(this, obj)
+                    || obj is IncludeTreeNode includeTreeNode && Equals(includeTreeNode)
+                );
 
             private bool Equals(IncludeTreeNode includeTreeNode)
             {
@@ -199,8 +220,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 foreach (var kvp in this)
                 {
-                    if (!includeTreeNode.TryGetValue(kvp.Key, out var otherIncludeTreeNode)
-                        || !kvp.Value.Equals(otherIncludeTreeNode))
+                    if (
+                        !includeTreeNode.TryGetValue(kvp.Key, out var otherIncludeTreeNode)
+                        || !kvp.Value.Equals(otherIncludeTreeNode)
+                    )
                     {
                         return false;
                     }
@@ -209,8 +232,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return true;
             }
 
-            public override int GetHashCode()
-                => HashCode.Combine(base.GetHashCode(), EntityType);
+            public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), EntityType);
         }
 
         /// <summary>
@@ -219,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         private sealed class NavigationExpansionExpression : Expression, IPrintableExpression
         {
-            private readonly List<(MethodInfo OrderingMethod, Expression KeySelector)> _pendingOrderings = new();
+            private readonly List<(MethodInfo OrderingMethod, Expression KeySelector)> _pendingOrderings =
+                new();
 
             private readonly string _parameterName;
 
@@ -229,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 Expression source,
                 NavigationTreeNode currentTree,
                 Expression pendingSelector,
-                string parameterName)
+                string parameterName
+            )
             {
                 Source = source;
                 _parameterName = parameterName;
@@ -241,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public ParameterExpression CurrentParameter
                 // CurrentParameter would be non-null if CurrentTree is non-null
-                => CurrentTree.CurrentParameter!;
+                =>
+                CurrentTree.CurrentParameter!;
 
             public NavigationTreeNode CurrentTree
             {
@@ -257,20 +282,17 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public Expression PendingSelector { get; private set; }
             public MethodInfo? CardinalityReducingGenericMethodInfo { get; private set; }
 
-            public Type SourceElementType
-                => CurrentParameter.Type;
+            public Type SourceElementType => CurrentParameter.Type;
 
-            public IReadOnlyList<(MethodInfo OrderingMethod, Expression KeySelector)> PendingOrderings
-                => _pendingOrderings;
+            public IReadOnlyList<(MethodInfo OrderingMethod, Expression KeySelector)> PendingOrderings =>
+                _pendingOrderings;
 
-            public void UpdateSource(Expression source)
-                => Source = source;
+            public void UpdateSource(Expression source) => Source = source;
 
-            public void UpdateCurrentTree(NavigationTreeNode currentTree)
-                => CurrentTree = currentTree;
+            public void UpdateCurrentTree(NavigationTreeNode currentTree) =>
+                CurrentTree = currentTree;
 
-            public void ApplySelector(Expression selector)
-                => PendingSelector = selector;
+            public void ApplySelector(Expression selector) => PendingSelector = selector;
 
             public void AddPendingOrdering(MethodInfo orderingMethod, Expression keySelector)
             {
@@ -278,25 +300,22 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 _pendingOrderings.Add((orderingMethod, keySelector));
             }
 
-            public void AppendPendingOrdering(MethodInfo orderingMethod, Expression keySelector)
-                => _pendingOrderings.Add((orderingMethod, keySelector));
+            public void AppendPendingOrdering(MethodInfo orderingMethod, Expression keySelector) =>
+                _pendingOrderings.Add((orderingMethod, keySelector));
 
-            public void ClearPendingOrderings()
-                => _pendingOrderings.Clear();
+            public void ClearPendingOrderings() => _pendingOrderings.Clear();
 
-            public void ConvertToSingleResult(MethodInfo genericMethod)
-                => CardinalityReducingGenericMethodInfo = genericMethod;
+            public void ConvertToSingleResult(MethodInfo genericMethod) =>
+                CardinalityReducingGenericMethodInfo = genericMethod;
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
 
-            public override Type Type
-                => CardinalityReducingGenericMethodInfo == null
+            public override Type Type =>
+                CardinalityReducingGenericMethodInfo == null
                     ? typeof(IQueryable<>).MakeGenericType(PendingSelector.Type)
                     : PendingSelector.Type;
 
-            protected override Expression VisitChildren(ExpressionVisitor visitor)
-                => this;
+            protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
             void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
             {
@@ -311,7 +330,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     expressionPrinter.AppendLine();
                     if (CardinalityReducingGenericMethodInfo != null)
                     {
-                        expressionPrinter.AppendLine("CardinalityReducingMethod: " + CardinalityReducingGenericMethodInfo.Name);
+                        expressionPrinter.AppendLine(
+                            "CardinalityReducingMethod: "
+                                + CardinalityReducingGenericMethodInfo.Name
+                        );
                     }
                 }
             }
@@ -324,16 +346,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 ParameterExpression groupingParameter,
                 NavigationTreeNode currentTree,
                 Expression pendingSelector,
-                string innerParameterName)
+                string innerParameterName
+            )
             {
                 Source = source;
                 CurrentParameter = groupingParameter;
                 Type = source.Type;
                 GroupingEnumerable = new NavigationExpansionExpression(
-                    Call(QueryableMethods.AsQueryable.MakeGenericMethod(CurrentParameter.Type.GetGenericArguments()[1]), CurrentParameter),
+                    Call(
+                        QueryableMethods.AsQueryable.MakeGenericMethod(
+                            CurrentParameter.Type.GetGenericArguments()[1]
+                        ),
+                        CurrentParameter
+                    ),
                     currentTree,
                     pendingSelector,
-                    innerParameterName);
+                    innerParameterName
+                );
             }
 
             public Expression Source { get; private set; }
@@ -342,21 +371,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             public Expression GroupingEnumerable { get; }
 
-            public Type SourceElementType
-                => CurrentParameter.Type;
+            public Type SourceElementType => CurrentParameter.Type;
 
             public void UpdateSource(Expression source)
             {
                 Source = source;
             }
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
 
             public override Type Type { get; }
 
-            protected override Expression VisitChildren(ExpressionVisitor visitor)
-                => this;
+            protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
             void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
             {
@@ -380,8 +406,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         private sealed class NavigationTreeExpression : NavigationTreeNode, IPrintableExpression
         {
-            public NavigationTreeExpression(Expression value)
-                : base(null, null)
+            public NavigationTreeExpression(Expression value) : base(null, null)
             {
                 Value = value;
             }
@@ -398,8 +423,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return this;
             }
 
-            public override Type Type
-                => Value.Type;
+            public override Type Type => Value.Type;
 
             void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
             {
@@ -428,8 +452,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 Left = left;
                 Right = right;
-                if (left != null
-                    && right != null)
+                if (left != null && right != null)
                 {
                     left._parent = this;
                     left.CurrentParameter = null;
@@ -442,15 +465,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public NavigationTreeNode? Right { get; }
             public ParameterExpression? CurrentParameter { get; private set; }
 
-            public void SetParameter(string parameterName)
-                => CurrentParameter = Parameter(Type, parameterName);
+            public void SetParameter(string parameterName) =>
+                CurrentParameter = Parameter(Type, parameterName);
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
 
             public override Type Type
                 // Left/Right could be null for NavigationTreeExpression (derived type) but it overrides this property.
-                => TransparentIdentifierFactory.Create(Left!.Type, Right!.Type);
+                =>
+                TransparentIdentifierFactory.Create(Left!.Type, Right!.Type);
 
             public Expression GetExpression()
             {
@@ -462,8 +485,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 var parentExperssion = _parent.GetExpression();
                 return _parent.Left == this
-                    ? MakeMemberAccess(parentExperssion, parentExperssion.Type.GetMember("Outer")[0])
-                    : MakeMemberAccess(parentExperssion, parentExperssion.Type.GetMember("Inner")[0]);
+                    ? MakeMemberAccess(
+                        parentExperssion,
+                        parentExperssion.Type.GetMember("Outer")[0]
+                    )
+                    : MakeMemberAccess(
+                        parentExperssion,
+                        parentExperssion.Type.GetMember("Inner")[0]
+                    );
             }
         }
 
@@ -473,7 +502,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         private sealed class OwnedNavigationReference : Expression
         {
-            public OwnedNavigationReference(Expression parent, INavigation navigation, EntityReference entityReference)
+            public OwnedNavigationReference(
+                Expression parent,
+                INavigation navigation,
+                EntityReference entityReference
+            )
             {
                 Parent = parent;
                 Navigation = navigation;
@@ -491,11 +524,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public INavigation Navigation { get; }
             public EntityReference EntityReference { get; }
 
-            public override Type Type
-                => Navigation.ClrType;
+            public override Type Type => Navigation.ClrType;
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
         }
     }
 }

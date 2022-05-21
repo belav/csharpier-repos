@@ -26,7 +26,8 @@ public static class ModelStateDictionaryExtensions
     public static void AddModelError<TModel>(
         this ModelStateDictionary modelState,
         Expression<Func<TModel, object>> expression,
-        string errorMessage)
+        string errorMessage
+    )
     {
         if (modelState == null)
         {
@@ -64,7 +65,8 @@ public static class ModelStateDictionaryExtensions
     public static void TryAddModelException<TModel>(
         this ModelStateDictionary modelState,
         Expression<Func<TModel, object>> expression,
-        Exception exception)
+        Exception exception
+    )
     {
         if (modelState == null)
         {
@@ -94,7 +96,8 @@ public static class ModelStateDictionaryExtensions
         this ModelStateDictionary modelState,
         Expression<Func<TModel, object>> expression,
         Exception exception,
-        ModelMetadata metadata)
+        ModelMetadata metadata
+    )
     {
         if (modelState == null)
         {
@@ -126,7 +129,8 @@ public static class ModelStateDictionaryExtensions
     /// </returns>
     public static bool Remove<TModel>(
         this ModelStateDictionary modelState,
-        Expression<Func<TModel, object>> expression)
+        Expression<Func<TModel, object>> expression
+    )
     {
         if (modelState == null)
         {
@@ -150,7 +154,8 @@ public static class ModelStateDictionaryExtensions
     /// <param name="expression">An expression to be evaluated against an item in the current model.</param>
     public static void RemoveAll<TModel>(
         this ModelStateDictionary modelState,
-        Expression<Func<TModel, object>> expression)
+        Expression<Func<TModel, object>> expression
+    )
     {
         if (modelState == null)
         {
@@ -197,9 +202,9 @@ public static class ModelStateDictionaryExtensions
 
         if (IsConversionToObject(unaryExpression))
         {
-            return ExpressionHelper.GetUncachedExpressionText(Expression.Lambda(
-                unaryExpression.Operand,
-                expression.Parameters[0]));
+            return ExpressionHelper.GetUncachedExpressionText(
+                Expression.Lambda(unaryExpression.Operand, expression.Parameters[0])
+            );
         }
 
         return ExpressionHelper.GetUncachedExpressionText(expression);
@@ -207,8 +212,8 @@ public static class ModelStateDictionaryExtensions
 
     private static bool IsConversionToObject(UnaryExpression expression)
     {
-        return expression?.NodeType == ExpressionType.Convert &&
-            expression.Operand?.NodeType == ExpressionType.MemberAccess &&
-            expression.Type == typeof(object);
+        return expression?.NodeType == ExpressionType.Convert
+            && expression.Operand?.NodeType == ExpressionType.MemberAccess
+            && expression.Type == typeof(object);
     }
 }

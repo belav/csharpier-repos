@@ -10,14 +10,15 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 {
-    internal class DateAndTimeEmbeddedLanguageFeatures : DateAndTimeEmbeddedLanguage, IEmbeddedLanguageFeatures
+    internal class DateAndTimeEmbeddedLanguageFeatures
+        : DateAndTimeEmbeddedLanguage,
+            IEmbeddedLanguageFeatures
     {
         // No highlights currently for date/time literals.
         public IDocumentHighlightsService? DocumentHighlightsService { get; }
         public EmbeddedLanguageCompletionProvider CompletionProvider { get; }
 
-        public DateAndTimeEmbeddedLanguageFeatures(
-            EmbeddedLanguageInfo info) : base(info)
+        public DateAndTimeEmbeddedLanguageFeatures(EmbeddedLanguageInfo info) : base(info)
         {
             CompletionProvider = new DateAndTimeEmbeddedCompletionProvider(this);
         }

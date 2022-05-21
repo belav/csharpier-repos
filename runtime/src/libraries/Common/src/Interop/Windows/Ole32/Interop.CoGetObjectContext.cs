@@ -10,6 +10,9 @@ internal static partial class Interop
     internal static partial class Ole32
     {
         [DllImport(Libraries.Ole32)]
-        internal static extern int CoGetObjectContext([MarshalAs(UnmanagedType.LPStruct)] Guid riid, out IntPtr ppv);
+        internal static extern int CoGetObjectContext(
+            [MarshalAs(UnmanagedType.LPStruct)] Guid riid,
+            out IntPtr ppv
+        );
     }
 }

@@ -14,15 +14,28 @@ namespace System.Globalization.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void TestCurrentCulturesAsync()
         {
-            var newCurrentCulture = new CultureInfo(CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase) ? "en-US" : "ja-JP");
-            var newCurrentUICulture = new CultureInfo(CultureInfo.CurrentUICulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase) ? "en-US" : "ja-JP");
+            var newCurrentCulture = new CultureInfo(
+                CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
+                    ? "en-US"
+                    : "ja-JP"
+            );
+            var newCurrentUICulture = new CultureInfo(
+                CultureInfo.CurrentUICulture.Name.Equals(
+                    "ja-JP",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                    ? "en-US"
+                    : "ja-JP"
+            );
             using (new ThreadCultureChange(newCurrentCulture, newCurrentUICulture))
             {
-                Task t = Task.Run(() =>
-                {
-                    Assert.Equal(CultureInfo.CurrentCulture, newCurrentCulture);
-                    Assert.Equal(CultureInfo.CurrentUICulture, newCurrentUICulture);
-                });
+                Task t = Task.Run(
+                    () =>
+                    {
+                        Assert.Equal(CultureInfo.CurrentCulture, newCurrentCulture);
+                        Assert.Equal(CultureInfo.CurrentUICulture, newCurrentUICulture);
+                    }
+                );
 
                 ((IAsyncResult)t).AsyncWaitHandle.WaitOne();
                 t.Wait();
@@ -32,8 +45,19 @@ namespace System.Globalization.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void TestCurrentCulturesWithAwait()
         {
-            var newCurrentCulture = new CultureInfo(CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase) ? "en-US" : "ja-JP");
-            var newCurrentUICulture = new CultureInfo(CultureInfo.CurrentUICulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase) ? "en-US" : "ja-JP");
+            var newCurrentCulture = new CultureInfo(
+                CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
+                    ? "en-US"
+                    : "ja-JP"
+            );
+            var newCurrentUICulture = new CultureInfo(
+                CultureInfo.CurrentUICulture.Name.Equals(
+                    "ja-JP",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                    ? "en-US"
+                    : "ja-JP"
+            );
             using (new ThreadCultureChange(newCurrentCulture, newCurrentUICulture))
             {
                 MainAsync().Wait();

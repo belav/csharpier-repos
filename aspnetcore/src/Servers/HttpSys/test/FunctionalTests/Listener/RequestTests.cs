@@ -15,7 +15,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener;
 
 public class RequestTests
 {
-
     [ConditionalTheory]
     [InlineData("/path%")]
     [InlineData("/path%XY")]
@@ -57,7 +56,10 @@ public class RequestTests
     [InlineData("%F0%A4%AD%A2", "𤭢")]
     [InlineData("%F0%a4%Ad%a2", "𤭢")]
     [InlineData("%48%65%6C%6C%6F%20%57%6F%72%6C%64", "Hello World")]
-    [InlineData("%48%65%6C%6C%6F%2D%C2%B5%40%C3%9F%C3%B6%C3%A4%C3%BC%C3%A0%C3%A1", "Hello-µ@ßöäüàá")]
+    [InlineData(
+        "%48%65%6C%6C%6F%2D%C2%B5%40%C3%9F%C3%B6%C3%A4%C3%BC%C3%A0%C3%A1",
+        "Hello-µ@ßöäüàá"
+    )]
     // Test the borderline cases of overlong UTF8.
     [InlineData("%C2%80", "\u0080")]
     [InlineData("%E0%A0%80", "\u0800")]
@@ -67,7 +69,10 @@ public class RequestTests
     [InlineData("%20", " ")]
     // Internationalized
     [InlineData("%C3%84ra%20Benetton", "Ära Benetton")]
-    [InlineData("%E6%88%91%E8%87%AA%E6%A8%AA%E5%88%80%E5%90%91%E5%A4%A9%E7%AC%91%E5%8E%BB%E7%95%99%E8%82%9D%E8%83%86%E4%B8%A4%E6%98%86%E4%BB%91", "我自横刀向天笑去留肝胆两昆仑")]
+    [InlineData(
+        "%E6%88%91%E8%87%AA%E6%A8%AA%E5%88%80%E5%90%91%E5%A4%A9%E7%AC%91%E5%8E%BB%E7%95%99%E8%82%9D%E8%83%86%E4%B8%A4%E6%98%86%E4%BB%91",
+        "我自横刀向天笑去留肝胆两昆仑"
+    )]
     // Skip forward slash
     [InlineData("%2F", "%2F")]
     [InlineData("foo%2Fbar", "foo%2Fbar")]
@@ -138,7 +143,11 @@ public class RequestTests
         }
     }
 
-    private async Task<string> SendSocketRequestAsync(string address, string path, string method = "GET")
+    private async Task<string> SendSocketRequestAsync(
+        string address,
+        string path,
+        string method = "GET"
+    )
     {
         var uri = new Uri(address);
         StringBuilder builder = new StringBuilder();

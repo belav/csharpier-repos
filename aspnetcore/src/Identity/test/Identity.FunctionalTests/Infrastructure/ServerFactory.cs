@@ -25,8 +25,7 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
     where TStartup : class
     where TContext : DbContext
 {
-    private readonly SqliteConnection _connection
-        = new SqliteConnection($"DataSource=:memory:");
+    private readonly SqliteConnection _connection = new SqliteConnection($"DataSource=:memory:");
 
     public ServerFactory()
     {
@@ -48,14 +47,16 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
         base.ConfigureWebHost(builder);
         builder.UseStartup<TStartup>();
 
-        builder.ConfigureServices(sc =>
-        {
-            sc.SetupTestDatabase<TContext>(_connection)
-                .AddMvc()
-                // Mark the cookie as essential for right now, as Identity uses it on
-                // several places to pass important data in post-redirect-get flows.
-                .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
-        });
+        builder.ConfigureServices(
+            sc =>
+            {
+                sc.SetupTestDatabase<TContext>(_connection)
+                    .AddMvc()
+                    // Mark the cookie as essential for right now, as Identity uses it on
+                    // several places to pass important data in post-redirect-get flows.
+                    .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
+            }
+        );
 
         UpdateApplicationParts(builder);
     }
@@ -94,68 +95,96 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
 
     private static void AddRelatedParts(IServiceCollection services, string framework)
     {
-        var _assemblyMap =
-            new Dictionary<UIFramework, string>()
-            {
-                [UIFramework.Bootstrap5] = "Microsoft.AspNetCore.Identity.UI.Views.V5",
-                [UIFramework.Bootstrap4] = "Microsoft.AspNetCore.Identity.UI.Views.V4",
-            };
+        var _assemblyMap = new Dictionary<UIFramework, string>()
+        {
+            [UIFramework.Bootstrap5] = "Microsoft.AspNetCore.Identity.UI.Views.V5",
+            [UIFramework.Bootstrap4] = "Microsoft.AspNetCore.Identity.UI.Views.V4",
+        };
 
         var mvcBuilder = services
             .AddMvc()
-            .ConfigureApplicationPartManager(partManager =>
-            {
-                var thisAssembly = typeof(IdentityBuilderUIExtensions).Assembly;
-                var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(thisAssembly, throwOnError: true);
-                var relatedParts = relatedAssemblies.ToDictionary(
-                    ra => ra,
-                    CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts);
-
-                var selectedFrameworkAssembly = _assemblyMap[framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5];
-
-                foreach (var kvp in relatedParts)
+            .ConfigureApplicationPartManager(
+                partManager =>
                 {
-                    var assemblyName = kvp.Key.GetName().Name;
-                    if (!IsAssemblyForFramework(selectedFrameworkAssembly, assemblyName))
+                    var thisAssembly = typeof(IdentityBuilderUIExtensions).Assembly;
+                    var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
+                        thisAssembly,
+                        throwOnError: true
+                    );
+                    var relatedParts = relatedAssemblies.ToDictionary(
+                        ra => ra,
+                        CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts
+                    );
+
+                    var selectedFrameworkAssembly = _assemblyMap[
+                        framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5
+                    ];
+
+                    foreach (var kvp in relatedParts)
                     {
-                        RemoveParts(partManager, kvp.Value);
-                    }
-                    else
-                    {
-                        AddParts(partManager, kvp.Value);
-                    }
-                }
-                bool IsAssemblyForFramework(string frameworkAssembly, string assemblyName) =>
-                    string.Equals(assemblyName, frameworkAssembly, StringComparison.OrdinalIgnoreCase);
-                void RemoveParts(
-                    ApplicationPartManager manager,
-                    IEnumerable<ApplicationPart> partsToRemove)
-                {
-                    for (var i = 0; i < manager.ApplicationParts.Count; i++)
-                    {
-                        var part = manager.ApplicationParts[i];
-                        if (partsToRemove.Any(p => string.Equals(
-                                p.Name,
-                                part.Name,
-                                StringComparison.OrdinalIgnoreCase)))
+                        var assemblyName = kvp.Key.GetName().Name;
+                        if (!IsAssemblyForFramework(selectedFrameworkAssembly, assemblyName))
                         {
-                            manager.ApplicationParts.Remove(part);
+                            RemoveParts(partManager, kvp.Value);
+                        }
+                        else
+                        {
+                            AddParts(partManager, kvp.Value);
+                        }
+                    }
+                    bool IsAssemblyForFramework(string frameworkAssembly, string assemblyName) =>
+                        string.Equals(
+                            assemblyName,
+                            frameworkAssembly,
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                    void RemoveParts(
+                        ApplicationPartManager manager,
+                        IEnumerable<ApplicationPart> partsToRemove
+                    )
+                    {
+                        for (var i = 0; i < manager.ApplicationParts.Count; i++)
+                        {
+                            var part = manager.ApplicationParts[i];
+                            if (
+                                partsToRemove.Any(
+                                    p =>
+                                        string.Equals(
+                                            p.Name,
+                                            part.Name,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                )
+                            )
+                            {
+                                manager.ApplicationParts.Remove(part);
+                            }
+                        }
+                    }
+                    void AddParts(
+                        ApplicationPartManager manager,
+                        IEnumerable<ApplicationPart> partsToAdd
+                    )
+                    {
+                        foreach (var part in partsToAdd)
+                        {
+                            if (
+                                !manager.ApplicationParts.Any(
+                                    p =>
+                                        p.GetType() == part.GetType()
+                                        && string.Equals(
+                                            p.Name,
+                                            part.Name,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                )
+                            )
+                            {
+                                manager.ApplicationParts.Add(part);
+                            }
                         }
                     }
                 }
-                void AddParts(
-                    ApplicationPartManager manager,
-                    IEnumerable<ApplicationPart> partsToAdd)
-                {
-                    foreach (var part in partsToAdd)
-                    {
-                        if (!manager.ApplicationParts.Any(p => p.GetType() == part.GetType() &&
-                            string.Equals(p.Name, part.Name, StringComparison.OrdinalIgnoreCase)))
-                        {
-                            manager.ApplicationParts.Add(part);
-                        }
-                    }
-                }
-            });
+            );
     }
 }

@@ -14,16 +14,19 @@ namespace System.Runtime.Serialization.Json
     {
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public JsonByteArrayDataContract(ByteArrayDataContract traditionalByteArrayDataContract)
-            : base(traditionalByteArrayDataContract)
-        {
-        }
+            : base(traditionalByteArrayDataContract) { }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader) ? null : jsonReader.ReadElementContentAsBase64();
+                return TryReadNullAtTopLevel(jsonReader)
+                    ? null
+                    : jsonReader.ReadElementContentAsBase64();
             }
             else
             {

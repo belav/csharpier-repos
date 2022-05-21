@@ -18,14 +18,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
     /// <typeparam name="TAttribute">The attribute type to look for.</typeparam>
-    public abstract class PropertyAttributeConventionBase<TAttribute> : IPropertyAddedConvention, IPropertyFieldChangedConvention
-        where TAttribute : Attribute
+    public abstract class PropertyAttributeConventionBase<TAttribute>
+        : IPropertyAddedConvention,
+            IPropertyFieldChangedConvention where TAttribute : Attribute
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyAttributeConventionBase{TAttribute}" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        protected PropertyAttributeConventionBase(ProviderConventionSetBuilderDependencies dependencies)
+        protected PropertyAttributeConventionBase(
+            ProviderConventionSetBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -42,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
+            IConventionContext<IConventionPropertyBuilder> context
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
@@ -66,16 +70,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             FieldInfo? newFieldInfo,
             FieldInfo? oldFieldInfo,
-            IConventionContext<FieldInfo> context)
+            IConventionContext<FieldInfo> context
+        )
         {
-            if (newFieldInfo != null
-                && propertyBuilder.Metadata.PropertyInfo == null)
+            if (newFieldInfo != null && propertyBuilder.Metadata.PropertyInfo == null)
             {
                 Process(propertyBuilder, newFieldInfo, (IReadableConventionContext)context);
             }
         }
 
-        private void Process(IConventionPropertyBuilder propertyBuilder, MemberInfo memberInfo, IReadableConventionContext context)
+        private void Process(
+            IConventionPropertyBuilder propertyBuilder,
+            MemberInfo memberInfo,
+            IReadableConventionContext context
+        )
         {
             if (!Attribute.IsDefined(memberInfo, typeof(TAttribute), inherit: true))
             {
@@ -105,6 +113,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             TAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context);
+            IConventionContext context
+        );
     }
 }

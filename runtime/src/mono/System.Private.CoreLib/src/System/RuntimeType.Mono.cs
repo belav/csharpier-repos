@@ -23,7 +23,7 @@ namespace System
         FormatSignature = 0x00000008, // Include signature in method names
         FormatNoVersion = 0x00000010, // Suppress version and culture information in all assembly names
 #if _DEBUG
-        FormatDebug         = 0x00000020, // For debug printing of types only
+        FormatDebug = 0x00000020, // For debug printing of types only
 #endif
         FormatAngleBrackets = 0x00000040, // Whether generic types are C<T> or C[T]
         FormatStubInfo = 0x00000080, // Include stub info like {unbox-stub}
@@ -32,9 +32,7 @@ namespace System
         // If we want to be able to distinguish between overloads whose parameter types have the same name but come from different assemblies,
         // we can add FormatAssembly | FormatNoVersion to FormatSerialization. But we are omitting it because it is not a useful scenario
         // and including the assembly name will normally increase the size of the serialized data and also decrease the performance.
-        FormatSerialization = FormatNamespace |
-                              FormatGenericParam |
-                              FormatFullInst
+        FormatSerialization = FormatNamespace | FormatGenericParam | FormatFullInst
     }
 
     internal partial class RuntimeType
@@ -102,10 +100,7 @@ namespace System
 
             public int Count
             {
-                get
-                {
-                    return _count;
-                }
+                get { return _count; }
             }
 
             public void Add(T item)
@@ -123,8 +118,7 @@ namespace System
                         _items = new T[_capacity];
                         _items[0] = _item;
                     }
-                    else
-                    if (_capacity == _count)
+                    else if (_capacity == _count)
                     {
                         int newCapacity = 2 * _capacity;
                         Array.Resize(ref _items, newCapacity);
@@ -144,14 +138,23 @@ namespace System
         #region Internal
 
         [RequiresUnreferencedCode("Types might be removed")]
-        internal static RuntimeType? GetType(string typeName, bool throwOnError, bool ignoreCase,
-            ref StackCrawlMark stackMark)
+        internal static RuntimeType? GetType(
+            string typeName,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
             if (typeName == null)
                 throw new ArgumentNullException(nameof(typeName));
 
             return RuntimeTypeHandle.GetTypeByName(
-                typeName, throwOnError, ignoreCase, ref stackMark, false);
+                typeName,
+                throwOnError,
+                ignoreCase,
+                ref stackMark,
+                false
+            );
         }
 
         private static void SplitName(string? fullname, out string? name, out string? ns)
@@ -178,12 +181,15 @@ namespace System
             {
                 name = fullname;
             }
-
         }
         #endregion
 
         #region Filters
-        internal static BindingFlags FilterPreCalculate(bool isPublic, bool isInherited, bool isStatic)
+        internal static BindingFlags FilterPreCalculate(
+            bool isPublic,
+            bool isInherited,
+            bool isStatic
+        )
         {
             BindingFlags bindingFlags = isPublic ? BindingFlags.Public : BindingFlags.NonPublic;
 
@@ -218,8 +224,13 @@ namespace System
 
         // Calculate prefixLookup, ignoreCase, and listType for use by GetXXXCandidates
         private static void FilterHelper(
-            BindingFlags bindingFlags, ref string? name, bool allowPrefixLookup, out bool prefixLookup,
-            out bool ignoreCase, out MemberListType listType)
+            BindingFlags bindingFlags,
+            ref string? name,
+            bool allowPrefixLookup,
+            out bool prefixLookup,
+            out bool ignoreCase,
+            out MemberListType listType
+        )
         {
             prefixLookup = false;
             ignoreCase = false;
@@ -254,15 +265,31 @@ namespace System
         }
 
         // Used by the singular GetXXX APIs (Event, Field, Interface, NestedType) where prefixLookup is not supported.
-        private static void FilterHelper(BindingFlags bindingFlags, ref string? name, out bool ignoreCase, out MemberListType listType)
+        private static void FilterHelper(
+            BindingFlags bindingFlags,
+            ref string? name,
+            out bool ignoreCase,
+            out MemberListType listType
+        )
         {
             bool prefixLookup;
-            FilterHelper(bindingFlags, ref name, false, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingFlags,
+                ref name,
+                false,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
         }
 
         // Only called by GetXXXCandidates, GetInterfaces, and GetNestedTypes when FilterHelper has set "prefixLookup" to true.
         // Most of the plural GetXXX methods allow prefix lookups while the singular GetXXX methods mostly do not.
-        private static bool FilterApplyPrefixLookup(MemberInfo memberInfo, string? name, bool ignoreCase)
+        private static bool FilterApplyPrefixLookup(
+            MemberInfo memberInfo,
+            string? name,
+            bool ignoreCase
+        )
         {
             Debug.Assert(name != null);
 
@@ -280,15 +307,24 @@ namespace System
             return true;
         }
 
-
         // Used by FilterApplyType to perform all the filtering based on name and BindingFlags
         private static bool FilterApplyBase(
-            MemberInfo memberInfo, BindingFlags bindingFlags, bool isPublic, bool isNonProtectedInternal, bool isStatic,
-            string? name, bool prefixLookup)
+            MemberInfo memberInfo,
+            BindingFlags bindingFlags,
+            bool isPublic,
+            bool isNonProtectedInternal,
+            bool isStatic,
+            string? name,
+            bool prefixLookup
+        )
         {
             #region Preconditions
             Debug.Assert(memberInfo != null);
-            Debug.Assert(name == null || (bindingFlags & BindingFlags.IgnoreCase) == 0 || (name.ToLowerInvariant().Equals(name)));
+            Debug.Assert(
+                name == null
+                    || (bindingFlags & BindingFlags.IgnoreCase) == 0
+                    || (name.ToLowerInvariant().Equals(name))
+            );
             #endregion
 
             #region Filter by Public & Private
@@ -312,8 +348,10 @@ namespace System
             #endregion
 
             #region Filter by Static & Instance
-            if (memberInfo.MemberType != MemberTypes.TypeInfo &&
-                memberInfo.MemberType != MemberTypes.NestedType)
+            if (
+                memberInfo.MemberType != MemberTypes.TypeInfo
+                && memberInfo.MemberType != MemberTypes.NestedType
+            )
             {
                 if (isStatic)
                 {
@@ -334,7 +372,13 @@ namespace System
             #region Filter by name wrt prefixLookup and implicitly by case sensitivity
             if (prefixLookup == true)
             {
-                if (!FilterApplyPrefixLookup(memberInfo, name, (bindingFlags & BindingFlags.IgnoreCase) != 0))
+                if (
+                    !FilterApplyPrefixLookup(
+                        memberInfo,
+                        name,
+                        (bindingFlags & BindingFlags.IgnoreCase) != 0
+                    )
+                )
                     return false;
             }
             #endregion
@@ -342,14 +386,19 @@ namespace System
             #region Asymmetries
             // @Asymmetry - Internal, inherited, instance, non-protected, non-virtual, non-abstract members returned
             //              iff BindingFlags !DeclaredOnly, Instance and Public are present except for fields
-            if (((bindingFlags & BindingFlags.DeclaredOnly) == 0) &&        // DeclaredOnly not present
-                 isInherited &&                                            // Is inherited Member
-
-                (isNonProtectedInternal) &&                                 // Is non-protected internal member
-                ((bindingFlags & BindingFlags.NonPublic) != 0) &&           // BindingFlag.NonPublic present
-
-                (!isStatic) &&                                              // Is instance member
-                ((bindingFlags & BindingFlags.Instance) != 0))              // BindingFlag.Instance present
+            if (
+                ((bindingFlags & BindingFlags.DeclaredOnly) == 0)
+                && // DeclaredOnly not present
+                isInherited
+                && // Is inherited Member
+                (isNonProtectedInternal)
+                && // Is non-protected internal member
+                ((bindingFlags & BindingFlags.NonPublic) != 0)
+                && // BindingFlag.NonPublic present
+                (!isStatic)
+                && // Is instance member
+                ((bindingFlags & BindingFlags.Instance) != 0)
+            ) // BindingFlag.Instance present
             {
                 MethodInfo? methodInfo = memberInfo as MethodInfo;
 
@@ -364,17 +413,31 @@ namespace System
             return true;
         }
 
-
         // Used by GetInterface and GetNestedType(s) which don't need parameter type filtering.
         private static bool FilterApplyType(
-            Type type, BindingFlags bindingFlags, string? name, bool prefixLookup, string? ns)
+            Type type,
+            BindingFlags bindingFlags,
+            string? name,
+            bool prefixLookup,
+            string? ns
+        )
         {
             Debug.Assert(type is RuntimeType);
 
             bool isPublic = type.IsNestedPublic || type.IsPublic;
             bool isStatic = false;
 
-            if (!FilterApplyBase(type, bindingFlags, isPublic, type.IsNestedAssembly, isStatic, name, prefixLookup))
+            if (
+                !FilterApplyBase(
+                    type,
+                    bindingFlags,
+                    isPublic,
+                    type.IsNestedAssembly,
+                    isStatic,
+                    name,
+                    prefixLookup
+                )
+            )
                 return false;
 
             if (ns != null && ns != type.Namespace)
@@ -383,16 +446,23 @@ namespace System
             return true;
         }
 
-
         private static bool FilterApplyMethodInfo(
-            RuntimeMethodInfo method, BindingFlags bindingFlags, CallingConventions callConv, Type[]? argumentTypes)
+            RuntimeMethodInfo method,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type[]? argumentTypes
+        )
         {
             // Optimization: Pre-Calculate the method binding flags to avoid casting.
             return FilterApplyMethodBase(method, bindingFlags, callConv, argumentTypes);
         }
 
         private static bool FilterApplyConstructorInfo(
-            RuntimeConstructorInfo constructor, BindingFlags bindingFlags, CallingConventions callConv, Type[]? argumentTypes)
+            RuntimeConstructorInfo constructor,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type[]? argumentTypes
+        )
         {
             // Optimization: Pre-Calculate the method binding flags to avoid casting.
             return FilterApplyMethodBase(constructor, bindingFlags, callConv, argumentTypes);
@@ -401,7 +471,11 @@ namespace System
         // Used by GetMethodCandidates/GetConstructorCandidates, InvokeMember, and CreateInstanceImpl to perform the necessary filtering.
         // Should only be called by FilterApplyMethodInfo and FilterApplyConstructorInfo.
         private static bool FilterApplyMethodBase(
-            MethodBase methodBase, BindingFlags bindingFlags, CallingConventions callConv, Type[]? argumentTypes)
+            MethodBase methodBase,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type[]? argumentTypes
+        )
         {
             Debug.Assert(methodBase != null);
 
@@ -409,12 +483,16 @@ namespace System
             #region Check CallingConvention
             if ((callConv & CallingConventions.Any) == 0)
             {
-                if ((callConv & CallingConventions.VarArgs) != 0 &&
-                    (methodBase.CallingConvention & CallingConventions.VarArgs) == 0)
+                if (
+                    (callConv & CallingConventions.VarArgs) != 0
+                    && (methodBase.CallingConvention & CallingConventions.VarArgs) == 0
+                )
                     return false;
 
-                if ((callConv & CallingConventions.Standard) != 0 &&
-                    (methodBase.CallingConvention & CallingConventions.Standard) == 0)
+                if (
+                    (callConv & CallingConventions.Standard) != 0
+                    && (methodBase.CallingConvention & CallingConventions.Standard) == 0
+                )
                     return false;
             }
             #endregion
@@ -429,8 +507,17 @@ namespace System
                     #region Invoke Member, Get\Set & Create Instance specific case
                     // If the number of supplied arguments differs than the number in the signature AND
                     // we are not filtering for a dynamic call -- InvokeMethod or CreateInstance -- filter out the method.
-                    if ((bindingFlags &
-                        (BindingFlags.InvokeMethod | BindingFlags.CreateInstance | BindingFlags.GetProperty | BindingFlags.SetProperty)) == 0)
+                    if (
+                        (
+                            bindingFlags
+                            & (
+                                BindingFlags.InvokeMethod
+                                | BindingFlags.CreateInstance
+                                | BindingFlags.GetProperty
+                                | BindingFlags.SetProperty
+                            )
+                        ) == 0
+                    )
                         return false;
 
                     bool testForParamArray = false;
@@ -453,7 +540,7 @@ namespace System
                         #endregion
                     }
                     else
-                    {// fewer supplied arguments than parameters, missing arguments could be optional
+                    { // fewer supplied arguments than parameters, missing arguments could be optional
                         #region OptionalParamBinding
                         if ((bindingFlags & BindingFlags.OptionalParamBinding) == 0)
                         {
@@ -478,7 +565,8 @@ namespace System
                             return false;
 
                         // The last argument of the signature could be a param array.
-                        bool shortByMoreThanOneSuppliedArgument = argumentTypes.Length < parameterInfos.Length - 1;
+                        bool shortByMoreThanOneSuppliedArgument =
+                            argumentTypes.Length < parameterInfos.Length - 1;
 
                         if (shortByMoreThanOneSuppliedArgument)
                             return false;
@@ -510,7 +598,12 @@ namespace System
                             for (int i = 0; i < parameterInfos.Length; i++)
                             {
                                 // a null argument type implies a null arg which is always a perfect match
-                                if (argumentTypes[i] is not null && !argumentTypes[i].MatchesParameterTypeExactly(parameterInfos[i]))
+                                if (
+                                    argumentTypes[i] is not null
+                                    && !argumentTypes[i].MatchesParameterTypeExactly(
+                                        parameterInfos[i]
+                                    )
+                                )
                                     return false;
                             }
                         }
@@ -538,19 +631,35 @@ namespace System
         #endregion
 
         #region Constructor
-        internal RuntimeType() { throw new NotSupportedException(); }
+        internal RuntimeType()
+        {
+            throw new NotSupportedException();
+        }
         #endregion
 
         #region Type Overrides
 
         #region Get XXXInfo Candidates
         private ListBuilder<MethodInfo> GetMethodCandidates(
-            string? name, BindingFlags bindingAttr, CallingConventions callConv,
-            Type[]? types, int genericParamCount, bool allowPrefixLookup)
+            string? name,
+            BindingFlags bindingAttr,
+            CallingConventions callConv,
+            Type[]? types,
+            int genericParamCount,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             MemberListType listType;
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
             RuntimeMethodInfo[] cache = GetMethodsByName(name, bindingAttr, listType, this);
             ListBuilder<MethodInfo> candidates = new ListBuilder<MethodInfo>(cache.Length);
@@ -569,8 +678,10 @@ namespace System
                     if (args.Length != genericParamCount)
                         continue;
                 }
-                if (FilterApplyMethodInfo(methodInfo, bindingAttr, callConv, types) &&
-                    (!prefixLookup || FilterApplyPrefixLookup(methodInfo, name, ignoreCase)))
+                if (
+                    FilterApplyMethodInfo(methodInfo, bindingAttr, callConv, types)
+                    && (!prefixLookup || FilterApplyPrefixLookup(methodInfo, name, ignoreCase))
+                )
                 {
                     candidates.Add(methodInfo);
                 }
@@ -580,22 +691,42 @@ namespace System
         }
 
         private ListBuilder<ConstructorInfo> GetConstructorCandidates(
-            string? name, BindingFlags bindingAttr, CallingConventions callConv,
-            Type[]? types, bool allowPrefixLookup)
+            string? name,
+            BindingFlags bindingAttr,
+            CallingConventions callConv,
+            Type[]? types,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             MemberListType listType;
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
-            if (!string.IsNullOrEmpty(name) && name != ConstructorInfo.ConstructorName && name != ConstructorInfo.TypeConstructorName)
+            if (
+                !string.IsNullOrEmpty(name)
+                && name != ConstructorInfo.ConstructorName
+                && name != ConstructorInfo.TypeConstructorName
+            )
                 return new ListBuilder<ConstructorInfo>(0);
             RuntimeConstructorInfo[] cache = GetConstructors_internal(bindingAttr, this);
-            ListBuilder<ConstructorInfo> candidates = new ListBuilder<ConstructorInfo>(cache.Length);
+            ListBuilder<ConstructorInfo> candidates = new ListBuilder<ConstructorInfo>(
+                cache.Length
+            );
             for (int i = 0; i < cache.Length; i++)
             {
                 RuntimeConstructorInfo constructorInfo = cache[i];
-                if (FilterApplyConstructorInfo(constructorInfo, bindingAttr, callConv, types) &&
-                    (!prefixLookup || FilterApplyPrefixLookup(constructorInfo, name, ignoreCase)))
+                if (
+                    FilterApplyConstructorInfo(constructorInfo, bindingAttr, callConv, types)
+                    && (!prefixLookup || FilterApplyPrefixLookup(constructorInfo, name, ignoreCase))
+                )
                 {
                     candidates.Add(constructorInfo);
                 }
@@ -604,13 +735,24 @@ namespace System
             return candidates;
         }
 
-
         private ListBuilder<PropertyInfo> GetPropertyCandidates(
-            string? name, BindingFlags bindingAttr, Type[]? types, bool allowPrefixLookup)
+            string? name,
+            BindingFlags bindingAttr,
+            Type[]? types,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             MemberListType listType;
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
             RuntimePropertyInfo[] cache = GetPropertiesByName(name, bindingAttr, listType, this);
             bindingAttr ^= BindingFlags.DeclaredOnly;
@@ -619,9 +761,11 @@ namespace System
             for (int i = 0; i < cache.Length; i++)
             {
                 RuntimePropertyInfo propertyInfo = cache[i];
-                if ((bindingAttr & propertyInfo.BindingFlags) == propertyInfo.BindingFlags &&
-                    (!prefixLookup || FilterApplyPrefixLookup(propertyInfo, name, ignoreCase)) &&
-                    (types == null || (propertyInfo.GetIndexParameters().Length == types.Length)))
+                if (
+                    (bindingAttr & propertyInfo.BindingFlags) == propertyInfo.BindingFlags
+                    && (!prefixLookup || FilterApplyPrefixLookup(propertyInfo, name, ignoreCase))
+                    && (types == null || (propertyInfo.GetIndexParameters().Length == types.Length))
+                )
                 {
                     candidates.Add(propertyInfo);
                 }
@@ -630,11 +774,23 @@ namespace System
             return candidates;
         }
 
-        private ListBuilder<EventInfo> GetEventCandidates(string? name, BindingFlags bindingAttr, bool allowPrefixLookup)
+        private ListBuilder<EventInfo> GetEventCandidates(
+            string? name,
+            BindingFlags bindingAttr,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             MemberListType listType;
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
             RuntimeEventInfo[] cache = GetEvents_internal(name, listType, this);
             bindingAttr ^= BindingFlags.DeclaredOnly;
@@ -643,8 +799,10 @@ namespace System
             for (int i = 0; i < cache.Length; i++)
             {
                 RuntimeEventInfo eventInfo = cache[i];
-                if ((bindingAttr & eventInfo.BindingFlags) == eventInfo.BindingFlags &&
-                    (!prefixLookup || FilterApplyPrefixLookup(eventInfo, name, ignoreCase)))
+                if (
+                    (bindingAttr & eventInfo.BindingFlags) == eventInfo.BindingFlags
+                    && (!prefixLookup || FilterApplyPrefixLookup(eventInfo, name, ignoreCase))
+                )
                 {
                     candidates.Add(eventInfo);
                 }
@@ -653,11 +811,23 @@ namespace System
             return candidates;
         }
 
-        private ListBuilder<FieldInfo> GetFieldCandidates(string? name, BindingFlags bindingAttr, bool allowPrefixLookup)
+        private ListBuilder<FieldInfo> GetFieldCandidates(
+            string? name,
+            BindingFlags bindingAttr,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             MemberListType listType;
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
             RuntimeFieldInfo[] cache = GetFields_internal(name, bindingAttr, listType, this);
             bindingAttr ^= BindingFlags.DeclaredOnly;
@@ -675,14 +845,27 @@ namespace System
             return candidates;
         }
 
-        private ListBuilder<Type> GetNestedTypeCandidates(string? fullname, BindingFlags bindingAttr, bool allowPrefixLookup)
+        private ListBuilder<Type> GetNestedTypeCandidates(
+            string? fullname,
+            BindingFlags bindingAttr,
+            bool allowPrefixLookup
+        )
         {
-            bool prefixLookup, ignoreCase;
+            bool prefixLookup,
+                ignoreCase;
             bindingAttr &= ~BindingFlags.Static;
-            string? name, ns;
+            string? name,
+                ns;
             MemberListType listType;
             SplitName(fullname, out name, out ns);
-            FilterHelper(bindingAttr, ref name, allowPrefixLookup, out prefixLookup, out ignoreCase, out listType);
+            FilterHelper(
+                bindingAttr,
+                ref name,
+                allowPrefixLookup,
+                out prefixLookup,
+                out ignoreCase,
+                out listType
+            );
 
             RuntimeType[] cache = GetNestedTypes_internal(name, bindingAttr, listType);
             ListBuilder<Type> candidates = new ListBuilder<Type>(cache.Length);
@@ -701,38 +884,58 @@ namespace System
         #endregion
 
         #region Get All XXXInfos
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
-            return GetMethodCandidates(null, bindingAttr, CallingConventions.Any, null, -1, false).ToArray();
+            return GetMethodCandidates(null, bindingAttr, CallingConventions.Any, null, -1, false)
+                .ToArray();
         }
 
         [ComVisible(true)]
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
-            return GetConstructorCandidates(null, bindingAttr, CallingConventions.Any, null, false).ToArray();
+            return GetConstructorCandidates(null, bindingAttr, CallingConventions.Any, null, false)
+                .ToArray();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             return GetPropertyCandidates(null, bindingAttr, null, false).ToArray();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             return GetEventCandidates(null, bindingAttr, false).ToArray();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             return GetFieldCandidates(null, bindingAttr, false).ToArray();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             return GetNestedTypeCandidates(null, bindingAttr, false).ToArray();
@@ -741,29 +944,54 @@ namespace System
         [DynamicallyAccessedMembers(GetAllMembers)]
         public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
         {
-            ListBuilder<MethodInfo> methods = GetMethodCandidates(null, bindingAttr, CallingConventions.Any, null, -1, false);
-            ListBuilder<ConstructorInfo> constructors = GetConstructorCandidates(null, bindingAttr, CallingConventions.Any, null, false);
-            ListBuilder<PropertyInfo> properties = GetPropertyCandidates(null, bindingAttr, null, false);
+            ListBuilder<MethodInfo> methods = GetMethodCandidates(
+                null,
+                bindingAttr,
+                CallingConventions.Any,
+                null,
+                -1,
+                false
+            );
+            ListBuilder<ConstructorInfo> constructors = GetConstructorCandidates(
+                null,
+                bindingAttr,
+                CallingConventions.Any,
+                null,
+                false
+            );
+            ListBuilder<PropertyInfo> properties = GetPropertyCandidates(
+                null,
+                bindingAttr,
+                null,
+                false
+            );
             ListBuilder<EventInfo> events = GetEventCandidates(null, bindingAttr, false);
             ListBuilder<FieldInfo> fields = GetFieldCandidates(null, bindingAttr, false);
             ListBuilder<Type> nestedTypes = GetNestedTypeCandidates(null, bindingAttr, false);
             // Interfaces are excluded from the result of GetMembers
 
             MemberInfo[] members = new MemberInfo[
-                methods.Count +
-                constructors.Count +
-                properties.Count +
-                events.Count +
-                fields.Count +
-                nestedTypes.Count];
+                methods.Count
+                    + constructors.Count
+                    + properties.Count
+                    + events.Count
+                    + fields.Count
+                    + nestedTypes.Count
+            ];
 
             int i = 0;
-            methods.CopyTo(members, i); i += methods.Count;
-            constructors.CopyTo(members, i); i += constructors.Count;
-            properties.CopyTo(members, i); i += properties.Count;
-            events.CopyTo(members, i); i += events.Count;
-            fields.CopyTo(members, i); i += fields.Count;
-            nestedTypes.CopyTo(members, i); i += nestedTypes.Count;
+            methods.CopyTo(members, i);
+            i += methods.Count;
+            constructors.CopyTo(members, i);
+            i += constructors.Count;
+            properties.CopyTo(members, i);
+            i += properties.Count;
+            events.CopyTo(members, i);
+            i += events.Count;
+            fields.CopyTo(members, i);
+            i += fields.Count;
+            nestedTypes.CopyTo(members, i);
+            i += nestedTypes.Count;
             Debug.Assert(i == members.Length);
 
             return members;
@@ -771,18 +999,44 @@ namespace System
 
         #endregion
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             return GetMethodImpl(name, -1, bindingAttr, binder, callConvention, types, modifiers);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, int genericParamCount,
-            BindingFlags bindingAttr, Binder? binder, CallingConventions callConv,
-            Type[]? types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            int genericParamCount,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConv,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
-            ListBuilder<MethodInfo> candidates = GetMethodCandidates(name, bindingAttr, callConv, types, genericParamCount, false);
+            ListBuilder<MethodInfo> candidates = GetMethodCandidates(
+                name,
+                bindingAttr,
+                callConv,
+                types,
+                genericParamCount,
+                false
+            );
             if (candidates.Count == 0)
                 return null;
 
@@ -804,22 +1058,39 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count) as MethodInfo;
+                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(
+                            candidates.ToArray(),
+                            candidates.Count
+                        ) as MethodInfo;
                 }
             }
 
             if (binder == null)
                 binder = DefaultBinder;
 
-            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers) as MethodInfo;
+            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers)
+                as MethodInfo;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         protected override ConstructorInfo? GetConstructorImpl(
-            BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention,
-            Type[] types, ParameterModifier[]? modifiers)
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
-            ListBuilder<ConstructorInfo> candidates = GetConstructorCandidates(null, bindingAttr, CallingConventions.Any, types, false);
+            ListBuilder<ConstructorInfo> candidates = GetConstructorCandidates(
+                null,
+                bindingAttr,
+                CallingConventions.Any,
+                types,
+                false
+            );
 
             if (candidates.Count == 0)
                 return null;
@@ -836,21 +1107,38 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactBinding(candidates.ToArray(), types, modifiers) as ConstructorInfo;
+                return System.DefaultBinder.ExactBinding(candidates.ToArray(), types, modifiers)
+                    as ConstructorInfo;
 
             if (binder == null)
                 binder = DefaultBinder;
 
-            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers) as ConstructorInfo;
+            return binder.SelectMethod(bindingAttr, candidates.ToArray(), types, modifiers)
+                as ConstructorInfo;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         protected override PropertyInfo? GetPropertyImpl(
-            string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers)
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
 
-            ListBuilder<PropertyInfo> candidates = GetPropertyCandidates(name, bindingAttr, types, false);
+            ListBuilder<PropertyInfo> candidates = GetPropertyCandidates(
+                name,
+                bindingAttr,
+                types,
+                false
+            );
 
             if (candidates.Count == 0)
                 return null;
@@ -862,7 +1150,10 @@ namespace System
                 {
                     PropertyInfo firstCandidate = candidates[0];
 
-                    if (returnType is not null && !returnType.IsEquivalentTo(firstCandidate.PropertyType))
+                    if (
+                        returnType is not null
+                        && !returnType.IsEquivalentTo(firstCandidate.PropertyType)
+                    )
                         return null;
 
                     return firstCandidate;
@@ -876,18 +1167,33 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(candidates.ToArray(), returnType, types, modifiers);
+                return System.DefaultBinder.ExactPropertyBinding(
+                    candidates.ToArray(),
+                    returnType,
+                    types,
+                    modifiers
+                );
 
             if (binder == null)
                 binder = DefaultBinder;
 
-            return binder.SelectProperty(bindingAttr, candidates.ToArray(), returnType, types, modifiers);
+            return binder.SelectProperty(
+                bindingAttr,
+                candidates.ToArray(),
+                returnType,
+                types,
+                modifiers
+            );
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo? GetEvent(string name, BindingFlags bindingAttr)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
 
             bool ignoreCase;
             MemberListType listType;
@@ -913,10 +1219,14 @@ namespace System
             return match;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
-            if (name == null) throw new ArgumentNullException();
+            if (name == null)
+                throw new ArgumentNullException();
 
             bool ignoreCase;
             MemberListType listType;
@@ -937,11 +1247,18 @@ namespace System
                         if (ReferenceEquals(fieldInfo.DeclaringType, match.DeclaringType))
                             throw new AmbiguousMatchException(SR.Arg_AmbiguousMatchException);
 
-                        if ((match.DeclaringType!.IsInterface == true) && (fieldInfo.DeclaringType!.IsInterface == true))
+                        if (
+                            (match.DeclaringType!.IsInterface == true)
+                            && (fieldInfo.DeclaringType!.IsInterface == true)
+                        )
                             multipleStaticFieldMatches = true;
                     }
 
-                    if (match == null || fieldInfo.DeclaringType!.IsSubclassOf(match.DeclaringType!) || match.DeclaringType!.IsInterface)
+                    if (
+                        match == null
+                        || fieldInfo.DeclaringType!.IsSubclassOf(match.DeclaringType!)
+                        || match.DeclaringType!.IsInterface
+                    )
                         match = fieldInfo;
                 }
             }
@@ -956,7 +1273,8 @@ namespace System
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         public override Type? GetInterface(string fullname, bool ignoreCase)
         {
-            if (fullname == null) throw new ArgumentNullException(nameof(fullname));
+            if (fullname == null)
+                throw new ArgumentNullException(nameof(fullname));
 
             BindingFlags bindingAttr = BindingFlags.Public | BindingFlags.NonPublic;
 
@@ -965,16 +1283,18 @@ namespace System
             if (ignoreCase)
                 bindingAttr |= BindingFlags.IgnoreCase;
 
-            string? name, ns;
+            string? name,
+                ns;
             MemberListType listType;
             SplitName(fullname, out name, out ns);
             FilterHelper(bindingAttr, ref name, out ignoreCase, out listType);
 
             List<RuntimeType>? list = null;
-            StringComparison nameComparison = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            StringComparison nameComparison = ignoreCase
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
             foreach (RuntimeType t in GetInterfaces())
             {
-
                 if (!string.Equals(t.Name, name, nameComparison))
                 {
                     continue;
@@ -1007,14 +1327,19 @@ namespace System
             return match;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type? GetNestedType(string fullname, BindingFlags bindingAttr)
         {
-            if (fullname == null) throw new ArgumentNullException(nameof(fullname));
+            if (fullname == null)
+                throw new ArgumentNullException(nameof(fullname));
 
             bool ignoreCase;
             bindingAttr &= ~BindingFlags.Static;
-            string? name, ns;
+            string? name,
+                ns;
             MemberListType listType;
             SplitName(fullname, out name, out ns);
             FilterHelper(bindingAttr, ref name, out ignoreCase, out listType);
@@ -1037,9 +1362,14 @@ namespace System
         }
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
 
             ListBuilder<MethodInfo> methods = default;
             ListBuilder<ConstructorInfo> constructors = default;
@@ -1053,7 +1383,14 @@ namespace System
             // Methods
             if ((type & MemberTypes.Method) != 0)
             {
-                methods = GetMethodCandidates(name, bindingAttr, CallingConventions.Any, null, -1, true);
+                methods = GetMethodCandidates(
+                    name,
+                    bindingAttr,
+                    CallingConventions.Any,
+                    null,
+                    -1,
+                    true
+                );
                 if (type == MemberTypes.Method)
                     return methods.ToArray();
                 totalCount += methods.Count;
@@ -1062,7 +1399,13 @@ namespace System
             // Constructors
             if ((type & MemberTypes.Constructor) != 0)
             {
-                constructors = GetConstructorCandidates(name, bindingAttr, CallingConventions.Any, null, true);
+                constructors = GetConstructorCandidates(
+                    name,
+                    bindingAttr,
+                    CallingConventions.Any,
+                    null,
+                    true
+                );
                 if (type == MemberTypes.Constructor)
                     return constructors.ToArray();
                 totalCount += constructors.Count;
@@ -1104,16 +1447,24 @@ namespace System
                 totalCount += nestedTypes.Count;
             }
 
-            MemberInfo[] compressMembers = (type == (MemberTypes.Method | MemberTypes.Constructor)) ?
-                new MethodBase[totalCount] : new MemberInfo[totalCount];
+            MemberInfo[] compressMembers =
+                (type == (MemberTypes.Method | MemberTypes.Constructor))
+                    ? new MethodBase[totalCount]
+                    : new MemberInfo[totalCount];
 
             int i = 0;
-            methods.CopyTo(compressMembers, i); i += methods.Count;
-            constructors.CopyTo(compressMembers, i); i += constructors.Count;
-            properties.CopyTo(compressMembers, i); i += properties.Count;
-            events.CopyTo(compressMembers, i); i += events.Count;
-            fields.CopyTo(compressMembers, i); i += fields.Count;
-            nestedTypes.CopyTo(compressMembers, i); i += nestedTypes.Count;
+            methods.CopyTo(compressMembers, i);
+            i += methods.Count;
+            constructors.CopyTo(compressMembers, i);
+            i += constructors.Count;
+            properties.CopyTo(compressMembers, i);
+            i += properties.Count;
+            events.CopyTo(compressMembers, i);
+            i += events.Count;
+            fields.CopyTo(compressMembers, i);
+            i += fields.Count;
+            nestedTypes.CopyTo(compressMembers, i);
+            i += nestedTypes.Count;
             Debug.Assert(i == compressMembers.Length);
 
             return compressMembers;
@@ -1121,19 +1472,24 @@ namespace System
 
         public override MemberInfo GetMemberWithSameMetadataDefinitionAs(MemberInfo member)
         {
-            if (member is null) throw new ArgumentNullException(nameof(member));
+            if (member is null)
+                throw new ArgumentNullException(nameof(member));
 
             RuntimeType? runtimeType = this;
             while (runtimeType != null)
             {
                 MemberInfo? result = member.MemberType switch
                 {
-                    MemberTypes.Method => GetMethodWithSameMetadataDefinitionAs(runtimeType, member),
-                    MemberTypes.Constructor => GetConstructorWithSameMetadataDefinitionAs(runtimeType, member),
-                    MemberTypes.Property => GetPropertyWithSameMetadataDefinitionAs(runtimeType, member),
+                    MemberTypes.Method
+                        => GetMethodWithSameMetadataDefinitionAs(runtimeType, member),
+                    MemberTypes.Constructor
+                        => GetConstructorWithSameMetadataDefinitionAs(runtimeType, member),
+                    MemberTypes.Property
+                        => GetPropertyWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Field => GetFieldWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Event => GetEventWithSameMetadataDefinitionAs(runtimeType, member),
-                    MemberTypes.NestedType => GetNestedTypeWithSameMetadataDefinitionAs(runtimeType, member),
+                    MemberTypes.NestedType
+                        => GetNestedTypeWithSameMetadataDefinitionAs(runtimeType, member),
                     _ => null
                 };
 
@@ -1149,11 +1505,25 @@ namespace System
         }
 
         private const BindingFlags GetMemberWithSameMetadataDefinitionAsBindingFlags =
-            BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags.DeclaredOnly
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.Public
+            | BindingFlags.NonPublic;
 
-        private static MemberInfo? GetMethodWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo methodInfo)
+        private static MemberInfo? GetMethodWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo methodInfo
+        )
         {
-            ListBuilder<MethodInfo> methods = runtimeType.GetMethodCandidates(methodInfo.Name, GetMemberWithSameMetadataDefinitionAsBindingFlags, CallingConventions.Any, null, -1, allowPrefixLookup: false);
+            ListBuilder<MethodInfo> methods = runtimeType.GetMethodCandidates(
+                methodInfo.Name,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                CallingConventions.Any,
+                null,
+                -1,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < methods.Count; i++)
             {
@@ -1167,9 +1537,18 @@ namespace System
             return null;
         }
 
-        private static MemberInfo? GetConstructorWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo constructorInfo)
+        private static MemberInfo? GetConstructorWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo constructorInfo
+        )
         {
-            ListBuilder<ConstructorInfo> ctors = runtimeType.GetConstructorCandidates(null, GetMemberWithSameMetadataDefinitionAsBindingFlags, CallingConventions.Any, null, allowPrefixLookup: false);
+            ListBuilder<ConstructorInfo> ctors = runtimeType.GetConstructorCandidates(
+                null,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                CallingConventions.Any,
+                null,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < ctors.Count; i++)
             {
@@ -1183,9 +1562,17 @@ namespace System
             return null;
         }
 
-        private static MemberInfo? GetPropertyWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo propertyInfo)
+        private static MemberInfo? GetPropertyWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo propertyInfo
+        )
         {
-            ListBuilder<PropertyInfo> properties = runtimeType.GetPropertyCandidates(propertyInfo.Name, GetMemberWithSameMetadataDefinitionAsBindingFlags, null, allowPrefixLookup: false);
+            ListBuilder<PropertyInfo> properties = runtimeType.GetPropertyCandidates(
+                propertyInfo.Name,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                null,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < properties.Count; i++)
             {
@@ -1199,9 +1586,16 @@ namespace System
             return null;
         }
 
-        private static MemberInfo? GetFieldWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo fieldInfo)
+        private static MemberInfo? GetFieldWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo fieldInfo
+        )
         {
-            ListBuilder<FieldInfo> fields = runtimeType.GetFieldCandidates(fieldInfo.Name, GetMemberWithSameMetadataDefinitionAsBindingFlags, allowPrefixLookup: false);
+            ListBuilder<FieldInfo> fields = runtimeType.GetFieldCandidates(
+                fieldInfo.Name,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < fields.Count; i++)
             {
@@ -1215,9 +1609,16 @@ namespace System
             return null;
         }
 
-        private static MemberInfo? GetEventWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo eventInfo)
+        private static MemberInfo? GetEventWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo eventInfo
+        )
         {
-            ListBuilder<EventInfo> events = runtimeType.GetEventCandidates(null, GetMemberWithSameMetadataDefinitionAsBindingFlags, allowPrefixLookup: false);
+            ListBuilder<EventInfo> events = runtimeType.GetEventCandidates(
+                null,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < events.Count; i++)
             {
@@ -1231,9 +1632,16 @@ namespace System
             return null;
         }
 
-        private static MemberInfo? GetNestedTypeWithSameMetadataDefinitionAs(RuntimeType runtimeType, MemberInfo nestedType)
+        private static MemberInfo? GetNestedTypeWithSameMetadataDefinitionAs(
+            RuntimeType runtimeType,
+            MemberInfo nestedType
+        )
         {
-            ListBuilder<Type> nestedTypes = runtimeType.GetNestedTypeCandidates(nestedType.Name, GetMemberWithSameMetadataDefinitionAsBindingFlags, allowPrefixLookup: false);
+            ListBuilder<Type> nestedTypes = runtimeType.GetNestedTypeCandidates(
+                nestedType.Name,
+                GetMemberWithSameMetadataDefinitionAsBindingFlags,
+                allowPrefixLookup: false
+            );
 
             for (int i = 0; i < nestedTypes.Count; i++)
             {
@@ -1306,7 +1714,9 @@ namespace System
             return types;
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override Type MakeGenericType(Type[] instantiation)
         {
             if (instantiation == null)
@@ -1315,7 +1725,9 @@ namespace System
             RuntimeType[] instantiationRuntimeType = new RuntimeType[instantiation.Length];
 
             if (!IsGenericTypeDefinition)
-                throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericTypeDefinition, this));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Arg_NotGenericTypeDefinition, this)
+                );
 
             if (GetGenericArguments().Length != instantiation.Length)
                 throw new ArgumentException(SR.Argument_GenericArgsCount, nameof(instantiation));
@@ -1338,7 +1750,10 @@ namespace System
                     instantiation = instantiationCopy;
                     if (!RuntimeFeature.IsDynamicCodeSupported)
                         throw new PlatformNotSupportedException();
-                    return System.Reflection.Emit.TypeBuilderInstantiation.MakeGenericType(this, instantiation);
+                    return System.Reflection.Emit.TypeBuilderInstantiation.MakeGenericType(
+                        this,
+                        instantiation
+                    );
                 }
 
                 instantiationRuntimeType[i] = rtInstantiationElem;
@@ -1392,12 +1807,22 @@ namespace System
                 throw new NotSupportedException(SR.Acc_CreateVoid);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2082:UnrecognizedReflectionPattern",
-            Justification = "Implementation detail of Activator that linker intrinsically recognizes")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2085:UnrecognizedReflectionPattern",
-            Justification = "Implementation detail of Activator that linker intrinsically recognizes")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2082:UnrecognizedReflectionPattern",
+            Justification = "Implementation detail of Activator that linker intrinsically recognizes"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2085:UnrecognizedReflectionPattern",
+            Justification = "Implementation detail of Activator that linker intrinsically recognizes"
+        )]
         internal object? CreateInstanceImpl(
-            BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture)
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture
+        )
         {
             CreateInstanceCheckThis();
 
@@ -1419,8 +1844,12 @@ namespace System
                     // so a call to GetMemberCons would fail
                     bool publicOnly = (bindingAttr & BindingFlags.NonPublic) == 0;
                     bool wrapExceptions = (bindingAttr & BindingFlags.DoNotWrapExceptions) == 0;
-                    if (argCnt == 0 && (bindingAttr & BindingFlags.Public) != 0 && (bindingAttr & BindingFlags.Instance) != 0
-                        && (IsValueType))
+                    if (
+                        argCnt == 0
+                        && (bindingAttr & BindingFlags.Public) != 0
+                        && (bindingAttr & BindingFlags.Instance) != 0
+                        && (IsValueType)
+                    )
                     {
                         server = CreateInstanceDefaultCtor(publicOnly, wrapExceptions);
                     }
@@ -1441,7 +1870,14 @@ namespace System
 
                         for (int i = 0; i < candidates.Length; i++)
                         {
-                            if (FilterApplyConstructorInfo((RuntimeConstructorInfo)candidates[i], bindingAttr, CallingConventions.Any, argsType))
+                            if (
+                                FilterApplyConstructorInfo(
+                                    (RuntimeConstructorInfo)candidates[i],
+                                    bindingAttr,
+                                    CallingConventions.Any,
+                                    argsType
+                                )
+                            )
                                 matches.Add(candidates[i]);
                         }
 
@@ -1452,7 +1888,9 @@ namespace System
 
                         if (cons == null)
                         {
-                            throw new MissingMethodException(SR.Format(SR.MissingConstructor_Name, FullName));
+                            throw new MissingMethodException(
+                                SR.Format(SR.MissingConstructor_Name, FullName)
+                            );
                         }
 
                         MethodBase? invokeMethod;
@@ -1460,39 +1898,60 @@ namespace System
 
                         try
                         {
-                            invokeMethod = binder.BindToMethod(bindingAttr, cons, ref args, null, culture, null, out state);
+                            invokeMethod = binder.BindToMethod(
+                                bindingAttr,
+                                cons,
+                                ref args,
+                                null,
+                                culture,
+                                null,
+                                out state
+                            );
                         }
-                        catch (MissingMethodException) { invokeMethod = null; }
+                        catch (MissingMethodException)
+                        {
+                            invokeMethod = null;
+                        }
 
                         if (invokeMethod == null)
                         {
-                            throw new MissingMethodException(SR.Format(SR.MissingConstructor_Name, FullName));
+                            throw new MissingMethodException(
+                                SR.Format(SR.MissingConstructor_Name, FullName)
+                            );
                         }
 
                         if (invokeMethod.GetParametersNoCopy().Length == 0)
                         {
                             if (args.Length != 0)
                             {
-
-                                Debug.Assert((invokeMethod.CallingConvention & CallingConventions.VarArgs) ==
-                                                 CallingConventions.VarArgs);
+                                Debug.Assert(
+                                    (invokeMethod.CallingConvention & CallingConventions.VarArgs)
+                                        == CallingConventions.VarArgs
+                                );
                                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
                             }
 
                             // fast path??
-                            server = Activator.CreateInstance(this, nonPublic: true, wrapExceptions: wrapExceptions);
+                            server = Activator.CreateInstance(
+                                this,
+                                nonPublic: true,
+                                wrapExceptions: wrapExceptions
+                            );
                         }
                         else
                         {
-                            server = ((ConstructorInfo)invokeMethod).Invoke(bindingAttr, binder, args, culture);
+                            server = ((ConstructorInfo)invokeMethod).Invoke(
+                                bindingAttr,
+                                binder,
+                                args,
+                                culture
+                            );
                             if (state != null)
                                 binder.ReorderArgumentArray(ref args, state);
                         }
                     }
                 }
-                finally
-                {
-                }
+                finally { }
             }
             catch (Exception)
             {
@@ -1529,14 +1988,15 @@ namespace System
         private TypeCache? cache;
 
         internal TypeCache Cache =>
-            Volatile.Read(ref cache) ??
-            Interlocked.CompareExchange(ref cache, new TypeCache(), null) ??
-            cache;
+            Volatile.Read(ref cache)
+            ?? Interlocked.CompareExchange(ref cache, new TypeCache(), null)
+            ?? cache;
 
         internal sealed class TypeCache
         {
             public Enum.EnumInfo? EnumInfo;
             public TypeCode TypeCode;
+
             // this is the displayed form: special characters
             // ,+*&*[]\ in the identifier portions of the names
             // have been escaped with a leading backslash (\)
@@ -1544,7 +2004,6 @@ namespace System
             public bool default_ctor_cached;
             public RuntimeConstructorInfo? default_ctor;
         }
-
 
         internal RuntimeType(object obj)
         {
@@ -1561,8 +2020,14 @@ namespace System
 
             ListBuilder<ConstructorInfo> ctors = GetConstructorCandidates(
                 null,
-                BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly, CallingConventions.Any,
-                Type.EmptyTypes, false);
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly,
+                CallingConventions.Any,
+                Type.EmptyTypes,
+                false
+            );
 
             if (ctors.Count == 1)
                 cache.default_ctor = ctor = (RuntimeConstructorInfo)ctors[0];
@@ -1593,12 +2058,17 @@ namespace System
             return GetCorrespondingInflatedConstructor(fromNoninstanciated);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2085:UnrecognizedReflectionPattern",
-            Justification = "We already have a FieldInfo so this will succeed")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2085:UnrecognizedReflectionPattern",
+            Justification = "We already have a FieldInfo so this will succeed"
+        )]
         internal override FieldInfo GetField(FieldInfo fromNoninstanciated)
         {
             /* create sensible flags from given FieldInfo */
-            BindingFlags flags = fromNoninstanciated.IsStatic ? BindingFlags.Static : BindingFlags.Instance;
+            BindingFlags flags = fromNoninstanciated.IsStatic
+                ? BindingFlags.Static
+                : BindingFlags.Instance;
             flags |= fromNoninstanciated.IsPublic ? BindingFlags.Public : BindingFlags.NonPublic;
             return GetField(fromNoninstanciated.Name, flags)!;
         }
@@ -1610,18 +2080,25 @@ namespace System
         }
 
         private RuntimeConstructorInfo? m_serializationCtor;
+
         internal RuntimeConstructorInfo? GetSerializationCtor()
         {
             if (m_serializationCtor == null)
             {
-                var s_SICtorParamTypes = new Type[] { typeof(SerializationInfo), typeof(StreamingContext) };
+                var s_SICtorParamTypes = new Type[]
+                {
+                    typeof(SerializationInfo),
+                    typeof(StreamingContext)
+                };
 
-                m_serializationCtor = GetConstructor(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                    null,
-                    CallingConventions.Any,
-                    s_SICtorParamTypes,
-                    null) as RuntimeConstructorInfo;
+                m_serializationCtor =
+                    GetConstructor(
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        CallingConventions.Any,
+                        s_SICtorParamTypes,
+                        null
+                    ) as RuntimeConstructorInfo;
             }
 
             return m_serializationCtor;
@@ -1638,7 +2115,10 @@ namespace System
             if (ctor == null)
             {
                 Type elementType = this.GetRootElementType();
-                if (ReferenceEquals(elementType, typeof(TypedReference)) || ReferenceEquals(elementType, typeof(RuntimeArgumentHandle)))
+                if (
+                    ReferenceEquals(elementType, typeof(TypedReference))
+                    || ReferenceEquals(elementType, typeof(RuntimeArgumentHandle))
+                )
                     throw new NotSupportedException("NotSupported_ContainsStackPtr");
 
                 if (IsValueType)
@@ -1650,13 +2130,25 @@ namespace System
             // TODO: .net does more checks in unmanaged land in RuntimeTypeHandle::CreateInstance
             if (IsAbstract)
             {
-                throw new MissingMethodException("Cannot create an abstract class '{0}'.", FullName);
+                throw new MissingMethodException(
+                    "Cannot create an abstract class '{0}'.",
+                    FullName
+                );
             }
 
-            return ctor.InvokeWorker(null, wrapExceptions ? BindingFlags.Default : BindingFlags.DoNotWrapExceptions, Span<object?>.Empty);
+            return ctor.InvokeWorker(
+                null,
+                wrapExceptions ? BindingFlags.Default : BindingFlags.DoNotWrapExceptions,
+                Span<object?>.Empty
+            );
         }
 
-        internal object? CheckValue(object? value, Binder? binder, CultureInfo? culture, BindingFlags invokeAttr)
+        internal object? CheckValue(
+            object? value,
+            Binder? binder,
+            CultureInfo? culture,
+            BindingFlags invokeAttr
+        )
         {
             bool failed = false;
             object? res = TryConvertToType(value, ref failed);
@@ -1913,16 +2405,15 @@ namespace System
         public override Type MakePointerType()
         {
             if (IsByRef)
-                throw new TypeLoadException($"Could not load type '{GetType()}' from assembly '{AssemblyQualifiedName}");
+                throw new TypeLoadException(
+                    $"Could not load type '{GetType()}' from assembly '{AssemblyQualifiedName}"
+                );
             return MakePointerType(this);
         }
 
         public override StructLayoutAttribute? StructLayoutAttribute
         {
-            get
-            {
-                return GetStructLayoutAttribute();
-            }
+            get { return GetStructLayoutAttribute(); }
         }
 
         public override bool ContainsGenericParameters
@@ -1951,15 +2442,21 @@ namespace System
             if (!IsGenericParameter)
                 throw new InvalidOperationException(SR.Arg_NotGenericParameter);
 
-            var paramInfo = new Mono.RuntimeGenericParamInfoHandle(RuntimeTypeHandle.GetGenericParameterInfo(this));
+            var paramInfo = new Mono.RuntimeGenericParamInfoHandle(
+                RuntimeTypeHandle.GetGenericParameterInfo(this)
+            );
             Type[] constraints = paramInfo.Constraints;
 
             return constraints ?? Type.EmptyTypes;
         }
 
         internal static object CreateInstanceForAnotherGenericParameter(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type genericType,
-            RuntimeType genericArgument)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type genericType,
+            RuntimeType genericArgument
+        )
         {
             var gt = (RuntimeType)MakeGenericType(genericType, new Type[] { genericArgument });
             RuntimeConstructorInfo? ctor = gt.GetDefaultConstructor();
@@ -1975,32 +2472,53 @@ namespace System
         private static extern Type MakeGenericType(Type gt, Type[] types);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern IntPtr GetMethodsByName_native(IntPtr namePtr, BindingFlags bindingAttr, MemberListType listType);
+        internal extern IntPtr GetMethodsByName_native(
+            IntPtr namePtr,
+            BindingFlags bindingAttr,
+            MemberListType listType
+        );
 
-        internal RuntimeMethodInfo[] GetMethodsByName(string? name, BindingFlags bindingAttr, MemberListType listType, RuntimeType reflectedType)
+        internal RuntimeMethodInfo[] GetMethodsByName(
+            string? name,
+            BindingFlags bindingAttr,
+            MemberListType listType,
+            RuntimeType reflectedType
+        )
         {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
-            using (var h = new Mono.SafeGPtrArrayHandle(GetMethodsByName_native(namePtr.Value, bindingAttr, listType)))
+            using (
+                var h = new Mono.SafeGPtrArrayHandle(
+                    GetMethodsByName_native(namePtr.Value, bindingAttr, listType)
+                )
+            )
             {
                 int n = h.Length;
                 var a = new RuntimeMethodInfo[n];
                 for (int i = 0; i < n; i++)
                 {
                     var mh = new RuntimeMethodHandle(h[i]);
-                    a[i] = (RuntimeMethodInfo)RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
+                    a[i] = (RuntimeMethodInfo)
+                        RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
                 }
                 return a;
             }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern IntPtr GetPropertiesByName_native(IntPtr name, BindingFlags bindingAttr, MemberListType listType);
+        private extern IntPtr GetPropertiesByName_native(
+            IntPtr name,
+            BindingFlags bindingAttr,
+            MemberListType listType
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern IntPtr GetConstructors_native(BindingFlags bindingAttr);
 
-        private RuntimeConstructorInfo[] GetConstructors_internal(BindingFlags bindingAttr, RuntimeType reflectedType)
+        private RuntimeConstructorInfo[] GetConstructors_internal(
+            BindingFlags bindingAttr,
+            RuntimeType reflectedType
+        )
         {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var h = new Mono.SafeGPtrArrayHandle(GetConstructors_native(bindingAttr)))
@@ -2010,17 +2528,27 @@ namespace System
                 for (int i = 0; i < n; i++)
                 {
                     var mh = new RuntimeMethodHandle(h[i]);
-                    a[i] = (RuntimeConstructorInfo)RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
+                    a[i] = (RuntimeConstructorInfo)
+                        RuntimeMethodInfo.GetMethodFromHandleNoGenericCheck(mh, refh);
                 }
                 return a;
             }
         }
 
-        private RuntimePropertyInfo[] GetPropertiesByName(string? name, BindingFlags bindingAttr, MemberListType listType, RuntimeType reflectedType)
+        private RuntimePropertyInfo[] GetPropertiesByName(
+            string? name,
+            BindingFlags bindingAttr,
+            MemberListType listType,
+            RuntimeType reflectedType
+        )
         {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
-            using (var h = new Mono.SafeGPtrArrayHandle(GetPropertiesByName_native(namePtr.Value, bindingAttr, listType)))
+            using (
+                var h = new Mono.SafeGPtrArrayHandle(
+                    GetPropertiesByName_native(namePtr.Value, bindingAttr, listType)
+                )
+            )
             {
                 int n = h.Length;
                 var a = new RuntimePropertyInfo[n];
@@ -2033,7 +2561,13 @@ namespace System
             }
         }
 
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type ifaceType)
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type ifaceType
+        )
         {
             if (IsGenericParameter)
                 throw new InvalidOperationException(SR.Arg_GenericParameter);
@@ -2061,13 +2595,21 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void GetInterfaceMapData(Type t, Type iface, out MethodInfo[] targets, out MethodInfo[] methods);
+        private static extern void GetInterfaceMapData(
+            Type t,
+            Type iface,
+            out MethodInfo[] targets,
+            out MethodInfo[] methods
+        );
 
         public override Guid GUID
         {
             get
             {
-                object[] att = GetCustomAttributes(typeof(System.Runtime.InteropServices.GuidAttribute), true);
+                object[] att = GetCustomAttributes(
+                    typeof(System.Runtime.InteropServices.GuidAttribute),
+                    true
+                );
                 if (att.Length == 0)
                     return Guid.Empty;
                 return new Guid(((System.Runtime.InteropServices.GuidAttribute)att[0]).Value);
@@ -2099,7 +2641,11 @@ namespace System
 
         private GenericParameterAttributes GetGenericParameterAttributes()
         {
-            return (new Mono.RuntimeGenericParamInfoHandle(RuntimeTypeHandle.GetGenericParameterInfo(this))).Attributes;
+            return (
+                new Mono.RuntimeGenericParamInfoHandle(
+                    RuntimeTypeHandle.GetGenericParameterInfo(this)
+                )
+            ).Attributes;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -2109,13 +2655,26 @@ namespace System
         private extern IntPtr GetEvents_native(IntPtr name, MemberListType listType);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern IntPtr GetFields_native(IntPtr name, BindingFlags bindingAttr, MemberListType listType);
+        private extern IntPtr GetFields_native(
+            IntPtr name,
+            BindingFlags bindingAttr,
+            MemberListType listType
+        );
 
-        private RuntimeFieldInfo[] GetFields_internal(string? name, BindingFlags bindingAttr, MemberListType listType, RuntimeType reflectedType)
+        private RuntimeFieldInfo[] GetFields_internal(
+            string? name,
+            BindingFlags bindingAttr,
+            MemberListType listType,
+            RuntimeType reflectedType
+        )
         {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
-            using (var h = new Mono.SafeGPtrArrayHandle(GetFields_native(namePtr.Value, bindingAttr, listType)))
+            using (
+                var h = new Mono.SafeGPtrArrayHandle(
+                    GetFields_native(namePtr.Value, bindingAttr, listType)
+                )
+            )
             {
                 int n = h.Length;
                 var a = new RuntimeFieldInfo[n];
@@ -2128,7 +2687,11 @@ namespace System
             }
         }
 
-        private RuntimeEventInfo[] GetEvents_internal(string? name, MemberListType listType, RuntimeType reflectedType)
+        private RuntimeEventInfo[] GetEvents_internal(
+            string? name,
+            MemberListType listType,
+            RuntimeType reflectedType
+        )
         {
             var refh = new RuntimeTypeHandle(reflectedType);
             using (var namePtr = new Mono.SafeStringMarshal(name))
@@ -2150,15 +2713,27 @@ namespace System
         public extern override Type[] GetInterfaces();
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern IntPtr GetNestedTypes_native(IntPtr name, BindingFlags bindingAttr, MemberListType listType);
+        private extern IntPtr GetNestedTypes_native(
+            IntPtr name,
+            BindingFlags bindingAttr,
+            MemberListType listType
+        );
 
-        private RuntimeType[] GetNestedTypes_internal(string? displayName, BindingFlags bindingAttr, MemberListType listType)
+        private RuntimeType[] GetNestedTypes_internal(
+            string? displayName,
+            BindingFlags bindingAttr,
+            MemberListType listType
+        )
         {
             string? internalName = null;
             if (displayName != null)
                 internalName = displayName;
             using (var namePtr = new Mono.SafeStringMarshal(internalName))
-            using (var h = new Mono.SafeGPtrArrayHandle(GetNestedTypes_native(namePtr.Value, bindingAttr, listType)))
+            using (
+                var h = new Mono.SafeGPtrArrayHandle(
+                    GetNestedTypes_native(namePtr.Value, bindingAttr, listType)
+                )
+            )
             {
                 int n = h.Length;
                 var a = new RuntimeType[n];
@@ -2173,10 +2748,7 @@ namespace System
 
         public override string? AssemblyQualifiedName
         {
-            get
-            {
-                return getFullName(true, true);
-            }
+            get { return getFullName(true, true); }
         }
 
         public extern override Type? DeclaringType
@@ -2215,22 +2787,17 @@ namespace System
             }
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeType>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeType>(other);
 
         public override bool IsSZArray
         {
-            get
-            {
-                return RuntimeTypeHandle.IsSzArray(this);
-            }
+            get { return RuntimeTypeHandle.IsSzArray(this); }
         }
 
         internal override bool IsUserType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsSubclassOf(Type type)
@@ -2252,23 +2819,38 @@ namespace System
             if (IsInterface || HasElementType || IsGenericParameter)
                 return null;
 
-            int pack = 0, size = 0;
+            int pack = 0,
+                size = 0;
             LayoutKind layoutKind = LayoutKind.Auto;
             switch (Attributes & TypeAttributes.LayoutMask)
             {
-                case TypeAttributes.ExplicitLayout: layoutKind = LayoutKind.Explicit; break;
-                case TypeAttributes.AutoLayout: layoutKind = LayoutKind.Auto; break;
-                case TypeAttributes.SequentialLayout: layoutKind = LayoutKind.Sequential; break;
-                default: break;
+                case TypeAttributes.ExplicitLayout:
+                    layoutKind = LayoutKind.Explicit;
+                    break;
+                case TypeAttributes.AutoLayout:
+                    layoutKind = LayoutKind.Auto;
+                    break;
+                case TypeAttributes.SequentialLayout:
+                    layoutKind = LayoutKind.Sequential;
+                    break;
+                default:
+                    break;
             }
 
             CharSet charSet = CharSet.None;
             switch (Attributes & TypeAttributes.StringFormatMask)
             {
-                case TypeAttributes.AnsiClass: charSet = CharSet.Ansi; break;
-                case TypeAttributes.AutoClass: charSet = CharSet.Auto; break;
-                case TypeAttributes.UnicodeClass: charSet = CharSet.Unicode; break;
-                default: break;
+                case TypeAttributes.AnsiClass:
+                    charSet = CharSet.Ansi;
+                    break;
+                case TypeAttributes.AutoClass:
+                    charSet = CharSet.Auto;
+                    break;
+                case TypeAttributes.UnicodeClass:
+                    charSet = CharSet.Unicode;
+                    break;
+                default:
+                    break;
             }
 
             GetPacking(out pack, out size);
@@ -2279,7 +2861,12 @@ namespace System
             if (pack == 0)
                 pack = DEFAULT_PACKING_SIZE;
 
-            return new StructLayoutAttribute(layoutKind) { Pack = pack, Size = size, CharSet = charSet };
+            return new StructLayoutAttribute(layoutKind)
+            {
+                Pack = pack,
+                Size = size,
+                CharSet = charSet
+            };
         }
     }
 }

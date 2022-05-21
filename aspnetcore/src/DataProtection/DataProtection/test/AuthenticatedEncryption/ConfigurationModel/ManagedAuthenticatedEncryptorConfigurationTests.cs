@@ -15,13 +15,25 @@ public class ManagedAuthenticatedEncryptorConfigurationTests
         var configuration = new ManagedAuthenticatedEncryptorConfiguration();
 
         // Act
-        var masterKey1 = ((ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
-        var masterKey2 = ((ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()).MasterKey;
+        var masterKey1 = (
+            (ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
+        var masterKey2 = (
+            (ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor()
+        ).MasterKey;
 
         // Assert
         SecretAssert.NotEqual(masterKey1, masterKey2);
-        SecretAssert.LengthIs(512 /* bits */, masterKey1);
-        SecretAssert.LengthIs(512 /* bits */, masterKey2);
+        SecretAssert.LengthIs(
+            512 /* bits */
+            ,
+            masterKey1
+        );
+        SecretAssert.LengthIs(
+            512 /* bits */
+            ,
+            masterKey2
+        );
     }
 
     [Fact]
@@ -31,7 +43,8 @@ public class ManagedAuthenticatedEncryptorConfigurationTests
         var configuration = new ManagedAuthenticatedEncryptorConfiguration();
 
         // Act
-        var descriptor = (ManagedAuthenticatedEncryptorDescriptor)configuration.CreateNewDescriptor();
+        var descriptor = (ManagedAuthenticatedEncryptorDescriptor)
+            configuration.CreateNewDescriptor();
 
         // Assert
         Assert.Equal(configuration, descriptor.Configuration);

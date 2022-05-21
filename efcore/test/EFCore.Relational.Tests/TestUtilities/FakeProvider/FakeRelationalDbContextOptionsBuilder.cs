@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider
 {
     public class FakeRelationalDbContextOptionsBuilder
-        : RelationalDbContextOptionsBuilder<FakeRelationalDbContextOptionsBuilder, FakeRelationalOptionsExtension>
+        : RelationalDbContextOptionsBuilder<
+            FakeRelationalDbContextOptionsBuilder,
+            FakeRelationalOptionsExtension
+        >
     {
         public FakeRelationalDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder)
-        {
-        }
+            : base(optionsBuilder) { }
     }
 }

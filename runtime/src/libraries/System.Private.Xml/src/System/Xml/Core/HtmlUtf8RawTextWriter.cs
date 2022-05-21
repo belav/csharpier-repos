@@ -32,7 +32,8 @@ namespace System.Xml
 
         private const int StackIncrement = 10;
 
-        public HtmlUtf8RawTextWriter(Stream stream, XmlWriterSettings settings) : base(stream, settings)
+        public HtmlUtf8RawTextWriter(Stream stream, XmlWriterSettings settings)
+            : base(stream, settings)
         {
             Init(settings);
         }
@@ -95,7 +96,9 @@ namespace System.Xml
         // For the HTML element, it should call this method with ns and prefix as String.Empty
         public override void WriteStartElement(string prefix, string localName, string ns)
         {
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             _elementScope.Push((byte)_currentElementProperties);
 
@@ -103,7 +106,8 @@ namespace System.Xml
             {
                 Debug.Assert(prefix.Length == 0);
 
-                _currentElementProperties = (ElementProperties)_elementPropertySearch.FindCaseInsensitiveString(localName);
+                _currentElementProperties = (ElementProperties)
+                    _elementPropertySearch.FindCaseInsensitiveString(localName);
                 base._bufBytes[_bufPos++] = (byte)'<';
                 base.RawText(localName);
                 base._attrEndPos = _bufPos;
@@ -280,7 +284,9 @@ namespace System.Xml
         //
         public override void WriteStartAttribute(string prefix, string localName, string ns)
         {
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             if (ns.Length == 0)
             {
@@ -292,10 +298,21 @@ namespace System.Xml
                 }
                 base.RawText(localName);
 
-                if ((_currentElementProperties & (ElementProperties.BOOL_PARENT | ElementProperties.URI_PARENT | ElementProperties.NAME_PARENT)) != 0)
+                if (
+                    (
+                        _currentElementProperties
+                        & (
+                            ElementProperties.BOOL_PARENT
+                            | ElementProperties.URI_PARENT
+                            | ElementProperties.NAME_PARENT
+                        )
+                    ) != 0
+                )
                 {
-                    _currentAttributeProperties = (AttributeProperties)_attributePropertySearch.FindCaseInsensitiveString(localName) &
-                                                 (AttributeProperties)_currentElementProperties;
+                    _currentAttributeProperties =
+                        (AttributeProperties)
+                            _attributePropertySearch.FindCaseInsensitiveString(localName)
+                        & (AttributeProperties)_currentElementProperties;
 
                     if ((_currentAttributeProperties & AttributeProperties.BOOLEAN) != 0)
                     {
@@ -478,7 +495,16 @@ namespace System.Xml
 
         protected unsafe void WriteHtmlAttributeTextBlock(char* pSrc, char* pSrcEnd)
         {
-            if ((_currentAttributeProperties & (AttributeProperties.BOOLEAN | AttributeProperties.URI | AttributeProperties.NAME)) != 0)
+            if (
+                (
+                    _currentAttributeProperties
+                    & (
+                        AttributeProperties.BOOLEAN
+                        | AttributeProperties.URI
+                        | AttributeProperties.NAME
+                    )
+                ) != 0
+            )
             {
                 if ((_currentAttributeProperties & AttributeProperties.BOOLEAN) != 0)
                 {
@@ -486,7 +512,13 @@ namespace System.Xml
                     return;
                 }
 
-                if ((_currentAttributeProperties & (AttributeProperties.URI | AttributeProperties.NAME)) != 0 && !_doNotEscapeUriAttributes)
+                if (
+                    (
+                        _currentAttributeProperties
+                        & (AttributeProperties.URI | AttributeProperties.NAME)
+                    ) != 0
+                    && !_doNotEscapeUriAttributes
+                )
                 {
                     WriteUriAttributeText(pSrc, pSrcEnd);
                 }
@@ -549,7 +581,11 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch <= 0x7F)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
+                        && ch <= 0x7F
+                    )
                     {
                         *pDst++ = (byte)ch;
                         pSrc++;
@@ -637,7 +673,11 @@ namespace System.Xml
                         pDstEnd = pDstBegin + _bufLen;
                     }
 
-                    while (pDst < pDstEnd && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc)) && ch < 0x80)
+                    while (
+                        pDst < pDstEnd
+                        && XmlCharType.IsAttributeValueChar((char)(ch = *pSrc))
+                        && ch < 0x80
+                    )
                     {
                         *pDst++ = (byte)ch;
                         pSrc++;
@@ -780,7 +820,8 @@ namespace System.Xml
         //
         // Constructors
         //
-        public HtmlUtf8RawTextWriterIndent(Stream stream, XmlWriterSettings settings) : base(stream, settings)
+        public HtmlUtf8RawTextWriterIndent(Stream stream, XmlWriterSettings settings)
+            : base(stream, settings)
         {
             Init(settings);
         }
@@ -801,7 +842,9 @@ namespace System.Xml
 
         public override void WriteStartElement(string prefix, string localName, string ns)
         {
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             base._elementScope.Push((byte)base._currentElementProperties);
 
@@ -809,9 +852,13 @@ namespace System.Xml
             {
                 Debug.Assert(prefix.Length == 0);
 
-                base._currentElementProperties = (ElementProperties)_elementPropertySearch.FindCaseInsensitiveString(localName);
+                base._currentElementProperties = (ElementProperties)
+                    _elementPropertySearch.FindCaseInsensitiveString(localName);
 
-                if (_endBlockPos == base._bufPos && (base._currentElementProperties & ElementProperties.BLOCK_WS) != 0)
+                if (
+                    _endBlockPos == base._bufPos
+                    && (base._currentElementProperties & ElementProperties.BLOCK_WS) != 0
+                )
                 {
                     WriteIndent();
                 }
@@ -821,7 +868,8 @@ namespace System.Xml
             }
             else
             {
-                base._currentElementProperties = ElementProperties.HAS_NS | ElementProperties.BLOCK_WS;
+                base._currentElementProperties =
+                    ElementProperties.HAS_NS | ElementProperties.BLOCK_WS;
 
                 if (_endBlockPos == base._bufPos)
                 {
@@ -863,7 +911,9 @@ namespace System.Xml
         internal override void WriteEndElement(string prefix, string localName, string ns)
         {
             bool isBlockWs;
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             _indentLevel--;
 

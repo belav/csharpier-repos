@@ -17,28 +17,16 @@ namespace System.ConfigurationTests
             [ApplicationScopedSetting]
             public string StringProperty
             {
-                get
-                {
-                    return (string) this[nameof(StringProperty)];
-                }
-                set
-                {
-                    this[nameof(StringProperty)] = value;
-                }
+                get { return (string)this[nameof(StringProperty)]; }
+                set { this[nameof(StringProperty)] = value; }
             }
 
             [UserScopedSetting]
             [DefaultSettingValue("42")]
             public int IntProperty
             {
-                get
-                {
-                    return (int)this[nameof(IntProperty)];
-                }
-                set
-                {
-                    this[nameof(IntProperty)] = value;
-                }
+                get { return (int)this[nameof(IntProperty)]; }
+                set { this[nameof(IntProperty)] = value; }
             }
         }
 
@@ -48,27 +36,15 @@ namespace System.ConfigurationTests
             [SettingsProvider(typeof(CustomProvider))]
             public string StringPropertyWithProvider
             {
-                get
-                {
-                    return (string)this[nameof(StringPropertyWithProvider)];
-                }
-                set
-                {
-                    this[nameof(StringPropertyWithProvider)] = value;
-                }
+                get { return (string)this[nameof(StringPropertyWithProvider)]; }
+                set { this[nameof(StringPropertyWithProvider)] = value; }
             }
 
             [UserScopedSetting]
             public string StringProperty
             {
-                get
-                {
-                    return (string)this[nameof(StringProperty)];
-                }
-                set
-                {
-                    this[nameof(StringProperty)] = value;
-                }
+                get { return (string)this[nameof(StringProperty)]; }
+                set { this[nameof(StringProperty)] = value; }
             }
 
             public class CustomProvider : SettingsProvider
@@ -76,29 +52,40 @@ namespace System.ConfigurationTests
                 public const string DefaultStringPropertyValue = "stringPropertySet";
                 public override string ApplicationName { get; set; }
 
-                public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
+                public override SettingsPropertyValueCollection GetPropertyValues(
+                    SettingsContext context,
+                    SettingsPropertyCollection collection
+                )
                 {
                     SettingsPropertyValueCollection result = new SettingsPropertyValueCollection();
-                    SettingsProperty property = new SettingsProperty("StringPropertyWithProvider", typeof(string), this, false, DefaultStringPropertyValue, SettingsSerializeAs.String, new SettingsAttributeDictionary(), false, false);
+                    SettingsProperty property = new SettingsProperty(
+                        "StringPropertyWithProvider",
+                        typeof(string),
+                        this,
+                        false,
+                        DefaultStringPropertyValue,
+                        SettingsSerializeAs.String,
+                        new SettingsAttributeDictionary(),
+                        false,
+                        false
+                    );
                     result.Add(new SettingsPropertyValue(new SettingsProperty(property)));
                     return result;
                 }
 
-                public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
-                {
-                }
+                public override void SetPropertyValues(
+                    SettingsContext context,
+                    SettingsPropertyValueCollection collection
+                ) { }
 
                 public override void Initialize(string name, NameValueCollection config)
                 {
                     base.Initialize(name ?? "CustomProvider", config ?? new NameValueCollection());
                 }
             }
-
         }
 
-        private class PersistedSimpleSettings : SimpleSettings
-        {
-        }
+        private class PersistedSimpleSettings : SimpleSettings { }
 
         [Theory]
         [InlineData(true)]
@@ -153,9 +140,14 @@ namespace System.ConfigurationTests
             Assert.Equal(10, settings.IntProperty);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer)),
+        [
+            ConditionalTheory(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsNotWindowsNanoServer)
+            ),
             InlineData(true),
-            InlineData(false)]
+            InlineData(false)
+        ]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/28833")]
         public void Save_SimpleSettings_Ok(bool isSynchronized)
         {
@@ -178,8 +170,8 @@ namespace System.ConfigurationTests
 
             // Create a new instance and validate persisted settings
             settings = isSynchronized
-                            ? (PersistedSimpleSettings)SettingsBase.Synchronized(new PersistedSimpleSettings())
-                            : new PersistedSimpleSettings();
+                ? (PersistedSimpleSettings)SettingsBase.Synchronized(new PersistedSimpleSettings())
+                : new PersistedSimpleSettings();
             Assert.Equal(default, settings.StringProperty); // [ApplicationScopedSetting] isn't persisted
             Assert.Equal(12, settings.IntProperty);
 
@@ -191,8 +183,8 @@ namespace System.ConfigurationTests
 
             // Create a new instance and validate persisted settings
             settings = isSynchronized
-                            ? (PersistedSimpleSettings)SettingsBase.Synchronized(new PersistedSimpleSettings())
-                            : new PersistedSimpleSettings();
+                ? (PersistedSimpleSettings)SettingsBase.Synchronized(new PersistedSimpleSettings())
+                : new PersistedSimpleSettings();
             Assert.Equal(default, settings.StringProperty); // [ApplicationScopedSetting] isn't persisted
             Assert.Equal(DefaultIntPropertyValue, settings.IntProperty);
         }
@@ -200,10 +192,7 @@ namespace System.ConfigurationTests
         [Fact]
         public void Reload_SimpleSettings_Ok()
         {
-            var settings = new SimpleSettings
-            {
-                IntProperty = 10
-            };
+            var settings = new SimpleSettings { IntProperty = 10 };
 
             Assert.NotEqual(DefaultIntPropertyValue, settings.IntProperty);
             settings.Reload();
@@ -222,20 +211,12 @@ namespace System.ConfigurationTests
             [SettingsProvider(typeof(TestProvider))]
             public string StringProperty
             {
-                get
-                {
-                    return (string)this["StringProperty"];
-                }
-                set
-                {
-                    this["StringProperty"] = value;
-                }
+                get { return (string)this["StringProperty"]; }
+                set { this["StringProperty"] = value; }
             }
         }
 
-        private class TestProvider : LocalFileSettingsProvider
-        {
-        }
+        private class TestProvider : LocalFileSettingsProvider { }
 
         [Fact]
         public void SettingsProperty_SettingsWithAttributes_Ok()
@@ -257,14 +238,13 @@ namespace System.ConfigurationTests
             bool changingFired = false;
             int newValue = 1976;
 
-            settings.SettingChanging += (object sender, SettingChangingEventArgs e)
-                =>
-                {
-                    changingFired = true;
-                    Assert.Equal(nameof(SimpleSettings.IntProperty), e.SettingName);
-                    Assert.Equal(typeof(SimpleSettings).FullName, e.SettingClass);
-                    Assert.Equal(newValue, e.NewValue);
-                };
+            settings.SettingChanging += (object sender, SettingChangingEventArgs e) =>
+            {
+                changingFired = true;
+                Assert.Equal(nameof(SimpleSettings.IntProperty), e.SettingName);
+                Assert.Equal(typeof(SimpleSettings).FullName, e.SettingClass);
+                Assert.Equal(newValue, e.NewValue);
+            };
 
             settings.IntProperty = newValue;
 
@@ -276,16 +256,12 @@ namespace System.ConfigurationTests
         public void SettingsChanging_Canceled()
         {
             int oldValue = 1776;
-            SimpleSettings settings = new SimpleSettings
-            {
-                IntProperty = oldValue
-            };
+            SimpleSettings settings = new SimpleSettings { IntProperty = oldValue };
 
             bool changingFired = false;
             int newValue = 1976;
 
-            settings.SettingChanging += (object sender, SettingChangingEventArgs e)
-                =>
+            settings.SettingChanging += (object sender, SettingChangingEventArgs e) =>
             {
                 changingFired = true;
                 e.Cancel = true;
@@ -303,11 +279,13 @@ namespace System.ConfigurationTests
             SettingsWithProvider settings = new SettingsWithProvider();
             bool loadedFired = false;
             string newStringPropertyValue = nameof(SettingsWithProvider.StringProperty);
-            settings.SettingsLoaded += (object s, SettingsLoadedEventArgs e)
-                =>
+            settings.SettingsLoaded += (object s, SettingsLoadedEventArgs e) =>
             {
                 loadedFired = true;
-                Assert.Equal(SettingsWithProvider.CustomProvider.DefaultStringPropertyValue, settings.StringPropertyWithProvider);
+                Assert.Equal(
+                    SettingsWithProvider.CustomProvider.DefaultStringPropertyValue,
+                    settings.StringPropertyWithProvider
+                );
                 if (string.IsNullOrEmpty(settings.StringProperty))
                     settings.StringProperty = newStringPropertyValue;
             };

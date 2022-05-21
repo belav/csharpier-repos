@@ -7,13 +7,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindKeylessEntitiesQuerySqliteTest : NorthwindKeylessEntitiesQueryRelationalTestBase<
-        NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+    public class NorthwindKeylessEntitiesQuerySqliteTest
+        : NorthwindKeylessEntitiesQueryRelationalTestBase<
+            NorthwindQuerySqliteFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindKeylessEntitiesQuerySqliteTest(
             NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

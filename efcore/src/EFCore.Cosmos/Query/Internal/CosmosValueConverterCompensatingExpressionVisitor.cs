@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public CosmosValueConverterCompensatingExpressionVisitor(
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -40,10 +41,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             return extensionExpression switch
             {
-                ShapedQueryExpression shapedQueryExpression => VisitShapedQueryExpression(shapedQueryExpression),
+                ShapedQueryExpression shapedQueryExpression
+                    => VisitShapedQueryExpression(shapedQueryExpression),
                 ReadItemExpression readItemExpression => readItemExpression,
                 SelectExpression selectExpression => VisitSelect(selectExpression),
-                SqlConditionalExpression sqlConditionalExpression => VisitSqlConditional(sqlConditionalExpression),
+                SqlConditionalExpression sqlConditionalExpression
+                    => VisitSqlConditional(sqlConditionalExpression),
                 _ => base.VisitExtension(extensionExpression),
             };
         }
@@ -53,9 +56,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var selectExpression = shapedQueryExpression.QueryExpression;
             var updatedSelectExpression = Visit(selectExpression);
             return updatedSelectExpression != selectExpression
-                ? shapedQueryExpression.Update(updatedSelectExpression,
+                ? shapedQueryExpression.Update(
+                    updatedSelectExpression,
                     ReplacingExpressionVisitor.Replace(
-                        selectExpression, updatedSelectExpression, shapedQueryExpression.ShaperExpression))
+                        selectExpression,
+                        updatedSelectExpression,
+                        shapedQueryExpression.ShaperExpression
+                    )
+                )
                 : shapedQueryExpression;
         }
 
@@ -74,7 +82,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var fromExpression = (RootReferenceExpression)Visit(selectExpression.FromExpression);
             changed |= fromExpression != selectExpression.FromExpression;
 
-            var predicate = TryCompensateForBoolWithValueConverter((SqlExpression)Visit(selectExpression.Predicate));
+            var predicate = TryCompensateForBoolWithValueConverter(
+                (SqlExpression)Visit(selectExpression.Predicate)
+            );
             changed |= predicate != selectExpression.Predicate;
 
             var orderings = new List<OrderingExpression>();
@@ -89,13 +99,22 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var offset = (SqlExpression)Visit(selectExpression.Offset);
 
             return changed
-                ? selectExpression.Update(projections, fromExpression, predicate, orderings, limit, offset)
+                ? selectExpression.Update(
+                    projections,
+                    fromExpression,
+                    predicate,
+                    orderings,
+                    limit,
+                    offset
+                )
                 : selectExpression;
         }
 
         private Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)
         {
-            var test = TryCompensateForBoolWithValueConverter((SqlExpression)Visit(sqlConditionalExpression.Test));
+            var test = TryCompensateForBoolWithValueConverter(
+                (SqlExpression)Visit(sqlConditionalExpression.Test)
+            );
             var ifTrue = (SqlExpression)Visit(sqlConditionalExpression.IfTrue);
             var ifFalse = (SqlExpression)Visit(sqlConditionalExpression.IfFalse);
 
@@ -104,28 +123,37 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private SqlExpression TryCompensateForBoolWithValueConverter(SqlExpression sqlExpression)
         {
-            if (sqlExpression is KeyAccessExpression keyAccessExpression
+            if (
+                sqlExpression is KeyAccessExpression keyAccessExpression
                 && keyAccessExpression.TypeMapping!.ClrType == typeof(bool)
-                && keyAccessExpression.TypeMapping!.Converter != null)
+                && keyAccessExpression.TypeMapping!.Converter != null
+            )
             {
                 return _sqlExpressionFactory.Equal(
                     sqlExpression,
-                    _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping));
+                    _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping)
+                );
             }
 
             if (sqlExpression is SqlUnaryExpression sqlUnaryExpression)
             {
                 return sqlUnaryExpression.Update(
-                    TryCompensateForBoolWithValueConverter(sqlUnaryExpression.Operand));
+                    TryCompensateForBoolWithValueConverter(sqlUnaryExpression.Operand)
+                );
             }
 
-            if (sqlExpression is SqlBinaryExpression sqlBinaryExpression
-                && (sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
-                    || sqlBinaryExpression.OperatorType == ExpressionType.OrElse))
+            if (
+                sqlExpression is SqlBinaryExpression sqlBinaryExpression
+                && (
+                    sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+                    || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
+                )
+            )
             {
                 return sqlBinaryExpression.Update(
                     TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Left),
-                    TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right));
+                    TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right)
+                );
             }
 
             return sqlExpression;

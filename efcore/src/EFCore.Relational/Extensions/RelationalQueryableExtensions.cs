@@ -49,7 +49,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The query string for debugging.</returns>
         public static DbCommand CreateDbCommand(this IQueryable source)
         {
-            if (source.Provider.Execute<IEnumerable>(source.Expression) is IRelationalQueryingEnumerable queryingEnumerable)
+            if (
+                source.Provider.Execute<IEnumerable>(source.Expression)
+                is IRelationalQueryingEnumerable queryingEnumerable
+            )
             {
                 return queryingEnumerable.CreateDbCommand();
             }
@@ -97,18 +100,16 @@ namespace Microsoft.EntityFrameworkCore
         public static IQueryable<TEntity> FromSqlRaw<TEntity>(
             this DbSet<TEntity> source,
             [NotParameterized] string sql,
-            params object[] parameters)
-            where TEntity : class
+            params object[] parameters
+        ) where TEntity : class
         {
             Check.NotEmpty(sql, nameof(sql));
             Check.NotNull(parameters, nameof(parameters));
 
             var queryableSource = (IQueryable)source;
             return queryableSource.Provider.CreateQuery<TEntity>(
-                GenerateFromSqlQueryRoot(
-                    queryableSource,
-                    sql,
-                    parameters));
+                GenerateFromSqlQueryRoot(queryableSource, sql, parameters)
+            );
         }
 
         /// <summary>
@@ -139,40 +140,47 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>An <see cref="IQueryable{T}" /> representing the interpolated string SQL query.</returns>
         public static IQueryable<TEntity> FromSqlInterpolated<TEntity>(
             this DbSet<TEntity> source,
-            [NotParameterized] FormattableString sql)
-            where TEntity : class
+            [NotParameterized] FormattableString sql
+        ) where TEntity : class
         {
             Check.NotNull(sql, nameof(sql));
             Check.NotEmpty(sql.Format, nameof(source));
 
             var queryableSource = (IQueryable)source;
             return queryableSource.Provider.CreateQuery<TEntity>(
-                GenerateFromSqlQueryRoot(
-                    queryableSource,
-                    sql.Format,
-                    sql.GetArguments()));
+                GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
+            );
         }
 
         private static FromSqlQueryRootExpression GenerateFromSqlQueryRoot(
             IQueryable source,
             string sql,
             object?[] arguments,
-            [CallerMemberName] string memberName = null!)
+            [CallerMemberName] string memberName = null!
+        )
         {
             var queryRootExpression = (QueryRootExpression)source.Expression;
 
             var entityType = queryRootExpression.EntityType;
-            if ((entityType.BaseType != null || entityType.GetDirectlyDerivedTypes().Any())
-                && entityType.FindDiscriminatorProperty() == null)
+            if (
+                (entityType.BaseType != null || entityType.GetDirectlyDerivedTypes().Any())
+                && entityType.FindDiscriminatorProperty() == null
+            )
             {
-                throw new InvalidOperationException(RelationalStrings.MethodOnNonTPHRootNotSupported(memberName, entityType.DisplayName()));
+                throw new InvalidOperationException(
+                    RelationalStrings.MethodOnNonTPHRootNotSupported(
+                        memberName,
+                        entityType.DisplayName()
+                    )
+                );
             }
 
             return new FromSqlQueryRootExpression(
                 queryRootExpression.QueryProvider!,
                 entityType,
                 sql,
-                Expression.Constant(arguments));
+                Expression.Constant(arguments)
+            );
         }
 
         /// <summary>
@@ -195,16 +203,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity">The type of entity being queried.</typeparam>
         /// <param name="source">The source query.</param>
         /// <returns>A new query where collections will be loaded through single database query.</returns>
-        public static IQueryable<TEntity> AsSingleQuery<TEntity>(
-            this IQueryable<TEntity> source)
-            where TEntity : class
-            => source.Provider is EntityQueryProvider
+        public static IQueryable<TEntity> AsSingleQuery<TEntity>(this IQueryable<TEntity> source)
+            where TEntity : class =>
+            source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)), source.Expression))
+                    Expression.Call(
+                        AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
                 : source;
 
-        internal static readonly MethodInfo AsSingleQueryMethodInfo
-            = typeof(RelationalQueryableExtensions).GetRequiredDeclaredMethod(nameof(AsSingleQuery));
+        internal static readonly MethodInfo AsSingleQueryMethodInfo =
+            typeof(RelationalQueryableExtensions).GetRequiredDeclaredMethod(nameof(AsSingleQuery));
 
         /// <summary>
         ///         Returns a new query which is configured to load the collections in the query results through separate database queries.
@@ -227,15 +238,18 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TEntity">The type of entity being queried.</typeparam>
         /// <param name="source">The source query.</param>
         /// <returns>A new query where collections will be loaded through separate database queries.</returns>
-        public static IQueryable<TEntity> AsSplitQuery<TEntity>(
-            this IQueryable<TEntity> source)
-            where TEntity : class
-            => source.Provider is EntityQueryProvider
+        public static IQueryable<TEntity> AsSplitQuery<TEntity>(this IQueryable<TEntity> source)
+            where TEntity : class =>
+            source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)), source.Expression))
+                    Expression.Call(
+                        AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
                 : source;
 
-        internal static readonly MethodInfo AsSplitQueryMethodInfo
-            = typeof(RelationalQueryableExtensions).GetRequiredDeclaredMethod(nameof(AsSplitQuery));
+        internal static readonly MethodInfo AsSplitQueryMethodInfo =
+            typeof(RelationalQueryableExtensions).GetRequiredDeclaredMethod(nameof(AsSplitQuery));
     }
 }

@@ -23,19 +23,22 @@ namespace System.CommandLine.Builder
     public static class CommandLineBuilderExtensions
     {
         private static readonly Lazy<string> _assemblyVersion =
-            new(() =>
-            {
-                var assembly = RootCommand.GetAssembly();
-                var assemblyVersionAttribute = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
-                if (assemblyVersionAttribute is null)
+            new(
+                () =>
                 {
-                    return assembly.GetName().Version.ToString();
+                    var assembly = RootCommand.GetAssembly();
+                    var assemblyVersionAttribute =
+                        assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                    if (assemblyVersionAttribute is null)
+                    {
+                        return assembly.GetName().Version.ToString();
+                    }
+                    else
+                    {
+                        return assemblyVersionAttribute.InformationalVersion;
+                    }
                 }
-                else
-                {
-                    return assemblyVersionAttribute.InformationalVersion;
-                }
-            });
+            );
 
         /// <summary>
         /// Enables signaling and handling of process termination via a <see cref="CancellationToken"/> that can be passed to a <see cref="ICommandHandler"/> during invocation.
@@ -44,53 +47,56 @@ namespace System.CommandLine.Builder
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder CancelOnProcessTermination(this CommandLineBuilder builder)
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                bool cancellationHandlingAdded = false;
-                ManualResetEventSlim? blockProcessExit = null;
-                ConsoleCancelEventHandler? consoleHandler = null;
-                EventHandler? processExitHandler = null;
+            builder.AddMiddleware(
+                async (context, next) =>
+                {
+                    bool cancellationHandlingAdded = false;
+                    ManualResetEventSlim? blockProcessExit = null;
+                    ConsoleCancelEventHandler? consoleHandler = null;
+                    EventHandler? processExitHandler = null;
 
-                context.CancellationHandlingAdded += (CancellationTokenSource cts) =>
-                {
-                    blockProcessExit = new ManualResetEventSlim(initialState: false);
-                    cancellationHandlingAdded = true;
-                    consoleHandler = (_, args) =>
+                    context.CancellationHandlingAdded += (CancellationTokenSource cts) =>
                     {
-                        cts.Cancel();
-                        // Stop the process from terminating.
-                        // Since the context was cancelled, the invocation should
-                        // finish and Main will return.
-                        args.Cancel = true;
+                        blockProcessExit = new ManualResetEventSlim(initialState: false);
+                        cancellationHandlingAdded = true;
+                        consoleHandler = (_, args) =>
+                        {
+                            cts.Cancel();
+                            // Stop the process from terminating.
+                            // Since the context was cancelled, the invocation should
+                            // finish and Main will return.
+                            args.Cancel = true;
+                        };
+                        processExitHandler = (_, _) =>
+                        {
+                            cts.Cancel();
+                            // The process exits as soon as the event handler returns.
+                            // We provide a return value using Environment.ExitCode
+                            // because Main will not finish executing.
+                            // Wait for the invocation to finish.
+                            blockProcessExit.Wait();
+                            ExitCode = context.ExitCode;
+                        };
+                        Console.CancelKeyPress += consoleHandler;
+                        AppDomain.CurrentDomain.ProcessExit += processExitHandler;
                     };
-                    processExitHandler = (_, _) =>
-                    {
-                        cts.Cancel();
-                        // The process exits as soon as the event handler returns.
-                        // We provide a return value using Environment.ExitCode
-                        // because Main will not finish executing.
-                        // Wait for the invocation to finish.
-                        blockProcessExit.Wait();
-                        ExitCode = context.ExitCode;
-                    };
-                    Console.CancelKeyPress += consoleHandler;
-                    AppDomain.CurrentDomain.ProcessExit += processExitHandler;
-                };
 
-                try
-                {
-                    await next(context);
-                }
-                finally
-                {
-                    if (cancellationHandlingAdded)
+                    try
                     {
-                        Console.CancelKeyPress -= consoleHandler;
-                        AppDomain.CurrentDomain.ProcessExit -= processExitHandler;
-                        blockProcessExit!.Set();
+                        await next(context);
                     }
-                }
-            }, MiddlewareOrderInternal.Startup);
+                    finally
+                    {
+                        if (cancellationHandlingAdded)
+                        {
+                            Console.CancelKeyPress -= consoleHandler;
+                            AppDomain.CurrentDomain.ProcessExit -= processExitHandler;
+                            blockProcessExit!.Set();
+                        }
+                    }
+                },
+                MiddlewareOrderInternal.Startup
+            );
 
             return builder;
         }
@@ -103,13 +109,19 @@ namespace System.CommandLine.Builder
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder ConfigureConsole(
             this CommandLineBuilder builder,
-            Func<BindingContext, IConsole> createConsole)
+            Func<BindingContext, IConsole> createConsole
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                context.BindingContext.ConsoleFactory = new AnonymousConsoleFactory(createConsole);
-                await next(context);
-            }, MiddlewareOrderInternal.ConfigureConsole);
+            builder.AddMiddleware(
+                async (context, next) =>
+                {
+                    context.BindingContext.ConsoleFactory = new AnonymousConsoleFactory(
+                        createConsole
+                    );
+                    await next(context);
+                },
+                MiddlewareOrderInternal.ConfigureConsole
+            );
 
             return builder;
         }
@@ -123,7 +135,8 @@ namespace System.CommandLine.Builder
         /// <seealso cref="IDirectiveCollection"/>
         public static CommandLineBuilder EnableDirectives(
             this CommandLineBuilder builder,
-            bool value = true)
+            bool value = true
+        )
         {
             builder.EnableDirectives = value;
             return builder;
@@ -135,7 +148,8 @@ namespace System.CommandLine.Builder
         /// <remarks>When set to <see langword="true"/>, all tokens following <c>--</c> will be placed into the <see cref="ParseResult.UnparsedTokens"/> collection. When set to <see langword="false"/>, all tokens following <c>--</c> will be treated as command arguments, even if they match an existing option.</remarks>
         public static CommandLineBuilder EnableLegacyDoubleDashBehavior(
             this CommandLineBuilder builder,
-            bool value = true)
+            bool value = true
+        )
         {
             builder.EnableLegacyDoubleDashBehavior = value;
             return builder;
@@ -149,12 +163,12 @@ namespace System.CommandLine.Builder
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         /// <remarks>
         /// POSIX conventions recommend that single-character options be allowed to be specified together after a single <c>-</c> prefix. When <see cref="EnablePosixBundling"/> is set to <see langword="true"/>, the following command lines are equivalent:
-        /// 
+        ///
         /// <code>
         ///     &gt; myapp -a -b -c
         ///     &gt; myapp -abc
         /// </code>
-        /// 
+        ///
         /// If an argument is provided after an option bundle, it applies to the last option in the bundle. When <see cref="EnablePosixBundling"/> is set to <see langword="true"/>, all of the following command lines are equivalent:
         /// <code>
         ///     &gt; myapp -a -b -c arg
@@ -165,7 +179,8 @@ namespace System.CommandLine.Builder
         /// </remarks>
         public static CommandLineBuilder EnablePosixBundling(
             this CommandLineBuilder builder,
-            bool value = true)
+            bool value = true
+        )
         {
             builder.EnablePosixBundling = value;
             return builder;
@@ -177,7 +192,8 @@ namespace System.CommandLine.Builder
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder ParseResponseFileAs(
             this CommandLineBuilder builder,
-            ResponseFileHandling responseFileHandling)
+            ResponseFileHandling responseFileHandling
+        )
         {
             builder.ResponseFileHandling = responseFileHandling;
             return builder;
@@ -189,51 +205,65 @@ namespace System.CommandLine.Builder
         /// <remarks>For command line completions to work, users must install the <c>dotnet-suggest</c> tool as well as the appropriate shim script for their shell.</remarks>
         /// <param name="builder">A command line builder.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
-        public static CommandLineBuilder RegisterWithDotnetSuggest(
-            this CommandLineBuilder builder)
+        public static CommandLineBuilder RegisterWithDotnetSuggest(this CommandLineBuilder builder)
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                var feature = new FeatureRegistration("dotnet-suggest-registration");
-
-                await feature.EnsureRegistered(async () =>
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    var stdOut = StringBuilderPool.Default.Rent();
-                    var stdErr = StringBuilderPool.Default.Rent();
+                    var feature = new FeatureRegistration("dotnet-suggest-registration");
 
-                    try
-                    {
-                        var currentProcessFullPath = Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-                        var currentProcessFileNameWithoutExtension = Path.GetFileNameWithoutExtension(currentProcessFullPath);
+                    await feature.EnsureRegistered(
+                        async () =>
+                        {
+                            var stdOut = StringBuilderPool.Default.Rent();
+                            var stdErr = StringBuilderPool.Default.Rent();
 
-                        var dotnetSuggestProcess = Process.StartProcess(
-                            command: "dotnet-suggest",
-                            args: $"register --command-path \"{currentProcessFullPath}\" --suggestion-command \"{currentProcessFileNameWithoutExtension}\"",
-                            stdOut: value => stdOut.Append(value),
-                            stdErr: value => stdOut.Append(value));
+                            try
+                            {
+                                var currentProcessFullPath = Diagnostics.Process
+                                    .GetCurrentProcess()
+                                    .MainModule.FileName;
+                                var currentProcessFileNameWithoutExtension =
+                                    Path.GetFileNameWithoutExtension(currentProcessFullPath);
 
-                        await dotnetSuggestProcess.CompleteAsync();
+                                var dotnetSuggestProcess = Process.StartProcess(
+                                    command: "dotnet-suggest",
+                                    args: $"register --command-path \"{currentProcessFullPath}\" --suggestion-command \"{currentProcessFileNameWithoutExtension}\"",
+                                    stdOut: value => stdOut.Append(value),
+                                    stdErr: value => stdOut.Append(value)
+                                );
 
-                        return string.Format(@"{0} exited with code {1}
+                                await dotnetSuggestProcess.CompleteAsync();
+
+                                return string.Format(
+                                    @"{0} exited with code {1}
 OUT:
 {2}
 ERR:
-{3}", dotnetSuggestProcess.StartInfo.FileName, dotnetSuggestProcess.ExitCode, stdOut, stdErr);
-                    }
-                    catch (Exception exception)
-                    {
-                        return $@"Exception during registration:
+{3}",
+                                    dotnetSuggestProcess.StartInfo.FileName,
+                                    dotnetSuggestProcess.ExitCode,
+                                    stdOut,
+                                    stdErr
+                                );
+                            }
+                            catch (Exception exception)
+                            {
+                                return $@"Exception during registration:
 {exception}";
-                    }
-                    finally
-                    {
-                        StringBuilderPool.Default.ReturnToPool(stdOut);
-                        StringBuilderPool.Default.ReturnToPool(stdErr);
-                    }
-                });
+                            }
+                            finally
+                            {
+                                StringBuilderPool.Default.ReturnToPool(stdOut);
+                                StringBuilderPool.Default.ReturnToPool(stdErr);
+                            }
+                        }
+                    );
 
-                await next(context);
-            }, MiddlewareOrderInternal.RegisterWithDotnetSuggest);
+                    await next(context);
+                },
+                MiddlewareOrderInternal.RegisterWithDotnetSuggest
+            );
 
             return builder;
         }
@@ -243,46 +273,66 @@ ERR:
         /// </summary>
         /// <param name="builder">A command line builder.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
-        public static CommandLineBuilder UseDebugDirective(
-            this CommandLineBuilder builder)
+        public static CommandLineBuilder UseDebugDirective(this CommandLineBuilder builder)
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.Directives.Contains("debug"))
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    const string environmentVariableName = "DOTNET_COMMANDLINE_DEBUG_PROCESSES";
+                    if (context.ParseResult.Directives.Contains("debug"))
+                    {
+                        const string environmentVariableName = "DOTNET_COMMANDLINE_DEBUG_PROCESSES";
 
-                    var process = Diagnostics.Process.GetCurrentProcess();
-                    var debuggableProcessNames = GetEnvironmentVariable(environmentVariableName);
-                    if (string.IsNullOrWhiteSpace(debuggableProcessNames))
-                    {
-                        context.Console.Error.WriteLine(context.LocalizationResources.DebugDirectiveExecutableNotSpecified(environmentVariableName, process.ProcessName));
-                        context.ExitCode = 1;
-                        return;
-                    }
-                    else
-                    {
-                        string[] processNames = debuggableProcessNames.Split(';');
-                        if (processNames.Contains(process.ProcessName, StringComparer.Ordinal))
+                        var process = Diagnostics.Process.GetCurrentProcess();
+                        var debuggableProcessNames = GetEnvironmentVariable(
+                            environmentVariableName
+                        );
+                        if (string.IsNullOrWhiteSpace(debuggableProcessNames))
                         {
-                            var processId = process.Id;
-                            context.Console.Out.WriteLine(context.LocalizationResources.DebugDirectiveAttachToProcess(processId, process.ProcessName));
-                            while (!Debugger.IsAttached)
-                            {
-                                await Task.Delay(500);
-                            }
-                        }
-                        else
-                        {
-                            context.Console.Error.WriteLine(context.LocalizationResources.DebugDirectiveProcessNotIncludedInEnvironmentVariable(process.ProcessName, environmentVariableName, debuggableProcessNames));
+                            context.Console.Error.WriteLine(
+                                context.LocalizationResources.DebugDirectiveExecutableNotSpecified(
+                                    environmentVariableName,
+                                    process.ProcessName
+                                )
+                            );
                             context.ExitCode = 1;
                             return;
                         }
+                        else
+                        {
+                            string[] processNames = debuggableProcessNames.Split(';');
+                            if (processNames.Contains(process.ProcessName, StringComparer.Ordinal))
+                            {
+                                var processId = process.Id;
+                                context.Console.Out.WriteLine(
+                                    context.LocalizationResources.DebugDirectiveAttachToProcess(
+                                        processId,
+                                        process.ProcessName
+                                    )
+                                );
+                                while (!Debugger.IsAttached)
+                                {
+                                    await Task.Delay(500);
+                                }
+                            }
+                            else
+                            {
+                                context.Console.Error.WriteLine(
+                                    context.LocalizationResources.DebugDirectiveProcessNotIncludedInEnvironmentVariable(
+                                        process.ProcessName,
+                                        environmentVariableName,
+                                        debuggableProcessNames
+                                    )
+                                );
+                                context.ExitCode = 1;
+                                return;
+                            }
+                        }
                     }
-                }
 
-                await next(context);
-            }, MiddlewareOrderInternal.DebugDirective);
+                    await next(context);
+                },
+                MiddlewareOrderInternal.DebugDirective
+            );
 
             return builder;
         }
@@ -293,29 +343,34 @@ ERR:
         /// <param name="builder">A command line builder.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseEnvironmentVariableDirective(
-            this CommandLineBuilder builder)
+            this CommandLineBuilder builder
+        )
         {
-            builder.AddMiddleware((context, next) =>
-            {
-                if (context.ParseResult.Directives.TryGetValues("env", out var directives))
+            builder.AddMiddleware(
+                (context, next) =>
                 {
-                    for (var i = 0; i < directives.Count; i++)
+                    if (context.ParseResult.Directives.TryGetValues("env", out var directives))
                     {
-                        var envDirective = directives[i];
-                        var components = envDirective.Split(new[] { '=' }, count: 2);
-                        var variable = components.Length > 0 ? components[0].Trim() : string.Empty;
-                        if (string.IsNullOrEmpty(variable) || components.Length < 2)
+                        for (var i = 0; i < directives.Count; i++)
                         {
-                            continue;
+                            var envDirective = directives[i];
+                            var components = envDirective.Split(new[] { '=' }, count: 2);
+                            var variable =
+                                components.Length > 0 ? components[0].Trim() : string.Empty;
+                            if (string.IsNullOrEmpty(variable) || components.Length < 2)
+                            {
+                                continue;
+                            }
+
+                            var value = components[1].Trim();
+                            SetEnvironmentVariable(variable, value);
                         }
-
-                        var value = components[1].Trim();
-                        SetEnvironmentVariable(variable, value);
                     }
-                }
 
-                return next(context);
-            }, MiddlewareOrderInternal.EnvironmentVariableDirective);
+                    return next(context);
+                },
+                MiddlewareOrderInternal.EnvironmentVariableDirective
+            );
 
             return builder;
         }
@@ -344,17 +399,17 @@ ERR:
         public static CommandLineBuilder UseDefaults(this CommandLineBuilder builder)
         {
             return builder
-                   .UseVersionOption()
-                   .UseHelp()
-                   .UseEnvironmentVariableDirective()
-                   .UseParseDirective()
-                   .UseDebugDirective()
-                   .UseSuggestDirective()
-                   .RegisterWithDotnetSuggest()
-                   .UseTypoCorrections()
-                   .UseParseErrorReporting()
-                   .UseExceptionHandler()
-                   .CancelOnProcessTermination();
+                .UseVersionOption()
+                .UseHelp()
+                .UseEnvironmentVariableDirective()
+                .UseParseDirective()
+                .UseDebugDirective()
+                .UseSuggestDirective()
+                .RegisterWithDotnetSuggest()
+                .UseTypoCorrections()
+                .UseParseErrorReporting()
+                .UseExceptionHandler()
+                .CancelOnProcessTermination();
         }
 
         /// <summary>
@@ -367,19 +422,23 @@ ERR:
         public static CommandLineBuilder UseExceptionHandler(
             this CommandLineBuilder builder,
             Action<Exception, InvocationContext>? onException = null,
-            int? errorExitCode = null)
+            int? errorExitCode = null
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                try
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    await next(context);
-                }
-                catch (Exception exception)
-                {
-                    (onException ?? Default)(exception, context);
-                }
-            }, MiddlewareOrderInternal.ExceptionHandler);
+                    try
+                    {
+                        await next(context);
+                    }
+                    catch (Exception exception)
+                    {
+                        (onException ?? Default)(exception, context);
+                    }
+                },
+                MiddlewareOrderInternal.ExceptionHandler
+            );
 
             return builder;
 
@@ -390,7 +449,9 @@ ERR:
                     context.Console.ResetTerminalForegroundColor();
                     context.Console.SetTerminalForegroundRed();
 
-                    context.Console.Error.Write(context.LocalizationResources.ExceptionHandlerHeader());
+                    context.Console.Error.Write(
+                        context.LocalizationResources.ExceptionHandlerHeader()
+                    );
                     context.Console.Error.WriteLine(exception.ToString());
 
                     context.Console.ResetTerminalForegroundColor();
@@ -425,27 +486,32 @@ ERR:
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseHelp(
             this CommandLineBuilder builder,
-            params string[] helpAliases)
+            params string[] helpAliases
+        )
         {
             return builder.UseHelp(new HelpOption(helpAliases, builder));
         }
 
         internal static CommandLineBuilder UseHelp(
             this CommandLineBuilder builder,
-            HelpOption helpOption)
+            HelpOption helpOption
+        )
         {
             if (builder.HelpOption is null)
             {
                 builder.HelpOption = helpOption;
                 builder.Command.TryAddGlobalOption(helpOption);
 
-                builder.AddMiddleware(async (context, next) =>
-                {
-                    if (!ShowHelp(context, builder.HelpOption))
+                builder.AddMiddleware(
+                    async (context, next) =>
                     {
-                        await next(context);
-                    }
-                }, MiddlewareOrderInternal.HelpOption);
+                        if (!ShowHelp(context, builder.HelpOption))
+                        {
+                            await next(context);
+                        }
+                    },
+                    MiddlewareOrderInternal.HelpOption
+                );
             }
             return builder;
         }
@@ -456,9 +522,10 @@ ERR:
         /// <param name="builder">A command line builder.</param>
         /// <param name="getHelpBuilder">A delegate that returns an instance of <see cref="IHelpBuilder"/></param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
-        public static TBuilder UseHelpBuilder<TBuilder>(this TBuilder builder,
-            Func<BindingContext, IHelpBuilder> getHelpBuilder)
-            where TBuilder : CommandLineBuilder
+        public static TBuilder UseHelpBuilder<TBuilder>(
+            this TBuilder builder,
+            Func<BindingContext, IHelpBuilder> getHelpBuilder
+        ) where TBuilder : CommandLineBuilder
         {
             if (builder is null)
             {
@@ -478,25 +545,25 @@ ERR:
         public static CommandLineBuilder AddMiddleware(
             this CommandLineBuilder builder,
             InvocationMiddleware middleware,
-            MiddlewareOrder order = MiddlewareOrder.Default)
+            MiddlewareOrder order = MiddlewareOrder.Default
+        )
         {
-            builder.AddMiddleware(
-                middleware,
-                order);
+            builder.AddMiddleware(middleware, order);
 
             return builder;
         }
 
         /// <inheritdoc cref="AddMiddleware(System.CommandLine.Builder.CommandLineBuilder,System.CommandLine.Invocation.InvocationMiddleware,System.CommandLine.Invocation.MiddlewareOrder)"/>
-        [Obsolete("This method is obsolete and will be removed in a future version. Please use AddMiddleware instead.")]
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. Please use AddMiddleware instead."
+        )]
         public static CommandLineBuilder UseMiddleware(
             this CommandLineBuilder builder,
             InvocationMiddleware middleware,
-            MiddlewareOrder order = MiddlewareOrder.Default)
+            MiddlewareOrder order = MiddlewareOrder.Default
+        )
         {
-            builder.AddMiddleware(
-                middleware,
-                order);
+            builder.AddMiddleware(middleware, order);
 
             return builder;
         }
@@ -511,29 +578,39 @@ ERR:
         public static CommandLineBuilder AddMiddleware(
             this CommandLineBuilder builder,
             Action<InvocationContext> onInvoke,
-            MiddlewareOrder order = MiddlewareOrder.Default)
+            MiddlewareOrder order = MiddlewareOrder.Default
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                onInvoke(context);
-                await next(context);
-            }, order);
+            builder.AddMiddleware(
+                async (context, next) =>
+                {
+                    onInvoke(context);
+                    await next(context);
+                },
+                order
+            );
 
             return builder;
         }
 
         /// <inheritdoc cref="AddMiddleware(System.CommandLine.Builder.CommandLineBuilder,System.CommandLine.Invocation.InvocationMiddleware,System.CommandLine.Invocation.MiddlewareOrder)"/>
-        [Obsolete("This method is obsolete and will be removed in a future version. Please use AddMiddleware instead.")]
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. Please use AddMiddleware instead."
+        )]
         public static CommandLineBuilder UseMiddleware(
             this CommandLineBuilder builder,
             Action<InvocationContext> onInvoke,
-            MiddlewareOrder order = MiddlewareOrder.Default)
+            MiddlewareOrder order = MiddlewareOrder.Default
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                onInvoke(context);
-                await next(context);
-            }, order);
+            builder.AddMiddleware(
+                async (context, next) =>
+                {
+                    onInvoke(context);
+                    await next(context);
+                },
+                order
+            );
 
             return builder;
         }
@@ -546,19 +623,23 @@ ERR:
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseParseDirective(
             this CommandLineBuilder builder,
-            int? errorExitCode = null)
+            int? errorExitCode = null
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.Directives.Contains("parse"))
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    context.InvocationResult = new ParseDirectiveResult(errorExitCode);
-                }
-                else
-                {
-                    await next(context);
-                }
-            }, MiddlewareOrderInternal.ParseDirective);
+                    if (context.ParseResult.Directives.Contains("parse"))
+                    {
+                        context.InvocationResult = new ParseDirectiveResult(errorExitCode);
+                    }
+                    else
+                    {
+                        await next(context);
+                    }
+                },
+                MiddlewareOrderInternal.ParseDirective
+            );
 
             return builder;
         }
@@ -571,19 +652,23 @@ ERR:
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseParseErrorReporting(
             this CommandLineBuilder builder,
-            int? errorExitCode = null)
+            int? errorExitCode = null
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.Errors.Count > 0)
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    context.InvocationResult = new ParseErrorResult(errorExitCode);
-                }
-                else
-                {
-                    await next(context);
-                }
-            }, MiddlewareOrderInternal.ParseErrorReporting);
+                    if (context.ParseResult.Errors.Count > 0)
+                    {
+                        context.InvocationResult = new ParseErrorResult(errorExitCode);
+                    }
+                    else
+                    {
+                        await next(context);
+                    }
+                },
+                MiddlewareOrderInternal.ParseErrorReporting
+            );
 
             return builder;
         }
@@ -594,31 +679,33 @@ ERR:
         /// <remarks>The <c>dotnet-suggest</c> tool requires the suggest directive to be enabled for an application to provide completions.</remarks>
         /// <param name="builder">A command line builder.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
-        public static CommandLineBuilder UseSuggestDirective(
-            this CommandLineBuilder builder)
+        public static CommandLineBuilder UseSuggestDirective(this CommandLineBuilder builder)
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.Directives.TryGetValues("suggest", out var values))
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    int position;
-
-                    if (values.FirstOrDefault() is { } positionString)
+                    if (context.ParseResult.Directives.TryGetValues("suggest", out var values))
                     {
-                        position = int.Parse(positionString);
+                        int position;
+
+                        if (values.FirstOrDefault() is { } positionString)
+                        {
+                            position = int.Parse(positionString);
+                        }
+                        else
+                        {
+                            position = context.ParseResult.RawInput?.Length ?? 0;
+                        }
+
+                        context.InvocationResult = new SuggestDirectiveResult(position);
                     }
                     else
                     {
-                        position = context.ParseResult.RawInput?.Length ?? 0;
+                        await next(context);
                     }
-
-                    context.InvocationResult = new SuggestDirectiveResult(position);
-                }
-                else
-                {
-                    await next(context);
-                }
-            }, MiddlewareOrderInternal.SuggestDirective);
+                },
+                MiddlewareOrderInternal.SuggestDirective
+            );
 
             return builder;
         }
@@ -630,20 +717,26 @@ ERR:
         /// <param name="maxLevenshteinDistance">The maximum Levenshtein distance for suggestions based on detected typos in command line input.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseTypoCorrections(
-            this CommandLineBuilder builder, 
-            int maxLevenshteinDistance = 3)
+            this CommandLineBuilder builder,
+            int maxLevenshteinDistance = 3
+        )
         {
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.CommandResult.Command.TreatUnmatchedTokensAsErrors &&
-                    context.ParseResult.UnmatchedTokens.Count > 0)
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    var typoCorrection = new TypoCorrection(maxLevenshteinDistance);
+                    if (
+                        context.ParseResult.CommandResult.Command.TreatUnmatchedTokensAsErrors
+                        && context.ParseResult.UnmatchedTokens.Count > 0
+                    )
+                    {
+                        var typoCorrection = new TypoCorrection(maxLevenshteinDistance);
 
-                    typoCorrection.ProvideSuggestions(context.ParseResult, context.Console);
-                }
-                await next(context);
-            }, MiddlewareOrderInternal.TypoCorrection);
+                        typoCorrection.ProvideSuggestions(context.ParseResult, context.Console);
+                    }
+                    await next(context);
+                },
+                MiddlewareOrderInternal.TypoCorrection
+            );
 
             return builder;
         }
@@ -656,7 +749,8 @@ ERR:
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         public static CommandLineBuilder UseLocalizationResources(
             this CommandLineBuilder builder,
-            LocalizationResources validationMessages)
+            LocalizationResources validationMessages
+        )
         {
             builder.LocalizationResources = validationMessages;
             return builder;
@@ -667,8 +761,7 @@ ERR:
         /// </summary>
         /// <param name="builder">A command line builder.</param>
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
-        public static CommandLineBuilder UseVersionOption(
-            this CommandLineBuilder builder)
+        public static CommandLineBuilder UseVersionOption(this CommandLineBuilder builder)
         {
             if (builder.VersionOption is not null)
             {
@@ -680,24 +773,31 @@ ERR:
             builder.VersionOption = versionOption;
             builder.Command.AddOption(versionOption);
 
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.FindResultFor(versionOption) is { })
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    if (context.ParseResult.Errors.Any(e => e.SymbolResult?.Symbol is VersionOption))
+                    if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
-                        context.InvocationResult = new ParseErrorResult(null);
+                        if (
+                            context.ParseResult.Errors.Any(
+                                e => e.SymbolResult?.Symbol is VersionOption
+                            )
+                        )
+                        {
+                            context.InvocationResult = new ParseErrorResult(null);
+                        }
+                        else
+                        {
+                            context.Console.Out.WriteLine(_assemblyVersion.Value);
+                        }
                     }
                     else
                     {
-                        context.Console.Out.WriteLine(_assemblyVersion.Value);
+                        await next(context);
                     }
-                }
-                else
-                {
-                    await next(context);
-                }
-            }, MiddlewareOrderInternal.VersionOption);
+                },
+                MiddlewareOrderInternal.VersionOption
+            );
 
             return builder;
         }
@@ -707,7 +807,8 @@ ERR:
         /// <param name="builder">A command line builder.</param>
         public static CommandLineBuilder UseVersionOption(
             this CommandLineBuilder builder,
-            params string[] aliases)
+            params string[] aliases
+        )
         {
             var command = builder.Command;
 
@@ -721,31 +822,36 @@ ERR:
             builder.VersionOption = versionOption;
             command.AddOption(versionOption);
 
-            builder.AddMiddleware(async (context, next) =>
-            {
-                if (context.ParseResult.FindResultFor(versionOption) is { })
+            builder.AddMiddleware(
+                async (context, next) =>
                 {
-                    if (context.ParseResult.Errors.Any(e => e.SymbolResult?.Symbol is VersionOption))
+                    if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
-                        context.InvocationResult = new ParseErrorResult(null);
+                        if (
+                            context.ParseResult.Errors.Any(
+                                e => e.SymbolResult?.Symbol is VersionOption
+                            )
+                        )
+                        {
+                            context.InvocationResult = new ParseErrorResult(null);
+                        }
+                        else
+                        {
+                            context.Console.Out.WriteLine(_assemblyVersion.Value);
+                        }
                     }
                     else
                     {
-                        context.Console.Out.WriteLine(_assemblyVersion.Value);
+                        await next(context);
                     }
-                }
-                else
-                {
-                    await next(context);
-                }
-            }, MiddlewareOrderInternal.VersionOption);
+                },
+                MiddlewareOrderInternal.VersionOption
+            );
 
             return builder;
         }
 
-        private static bool ShowHelp(
-            InvocationContext context,
-            IOption helpOption)
+        private static bool ShowHelp(InvocationContext context, IOption helpOption)
         {
             if (context.ParseResult.FindResultFor(helpOption) is { })
             {

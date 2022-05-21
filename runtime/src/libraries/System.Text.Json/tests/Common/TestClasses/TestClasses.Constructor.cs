@@ -80,7 +80,9 @@ namespace System.Text.Json.Serialization.Tests
         private PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes() { }
 
         [JsonConstructor]
-        internal PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes(int value) { }
+        internal PrivateParameterlessCtor_InternalParameterizedCtor_WithMultipleAttributes(
+            int value
+        ) { }
     }
 
     public class ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes
@@ -89,7 +91,9 @@ namespace System.Text.Json.Serialization.Tests
         protected ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes() { }
 
         [JsonConstructor]
-        private ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(int value) { }
+        private ProtectedParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(
+            int value
+        ) { }
     }
 
     public class PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes
@@ -98,7 +102,8 @@ namespace System.Text.Json.Serialization.Tests
         public PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes() { }
 
         [JsonConstructor]
-        private PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(int value) { }
+        private PublicParameterlessCtor_PrivateParameterizedCtor_WithMultipleAttributes(int value)
+        { }
     }
 
     public class PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes
@@ -107,16 +112,21 @@ namespace System.Text.Json.Serialization.Tests
         public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(int value) { }
 
         [JsonConstructor]
-        public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(float value) { }
+        public PublicParameterizedCtor_PublicParameterizedCtor_WithMultipleAttributes(float value)
+        { }
     }
 
     public struct Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes
     {
         [JsonConstructor]
-        public Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(float value) { }
+        public Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(
+            float value
+        ) { }
 
         [JsonConstructor]
-        private Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(int value) { }
+        private Struct_PublicParameterizedCtor_PrivateParameterizedCtor_WithMultipleAttributes(
+            int value
+        ) { }
     }
 
     public struct Point_2D_Struct
@@ -161,7 +171,8 @@ namespace System.Text.Json.Serialization.Tests
         public Point_2D_Struct_WithMultipleAttributes_OneNonPublic(int x) => (X, Y) = (x, 0);
 
         [JsonConstructor]
-        private Point_2D_Struct_WithMultipleAttributes_OneNonPublic(int x, int y) => (X, Y) = (x, y);
+        private Point_2D_Struct_WithMultipleAttributes_OneNonPublic(int x, int y) =>
+            (X, Y) = (x, y);
     }
 
     public class SinglePublicParameterizedCtor
@@ -208,7 +219,10 @@ namespace System.Text.Json.Serialization.Tests
             MyString = null;
         }
 
-        public SingleParameterlessCtor_MultiplePublicParameterizedCtor_Struct(int myInt, string myString)
+        public SingleParameterlessCtor_MultiplePublicParameterizedCtor_Struct(
+            int myInt,
+            string myString
+        )
         {
             MyInt = myInt;
             MyString = myString;
@@ -367,7 +381,10 @@ namespace System.Text.Json.Serialization.Tests
             MyInt = myInt;
         }
 
-        public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute(int myInt, string myString)
+        public ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute(
+            int myInt,
+            string myString
+        )
         {
             MyInt = myInt;
             MyString = myString;
@@ -402,7 +419,10 @@ namespace System.Text.Json.Serialization.Tests
         public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes() { }
 
         [JsonConstructor]
-        public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes(int myInt, string myString)
+        public PublicParameterlessConstructor_PublicParameterizedCtor_WithMultipleAttributes(
+            int myInt,
+            string myString
+        )
         {
             MyInt = myInt;
             MyString = myString;
@@ -556,7 +576,11 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [JsonConstructor]
-        public ClassWrapper_For_Int_Point_3D_String(int myInt, Point_3D_Struct myPoint3DStruct, string myString)
+        public ClassWrapper_For_Int_Point_3D_String(
+            int myInt,
+            Point_3D_Struct myPoint3DStruct,
+            string myString
+        )
         {
             MyInt = myInt;
             MyPoint3DStruct = myPoint3DStruct;
@@ -608,7 +632,8 @@ namespace System.Text.Json.Serialization.Tests
             Point_2D_With_ExtData_Class readOnlyPoint2DWithExtDataClass,
             Point_3D_Struct readOnlyPoint3DStruct,
             Point_2D_With_ExtData readOnlyPoint2DWithExtData,
-            SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor)
+            SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor
+        )
         {
             EmailAddress = emailAddress;
             Id = id;
@@ -627,7 +652,7 @@ namespace System.Text.Json.Serialization.Tests
         public static string s_json_minimal => @"{""ReadOnlyPoint2D"":{""X"":1,""Y"":2}}";
 
         private const string s_partialJson1 =
-             @"
+            @"
                 ""FirstName"":""John"",
                 ""LastName"":""Doe"",
                 ""EmailAddress"":""johndoe@live.com"",
@@ -749,7 +774,8 @@ namespace System.Text.Json.Serialization.Tests
             Point_2D_With_ExtData_Class readOnlyPoint2DWithExtDataClass,
             Point_3D_Struct readOnlyPoint3DStruct,
             Point_2D_With_ExtData readOnlyPoint2DWithExtData,
-            SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor)
+            SinglePublicParameterizedCtor readOnlySinglePublicParameterizedCtor
+        )
         {
             // Readonly, setting in ctor.
             EmailAddress = emailAddress;
@@ -772,7 +798,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public static readonly string s_json =
-             @"{
+            @"{
                 ""FirstName"":""John"",
                 ""LastName"":""Doe"",
                 ""EmailAddress"":""johndoe@live.com"",
@@ -852,8 +878,6 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-
-
     public class Point_2D_With_ExtData_Class
     {
         public int X { get; }
@@ -908,7 +932,11 @@ namespace System.Text.Json.Serialization.Tests
         public ImmutableArray<int> ImmutableArray { get; }
         public int Int { get; }
 
-        public NullArgTester(Point_3D_Struct point3DStruct, ImmutableArray<int> immutableArray, int @int = 50)
+        public NullArgTester(
+            Point_3D_Struct point3DStruct,
+            ImmutableArray<int> immutableArray,
+            int @int = 50
+        )
         {
             Point3DStruct = point3DStruct;
             ImmutableArray = immutableArray;
@@ -984,7 +1012,8 @@ namespace System.Text.Json.Serialization.Tests
             Dictionary<string, string> myStringToStringGenericDict,
             IImmutableDictionary<string, string> myStringToStringIImmutableDict,
             ImmutableSortedSet<string> myStringImmutableSortedSetT,
-            List<string> myListOfNullString)
+            List<string> myListOfNullString
+        )
         {
             MyByte = myByte;
             MyChar = myChar;
@@ -1021,43 +1050,44 @@ namespace System.Text.Json.Serialization.Tests
         public static string s_json_minimal => @"{""MyDecimal"" : 3.3}";
 
         private const string s_partialJson1 =
-            @"""MyByte"" : 7," +
-            @"""MySByte"" : 8," +
-            @"""MyChar"" : ""a""," +
-            @"""MyString"" : ""Hello""," +
-            @"""MyBooleanTrue"" : true," +
-            @"""MyBooleanFalse"" : false," +
-            @"""MySingle"" : 1.1," +
-            @"""MyDouble"" : 2.2," +
-            @"""MyDecimal"" : 3.3," +
-            @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z""," +
-            @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00""," +
-            @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""," +
-            @"""MyUri"" : ""https://github.com/dotnet/runtime""," +
-            @"""MyEnum"" : 2," + // int by default
-            @"""MyInt64Enum"" : -9223372036854775808," +
-            @"""MyUInt64Enum"" : 18446744073709551615," +
-            @"""MySimpleStruct"" : {""One"" : 11, ""Two"" : 1.9999, ""Three"" : 33}," +
-            @"""MySimpleTestStruct"" : {""MyInt64"" : 64, ""MyString"" :""Hello"", ""MyInt32Array"" : [32]}," +
-            @"""MyInt16ThreeDimensionArray"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]]";
+            @"""MyByte"" : 7,"
+            + @"""MySByte"" : 8,"
+            + @"""MyChar"" : ""a"","
+            + @"""MyString"" : ""Hello"","
+            + @"""MyBooleanTrue"" : true,"
+            + @"""MyBooleanFalse"" : false,"
+            + @"""MySingle"" : 1.1,"
+            + @"""MyDouble"" : 2.2,"
+            + @"""MyDecimal"" : 3.3,"
+            + @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z"","
+            + @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00"","
+            + @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"","
+            + @"""MyUri"" : ""https://github.com/dotnet/runtime"","
+            + @"""MyEnum"" : 2,"
+            + // int by default
+            @"""MyInt64Enum"" : -9223372036854775808,"
+            + @"""MyUInt64Enum"" : 18446744073709551615,"
+            + @"""MySimpleStruct"" : {""One"" : 11, ""Two"" : 1.9999, ""Three"" : 33},"
+            + @"""MySimpleTestStruct"" : {""MyInt64"" : 64, ""MyString"" :""Hello"", ""MyInt32Array"" : [32]},"
+            + @"""MyInt16ThreeDimensionArray"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]]";
 
         private const string s_partialJson2 =
-            @"""MyInt16ThreeDimensionList"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]]," +
-            @"""MyStringList"" : [""Hello""]," +
-            @"""MyStringIEnumerable"" : [""Hello""]," +
-            @"""MyStringIList"" : [""Hello""]," +
-            @"""MyStringICollection"" : [""Hello""]," +
-            @"""MyStringIEnumerableT"" : [""Hello""]," +
-            @"""MyStringIReadOnlyListT"" : [""Hello""]," +
-            @"""MyStringISetT"" : [""Hello""]," +
-            @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""}," +
-            @"""MyStringToStringIDict"" : {""key"" : ""value""}," +
-            @"""MyStringToStringGenericDict"" : {""key"" : ""value""}," +
-            @"""MyStringToStringGenericIDict"" : {""key"" : ""value""}," +
-            @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""}," +
-            @"""MyStringImmutablQueueT"" : [""Hello""]," +
-            @"""MyStringImmutableSortedSetT"" : [""Hello""]," +
-            @"""MyListOfNullString"" : [null]";
+            @"""MyInt16ThreeDimensionList"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]],"
+            + @"""MyStringList"" : [""Hello""],"
+            + @"""MyStringIEnumerable"" : [""Hello""],"
+            + @"""MyStringIList"" : [""Hello""],"
+            + @"""MyStringICollection"" : [""Hello""],"
+            + @"""MyStringIEnumerableT"" : [""Hello""],"
+            + @"""MyStringIReadOnlyListT"" : [""Hello""],"
+            + @"""MyStringISetT"" : [""Hello""],"
+            + @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""},"
+            + @"""MyStringToStringIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""},"
+            + @"""MyStringImmutablQueueT"" : [""Hello""],"
+            + @"""MyStringImmutableSortedSetT"" : [""Hello""],"
+            + @"""MyListOfNullString"" : [null]";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -1075,7 +1105,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1.1f, MySingle);
             Assert.Equal(2.2d, MyDouble);
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTime);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), MyDateTimeOffset);
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                MyDateTimeOffset
+            );
             Assert.Equal(SampleEnum.Two, MyEnum);
             Assert.Equal(SampleEnumInt64.MinNegative, MyInt64Enum);
             Assert.Equal(SampleEnumUInt64.Max, MyUInt64Enum);
@@ -1141,6 +1174,7 @@ namespace System.Text.Json.Serialization.Tests
 
         public void VerifyMinimal() => Assert.Equal(3.3m, MyDecimal);
     }
+
     public class Parameterless_ClassWithPrimitives
     {
         public int FirstInt { get; set; }
@@ -1190,8 +1224,8 @@ namespace System.Text.Json.Serialization.Tests
         public DateTime ThirdDateTime { get; set; }
         public DateTime FourthDateTime { get; set; }
 
-
-        public Parameterized_ClassWithPrimitives_3Args(int x, int y, int z) => (X, Y, Z) = (x, y, z);
+        public Parameterized_ClassWithPrimitives_3Args(int x, int y, int z) =>
+            (X, Y, Z) = (x, y, z);
     }
 
     public class TupleWrapper
@@ -1201,7 +1235,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ConverterForPoint3D : JsonConverter<Point_3D>
     {
-        public override Point_3D Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Point_3D Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -1216,7 +1254,11 @@ namespace System.Text.Json.Serialization.Tests
             return new Point_3D(4, 4, 4);
         }
 
-        public override void Write(Utf8JsonWriter writer, Point_3D value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Point_3D value,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
@@ -1289,26 +1331,141 @@ namespace System.Text.Json.Serialization.Tests
         public int Int62 { get; }
         public int Int63 { get; }
 
-        public Class_With_Ctor_With_64_Params(int int0, int int1, int int2, int int3, int int4, int int5, int int6, int int7,
-                                             int int8, int int9, int int10, int int11, int int12, int int13, int int14, int int15,
-                                             int int16, int int17, int int18, int int19, int int20, int int21, int int22, int int23,
-                                             int int24, int int25, int int26, int int27, int int28, int int29, int int30, int int31,
-                                             int int32, int int33, int int34, int int35, int int36, int int37, int int38, int int39,
-                                             int int40, int int41, int int42, int int43, int int44, int int45, int int46, int int47,
-                                             int int48, int int49, int int50, int int51, int int52, int int53, int int54, int int55,
-                                             int int56, int int57, int int58, int int59, int int60, int int61, int int62, int int63)
+        public Class_With_Ctor_With_64_Params(
+            int int0,
+            int int1,
+            int int2,
+            int int3,
+            int int4,
+            int int5,
+            int int6,
+            int int7,
+            int int8,
+            int int9,
+            int int10,
+            int int11,
+            int int12,
+            int int13,
+            int int14,
+            int int15,
+            int int16,
+            int int17,
+            int int18,
+            int int19,
+            int int20,
+            int int21,
+            int int22,
+            int int23,
+            int int24,
+            int int25,
+            int int26,
+            int int27,
+            int int28,
+            int int29,
+            int int30,
+            int int31,
+            int int32,
+            int int33,
+            int int34,
+            int int35,
+            int int36,
+            int int37,
+            int int38,
+            int int39,
+            int int40,
+            int int41,
+            int int42,
+            int int43,
+            int int44,
+            int int45,
+            int int46,
+            int int47,
+            int int48,
+            int int49,
+            int int50,
+            int int51,
+            int int52,
+            int int53,
+            int int54,
+            int int55,
+            int int56,
+            int int57,
+            int int58,
+            int int59,
+            int int60,
+            int int61,
+            int int62,
+            int int63
+        )
         {
-            Int0 = int0; Int1 = int1; Int2 = int2; Int3 = int3; Int4 = int4; Int5 = int5; Int6 = int6; Int7 = int7;
-            Int8 = int8; Int9 = int9; Int10 = int10; Int11 = int11; Int12 = int12; Int13 = int13; Int14 = int14; Int15 = int15;
-            Int16 = int16; Int17 = int17; Int18 = int18; Int19 = int19; Int20 = int20; Int21 = int21; Int22 = int22; Int23 = int23;
-            Int24 = int24; Int25 = int25; Int26 = int26; Int27 = int27; Int28 = int28; Int29 = int29; Int30 = int30; Int31 = int31;
-            Int32 = int32; Int33 = int33; Int34 = int34; Int35 = int35; Int36 = int36; Int37 = int37; Int38 = int38; Int39 = int39;
-            Int40 = int40; Int41 = int41; Int42 = int42; Int43 = int43; Int44 = int44; Int45 = int45; Int46 = int46; Int47 = int47;
-            Int48 = int48; Int49 = int49; Int50 = int50; Int51 = int51; Int52 = int52; Int53 = int53; Int54 = int54; Int55 = int55;
-            Int56 = int56; Int57 = int57; Int58 = int58; Int59 = int59; Int60 = int60; Int61 = int61; Int62 = int62; Int63 = int63;
+            Int0 = int0;
+            Int1 = int1;
+            Int2 = int2;
+            Int3 = int3;
+            Int4 = int4;
+            Int5 = int5;
+            Int6 = int6;
+            Int7 = int7;
+            Int8 = int8;
+            Int9 = int9;
+            Int10 = int10;
+            Int11 = int11;
+            Int12 = int12;
+            Int13 = int13;
+            Int14 = int14;
+            Int15 = int15;
+            Int16 = int16;
+            Int17 = int17;
+            Int18 = int18;
+            Int19 = int19;
+            Int20 = int20;
+            Int21 = int21;
+            Int22 = int22;
+            Int23 = int23;
+            Int24 = int24;
+            Int25 = int25;
+            Int26 = int26;
+            Int27 = int27;
+            Int28 = int28;
+            Int29 = int29;
+            Int30 = int30;
+            Int31 = int31;
+            Int32 = int32;
+            Int33 = int33;
+            Int34 = int34;
+            Int35 = int35;
+            Int36 = int36;
+            Int37 = int37;
+            Int38 = int38;
+            Int39 = int39;
+            Int40 = int40;
+            Int41 = int41;
+            Int42 = int42;
+            Int43 = int43;
+            Int44 = int44;
+            Int45 = int45;
+            Int46 = int46;
+            Int47 = int47;
+            Int48 = int48;
+            Int49 = int49;
+            Int50 = int50;
+            Int51 = int51;
+            Int52 = int52;
+            Int53 = int53;
+            Int54 = int54;
+            Int55 = int55;
+            Int56 = int56;
+            Int57 = int57;
+            Int58 = int58;
+            Int59 = int59;
+            Int60 = int60;
+            Int61 = int61;
+            Int62 = int62;
+            Int63 = int63;
         }
 
-        public static string Json {
+        public static string Json
+        {
             get
             {
                 StringBuilder sb = new StringBuilder();
@@ -1332,7 +1489,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             for (int i = 0; i < 64; i++)
             {
-                Assert.Equal(i, (int)typeof(Class_With_Ctor_With_64_Params).GetProperty($"Int{i}").GetValue(this));
+                Assert.Equal(
+                    i,
+                    (int)
+                        typeof(Class_With_Ctor_With_64_Params).GetProperty($"Int{i}").GetValue(this)
+                );
             }
         }
     }
@@ -1405,23 +1566,137 @@ namespace System.Text.Json.Serialization.Tests
         public int Int63 { get; }
 
         [JsonConstructor]
-        public Struct_With_Ctor_With_64_Params(int int0, int int1, int int2, int int3, int int4, int int5, int int6, int int7,
-                                             int int8, int int9, int int10, int int11, int int12, int int13, int int14, int int15,
-                                             int int16, int int17, int int18, int int19, int int20, int int21, int int22, int int23,
-                                             int int24, int int25, int int26, int int27, int int28, int int29, int int30, int int31,
-                                             int int32, int int33, int int34, int int35, int int36, int int37, int int38, int int39,
-                                             int int40, int int41, int int42, int int43, int int44, int int45, int int46, int int47,
-                                             int int48, int int49, int int50, int int51, int int52, int int53, int int54, int int55,
-                                             int int56, int int57, int int58, int int59, int int60, int int61, int int62, int int63)
+        public Struct_With_Ctor_With_64_Params(
+            int int0,
+            int int1,
+            int int2,
+            int int3,
+            int int4,
+            int int5,
+            int int6,
+            int int7,
+            int int8,
+            int int9,
+            int int10,
+            int int11,
+            int int12,
+            int int13,
+            int int14,
+            int int15,
+            int int16,
+            int int17,
+            int int18,
+            int int19,
+            int int20,
+            int int21,
+            int int22,
+            int int23,
+            int int24,
+            int int25,
+            int int26,
+            int int27,
+            int int28,
+            int int29,
+            int int30,
+            int int31,
+            int int32,
+            int int33,
+            int int34,
+            int int35,
+            int int36,
+            int int37,
+            int int38,
+            int int39,
+            int int40,
+            int int41,
+            int int42,
+            int int43,
+            int int44,
+            int int45,
+            int int46,
+            int int47,
+            int int48,
+            int int49,
+            int int50,
+            int int51,
+            int int52,
+            int int53,
+            int int54,
+            int int55,
+            int int56,
+            int int57,
+            int int58,
+            int int59,
+            int int60,
+            int int61,
+            int int62,
+            int int63
+        )
         {
-            Int0 = int0; Int1 = int1; Int2 = int2; Int3 = int3; Int4 = int4; Int5 = int5; Int6 = int6; Int7 = int7;
-            Int8 = int8; Int9 = int9; Int10 = int10; Int11 = int11; Int12 = int12; Int13 = int13; Int14 = int14; Int15 = int15;
-            Int16 = int16; Int17 = int17; Int18 = int18; Int19 = int19; Int20 = int20; Int21 = int21; Int22 = int22; Int23 = int23;
-            Int24 = int24; Int25 = int25; Int26 = int26; Int27 = int27; Int28 = int28; Int29 = int29; Int30 = int30; Int31 = int31;
-            Int32 = int32; Int33 = int33; Int34 = int34; Int35 = int35; Int36 = int36; Int37 = int37; Int38 = int38; Int39 = int39;
-            Int40 = int40; Int41 = int41; Int42 = int42; Int43 = int43; Int44 = int44; Int45 = int45; Int46 = int46; Int47 = int47;
-            Int48 = int48; Int49 = int49; Int50 = int50; Int51 = int51; Int52 = int52; Int53 = int53; Int54 = int54; Int55 = int55;
-            Int56 = int56; Int57 = int57; Int58 = int58; Int59 = int59; Int60 = int60; Int61 = int61; Int62 = int62; Int63 = int63;
+            Int0 = int0;
+            Int1 = int1;
+            Int2 = int2;
+            Int3 = int3;
+            Int4 = int4;
+            Int5 = int5;
+            Int6 = int6;
+            Int7 = int7;
+            Int8 = int8;
+            Int9 = int9;
+            Int10 = int10;
+            Int11 = int11;
+            Int12 = int12;
+            Int13 = int13;
+            Int14 = int14;
+            Int15 = int15;
+            Int16 = int16;
+            Int17 = int17;
+            Int18 = int18;
+            Int19 = int19;
+            Int20 = int20;
+            Int21 = int21;
+            Int22 = int22;
+            Int23 = int23;
+            Int24 = int24;
+            Int25 = int25;
+            Int26 = int26;
+            Int27 = int27;
+            Int28 = int28;
+            Int29 = int29;
+            Int30 = int30;
+            Int31 = int31;
+            Int32 = int32;
+            Int33 = int33;
+            Int34 = int34;
+            Int35 = int35;
+            Int36 = int36;
+            Int37 = int37;
+            Int38 = int38;
+            Int39 = int39;
+            Int40 = int40;
+            Int41 = int41;
+            Int42 = int42;
+            Int43 = int43;
+            Int44 = int44;
+            Int45 = int45;
+            Int46 = int46;
+            Int47 = int47;
+            Int48 = int48;
+            Int49 = int49;
+            Int50 = int50;
+            Int51 = int51;
+            Int52 = int52;
+            Int53 = int53;
+            Int54 = int54;
+            Int55 = int55;
+            Int56 = int56;
+            Int57 = int57;
+            Int58 = int58;
+            Int59 = int59;
+            Int60 = int60;
+            Int61 = int61;
+            Int62 = int62;
+            Int63 = int63;
         }
     }
 
@@ -1493,24 +1768,138 @@ namespace System.Text.Json.Serialization.Tests
         public int Int63 { get; }
         public int Int64 { get; }
 
-        public Class_With_Ctor_With_65_Params(int int0, int int1, int int2, int int3, int int4, int int5, int int6, int int7,
-                                             int int8, int int9, int int10, int int11, int int12, int int13, int int14, int int15,
-                                             int int16, int int17, int int18, int int19, int int20, int int21, int int22, int int23,
-                                             int int24, int int25, int int26, int int27, int int28, int int29, int int30, int int31,
-                                             int int32, int int33, int int34, int int35, int int36, int int37, int int38, int int39,
-                                             int int40, int int41, int int42, int int43, int int44, int int45, int int46, int int47,
-                                             int int48, int int49, int int50, int int51, int int52, int int53, int int54, int int55,
-                                             int int56, int int57, int int58, int int59, int int60, int int61, int int62, int int63,
-                                             int int64)
+        public Class_With_Ctor_With_65_Params(
+            int int0,
+            int int1,
+            int int2,
+            int int3,
+            int int4,
+            int int5,
+            int int6,
+            int int7,
+            int int8,
+            int int9,
+            int int10,
+            int int11,
+            int int12,
+            int int13,
+            int int14,
+            int int15,
+            int int16,
+            int int17,
+            int int18,
+            int int19,
+            int int20,
+            int int21,
+            int int22,
+            int int23,
+            int int24,
+            int int25,
+            int int26,
+            int int27,
+            int int28,
+            int int29,
+            int int30,
+            int int31,
+            int int32,
+            int int33,
+            int int34,
+            int int35,
+            int int36,
+            int int37,
+            int int38,
+            int int39,
+            int int40,
+            int int41,
+            int int42,
+            int int43,
+            int int44,
+            int int45,
+            int int46,
+            int int47,
+            int int48,
+            int int49,
+            int int50,
+            int int51,
+            int int52,
+            int int53,
+            int int54,
+            int int55,
+            int int56,
+            int int57,
+            int int58,
+            int int59,
+            int int60,
+            int int61,
+            int int62,
+            int int63,
+            int int64
+        )
         {
-            Int0 = int0; Int1 = int1; Int2 = int2; Int3 = int3; Int4 = int4; Int5 = int5; Int6 = int6; Int7 = int7;
-            Int8 = int8; Int9 = int9; Int10 = int10; Int11 = int11; Int12 = int12; Int13 = int13; Int14 = int14; Int15 = int15;
-            Int16 = int16; Int17 = int17; Int18 = int18; Int19 = int19; Int20 = int20; Int21 = int21; Int22 = int22; Int23 = int23;
-            Int24 = int24; Int25 = int25; Int26 = int26; Int27 = int27; Int28 = int28; Int29 = int29; Int30 = int30; Int31 = int31;
-            Int32 = int32; Int33 = int33; Int34 = int34; Int35 = int35; Int36 = int36; Int37 = int37; Int38 = int38; Int39 = int39;
-            Int40 = int40; Int41 = int41; Int42 = int42; Int43 = int43; Int44 = int44; Int45 = int45; Int46 = int46; Int47 = int47;
-            Int48 = int48; Int49 = int49; Int50 = int50; Int51 = int51; Int52 = int52; Int53 = int53; Int54 = int54; Int55 = int55;
-            Int56 = int56; Int57 = int57; Int58 = int58; Int59 = int59; Int60 = int60; Int61 = int61; Int62 = int62; Int63 = int63;
+            Int0 = int0;
+            Int1 = int1;
+            Int2 = int2;
+            Int3 = int3;
+            Int4 = int4;
+            Int5 = int5;
+            Int6 = int6;
+            Int7 = int7;
+            Int8 = int8;
+            Int9 = int9;
+            Int10 = int10;
+            Int11 = int11;
+            Int12 = int12;
+            Int13 = int13;
+            Int14 = int14;
+            Int15 = int15;
+            Int16 = int16;
+            Int17 = int17;
+            Int18 = int18;
+            Int19 = int19;
+            Int20 = int20;
+            Int21 = int21;
+            Int22 = int22;
+            Int23 = int23;
+            Int24 = int24;
+            Int25 = int25;
+            Int26 = int26;
+            Int27 = int27;
+            Int28 = int28;
+            Int29 = int29;
+            Int30 = int30;
+            Int31 = int31;
+            Int32 = int32;
+            Int33 = int33;
+            Int34 = int34;
+            Int35 = int35;
+            Int36 = int36;
+            Int37 = int37;
+            Int38 = int38;
+            Int39 = int39;
+            Int40 = int40;
+            Int41 = int41;
+            Int42 = int42;
+            Int43 = int43;
+            Int44 = int44;
+            Int45 = int45;
+            Int46 = int46;
+            Int47 = int47;
+            Int48 = int48;
+            Int49 = int49;
+            Int50 = int50;
+            Int51 = int51;
+            Int52 = int52;
+            Int53 = int53;
+            Int54 = int54;
+            Int55 = int55;
+            Int56 = int56;
+            Int57 = int57;
+            Int58 = int58;
+            Int59 = int59;
+            Int60 = int60;
+            Int61 = int61;
+            Int62 = int62;
+            Int63 = int63;
             Int64 = int64;
         }
     }
@@ -1584,24 +1973,138 @@ namespace System.Text.Json.Serialization.Tests
         public int Int64 { get; }
 
         [JsonConstructor]
-        public Struct_With_Ctor_With_65_Params(int int0, int int1, int int2, int int3, int int4, int int5, int int6, int int7,
-                                             int int8, int int9, int int10, int int11, int int12, int int13, int int14, int int15,
-                                             int int16, int int17, int int18, int int19, int int20, int int21, int int22, int int23,
-                                             int int24, int int25, int int26, int int27, int int28, int int29, int int30, int int31,
-                                             int int32, int int33, int int34, int int35, int int36, int int37, int int38, int int39,
-                                             int int40, int int41, int int42, int int43, int int44, int int45, int int46, int int47,
-                                             int int48, int int49, int int50, int int51, int int52, int int53, int int54, int int55,
-                                             int int56, int int57, int int58, int int59, int int60, int int61, int int62, int int63,
-                                             int int64)
+        public Struct_With_Ctor_With_65_Params(
+            int int0,
+            int int1,
+            int int2,
+            int int3,
+            int int4,
+            int int5,
+            int int6,
+            int int7,
+            int int8,
+            int int9,
+            int int10,
+            int int11,
+            int int12,
+            int int13,
+            int int14,
+            int int15,
+            int int16,
+            int int17,
+            int int18,
+            int int19,
+            int int20,
+            int int21,
+            int int22,
+            int int23,
+            int int24,
+            int int25,
+            int int26,
+            int int27,
+            int int28,
+            int int29,
+            int int30,
+            int int31,
+            int int32,
+            int int33,
+            int int34,
+            int int35,
+            int int36,
+            int int37,
+            int int38,
+            int int39,
+            int int40,
+            int int41,
+            int int42,
+            int int43,
+            int int44,
+            int int45,
+            int int46,
+            int int47,
+            int int48,
+            int int49,
+            int int50,
+            int int51,
+            int int52,
+            int int53,
+            int int54,
+            int int55,
+            int int56,
+            int int57,
+            int int58,
+            int int59,
+            int int60,
+            int int61,
+            int int62,
+            int int63,
+            int int64
+        )
         {
-            Int0 = int0; Int1 = int1; Int2 = int2; Int3 = int3; Int4 = int4; Int5 = int5; Int6 = int6; Int7 = int7;
-            Int8 = int8; Int9 = int9; Int10 = int10; Int11 = int11; Int12 = int12; Int13 = int13; Int14 = int14; Int15 = int15;
-            Int16 = int16; Int17 = int17; Int18 = int18; Int19 = int19; Int20 = int20; Int21 = int21; Int22 = int22; Int23 = int23;
-            Int24 = int24; Int25 = int25; Int26 = int26; Int27 = int27; Int28 = int28; Int29 = int29; Int30 = int30; Int31 = int31;
-            Int32 = int32; Int33 = int33; Int34 = int34; Int35 = int35; Int36 = int36; Int37 = int37; Int38 = int38; Int39 = int39;
-            Int40 = int40; Int41 = int41; Int42 = int42; Int43 = int43; Int44 = int44; Int45 = int45; Int46 = int46; Int47 = int47;
-            Int48 = int48; Int49 = int49; Int50 = int50; Int51 = int51; Int52 = int52; Int53 = int53; Int54 = int54; Int55 = int55;
-            Int56 = int56; Int57 = int57; Int58 = int58; Int59 = int59; Int60 = int60; Int61 = int61; Int62 = int62; Int63 = int63;
+            Int0 = int0;
+            Int1 = int1;
+            Int2 = int2;
+            Int3 = int3;
+            Int4 = int4;
+            Int5 = int5;
+            Int6 = int6;
+            Int7 = int7;
+            Int8 = int8;
+            Int9 = int9;
+            Int10 = int10;
+            Int11 = int11;
+            Int12 = int12;
+            Int13 = int13;
+            Int14 = int14;
+            Int15 = int15;
+            Int16 = int16;
+            Int17 = int17;
+            Int18 = int18;
+            Int19 = int19;
+            Int20 = int20;
+            Int21 = int21;
+            Int22 = int22;
+            Int23 = int23;
+            Int24 = int24;
+            Int25 = int25;
+            Int26 = int26;
+            Int27 = int27;
+            Int28 = int28;
+            Int29 = int29;
+            Int30 = int30;
+            Int31 = int31;
+            Int32 = int32;
+            Int33 = int33;
+            Int34 = int34;
+            Int35 = int35;
+            Int36 = int36;
+            Int37 = int37;
+            Int38 = int38;
+            Int39 = int39;
+            Int40 = int40;
+            Int41 = int41;
+            Int42 = int42;
+            Int43 = int43;
+            Int44 = int44;
+            Int45 = int45;
+            Int46 = int46;
+            Int47 = int47;
+            Int48 = int48;
+            Int49 = int49;
+            Int50 = int50;
+            Int51 = int51;
+            Int52 = int52;
+            Int53 = int53;
+            Int54 = int54;
+            Int55 = int55;
+            Int56 = int56;
+            Int57 = int57;
+            Int58 = int58;
+            Int59 = int59;
+            Int60 = int60;
+            Int61 = int61;
+            Int62 = int62;
+            Int63 = int63;
             Int64 = int64;
         }
     }
@@ -1619,7 +2122,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public Parameterized_Person(Guid id) => Id = id;
 
-        public static readonly string s_json = @"{
+        public static readonly string s_json =
+            @"{
             ""FirstName"":""Jet"",
             ""Id"":""270bb22b-4816-4bd9-9acd-8ec5b1a896d3"",
             ""EmailAddress"":""jetdoe@outlook.com"",
@@ -1655,7 +2159,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public Parameterized_Person_ObjExtData(Guid id) => Id = id;
 
-        public static readonly string s_json = @"{
+        public static readonly string s_json =
+            @"{
             ""FirstName"":""Jet"",
             ""Id"":""270bb22b-4816-4bd9-9acd-8ec5b1a896d3"",
             ""EmailAddress"":""jetdoe@outlook.com"",
@@ -1673,7 +2178,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("Jet", FirstName);
             Assert.Equal("Doe", LastName);
             Assert.Equal("63cf821d-fd47-4782-8345-576d9228a534", Id.ToString());
-            Assert.Equal("jetdoe@outlook.com", ((JsonElement)ExtensionData["EmailAddress"]).GetString());
+            Assert.Equal(
+                "jetdoe@outlook.com",
+                ((JsonElement)ExtensionData["EmailAddress"]).GetString()
+            );
             Assert.False(ExtensionData.ContainsKey("Id"));
         }
     }
@@ -1688,7 +2196,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public Parameterized_Person_Simple(Guid id) => Id = id;
 
-        public static readonly string s_json = @"{
+        public static readonly string s_json =
+            @"{
             ""FirstName"":""Jet"",
             ""Id"":""270bb22b-4816-4bd9-9acd-8ec5b1a896d3"",
             ""LastName"":""Doe""
@@ -1764,7 +2273,8 @@ namespace System.Text.Json.Serialization.Tests
         public Parameterized_IndexViewModel_Immutable(
             List<ActiveOrUpcomingEvent> activeOrUpcomingEvents,
             CampaignSummaryViewModel featuredCampaign,
-            bool isNewAccount)
+            bool isNewAccount
+        )
         {
             ActiveOrUpcomingEvents = activeOrUpcomingEvents;
             FeaturedCampaign = featuredCampaign;
@@ -1809,17 +2319,26 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(10, @event.Id);
             Assert.Equal("Name FamilyName", @event.CampaignManagedOrganizerName);
             Assert.Equal("The very new campaign", @event.CampaignName);
-            Assert.Equal("The .NET Foundation works with Microsoft and the broader industry to increase the exposure of open source projects in the .NET community and the .NET Foundation. The .NET Foundation provides access to these resources to projects and looks to promote the activities of our communities.", @event.Description);
+            Assert.Equal(
+                "The .NET Foundation works with Microsoft and the broader industry to increase the exposure of open source projects in the .NET community and the .NET Foundation. The .NET Foundation provides access to these resources to projects and looks to promote the activities of our communities.",
+                @event.Description
+            );
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), @event.EndDate);
             Assert.Equal("Just a name", @event.Name);
-            Assert.Equal("https://www.dotnetfoundation.org/theme/img/carousel/foundation-diagram-content.png", @event.ImageUrl);
+            Assert.Equal(
+                "https://www.dotnetfoundation.org/theme/img/carousel/foundation-diagram-content.png",
+                @event.ImageUrl
+            );
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), @event.StartDate);
 
             Assert.Equal("Very nice campaign", FeaturedCampaign.Description);
             Assert.Equal("The Headline", FeaturedCampaign.Headline);
             Assert.Equal(234235, FeaturedCampaign.Id);
             Assert.Equal("The Company XYZ", FeaturedCampaign.OrganizationName);
-            Assert.Equal("https://www.dotnetfoundation.org/theme/img/carousel/foundation-diagram-content.png", FeaturedCampaign.ImageUrl);
+            Assert.Equal(
+                "https://www.dotnetfoundation.org/theme/img/carousel/foundation-diagram-content.png",
+                FeaturedCampaign.ImageUrl
+            );
             Assert.Equal("Promoting Open Source", FeaturedCampaign.Title);
         }
     }
@@ -1849,13 +2368,14 @@ namespace System.Text.Json.Serialization.Tests
     public class Parameterized_Class_With_ComplexTuple : ITestClassWithParameterizedCtor
     {
         public Tuple<
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams,
-                ObjWCtorMixedParams> MyTuple { get; }
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams,
+            ObjWCtorMixedParams
+        > MyTuple { get; }
 
         public Parameterized_Class_With_ComplexTuple(
             Tuple<
@@ -1865,9 +2385,12 @@ namespace System.Text.Json.Serialization.Tests
                 ObjWCtorMixedParams,
                 ObjWCtorMixedParams,
                 ObjWCtorMixedParams,
-                ObjWCtorMixedParams> myTuple) => MyTuple = myTuple;
+                ObjWCtorMixedParams
+            > myTuple
+        ) => MyTuple = myTuple;
 
-        private const string s_inner_json = @"
+        private const string s_inner_json =
+            @"
             {
                 ""MyByte"": 7,
                 ""MyChar"": ""a"",
@@ -2059,7 +2582,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(0, Y); // We don't set parameter default value here.
         }
     }
-    
+
     public class Point_MembersHave_JsonInclude : ITestClass
     {
         [JsonInclude]
@@ -2100,14 +2623,23 @@ namespace System.Text.Json.Serialization.Tests
         [JsonNumberHandling(JsonNumberHandling.WriteAsString)]
         public int D { get; }
 
-        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString)]
+        [JsonNumberHandling(
+            JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+        )]
         public int E { get; }
 
-        public ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes(int a, float b, int c, int d, int e) => (A, B, C, D, E) = (a, b, c, d, e);
+        public ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes(
+            int a,
+            float b,
+            int c,
+            int d,
+            int e
+        ) => (A, B, C, D, E) = (a, b, c, d, e);
 
         public void Initialize() { }
 
-        public static readonly string s_json = @"{""A"":1,""B"":""NaN"",""C"":""2"",""D"": 3,""E"":""4""}";
+        public static readonly string s_json =
+            @"{""A"":1,""B"":""NaN"",""C"":""2"",""D"": 3,""E"":""4""}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2170,7 +2702,6 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; set; }
         public Point_With_MismatchedMembers MyPoint { get; set; }
     }
-
 
     public class Point_ExtendedPropNames
     {
@@ -2257,7 +2788,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_With_Array Obj { get; }
 
-        public static readonly string s_json = @$"{{""X"":1,""Y"":2,""Obj"":{Point_With_Array.s_json}}}";
+        public static readonly string s_json =
+            @$"{{""X"":1,""Y"":2,""Obj"":{Point_With_Array.s_json}}}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2282,7 +2814,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public int X { get; }
         public int Y { get; }
-        public int Z { get; set;  }
+        public int Z { get; set; }
 
         [JsonConstructor]
         public Point_With_Property(int x, int y)
@@ -2295,17 +2827,17 @@ namespace System.Text.Json.Serialization.Tests
 
     public class MyEventsListerViewModel
     {
-        public List<MyEventsListerItem> CurrentEvents { get; set; } = new List<MyEventsListerItem>();
+        public List<MyEventsListerItem> CurrentEvents { get; set; } =
+            new List<MyEventsListerItem>();
         public List<MyEventsListerItem> FutureEvents { get; set; } = new List<MyEventsListerItem>();
         public List<MyEventsListerItem> PastEvents { get; set; } = new List<MyEventsListerItem>();
 
-        public static MyEventsListerViewModel Instance
-            = new MyEventsListerViewModel
-            {
-                CurrentEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 3).ToList(),
-                FutureEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 9).ToList(),
-                PastEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 60).ToList() // usually  there is a lot of historical data
-            };
+        public static MyEventsListerViewModel Instance = new MyEventsListerViewModel
+        {
+            CurrentEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 3).ToList(),
+            FutureEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 9).ToList(),
+            PastEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 60).ToList() // usually  there is a lot of historical data
+        };
     }
 
     public class MyEventsListerItem
@@ -2319,27 +2851,31 @@ namespace System.Text.Json.Serialization.Tests
         public string Organization { get; set; }
         public int VolunteerCount { get; set; }
 
-        public List<MyEventsListerItemTask> Tasks { get; set; } = new List<MyEventsListerItemTask>();
+        public List<MyEventsListerItemTask> Tasks { get; set; } =
+            new List<MyEventsListerItemTask>();
 
-        public static MyEventsListerItem Instance
-            = new MyEventsListerItem
-            {
-                Campaign = "A very nice campaign",
-                EndDate = DateTime.UtcNow.AddDays(7),
-                EventId = 321,
-                EventName = "wonderful name",
-                Organization = "Local Animal Shelter",
-                StartDate = DateTime.UtcNow.AddDays(-7),
-                TimeZone = TimeZoneInfo.Utc.DisplayName,
-                VolunteerCount = 15,
-                Tasks = Enumerable.Repeat(
+        public static MyEventsListerItem Instance = new MyEventsListerItem
+        {
+            Campaign = "A very nice campaign",
+            EndDate = DateTime.UtcNow.AddDays(7),
+            EventId = 321,
+            EventName = "wonderful name",
+            Organization = "Local Animal Shelter",
+            StartDate = DateTime.UtcNow.AddDays(-7),
+            TimeZone = TimeZoneInfo.Utc.DisplayName,
+            VolunteerCount = 15,
+            Tasks = Enumerable
+                .Repeat(
                     new MyEventsListerItemTask
                     {
                         StartDate = DateTime.UtcNow,
                         EndDate = DateTime.UtcNow.AddDays(1),
                         Name = "A very nice task to have"
-                    }, 4).ToList()
-            };
+                    },
+                    4
+                )
+                .ToList()
+        };
     }
 
     public class MyEventsListerItemTask
@@ -2371,7 +2907,10 @@ namespace System.Text.Json.Serialization.Tests
 
         public Point_2D_Struct_WithAttribute MyPoint { get; }
 
-        public ClassWithNestedClass(ClassWithNestedClass myClass, Point_2D_Struct_WithAttribute myPoint)
+        public ClassWithNestedClass(
+            ClassWithNestedClass myClass,
+            Point_2D_Struct_WithAttribute myPoint
+        )
         {
             MyClass = myClass;
             MyPoint = myPoint;

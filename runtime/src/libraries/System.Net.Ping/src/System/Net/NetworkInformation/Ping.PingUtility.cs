@@ -15,22 +15,40 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping
     {
-        private Process GetPingProcess(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private Process GetPingProcess(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
-            string? pingExecutable = isIpv4 ? UnixCommandLinePing.Ping4UtilityPath : UnixCommandLinePing.Ping6UtilityPath;
+            string? pingExecutable = isIpv4
+                ? UnixCommandLinePing.Ping4UtilityPath
+                : UnixCommandLinePing.Ping6UtilityPath;
             if (pingExecutable == null)
             {
                 throw new PlatformNotSupportedException(SR.net_ping_utility_not_found);
             }
 
-            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing.PingFragmentOptions.Default;
+            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing
+                .PingFragmentOptions
+                .Default;
             if (options != null && address.AddressFamily == AddressFamily.InterNetwork)
             {
-                fragmentOption = options.DontFragment ? UnixCommandLinePing.PingFragmentOptions.Do : UnixCommandLinePing.PingFragmentOptions.Dont;
+                fragmentOption = options.DontFragment
+                    ? UnixCommandLinePing.PingFragmentOptions.Do
+                    : UnixCommandLinePing.PingFragmentOptions.Dont;
             }
 
-            string processArgs = UnixCommandLinePing.ConstructCommandLine(buffer.Length, timeout, address.ToString(), isIpv4, options?.Ttl ?? 0, fragmentOption);
+            string processArgs = UnixCommandLinePing.ConstructCommandLine(
+                buffer.Length,
+                timeout,
+                address.ToString(),
+                isIpv4,
+                options?.Ttl ?? 0,
+                fragmentOption
+            );
 
             ProcessStartInfo psi = new ProcessStartInfo(pingExecutable, processArgs);
             psi.RedirectStandardOutput = true;
@@ -40,7 +58,12 @@ namespace System.Net.NetworkInformation
             return new Process() { StartInfo = psi };
         }
 
-        private PingReply SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private PingReply SendWithPingUtility(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             using (Process p = GetPingProcess(address, buffer, timeout, options))
             {
@@ -63,18 +86,27 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private async Task<PingReply> SendWithPingUtilityAsync(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private async Task<PingReply> SendWithPingUtilityAsync(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             using (Process p = GetPingProcess(address, buffer, timeout, options))
             {
-                var processCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var processCompletion = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 p.EnableRaisingEvents = true;
                 p.Exited += (s, e) => processCompletion.SetResult();
                 p.Start();
 
                 try
                 {
-                    await processCompletion.Task.WaitAsync(TimeSpan.FromMilliseconds(timeout)).ConfigureAwait(false);
+                    await processCompletion.Task
+                        .WaitAsync(TimeSpan.FromMilliseconds(timeout))
+                        .ConfigureAwait(false);
                 }
                 catch (TimeoutException)
                 {
@@ -109,7 +141,8 @@ namespace System.Net.NetworkInformation
                 null, // Ping utility cannot accommodate these, return null to indicate they were ignored.
                 IPStatus.Success,
                 rtt,
-                Array.Empty<byte>()); // Ping utility doesn't deliver this info.
+                Array.Empty<byte>()
+            ); // Ping utility doesn't deliver this info.
         }
     }
 }

@@ -25,52 +25,86 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
 {
-    [ExportConfigurationFixProvider(PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption, LanguageNames.CSharp, LanguageNames.VisualBasic), Shared]
+    [
+        ExportConfigurationFixProvider(
+            PredefinedConfigurationFixProviderNames.ConfigureCodeStyleOption,
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = PredefinedConfigurationFixProviderNames.ConfigureSeverity)]
     [ExtensionOrder(After = PredefinedConfigurationFixProviderNames.Suppression)]
-    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider : IConfigurationFixProvider
+    internal sealed partial class ConfigureCodeStyleOptionCodeFixProvider
+        : IConfigurationFixProvider
     {
-        private static readonly ImmutableArray<bool> s_boolValues = ImmutableArray.Create(true, false);
+        private static readonly ImmutableArray<bool> s_boolValues = ImmutableArray.Create(
+            true,
+            false
+        );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ConfigureCodeStyleOptionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ConfigureCodeStyleOptionCodeFixProvider() { }
 
         public bool IsFixableDiagnostic(Diagnostic diagnostic)
         {
             // We only offer fix for configurable code style diagnostics which have one of more editorconfig based storage locations.
             // Also skip suppressed diagnostics defensively, though the code fix engine should ideally never call us for suppressed diagnostics.
-            if (diagnostic.IsSuppressed ||
-                SuppressionHelpers.IsNotConfigurableDiagnostic(diagnostic) ||
-                diagnostic.Location.SourceTree == null)
+            if (
+                diagnostic.IsSuppressed
+                || SuppressionHelpers.IsNotConfigurableDiagnostic(diagnostic)
+                || diagnostic.Location.SourceTree == null
+            )
             {
                 return false;
             }
 
             var language = diagnostic.Location.SourceTree.Options.Language;
-            return IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(diagnostic.Id, language, out var options) &&
-               !options.IsEmpty &&
-               options.All(o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2));
+            return IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
+                    diagnostic.Id,
+                    language,
+                    out var options
+                )
+                && !options.IsEmpty
+                && options.All(
+                    o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2)
+                );
         }
 
-        public FixAllProvider GetFixAllProvider()
-            => null;
+        public FixAllProvider GetFixAllProvider() => null;
 
-        public Task<ImmutableArray<CodeFix>> GetFixesAsync(Document document, TextSpan span, IEnumerable<Diagnostic> diagnostics, CancellationToken cancellationToken)
-            => Task.FromResult(GetConfigurations(document.Project, diagnostics, cancellationToken));
+        public Task<ImmutableArray<CodeFix>> GetFixesAsync(
+            Document document,
+            TextSpan span,
+            IEnumerable<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(GetConfigurations(document.Project, diagnostics, cancellationToken));
 
-        public Task<ImmutableArray<CodeFix>> GetFixesAsync(Project project, IEnumerable<Diagnostic> diagnostics, CancellationToken cancellationToken)
-            => Task.FromResult(GetConfigurations(project, diagnostics, cancellationToken));
+        public Task<ImmutableArray<CodeFix>> GetFixesAsync(
+            Project project,
+            IEnumerable<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(GetConfigurations(project, diagnostics, cancellationToken));
 
-        private static ImmutableArray<CodeFix> GetConfigurations(Project project, IEnumerable<Diagnostic> diagnostics, CancellationToken cancellationToken)
+        private static ImmutableArray<CodeFix> GetConfigurations(
+            Project project,
+            IEnumerable<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             var result = ArrayBuilder<CodeFix>.GetInstance();
             foreach (var diagnostic in diagnostics)
             {
                 // First get all the relevant code style options for the diagnostic.
-                var codeStyleOptions = ConfigurationUpdater.GetCodeStyleOptionsForDiagnostic(diagnostic, project);
+                var codeStyleOptions = ConfigurationUpdater.GetCodeStyleOptionsForDiagnostic(
+                    diagnostic,
+                    project
+                );
                 if (codeStyleOptions.IsEmpty)
                 {
                     continue;
@@ -82,9 +116,24 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 using var _ = ArrayBuilder<CodeAction>.GetInstance(out var nestedActions);
                 var optionSet = project.Solution.Workspace.Options;
                 var hasMultipleOptions = codeStyleOptions.Length > 1;
-                foreach (var (optionKey, codeStyleOption, editorConfigLocation, perLanguageOption) in codeStyleOptions.OrderBy(t => t.optionKey.Option.Name))
+                foreach (
+                    var (
+                        optionKey,
+                        codeStyleOption,
+                        editorConfigLocation,
+                        perLanguageOption
+                    ) in codeStyleOptions.OrderBy(t => t.optionKey.Option.Name)
+                )
                 {
-                    var topLevelAction = GetCodeActionForCodeStyleOption(optionKey, codeStyleOption, editorConfigLocation, diagnostic, perLanguageOption, optionSet, hasMultipleOptions);
+                    var topLevelAction = GetCodeActionForCodeStyleOption(
+                        optionKey,
+                        codeStyleOption,
+                        editorConfigLocation,
+                        diagnostic,
+                        perLanguageOption,
+                        optionSet,
+                        hasMultipleOptions
+                    );
                     if (topLevelAction != null)
                     {
                         nestedActions.Add(topLevelAction);
@@ -94,9 +143,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 if (nestedActions.Count != 0)
                 {
                     // Wrap actions by another level if the diagnostic ID has multiple associated code style options to reduce clutter.
-                    var resultCodeAction = nestedActions.Count > 1
-                        ? new TopLevelConfigureCodeStyleOptionCodeAction(diagnostic, nestedActions.ToImmutable())
-                        : nestedActions.Single();
+                    var resultCodeAction =
+                        nestedActions.Count > 1
+                            ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                                diagnostic,
+                                nestedActions.ToImmutable()
+                            )
+                            : nestedActions.Single();
 
                     result.Add(new CodeFix(project, resultCodeAction, diagnostic));
                 }
@@ -112,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 Diagnostic diagnostic,
                 bool isPerLanguage,
                 OptionSet optionSet,
-                bool hasMultipleOptions)
+                bool hasMultipleOptions
+            )
             {
                 // Add a code action for every valid value of the given code style option.
                 // We only support light-bulb configuration of code style options with boolean or enum values.
@@ -141,8 +195,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     // In that case, we will already have a containing top level action for the diagnostic.
                     // Otherwise, use the diagnostic information in the title.
                     return hasMultipleOptions
-                        ? new TopLevelConfigureCodeStyleOptionCodeAction(optionName, nestedActions.ToImmutable())
-                        : new TopLevelConfigureCodeStyleOptionCodeAction(diagnostic, nestedActions.ToImmutable());
+                        ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                            optionName,
+                            nestedActions.ToImmutable()
+                        )
+                        : new TopLevelConfigureCodeStyleOptionCodeAction(
+                            diagnostic,
+                            nestedActions.ToImmutable()
+                        );
                 }
 
                 return null;
@@ -154,7 +214,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     var configuredCodeStyleOption = codeStyleOption.WithValue(newValue);
 
                     // Try to get the parsed editorconfig string representation of the new code style option value
-                    if (ConfigurationUpdater.TryGetEditorConfigStringParts(configuredCodeStyleOption, editorConfigLocation, optionSet, out var parts))
+                    if (
+                        ConfigurationUpdater.TryGetEditorConfigStringParts(
+                            configuredCodeStyleOption,
+                            editorConfigLocation,
+                            optionSet,
+                            out var parts
+                        )
+                    )
                     {
                         // We expect all code style values for same code style option to have the same editorconfig option name.
                         Debug.Assert(optionName == null || optionName == parts.optionName);
@@ -164,8 +231,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                         nestedActions.Add(
                             new SolutionChangeAction(
                                 parts.optionValue,
-                                solution => ConfigurationUpdater.ConfigureCodeStyleOptionAsync(parts.optionName, parts.optionValue, diagnostic, isPerLanguage, project, cancellationToken),
-                                parts.optionValue));
+                                solution =>
+                                    ConfigurationUpdater.ConfigureCodeStyleOptionAsync(
+                                        parts.optionName,
+                                        parts.optionValue,
+                                        diagnostic,
+                                        isPerLanguage,
+                                        project,
+                                        cancellationToken
+                                    ),
+                                parts.optionValue
+                            )
+                        );
                     }
                 }
             }

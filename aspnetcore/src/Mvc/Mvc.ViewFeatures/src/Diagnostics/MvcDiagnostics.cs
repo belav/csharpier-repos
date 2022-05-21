@@ -26,7 +26,11 @@ public sealed class BeforeViewComponentEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="viewComponentContext">The <see cref="ViewComponentContext"/>.</param>
     /// <param name="viewComponent">The <see cref="ViewComponent"/>.</param>
-    public BeforeViewComponentEventData(ActionDescriptor actionDescriptor, ViewComponentContext viewComponentContext, object viewComponent)
+    public BeforeViewComponentEventData(
+        ActionDescriptor actionDescriptor,
+        ViewComponentContext viewComponentContext,
+        object viewComponent
+    )
     {
         ActionDescriptor = actionDescriptor;
         ViewComponentContext = viewComponentContext;
@@ -52,13 +56,18 @@ public sealed class BeforeViewComponentEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ViewComponentContext), ViewComponentContext),
-        2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -78,7 +87,12 @@ public sealed class AfterViewComponentEventData : EventData
     /// <param name="viewComponentContext">The <see cref="ViewComponentContext"/>.</param>
     /// <param name="viewComponentResult">The <see cref="ViewComponentResult"/>.</param>
     /// <param name="viewComponent">The <see cref="ViewComponent"/>.</param>
-    public AfterViewComponentEventData(ActionDescriptor actionDescriptor, ViewComponentContext viewComponentContext, IViewComponentResult viewComponentResult, object viewComponent)
+    public AfterViewComponentEventData(
+        ActionDescriptor actionDescriptor,
+        ViewComponentContext viewComponentContext,
+        IViewComponentResult viewComponentResult,
+        object viewComponent
+    )
     {
         ActionDescriptor = actionDescriptor;
         ViewComponentContext = viewComponentContext;
@@ -110,14 +124,19 @@ public sealed class AfterViewComponentEventData : EventData
     protected override int Count => 4;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ViewComponentContext), ViewComponentContext),
-        2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
-        3 => new KeyValuePair<string, object>(nameof(ViewComponentResult), ViewComponentResult),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
+            3 => new KeyValuePair<string, object>(nameof(ViewComponentResult), ViewComponentResult),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -136,12 +155,17 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="viewComponentContext">The <see cref="ViewComponentContext"/>.</param>
     /// <param name="view">The <see cref="IView"/>.</param>
-    public ViewComponentBeforeViewExecuteEventData(ActionDescriptor actionDescriptor, ViewComponentContext viewComponentContext, IView view)
+    public ViewComponentBeforeViewExecuteEventData(
+        ActionDescriptor actionDescriptor,
+        ViewComponentContext viewComponentContext,
+        IView view
+    )
     {
         ActionDescriptor = actionDescriptor;
         ViewComponentContext = viewComponentContext;
         View = view;
     }
+
     /// <summary>
     /// The <see cref="ActionDescriptor"/>.
     /// </summary>
@@ -161,13 +185,18 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ViewComponentContext), ViewComponentContext),
-        2 => new KeyValuePair<string, object>(nameof(View), View),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(View), View),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -186,7 +215,11 @@ public sealed class ViewComponentAfterViewExecuteEventData : EventData
     /// <param name="actionDescriptor">The <see cref="ActionDescriptor"/>.</param>
     /// <param name="viewComponentContext">The <see cref="ViewComponentContext"/>.</param>
     /// <param name="view">The <see cref="IView"/>.</param>
-    public ViewComponentAfterViewExecuteEventData(ActionDescriptor actionDescriptor, ViewComponentContext viewComponentContext, IView view)
+    public ViewComponentAfterViewExecuteEventData(
+        ActionDescriptor actionDescriptor,
+        ViewComponentContext viewComponentContext,
+        IView view
+    )
     {
         ActionDescriptor = actionDescriptor;
         ViewComponentContext = viewComponentContext;
@@ -212,13 +245,18 @@ public sealed class ViewComponentAfterViewExecuteEventData : EventData
     protected override int Count => 3;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        1 => new KeyValuePair<string, object>(nameof(ViewComponentContext), ViewComponentContext),
-        2 => new KeyValuePair<string, object>(nameof(View), View),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            1
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
+            2 => new KeyValuePair<string, object>(nameof(View), View),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -256,12 +294,13 @@ public sealed class BeforeViewEventData : EventData
     protected override int Count => 2;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(View), View),
-        1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(View), View),
+            1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -299,12 +338,13 @@ public sealed class AfterViewEventData : EventData
     protected override int Count => 2;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(View), View),
-        1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(View), View),
+            1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -325,7 +365,13 @@ public sealed class ViewFoundEventData : EventData
     /// <param name="result">The <see cref="ActionResult"/>.</param>
     /// <param name="viewName">The name of the view.</param>
     /// <param name="view">The <see cref="IView"/>.</param>
-    public ViewFoundEventData(ActionContext actionContext, bool isMainPage, ActionResult result, string viewName, IView view)
+    public ViewFoundEventData(
+        ActionContext actionContext,
+        bool isMainPage,
+        ActionResult result,
+        string viewName,
+        IView view
+    )
     {
         ActionContext = actionContext;
         IsMainPage = isMainPage;
@@ -363,15 +409,16 @@ public sealed class ViewFoundEventData : EventData
     protected override int Count => 5;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(IsMainPage), IsMainPage),
-        2 => new KeyValuePair<string, object>(nameof(Result), Result),
-        3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
-        4 => new KeyValuePair<string, object>(nameof(View), View),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(IsMainPage), IsMainPage),
+            2 => new KeyValuePair<string, object>(nameof(Result), Result),
+            3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
+            4 => new KeyValuePair<string, object>(nameof(View), View),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }
 
 /// <summary>
@@ -392,7 +439,13 @@ public sealed class ViewNotFoundEventData : EventData
     /// <param name="result">The <see cref="ActionResult"/>.</param>
     /// <param name="viewName">The name of the view.</param>
     /// <param name="searchedLocations">The locations searched for the view.</param>
-    public ViewNotFoundEventData(ActionContext actionContext, bool isMainPage, ActionResult result, string viewName, IEnumerable<string> searchedLocations)
+    public ViewNotFoundEventData(
+        ActionContext actionContext,
+        bool isMainPage,
+        ActionResult result,
+        string viewName,
+        IEnumerable<string> searchedLocations
+    )
     {
         ActionContext = actionContext;
         IsMainPage = isMainPage;
@@ -430,13 +483,14 @@ public sealed class ViewNotFoundEventData : EventData
     protected override int Count => 5;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-        1 => new KeyValuePair<string, object>(nameof(IsMainPage), IsMainPage),
-        2 => new KeyValuePair<string, object>(nameof(Result), Result),
-        3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
-        4 => new KeyValuePair<string, object>(nameof(SearchedLocations), SearchedLocations),
-        _ => throw new IndexOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
+            1 => new KeyValuePair<string, object>(nameof(IsMainPage), IsMainPage),
+            2 => new KeyValuePair<string, object>(nameof(Result), Result),
+            3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
+            4 => new KeyValuePair<string, object>(nameof(SearchedLocations), SearchedLocations),
+            _ => throw new IndexOutOfRangeException(nameof(index))
+        };
 }

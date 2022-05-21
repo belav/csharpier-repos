@@ -20,18 +20,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-internal class HttpConnectionContext : ConnectionContext,
-                                     IConnectionIdFeature,
-                                     IConnectionItemsFeature,
-                                     IConnectionTransportFeature,
-                                     IConnectionUserFeature,
-                                     IConnectionHeartbeatFeature,
-                                     ITransferFormatFeature,
-                                     IHttpContextFeature,
-                                     IHttpTransportFeature,
-                                     IConnectionInherentKeepAliveFeature,
-                                     IConnectionLifetimeFeature,
-                                     IConnectionLifetimeNotificationFeature
+internal class HttpConnectionContext
+    : ConnectionContext,
+        IConnectionIdFeature,
+        IConnectionItemsFeature,
+        IConnectionTransportFeature,
+        IConnectionUserFeature,
+        IConnectionHeartbeatFeature,
+        ITransferFormatFeature,
+        IHttpContextFeature,
+        IHttpTransportFeature,
+        IConnectionInherentKeepAliveFeature,
+        IConnectionLifetimeFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private readonly HttpConnectionDispatcherOptions _options;
 
@@ -54,13 +55,22 @@ internal class HttpConnectionContext : ConnectionContext,
 
     // This tcs exists so that multiple calls to DisposeAsync all wait asynchronously
     // on the same task
-    private readonly TaskCompletionSource _disposeTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _disposeTcs = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     /// <summary>
     /// Creates the DefaultConnectionContext without Pipes to avoid upfront allocations.
     /// The caller is expected to set the <see cref="Transport"/> and <see cref="Application"/> pipes manually.
     /// </summary>
-    public HttpConnectionContext(string connectionId, string connectionToken, ILogger logger, IDuplexPipe transport, IDuplexPipe application, HttpConnectionDispatcherOptions options)
+    public HttpConnectionContext(
+        string connectionId,
+        string connectionToken,
+        ILogger logger,
+        IDuplexPipe transport,
+        IDuplexPipe application,
+        HttpConnectionDispatcherOptions options
+    )
     {
         Transport = transport;
         _applicationStream = new PipeWriterStream(application.Output);
@@ -191,7 +201,10 @@ internal class HttpConnectionContext : ConnectionContext,
 
     public override void Abort()
     {
-        ThreadPool.UnsafeQueueUserWorkItem(cts => ((CancellationTokenSource)cts!).Cancel(), _connectionClosedTokenSource);
+        ThreadPool.UnsafeQueueUserWorkItem(
+            cts => ((CancellationTokenSource)cts!).Cancel(),
+            _connectionClosedTokenSource
+        );
 
         HttpContext?.Abort();
     }
@@ -336,7 +349,10 @@ internal class HttpConnectionContext : ConnectionContext,
                     Application?.Input.Complete();
 
                     // Trigger ConnectionClosed
-                    ThreadPool.UnsafeQueueUserWorkItem(cts => ((CancellationTokenSource)cts!).Cancel(), _connectionClosedTokenSource);
+                    ThreadPool.UnsafeQueueUserWorkItem(
+                        cts => ((CancellationTokenSource)cts!).Cancel(),
+                        _connectionClosedTokenSource
+                    );
                 }
             }
             else
@@ -346,7 +362,10 @@ internal class HttpConnectionContext : ConnectionContext,
                 Application?.Input.Complete();
 
                 // Trigger ConnectionClosed
-                ThreadPool.UnsafeQueueUserWorkItem(cts => ((CancellationTokenSource)cts!).Cancel(), _connectionClosedTokenSource);
+                ThreadPool.UnsafeQueueUserWorkItem(
+                    cts => ((CancellationTokenSource)cts!).Cancel(),
+                    _connectionClosedTokenSource
+                );
 
                 try
                 {
@@ -385,7 +404,8 @@ internal class HttpConnectionContext : ConnectionContext,
         ConnectionDelegate connectionDelegate,
         IHttpTransport transport,
         HttpContext context,
-        ILogger dispatcherLogger)
+        ILogger dispatcherLogger
+    )
     {
         lock (_stateLock)
         {
@@ -416,7 +436,8 @@ internal class HttpConnectionContext : ConnectionContext,
         TimeSpan pollTimeout,
         Task currentRequestTask,
         ILoggerFactory loggerFactory,
-        ILogger dispatcherLogger)
+        ILogger dispatcherLogger
+    )
     {
         lock (_stateLock)
         {
@@ -450,16 +471,28 @@ internal class HttpConnectionContext : ConnectionContext,
                     Cancellation = new CancellationTokenSource();
 
                     var timeoutSource = new CancellationTokenSource();
-                    var tokenSource = CancellationTokenSource.CreateLinkedTokenSource(Cancellation.Token, nonClonedContext.RequestAborted, timeoutSource.Token);
+                    var tokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                        Cancellation.Token,
+                        nonClonedContext.RequestAborted,
+                        timeoutSource.Token
+                    );
 
                     // Dispose these tokens when the request is over
                     nonClonedContext.Response.RegisterForDispose(timeoutSource);
                     nonClonedContext.Response.RegisterForDispose(tokenSource);
 
-                    var longPolling = new LongPollingServerTransport(timeoutSource.Token, Application.Input, loggerFactory, this);
+                    var longPolling = new LongPollingServerTransport(
+                        timeoutSource.Token,
+                        Application.Input,
+                        loggerFactory,
+                        this
+                    );
 
                     // Start the transport
-                    TransportTask = longPolling.ProcessRequestAsync(nonClonedContext, tokenSource.Token);
+                    TransportTask = longPolling.ProcessRequestAsync(
+                        nonClonedContext,
+                        tokenSource.Token
+                    );
 
                     // Start the timeout after we return from creating the transport task
                     timeoutSource.CancelAfter(pollTimeout);
@@ -476,11 +509,18 @@ internal class HttpConnectionContext : ConnectionContext,
         }
     }
 
-    private void FailActivationUnsynchronized(HttpContext nonClonedContext, ILogger dispatcherLogger)
+    private void FailActivationUnsynchronized(
+        HttpContext nonClonedContext,
+        ILogger dispatcherLogger
+    )
     {
         if (Status == HttpConnectionStatus.Active)
         {
-            HttpConnectionDispatcher.Log.ConnectionAlreadyActive(dispatcherLogger, ConnectionId, HttpContext!.TraceIdentifier);
+            HttpConnectionDispatcher.Log.ConnectionAlreadyActive(
+                dispatcherLogger,
+                ConnectionId,
+                HttpContext!.TraceIdentifier
+            );
 
             // Reject the request with a 409 conflict
             nonClonedContext.Response.StatusCode = StatusCodes.Status409Conflict;
@@ -552,7 +592,10 @@ internal class HttpConnectionContext : ConnectionContext,
     private async Task ExecuteApplication(ConnectionDelegate connectionDelegate)
     {
         // Verify some initialization invariants
-        Debug.Assert(TransportType != HttpTransportType.None, "Transport has not been initialized yet");
+        Debug.Assert(
+            TransportType != HttpTransportType.None,
+            "Transport has not been initialized yet"
+        );
 
         // Jump onto the thread pool thread so blocking user code doesn't block the setup of the
         // connection and transport
@@ -617,37 +660,88 @@ internal class HttpConnectionContext : ConnectionContext,
 
     public void RequestClose()
     {
-        ThreadPool.UnsafeQueueUserWorkItem(static cts => ((CancellationTokenSource)cts!).Cancel(), _connectionCloseRequested);
+        ThreadPool.UnsafeQueueUserWorkItem(
+            static cts => ((CancellationTokenSource)cts!).Cancel(),
+            _connectionCloseRequested
+        );
     }
 
     private static class Log
     {
         private static readonly Action<ILogger, string, Exception?> _disposingConnection =
-            LoggerMessage.Define<string>(LogLevel.Trace, new EventId(1, "DisposingConnection"), "Disposing connection {TransportConnectionId}.");
+            LoggerMessage.Define<string>(
+                LogLevel.Trace,
+                new EventId(1, "DisposingConnection"),
+                "Disposing connection {TransportConnectionId}."
+            );
 
         private static readonly Action<ILogger, Exception?> _waitingForApplication =
-            LoggerMessage.Define(LogLevel.Trace, new EventId(2, "WaitingForApplication"), "Waiting for application to complete.");
+            LoggerMessage.Define(
+                LogLevel.Trace,
+                new EventId(2, "WaitingForApplication"),
+                "Waiting for application to complete."
+            );
 
         private static readonly Action<ILogger, Exception?> _applicationComplete =
-            LoggerMessage.Define(LogLevel.Trace, new EventId(3, "ApplicationComplete"), "Application complete.");
+            LoggerMessage.Define(
+                LogLevel.Trace,
+                new EventId(3, "ApplicationComplete"),
+                "Application complete."
+            );
 
-        private static readonly Action<ILogger, HttpTransportType, Exception?> _waitingForTransport =
-            LoggerMessage.Define<HttpTransportType>(LogLevel.Trace, new EventId(4, "WaitingForTransport"), "Waiting for {TransportType} transport to complete.");
+        private static readonly Action<
+            ILogger,
+            HttpTransportType,
+            Exception?
+        > _waitingForTransport = LoggerMessage.Define<HttpTransportType>(
+            LogLevel.Trace,
+            new EventId(4, "WaitingForTransport"),
+            "Waiting for {TransportType} transport to complete."
+        );
 
         private static readonly Action<ILogger, HttpTransportType, Exception?> _transportComplete =
-            LoggerMessage.Define<HttpTransportType>(LogLevel.Trace, new EventId(5, "TransportComplete"), "{TransportType} transport complete.");
+            LoggerMessage.Define<HttpTransportType>(
+                LogLevel.Trace,
+                new EventId(5, "TransportComplete"),
+                "{TransportType} transport complete."
+            );
 
-        private static readonly Action<ILogger, HttpTransportType, Exception?> _shuttingDownTransportAndApplication =
-            LoggerMessage.Define<HttpTransportType>(LogLevel.Trace, new EventId(6, "ShuttingDownTransportAndApplication"), "Shutting down both the application and the {TransportType} transport.");
+        private static readonly Action<
+            ILogger,
+            HttpTransportType,
+            Exception?
+        > _shuttingDownTransportAndApplication = LoggerMessage.Define<HttpTransportType>(
+            LogLevel.Trace,
+            new EventId(6, "ShuttingDownTransportAndApplication"),
+            "Shutting down both the application and the {TransportType} transport."
+        );
 
-        private static readonly Action<ILogger, HttpTransportType, Exception?> _waitingForTransportAndApplication =
-            LoggerMessage.Define<HttpTransportType>(LogLevel.Trace, new EventId(7, "WaitingForTransportAndApplication"), "Waiting for both the application and {TransportType} transport to complete.");
+        private static readonly Action<
+            ILogger,
+            HttpTransportType,
+            Exception?
+        > _waitingForTransportAndApplication = LoggerMessage.Define<HttpTransportType>(
+            LogLevel.Trace,
+            new EventId(7, "WaitingForTransportAndApplication"),
+            "Waiting for both the application and {TransportType} transport to complete."
+        );
 
-        private static readonly Action<ILogger, HttpTransportType, Exception?> _transportAndApplicationComplete =
-            LoggerMessage.Define<HttpTransportType>(LogLevel.Trace, new EventId(8, "TransportAndApplicationComplete"), "The application and {TransportType} transport are both complete.");
+        private static readonly Action<
+            ILogger,
+            HttpTransportType,
+            Exception?
+        > _transportAndApplicationComplete = LoggerMessage.Define<HttpTransportType>(
+            LogLevel.Trace,
+            new EventId(8, "TransportAndApplicationComplete"),
+            "The application and {TransportType} transport are both complete."
+        );
 
         private static readonly Action<ILogger, int, string, Exception?> _transportSendtimeout =
-            LoggerMessage.Define<int, string>(LogLevel.Trace, new EventId(9, "TransportSendTimeout"), "{Timeout}ms elapsed attempting to send a message to the transport. Closing connection {TransportConnectionId}.");
+            LoggerMessage.Define<int, string>(
+                LogLevel.Trace,
+                new EventId(9, "TransportSendTimeout"),
+                "{Timeout}ms elapsed attempting to send a message to the transport. Closing connection {TransportConnectionId}."
+            );
 
         public static void DisposingConnection(ILogger logger, string connectionId)
         {
@@ -699,7 +793,10 @@ internal class HttpConnectionContext : ConnectionContext,
             _transportComplete(logger, transportType, null);
         }
 
-        public static void ShuttingDownTransportAndApplication(ILogger logger, HttpTransportType transportType)
+        public static void ShuttingDownTransportAndApplication(
+            ILogger logger,
+            HttpTransportType transportType
+        )
         {
             if (logger == null)
             {
@@ -709,7 +806,10 @@ internal class HttpConnectionContext : ConnectionContext,
             _shuttingDownTransportAndApplication(logger, transportType, null);
         }
 
-        public static void WaitingForTransportAndApplication(ILogger logger, HttpTransportType transportType)
+        public static void WaitingForTransportAndApplication(
+            ILogger logger,
+            HttpTransportType transportType
+        )
         {
             if (logger == null)
             {
@@ -719,7 +819,10 @@ internal class HttpConnectionContext : ConnectionContext,
             _waitingForTransportAndApplication(logger, transportType, null);
         }
 
-        public static void TransportAndApplicationComplete(ILogger logger, HttpTransportType transportType)
+        public static void TransportAndApplicationComplete(
+            ILogger logger,
+            HttpTransportType transportType
+        )
         {
             if (logger == null)
             {
@@ -729,9 +832,18 @@ internal class HttpConnectionContext : ConnectionContext,
             _transportAndApplicationComplete(logger, transportType, null);
         }
 
-        public static void TransportSendTimeout(ILogger logger, TimeSpan transportTimeout, string connectionId)
+        public static void TransportSendTimeout(
+            ILogger logger,
+            TimeSpan transportTimeout,
+            string connectionId
+        )
         {
-            _transportSendtimeout(logger, (int)transportTimeout.TotalMilliseconds, connectionId, null);
+            _transportSendtimeout(
+                logger,
+                (int)transportTimeout.TotalMilliseconds,
+                connectionId,
+                null
+            );
         }
     }
 }

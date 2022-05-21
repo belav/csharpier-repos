@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis
     /// A small struct that holds the values that define the identity of a source generated document, and don't change
     /// as new generations happen. This is mostly for convenience as we are reguarly working with this combination of values.
     /// </summary>
-    internal readonly struct SourceGeneratedDocumentIdentity : IObjectWritable, IEquatable<SourceGeneratedDocumentIdentity>
+    internal readonly struct SourceGeneratedDocumentIdentity
+        : IObjectWritable,
+            IEquatable<SourceGeneratedDocumentIdentity>
     {
         public DocumentId DocumentId { get; }
         public string HintName { get; }
@@ -25,7 +27,13 @@ namespace Microsoft.CodeAnalysis
 
         public bool ShouldReuseInSerialization => true;
 
-        public SourceGeneratedDocumentIdentity(DocumentId documentId, string hintName, string generatorAssemblyName, string generatorTypeName, string filePath)
+        public SourceGeneratedDocumentIdentity(
+            DocumentId documentId,
+            string hintName,
+            string generatorAssemblyName,
+            string generatorTypeName,
+            string filePath
+        )
         {
             DocumentId = documentId;
             HintName = hintName;
@@ -44,7 +52,12 @@ namespace Microsoft.CodeAnalysis
             return generator.GetGeneratorType().Assembly.FullName!;
         }
 
-        public static SourceGeneratedDocumentIdentity Generate(ProjectId projectId, string hintName, ISourceGenerator generator, string filePath)
+        public static SourceGeneratedDocumentIdentity Generate(
+            ProjectId projectId,
+            string hintName,
+            ISourceGenerator generator,
+            string filePath
+        )
         {
             // We want the DocumentId generated for a generated output to be stable between Compilations; this is so features that track
             // a document by DocumentId can find it after some change has happened that requires generators to run again.
@@ -56,7 +69,17 @@ namespace Microsoft.CodeAnalysis
             // Combine the strings together; we'll use Encoding.Unicode since that'll match the underlying format; this can be made much
             // faster once we're on .NET Core since we could directly treat the strings as ReadOnlySpan<char>.
             var projectIdBytes = projectId.Id.ToByteArray();
-            using var _ = ArrayBuilder<byte>.GetInstance(capacity: (generatorAssemblyName.Length + 1 + generatorTypeName.Length + 1 + hintName.Length) * 2 + projectIdBytes.Length, out var hashInput);
+            using var _ = ArrayBuilder<byte>.GetInstance(
+                capacity: (
+                    generatorAssemblyName.Length
+                    + 1
+                    + generatorTypeName.Length
+                    + 1
+                    + hintName.Length
+                ) * 2
+                    + projectIdBytes.Length,
+                out var hashInput
+            );
             hashInput.AddRange(projectIdBytes);
 
             // Add a null to separate the generator name and hint name; since this is effectively a joining of UTF-16 bytes
@@ -76,7 +99,13 @@ namespace Microsoft.CodeAnalysis
 
             var documentId = DocumentId.CreateFromSerialized(projectId, guid, hintName);
 
-            return new SourceGeneratedDocumentIdentity(documentId, hintName, generatorAssemblyName, generatorTypeName, filePath);
+            return new SourceGeneratedDocumentIdentity(
+                documentId,
+                hintName,
+                generatorAssemblyName,
+                generatorTypeName,
+                filePath
+            );
         }
 
         public void WriteTo(ObjectWriter writer)
@@ -98,7 +127,13 @@ namespace Microsoft.CodeAnalysis
             var generatorTypeName = reader.ReadString();
             var filePath = reader.ReadString();
 
-            return new SourceGeneratedDocumentIdentity(documentId, hintName, generatorAssemblyName, generatorTypeName, filePath);
+            return new SourceGeneratedDocumentIdentity(
+                documentId,
+                hintName,
+                generatorAssemblyName,
+                generatorTypeName,
+                filePath
+            );
         }
 
         public override bool Equals(object? obj)
@@ -108,28 +143,39 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(SourceGeneratedDocumentIdentity other)
         {
-            return EqualityComparer<DocumentId>.Default.Equals(DocumentId, other.DocumentId) &&
-                   HintName == other.HintName &&
-                   GeneratorAssemblyName == other.GeneratorAssemblyName &&
-                   GeneratorTypeName == other.GeneratorTypeName &&
-                   FilePath == other.FilePath;
+            return EqualityComparer<DocumentId>.Default.Equals(DocumentId, other.DocumentId)
+                && HintName == other.HintName
+                && GeneratorAssemblyName == other.GeneratorAssemblyName
+                && GeneratorTypeName == other.GeneratorTypeName
+                && FilePath == other.FilePath;
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(DocumentId,
-                   Hash.Combine(HintName,
-                   Hash.Combine(GeneratorAssemblyName,
-                   Hash.Combine(GeneratorTypeName,
-                   Hash.Combine(FilePath, 0)))));
+            return Hash.Combine(
+                DocumentId,
+                Hash.Combine(
+                    HintName,
+                    Hash.Combine(
+                        GeneratorAssemblyName,
+                        Hash.Combine(GeneratorTypeName, Hash.Combine(FilePath, 0))
+                    )
+                )
+            );
         }
 
-        public static bool operator ==(SourceGeneratedDocumentIdentity left, SourceGeneratedDocumentIdentity right)
+        public static bool operator ==(
+            SourceGeneratedDocumentIdentity left,
+            SourceGeneratedDocumentIdentity right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(SourceGeneratedDocumentIdentity left, SourceGeneratedDocumentIdentity right)
+        public static bool operator !=(
+            SourceGeneratedDocumentIdentity left,
+            SourceGeneratedDocumentIdentity right
+        )
         {
             return !(left == right);
         }

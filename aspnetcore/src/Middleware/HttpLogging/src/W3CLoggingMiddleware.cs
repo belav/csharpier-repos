@@ -30,19 +30,39 @@ internal class W3CLoggingMiddleware
     // Convenience for getting the index of each element in the elements array
     internal static readonly int _dateIndex = BitOperations.Log2((int)W3CLoggingFields.Date);
     internal static readonly int _timeIndex = BitOperations.Log2((int)W3CLoggingFields.Time);
-    internal static readonly int _clientIpIndex = BitOperations.Log2((int)W3CLoggingFields.ClientIpAddress);
-    internal static readonly int _userNameIndex = BitOperations.Log2((int)W3CLoggingFields.UserName);
-    internal static readonly int _serverNameIndex = BitOperations.Log2((int)W3CLoggingFields.ServerName);
-    internal static readonly int _serverIpIndex = BitOperations.Log2((int)W3CLoggingFields.ServerIpAddress);
-    internal static readonly int _serverPortIndex = BitOperations.Log2((int)W3CLoggingFields.ServerPort);
+    internal static readonly int _clientIpIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ClientIpAddress
+    );
+    internal static readonly int _userNameIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.UserName
+    );
+    internal static readonly int _serverNameIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ServerName
+    );
+    internal static readonly int _serverIpIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ServerIpAddress
+    );
+    internal static readonly int _serverPortIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ServerPort
+    );
     internal static readonly int _methodIndex = BitOperations.Log2((int)W3CLoggingFields.Method);
     internal static readonly int _uriStemIndex = BitOperations.Log2((int)W3CLoggingFields.UriStem);
-    internal static readonly int _uriQueryIndex = BitOperations.Log2((int)W3CLoggingFields.UriQuery);
-    internal static readonly int _protocolStatusIndex = BitOperations.Log2((int)W3CLoggingFields.ProtocolStatus);
-    internal static readonly int _timeTakenIndex = BitOperations.Log2((int)W3CLoggingFields.TimeTaken);
-    internal static readonly int _protocolVersionIndex = BitOperations.Log2((int)W3CLoggingFields.ProtocolVersion);
+    internal static readonly int _uriQueryIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.UriQuery
+    );
+    internal static readonly int _protocolStatusIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ProtocolStatus
+    );
+    internal static readonly int _timeTakenIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.TimeTaken
+    );
+    internal static readonly int _protocolVersionIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.ProtocolVersion
+    );
     internal static readonly int _hostIndex = BitOperations.Log2((int)W3CLoggingFields.Host);
-    internal static readonly int _userAgentIndex = BitOperations.Log2((int)W3CLoggingFields.UserAgent);
+    internal static readonly int _userAgentIndex = BitOperations.Log2(
+        (int)W3CLoggingFields.UserAgent
+    );
     internal static readonly int _cookieIndex = BitOperations.Log2((int)W3CLoggingFields.Cookie);
     internal static readonly int _refererIndex = BitOperations.Log2((int)W3CLoggingFields.Referer);
 
@@ -55,7 +75,11 @@ internal class W3CLoggingMiddleware
     /// <param name="next"></param>
     /// <param name="options"></param>
     /// <param name="w3cLogger"></param>
-    public W3CLoggingMiddleware(RequestDelegate next, IOptionsMonitor<W3CLoggerOptions> options, W3CLogger w3cLogger)
+    public W3CLoggingMiddleware(
+        RequestDelegate next,
+        IOptionsMonitor<W3CLoggerOptions> options,
+        W3CLogger w3cLogger
+    )
     {
         if (next == null)
         {
@@ -95,12 +119,20 @@ internal class W3CLoggingMiddleware
         var stopWatch = ValueStopwatch.StartNew();
         if (options.LoggingFields.HasFlag(W3CLoggingFields.Date))
         {
-            shouldLog |= AddToList(elements, _dateIndex, now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            shouldLog |= AddToList(
+                elements,
+                _dateIndex,
+                now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+            );
         }
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.Time))
         {
-            shouldLog |= AddToList(elements, _timeIndex, now.ToString("HH:mm:ss", CultureInfo.InvariantCulture));
+            shouldLog |= AddToList(
+                elements,
+                _timeIndex,
+                now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)
+            );
         }
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.ServerName))
@@ -109,23 +141,41 @@ internal class W3CLoggingMiddleware
             shouldLog |= AddToList(elements, _serverNameIndex, _serverName);
         }
 
-        if ((W3CLoggingFields.ConnectionInfoFields & options.LoggingFields) != W3CLoggingFields.None)
+        if (
+            (W3CLoggingFields.ConnectionInfoFields & options.LoggingFields) != W3CLoggingFields.None
+        )
         {
             var connectionInfo = context.Connection;
 
             if (options.LoggingFields.HasFlag(W3CLoggingFields.ClientIpAddress))
             {
-                shouldLog |= AddToList(elements, _clientIpIndex, connectionInfo.RemoteIpAddress is null ? "" : connectionInfo.RemoteIpAddress.ToString());
+                shouldLog |= AddToList(
+                    elements,
+                    _clientIpIndex,
+                    connectionInfo.RemoteIpAddress is null
+                        ? ""
+                        : connectionInfo.RemoteIpAddress.ToString()
+                );
             }
 
             if (options.LoggingFields.HasFlag(W3CLoggingFields.ServerIpAddress))
             {
-                shouldLog |= AddToList(elements, _serverIpIndex, connectionInfo.LocalIpAddress is null ? "" : connectionInfo.LocalIpAddress.ToString());
+                shouldLog |= AddToList(
+                    elements,
+                    _serverIpIndex,
+                    connectionInfo.LocalIpAddress is null
+                        ? ""
+                        : connectionInfo.LocalIpAddress.ToString()
+                );
             }
 
             if (options.LoggingFields.HasFlag(W3CLoggingFields.ServerPort))
             {
-                shouldLog |= AddToList(elements, _serverPortIndex, connectionInfo.LocalPort.ToString(CultureInfo.InvariantCulture));
+                shouldLog |= AddToList(
+                    elements,
+                    _serverPortIndex,
+                    connectionInfo.LocalPort.ToString(CultureInfo.InvariantCulture)
+                );
             }
         }
 
@@ -145,7 +195,11 @@ internal class W3CLoggingMiddleware
 
             if (options.LoggingFields.HasFlag(W3CLoggingFields.UriStem))
             {
-                shouldLog |= AddToList(elements, _uriStemIndex, (request.PathBase + request.Path).ToUriComponent());
+                shouldLog |= AddToList(
+                    elements,
+                    _uriStemIndex,
+                    (request.PathBase + request.Path).ToUriComponent()
+                );
             }
 
             if (options.LoggingFields.HasFlag(W3CLoggingFields.UriQuery))
@@ -214,12 +268,20 @@ internal class W3CLoggingMiddleware
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.ProtocolStatus))
         {
-            shouldLog |= AddToList(elements, _protocolStatusIndex, response.StatusCode.ToString(CultureInfo.InvariantCulture));
+            shouldLog |= AddToList(
+                elements,
+                _protocolStatusIndex,
+                response.StatusCode.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.TimeTaken))
         {
-            shouldLog |= AddToList(elements, _timeTakenIndex, stopWatch.GetElapsedTime().TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            shouldLog |= AddToList(
+                elements,
+                _timeTakenIndex,
+                stopWatch.GetElapsedTime().TotalMilliseconds.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
         // Write the log

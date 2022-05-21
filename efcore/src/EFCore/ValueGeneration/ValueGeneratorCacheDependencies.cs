@@ -48,8 +48,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public ValueGeneratorCacheDependencies()
-        {
-        }
+        public ValueGeneratorCacheDependencies() { }
     }
 }

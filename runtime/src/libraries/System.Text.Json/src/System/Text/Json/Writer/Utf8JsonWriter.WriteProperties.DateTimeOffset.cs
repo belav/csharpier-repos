@@ -49,8 +49,11 @@ namespace System.Text.Json
         /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
         /// The property name is escaped before writing.
         /// </remarks>
-        public void WriteString(string propertyName, DateTimeOffset value)
-            => WriteString((propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan(), value);
+        public void WriteString(string propertyName, DateTimeOffset value) =>
+            WriteString(
+                (propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan(),
+                value
+            );
 
         /// <summary>
         /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a name/value pair of a JSON object.
@@ -134,20 +137,36 @@ namespace System.Text.Json
             }
         }
 
-        private void WriteStringEscapeProperty(ReadOnlySpan<char> propertyName, DateTimeOffset value, int firstEscapeIndexProp)
+        private void WriteStringEscapeProperty(
+            ReadOnlySpan<char> propertyName,
+            DateTimeOffset value,
+            int firstEscapeIndexProp
+        )
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
+            );
             Debug.Assert(firstEscapeIndexProp >= 0 && firstEscapeIndexProp < propertyName.Length);
 
             char[]? propertyArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(propertyName.Length, firstEscapeIndexProp);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                propertyName.Length,
+                firstEscapeIndexProp
+            );
 
-            Span<char> escapedPropertyName = length <= JsonConstants.StackallocCharThreshold ?
-                stackalloc char[JsonConstants.StackallocCharThreshold] :
-                (propertyArray = ArrayPool<char>.Shared.Rent(length));
+            Span<char> escapedPropertyName =
+                length <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (propertyArray = ArrayPool<char>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(propertyName, escapedPropertyName, firstEscapeIndexProp, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                propertyName,
+                escapedPropertyName,
+                firstEscapeIndexProp,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStringByOptions(escapedPropertyName.Slice(0, written), value);
 
@@ -157,20 +176,39 @@ namespace System.Text.Json
             }
         }
 
-        private void WriteStringEscapeProperty(ReadOnlySpan<byte> utf8PropertyName, DateTimeOffset value, int firstEscapeIndexProp)
+        private void WriteStringEscapeProperty(
+            ReadOnlySpan<byte> utf8PropertyName,
+            DateTimeOffset value,
+            int firstEscapeIndexProp
+        )
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8PropertyName.Length);
-            Debug.Assert(firstEscapeIndexProp >= 0 && firstEscapeIndexProp < utf8PropertyName.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
+                    >= utf8PropertyName.Length
+            );
+            Debug.Assert(
+                firstEscapeIndexProp >= 0 && firstEscapeIndexProp < utf8PropertyName.Length
+            );
 
             byte[]? propertyArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(utf8PropertyName.Length, firstEscapeIndexProp);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                utf8PropertyName.Length,
+                firstEscapeIndexProp
+            );
 
-            Span<byte> escapedPropertyName = length <= JsonConstants.StackallocByteThreshold ?
-                stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                (propertyArray = ArrayPool<byte>.Shared.Rent(length));
+            Span<byte> escapedPropertyName =
+                length <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (propertyArray = ArrayPool<byte>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(utf8PropertyName, escapedPropertyName, firstEscapeIndexProp, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                utf8PropertyName,
+                escapedPropertyName,
+                firstEscapeIndexProp,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStringByOptions(escapedPropertyName.Slice(0, written), value);
 
@@ -206,13 +244,24 @@ namespace System.Text.Json
             }
         }
 
-        private void WriteStringMinimized(ReadOnlySpan<char> escapedPropertyName, DateTimeOffset value)
+        private void WriteStringMinimized(
+            ReadOnlySpan<char> escapedPropertyName,
+            DateTimeOffset value
+        )
         {
-            Debug.Assert(escapedPropertyName.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - JsonConstants.MaximumFormatDateTimeOffsetLength - 6);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
+                        - JsonConstants.MaximumFormatDateTimeOffsetLength
+                        - 6
+            );
 
             // All ASCII, 2 quotes for property name, 2 quotes for date, and 1 colon => escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 5
             // Optionally, 1 list separator, and up to 3x growth when transcoding
-            int maxRequired = (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + JsonConstants.MaximumFormatDateTimeOffsetLength + 6;
+            int maxRequired =
+                (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
+                + JsonConstants.MaximumFormatDateTimeOffsetLength
+                + 6;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -234,17 +283,28 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;
         }
 
-        private void WriteStringMinimized(ReadOnlySpan<byte> escapedPropertyName, DateTimeOffset value)
+        private void WriteStringMinimized(
+            ReadOnlySpan<byte> escapedPropertyName,
+            DateTimeOffset value
+        )
         {
-            Debug.Assert(escapedPropertyName.Length < int.MaxValue - JsonConstants.MaximumFormatDateTimeOffsetLength - 6);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < int.MaxValue - JsonConstants.MaximumFormatDateTimeOffsetLength - 6
+            );
 
-            int minRequired = escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 5; // 2 quotes for property name, 2 quotes for date, and 1 colon
+            int minRequired =
+                escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 5; // 2 quotes for property name, 2 quotes for date, and 1 colon
             int maxRequired = minRequired + 1; // Optionally, 1 list separator
 
             if (_memory.Length - BytesPending < maxRequired)
@@ -268,22 +328,41 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;
         }
 
-        private void WriteStringIndented(ReadOnlySpan<char> escapedPropertyName, DateTimeOffset value)
+        private void WriteStringIndented(
+            ReadOnlySpan<char> escapedPropertyName,
+            DateTimeOffset value
+        )
         {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
-            Debug.Assert(escapedPropertyName.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - indent - JsonConstants.MaximumFormatDateTimeOffsetLength - 7 - s_newLineLength);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
+                        - indent
+                        - JsonConstants.MaximumFormatDateTimeOffsetLength
+                        - 7
+                        - s_newLineLength
+            );
 
             // All ASCII, 2 quotes for property name, 2 quotes for date, 1 colon, and 1 space => escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 6
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
-            int maxRequired = indent + (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + JsonConstants.MaximumFormatDateTimeOffsetLength + 7 + s_newLineLength;
+            int maxRequired =
+                indent
+                + (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
+                + JsonConstants.MaximumFormatDateTimeOffsetLength
+                + 7
+                + s_newLineLength;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -317,20 +396,38 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;
         }
 
-        private void WriteStringIndented(ReadOnlySpan<byte> escapedPropertyName, DateTimeOffset value)
+        private void WriteStringIndented(
+            ReadOnlySpan<byte> escapedPropertyName,
+            DateTimeOffset value
+        )
         {
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
-            Debug.Assert(escapedPropertyName.Length < int.MaxValue - indent - JsonConstants.MaximumFormatDateTimeOffsetLength - 7 - s_newLineLength);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < int.MaxValue
+                        - indent
+                        - JsonConstants.MaximumFormatDateTimeOffsetLength
+                        - 7
+                        - s_newLineLength
+            );
 
-            int minRequired = indent + escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 6; // 2 quotes for property name, 2 quotes for date, 1 colon, and 1 space
+            int minRequired =
+                indent
+                + escapedPropertyName.Length
+                + JsonConstants.MaximumFormatDateTimeOffsetLength
+                + 6; // 2 quotes for property name, 2 quotes for date, 1 colon, and 1 space
             int maxRequired = minRequired + 1 + s_newLineLength; // Optionally, 1 list separator and 1-2 bytes for new line
 
             if (_memory.Length - BytesPending < maxRequired)
@@ -366,7 +463,11 @@ namespace System.Text.Json
 
             output[BytesPending++] = JsonConstants.Quote;
 
-            JsonWriterHelper.WriteDateTimeOffsetTrimmed(output.Slice(BytesPending), value, out int bytesWritten);
+            JsonWriterHelper.WriteDateTimeOffsetTrimmed(
+                output.Slice(BytesPending),
+                value,
+                out int bytesWritten
+            );
             BytesPending += bytesWritten;
 
             output[BytesPending++] = JsonConstants.Quote;

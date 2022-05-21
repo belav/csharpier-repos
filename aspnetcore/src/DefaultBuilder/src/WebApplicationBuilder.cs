@@ -25,7 +25,10 @@ public sealed class WebApplicationBuilder
 
     private WebApplication? _builtApplication;
 
-    internal WebApplicationBuilder(WebApplicationOptions options, Action<IHostBuilder>? configureDefaults = null)
+    internal WebApplicationBuilder(
+        WebApplicationOptions options,
+        Action<IHostBuilder>? configureDefaults = null
+    )
     {
         Services = _services;
 
@@ -48,32 +51,38 @@ public sealed class WebApplicationBuilder
         // we order those configuration providers appropriately without duplicating them
         if (args is { Length: > 0 })
         {
-            _bootstrapHostBuilder.ConfigureAppConfiguration(config =>
-            {
-                config.AddCommandLine(args);
-            });
+            _bootstrapHostBuilder.ConfigureAppConfiguration(
+                config =>
+                {
+                    config.AddCommandLine(args);
+                }
+            );
         }
 
-        _bootstrapHostBuilder.ConfigureWebHostDefaults(webHostBuilder =>
-        {
+        _bootstrapHostBuilder.ConfigureWebHostDefaults(
+            webHostBuilder =>
+            {
                 // Runs inline.
                 webHostBuilder.Configure(ConfigureApplication);
 
                 // Attempt to set the application name from options
                 options.ApplyApplicationName(webHostBuilder);
-        });
+            }
+        );
 
         // Apply the args to host configuration last since ConfigureWebHostDefaults overrides a host specific setting (the application name).
-        _bootstrapHostBuilder.ConfigureHostConfiguration(config =>
-        {
-            if (args is { Length: > 0 })
+        _bootstrapHostBuilder.ConfigureHostConfiguration(
+            config =>
             {
-                config.AddCommandLine(args);
-            }
+                if (args is { Length: > 0 })
+                {
+                    config.AddCommandLine(args);
+                }
 
                 // Apply the options after the args
                 options.ApplyHostConfiguration(config);
-        });
+            }
+        );
 
         Configuration = new();
 
@@ -81,7 +90,10 @@ public sealed class WebApplicationBuilder
         _services.TrackHostedServices = true;
 
         // This is the application configuration
-        var (hostContext, hostConfiguration) = _bootstrapHostBuilder.RunDefaultCallbacks(Configuration, _hostBuilder);
+        var (hostContext, hostConfiguration) = _bootstrapHostBuilder.RunDefaultCallbacks(
+            Configuration,
+            _hostBuilder
+        );
 
         // Stop tracking here
         _services.TrackHostedServices = false;
@@ -92,7 +104,8 @@ public sealed class WebApplicationBuilder
         _hostConfigurationValues = new(hostConfiguration.AsEnumerable());
 
         // Grab the WebHostBuilderContext from the property bag to use in the ConfigureWebHostBuilder
-        var webHostContext = (WebHostBuilderContext)hostContext.Properties[typeof(WebHostBuilderContext)];
+        var webHostContext = (WebHostBuilderContext)
+            hostContext.Properties[typeof(WebHostBuilderContext)];
 
         // Grab the IWebHostEnvironment from the webHostContext. This also matches the instance in the IServiceCollection.
         Environment = webHostContext.HostingEnvironment;
@@ -143,45 +156,50 @@ public sealed class WebApplicationBuilder
     {
         // Wire up the host configuration here. We don't try to preserve the configuration
         // source itself here since we don't support mutating the host values after creating the builder.
-        _hostBuilder.ConfigureHostConfiguration(builder =>
-        {
-            builder.AddInMemoryCollection(_hostConfigurationValues);
-        });
+        _hostBuilder.ConfigureHostConfiguration(
+            builder =>
+            {
+                builder.AddInMemoryCollection(_hostConfigurationValues);
+            }
+        );
 
         // Wire up the _hostBuilder's application configuration with a ChainedConfigurationSource to the ConfigurationManager.
         // We use a "tracking" source to avoid creating a circular reference when copying providers in ConfigureServices.
         var chainedConfigSource = new TrackingChainedConfigurationSource(Configuration);
 
-        _hostBuilder.ConfigureAppConfiguration(builder =>
-        {
-            builder.Add(chainedConfigSource);
-
-            foreach (var (key, value) in ((IConfigurationBuilder)Configuration).Properties)
+        _hostBuilder.ConfigureAppConfiguration(
+            builder =>
             {
-                builder.Properties[key] = value;
+                builder.Add(chainedConfigSource);
+
+                foreach (var (key, value) in ((IConfigurationBuilder)Configuration).Properties)
+                {
+                    builder.Properties[key] = value;
+                }
             }
-        });
+        );
 
         // This needs to go here to avoid adding the IHostedService that boots the server twice (the GenericWebHostService).
         // Copy the services that were added via WebApplicationBuilder.Services into the final IServiceCollection
-        _hostBuilder.ConfigureServices((context, services) =>
-        {
+        _hostBuilder.ConfigureServices(
+            (context, services) =>
+            {
                 // We've only added services configured by the GenericWebHostBuilder and WebHost.ConfigureWebDefaults
                 // at this point. HostBuilder news up a new ServiceCollection in HostBuilder.Build() we haven't seen
                 // until now, so we cannot clear these services even though some are redundant because
                 // we called ConfigureWebHostDefaults on both the _deferredHostBuilder and _hostBuilder.
                 foreach (var s in _services)
-            {
-                services.Add(s);
-            }
+                {
+                    services.Add(s);
+                }
 
                 // Add the hosted services that were initially added last
                 // this makes sure any hosted services that are added run after the initial set
                 // of hosted services. This means hosted services run before the web host starts.
                 foreach (var s in _services.HostedServices)
-            {
-                services.Add(s);
-            }
+                {
+                    services.Add(s);
+                }
 
                 // Clear the hosted services list out
                 _services.HostedServices.Clear();
@@ -194,27 +212,30 @@ public sealed class WebApplicationBuilder
                 // to the new one. This allows code that has references to the service collection to still function.
                 _services.InnerCollection = services;
 
-            var hostBuilderProviders = ((IConfigurationRoot)context.Configuration).Providers;
+                var hostBuilderProviders = ((IConfigurationRoot)context.Configuration).Providers;
 
-            if (!hostBuilderProviders.Contains(chainedConfigSource.BuiltProvider))
-            {
+                if (!hostBuilderProviders.Contains(chainedConfigSource.BuiltProvider))
+                {
                     // Something removed the _hostBuilder's TrackingChainedConfigurationSource pointing back to the ConfigurationManager.
                     // This is likely a test using WebApplicationFactory. Replicate the effect by clearing the ConfingurationManager sources.
                     ((IConfigurationBuilder)Configuration).Sources.Clear();
-            }
+                }
 
                 // Make the ConfigurationManager match the final _hostBuilder's configuration. To do that, we add the additional providers
                 // to the inner _hostBuilders's configuration to the ConfigurationManager. We wrap the existing provider in a
                 // configuration source to avoid rebulding or reloading the already added configuration sources.
                 foreach (var provider in hostBuilderProviders)
-            {
+                {
                     // Avoid creating a circular reference to the ConfigurationManager via the chained configuration source.
                     if (!ReferenceEquals(provider, chainedConfigSource.BuiltProvider))
-                {
-                    ((IConfigurationBuilder)Configuration).Add(new ConfigurationProviderSource(provider));
+                    {
+                        ((IConfigurationBuilder)Configuration).Add(
+                            new ConfigurationProviderSource(provider)
+                        );
+                    }
                 }
             }
-        });
+        );
 
         // Run the other callbacks on the final host builder
         Host.RunDeferredCallbacks(_hostBuilder);
@@ -259,7 +280,12 @@ public sealed class WebApplicationBuilder
         if (_builtApplication.DataSources.Count > 0)
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
-            if (!_builtApplication.Properties.TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder))
+            if (
+                !_builtApplication.Properties.TryGetValue(
+                    EndpointRouteBuilderKey,
+                    out var localRouteBuilder
+                )
+            )
             {
                 app.UseRouting();
             }
@@ -271,11 +297,13 @@ public sealed class WebApplicationBuilder
         }
 
         // Wire the source pipeline to run in the destination pipeline
-        app.Use(next =>
-        {
-            _builtApplication.Run(next);
-            return _builtApplication.BuildRequestDelegate();
-        });
+        app.Use(
+            next =>
+            {
+                _builtApplication.Run(next);
+                return _builtApplication.BuildRequestDelegate();
+            }
+        );
 
         if (_builtApplication.DataSources.Count > 0)
         {

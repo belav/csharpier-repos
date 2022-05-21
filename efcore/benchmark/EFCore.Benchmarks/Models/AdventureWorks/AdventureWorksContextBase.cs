@@ -102,10 +102,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.StateProvince)
+                    entity
+                        .HasOne(d => d.StateProvince)
                         .WithMany(p => p.Address)
                         .HasForeignKey(d => d.StateProvinceID);
-                });
+                }
+            );
 
             modelBuilder.Entity<AddressType>(
                 entity =>
@@ -117,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.Name).IsRequired();
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<BillOfMaterials>(
                 entity =>
@@ -126,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.Property(e => e.PerAssemblyQty)
+                    entity
+                        .Property(e => e.PerAssemblyQty)
                         .HasColumnType("decimal(8, 2)")
                         .HasDefaultValue(1.00m);
 
@@ -134,18 +138,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.UnitMeasureCode).IsRequired();
 
-                    entity.HasOne(d => d.Component)
+                    entity
+                        .HasOne(d => d.Component)
                         .WithMany(p => p.BillOfMaterials)
                         .HasForeignKey(d => d.ComponentID);
 
-                    entity.HasOne(d => d.ProductAssembly)
+                    entity
+                        .HasOne(d => d.ProductAssembly)
                         .WithMany(p => p.BillOfMaterialsNavigation)
                         .HasForeignKey(d => d.ProductAssemblyID);
 
-                    entity.HasOne(d => d.UnitMeasureCodeNavigation)
+                    entity
+                        .HasOne(d => d.UnitMeasureCodeNavigation)
                         .WithMany(p => p.BillOfMaterials)
                         .HasForeignKey(d => d.UnitMeasureCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<BusinessEntity>(
                 entity =>
@@ -155,18 +163,13 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<BusinessEntityAddress>(
                 entity =>
                 {
-                    entity.HasKey(
-                        e => new
-                        {
-                            e.BusinessEntityID,
-                            e.AddressID,
-                            e.AddressTypeID
-                        });
+                    entity.HasKey(e => new { e.BusinessEntityID, e.AddressID, e.AddressTypeID });
 
                     entity.ToTable("BusinessEntityAddress", "Person");
 
@@ -174,29 +177,27 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.Address)
+                    entity
+                        .HasOne(d => d.Address)
                         .WithMany(p => p.BusinessEntityAddress)
                         .HasForeignKey(d => d.AddressID);
 
-                    entity.HasOne(d => d.AddressType)
+                    entity
+                        .HasOne(d => d.AddressType)
                         .WithMany(p => p.BusinessEntityAddress)
                         .HasForeignKey(d => d.AddressTypeID);
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.BusinessEntityAddress)
                         .HasForeignKey(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<BusinessEntityContact>(
                 entity =>
                 {
-                    entity.HasKey(
-                        e => new
-                        {
-                            e.BusinessEntityID,
-                            e.PersonID,
-                            e.ContactTypeID
-                        });
+                    entity.HasKey(e => new { e.BusinessEntityID, e.PersonID, e.ContactTypeID });
 
                     entity.ToTable("BusinessEntityContact", "Person");
 
@@ -204,18 +205,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.BusinessEntityContact)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.ContactType)
+                    entity
+                        .HasOne(d => d.ContactType)
                         .WithMany(p => p.BusinessEntityContact)
                         .HasForeignKey(d => d.ContactTypeID);
 
-                    entity.HasOne(d => d.Person)
+                    entity
+                        .HasOne(d => d.Person)
                         .WithMany(p => p.BusinessEntityContact)
                         .HasForeignKey(d => d.PersonID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ContactType>(
                 entity =>
@@ -225,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<CountryRegion>(
                 entity =>
@@ -237,7 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<CountryRegionCurrency>(
                 entity =>
@@ -248,14 +255,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.CountryRegionCodeNavigation)
+                    entity
+                        .HasOne(d => d.CountryRegionCodeNavigation)
                         .WithMany(p => p.CountryRegionCurrency)
                         .HasForeignKey(d => d.CountryRegionCode);
 
-                    entity.HasOne(d => d.CurrencyCodeNavigation)
+                    entity
+                        .HasOne(d => d.CurrencyCodeNavigation)
                         .WithMany(p => p.CountryRegionCurrency)
                         .HasForeignKey(d => d.CurrencyCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<CreditCard>(
                 entity =>
@@ -267,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.CardType).IsRequired();
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
-                });
+                }
+            );
 
             modelBuilder.Entity<Culture>(
                 entity =>
@@ -277,7 +288,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<Currency>(
                 entity =>
@@ -289,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<CurrencyRate>(
                 entity =>
@@ -302,21 +315,25 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ToCurrencyCode).IsRequired();
 
-                    entity.HasOne(d => d.FromCurrencyCodeNavigation)
+                    entity
+                        .HasOne(d => d.FromCurrencyCodeNavigation)
                         .WithMany(p => p.CurrencyRate)
                         .HasForeignKey(d => d.FromCurrencyCode);
 
-                    entity.HasOne(d => d.ToCurrencyCodeNavigation)
+                    entity
+                        .HasOne(d => d.ToCurrencyCodeNavigation)
                         .WithMany(p => p.CurrencyRateNavigation)
                         .HasForeignKey(d => d.ToCurrencyCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<Customer>(
                 entity =>
                 {
                     entity.ToTable("Customer", "Sales");
 
-                    entity.Property(e => e.AccountNumber)
+                    entity
+                        .Property(e => e.AccountNumber)
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate();
 
@@ -324,18 +341,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.Person)
+                    entity
+                        .HasOne(d => d.Person)
                         .WithMany(p => p.Customer)
                         .HasForeignKey(d => d.PersonID);
 
-                    entity.HasOne(d => d.Store)
+                    entity
+                        .HasOne(d => d.Store)
                         .WithMany(p => p.Customer)
                         .HasForeignKey(d => d.StoreID);
 
-                    entity.HasOne(d => d.Territory)
+                    entity
+                        .HasOne(d => d.Territory)
                         .WithMany(p => p.Customer)
                         .HasForeignKey(d => d.TerritoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<Department>(
                 entity =>
@@ -347,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<EmailAddress>(
                 entity =>
@@ -362,10 +384,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.EmailAddress)
                         .HasForeignKey(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<Employee>(
                 entity =>
@@ -398,39 +422,40 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.VacationHours).HasDefaultValue((short)0);
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithOne(p => p.Employee)
                         .HasForeignKey<Employee>(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<EmployeeDepartmentHistory>(
                 entity =>
                 {
                     entity.HasKey(
-                        e => new
-                        {
-                            e.BusinessEntityID,
-                            e.StartDate,
-                            e.DepartmentID,
-                            e.ShiftID
-                        });
+                        e => new { e.BusinessEntityID, e.StartDate, e.DepartmentID, e.ShiftID }
+                    );
 
                     entity.ToTable("EmployeeDepartmentHistory", "HumanResources");
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.EmployeeDepartmentHistory)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.Department)
+                    entity
+                        .HasOne(d => d.Department)
                         .WithMany(p => p.EmployeeDepartmentHistory)
                         .HasForeignKey(d => d.DepartmentID);
 
-                    entity.HasOne(d => d.Shift)
+                    entity
+                        .HasOne(d => d.Shift)
                         .WithMany(p => p.EmployeeDepartmentHistory)
                         .HasForeignKey(d => d.ShiftID);
-                });
+                }
+            );
 
             modelBuilder.Entity<EmployeePayHistory>(
                 entity =>
@@ -441,10 +466,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.EmployeePayHistory)
                         .HasForeignKey(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<Illustration>(
                 entity =>
@@ -452,7 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.ToTable("Illustration", "Production");
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
-                });
+                }
+            );
 
             modelBuilder.Entity<JobCandidate>(
                 entity =>
@@ -461,17 +489,20 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.JobCandidate)
                         .HasForeignKey(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<Location>(
                 entity =>
                 {
                     entity.ToTable("Location", "Production");
 
-                    entity.Property(e => e.Availability)
+                    entity
+                        .Property(e => e.Availability)
                         .HasColumnType("decimal(8, 2)")
                         .HasDefaultValue(0.00m);
 
@@ -480,7 +511,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<Password>(
                 entity =>
@@ -497,8 +529,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity).WithOne(p => p.Password).HasForeignKey<Password>(d => d.BusinessEntityID);
-                });
+                    entity
+                        .HasOne(d => d.BusinessEntity)
+                        .WithOne(p => p.Password)
+                        .HasForeignKey<Password>(d => d.BusinessEntityID);
+                }
+            );
 
             modelBuilder.Entity<Person>(
                 entity =>
@@ -521,10 +557,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithOne(p => p.Person)
                         .HasForeignKey<Person>(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<PersonCreditCard>(
                 entity =>
@@ -535,38 +573,40 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.PersonCreditCard)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.CreditCard)
+                    entity
+                        .HasOne(d => d.CreditCard)
                         .WithMany(p => p.PersonCreditCard)
                         .HasForeignKey(d => d.CreditCardID);
-                });
+                }
+            );
 
             modelBuilder.Entity<PersonPhone>(
                 entity =>
                 {
                     entity.HasKey(
-                        e => new
-                        {
-                            e.BusinessEntityID,
-                            e.PhoneNumber,
-                            e.PhoneNumberTypeID
-                        });
+                        e => new { e.BusinessEntityID, e.PhoneNumber, e.PhoneNumberTypeID }
+                    );
 
                     entity.ToTable("PersonPhone", "Person");
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.PersonPhone)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.PhoneNumberType)
+                    entity
+                        .HasOne(d => d.PhoneNumberType)
                         .WithMany(p => p.PersonPhone)
                         .HasForeignKey(d => d.PhoneNumberTypeID);
-                });
+                }
+            );
 
             modelBuilder.Entity<PhoneNumberType>(
                 entity =>
@@ -576,7 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<Product>(
                 entity =>
@@ -597,22 +638,27 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.Weight).HasColumnType("decimal(8, 2)");
 
-                    entity.HasOne(d => d.ProductModel)
+                    entity
+                        .HasOne(d => d.ProductModel)
                         .WithMany(p => p.Product)
                         .HasForeignKey(d => d.ProductModelID);
 
-                    entity.HasOne(d => d.ProductSubcategory)
+                    entity
+                        .HasOne(d => d.ProductSubcategory)
                         .WithMany(p => p.Product)
                         .HasForeignKey(d => d.ProductSubcategoryID);
 
-                    entity.HasOne(d => d.SizeUnitMeasureCodeNavigation)
+                    entity
+                        .HasOne(d => d.SizeUnitMeasureCodeNavigation)
                         .WithMany(p => p.Product)
                         .HasForeignKey(d => d.SizeUnitMeasureCode);
 
-                    entity.HasOne(d => d.WeightUnitMeasureCodeNavigation)
+                    entity
+                        .HasOne(d => d.WeightUnitMeasureCodeNavigation)
                         .WithMany(p => p.ProductNavigation)
                         .HasForeignKey(d => d.WeightUnitMeasureCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductCategory>(
                 entity =>
@@ -624,7 +670,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.Name).IsRequired();
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductCostHistory>(
                 entity =>
@@ -635,10 +682,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductCostHistory)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductDescription>(
                 entity =>
@@ -650,7 +699,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductDocument>(
                 entity =>
@@ -661,10 +711,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductDocument)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductInventory>(
                 entity =>
@@ -681,14 +733,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.Shelf).IsRequired();
 
-                    entity.HasOne(d => d.Location)
+                    entity
+                        .HasOne(d => d.Location)
                         .WithMany(p => p.ProductInventory)
                         .HasForeignKey(d => d.LocationID);
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductInventory)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductListPriceHistory>(
                 entity =>
@@ -699,10 +754,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductListPriceHistory)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductModel>(
                 entity =>
@@ -714,7 +771,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.Name).IsRequired();
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductModelIllustration>(
                 entity =>
@@ -725,42 +783,45 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Illustration)
+                    entity
+                        .HasOne(d => d.Illustration)
                         .WithMany(p => p.ProductModelIllustration)
                         .HasForeignKey(d => d.IllustrationID);
 
-                    entity.HasOne(d => d.ProductModel)
+                    entity
+                        .HasOne(d => d.ProductModel)
                         .WithMany(p => p.ProductModelIllustration)
                         .HasForeignKey(d => d.ProductModelID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductModelProductDescriptionCulture>(
                 entity =>
                 {
                     entity.HasKey(
-                        e => new
-                        {
-                            e.ProductModelID,
-                            e.ProductDescriptionID,
-                            e.CultureID
-                        });
+                        e => new { e.ProductModelID, e.ProductDescriptionID, e.CultureID }
+                    );
 
                     entity.ToTable("ProductModelProductDescriptionCulture", "Production");
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Culture)
+                    entity
+                        .HasOne(d => d.Culture)
                         .WithMany(p => p.ProductModelProductDescriptionCulture)
                         .HasForeignKey(d => d.CultureID);
 
-                    entity.HasOne(d => d.ProductDescription)
+                    entity
+                        .HasOne(d => d.ProductDescription)
                         .WithMany(p => p.ProductModelProductDescriptionCulture)
                         .HasForeignKey(d => d.ProductDescriptionID);
 
-                    entity.HasOne(d => d.ProductModel)
+                    entity
+                        .HasOne(d => d.ProductModel)
                         .WithMany(p => p.ProductModelProductDescriptionCulture)
                         .HasForeignKey(d => d.ProductModelID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductPhoto>(
                 entity =>
@@ -768,7 +829,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.ToTable("ProductPhoto", "Production");
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductProductPhoto>(
                 entity =>
@@ -781,14 +843,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.Primary).HasDefaultValue(false);
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductProductPhoto)
                         .HasForeignKey(d => d.ProductID);
 
-                    entity.HasOne(d => d.ProductPhoto)
+                    entity
+                        .HasOne(d => d.ProductPhoto)
                         .WithMany(p => p.ProductProductPhoto)
                         .HasForeignKey(d => d.ProductPhotoID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductReview>(
                 entity =>
@@ -803,10 +868,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ReviewerName).IsRequired();
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductReview)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductSubcategory>(
                 entity =>
@@ -819,10 +886,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.ProductCategory)
+                    entity
+                        .HasOne(d => d.ProductCategory)
                         .WithMany(p => p.ProductSubcategory)
                         .HasForeignKey(d => d.ProductCategoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ProductVendor>(
                 entity =>
@@ -835,18 +904,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.UnitMeasureCode).IsRequired();
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.ProductVendor)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ProductVendor)
                         .HasForeignKey(d => d.ProductID);
 
-                    entity.HasOne(d => d.UnitMeasureCodeNavigation)
+                    entity
+                        .HasOne(d => d.UnitMeasureCodeNavigation)
                         .WithMany(p => p.ProductVendor)
                         .HasForeignKey(d => d.UnitMeasureCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<PurchaseOrderDetail>(
                 entity =>
@@ -863,18 +936,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.RejectedQty).HasColumnType("decimal(8, 2)");
 
-                    entity.Property(e => e.StockedQty)
+                    entity
+                        .Property(e => e.StockedQty)
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("decimal(9, 2)");
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.PurchaseOrderDetail)
                         .HasForeignKey(d => d.ProductID);
 
-                    entity.HasOne(d => d.PurchaseOrder)
+                    entity
+                        .HasOne(d => d.PurchaseOrder)
                         .WithMany(p => p.PurchaseOrderDetail)
                         .HasForeignKey(d => d.PurchaseOrderID);
-                });
+                }
+            );
 
             modelBuilder.Entity<PurchaseOrderHeader>(
                 entity =>
@@ -899,18 +976,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.TotalDue).ValueGeneratedOnAddOrUpdate();
 
-                    entity.HasOne(d => d.Employee)
+                    entity
+                        .HasOne(d => d.Employee)
                         .WithMany(p => p.PurchaseOrderHeader)
                         .HasForeignKey(d => d.EmployeeID);
 
-                    entity.HasOne(d => d.ShipMethod)
+                    entity
+                        .HasOne(d => d.ShipMethod)
                         .WithMany(p => p.PurchaseOrderHeader)
                         .HasForeignKey(d => d.ShipMethodID);
 
-                    entity.HasOne(d => d.Vendor)
+                    entity
+                        .HasOne(d => d.Vendor)
                         .WithMany(p => p.PurchaseOrderHeader)
                         .HasForeignKey(d => d.VendorID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesOrderDetail>(
                 entity =>
@@ -919,7 +1000,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.ToTable("SalesOrderDetail", "Sales");
 
-                    entity.Property(e => e.LineTotal)
+                    entity
+                        .Property(e => e.LineTotal)
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("numeric(38, 6)");
 
@@ -929,14 +1011,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.UnitPriceDiscount).HasDefaultValue(0.0m);
 
-                    entity.HasOne(d => d.SalesOrder)
+                    entity
+                        .HasOne(d => d.SalesOrder)
                         .WithMany(p => p.SalesOrderDetail)
                         .HasForeignKey(d => d.SalesOrderID);
 
-                    entity.HasOne(d => d.SpecialOfferProduct)
+                    entity
+                        .HasOne(d => d.SpecialOfferProduct)
                         .WithMany(p => p.SalesOrderDetail)
                         .HasForeignKey(d => new { d.SpecialOfferID, d.ProductID });
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesOrderHeader>(
                 entity =>
@@ -957,7 +1042,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.Property(e => e.SalesOrderNumber)
+                    entity
+                        .Property(e => e.SalesOrderNumber)
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate();
 
@@ -969,38 +1055,47 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.TotalDue).ValueGeneratedOnAddOrUpdate();
 
-                    entity.HasOne(d => d.BillToAddress)
+                    entity
+                        .HasOne(d => d.BillToAddress)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.BillToAddressID);
 
-                    entity.HasOne(d => d.CreditCard)
+                    entity
+                        .HasOne(d => d.CreditCard)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.CreditCardID);
 
-                    entity.HasOne(d => d.CurrencyRate)
+                    entity
+                        .HasOne(d => d.CurrencyRate)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.CurrencyRateID);
 
-                    entity.HasOne(d => d.Customer)
+                    entity
+                        .HasOne(d => d.Customer)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.CustomerID);
 
-                    entity.HasOne(d => d.SalesPerson)
+                    entity
+                        .HasOne(d => d.SalesPerson)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.SalesPersonID);
 
-                    entity.HasOne(d => d.ShipMethod)
+                    entity
+                        .HasOne(d => d.ShipMethod)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.ShipMethodID);
 
-                    entity.HasOne(d => d.ShipToAddress)
+                    entity
+                        .HasOne(d => d.ShipToAddress)
                         .WithMany(p => p.SalesOrderHeaderNavigation)
                         .HasForeignKey(d => d.ShipToAddressID);
 
-                    entity.HasOne(d => d.Territory)
+                    entity
+                        .HasOne(d => d.Territory)
                         .WithMany(p => p.SalesOrderHeader)
                         .HasForeignKey(d => d.TerritoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesOrderHeaderSalesReason>(
                 entity =>
@@ -1011,14 +1106,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.SalesOrder)
+                    entity
+                        .HasOne(d => d.SalesOrder)
                         .WithMany(p => p.SalesOrderHeaderSalesReason)
                         .HasForeignKey(d => d.SalesOrderID);
 
-                    entity.HasOne(d => d.SalesReason)
+                    entity
+                        .HasOne(d => d.SalesReason)
                         .WithMany(p => p.SalesOrderHeaderSalesReason)
                         .HasForeignKey(d => d.SalesReasonID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesPerson>(
                 entity =>
@@ -1039,14 +1137,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.SalesYTD).HasDefaultValue(0.00m);
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithOne(p => p.SalesPerson)
                         .HasForeignKey<SalesPerson>(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.Territory)
+                    entity
+                        .HasOne(d => d.Territory)
                         .WithMany(p => p.SalesPerson)
                         .HasForeignKey(d => d.TerritoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesPersonQuotaHistory>(
                 entity =>
@@ -1059,10 +1160,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.SalesPersonQuotaHistory)
                         .HasForeignKey(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesReason>(
                 entity =>
@@ -1074,7 +1177,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.Name).IsRequired();
 
                     entity.Property(e => e.ReasonType).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesTaxRate>(
                 entity =>
@@ -1089,10 +1193,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.TaxRate).HasDefaultValue(0.00m);
 
-                    entity.HasOne(d => d.StateProvince)
+                    entity
+                        .HasOne(d => d.StateProvince)
                         .WithMany(p => p.SalesTaxRate)
                         .HasForeignKey(d => d.StateProvinceID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesTerritory>(
                 entity =>
@@ -1119,21 +1225,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.SalesYTD).HasDefaultValue(0.00m);
 
-                    entity.HasOne(d => d.CountryRegionCodeNavigation)
+                    entity
+                        .HasOne(d => d.CountryRegionCodeNavigation)
                         .WithMany(p => p.SalesTerritory)
                         .HasForeignKey(d => d.CountryRegionCode);
-                });
+                }
+            );
 
             modelBuilder.Entity<SalesTerritoryHistory>(
                 entity =>
                 {
-                    entity.HasKey(
-                        e => new
-                        {
-                            e.BusinessEntityID,
-                            e.StartDate,
-                            e.TerritoryID
-                        });
+                    entity.HasKey(e => new { e.BusinessEntityID, e.StartDate, e.TerritoryID });
 
                     entity.ToTable("SalesTerritoryHistory", "Sales");
 
@@ -1141,14 +1243,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithMany(p => p.SalesTerritoryHistory)
                         .HasForeignKey(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.Territory)
+                    entity
+                        .HasOne(d => d.Territory)
                         .WithMany(p => p.SalesTerritoryHistory)
                         .HasForeignKey(d => d.TerritoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<ScrapReason>(
                 entity =>
@@ -1158,7 +1263,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<Shift>(
                 entity =>
@@ -1168,7 +1274,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<ShipMethod>(
                 entity =>
@@ -1184,7 +1291,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ShipBase).HasDefaultValue(0.00m);
 
                     entity.Property(e => e.ShipRate).HasDefaultValue(0.00m);
-                });
+                }
+            );
 
             modelBuilder.Entity<ShoppingCartItem>(
                 entity =>
@@ -1197,10 +1305,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.Quantity).HasDefaultValue(1);
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.ShoppingCartItem)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<SpecialOffer>(
                 entity =>
@@ -1220,7 +1330,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
                     entity.Property(e => e.Type).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<SpecialOfferProduct>(
                 entity =>
@@ -1233,14 +1344,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.SpecialOfferProduct)
                         .HasForeignKey(d => d.ProductID);
 
-                    entity.HasOne(d => d.SpecialOffer)
+                    entity
+                        .HasOne(d => d.SpecialOffer)
                         .WithMany(p => p.SpecialOfferProduct)
                         .HasForeignKey(d => d.SpecialOfferID);
-                });
+                }
+            );
 
             modelBuilder.Entity<StateProvince>(
                 entity =>
@@ -1259,14 +1373,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.StateProvinceCode).IsRequired();
 
-                    entity.HasOne(d => d.CountryRegionCodeNavigation)
+                    entity
+                        .HasOne(d => d.CountryRegionCodeNavigation)
                         .WithMany(p => p.StateProvince)
                         .HasForeignKey(d => d.CountryRegionCode);
 
-                    entity.HasOne(d => d.Territory)
+                    entity
+                        .HasOne(d => d.Territory)
                         .WithMany(p => p.StateProvince)
                         .HasForeignKey(d => d.TerritoryID);
-                });
+                }
+            );
 
             modelBuilder.Entity<Store>(
                 entity =>
@@ -1281,14 +1398,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.rowguid).HasDefaultValueSql("newid()");
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithOne(p => p.Store)
                         .HasForeignKey<Store>(d => d.BusinessEntityID);
 
-                    entity.HasOne(d => d.SalesPerson)
+                    entity
+                        .HasOne(d => d.SalesPerson)
                         .WithMany(p => p.Store)
                         .HasForeignKey(d => d.SalesPersonID);
-                });
+                }
+            );
 
             modelBuilder.Entity<TransactionHistory>(
                 entity =>
@@ -1305,10 +1425,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.TransactionType).IsRequired();
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.TransactionHistory)
                         .HasForeignKey(d => d.ProductID);
-                });
+                }
+            );
 
             modelBuilder.Entity<TransactionHistoryArchive>(
                 entity =>
@@ -1324,7 +1446,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.TransactionDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.TransactionType).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<UnitMeasure>(
                 entity =>
@@ -1336,7 +1459,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
                     entity.Property(e => e.Name).IsRequired();
-                });
+                }
+            );
 
             modelBuilder.Entity<Vendor>(
                 entity =>
@@ -1355,10 +1479,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.PreferredVendorStatus).HasDefaultValue(true);
 
-                    entity.HasOne(d => d.BusinessEntity)
+                    entity
+                        .HasOne(d => d.BusinessEntity)
                         .WithOne(p => p.Vendor)
                         .HasForeignKey<Vendor>(d => d.BusinessEntityID);
-                });
+                }
+            );
 
             modelBuilder.Entity<WorkOrder>(
                 entity =>
@@ -1369,25 +1495,22 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.StockedQty).ValueGeneratedOnAddOrUpdate();
 
-                    entity.HasOne(d => d.Product)
+                    entity
+                        .HasOne(d => d.Product)
                         .WithMany(p => p.WorkOrder)
                         .HasForeignKey(d => d.ProductID);
 
-                    entity.HasOne(d => d.ScrapReason)
+                    entity
+                        .HasOne(d => d.ScrapReason)
                         .WithMany(p => p.WorkOrder)
                         .HasForeignKey(d => d.ScrapReasonID);
-                });
+                }
+            );
 
             modelBuilder.Entity<WorkOrderRouting>(
                 entity =>
                 {
-                    entity.HasKey(
-                        e => new
-                        {
-                            e.WorkOrderID,
-                            e.ProductID,
-                            e.OperationSequence
-                        });
+                    entity.HasKey(e => new { e.WorkOrderID, e.ProductID, e.OperationSequence });
 
                     entity.ToTable("WorkOrderRouting", "Production");
 
@@ -1395,14 +1518,17 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
 
                     entity.Property(e => e.ModifiedDate).HasDefaultValueSql("getdate()");
 
-                    entity.HasOne(d => d.Location)
+                    entity
+                        .HasOne(d => d.Location)
                         .WithMany(p => p.WorkOrderRouting)
                         .HasForeignKey(d => d.LocationID);
 
-                    entity.HasOne(d => d.WorkOrder)
+                    entity
+                        .HasOne(d => d.WorkOrder)
                         .WithMany(p => p.WorkOrderRouting)
                         .HasForeignKey(d => d.WorkOrderID);
-                });
+                }
+            );
         }
     }
 }

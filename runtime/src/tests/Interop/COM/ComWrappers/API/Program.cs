@@ -16,7 +16,11 @@ namespace ComWrappersTests
     {
         class TestComWrappers : ComWrappers
         {
-            protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected unsafe override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 IntPtr fpQueryInterface = default;
                 IntPtr fpAddRef = default;
@@ -37,10 +41,17 @@ namespace ComWrappersTests
                         },
                         SetValue = Marshal.GetFunctionPointerForDelegate(ITestVtbl.pSetValue)
                     };
-                    var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ITestVtbl), sizeof(ITestVtbl));
+                    var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(ITestVtbl),
+                        sizeof(ITestVtbl)
+                    );
                     Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
-                    entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ITestVtbl), sizeof(ComInterfaceEntry));
+                    entryRaw = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(ITestVtbl),
+                            sizeof(ComInterfaceEntry)
+                        );
                     entryRaw->IID = typeof(ITest).GUID;
                     entryRaw->Vtable = vtblRaw;
                     count = 1;
@@ -70,7 +81,11 @@ namespace ComWrappersTests
             {
                 Console.WriteLine($"Running {nameof(ValidateIUnknownImpls)}...");
 
-                ComWrappers.GetIUnknownImpl(out IntPtr fpQueryInterface, out IntPtr fpAddRef, out IntPtr fpRelease);
+                ComWrappers.GetIUnknownImpl(
+                    out IntPtr fpQueryInterface,
+                    out IntPtr fpAddRef,
+                    out IntPtr fpRelease
+                );
 
                 Assert.NotEqual(fpQueryInterface, IntPtr.Zero);
                 Assert.NotEqual(fpAddRef, IntPtr.Zero);
@@ -99,11 +114,17 @@ namespace ComWrappersTests
             var wrappers = new TestComWrappers();
 
             // Allocate a wrapper for the object
-            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
+            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
             Assert.NotEqual(IntPtr.Zero, comWrapper);
 
             // Get a wrapper for an object and verify it is the same one.
-            IntPtr comWrapperMaybe = wrappers.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
+            IntPtr comWrapperMaybe = wrappers.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
             Assert.Equal(comWrapper, comWrapperMaybe);
 
             // Release the wrapper
@@ -113,7 +134,10 @@ namespace ComWrappersTests
             Assert.Equal(0, count);
 
             // Create a new wrapper
-            IntPtr comWrapperNew = wrappers.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
+            IntPtr comWrapperNew = wrappers.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
 
             // Once a wrapper is created for a managed object it is always present
             Assert.Equal(comWrapperNew, comWrapper);
@@ -132,10 +156,16 @@ namespace ComWrappersTests
             var wrappers = new TestComWrappers();
 
             // Allocate a wrapper for the object
-            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.None);
+            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.None
+            );
             Assert.NotEqual(IntPtr.Zero, comWrapper);
 
-            var testObjUnwrapped = wrappers.GetOrCreateObjectForComInstance(comWrapper, CreateObjectFlags.Unwrap);
+            var testObjUnwrapped = wrappers.GetOrCreateObjectForComInstance(
+                comWrapper,
+                CreateObjectFlags.Unwrap
+            );
             Assert.Equal(testObj, testObjUnwrapped);
 
             // Release the wrapper
@@ -147,15 +177,15 @@ namespace ComWrappersTests
         {
             Console.WriteLine($"Running {nameof(ValidateFallbackQueryInterface)}...");
 
-            var testObj = new Test()
-                {
-                    EnableICustomQueryInterface = true
-                };
+            var testObj = new Test() { EnableICustomQueryInterface = true };
 
             var wrappers = new TestComWrappers();
 
             // Allocate a wrapper for the object
-            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.None);
+            IntPtr comWrapper = wrappers.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.None
+            );
 
             testObj.ICustomQueryInterface_GetInterfaceResult = new IntPtr(0x2000000);
 
@@ -185,14 +215,20 @@ namespace ComWrappersTests
             // Get an object from a tracker runtime.
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
-            var trackerObj1 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
-            var trackerObj2 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj1 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj2 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.Equal(trackerObj1, trackerObj2);
 
             // Ownership has been transferred to the wrapper.
             Marshal.Release(trackerObjRaw);
 
-            var trackerObj3 = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject | CreateObjectFlags.UniqueInstance);
+            var trackerObj3 = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject | CreateObjectFlags.UniqueInstance
+                );
             Assert.NotEqual(trackerObj1, trackerObj3);
         }
 
@@ -206,14 +242,26 @@ namespace ComWrappersTests
             var testObj = new Test();
 
             // Allocate a wrapper for the object
-            IntPtr comWrapper1 = cw1.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
-            IntPtr comWrapper2 = cw2.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
+            IntPtr comWrapper1 = cw1.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
+            IntPtr comWrapper2 = cw2.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
             Assert.NotEqual(comWrapper1, IntPtr.Zero);
             Assert.NotEqual(comWrapper2, IntPtr.Zero);
             Assert.NotEqual(comWrapper1, comWrapper2);
 
-            IntPtr comWrapper3 = cw1.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
-            IntPtr comWrapper4 = cw2.GetOrCreateComInterfaceForObject(testObj, CreateComInterfaceFlags.TrackerSupport);
+            IntPtr comWrapper3 = cw1.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
+            IntPtr comWrapper4 = cw2.GetOrCreateComInterfaceForObject(
+                testObj,
+                CreateComInterfaceFlags.TrackerSupport
+            );
             Assert.NotEqual(comWrapper3, comWrapper4);
             Assert.Equal(comWrapper1, comWrapper3);
             Assert.Equal(comWrapper2, comWrapper4);
@@ -227,12 +275,16 @@ namespace ComWrappersTests
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
             // Create objects for the COM instance
-            var trackerObj1 = (ITrackerObjectWrapper)cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
-            var trackerObj2 = (ITrackerObjectWrapper)cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj1 = (ITrackerObjectWrapper)
+                cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj2 = (ITrackerObjectWrapper)
+                cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.NotEqual(trackerObj1, trackerObj2);
 
-            var trackerObj3 = (ITrackerObjectWrapper)cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
-            var trackerObj4 = (ITrackerObjectWrapper)cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj3 = (ITrackerObjectWrapper)
+                cw1.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj4 = (ITrackerObjectWrapper)
+                cw2.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
             Assert.NotEqual(trackerObj3, trackerObj4);
             Assert.Equal(trackerObj1, trackerObj3);
             Assert.Equal(trackerObj2, trackerObj4);
@@ -257,7 +309,12 @@ namespace ComWrappersTests
             var nativeWrapper = new ITrackerObjectWrapper(iTestComObject);
 
             // Register wrapper, but supply the wrapper.
-            var nativeWrapper2 = (ITrackerObjectWrapper)cw.GetOrRegisterObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject, nativeWrapper);
+            var nativeWrapper2 = (ITrackerObjectWrapper)
+                cw.GetOrRegisterObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject,
+                    nativeWrapper
+                );
             Assert.Equal(nativeWrapper, nativeWrapper2);
 
             // Ownership has been transferred to the wrapper.
@@ -268,16 +325,26 @@ namespace ComWrappersTests
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    cw.GetOrRegisterObjectForComInstance(trackerObjRaw2, CreateObjectFlags.None, nativeWrapper2);
-                });
+                    cw.GetOrRegisterObjectForComInstance(
+                        trackerObjRaw2,
+                        CreateObjectFlags.None,
+                        nativeWrapper2
+                    );
+                }
+            );
             Marshal.Release(trackerObjRaw2);
 
             // Validate passing null wrapper fails.
             Assert.Throws<ArgumentNullException>(
                 () =>
                 {
-                    cw.GetOrRegisterObjectForComInstance(trackerObjRaw, CreateObjectFlags.None, null);
-                });
+                    cw.GetOrRegisterObjectForComInstance(
+                        trackerObjRaw,
+                        CreateObjectFlags.None,
+                        null
+                    );
+                }
+            );
         }
 
         static void ValidateExternalWrapperCacheCleanUp()
@@ -311,7 +378,10 @@ namespace ComWrappersTests
             wrapper1.ReregisterForFinalize = false;
             wrapper2.ReregisterForFinalize = false;
 
-            static WeakReference<ITrackerObjectWrapper> CreateAndRegisterWrapper(ComWrappers cw, IntPtr trackerObjRaw)
+            static WeakReference<ITrackerObjectWrapper> CreateAndRegisterWrapper(
+                ComWrappers cw,
+                IntPtr trackerObjRaw
+            )
             {
                 // Manually create a wrapper
                 var iid = typeof(ITrackerObject).GUID;
@@ -320,13 +390,21 @@ namespace ComWrappersTests
                 Assert.Equal(0, hr);
                 var nativeWrapper = new ITrackerObjectWrapper(iTestComObject);
 
-                nativeWrapper = (ITrackerObjectWrapper)cw.GetOrRegisterObjectForComInstance(trackerObjRaw, CreateObjectFlags.None, nativeWrapper);
+                nativeWrapper = (ITrackerObjectWrapper)
+                    cw.GetOrRegisterObjectForComInstance(
+                        trackerObjRaw,
+                        CreateObjectFlags.None,
+                        nativeWrapper
+                    );
 
                 // Set this on the return instead of during creation since the returned wrapper may be the one from
                 // the internal cache and not the one passed in above.
                 nativeWrapper.ReregisterForFinalize = true;
 
-                return new WeakReference<ITrackerObjectWrapper>(nativeWrapper, trackResurrection: true);
+                return new WeakReference<ITrackerObjectWrapper>(
+                    nativeWrapper,
+                    trackResurrection: true
+                );
             }
         }
 
@@ -343,12 +421,17 @@ namespace ComWrappersTests
             Assert.Throws<InvalidOperationException>(
                 () =>
                 {
-                    cw.GetOrRegisterObjectForComInstance(invalidInstance, CreateObjectFlags.None, new object(), invalidInner);
-                });
+                    cw.GetOrRegisterObjectForComInstance(
+                        invalidInstance,
+                        CreateObjectFlags.None,
+                        new object(),
+                        invalidInner
+                    );
+                }
+            );
         }
 
-        static void ValidateIUnknownImpls()
-            => TestComWrappers.ValidateIUnknownImpls();
+        static void ValidateIUnknownImpls() => TestComWrappers.ValidateIUnknownImpls();
 
         class BadComWrappers : ComWrappers
         {
@@ -363,7 +446,11 @@ namespace ComWrappersTests
             public FailureMode ComputeVtablesMode { get; set; }
             public FailureMode CreateObjectMode { get; set; }
 
-            protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected unsafe override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 switch (ComputeVtablesMode)
                 {
@@ -380,7 +467,10 @@ namespace ComWrappersTests
                 }
             }
 
-            protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override object CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 switch (CreateObjectMode)
                 {
@@ -410,8 +500,12 @@ namespace ComWrappersTests
                 () =>
                 {
                     wrapper.ComputeVtablesMode = BadComWrappers.FailureMode.ReturnInvalid;
-                    wrapper.GetOrCreateComInterfaceForObject(new Test(), CreateComInterfaceFlags.None);
-                });
+                    wrapper.GetOrCreateComInterfaceForObject(
+                        new Test(),
+                        CreateComInterfaceFlags.None
+                    );
+                }
+            );
 
             try
             {
@@ -430,7 +524,8 @@ namespace ComWrappersTests
                 {
                     wrapper.CreateObjectMode = BadComWrappers.FailureMode.ReturnInvalid;
                     wrapper.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.None);
-                });
+                }
+            );
 
             try
             {
@@ -455,7 +550,8 @@ namespace ComWrappersTests
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
             // Create a managed wrapper for the native object.
-            var trackerObj = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+            var trackerObj = (ITrackerObjectWrapper)
+                cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
 
             // Ownership has been transferred to the wrapper.
             Marshal.Release(trackerObjRaw);
@@ -464,7 +560,10 @@ namespace ComWrappersTests
             for (int i = 0; i < 1000; ++i)
             {
                 // Create a native wrapper for the managed object.
-                IntPtr testWrapper = cw.GetOrCreateComInterfaceForObject(new Test(), CreateComInterfaceFlags.TrackerSupport);
+                IntPtr testWrapper = cw.GetOrCreateComInterfaceForObject(
+                    new Test(),
+                    CreateComInterfaceFlags.TrackerSupport
+                );
 
                 // Pass the managed object to the native object.
                 int id = trackerObj.AddObjectRef(testWrapper);
@@ -494,14 +593,20 @@ namespace ComWrappersTests
 
         static void ValidateQueryInterfaceAfterManagedObjectCollected()
         {
-            Console.WriteLine($"Running {nameof(ValidateQueryInterfaceAfterManagedObjectCollected)}...");
+            Console.WriteLine(
+                $"Running {nameof(ValidateQueryInterfaceAfterManagedObjectCollected)}..."
+            );
 
             var cw = new TestComWrappers();
 
             {
                 // Activate the Reference Tracker system in the .NET runtime by consuming an IReferenceTracker instance.
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = (ITrackerObjectWrapper)cw.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+                var trackerObj = (ITrackerObjectWrapper)
+                    cw.GetOrCreateObjectForComInstance(
+                        trackerObjRaw,
+                        CreateObjectFlags.TrackerObject
+                    );
                 Marshal.Release(trackerObjRaw);
             }
 
@@ -512,7 +617,10 @@ namespace ComWrappersTests
                 // Create a native wrapper over a managed object.
                 IntPtr testWrapper = CreateWrapper(cw);
 
-                refTrackerTarget = MockReferenceTrackerRuntime.TrackerTarget_AddRefFromReferenceTrackerAndReturn(testWrapper);
+                refTrackerTarget =
+                    MockReferenceTrackerRuntime.TrackerTarget_AddRefFromReferenceTrackerAndReturn(
+                        testWrapper
+                    );
 
                 // Ownership has been transferred to the IReferenceTrackerTarget instance.
                 // The COM reference count should be 0 and indicates to the GC the managed object
@@ -535,28 +643,38 @@ namespace ComWrappersTests
             Assert.Equal(COR_E_ACCESSING_CCW, hr);
 
             // Release the IReferenceTrackerTarget instance.
-            refCount = MockReferenceTrackerRuntime.TrackerTarget_ReleaseFromReferenceTracker(refTrackerTarget);
+            refCount = MockReferenceTrackerRuntime.TrackerTarget_ReleaseFromReferenceTracker(
+                refTrackerTarget
+            );
             Assert.Equal(0, refCount);
 
             static IntPtr CreateWrapper(TestComWrappers cw)
             {
-                return cw.GetOrCreateComInterfaceForObject(new Test(), CreateComInterfaceFlags.TrackerSupport);
+                return cw.GetOrCreateComInterfaceForObject(
+                    new Test(),
+                    CreateComInterfaceFlags.TrackerSupport
+                );
             }
         }
 
         unsafe class Derived : ITrackerObjectWrapper
         {
-            public Derived(ComWrappers cw, bool aggregateRefTracker)
-                : base(cw, aggregateRefTracker)
+            public Derived(ComWrappers cw, bool aggregateRefTracker) : base(cw, aggregateRefTracker)
             { }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public static WeakReference<Derived> AllocateAndUseBaseType(ComWrappers cw, bool aggregateRefTracker)
+            public static WeakReference<Derived> AllocateAndUseBaseType(
+                ComWrappers cw,
+                bool aggregateRefTracker
+            )
             {
                 var derived = new Derived(cw, aggregateRefTracker);
 
                 // Use the base type
-                IntPtr testWrapper = cw.GetOrCreateComInterfaceForObject(new Test(), CreateComInterfaceFlags.TrackerSupport);
+                IntPtr testWrapper = cw.GetOrCreateComInterfaceForObject(
+                    new Test(),
+                    CreateComInterfaceFlags.TrackerSupport
+                );
                 int id = derived.AddObjectRef(testWrapper);
 
                 // Tell the tracker runtime to release its hold on the base instance.
@@ -577,7 +695,10 @@ namespace ComWrappersTests
 
             using var allocTracker = MockReferenceTrackerRuntime.CountTrackerObjectAllocations();
             var cw = new TestComWrappers();
-            WeakReference<Derived> weakRef = Derived.AllocateAndUseBaseType(cw, aggregateRefTracker: false);
+            WeakReference<Derived> weakRef = Derived.AllocateAndUseBaseType(
+                cw,
+                aggregateRefTracker: false
+            );
 
             ForceGC();
 
@@ -588,11 +709,16 @@ namespace ComWrappersTests
 
         static void ValidateAggregationWithReferenceTrackerObject()
         {
-            Console.WriteLine($"Running {nameof(ValidateAggregationWithReferenceTrackerObject)}...");
+            Console.WriteLine(
+                $"Running {nameof(ValidateAggregationWithReferenceTrackerObject)}..."
+            );
 
             using var allocTracker = MockReferenceTrackerRuntime.CountTrackerObjectAllocations();
             var cw = new TestComWrappers();
-            WeakReference<Derived> weakRef = Derived.AllocateAndUseBaseType(cw, aggregateRefTracker: true);
+            WeakReference<Derived> weakRef = Derived.AllocateAndUseBaseType(
+                cw,
+                aggregateRefTracker: true
+            );
 
             ForceGC();
 
@@ -638,4 +764,3 @@ namespace ComWrappersTests
         }
     }
 }
-

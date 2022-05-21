@@ -16,7 +16,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 /// IConfigurationRoot, and IConfigurationBuilder. It can be used to simulatneously build
 /// and read from a configuration object.
 /// </summary>
-public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, IConfigurationBuilder
+public class WebAssemblyHostConfiguration
+    : IConfiguration,
+        IConfigurationRoot,
+        IConfigurationBuilder
 {
     private readonly List<IConfigurationProvider> _providers = new List<IConfigurationProvider>();
     private readonly List<IConfigurationSource> _sources = new List<IConfigurationSource>();
@@ -27,12 +30,14 @@ public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, 
     /// <summary>
     /// Gets the sources used to obtain configuration values.
     /// </summary>
-    IList<IConfigurationSource> IConfigurationBuilder.Sources => new ReadOnlyCollection<IConfigurationSource>(_sources.ToArray());
+    IList<IConfigurationSource> IConfigurationBuilder.Sources =>
+        new ReadOnlyCollection<IConfigurationSource>(_sources.ToArray());
 
     /// <summary>
     /// Gets the providers used to obtain configuration values.
     /// </summary>
-    IEnumerable<IConfigurationProvider> IConfigurationRoot.Providers => new ReadOnlyCollection<IConfigurationProvider>(_providers.ToArray());
+    IEnumerable<IConfigurationProvider> IConfigurationRoot.Providers =>
+        new ReadOnlyCollection<IConfigurationProvider>(_providers.ToArray());
 
     /// <summary>
     /// Gets a key/value collection that can be used to share data between the <see cref="IConfigurationBuilder"/>
@@ -41,7 +46,8 @@ public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, 
     // In this implementation, this largely exists as a way to satisfy the
     // requirements of the IConfigurationBuilder and is not populated by
     // the WebAssemblyHostConfiguration with any meaningful info.
-    IDictionary<string, object> IConfigurationBuilder.Properties { get; } = new Dictionary<string, object>();
+    IDictionary<string, object> IConfigurationBuilder.Properties { get; } =
+        new Dictionary<string, object>();
 
     /// <inheritdoc />
     public string? this[string key]
@@ -66,14 +72,15 @@ public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, 
         {
             if (_providers.Count == 0)
             {
-                throw new InvalidOperationException("Can only set property if at least one provider has been inserted.");
+                throw new InvalidOperationException(
+                    "Can only set property if at least one provider has been inserted."
+                );
             }
 
             foreach (var provider in _providers)
             {
                 provider.Set(key, value);
             }
-
         }
     }
 
@@ -98,7 +105,9 @@ public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, 
         var result = new List<IConfigurationSection>();
         foreach (var provider in _providers)
         {
-            foreach (var child in provider.GetChildKeys(Enumerable.Empty<string>(), parentPath: null))
+            foreach (
+                var child in provider.GetChildKeys(Enumerable.Empty<string>(), parentPath: null)
+            )
             {
                 if (!hashSet.Add(child))
                 {
@@ -161,7 +170,9 @@ public class WebAssemblyHostConfiguration : IConfiguration, IConfigurationRoot, 
         // provider has reloaded data. This will invoke the RaiseChanged
         // method which maps changes in individual providers to the change
         // token on the WebAssemblyHostConfiguration object.
-        _changeTokenRegistrations.Add(ChangeToken.OnChange(() => provider.GetReloadToken(), () => RaiseChanged()));
+        _changeTokenRegistrations.Add(
+            ChangeToken.OnChange(() => provider.GetReloadToken(), () => RaiseChanged())
+        );
 
         // We keep a list of providers in this class so that we can map
         // set and get methods on this class to the set and get methods

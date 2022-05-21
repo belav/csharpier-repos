@@ -27,8 +27,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public KeyPropagator(
-            IValueGeneratorSelector valueGeneratorSelector)
+        public KeyPropagator(IValueGeneratorSelector valueGeneratorSelector)
         {
             _valueGeneratorSelector = valueGeneratorSelector;
         }
@@ -39,22 +38,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalEntityEntry? PropagateValue(InternalEntityEntry entry, IProperty property)
+        public virtual InternalEntityEntry? PropagateValue(
+            InternalEntityEntry entry,
+            IProperty property
+        )
         {
             Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
             var generationProperty = property.FindGenerationProperty();
             var principalEntry = TryPropagateValue(entry, property, generationProperty);
 
-            if (principalEntry == null
-                && property.IsKey()
-                && !property.IsForeignKeyToSelf())
+            if (principalEntry == null && property.IsKey() && !property.IsForeignKeyToSelf())
             {
                 var valueGenerator = TryGetValueGenerator(
                     generationProperty,
                     generationProperty == property
                         ? entry.EntityType
-                        : generationProperty?.DeclaringEntityType);
+                        : generationProperty?.DeclaringEntityType
+                );
 
                 if (valueGenerator != null)
                 {
@@ -88,25 +89,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual async Task<InternalEntityEntry?> PropagateValueAsync(
             InternalEntityEntry entry,
             IProperty property,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
             var generationProperty = property.FindGenerationProperty();
             var principalEntry = TryPropagateValue(entry, property, generationProperty);
 
-            if (principalEntry == null
-                && property.IsKey())
+            if (principalEntry == null && property.IsKey())
             {
                 var valueGenerator = TryGetValueGenerator(
                     generationProperty,
                     generationProperty == property
                         ? entry.EntityType
-                        : generationProperty?.DeclaringEntityType);
+                        : generationProperty?.DeclaringEntityType
+                );
 
                 if (valueGenerator != null)
                 {
-                    var value = await valueGenerator.NextAsync(new EntityEntry(entry), cancellationToken)
+                    var value = await valueGenerator
+                        .NextAsync(new EntityEntry(entry), cancellationToken)
                         .ConfigureAwait(false);
 
                     if (valueGenerator.GeneratesTemporaryValues)
@@ -128,28 +131,45 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return principalEntry;
         }
 
-        private static InternalEntityEntry? TryPropagateValue(InternalEntityEntry entry, IProperty property, IProperty? generationProperty)
+        private static InternalEntityEntry? TryPropagateValue(
+            InternalEntityEntry entry,
+            IProperty property,
+            IProperty? generationProperty
+        )
         {
             var entityType = entry.EntityType;
             var stateManager = entry.StateManager;
 
             foreach (var foreignKey in entityType.GetForeignKeys())
             {
-                for (var propertyIndex = 0; propertyIndex < foreignKey.Properties.Count; propertyIndex++)
+                for (
+                    var propertyIndex = 0;
+                    propertyIndex < foreignKey.Properties.Count;
+                    propertyIndex++
+                )
                 {
                     if (property == foreignKey.Properties[propertyIndex])
                     {
-                        var principal = foreignKey.DependentToPrincipal == null
-                            ? null
-                            : entry[foreignKey.DependentToPrincipal];
+                        var principal =
+                            foreignKey.DependentToPrincipal == null
+                                ? null
+                                : entry[foreignKey.DependentToPrincipal];
                         InternalEntityEntry? principalEntry = null;
                         if (principal != null)
                         {
-                            principalEntry = stateManager.GetOrCreateEntry(principal, foreignKey.PrincipalEntityType);
+                            principalEntry = stateManager.GetOrCreateEntry(
+                                principal,
+                                foreignKey.PrincipalEntityType
+                            );
                         }
                         else if (foreignKey.PrincipalToDependent != null)
                         {
-                            foreach (var danglerEntry in stateManager.GetRecordedReferrers(entry.Entity, clear: false))
+                            foreach (
+                                var danglerEntry in stateManager.GetRecordedReferrers(
+                                    entry.Entity,
+                                    clear: false
+                                )
+                            )
                             {
                                 if (danglerEntry.Item1 == foreignKey.PrincipalToDependent)
                                 {
@@ -161,15 +181,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                         if (principalEntry != null)
                         {
-                            var principalProperty = foreignKey.PrincipalKey.Properties[propertyIndex];
+                            var principalProperty = foreignKey.PrincipalKey.Properties[
+                                propertyIndex
+                            ];
 
                             if (principalProperty != property)
                             {
                                 var principalValue = principalEntry[principalProperty];
-                                if (generationProperty == null
-                                    || !principalProperty.ClrType.IsDefaultValue(principalValue))
+                                if (
+                                    generationProperty == null
+                                    || !principalProperty.ClrType.IsDefaultValue(principalValue)
+                                )
                                 {
-                                    entry.PropagateValue(principalEntry, principalProperty, property);
+                                    entry.PropagateValue(
+                                        principalEntry,
+                                        principalProperty,
+                                        property
+                                    );
 
                                     return principalEntry;
                                 }
@@ -184,8 +212,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return null;
         }
 
-        private ValueGenerator? TryGetValueGenerator(IProperty? generationProperty, IEntityType? entityType)
-            => generationProperty != null
+        private ValueGenerator? TryGetValueGenerator(
+            IProperty? generationProperty,
+            IEntityType? entityType
+        ) =>
+            generationProperty != null
                 ? _valueGeneratorSelector.Select(generationProperty, entityType!)
                 : null;
     }

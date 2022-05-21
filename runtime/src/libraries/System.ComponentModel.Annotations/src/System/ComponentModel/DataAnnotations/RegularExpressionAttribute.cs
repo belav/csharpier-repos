@@ -9,8 +9,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Regular expression validation attribute
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class RegularExpressionAttribute : ValidationAttribute
     {
         /// <summary>
@@ -82,7 +84,6 @@ namespace System.ComponentModel.DataAnnotations
             return string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Pattern);
         }
 
-
         /// <summary>
         ///     Sets up the <see cref="Regex" /> property from the <see cref="Pattern" /> property.
         /// </summary>
@@ -97,12 +98,18 @@ namespace System.ComponentModel.DataAnnotations
                 if (string.IsNullOrEmpty(Pattern))
                 {
                     throw new InvalidOperationException(
-                        SR.RegularExpressionAttribute_Empty_Pattern);
+                        SR.RegularExpressionAttribute_Empty_Pattern
+                    );
                 }
 
-                Regex = MatchTimeoutInMilliseconds == -1
-                    ? new Regex(Pattern)
-                    : new Regex(Pattern, default(RegexOptions), TimeSpan.FromMilliseconds(MatchTimeoutInMilliseconds));
+                Regex =
+                    MatchTimeoutInMilliseconds == -1
+                        ? new Regex(Pattern)
+                        : new Regex(
+                            Pattern,
+                            default(RegexOptions),
+                            TimeSpan.FromMilliseconds(MatchTimeoutInMilliseconds)
+                        );
             }
         }
     }

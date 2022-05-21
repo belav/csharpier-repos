@@ -26,12 +26,12 @@ namespace System.Web.Helpers.Test
 
         private class MockMemberBinder : GetMemberBinder
         {
-            public MockMemberBinder(string name)
-                : base(name, false)
-            {
-            }
+            public MockMemberBinder(string name) : base(name, false) { }
 
-            public override DynamicMetaObject FallbackGetMember(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+            public override DynamicMetaObject FallbackGetMember(
+                DynamicMetaObject target,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotImplementedException();
             }

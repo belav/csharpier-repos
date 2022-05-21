@@ -22,7 +22,8 @@ namespace System.Text.Json
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         public static byte[] SerializeToUtf8Bytes<TValue>(
             TValue value,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeType(value);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, runtimeType);
@@ -50,7 +51,8 @@ namespace System.Text.Json
         public static byte[] SerializeToUtf8Bytes(
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeTypeAndValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, runtimeType);
@@ -70,7 +72,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static byte[] SerializeToUtf8Bytes<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static byte[] SerializeToUtf8Bytes<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo == null)
             {
@@ -101,7 +106,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static byte[] SerializeToUtf8Bytes(object? value, Type inputType, JsonSerializerContext context)
+        public static byte[] SerializeToUtf8Bytes(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context == null)
             {
@@ -113,7 +122,10 @@ namespace System.Text.Json
             return WriteBytesUsingGeneratedSerializer(value!, jsonTypeInfo);
         }
 
-        private static byte[] WriteBytesUsingGeneratedSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static byte[] WriteBytesUsingGeneratedSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
 
@@ -126,7 +138,10 @@ namespace System.Text.Json
             return output.WrittenMemory.ToArray();
         }
 
-        private static byte[] WriteBytesUsingSerializer<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static byte[] WriteBytesUsingSerializer<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
 

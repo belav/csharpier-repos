@@ -19,16 +19,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class DownloadAnchorTest
-        : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+    public class DownloadAnchorTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     {
         public DownloadAnchorTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture.WithServerExecution(), output)
-        {            
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
         [Fact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/29739")]
@@ -48,9 +45,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // File should be requested or downloaded to to disk
             var requestedPaths = GetAndClearRequestedPaths();
-            var downloadPath = Path.Combine(BrowserFixture.UserProfileDir, "Downloads", "blazor_logo_1000x.png");
+            var downloadPath = Path.Combine(
+                BrowserFixture.UserProfileDir,
+                "Downloads",
+                "blazor_logo_1000x.png"
+            );
             var fileExists = File.Exists(downloadPath);
-            var requestSent = requestedPaths.Any(path => path.EndsWith("blazor_logo_1000x.png", StringComparison.InvariantCultureIgnoreCase));
+            var requestSent = requestedPaths.Any(
+                path =>
+                    path.EndsWith(
+                        "blazor_logo_1000x.png",
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+            );
             Assert.True(fileExists || requestSent);
         }
 
@@ -63,7 +70,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
         private IReadOnlyCollection<string> GetAndClearRequestedPaths()
         {
-            var requestLog = _serverFixture.Host.Services.GetRequiredService<TestServer.ResourceRequestLog>();
+            var requestLog =
+                _serverFixture.Host.Services.GetRequiredService<TestServer.ResourceRequestLog>();
             var result = requestLog.RequestPaths.ToList();
             requestLog.Clear();
             return result;

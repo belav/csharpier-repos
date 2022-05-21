@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? rootNamespace,
             string? language,
             bool nullable,
-            string[]? args)
+            string[]? args
+        )
             : this(
                 reporter,
                 assembly,
@@ -62,9 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 language,
                 nullable,
                 args,
-                new AppServiceProviderFactory(startupAssembly, reporter))
-        {
-        }
+                new AppServiceProviderFactory(startupAssembly, reporter)
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string? language,
             bool nullable,
             string[]? args,
-            AppServiceProviderFactory appServicesFactory)
+            AppServiceProviderFactory appServicesFactory
+        )
         {
             _reporter = reporter;
             _assembly = assembly;
@@ -92,7 +93,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             _nullable = nullable;
             _args = args ?? Array.Empty<string>();
             _appServicesFactory = appServicesFactory;
-            _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
+            _servicesBuilder = new DesignTimeServicesBuilder(
+                assembly,
+                startupAssembly,
+                reporter,
+                _args
+            );
         }
 
         /// <summary>
@@ -105,7 +111,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             using var context = CreateContext(contextType);
             var connection = context.Database.GetDbConnection();
-            _reporter.WriteInformation(DesignStrings.DroppingDatabase(connection.Database, connection.DataSource));
+            _reporter.WriteInformation(
+                DesignStrings.DroppingDatabase(connection.Database, connection.DataSource)
+            );
             if (context.Database.EnsureDeleted())
             {
                 _reporter.WriteInformation(DesignStrings.DatabaseDropped(connection.Database));
@@ -134,7 +142,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Optimize(string? outputDir, string? modelNamespace, string? contextTypeName)
+        public virtual void Optimize(
+            string? outputDir,
+            string? modelNamespace,
+            string? contextTypeName
+        )
         {
             using var context = CreateContext(contextTypeName);
             var contextType = context.GetType();
@@ -145,13 +157,18 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             if (outputDir == null)
             {
                 var contextSubNamespace = contextType.Namespace ?? "";
-                if (!string.IsNullOrEmpty(_rootNamespace)
-                    && contextSubNamespace.StartsWith(_rootNamespace, StringComparison.Ordinal))
+                if (
+                    !string.IsNullOrEmpty(_rootNamespace)
+                    && contextSubNamespace.StartsWith(_rootNamespace, StringComparison.Ordinal)
+                )
                 {
                     contextSubNamespace = contextSubNamespace[_rootNamespace.Length..];
                 }
 
-                outputDir = Path.Combine(contextSubNamespace.Replace('.', Path.DirectorySeparatorChar), "CompiledModels");
+                outputDir = Path.Combine(
+                    contextSubNamespace.Replace('.', Path.DirectorySeparatorChar),
+                    "CompiledModels"
+                );
             }
 
             outputDir = Path.GetFullPath(Path.Combine(_projectDir, outputDir));
@@ -167,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     ModelNamespace = finalModelNamespace,
                     Language = _language,
                     UseNullableReferenceTypes = _nullable
-                });
+                }
+            );
 
             var fullName = contextType.ShortDisplayName() + "Model";
             if (!string.IsNullOrEmpty(modelNamespace))
@@ -175,12 +193,18 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 fullName = modelNamespace + "." + fullName;
             }
 
-            _reporter.WriteInformation(DesignStrings.CompiledModelGenerated($"options.UseModel({fullName}.Instance)"));
+            _reporter.WriteInformation(
+                DesignStrings.CompiledModelGenerated($"options.UseModel({fullName}.Instance)")
+            );
 
             var cacheKeyFactory = context.GetService<IModelCacheKeyFactory>();
             if (!(cacheKeyFactory is ModelCacheKeyFactory))
             {
-                _reporter.WriteWarning(DesignStrings.CompiledModelCustomCacheKeyFactory(cacheKeyFactory.GetType().ShortDisplayName()));
+                _reporter.WriteWarning(
+                    DesignStrings.CompiledModelCustomCacheKeyFactory(
+                        cacheKeyFactory.GetType().ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -210,7 +234,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 ? string.Join(
                     ".",
                     subPath.Split(
-                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries))
+                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
                 : null;
         }
 
@@ -220,8 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DbContext CreateContext(string? contextType)
-            => CreateContext(FindContextType(contextType).Value);
+        public virtual DbContext CreateContext(string? contextType) =>
+            CreateContext(FindContextType(contextType).Value);
 
         private DbContext CreateContext(Func<DbContext> factory)
         {
@@ -240,8 +267,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<Type> GetContextTypes()
-            => FindContextTypes().Keys;
+        public virtual IEnumerable<Type> GetContextTypes() => FindContextTypes().Keys;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,8 +275,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Type GetContextType(string? name)
-            => FindContextType(name).Key;
+        public virtual Type GetContextType(string? name) => FindContextType(name).Key;
 
         private IDictionary<Type, Func<DbContext>> FindContextTypes()
         {
@@ -260,28 +285,36 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             // Look for IDesignTimeDbContextFactory implementations
             _reporter.WriteVerbose(DesignStrings.FindingContextFactories);
-            var contextFactories = _startupAssembly.GetConstructibleTypes()
+            var contextFactories = _startupAssembly
+                .GetConstructibleTypes()
                 .Where(t => typeof(IDesignTimeDbContextFactory<DbContext>).IsAssignableFrom(t));
             foreach (var factory in contextFactories)
             {
-                _reporter.WriteVerbose(DesignStrings.FoundContextFactory(factory.ShortDisplayName()));
+                _reporter.WriteVerbose(
+                    DesignStrings.FoundContextFactory(factory.ShortDisplayName())
+                );
                 var manufacturedContexts =
                     from i in factory.ImplementedInterfaces
-                    where i.IsGenericType
+                    where
+                        i.IsGenericType
                         && i.GetGenericTypeDefinition() == typeof(IDesignTimeDbContextFactory<>)
                     select i.GenericTypeArguments[0];
                 foreach (var context in manufacturedContexts)
                 {
-                    _reporter.WriteVerbose(DesignStrings.FoundDbContext(context.ShortDisplayName()));
+                    _reporter.WriteVerbose(
+                        DesignStrings.FoundDbContext(context.ShortDisplayName())
+                    );
                     contexts.Add(
                         context,
-                        () => CreateContextFromFactory(factory.AsType(), context));
+                        () => CreateContextFromFactory(factory.AsType(), context)
+                    );
                 }
             }
 
             // Look for DbContext classes registered in the service provider
             var appServices = _appServicesFactory.Create(_args);
-            var registeredContexts = appServices.GetServices<DbContextOptions>()
+            var registeredContexts = appServices
+                .GetServices<DbContextOptions>()
                 .Select(o => o.ContextType);
             foreach (var context in registeredContexts.Where(c => !contexts.ContainsKey(c)))
             {
@@ -289,23 +322,35 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 contexts.Add(
                     context,
                     FindContextFactory(context)
-                    ?? FindContextFromRuntimeDbContextFactory(appServices, context)
-                    ?? (() => (DbContext)ActivatorUtilities.GetServiceOrCreateInstance(appServices, context)));
+                        ?? FindContextFromRuntimeDbContextFactory(appServices, context)
+                        ?? (
+                            () =>
+                                (DbContext)
+                                    ActivatorUtilities.GetServiceOrCreateInstance(
+                                        appServices,
+                                        context
+                                    )
+                        )
+                );
             }
 
             // Look for DbContext classes in assemblies
             _reporter.WriteVerbose(DesignStrings.FindingReferencedContexts);
-            var types = _startupAssembly.GetConstructibleTypes()
+            var types = _startupAssembly
+                .GetConstructibleTypes()
                 .Concat(_assembly.GetConstructibleTypes())
                 .ToList();
 
-            var contextTypes = types.Where(t => typeof(DbContext).IsAssignableFrom(t)).Select(
-                    t => t.AsType())
+            var contextTypes = types
+                .Where(t => typeof(DbContext).IsAssignableFrom(t))
+                .Select(t => t.AsType())
                 .Concat(
-                    types.Where(t => typeof(Migration).IsAssignableFrom(t))
+                    types
+                        .Where(t => typeof(Migration).IsAssignableFrom(t))
                         .Select(t => t.GetCustomAttribute<DbContextAttribute>()?.ContextType)
                         .Where(t => t != null)
-                        .Cast<Type>())
+                        .Cast<Type>()
+                )
                 .Distinct();
 
             foreach (var context in contextTypes.Where(c => !contexts.ContainsKey(c)))
@@ -314,17 +359,27 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 contexts.Add(
                     context,
                     FindContextFactory(context)
-                    ?? (() =>
-                        {
-                            try
+                        ?? (
+                            () =>
                             {
-                                return (DbContext)ActivatorUtilities.GetServiceOrCreateInstance(appServices, context);
+                                try
+                                {
+                                    return (DbContext)
+                                        ActivatorUtilities.GetServiceOrCreateInstance(
+                                            appServices,
+                                            context
+                                        );
+                                }
+                                catch (Exception ex)
+                                {
+                                    throw new OperationException(
+                                        DesignStrings.NoParameterlessConstructor(context.Name),
+                                        ex
+                                    );
+                                }
                             }
-                            catch (Exception ex)
-                            {
-                                throw new OperationException(DesignStrings.NoParameterlessConstructor(context.Name), ex);
-                            }
-                        }));
+                        )
+                );
             }
 
             return contexts;
@@ -339,15 +394,15 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         public virtual ContextInfo GetContextInfo(string? contextType)
         {
             using var context = CreateContext(contextType);
-            var info = new ContextInfo
-            {
-                Type = context.GetType().FullName!
-            };
+            var info = new ContextInfo { Type = context.GetType().FullName! };
 
             var provider = context.GetService<IDatabaseProvider>();
             info.ProviderName = provider.Name;
 
-            if (((IDatabaseFacadeDependenciesAccessor)context.Database).Dependencies is IRelationalDatabaseFacadeDependencies)
+            if (
+                ((IDatabaseFacadeDependenciesAccessor)context.Database).Dependencies
+                is IRelationalDatabaseFacadeDependencies
+            )
             {
                 try
                 {
@@ -357,7 +412,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 }
                 catch (Exception exception)
                 {
-                    info.DataSource = info.DatabaseName = DesignStrings.BadConnection(exception.Message);
+                    info.DataSource = info.DatabaseName = DesignStrings.BadConnection(
+                        exception.Message
+                    );
                 }
             }
             else
@@ -371,32 +428,47 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             return info;
         }
 
-        private Func<DbContext>? FindContextFromRuntimeDbContextFactory(IServiceProvider appServices, Type contextType)
+        private Func<DbContext>? FindContextFromRuntimeDbContextFactory(
+            IServiceProvider appServices,
+            Type contextType
+        )
         {
             var factoryInterface = typeof(IDbContextFactory<>).MakeGenericType(contextType);
             var service = appServices.GetService(factoryInterface);
             return service == null
                 ? null
-                : () => (DbContext)factoryInterface
-                    .GetMethod(nameof(IDbContextFactory<DbContext>.CreateDbContext))
-                    !.Invoke(service, null)!;
+                : () =>
+                    (DbContext)
+                        factoryInterface
+                            .GetMethod(nameof(IDbContextFactory<DbContext>.CreateDbContext))!
+                            .Invoke(service, null)!;
         }
 
         private Func<DbContext>? FindContextFactory(Type contextType)
         {
-            var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType);
-            var factory = contextType.Assembly.GetConstructibleTypes()
+            var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(
+                contextType
+            );
+            var factory = contextType.Assembly
+                .GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
-            return factory == null ? null : (() => CreateContextFromFactory(factory.AsType(), contextType));
+            return factory == null
+                ? null
+                : (() => CreateContextFromFactory(factory.AsType(), contextType));
         }
 
         private DbContext CreateContextFromFactory(Type factory, Type contextType)
         {
             _reporter.WriteVerbose(DesignStrings.UsingDbContextFactory(factory.ShortDisplayName()));
 
-            return (DbContext)typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType)
-                .GetMethod(nameof(IDesignTimeDbContextFactory<DbContext>.CreateDbContext), new[] { typeof(string[]) })!
-                .Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
+            return (DbContext)
+                typeof(IDesignTimeDbContextFactory<>)
+                    .MakeGenericType(contextType)
+                    .GetMethod(
+                        nameof(IDesignTimeDbContextFactory<DbContext>.CreateDbContext),
+                        new[] { typeof(string[]) }
+                    )!
+                    .Invoke(Activator.CreateInstance(factory), new object[] { _args })!;
         }
 
         private KeyValuePair<Type, Func<DbContext>> FindContextType(string? name)
@@ -442,7 +514,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             // Allow selecting types in the default namespace
-            candidates = candidates.Where(t => t.Key.Namespace == null).ToDictionary(t => t.Key, t => t.Value);
+            candidates = candidates
+                .Where(t => t.Key.Namespace == null)
+                .ToDictionary(t => t.Key, t => t.Value);
             if (candidates.Count == 0)
             {
                 throw new OperationException(DesignStrings.MultipleContextsWithQualifiedName(name));
@@ -456,15 +530,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         private static IDictionary<Type, Func<DbContext>> FilterTypes(
             IDictionary<Type, Func<DbContext>> types,
             string name,
-            bool ignoreCase = false)
+            bool ignoreCase = false
+        )
         {
-            var comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            var comparisonType = ignoreCase
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
 
             return types
                 .Where(
-                    t => string.Equals(t.Key.Name, name, comparisonType)
+                    t =>
+                        string.Equals(t.Key.Name, name, comparisonType)
                         || string.Equals(t.Key.FullName, name, comparisonType)
-                        || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType))
+                        || string.Equals(t.Key.AssemblyQualifiedName, name, comparisonType)
+                )
                 .ToDictionary(t => t.Key, t => t.Value);
         }
     }

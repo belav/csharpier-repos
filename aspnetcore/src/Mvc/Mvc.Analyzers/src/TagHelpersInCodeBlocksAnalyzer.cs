@@ -14,7 +14,8 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
 {
     public TagHelpersInCodeBlocksAnalyzer()
     {
-        TagHelperInCodeBlockDiagnostic = DiagnosticDescriptors.MVC1006_FunctionsContainingTagHelpersMustBeAsyncAndReturnTask;
+        TagHelperInCodeBlockDiagnostic =
+            DiagnosticDescriptors.MVC1006_FunctionsContainingTagHelpersMustBeAsyncAndReturnTask;
         SupportedDiagnostics = ImmutableArray.Create(new[] { TagHelperInCodeBlockDiagnostic });
     }
 
@@ -26,87 +27,115 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
     {
         context.EnableConcurrentExecution();
         // Generated Razor code is considered auto generated. By default analyzers skip over auto-generated code unless we say otherwise.
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-        context.RegisterCompilationStartAction(context =>
-        {
-            if (!SymbolCache.TryCreate(context.Compilation, out var symbolCache))
+        context.ConfigureGeneratedCodeAnalysis(
+            GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+        );
+        context.RegisterCompilationStartAction(
+            context =>
             {
+                if (!SymbolCache.TryCreate(context.Compilation, out var symbolCache))
+                {
                     // No-op if we can't find types we care about.
                     return;
-            }
+                }
 
-            InitializeWorker(context, symbolCache);
-        });
+                InitializeWorker(context, symbolCache);
+            }
+        );
     }
 
     private void InitializeWorker(CompilationStartAnalysisContext context, SymbolCache symbolCache)
     {
-        context.RegisterOperationBlockStartAction(startBlockContext =>
-        {
-            var capturedDiagnosticLocations = new HashSet<Location>();
-            startBlockContext.RegisterOperationAction(context =>
+        context.RegisterOperationBlockStartAction(
+            startBlockContext =>
             {
-                var awaitOperation = (IAwaitOperation)context.Operation;
+                var capturedDiagnosticLocations = new HashSet<Location>();
+                startBlockContext.RegisterOperationAction(
+                    context =>
+                    {
+                        var awaitOperation = (IAwaitOperation)context.Operation;
 
-                if (awaitOperation.Operation.Kind != OperationKind.Invocation)
-                {
-                    return;
-                }
+                        if (awaitOperation.Operation.Kind != OperationKind.Invocation)
+                        {
+                            return;
+                        }
 
-                var invocationOperation = (IInvocationOperation)awaitOperation.Operation;
+                        var invocationOperation = (IInvocationOperation)awaitOperation.Operation;
 
-                if (!IsTagHelperRunnerRunAsync(invocationOperation.TargetMethod, symbolCache))
-                {
-                    return;
-                }
+                        if (
+                            !IsTagHelperRunnerRunAsync(
+                                invocationOperation.TargetMethod,
+                                symbolCache
+                            )
+                        )
+                        {
+                            return;
+                        }
 
-                var parent = context.Operation.Parent;
-                while (parent != null && !IsParentMethod(parent))
-                {
-                    parent = parent.Parent;
-                }
+                        var parent = context.Operation.Parent;
+                        while (parent != null && !IsParentMethod(parent))
+                        {
+                            parent = parent.Parent;
+                        }
 
-                if (parent == null)
-                {
-                    return;
-                }
+                        if (parent == null)
+                        {
+                            return;
+                        }
 
-                var methodSymbol = (IMethodSymbol?)(parent switch
-                {
-                    ILocalFunctionOperation localFunctionOperation => localFunctionOperation.Symbol,
-                    IAnonymousFunctionOperation anonymousFunctionOperation => anonymousFunctionOperation.Symbol,
-                    IMethodBodyOperation methodBodyOperation => startBlockContext.OwningSymbol,
-                    _ => null,
-                });
+                        var methodSymbol = (IMethodSymbol?)(
+                            parent switch
+                            {
+                                ILocalFunctionOperation localFunctionOperation
+                                    => localFunctionOperation.Symbol,
+                                IAnonymousFunctionOperation anonymousFunctionOperation
+                                    => anonymousFunctionOperation.Symbol,
+                                IMethodBodyOperation methodBodyOperation
+                                    => startBlockContext.OwningSymbol,
+                                _ => null,
+                            }
+                        );
 
-                if (methodSymbol == null)
-                {
-                        // Unsupported operation type.
-                        return;
-                }
+                        if (methodSymbol == null)
+                        {
+                            // Unsupported operation type.
+                            return;
+                        }
 
-                if (!methodSymbol.IsAsync ||
-                    !symbolCache.TaskType.IsAssignableFrom(methodSymbol.ReturnType))
-                {
-                    capturedDiagnosticLocations.Add(parent.Syntax.GetLocation());
-                }
+                        if (
+                            !methodSymbol.IsAsync
+                            || !symbolCache.TaskType.IsAssignableFrom(methodSymbol.ReturnType)
+                        )
+                        {
+                            capturedDiagnosticLocations.Add(parent.Syntax.GetLocation());
+                        }
+                    },
+                    OperationKind.Await
+                );
 
-            }, OperationKind.Await);
-
-            startBlockContext.RegisterOperationBlockEndAction(context =>
-            {
-                foreach (var location in capturedDiagnosticLocations)
-                {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(TagHelperInCodeBlockDiagnostic, location));
-                }
-            });
-        });
+                startBlockContext.RegisterOperationBlockEndAction(
+                    context =>
+                    {
+                        foreach (var location in capturedDiagnosticLocations)
+                        {
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(TagHelperInCodeBlockDiagnostic, location)
+                            );
+                        }
+                    }
+                );
+            }
+        );
     }
 
     private bool IsTagHelperRunnerRunAsync(IMethodSymbol method, SymbolCache symbolCache)
     {
-        if (!SymbolEqualityComparer.Default.Equals(method, symbolCache.TagHelperRunnerRunAsyncMethodSymbol))
+        if (
+            !SymbolEqualityComparer.Default.Equals(
+                method,
+                symbolCache.TagHelperRunnerRunAsyncMethodSymbol
+            )
+        )
         {
             return false;
         }
@@ -138,7 +167,8 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
     {
         private SymbolCache(
             IMethodSymbol tagHelperRunnerRunAsyncMethodSymbol,
-            INamedTypeSymbol taskType)
+            INamedTypeSymbol taskType
+        )
         {
             TagHelperRunnerRunAsyncMethodSymbol = tagHelperRunnerRunAsyncMethodSymbol;
             TaskType = taskType;
@@ -147,7 +177,6 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
         public IMethodSymbol TagHelperRunnerRunAsyncMethodSymbol { get; }
 
         public INamedTypeSymbol TaskType { get; }
-
 
         public static bool TryCreate(Compilation compilation, out SymbolCache symbolCache)
         {

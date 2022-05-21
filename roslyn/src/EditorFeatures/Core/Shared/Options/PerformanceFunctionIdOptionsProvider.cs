@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PerformanceFunctionIdOptionsProvider()
-        {
-        }
+        public PerformanceFunctionIdOptionsProvider() { }
 
         public ImmutableArray<IOption> Options
         {

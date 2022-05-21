@@ -17,8 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
     {
         private sealed class EntityShaperNullableMarkingExpressionVisitor : ExpressionVisitor
         {
-            protected override Expression VisitExtension(Expression extensionExpression)
-                => extensionExpression is EntityShaperExpression entityShaper
+            protected override Expression VisitExtension(Expression extensionExpression) =>
+                extensionExpression is EntityShaperExpression entityShaper
                     ? entityShaper.MakeNullable()
                     : base.VisitExtension(extensionExpression);
         }
@@ -28,7 +28,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             private readonly SelectExpression _outerSelectExpression;
             private bool _containsOuterReference;
 
-            public SelectExpressionCorrelationFindingExpressionVisitor(SelectExpression outerSelectExpression)
+            public SelectExpressionCorrelationFindingExpressionVisitor(
+                SelectExpression outerSelectExpression
+            )
             {
                 _outerSelectExpression = outerSelectExpression;
             }
@@ -50,8 +52,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     return expression;
                 }
 
-                if (expression is ColumnExpression columnExpression
-                    && _outerSelectExpression.ContainsTableReference(columnExpression))
+                if (
+                    expression is ColumnExpression columnExpression
+                    && _outerSelectExpression.ContainsTableReference(columnExpression)
+                )
                 {
                     _containsOuterReference = true;
 
@@ -65,11 +69,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         private sealed class ProjectionMemberRemappingExpressionVisitor : ExpressionVisitor
         {
             private readonly SelectExpression _queryExpression;
-            private readonly Dictionary<ProjectionMember, ProjectionMember> _projectionMemberMappings;
+            private readonly Dictionary<
+                ProjectionMember,
+                ProjectionMember
+            > _projectionMemberMappings;
 
             public ProjectionMemberRemappingExpressionVisitor(
                 SelectExpression queryExpression,
-                Dictionary<ProjectionMember, ProjectionMember> projectionMemberMappings)
+                Dictionary<ProjectionMember, ProjectionMember> projectionMemberMappings
+            )
             {
                 _queryExpression = queryExpression;
                 _projectionMemberMappings = projectionMemberMappings;
@@ -82,12 +90,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.ProjectionMember != null,
-                        "ProjectionBindingExpression must have projection member.");
+                        "ProjectionBindingExpression must have projection member."
+                    );
 
                     return new ProjectionBindingExpression(
                         _queryExpression,
                         _projectionMemberMappings[projectionBindingExpression.ProjectionMember],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -101,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             public ProjectionMemberToIndexConvertingExpressionVisitor(
                 SelectExpression queryExpression,
-                Dictionary<ProjectionMember, int> projectionMemberMappings)
+                Dictionary<ProjectionMember, int> projectionMemberMappings
+            )
             {
                 _queryExpression = queryExpression;
                 _projectionMemberMappings = projectionMemberMappings;
@@ -114,12 +125,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.ProjectionMember != null,
-                        "ProjectionBindingExpression must have projection member.");
+                        "ProjectionBindingExpression must have projection member."
+                    );
 
                     return new ProjectionBindingExpression(
                         _queryExpression,
                         _projectionMemberMappings[projectionBindingExpression.ProjectionMember],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -135,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             public ProjectionIndexRemappingExpressionVisitor(
                 SelectExpression oldSelectExpression,
                 SelectExpression newSelectExpression,
-                int[] indexMap)
+                int[] indexMap
+            )
             {
                 _oldSelectExpression = oldSelectExpression;
                 _newSelectExpression = newSelectExpression;
@@ -145,17 +159,24 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
             {
-                if (expression is ProjectionBindingExpression projectionBindingExpression
-                    && ReferenceEquals(projectionBindingExpression.QueryExpression, _oldSelectExpression))
+                if (
+                    expression is ProjectionBindingExpression projectionBindingExpression
+                    && ReferenceEquals(
+                        projectionBindingExpression.QueryExpression,
+                        _oldSelectExpression
+                    )
+                )
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.Index != null,
-                        "ProjectionBindingExpression must have index.");
+                        "ProjectionBindingExpression must have index."
+                    );
 
                     return new ProjectionBindingExpression(
                         _newSelectExpression,
                         _indexMap[projectionBindingExpression.Index.Value],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -171,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             public SqlRemappingVisitor(
                 Dictionary<SqlExpression, ColumnExpression> mappings,
                 SelectExpression subquery,
-                TableReferenceExpression tableReferenceExpression)
+                TableReferenceExpression tableReferenceExpression
+            )
             {
                 _subquery = subquery;
                 _tableReferenceExpression = tableReferenceExpression;
@@ -179,12 +201,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             [return: NotNullIfNotNull("sqlExpression")]
-            public SqlExpression? Remap(SqlExpression? sqlExpression)
-                => (SqlExpression?)Visit(sqlExpression);
+            public SqlExpression? Remap(SqlExpression? sqlExpression) =>
+                (SqlExpression?)Visit(sqlExpression);
 
             [return: NotNullIfNotNull("sqlExpression")]
-            public SelectExpression? Remap(SelectExpression? sqlExpression)
-                => (SelectExpression?)Visit(sqlExpression);
+            public SelectExpression? Remap(SelectExpression? sqlExpression) =>
+                (SelectExpression?)Visit(sqlExpression);
 
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
@@ -197,7 +219,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                     case ColumnExpression columnExpression
                         when _subquery.ContainsTableReference(columnExpression):
-                        var outerColumn = _subquery.GenerateOuterColumn(_tableReferenceExpression, columnExpression);
+                        var outerColumn = _subquery.GenerateOuterColumn(
+                            _tableReferenceExpression,
+                            columnExpression
+                        );
                         _mappings[columnExpression] = outerColumn;
                         return outerColumn;
 
@@ -212,7 +237,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             private Dictionary<string, HashSet<string>?>? _columnReferenced;
             private Dictionary<string, HashSet<string>?>? _columnsUsedInJoinCondition;
 
-            public Dictionary<string, HashSet<string>?> FindColumns(SelectExpression selectExpression)
+            public Dictionary<string, HashSet<string>?> FindColumns(
+                SelectExpression selectExpression
+            )
             {
                 _columnReferenced = new Dictionary<string, HashSet<string>?>();
                 _columnsUsedInJoinCondition = new Dictionary<string, HashSet<string>?>();
@@ -230,10 +257,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 foreach (var keyValuePair in _columnsUsedInJoinCondition)
                 {
                     var tableAlias = keyValuePair.Key;
-                    if (_columnReferenced[tableAlias] != null
-                        && _columnsUsedInJoinCondition[tableAlias] != null)
+                    if (
+                        _columnReferenced[tableAlias] != null
+                        && _columnsUsedInJoinCondition[tableAlias] != null
+                    )
                     {
-                        _columnReferenced[tableAlias]!.UnionWith(_columnsUsedInJoinCondition[tableAlias]!);
+                        _columnReferenced[tableAlias]!.UnionWith(
+                            _columnsUsedInJoinCondition[tableAlias]!
+                        );
                     }
                 }
 
@@ -271,11 +302,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         // We should also remove references to the outer if this column gets removed then that subquery can also remove projections
                         // But currently we only remove table for TPT scenario in which there are all table expressions which connects via joins.
                         var joinOnSameLevel = _columnReferenced!.ContainsKey(leftJoinTableAlias);
-                        var noReferences = !joinOnSameLevel || _columnReferenced[leftJoinTableAlias] == null;
+                        var noReferences =
+                            !joinOnSameLevel || _columnReferenced[leftJoinTableAlias] == null;
                         base.Visit(leftJoinExpression);
                         if (noReferences && joinOnSameLevel)
                         {
-                            _columnsUsedInJoinCondition![leftJoinTableAlias] = _columnReferenced[leftJoinTableAlias];
+                            _columnsUsedInJoinCondition![leftJoinTableAlias] = _columnReferenced[
+                                leftJoinTableAlias
+                            ];
                             _columnReferenced[leftJoinTableAlias] = null;
                         }
 
@@ -292,7 +326,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             private readonly SelectExpression _oldSelect;
             private readonly SelectExpression _newSelect;
 
-            public TableReferenceUpdatingExpressionVisitor(SelectExpression oldSelect, SelectExpression newSelect)
+            public TableReferenceUpdatingExpressionVisitor(
+                SelectExpression oldSelect,
+                SelectExpression newSelect
+            )
             {
                 _oldSelect = oldSelect;
                 _newSelect = newSelect;
@@ -310,13 +347,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
         }
 
-        private sealed class IdentifierComparer : IEqualityComparer<(ColumnExpression Column, ValueComparer Comparer)>
+        private sealed class IdentifierComparer
+            : IEqualityComparer<(ColumnExpression Column, ValueComparer Comparer)>
         {
-            public bool Equals((ColumnExpression Column, ValueComparer Comparer) x, (ColumnExpression Column, ValueComparer Comparer) y)
-                => x.Column.Equals(y.Column);
+            public bool Equals(
+                (ColumnExpression Column, ValueComparer Comparer) x,
+                (ColumnExpression Column, ValueComparer Comparer) y
+            ) => x.Column.Equals(y.Column);
 
-            public int GetHashCode([DisallowNull] (ColumnExpression Column, ValueComparer Comparer) obj)
-                => obj.Column.GetHashCode();
+            public int GetHashCode(
+                [DisallowNull] (ColumnExpression Column, ValueComparer Comparer) obj
+            ) => obj.Column.GetHashCode();
         }
 
         private sealed class AliasUniquefier : ExpressionVisitor
@@ -332,12 +373,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
             {
-                if (expression is SelectExpression innerSelectExpression
-                    && !_visitedSelectExpressions.Contains(innerSelectExpression))
+                if (
+                    expression is SelectExpression innerSelectExpression
+                    && !_visitedSelectExpressions.Contains(innerSelectExpression)
+                )
                 {
                     for (var i = 0; i < innerSelectExpression._tableReferences.Count; i++)
                     {
-                        var newAlias = GenerateUniqueAlias(_usedAliases, innerSelectExpression._tableReferences[i].Alias);
+                        var newAlias = GenerateUniqueAlias(
+                            _usedAliases,
+                            innerSelectExpression._tableReferences[i].Alias
+                        );
                         innerSelectExpression._tableReferences[i].Alias = newAlias;
                         UnwrapJoinExpression(innerSelectExpression._tables[i]).Alias = newAlias;
                     }
@@ -359,17 +405,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 Alias = alias;
             }
 
-            public TableExpressionBase Table
-                => _selectExpression.Tables.Single(
-                    e => string.Equals((e as JoinExpressionBase)?.Table.Alias ?? e.Alias, Alias, StringComparison.OrdinalIgnoreCase));
+            public TableExpressionBase Table =>
+                _selectExpression.Tables.Single(
+                    e =>
+                        string.Equals(
+                            (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
+                            Alias,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
 
             public string Alias { get; internal set; }
 
-            public override Type Type
-                => typeof(object);
+            public override Type Type => typeof(object);
 
-            public override ExpressionType NodeType
-                => ExpressionType.Extension;
+            public override ExpressionType NodeType => ExpressionType.Extension;
 
             public void UpdateTableReference(SelectExpression oldSelect, SelectExpression newSelect)
             {
@@ -388,51 +438,64 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             /// <inheritdoc />
-            public override bool Equals(object? obj)
-                => obj != null
-                    && (ReferenceEquals(this, obj)
-                        || obj is TableReferenceExpression tableReferenceExpression
-                        && Equals(tableReferenceExpression));
+            public override bool Equals(object? obj) =>
+                obj != null
+                && (
+                    ReferenceEquals(this, obj)
+                    || obj is TableReferenceExpression tableReferenceExpression
+                        && Equals(tableReferenceExpression)
+                );
 
             // Since table reference is owned by SelectExpression, the select expression should be the same reference if they are matching.
             // That means we also don't need to compute the hashcode for it.
             // This allows us to break the cycle in computation when traversing this graph.
-            private bool Equals(TableReferenceExpression tableReferenceExpression)
-                => string.Equals(Alias, tableReferenceExpression.Alias, StringComparison.OrdinalIgnoreCase)
-                    && ReferenceEquals(_selectExpression, tableReferenceExpression._selectExpression);
+            private bool Equals(TableReferenceExpression tableReferenceExpression) =>
+                string.Equals(
+                    Alias,
+                    tableReferenceExpression.Alias,
+                    StringComparison.OrdinalIgnoreCase
+                ) && ReferenceEquals(_selectExpression, tableReferenceExpression._selectExpression);
 
             /// <inheritdoc />
-            public override int GetHashCode()
-                => Alias.GetHashCode();
+            public override int GetHashCode() => Alias.GetHashCode();
         }
 
         private sealed class ConcreteColumnExpression : ColumnExpression
         {
             private readonly TableReferenceExpression _table;
 
-            public ConcreteColumnExpression(IProperty property, IColumnBase column, TableReferenceExpression table, bool nullable)
+            public ConcreteColumnExpression(
+                IProperty property,
+                IColumnBase column,
+                TableReferenceExpression table,
+                bool nullable
+            )
                 : this(
                     column.Name,
                     table,
                     property.ClrType.UnwrapNullableType(),
                     column.PropertyMappings.First(m => m.Property == property).TypeMapping,
-                    nullable || column.IsNullable)
-            {
-            }
+                    nullable || column.IsNullable
+                ) { }
 
-            public ConcreteColumnExpression(ProjectionExpression subqueryProjection, TableReferenceExpression table)
+            public ConcreteColumnExpression(
+                ProjectionExpression subqueryProjection,
+                TableReferenceExpression table
+            )
                 : this(
-                    subqueryProjection.Alias, table,
-                    subqueryProjection.Type, subqueryProjection.Expression.TypeMapping!,
-                    IsNullableProjection(subqueryProjection))
-            {
-            }
+                    subqueryProjection.Alias,
+                    table,
+                    subqueryProjection.Type,
+                    subqueryProjection.Expression.TypeMapping!,
+                    IsNullableProjection(subqueryProjection)
+                ) { }
 
-            private static bool IsNullableProjection(ProjectionExpression projectionExpression)
-                => projectionExpression.Expression switch
+            private static bool IsNullableProjection(ProjectionExpression projectionExpression) =>
+                projectionExpression.Expression switch
                 {
                     ColumnExpression columnExpression => columnExpression.IsNullable,
-                    SqlConstantExpression sqlConstantExpression => sqlConstantExpression.Value == null,
+                    SqlConstantExpression sqlConstantExpression
+                        => sqlConstantExpression.Value == null,
                     _ => true,
                 };
 
@@ -441,8 +504,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 TableReferenceExpression table,
                 Type type,
                 RelationalTypeMapping typeMapping,
-                bool nullable)
-                : base(type, typeMapping)
+                bool nullable
+            ) : base(type, typeMapping)
             {
                 Name = name;
                 _table = table;
@@ -451,23 +514,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
             public override string Name { get; }
 
-            public override TableExpressionBase Table
-                => _table.Table;
+            public override TableExpressionBase Table => _table.Table;
 
-            public override string TableAlias
-                => _table.Alias;
+            public override string TableAlias => _table.Alias;
 
             public override bool IsNullable { get; }
 
             /// <inheritdoc />
-            protected override Expression VisitChildren(ExpressionVisitor visitor)
-                => this;
+            protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
-            public override ConcreteColumnExpression MakeNullable()
-                => new(Name, _table, Type, TypeMapping!, true);
+            public override ConcreteColumnExpression MakeNullable() =>
+                new(Name, _table, Type, TypeMapping!, true);
 
-            public void UpdateTableReference(SelectExpression oldSelect, SelectExpression newSelect)
-                => _table.UpdateTableReference(oldSelect, newSelect);
+            public void UpdateTableReference(
+                SelectExpression oldSelect,
+                SelectExpression newSelect
+            ) => _table.UpdateTableReference(oldSelect, newSelect);
 
             internal void Verify(IReadOnlyList<TableReferenceExpression> tableReferences)
             {
@@ -478,21 +540,23 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             /// <inheritdoc />
-            public override bool Equals(object? obj)
-                => obj != null
-                    && (ReferenceEquals(this, obj)
-                        || obj is ConcreteColumnExpression concreteColumnExpression
-                        && Equals(concreteColumnExpression));
+            public override bool Equals(object? obj) =>
+                obj != null
+                && (
+                    ReferenceEquals(this, obj)
+                    || obj is ConcreteColumnExpression concreteColumnExpression
+                        && Equals(concreteColumnExpression)
+                );
 
-            private bool Equals(ConcreteColumnExpression concreteColumnExpression)
-                => base.Equals(concreteColumnExpression)
-                    && Name == concreteColumnExpression.Name
-                    && _table.Equals(concreteColumnExpression._table)
-                    && IsNullable == concreteColumnExpression.IsNullable;
+            private bool Equals(ConcreteColumnExpression concreteColumnExpression) =>
+                base.Equals(concreteColumnExpression)
+                && Name == concreteColumnExpression.Name
+                && _table.Equals(concreteColumnExpression._table)
+                && IsNullable == concreteColumnExpression.IsNullable;
 
             /// <inheritdoc />
-            public override int GetHashCode()
-                => HashCode.Combine(base.GetHashCode(), Name, _table, IsNullable);
+            public override int GetHashCode() =>
+                HashCode.Combine(base.GetHashCode(), Name, _table, IsNullable);
         }
 
         private struct SingleCollectionInfo
@@ -504,7 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 IReadOnlyList<ValueComparer> parentIdentifierValueComparers,
                 IReadOnlyList<ValueComparer> outerIdentifierValueComparers,
                 IReadOnlyList<ValueComparer> selfIdentifierValueComparers,
-                Expression shaperExpression)
+                Expression shaperExpression
+            )
             {
                 ParentIdentifier = parentIdentifier;
                 OuterIdentifier = outerIdentifier;
@@ -531,7 +596,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 Expression childIdentifier,
                 IReadOnlyList<ValueComparer> identifierValueComparers,
                 SelectExpression selectExpression,
-                Expression shaperExpression)
+                Expression shaperExpression
+            )
             {
                 ParentIdentifier = parentIdentifier;
                 ChildIdentifier = childIdentifier;
@@ -565,7 +631,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     if (value is int intValue)
                     {
                         return new ProjectionBindingExpression(
-                            projectionBindingExpression.QueryExpression, intValue, projectionBindingExpression.Type);
+                            projectionBindingExpression.QueryExpression,
+                            intValue,
+                            projectionBindingExpression.Type
+                        );
                     }
 
                     if (value is Expression innerShaper)
@@ -578,8 +647,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                 if (expression is CollectionResultExpression collectionResultExpression)
                 {
-                    var innerProjectionBindingExpression = collectionResultExpression.ProjectionBindingExpression;
-                    var value = _clientProjectionIndexMap[innerProjectionBindingExpression.Index!.Value];
+                    var innerProjectionBindingExpression =
+                        collectionResultExpression.ProjectionBindingExpression;
+                    var value = _clientProjectionIndexMap[
+                        innerProjectionBindingExpression.Index!.Value
+                    ];
                     if (value is SingleCollectionInfo singleCollectionInfo)
                     {
                         return new RelationalCollectionShaperExpression(
@@ -591,7 +663,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                             singleCollectionInfo.SelfIdentifierValueComparers,
                             singleCollectionInfo.ShaperExpression,
                             collectionResultExpression.Navigation,
-                            collectionResultExpression.ElementType);
+                            collectionResultExpression.ElementType
+                        );
                     }
 
                     if (value is SplitCollectionInfo splitCollectionInfo)
@@ -603,7 +676,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                             splitCollectionInfo.SelectExpression,
                             splitCollectionInfo.ShaperExpression,
                             collectionResultExpression.Navigation,
-                            collectionResultExpression.ElementType);
+                            collectionResultExpression.ElementType
+                        );
                     }
 
                     throw new InvalidOperationException();
@@ -617,7 +691,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             private readonly List<TableReferenceExpression> _tableReferencesInScope = new();
 
-            public SelectExpressionVerifyingExpressionVisitor(IEnumerable<TableReferenceExpression> tableReferencesInScope)
+            public SelectExpressionVerifyingExpressionVisitor(
+                IEnumerable<TableReferenceExpression> tableReferencesInScope
+            )
             {
                 _tableReferencesInScope.AddRange(tableReferencesInScope);
             }
@@ -641,11 +717,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                             switch (table)
                             {
                                 case PredicateJoinExpressionBase predicateJoinExpressionBase:
-                                    Verify(predicateJoinExpressionBase.Table, _tableReferencesInScope);
+                                    Verify(
+                                        predicateJoinExpressionBase.Table,
+                                        _tableReferencesInScope
+                                    );
                                     currentLevelTableReferences.Add(tableReference);
                                     Verify(
                                         predicateJoinExpressionBase.JoinPredicate,
-                                        _tableReferencesInScope.Concat(currentLevelTableReferences));
+                                        _tableReferencesInScope.Concat(currentLevelTableReferences)
+                                    );
                                     break;
 
                                 case SelectExpression innerSelectExpression:
@@ -653,11 +733,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     break;
 
                                 case CrossApplyExpression crossApplyExpression:
-                                    Verify(crossApplyExpression, _tableReferencesInScope.Concat(currentLevelTableReferences));
+                                    Verify(
+                                        crossApplyExpression,
+                                        _tableReferencesInScope.Concat(currentLevelTableReferences)
+                                    );
                                     break;
 
                                 case OuterApplyExpression outerApplyExpression:
-                                    Verify(outerApplyExpression, _tableReferencesInScope.Concat(currentLevelTableReferences));
+                                    Verify(
+                                        outerApplyExpression,
+                                        _tableReferencesInScope.Concat(currentLevelTableReferences)
+                                    );
                                     break;
 
                                 case JoinExpressionBase joinExpressionBase:
@@ -732,9 +818,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 return base.Visit(expression);
             }
 
-            public static void Verify(Expression expression, IEnumerable<TableReferenceExpression> tableReferencesInScope)
-                => new SelectExpressionVerifyingExpressionVisitor(tableReferencesInScope)
-                    .Visit(expression);
+            public static void Verify(
+                Expression expression,
+                IEnumerable<TableReferenceExpression> tableReferencesInScope
+            ) =>
+                new SelectExpressionVerifyingExpressionVisitor(tableReferencesInScope).Visit(
+                    expression
+                );
         }
 
         private sealed class CloningExpressionVisitor : ExpressionVisitor
@@ -744,35 +834,54 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             {
                 if (expression is SelectExpression selectExpression)
                 {
-                    var newProjectionMappings = new Dictionary<ProjectionMember, Expression>(selectExpression._projectionMapping.Count);
+                    var newProjectionMappings = new Dictionary<ProjectionMember, Expression>(
+                        selectExpression._projectionMapping.Count
+                    );
                     foreach (var keyValuePair in selectExpression._projectionMapping)
                     {
                         newProjectionMappings[keyValuePair.Key] = Visit(keyValuePair.Value);
                     }
 
-                    var newProjections = selectExpression._projection.Select(Visit).ToList<ProjectionExpression>();
+                    var newProjections = selectExpression._projection
+                        .Select(Visit)
+                        .ToList<ProjectionExpression>();
 
-                    var newTables = selectExpression._tables.Select(Visit).ToList<TableExpressionBase>();
+                    var newTables = selectExpression._tables
+                        .Select(Visit)
+                        .ToList<TableExpressionBase>();
                     // Since we are cloning we need to generate new table references
                     // In other cases (like VisitChildren), we just reuse the same table references and update the SelectExpression inside it.
                     // We initially assign old SelectExpression in table references and later update it once we construct clone
                     var newTableReferences = selectExpression._tableReferences
-                        .Select(e => new TableReferenceExpression(selectExpression, e.Alias)).ToList();
+                        .Select(e => new TableReferenceExpression(selectExpression, e.Alias))
+                        .ToList();
                     Check.DebugAssert(
-                        newTables.Select(e => GetAliasFromTableExpressionBase(e)).SequenceEqual(newTableReferences.Select(e => e.Alias)),
-                        "Alias of updated tables must match the old tables.");
+                        newTables
+                            .Select(e => GetAliasFromTableExpressionBase(e))
+                            .SequenceEqual(newTableReferences.Select(e => e.Alias)),
+                        "Alias of updated tables must match the old tables."
+                    );
 
                     var predicate = (SqlExpression?)Visit(selectExpression.Predicate);
-                    var newGroupBy = selectExpression._groupBy.Select(Visit)
+                    var newGroupBy = selectExpression._groupBy
+                        .Select(Visit)
                         .Where(e => !(e is SqlConstantExpression || e is SqlParameterExpression))
                         .ToList<SqlExpression>();
                     var havingExpression = (SqlExpression?)Visit(selectExpression.Having);
-                    var newOrderings = selectExpression._orderings.Select(Visit).ToList<OrderingExpression>();
+                    var newOrderings = selectExpression._orderings
+                        .Select(Visit)
+                        .ToList<OrderingExpression>();
                     var offset = (SqlExpression?)Visit(selectExpression.Offset);
                     var limit = (SqlExpression?)Visit(selectExpression.Limit);
 
                     var newSelectExpression = new SelectExpression(
-                        selectExpression.Alias, newProjections, newTables, newTableReferences, newGroupBy, newOrderings)
+                        selectExpression.Alias,
+                        newProjections,
+                        newTables,
+                        newTableReferences,
+                        newGroupBy,
+                        newOrderings
+                    )
                     {
                         Predicate = predicate,
                         Having = havingExpression,
@@ -784,10 +893,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         _projectionMapping = newProjectionMappings
                     };
 
-                    newSelectExpression._tptLeftJoinTables.AddRange(selectExpression._tptLeftJoinTables);
+                    newSelectExpression._tptLeftJoinTables.AddRange(
+                        selectExpression._tptLeftJoinTables
+                    );
                     // Since identifiers are ColumnExpression, they are not visited since they don't contain SelectExpression inside it.
                     newSelectExpression._identifier.AddRange(selectExpression._identifier);
-                    newSelectExpression._childIdentifiers.AddRange(selectExpression._childIdentifiers);
+                    newSelectExpression._childIdentifiers.AddRange(
+                        selectExpression._childIdentifiers
+                    );
 
                     // Remap tableReferences in new select expression
                     foreach (var tableReference in newTableReferences)
@@ -796,14 +909,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     }
 
                     // Now that we have SelectExpression, we visit all components and update table references inside columns
-                    newSelectExpression =
-                        (SelectExpression)new ColumnExpressionReplacingExpressionVisitor(selectExpression, newSelectExpression)
-                            .Visit(newSelectExpression);
+                    newSelectExpression = (SelectExpression)
+                        new ColumnExpressionReplacingExpressionVisitor(
+                            selectExpression,
+                            newSelectExpression
+                        ).Visit(newSelectExpression);
 
                     return newSelectExpression;
                 }
 
-                return expression is IClonableTableExpressionBase cloneable ? cloneable.Clone() : base.Visit(expression);
+                return expression is IClonableTableExpressionBase cloneable
+                    ? cloneable.Clone()
+                    : base.Visit(expression);
             }
         }
 
@@ -812,25 +929,32 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             private readonly SelectExpression _oldSelectExpression;
             private readonly Dictionary<string, TableReferenceExpression> _newTableReferences;
 
-            public ColumnExpressionReplacingExpressionVisitor(SelectExpression oldSelectExpression, SelectExpression newSelectExpression)
+            public ColumnExpressionReplacingExpressionVisitor(
+                SelectExpression oldSelectExpression,
+                SelectExpression newSelectExpression
+            )
             {
                 _oldSelectExpression = oldSelectExpression;
-                _newTableReferences = newSelectExpression._tableReferences.ToDictionary(e => e.Alias);
+                _newTableReferences = newSelectExpression._tableReferences.ToDictionary(
+                    e => e.Alias
+                );
             }
 
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
             {
-                return expression is ConcreteColumnExpression concreteColumnExpression
+                return
+                    expression is ConcreteColumnExpression concreteColumnExpression
                     && _oldSelectExpression.ContainsTableReference(concreteColumnExpression)
                     && _newTableReferences.ContainsKey(concreteColumnExpression.TableAlias)
-                        ? new ConcreteColumnExpression(
-                            concreteColumnExpression.Name,
-                            _newTableReferences[concreteColumnExpression.TableAlias],
-                            concreteColumnExpression.Type,
-                            concreteColumnExpression.TypeMapping!,
-                            concreteColumnExpression.IsNullable)
-                        : base.Visit(expression);
+                    ? new ConcreteColumnExpression(
+                        concreteColumnExpression.Name,
+                        _newTableReferences[concreteColumnExpression.TableAlias],
+                        concreteColumnExpression.Type,
+                        concreteColumnExpression.TypeMapping!,
+                        concreteColumnExpression.IsNullable
+                    )
+                    : base.Visit(expression);
             }
         }
 
@@ -850,26 +974,42 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     // A scalar subquery on a GROUP BY may represent aggregation which can be lifted.
                     var subquery = scalarSubqueryExpression.Subquery;
-                    if (subquery.Limit == null
+                    if (
+                        subquery.Limit == null
                         && subquery.Offset == null
                         && subquery._groupBy.Count == 0
-                        && subquery.Predicate != null)
+                        && subquery.Predicate != null
+                    )
                     {
                         var initialTableCounts = 0;
-                        var potentialTableCount = Math.Min(_selectExpression._tables.Count, subquery._tables.Count);
+                        var potentialTableCount = Math.Min(
+                            _selectExpression._tables.Count,
+                            subquery._tables.Count
+                        );
                         for (var i = 0; i < potentialTableCount; i++)
                         {
-                            if (!string.Equals(
-                                _selectExpression._tableReferences[i].Alias,
-                                subquery._tableReferences[i].Alias, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                !string.Equals(
+                                    _selectExpression._tableReferences[i].Alias,
+                                    subquery._tableReferences[i].Alias,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 break;
                             }
 
-                            if (_selectExpression._tables[i] is SelectExpression originalNestedSelectExpression
-                                && subquery._tables[i] is SelectExpression subqueryNestedSelectExpression)
+                            if (
+                                _selectExpression._tables[i]
+                                    is SelectExpression originalNestedSelectExpression
+                                && subquery._tables[i]
+                                    is SelectExpression subqueryNestedSelectExpression
+                            )
                             {
-                                CopyOverOwnedJoinInSameTable(originalNestedSelectExpression, subqueryNestedSelectExpression);
+                                CopyOverOwnedJoinInSameTable(
+                                    originalNestedSelectExpression,
+                                    subqueryNestedSelectExpression
+                                );
                             }
 
                             initialTableCounts++;
@@ -879,7 +1019,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         {
                             // If there are no initial table then this is not correlated grouping subquery
                             var columnExpressionReplacingExpressionVisitor =
-                                new ColumnExpressionReplacingExpressionVisitor(subquery, _selectExpression);
+                                new ColumnExpressionReplacingExpressionVisitor(
+                                    subquery,
+                                    _selectExpression
+                                );
                             if (subquery._tables.Count != initialTableCounts)
                             {
                                 // If subquery has more tables then we expanded join on it.
@@ -889,40 +1032,58 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     // So we don't need to remap those columns, they will transfer automatically.
                                     var table = subquery._tables[i];
                                     var tableReference = subquery._tableReferences[i];
-                                    table = (TableExpressionBase)columnExpressionReplacingExpressionVisitor.Visit(table);
-                                    tableReference.UpdateTableReference(subquery, _selectExpression);
+                                    table = (TableExpressionBase)
+                                        columnExpressionReplacingExpressionVisitor.Visit(table);
+                                    tableReference.UpdateTableReference(
+                                        subquery,
+                                        _selectExpression
+                                    );
                                     _selectExpression.AddTable(table, tableReference);
                                 }
                             }
 
-                            var updatedProjection = columnExpressionReplacingExpressionVisitor.Visit(subquery._projection[0].Expression);
+                            var updatedProjection =
+                                columnExpressionReplacingExpressionVisitor.Visit(
+                                    subquery._projection[0].Expression
+                                );
 
                             return updatedProjection;
                         }
                     }
                 }
 
-                if (expression is SelectExpression innerSelectExpression
-                    && innerSelectExpression.GroupBy.Count > 0)
+                if (
+                    expression is SelectExpression innerSelectExpression
+                    && innerSelectExpression.GroupBy.Count > 0
+                )
                 {
-                    expression = new GroupByAggregateLiftingExpressionVisitor(innerSelectExpression).Visit(innerSelectExpression);
+                    expression = new GroupByAggregateLiftingExpressionVisitor(
+                        innerSelectExpression
+                    ).Visit(innerSelectExpression);
                 }
 
                 return base.Visit(expression);
             }
 
-            private void CopyOverOwnedJoinInSameTable(SelectExpression target, SelectExpression source)
+            private void CopyOverOwnedJoinInSameTable(
+                SelectExpression target,
+                SelectExpression source
+            )
             {
                 if (target._projection.Count != source._projection.Count)
                 {
-                    var columnExpressionReplacingExpressionVisitor = new ColumnExpressionReplacingExpressionVisitor(source, target);
-                    var minProjectionCount = Math.Min(target._projection.Count, source._projection.Count);
+                    var columnExpressionReplacingExpressionVisitor =
+                        new ColumnExpressionReplacingExpressionVisitor(source, target);
+                    var minProjectionCount = Math.Min(
+                        target._projection.Count,
+                        source._projection.Count
+                    );
                     var initialProjectionCount = 0;
                     for (var i = 0; i < minProjectionCount; i++)
                     {
                         var projectionToCopy = source._projection[i];
-                        var transformedProjection =
-                            (ProjectionExpression)columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
+                        var transformedProjection = (ProjectionExpression)
+                            columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
                         if (!transformedProjection.Equals(target._projection[i]))
                         {
                             break;
@@ -941,16 +1102,34 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                 continue;
                             }
 
-                            var transformedProjection =
-                                (ConcreteColumnExpression)columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
-                            if (target._projection.FindIndex(e => e.Expression.Equals(transformedProjection)) == -1)
+                            var transformedProjection = (ConcreteColumnExpression)
+                                columnExpressionReplacingExpressionVisitor.Visit(projectionToCopy);
+                            if (
+                                target._projection.FindIndex(
+                                    e => e.Expression.Equals(transformedProjection)
+                                ) == -1
+                            )
                             {
-                                target._projection.Add(new ProjectionExpression(transformedProjection, transformedProjection.Name));
-                                if (UnwrapJoinExpression(columnToCopy.Table) is SelectExpression innerSelectExpression)
+                                target._projection.Add(
+                                    new ProjectionExpression(
+                                        transformedProjection,
+                                        transformedProjection.Name
+                                    )
+                                );
+                                if (
+                                    UnwrapJoinExpression(columnToCopy.Table)
+                                    is SelectExpression innerSelectExpression
+                                )
                                 {
-                                    var tableIndex = source._tableReferences.FindIndex(e => e.Alias == columnToCopy.TableAlias);
+                                    var tableIndex = source._tableReferences.FindIndex(
+                                        e => e.Alias == columnToCopy.TableAlias
+                                    );
                                     CopyOverOwnedJoinInSameTable(
-                                        (SelectExpression)UnwrapJoinExpression(target._tables[tableIndex]), innerSelectExpression);
+                                        (SelectExpression)UnwrapJoinExpression(
+                                            target._tables[tableIndex]
+                                        ),
+                                        innerSelectExpression
+                                    );
                                 }
                             }
                         }

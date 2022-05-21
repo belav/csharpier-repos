@@ -24,26 +24,37 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 /// <summary>
 /// Functional test to verify the error reporting of Razor compilation by diagnostic middleware.
 /// </summary>
-public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWebSite.Startup>>, IDisposable
+public class ErrorPageTests
+    : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWebSite.Startup>>,
+        IDisposable
 {
     private static readonly string PreserveCompilationContextMessage = HtmlEncoder.Default.Encode(
-        "One or more compilation references may be missing. " +
-        "If you're seeing this in a published application, set 'CopyRefAssembliesToPublishDirectory' to true in your project file to ensure files in the refs directory are published.");
+        "One or more compilation references may be missing. "
+            + "If you're seeing this in a published application, set 'CopyRefAssembliesToPublishDirectory' to true in your project file to ensure files in the refs directory are published."
+    );
     private readonly AssemblyTestLog _assemblyTestLog;
 
     private readonly MvcTestFixture<ErrorPageMiddlewareWebSite.Startup> _fixture;
 
     public ErrorPageTests(
         MvcTestFixture<ErrorPageMiddlewareWebSite.Startup> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
     {
         _assemblyTestLog = AssemblyTestLog.ForAssembly(GetType().Assembly);
 
         var loggerProvider = _assemblyTestLog.CreateLoggerFactory(testOutputHelper, GetType().Name);
 
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
         Client = factory
-            .WithWebHostBuilder(builder => builder.ConfigureLogging(l => l.Services.AddSingleton<ILoggerFactory>(loggerProvider)))
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureLogging(
+                        l => l.Services.AddSingleton<ILoggerFactory>(loggerProvider)
+                    )
+            )
             .CreateDefaultClient();
         // These tests want to verify runtime compilation and formatting in the HTML of the error page
         Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
@@ -57,8 +68,18 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     public async Task CompilationFailuresAreListedByErrorPageMiddleware()
     {
         // Arrange
-        var factory = _fixture.Factories.FirstOrDefault() ?? _fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
-        factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(ConfigureRuntimeCompilationOptions)));
+        var factory =
+            _fixture.Factories.FirstOrDefault()
+            ?? _fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
+        factory = factory.WithWebHostBuilder(
+            b =>
+                b.ConfigureTestServices(
+                    serviceCollection =>
+                        serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
+                            ConfigureRuntimeCompilationOptions
+                        )
+                )
+        );
 
         var client = factory.CreateDefaultClient();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
@@ -96,10 +117,11 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     {
         // Arrange
         var action = "ParserError";
-        var expected = "The code block is missing a closing &quot;}&quot; character.  Make sure you " +
-        "have a matching &quot;}&quot; character for all the &quot;{&quot; characters " +
-        "within this block, and that none of the &quot;}&quot; characters are being " +
-        "interpreted as markup.";
+        var expected =
+            "The code block is missing a closing &quot;}&quot; character.  Make sure you "
+            + "have a matching &quot;}&quot; character for all the &quot;{&quot; characters "
+            + "within this block, and that none of the &quot;}&quot; characters are being "
+            + "interpreted as markup.";
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
 
         // Act
@@ -117,9 +139,11 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     public async Task CompilationFailuresFromViewImportsAreListed()
     {
         // Arrange
-        var expectedMessage = "The type or namespace name &#x27;NamespaceDoesNotExist&#x27; could not be found ("
+        var expectedMessage =
+            "The type or namespace name &#x27;NamespaceDoesNotExist&#x27; could not be found ("
             + "are you missing a using directive or an assembly reference?)";
-        var expectedCompilationContent = "Views_ErrorFromViewImports_Index : "
+        var expectedCompilationContent =
+            "Views_ErrorFromViewImports_Index : "
             + "global::Microsoft.AspNetCore.Mvc.Razor.RazorPage&lt;dynamic&gt;";
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
 
@@ -140,7 +164,9 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     public async Task RuntimeErrorAreListedByErrorPageMiddleware()
     {
         // Arrange
-        var expectedMessage = HtmlEncoder.Default.Encode("throw new Exception(\"Error from view\");");
+        var expectedMessage = HtmlEncoder.Default.Encode(
+            "throw new Exception(\"Error from view\");"
+        );
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
 
         // Act

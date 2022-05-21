@@ -19,28 +19,38 @@ public static class RazorProjectEngineBuilderExtensions
     /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
     /// <param name="csharpLanguageVersion">The C# <see cref="LanguageVersion"/>.</param>
     /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-    public static RazorProjectEngineBuilder SetCSharpLanguageVersion(this RazorProjectEngineBuilder builder, LanguageVersion csharpLanguageVersion)
+    public static RazorProjectEngineBuilder SetCSharpLanguageVersion(
+        this RazorProjectEngineBuilder builder,
+        LanguageVersion csharpLanguageVersion
+    )
     {
         if (builder == null)
         {
             throw new ArgumentNullException(nameof(builder));
         }
 
-        var existingFeature = builder.Features.OfType<ConfigureParserForCSharpVersionFeature>().FirstOrDefault();
+        var existingFeature = builder.Features
+            .OfType<ConfigureParserForCSharpVersionFeature>()
+            .FirstOrDefault();
         if (existingFeature != null)
         {
             builder.Features.Remove(existingFeature);
         }
 
         // This will convert any "latest", "default" or "LatestMajor" LanguageVersions into their numerical equivalent.
-        var effectiveCSharpLanguageVersion = LanguageVersionFacts.MapSpecifiedToEffectiveVersion(csharpLanguageVersion);
-        builder.Features.Add(new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion));
+        var effectiveCSharpLanguageVersion = LanguageVersionFacts.MapSpecifiedToEffectiveVersion(
+            csharpLanguageVersion
+        );
+        builder.Features.Add(
+            new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion)
+        );
 
         return builder;
     }
 
     // Internal for testing
-    internal class ConfigureParserForCSharpVersionFeature : IConfigureRazorCodeGenerationOptionsFeature
+    internal class ConfigureParserForCSharpVersionFeature
+        : IConfigureRazorCodeGenerationOptionsFeature
     {
         public ConfigureParserForCSharpVersionFeature(LanguageVersion csharpLanguageVersion)
         {

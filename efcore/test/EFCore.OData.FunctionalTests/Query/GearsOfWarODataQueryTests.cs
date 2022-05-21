@@ -10,12 +10,12 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class GearsOfWarODataQueryTests : ODataQueryTestBase, IClassFixture<GearsOfWarODataQueryTestFixture>
+    public class GearsOfWarODataQueryTests
+        : ODataQueryTestBase,
+            IClassFixture<GearsOfWarODataQueryTestFixture>
     {
-        public GearsOfWarODataQueryTests(GearsOfWarODataQueryTestFixture fixture)
-            : base(fixture)
-        {
-        }
+        public GearsOfWarODataQueryTests(GearsOfWarODataQueryTestFixture fixture) : base(fixture)
+        { }
 
         [ConditionalFact]
         public async Task Basic_query_gears()
@@ -36,14 +36,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Basic_query_inheritance()
         {
-            var requestUri = $"{BaseAddress}/odata/Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer";
+            var requestUri =
+                $"{BaseAddress}/odata/Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var result = await response.Content.ReadAsObject<JObject>();
 
-            Assert.Contains("$metadata#Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer", result["@odata.context"].ToString());
+            Assert.Contains(
+                "$metadata#Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer",
+                result["@odata.context"].ToString()
+            );
             var gears = result["value"] as JArray;
 
             Assert.Equal(2, gears.Count);
@@ -60,14 +64,20 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var result = await response.Content.ReadAsObject<JObject>();
 
-            Assert.Contains("$metadata#Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer/$entity", result["@odata.context"].ToString());
+            Assert.Contains(
+                "$metadata#Gears/Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel.Officer/$entity",
+                result["@odata.context"].ToString()
+            );
             Assert.Equal("Marcus", result["Nickname"].ToString());
         }
 
         [ConditionalFact]
         public async Task Complex_query_with_any_on_collection_navigation()
         {
-            var requestUri = string.Format(@"{0}/odata/Gears?$filter=Weapons/any(w: w/Id gt 4)", BaseAddress);
+            var requestUri = string.Format(
+                @"{0}/odata/Gears?$filter=Weapons/any(w: w/Id gt 4)",
+                BaseAddress
+            );
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
@@ -83,14 +93,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Query_with_expand_and_key_projection()
         {
-            var requestUri = string.Format(@"{0}/odata/Gears?$select=SquadId&$expand=Tag($select=Id)", BaseAddress);
+            var requestUri = string.Format(
+                @"{0}/odata/Gears?$select=SquadId&$expand=Tag($select=Id)",
+                BaseAddress
+            );
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var result = await response.Content.ReadAsObject<JObject>();
 
-            Assert.Contains("$metadata#Gears(SquadId,Tag(Id))", result["@odata.context"].ToString());
+            Assert.Contains(
+                "$metadata#Gears(SquadId,Tag(Id))",
+                result["@odata.context"].ToString()
+            );
             var projections = result["value"] as JArray;
 
             Assert.Equal(5, projections.Count);

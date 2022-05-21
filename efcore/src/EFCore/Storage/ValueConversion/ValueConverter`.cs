@@ -35,10 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         public ValueConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
         /// <summary>
         ///     <para>
@@ -68,31 +66,36 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
             bool convertsNulls,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, convertsNulls, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        )
+            : base(
+                convertToProviderExpression,
+                convertFromProviderExpression,
+                convertsNulls,
+                mappingHints
+            ) { }
 
         private static Func<object?, object?> SanitizeConverter<TIn, TOut>(
             Expression<Func<TIn, TOut>> convertExpression,
-            bool convertsNulls)
+            bool convertsNulls
+        )
         {
             var compiled = convertExpression.Compile();
 
             return convertsNulls
                 ? v => compiled((TIn)v!)
-                : v => v == null
-                    ? null
-                    : compiled(Sanitize<TIn>(v));
+                : v => v == null ? null : compiled(Sanitize<TIn>(v));
         }
 
         private static T Sanitize<T>(object value)
         {
             var unwrappedType = typeof(T).UnwrapNullableType();
 
-            return (T)(!unwrappedType.IsInstanceOfType(value)
-                ? Convert.ChangeType(value, unwrappedType)
-                : value);
+            return (T)(
+                !unwrappedType.IsInstanceOfType(value)
+                    ? Convert.ChangeType(value, unwrappedType)
+                    : value
+            );
         }
 
         /// <summary>
@@ -102,9 +105,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public override Func<object?, object?> ConvertToProvider
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _convertToProvider, this, static c => SanitizeConverter(c.ConvertToProviderExpression, c.ConvertsNulls));
+        public override Func<object?, object?> ConvertToProvider =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _convertToProvider,
+                this,
+                static c => SanitizeConverter(c.ConvertToProviderExpression, c.ConvertsNulls)
+            );
 
         /// <summary>
         ///     Gets the function to convert objects when reading data from the store,
@@ -113,9 +119,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public override Func<object?, object?> ConvertFromProvider
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _convertFromProvider, this, static c => SanitizeConverter(c.ConvertFromProviderExpression, c.ConvertsNulls));
+        public override Func<object?, object?> ConvertFromProvider =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _convertFromProvider,
+                this,
+                static c => SanitizeConverter(c.ConvertFromProviderExpression, c.ConvertsNulls)
+            );
 
         /// <summary>
         ///     Gets the expression to convert objects when writing data to the store,
@@ -125,8 +134,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public new virtual Expression<Func<TModel, TProvider>> ConvertToProviderExpression
-            => (Expression<Func<TModel, TProvider>>)base.ConvertToProviderExpression;
+        public new virtual Expression<Func<TModel, TProvider>> ConvertToProviderExpression =>
+            (Expression<Func<TModel, TProvider>>)base.ConvertToProviderExpression;
 
         /// <summary>
         ///     Gets the expression to convert objects when reading data from the store,
@@ -136,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public new virtual Expression<Func<TProvider, TModel>> ConvertFromProviderExpression
-            => (Expression<Func<TProvider, TModel>>)base.ConvertFromProviderExpression;
+        public new virtual Expression<Func<TProvider, TModel>> ConvertFromProviderExpression =>
+            (Expression<Func<TProvider, TModel>>)base.ConvertFromProviderExpression;
 
         /// <summary>
         ///     The CLR type used in the EF model.
@@ -145,8 +154,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public override Type ModelClrType
-            => typeof(TModel);
+        public override Type ModelClrType => typeof(TModel);
 
         /// <summary>
         ///     The CLR type used when reading and writing from the store.
@@ -154,7 +162,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public override Type ProviderClrType
-            => typeof(TProvider);
+        public override Type ProviderClrType => typeof(TProvider);
     }
 }

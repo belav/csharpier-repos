@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         public FormattingDbContextLogger(
             Action<string> sink,
             Func<EventId, LogLevel, bool> filter,
-            DbContextLoggerOptions options)
+            DbContextLoggerOptions options
+        )
         {
             _sink = sink;
             _filter = filter;
@@ -58,7 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 if ((_options & DbContextLoggerOptions.LocalTime) != 0)
                 {
-                    messageBuilder.Append(DateTime.Now.ToShortDateString()).Append(DateTime.Now.ToString(" HH:mm:ss.fff "));
+                    messageBuilder
+                        .Append(DateTime.Now.ToShortDateString())
+                        .Append(DateTime.Now.ToString(" HH:mm:ss.fff "));
                 }
 
                 if ((_options & DbContextLoggerOptions.UtcTime) != 0)
@@ -68,7 +71,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 if ((_options & DbContextLoggerOptions.Id) != 0)
                 {
-                    messageBuilder.Append(eventData.EventIdCode).Append('[').Append(eventId.Id).Append("] ");
+                    messageBuilder
+                        .Append(eventData.EventIdCode)
+                        .Append('[')
+                        .Append(eventId.Id)
+                        .Append("] ");
                 }
 
                 if ((_options & DbContextLoggerOptions.Category) != 0)
@@ -76,7 +83,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     var lastDot = eventId.Name!.LastIndexOf('.');
                     if (lastDot > 0)
                     {
-                        messageBuilder.Append('(').Append(eventId.Name.Substring(0, lastDot)).Append(") ");
+                        messageBuilder
+                            .Append('(')
+                            .Append(eventId.Name.Substring(0, lastDot))
+                            .Append(") ");
                     }
                 }
 
@@ -92,18 +102,28 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 }
                 else
                 {
-                    message = (_options & DbContextLoggerOptions.SingleLine) != 0
-                        ? messageBuilder
-                            .Append("-> ")
-                            .Append(message)
-                            .Replace(Environment.NewLine, "", preambleLength, messageBuilder.Length - preambleLength)
-                            .ToString()
-                        : messageBuilder
-                            .AppendLine()
-                            .Append(message)
-                            .Replace(
-                                Environment.NewLine, Environment.NewLine + padding, preambleLength, messageBuilder.Length - preambleLength)
-                            .ToString();
+                    message =
+                        (_options & DbContextLoggerOptions.SingleLine) != 0
+                            ? messageBuilder
+                                .Append("-> ")
+                                .Append(message)
+                                .Replace(
+                                    Environment.NewLine,
+                                    "",
+                                    preambleLength,
+                                    messageBuilder.Length - preambleLength
+                                )
+                                .ToString()
+                            : messageBuilder
+                                .AppendLine()
+                                .Append(message)
+                                .Replace(
+                                    Environment.NewLine,
+                                    Environment.NewLine + padding,
+                                    preambleLength,
+                                    messageBuilder.Length - preambleLength
+                                )
+                                .ToString();
                 }
             }
 
@@ -111,11 +131,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         }
 
         /// <inheritdoc />
-        public virtual bool ShouldLog(EventId eventId, LogLevel logLevel)
-            => _filter(eventId, logLevel);
+        public virtual bool ShouldLog(EventId eventId, LogLevel logLevel) =>
+            _filter(eventId, logLevel);
 
-        private static string GetLogLevelString(LogLevel logLevel)
-            => logLevel switch
+        private static string GetLogLevelString(LogLevel logLevel) =>
+            logLevel switch
             {
                 LogLevel.Trace => "trce: ",
                 LogLevel.Debug => "dbug: ",

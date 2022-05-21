@@ -16,12 +16,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal abstract class AbstractAddAccessibilityModifiersCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractAddAccessibilityModifiersCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         protected abstract SyntaxNode MapToDeclarator(SyntaxNode declaration);
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -30,24 +31,33 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             var diagnostic = context.Diagnostics.First();
 
 #if CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.
-            var codeAction = new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c));
+            var codeAction = new MyCodeAction(
+                c => FixAsync(context.Document, context.Diagnostics.First(), c)
+            );
 #else
-            var priority = diagnostic.Severity == DiagnosticSeverity.Hidden
-                ? CodeActionPriority.Low
-                : CodeActionPriority.Medium;
-            var codeAction = new MyCodeAction(priority, c => FixAsync(context.Document, context.Diagnostics.First(), c));
+            var priority =
+                diagnostic.Severity == DiagnosticSeverity.Hidden
+                    ? CodeActionPriority.Low
+                    : CodeActionPriority.Medium;
+            var codeAction = new MyCodeAction(
+                priority,
+                c => FixAsync(context.Document, context.Diagnostics.First(), c)
+            );
 #endif
-            context.RegisterCodeFix(
-                codeAction,
-                context.Diagnostics);
+            context.RegisterCodeFix(codeAction, context.Diagnostics);
             return Task.CompletedTask;
         }
 
         protected sealed override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {
@@ -63,12 +73,21 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
         {
 #if CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Add_accessibility_modifiers, createChangedDocument, AnalyzersResources.Add_accessibility_modifiers)
-            {
-            }
+                : base(
+                    AnalyzersResources.Add_accessibility_modifiers,
+                    createChangedDocument,
+                    AnalyzersResources.Add_accessibility_modifiers
+                ) { }
 #else
-            public MyCodeAction(CodeActionPriority priority, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Add_accessibility_modifiers, createChangedDocument, AnalyzersResources.Add_accessibility_modifiers)
+            public MyCodeAction(
+                CodeActionPriority priority,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            )
+                : base(
+                    AnalyzersResources.Add_accessibility_modifiers,
+                    createChangedDocument,
+                    AnalyzersResources.Add_accessibility_modifiers
+                )
             {
                 Priority = priority;
             }

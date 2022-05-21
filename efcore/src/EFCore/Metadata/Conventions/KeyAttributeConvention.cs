@@ -19,16 +19,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class KeyAttributeConvention : PropertyAttributeConventionBase<KeyAttribute>, IModelFinalizingConvention
+    public class KeyAttributeConvention
+        : PropertyAttributeConventionBase<KeyAttribute>,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="KeyAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public KeyAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             KeyAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             var entityType = propertyBuilder.Metadata.DeclaringEntityType;
             if (entityType.IsKeyless)
@@ -49,8 +50,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 switch (entityType.GetIsKeylessConfigurationSource())
                 {
                     case ConfigurationSource.DataAnnotation:
-                        Dependencies.Logger
-                            .ConflictingKeylessAndKeyAttributesWarning(propertyBuilder.Metadata);
+                        Dependencies.Logger.ConflictingKeylessAndKeyAttributesWarning(
+                            propertyBuilder.Metadata
+                        );
                         return;
 
                     case ConfigurationSource.Explicit:
@@ -64,8 +66,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            if (entityType.IsKeyless
-                && entityType.GetIsKeylessConfigurationSource().Overrides(ConfigurationSource.DataAnnotation))
+            if (
+                entityType.IsKeyless
+                && entityType
+                    .GetIsKeylessConfigurationSource()
+                    .Overrides(ConfigurationSource.DataAnnotation)
+            )
             {
                 // TODO: Log a warning that KeyAttribute is being ignored. See issue#20014
                 // This code path will also be hit when entity is marked as Keyless explicitly
@@ -76,13 +82,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var currentKey = entityTypeBuilder.Metadata.FindPrimaryKey();
             var properties = new List<string> { propertyBuilder.Metadata.Name };
 
-            if (currentKey != null
-                && entityType.GetPrimaryKeyConfigurationSource() == ConfigurationSource.DataAnnotation)
+            if (
+                currentKey != null
+                && entityType.GetPrimaryKeyConfigurationSource()
+                    == ConfigurationSource.DataAnnotation
+            )
             {
                 properties.AddRange(
                     currentKey.Properties
-                        .Where(p => !p.Name.Equals(propertyBuilder.Metadata.Name, StringComparison.OrdinalIgnoreCase))
-                        .Select(p => p.Name));
+                        .Where(
+                            p =>
+                                !p.Name.Equals(
+                                    propertyBuilder.Metadata.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        )
+                        .Select(p => p.Name)
+                );
                 if (properties.Count > 1)
                 {
                     properties.Sort(StringComparer.OrdinalIgnoreCase);
@@ -91,13 +107,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             entityTypeBuilder.PrimaryKey(
-                entityTypeBuilder.GetOrCreateProperties(properties, fromDataAnnotation: true), fromDataAnnotation: true);
+                entityTypeBuilder.GetOrCreateProperties(properties, fromDataAnnotation: true),
+                fromDataAnnotation: true
+            );
         }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             var entityTypes = modelBuilder.Metadata.GetEntityTypes();
             foreach (var entityType in entityTypes)
@@ -105,10 +124,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (entityType.BaseType == null)
                 {
                     var currentPrimaryKey = entityType.FindPrimaryKey();
-                    if (currentPrimaryKey?.Properties.Count > 1
-                        && entityType.GetPrimaryKeyConfigurationSource() == ConfigurationSource.DataAnnotation)
+                    if (
+                        currentPrimaryKey?.Properties.Count > 1
+                        && entityType.GetPrimaryKeyConfigurationSource()
+                            == ConfigurationSource.DataAnnotation
+                    )
                     {
-                        throw new InvalidOperationException(CoreStrings.CompositePKWithDataAnnotation(entityType.DisplayName()));
+                        throw new InvalidOperationException(
+                            CoreStrings.CompositePKWithDataAnnotation(entityType.DisplayName())
+                        );
                     }
                 }
                 else
@@ -117,12 +141,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         var memberInfo = declaredProperty.GetIdentifyingMemberInfo();
 
-                        if (memberInfo != null
-                            && Attribute.IsDefined(memberInfo, typeof(KeyAttribute), inherit: true))
+                        if (
+                            memberInfo != null
+                            && Attribute.IsDefined(memberInfo, typeof(KeyAttribute), inherit: true)
+                        )
                         {
                             throw new InvalidOperationException(
                                 CoreStrings.KeyAttributeOnDerivedEntity(
-                                    entityType.DisplayName(), declaredProperty.Name, entityType.GetRootType().DisplayName()));
+                                    entityType.DisplayName(),
+                                    declaredProperty.Name,
+                                    entityType.GetRootType().DisplayName()
+                                )
+                            );
                         }
                     }
                 }

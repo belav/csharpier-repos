@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 namespace DebuggerTests
 {
     public class EvaluateTestsClass
@@ -15,6 +16,7 @@ namespace DebuggerTests
             public int c;
             public DateTime dt = new DateTime(2000, 5, 4, 3, 2, 1);
             public TestEvaluate NullIfAIsNotZero => a != 0 ? null : this;
+
             public void run(int g, int h, string a, string valString, int this_a)
             {
                 int d = g + 1;
@@ -42,7 +44,6 @@ namespace DebuggerTests
             var f_g_s = new EvaluateTestsGenericStruct<int>();
             f_g_s.EvaluateTestsGenericStructInstanceMethod(100, 200, "test");
         }
-
     }
 
     public struct EvaluateTestsGenericStruct<T>
@@ -51,6 +52,7 @@ namespace DebuggerTests
         public int b;
         public int c;
         DateTime dateTime;
+
         public void EvaluateTestsGenericStructInstanceMethod(int g, int h, string valString)
         {
             int d = g + 1;
@@ -78,9 +80,14 @@ namespace DebuggerTests
         public DateTime DTProp => dateTime.AddMinutes(10);
         public int IntProp => a + 5;
         public string PropertyThrowException => throw new Exception("error");
-        public string SetOnlyProp { set { a = value.Length; } }
-        public EvaluateTestsClassWithProperties NullIfAIsNotZero => a != 1908712 ? null : new EvaluateTestsClassWithProperties(0);
-        public EvaluateTestsClassWithProperties NewInstance => new EvaluateTestsClassWithProperties(3);
+        public string SetOnlyProp
+        {
+            set { a = value.Length; }
+        }
+        public EvaluateTestsClassWithProperties NullIfAIsNotZero =>
+            a != 1908712 ? null : new EvaluateTestsClassWithProperties(0);
+        public EvaluateTestsClassWithProperties NewInstance =>
+            new EvaluateTestsClassWithProperties(3);
 
         public EvaluateTestsClassWithProperties(int bias)
         {
@@ -95,12 +102,33 @@ namespace DebuggerTests
             var obj = new EvaluateTestsClassWithProperties(0);
             var obj2 = new EvaluateTestsClassWithProperties(0);
             obj.InstanceMethod(400, 123, "just a test", obj2);
-            new EvaluateTestsClassWithProperties(0).GenericInstanceMethod<int>(400, 123, "just a test", obj2);
-            new EvaluateTestsClassWithProperties(0).EvaluateShadow(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
+            new EvaluateTestsClassWithProperties(0).GenericInstanceMethod<int>(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            new EvaluateTestsClassWithProperties(0).EvaluateShadow(
+                new DateTime(2020, 3, 4, 5, 6, 7),
+                obj.NewInstance
+            );
 
-            await new EvaluateTestsClassWithProperties(0).InstanceMethodAsync(400, 123, "just a test", obj2);
-            await new EvaluateTestsClassWithProperties(0).GenericInstanceMethodAsync<int>(400, 123, "just a test", obj2);
-            await new EvaluateTestsClassWithProperties(0).EvaluateShadowAsync(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
+            await new EvaluateTestsClassWithProperties(0).InstanceMethodAsync(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            await new EvaluateTestsClassWithProperties(0).GenericInstanceMethodAsync<int>(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            await new EvaluateTestsClassWithProperties(0).EvaluateShadowAsync(
+                new DateTime(2020, 3, 4, 5, 6, 7),
+                obj.NewInstance
+            );
         }
 
         public void EvaluateShadow(DateTime dateTime, EvaluateTestsClassWithProperties me)
@@ -110,7 +138,10 @@ namespace DebuggerTests
             SomeMethod(dateTime, me);
         }
 
-        public async Task EvaluateShadowAsync(DateTime dateTime, EvaluateTestsClassWithProperties me)
+        public async Task EvaluateShadowAsync(
+            DateTime dateTime,
+            EvaluateTestsClassWithProperties me
+        )
         {
             string a = "hello";
             Console.WriteLine($"EvaluateShadowAsync - break here");
@@ -125,7 +156,12 @@ namespace DebuggerTests
             Console.WriteLine($"dtProp: {DTProp}");
         }
 
-        public async Task InstanceMethodAsync(int g, int h, string valString, EvaluateTestsClassWithProperties me)
+        public async Task InstanceMethodAsync(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsClassWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -141,7 +177,12 @@ namespace DebuggerTests
             await Task.CompletedTask;
         }
 
-        public void InstanceMethod(int g, int h, string valString, EvaluateTestsClassWithProperties me)
+        public void InstanceMethod(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsClassWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -156,7 +197,12 @@ namespace DebuggerTests
             c = c + 1;
         }
 
-        public void GenericInstanceMethod<T>(int g, int h, string valString, EvaluateTestsClassWithProperties me)
+        public void GenericInstanceMethod<T>(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsClassWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -172,7 +218,12 @@ namespace DebuggerTests
             T t = default(T);
         }
 
-        public async Task<T> GenericInstanceMethodAsync<T>(int g, int h, string valString, EvaluateTestsClassWithProperties me)
+        public async Task<T> GenericInstanceMethodAsync<T>(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsClassWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -199,9 +250,14 @@ namespace DebuggerTests
         public DateTime dateTime;
         public DateTime DTProp => dateTime.AddMinutes(10);
         public int IntProp => a + 5;
-        public string SetOnlyProp { set { a = value.Length; } }
-        public EvaluateTestsClassWithProperties NullIfAIsNotZero => a != 1908712 ? null : new EvaluateTestsClassWithProperties(0);
-        public EvaluateTestsStructWithProperties NewInstance => new EvaluateTestsStructWithProperties(3);
+        public string SetOnlyProp
+        {
+            set { a = value.Length; }
+        }
+        public EvaluateTestsClassWithProperties NullIfAIsNotZero =>
+            a != 1908712 ? null : new EvaluateTestsClassWithProperties(0);
+        public EvaluateTestsStructWithProperties NewInstance =>
+            new EvaluateTestsStructWithProperties(3);
 
         public EvaluateTestsStructWithProperties(int bias)
         {
@@ -216,12 +272,33 @@ namespace DebuggerTests
             var obj = new EvaluateTestsStructWithProperties(0);
             var obj2 = new EvaluateTestsStructWithProperties(0);
             obj.InstanceMethod(400, 123, "just a test", obj2);
-            new EvaluateTestsStructWithProperties(0).GenericInstanceMethod<int>(400, 123, "just a test", obj2);
-            new EvaluateTestsStructWithProperties(0).EvaluateShadow(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
+            new EvaluateTestsStructWithProperties(0).GenericInstanceMethod<int>(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            new EvaluateTestsStructWithProperties(0).EvaluateShadow(
+                new DateTime(2020, 3, 4, 5, 6, 7),
+                obj.NewInstance
+            );
 
-            await new EvaluateTestsStructWithProperties(0).InstanceMethodAsync(400, 123, "just a test", obj2);
-            await new EvaluateTestsStructWithProperties(0).GenericInstanceMethodAsync<int>(400, 123, "just a test", obj2);
-            await new EvaluateTestsStructWithProperties(0).EvaluateShadowAsync(new DateTime(2020, 3, 4, 5, 6, 7), obj.NewInstance);
+            await new EvaluateTestsStructWithProperties(0).InstanceMethodAsync(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            await new EvaluateTestsStructWithProperties(0).GenericInstanceMethodAsync<int>(
+                400,
+                123,
+                "just a test",
+                obj2
+            );
+            await new EvaluateTestsStructWithProperties(0).EvaluateShadowAsync(
+                new DateTime(2020, 3, 4, 5, 6, 7),
+                obj.NewInstance
+            );
         }
 
         public void EvaluateShadow(DateTime dateTime, EvaluateTestsStructWithProperties me)
@@ -231,7 +308,10 @@ namespace DebuggerTests
             SomeMethod(dateTime, me);
         }
 
-        public async Task EvaluateShadowAsync(DateTime dateTime, EvaluateTestsStructWithProperties me)
+        public async Task EvaluateShadowAsync(
+            DateTime dateTime,
+            EvaluateTestsStructWithProperties me
+        )
         {
             string a = "hello";
             Console.WriteLine($"EvaluateShadowAsync - break here");
@@ -246,7 +326,12 @@ namespace DebuggerTests
             Console.WriteLine($"dtProp: {DTProp}");
         }
 
-        public async Task InstanceMethodAsync(int g, int h, string valString, EvaluateTestsStructWithProperties me)
+        public async Task InstanceMethodAsync(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsStructWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -262,7 +347,12 @@ namespace DebuggerTests
             await Task.CompletedTask;
         }
 
-        public void InstanceMethod(int g, int h, string valString, EvaluateTestsStructWithProperties me)
+        public void InstanceMethod(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsStructWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -277,7 +367,12 @@ namespace DebuggerTests
             c = c + 1;
         }
 
-        public void GenericInstanceMethod<T>(int g, int h, string valString, EvaluateTestsStructWithProperties me)
+        public void GenericInstanceMethod<T>(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsStructWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -293,7 +388,12 @@ namespace DebuggerTests
             T t = default(T);
         }
 
-        public async Task<T> GenericInstanceMethodAsync<T>(int g, int h, string valString, EvaluateTestsStructWithProperties me)
+        public async Task<T> GenericInstanceMethodAsync<T>(
+            int g,
+            int h,
+            string valString,
+            EvaluateTestsStructWithProperties me
+        )
         {
             int d = g + 1;
             int e = g + 2;
@@ -310,22 +410,26 @@ namespace DebuggerTests
             return await Task.FromResult(default(T));
         }
     }
+
     public class EvaluateMethodTestsClass
     {
         public class ParmToTest
         {
             public int a;
             public int b;
+
             public ParmToTest()
             {
                 a = 10;
                 b = 10;
             }
+
             public string MyMethod()
             {
                 return "methodOK";
             }
         }
+
         public class TestEvaluate
         {
             public int a;
@@ -338,6 +442,7 @@ namespace DebuggerTests
             public ParmToTest ParmToTestObj => objToTest;
             public ParmToTest ParmToTestObjNull => null;
             public ParmToTest ParmToTestObjException => throw new Exception("error2");
+
             public void run(int g, int h, string a, string valString, int this_a)
             {
                 objToTest = new ParmToTest();
@@ -392,7 +497,6 @@ namespace DebuggerTests
                 return parm.a;
             }
 
-
             public string CallMethodWithChar(char parm)
             {
                 return str + parm;
@@ -404,14 +508,13 @@ namespace DebuggerTests
             TestEvaluate f = new TestEvaluate();
             f.run(100, 200, "9000", "test", 45);
         }
-
     }
 
     public static class EvaluateStaticClass
     {
         public static int StaticField1 = 10;
         public static string StaticProperty1 => "StaticProperty1";
-		public static string StaticPropertyWithError => throw new Exception("not implemented");
+        public static string StaticPropertyWithError => throw new Exception("not implemented");
     }
 
     public class EvaluateLocalsWithElementAccessTests
@@ -441,7 +544,7 @@ namespace DebuggerTests
                 textListOfLists = new List<List<string>> { textList, textList };
                 idx0 = 0;
                 idx1 = 1;
-            }        
+            }
         }
 
         public static void EvaluateLocals()
@@ -452,5 +555,4 @@ namespace DebuggerTests
             f.run();
         }
     }
-
 }

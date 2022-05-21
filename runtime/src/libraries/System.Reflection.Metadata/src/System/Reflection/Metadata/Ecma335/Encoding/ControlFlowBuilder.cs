@@ -26,7 +26,12 @@ namespace System.Reflection.Metadata.Ecma335
                 _opCode = (byte)opCode;
             }
 
-            internal int GetBranchDistance(ImmutableArray<int>.Builder labels, ILOpCode branchOpCode, int branchILOffset, bool isShortBranch)
+            internal int GetBranchDistance(
+                ImmutableArray<int>.Builder labels,
+                ILOpCode branchOpCode,
+                int branchILOffset,
+                bool isShortBranch
+            )
             {
                 int labelTargetOffset = labels[Label.Id - 1];
                 if (labelTargetOffset < 0)
@@ -43,7 +48,14 @@ namespace System.Reflection.Metadata.Ecma335
                     // however an optimal algorithm would be rather complex (something like: calculate topological ordering of crossing branch instructions
                     // and then use fixed point to eliminate cycles). If the caller doesn't care about optimal IL size they can use long branches whenever the
                     // distance is unknown upfront. If they do they probably implement more sophisticated algorithm for IL layout optimization already.
-                    throw new InvalidOperationException(SR.Format(SR.DistanceBetweenInstructionAndLabelTooBig, branchOpCode, branchILOffset, distance));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.DistanceBetweenInstructionAndLabelTooBig,
+                            branchOpCode,
+                            branchILOffset,
+                            distance
+                        )
+                    );
                 }
 
                 return distance;
@@ -53,7 +65,11 @@ namespace System.Reflection.Metadata.Ecma335
         internal readonly struct ExceptionHandlerInfo
         {
             public readonly ExceptionRegionKind Kind;
-            public readonly LabelHandle TryStart, TryEnd, HandlerStart, HandlerEnd, FilterStart;
+            public readonly LabelHandle TryStart,
+                TryEnd,
+                HandlerStart,
+                HandlerEnd,
+                FilterStart;
             public readonly EntityHandle CatchType;
 
             public ExceptionHandlerInfo(
@@ -63,7 +79,8 @@ namespace System.Reflection.Metadata.Ecma335
                 LabelHandle handlerStart,
                 LabelHandle handlerEnd,
                 LabelHandle filterStart,
-                EntityHandle catchType)
+                EntityHandle catchType
+            )
             {
                 Kind = kind;
                 TryStart = tryStart;
@@ -146,8 +163,19 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerEnd">Label marking the instruction immediately following the handler.</param>
         /// <exception cref="ArgumentException">A label was not defined by an instruction encoder this builder is associated with.</exception>
         /// <exception cref="ArgumentNullException">A label has default value.</exception>
-        public void AddFinallyRegion(LabelHandle tryStart, LabelHandle tryEnd, LabelHandle handlerStart, LabelHandle handlerEnd) =>
-            AddExceptionRegion(ExceptionRegionKind.Finally, tryStart, tryEnd, handlerStart, handlerEnd);
+        public void AddFinallyRegion(
+            LabelHandle tryStart,
+            LabelHandle tryEnd,
+            LabelHandle handlerStart,
+            LabelHandle handlerEnd
+        ) =>
+            AddExceptionRegion(
+                ExceptionRegionKind.Finally,
+                tryStart,
+                tryEnd,
+                handlerStart,
+                handlerEnd
+            );
 
         /// <summary>
         /// Adds fault region.
@@ -158,8 +186,19 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="handlerEnd">Label marking the instruction immediately following the handler.</param>
         /// <exception cref="ArgumentException">A label was not defined by an instruction encoder this builder is associated with.</exception>
         /// <exception cref="ArgumentNullException">A label has default value.</exception>
-        public void AddFaultRegion(LabelHandle tryStart, LabelHandle tryEnd, LabelHandle handlerStart, LabelHandle handlerEnd) =>
-            AddExceptionRegion(ExceptionRegionKind.Fault, tryStart, tryEnd, handlerStart, handlerEnd);
+        public void AddFaultRegion(
+            LabelHandle tryStart,
+            LabelHandle tryEnd,
+            LabelHandle handlerStart,
+            LabelHandle handlerEnd
+        ) =>
+            AddExceptionRegion(
+                ExceptionRegionKind.Fault,
+                tryStart,
+                tryEnd,
+                handlerStart,
+                handlerEnd
+            );
 
         /// <summary>
         /// Adds catch region.
@@ -172,14 +211,27 @@ namespace System.Reflection.Metadata.Ecma335
         /// <exception cref="ArgumentException">A label was not defined by an instruction encoder this builder is associated with.</exception>
         /// <exception cref="ArgumentException"><paramref name="catchType"/> is not a valid type handle.</exception>
         /// <exception cref="ArgumentNullException">A label has default value.</exception>
-        public void AddCatchRegion(LabelHandle tryStart, LabelHandle tryEnd, LabelHandle handlerStart, LabelHandle handlerEnd, EntityHandle catchType)
+        public void AddCatchRegion(
+            LabelHandle tryStart,
+            LabelHandle tryEnd,
+            LabelHandle handlerStart,
+            LabelHandle handlerEnd,
+            EntityHandle catchType
+        )
         {
             if (!ExceptionRegionEncoder.IsValidCatchTypeHandle(catchType))
             {
                 Throw.InvalidArgument_Handle(nameof(catchType));
             }
 
-            AddExceptionRegion(ExceptionRegionKind.Catch, tryStart, tryEnd, handlerStart, handlerEnd, catchType: catchType);
+            AddExceptionRegion(
+                ExceptionRegionKind.Catch,
+                tryStart,
+                tryEnd,
+                handlerStart,
+                handlerEnd,
+                catchType: catchType
+            );
         }
 
         /// <summary>
@@ -192,10 +244,23 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="filterStart">Label marking the first instruction of the filter block.</param>
         /// <exception cref="ArgumentException">A label was not defined by an instruction encoder this builder is associated with.</exception>
         /// <exception cref="ArgumentNullException">A label has default value.</exception>
-        public void AddFilterRegion(LabelHandle tryStart, LabelHandle tryEnd, LabelHandle handlerStart, LabelHandle handlerEnd, LabelHandle filterStart)
+        public void AddFilterRegion(
+            LabelHandle tryStart,
+            LabelHandle tryEnd,
+            LabelHandle handlerStart,
+            LabelHandle handlerEnd,
+            LabelHandle filterStart
+        )
         {
             ValidateLabel(filterStart, nameof(filterStart));
-            AddExceptionRegion(ExceptionRegionKind.Filter, tryStart, tryEnd, handlerStart, handlerEnd, filterStart: filterStart);
+            AddExceptionRegion(
+                ExceptionRegionKind.Filter,
+                tryStart,
+                tryEnd,
+                handlerStart,
+                handlerEnd,
+                filterStart: filterStart
+            );
         }
 
         private void AddExceptionRegion(
@@ -205,7 +270,8 @@ namespace System.Reflection.Metadata.Ecma335
             LabelHandle handlerStart,
             LabelHandle handlerEnd,
             LabelHandle filterStart = default(LabelHandle),
-            EntityHandle catchType = default(EntityHandle))
+            EntityHandle catchType = default(EntityHandle)
+        )
         {
             ValidateLabel(tryStart, nameof(tryStart));
             ValidateLabel(tryEnd, nameof(tryEnd));
@@ -217,7 +283,17 @@ namespace System.Reflection.Metadata.Ecma335
                 _lazyExceptionHandlers = ImmutableArray.CreateBuilder<ExceptionHandlerInfo>();
             }
 
-            _lazyExceptionHandlers.Add(new ExceptionHandlerInfo(kind, tryStart, tryEnd, handlerStart, handlerEnd, filterStart, catchType));
+            _lazyExceptionHandlers.Add(
+                new ExceptionHandlerInfo(
+                    kind,
+                    tryStart,
+                    tryEnd,
+                    handlerStart,
+                    handlerEnd,
+                    filterStart,
+                    catchType
+                )
+            );
         }
 
         // internal for testing:
@@ -245,14 +321,22 @@ namespace System.Reflection.Metadata.Ecma335
             foreach (Blob srcBlob in srcBuilder.GetBlobs())
             {
                 Debug.Assert(
-                    srcBlobOffset == 0 ||
-                    srcBlobOffset == 1 && srcBlob.Buffer[0] == 0xff ||
-                    srcBlobOffset == 4 && srcBlob.Buffer[0] == 0xff && srcBlob.Buffer[1] == 0xff && srcBlob.Buffer[2] == 0xff && srcBlob.Buffer[3] == 0xff);
+                    srcBlobOffset == 0
+                        || srcBlobOffset == 1 && srcBlob.Buffer[0] == 0xff
+                        || srcBlobOffset == 4
+                            && srcBlob.Buffer[0] == 0xff
+                            && srcBlob.Buffer[1] == 0xff
+                            && srcBlob.Buffer[2] == 0xff
+                            && srcBlob.Buffer[3] == 0xff
+                );
 
                 while (true)
                 {
                     // copy bytes preceding the next branch, or till the end of the blob:
-                    int chunkSize = Math.Min(branch.ILOffset - srcOffset, srcBlob.Length - srcBlobOffset);
+                    int chunkSize = Math.Min(
+                        branch.ILOffset - srcOffset,
+                        srcBlob.Length - srcBlobOffset
+                    );
                     dstBuilder.WriteBytes(srcBlob.Buffer, srcBlobOffset, chunkSize);
                     srcOffset += chunkSize;
                     srcBlobOffset += chunkSize;
@@ -271,15 +355,24 @@ namespace System.Reflection.Metadata.Ecma335
 
                     // Note: the 4B operand is contiguous since we wrote it via BlobBuilder.WriteInt32()
                     Debug.Assert(
-                        srcBlobOffset + 1 == srcBlob.Length ||
-                        (isShortInstruction ?
-                           srcBlob.Buffer[srcBlobOffset + 1] == 0xff :
-                           BitConverter.ToUInt32(srcBlob.Buffer, srcBlobOffset + 1) == 0xffffffff));
+                        srcBlobOffset + 1 == srcBlob.Length
+                            || (
+                                isShortInstruction
+                                    ? srcBlob.Buffer[srcBlobOffset + 1] == 0xff
+                                    : BitConverter.ToUInt32(srcBlob.Buffer, srcBlobOffset + 1)
+                                        == 0xffffffff
+                            )
+                    );
 
                     // write branch opcode:
                     dstBuilder.WriteByte(srcBlob.Buffer[srcBlobOffset]);
 
-                    int branchDistance = branch.GetBranchDistance(_labels, branch.OpCode, srcOffset, isShortInstruction);
+                    int branchDistance = branch.GetBranchDistance(
+                        _labels,
+                        branch.OpCode,
+                        srcOffset,
+                        isShortInstruction
+                    );
 
                     // write branch operand:
                     if (isShortInstruction)
@@ -324,7 +417,11 @@ namespace System.Reflection.Metadata.Ecma335
                 return;
             }
 
-            var regionEncoder = ExceptionRegionEncoder.SerializeTableHeader(builder, _lazyExceptionHandlers.Count, HasSmallExceptionRegions());
+            var regionEncoder = ExceptionRegionEncoder.SerializeTableHeader(
+                builder,
+                _lazyExceptionHandlers.Count,
+                HasSmallExceptionRegions()
+            );
 
             foreach (var handler in _lazyExceptionHandlers)
             {
@@ -338,12 +435,16 @@ namespace System.Reflection.Metadata.Ecma335
 
                 if (tryStart > tryEnd)
                 {
-                    Throw.InvalidOperation(SR.Format(SR.InvalidExceptionRegionBounds, tryStart, tryEnd));
+                    Throw.InvalidOperation(
+                        SR.Format(SR.InvalidExceptionRegionBounds, tryStart, tryEnd)
+                    );
                 }
 
                 if (handlerStart > handlerEnd)
                 {
-                    Throw.InvalidOperation(SR.Format(SR.InvalidExceptionRegionBounds, handlerStart, handlerEnd));
+                    Throw.InvalidOperation(
+                        SR.Format(SR.InvalidExceptionRegionBounds, handlerStart, handlerEnd)
+                    );
                 }
 
                 int catchTokenOrOffset = handler.Kind switch
@@ -359,7 +460,8 @@ namespace System.Reflection.Metadata.Ecma335
                     tryEnd - tryStart,
                     handlerStart,
                     handlerEnd - handlerStart,
-                    catchTokenOrOffset);
+                    catchTokenOrOffset
+                );
             }
         }
 
@@ -374,8 +476,16 @@ namespace System.Reflection.Metadata.Ecma335
 
             foreach (var handler in _lazyExceptionHandlers)
             {
-                if (!ExceptionRegionEncoder.IsSmallExceptionRegionFromBounds(GetLabelOffsetChecked(handler.TryStart), GetLabelOffsetChecked(handler.TryEnd)) ||
-                    !ExceptionRegionEncoder.IsSmallExceptionRegionFromBounds(GetLabelOffsetChecked(handler.HandlerStart), GetLabelOffsetChecked(handler.HandlerEnd)))
+                if (
+                    !ExceptionRegionEncoder.IsSmallExceptionRegionFromBounds(
+                        GetLabelOffsetChecked(handler.TryStart),
+                        GetLabelOffsetChecked(handler.TryEnd)
+                    )
+                    || !ExceptionRegionEncoder.IsSmallExceptionRegionFromBounds(
+                        GetLabelOffsetChecked(handler.HandlerStart),
+                        GetLabelOffsetChecked(handler.HandlerEnd)
+                    )
+                )
                 {
                     return false;
                 }

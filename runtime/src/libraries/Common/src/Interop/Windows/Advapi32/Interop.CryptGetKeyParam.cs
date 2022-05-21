@@ -23,6 +23,7 @@ internal static partial class Interop
             CryptGetKeyParamFlags dwParam,
             byte[]? pbData,
             ref int pdwDataLen,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

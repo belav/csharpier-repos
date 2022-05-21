@@ -22,7 +22,8 @@ namespace Microsoft.Interop.Analyzers
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class ConvertToGeneratedDllImportFixer : CodeFixProvider
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(Ids.ConvertToGeneratedDllImport);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(Ids.ConvertToGeneratedDllImport);
 
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -30,32 +31,38 @@ namespace Microsoft.Interop.Analyzers
         public const string WithPreprocessorDefinesKey = "ConvertToGeneratedDllImportPreprocessor";
 
         private static readonly string[] s_preferredAttributeArgumentOrder =
-            {
-                nameof(DllImportAttribute.EntryPoint),
-                nameof(DllImportAttribute.BestFitMapping),
-                nameof(DllImportAttribute.CallingConvention),
-                nameof(DllImportAttribute.CharSet),
-                nameof(DllImportAttribute.ExactSpelling),
-                nameof(DllImportAttribute.PreserveSig),
-                nameof(DllImportAttribute.SetLastError),
-                nameof(DllImportAttribute.ThrowOnUnmappableChar)
-            };
+        {
+            nameof(DllImportAttribute.EntryPoint),
+            nameof(DllImportAttribute.BestFitMapping),
+            nameof(DllImportAttribute.CallingConvention),
+            nameof(DllImportAttribute.CharSet),
+            nameof(DllImportAttribute.ExactSpelling),
+            nameof(DllImportAttribute.PreserveSig),
+            nameof(DllImportAttribute.SetLastError),
+            nameof(DllImportAttribute.ThrowOnUnmappableChar)
+        };
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             // Get the syntax root and semantic model
             Document doc = context.Document;
-            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-            SemanticModel? model = await doc.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
+            SemanticModel? model = await doc.GetSemanticModelAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             if (root == null || model == null)
                 return;
 
             // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
-            INamedTypeSymbol? generatedDllImportAttrType = model.Compilation.GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
+            INamedTypeSymbol? generatedDllImportAttrType = model.Compilation.GetTypeByMetadataName(
+                TypeNames.GeneratedDllImportAttribute
+            );
             if (generatedDllImportAttrType == null)
                 return;
 
-            INamedTypeSymbol? dllImportAttrType = model.Compilation.GetTypeByMetadataName(typeof(DllImportAttribute).FullName);
+            INamedTypeSymbol? dllImportAttrType = model.Compilation.GetTypeByMetadataName(
+                typeof(DllImportAttribute).FullName
+            );
             if (dllImportAttrType == null)
                 return;
 
@@ -63,7 +70,10 @@ namespace Microsoft.Interop.Analyzers
             if (root.FindNode(context.Span) is not MethodDeclarationSyntax methodSyntax)
                 return;
 
-            if (model.GetDeclaredSymbol(methodSyntax, context.CancellationToken) is not IMethodSymbol methodSymbol)
+            if (
+                model.GetDeclaredSymbol(methodSyntax, context.CancellationToken)
+                is not IMethodSymbol methodSymbol
+            )
                 return;
 
             // Make sure the method has the DllImportAttribute
@@ -74,30 +84,38 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Resources.ConvertToGeneratedDllImportNoPreprocessor,
-                    cancelToken => ConvertToGeneratedDllImport(
-                        context.Document,
-                        methodSyntax,
-                        methodSymbol,
-                        dllImportAttr!,
-                        generatedDllImportAttrType,
-                        usePreprocessorDefines: false,
-                        cancelToken),
-                    equivalenceKey: NoPreprocessorDefinesKey),
-                context.Diagnostics);
+                    cancelToken =>
+                        ConvertToGeneratedDllImport(
+                            context.Document,
+                            methodSyntax,
+                            methodSymbol,
+                            dllImportAttr!,
+                            generatedDllImportAttrType,
+                            usePreprocessorDefines: false,
+                            cancelToken
+                        ),
+                    equivalenceKey: NoPreprocessorDefinesKey
+                ),
+                context.Diagnostics
+            );
 
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Resources.ConvertToGeneratedDllImportWithPreprocessor,
-                    cancelToken => ConvertToGeneratedDllImport(
-                        context.Document,
-                        methodSyntax,
-                        methodSymbol,
-                        dllImportAttr!,
-                        generatedDllImportAttrType,
-                        usePreprocessorDefines: true,
-                        cancelToken),
-                    equivalenceKey: WithPreprocessorDefinesKey),
-                context.Diagnostics);
+                    cancelToken =>
+                        ConvertToGeneratedDllImport(
+                            context.Document,
+                            methodSyntax,
+                            methodSymbol,
+                            dllImportAttr!,
+                            generatedDllImportAttrType,
+                            usePreprocessorDefines: true,
+                            cancelToken
+                        ),
+                    equivalenceKey: WithPreprocessorDefinesKey
+                ),
+                context.Diagnostics
+            );
         }
 
         private async Task<Document> ConvertToGeneratedDllImport(
@@ -107,12 +125,16 @@ namespace Microsoft.Interop.Analyzers
             AttributeData dllImportAttr,
             INamedTypeSymbol generatedDllImportAttrType,
             bool usePreprocessorDefines,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            DocumentEditor editor = await DocumentEditor.CreateAsync(doc, cancellationToken).ConfigureAwait(false);
+            DocumentEditor editor = await DocumentEditor
+                .CreateAsync(doc, cancellationToken)
+                .ConfigureAwait(false);
             SyntaxGenerator generator = editor.Generator;
 
-            var dllImportSyntax = (AttributeSyntax)dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(cancellationToken);
+            var dllImportSyntax = (AttributeSyntax)
+                dllImportAttr!.ApplicationSyntaxReference!.GetSyntax(cancellationToken);
 
             // Create GeneratedDllImport attribute based on the DllImport attribute
             SyntaxNode generatedDllImportSyntax = GetGeneratedDllImportAttribute(
@@ -121,26 +143,39 @@ namespace Microsoft.Interop.Analyzers
                 dllImportSyntax,
                 methodSymbol.GetDllImportData()!,
                 generatedDllImportAttrType,
-                out SyntaxNode? unmanagedCallConvAttributeMaybe);
+                out SyntaxNode? unmanagedCallConvAttributeMaybe
+            );
 
             // Add annotation about potential behavioural and compatibility changes
             generatedDllImportSyntax = generatedDllImportSyntax.WithAdditionalAnnotations(
-                WarningAnnotation.Create(string.Format(Resources.ConvertToGeneratedDllImportWarning, "[TODO] Documentation link")));
+                WarningAnnotation.Create(
+                    string.Format(
+                        Resources.ConvertToGeneratedDllImportWarning,
+                        "[TODO] Documentation link"
+                    )
+                )
+            );
 
             // Replace DllImport with GeneratedDllImport
-            SyntaxNode generatedDeclaration = generator.ReplaceNode(methodSyntax, dllImportSyntax, generatedDllImportSyntax);
+            SyntaxNode generatedDeclaration = generator.ReplaceNode(
+                methodSyntax,
+                dllImportSyntax,
+                generatedDllImportSyntax
+            );
 
             if (unmanagedCallConvAttributeMaybe is not null)
             {
-                generatedDeclaration = generator.AddAttributes(generatedDeclaration, unmanagedCallConvAttributeMaybe);
+                generatedDeclaration = generator.AddAttributes(
+                    generatedDeclaration,
+                    unmanagedCallConvAttributeMaybe
+                );
             }
 
             // Replace extern keyword with partial keyword
             generatedDeclaration = generator.WithModifiers(
                 generatedDeclaration,
-                generator.GetModifiers(methodSyntax)
-                    .WithIsExtern(false)
-                    .WithPartial(true));
+                generator.GetModifiers(methodSyntax).WithIsExtern(false).WithPartial(true)
+            );
 
             if (!usePreprocessorDefines)
             {
@@ -151,33 +186,67 @@ namespace Microsoft.Interop.Analyzers
             {
                 // #if DLLIMPORTGENERATOR_ENABLED
                 generatedDeclaration = generatedDeclaration.WithLeadingTrivia(
-                    generatedDeclaration.GetLeadingTrivia()
-                        .AddRange(new[] {
-                            SyntaxFactory.Trivia(SyntaxFactory.IfDirectiveTrivia(SyntaxFactory.IdentifierName("DLLIMPORTGENERATOR_ENABLED"), isActive: true, branchTaken: true, conditionValue: true)),
-                            SyntaxFactory.ElasticMarker
-                        }));
+                    generatedDeclaration
+                        .GetLeadingTrivia()
+                        .AddRange(
+                            new[]
+                            {
+                                SyntaxFactory.Trivia(
+                                    SyntaxFactory.IfDirectiveTrivia(
+                                        SyntaxFactory.IdentifierName("DLLIMPORTGENERATOR_ENABLED"),
+                                        isActive: true,
+                                        branchTaken: true,
+                                        conditionValue: true
+                                    )
+                                ),
+                                SyntaxFactory.ElasticMarker
+                            }
+                        )
+                );
 
                 // #else
                 generatedDeclaration = generatedDeclaration.WithTrailingTrivia(
-                    generatedDeclaration.GetTrailingTrivia()
-                        .AddRange(new[] {
-                            SyntaxFactory.Trivia(SyntaxFactory.ElseDirectiveTrivia(isActive: false, branchTaken: false)),
-                            SyntaxFactory.ElasticMarker
-                        }));
+                    generatedDeclaration
+                        .GetTrailingTrivia()
+                        .AddRange(
+                            new[]
+                            {
+                                SyntaxFactory.Trivia(
+                                    SyntaxFactory.ElseDirectiveTrivia(
+                                        isActive: false,
+                                        branchTaken: false
+                                    )
+                                ),
+                                SyntaxFactory.ElasticMarker
+                            }
+                        )
+                );
 
                 // Sort attribute arguments so that GeneratedDllImport and DllImport match
-                MethodDeclarationSyntax updatedDeclaration = (MethodDeclarationSyntax)generator.ReplaceNode(methodSyntax, dllImportSyntax, SortDllImportAttributeArguments(dllImportSyntax, generator));
+                MethodDeclarationSyntax updatedDeclaration = (MethodDeclarationSyntax)
+                    generator.ReplaceNode(
+                        methodSyntax,
+                        dllImportSyntax,
+                        SortDllImportAttributeArguments(dllImportSyntax, generator)
+                    );
 
                 // Remove existing leading trivia - it will be on the GeneratedDllImport method
                 updatedDeclaration = updatedDeclaration.WithLeadingTrivia();
 
                 // #endif
                 updatedDeclaration = updatedDeclaration.WithTrailingTrivia(
-                    methodSyntax.GetTrailingTrivia()
-                        .AddRange(new[] {
-                            SyntaxFactory.Trivia(SyntaxFactory.EndIfDirectiveTrivia(isActive: true)),
-                            SyntaxFactory.ElasticMarker
-                        }));
+                    methodSyntax
+                        .GetTrailingTrivia()
+                        .AddRange(
+                            new[]
+                            {
+                                SyntaxFactory.Trivia(
+                                    SyntaxFactory.EndIfDirectiveTrivia(isActive: true)
+                                ),
+                                SyntaxFactory.ElasticMarker
+                            }
+                        )
+                );
 
                 // Add the GeneratedDllImport method
                 editor.InsertBefore(methodSyntax, generatedDeclaration);
@@ -195,33 +264,42 @@ namespace Microsoft.Interop.Analyzers
             AttributeSyntax dllImportSyntax,
             DllImportData dllImportData,
             INamedTypeSymbol generatedDllImportAttrType,
-            out SyntaxNode? unmanagedCallConvAttributeMaybe)
+            out SyntaxNode? unmanagedCallConvAttributeMaybe
+        )
         {
             unmanagedCallConvAttributeMaybe = null;
             // Create GeneratedDllImport based on the DllImport attribute
-            SyntaxNode generatedDllImportSyntax = generator.ReplaceNode(dllImportSyntax,
+            SyntaxNode generatedDllImportSyntax = generator.ReplaceNode(
+                dllImportSyntax,
                 dllImportSyntax.Name,
-                generator.TypeExpression(generatedDllImportAttrType));
+                generator.TypeExpression(generatedDllImportAttrType)
+            );
 
             // Update attribute arguments for GeneratedDllImport
             List<SyntaxNode> argumentsToRemove = new List<SyntaxNode>();
-            foreach (SyntaxNode argument in generator.GetAttributeArguments(generatedDllImportSyntax))
+            foreach (
+                SyntaxNode argument in generator.GetAttributeArguments(generatedDllImportSyntax)
+            )
             {
                 if (argument is not AttributeArgumentSyntax attrArg)
                     continue;
 
-                if (dllImportData.BestFitMapping != null
+                if (
+                    dllImportData.BestFitMapping != null
                     && !dllImportData.BestFitMapping.Value
-                    && IsMatchingNamedArg(attrArg, nameof(DllImportAttribute.BestFitMapping)))
+                    && IsMatchingNamedArg(attrArg, nameof(DllImportAttribute.BestFitMapping))
+                )
                 {
                     // BestFitMapping=false is explicitly set
                     // GeneratedDllImport does not support setting BestFitMapping. The generated code
                     // has the equivalent behaviour of BestFitMapping=false, so we can remove the argument.
                     argumentsToRemove.Add(argument);
                 }
-                else if (dllImportData.ThrowOnUnmappableCharacter != null
+                else if (
+                    dllImportData.ThrowOnUnmappableCharacter != null
                     && !dllImportData.ThrowOnUnmappableCharacter.Value
-                    && IsMatchingNamedArg(attrArg, nameof(DllImportAttribute.ThrowOnUnmappableChar)))
+                    && IsMatchingNamedArg(attrArg, nameof(DllImportAttribute.ThrowOnUnmappableChar))
+                )
                 {
                     // ThrowOnUnmappableChar=false is explicitly set
                     // GeneratedDllImport does not support setting ThrowOnUnmappableChar. The generated code
@@ -230,36 +308,55 @@ namespace Microsoft.Interop.Analyzers
                 }
                 else if (IsMatchingNamedArg(attrArg, nameof(DllImportAttribute.CallingConvention)))
                 {
-                    if (TryCreateUnmanagedCallConvAttributeToEmit(
-                        editor,
-                        generator,
-                        dllImportData.CallingConvention,
-                        out unmanagedCallConvAttributeMaybe))
+                    if (
+                        TryCreateUnmanagedCallConvAttributeToEmit(
+                            editor,
+                            generator,
+                            dllImportData.CallingConvention,
+                            out unmanagedCallConvAttributeMaybe
+                        )
+                    )
                     {
                         argumentsToRemove.Add(argument);
                     }
                 }
             }
 
-            generatedDllImportSyntax = generator.RemoveNodes(generatedDllImportSyntax, argumentsToRemove);
-            return SortDllImportAttributeArguments((AttributeSyntax)generatedDllImportSyntax, generator);
+            generatedDllImportSyntax = generator.RemoveNodes(
+                generatedDllImportSyntax,
+                argumentsToRemove
+            );
+            return SortDllImportAttributeArguments(
+                (AttributeSyntax)generatedDllImportSyntax,
+                generator
+            );
         }
 
-        private static SyntaxNode SortDllImportAttributeArguments(AttributeSyntax attribute, SyntaxGenerator generator)
+        private static SyntaxNode SortDllImportAttributeArguments(
+            AttributeSyntax attribute,
+            SyntaxGenerator generator
+        )
         {
             AttributeArgumentListSyntax updatedArgList = attribute.ArgumentList.WithArguments(
                 SyntaxFactory.SeparatedList(
-                    attribute.ArgumentList.Arguments.OrderBy(arg =>
-                    {
-                        // Unnamed arguments first
-                        if (arg.NameEquals == null)
-                            return -1;
+                    attribute.ArgumentList.Arguments.OrderBy(
+                        arg =>
+                        {
+                            // Unnamed arguments first
+                            if (arg.NameEquals == null)
+                                return -1;
 
-                        // Named arguments in specified order, followed by any named arguments with no preferred order
-                        string name = arg.NameEquals.Name.Identifier.Text;
-                        int index = System.Array.IndexOf(s_preferredAttributeArgumentOrder, name);
-                        return index == -1 ? int.MaxValue : index;
-                    })));
+                            // Named arguments in specified order, followed by any named arguments with no preferred order
+                            string name = arg.NameEquals.Name.Identifier.Text;
+                            int index = System.Array.IndexOf(
+                                s_preferredAttributeArgumentOrder,
+                                name
+                            );
+                            return index == -1 ? int.MaxValue : index;
+                        }
+                    )
+                )
+            );
             return generator.ReplaceNode(attribute, attribute.ArgumentList, updatedArgList);
         }
 
@@ -267,9 +364,15 @@ namespace Microsoft.Interop.Analyzers
             DocumentEditor editor,
             SyntaxGenerator generator,
             CallingConvention callingConvention,
-            out SyntaxNode? unmanagedCallConvAttribute)
+            out SyntaxNode? unmanagedCallConvAttribute
+        )
         {
-            if (editor.SemanticModel.Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute) is null)
+            if (
+                editor.SemanticModel.Compilation.GetTypeByMetadataName(
+                    TypeNames.UnmanagedCallConvAttribute
+                )
+                is null
+            )
             {
                 unmanagedCallConvAttribute = null;
                 return false;
@@ -285,14 +388,22 @@ namespace Microsoft.Interop.Analyzers
 
             ITypeSymbol? callingConventionType = callingConvention switch
             {
-                CallingConvention.Cdecl => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.
-                GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvCdecl"),
-                CallingConvention.StdCall => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.
-                GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvStdcall"),
-                CallingConvention.ThisCall => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.
-                GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvThiscall"),
-                CallingConvention.FastCall => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.
-                GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvFastcall"),
+                CallingConvention.Cdecl
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvCdecl"
+                    ),
+                CallingConvention.StdCall
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvStdcall"
+                    ),
+                CallingConvention.ThisCall
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvThiscall"
+                    ),
+                CallingConvention.FastCall
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvFastcall"
+                    ),
                 _ => null
             };
 
@@ -305,16 +416,34 @@ namespace Microsoft.Interop.Analyzers
                 return false;
             }
 
-            unmanagedCallConvAttribute = generator.Attribute(TypeNames.UnmanagedCallConvAttribute,
-                generator.AttributeArgument("CallConvs",
+            unmanagedCallConvAttribute = generator.Attribute(
+                TypeNames.UnmanagedCallConvAttribute,
+                generator.AttributeArgument(
+                    "CallConvs",
                     generator.ArrayCreationExpression(
-                        generator.TypeExpression(editor.SemanticModel.Compilation.GetTypeByMetadataName(TypeNames.System_Type)),
-                        new[] { generator.TypeOfExpression(generator.TypeExpression(callingConventionType)) })));
+                        generator.TypeExpression(
+                            editor.SemanticModel.Compilation.GetTypeByMetadataName(
+                                TypeNames.System_Type
+                            )
+                        ),
+                        new[]
+                        {
+                            generator.TypeOfExpression(
+                                generator.TypeExpression(callingConventionType)
+                            )
+                        }
+                    )
+                )
+            );
 
             return true;
         }
 
-        private static bool TryGetAttribute(IMethodSymbol method, INamedTypeSymbol attributeType, out AttributeData? attr)
+        private static bool TryGetAttribute(
+            IMethodSymbol method,
+            INamedTypeSymbol attributeType,
+            out AttributeData? attr
+        )
         {
             attr = default;
             foreach (AttributeData attrLocal in method.GetAttributes())

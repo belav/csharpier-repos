@@ -20,8 +20,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     {
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-        private static readonly MethodInfo _methodInfo = typeof(SqlServerDbFunctionsExtensions)
-            .GetRequiredRuntimeMethod(nameof(SqlServerDbFunctionsExtensions.IsNumeric), typeof(DbFunctions), typeof(string));
+        private static readonly MethodInfo _methodInfo =
+            typeof(SqlServerDbFunctionsExtensions).GetRequiredRuntimeMethod(
+                nameof(SqlServerDbFunctionsExtensions.IsNumeric),
+                typeof(DbFunctions),
+                typeof(string)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerIsNumericFunctionTranslator(ISqlExpressionFactory sqlExpressionFactory)
-            => _sqlExpressionFactory = sqlExpressionFactory;
+        public SqlServerIsNumericFunctionTranslator(ISqlExpressionFactory sqlExpressionFactory) =>
+            _sqlExpressionFactory = sqlExpressionFactory;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,16 +46,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-            => _methodInfo.Equals(method)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) =>
+            _methodInfo.Equals(method)
                 ? _sqlExpressionFactory.Equal(
                     _sqlExpressionFactory.Function(
                         "ISNUMERIC",
                         new[] { arguments[1] },
                         nullable: false,
                         argumentsPropagateNullability: new[] { false },
-                        typeof(int)),
-                    _sqlExpressionFactory.Constant(1))
+                        typeof(int)
+                    ),
+                    _sqlExpressionFactory.Constant(1)
+                )
                 : null;
     }
 }

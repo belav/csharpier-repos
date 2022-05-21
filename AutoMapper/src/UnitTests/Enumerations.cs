@@ -20,10 +20,13 @@ namespace AutoMapper.Tests
             public string Color { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -51,10 +54,13 @@ namespace AutoMapper.Tests
             public ConsoleColor? Color { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -82,11 +88,14 @@ namespace AutoMapper.Tests
             public string Color { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<Enum, string>().ConvertUsing((Enum src) => "Test");
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<Enum, string>().ConvertUsing((Enum src) => "Test");
+                }
+            );
 
         protected override void Because_of()
         {
@@ -107,10 +116,7 @@ namespace AutoMapper.Tests
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDto>());
 
-            var order = new Order
-                {
-                    Status = Status.InProgress
-                };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDto>(order);
@@ -119,12 +125,11 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapToUnderlyingType() {
+        public void ShouldMapToUnderlyingType()
+        {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoInt>());
 
-            var order = new Order {
-                Status = Status.InProgress
-            };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDtoInt>(order);
@@ -133,12 +138,11 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapToStringType() {
+        public void ShouldMapToStringType()
+        {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoString>());
 
-            var order = new Order {
-                Status = Status.InProgress
-            };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDtoString>(order);
@@ -147,12 +151,11 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapFromUnderlyingType() {
+        public void ShouldMapFromUnderlyingType()
+        {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderDtoInt, Order>());
 
-            var order = new OrderDtoInt {
-                Status = 1
-            };
+            var order = new OrderDtoInt { Status = 1 };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OrderDtoInt, Order>(order);
@@ -161,28 +164,26 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapFromStringType() {
+        public void ShouldMapFromStringType()
+        {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderDtoString, Order>());
 
-            var order = new OrderDtoString {
-                Status = "InProgress"
-            };
+            var order = new OrderDtoString { Status = "InProgress" };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OrderDtoString, Order>(order);
 
             dto.Status.ShouldBe(Status.InProgress);
         }
-        
+
         [Fact]
         public void ShouldMapEnumByMatchingNames()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
+            );
 
-            var order = new Order
-                {
-                    Status = Status.InProgress
-                };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -193,12 +194,11 @@ namespace AutoMapper.Tests
         [Fact]
         public void ShouldMapEnumByMatchingValues()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
+            );
 
-            var order = new Order
-                {
-                    Status = Status.InProgress
-                };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -207,13 +207,13 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapSharedNullableEnum() 
+        public void ShouldMapSharedNullableEnum()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithNullableStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithNullableStatus>()
+            );
 
-            var order = new OrderWithNullableStatus {
-                Status = Status.InProgress
-            };
+            var order = new OrderWithNullableStatus { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OrderWithNullableStatus, OrderDtoWithNullableStatus>(order);
@@ -222,13 +222,13 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapNullableEnumByMatchingValues() 
+        public void ShouldMapNullableEnumByMatchingValues()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>()
+            );
 
-            var order = new OrderWithNullableStatus {
-                Status = Status.InProgress
-            };
+            var order = new OrderWithNullableStatus { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>(order);
@@ -237,23 +237,19 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapNullableEnumToNullWhenSourceEnumIsNullAndDestinationWasNotNull() 
+        public void ShouldMapNullableEnumToNullWhenSourceEnumIsNullAndDestinationWasNotNull()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AllowNullDestinationValues = true;
-                cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AllowNullDestinationValues = true;
+                    cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>();
+                }
+            );
 
-            var dto = new OrderDtoWithOwnNullableStatus()
-            {
-                Status = StatusForDto.Complete
-            };
+            var dto = new OrderDtoWithOwnNullableStatus() { Status = StatusForDto.Complete };
 
-            var order = new OrderWithNullableStatus
-            {
-                Status = null
-            };
+            var order = new OrderWithNullableStatus { Status = null };
 
             var mapper = config.CreateMapper();
             mapper.Map(order, dto);
@@ -262,13 +258,13 @@ namespace AutoMapper.Tests
         }
 
         [Fact]
-        public void ShouldMapNullableEnumToNullWhenSourceEnumIsNull() 
+        public void ShouldMapNullableEnumToNullWhenSourceEnumIsNull()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>()
+            );
 
-            var order = new OrderWithNullableStatus {
-                Status = null
-            };
+            var order = new OrderWithNullableStatus { Status = null };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>(order);
@@ -279,13 +275,16 @@ namespace AutoMapper.Tests
         [Fact]
         public void ShouldMapEnumUsingCustomResolver()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
-                .ForMember(dto => dto.Status, options => options.MapFrom<DtoStatusValueResolver>()));
+            var config = new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
+                        .ForMember(
+                            dto => dto.Status,
+                            options => options.MapFrom<DtoStatusValueResolver>()
+                        )
+            );
 
-            var order = new Order
-                {
-                    Status = Status.InProgress
-                };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var mappedDto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -296,13 +295,19 @@ namespace AutoMapper.Tests
         [Fact]
         public void ShouldMapEnumUsingGenericEnumResolver()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
-                .ForMember(dto => dto.Status, options => options.MapFrom<EnumValueResolver<Status, StatusForDto>, Status>(m => m.Status)));
+            var config = new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
+                        .ForMember(
+                            dto => dto.Status,
+                            options =>
+                                options.MapFrom<EnumValueResolver<Status, StatusForDto>, Status>(
+                                    m => m.Status
+                                )
+                        )
+            );
 
-            var order = new Order
-                {
-                    Status = Status.InProgress
-                };
+            var order = new Order { Status = Status.InProgress };
 
             var mapper = config.CreateMapper();
             var mappedDto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -313,12 +318,11 @@ namespace AutoMapper.Tests
         [Fact]
         public void ShouldMapEnumWithInvalidValue()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>());
+            var config = new MapperConfiguration(
+                cfg => cfg.CreateMap<Order, OrderDtoWithOwnStatus>()
+            );
 
-            var order = new Order
-            {
-                Status = 0
-            };
+            var order = new Order { Status = 0 };
 
             var mapper = config.CreateMapper();
             var dto = mapper.Map<Order, OrderDtoWithOwnStatus>(order);
@@ -350,11 +354,13 @@ namespace AutoMapper.Tests
             public Status Status { get; set; }
         }
 
-        public class OrderDtoInt {
+        public class OrderDtoInt
+        {
             public int Status { get; set; }
         }
 
-        public class OrderDtoString {
+        public class OrderDtoString
+        {
             public string Status { get; set; }
         }
 
@@ -363,48 +369,73 @@ namespace AutoMapper.Tests
             public StatusForDto Status { get; set; }
         }
 
-        public class OrderWithNullableStatus 
+        public class OrderWithNullableStatus
         {
             public Status? Status { get; set; }
         }
 
-        public class OrderDtoWithNullableStatus 
+        public class OrderDtoWithNullableStatus
         {
             public Status? Status { get; set; }
         }
 
-        public class OrderDtoWithOwnNullableStatus 
+        public class OrderDtoWithOwnNullableStatus
         {
             public StatusForDto? Status { get; set; }
         }
 
         public class DtoStatusValueResolver : IValueResolver<Order, object, StatusForDto>
         {
-            public StatusForDto Resolve(Order source, object d, StatusForDto dest, ResolutionContext context)
+            public StatusForDto Resolve(
+                Order source,
+                object d,
+                StatusForDto dest,
+                ResolutionContext context
+            )
             {
                 return context.Mapper.Map<StatusForDto>(source.Status);
             }
         }
 
-        public class EnumValueResolver<TInputEnum, TOutputEnum> : IMemberValueResolver<object, object, TInputEnum, TOutputEnum>
+        public class EnumValueResolver<TInputEnum, TOutputEnum>
+            : IMemberValueResolver<object, object, TInputEnum, TOutputEnum>
         {
-            public TOutputEnum Resolve(object s, object d, TInputEnum source, TOutputEnum dest, ResolutionContext context)
+            public TOutputEnum Resolve(
+                object s,
+                object d,
+                TInputEnum source,
+                TOutputEnum dest,
+                ResolutionContext context
+            )
             {
-                return ((TOutputEnum)Enum.Parse(typeof(TOutputEnum), Enum.GetName(typeof(TInputEnum), source), false));
+                return (
+                    (TOutputEnum)
+                        Enum.Parse(
+                            typeof(TOutputEnum),
+                            Enum.GetName(typeof(TInputEnum), source),
+                            false
+                        )
+                );
             }
         }
     }
+
     public class When_mapping_from_a_null_object_with_an_enum : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.AllowNullDestinationValues = false;
-            cfg.CreateMap<SourceClass, DestinationClass>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AllowNullDestinationValues = false;
+                    cfg.CreateMap<SourceClass, DestinationClass>();
+                }
+            );
 
         public enum EnumValues
         {
-            One, Two, Three
+            One,
+            Two,
+            Three
         }
 
         public class DestinationClass
@@ -428,15 +459,20 @@ namespace AutoMapper.Tests
 
     public class When_mapping_to_a_nullable_flags_enum : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<SourceClass, DestinationClass>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<SourceClass, DestinationClass>();
+                }
+            );
 
         [Flags]
         public enum EnumValues
         {
-            One, Two = 2, Three = 4
+            One,
+            Two = 2,
+            Three = 4
         }
 
         public class SourceClass
@@ -453,22 +489,29 @@ namespace AutoMapper.Tests
         public void Should_set_the_target_enum_to_the_default_value()
         {
             var values = EnumValues.Two | EnumValues.Three;
-            var dest = Mapper.Map<SourceClass, DestinationClass>(new SourceClass { Values = values });
+            var dest = Mapper.Map<SourceClass, DestinationClass>(
+                new SourceClass { Values = values }
+            );
             dest.Values.ShouldBe(values);
         }
     }
 
     public class When_mapping_from_a_null_object_with_a_nullable_enum : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.AllowNullDestinationValues = false;
-            cfg.CreateMap<SourceClass, DestinationClass>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AllowNullDestinationValues = false;
+                    cfg.CreateMap<SourceClass, DestinationClass>();
+                }
+            );
 
         public enum EnumValues
         {
-            One, Two, Three
+            One,
+            Two,
+            Three
         }
 
         public class DestinationClass
@@ -489,16 +532,22 @@ namespace AutoMapper.Tests
             dest.Values.ShouldBe(default(EnumValues));
         }
     }
+
     public class When_mapping_from_a_null_object_with_a_nullable_enum_as_string : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<SourceClass, DestinationClass>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<SourceClass, DestinationClass>();
+                }
+            );
 
         public enum EnumValues
         {
-            One, Two, Three
+            One,
+            Two,
+            Three
         }
 
         public class DestinationClass
@@ -534,15 +583,11 @@ namespace AutoMapper.Tests
         [Fact]
         public void Should_set_the_target_empty_to_null()
         {
-            var sourceClass = new SourceClass
-            {
-                Values3 = ""
-            };
+            var sourceClass = new SourceClass { Values3 = "" };
             var dest = Mapper.Map<SourceClass, DestinationClass>(sourceClass);
             dest.Values3.ShouldBe(default(EnumValues));
         }
     }
-
 
     public class When_mapping_a_flags_enum : NonValidatingSpecBase
     {
@@ -568,11 +613,14 @@ namespace AutoMapper.Tests
             Eight = 8
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => { });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => { });
 
         protected override void Because_of()
         {
-            _result = Mapper.Map<SourceFlags, DestinationFlags>(SourceFlags.One | SourceFlags.Four | SourceFlags.Eight);
+            _result = Mapper.Map<SourceFlags, DestinationFlags>(
+                SourceFlags.One | SourceFlags.Four | SourceFlags.Eight
+            );
         }
 
         [Fact]
@@ -587,11 +635,13 @@ namespace AutoMapper.Tests
         public enum EnumWithEnumMemberAttribute
         {
             Null,
+
             [EnumMember(Value = "Eins")]
             One
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => { });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => { });
 
         [Fact]
         public void Should_return_the_enum_from_defined_enummemberattribute_value()
@@ -643,43 +693,52 @@ namespace AutoMapper.Tests
         }
     }
 
-
     public class When_the_source_has_an_enummemberattribute_value : AutoMapperSpecBase
     {
         public enum EnumWithEnumMemberAttribute
         {
             Null,
+
             [EnumMember(Value = "Eins")]
             One
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => { });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(cfg => { });
 
         [Fact]
         public void Should_return_the_defined_enummemberattribute_value()
         {
-            var dest = Mapper.Map<EnumWithEnumMemberAttribute, string>(EnumWithEnumMemberAttribute.One);
+            var dest = Mapper.Map<EnumWithEnumMemberAttribute, string>(
+                EnumWithEnumMemberAttribute.One
+            );
             dest.ShouldBe("Eins");
         }
 
         [Fact]
         public void Should_return_the_enum_value()
         {
-            var dest = Mapper.Map<EnumWithEnumMemberAttribute, string>(EnumWithEnumMemberAttribute.Null);
+            var dest = Mapper.Map<EnumWithEnumMemberAttribute, string>(
+                EnumWithEnumMemberAttribute.Null
+            );
             dest.ShouldBe("Null");
         }
 
         [Fact]
         public void Should_return_the_defined_enummemberattribute_value_nullable()
         {
-            var dest = Mapper.Map<EnumWithEnumMemberAttribute?, string>(EnumWithEnumMemberAttribute.One);
+            var dest = Mapper.Map<EnumWithEnumMemberAttribute?, string>(
+                EnumWithEnumMemberAttribute.One
+            );
             dest.ShouldBe("Eins");
         }
 
         [Fact]
         public void Should_return_the_enum_value_nullable()
         {
-            var dest = Mapper.Map<EnumWithEnumMemberAttribute?, string>(EnumWithEnumMemberAttribute.Null);
+            var dest = Mapper.Map<EnumWithEnumMemberAttribute?, string>(
+                EnumWithEnumMemberAttribute.Null
+            );
             dest.ShouldBe("Null");
         }
 

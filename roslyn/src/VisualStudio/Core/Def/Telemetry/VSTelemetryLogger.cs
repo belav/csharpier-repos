@@ -23,11 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         public VSTelemetryLogger(TelemetrySession session)
         {
             _session = session;
-            _pendingScopes = new ConcurrentDictionary<int, object>(concurrencyLevel: 2, capacity: 10);
+            _pendingScopes = new ConcurrentDictionary<int, object>(
+                concurrencyLevel: 2,
+                capacity: 10
+            );
         }
 
-        public bool IsEnabled(FunctionId functionId)
-            => _session.IsOptedIn;
+        public bool IsEnabled(FunctionId functionId) => _session.IsOptedIn;
 
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
@@ -48,12 +50,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 var telemetryEvent = CreateTelemetryEvent(functionId, logMessage);
                 _session.PostEvent(telemetryEvent);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int blockId, CancellationToken cancellationToken)
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreMessage(logMessage))
             {
@@ -67,12 +72,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
                 _pendingScopes[blockId] = CreateAndStartScope(kind, functionId);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int blockId, int delta, CancellationToken cancellationToken)
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            int delta,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreMessage(logMessage))
             {
@@ -87,7 +96,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 switch (kind)
                 {
                     case LogType.Trace:
-                        EndScope<OperationEvent>(functionId, blockId, logMessage, cancellationToken);
+                        EndScope<OperationEvent>(
+                            functionId,
+                            blockId,
+                            logMessage,
+                            cancellationToken
+                        );
                         return;
                     case LogType.UserAction:
                         EndScope<UserTaskEvent>(functionId, blockId, logMessage, cancellationToken);
@@ -96,25 +110,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                         throw ExceptionUtilities.UnexpectedValue(kind);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        private static bool IgnoreMessage(LogMessage logMessage)
-            => logMessage.LogLevel < LogLevel.Information;
+        private static bool IgnoreMessage(LogMessage logMessage) =>
+            logMessage.LogLevel < LogLevel.Information;
 
-        private static LogType GetKind(LogMessage logMessage)
-            => logMessage is KeyValueLogMessage kvLogMessage
-                                ? kvLogMessage.Kind
-                                : logMessage.LogLevel switch
-                                {
-                                    >= LogLevel.Information => LogType.UserAction,
-                                    _ => LogType.Trace
-                                };
+        private static LogType GetKind(LogMessage logMessage) =>
+            logMessage is KeyValueLogMessage kvLogMessage
+                ? kvLogMessage.Kind
+                : logMessage.LogLevel switch
+                {
+                    >= LogLevel.Information => LogType.UserAction,
+                    _ => LogType.Trace
+                };
 
-        private void EndScope<T>(FunctionId functionId, int blockId, LogMessage logMessage, CancellationToken cancellationToken)
-            where T : OperationEvent
+        private void EndScope<T>(
+            FunctionId functionId,
+            int blockId,
+            LogMessage logMessage,
+            CancellationToken cancellationToken
+        ) where T : OperationEvent
         {
             if (!_pendingScopes.TryRemove(blockId, out var value))
             {
@@ -125,12 +141,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             var operation = (TelemetryScope<T>)value;
 
             UpdateEvent(operation.EndEvent, functionId, logMessage);
-            operation.End(cancellationToken.IsCancellationRequested ? TelemetryResult.UserCancel : TelemetryResult.Success);
+            operation.End(
+                cancellationToken.IsCancellationRequested
+                    ? TelemetryResult.UserCancel
+                    : TelemetryResult.Success
+            );
         }
 
         private object CreateAndStartScope(LogType kind, FunctionId functionId)
         {
-            // use object since TelemetryScope<UserTask> and 
+            // use object since TelemetryScope<UserTask> and
             // TelemetryScope<Operation> can't be shared
             var eventName = functionId.GetEventName();
 
@@ -142,7 +162,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             };
         }
 
-        private static TelemetryEvent CreateTelemetryEvent(FunctionId functionId, LogMessage logMessage)
+        private static TelemetryEvent CreateTelemetryEvent(
+            FunctionId functionId,
+            LogMessage logMessage
+        )
         {
             var eventName = functionId.GetEventName();
             var telemetryEvent = new TelemetryEvent(eventName);
@@ -150,7 +173,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             return UpdateEvent(telemetryEvent, functionId, logMessage);
         }
 
-        private static TelemetryEvent UpdateEvent(TelemetryEvent telemetryEvent, FunctionId functionId, LogMessage logMessage)
+        private static TelemetryEvent UpdateEvent(
+            TelemetryEvent telemetryEvent,
+            FunctionId functionId,
+            LogMessage logMessage
+        )
         {
             if (logMessage is KeyValueLogMessage kvLogMessage)
             {
@@ -169,21 +196,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             return telemetryEvent;
         }
 
-        private static void AppendProperties(TelemetryEvent telemetryEvent, FunctionId functionId, KeyValueLogMessage logMessage)
+        private static void AppendProperties(
+            TelemetryEvent telemetryEvent,
+            FunctionId functionId,
+            KeyValueLogMessage logMessage
+        )
         {
             foreach (var (key, value) in logMessage.Properties)
             {
                 // call SetProperty. VS telemetry will take care of finding correct
                 // API based on given object type for us.
-                // 
+                //
                 // numeric data will show up in ES with measurement prefix.
 
-                telemetryEvent.Properties.Add(functionId.GetPropertyName(key), value switch
-                {
-                    PiiValue pii => new TelemetryPiiProperty(pii.Value),
-                    IEnumerable<object> items => new TelemetryComplexProperty(items.Select(item => (item is PiiValue pii) ? pii.Value : item)),
-                    _ => value
-                });
+                telemetryEvent.Properties.Add(
+                    functionId.GetPropertyName(key),
+                    value switch
+                    {
+                        PiiValue pii => new TelemetryPiiProperty(pii.Value),
+                        IEnumerable<object> items
+                            => new TelemetryComplexProperty(
+                                items.Select(item => (item is PiiValue pii) ? pii.Value : item)
+                            ),
+                        _ => value
+                    }
+                );
             }
         }
     }

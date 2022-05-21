@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
     /// Computes the semantic tokens edits for a file. Clients may make edit requests on a timer,
     /// or every time an edit is made by the user.
     /// </summary>
-    internal class SemanticTokensEditsHandler : IRequestHandler<LSP.SemanticTokensDeltaParams, SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>>
+    internal class SemanticTokensEditsHandler
+        : IRequestHandler<
+            LSP.SemanticTokensDeltaParams,
+            SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>
+        >
     {
         private readonly SemanticTokensCache _tokensCache;
 
@@ -32,7 +36,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             _tokensCache = tokensCache;
         }
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.SemanticTokensDeltaParams request)
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.SemanticTokensDeltaParams request
+        )
         {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
@@ -41,7 +47,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task<SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>> HandleRequestAsync(
             LSP.SemanticTokensDeltaParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             Contract.ThrowIfNull(request.PreviousResultId, "previousResultId is null.");
@@ -49,17 +56,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
             // Even though we want to ultimately pass edits back to LSP, we still need to compute all semantic tokens,
             // both for caching purposes and in order to have a baseline comparison when computing the edits.
-            var (newSemanticTokensData, isFinalized) = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                context.Document, SemanticTokensCache.TokenTypeToIndex,
-                range: null, cancellationToken).ConfigureAwait(false);
+            var (newSemanticTokensData, isFinalized) = await SemanticTokensHelpers
+                .ComputeSemanticTokensDataAsync(
+                    context.Document,
+                    SemanticTokensCache.TokenTypeToIndex,
+                    range: null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Contract.ThrowIfNull(newSemanticTokensData, "newSemanticTokensData is null.");
 
             // Getting the cached tokens for the document. If we don't have an applicable cached token set,
             // we can't calculate edits, so we must return all semantic tokens instead. Likewise, if the new
             // token set is empty, there's no need to calculate edits.
-            var oldSemanticTokensData = await _tokensCache.GetCachedTokensDataAsync(
-                request.TextDocument.Uri, request.PreviousResultId, cancellationToken).ConfigureAwait(false);
+            var oldSemanticTokensData = await _tokensCache
+                .GetCachedTokensDataAsync(
+                    request.TextDocument.Uri,
+                    request.PreviousResultId,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (oldSemanticTokensData == null || newSemanticTokensData.Length == 0)
             {
                 var newResultId = _tokensCache.GetNextResultId();
@@ -72,14 +89,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
                 if (newSemanticTokensData.Length > 0)
                 {
-                    await _tokensCache.UpdateCacheAsync(
-                        request.TextDocument.Uri, updatedTokens, cancellationToken).ConfigureAwait(false);
+                    await _tokensCache
+                        .UpdateCacheAsync(
+                            request.TextDocument.Uri,
+                            updatedTokens,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 return updatedTokens;
             }
 
-            var editArray = await ComputeSemanticTokensEditsAsync(oldSemanticTokensData, newSemanticTokensData).ConfigureAwait(false);
+            var editArray = await ComputeSemanticTokensEditsAsync(
+                    oldSemanticTokensData,
+                    newSemanticTokensData
+                )
+                .ConfigureAwait(false);
             var resultId = request.PreviousResultId;
 
             // If we have edits, generate a new ResultId. Otherwise, re-use the previous one.
@@ -93,8 +119,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     IsFinalized = isFinalized
                 };
 
-                await _tokensCache.UpdateCacheAsync(
-                    request.TextDocument.Uri, updatedTokens, cancellationToken).ConfigureAwait(false);
+                await _tokensCache
+                    .UpdateCacheAsync(request.TextDocument.Uri, updatedTokens, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             var edits = new RoslynSemanticTokensDelta
@@ -112,7 +139,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// </summary>
         private static async Task<LSP.SemanticTokensEdit[]> ComputeSemanticTokensEditsAsync(
             int[] oldSemanticTokens,
-            int[] newSemanticTokens)
+            int[] newSemanticTokens
+        )
         {
             if (oldSemanticTokens.SequenceEqual(newSemanticTokens))
             {
@@ -122,7 +150,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // Edits are computed on an int level, with five ints representing one token.
             // We compute on int level rather than token level to minimize the amount of
             // edits we send back to the client.
-            var edits = await SemanticTokensEditsDiffer.ComputeSemanticTokensEditsAsync(oldSemanticTokens, newSemanticTokens).ConfigureAwait(false);
+            var edits = await SemanticTokensEditsDiffer
+                .ComputeSemanticTokensEditsAsync(oldSemanticTokens, newSemanticTokens)
+                .ConfigureAwait(false);
 
             var processedEdits = ProcessEdits(newSemanticTokens, edits);
             return processedEdits;
@@ -130,7 +160,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         private static LSP.SemanticTokensEdit[] ProcessEdits(
             int[] newSemanticTokens,
-            IReadOnlyList<DiffEdit> edits)
+            IReadOnlyList<DiffEdit> edits
+        )
         {
             using var _ = ArrayBuilder<RoslynSemanticTokensEdit>.GetInstance(out var results);
 
@@ -151,18 +182,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                         // an insertion edit in progress, but not vice versa. This works out
                         // because the edits list passed into this method always orders the
                         // insertions for a given start index before deletions.
-                        if (editInProgress != null &&
-                            editInProgress.Start + editInProgress.DeleteCount == edit.Position)
+                        if (
+                            editInProgress != null
+                            && editInProgress.Start + editInProgress.DeleteCount == edit.Position
+                        )
                         {
                             editInProgress.DeleteCount++;
                         }
                         else
                         {
-                            results.Add(new RoslynSemanticTokensEdit
-                            {
-                                Start = edit.Position,
-                                DeleteCount = 1,
-                            });
+                            results.Add(
+                                new RoslynSemanticTokensEdit
+                                {
+                                    Start = edit.Position,
+                                    DeleteCount = 1,
+                                }
+                            );
                         }
 
                         break;
@@ -172,10 +207,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                         //
                         // As mentioned above, we only combine insertion edits with in-progress
                         // insertion edits.
-                        if (editInProgress != null &&
-                            editInProgress.Data != null &&
-                            editInProgress.Data.Count > 0 &&
-                            editInProgress.Start == edit.Position)
+                        if (
+                            editInProgress != null
+                            && editInProgress.Data != null
+                            && editInProgress.Data.Count > 0
+                            && editInProgress.Start == edit.Position
+                        )
                         {
                             editInProgress.Data.Add(newSemanticTokens[edit.NewTextPosition!.Value]);
                         }

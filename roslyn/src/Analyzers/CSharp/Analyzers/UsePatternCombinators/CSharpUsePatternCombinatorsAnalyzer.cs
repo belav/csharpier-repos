@@ -47,10 +47,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case IBinaryOperation { OperatorKind: NotEquals } op:
                     return Not.TryCreate(ParseConstantPattern(op));
 
-                case IBinaryOperation { OperatorKind: ConditionalOr, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalOr,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: true, syntax.OperatorToken);
 
-                case IBinaryOperation { OperatorKind: ConditionalAnd, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalAnd,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: false, syntax.OperatorToken);
 
                 case IBinaryOperation op when IsRelationalOperator(op.OperatorKind):
@@ -59,7 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case IUnaryOperation { OperatorKind: UnaryOperatorKind.Not } op:
                     return Not.TryCreate(ParsePattern(op.Operand));
 
-                case IIsTypeOperation { Syntax: BinaryExpressionSyntax { Right: TypeSyntax type } } op:
+                case IIsTypeOperation
+                {
+                    Syntax: BinaryExpressionSyntax { Right: TypeSyntax type }
+                } op:
                     return new Type(type, op.ValueOperand);
 
                 case IIsPatternOperation { Pattern: { Syntax: PatternSyntax pattern } } op:
@@ -72,7 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return null;
         }
 
-        private static AnalyzedPattern? ParseBinaryPattern(IBinaryOperation op, bool isDisjunctive, SyntaxToken token)
+        private static AnalyzedPattern? ParseBinaryPattern(
+            IBinaryOperation op,
+            bool isDisjunctive,
+            SyntaxToken token
+        )
         {
             var leftPattern = ParsePattern(op.LeftOperand);
             if (leftPattern is null)

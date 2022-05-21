@@ -36,8 +36,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var comparer = property.GetKeyValueComparer();
 
-            EqualityComparer
-                = comparer != null
+            EqualityComparer =
+                comparer != null
                     ? new NoNullsCustomEqualityComparer(comparer)
                     : typeof(IStructuralEquatable).IsAssignableFrom(typeof(TKey))
                         ? new NoNullsStructuralEqualityComparer()
@@ -50,8 +50,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual object? CreateFromKeyValues(object?[] keyValues)
-            => keyValues[0];
+        public virtual object? CreateFromKeyValues(object?[] keyValues) => keyValues[0];
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual object? CreateFromBuffer(ValueBuffer valueBuffer)
-            => _propertyAccessors.ValueBufferGetter!(valueBuffer);
+        public virtual object? CreateFromBuffer(ValueBuffer valueBuffer) =>
+            _propertyAccessors.ValueBufferGetter!(valueBuffer);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,8 +67,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IProperty FindNullPropertyInKeyValues(object?[] keyValues)
-            => _property;
+        public virtual IProperty FindNullPropertyInKeyValues(object?[] keyValues) => _property;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,8 +75,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TKey CreateFromCurrentValues(IUpdateEntry entry)
-            => ((Func<IUpdateEntry, TKey>)_propertyAccessors.CurrentValueGetter)(entry);
+        public virtual TKey CreateFromCurrentValues(IUpdateEntry entry) =>
+            ((Func<IUpdateEntry, TKey>)_propertyAccessors.CurrentValueGetter)(entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IProperty FindNullPropertyInCurrentValues(IUpdateEntry entry)
-            => _property;
+        public virtual IProperty FindNullPropertyInCurrentValues(IUpdateEntry entry) => _property;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +92,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TKey CreateFromOriginalValues(IUpdateEntry entry)
-            => ((Func<IUpdateEntry, TKey>)_propertyAccessors.OriginalValueGetter!)(entry);
+        public virtual TKey CreateFromOriginalValues(IUpdateEntry entry) =>
+            ((Func<IUpdateEntry, TKey>)_propertyAccessors.OriginalValueGetter!)(entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,8 +101,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TKey CreateFromRelationshipSnapshot(IUpdateEntry entry)
-            => ((Func<IUpdateEntry, TKey>)_propertyAccessors.RelationshipSnapshotGetter)(entry);
+        public virtual TKey CreateFromRelationshipSnapshot(IUpdateEntry entry) =>
+            ((Func<IUpdateEntry, TKey>)_propertyAccessors.RelationshipSnapshotGetter)(entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -117,14 +114,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         private sealed class NoNullsStructuralEqualityComparer : IEqualityComparer<TKey>
         {
-            private readonly IEqualityComparer _comparer
-                = StructuralComparisons.StructuralEqualityComparer;
+            private readonly IEqualityComparer _comparer =
+                StructuralComparisons.StructuralEqualityComparer;
 
-            public bool Equals(TKey? x, TKey? y)
-                => _comparer.Equals(x, y);
+            public bool Equals(TKey? x, TKey? y) => _comparer.Equals(x, y);
 
-            public int GetHashCode([DisallowNull] TKey obj)
-                => _comparer.GetHashCode(obj);
+            public int GetHashCode([DisallowNull] TKey obj) => _comparer.GetHashCode(obj);
         }
 
         private sealed class NoNullsCustomEqualityComparer : IEqualityComparer<TKey>
@@ -134,8 +129,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             public NoNullsCustomEqualityComparer(ValueComparer comparer)
             {
-                if (comparer.Type != typeof(TKey)
-                    && comparer.Type == typeof(TKey).UnwrapNullableType())
+                if (
+                    comparer.Type != typeof(TKey)
+                    && comparer.Type == typeof(TKey).UnwrapNullableType()
+                )
                 {
                     comparer = comparer.ToNonNullNullableComparer();
                 }
@@ -144,11 +141,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _hashCode = (Func<TKey, int>)comparer.HashCodeExpression.Compile();
             }
 
-            public bool Equals(TKey? x, TKey? y)
-                => _equals(x, y);
+            public bool Equals(TKey? x, TKey? y) => _equals(x, y);
 
-            public int GetHashCode([DisallowNull] TKey obj)
-                => _hashCode(obj);
+            public int GetHashCode([DisallowNull] TKey obj) => _hashCode(obj);
         }
     }
 }

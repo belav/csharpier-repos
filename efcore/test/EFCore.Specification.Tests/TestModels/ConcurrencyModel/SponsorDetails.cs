@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel
 {
     public class SponsorDetails
     {
-        public SponsorDetails()
-        {
-        }
+        public SponsorDetails() { }
 
         private SponsorDetails(int days, decimal space)
         {

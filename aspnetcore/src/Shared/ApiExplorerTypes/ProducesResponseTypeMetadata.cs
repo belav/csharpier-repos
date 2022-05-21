@@ -19,8 +19,7 @@ internal sealed class ProducesResponseTypeMetadata : IProducesResponseTypeMetada
     /// Initializes an instance of <see cref="ProducesResponseTypeMetadata"/>.
     /// </summary>
     /// <param name="statusCode">The HTTP response status code.</param>
-    public ProducesResponseTypeMetadata(int statusCode)
-        : this(typeof(void), statusCode)
+    public ProducesResponseTypeMetadata(int statusCode) : this(typeof(void), statusCode)
     {
         IsResponseTypeSetByDefault = true;
     }
@@ -45,7 +44,12 @@ internal sealed class ProducesResponseTypeMetadata : IProducesResponseTypeMetada
     /// <param name="statusCode">The HTTP response status code.</param>
     /// <param name="contentType">The content type associated with the response.</param>
     /// <param name="additionalContentTypes">Additional content types supported by the response.</param>
-    public ProducesResponseTypeMetadata(Type type, int statusCode, string contentType, params string[] additionalContentTypes)
+    public ProducesResponseTypeMetadata(
+        Type type,
+        int statusCode,
+        string contentType,
+        params string[] additionalContentTypes
+    )
     {
         if (contentType == null)
         {
@@ -106,7 +110,9 @@ internal sealed class ProducesResponseTypeMetadata : IProducesResponseTypeMetada
         {
             if (type.Contains('*', StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException($"Could not parse '{type}'. Content types with wildcards are not supported.");
+                throw new InvalidOperationException(
+                    $"Could not parse '{type}'. Content types with wildcards are not supported."
+                );
             }
         }
     }

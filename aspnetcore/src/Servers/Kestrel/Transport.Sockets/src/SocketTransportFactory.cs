@@ -23,7 +23,8 @@ public sealed class SocketTransportFactory : IConnectionListenerFactory
 
     public SocketTransportFactory(
         IOptions<SocketTransportOptions> options,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
@@ -39,7 +40,10 @@ public sealed class SocketTransportFactory : IConnectionListenerFactory
         _logger = loggerFactory;
     }
 
-    public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+    public ValueTask<IConnectionListener> BindAsync(
+        EndPoint endpoint,
+        CancellationToken cancellationToken = default
+    )
     {
         var transport = new SocketConnectionListener(endpoint, _options, _logger);
         transport.Bind();

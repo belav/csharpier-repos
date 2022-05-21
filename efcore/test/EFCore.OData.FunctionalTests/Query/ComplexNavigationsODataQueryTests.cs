@@ -10,12 +10,12 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsODataQueryTests : ODataQueryTestBase, IClassFixture<ComplexNavigationsODataQueryTestFixture>
+    public class ComplexNavigationsODataQueryTests
+        : ODataQueryTestBase,
+            IClassFixture<ComplexNavigationsODataQueryTestFixture>
     {
         public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         [ConditionalFact]
         public async Task Query_level_ones()
@@ -84,14 +84,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Query_count_expand_with_filter_contains()
         {
-            var requestUri = $"{BaseAddress}/odata/LevelOne?$count=true&$expand=OneToOne_Required_FK1&$filter=OneToOne_Required_FK1/Id in (1)";
+            var requestUri =
+                $"{BaseAddress}/odata/LevelOne?$count=true&$expand=OneToOne_Required_FK1&$filter=OneToOne_Required_FK1/Id in (1)";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var result = await response.Content.ReadAsObject<JObject>();
 
-            Assert.Contains("$metadata#LevelOne(OneToOne_Required_FK1())", result["@odata.context"].ToString());
+            Assert.Contains(
+                "$metadata#LevelOne(OneToOne_Required_FK1())",
+                result["@odata.context"].ToString()
+            );
             Assert.Equal(1, result["@odata.count"]);
             var projection = result["value"] as JArray;
             Assert.Single(projection);

@@ -31,7 +31,9 @@ namespace System.Data.ProviderBase
         private sealed class TransactedConnectionList : List<DbConnectionInternal>
         {
             private readonly SysTx.Transaction _transaction;
-            internal TransactedConnectionList(int initialAllocation, SysTx.Transaction tx) : base(initialAllocation)
+
+            internal TransactedConnectionList(int initialAllocation, SysTx.Transaction tx)
+                : base(initialAllocation)
             {
                 _transaction = tx;
             }
@@ -47,12 +49,18 @@ namespace System.Data.ProviderBase
 
         private sealed class PendingGetConnection
         {
-            public PendingGetConnection(long dueTime, DbConnection owner, TaskCompletionSource<DbConnectionInternal> completion, DbConnectionOptions? userOptions)
+            public PendingGetConnection(
+                long dueTime,
+                DbConnection owner,
+                TaskCompletionSource<DbConnectionInternal> completion,
+                DbConnectionOptions? userOptions
+            )
             {
                 DueTime = dueTime;
                 Owner = owner;
                 Completion = completion;
             }
+
             public long DueTime { get; private set; }
             public DbConnection Owner { get; private set; }
             public TaskCompletionSource<DbConnectionInternal> Completion { get; private set; }
@@ -61,7 +69,10 @@ namespace System.Data.ProviderBase
 
         private sealed class TransactedConnectionPool
         {
-            private readonly Dictionary<SysTx.Transaction, TransactedConnectionList> _transactedCxns;
+            private readonly Dictionary<
+                SysTx.Transaction,
+                TransactedConnectionList
+            > _transactedCxns;
 
             private readonly DbConnectionPool _pool;
 
@@ -75,10 +86,7 @@ namespace System.Data.ProviderBase
 
             internal DbConnectionPool Pool
             {
-                get
-                {
-                    return _pool;
-                }
+                get { return _pool; }
             }
 
             internal DbConnectionInternal? GetTransactedObject(SysTx.Transaction transaction)
@@ -121,7 +129,10 @@ namespace System.Data.ProviderBase
                 return transactedObject;
             }
 
-            internal void PutTransactedObject(SysTx.Transaction transaction, DbConnectionInternal transactedObject)
+            internal void PutTransactedObject(
+                SysTx.Transaction transaction,
+                DbConnectionInternal transactedObject
+            )
             {
                 Debug.Assert(null != transaction, "null transaction?");
                 Debug.Assert(null != transactedObject, "null transactedObject?");
@@ -142,7 +153,10 @@ namespace System.Data.ProviderBase
                         // synchronize multi-threaded access with GetTransactedObject
                         lock (connections)
                         {
-                            Debug.Assert(0 > connections.IndexOf(transactedObject), "adding to pool a second time?");
+                            Debug.Assert(
+                                0 > connections.IndexOf(transactedObject),
+                                "adding to pool a second time?"
+                            );
 
                             connections.Add(transactedObject);
                         }
@@ -170,14 +184,19 @@ namespace System.Data.ProviderBase
                             //   add a different connection to the transacted pool under the same
                             //   transaction. As a result, threadB may have completed creating the
                             //   transacted pool while threadA was processing the above instructions.
-                            if (txnFound = _transactedCxns.TryGetValue(transaction, out connections))
+                            if (
+                                txnFound = _transactedCxns.TryGetValue(transaction, out connections)
+                            )
                             {
                                 Debug.Assert(connections != null);
 
                                 // synchronize multi-threaded access with GetTransactedObject
                                 lock (connections)
                                 {
-                                    Debug.Assert(0 > connections.IndexOf(transactedObject), "adding to pool a second time?");
+                                    Debug.Assert(
+                                        0 > connections.IndexOf(transactedObject),
+                                        "adding to pool a second time?"
+                                    );
 
                                     connections.Add(transactedObject);
                                 }
@@ -213,7 +232,6 @@ namespace System.Data.ProviderBase
                 }
 
                 Pool.PerformanceCounters.NumberOfFreeConnections.Increment();
-
             }
         }
 
@@ -235,7 +253,9 @@ namespace System.Data.ProviderBase
 
             public PoolWaitHandles() : base(3 * IntPtr.Size)
             {
-                bool mustRelease1 = false, mustRelease2 = false, mustRelease3 = false;
+                bool mustRelease1 = false,
+                    mustRelease2 = false,
+                    mustRelease3 = false;
 
                 _poolSemaphore = new Semaphore(0, MAX_Q_SIZE);
                 _errorEvent = new ManualResetEvent(false);
@@ -259,7 +279,10 @@ namespace System.Data.ProviderBase
 
                     WriteIntPtr(SEMAPHORE_HANDLE * IntPtr.Size, _poolHandle.DangerousGetHandle());
                     WriteIntPtr(ERROR_HANDLE * IntPtr.Size, _errorHandle.DangerousGetHandle());
-                    WriteIntPtr(CREATION_HANDLE * IntPtr.Size, _creationHandle.DangerousGetHandle());
+                    WriteIntPtr(
+                        CREATION_HANDLE * IntPtr.Size,
+                        _creationHandle.DangerousGetHandle()
+                    );
                 }
                 finally
                 {
@@ -346,10 +369,13 @@ namespace System.Data.ProviderBase
         private readonly DbConnectionPoolGroupOptions _connectionPoolGroupOptions;
         private State _state;
 
-        private readonly ConcurrentStack<DbConnectionInternal> _stackOld = new ConcurrentStack<DbConnectionInternal>();
-        private readonly ConcurrentStack<DbConnectionInternal> _stackNew = new ConcurrentStack<DbConnectionInternal>();
+        private readonly ConcurrentStack<DbConnectionInternal> _stackOld =
+            new ConcurrentStack<DbConnectionInternal>();
+        private readonly ConcurrentStack<DbConnectionInternal> _stackNew =
+            new ConcurrentStack<DbConnectionInternal>();
 
-        private readonly ConcurrentQueue<PendingGetConnection> _pendingOpens = new ConcurrentQueue<PendingGetConnection>();
+        private readonly ConcurrentQueue<PendingGetConnection> _pendingOpens =
+            new ConcurrentQueue<PendingGetConnection>();
         private int _pendingOpensWaiting;
 
         private readonly WaitCallback _poolCreateRequest;
@@ -372,9 +398,10 @@ namespace System.Data.ProviderBase
 
         // only created by DbConnectionPoolGroup.GetConnectionPool
         internal DbConnectionPool(
-                            DbConnectionFactory connectionFactory,
-                            DbConnectionPoolGroup connectionPoolGroup,
-                            DbConnectionPoolIdentity identity)
+            DbConnectionFactory connectionFactory,
+            DbConnectionPoolGroup connectionPoolGroup,
+            DbConnectionPoolIdentity identity
+        )
         {
             Debug.Assert(ADP.IsWindowsNT, "Attempting to construct a connection pool on Win9x?");
             Debug.Assert(null != connectionPoolGroup, "null connectionPoolGroup");
@@ -399,7 +426,7 @@ namespace System.Data.ProviderBase
             _waitHandles = new PoolWaitHandles();
 
             _errorWait = ERROR_WAIT_DEFAULT;
-            _errorTimer = null;  // No error yet.
+            _errorTimer = null; // No error yet.
 
             _objectList = new List<DbConnectionInternal>(MaxPoolSize);
 
@@ -462,7 +489,9 @@ namespace System.Data.ProviderBase
 
                 int freeObjects = (_stackNew.Count + _stackOld.Count);
                 int waitingRequests = _waitCount;
-                bool needToReplenish = (freeObjects < waitingRequests) || ((freeObjects == waitingRequests) && (totalObjects > 1));
+                bool needToReplenish =
+                    (freeObjects < waitingRequests)
+                    || ((freeObjects == waitingRequests) && (totalObjects > 1));
 
                 return needToReplenish;
             }
@@ -532,8 +561,9 @@ namespace System.Data.ProviderBase
             // Destroy free objects that put us above MinPoolSize from old stack.
             while (Count > MinPoolSize)
             { // While above MinPoolSize...
-
-                if (_waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */)
+                if (
+                    _waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */
+                )
                 {
                     // We obtained a objects from the semaphore.
                     DbConnectionInternal? obj;
@@ -547,7 +577,7 @@ namespace System.Data.ProviderBase
                         // Transaction roots must survive even aging out (TxEnd event will clean them up).
                         bool shouldDestroy = true;
                         lock (obj)
-                        {    // Lock to prevent race condition window between IsTransactionRoot and shouldDestroy assignment
+                        { // Lock to prevent race condition window between IsTransactionRoot and shouldDestroy assignment
                             if (obj.IsTransactionRoot)
                             {
                                 shouldDestroy = false;
@@ -591,7 +621,9 @@ namespace System.Data.ProviderBase
 
             // Push to the old-stack.  For each free object, move object from
             // new stack to old stack.
-            if (_waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */)
+            if (
+                _waitHandles.PoolSemaphore.WaitOne(0, false) /* != WAIT_TIMEOUT */
+            )
             {
                 while (true)
                 {
@@ -655,25 +687,37 @@ namespace System.Data.ProviderBase
 
         private Timer CreateCleanupTimer()
         {
-            return (new Timer(new TimerCallback(this.CleanupCallback), null, _cleanupWait, _cleanupWait));
+            return (
+                new Timer(new TimerCallback(this.CleanupCallback), null, _cleanupWait, _cleanupWait)
+            );
         }
 
         private bool IsBlockingPeriodEnabled() => true;
 
-        private DbConnectionInternal CreateObject(DbConnection? owningObject, DbConnectionOptions? userOptions, DbConnectionInternal? oldConnection)
+        private DbConnectionInternal CreateObject(
+            DbConnection? owningObject,
+            DbConnectionOptions? userOptions,
+            DbConnectionInternal? oldConnection
+        )
         {
             DbConnectionInternal? newObj = null;
 
             try
             {
-                newObj = _connectionFactory.CreatePooledConnection(this, owningObject, _connectionPoolGroup.ConnectionOptions, _connectionPoolGroup.PoolKey, userOptions);
+                newObj = _connectionFactory.CreatePooledConnection(
+                    this,
+                    owningObject,
+                    _connectionPoolGroup.ConnectionOptions,
+                    _connectionPoolGroup.PoolKey,
+                    userOptions
+                );
                 if (null == newObj)
                 {
-                    throw ADP.InternalError(ADP.InternalErrorCode.CreateObjectReturnedNull);    // CreateObject succeeded, but null object
+                    throw ADP.InternalError(ADP.InternalErrorCode.CreateObjectReturnedNull); // CreateObject succeeded, but null object
                 }
                 if (!newObj.CanBePooled)
                 {
-                    throw ADP.InternalError(ADP.InternalErrorCode.NewObjectCannotBePooled);        // CreateObject succeeded, but non-poolable object
+                    throw ADP.InternalError(ADP.InternalErrorCode.NewObjectCannotBePooled); // CreateObject succeeded, but non-poolable object
                 }
                 newObj.PrePush(null);
 
@@ -685,7 +729,7 @@ namespace System.Data.ProviderBase
                     }
                     _objectList.Add(newObj);
                     _totalObjects = _objectList.Count;
-                    PerformanceCounters.NumberOfPooledConnections.Increment();   // TODO: Performance: Consider moving outside of lock?
+                    PerformanceCounters.NumberOfPooledConnections.Increment(); // TODO: Performance: Consider moving outside of lock?
                 }
 
                 // If the old connection belonged to another pool, we need to remove it from that
@@ -694,7 +738,10 @@ namespace System.Data.ProviderBase
                     var oldConnectionPool = oldConnection.Pool;
                     if (oldConnectionPool != null && oldConnectionPool != this)
                     {
-                        Debug.Assert(oldConnectionPool._state == State.ShuttingDown, "Old connections pool should be shutting down");
+                        Debug.Assert(
+                            oldConnectionPool._state == State.ShuttingDown,
+                            "Old connections pool should be shutting down"
+                        );
                         lock (oldConnectionPool._objectList)
                         {
                             oldConnectionPool._objectList.Remove(oldConnection);
@@ -728,11 +775,15 @@ namespace System.Data.ProviderBase
                 // Make sure the timer starts even if ThreadAbort occurs after setting the ErrorEvent.
 
                 // timer allocation has to be done out of CER block
-                Timer t = new Timer(new TimerCallback(this.ErrorCallback), null, Timeout.Infinite, Timeout.Infinite);
+                Timer t = new Timer(
+                    new TimerCallback(this.ErrorCallback),
+                    null,
+                    Timeout.Infinite,
+                    Timeout.Infinite
+                );
                 bool timerIsNotDisposed;
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
                     _waitHandles.ErrorEvent.Set();
@@ -829,7 +880,10 @@ namespace System.Data.ProviderBase
                                 //   Although perhaps not ideal, this is OK because the
                                 //   DelegatedTransactionEnded event will clean up the
                                 //   connection appropriately regardless of the pool state.
-                                Debug.Assert(_transactedConnectionPool != null, "Transacted connection pool was not expected to be null.");
+                                Debug.Assert(
+                                    _transactedConnectionPool != null,
+                                    "Transacted connection pool was not expected to be null."
+                                );
                                 _transactedConnectionPool.PutTransactedObject(transaction, obj);
                                 rootTxn = true;
                             }
@@ -899,9 +953,7 @@ namespace System.Data.ProviderBase
             // we simply leave it alone; when the transaction completes, it will
             // come back through PutObjectFromTransactedPool, which will call us
             // again.
-            if (obj.IsTxRootWaitingForTxEnd)
-            {
-            }
+            if (obj.IsTxRootWaitingForTxEnd) { }
             else
             {
                 bool removed = false;
@@ -944,7 +996,10 @@ namespace System.Data.ProviderBase
 
         private void WaitForPendingOpen()
         {
-            Debug.Assert(!Thread.CurrentThread.IsThreadPoolThread, "This thread may block for a long time.  Threadpool threads should not be used.");
+            Debug.Assert(
+                !Thread.CurrentThread.IsThreadPoolThread,
+                "This thread may block for a long time.  Threadpool threads should not be used."
+            );
 
             PendingGetConnection? next;
 
@@ -956,8 +1011,7 @@ namespace System.Data.ProviderBase
                 try
                 {
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try
-                    { }
+                    try { }
                     finally
                     {
                         started = Interlocked.CompareExchange(ref _pendingOpensWaiting, 1, 0) == 0;
@@ -994,25 +1048,40 @@ namespace System.Data.ProviderBase
                         {
                             bool allowCreate = true;
                             bool onlyOneCheckConnection = false;
-                            ADP.SetCurrentTransaction(next.Completion.Task.AsyncState as Transactions.Transaction);
-                            timeout = !TryGetConnection(next.Owner, delay, allowCreate, onlyOneCheckConnection, next.UserOptions, out connection);
+                            ADP.SetCurrentTransaction(
+                                next.Completion.Task.AsyncState as Transactions.Transaction
+                            );
+                            timeout = !TryGetConnection(
+                                next.Owner,
+                                delay,
+                                allowCreate,
+                                onlyOneCheckConnection,
+                                next.UserOptions,
+                                out connection
+                            );
                         }
                         catch (System.OutOfMemoryException)
                         {
                             if (connection != null)
-                            { connection.DoomThisConnection(); }
+                            {
+                                connection.DoomThisConnection();
+                            }
                             throw;
                         }
                         catch (System.StackOverflowException)
                         {
                             if (connection != null)
-                            { connection.DoomThisConnection(); }
+                            {
+                                connection.DoomThisConnection();
+                            }
                             throw;
                         }
                         catch (System.Threading.ThreadAbortException)
                         {
                             if (connection != null)
-                            { connection.DoomThisConnection(); }
+                            {
+                                connection.DoomThisConnection();
+                            }
                             throw;
                         }
                         catch (Exception e)
@@ -1026,11 +1095,16 @@ namespace System.Data.ProviderBase
                         }
                         else if (timeout)
                         {
-                            next.Completion.TrySetException(ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout()));
+                            next.Completion.TrySetException(
+                                ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
+                            );
                         }
                         else
                         {
-                            Debug.Assert(connection != null, "connection should never be null in success case");
+                            Debug.Assert(
+                                connection != null,
+                                "connection should never be null in success case"
+                            );
                             if (!next.Completion.TrySetResult(connection))
                             {
                                 // if the completion was cancelled, lets try and get this connection back for the next try
@@ -1046,11 +1120,15 @@ namespace System.Data.ProviderBase
                         Interlocked.Exchange(ref _pendingOpensWaiting, 0);
                     }
                 }
-
             } while (_pendingOpens.TryPeek(out next));
         }
 
-        internal bool TryGetConnection(DbConnection owningObject, TaskCompletionSource<DbConnectionInternal>? retry, DbConnectionOptions? userOptions, out DbConnectionInternal? connection)
+        internal bool TryGetConnection(
+            DbConnection owningObject,
+            TaskCompletionSource<DbConnectionInternal>? retry,
+            DbConnectionOptions? userOptions,
+            out DbConnectionInternal? connection
+        )
         {
             uint waitForMultipleObjectsTimeout = 0;
             bool allowCreate = false;
@@ -1073,7 +1151,16 @@ namespace System.Data.ProviderBase
             }
 
             bool onlyOneCheckConnection = true;
-            if (TryGetConnection(owningObject, waitForMultipleObjectsTimeout, allowCreate, onlyOneCheckConnection, userOptions, out connection))
+            if (
+                TryGetConnection(
+                    owningObject,
+                    waitForMultipleObjectsTimeout,
+                    allowCreate,
+                    onlyOneCheckConnection,
+                    userOptions,
+                    out connection
+                )
+            )
             {
                 return true;
             }
@@ -1083,12 +1170,14 @@ namespace System.Data.ProviderBase
                 return true;
             }
 
-            var pendingGetConnection =
-                new PendingGetConnection(
-                    CreationTimeout == 0 ? Timeout.Infinite : ADP.TimerCurrent() + ADP.TimerFromSeconds(CreationTimeout / 1000),
-                    owningObject,
-                    retry,
-                    userOptions);
+            var pendingGetConnection = new PendingGetConnection(
+                CreationTimeout == 0
+                    ? Timeout.Infinite
+                    : ADP.TimerCurrent() + ADP.TimerFromSeconds(CreationTimeout / 1000),
+                owningObject,
+                retry,
+                userOptions
+            );
             _pendingOpens.Enqueue(pendingGetConnection);
 
             // it is better to StartNew too many times than not enough
@@ -1103,7 +1192,14 @@ namespace System.Data.ProviderBase
             return false;
         }
 
-        private bool TryGetConnection(DbConnection owningObject, uint waitForMultipleObjectsTimeout, bool allowCreate, bool onlyOneCheckConnection, DbConnectionOptions? userOptions, out DbConnectionInternal? connection)
+        private bool TryGetConnection(
+            DbConnection owningObject,
+            uint waitForMultipleObjectsTimeout,
+            bool allowCreate,
+            bool onlyOneCheckConnection,
+            DbConnectionOptions? userOptions,
+            out DbConnectionInternal? connection
+        )
         {
             DbConnectionInternal? obj = null;
             SysTx.Transaction? transaction = null;
@@ -1139,11 +1235,20 @@ namespace System.Data.ProviderBase
                         RuntimeHelpers.PrepareConstrainedRegions();
                         try
                         {
-                            Debug.Assert(2 == waitHandleCount || 3 == waitHandleCount, "unexpected waithandle count");
+                            Debug.Assert(
+                                2 == waitHandleCount || 3 == waitHandleCount,
+                                "unexpected waithandle count"
+                            );
                         }
                         finally
                         {
-                            waitResult = SafeNativeMethods.WaitForMultipleObjectsEx(waitHandleCount, _waitHandles.DangerousGetHandle(), false, waitForMultipleObjectsTimeout, false);
+                            waitResult = SafeNativeMethods.WaitForMultipleObjectsEx(
+                                waitHandleCount,
+                                _waitHandles.DangerousGetHandle(),
+                                false,
+                                waitForMultipleObjectsTimeout,
+                                false
+                            );
 
                             // call GetHRForLastWin32Error immediately after after the native call
                             if (waitResult == WAIT_FAILED)
@@ -1208,7 +1313,10 @@ namespace System.Data.ProviderBase
                                         if (!ReclaimEmancipatedObjects())
                                         {
                                             // modify handle array not to wait on creation mutex anymore
-                                            Debug.Assert(2 == CREATION_HANDLE, "creation handle changed value");
+                                            Debug.Assert(
+                                                2 == CREATION_HANDLE,
+                                                "creation handle changed value"
+                                            );
                                             waitHandleCount = 2;
                                         }
                                     }
@@ -1225,11 +1333,15 @@ namespace System.Data.ProviderBase
                                 if ((obj != null) && (!obj.IsConnectionAlive()))
                                 {
                                     DestroyObject(obj);
-                                    obj = null;     // Setting to null in case creating a new object fails
+                                    obj = null; // Setting to null in case creating a new object fails
 
                                     if (onlyOneCheckConnection)
                                     {
-                                        if (_waitHandles.CreationSemaphore.WaitOne(unchecked((int)waitForMultipleObjectsTimeout)))
+                                        if (
+                                            _waitHandles.CreationSemaphore.WaitOne(
+                                                unchecked((int)waitForMultipleObjectsTimeout)
+                                            )
+                                        )
                                         {
                                             RuntimeHelpers.PrepareConstrainedRegions();
                                             try
@@ -1252,29 +1364,47 @@ namespace System.Data.ProviderBase
                                 break;
 
                             case WAIT_FAILED:
-                                Debug.Assert(waitForMultipleObjectsExHR != 0, "WaitForMultipleObjectsEx failed but waitForMultipleObjectsExHR remained 0");
+                                Debug.Assert(
+                                    waitForMultipleObjectsExHR != 0,
+                                    "WaitForMultipleObjectsEx failed but waitForMultipleObjectsExHR remained 0"
+                                );
                                 Interlocked.Decrement(ref _waitCount);
                                 Marshal.ThrowExceptionForHR(waitForMultipleObjectsExHR);
                                 goto default; // if ThrowExceptionForHR didn't throw for some reason
                             case (WAIT_ABANDONED + SEMAPHORE_HANDLE):
                                 Interlocked.Decrement(ref _waitCount);
-                                throw new AbandonedMutexException(SEMAPHORE_HANDLE, _waitHandles.PoolSemaphore);
+                                throw new AbandonedMutexException(
+                                    SEMAPHORE_HANDLE,
+                                    _waitHandles.PoolSemaphore
+                                );
                             case (WAIT_ABANDONED + ERROR_HANDLE):
                                 Interlocked.Decrement(ref _waitCount);
-                                throw new AbandonedMutexException(ERROR_HANDLE, _waitHandles.ErrorEvent);
+                                throw new AbandonedMutexException(
+                                    ERROR_HANDLE,
+                                    _waitHandles.ErrorEvent
+                                );
                             case (WAIT_ABANDONED + CREATION_HANDLE):
                                 Interlocked.Decrement(ref _waitCount);
-                                throw new AbandonedMutexException(CREATION_HANDLE, _waitHandles.CreationSemaphore);
+                                throw new AbandonedMutexException(
+                                    CREATION_HANDLE,
+                                    _waitHandles.CreationSemaphore
+                                );
                             default:
                                 Interlocked.Decrement(ref _waitCount);
-                                throw ADP.InternalError(ADP.InternalErrorCode.UnexpectedWaitAnyResult);
+                                throw ADP.InternalError(
+                                    ADP.InternalErrorCode.UnexpectedWaitAnyResult
+                                );
                         }
                     }
                     finally
                     {
                         if (CREATION_HANDLE == waitResult)
                         {
-                            int result = SafeNativeMethods.ReleaseSemaphore(_waitHandles.CreationHandle.DangerousGetHandle(), 1, IntPtr.Zero);
+                            int result = SafeNativeMethods.ReleaseSemaphore(
+                                _waitHandles.CreationHandle.DangerousGetHandle(),
+                                1,
+                                IntPtr.Zero
+                            );
                             if (0 == result)
                             { // failure case
                                 releaseSemaphoreResult = Marshal.GetHRForLastWin32Error();
@@ -1301,10 +1431,14 @@ namespace System.Data.ProviderBase
             return true;
         }
 
-        private void PrepareConnection(DbConnection owningObject, DbConnectionInternal obj, SysTx.Transaction? transaction)
+        private void PrepareConnection(
+            DbConnection owningObject,
+            DbConnectionInternal obj,
+            SysTx.Transaction? transaction
+        )
         {
             lock (obj)
-            {   // Protect against Clear and ReclaimEmancipatedObjects, which call IsEmancipated, which is affected by PrePush and PostPop
+            { // Protect against Clear and ReclaimEmancipatedObjects, which call IsEmancipated, which is affected by PrePush and PostPop
                 obj.PostPop(owningObject);
             }
             try
@@ -1327,11 +1461,19 @@ namespace System.Data.ProviderBase
         /// <param name="userOptions">Options used to create the new connection</param>
         /// <param name="oldConnection">Inner connection that will be replaced</param>
         /// <returns>A new inner connection that is attached to the <paramref name="owningObject"/></returns>
-        internal DbConnectionInternal? ReplaceConnection(DbConnection owningObject, DbConnectionOptions? userOptions, DbConnectionInternal? oldConnection)
+        internal DbConnectionInternal? ReplaceConnection(
+            DbConnection owningObject,
+            DbConnectionOptions? userOptions,
+            DbConnectionInternal? oldConnection
+        )
         {
             PerformanceCounters.SoftConnectsPerSecond.Increment();
 
-            DbConnectionInternal? newConnection = UserCreateRequest(owningObject, userOptions, oldConnection);
+            DbConnectionInternal? newConnection = UserCreateRequest(
+                owningObject,
+                userOptions,
+                oldConnection
+            );
 
             if (newConnection != null)
             {
@@ -1442,7 +1584,10 @@ namespace System.Data.ProviderBase
                         // since either Open will fail or we will open a object for this pool that does
                         // not belong in this pool.  The side effect of this is that if using integrated
                         // security min pool size cannot be guaranteed.
-                        if (UsingIntegrateSecurity && !_identity!.Equals(DbConnectionPoolIdentity.GetCurrent()))
+                        if (
+                            UsingIntegrateSecurity
+                            && !_identity!.Equals(DbConnectionPoolIdentity.GetCurrent())
+                        )
                         {
                             return;
                         }
@@ -1458,11 +1603,14 @@ namespace System.Data.ProviderBase
                             // Obtain creation mutex so we're the only one creating objects
                             // and we must have the wait result
                             RuntimeHelpers.PrepareConstrainedRegions();
-                            try
-                            { }
+                            try { }
                             finally
                             {
-                                waitResult = SafeNativeMethods.WaitForSingleObjectEx(_waitHandles.CreationHandle.DangerousGetHandle(), timeout, false);
+                                waitResult = SafeNativeMethods.WaitForSingleObjectEx(
+                                    _waitHandles.CreationHandle.DangerousGetHandle(),
+                                    timeout,
+                                    false
+                                );
                             }
                             if (WAIT_OBJECT_0 == waitResult)
                             {
@@ -1474,7 +1622,11 @@ namespace System.Data.ProviderBase
                                     while (NeedToReplenish)
                                     {
                                         // Don't specify any user options because there is no outer connection associated with the new connection
-                                        newObj = CreateObject(owningObject: null, userOptions: null, oldConnection: null);
+                                        newObj = CreateObject(
+                                            owningObject: null,
+                                            userOptions: null,
+                                            oldConnection: null
+                                        );
 
                                         // We do not need to check error flag here, since we know if
                                         // CreateObject returned null, we are in error case.
@@ -1517,7 +1669,11 @@ namespace System.Data.ProviderBase
                             if (WAIT_OBJECT_0 == waitResult)
                             {
                                 // reuse waitResult and ignore its value
-                                waitResult = SafeNativeMethods.ReleaseSemaphore(_waitHandles.CreationHandle.DangerousGetHandle(), 1, IntPtr.Zero);
+                                waitResult = SafeNativeMethods.ReleaseSemaphore(
+                                    _waitHandles.CreationHandle.DangerousGetHandle(),
+                                    1,
+                                    IntPtr.Zero
+                                );
                             }
                             if (mustRelease)
                             {
@@ -1542,7 +1698,6 @@ namespace System.Data.ProviderBase
             _stackNew.Push(obj);
             _waitHandles.PoolSemaphore.Release(1);
             PerformanceCounters.NumberOfFreeConnections.Increment();
-
         }
 
         internal void PutObject(DbConnectionInternal obj, object owningObject)
@@ -1694,7 +1849,11 @@ namespace System.Data.ProviderBase
             }
         }
 
-        private DbConnectionInternal? UserCreateRequest(DbConnection owningObject, DbConnectionOptions? userOptions, DbConnectionInternal? oldConnection = null)
+        private DbConnectionInternal? UserCreateRequest(
+            DbConnection owningObject,
+            DbConnectionOptions? userOptions,
+            DbConnectionInternal? oldConnection = null
+        )
         {
             // called by user when they were not able to obtain a free object but
             // instead obtained creation mutex
@@ -1712,7 +1871,11 @@ namespace System.Data.ProviderBase
                     // If we did not find any objects to reclaim, create a new one.
 
                     // TODO: Consider implement a control knob here; why do we only check for dead objects ever other time?  why not every 10th time or every time?
-                    if ((oldConnection != null) || (Count & 0x1) == 0x1 || !ReclaimEmancipatedObjects())
+                    if (
+                        (oldConnection != null)
+                        || (Count & 0x1) == 0x1
+                        || !ReclaimEmancipatedObjects()
+                    )
                         obj = CreateObject(owningObject, userOptions, oldConnection);
                 }
                 return obj;

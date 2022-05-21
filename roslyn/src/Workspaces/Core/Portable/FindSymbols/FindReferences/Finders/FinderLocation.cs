@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// is not necessarily the same location you would get by calling <see cref="Node"/>.<see
         /// cref="SyntaxNode.GetLocation"/>.  Instead, this location is where we want to navigate
         /// the user to.  A case where this can be different is with an indexer reference.  The <see
-        /// cref="Node"/> will be the node for the full 'ElementAccessExpression', whereas the 
+        /// cref="Node"/> will be the node for the full 'ElementAccessExpression', whereas the
         /// location we will take the user to will be the zero-length position immediately preceding
         /// the `[` character.
         /// </summary>

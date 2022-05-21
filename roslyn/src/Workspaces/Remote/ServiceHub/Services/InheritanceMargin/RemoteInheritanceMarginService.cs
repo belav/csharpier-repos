@@ -9,31 +9,46 @@ using Microsoft.CodeAnalysis.InheritanceMargin;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteInheritanceMarginService : BrokeredServiceBase, IRemoteInheritanceMarginService
+    internal sealed class RemoteInheritanceMarginService
+        : BrokeredServiceBase,
+            IRemoteInheritanceMarginService
     {
         internal sealed class Factory : FactoryBase<IRemoteInheritanceMarginService>
         {
-            protected override IRemoteInheritanceMarginService CreateService(in ServiceConstructionArguments arguments)
+            protected override IRemoteInheritanceMarginService CreateService(
+                in ServiceConstructionArguments arguments
+            )
             {
                 return new RemoteInheritanceMarginService(arguments);
             }
         }
 
-        public RemoteInheritanceMarginService(in ServiceConstructionArguments arguments) : base(in arguments)
-        {
-        }
+        public RemoteInheritanceMarginService(in ServiceConstructionArguments arguments)
+            : base(in arguments) { }
 
-        public ValueTask<ImmutableArray<SerializableInheritanceMarginItem>> GetInheritanceMarginItemsAsync(
+        public ValueTask<
+            ImmutableArray<SerializableInheritanceMarginItem>
+        > GetInheritanceMarginItemsAsync(
             PinnedSolutionInfo pinnedSolutionInfo,
             ProjectId projectId,
             ImmutableArray<(SymbolKey symbolKey, int lineNumber)> symbolKeyAndLineNumbers,
-            CancellationToken cancellationToken)
-            => RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(pinnedSolutionInfo, cancellationToken).ConfigureAwait(false);
-                return await InheritanceMarginServiceHelper
-                    .GetInheritanceMemberItemAsync(solution, projectId, symbolKeyAndLineNumbers, cancellationToken)
-                    .ConfigureAwait(false);
-            }, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(pinnedSolutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    return await InheritanceMarginServiceHelper
+                        .GetInheritanceMemberItemAsync(
+                            solution,
+                            projectId,
+                            symbolKeyAndLineNumbers,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
     }
 }

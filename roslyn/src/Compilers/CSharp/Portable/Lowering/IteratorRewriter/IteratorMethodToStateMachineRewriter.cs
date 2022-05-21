@@ -17,7 +17,8 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class IteratorMethodToStateMachineRewriter : MethodToStateMachineRewriter
+    internal sealed partial class IteratorMethodToStateMachineRewriter
+        : MethodToStateMachineRewriter
     {
         /// <summary>
         /// The field of the generated iterator class that underlies the Current property.
@@ -47,13 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Finally state of the next Finally frame if such created.
         /// Finally state is a negative decreasing number starting with -3. (-2 is used for something else).
         /// Root frame has finally state -1.
-        /// 
+        ///
         /// The Finally state is the state that we are in when "between states".
         /// Regular states are positive and are the only states that can be resumed to.
-        /// The purpose of distinct finally states is to have enough information about 
-        /// which finally handlers must run when we need to finalize iterator after a fault. 
+        /// The purpose of distinct finally states is to have enough information about
+        /// which finally handlers must run when we need to finalize iterator after a fault.
         /// </summary>
-        private int _nextFinalizeState = StateMachineStates.FinishedStateMachine - 1;  // -3
+        private int _nextFinalizeState = StateMachineStates.FinishedStateMachine - 1; // -3
 
         internal IteratorMethodToStateMachineRewriter(
             SyntheticBoundNodeFactory F,
@@ -65,13 +66,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             SynthesizedLocalOrdinalsDispenser synthesizedLocalOrdinals,
             VariableSlotAllocator slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
-            BindingDiagnosticBag diagnostics)
-            : base(F, originalMethod, state, hoistedVariables, nonReusableLocalProxies, synthesizedLocalOrdinals, slotAllocatorOpt, nextFreeHoistedLocalSlot, diagnostics, useFinalizerBookkeeping: false)
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                F,
+                originalMethod,
+                state,
+                hoistedVariables,
+                nonReusableLocalProxies,
+                synthesizedLocalOrdinals,
+                slotAllocatorOpt,
+                nextFreeHoistedLocalSlot,
+                diagnostics,
+                useFinalizerBookkeeping: false
+            )
         {
             _current = current;
         }
 
-        internal void GenerateMoveNextAndDispose(BoundStatement body, SynthesizedImplementationMethod moveNextMethod, SynthesizedImplementationMethod disposeMethod)
+        internal void GenerateMoveNextAndDispose(
+            BoundStatement body,
+            SynthesizedImplementationMethod moveNextMethod,
+            SynthesizedImplementationMethod disposeMethod
+        )
         {
             // scan body for yielding try blocks
             _yieldsInTryAnalysis = new YieldsInTryAnalysis(body);
@@ -81,7 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _tryNestingLevel++;
             }
 
-            /////////////////////////////////// 
+            ///////////////////////////////////
             // Generate the body for MoveNext()
             ///////////////////////////////////
 
@@ -99,20 +116,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             // }
             // state_0:
             // state = -1;
-            // [optional: cachedThis = capturedThis;] 
+            // [optional: cachedThis = capturedThis;]
             // [[rewritten body]]
-            newBody = F.Block((object)cachedThis == null ?
-                                ImmutableArray.Create(cachedState) :
-                                ImmutableArray.Create(cachedState, cachedThis),
-
-                    F.HiddenSequencePoint(),
-                    F.Assignment(F.Local(cachedState), F.Field(F.This(), stateField)),
-                    CacheThisIfNeeded(),
-                    Dispatch(),
-                    GenerateReturn(finished: true),
-                    F.Label(initialLabel),
-                    F.Assignment(F.Field(F.This(), stateField), F.Literal(StateMachineStates.NotStartedStateMachine)),
-                    newBody);
+            newBody = F.Block(
+                (object)cachedThis == null
+                    ? ImmutableArray.Create(cachedState)
+                    : ImmutableArray.Create(cachedState, cachedThis),
+                F.HiddenSequencePoint(),
+                F.Assignment(F.Local(cachedState), F.Field(F.This(), stateField)),
+                CacheThisIfNeeded(),
+                Dispatch(),
+                GenerateReturn(finished: true),
+                F.Label(initialLabel),
+                F.Assignment(
+                    F.Field(F.This(), stateField),
+                    F.Literal(StateMachineStates.NotStartedStateMachine)
+                ),
+                newBody
+            );
 
             //
             // C# spec requires that iterators trap all exceptions and self-dispose eagerly.
@@ -127,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //
             if (_yieldsInTryAnalysis.ContainsYieldsInTrys())
             {
-                // try 
+                // try
                 // {
                 //    body;
                 // }
@@ -143,7 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             newBody = HandleReturn(newBody);
             F.CloseMethod(F.SequencePoint(body.Syntax, newBody));
 
-            /////////////////////////////////// 
+            ///////////////////////////////////
             // Generate the body for Dispose().
             ///////////////////////////////////
             F.CurrentFunction = disposeMethod;
@@ -160,10 +181,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var state = F.Local(stateLocal);
 
                 var disposeBody = F.Block(
-                                    ImmutableArray.Create<LocalSymbol>(stateLocal),
-                                    F.Assignment(F.Local(stateLocal), F.Field(F.This(), stateField)),
-                                    EmitFinallyFrame(rootFrame, state),
-                                    F.Return());
+                    ImmutableArray.Create<LocalSymbol>(stateLocal),
+                    F.Assignment(F.Local(stateLocal), F.Field(F.This(), stateField)),
+                    EmitFinallyFrame(rootFrame, state),
+                    F.Return()
+                );
 
                 F.CloseMethod(disposeBody);
             }
@@ -175,9 +197,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 //   body;
                 //   return false;
-                newBody = F.Block(
-                        newBody,
-                        F.Return(F.Literal(false)));
+                newBody = F.Block(newBody, F.Return(F.Literal(false)));
             }
             else
             {
@@ -186,11 +206,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // exitLabel:
                 //   return methodValue;
                 newBody = F.Block(
-                        ImmutableArray.Create<LocalSymbol>(_methodValue),
-                        newBody,
-                        F.Assignment(this.F.Local(_methodValue), this.F.Literal(true)),
-                        F.Label(_exitLabel),
-                        F.Return(this.F.Local(_methodValue)));
+                    ImmutableArray.Create<LocalSymbol>(_methodValue),
+                    newBody,
+                    F.Assignment(this.F.Local(_methodValue), this.F.Literal(true)),
+                    F.Label(_exitLabel),
+                    F.Return(this.F.Local(_methodValue))
+                );
             }
 
             return newBody;
@@ -200,9 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Produces a Try/Finally if frame has a handler (otherwise a regular block).
         /// Handler goes into the Finally.
         /// If there are nested frames, they are emitted into the try block.
-        /// This way the handler for the current frame is guaranteed to run even if 
+        /// This way the handler for the current frame is guaranteed to run even if
         /// nested handlers throw exceptions.
-        /// 
+        ///
         /// {
         ///     switch(state)
         ///     {
@@ -234,13 +255,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///                 handler_1_2()
         ///             }
         ///             break;
-        ///             
+        ///
         ///         case state5:
         ///             ... another dispatch of nested states to their finally blocks ...
         ///             break;
         ///     }
         /// }
-        /// 
+        ///
         /// </summary>
         private BoundStatement EmitFinallyFrame(IteratorFinallyFrame frame, BoundLocal state)
         {
@@ -248,16 +269,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (frame.knownStates != null)
             {
                 var breakLabel = F.GenerateLabel("break");
-                var sections = from ft in frame.knownStates
-                               group ft.Key by ft.Value into g
-                               select F.SwitchSection(
-                                    new List<int>(g),
-                                    EmitFinallyFrame(g.Key, state),
-                                    F.Goto(breakLabel));
+                var sections =
+                    from ft in frame.knownStates
+                    group ft.Key by ft.Value into g
+                    select F.SwitchSection(
+                        new List<int>(g),
+                        EmitFinallyFrame(g.Key, state),
+                        F.Goto(breakLabel)
+                    );
 
-                body = F.Block(
-                    F.Switch(state, sections.ToImmutableArray()),
-                    F.Label(breakLabel));
+                body = F.Block(F.Switch(state, sections.ToImmutableArray()), F.Label(breakLabel));
             }
 
             if (!frame.IsRoot())
@@ -266,7 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 body = F.Try(
                     tryBlock,
                     ImmutableArray<BoundCatchBlock>.Empty,
-                    F.Block(F.ExpressionStatement(F.Call(F.This(), frame.handler))));
+                    F.Block(F.ExpressionStatement(F.Call(F.This(), frame.handler)))
+                );
             }
 
             Debug.Assert(body != null, "we should have either sub-dispatch or a handler");
@@ -297,12 +319,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     gotoExit = (BoundGotoStatement)VisitGotoStatement(gotoExit);
                 }
 
-                return this.F.Block(
-                     F.Assignment(this.F.Local(_methodValue), result),
-                     gotoExit);
+                return this.F.Block(F.Assignment(this.F.Local(_methodValue), result), gotoExit);
             }
         }
-
 
         #region Visitors
 
@@ -334,7 +353,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 GenerateReturn(finished: false),
                 F.Label(resumeLabel),
                 F.HiddenSequencePoint(),
-                F.Assignment(F.Field(F.This(), stateField), F.Literal(_currentFinallyFrame.finalizeState)));
+                F.Assignment(
+                    F.Field(F.This(), stateField),
+                    F.Literal(_currentFinallyFrame.finalizeState)
+                )
+            );
         }
 
         public override BoundNode VisitGotoStatement(BoundGotoStatement node)
@@ -342,13 +365,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression caseExpressionOpt = (BoundExpression)this.Visit(node.CaseExpressionOpt);
             BoundLabel labelExpressionOpt = (BoundLabel)this.Visit(node.LabelExpressionOpt);
             var proxyLabel = _currentFinallyFrame.ProxyLabelIfNeeded(node.Label);
-            Debug.Assert(node.Label == proxyLabel || !(F.CurrentFunction is IteratorFinallyMethodSymbol), "should not be proxying branches in finally");
+            Debug.Assert(
+                node.Label == proxyLabel || !(F.CurrentFunction is IteratorFinallyMethodSymbol),
+                "should not be proxying branches in finally"
+            );
             return node.Update(proxyLabel, caseExpressionOpt, labelExpressionOpt);
         }
 
         public override BoundNode VisitConditionalGoto(BoundConditionalGoto node)
         {
-            Debug.Assert(node.Label == _currentFinallyFrame.ProxyLabelIfNeeded(node.Label), "conditional leave?");
+            Debug.Assert(
+                node.Label == _currentFinallyFrame.ProxyLabelIfNeeded(node.Label),
+                "conditional leave?"
+            );
             return base.VisitConditionalGoto(node);
         }
 
@@ -359,11 +388,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _tryNestingLevel++;
                 var result = node.Update(
-                                    (BoundBlock)Visit(node.TryBlock),
-                                    VisitList(node.CatchBlocks),
-                                    (BoundBlock)Visit(node.FinallyBlockOpt),
-                                    node.FinallyLabelOpt,
-                                    node.PreferFaultHandler);
+                    (BoundBlock)Visit(node.TryBlock),
+                    VisitList(node.CatchBlocks),
+                    (BoundBlock)Visit(node.FinallyBlockOpt),
+                    node.FinallyLabelOpt,
+                    node.PreferFaultHandler
+                );
 
                 _tryNestingLevel--;
                 return result;
@@ -378,7 +408,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenBody = (BoundStatement)this.Visit(node.TryBlock);
 
             Debug.Assert(!frame.IsRoot());
-            Debug.Assert(frame.parent.knownStates.ContainsValue(frame), "parent must be aware about states in the child frame");
+            Debug.Assert(
+                frame.parent.knownStates.ContainsValue(frame),
+                "parent must be aware about states in the child frame"
+            );
 
             var finallyMethod = frame.handler;
             var origMethod = F.CurrentFunction;
@@ -396,18 +429,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             //      return;
             // }
             Debug.Assert(frame.parent.finalizeState == _currentFinallyFrame.finalizeState);
-            rewrittenHandler = F.Block((object)this.cachedThis != null ?
-                                            ImmutableArray.Create(this.cachedThis) :
-                                            ImmutableArray<LocalSymbol>.Empty,
-                                F.Assignment(F.Field(F.This(), stateField), F.Literal(frame.parent.finalizeState)),
-                                CacheThisIfNeeded(),
-                                rewrittenHandler,
-                                F.Return()
-                            );
+            rewrittenHandler = F.Block(
+                (object)this.cachedThis != null
+                    ? ImmutableArray.Create(this.cachedThis)
+                    : ImmutableArray<LocalSymbol>.Empty,
+                F.Assignment(F.Field(F.This(), stateField), F.Literal(frame.parent.finalizeState)),
+                CacheThisIfNeeded(),
+                rewrittenHandler,
+                F.Return()
+            );
 
             F.CloseMethod(rewrittenHandler);
             F.CurrentFunction = origMethod;
-
 
             var bodyStatements = ArrayBuilder<BoundStatement>.GetInstance();
 
@@ -418,7 +451,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             //      body;
             //      this.Finally();   // will reset the state to the finally state of the parent.
             // }
-            bodyStatements.Add(F.Assignment(F.Field(F.This(), stateField), F.Literal(frame.finalizeState)));
+            bodyStatements.Add(
+                F.Assignment(F.Field(F.This(), stateField), F.Literal(frame.finalizeState))
+            );
             bodyStatements.Add(rewrittenBody);
             bodyStatements.Add(F.ExpressionStatement(F.Call(F.This(), finallyMethod)));
 
@@ -456,7 +491,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var state = _nextFinalizeState--;
 
             var finallyMethod = MakeSynthesizedFinally(state);
-            var newFrame = new IteratorFinallyFrame(_currentFinallyFrame, state, finallyMethod, _yieldsInTryAnalysis.Labels(statement));
+            var newFrame = new IteratorFinallyFrame(
+                _currentFinallyFrame,
+                state,
+                finallyMethod,
+                _yieldsInTryAnalysis.Labels(statement)
+            );
             newFrame.AddState(state);
 
             _currentFinallyFrame = newFrame;
@@ -477,9 +517,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         private IteratorFinallyMethodSymbol MakeSynthesizedFinally(int state)
         {
             var stateMachineType = (IteratorStateMachine)F.CurrentType;
-            var finallyMethod = new IteratorFinallyMethodSymbol(stateMachineType, GeneratedNames.MakeIteratorFinallyMethodName(state));
+            var finallyMethod = new IteratorFinallyMethodSymbol(
+                stateMachineType,
+                GeneratedNames.MakeIteratorFinallyMethodName(state)
+            );
 
-            F.ModuleBuilderOpt.AddSynthesizedDefinition(stateMachineType, finallyMethod.GetCciAdapter());
+            F.ModuleBuilderOpt.AddSynthesizedDefinition(
+                stateMachineType,
+                finallyMethod.GetCciAdapter()
+            );
             return finallyMethod;
         }
 

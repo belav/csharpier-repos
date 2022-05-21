@@ -9,16 +9,67 @@ internal static partial class Interop
 {
     internal static partial class NCrypt
     {
-        internal static unsafe ErrorCode NCryptSignHash(SafeNCryptKeyHandle hKey, void* pPaddingInfo, ReadOnlySpan<byte> pbHashValue, int cbHashValue, Span<byte> pbSignature, int cbSignature, out int pcbResult, AsymmetricPaddingMode dwFlags) =>
-            NCryptSignHash(hKey, pPaddingInfo, ref MemoryMarshal.GetReference(pbHashValue), cbHashValue, ref MemoryMarshal.GetReference(pbSignature), cbSignature, out pcbResult, dwFlags);
+        internal static unsafe ErrorCode NCryptSignHash(
+            SafeNCryptKeyHandle hKey,
+            void* pPaddingInfo,
+            ReadOnlySpan<byte> pbHashValue,
+            int cbHashValue,
+            Span<byte> pbSignature,
+            int cbSignature,
+            out int pcbResult,
+            AsymmetricPaddingMode dwFlags
+        ) =>
+            NCryptSignHash(
+                hKey,
+                pPaddingInfo,
+                ref MemoryMarshal.GetReference(pbHashValue),
+                cbHashValue,
+                ref MemoryMarshal.GetReference(pbSignature),
+                cbSignature,
+                out pcbResult,
+                dwFlags
+            );
 
         [GeneratedDllImport(Libraries.NCrypt, CharSet = CharSet.Unicode)]
-        private static unsafe partial ErrorCode NCryptSignHash(SafeNCryptKeyHandle hKey, void* pPaddingInfo, ref byte pbHashValue, int cbHashValue, ref byte pbSignature, int cbSignature, out int pcbResult, AsymmetricPaddingMode dwFlags);
+        private static unsafe partial ErrorCode NCryptSignHash(
+            SafeNCryptKeyHandle hKey,
+            void* pPaddingInfo,
+            ref byte pbHashValue,
+            int cbHashValue,
+            ref byte pbSignature,
+            int cbSignature,
+            out int pcbResult,
+            AsymmetricPaddingMode dwFlags
+        );
 
-        internal static unsafe ErrorCode NCryptVerifySignature(SafeNCryptKeyHandle hKey, void* pPaddingInfo, ReadOnlySpan<byte> pbHashValue, int cbHashValue, ReadOnlySpan<byte> pbSignature, int cbSignature, AsymmetricPaddingMode dwFlags) =>
-            NCryptVerifySignature(hKey, pPaddingInfo, ref MemoryMarshal.GetReference(pbHashValue), cbHashValue, ref MemoryMarshal.GetReference(pbSignature), cbSignature, dwFlags);
+        internal static unsafe ErrorCode NCryptVerifySignature(
+            SafeNCryptKeyHandle hKey,
+            void* pPaddingInfo,
+            ReadOnlySpan<byte> pbHashValue,
+            int cbHashValue,
+            ReadOnlySpan<byte> pbSignature,
+            int cbSignature,
+            AsymmetricPaddingMode dwFlags
+        ) =>
+            NCryptVerifySignature(
+                hKey,
+                pPaddingInfo,
+                ref MemoryMarshal.GetReference(pbHashValue),
+                cbHashValue,
+                ref MemoryMarshal.GetReference(pbSignature),
+                cbSignature,
+                dwFlags
+            );
 
         [GeneratedDllImport(Libraries.NCrypt, CharSet = CharSet.Unicode)]
-        private static unsafe partial ErrorCode NCryptVerifySignature(SafeNCryptKeyHandle hKey, void* pPaddingInfo, ref byte pbHashValue, int cbHashValue, ref byte pbSignature, int cbSignature, AsymmetricPaddingMode dwFlags);
+        private static unsafe partial ErrorCode NCryptVerifySignature(
+            SafeNCryptKeyHandle hKey,
+            void* pPaddingInfo,
+            ref byte pbHashValue,
+            int cbHashValue,
+            ref byte pbSignature,
+            int cbSignature,
+            AsymmetricPaddingMode dwFlags
+        );
     }
 }

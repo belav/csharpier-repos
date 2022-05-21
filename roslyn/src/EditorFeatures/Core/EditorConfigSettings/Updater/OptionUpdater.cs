@@ -10,17 +10,21 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
 {
-
     internal class OptionUpdater : SettingsUpdaterBase<IOption2, object>
     {
         public OptionUpdater(Workspace workspace, string editorconfigPath)
-            : base(workspace, editorconfigPath)
-        {
-        }
+            : base(workspace, editorconfigPath) { }
 
-        protected override SourceText? GetNewText(SourceText SourceText,
-                                                  IReadOnlyList<(IOption2 option, object value)> settingsToUpdate,
-                                                  CancellationToken token)
-            => SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(SourceText, EditorconfigPath, Workspace.Options, settingsToUpdate);
+        protected override SourceText? GetNewText(
+            SourceText SourceText,
+            IReadOnlyList<(IOption2 option, object value)> settingsToUpdate,
+            CancellationToken token
+        ) =>
+            SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(
+                SourceText,
+                EditorconfigPath,
+                Workspace.Options,
+                settingsToUpdate
+            );
     }
 }

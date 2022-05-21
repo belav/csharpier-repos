@@ -23,7 +23,8 @@ public class UserStore : UserStore<IdentityUser<string>>
     /// </summary>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-    public UserStore(DbContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+    public UserStore(DbContext context, IdentityErrorDescriber describer = null)
+        : base(context, describer) { }
 }
 
 /// <summary>
@@ -38,7 +39,8 @@ public class UserStore<TUser> : UserStore<TUser, IdentityRole, DbContext, string
     /// </summary>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-    public UserStore(DbContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+    public UserStore(DbContext context, IdentityErrorDescriber describer = null)
+        : base(context, describer) { }
 }
 
 /// <summary>
@@ -57,7 +59,8 @@ public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContex
     /// </summary>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-    public UserStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+    public UserStore(TContext context, IdentityErrorDescriber describer = null)
+        : base(context, describer) { }
 }
 
 /// <summary>
@@ -67,7 +70,18 @@ public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContex
 /// <typeparam name="TRole">The type representing a role.</typeparam>
 /// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
-public class UserStore<TUser, TRole, TContext, TKey> : UserStore<TUser, TRole, TContext, TKey, IdentityUserClaim<TKey>, IdentityUserRole<TKey>, IdentityUserLogin<TKey>, IdentityUserToken<TKey>, IdentityRoleClaim<TKey>>
+public class UserStore<TUser, TRole, TContext, TKey>
+    : UserStore<
+        TUser,
+        TRole,
+        TContext,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserRole<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityUserToken<TKey>,
+        IdentityRoleClaim<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TContext : DbContext
@@ -78,7 +92,8 @@ public class UserStore<TUser, TRole, TContext, TKey> : UserStore<TUser, TRole, T
     /// </summary>
     /// <param name="context">The <see cref="DbContext"/>.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-    public UserStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+    public UserStore(TContext context, IdentityErrorDescriber describer = null)
+        : base(context, describer) { }
 }
 
 /// <summary>
@@ -93,9 +108,19 @@ public class UserStore<TUser, TRole, TContext, TKey> : UserStore<TUser, TRole, T
 /// <typeparam name="TUserLogin">The type representing a user external login.</typeparam>
 /// <typeparam name="TUserToken">The type representing a user token.</typeparam>
 /// <typeparam name="TRoleClaim">The type representing a role claim.</typeparam>
-public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUserLogin, TUserToken, TRoleClaim> :
-    UserStoreBase<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TUserToken, TRoleClaim>,
-    IProtectedUserStore<TUser>
+public class UserStore<
+    TUser,
+    TRole,
+    TContext,
+    TKey,
+    TUserClaim,
+    TUserRole,
+    TUserLogin,
+    TUserToken,
+    TRoleClaim
+>
+    : UserStoreBase<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TUserToken, TRoleClaim>,
+        IProtectedUserStore<TUser>
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TContext : DbContext
@@ -111,7 +136,8 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// </summary>
     /// <param name="context">The context used to access the store.</param>
     /// <param name="describer">The <see cref="IdentityErrorDescriber"/> used to describe store errors.</param>
-    public UserStore(TContext context, IdentityErrorDescriber describer = null) : base(describer ?? new IdentityErrorDescriber())
+    public UserStore(TContext context, IdentityErrorDescriber describer = null)
+        : base(describer ?? new IdentityErrorDescriber())
     {
         if (context == null)
         {
@@ -125,12 +151,30 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// </summary>
     public virtual TContext Context { get; private set; }
 
-    private DbSet<TUser> UsersSet { get { return Context.Set<TUser>(); } }
-    private DbSet<TRole> Roles { get { return Context.Set<TRole>(); } }
-    private DbSet<TUserClaim> UserClaims { get { return Context.Set<TUserClaim>(); } }
-    private DbSet<TUserRole> UserRoles { get { return Context.Set<TUserRole>(); } }
-    private DbSet<TUserLogin> UserLogins { get { return Context.Set<TUserLogin>(); } }
-    private DbSet<TUserToken> UserTokens { get { return Context.Set<TUserToken>(); } }
+    private DbSet<TUser> UsersSet
+    {
+        get { return Context.Set<TUser>(); }
+    }
+    private DbSet<TRole> Roles
+    {
+        get { return Context.Set<TRole>(); }
+    }
+    private DbSet<TUserClaim> UserClaims
+    {
+        get { return Context.Set<TUserClaim>(); }
+    }
+    private DbSet<TUserRole> UserRoles
+    {
+        get { return Context.Set<TUserRole>(); }
+    }
+    private DbSet<TUserLogin> UserLogins
+    {
+        get { return Context.Set<TUserLogin>(); }
+    }
+    private DbSet<TUserToken> UserTokens
+    {
+        get { return Context.Set<TUserToken>(); }
+    }
 
     /// <summary>
     /// Gets or sets a flag indicating if changes should be persisted after CreateAsync, UpdateAsync and DeleteAsync are called.
@@ -154,7 +198,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="user">The user to create.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the creation operation.</returns>
-    public override async Task<IdentityResult> CreateAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IdentityResult> CreateAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -173,7 +220,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="user">The user to update.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
-    public override async Task<IdentityResult> UpdateAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IdentityResult> UpdateAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -202,7 +252,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="user">The user to delete.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
-    public override async Task<IdentityResult> DeleteAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IdentityResult> DeleteAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -231,7 +284,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="userId"/> if it exists.
     /// </returns>
-    public override Task<TUser> FindByIdAsync(string userId, CancellationToken cancellationToken = default(CancellationToken))
+    public override Task<TUser> FindByIdAsync(
+        string userId,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -247,12 +303,18 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="normalizedUserName"/> if it exists.
     /// </returns>
-    public override Task<TUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
+    public override Task<TUser> FindByNameAsync(
+        string normalizedUserName,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
 
-        return Users.FirstOrDefaultAsync(u => u.NormalizedUserName == normalizedUserName, cancellationToken);
+        return Users.FirstOrDefaultAsync(
+            u => u.NormalizedUserName == normalizedUserName,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -269,9 +331,15 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="normalizedRoleName">The normalized role name.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The role if it exists.</returns>
-    protected override Task<TRole> FindRoleAsync(string normalizedRoleName, CancellationToken cancellationToken)
+    protected override Task<TRole> FindRoleAsync(
+        string normalizedRoleName,
+        CancellationToken cancellationToken
+    )
     {
-        return Roles.SingleOrDefaultAsync(r => r.NormalizedName == normalizedRoleName, cancellationToken);
+        return Roles.SingleOrDefaultAsync(
+            r => r.NormalizedName == normalizedRoleName,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -281,7 +349,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="roleId">The role's id.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The user role if it exists.</returns>
-    protected override Task<TUserRole> FindUserRoleAsync(TKey userId, TKey roleId, CancellationToken cancellationToken)
+    protected override Task<TUserRole> FindUserRoleAsync(
+        TKey userId,
+        TKey roleId,
+        CancellationToken cancellationToken
+    )
     {
         return UserRoles.FindAsync(new object[] { userId, roleId }, cancellationToken).AsTask();
     }
@@ -305,9 +377,20 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The user login if it exists.</returns>
-    protected override Task<TUserLogin> FindUserLoginAsync(TKey userId, string loginProvider, string providerKey, CancellationToken cancellationToken)
+    protected override Task<TUserLogin> FindUserLoginAsync(
+        TKey userId,
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken
+    )
     {
-        return UserLogins.SingleOrDefaultAsync(userLogin => userLogin.UserId.Equals(userId) && userLogin.LoginProvider == loginProvider && userLogin.ProviderKey == providerKey, cancellationToken);
+        return UserLogins.SingleOrDefaultAsync(
+            userLogin =>
+                userLogin.UserId.Equals(userId)
+                && userLogin.LoginProvider == loginProvider
+                && userLogin.ProviderKey == providerKey,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -317,9 +400,17 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The user login if it exists.</returns>
-    protected override Task<TUserLogin> FindUserLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken)
+    protected override Task<TUserLogin> FindUserLoginAsync(
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken
+    )
     {
-        return UserLogins.SingleOrDefaultAsync(userLogin => userLogin.LoginProvider == loginProvider && userLogin.ProviderKey == providerKey, cancellationToken);
+        return UserLogins.SingleOrDefaultAsync(
+            userLogin =>
+                userLogin.LoginProvider == loginProvider && userLogin.ProviderKey == providerKey,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -329,7 +420,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="normalizedRoleName">The role to add.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override async Task AddToRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task AddToRoleAsync(
+        TUser user,
+        string normalizedRoleName,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -339,12 +434,21 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
         }
         if (string.IsNullOrWhiteSpace(normalizedRoleName))
         {
-            throw new ArgumentException(Resources.ValueCannotBeNullOrEmpty, nameof(normalizedRoleName));
+            throw new ArgumentException(
+                Resources.ValueCannotBeNullOrEmpty,
+                nameof(normalizedRoleName)
+            );
         }
         var roleEntity = await FindRoleAsync(normalizedRoleName, cancellationToken);
         if (roleEntity == null)
         {
-            throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.RoleNotFound, normalizedRoleName));
+            throw new InvalidOperationException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.RoleNotFound,
+                    normalizedRoleName
+                )
+            );
         }
         UserRoles.Add(CreateUserRole(user, roleEntity));
     }
@@ -356,7 +460,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="normalizedRoleName">The role to remove.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override async Task RemoveFromRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task RemoveFromRoleAsync(
+        TUser user,
+        string normalizedRoleName,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -366,7 +474,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
         }
         if (string.IsNullOrWhiteSpace(normalizedRoleName))
         {
-            throw new ArgumentException(Resources.ValueCannotBeNullOrEmpty, nameof(normalizedRoleName));
+            throw new ArgumentException(
+                Resources.ValueCannotBeNullOrEmpty,
+                nameof(normalizedRoleName)
+            );
         }
         var roleEntity = await FindRoleAsync(normalizedRoleName, cancellationToken);
         if (roleEntity != null)
@@ -385,7 +496,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="user">The user whose roles should be retrieved.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>A <see cref="Task{TResult}"/> that contains the roles the user is a member of.</returns>
-    public override async Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IList<string>> GetRolesAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -394,10 +508,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
             throw new ArgumentNullException(nameof(user));
         }
         var userId = user.Id;
-        var query = from userRole in UserRoles
-                    join role in Roles on userRole.RoleId equals role.Id
-                    where userRole.UserId.Equals(userId)
-                    select role.Name;
+        var query =
+            from userRole in UserRoles
+            join role in Roles on userRole.RoleId equals role.Id
+            where userRole.UserId.Equals(userId)
+            select role.Name;
         return await query.ToListAsync(cancellationToken);
     }
 
@@ -409,7 +524,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user is a member of the given group. If the
     /// user is a member of the group the returned value with be true, otherwise it will be false.</returns>
-    public override async Task<bool> IsInRoleAsync(TUser user, string normalizedRoleName, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<bool> IsInRoleAsync(
+        TUser user,
+        string normalizedRoleName,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -419,7 +538,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
         }
         if (string.IsNullOrWhiteSpace(normalizedRoleName))
         {
-            throw new ArgumentException(Resources.ValueCannotBeNullOrEmpty, nameof(normalizedRoleName));
+            throw new ArgumentException(
+                Resources.ValueCannotBeNullOrEmpty,
+                nameof(normalizedRoleName)
+            );
         }
         var role = await FindRoleAsync(normalizedRoleName, cancellationToken);
         if (role != null)
@@ -436,7 +558,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="user">The user whose claims should be retrieved.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>A <see cref="Task{TResult}"/> that contains the claims granted to a user.</returns>
-    public override async Task<IList<Claim>> GetClaimsAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IList<Claim>> GetClaimsAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         ThrowIfDisposed();
         if (user == null)
@@ -444,7 +569,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
             throw new ArgumentNullException(nameof(user));
         }
 
-        return await UserClaims.Where(uc => uc.UserId.Equals(user.Id)).Select(c => c.ToClaim()).ToListAsync(cancellationToken);
+        return await UserClaims
+            .Where(uc => uc.UserId.Equals(user.Id))
+            .Select(c => c.ToClaim())
+            .ToListAsync(cancellationToken);
     }
 
     /// <summary>
@@ -454,7 +582,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="claims">The claim to add to the user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default(CancellationToken))
+    public override Task AddClaimsAsync(
+        TUser user,
+        IEnumerable<Claim> claims,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         ThrowIfDisposed();
         if (user == null)
@@ -480,7 +612,12 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="newClaim">The new claim replacing the <paramref name="claim"/>.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override async Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task ReplaceClaimAsync(
+        TUser user,
+        Claim claim,
+        Claim newClaim,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         ThrowIfDisposed();
         if (user == null)
@@ -496,7 +633,14 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
             throw new ArgumentNullException(nameof(newClaim));
         }
 
-        var matchedClaims = await UserClaims.Where(uc => uc.UserId.Equals(user.Id) && uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type).ToListAsync(cancellationToken);
+        var matchedClaims = await UserClaims
+            .Where(
+                uc =>
+                    uc.UserId.Equals(user.Id)
+                    && uc.ClaimValue == claim.Value
+                    && uc.ClaimType == claim.Type
+            )
+            .ToListAsync(cancellationToken);
         foreach (var matchedClaim in matchedClaims)
         {
             matchedClaim.ClaimValue = newClaim.Value;
@@ -511,7 +655,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="claims">The claim to remove.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override async Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task RemoveClaimsAsync(
+        TUser user,
+        IEnumerable<Claim> claims,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         ThrowIfDisposed();
         if (user == null)
@@ -524,7 +672,14 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
         }
         foreach (var claim in claims)
         {
-            var matchedClaims = await UserClaims.Where(uc => uc.UserId.Equals(user.Id) && uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type).ToListAsync(cancellationToken);
+            var matchedClaims = await UserClaims
+                .Where(
+                    uc =>
+                        uc.UserId.Equals(user.Id)
+                        && uc.ClaimValue == claim.Value
+                        && uc.ClaimType == claim.Type
+                )
+                .ToListAsync(cancellationToken);
             foreach (var c in matchedClaims)
             {
                 UserClaims.Remove(c);
@@ -539,8 +694,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="login">The login to add to the user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override Task AddLoginAsync(TUser user, UserLoginInfo login,
-        CancellationToken cancellationToken = default(CancellationToken))
+    public override Task AddLoginAsync(
+        TUser user,
+        UserLoginInfo login,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -564,8 +722,12 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    public override async Task RemoveLoginAsync(TUser user, string loginProvider, string providerKey,
-        CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task RemoveLoginAsync(
+        TUser user,
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -573,7 +735,12 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
         {
             throw new ArgumentNullException(nameof(user));
         }
-        var entry = await FindUserLoginAsync(user.Id, loginProvider, providerKey, cancellationToken);
+        var entry = await FindUserLoginAsync(
+            user.Id,
+            loginProvider,
+            providerKey,
+            cancellationToken
+        );
         if (entry != null)
         {
             UserLogins.Remove(entry);
@@ -588,7 +755,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
     /// </returns>
-    public override async Task<IList<UserLoginInfo>> GetLoginsAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IList<UserLoginInfo>> GetLoginsAsync(
+        TUser user,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -597,8 +767,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
             throw new ArgumentNullException(nameof(user));
         }
         var userId = user.Id;
-        return await UserLogins.Where(l => l.UserId.Equals(userId))
-            .Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName)).ToListAsync(cancellationToken);
+        return await UserLogins
+            .Where(l => l.UserId.Equals(userId))
+            .Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey, l.ProviderDisplayName))
+            .ToListAsync(cancellationToken);
     }
 
     /// <summary>
@@ -610,8 +782,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched the specified login provider and key.
     /// </returns>
-    public override async Task<TUser> FindByLoginAsync(string loginProvider, string providerKey,
-        CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<TUser> FindByLoginAsync(
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -631,12 +806,18 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The task object containing the results of the asynchronous lookup operation, the user if any associated with the specified normalized email address.
     /// </returns>
-    public override Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken = default(CancellationToken))
+    public override Task<TUser> FindByEmailAsync(
+        string normalizedEmail,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
 
-        return Users.SingleOrDefaultAsync(u => u.NormalizedEmail == normalizedEmail, cancellationToken);
+        return Users.SingleOrDefaultAsync(
+            u => u.NormalizedEmail == normalizedEmail,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -647,7 +828,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> contains a list of users, if any, that contain the specified claim.
     /// </returns>
-    public override async Task<IList<TUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IList<TUser>> GetUsersForClaimAsync(
+        Claim claim,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -656,11 +840,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
             throw new ArgumentNullException(nameof(claim));
         }
 
-        var query = from userclaims in UserClaims
-                    join user in Users on userclaims.UserId equals user.Id
-                    where userclaims.ClaimValue == claim.Value
-                    && userclaims.ClaimType == claim.Type
-                    select user;
+        var query =
+            from userclaims in UserClaims
+            join user in Users on userclaims.UserId equals user.Id
+            where userclaims.ClaimValue == claim.Value && userclaims.ClaimType == claim.Type
+            select user;
 
         return await query.ToListAsync(cancellationToken);
     }
@@ -673,7 +857,10 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <returns>
     /// The <see cref="Task"/> contains a list of users, if any, that are in the specified role.
     /// </returns>
-    public override async Task<IList<TUser>> GetUsersInRoleAsync(string normalizedRoleName, CancellationToken cancellationToken = default(CancellationToken))
+    public override async Task<IList<TUser>> GetUsersInRoleAsync(
+        string normalizedRoleName,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
         ThrowIfDisposed();
@@ -686,10 +873,11 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
 
         if (role != null)
         {
-            var query = from userrole in UserRoles
-                        join user in Users on userrole.UserId equals user.Id
-                        where userrole.RoleId.Equals(role.Id)
-                        select user;
+            var query =
+                from userrole in UserRoles
+                join user in Users on userrole.UserId equals user.Id
+                where userrole.RoleId.Equals(role.Id)
+                select user;
 
             return await query.ToListAsync(cancellationToken);
         }
@@ -704,8 +892,15 @@ public class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserRole, TUse
     /// <param name="name">The name of the token.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The user token if it exists.</returns>
-    protected override Task<TUserToken> FindTokenAsync(TUser user, string loginProvider, string name, CancellationToken cancellationToken)
-        => UserTokens.FindAsync(new object[] { user.Id, loginProvider, name }, cancellationToken).AsTask();
+    protected override Task<TUserToken> FindTokenAsync(
+        TUser user,
+        string loginProvider,
+        string name,
+        CancellationToken cancellationToken
+    ) =>
+        UserTokens
+            .FindAsync(new object[] { user.Id, loginProvider, name }, cancellationToken)
+            .AsTask();
 
     /// <summary>
     /// Add a new user token.

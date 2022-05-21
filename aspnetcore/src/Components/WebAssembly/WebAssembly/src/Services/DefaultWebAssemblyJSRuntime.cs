@@ -29,31 +29,53 @@ internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     private DefaultWebAssemblyJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(new ElementReferenceJsonConverter(ElementReferenceContext));
+        JsonSerializerOptions.Converters.Add(
+            new ElementReferenceJsonConverter(ElementReferenceContext)
+        );
     }
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
 
     // The following methods are invoke via Mono's JS interop mechanism (invoke_method)
-    public static string? InvokeDotNet(string assemblyName, string methodIdentifier, string dotNetObjectId, string argsJson)
+    public static string? InvokeDotNet(
+        string assemblyName,
+        string methodIdentifier,
+        string dotNetObjectId,
+        string argsJson
+    )
     {
-        var callInfo = new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId == null ? default : long.Parse(dotNetObjectId, CultureInfo.InvariantCulture), callId: null);
+        var callInfo = new DotNetInvocationInfo(
+            assemblyName,
+            methodIdentifier,
+            dotNetObjectId == null
+                ? default
+                : long.Parse(dotNetObjectId, CultureInfo.InvariantCulture),
+            callId: null
+        );
         return DotNetDispatcher.Invoke(Instance, callInfo, argsJson);
     }
 
     // Invoked via Mono's JS interop mechanism (invoke_method)
     public static void EndInvokeJS(string argsJson)
     {
-        WebAssemblyCallQueue.Schedule(argsJson, static argsJson =>
-        {
+        WebAssemblyCallQueue.Schedule(
+            argsJson,
+            static argsJson =>
+            {
                 // This is not expected to throw, as it takes care of converting any unhandled user code
                 // exceptions into a failure on the Task that was returned when calling InvokeAsync.
                 DotNetDispatcher.EndInvokeJS(Instance, argsJson);
-        });
+            }
+        );
     }
 
     // Invoked via Mono's JS interop mechanism (invoke_method)
-    public static void BeginInvokeDotNet(string callId, string assemblyNameOrDotNetObjectId, string methodIdentifier, string argsJson)
+    public static void BeginInvokeDotNet(
+        string callId,
+        string assemblyNameOrDotNetObjectId,
+        string methodIdentifier,
+        string argsJson
+    )
     {
         // Figure out whether 'assemblyNameOrDotNetObjectId' is the assembly name or the instance ID
         // We only need one for any given call. This helps to work around the limitation that we can
@@ -71,13 +93,21 @@ internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
             assemblyName = assemblyNameOrDotNetObjectId;
         }
 
-        var callInfo = new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId);
-        WebAssemblyCallQueue.Schedule((callInfo, argsJson), static state =>
-        {
+        var callInfo = new DotNetInvocationInfo(
+            assemblyName,
+            methodIdentifier,
+            dotNetObjectId,
+            callId
+        );
+        WebAssemblyCallQueue.Schedule(
+            (callInfo, argsJson),
+            static state =>
+            {
                 // This is not expected to throw, as it takes care of converting any unhandled user code
                 // exceptions into a failure on the JS Promise object.
                 DotNetDispatcher.BeginInvokeDotNet(Instance, state.callInfo, state.argsJson);
-        });
+            }
+        );
     }
 
     /// <summary>
@@ -97,11 +127,25 @@ internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     }
 
     /// <inheritdoc />
-    protected override Task<Stream> ReadJSDataAsStreamAsync(IJSStreamReference jsStreamReference, long totalLength, CancellationToken cancellationToken = default)
-        => Task.FromResult<Stream>(PullFromJSDataStream.CreateJSDataStream(this, jsStreamReference, totalLength, cancellationToken));
+    protected override Task<Stream> ReadJSDataAsStreamAsync(
+        IJSStreamReference jsStreamReference,
+        long totalLength,
+        CancellationToken cancellationToken = default
+    ) =>
+        Task.FromResult<Stream>(
+            PullFromJSDataStream.CreateJSDataStream(
+                this,
+                jsStreamReference,
+                totalLength,
+                cancellationToken
+            )
+        );
 
     /// <inheritdoc />
-    protected override Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+    protected override Task TransmitStreamAsync(
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
         return TransmitDataStreamToJS.TransmitStreamAsync(this, streamId, dotNetStreamReference);
     }

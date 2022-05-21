@@ -16,18 +16,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
     internal abstract class StackFrameNode : EmbeddedSyntaxNode<StackFrameKind, StackFrameNode>
     {
-        protected StackFrameNode(StackFrameKind kind) : base(kind)
-        {
-        }
+        protected StackFrameNode(StackFrameKind kind) : base(kind) { }
 
         public abstract void Accept(IStackFrameNodeVisitor visitor);
     }
 
     internal abstract class StackFrameDeclarationNode : StackFrameNode
     {
-        protected StackFrameDeclarationNode(StackFrameKind kind) : base(kind)
-        {
-        }
+        protected StackFrameDeclarationNode(StackFrameKind kind) : base(kind) { }
     }
 
     internal sealed class StackFrameMethodDeclarationNode : StackFrameDeclarationNode
@@ -39,8 +35,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public StackFrameMethodDeclarationNode(
             StackFrameQualifiedNameNode memberAccessExpression,
             StackFrameTypeArgumentList? typeArguments,
-            StackFrameParameterList argumentList)
-            : base(StackFrameKind.MethodDeclaration)
+            StackFrameParameterList argumentList
+        ) : base(StackFrameKind.MethodDeclaration)
         {
             MemberAccessExpression = memberAccessExpression;
             TypeArguments = typeArguments;
@@ -49,17 +45,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-             => index switch
-             {
-                 0 => MemberAccessExpression,
-                 1 => TypeArguments,
-                 2 => ArgumentList,
-                 _ => throw new InvalidOperationException(),
-             };
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
+            {
+                0 => MemberAccessExpression,
+                1 => TypeArguments,
+                2 => ArgumentList,
+                _ => throw new InvalidOperationException(),
+            };
     }
 
     /// <summary>
@@ -67,24 +62,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// </summary>
     internal abstract class StackFrameTypeNode : StackFrameNode
     {
-        protected StackFrameTypeNode(StackFrameKind kind) : base(kind)
-        {
-        }
+        protected StackFrameTypeNode(StackFrameKind kind) : base(kind) { }
     }
 
     /// <summary>
     /// Base class for all name nodes
     /// </summary>
     /// <remarks>
-    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name that 
+    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name that
     /// is not a type then it should use <see cref="StackFrameToken"/> with <see cref="StackFrameKind.IdentifierToken"/>
     /// directly.
     /// </remarks>
     internal abstract class StackFrameNameNode : StackFrameTypeNode
     {
-        protected StackFrameNameNode(StackFrameKind kind) : base(kind)
-        {
-        }
+        protected StackFrameNameNode(StackFrameKind kind) : base(kind) { }
     }
 
     /// <summary>
@@ -94,7 +85,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     {
         public readonly StackFrameToken Identifier;
 
-        protected StackFrameSimpleNameNode(StackFrameToken identifier, StackFrameKind kind) : base(kind)
+        protected StackFrameSimpleNameNode(StackFrameToken identifier, StackFrameKind kind)
+            : base(kind)
         {
             Debug.Assert(identifier.Kind == StackFrameKind.IdentifierToken);
             Identifier = identifier;
@@ -110,7 +102,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public readonly StackFrameToken DotToken;
         public readonly StackFrameSimpleNameNode Right;
 
-        public StackFrameQualifiedNameNode(StackFrameNameNode left, StackFrameToken dotToken, StackFrameSimpleNameNode right) : base(StackFrameKind.MemberAccess)
+        public StackFrameQualifiedNameNode(
+            StackFrameNameNode left,
+            StackFrameToken dotToken,
+            StackFrameSimpleNameNode right
+        ) : base(StackFrameKind.MemberAccess)
         {
             Debug.Assert(dotToken.Kind == StackFrameKind.DotToken);
 
@@ -121,11 +117,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => Left,
                 1 => DotToken,
@@ -142,15 +137,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         internal override int ChildCount => 1;
 
         public StackFrameIdentifierNameNode(StackFrameToken identifier)
-            : base(identifier, StackFrameKind.TypeIdentifier)
-        {
-        }
+            : base(identifier, StackFrameKind.TypeIdentifier) { }
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => Identifier,
                 _ => throw new InvalidOperationException()
@@ -158,7 +150,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     }
 
     /// <summary>
-    /// An identifier with an arity, such as "MyNamespace.MyClass`1" 
+    /// An identifier with an arity, such as "MyNamespace.MyClass`1"
     /// </summary>
     internal sealed class StackFrameGenericNameNode : StackFrameSimpleNameNode
     {
@@ -171,8 +163,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public StackFrameGenericNameNode(StackFrameToken identifier, StackFrameToken graveAccentToken, StackFrameToken numberToken)
-            : base(identifier, StackFrameKind.GenericTypeIdentifier)
+        public StackFrameGenericNameNode(
+            StackFrameToken identifier,
+            StackFrameToken graveAccentToken,
+            StackFrameToken numberToken
+        ) : base(identifier, StackFrameKind.GenericTypeIdentifier)
         {
             Debug.Assert(graveAccentToken.Kind == StackFrameKind.GraveAccentToken);
             Debug.Assert(numberToken.Kind == StackFrameKind.NumberToken);
@@ -181,11 +176,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             NumberToken = numberToken;
         }
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => Identifier,
                 1 => GraveAccentToken,
@@ -210,11 +204,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// Each unique array identifier for the type
         /// string[,][]
         ///        ^--- First array expression = "[,]"
-        ///           ^- Second array expression = "[]" 
+        ///           ^- Second array expression = "[]"
         /// </summary>
         public ImmutableArray<StackFrameArrayRankSpecifier> ArrayExpressions;
 
-        public StackFrameArrayTypeNode(StackFrameNameNode typeIdentifier, ImmutableArray<StackFrameArrayRankSpecifier> arrayExpressions) : base(StackFrameKind.ArrayTypeExpression)
+        public StackFrameArrayTypeNode(
+            StackFrameNameNode typeIdentifier,
+            ImmutableArray<StackFrameArrayRankSpecifier> arrayExpressions
+        ) : base(StackFrameKind.ArrayTypeExpression)
         {
             Debug.Assert(!arrayExpressions.IsDefaultOrEmpty);
             TypeIdentifier = typeIdentifier;
@@ -223,11 +220,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 1 + ArrayExpressions.Length;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => TypeIdentifier,
                 _ => ArrayExpressions[index - 1]
@@ -240,8 +236,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public readonly StackFrameToken CloseBracket;
         public readonly ImmutableArray<StackFrameToken> CommaTokens;
 
-        public StackFrameArrayRankSpecifier(StackFrameToken openBracket, StackFrameToken closeBracket, ImmutableArray<StackFrameToken> commaTokens)
-            : base(StackFrameKind.ArrayExpression)
+        public StackFrameArrayRankSpecifier(
+            StackFrameToken openBracket,
+            StackFrameToken closeBracket,
+            ImmutableArray<StackFrameToken> commaTokens
+        ) : base(StackFrameKind.ArrayExpression)
         {
             Debug.Assert(!commaTokens.IsDefault);
             Debug.Assert(openBracket.Kind == StackFrameKind.OpenBracketToken);
@@ -255,8 +254,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 2 + CommaTokens.Length;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
         internal override StackFrameNodeOrToken ChildAt(int index)
         {
@@ -275,31 +273,45 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     }
 
     /// <summary>
-    /// The type argument list for a method declaration. 
-    /// 
+    /// The type argument list for a method declaration.
+    ///
     /// <code>
-    /// Ex: MyType.MyMethod[T, U, V](T t, U u, V v) 
-    ///                    ^-----------------------  "[" = Open Token 
+    /// Ex: MyType.MyMethod[T, U, V](T t, U u, V v)
+    ///                    ^-----------------------  "[" = Open Token
     ///                     ^------^   ------------  "T, U, V" = SeparatedStackFrameNodeList&lt;StackFrameTypeArgumentNode&gt;
     ///                             ^--------------  "]" = Close Token
     /// </code>
-    /// 
+    ///
     /// </summary>
     internal sealed class StackFrameTypeArgumentList : StackFrameNode
     {
         public readonly StackFrameToken OpenToken;
-        public readonly EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameIdentifierNameNode> TypeArguments;
+        public readonly EmbeddedSeparatedSyntaxNodeList<
+            StackFrameKind,
+            StackFrameNode,
+            StackFrameIdentifierNameNode
+        > TypeArguments;
         public readonly StackFrameToken CloseToken;
 
         public StackFrameTypeArgumentList(
             StackFrameToken openToken,
-            EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameIdentifierNameNode> typeArguments,
-            StackFrameToken closeToken)
-            : base(StackFrameKind.TypeArgument)
+            EmbeddedSeparatedSyntaxNodeList<
+                StackFrameKind,
+                StackFrameNode,
+                StackFrameIdentifierNameNode
+            > typeArguments,
+            StackFrameToken closeToken
+        ) : base(StackFrameKind.TypeArgument)
         {
-            Debug.Assert(openToken.Kind is StackFrameKind.OpenBracketToken or StackFrameKind.LessThanToken);
+            Debug.Assert(
+                openToken.Kind is StackFrameKind.OpenBracketToken or StackFrameKind.LessThanToken
+            );
             Debug.Assert(typeArguments.Length > 0);
-            Debug.Assert(openToken.Kind == StackFrameKind.OpenBracketToken ? closeToken.Kind == StackFrameKind.CloseBracketToken : closeToken.Kind == StackFrameKind.GreaterThanToken);
+            Debug.Assert(
+                openToken.Kind == StackFrameKind.OpenBracketToken
+                    ? closeToken.Kind == StackFrameKind.CloseBracketToken
+                    : closeToken.Kind == StackFrameKind.GreaterThanToken
+            );
 
             OpenToken = openToken;
             TypeArguments = typeArguments;
@@ -308,8 +320,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => TypeArguments.NodesAndTokens.Length + 2;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
         internal override StackFrameNodeOrToken ChildAt(int index)
         {
@@ -340,19 +351,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 2;
 
-        public StackFrameParameterDeclarationNode(StackFrameTypeNode type, StackFrameToken identifier)
-            : base(StackFrameKind.Parameter)
+        public StackFrameParameterDeclarationNode(
+            StackFrameTypeNode type,
+            StackFrameToken identifier
+        ) : base(StackFrameKind.Parameter)
         {
             Debug.Assert(identifier.Kind == StackFrameKind.IdentifierToken);
             Type = type;
             Identifier = identifier;
         }
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => Type,
                 1 => Identifier,
@@ -363,14 +375,22 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     internal sealed class StackFrameParameterList : StackFrameNode
     {
         public readonly StackFrameToken OpenParen;
-        public readonly EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameParameterDeclarationNode> Parameters;
+        public readonly EmbeddedSeparatedSyntaxNodeList<
+            StackFrameKind,
+            StackFrameNode,
+            StackFrameParameterDeclarationNode
+        > Parameters;
         public readonly StackFrameToken CloseParen;
 
         public StackFrameParameterList(
             StackFrameToken openToken,
-            EmbeddedSeparatedSyntaxNodeList<StackFrameKind, StackFrameNode, StackFrameParameterDeclarationNode> parameters,
-            StackFrameToken closeToken)
-            : base(StackFrameKind.ParameterList)
+            EmbeddedSeparatedSyntaxNodeList<
+                StackFrameKind,
+                StackFrameNode,
+                StackFrameParameterDeclarationNode
+            > parameters,
+            StackFrameToken closeToken
+        ) : base(StackFrameKind.ParameterList)
         {
             Debug.Assert(openToken.Kind == StackFrameKind.OpenParenToken);
             Debug.Assert(closeToken.Kind == StackFrameKind.CloseParenToken);
@@ -410,7 +430,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public readonly StackFrameToken? Colon;
         public readonly StackFrameToken? Line;
 
-        public StackFrameFileInformationNode(StackFrameToken path, StackFrameToken? colon, StackFrameToken? line) : base(StackFrameKind.FileInformation)
+        public StackFrameFileInformationNode(
+            StackFrameToken path,
+            StackFrameToken? colon,
+            StackFrameToken? line
+        ) : base(StackFrameKind.FileInformation)
         {
             Debug.Assert(path.Kind == StackFrameKind.PathToken);
             Debug.Assert(colon.HasValue == line.HasValue);
@@ -423,11 +447,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => Path,
                 1 => Colon.HasValue ? Colon.Value : null,

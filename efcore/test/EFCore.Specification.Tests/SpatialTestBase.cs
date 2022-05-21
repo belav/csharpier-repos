@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class SpatialTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : SpatialFixtureBase, new()
     {
-        protected SpatialTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected SpatialTestBase(TFixture fixture) => Fixture = fixture;
 
         protected virtual TFixture Fixture { get; }
 
@@ -47,13 +46,20 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual void Mutation_of_tracked_values_does_not_mutate_values_in_store()
         {
-            Point CreatePoint(double y = 2.2)
-                => new(1.1, y, 3.3);
+            Point CreatePoint(double y = 2.2) => new(1.1, y, 3.3);
 
-            Polygon CreatePolygon(double y = 2.2)
-                => new(
+            Polygon CreatePolygon(double y = 2.2) =>
+                new(
                     new LinearRing(
-                        new[] { new Coordinate(1.1, 2.2), new Coordinate(2.2, y), new Coordinate(2.2, 1.1), new Coordinate(1.1, 2.2) }));
+                        new[]
+                        {
+                            new Coordinate(1.1, 2.2),
+                            new Coordinate(2.2, y),
+                            new Coordinate(2.2, 1.1),
+                            new Coordinate(1.1, 2.2)
+                        }
+                    )
+                );
 
             var id1 = Guid.NewGuid();
             var id2 = Guid.NewGuid();
@@ -65,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     context.AddRange(
                         new PointEntity { Id = id1, Point = point },
-                        new PolygonEntity { Id = id2, Polygon = polygon });
+                        new PolygonEntity { Id = id2, Polygon = polygon }
+                    );
 
                     context.SaveChanges();
                 },
@@ -94,31 +101,26 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(CreatePoint(22.2), fromStore1.Point);
                     Assert.Equal(CreatePolygon(), fromStore2.Polygon);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
         public virtual void Translators_handle_static_members()
         {
             using var db = Fixture.CreateContext();
-            (from e in db.Set<PointEntity>()
-             orderby e.Id
-             select new
-             {
-                 e.Id,
-                 e.Point,
-                 Point.Empty,
-                 DateTime.UtcNow,
-                 Guid = Guid.NewGuid()
-             }).FirstOrDefault();
+            (
+                from e in db.Set<PointEntity>()
+                orderby e.Id
+                select new { e.Id, e.Point, Point.Empty, DateTime.UtcNow, Guid = Guid.NewGuid() }
+            ).FirstOrDefault();
         }
 
         [ConditionalFact]
         public virtual void Can_roundtrip_Z_and_M()
         {
             using var db = Fixture.CreateContext();
-            var entity = db.Set<PointEntity>()
-                .FirstOrDefault(e => e.Id == PointEntity.WellKnownId);
+            var entity = db.Set<PointEntity>().FirstOrDefault(e => e.Id == PointEntity.WellKnownId);
 
             Assert.NotNull(entity);
             Assert.NotNull(entity.Point);
@@ -135,14 +137,21 @@ namespace Microsoft.EntityFrameworkCore
         protected virtual void ExecuteWithStrategyInTransaction(
             Action<SpatialContext> testOperation,
             Action<SpatialContext> nestedTestOperation1 = null,
-            Action<SpatialContext> nestedTestOperation2 = null)
-            => TestHelpers.ExecuteWithStrategyInTransaction(
-                CreateContext, UseTransaction,
-                testOperation, nestedTestOperation1, nestedTestOperation2);
+            Action<SpatialContext> nestedTestOperation2 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransaction(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
 
-        protected abstract void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction);
+        protected abstract void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        );
 
-        protected SpatialContext CreateContext()
-            => Fixture.CreateContext();
+        protected SpatialContext CreateContext() => Fixture.CreateContext();
     }
 }

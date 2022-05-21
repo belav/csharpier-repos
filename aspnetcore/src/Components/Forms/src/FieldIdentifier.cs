@@ -43,7 +43,10 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
 
         if (model.GetType().IsValueType)
         {
-            throw new ArgumentException("The model must be a reference-typed object.", nameof(model));
+            throw new ArgumentException(
+                "The model must be a reference-typed object.",
+                nameof(model)
+            );
         }
 
         Model = model;
@@ -69,41 +72,43 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         // We want to compare Model instances by reference. RuntimeHelpers.GetHashCode returns identical hashes for equal object references (ignoring any `Equals`/`GetHashCode` overrides) which is what we want.
         var modelHash = RuntimeHelpers.GetHashCode(Model);
         var fieldHash = StringComparer.Ordinal.GetHashCode(FieldName);
-        return (
-            modelHash,
-            fieldHash
-        )
-        .GetHashCode();
+        return (modelHash, fieldHash).GetHashCode();
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is FieldIdentifier otherIdentifier
-        && Equals(otherIdentifier);
+    public override bool Equals(object? obj) =>
+        obj is FieldIdentifier otherIdentifier && Equals(otherIdentifier);
 
     /// <inheritdoc />
     public bool Equals(FieldIdentifier otherIdentifier)
     {
-        return
-            ReferenceEquals(otherIdentifier.Model, Model) &&
-            string.Equals(otherIdentifier.FieldName, FieldName, StringComparison.Ordinal);
+        return ReferenceEquals(otherIdentifier.Model, Model)
+            && string.Equals(otherIdentifier.FieldName, FieldName, StringComparison.Ordinal);
     }
 
-    private static void ParseAccessor<T>(Expression<Func<T>> accessor, out object model, out string fieldName)
+    private static void ParseAccessor<T>(
+        Expression<Func<T>> accessor,
+        out object model,
+        out string fieldName
+    )
     {
         var accessorBody = accessor.Body;
 
         // Unwrap casts to object
-        if (accessorBody is UnaryExpression unaryExpression
+        if (
+            accessorBody is UnaryExpression unaryExpression
             && unaryExpression.NodeType == ExpressionType.Convert
-            && unaryExpression.Type == typeof(object))
+            && unaryExpression.Type == typeof(object)
+        )
         {
             accessorBody = unaryExpression.Operand;
         }
 
         if (!(accessorBody is MemberExpression memberExpression))
         {
-            throw new ArgumentException($"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.");
+            throw new ArgumentException(
+                $"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object."
+            );
         }
 
         // Identify the field name. We don't mind whether it's a property or field, or even something else.
@@ -115,7 +120,9 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         {
             if (constantExpression.Value is null)
             {
-                throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+                throw new ArgumentException(
+                    "The provided expression must evaluate to a non-null value."
+                );
             }
             model = constantExpression.Value;
         }
@@ -130,13 +137,17 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
             var result = modelLambdaCompiled();
             if (result is null)
             {
-                throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+                throw new ArgumentException(
+                    "The provided expression must evaluate to a non-null value."
+                );
             }
             model = result;
         }
         else
         {
-            throw new ArgumentException($"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.");
+            throw new ArgumentException(
+                $"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object."
+            );
         }
     }
 }

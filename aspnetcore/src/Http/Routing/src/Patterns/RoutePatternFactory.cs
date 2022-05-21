@@ -20,8 +20,13 @@ public static class RoutePatternFactory
     private static readonly IReadOnlyDictionary<string, object?> EmptyDictionary =
         new ReadOnlyDictionary<string, object?>(new Dictionary<string, object?>());
 
-    private static readonly IReadOnlyDictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>> EmptyPoliciesDictionary =
-        new ReadOnlyDictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>>(new Dictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>>());
+    private static readonly IReadOnlyDictionary<
+        string,
+        IReadOnlyList<RoutePatternParameterPolicyReference>
+    > EmptyPoliciesDictionary = new ReadOnlyDictionary<
+        string,
+        IReadOnlyList<RoutePatternParameterPolicyReference>
+    >(new Dictionary<string, IReadOnlyList<RoutePatternParameterPolicyReference>>());
 
     /// <summary>
     /// Creates a <see cref="RoutePattern"/> from its string representation.
@@ -63,7 +68,13 @@ public static class RoutePatternFactory
         }
 
         var original = RoutePatternParser.Parse(pattern);
-        return PatternCore(original.RawText, Wrap(defaults), Wrap(parameterPolicies), requiredValues: null, original.PathSegments);
+        return PatternCore(
+            original.RawText,
+            Wrap(defaults),
+            Wrap(parameterPolicies),
+            requiredValues: null,
+            original.PathSegments
+        );
     }
 
     /// <summary>
@@ -86,7 +97,12 @@ public static class RoutePatternFactory
     /// Route values that can be substituted for parameters in the route pattern. See remarks on <see cref="RoutePattern.RequiredValues"/>.
     /// </param>
     /// <returns>The <see cref="RoutePattern"/>.</returns>
-    public static RoutePattern Parse(string pattern, object? defaults, object? parameterPolicies, object? requiredValues)
+    public static RoutePattern Parse(
+        string pattern,
+        object? defaults,
+        object? parameterPolicies,
+        object? requiredValues
+    )
     {
         if (pattern == null)
         {
@@ -94,7 +110,13 @@ public static class RoutePatternFactory
         }
 
         var original = RoutePatternParser.Parse(pattern);
-        return PatternCore(original.RawText, Wrap(defaults), Wrap(parameterPolicies), Wrap(requiredValues), original.PathSegments);
+        return PatternCore(
+            original.RawText,
+            Wrap(defaults),
+            Wrap(parameterPolicies),
+            Wrap(requiredValues),
+            original.PathSegments
+        );
     }
 
     /// <summary>
@@ -118,7 +140,10 @@ public static class RoutePatternFactory
     /// <param name="rawText">The raw text to associate with the route pattern. May be null.</param>
     /// <param name="segments">The collection of segments.</param>
     /// <returns>The <see cref="RoutePattern"/>.</returns>
-    public static RoutePattern Pattern(string? rawText, IEnumerable<RoutePatternPathSegment> segments)
+    public static RoutePattern Pattern(
+        string? rawText,
+        IEnumerable<RoutePatternPathSegment> segments
+    )
     {
         if (segments == null)
         {
@@ -148,14 +173,21 @@ public static class RoutePatternFactory
     public static RoutePattern Pattern(
         object? defaults,
         object? parameterPolicies,
-        IEnumerable<RoutePatternPathSegment> segments)
+        IEnumerable<RoutePatternPathSegment> segments
+    )
     {
         if (segments == null)
         {
             throw new ArgumentNullException(nameof(segments));
         }
 
-        return PatternCore(null, new RouteValueDictionary(defaults), new RouteValueDictionary(parameterPolicies), requiredValues: null, segments);
+        return PatternCore(
+            null,
+            new RouteValueDictionary(defaults),
+            new RouteValueDictionary(parameterPolicies),
+            requiredValues: null,
+            segments
+        );
     }
 
     /// <summary>
@@ -180,14 +212,21 @@ public static class RoutePatternFactory
         string? rawText,
         object? defaults,
         object? parameterPolicies,
-        IEnumerable<RoutePatternPathSegment> segments)
+        IEnumerable<RoutePatternPathSegment> segments
+    )
     {
         if (segments == null)
         {
             throw new ArgumentNullException(nameof(segments));
         }
 
-        return PatternCore(rawText, new RouteValueDictionary(defaults), new RouteValueDictionary(parameterPolicies), requiredValues: null, segments);
+        return PatternCore(
+            rawText,
+            new RouteValueDictionary(defaults),
+            new RouteValueDictionary(parameterPolicies),
+            requiredValues: null,
+            segments
+        );
     }
 
     /// <summary>
@@ -241,14 +280,21 @@ public static class RoutePatternFactory
     public static RoutePattern Pattern(
         object? defaults,
         object? parameterPolicies,
-        params RoutePatternPathSegment[] segments)
+        params RoutePatternPathSegment[] segments
+    )
     {
         if (segments == null)
         {
             throw new ArgumentNullException(nameof(segments));
         }
 
-        return PatternCore(null, new RouteValueDictionary(defaults), new RouteValueDictionary(parameterPolicies), requiredValues: null, segments);
+        return PatternCore(
+            null,
+            new RouteValueDictionary(defaults),
+            new RouteValueDictionary(parameterPolicies),
+            requiredValues: null,
+            segments
+        );
     }
 
     /// <summary>
@@ -273,14 +319,21 @@ public static class RoutePatternFactory
         string? rawText,
         object? defaults,
         object? parameterPolicies,
-        params RoutePatternPathSegment[] segments)
+        params RoutePatternPathSegment[] segments
+    )
     {
         if (segments == null)
         {
             throw new ArgumentNullException(nameof(segments));
         }
 
-        return PatternCore(rawText, new RouteValueDictionary(defaults), new RouteValueDictionary(parameterPolicies), requiredValues: null, segments);
+        return PatternCore(
+            rawText,
+            new RouteValueDictionary(defaults),
+            new RouteValueDictionary(parameterPolicies),
+            requiredValues: null,
+            segments
+        );
     }
 
     private static RoutePattern PatternCore(
@@ -288,7 +341,8 @@ public static class RoutePatternFactory
         RouteValueDictionary? defaults,
         RouteValueDictionary? parameterPolicies,
         RouteValueDictionary? requiredValues,
-        IEnumerable<RoutePatternPathSegment> segments)
+        IEnumerable<RoutePatternPathSegment> segments
+    )
     {
         // We want to merge the segment data with the 'out of line' defaults and parameter policies.
         //
@@ -304,7 +358,10 @@ public static class RoutePatternFactory
         Dictionary<string, object?>? updatedDefaults = null;
         if (defaults != null && defaults.Count > 0)
         {
-            updatedDefaults = new Dictionary<string, object?>(defaults.Count, StringComparer.OrdinalIgnoreCase);
+            updatedDefaults = new Dictionary<string, object?>(
+                defaults.Count,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var kvp in defaults)
             {
@@ -312,10 +369,14 @@ public static class RoutePatternFactory
             }
         }
 
-        Dictionary<string, List<RoutePatternParameterPolicyReference>>? updatedParameterPolicies = null;
+        Dictionary<string, List<RoutePatternParameterPolicyReference>>? updatedParameterPolicies =
+            null;
         if (parameterPolicies != null && parameterPolicies.Count > 0)
         {
-            updatedParameterPolicies = new Dictionary<string, List<RoutePatternParameterPolicyReference>>(parameterPolicies.Count, StringComparer.OrdinalIgnoreCase);
+            updatedParameterPolicies = new Dictionary<
+                string,
+                List<RoutePatternParameterPolicyReference>
+            >(parameterPolicies.Count, StringComparer.OrdinalIgnoreCase);
 
             foreach (var kvp in parameterPolicies)
             {
@@ -335,14 +396,19 @@ public static class RoutePatternFactory
                     foreach (var item in multiplePolicies)
                     {
                         // Constraint will convert string values into regex constraints
-                        policyReferences.Add(item is IParameterPolicy p ? ParameterPolicy(p) : Constraint(item));
+                        policyReferences.Add(
+                            item is IParameterPolicy p ? ParameterPolicy(p) : Constraint(item)
+                        );
                     }
                 }
                 else
                 {
-                    throw new InvalidOperationException(Resources.FormatRoutePattern_InvalidConstraintReference(
-                        kvp.Value ?? "null",
-                        typeof(IRouteConstraint)));
+                    throw new InvalidOperationException(
+                        Resources.FormatRoutePattern_InvalidConstraintReference(
+                            kvp.Value ?? "null",
+                            typeof(IRouteConstraint)
+                        )
+                    );
                 }
 
                 updatedParameterPolicies.Add(kvp.Key, policyReferences);
@@ -386,7 +452,13 @@ public static class RoutePatternFactory
                 {
                     for (var i = 0; i < parameters.Count; i++)
                     {
-                        if (string.Equals(kvp.Key, parameters[i].Name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                kvp.Key,
+                                parameters[i].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             found = true;
                             break;
@@ -395,10 +467,12 @@ public static class RoutePatternFactory
                 }
 
                 // 3. have a corresponding default that matches both key and value
-                if (!found &&
-                    updatedDefaults != null &&
-                    updatedDefaults.TryGetValue(kvp.Key, out var defaultValue) &&
-                    RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue))
+                if (
+                    !found
+                    && updatedDefaults != null
+                    && updatedDefaults.TryGetValue(kvp.Key, out var defaultValue)
+                    && RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
+                )
                 {
                     found = true;
                 }
@@ -406,9 +480,10 @@ public static class RoutePatternFactory
                 if (!found)
                 {
                     throw new InvalidOperationException(
-                        $"No corresponding parameter or default value could be found for the required value " +
-                        $"'{kvp.Key}={kvp.Value}'. A non-null required value must correspond to a route parameter or the " +
-                        $"route pattern must have a matching default value.");
+                        $"No corresponding parameter or default value could be found for the required value "
+                            + $"'{kvp.Key}={kvp.Value}'. A non-null required value must correspond to a route parameter or the "
+                            + $"route pattern must have a matching default value."
+                    );
                 }
             }
         }
@@ -417,11 +492,16 @@ public static class RoutePatternFactory
             rawText,
             updatedDefaults ?? EmptyDictionary,
             updatedParameterPolicies != null
-                ? updatedParameterPolicies.ToDictionary(kvp => kvp.Key, kvp => (IReadOnlyList<RoutePatternParameterPolicyReference>)kvp.Value.ToArray())
+                ? updatedParameterPolicies.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => (IReadOnlyList<RoutePatternParameterPolicyReference>)kvp.Value.ToArray()
+                )
                 : EmptyPoliciesDictionary,
             requiredValues ?? EmptyDictionary,
-            (IReadOnlyList<RoutePatternParameterPart>?)parameters ?? Array.Empty<RoutePatternParameterPart>(),
-            updatedSegments);
+            (IReadOnlyList<RoutePatternParameterPart>?)parameters
+                ?? Array.Empty<RoutePatternParameterPart>(),
+            updatedSegments
+        );
 
         RoutePatternPathSegment VisitSegment(RoutePatternPathSegment segment)
         {
@@ -461,11 +541,17 @@ public static class RoutePatternFactory
             var parameter = (RoutePatternParameterPart)part;
             var @default = parameter.Default;
 
-            if (updatedDefaults != null && updatedDefaults.TryGetValue(parameter.Name, out var newDefault))
+            if (
+                updatedDefaults != null
+                && updatedDefaults.TryGetValue(parameter.Name, out var newDefault)
+            )
             {
                 if (parameter.Default != null && !Equals(newDefault, parameter.Default))
                 {
-                    var message = Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(parameter.Name);
+                    var message =
+                        Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
+                            parameter.Name
+                        );
                     throw new InvalidOperationException(message);
                 }
 
@@ -482,22 +568,37 @@ public static class RoutePatternFactory
             {
                 if (updatedDefaults == null)
                 {
-                    updatedDefaults = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+                    updatedDefaults = new Dictionary<string, object?>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 updatedDefaults[parameter.Name] = parameter.Default;
             }
 
             List<RoutePatternParameterPolicyReference>? parameterConstraints = null;
-            if ((updatedParameterPolicies == null || !updatedParameterPolicies.TryGetValue(parameter.Name, out parameterConstraints)) &&
-                parameter.ParameterPolicies.Count > 0)
+            if (
+                (
+                    updatedParameterPolicies == null
+                    || !updatedParameterPolicies.TryGetValue(
+                        parameter.Name,
+                        out parameterConstraints
+                    )
+                )
+                && parameter.ParameterPolicies.Count > 0
+            )
             {
                 if (updatedParameterPolicies == null)
                 {
-                    updatedParameterPolicies = new Dictionary<string, List<RoutePatternParameterPolicyReference>>(StringComparer.OrdinalIgnoreCase);
+                    updatedParameterPolicies = new Dictionary<
+                        string,
+                        List<RoutePatternParameterPolicyReference>
+                    >(StringComparer.OrdinalIgnoreCase);
                 }
 
-                parameterConstraints = new List<RoutePatternParameterPolicyReference>(parameter.ParameterPolicies.Count);
+                parameterConstraints = new List<RoutePatternParameterPolicyReference>(
+                    parameter.ParameterPolicies.Count
+                );
                 updatedParameterPolicies.Add(parameter.Name, parameterConstraints);
             }
 
@@ -506,9 +607,11 @@ public static class RoutePatternFactory
                 parameterConstraints!.AddRange(parameter.ParameterPolicies);
             }
 
-            if (Equals(parameter.Default, @default)
+            if (
+                Equals(parameter.Default, @default)
                 && parameter.ParameterPolicies.Count == 0
-                && (parameterConstraints?.Count ?? 0) == 0)
+                && (parameterConstraints?.Count ?? 0) == 0
+            )
             {
                 // Part has not changed
                 return part;
@@ -518,8 +621,10 @@ public static class RoutePatternFactory
                 parameter.Name,
                 @default,
                 parameter.ParameterKind,
-                parameterConstraints?.ToArray() ?? Array.Empty<RoutePatternParameterPolicyReference>(),
-                parameter.EncodeSlashes);
+                parameterConstraints?.ToArray()
+                    ?? Array.Empty<RoutePatternParameterPolicyReference>(),
+                parameter.EncodeSlashes
+            );
         }
     }
 
@@ -621,14 +726,17 @@ public static class RoutePatternFactory
 
         if (parameterName.IndexOfAny(RoutePatternParser.InvalidParameterNameChars) >= 0)
         {
-            throw new ArgumentException(Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+            throw new ArgumentException(
+                Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+            );
         }
 
         return ParameterPartCore(
             parameterName: parameterName,
             @default: null,
             parameterKind: RoutePatternParameterKind.Standard,
-            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>());
+            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>()
+        );
     }
 
     /// <summary>
@@ -647,14 +755,17 @@ public static class RoutePatternFactory
 
         if (parameterName.IndexOfAny(RoutePatternParser.InvalidParameterNameChars) >= 0)
         {
-            throw new ArgumentException(Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+            throw new ArgumentException(
+                Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+            );
         }
 
         return ParameterPartCore(
             parameterName: parameterName,
             @default: @default,
             parameterKind: RoutePatternParameterKind.Standard,
-            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>());
+            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>()
+        );
     }
 
     /// <summary>
@@ -668,7 +779,8 @@ public static class RoutePatternFactory
     public static RoutePatternParameterPart ParameterPart(
         string parameterName,
         object? @default,
-        RoutePatternParameterKind parameterKind)
+        RoutePatternParameterKind parameterKind
+    )
     {
         if (string.IsNullOrEmpty(parameterName))
         {
@@ -677,19 +789,25 @@ public static class RoutePatternFactory
 
         if (parameterName.IndexOfAny(RoutePatternParser.InvalidParameterNameChars) >= 0)
         {
-            throw new ArgumentException(Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+            throw new ArgumentException(
+                Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+            );
         }
 
         if (@default != null && parameterKind == RoutePatternParameterKind.Optional)
         {
-            throw new ArgumentNullException(nameof(parameterKind), Resources.TemplateRoute_OptionalCannotHaveDefaultValue);
+            throw new ArgumentNullException(
+                nameof(parameterKind),
+                Resources.TemplateRoute_OptionalCannotHaveDefaultValue
+            );
         }
 
         return ParameterPartCore(
             parameterName: parameterName,
             @default: @default,
             parameterKind: parameterKind,
-            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>());
+            parameterPolicies: Array.Empty<RoutePatternParameterPolicyReference>()
+        );
     }
 
     /// <summary>
@@ -705,7 +823,8 @@ public static class RoutePatternFactory
         string parameterName,
         object? @default,
         RoutePatternParameterKind parameterKind,
-        IEnumerable<RoutePatternParameterPolicyReference> parameterPolicies)
+        IEnumerable<RoutePatternParameterPolicyReference> parameterPolicies
+    )
     {
         if (string.IsNullOrEmpty(parameterName))
         {
@@ -714,12 +833,17 @@ public static class RoutePatternFactory
 
         if (parameterName.IndexOfAny(RoutePatternParser.InvalidParameterNameChars) >= 0)
         {
-            throw new ArgumentException(Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+            throw new ArgumentException(
+                Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+            );
         }
 
         if (@default != null && parameterKind == RoutePatternParameterKind.Optional)
         {
-            throw new ArgumentNullException(nameof(parameterKind), Resources.TemplateRoute_OptionalCannotHaveDefaultValue);
+            throw new ArgumentNullException(
+                nameof(parameterKind),
+                Resources.TemplateRoute_OptionalCannotHaveDefaultValue
+            );
         }
 
         if (parameterPolicies == null)
@@ -731,7 +855,8 @@ public static class RoutePatternFactory
             parameterName: parameterName,
             @default: @default,
             parameterKind: parameterKind,
-            parameterPolicies: parameterPolicies.ToArray());
+            parameterPolicies: parameterPolicies.ToArray()
+        );
     }
 
     /// <summary>
@@ -747,7 +872,8 @@ public static class RoutePatternFactory
         string parameterName,
         object? @default,
         RoutePatternParameterKind parameterKind,
-        params RoutePatternParameterPolicyReference[] parameterPolicies)
+        params RoutePatternParameterPolicyReference[] parameterPolicies
+    )
     {
         if (string.IsNullOrEmpty(parameterName))
         {
@@ -756,12 +882,17 @@ public static class RoutePatternFactory
 
         if (parameterName.IndexOfAny(RoutePatternParser.InvalidParameterNameChars) >= 0)
         {
-            throw new ArgumentException(Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+            throw new ArgumentException(
+                Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+            );
         }
 
         if (@default != null && parameterKind == RoutePatternParameterKind.Optional)
         {
-            throw new ArgumentNullException(nameof(parameterKind), Resources.TemplateRoute_OptionalCannotHaveDefaultValue);
+            throw new ArgumentNullException(
+                nameof(parameterKind),
+                Resources.TemplateRoute_OptionalCannotHaveDefaultValue
+            );
         }
 
         if (parameterPolicies == null)
@@ -773,16 +904,24 @@ public static class RoutePatternFactory
             parameterName: parameterName,
             @default: @default,
             parameterKind: parameterKind,
-            parameterPolicies: (RoutePatternParameterPolicyReference[])parameterPolicies.Clone());
+            parameterPolicies: (RoutePatternParameterPolicyReference[])parameterPolicies.Clone()
+        );
     }
 
     private static RoutePatternParameterPart ParameterPartCore(
         string parameterName,
         object? @default,
         RoutePatternParameterKind parameterKind,
-        RoutePatternParameterPolicyReference[] parameterPolicies)
+        RoutePatternParameterPolicyReference[] parameterPolicies
+    )
     {
-        return ParameterPartCore(parameterName, @default, parameterKind, parameterPolicies, encodeSlashes: true);
+        return ParameterPartCore(
+            parameterName,
+            @default,
+            parameterKind,
+            parameterPolicies,
+            encodeSlashes: true
+        );
     }
 
     private static RoutePatternParameterPart ParameterPartCore(
@@ -790,14 +929,16 @@ public static class RoutePatternFactory
         object? @default,
         RoutePatternParameterKind parameterKind,
         RoutePatternParameterPolicyReference[] parameterPolicies,
-        bool encodeSlashes)
+        bool encodeSlashes
+    )
     {
         return new RoutePatternParameterPart(
             parameterName,
             @default,
             parameterKind,
             parameterPolicies,
-            encodeSlashes);
+            encodeSlashes
+        );
     }
 
     /// <summary>
@@ -822,9 +963,12 @@ public static class RoutePatternFactory
         }
         else
         {
-            throw new InvalidOperationException(Resources.FormatRoutePattern_InvalidConstraintReference(
-                constraint ?? "null",
-                typeof(IRouteConstraint)));
+            throw new InvalidOperationException(
+                Resources.FormatRoutePattern_InvalidConstraintReference(
+                    constraint ?? "null",
+                    typeof(IRouteConstraint)
+                )
+            );
         }
     }
 
@@ -869,7 +1013,9 @@ public static class RoutePatternFactory
     /// The parameter policy object.
     /// </param>
     /// <returns>The <see cref="RoutePatternParameterPolicyReference"/>.</returns>
-    public static RoutePatternParameterPolicyReference ParameterPolicy(IParameterPolicy parameterPolicy)
+    public static RoutePatternParameterPolicyReference ParameterPolicy(
+        IParameterPolicy parameterPolicy
+    )
     {
         if (parameterPolicy == null)
         {
@@ -901,7 +1047,9 @@ public static class RoutePatternFactory
         return new RoutePatternParameterPolicyReference(parameterPolicy);
     }
 
-    private static RoutePatternParameterPolicyReference ParameterPolicyCore(IParameterPolicy parameterPolicy)
+    private static RoutePatternParameterPolicyReference ParameterPolicyCore(
+        IParameterPolicy parameterPolicy
+    )
     {
         return new RoutePatternParameterPolicyReference(parameterPolicy);
     }

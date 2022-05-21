@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression projection,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
+            Type elementType
+        )
         {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
@@ -76,8 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,8 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         public virtual CollectionShaperExpression Update(
             Expression projection,
-            Expression innerShaper)
+            Expression innerShaper
+        )
         {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));

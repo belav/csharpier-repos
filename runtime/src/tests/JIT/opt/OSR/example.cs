@@ -24,7 +24,7 @@ class OSR_Example
     {
         int final = args.Length <= 0 ? 1_000_000 : Int32.Parse(args[0]);
         long frequency = Stopwatch.Frequency;
-        long nanosecPerTick = (1000L*1000L*1000L) / frequency;
+        long nanosecPerTick = (1000L * 1000L * 1000L) / frequency;
         // Console.WriteLine($"computing sum over {final} ints");
         // Get some of the initial jit cost out of the way
         Stopwatch s = new Stopwatch();
@@ -35,8 +35,8 @@ class OSR_Example
         s.Start();
         double result = F(0, final);
         s.Stop();
-        double elapsedTime = 1000.0 * (double) s.ElapsedTicks / (double) frequency;
+        double elapsedTime = 1000.0 * (double)s.ElapsedTicks / (double)frequency;
         Console.WriteLine($"{final} iterations took {elapsedTime:F2}ms");
         return result == 499999500000 ? 100 : -1;
-    }  
+    }
 }

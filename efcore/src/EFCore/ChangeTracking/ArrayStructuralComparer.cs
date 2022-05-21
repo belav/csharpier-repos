@@ -22,8 +22,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             : base(
                 CreateDefaultEqualsExpression(),
                 CreateDefaultHashCodeExpression(favorStructuralComparisons: true),
-                v => v.ToArray())
-        {
-        }
+                v => v.ToArray()
+            ) { }
     }
 }

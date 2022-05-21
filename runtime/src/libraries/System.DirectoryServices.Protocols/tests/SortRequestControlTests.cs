@@ -7,16 +7,28 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class SortRequestControlTests
     {
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34679", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34679",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData(true)]
         [InlineData(false)]
         public void Ctor_SortKeys(bool critical)
         {
-            SortKey[] sortKeys = new SortKey[] { new SortKey("name1", "rule1", true), new SortKey("name2", "rule2", false) };
+            SortKey[] sortKeys = new SortKey[]
+            {
+                new SortKey("name1", "rule1", true),
+                new SortKey("name2", "rule2", false)
+            };
             var control = new SortRequestControl(sortKeys);
             Assert.True(control.IsCritical);
             Assert.True(control.ServerSide);
@@ -31,25 +43,103 @@ namespace System.DirectoryServices.Protocols.Tests
             }
 
             control.IsCritical = critical;
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ?
-                new byte[] { 48, 132, 0, 0, 0, 43, 48, 132, 0, 0, 0, 17, 4, 5,110,
-                97, 109, 101, 49, 128, 5, 114, 117, 108, 101, 49, 129,
-                1, 255, 48, 132, 0, 0, 0, 14, 4, 5, 110, 97, 109, 101,
-                50, 128, 5, 114, 117, 108, 101, 50} :
-                new byte[] { 48, 19, 48, 9, 4, 1, 110, 128, 1, 114, 129, 1, 255, 48, 6, 4, 1, 110, 128, 1, 114 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[]
+                    {
+                        48,
+                        132,
+                        0,
+                        0,
+                        0,
+                        43,
+                        48,
+                        132,
+                        0,
+                        0,
+                        0,
+                        17,
+                        4,
+                        5,
+                        110,
+                        97,
+                        109,
+                        101,
+                        49,
+                        128,
+                        5,
+                        114,
+                        117,
+                        108,
+                        101,
+                        49,
+                        129,
+                        1,
+                        255,
+                        48,
+                        132,
+                        0,
+                        0,
+                        0,
+                        14,
+                        4,
+                        5,
+                        110,
+                        97,
+                        109,
+                        101,
+                        50,
+                        128,
+                        5,
+                        114,
+                        117,
+                        108,
+                        101,
+                        50
+                    }
+                    : new byte[]
+                    {
+                        48,
+                        19,
+                        48,
+                        9,
+                        4,
+                        1,
+                        110,
+                        128,
+                        1,
+                        114,
+                        129,
+                        1,
+                        255,
+                        48,
+                        6,
+                        4,
+                        1,
+                        110,
+                        128,
+                        1,
+                        114
+                    };
             Assert.Equal(expected, control.GetValue());
         }
 
         [Fact]
         public void Ctor_NullSortKeys_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("sortKeys", () => new SortRequestControl(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "sortKeys",
+                () => new SortRequestControl(null)
+            );
         }
 
         [Fact]
         public void CtorNullValueInSortKeys_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("sortKeys", () => new SortRequestControl(new SortKey[] { null }));
+            AssertExtensions.Throws<ArgumentException>(
+                "sortKeys",
+                () => new SortRequestControl(new SortKey[] { null })
+            );
         }
 
         [Fact]
@@ -81,7 +171,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void SortKeys_SetValid_GetReturnsExpected()
         {
-            SortKey[] sortKeys = new SortKey[] { new SortKey("name1", "rule1", true), new SortKey("name2", "rule2", false) };
+            SortKey[] sortKeys = new SortKey[]
+            {
+                new SortKey("name1", "rule1", true),
+                new SortKey("name2", "rule2", false)
+            };
             var control = new SortRequestControl { SortKeys = sortKeys };
             Assert.NotSame(sortKeys, control.SortKeys);
             for (int i = 0; i < sortKeys.Length; i++)
@@ -93,11 +187,16 @@ namespace System.DirectoryServices.Protocols.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "The field _keys in .NET Framework is called keys, so GetField returns null and ends up in a NRE")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "The field _keys in .NET Framework is called keys, so GetField returns null and ends up in a NRE"
+        )]
         public void SortKeys_GetNull_ReturnsEmptyArray()
         {
             var control = new SortRequestControl();
-            FieldInfo field = control.GetType().GetField("_keys", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo field = control
+                .GetType()
+                .GetField("_keys", BindingFlags.NonPublic | BindingFlags.Instance);
             field.SetValue(control, null);
             Assert.Empty(control.SortKeys);
         }
@@ -113,7 +212,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void SortKeys_SetNullInValue_ThrowsArgumentException()
         {
             var control = new SortRequestControl(new SortKey[0]);
-            AssertExtensions.Throws<ArgumentException>("value", () => control.SortKeys = new SortKey[] { null });
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => control.SortKeys = new SortKey[] { null }
+            );
         }
     }
 }

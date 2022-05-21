@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqlServerNavigationExpansionExtensibilityHelper : NavigationExpansionExtensibilityHelper
+    public class SqlServerNavigationExpansionExtensibilityHelper
+        : NavigationExpansionExtensibilityHelper
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -22,10 +23,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerNavigationExpansionExtensibilityHelper(NavigationExpansionExtensibilityHelperDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public SqlServerNavigationExpansionExtensibilityHelper(
+            NavigationExpansionExtensibilityHelperDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,24 +33,36 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override QueryRootExpression CreateQueryRoot(IEntityType entityType, QueryRootExpression? source)
+        public override QueryRootExpression CreateQueryRoot(
+            IEntityType entityType,
+            QueryRootExpression? source
+        )
         {
             if (source is TemporalQueryRootExpression)
             {
                 if (!entityType.GetRootType().IsTemporal())
                 {
                     throw new InvalidOperationException(
-                        SqlServerStrings.TemporalNavigationExpansionBetweenTemporalAndNonTemporal(entityType.DisplayName()));
+                        SqlServerStrings.TemporalNavigationExpansionBetweenTemporalAndNonTemporal(
+                            entityType.DisplayName()
+                        )
+                    );
                 }
 
                 if (source is TemporalAsOfQueryRootExpression asOf)
                 {
                     return source.QueryProvider != null
-                        ? new TemporalAsOfQueryRootExpression(source.QueryProvider, entityType, asOf.PointInTime)
+                        ? new TemporalAsOfQueryRootExpression(
+                            source.QueryProvider,
+                            entityType,
+                            asOf.PointInTime
+                        )
                         : new TemporalAsOfQueryRootExpression(entityType, asOf.PointInTime);
                 }
 
-                throw new InvalidOperationException(SqlServerStrings.TemporalNavigationExpansionOnlySupportedForAsOf("AsOf"));
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalNavigationExpansionOnlySupportedForAsOf("AsOf")
+                );
             }
 
             return base.CreateQueryRoot(entityType, source);
@@ -62,7 +74,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool AreQueryRootsCompatible(QueryRootExpression? first, QueryRootExpression? second)
+        public override bool AreQueryRootsCompatible(
+            QueryRootExpression? first,
+            QueryRootExpression? second
+        )
         {
             if (!base.AreQueryRootsCompatible(first, second))
             {
@@ -74,23 +89,29 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             if (firstTemporal && secondTemporal)
             {
-                if (first is TemporalAsOfQueryRootExpression firstAsOf
+                if (
+                    first is TemporalAsOfQueryRootExpression firstAsOf
                     && second is TemporalAsOfQueryRootExpression secondAsOf
-                    && firstAsOf.PointInTime == secondAsOf.PointInTime)
+                    && firstAsOf.PointInTime == secondAsOf.PointInTime
+                )
                 {
                     return true;
                 }
 
-                if (first is TemporalAllQueryRootExpression
-                    && second is TemporalAllQueryRootExpression)
+                if (
+                    first is TemporalAllQueryRootExpression
+                    && second is TemporalAllQueryRootExpression
+                )
                 {
                     return true;
                 }
 
-                if (first is TemporalRangeQueryRootExpression firstRange
+                if (
+                    first is TemporalRangeQueryRootExpression firstRange
                     && second is TemporalRangeQueryRootExpression secondRange
                     && firstRange.From == secondRange.From
-                    && firstRange.To == secondRange.To)
+                    && firstRange.To == secondRange.To
+                )
                 {
                     return true;
                 }
@@ -100,7 +121,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             {
                 var entityType = first?.EntityType ?? second?.EntityType;
 
-                throw new InvalidOperationException(SqlServerStrings.TemporalSetOperationOnMismatchedSources(entityType!.DisplayName()));
+                throw new InvalidOperationException(
+                    SqlServerStrings.TemporalSetOperationOnMismatchedSources(
+                        entityType!.DisplayName()
+                    )
+                );
             }
 
             return true;

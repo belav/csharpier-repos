@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
     using static BinaryOperatorKind;
 
     internal abstract partial class AbstractConvertIfToSwitchCodeRefactoringProvider<
-        TIfStatementSyntax, TExpressionSyntax, TIsExpressionSyntax, TPatternSyntax>
+        TIfStatementSyntax,
+        TExpressionSyntax,
+        TIsExpressionSyntax,
+        TPatternSyntax
+    >
     {
         // Match the following pattern which can be safely converted to switch statement
         //
@@ -66,10 +70,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
             public Feature Features { get; }
 
-            public bool Supports(Feature feature)
-                => (Features & feature) != 0;
+            public bool Supports(Feature feature) => (Features & feature) != 0;
 
-            public (ImmutableArray<AnalyzedSwitchSection>, SyntaxNode TargetExpression) AnalyzeIfStatementSequence(ReadOnlySpan<IOperation> operations)
+            public (ImmutableArray<AnalyzedSwitchSection>, SyntaxNode TargetExpression) AnalyzeIfStatementSequence(
+                ReadOnlySpan<IOperation> operations
+            )
             {
                 using var _ = ArrayBuilder<AnalyzedSwitchSection>.GetInstance(out var sections);
                 if (!ParseIfStatementSequence(operations, sections, out var defaultBodyOpt))
@@ -79,7 +84,13 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
                 if (defaultBodyOpt is object)
                 {
-                    sections.Add(new AnalyzedSwitchSection(labels: default, defaultBodyOpt, defaultBodyOpt.Syntax));
+                    sections.Add(
+                        new AnalyzedSwitchSection(
+                            labels: default,
+                            defaultBodyOpt,
+                            defaultBodyOpt.Syntax
+                        )
+                    );
                 }
 
                 RoslynDebug.Assert(_switchTargetExpression is object);
@@ -93,11 +104,17 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             //        : if (<section-expr>) { <unreachable-end-point> }, ( return | throw )
             //        | <if-statement>
             //
-            private bool ParseIfStatementSequence(ReadOnlySpan<IOperation> operations, ArrayBuilder<AnalyzedSwitchSection> sections, out IOperation? defaultBodyOpt)
+            private bool ParseIfStatementSequence(
+                ReadOnlySpan<IOperation> operations,
+                ArrayBuilder<AnalyzedSwitchSection> sections,
+                out IOperation? defaultBodyOpt
+            )
             {
-                if (operations.Length > 1 &&
-                    operations[0] is IConditionalOperation { WhenFalse: null } op &&
-                    HasUnreachableEndPoint(op.WhenTrue))
+                if (
+                    operations.Length > 1
+                    && operations[0] is IConditionalOperation { WhenFalse: null } op
+                    && HasUnreachableEndPoint(op.WhenTrue)
+                )
                 {
                     if (!ParseIfStatement(op, sections, out defaultBodyOpt))
                     {
@@ -107,8 +124,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     if (!ParseIfStatementSequence(operations[1..], sections, out defaultBodyOpt))
                     {
                         var nextStatement = operations[1];
-                        if (nextStatement is IReturnOperation { ReturnedValue: { } } or
-                            IThrowOperation { Exception: { } })
+                        if (
+                            nextStatement
+                            is IReturnOperation { ReturnedValue: { } }
+                                or IThrowOperation { Exception: { } }
+                        )
                         {
                             defaultBodyOpt = nextStatement;
                         }
@@ -134,7 +154,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             //        | if (<section-expr>) { _ } else { _ }
             //        | if (<section-expr>) { _ }
             //
-            private bool ParseIfStatement(IOperation operation, ArrayBuilder<AnalyzedSwitchSection> sections, out IOperation? defaultBodyOpt)
+            private bool ParseIfStatement(
+                IOperation operation,
+                ArrayBuilder<AnalyzedSwitchSection> sections,
+                out IOperation? defaultBodyOpt
+            )
             {
                 switch (operation)
                 {
@@ -151,7 +175,9 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         {
                             defaultBodyOpt = null;
                         }
-                        else if (!ParseIfStatementOrBlock(op.WhenFalse, sections, out defaultBodyOpt))
+                        else if (
+                            !ParseIfStatementOrBlock(op.WhenFalse, sections, out defaultBodyOpt)
+                        )
                         {
                             defaultBodyOpt = op.WhenFalse;
                         }
@@ -163,10 +189,18 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return false;
             }
 
-            private bool ParseIfStatementOrBlock(IOperation op, ArrayBuilder<AnalyzedSwitchSection> sections, out IOperation? defaultBodyOpt)
+            private bool ParseIfStatementOrBlock(
+                IOperation op,
+                ArrayBuilder<AnalyzedSwitchSection> sections,
+                out IOperation? defaultBodyOpt
+            )
             {
                 return op is IBlockOperation block
-                    ? ParseIfStatementSequence(block.Operations.AsSpan(), sections, out defaultBodyOpt)
+                    ? ParseIfStatementSequence(
+                        block.Operations.AsSpan(),
+                        sections,
+                        out defaultBodyOpt
+                    )
                     : ParseIfStatement(op, sections, out defaultBodyOpt);
             }
 
@@ -178,7 +212,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     return null;
                 }
 
-                return new AnalyzedSwitchSection(labels.ToImmutable(), operation.WhenTrue, operation.Syntax);
+                return new AnalyzedSwitchSection(
+                    labels.ToImmutable(),
+                    operation.WhenTrue,
+                    operation.Syntax
+                );
             }
 
             // Tree to parse:
@@ -187,7 +225,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             //        : <section-expr> || <pattern-expr>
             //        | <pattern-expr>
             //
-            private bool ParseSwitchLabels(IOperation operation, ArrayBuilder<AnalyzedSwitchLabel> labels)
+            private bool ParseSwitchLabels(
+                IOperation operation,
+                ArrayBuilder<AnalyzedSwitchLabel> labels
+            )
             {
                 if (operation is IBinaryOperation { OperatorKind: ConditionalOr } op)
                 {
@@ -225,10 +266,12 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 /// None of operands were constant.
                 /// </summary>
                 None,
+
                 /// <summary>
                 /// Signifies that the left operand is the constant.
                 /// </summary>
                 Left,
+
                 /// <summary>
                 /// Signifies that the right operand is the constant.
                 /// </summary>
@@ -239,8 +282,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 return (op.LeftOperand, op.RightOperand) switch
                 {
-                    var (e, v) when IsConstant(v) && CheckTargetExpression(e) => ConstantResult.Right,
-                    var (v, e) when IsConstant(v) && CheckTargetExpression(e) => ConstantResult.Left,
+                    var (e, v) when IsConstant(v) && CheckTargetExpression(e)
+                        => ConstantResult.Right,
+                    var (v, e) when IsConstant(v) && CheckTargetExpression(e)
+                        => ConstantResult.Left,
                     _ => ConstantResult.None,
                 };
             }
@@ -258,12 +303,18 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             //        | ( <expr0> <= <const> | <const> >= <expr0> )
             //           && ( <expr0> >= <const> | <const> <= <expr0> )  //     VB
             //
-            private AnalyzedPattern? ParsePattern(IOperation operation, ArrayBuilder<TExpressionSyntax> guards)
+            private AnalyzedPattern? ParsePattern(
+                IOperation operation,
+                ArrayBuilder<TExpressionSyntax> guards
+            )
             {
                 switch (operation)
                 {
                     case IBinaryOperation { OperatorKind: ConditionalAnd } op
-                        when Supports(Feature.RangePattern) && GetRangeBounds(op) is (TExpressionSyntax lower, TExpressionSyntax higher):
+                        when Supports(Feature.RangePattern)
+                            && GetRangeBounds(op)
+                                is
+                                (TExpressionSyntax lower, TExpressionSyntax higher):
                         return new AnalyzedPattern.Range(lower, higher);
 
                     case IBinaryOperation { OperatorKind: BinaryOperatorKind.Equals } op:
@@ -271,7 +322,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         {
                             ConstantResult.Left when op.LeftOperand.Syntax is TExpressionSyntax left
                                 => new AnalyzedPattern.Constant(left),
-                            ConstantResult.Right when op.RightOperand.Syntax is TExpressionSyntax right
+                            ConstantResult.Right
+                                when op.RightOperand.Syntax is TExpressionSyntax right
                                 => new AnalyzedPattern.Constant(right),
                             _ => null
                         };
@@ -281,44 +333,52 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                         return ParseRelationalPattern(op);
 
                     case IBinaryOperation op
-                        when Supports(Feature.RelationalPattern) && IsRelationalOperator(op.OperatorKind):
+                        when Supports(Feature.RelationalPattern)
+                            && IsRelationalOperator(op.OperatorKind):
                         return ParseRelationalPattern(op);
 
                     // Check this below the cases that produce Relational/Ranges.  We would prefer to use those if
                     // available before utilizing a CaseGuard.
                     case IBinaryOperation { OperatorKind: ConditionalAnd } op
                         when Supports(Feature.AndPattern | Feature.CaseGuard):
-                        {
-                            var leftPattern = ParsePattern(op.LeftOperand, guards);
-                            if (leftPattern == null)
-                                return null;
-
-                            if (Supports(Feature.AndPattern))
-                            {
-                                var guardCount = guards.Count;
-                                var rightPattern = ParsePattern(op.RightOperand, guards);
-                                if (rightPattern != null)
-                                    return new AnalyzedPattern.And(leftPattern, rightPattern);
-
-                                // Making a pattern out of the RHS didn't work.  Reset the guards back to where we started.
-                                guards.Count = guardCount;
-                            }
-
-                            if (Supports(Feature.CaseGuard) && op.RightOperand.Syntax is TExpressionSyntax node)
-                            {
-                                guards.Add(node);
-                                return leftPattern;
-                            }
-
+                    {
+                        var leftPattern = ParsePattern(op.LeftOperand, guards);
+                        if (leftPattern == null)
                             return null;
+
+                        if (Supports(Feature.AndPattern))
+                        {
+                            var guardCount = guards.Count;
+                            var rightPattern = ParsePattern(op.RightOperand, guards);
+                            if (rightPattern != null)
+                                return new AnalyzedPattern.And(leftPattern, rightPattern);
+
+                            // Making a pattern out of the RHS didn't work.  Reset the guards back to where we started.
+                            guards.Count = guardCount;
                         }
 
+                        if (
+                            Supports(Feature.CaseGuard)
+                            && op.RightOperand.Syntax is TExpressionSyntax node
+                        )
+                        {
+                            guards.Add(node);
+                            return leftPattern;
+                        }
+
+                        return null;
+                    }
+
                     case IIsTypeOperation op
-                        when Supports(Feature.IsTypePattern) && CheckTargetExpression(op.ValueOperand) && op.Syntax is TIsExpressionSyntax node:
+                        when Supports(Feature.IsTypePattern)
+                            && CheckTargetExpression(op.ValueOperand)
+                            && op.Syntax is TIsExpressionSyntax node:
                         return new AnalyzedPattern.Type(node);
 
                     case IIsPatternOperation op
-                        when Supports(Feature.SourcePattern) && CheckTargetExpression(op.Value) && op.Pattern.Syntax is TPatternSyntax pattern:
+                        when Supports(Feature.SourcePattern)
+                            && CheckTargetExpression(op.Value)
+                            && op.Pattern.Syntax is TPatternSyntax pattern:
                         return new AnalyzedPattern.Source(pattern);
 
                     case IParenthesizedOperation op:
@@ -346,10 +406,12 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 /// Not a range bound.
                 /// </summary>
                 None,
+
                 /// <summary>
                 /// Signifies that the lower-bound of a range pattern
                 /// </summary>
                 Lower,
+
                 /// <summary>
                 /// Signifies that the higher-bound of a range pattern
                 /// </summary>
@@ -358,8 +420,13 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
 
             private (SyntaxNode Lower, SyntaxNode Higher) GetRangeBounds(IBinaryOperation op)
             {
-                if (op is not
-                    { LeftOperand: IBinaryOperation left, RightOperand: IBinaryOperation right })
+                if (
+                    op
+                    is not {
+                        LeftOperand: IBinaryOperation left,
+                        RightOperand: IBinaryOperation right
+                    }
+                )
                 {
                     return default;
                 }
@@ -367,28 +434,37 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return (GetRangeBound(left), GetRangeBound(right)) switch
                 {
                     ({ Kind: BoundKind.Lower } low, { Kind: BoundKind.Higher } high)
-                        when CheckTargetExpression(low.Expression, high.Expression) => (low.Value.Syntax, high.Value.Syntax),
+                        when CheckTargetExpression(low.Expression, high.Expression)
+                        => (low.Value.Syntax, high.Value.Syntax),
                     ({ Kind: BoundKind.Higher } high, { Kind: BoundKind.Lower } low)
-                        when CheckTargetExpression(low.Expression, high.Expression) => (low.Value.Syntax, high.Value.Syntax),
+                        when CheckTargetExpression(low.Expression, high.Expression)
+                        => (low.Value.Syntax, high.Value.Syntax),
                     _ => default
                 };
 
-                bool CheckTargetExpression(IOperation left, IOperation right)
-                    => _syntaxFacts.AreEquivalent(left.Syntax, right.Syntax) && this.CheckTargetExpression(left);
+                bool CheckTargetExpression(IOperation left, IOperation right) =>
+                    _syntaxFacts.AreEquivalent(left.Syntax, right.Syntax)
+                    && this.CheckTargetExpression(left);
             }
 
-            private static (BoundKind Kind, IOperation Expression, IOperation Value) GetRangeBound(IBinaryOperation op)
+            private static (BoundKind Kind, IOperation Expression, IOperation Value) GetRangeBound(
+                IBinaryOperation op
+            )
             {
                 return op.OperatorKind switch
                 {
                     // 5 <= i
-                    LessThanOrEqual when IsConstant(op.LeftOperand) => (BoundKind.Lower, op.RightOperand, op.LeftOperand),
+                    LessThanOrEqual when IsConstant(op.LeftOperand)
+                        => (BoundKind.Lower, op.RightOperand, op.LeftOperand),
                     // i <= 5
-                    LessThanOrEqual when IsConstant(op.RightOperand) => (BoundKind.Higher, op.LeftOperand, op.RightOperand),
+                    LessThanOrEqual when IsConstant(op.RightOperand)
+                        => (BoundKind.Higher, op.LeftOperand, op.RightOperand),
                     // 5 >= i
-                    GreaterThanOrEqual when IsConstant(op.LeftOperand) => (BoundKind.Higher, op.RightOperand, op.LeftOperand),
+                    GreaterThanOrEqual when IsConstant(op.LeftOperand)
+                        => (BoundKind.Higher, op.RightOperand, op.LeftOperand),
                     // i >= 5
-                    GreaterThanOrEqual when IsConstant(op.RightOperand) => (BoundKind.Lower, op.LeftOperand, op.RightOperand),
+                    GreaterThanOrEqual when IsConstant(op.RightOperand)
+                        => (BoundKind.Lower, op.LeftOperand, op.RightOperand),
                     _ => default
                 };
             }
@@ -456,17 +532,22 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         internal enum Feature
         {
             None = 0,
+
             // VB/C# 9.0 features
             RelationalPattern = 1,
+
             // VB features
             InequalityPattern = 1 << 1,
             RangePattern = 1 << 2,
+
             // C# 7.0 features
             SourcePattern = 1 << 3,
             IsTypePattern = 1 << 4,
             CaseGuard = 1 << 5,
+
             // C# 8.0 features
             SwitchExpression = 1 << 6,
+
             // C# 9.0 features
             OrPattern = 1 << 7,
             AndPattern = 1 << 8,

@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [GeneratedDllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool GetProcessWorkingSetSizeEx(SafeProcessHandle handle, out IntPtr min, out IntPtr max, out int flags);
+        internal static partial bool GetProcessWorkingSetSizeEx(
+            SafeProcessHandle handle,
+            out IntPtr min,
+            out IntPtr max,
+            out int flags
+        );
     }
 }

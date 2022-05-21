@@ -25,9 +25,9 @@ internal static class DefaultDisplayTemplates
             value = Convert.ToBoolean(htmlHelper.ViewData.Model, CultureInfo.InvariantCulture);
         }
 
-        return htmlHelper.ViewData.ModelMetadata.IsNullableValueType ?
-            BooleanTemplateDropDownList(value) :
-            BooleanTemplateCheckbox(value ?? false);
+        return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
+            ? BooleanTemplateDropDownList(value)
+            : BooleanTemplateCheckbox(value ?? false);
     }
 
     private static IHtmlContent BooleanTemplateCheckbox(bool value)
@@ -64,11 +64,11 @@ internal static class DefaultDisplayTemplates
     internal static List<SelectListItem> TriStateValues(bool? value)
     {
         return new List<SelectListItem>
-            {
-                new SelectListItem(Resources.Common_TriState_NotSet, string.Empty, !value.HasValue),
-                new SelectListItem(Resources.Common_TriState_True, "true", (value == true)),
-                new SelectListItem(Resources.Common_TriState_False, "false", (value == false)),
-            };
+        {
+            new SelectListItem(Resources.Common_TriState_NotSet, string.Empty, !value.HasValue),
+            new SelectListItem(Resources.Common_TriState_True, "true", (value == true)),
+            new SelectListItem(Resources.Common_TriState_False, "false", (value == false)),
+        };
     }
 
     public static IHtmlContent CollectionTemplate(IHtmlHelper htmlHelper)
@@ -83,8 +83,13 @@ internal static class DefaultDisplayTemplates
         if (enumerable == null)
         {
             // Only way we could reach here is if user passed templateName: "Collection" to a Display() overload.
-            throw new InvalidOperationException(Resources.FormatTemplates_TypeMustImplementIEnumerable(
-                "Collection", model.GetType().FullName, typeof(IEnumerable).FullName));
+            throw new InvalidOperationException(
+                Resources.FormatTemplates_TypeMustImplementIEnumerable(
+                    "Collection",
+                    model.GetType().FullName,
+                    typeof(IEnumerable).FullName
+                )
+            );
         }
 
         var elementMetadata = htmlHelper.ViewData.ModelMetadata.ElementMetadata;
@@ -106,7 +111,10 @@ internal static class DefaultDisplayTemplates
             htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
 
             var collection = model as ICollection;
-            var result = collection == null ? new HtmlContentBuilder() : new HtmlContentBuilder(collection.Count);
+            var result =
+                collection == null
+                    ? new HtmlContentBuilder()
+                    : new HtmlContentBuilder(collection.Count);
             var viewEngine = serviceProvider.GetRequiredService<ICompositeViewEngine>();
             var viewBufferScope = serviceProvider.GetRequiredService<IViewBufferScope>();
 
@@ -123,8 +131,14 @@ internal static class DefaultDisplayTemplates
                     metadataProvider,
                     container: htmlHelper.ViewData.ModelExplorer,
                     metadata: itemMetadata,
-                    model: item);
-                var fieldName = string.Format(CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
+                    model: item
+                );
+                var fieldName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}[{1}]",
+                    oldPrefix,
+                    index++
+                );
 
                 var templateBuilder = new TemplateBuilder(
                     viewEngine,
@@ -135,7 +149,8 @@ internal static class DefaultDisplayTemplates
                     htmlFieldName: fieldName,
                     templateName: null,
                     readOnly: true,
-                    additionalViewData: null);
+                    additionalViewData: null
+                );
                 result.AppendHtml(templateBuilder.Build());
             }
 
@@ -151,8 +166,11 @@ internal static class DefaultDisplayTemplates
     {
         if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == htmlHelper.ViewData.Model)
         {
-            htmlHelper.ViewData.TemplateInfo.FormattedModelValue =
-                string.Format(CultureInfo.CurrentCulture, "{0:0.00}", htmlHelper.ViewData.Model);
+            htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
+                CultureInfo.CurrentCulture,
+                "{0:0.00}",
+                htmlHelper.ViewData.Model
+            );
         }
 
         return StringTemplate(htmlHelper);
@@ -160,12 +178,17 @@ internal static class DefaultDisplayTemplates
 
     public static IHtmlContent EmailAddressTemplate(IHtmlHelper htmlHelper)
     {
-        var uriString = "mailto:" + ((htmlHelper.ViewData.Model == null) ?
-            string.Empty :
-            htmlHelper.ViewData.Model.ToString());
-        var linkedText = (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null) ?
-            string.Empty :
-            htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
+        var uriString =
+            "mailto:"
+            + (
+                (htmlHelper.ViewData.Model == null)
+                    ? string.Empty
+                    : htmlHelper.ViewData.Model.ToString()
+            );
+        var linkedText =
+            (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null)
+                ? string.Empty
+                : htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
         return HyperlinkTemplate(uriString, linkedText);
     }
@@ -229,7 +252,8 @@ internal static class DefaultDisplayTemplates
                 htmlFieldName: propertyMetadata.PropertyName,
                 templateName: null,
                 readOnly: true,
-                additionalViewData: null);
+                additionalViewData: null
+            );
 
             var templateBuilderResult = templateBuilder.Build();
             if (!propertyMetadata.HideSurroundingHtml)
@@ -259,10 +283,9 @@ internal static class DefaultDisplayTemplates
 
     private static bool ShouldShow(ModelExplorer modelExplorer, TemplateInfo templateInfo)
     {
-        return
-            modelExplorer.Metadata.ShowForDisplay &&
-            !modelExplorer.Metadata.IsComplexType &&
-            !templateInfo.Visited(modelExplorer);
+        return modelExplorer.Metadata.ShowForDisplay
+            && !modelExplorer.Metadata.IsComplexType
+            && !templateInfo.Visited(modelExplorer);
     }
 
     public static IHtmlContent StringTemplate(IHtmlHelper htmlHelper)
@@ -278,10 +301,14 @@ internal static class DefaultDisplayTemplates
 
     public static IHtmlContent UrlTemplate(IHtmlHelper htmlHelper)
     {
-        var uriString = (htmlHelper.ViewData.Model == null) ? string.Empty : htmlHelper.ViewData.Model.ToString();
-        var linkedText = (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null) ?
-            string.Empty :
-            htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
+        var uriString =
+            (htmlHelper.ViewData.Model == null)
+                ? string.Empty
+                : htmlHelper.ViewData.Model.ToString();
+        var linkedText =
+            (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == null)
+                ? string.Empty
+                : htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
         return HyperlinkTemplate(uriString, linkedText);
     }

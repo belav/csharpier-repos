@@ -13,35 +13,63 @@ using System.Runtime.CompilerServices;
 // ReSharper disable ConvertToAutoProperty
 namespace Microsoft.EntityFrameworkCore.TestModels
 {
-    public class ChangedOnlyMonsterContext : MonsterContext<
-        ChangedOnlyMonsterContext.Customer, ChangedOnlyMonsterContext.Barcode, ChangedOnlyMonsterContext.IncorrectScan,
-        ChangedOnlyMonsterContext.BarcodeDetail, ChangedOnlyMonsterContext.Complaint, ChangedOnlyMonsterContext.Resolution,
-        ChangedOnlyMonsterContext.Login, ChangedOnlyMonsterContext.SuspiciousActivity, ChangedOnlyMonsterContext.SmartCard,
-        ChangedOnlyMonsterContext.RsaToken, ChangedOnlyMonsterContext.PasswordReset, ChangedOnlyMonsterContext.PageView,
-        ChangedOnlyMonsterContext.LastLogin, ChangedOnlyMonsterContext.Message, ChangedOnlyMonsterContext.AnOrder,
-        ChangedOnlyMonsterContext.OrderNote, ChangedOnlyMonsterContext.OrderQualityCheck, ChangedOnlyMonsterContext.OrderLine,
-        ChangedOnlyMonsterContext.Product, ChangedOnlyMonsterContext.ProductDetail, ChangedOnlyMonsterContext.ProductReview,
-        ChangedOnlyMonsterContext.ProductPhoto, ChangedOnlyMonsterContext.ProductWebFeature, ChangedOnlyMonsterContext.Supplier,
-        ChangedOnlyMonsterContext.SupplierLogo, ChangedOnlyMonsterContext.SupplierInfo, ChangedOnlyMonsterContext.CustomerInfo,
-        ChangedOnlyMonsterContext.Computer, ChangedOnlyMonsterContext.ComputerDetail, ChangedOnlyMonsterContext.Driver,
-        ChangedOnlyMonsterContext.License, ChangedOnlyMonsterContext.ConcurrencyInfo, ChangedOnlyMonsterContext.AuditInfo,
-        ChangedOnlyMonsterContext.ContactDetails, ChangedOnlyMonsterContext.Dimensions, ChangedOnlyMonsterContext.Phone,
-        ChangedOnlyMonsterContext.BackOrderLine, ChangedOnlyMonsterContext.DiscontinuedProduct,
-        ChangedOnlyMonsterContext.ProductPageView>
+    public class ChangedOnlyMonsterContext
+        : MonsterContext<
+            ChangedOnlyMonsterContext.Customer,
+            ChangedOnlyMonsterContext.Barcode,
+            ChangedOnlyMonsterContext.IncorrectScan,
+            ChangedOnlyMonsterContext.BarcodeDetail,
+            ChangedOnlyMonsterContext.Complaint,
+            ChangedOnlyMonsterContext.Resolution,
+            ChangedOnlyMonsterContext.Login,
+            ChangedOnlyMonsterContext.SuspiciousActivity,
+            ChangedOnlyMonsterContext.SmartCard,
+            ChangedOnlyMonsterContext.RsaToken,
+            ChangedOnlyMonsterContext.PasswordReset,
+            ChangedOnlyMonsterContext.PageView,
+            ChangedOnlyMonsterContext.LastLogin,
+            ChangedOnlyMonsterContext.Message,
+            ChangedOnlyMonsterContext.AnOrder,
+            ChangedOnlyMonsterContext.OrderNote,
+            ChangedOnlyMonsterContext.OrderQualityCheck,
+            ChangedOnlyMonsterContext.OrderLine,
+            ChangedOnlyMonsterContext.Product,
+            ChangedOnlyMonsterContext.ProductDetail,
+            ChangedOnlyMonsterContext.ProductReview,
+            ChangedOnlyMonsterContext.ProductPhoto,
+            ChangedOnlyMonsterContext.ProductWebFeature,
+            ChangedOnlyMonsterContext.Supplier,
+            ChangedOnlyMonsterContext.SupplierLogo,
+            ChangedOnlyMonsterContext.SupplierInfo,
+            ChangedOnlyMonsterContext.CustomerInfo,
+            ChangedOnlyMonsterContext.Computer,
+            ChangedOnlyMonsterContext.ComputerDetail,
+            ChangedOnlyMonsterContext.Driver,
+            ChangedOnlyMonsterContext.License,
+            ChangedOnlyMonsterContext.ConcurrencyInfo,
+            ChangedOnlyMonsterContext.AuditInfo,
+            ChangedOnlyMonsterContext.ContactDetails,
+            ChangedOnlyMonsterContext.Dimensions,
+            ChangedOnlyMonsterContext.Phone,
+            ChangedOnlyMonsterContext.BackOrderLine,
+            ChangedOnlyMonsterContext.DiscontinuedProduct,
+            ChangedOnlyMonsterContext.ProductPageView
+        >
     {
-        public ChangedOnlyMonsterContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public ChangedOnlyMonsterContext(DbContextOptions options) : base(options) { }
 
         public class NotificationEntity : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private void NotifyChanged(string propertyName)
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private void NotifyChanged(string propertyName) =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-            protected void SetWithNotify<T>(T value, ref T field, [CallerMemberName] string propertyName = "")
+            protected void SetWithNotify<T>(
+                T value,
+                ref T field,
+                [CallerMemberName] string propertyName = ""
+            )
             {
                 if (!StructuralComparisons.StructuralEqualityComparer.Equals(field, value))
                 {
@@ -51,9 +79,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels
             }
         }
 
-        public class BackOrderLine2 : BackOrderLine
-        {
-        }
+        public class BackOrderLine2 : BackOrderLine { }
 
         public class BackOrderLine : OrderLine, IBackOrderLine
         {

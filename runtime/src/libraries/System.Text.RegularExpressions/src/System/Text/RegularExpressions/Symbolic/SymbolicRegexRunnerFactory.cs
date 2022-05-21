@@ -10,22 +10,34 @@ namespace System.Text.RegularExpressions.Symbolic
     internal sealed class SymbolicRegexRunnerFactory : RegexRunnerFactory
     {
         /// <summary>The unicode component, including the BDD algebra.</summary>
-        internal static readonly UnicodeCategoryTheory<BDD> s_unicode = new UnicodeCategoryTheory<BDD>(new CharSetSolver());
+        internal static readonly UnicodeCategoryTheory<BDD> s_unicode =
+            new UnicodeCategoryTheory<BDD>(new CharSetSolver());
 
         /// <summary>The matching engine.</summary>
         internal readonly SymbolicRegexMatcher _matcher;
+
         /// <summary>Minimum length computed</summary>
         private readonly int _minRequiredLength;
 
         /// <summary>Initializes the factory.</summary>
-        public SymbolicRegexRunnerFactory(RegexCode code, RegexOptions options, TimeSpan matchTimeout, CultureInfo culture)
+        public SymbolicRegexRunnerFactory(
+            RegexCode code,
+            RegexOptions options,
+            TimeSpan matchTimeout,
+            CultureInfo culture
+        )
         {
             // RightToLeft and ECMAScript are currently not supported in conjunction with NonBacktracking.
             if ((options & (RegexOptions.RightToLeft | RegexOptions.ECMAScript)) != 0)
             {
                 throw new NotSupportedException(
-                    SR.Format(SR.NotSupported_NonBacktrackingConflictingOption,
-                        (options & RegexOptions.RightToLeft) != 0 ? nameof(RegexOptions.RightToLeft) : nameof(RegexOptions.ECMAScript)));
+                    SR.Format(
+                        SR.NotSupported_NonBacktrackingConflictingOption,
+                        (options & RegexOptions.RightToLeft) != 0
+                            ? nameof(RegexOptions.RightToLeft)
+                            : nameof(RegexOptions.ECMAScript)
+                    )
+                );
             }
 
             var converter = new RegexNodeToSymbolicConverter(s_unicode, culture);
@@ -43,12 +55,28 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 // The default constructor sets the following predicates to False; this update happens after the fact.
                 // It depends on whether anchors where used in the regex whether the predicates are actually different from False.
-                builderBV._wordLetterPredicateForAnchors = algBV.ConvertFromCharSet(solver, converter._builder._wordLetterPredicateForAnchors);
-                builderBV._newLinePredicate = algBV.ConvertFromCharSet(solver, converter._builder._newLinePredicate);
+                builderBV._wordLetterPredicateForAnchors = algBV.ConvertFromCharSet(
+                    solver,
+                    converter._builder._wordLetterPredicateForAnchors
+                );
+                builderBV._newLinePredicate = algBV.ConvertFromCharSet(
+                    solver,
+                    converter._builder._newLinePredicate
+                );
 
                 //Convert the BDD based AST to BV based AST
-                SymbolicRegexNode<BV> rootBV = converter._builder.Transform(root, builderBV, bdd => builderBV._solver.ConvertFromCharSet(solver, bdd));
-                _matcher = new SymbolicRegexMatcher<BV>(rootBV, solver, minterms, matchTimeout, culture);
+                SymbolicRegexNode<BV> rootBV = converter._builder.Transform(
+                    root,
+                    builderBV,
+                    bdd => builderBV._solver.ConvertFromCharSet(solver, bdd)
+                );
+                _matcher = new SymbolicRegexMatcher<BV>(
+                    rootBV,
+                    solver,
+                    minterms,
+                    matchTimeout,
+                    culture
+                );
             }
             else
             {
@@ -58,18 +86,35 @@ namespace System.Text.RegularExpressions.Symbolic
                 {
                     // The default constructor sets the following predicates to False, this update happens after the fact
                     // It depends on whether anchors where used in the regex whether the predicates are actually different from False
-                    _wordLetterPredicateForAnchors = alg64.ConvertFromCharSet(solver, converter._builder._wordLetterPredicateForAnchors),
-                    _newLinePredicate = alg64.ConvertFromCharSet(solver, converter._builder._newLinePredicate)
+                    _wordLetterPredicateForAnchors = alg64.ConvertFromCharSet(
+                        solver,
+                        converter._builder._wordLetterPredicateForAnchors
+                    ),
+                    _newLinePredicate = alg64.ConvertFromCharSet(
+                        solver,
+                        converter._builder._newLinePredicate
+                    )
                 };
 
                 // Convert the BDD-based AST to ulong-based AST
-                SymbolicRegexNode<ulong> root64 = converter._builder.Transform(root, builder64, bdd => builder64._solver.ConvertFromCharSet(solver, bdd));
-                _matcher = new SymbolicRegexMatcher<ulong>(root64, solver, minterms, matchTimeout, culture);
+                SymbolicRegexNode<ulong> root64 = converter._builder.Transform(
+                    root,
+                    builder64,
+                    bdd => builder64._solver.ConvertFromCharSet(solver, bdd)
+                );
+                _matcher = new SymbolicRegexMatcher<ulong>(
+                    root64,
+                    solver,
+                    minterms,
+                    matchTimeout,
+                    culture
+                );
             }
         }
 
         /// <summary>Creates a <see cref="RegexRunner"/> object.</summary>
-        protected internal override RegexRunner CreateInstance() => new Runner(_matcher, _minRequiredLength);
+        protected internal override RegexRunner CreateInstance() =>
+            new Runner(_matcher, _minRequiredLength);
 
         /// <summary>Runner type produced by this factory.</summary>
         /// <remarks>
@@ -81,6 +126,7 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             /// <summary>The matching engine.</summary>
             private readonly SymbolicRegexMatcher _matcher;
+
             /// <summary>Minimum length computed.</summary>
             private readonly int _minRequiredLength;
 

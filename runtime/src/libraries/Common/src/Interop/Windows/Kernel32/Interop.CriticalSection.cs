@@ -20,15 +20,23 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void InitializeCriticalSection(CRITICAL_SECTION* lpCriticalSection);
+        internal static extern unsafe void InitializeCriticalSection(
+            CRITICAL_SECTION* lpCriticalSection
+        );
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void EnterCriticalSection(CRITICAL_SECTION* lpCriticalSection);
+        internal static extern unsafe void EnterCriticalSection(
+            CRITICAL_SECTION* lpCriticalSection
+        );
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void LeaveCriticalSection(CRITICAL_SECTION* lpCriticalSection);
+        internal static extern unsafe void LeaveCriticalSection(
+            CRITICAL_SECTION* lpCriticalSection
+        );
 
         [DllImport(Libraries.Kernel32, ExactSpelling = true)]
-        internal static extern unsafe void DeleteCriticalSection(CRITICAL_SECTION* lpCriticalSection);
+        internal static extern unsafe void DeleteCriticalSection(
+            CRITICAL_SECTION* lpCriticalSection
+        );
     }
 }

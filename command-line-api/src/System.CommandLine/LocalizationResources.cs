@@ -21,25 +21,37 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizationResources"/> class.
         /// </summary>
-        protected LocalizationResources()
-        {
-        }
+        protected LocalizationResources() { }
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Command &apos;{0}&apos; expects a single argument but {1} were provided.
         /// </summary>
-        public virtual string ExpectsOneArgument(SymbolResult symbolResult) => 
+        public virtual string ExpectsOneArgument(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                    ? GetResourceString(Properties.Resources.CommandExpectsOneArgument, symbolResult.Token().Value, symbolResult.Tokens.Count)
-                    : GetResourceString(Properties.Resources.OptionExpectsOneArgument, symbolResult.Token().Value, symbolResult.Tokens.Count);
+                ? GetResourceString(
+                    Properties.Resources.CommandExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                )
+                : GetResourceString(
+                    Properties.Resources.OptionExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to No argument was provided for Command &apos;{0}&apos;..
         /// </summary>
         public virtual string NoArgumentProvided(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                ? GetResourceString(Properties.Resources.CommandNoArgumentProvided, symbolResult.Token().Value)
-                : GetResourceString(Properties.Resources.OptionNoArgumentProvided, symbolResult.Token().Value);
+                ? GetResourceString(
+                    Properties.Resources.CommandNoArgumentProvided,
+                    symbolResult.Token().Value
+                )
+                : GetResourceString(
+                    Properties.Resources.OptionNoArgumentProvided,
+                    symbolResult.Token().Value
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Command &apos;{0}&apos; expects no more than {1} arguments, but {2} were provided.
@@ -47,10 +59,21 @@ namespace System.CommandLine
         public virtual string ExpectsFewerArguments(
             Token token,
             int providedNumberOfValues,
-            int maximumNumberOfValues) =>
+            int maximumNumberOfValues
+        ) =>
             token.Type == TokenType.Command
-                ? GetResourceString(Properties.Resources.CommandExpectsFewerArguments, token, maximumNumberOfValues, providedNumberOfValues)
-                : GetResourceString(Properties.Resources.OptionExpectsFewerArguments, token, maximumNumberOfValues, providedNumberOfValues);
+                ? GetResourceString(
+                    Properties.Resources.CommandExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                )
+                : GetResourceString(
+                    Properties.Resources.OptionExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Directory does not exist: {0}.
@@ -75,7 +98,7 @@ namespace System.CommandLine
         /// </summary>
         public virtual string InvalidCharactersInPath(char invalidChar) =>
             GetResourceString(Properties.Resources.InvalidCharactersInPath, invalidChar);
-        
+
         /// <summary>
         ///   Interpolates values into a localized string similar to Character not allowed in a file name: {0}.
         /// </summary>
@@ -87,8 +110,14 @@ namespace System.CommandLine
         /// </summary>
         public virtual string RequiredArgumentMissing(SymbolResult symbolResult) =>
             symbolResult is CommandResult
-                ? GetResourceString(Properties.Resources.CommandRequiredArgumentMissing, symbolResult.Token().Value)
-                : GetResourceString(Properties.Resources.OptionRequiredArgumentMissing, symbolResult.Token().Value);
+                ? GetResourceString(
+                    Properties.Resources.CommandRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                )
+                : GetResourceString(
+                    Properties.Resources.OptionRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Required command was not provided.
@@ -99,8 +128,15 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to Argument &apos;{0}&apos; not recognized. Must be one of:{1}.
         /// </summary>
-        public virtual string UnrecognizedArgument(string unrecognizedArg, IReadOnlyCollection<string> allowedValues) =>
-            GetResourceString(Properties.Resources.UnrecognizedArgument, unrecognizedArg,$"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}");
+        public virtual string UnrecognizedArgument(
+            string unrecognizedArg,
+            IReadOnlyCollection<string> allowedValues
+        ) =>
+            GetResourceString(
+                Properties.Resources.UnrecognizedArgument,
+                unrecognizedArg,
+                $"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}"
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Unrecognized command or argument &apos;{0}&apos;.
@@ -201,64 +237,109 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to &apos;{0}&apos; was not matched. Did you mean one of the following?.
         /// </summary>
-        public virtual string SuggestionsTokenNotMatched(string token)
-            => GetResourceString(Properties.Resources.SuggestionsTokenNotMatched, token);
+        public virtual string SuggestionsTokenNotMatched(string token) =>
+            GetResourceString(Properties.Resources.SuggestionsTokenNotMatched, token);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Show version information.
         /// </summary>
-        public virtual string VersionOptionDescription()
-            => GetResourceString(Properties.Resources.VersionOptionDescription);
+        public virtual string VersionOptionDescription() =>
+            GetResourceString(Properties.Resources.VersionOptionDescription);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to {0} option cannot be combined with other arguments..
         /// </summary>
-        public virtual string VersionOptionCannotBeCombinedWithOtherArguments(string optionAlias)
-            => GetResourceString(Properties.Resources.VersionOptionCannotBeCombinedWithOtherArguments, optionAlias);
+        public virtual string VersionOptionCannotBeCombinedWithOtherArguments(string optionAlias) =>
+            GetResourceString(
+                Properties.Resources.VersionOptionCannotBeCombinedWithOtherArguments,
+                optionAlias
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Unhandled exception: .
         /// </summary>
-        public virtual string ExceptionHandlerHeader()
-            => GetResourceString(Properties.Resources.ExceptionHandlerHeader);
+        public virtual string ExceptionHandlerHeader() =>
+            GetResourceString(Properties.Resources.ExceptionHandlerHeader);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Debug directive specified, but no process names are listed as allowed for debug.
         ///Add your process name to the &apos;{0}&apos; environment variable.
         ///The value of the variable should be the name of the processes, separated by a semi-colon &apos;;&apos;, for example &apos;{0}={1}&apos;.
         /// </summary>
-        public virtual string DebugDirectiveExecutableNotSpecified(string environmentVariableName, string processName)
-            => GetResourceString(Properties.Resources.DebugDirectiveExecutableNotSpecified, environmentVariableName, processName);
+        public virtual string DebugDirectiveExecutableNotSpecified(
+            string environmentVariableName,
+            string processName
+        ) =>
+            GetResourceString(
+                Properties.Resources.DebugDirectiveExecutableNotSpecified,
+                environmentVariableName,
+                processName
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Attach your debugger to process {0} ({1})..
         /// </summary>
-        public virtual string DebugDirectiveAttachToProcess(int processId, string processName)
-            => GetResourceString(Properties.Resources.DebugDirectiveAttachToProcess, processId, processName);
+        public virtual string DebugDirectiveAttachToProcess(int processId, string processName) =>
+            GetResourceString(
+                Properties.Resources.DebugDirectiveAttachToProcess,
+                processId,
+                processName
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Process name &apos;{0}&apos; is not included in the list of debuggable process names in the {1} environment variable (&apos;{2}&apos;).
         /// </summary>
-        public virtual string DebugDirectiveProcessNotIncludedInEnvironmentVariable(string processName, string environmentVariableName, string processNames)
-            => GetResourceString(Properties.Resources.DebugDirectiveProcessNotIncludedInEnvironmentVariable, processName, environmentVariableName, processNames);
+        public virtual string DebugDirectiveProcessNotIncludedInEnvironmentVariable(
+            string processName,
+            string environmentVariableName,
+            string processNames
+        ) =>
+            GetResourceString(
+                Properties.Resources.DebugDirectiveProcessNotIncludedInEnvironmentVariable,
+                processName,
+                environmentVariableName,
+                processNames
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; as expected type {1}..
         /// </summary>
-        public virtual string ArgumentConversionCannotParse(string value, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParse, value, expectedType);
+        public virtual string ArgumentConversionCannotParse(string value, Type expectedType) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParse,
+                value,
+                expectedType
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for command &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        public virtual string ArgumentConversionCannotParseForCommand(string value, string commandAlias, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForCommand, value, commandAlias, expectedType);
+        public virtual string ArgumentConversionCannotParseForCommand(
+            string value,
+            string commandAlias,
+            Type expectedType
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForCommand,
+                value,
+                commandAlias,
+                expectedType
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for option &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        public virtual string ArgumentConversionCannotParseForOption(string value, string optionAlias, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForOption, value, optionAlias, expectedType);
+        public virtual string ArgumentConversionCannotParseForOption(
+            string value,
+            string optionAlias,
+            Type expectedType
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForOption,
+                value,
+                optionAlias,
+                expectedType
+            );
 
         /// <summary>
         /// Interpolates values into a localized string.
@@ -266,7 +347,10 @@ namespace System.CommandLine
         /// <param name="resourceString">The string template into which values will be interpolated.</param>
         /// <param name="formatArguments">The values to interpolate.</param>
         /// <returns>The final string after interpolation.</returns>
-        protected virtual string GetResourceString(string resourceString, params object[] formatArguments)
+        protected virtual string GetResourceString(
+            string resourceString,
+            params object[] formatArguments
+        )
         {
             if (resourceString is null)
             {

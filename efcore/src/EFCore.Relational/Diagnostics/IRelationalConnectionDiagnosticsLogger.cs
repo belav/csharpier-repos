@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///         for more information.
     ///     </para>
     /// </remarks>
-    public interface IRelationalConnectionDiagnosticsLogger : IDiagnosticsLogger<DbLoggerCategory.Database.Connection>
+    public interface IRelationalConnectionDiagnosticsLogger
+        : IDiagnosticsLogger<DbLoggerCategory.Database.Connection>
     {
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionOpening" /> event.
@@ -34,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         InterceptionResult ConnectionOpening(
             IRelationalConnection connection,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionOpening" /> event.
@@ -47,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ValueTask<InterceptionResult> ConnectionOpeningAsync(
             IRelationalConnection connection,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionOpened" /> event.
@@ -58,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         void ConnectionOpened(
             IRelationalConnection connection,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionOpened" /> event.
@@ -73,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IRelationalConnection connection,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionClosing" /> event.
@@ -83,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns>The result of execution, which may have been modified by an interceptor.</returns>
         InterceptionResult ConnectionClosing(
             IRelationalConnection connection,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionClosing" /> event.
@@ -93,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <returns>A <see cref="Task" /> representing the async operation.</returns>
         ValueTask<InterceptionResult> ConnectionClosingAsync(
             IRelationalConnection connection,
-            DateTimeOffset startTime);
+            DateTimeOffset startTime
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionClosed" /> event.
@@ -104,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         void ConnectionClosed(
             IRelationalConnection connection,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionClosed" /> event.
@@ -116,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task ConnectionClosedAsync(
             IRelationalConnection connection,
             DateTimeOffset startTime,
-            TimeSpan duration);
+            TimeSpan duration
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionError" /> event.
@@ -131,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration,
-            bool logErrorAsDebug);
+            bool logErrorAsDebug
+        );
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.ConnectionError" /> event.
@@ -150,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DateTimeOffset startTime,
             TimeSpan duration,
             bool logErrorAsDebug,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Whether <see cref="RelationalEventId.ConnectionOpening" /> or <see cref="RelationalEventId.ConnectionOpened" /> need

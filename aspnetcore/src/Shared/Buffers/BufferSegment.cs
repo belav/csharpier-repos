@@ -114,9 +114,15 @@ internal sealed class BufferSegment : ReadOnlySequenceSegment<byte>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal static long GetLength(BufferSegment startSegment, int startIndex, BufferSegment endSegment, int endIndex)
+    internal static long GetLength(
+        BufferSegment startSegment,
+        int startIndex,
+        BufferSegment endSegment,
+        int endIndex
+    )
     {
-        return (endSegment.RunningIndex + (uint)endIndex) - (startSegment.RunningIndex + (uint)startIndex);
+        return (endSegment.RunningIndex + (uint)endIndex)
+            - (startSegment.RunningIndex + (uint)startIndex);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

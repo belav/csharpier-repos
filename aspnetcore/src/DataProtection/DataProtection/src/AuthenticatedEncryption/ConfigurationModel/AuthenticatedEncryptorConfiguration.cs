@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// <summary>
 /// Represents a generalized authenticated encryption mechanism.
 /// </summary>
-public sealed class AuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+public sealed class AuthenticatedEncryptorConfiguration
+    : AlgorithmConfiguration,
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The algorithm to use for symmetric encryption (confidentiality).
@@ -37,7 +39,9 @@ public sealed class AuthenticatedEncryptorConfiguration : AlgorithmConfiguration
         return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+        ISecret secret
+    )
     {
         return new AuthenticatedEncryptorDescriptor(this, secret);
     }

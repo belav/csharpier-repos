@@ -18,7 +18,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    [ExportLanguageService(typeof(INavigateToSearchService), InternalLanguageNames.TypeScript), Shared]
+    [
+        ExportLanguageService(typeof(INavigateToSearchService), InternalLanguageNames.TypeScript),
+        Shared
+    ]
     internal class VSTypeScriptNavigateToSearchService : INavigateToSearchService
     {
         private readonly IVSTypeScriptNavigateToSearchService? _searchService;
@@ -26,12 +29,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptNavigateToSearchService(
-            [Import(AllowDefault = true)] IVSTypeScriptNavigateToSearchService? searchService)
+            [Import(AllowDefault = true)] IVSTypeScriptNavigateToSearchService? searchService
+        )
         {
             _searchService = searchService;
         }
 
-        public IImmutableSet<string> KindsProvided => _searchService?.KindsProvided ?? ImmutableHashSet<string>.Empty;
+        public IImmutableSet<string> KindsProvided =>
+            _searchService?.KindsProvided ?? ImmutableHashSet<string>.Empty;
 
         public bool CanFilter => _searchService?.CanFilter ?? false;
 
@@ -40,11 +45,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_searchService != null)
             {
-                var results = await _searchService.SearchDocumentAsync(document, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+                var results = await _searchService
+                    .SearchDocumentAsync(document, searchPattern, kinds, cancellationToken)
+                    .ConfigureAwait(false);
                 foreach (var result in results)
                     await onResultFound(Convert(result)).ConfigureAwait(false);
             }
@@ -56,11 +64,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_searchService != null)
             {
-                var results = await _searchService.SearchProjectAsync(project, priorityDocuments, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+                var results = await _searchService
+                    .SearchProjectAsync(
+                        project,
+                        priorityDocuments,
+                        searchPattern,
+                        kinds,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 foreach (var result in results)
                     await onResultFound(Convert(result)).ConfigureAwait(false);
             }
@@ -72,7 +89,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // we don't support searching cached documents.
             return Task.CompletedTask;
@@ -83,14 +101,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // we don't support searching generated documents.
             return Task.CompletedTask;
         }
 
-        private static INavigateToSearchResult Convert(IVSTypeScriptNavigateToSearchResult result)
-            => new WrappedNavigateToSearchResult(result);
+        private static INavigateToSearchResult Convert(
+            IVSTypeScriptNavigateToSearchResult result
+        ) => new WrappedNavigateToSearchResult(result);
 
         private class WrappedNavigateToSearchResult : INavigateToSearchResult
         {
@@ -105,19 +125,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
             public string Kind => _result.Kind;
 
-            public NavigateToMatchKind MatchKind
-                => _result.MatchKind switch
+            public NavigateToMatchKind MatchKind =>
+                _result.MatchKind switch
                 {
                     VSTypeScriptNavigateToMatchKind.Exact => NavigateToMatchKind.Exact,
                     VSTypeScriptNavigateToMatchKind.Prefix => NavigateToMatchKind.Prefix,
                     VSTypeScriptNavigateToMatchKind.Substring => NavigateToMatchKind.Substring,
                     VSTypeScriptNavigateToMatchKind.Regular => NavigateToMatchKind.Regular,
                     VSTypeScriptNavigateToMatchKind.None => NavigateToMatchKind.None,
-                    VSTypeScriptNavigateToMatchKind.CamelCaseExact => NavigateToMatchKind.CamelCaseExact,
-                    VSTypeScriptNavigateToMatchKind.CamelCasePrefix => NavigateToMatchKind.CamelCasePrefix,
-                    VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
-                    VSTypeScriptNavigateToMatchKind.CamelCaseSubstring => NavigateToMatchKind.CamelCaseSubstring,
-                    VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
+                    VSTypeScriptNavigateToMatchKind.CamelCaseExact
+                        => NavigateToMatchKind.CamelCaseExact,
+                    VSTypeScriptNavigateToMatchKind.CamelCasePrefix
+                        => NavigateToMatchKind.CamelCasePrefix,
+                    VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix
+                        => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
+                    VSTypeScriptNavigateToMatchKind.CamelCaseSubstring
+                        => NavigateToMatchKind.CamelCaseSubstring,
+                    VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring
+                        => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
                     VSTypeScriptNavigateToMatchKind.Fuzzy => NavigateToMatchKind.Fuzzy,
                     _ => throw ExceptionUtilities.UnexpectedValue(_result.MatchKind),
                 };
@@ -132,7 +157,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
             public string Summary => _result.Summary;
 
-            public INavigableItem? NavigableItem => _result.NavigableItem == null ? null : new WrappedNavigableItem(_result.NavigableItem);
+            public INavigableItem? NavigableItem =>
+                _result.NavigableItem == null
+                    ? null
+                    : new WrappedNavigableItem(_result.NavigableItem);
         }
 
         private class WrappedNavigableItem : INavigableItem
@@ -146,7 +174,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
             public Glyph Glyph => _navigableItem.Glyph;
 
-            public ImmutableArray<TaggedText> DisplayTaggedParts => _navigableItem.DisplayTaggedParts;
+            public ImmutableArray<TaggedText> DisplayTaggedParts =>
+                _navigableItem.DisplayTaggedParts;
 
             public bool DisplayFileLocation => _navigableItem.DisplayFileLocation;
 
@@ -158,10 +187,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
             public bool IsStale => false;
 
-            public ImmutableArray<INavigableItem> ChildItems
-                => _navigableItem.ChildItems.IsDefault
+            public ImmutableArray<INavigableItem> ChildItems =>
+                _navigableItem.ChildItems.IsDefault
                     ? default
-                    : _navigableItem.ChildItems.SelectAsArray(i => (INavigableItem)new WrappedNavigableItem(i));
+                    : _navigableItem.ChildItems.SelectAsArray(
+                        i => (INavigableItem)new WrappedNavigableItem(i)
+                    );
         }
     }
 }

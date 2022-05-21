@@ -14,20 +14,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
     {
         public static readonly BlankLineInGeneratedMethodFormattingRule Instance = new();
 
-        private BlankLineInGeneratedMethodFormattingRule()
-        {
-        }
+        private BlankLineInGeneratedMethodFormattingRule() { }
 
-        public override AdjustNewLinesOperation GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+        public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        )
         {
             // case: insert blank line in empty method body.
-            if (previousToken.Kind() == SyntaxKind.OpenBraceToken &&
-                currentToken.Kind() == SyntaxKind.CloseBraceToken)
+            if (
+                previousToken.Kind() == SyntaxKind.OpenBraceToken
+                && currentToken.Kind() == SyntaxKind.CloseBraceToken
+            )
             {
-                if (currentToken.Parent.Kind() == SyntaxKind.Block &&
-                    currentToken.Parent.Parent.Kind() == SyntaxKind.MethodDeclaration)
+                if (
+                    currentToken.Parent.Kind() == SyntaxKind.Block
+                    && currentToken.Parent.Parent.Kind() == SyntaxKind.MethodDeclaration
+                )
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(2, AdjustNewLinesOption.ForceLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        2,
+                        AdjustNewLinesOption.ForceLines
+                    );
                 }
             }
 

@@ -10,13 +10,15 @@ namespace Profiler.Tests
 {
     class MultiplyLoaded
     {
-        static readonly Guid MultipleProfilerGuid = new Guid("BFA8EF13-E144-49B9-B95C-FC1C150C7651");
+        static readonly Guid MultipleProfilerGuid = new Guid(
+            "BFA8EF13-E144-49B9-B95C-FC1C150C7651"
+        );
         static readonly string ProfilerPath = ProfilerTestRunner.GetProfilerPath();
 
         [DllImport("Profiler")]
         private static extern void PassCallbackToProfiler(ProfilerCallback callback);
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             ManualResetEvent _profilerDone = new ManualResetEvent(false);
             PassCallbackToProfiler(() => _profilerDone.Set());
@@ -50,11 +52,13 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "MultiplyLoaded",
-                                          profilerClsid: MultipleProfilerGuid,
-                                          loadAsNotification: true,
-                                          notificationCopies: 2);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "MultiplyLoaded",
+                profilerClsid: MultipleProfilerGuid,
+                loadAsNotification: true,
+                notificationCopies: 2
+            );
         }
     }
 }

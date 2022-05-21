@@ -14,6 +14,7 @@ internal static partial class Interop
         internal static partial bool OpenProcessToken(
             IntPtr ProcessToken,
             TokenAccessLevels DesiredAccess,
-            out SafeAccessTokenHandle TokenHandle);
+            out SafeAccessTokenHandle TokenHandle
+        );
     }
 }

@@ -12,14 +12,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     using StackFrameTrivia = EmbeddedSyntaxTrivia<StackFrameKind>;
 
     /// <summary>
-    /// The root unit for a stackframe. Includes the method declaration for the stack frame and optional file information. 
+    /// The root unit for a stackframe. Includes the method declaration for the stack frame and optional file information.
     /// Any leading "at " is considered trivia of <see cref="MethodDeclaration"/>, and " in " is put as trivia for the <see cref="FileInformationExpression"/>.
     /// Remaining unparsable text is put as leading trivia on the <see cref="EndOfLineToken"/>
     /// </summary>
     internal class StackFrameCompilationUnit : StackFrameNode
     {
         /// <summary>
-        /// Represents the method declaration for a stack frame. Requires at least a member 
+        /// Represents the method declaration for a stack frame. Requires at least a member
         /// access and argument list with no parameters to be considered valid
         /// </summary>
         public readonly StackFrameMethodDeclarationNode MethodDeclaration;
@@ -36,8 +36,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </summary>
         public readonly StackFrameToken EndOfLineToken;
 
-        public StackFrameCompilationUnit(StackFrameMethodDeclarationNode methodDeclaration, StackFrameFileInformationNode? fileInformationExpression, StackFrameToken endOfLineToken)
-            : base(StackFrameKind.CompilationUnit)
+        public StackFrameCompilationUnit(
+            StackFrameMethodDeclarationNode methodDeclaration,
+            StackFrameFileInformationNode? fileInformationExpression,
+            StackFrameToken endOfLineToken
+        ) : base(StackFrameKind.CompilationUnit)
         {
             MethodDeclaration = methodDeclaration;
             FileInformationExpression = fileInformationExpression;
@@ -46,11 +49,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => MethodDeclaration,
                 1 => FileInformationExpression,

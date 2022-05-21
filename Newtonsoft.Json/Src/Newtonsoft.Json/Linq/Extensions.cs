@@ -62,7 +62,8 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JToken"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains every token in the source collection, the ancestors of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> AncestorsAndSelf<T>(this IEnumerable<T> source) where T : JToken
+        public static IJEnumerable<JToken> AncestorsAndSelf<T>(this IEnumerable<T> source)
+            where T : JToken
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
@@ -75,7 +76,8 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JContainer"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the descendants of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> Descendants<T>(this IEnumerable<T> source) where T : JContainer
+        public static IJEnumerable<JToken> Descendants<T>(this IEnumerable<T> source)
+            where T : JContainer
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
@@ -88,7 +90,8 @@ namespace Newtonsoft.Json.Linq
         /// <typeparam name="T">The type of the objects in source, constrained to <see cref="JContainer"/>.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains the source collection.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="JToken"/> that contains every token in the source collection, and the descendants of every token in the source collection.</returns>
-        public static IJEnumerable<JToken> DescendantsAndSelf<T>(this IEnumerable<T> source) where T : JContainer
+        public static IJEnumerable<JToken> DescendantsAndSelf<T>(this IEnumerable<T> source)
+            where T : JContainer
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
@@ -181,7 +184,8 @@ namespace Newtonsoft.Json.Linq
             return token.Convert<JToken, U>();
         }
 
-        internal static IEnumerable<U?> Values<T, U>(this IEnumerable<T> source, object? key) where T : JToken
+        internal static IEnumerable<U?> Values<T, U>(this IEnumerable<T> source, object? key)
+            where T : JToken
         {
             ValidationUtils.ArgumentNotNull(source, nameof(source));
 
@@ -262,9 +266,12 @@ namespace Newtonsoft.Json.Linq
 #pragma warning restore CS8653 // A default expression introduces a null value for a type parameter.
             }
 
-            if (token is U castValue
+            if (
+                token is U castValue
                 // don't want to cast JValue to its interfaces, want to get the internal value
-                && typeof(U) != typeof(IComparable) && typeof(U) != typeof(IFormattable))
+                && typeof(U) != typeof(IComparable)
+                && typeof(U) != typeof(IFormattable)
+            )
             {
                 return castValue;
             }
@@ -272,7 +279,13 @@ namespace Newtonsoft.Json.Linq
             {
                 if (!(token is JValue value))
                 {
-                    throw new InvalidCastException("Cannot cast {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, token.GetType(), typeof(T)));
+                    throw new InvalidCastException(
+                        "Cannot cast {0} to {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.GetType(),
+                            typeof(T)
+                        )
+                    );
                 }
 
                 if (value.Value is U u)
@@ -294,7 +307,12 @@ namespace Newtonsoft.Json.Linq
                     targetType = Nullable.GetUnderlyingType(targetType);
                 }
 
-                return (U)System.Convert.ChangeType(value.Value, targetType, CultureInfo.InvariantCulture);
+                return (U)
+                    System.Convert.ChangeType(
+                        value.Value,
+                        targetType,
+                        CultureInfo.InvariantCulture
+                    );
             }
         }
 

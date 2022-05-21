@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Simple1()
         {
-            var text =
-                "namespace N.S{class C{int F; void M(int P}{}}";
+            var text = "namespace N.S{class C{int F; void M(int P}{}}";
 
             // 000000000011111111112222222222333333333344444444445555555555666666666677777777778
             // 012345678901234567890123456789012345678901234567890123456789012345678901234567890

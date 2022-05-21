@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Internal;
 
 internal class TestCounterListener : EventListener
 {
-    private readonly Dictionary<string, Channel<double>> _counters = new Dictionary<string, Channel<double>>();
+    private readonly Dictionary<string, Channel<double>> _counters =
+        new Dictionary<string, Channel<double>>();
 
     /// <summary>
     /// Creates a new TestCounterListener.
@@ -24,7 +25,10 @@ internal class TestCounterListener : EventListener
         }
     }
 
-    public IAsyncEnumerable<double> GetCounterValues(string counterName, CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<double> GetCounterValues(
+        string counterName,
+        CancellationToken cancellationToken = default
+    )
     {
         return _counters[counterName].Reader.ReadAllAsync(cancellationToken);
     }

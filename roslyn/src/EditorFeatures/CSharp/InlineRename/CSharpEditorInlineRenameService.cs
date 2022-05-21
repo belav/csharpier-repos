@@ -21,14 +21,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEditorInlineRenameService(
-            [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices) : base(refactorNotifyServices)
-        {
-        }
+            [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices
+        ) : base(refactorNotifyServices) { }
 
-        protected override bool CheckLanguageSpecificIssues(SemanticModel semanticModel, ISymbol symbol, SyntaxToken triggerToken, [NotNullWhen(true)] out string? langError)
+        protected override bool CheckLanguageSpecificIssues(
+            SemanticModel semanticModel,
+            ISymbol symbol,
+            SyntaxToken triggerToken,
+            [NotNullWhen(true)] out string? langError
+        )
         {
-            if (triggerToken.IsTypeNamedDynamic() &&
-                symbol.Kind == SymbolKind.DynamicType)
+            if (triggerToken.IsTypeNamedDynamic() && symbol.Kind == SymbolKind.DynamicType)
             {
                 langError = EditorFeaturesResources.You_cannot_rename_this_element;
                 return true;
@@ -36,14 +39,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
 
             if (IsTypeNamedVarInVariableOrFieldDeclaration(triggerToken))
             {
-                // To check if var in this context is a real type, or the keyword, we need to 
+                // To check if var in this context is a real type, or the keyword, we need to
                 // speculatively bind the identifier "var". If it returns a symbol, it's a real type,
                 // if not, it's the keyword.
                 // see bugs 659683 (compiler API) and 659705 (rename/workspace api) for examples
-                var symbolForVar = semanticModel.GetSpeculativeSymbolInfo(
-                    triggerToken.SpanStart,
-                    triggerToken.Parent!,
-                    SpeculativeBindingOption.BindAsTypeOrNamespace).Symbol;
+                var symbolForVar = semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        triggerToken.SpanStart,
+                        triggerToken.Parent!,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Symbol;
 
                 if (symbolForVar == null)
                 {
@@ -62,11 +68,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
             if (parent.IsKind(SyntaxKind.IdentifierName))
             {
                 TypeSyntax? declaredType = null;
-                if (parent.IsParentKind(SyntaxKind.VariableDeclaration, out VariableDeclarationSyntax? varDecl))
+                if (
+                    parent.IsParentKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax? varDecl
+                    )
+                )
                 {
                     declaredType = varDecl.Type;
                 }
-                else if (parent.IsParentKind(SyntaxKind.FieldDeclaration, out FieldDeclarationSyntax? fieldDecl))
+                else if (
+                    parent.IsParentKind(
+                        SyntaxKind.FieldDeclaration,
+                        out FieldDeclarationSyntax? fieldDecl
+                    )
+                )
                 {
                     declaredType = fieldDecl.Declaration.Type;
                 }

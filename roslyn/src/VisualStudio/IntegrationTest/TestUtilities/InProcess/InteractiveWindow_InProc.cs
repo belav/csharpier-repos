@@ -23,8 +23,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     /// </remarks>
     internal abstract class InteractiveWindow_InProc : TextViewWindow_InProc
     {
-        private static readonly Func<string, string, bool> s_contains = (expected, actual) => actual.Contains(expected);
-        private static readonly Func<string, string, bool> s_endsWith = (expected, actual) => actual.EndsWith(expected);
+        private static readonly Func<string, string, bool> s_contains = (expected, actual) =>
+            actual.Contains(expected);
+        private static readonly Func<string, string, bool> s_endsWith = (expected, actual) =>
+            actual.EndsWith(expected);
 
         private const string NewLineFollowedByReplSubmissionText = "\n. ";
         private const string ReplSubmissionText = ". ";
@@ -65,7 +67,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public string GetReplText()
         {
             Contract.ThrowIfNull(_interactiveWindow);
-            return InvokeOnUIThread(cancellationToken => _interactiveWindow.TextView.TextBuffer.CurrentSnapshot.GetText());
+            return InvokeOnUIThread(
+                cancellationToken =>
+                    _interactiveWindow.TextView.TextBuffer.CurrentSnapshot.GetText()
+            );
         }
 
         protected override bool HasActiveTextView()
@@ -117,7 +122,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (lastSubmissionIndex > 0)
             {
-                replText = replText.Substring(lastSubmissionIndex, replText.Length - lastSubmissionIndex);
+                replText = replText.Substring(
+                    lastSubmissionIndex,
+                    replText.Length - lastSubmissionIndex
+                );
             }
             else if (!replText.StartsWith(ReplPromptText))
             {
@@ -158,22 +166,25 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 firstNewLineIndex = replText.IndexOf(Environment.NewLine, lastSubmissionTextIndex);
             }
 
-            var lastReplInputWithReplSubmissionText = (firstNewLineIndex <= 0) ? replText : replText.Substring(0, firstNewLineIndex);
+            var lastReplInputWithReplSubmissionText =
+                (firstNewLineIndex <= 0) ? replText : replText.Substring(0, firstNewLineIndex);
 
             return lastReplInputWithReplSubmissionText.Replace(ReplSubmissionText, string.Empty);
         }
 
         public void Reset(bool waitForPrompt = true)
         {
-            ThreadHelper.JoinableTaskFactory.Run(async () =>
-            {
-                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            ThreadHelper.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                var interactiveWindow = AcquireInteractiveWindow();
-                var operations = (IInteractiveWindowOperations)interactiveWindow;
-                var result = await operations.ResetAsync();
-                Contract.ThrowIfFalse(result.IsSuccessful);
-            });
+                    var interactiveWindow = AcquireInteractiveWindow();
+                    var operations = (IInteractiveWindowOperations)interactiveWindow;
+                    var result = await operations.ResetAsync();
+                    Contract.ThrowIfFalse(result.IsSuccessful);
+                }
+            );
 
             if (waitForPrompt)
             {
@@ -191,14 +202,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void CloseWindow()
         {
-            InvokeOnUIThread(cancellationToken =>
-            {
-                var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                if (ErrorHandler.Succeeded(shell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fFrameOnly, _windowId, out var windowFrame)))
+            InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    ErrorHandler.ThrowOnFailure(windowFrame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave));
+                    var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
+                    if (
+                        ErrorHandler.Succeeded(
+                            shell.FindToolWindow(
+                                (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                                _windowId,
+                                out var windowFrame
+                            )
+                        )
+                    )
+                    {
+                        ErrorHandler.ThrowOnFailure(
+                            windowFrame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
+                        );
+                    }
                 }
-            });
+            );
         }
 
         public void ShowWindow(bool waitForPrompt = true)
@@ -211,14 +234,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public void WaitForReplPrompt()
-            => WaitForPredicate(GetReplText, ReplPromptText, s_endsWith, "end with");
+        public void WaitForReplPrompt() =>
+            WaitForPredicate(GetReplText, ReplPromptText, s_endsWith, "end with");
 
-        public void WaitForReplOutput(string outputText)
-            => WaitForPredicate(GetReplText, outputText + Environment.NewLine + ReplPromptText, s_endsWith, "end with");
+        public void WaitForReplOutput(string outputText) =>
+            WaitForPredicate(
+                GetReplText,
+                outputText + Environment.NewLine + ReplPromptText,
+                s_endsWith,
+                "end with"
+            );
 
-        public void ClearScreen()
-            => ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ClearScreen);
+        public void ClearScreen() =>
+            ExecuteCommand(WellKnownCommandNames.InteractiveConsole_ClearScreen);
 
         public void InsertCode(string text)
         {
@@ -226,16 +254,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             InvokeOnUIThread(cancellationToken => _interactiveWindow.InsertCode(text));
         }
 
-        public void WaitForLastReplOutput(string outputText)
-            => WaitForPredicate(GetLastReplOutput, outputText, s_contains, "contain");
+        public void WaitForLastReplOutput(string outputText) =>
+            WaitForPredicate(GetLastReplOutput, outputText, s_contains, "contain");
 
-        public void WaitForLastReplOutputContains(string outputText)
-            => WaitForPredicate(GetLastReplOutput, outputText, s_contains, "contain");
+        public void WaitForLastReplOutputContains(string outputText) =>
+            WaitForPredicate(GetLastReplOutput, outputText, s_contains, "contain");
 
-        public void WaitForLastReplInputContains(string outputText)
-            => WaitForPredicate(GetLastReplInput, outputText, s_contains, "contain");
+        public void WaitForLastReplInputContains(string outputText) =>
+            WaitForPredicate(GetLastReplInput, outputText, s_contains, "contain");
 
-        private void WaitForPredicate(Func<string> getValue, string expectedValue, Func<string, string, bool> valueComparer, string verb)
+        private void WaitForPredicate(
+            Func<string> getValue,
+            string expectedValue,
+            Func<string, string, bool> valueComparer,
+            string verb
+        )
         {
             var beginTime = DateTime.UtcNow;
 
@@ -251,11 +284,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (DateTime.UtcNow > beginTime + Helper.HangMitigatingTimeout)
                 {
                     throw new Exception(
-                        $"Unable to find expected content in REPL within {Helper.HangMitigatingTimeout.TotalMilliseconds} milliseconds and no exceptions were thrown.{Environment.NewLine}" +
-                        $"Buffer content is expected to {verb}: {Environment.NewLine}" +
-                        $"[[{expectedValue}]]" +
-                        $"Actual content:{Environment.NewLine}" +
-                        $"[[{actualValue}]]");
+                        $"Unable to find expected content in REPL within {Helper.HangMitigatingTimeout.TotalMilliseconds} milliseconds and no exceptions were thrown.{Environment.NewLine}"
+                            + $"Buffer content is expected to {verb}: {Environment.NewLine}"
+                            + $"[[{expectedValue}]]"
+                            + $"Actual content:{Environment.NewLine}"
+                            + $"[[{actualValue}]]"
+                    );
                 }
 
                 Thread.Sleep(50);

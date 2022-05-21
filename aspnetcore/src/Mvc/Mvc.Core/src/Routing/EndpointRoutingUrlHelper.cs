@@ -28,8 +28,8 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
     public EndpointRoutingUrlHelper(
         ActionContext actionContext,
         LinkGenerator linkGenerator,
-        ILogger<EndpointRoutingUrlHelper> logger)
-        : base(actionContext)
+        ILogger<EndpointRoutingUrlHelper> logger
+    ) : base(actionContext)
     {
         if (linkGenerator == null)
         {
@@ -57,8 +57,9 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
 
         if (urlActionContext.Action == null)
         {
-            if (!values.ContainsKey("action") &&
-                AmbientValues.TryGetValue("action", out var action))
+            if (
+                !values.ContainsKey("action") && AmbientValues.TryGetValue("action", out var action)
+            )
             {
                 values["action"] = action;
             }
@@ -70,8 +71,10 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
 
         if (urlActionContext.Controller == null)
         {
-            if (!values.ContainsKey("controller") &&
-                AmbientValues.TryGetValue("controller", out var controller))
+            if (
+                !values.ContainsKey("controller")
+                && AmbientValues.TryGetValue("controller", out var controller)
+            )
             {
                 values["controller"] = controller;
             }
@@ -81,12 +84,14 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
             values["controller"] = urlActionContext.Controller;
         }
 
-
         var path = _linkGenerator.GetPathByRouteValues(
             ActionContext.HttpContext,
             routeName: null,
             values,
-            fragment: urlActionContext.Fragment == null ? FragmentString.Empty : new FragmentString("#" + urlActionContext.Fragment));
+            fragment: urlActionContext.Fragment == null
+                ? FragmentString.Empty
+                : new FragmentString("#" + urlActionContext.Fragment)
+        );
         return GenerateUrl(urlActionContext.Protocol, urlActionContext.Host, path);
     }
 
@@ -102,7 +107,10 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
             ActionContext.HttpContext,
             routeContext.RouteName,
             routeContext.Values,
-            fragment: routeContext.Fragment == null ? FragmentString.Empty : new FragmentString("#" + routeContext.Fragment));
+            fragment: routeContext.Fragment == null
+                ? FragmentString.Empty
+                : new FragmentString("#" + routeContext.Fragment)
+        );
         return GenerateUrl(routeContext.Protocol, routeContext.Host, path);
     }
 }

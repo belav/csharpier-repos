@@ -8,6 +8,7 @@ namespace System.Xml.XmlResolver.Tests
     internal class DummyStream : MemoryStream
     {
         internal DummyStream(byte[] data) : base(data) { }
+
         public override bool CanSeek => false;
 
         public override long Seek(long offset, SeekOrigin loc)

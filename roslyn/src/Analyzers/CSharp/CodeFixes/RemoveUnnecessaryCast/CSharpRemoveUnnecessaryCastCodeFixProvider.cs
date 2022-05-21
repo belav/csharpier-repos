@@ -23,15 +23,24 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.ImplementInterface)]
-    internal partial class CSharpRemoveUnnecessaryCastCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal partial class CSharpRemoveUnnecessaryCastCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnnecessaryCastCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnnecessaryCastCodeFixProvider() { }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId);
@@ -40,30 +49,49 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var castNodes = diagnostics.SelectAsArray(
-                d => (ExpressionSyntax)d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken));
+                d =>
+                    (ExpressionSyntax)
+                        d.AdditionalLocations[0].FindNode(
+                            getInnermostNodeForTie: true,
+                            cancellationToken
+                        )
+            );
 
-            await editor.ApplyExpressionLevelSemanticEditsAsync(
-                document, castNodes,
-                (semanticModel, castExpression) => CastSimplifier.IsUnnecessaryCast(castExpression, semanticModel, cancellationToken),
-                (_, currentRoot, castExpression) =>
-                {
-                    var oldParent = castExpression.WalkUpParentheses();
-                    var newParent = Recurse(oldParent);
+            await editor
+                .ApplyExpressionLevelSemanticEditsAsync(
+                    document,
+                    castNodes,
+                    (semanticModel, castExpression) =>
+                        CastSimplifier.IsUnnecessaryCast(
+                            castExpression,
+                            semanticModel,
+                            cancellationToken
+                        ),
+                    (_, currentRoot, castExpression) =>
+                    {
+                        var oldParent = castExpression.WalkUpParentheses();
+                        var newParent = Recurse(oldParent);
 
-                    return currentRoot.ReplaceNode(oldParent, newParent);
-                },
-                cancellationToken).ConfigureAwait(false);
+                        return currentRoot.ReplaceNode(oldParent, newParent);
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private ExpressionSyntax Recurse(ExpressionSyntax old)
@@ -74,20 +102,27 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
                 // remove the cast and produce (expr).Etc().  So we mark all parent parenthesized
                 // expressions as worthy of simplification.  The simplifier will remove these
                 // if possible, or leave them alone if not.
-                return parenthesizedExpression.ReplaceNode(parenthesizedExpression.Expression, Recurse(parenthesizedExpression.Expression))
-                                              .WithAdditionalAnnotations(Simplifier.Annotation);
+                return parenthesizedExpression
+                    .ReplaceNode(
+                        parenthesizedExpression.Expression,
+                        Recurse(parenthesizedExpression.Expression)
+                    )
+                    .WithAdditionalAnnotations(Simplifier.Annotation);
             }
             else if (old is CastExpressionSyntax castExpression)
             {
                 // parenthesize the uncasted value to help ensure any proper parsing. The excess
-                // parens will be removed if unnecessary. 
-                return castExpression.Uncast().WithAdditionalAnnotations(Formatter.Annotation)
-                                     .Parenthesize();
+                // parens will be removed if unnecessary.
+                return castExpression
+                    .Uncast()
+                    .WithAdditionalAnnotations(Formatter.Annotation)
+                    .Parenthesize();
             }
             else if (old is BinaryExpressionSyntax binaryExpression)
             {
-                return binaryExpression.Left.WithTrailingTrivia(binaryExpression.GetTrailingTrivia())
-                                       .WithAdditionalAnnotations(Simplifier.Annotation);
+                return binaryExpression.Left
+                    .WithTrailingTrivia(binaryExpression.GetTrailingTrivia())
+                    .WithAdditionalAnnotations(Simplifier.Annotation);
             }
             else
             {
@@ -98,9 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Remove_Unnecessary_Cast, createChangedDocument, nameof(AnalyzersResources.Remove_Unnecessary_Cast))
-            {
-            }
+                : base(
+                    AnalyzersResources.Remove_Unnecessary_Cast,
+                    createChangedDocument,
+                    nameof(AnalyzersResources.Remove_Unnecessary_Cast)
+                ) { }
         }
     }
 }

@@ -10,7 +10,7 @@ class ThreadStartBool
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartBool <bool>\n");
             return -1;

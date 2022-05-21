@@ -20,7 +20,10 @@ namespace System.Web.Razor
     {
         private static bool _outputDebuggingEnabled = IsDebuggingEnabled();
 
-        private static readonly Dictionary<char, string> _printableEscapeChars = new Dictionary<char, string>
+        private static readonly Dictionary<char, string> _printableEscapeChars = new Dictionary<
+            char,
+            string
+        >
         {
             { '\0', "\\0" },
             { '\\', "\\\\" },
@@ -40,9 +43,22 @@ namespace System.Web.Razor
             get { return _outputDebuggingEnabled; }
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule", Justification = "This is debug only")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "This is debug only")]
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.IO.StringWriter.#ctor", Justification = "This is debug only")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2141:TransparentMethodsMustNotSatisfyLinkDemandsFxCopRule",
+            Justification = "This is debug only"
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "This is debug only"
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1305:SpecifyIFormatProvider",
+            MessageId = "System.IO.StringWriter.#ctor",
+            Justification = "This is debug only"
+        )]
         internal static void WriteGeneratedCode(string sourceFile, CodeCompileUnit codeCompileUnit)
         {
             if (!OutputDebuggingEnabled)
@@ -50,59 +66,105 @@ namespace System.Web.Razor
                 return;
             }
 
-            RunTask(() =>
-            {
-                string extension = Path.GetExtension(sourceFile);
-                RazorCodeLanguage language = RazorCodeLanguage.GetLanguageByExtension(extension);
-                CodeDomProvider provider = CodeDomProvider.CreateProvider(language.LanguageName);
-
-                using (var writer = new StringWriter())
+            RunTask(
+                () =>
                 {
-                    // Trim the html part of cshtml or vbhtml
-                    string outputExtension = extension.Substring(0, 3);
-                    string outputFileName = Normalize(sourceFile) + "_generated" + outputExtension;
-                    string outputPath = Path.Combine(Path.GetDirectoryName(sourceFile), outputFileName);
+                    string extension = Path.GetExtension(sourceFile);
+                    RazorCodeLanguage language = RazorCodeLanguage.GetLanguageByExtension(
+                        extension
+                    );
+                    CodeDomProvider provider = CodeDomProvider.CreateProvider(
+                        language.LanguageName
+                    );
 
-                    // REVIEW: Do these options need to be tweaked?
-                    provider.GenerateCodeFromCompileUnit(codeCompileUnit, writer, new CodeGeneratorOptions());
-                    File.WriteAllText(outputPath, writer.ToString());
+                    using (var writer = new StringWriter())
+                    {
+                        // Trim the html part of cshtml or vbhtml
+                        string outputExtension = extension.Substring(0, 3);
+                        string outputFileName =
+                            Normalize(sourceFile) + "_generated" + outputExtension;
+                        string outputPath = Path.Combine(
+                            Path.GetDirectoryName(sourceFile),
+                            outputFileName
+                        );
+
+                        // REVIEW: Do these options need to be tweaked?
+                        provider.GenerateCodeFromCompileUnit(
+                            codeCompileUnit,
+                            writer,
+                            new CodeGeneratorOptions()
+                        );
+                        File.WriteAllText(outputPath, writer.ToString());
+                    }
                 }
-            });
+            );
         }
 
-        internal static void WriteDebugTree(string sourceFile, Block document, PartialParseResult result, TextChange change, RazorEditorParser parser, bool treeStructureChanged)
+        internal static void WriteDebugTree(
+            string sourceFile,
+            Block document,
+            PartialParseResult result,
+            TextChange change,
+            RazorEditorParser parser,
+            bool treeStructureChanged
+        )
         {
             if (!OutputDebuggingEnabled)
             {
                 return;
             }
 
-            RunTask(() =>
-            {
-                string outputFileName = Normalize(sourceFile) + "_tree";
-                string outputPath = Path.Combine(Path.GetDirectoryName(sourceFile), outputFileName);
+            RunTask(
+                () =>
+                {
+                    string outputFileName = Normalize(sourceFile) + "_tree";
+                    string outputPath = Path.Combine(
+                        Path.GetDirectoryName(sourceFile),
+                        outputFileName
+                    );
 
-                var treeBuilder = new StringBuilder();
-                WriteTree(document, treeBuilder);
-                treeBuilder.AppendLine();
-                treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Last Change: {0}", change);
-                treeBuilder.AppendLine();
-                treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Normalized To: {0}", change.Normalize());
-                treeBuilder.AppendLine();
-                treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Partial Parse Result: {0}", result);
-                treeBuilder.AppendLine();
-                if (result.HasFlag(PartialParseResult.Rejected))
-                {
-                    treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Tree Structure Changed: {0}", treeStructureChanged);
+                    var treeBuilder = new StringBuilder();
+                    WriteTree(document, treeBuilder);
                     treeBuilder.AppendLine();
-                }
-                if (result.HasFlag(PartialParseResult.AutoCompleteBlock))
-                {
-                    treeBuilder.AppendFormat(CultureInfo.CurrentCulture, "Auto Complete Insert String: \"{0}\"", parser.GetAutoCompleteString());
+                    treeBuilder.AppendFormat(
+                        CultureInfo.CurrentCulture,
+                        "Last Change: {0}",
+                        change
+                    );
                     treeBuilder.AppendLine();
+                    treeBuilder.AppendFormat(
+                        CultureInfo.CurrentCulture,
+                        "Normalized To: {0}",
+                        change.Normalize()
+                    );
+                    treeBuilder.AppendLine();
+                    treeBuilder.AppendFormat(
+                        CultureInfo.CurrentCulture,
+                        "Partial Parse Result: {0}",
+                        result
+                    );
+                    treeBuilder.AppendLine();
+                    if (result.HasFlag(PartialParseResult.Rejected))
+                    {
+                        treeBuilder.AppendFormat(
+                            CultureInfo.CurrentCulture,
+                            "Tree Structure Changed: {0}",
+                            treeStructureChanged
+                        );
+                        treeBuilder.AppendLine();
+                    }
+                    if (result.HasFlag(PartialParseResult.AutoCompleteBlock))
+                    {
+                        treeBuilder.AppendFormat(
+                            CultureInfo.CurrentCulture,
+                            "Auto Complete Insert String: \"{0}\"",
+                            parser.GetAutoCompleteString()
+                        );
+                        treeBuilder.AppendLine();
+                    }
+                    File.WriteAllText(outputPath, treeBuilder.ToString());
                 }
-                File.WriteAllText(outputPath, treeBuilder.ToString());
-            });
+            );
         }
 
         private static void WriteTree(SyntaxTreeNode node, StringBuilder treeBuilder, int depth = 0)
@@ -131,22 +193,36 @@ namespace System.Web.Razor
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is debug only")]
-        [SuppressMessage("Microsoft.Web.FxCop", "MW1202:DoNotUseProblematicTaskTypes", Justification = "This rule is not applicable to this assembly.")]
-        [SuppressMessage("Microsoft.Web.FxCop", "MW1201:DoNotCallProblematicMethodsOnTask", Justification = "This rule is not applicable to this assembly.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "This is debug only"
+        )]
+        [SuppressMessage(
+            "Microsoft.Web.FxCop",
+            "MW1202:DoNotUseProblematicTaskTypes",
+            Justification = "This rule is not applicable to this assembly."
+        )]
+        [SuppressMessage(
+            "Microsoft.Web.FxCop",
+            "MW1201:DoNotCallProblematicMethodsOnTask",
+            Justification = "This rule is not applicable to this assembly."
+        )]
         private static void RunTask(Action action)
         {
-            Task.Factory.StartNew(() =>
-            {
-                try
+            Task.Factory.StartNew(
+                () =>
                 {
-                    action();
+                    try
+                    {
+                        action();
+                    }
+                    catch
+                    {
+                        // Catch all errors since this is just a debug helper
+                    }
                 }
-                catch
-                {
-                    // Catch all errors since this is just a debug helper
-                }
-            });
+            );
         }
 
         private static void WriteIndent(StringBuilder sb, int depth)
@@ -192,7 +268,8 @@ namespace System.Web.Razor
         private static bool IsDebuggingEnabled()
         {
             bool enabled;
-            return Boolean.TryParse(Environment.GetEnvironmentVariable("RAZOR_DEBUG"), out enabled) && enabled;
+            return Boolean.TryParse(Environment.GetEnvironmentVariable("RAZOR_DEBUG"), out enabled)
+                && enabled;
         }
     }
 }

@@ -19,26 +19,62 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteGeometryMemberTranslator : IMemberTranslator
     {
-        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName = new Dictionary<MemberInfo, string>
-        {
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Area)), "Area" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Boundary)), "Boundary" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Centroid)), "Centroid" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Dimension)), "Dimension" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Envelope)), "Envelope" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.InteriorPoint)), "PointOnSurface" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsEmpty)), "IsEmpty" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsSimple)), "IsSimple" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsValid)), "IsValid" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Length)), "GLength" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumGeometries)), "NumGeometries" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumPoints)), "NumPoints" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.PointOnSurface)), "PointOnSurface" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.SRID)), "SRID" }
-        };
+        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName =
+            new Dictionary<MemberInfo, string>
+            {
+                { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Area)), "Area" },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Boundary)),
+                    "Boundary"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Centroid)),
+                    "Centroid"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Dimension)),
+                    "Dimension"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Envelope)),
+                    "Envelope"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.InteriorPoint)),
+                    "PointOnSurface"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsEmpty)),
+                    "IsEmpty"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsSimple)),
+                    "IsSimple"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsValid)),
+                    "IsValid"
+                },
+                { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Length)), "GLength" },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumGeometries)),
+                    "NumGeometries"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumPoints)),
+                    "NumPoints"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.PointOnSurface)),
+                    "PointOnSurface"
+                },
+                { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.SRID)), "SRID" }
+            };
 
-        private static readonly MemberInfo _geometryType = typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.GeometryType));
-        private static readonly MemberInfo _ogcGeometryType = typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
+        private static readonly MemberInfo _geometryType =
+            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.GeometryType));
+        private static readonly MemberInfo _ogcGeometryType =
+            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>
@@ -62,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (instance != null)
             {
@@ -79,15 +116,19 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                         new[] { instance },
                                         nullable: false,
                                         argumentsPropagateNullability: new[] { false },
-                                        returnType))
+                                        returnType
+                                    )
+                                )
                             },
-                            null)
+                            null
+                        )
                         : _sqlExpressionFactory.Function(
                             functionName,
                             new[] { instance },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true },
-                            returnType);
+                            returnType
+                        );
                 }
 
                 if (Equals(member, _geometryType))
@@ -102,26 +143,47 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     new[] { instance },
                                     nullable: true,
                                     argumentsPropagateNullability: new[] { true },
-                                    returnType),
+                                    returnType
+                                ),
                                 _sqlExpressionFactory.Constant(" ZM")
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true },
-                            returnType),
+                            returnType
+                        ),
                         new[]
                         {
-                            new CaseWhenClause(_sqlExpressionFactory.Constant("POINT"), _sqlExpressionFactory.Constant("Point")),
-                            new CaseWhenClause(_sqlExpressionFactory.Constant("LINESTRING"), _sqlExpressionFactory.Constant("LineString")),
-                            new CaseWhenClause(_sqlExpressionFactory.Constant("POLYGON"), _sqlExpressionFactory.Constant("Polygon")),
-                            new CaseWhenClause(_sqlExpressionFactory.Constant("MULTIPOINT"), _sqlExpressionFactory.Constant("MultiPoint")),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("MULTILINESTRING"), _sqlExpressionFactory.Constant("MultiLineString")),
+                                _sqlExpressionFactory.Constant("POINT"),
+                                _sqlExpressionFactory.Constant("Point")
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("MULTIPOLYGON"), _sqlExpressionFactory.Constant("MultiPolygon")),
+                                _sqlExpressionFactory.Constant("LINESTRING"),
+                                _sqlExpressionFactory.Constant("LineString")
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("GEOMETRYCOLLECTION"), _sqlExpressionFactory.Constant("GeometryCollection"))
+                                _sqlExpressionFactory.Constant("POLYGON"),
+                                _sqlExpressionFactory.Constant("Polygon")
+                            ),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Constant("MULTIPOINT"),
+                                _sqlExpressionFactory.Constant("MultiPoint")
+                            ),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Constant("MULTILINESTRING"),
+                                _sqlExpressionFactory.Constant("MultiLineString")
+                            ),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Constant("MULTIPOLYGON"),
+                                _sqlExpressionFactory.Constant("MultiPolygon")
+                            ),
+                            new CaseWhenClause(
+                                _sqlExpressionFactory.Constant("GEOMETRYCOLLECTION"),
+                                _sqlExpressionFactory.Constant("GeometryCollection")
+                            )
                         },
-                        null);
+                        null
+                    );
                 }
 
                 if (Equals(member, _ogcGeometryType))
@@ -136,33 +198,47 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     new[] { instance },
                                     nullable: true,
                                     argumentsPropagateNullability: new[] { true },
-                                    typeof(string)),
+                                    typeof(string)
+                                ),
                                 _sqlExpressionFactory.Constant(" ZM")
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true },
-                            typeof(string)),
+                            typeof(string)
+                        ),
                         new[]
                         {
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("POINT"), _sqlExpressionFactory.Constant(OgcGeometryType.Point)),
+                                _sqlExpressionFactory.Constant("POINT"),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.Point)
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("LINESTRING"), _sqlExpressionFactory.Constant(OgcGeometryType.LineString)),
+                                _sqlExpressionFactory.Constant("LINESTRING"),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.LineString)
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("POLYGON"), _sqlExpressionFactory.Constant(OgcGeometryType.Polygon)),
+                                _sqlExpressionFactory.Constant("POLYGON"),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.Polygon)
+                            ),
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("MULTIPOINT"), _sqlExpressionFactory.Constant(OgcGeometryType.MultiPoint)),
+                                _sqlExpressionFactory.Constant("MULTIPOINT"),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.MultiPoint)
+                            ),
                             new CaseWhenClause(
                                 _sqlExpressionFactory.Constant("MULTILINESTRING"),
-                                _sqlExpressionFactory.Constant(OgcGeometryType.MultiLineString)),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.MultiLineString)
+                            ),
                             new CaseWhenClause(
                                 _sqlExpressionFactory.Constant("MULTIPOLYGON"),
-                                _sqlExpressionFactory.Constant(OgcGeometryType.MultiPolygon)),
+                                _sqlExpressionFactory.Constant(OgcGeometryType.MultiPolygon)
+                            ),
                             new CaseWhenClause(
                                 _sqlExpressionFactory.Constant("GEOMETRYCOLLECTION"),
-                                _sqlExpressionFactory.Constant(OgcGeometryType.GeometryCollection))
+                                _sqlExpressionFactory.Constant(OgcGeometryType.GeometryCollection)
+                            )
                         },
-                        null);
+                        null
+                    );
                 }
             }
 

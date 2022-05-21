@@ -32,6 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="modificationCommandParameters">The creation parameters.</param>
         /// <returns>A new <see cref="IModificationCommand" /> instance.</returns>
         IModificationCommand CreateModificationCommand(
-            in ModificationCommandParameters modificationCommandParameters);
+            in ModificationCommandParameters modificationCommandParameters
+        );
     }
 }

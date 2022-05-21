@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static PropertiesConfigurationBuilder HaveColumnType(
             this PropertiesConfigurationBuilder propertyBuilder,
-            string typeName)
+            string typeName
+        )
         {
             Check.NotEmpty(typeName, nameof(typeName));
 
@@ -47,8 +48,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static PropertiesConfigurationBuilder<TProperty> HaveColumnType<TProperty>(
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
-            string typeName)
-            => (PropertiesConfigurationBuilder<TProperty>)HaveColumnType((PropertiesConfigurationBuilder)propertyBuilder, typeName);
+            string typeName
+        ) =>
+            (PropertiesConfigurationBuilder<TProperty>)
+                HaveColumnType((PropertiesConfigurationBuilder)propertyBuilder, typeName);
 
         /// <summary>
         ///     Configures the property as capable of storing only fixed-length data, such as strings.
@@ -61,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public static PropertiesConfigurationBuilder AreFixedLength(
             this PropertiesConfigurationBuilder propertyBuilder,
-            bool fixedLength = true)
+            bool fixedLength = true
+        )
         {
             propertyBuilder.HaveAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength);
 
@@ -80,8 +84,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public static PropertiesConfigurationBuilder<TProperty> AreFixedLength<TProperty>(
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
-            bool fixedLength = true)
-            => (PropertiesConfigurationBuilder<TProperty>)AreFixedLength((PropertiesConfigurationBuilder)propertyBuilder, fixedLength);
+            bool fixedLength = true
+        ) =>
+            (PropertiesConfigurationBuilder<TProperty>)
+                AreFixedLength((PropertiesConfigurationBuilder)propertyBuilder, fixedLength);
 
         /// <summary>
         ///     Configures the property to use the given collation. The database column will be created with the given
@@ -93,7 +99,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="propertyBuilder">The builder for the property being configured.</param>
         /// <param name="collation">The collation for the column.</param>
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-        public static PropertiesConfigurationBuilder UseCollation(this PropertiesConfigurationBuilder propertyBuilder, string collation)
+        public static PropertiesConfigurationBuilder UseCollation(
+            this PropertiesConfigurationBuilder propertyBuilder,
+            string collation
+        )
         {
             Check.NotEmpty(collation, nameof(collation));
 
@@ -114,7 +123,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static PropertiesConfigurationBuilder<TProperty> UseCollation<TProperty>(
             this PropertiesConfigurationBuilder<TProperty> propertyBuilder,
-            string collation)
-            => (PropertiesConfigurationBuilder<TProperty>)UseCollation((PropertiesConfigurationBuilder)propertyBuilder, collation);
+            string collation
+        ) =>
+            (PropertiesConfigurationBuilder<TProperty>)
+                UseCollation((PropertiesConfigurationBuilder)propertyBuilder, collation);
     }
 }

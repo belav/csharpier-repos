@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [Obsolete("Use the overload with ModelCreationDependencies")]
         public virtual IModel GetModel(
             DbContext context,
-            IConventionSetBuilder conventionSetBuilder)
+            IConventionSetBuilder conventionSetBuilder
+        )
         {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
@@ -73,8 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     {
                         model = CreateModel(context, conventionSetBuilder);
 
-                        if (model is Model mutableModel
-                            && !mutableModel.IsReadOnly)
+                        if (model is Model mutableModel && !mutableModel.IsReadOnly)
                         {
                             model = mutableModel.FinalizeModel();
                         }
@@ -82,9 +82,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         model = model.GetOrAddRuntimeAnnotationValue(
                             CoreAnnotationNames.ReadOnlyModel,
                             static model => model!,
-                            model);
+                            model
+                        );
 
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -103,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel GetModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies)
+            ModelDependencies modelDependencies
+        )
         {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context);
@@ -116,8 +126,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     {
                         model = CreateModel(context, conventionSetBuilder, modelDependencies);
 
-                        if (model is Model mutableModel
-                            && !mutableModel.IsReadOnly)
+                        if (model is Model mutableModel && !mutableModel.IsReadOnly)
                         {
                             model = mutableModel.FinalizeModel();
                         }
@@ -125,9 +134,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         model = model.GetOrAddRuntimeAnnotationValue(
                             CoreAnnotationNames.ReadOnlyModel,
                             static model => model!,
-                            model);
+                            model
+                        );
 
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -145,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel GetModel(
             DbContext context,
             ModelCreationDependencies modelCreationDependencies,
-            bool designTime)
+            bool designTime
+        )
         {
             var cache = Dependencies.MemoryCache;
             var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context, designTime);
@@ -157,12 +176,26 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     if (!cache.TryGetValue(cacheKey, out model))
                     {
                         model = CreateModel(
-                            context, modelCreationDependencies.ConventionSetBuilder, modelCreationDependencies.ModelDependencies);
+                            context,
+                            modelCreationDependencies.ConventionSetBuilder,
+                            modelCreationDependencies.ModelDependencies
+                        );
 
                         model = modelCreationDependencies.ModelRuntimeInitializer.Initialize(
-                            model, designTime, modelCreationDependencies.ValidationLogger);
+                            model,
+                            designTime,
+                            modelCreationDependencies.ValidationLogger
+                        );
 
-                        model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                        model = cache.Set(
+                            cacheKey,
+                            model,
+                            new MemoryCacheEntryOptions
+                            {
+                                Size = 100,
+                                Priority = CacheItemPriority.High
+                            }
+                        );
                     }
                 }
             }
@@ -179,7 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [Obsolete("Use the overload with ModelCreationDependencies")]
         protected virtual IModel CreateModel(
             DbContext context,
-            IConventionSetBuilder conventionSetBuilder)
+            IConventionSetBuilder conventionSetBuilder
+        )
         {
             var modelBuilder = new ModelBuilder(conventionSetBuilder.CreateConventionSet());
 
@@ -198,11 +232,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         protected virtual IModel CreateModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies)
+            ModelDependencies modelDependencies
+        )
         {
             Check.DebugAssert(context != null, "context == null");
 
-            var modelConfigurationBuilder = new ModelConfigurationBuilder(conventionSetBuilder.CreateConventionSet());
+            var modelConfigurationBuilder = new ModelConfigurationBuilder(
+                conventionSetBuilder.CreateConventionSet()
+            );
 
             context.ConfigureConventions(modelConfigurationBuilder);
 

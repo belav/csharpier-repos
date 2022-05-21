@@ -24,8 +24,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
 
         public bool BlockForCompletionItems
         {
-            get => _globalOptions.GetOption(CompletionViewOptions.BlockForCompletionItems, LanguageNames.FSharp);
-            set => _globalOptions.SetGlobalOption(new OptionKey(CompletionViewOptions.BlockForCompletionItems, LanguageNames.FSharp), value);
+            get =>
+                _globalOptions.GetOption(
+                    CompletionViewOptions.BlockForCompletionItems,
+                    LanguageNames.FSharp
+                );
+            set =>
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(
+                        CompletionViewOptions.BlockForCompletionItems,
+                        LanguageNames.FSharp
+                    ),
+                    value
+                );
         }
     }
 }

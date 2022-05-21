@@ -19,25 +19,84 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteDateTimeAddTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _addMilliseconds
-            = typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMilliseconds), typeof(double));
+        private static readonly MethodInfo _addMilliseconds =
+            typeof(DateTime).GetRequiredRuntimeMethod(
+                nameof(DateTime.AddMilliseconds),
+                typeof(double)
+            );
 
-        private static readonly MethodInfo _addTicks
-            = typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddTicks), typeof(long));
+        private static readonly MethodInfo _addTicks = typeof(DateTime).GetRequiredRuntimeMethod(
+            nameof(DateTime.AddTicks),
+            typeof(long)
+        );
 
-        private readonly Dictionary<MethodInfo, string> _methodInfoToUnitSuffix = new()
-        {
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddYears), typeof(int)), " years" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMonths), typeof(int)), " months" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddDays), typeof(double)), " days" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddHours), typeof(double)), " hours" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddMinutes), typeof(double)), " minutes" },
-            { typeof(DateTime).GetRequiredRuntimeMethod(nameof(DateTime.AddSeconds), typeof(double)), " seconds" },
-
-            { typeof(DateOnly).GetRequiredRuntimeMethod(nameof(DateOnly.AddYears), typeof(int)), " years" },
-            { typeof(DateOnly).GetRequiredRuntimeMethod(nameof(DateOnly.AddMonths), typeof(int)), " months" },
-            { typeof(DateOnly).GetRequiredRuntimeMethod(nameof(DateOnly.AddDays), typeof(int)), " days" },
-        };
+        private readonly Dictionary<MethodInfo, string> _methodInfoToUnitSuffix =
+            new()
+            {
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddYears),
+                        typeof(int)
+                    ),
+                    " years"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddMonths),
+                        typeof(int)
+                    ),
+                    " months"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddDays),
+                        typeof(double)
+                    ),
+                    " days"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddHours),
+                        typeof(double)
+                    ),
+                    " hours"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddMinutes),
+                        typeof(double)
+                    ),
+                    " minutes"
+                },
+                {
+                    typeof(DateTime).GetRequiredRuntimeMethod(
+                        nameof(DateTime.AddSeconds),
+                        typeof(double)
+                    ),
+                    " seconds"
+                },
+                {
+                    typeof(DateOnly).GetRequiredRuntimeMethod(
+                        nameof(DateOnly.AddYears),
+                        typeof(int)
+                    ),
+                    " years"
+                },
+                {
+                    typeof(DateOnly).GetRequiredRuntimeMethod(
+                        nameof(DateOnly.AddMonths),
+                        typeof(int)
+                    ),
+                    " months"
+                },
+                {
+                    typeof(DateOnly).GetRequiredRuntimeMethod(
+                        nameof(DateOnly.AddDays),
+                        typeof(int)
+                    ),
+                    " days"
+                },
+            };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -62,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -78,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         private SqlExpression? TranslateDateTime(
             SqlExpression? instance,
             MethodInfo method,
-            IReadOnlyList<SqlExpression> arguments)
+            IReadOnlyList<SqlExpression> arguments
+        )
         {
             SqlExpression? modifier = null;
             if (_addMilliseconds.Equals(method))
@@ -87,9 +148,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _sqlExpressionFactory.Convert(
                         _sqlExpressionFactory.Divide(
                             arguments[0],
-                            _sqlExpressionFactory.Constant(1000.0)),
-                        typeof(string)),
-                    _sqlExpressionFactory.Constant(" seconds"));
+                            _sqlExpressionFactory.Constant(1000.0)
+                        ),
+                        typeof(string)
+                    ),
+                    _sqlExpressionFactory.Constant(" seconds")
+                );
             }
             else if (_addTicks.Equals(method))
             {
@@ -97,15 +161,19 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _sqlExpressionFactory.Convert(
                         _sqlExpressionFactory.Divide(
                             arguments[0],
-                            _sqlExpressionFactory.Constant((double)TimeSpan.TicksPerDay)),
-                        typeof(string)),
-                    _sqlExpressionFactory.Constant(" seconds"));
+                            _sqlExpressionFactory.Constant((double)TimeSpan.TicksPerDay)
+                        ),
+                        typeof(string)
+                    ),
+                    _sqlExpressionFactory.Constant(" seconds")
+                );
             }
             else if (_methodInfoToUnitSuffix.TryGetValue(method, out var unitSuffix))
             {
                 modifier = _sqlExpressionFactory.Add(
                     _sqlExpressionFactory.Convert(arguments[0], typeof(string)),
-                    _sqlExpressionFactory.Constant(unitSuffix));
+                    _sqlExpressionFactory.Constant(unitSuffix)
+                );
             }
 
             if (modifier != null)
@@ -123,17 +191,20 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     method.ReturnType,
                                     "%Y-%m-%d %H:%M:%f",
                                     instance!,
-                                    new[] { modifier }),
+                                    new[] { modifier }
+                                ),
                                 _sqlExpressionFactory.Constant("0")
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, false },
-                            method.ReturnType),
+                            method.ReturnType
+                        ),
                         _sqlExpressionFactory.Constant(".")
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, false },
-                    method.ReturnType);
+                    method.ReturnType
+                );
             }
 
             return null;
@@ -142,9 +213,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         private SqlExpression? TranslateDateOnly(
             SqlExpression? instance,
             MethodInfo method,
-            IReadOnlyList<SqlExpression> arguments)
+            IReadOnlyList<SqlExpression> arguments
+        )
         {
-            if (instance is not null && _methodInfoToUnitSuffix.TryGetValue(method, out var unitSuffix))
+            if (
+                instance is not null
+                && _methodInfoToUnitSuffix.TryGetValue(method, out var unitSuffix)
+            )
             {
                 return _sqlExpressionFactory.Function(
                     "date",
@@ -153,11 +228,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         instance,
                         _sqlExpressionFactory.Add(
                             _sqlExpressionFactory.Convert(arguments[0], typeof(string)),
-                            _sqlExpressionFactory.Constant(unitSuffix))
+                            _sqlExpressionFactory.Constant(unitSuffix)
+                        )
                     },
                     argumentsPropagateNullability: new[] { true, true },
                     nullable: true,
-                    returnType: method.ReturnType);
+                    returnType: method.ReturnType
+                );
             }
 
             return null;

@@ -17,14 +17,15 @@ namespace System.Text.Json.SourceGeneration.Tests
     public partial class CollectionTests_Metadata : CollectionTests
     {
         public CollectionTests_Metadata()
-            : this(new StringSerializerWrapper(CollectionTestsContext_Metadata.Default, (options) => new CollectionTestsContext_Metadata(options)))
-        {
-        }
+            : this(
+                new StringSerializerWrapper(
+                    CollectionTestsContext_Metadata.Default,
+                    (options) => new CollectionTestsContext_Metadata(options)
+                )
+            ) { }
 
         protected CollectionTests_Metadata(JsonSerializerWrapperForString serializerWrapper)
-            : base(serializerWrapper, null)
-        {
-        }
+            : base(serializerWrapper, null) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(ConcurrentDictionary<string, string>))]
@@ -69,10 +70,15 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Dictionary<string, int[]>))]
         [JsonSerializable(typeof(List<Dictionary<string, int>>))]
         [JsonSerializable(typeof(List<ImmutableSortedDictionary<string, int>>))]
-        [JsonSerializable(typeof(Dictionary<string, int>[]), TypeInfoPropertyName = "ArrayOfDictionaryStringInt")]
+        [JsonSerializable(
+            typeof(Dictionary<string, int>[]),
+            TypeInfoPropertyName = "ArrayOfDictionaryStringInt"
+        )]
         [JsonSerializable(typeof(ImmutableSortedDictionary<string, int>[]))]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, int>>))]
-        [JsonSerializable(typeof(ImmutableSortedDictionary<string, ImmutableSortedDictionary<string, int>>))]
+        [JsonSerializable(
+            typeof(ImmutableSortedDictionary<string, ImmutableSortedDictionary<string, int>>)
+        )]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, Dictionary<string, int>>>))]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, int>[]>))]
         [JsonSerializable(typeof(SimpleTestClass))]
@@ -131,7 +137,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(GenericIEnumerableWrapper<StringIEnumerableWrapper>))]
         [JsonSerializable(typeof(IEnumerable<int[]>))]
         [JsonSerializable(typeof(GenericIEnumerableWrapper<int[]>))]
-        [JsonSerializable(typeof(IEnumerable<int>[]), TypeInfoPropertyName = "ArrayOfIntIEnumerable")]
+        [JsonSerializable(
+            typeof(IEnumerable<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIEnumerable"
+        )]
         [JsonSerializable(typeof(StringIEnumerableWrapper[]))]
         [JsonSerializable(typeof(IEnumerable<int>))]
         [JsonSerializable(typeof(StringIEnumerableWrapper))]
@@ -150,14 +159,22 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ICollection<ICollection<int>>))]
         [JsonSerializable(typeof(ICollection<int[]>))]
         [JsonSerializable(typeof(GenericICollectionWrapper<string[]>))]
-        [JsonSerializable(typeof(ICollection<int>[]), TypeInfoPropertyName = "ArrayOfIntICollection")]
+        [JsonSerializable(
+            typeof(ICollection<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntICollection"
+        )]
         [JsonSerializable(typeof(ICollection<int>))]
         [JsonSerializable(typeof(GenericICollectionWrapper<string>))]
         [JsonSerializable(typeof(IReadOnlyCollection<IReadOnlyCollection<int>>))]
-        [JsonSerializable(typeof(GenericIReadOnlyCollectionWrapper<WrapperForIReadOnlyCollectionOfT<string>>))]
+        [JsonSerializable(
+            typeof(GenericIReadOnlyCollectionWrapper<WrapperForIReadOnlyCollectionOfT<string>>)
+        )]
         [JsonSerializable(typeof(IReadOnlyCollection<int[]>))]
         [JsonSerializable(typeof(GenericIReadOnlyCollectionWrapper<int[]>))]
-        [JsonSerializable(typeof(IReadOnlyCollection<int>[]), TypeInfoPropertyName = "ArrayOfIntIReadOnlyCollection")]
+        [JsonSerializable(
+            typeof(IReadOnlyCollection<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIReadOnlyCollection"
+        )]
         [JsonSerializable(typeof(WrapperForIReadOnlyCollectionOfT<string>[]))]
         [JsonSerializable(typeof(IReadOnlyCollection<int>))]
         [JsonSerializable(typeof(WrapperForIReadOnlyCollectionOfT<string>))]
@@ -165,7 +182,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(GenericIReadOnlyListWrapper<StringIReadOnlyListWrapper>))]
         [JsonSerializable(typeof(IReadOnlyList<int[]>))]
         [JsonSerializable(typeof(GenericIReadOnlyListWrapper<string[]>))]
-        [JsonSerializable(typeof(IReadOnlyList<int>[]), TypeInfoPropertyName = "ArrayOfIntIReadOnlyList")]
+        [JsonSerializable(
+            typeof(IReadOnlyList<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIReadOnlyList"
+        )]
         [JsonSerializable(typeof(StringIReadOnlyListWrapper[]))]
         [JsonSerializable(typeof(IReadOnlyList<int>))]
         [JsonSerializable(typeof(StringIReadOnlyListWrapper))]
@@ -268,40 +288,67 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(NameValueCollection))]
         [JsonSerializable(typeof(ImmutableArray<ImmutableArray<int>>))]
         [JsonSerializable(typeof(ImmutableArray<int[]>))]
-        [JsonSerializable(typeof(ImmutableArray<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntArray")]
+        [JsonSerializable(
+            typeof(ImmutableArray<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntArray"
+        )]
         [JsonSerializable(typeof(ImmutableArray<int>))]
         [JsonSerializable(typeof(SimpleTestClassWithImmutableArray))]
         [JsonSerializable(typeof(IImmutableList<IImmutableList<int>>))]
         [JsonSerializable(typeof(IImmutableList<int[]>))]
-        [JsonSerializable(typeof(IImmutableList<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntArrayList")]
+        [JsonSerializable(
+            typeof(IImmutableList<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntArrayList"
+        )]
         [JsonSerializable(typeof(IImmutableList<int>))]
         [JsonSerializable(typeof(IImmutableStack<IImmutableStack<int>>))]
         [JsonSerializable(typeof(IImmutableStack<int[]>))]
-        [JsonSerializable(typeof(IImmutableStack<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntStack")]
+        [JsonSerializable(
+            typeof(IImmutableStack<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntStack"
+        )]
         [JsonSerializable(typeof(IImmutableStack<int>))]
         [JsonSerializable(typeof(IImmutableQueue<IImmutableQueue<int>>))]
         [JsonSerializable(typeof(IImmutableQueue<int[]>))]
-        [JsonSerializable(typeof(IImmutableQueue<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntQueue")]
+        [JsonSerializable(
+            typeof(IImmutableQueue<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntQueue"
+        )]
         [JsonSerializable(typeof(IImmutableQueue<int>))]
         [JsonSerializable(typeof(IImmutableSet<IImmutableSet<int>>))]
         [JsonSerializable(typeof(IImmutableSet<int[]>))]
-        [JsonSerializable(typeof(IImmutableSet<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntSet")]
+        [JsonSerializable(
+            typeof(IImmutableSet<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntSet"
+        )]
         [JsonSerializable(typeof(IImmutableSet<int>))]
         [JsonSerializable(typeof(ImmutableHashSet<ImmutableHashSet<int>>))]
         [JsonSerializable(typeof(ImmutableHashSet<int[]>))]
-        [JsonSerializable(typeof(ImmutableHashSet<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntHashSet")]
+        [JsonSerializable(
+            typeof(ImmutableHashSet<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntHashSet"
+        )]
         [JsonSerializable(typeof(ImmutableHashSet<int>))]
         [JsonSerializable(typeof(ImmutableList<ImmutableList<int>>))]
         [JsonSerializable(typeof(ImmutableList<int[]>))]
-        [JsonSerializable(typeof(ImmutableList<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntList")]
+        [JsonSerializable(
+            typeof(ImmutableList<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntList"
+        )]
         [JsonSerializable(typeof(ImmutableList<int>))]
         [JsonSerializable(typeof(ImmutableStack<ImmutableStack<int>>))]
         [JsonSerializable(typeof(ImmutableStack<int[]>))]
-        [JsonSerializable(typeof(ImmutableStack<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntStack")]
+        [JsonSerializable(
+            typeof(ImmutableStack<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntStack"
+        )]
         [JsonSerializable(typeof(ImmutableStack<int>))]
         [JsonSerializable(typeof(ImmutableQueue<ImmutableQueue<int>>))]
         [JsonSerializable(typeof(ImmutableQueue<int[]>))]
-        [JsonSerializable(typeof(ImmutableQueue<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntQueue")]
+        [JsonSerializable(
+            typeof(ImmutableQueue<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntQueue"
+        )]
         [JsonSerializable(typeof(ImmutableQueue<int>))]
         [JsonSerializable(typeof(ImmutableSortedSet<int>[]))]
         [JsonSerializable(typeof(ImmutableSortedSet<int>))]
@@ -384,24 +431,27 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<string, SimpleClassWithKeyValuePairs>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, string>>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, object>>))]
-        [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, SimpleClassWithKeyValuePairs>>))]
+        [JsonSerializable(
+            typeof(KeyValuePair<string, KeyValuePair<string, SimpleClassWithKeyValuePairs>>)
+        )]
         [JsonSerializable(typeof(SimpleClassWithKeyValuePairs))]
         [JsonSerializable(typeof(KeyNameNullPolicy))]
         [JsonSerializable(typeof(ValueNameNullPolicy))]
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class CollectionTestsContext_Metadata : JsonSerializerContext { }
     }
 
     public partial class CollectionTests_Default : CollectionTests_Metadata
     {
         public CollectionTests_Default()
-            : base(new StringSerializerWrapper(CollectionTestsContext_Default.Default, (options) => new CollectionTestsContext_Default(options)))
-        {
-        }
+            : base(
+                new StringSerializerWrapper(
+                    CollectionTestsContext_Default.Default,
+                    (options) => new CollectionTestsContext_Default(options)
+                )
+            ) { }
 
         [JsonSerializable(typeof(ConcurrentDictionary<string, string>))]
         [JsonSerializable(typeof(ConcurrentQueue<string>))]
@@ -445,10 +495,15 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Dictionary<string, int[]>))]
         [JsonSerializable(typeof(List<Dictionary<string, int>>))]
         [JsonSerializable(typeof(List<ImmutableSortedDictionary<string, int>>))]
-        [JsonSerializable(typeof(Dictionary<string, int>[]), TypeInfoPropertyName = "ArrayOfDictionaryStringInt")]
+        [JsonSerializable(
+            typeof(Dictionary<string, int>[]),
+            TypeInfoPropertyName = "ArrayOfDictionaryStringInt"
+        )]
         [JsonSerializable(typeof(ImmutableSortedDictionary<string, int>[]))]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, int>>))]
-        [JsonSerializable(typeof(ImmutableSortedDictionary<string, ImmutableSortedDictionary<string, int>>))]
+        [JsonSerializable(
+            typeof(ImmutableSortedDictionary<string, ImmutableSortedDictionary<string, int>>)
+        )]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, Dictionary<string, int>>>))]
         [JsonSerializable(typeof(Dictionary<string, Dictionary<string, int>[]>))]
         [JsonSerializable(typeof(SimpleTestClass))]
@@ -507,7 +562,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(GenericIEnumerableWrapper<StringIEnumerableWrapper>))]
         [JsonSerializable(typeof(IEnumerable<int[]>))]
         [JsonSerializable(typeof(GenericIEnumerableWrapper<int[]>))]
-        [JsonSerializable(typeof(IEnumerable<int>[]), TypeInfoPropertyName = "ArrayOfIntIEnumerable")]
+        [JsonSerializable(
+            typeof(IEnumerable<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIEnumerable"
+        )]
         [JsonSerializable(typeof(StringIEnumerableWrapper[]))]
         [JsonSerializable(typeof(IEnumerable<int>))]
         [JsonSerializable(typeof(StringIEnumerableWrapper))]
@@ -526,14 +584,22 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ICollection<ICollection<int>>))]
         [JsonSerializable(typeof(ICollection<int[]>))]
         [JsonSerializable(typeof(GenericICollectionWrapper<string[]>))]
-        [JsonSerializable(typeof(ICollection<int>[]), TypeInfoPropertyName = "ArrayOfIntICollection")]
+        [JsonSerializable(
+            typeof(ICollection<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntICollection"
+        )]
         [JsonSerializable(typeof(ICollection<int>))]
         [JsonSerializable(typeof(GenericICollectionWrapper<string>))]
         [JsonSerializable(typeof(IReadOnlyCollection<IReadOnlyCollection<int>>))]
-        [JsonSerializable(typeof(GenericIReadOnlyCollectionWrapper<WrapperForIReadOnlyCollectionOfT<string>>))]
+        [JsonSerializable(
+            typeof(GenericIReadOnlyCollectionWrapper<WrapperForIReadOnlyCollectionOfT<string>>)
+        )]
         [JsonSerializable(typeof(IReadOnlyCollection<int[]>))]
         [JsonSerializable(typeof(GenericIReadOnlyCollectionWrapper<int[]>))]
-        [JsonSerializable(typeof(IReadOnlyCollection<int>[]), TypeInfoPropertyName = "ArrayOfIntIReadOnlyCollection")]
+        [JsonSerializable(
+            typeof(IReadOnlyCollection<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIReadOnlyCollection"
+        )]
         [JsonSerializable(typeof(WrapperForIReadOnlyCollectionOfT<string>[]))]
         [JsonSerializable(typeof(IReadOnlyCollection<int>))]
         [JsonSerializable(typeof(WrapperForIReadOnlyCollectionOfT<string>))]
@@ -541,7 +607,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(GenericIReadOnlyListWrapper<StringIReadOnlyListWrapper>))]
         [JsonSerializable(typeof(IReadOnlyList<int[]>))]
         [JsonSerializable(typeof(GenericIReadOnlyListWrapper<string[]>))]
-        [JsonSerializable(typeof(IReadOnlyList<int>[]), TypeInfoPropertyName = "ArrayOfIntIReadOnlyList")]
+        [JsonSerializable(
+            typeof(IReadOnlyList<int>[]),
+            TypeInfoPropertyName = "ArrayOfIntIReadOnlyList"
+        )]
         [JsonSerializable(typeof(StringIReadOnlyListWrapper[]))]
         [JsonSerializable(typeof(IReadOnlyList<int>))]
         [JsonSerializable(typeof(StringIReadOnlyListWrapper))]
@@ -644,40 +713,67 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(NameValueCollection))]
         [JsonSerializable(typeof(ImmutableArray<ImmutableArray<int>>))]
         [JsonSerializable(typeof(ImmutableArray<int[]>))]
-        [JsonSerializable(typeof(ImmutableArray<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntArray")]
+        [JsonSerializable(
+            typeof(ImmutableArray<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntArray"
+        )]
         [JsonSerializable(typeof(ImmutableArray<int>))]
         [JsonSerializable(typeof(SimpleTestClassWithImmutableArray))]
         [JsonSerializable(typeof(IImmutableList<IImmutableList<int>>))]
         [JsonSerializable(typeof(IImmutableList<int[]>))]
-        [JsonSerializable(typeof(IImmutableList<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntArrayList")]
+        [JsonSerializable(
+            typeof(IImmutableList<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntArrayList"
+        )]
         [JsonSerializable(typeof(IImmutableList<int>))]
         [JsonSerializable(typeof(IImmutableStack<IImmutableStack<int>>))]
         [JsonSerializable(typeof(IImmutableStack<int[]>))]
-        [JsonSerializable(typeof(IImmutableStack<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntStack")]
+        [JsonSerializable(
+            typeof(IImmutableStack<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntStack"
+        )]
         [JsonSerializable(typeof(IImmutableStack<int>))]
         [JsonSerializable(typeof(IImmutableQueue<IImmutableQueue<int>>))]
         [JsonSerializable(typeof(IImmutableQueue<int[]>))]
-        [JsonSerializable(typeof(IImmutableQueue<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntQueue")]
+        [JsonSerializable(
+            typeof(IImmutableQueue<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntQueue"
+        )]
         [JsonSerializable(typeof(IImmutableQueue<int>))]
         [JsonSerializable(typeof(IImmutableSet<IImmutableSet<int>>))]
         [JsonSerializable(typeof(IImmutableSet<int[]>))]
-        [JsonSerializable(typeof(IImmutableSet<int>[]), TypeInfoPropertyName = "ArrayOfIImmutableIntSet")]
+        [JsonSerializable(
+            typeof(IImmutableSet<int>[]),
+            TypeInfoPropertyName = "ArrayOfIImmutableIntSet"
+        )]
         [JsonSerializable(typeof(IImmutableSet<int>))]
         [JsonSerializable(typeof(ImmutableHashSet<ImmutableHashSet<int>>))]
         [JsonSerializable(typeof(ImmutableHashSet<int[]>))]
-        [JsonSerializable(typeof(ImmutableHashSet<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntHashSet")]
+        [JsonSerializable(
+            typeof(ImmutableHashSet<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntHashSet"
+        )]
         [JsonSerializable(typeof(ImmutableHashSet<int>))]
         [JsonSerializable(typeof(ImmutableList<ImmutableList<int>>))]
         [JsonSerializable(typeof(ImmutableList<int[]>))]
-        [JsonSerializable(typeof(ImmutableList<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntList")]
+        [JsonSerializable(
+            typeof(ImmutableList<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntList"
+        )]
         [JsonSerializable(typeof(ImmutableList<int>))]
         [JsonSerializable(typeof(ImmutableStack<ImmutableStack<int>>))]
         [JsonSerializable(typeof(ImmutableStack<int[]>))]
-        [JsonSerializable(typeof(ImmutableStack<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntStack")]
+        [JsonSerializable(
+            typeof(ImmutableStack<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntStack"
+        )]
         [JsonSerializable(typeof(ImmutableStack<int>))]
         [JsonSerializable(typeof(ImmutableQueue<ImmutableQueue<int>>))]
         [JsonSerializable(typeof(ImmutableQueue<int[]>))]
-        [JsonSerializable(typeof(ImmutableQueue<int>[]), TypeInfoPropertyName = "ArrayOfImmutableIntQueue")]
+        [JsonSerializable(
+            typeof(ImmutableQueue<int>[]),
+            TypeInfoPropertyName = "ArrayOfImmutableIntQueue"
+        )]
         [JsonSerializable(typeof(ImmutableQueue<int>))]
         [JsonSerializable(typeof(ImmutableSortedSet<int>[]))]
         [JsonSerializable(typeof(ImmutableSortedSet<int>))]
@@ -760,15 +856,15 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(KeyValuePair<string, SimpleClassWithKeyValuePairs>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, string>>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, object>>))]
-        [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, SimpleClassWithKeyValuePairs>>))]
+        [JsonSerializable(
+            typeof(KeyValuePair<string, KeyValuePair<string, SimpleClassWithKeyValuePairs>>)
+        )]
         [JsonSerializable(typeof(SimpleClassWithKeyValuePairs))]
         [JsonSerializable(typeof(KeyNameNullPolicy))]
         [JsonSerializable(typeof(ValueNameNullPolicy))]
         [JsonSerializable(typeof(KeyValuePair<int, int>))]
         [JsonSerializable(typeof(KeyValuePair<string, KeyValuePair<string, int>>))]
         [JsonSerializable(typeof(StackWrapper))]
-        internal sealed partial class CollectionTestsContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class CollectionTestsContext_Default : JsonSerializerContext { }
     }
 }

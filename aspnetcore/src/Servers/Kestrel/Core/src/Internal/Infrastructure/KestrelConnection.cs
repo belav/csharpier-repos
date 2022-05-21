@@ -11,7 +11,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnectionCompleteFeature, IConnectionLifetimeNotificationFeature
+internal abstract class KestrelConnection
+    : IConnectionHeartbeatFeature,
+        IConnectionCompleteFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private List<(Action<object> handler, object state)>? _heartbeatHandlers;
     private readonly object _heartbeatLock = new object();
@@ -20,15 +23,19 @@ internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnec
     private bool _completed;
 
     private readonly CancellationTokenSource _connectionClosingCts = new CancellationTokenSource();
-    private readonly TaskCompletionSource _completionTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _completionTcs = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
     protected readonly long _id;
     protected readonly ServiceContext _serviceContext;
     protected readonly TransportConnectionManager _transportConnectionManager;
 
-    public KestrelConnection(long id,
-                             ServiceContext serviceContext,
-                             TransportConnectionManager transportConnectionManager,
-                             KestrelTrace logger)
+    public KestrelConnection(
+        long id,
+        ServiceContext serviceContext,
+        TransportConnectionManager transportConnectionManager,
+        KestrelTrace logger
+    )
     {
         _id = id;
         _serviceContext = serviceContext;
@@ -120,14 +127,20 @@ internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnec
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                Logger.LogError(
+                    ex,
+                    "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                );
             }
         }
 
         return Task.CompletedTask;
     }
 
-    private async Task CompleteAsyncAwaited(Task currentTask, Stack<KeyValuePair<Func<object, Task>, object>> onCompleted)
+    private async Task CompleteAsyncAwaited(
+        Task currentTask,
+        Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
+    )
     {
         try
         {
@@ -135,7 +148,10 @@ internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnec
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+            Logger.LogError(
+                ex,
+                "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+            );
         }
 
         while (onCompleted.TryPop(out var entry))
@@ -146,7 +162,10 @@ internal abstract class KestrelConnection : IConnectionHeartbeatFeature, IConnec
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                Logger.LogError(
+                    ex,
+                    "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                );
             }
         }
     }

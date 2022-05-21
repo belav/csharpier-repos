@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation;
 /// <summary>
 /// A per-request authentication handler for the WsFederation.
 /// </summary>
-public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptions>, IAuthenticationSignOutHandler
+public class WsFederationHandler
+    : RemoteAuthenticationHandler<WsFederationOptions>,
+        IAuthenticationSignOutHandler
 {
     private const string CorrelationProperty = ".xsrf";
     private WsFederationConfiguration? _configuration;
@@ -30,10 +32,12 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
     /// <param name="encoder"></param>
     /// <param name="clock"></param>
     /// <param name="logger"></param>
-    public WsFederationHandler(IOptionsMonitor<WsFederationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    {
-    }
+    public WsFederationHandler(
+        IOptionsMonitor<WsFederationOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    ) : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -49,7 +53,8 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
     /// Creates a new instance of the events instance.
     /// </summary>
     /// <returns>A new instance of the events instance.</returns>
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new WsFederationEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new WsFederationEvents());
 
     /// <summary>
     /// Overridden to handle remote signout requests
@@ -58,9 +63,16 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
     public override Task<bool> HandleRequestAsync()
     {
         // RemoteSignOutPath and CallbackPath may be the same, fall through if the message doesn't match.
-        if (Options.RemoteSignOutPath.HasValue && Options.RemoteSignOutPath == Request.Path && HttpMethods.IsGet(Request.Method)
-            && string.Equals(Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
-                WsFederationConstants.WsFederationActions.SignOutCleanup, StringComparison.OrdinalIgnoreCase))
+        if (
+            Options.RemoteSignOutPath.HasValue
+            && Options.RemoteSignOutPath == Request.Path
+            && HttpMethods.IsGet(Request.Method)
+            && string.Equals(
+                Request.Query[WsFederationConstants.WsFederationParameterNames.Wa],
+                WsFederationConstants.WsFederationActions.SignOutCleanup,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             // We've received a remote sign-out request
             return HandleRemoteSignOutAsync();
@@ -77,7 +89,9 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
     {
         if (_configuration == null)
         {
-            _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+            _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                Context.RequestAborted
+            );
         }
 
         // Save the original challenge URI so we can redirect back to it when we're done.
@@ -119,10 +133,13 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
 
         if (!string.IsNullOrEmpty(wsFederationMessage.Wctx))
         {
-            properties.Items[WsFederationDefaults.UserstatePropertiesKey] = wsFederationMessage.Wctx;
+            properties.Items[WsFederationDefaults.UserstatePropertiesKey] =
+                wsFederationMessage.Wctx;
         }
 
-        wsFederationMessage.Wctx = Uri.EscapeDataString(Options.StateDataFormat.Protect(properties));
+        wsFederationMessage.Wctx = Uri.EscapeDataString(
+            Options.StateDataFormat.Protect(properties)
+        );
 
         var redirectUri = wsFederationMessage.CreateSignInUrl();
         if (!Uri.IsWellFormedUriString(redirectUri, UriKind.Absolute))
@@ -142,17 +159,26 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
         AuthenticationProperties? properties = null;
 
         // assumption: if the ContentType is "application/x-www-form-urlencoded" it should be safe to read as it is small.
-        if (HttpMethods.IsPost(Request.Method)
-          && !string.IsNullOrEmpty(Request.ContentType)
-          // May have media/type; charset=utf-8, allow partial match.
-          && Request.ContentType.StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase)
-          && Request.Body.CanRead)
+        if (
+            HttpMethods.IsPost(Request.Method)
+            && !string.IsNullOrEmpty(Request.ContentType)
+            // May have media/type; charset=utf-8, allow partial match.
+            && Request.ContentType.StartsWith(
+                "application/x-www-form-urlencoded",
+                StringComparison.OrdinalIgnoreCase
+            )
+            && Request.Body.CanRead
+        )
         {
             var form = await Request.ReadFormAsync(Context.RequestAborted);
 
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
-            wsFederationMessage = new WsFederationMessage(form.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())));
+            wsFederationMessage = new WsFederationMessage(
+                form.Select(
+                    pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
+                )
+            );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         }
 
@@ -184,11 +210,19 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
             else
             {
                 // Extract the user state from properties and reset.
-                properties.Items.TryGetValue(WsFederationDefaults.UserstatePropertiesKey, out var userState);
+                properties.Items.TryGetValue(
+                    WsFederationDefaults.UserstatePropertiesKey,
+                    out var userState
+                );
                 wsFederationMessage.Wctx = userState;
             }
 
-            var messageReceivedContext = new MessageReceivedContext(Context, Scheme, Options, properties)
+            var messageReceivedContext = new MessageReceivedContext(
+                Context,
+                Scheme,
+                Options,
+                properties
+            )
             {
                 ProtocolMessage = wsFederationMessage
             };
@@ -201,8 +235,10 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
             properties = messageReceivedContext.Properties!; // Provides a new instance if not set.
 
             // If state did flow from the challenge then validate it. See AllowUnsolicitedLogins above.
-            if (properties.Items.TryGetValue(CorrelationProperty, out string? correlationId)
-                && !ValidateCorrelationId(properties))
+            if (
+                properties.Items.TryGetValue(CorrelationProperty, out string? correlationId)
+                && !ValidateCorrelationId(properties)
+            )
             {
                 return HandleRequestResult.Fail("Correlation failed.", properties);
             }
@@ -210,7 +246,10 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
             if (wsFederationMessage.Wresult == null)
             {
                 Logger.SignInWithoutWResult();
-                return HandleRequestResult.Fail(Resources.SignInMessageWresultIsMissing, properties);
+                return HandleRequestResult.Fail(
+                    Resources.SignInMessageWresultIsMissing,
+                    properties
+                );
             }
 
             var token = wsFederationMessage.GetToken();
@@ -220,7 +259,12 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
                 return HandleRequestResult.Fail(Resources.SignInMessageTokenIsMissing, properties);
             }
 
-            var securityTokenReceivedContext = new SecurityTokenReceivedContext(Context, Scheme, Options, properties)
+            var securityTokenReceivedContext = new SecurityTokenReceivedContext(
+                Context,
+                Scheme,
+                Options,
+                properties
+            )
             {
                 ProtocolMessage = wsFederationMessage
             };
@@ -234,14 +278,22 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
 
             if (_configuration == null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                    Context.RequestAborted
+                );
             }
 
             // Copy and augment to avoid cross request race conditions for updated configurations.
             var tvp = Options.TokenValidationParameters.Clone();
             var issuers = new[] { _configuration.Issuer };
-            tvp.ValidIssuers = (tvp.ValidIssuers == null ? issuers : tvp.ValidIssuers.Concat(issuers));
-            tvp.IssuerSigningKeys = (tvp.IssuerSigningKeys == null ? _configuration.SigningKeys : tvp.IssuerSigningKeys.Concat(_configuration.SigningKeys));
+            tvp.ValidIssuers = (
+                tvp.ValidIssuers == null ? issuers : tvp.ValidIssuers.Concat(issuers)
+            );
+            tvp.IssuerSigningKeys = (
+                tvp.IssuerSigningKeys == null
+                    ? _configuration.SigningKeys
+                    : tvp.IssuerSigningKeys.Concat(_configuration.SigningKeys)
+            );
 
             ClaimsPrincipal? principal = null;
             SecurityToken? parsedToken = null;
@@ -275,7 +327,13 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
                 properties.AllowRefresh = false;
             }
 
-            var securityTokenValidatedContext = new SecurityTokenValidatedContext(Context, Scheme, Options, principal, properties)
+            var securityTokenValidatedContext = new SecurityTokenValidatedContext(
+                Context,
+                Scheme,
+                Options,
+                principal,
+                properties
+            )
             {
                 ProtocolMessage = wsFederationMessage,
                 SecurityToken = parsedToken,
@@ -291,19 +349,28 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
             principal = securityTokenValidatedContext.Principal!;
             properties = securityTokenValidatedContext.Properties;
 
-            return HandleRequestResult.Success(new AuthenticationTicket(principal, properties, Scheme.Name));
+            return HandleRequestResult.Success(
+                new AuthenticationTicket(principal, properties, Scheme.Name)
+            );
         }
         catch (Exception exception)
         {
             Logger.ExceptionProcessingMessage(exception);
 
             // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the notification.
-            if (Options.RefreshOnIssuerKeyNotFound && exception is SecurityTokenSignatureKeyNotFoundException)
+            if (
+                Options.RefreshOnIssuerKeyNotFound
+                && exception is SecurityTokenSignatureKeyNotFoundException
+            )
             {
                 Options.ConfigurationManager.RequestRefresh();
             }
 
-            var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
+            var authenticationFailedContext = new AuthenticationFailedContext(
+                Context,
+                Scheme,
+                Options
+            )
             {
                 ProtocolMessage = wsFederationMessage,
                 Exception = exception
@@ -333,7 +400,9 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
 
         if (_configuration == null)
         {
-            _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+            _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                Context.RequestAborted
+            );
         }
 
         var wsFederationMessage = new WsFederationMessage()
@@ -385,7 +454,11 @@ public class WsFederationHandler : RemoteAuthenticationHandler<WsFederationOptio
     {
         // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
-        var message = new WsFederationMessage(Request.Query.Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())));
+        var message = new WsFederationMessage(
+            Request.Query.Select(
+                pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray())
+            )
+        );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
 
         var remoteSignOutContext = new RemoteSignOutContext(Context, Scheme, Options, message);

@@ -25,7 +25,12 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
 
-            await AssertOptionsAsync(context.Database.GetDbConnection(), 1000 * (1L << 28), "Standard", "ElasticPool");
+            await AssertOptionsAsync(
+                context.Database.GetDbConnection(),
+                1000 * (1L << 28),
+                "Standard",
+                "ElasticPool"
+            );
         }
 
         private class ElasticPoolContext : DbContext
@@ -59,7 +64,12 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
 
-            await AssertOptionsAsync(context.Database.GetDbConnection(), 1L << 30, "Basic", "Basic");
+            await AssertOptionsAsync(
+                context.Database.GetDbConnection(),
+                1L << 30,
+                "Basic",
+                "Basic"
+            );
         }
 
         private class BasicContext : DbContext
@@ -94,7 +104,12 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
 
-            await AssertOptionsAsync(context.Database.GetDbConnection(), 1L << 31, "BusinessCritical", "BC_Gen4_1");
+            await AssertOptionsAsync(
+                context.Database.GetDbConnection(),
+                1L << 31,
+                "BusinessCritical",
+                "BC_Gen4_1"
+            );
         }
 
         private class BusinessCriticalContext : DbContext
@@ -122,14 +137,22 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
             }
         }
 
-        private async Task AssertOptionsAsync(DbConnection connection, long? maxSize, string serviceTier, string performanceLevel)
+        private async Task AssertOptionsAsync(
+            DbConnection connection,
+            long? maxSize,
+            string serviceTier,
+            string performanceLevel
+        )
         {
-            var storeName = new SqlConnectionStringBuilder(connection.ConnectionString).InitialCatalog;
+            var storeName = new SqlConnectionStringBuilder(
+                connection.ConnectionString
+            ).InitialCatalog;
             await Task.Delay(TimeSpan.FromMinutes(5));
 
             await connection.OpenAsync();
             using var command = connection.CreateCommand();
-            command.CommandText = $@"
+            command.CommandText =
+                $@"
 SELECT DATABASEPROPERTYEX('{storeName}', 'EDITION'),
        DATABASEPROPERTYEX('{storeName}', 'ServiceObjective'),
        DATABASEPROPERTYEX('{storeName}', 'MaxSizeInBytes');";
@@ -139,9 +162,20 @@ SELECT DATABASEPROPERTYEX('{storeName}', 'EDITION'),
 
             await reader.ReadAsync();
 
-            Assert.Equal(serviceTier, await reader.IsDBNullAsync(0) ? null : await reader.GetFieldValueAsync<string>(0));
-            Assert.Equal(performanceLevel, await reader.IsDBNullAsync(1) ? null : await reader.GetFieldValueAsync<string>(1));
-            Assert.Equal(maxSize, await reader.IsDBNullAsync(2) ? (long?)null : await reader.GetFieldValueAsync<long>(2));
+            Assert.Equal(
+                serviceTier,
+                await reader.IsDBNullAsync(0) ? null : await reader.GetFieldValueAsync<string>(0)
+            );
+            Assert.Equal(
+                performanceLevel,
+                await reader.IsDBNullAsync(1) ? null : await reader.GetFieldValueAsync<string>(1)
+            );
+            Assert.Equal(
+                maxSize,
+                await reader.IsDBNullAsync(2)
+                    ? (long?)null
+                    : await reader.GetFieldValueAsync<long>(2)
+            );
         }
 
         private class BigUn

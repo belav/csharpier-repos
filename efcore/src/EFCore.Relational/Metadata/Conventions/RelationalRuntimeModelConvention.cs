@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public RelationalRuntimeModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies)
         {
             RelationalDependencies = relationalDependencies;
         }
@@ -50,22 +50,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IModel model,
             RuntimeModel runtimeModel,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
             if (runtime)
             {
-                annotations[RelationalAnnotationNames.RelationalModel] =
-                    RelationalModel.Create(runtimeModel, RelationalDependencies.RelationalAnnotationProvider, designTime: false);
+                annotations[RelationalAnnotationNames.RelationalModel] = RelationalModel.Create(
+                    runtimeModel,
+                    RelationalDependencies.RelationalAnnotationProvider,
+                    designTime: false
+                );
             }
             else
             {
                 annotations.Remove(RelationalAnnotationNames.Collation);
 
-                if (annotations.TryGetValue(RelationalAnnotationNames.DbFunctions, out var functions))
+                if (
+                    annotations.TryGetValue(
+                        RelationalAnnotationNames.DbFunctions,
+                        out var functions
+                    )
+                )
                 {
-                    var runtimeFunctions = new SortedDictionary<string, IDbFunction>(StringComparer.Ordinal);
+                    var runtimeFunctions = new SortedDictionary<string, IDbFunction>(
+                        StringComparer.Ordinal
+                    );
                     foreach (var functionPair in (SortedDictionary<string, IDbFunction>)functions!)
                     {
                         var runtimeFunction = Create(functionPair.Value, runtimeModel);
@@ -76,13 +87,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             var runtimeParameter = Create(parameter, runtimeFunction);
 
                             CreateAnnotations(
-                                parameter, runtimeParameter, static (convention, annotations, source, target, runtime) =>
-                                    convention.ProcessFunctionParameterAnnotations(annotations, source, target, runtime));
+                                parameter,
+                                runtimeParameter,
+                                static (convention, annotations, source, target, runtime) =>
+                                    convention.ProcessFunctionParameterAnnotations(
+                                        annotations,
+                                        source,
+                                        target,
+                                        runtime
+                                    )
+                            );
                         }
 
                         CreateAnnotations(
-                            functionPair.Value, runtimeFunction, static (convention, annotations, source, target, runtime) =>
-                                convention.ProcessFunctionAnnotations(annotations, source, target, runtime));
+                            functionPair.Value,
+                            runtimeFunction,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessFunctionAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     annotations[RelationalAnnotationNames.DbFunctions] = runtimeFunctions;
@@ -91,14 +118,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (annotations.TryGetValue(RelationalAnnotationNames.Sequences, out var sequences))
                 {
                     var runtimeSequences = new SortedDictionary<(string, string?), ISequence>();
-                    foreach (var sequencePair in (SortedDictionary<(string, string?), ISequence>)sequences!)
+                    foreach (
+                        var sequencePair in (SortedDictionary<(string, string?), ISequence>)
+                            sequences!
+                    )
                     {
                         var runtimeSequence = Create(sequencePair.Value, runtimeModel);
                         runtimeSequences[sequencePair.Key] = runtimeSequence;
 
                         CreateAnnotations(
-                            sequencePair.Value, runtimeSequence, static (convention, annotations, source, target, runtime) =>
-                                convention.ProcessSequenceAnnotations(annotations, source, target, runtime));
+                            sequencePair.Value,
+                            runtimeSequence,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessSequenceAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     annotations[RelationalAnnotationNames.Sequences] = runtimeSequences;
@@ -117,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IEntityType entityType,
             RuntimeEntityType runtimeEntityType,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 
@@ -148,7 +187,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void CreateAnnotations<TSource, TTarget>(
             TSource source,
             TTarget target,
-            Action<RelationalRuntimeModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process)
+            Action<
+                RelationalRuntimeModelConvention,
+                Dictionary<string, object?>,
+                TSource,
+                TTarget,
+                bool
+            > process
+        )
             where TSource : IAnnotatable
             where TTarget : AnnotatableBase
         {
@@ -161,8 +207,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             target.AddRuntimeAnnotations(annotations);
         }
 
-        private RuntimeDbFunction Create(IDbFunction function, RuntimeModel runtimeModel)
-            => new RuntimeDbFunction(
+        private RuntimeDbFunction Create(IDbFunction function, RuntimeModel runtimeModel) =>
+            new RuntimeDbFunction(
                 function.ModelName,
                 runtimeModel,
                 function.ReturnType,
@@ -175,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 function.IsNullable,
                 function.IsBuiltIn,
                 function.TypeMapping,
-                function.Translation);
+                function.Translation
+            );
 
         /// <summary>
         ///     Updates the function annotations that will be set on the read-only object.
@@ -188,17 +235,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IDbFunction function,
             RuntimeDbFunction runtimeFunction,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private RuntimeDbFunctionParameter Create(IDbFunctionParameter parameter, RuntimeDbFunction runtimeFunction)
-            => runtimeFunction.AddParameter(
+        private RuntimeDbFunctionParameter Create(
+            IDbFunctionParameter parameter,
+            RuntimeDbFunction runtimeFunction
+        ) =>
+            runtimeFunction.AddParameter(
                 parameter.Name,
                 parameter.ClrType,
                 parameter.PropagatesNullability,
                 parameter.StoreType,
-                parameter.TypeMapping);
+                parameter.TypeMapping
+            );
 
         /// <summary>
         ///     Updates the function parameter annotations that will be set on the read-only object.
@@ -211,12 +261,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IDbFunctionParameter parameter,
             RuntimeDbFunctionParameter runtimeParameter,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
-        private RuntimeSequence Create(ISequence sequence, RuntimeModel runtimeModel)
-            => new RuntimeSequence(
+        private RuntimeSequence Create(ISequence sequence, RuntimeModel runtimeModel) =>
+            new RuntimeSequence(
                 sequence.Name,
                 runtimeModel,
                 sequence.Type,
@@ -225,7 +274,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 sequence.IncrementBy,
                 sequence.IsCyclic,
                 sequence.MinValue,
-                sequence.MaxValue);
+                sequence.MaxValue
+            );
 
         /// <summary>
         ///     Updates the sequence annotations that will be set on the read-only object.
@@ -238,9 +288,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             ISequence sequence,
             RuntimeSequence runtimeSequence,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
         /// <summary>
         ///     Updates the property annotations that will be set on the read-only object.
@@ -253,7 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IProperty property,
             RuntimeProperty runtimeProperty,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessPropertyAnnotations(annotations, property, runtimeProperty, runtime);
 
@@ -271,32 +321,54 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 annotations.Remove(RelationalAnnotationNames.Comment);
                 annotations.Remove(RelationalAnnotationNames.Collation);
 
-                if (annotations.TryGetValue(RelationalAnnotationNames.RelationalOverrides, out var overrides))
+                if (
+                    annotations.TryGetValue(
+                        RelationalAnnotationNames.RelationalOverrides,
+                        out var overrides
+                    )
+                )
                 {
-                    var runtimePropertyOverrides = new SortedDictionary<StoreObjectIdentifier, object>();
-                    foreach (var overridesPair in (SortedDictionary<StoreObjectIdentifier, object>?)overrides!)
+                    var runtimePropertyOverrides =
+                        new SortedDictionary<StoreObjectIdentifier, object>();
+                    foreach (
+                        var overridesPair in (SortedDictionary<StoreObjectIdentifier, object>?)
+                            overrides!
+                    )
                     {
-                        var runtimeOverrides = Create((IRelationalPropertyOverrides)overridesPair.Value, runtimeProperty);
+                        var runtimeOverrides = Create(
+                            (IRelationalPropertyOverrides)overridesPair.Value,
+                            runtimeProperty
+                        );
                         runtimePropertyOverrides[overridesPair.Key] = runtimeOverrides;
 
                         CreateAnnotations(
-                            (IRelationalPropertyOverrides)overridesPair.Value, runtimeOverrides,
+                            (IRelationalPropertyOverrides)overridesPair.Value,
+                            runtimeOverrides,
                             static (convention, annotations, source, target, runtime) =>
-                                convention.ProcessPropertyOverridesAnnotations(annotations, source, target, runtime));
+                                convention.ProcessPropertyOverridesAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
-                    annotations[RelationalAnnotationNames.RelationalOverrides] = runtimePropertyOverrides;
+                    annotations[RelationalAnnotationNames.RelationalOverrides] =
+                        runtimePropertyOverrides;
                 }
             }
         }
 
         private RuntimeRelationalPropertyOverrides Create(
             IRelationalPropertyOverrides propertyOverrides,
-            RuntimeProperty runtimeProperty)
-            => new RuntimeRelationalPropertyOverrides(
+            RuntimeProperty runtimeProperty
+        ) =>
+            new RuntimeRelationalPropertyOverrides(
                 runtimeProperty,
                 propertyOverrides.ColumnNameOverriden,
-                propertyOverrides.ColumnName);
+                propertyOverrides.ColumnName
+            );
 
         /// <summary>
         ///     Updates the relational property overrides annotations that will be set on the read-only object.
@@ -309,9 +381,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IRelationalPropertyOverrides propertyOverrides,
             RuntimeRelationalPropertyOverrides runtimePropertyOverrides,
-            bool runtime)
-        {
-        }
+            bool runtime
+        ) { }
 
         /// <summary>
         ///     Updates the key annotations that will be set on the read-only object.
@@ -324,7 +395,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IKey key,
             RuntimeKey runtimeKey,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessKeyAnnotations(annotations, key, runtimeKey, runtime);
 
@@ -345,7 +417,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IIndex index,
             RuntimeIndex runtimeIndex,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessIndexAnnotations(annotations, index, runtimeIndex, runtime);
 
@@ -370,7 +443,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IForeignKey foreignKey,
             RuntimeForeignKey runtimeForeignKey,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessForeignKeyAnnotations(annotations, foreignKey, runtimeForeignKey, runtime);
 

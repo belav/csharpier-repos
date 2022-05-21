@@ -13,15 +13,22 @@ namespace Internal.Runtime.InteropServices
 {
     public static class ComponentActivator
     {
-        private const string TrimIncompatibleWarningMessage = "Native hosting is not trim compatible and this warning will be seen if trimming is enabled.";
+        private const string TrimIncompatibleWarningMessage =
+            "Native hosting is not trim compatible and this warning will be seen if trimming is enabled.";
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
-        private static readonly Dictionary<string, IsolatedComponentLoadContext> s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(StringComparer.InvariantCulture);
-        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<IntPtr, Delegate>();
+        private static readonly Dictionary<
+            string,
+            IsolatedComponentLoadContext
+        > s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(
+            StringComparer.InvariantCulture
+        );
+        private static readonly Dictionary<IntPtr, Delegate> s_delegates =
+            new Dictionary<IntPtr, Delegate>();
 
         // Use a value defined in https://github.com/dotnet/runtime/blob/main/docs/design/features/host-error-codes.md
         // To indicate the specific error when IsSupported is false
@@ -29,7 +36,13 @@ namespace Internal.Runtime.InteropServices
 
         private static bool IsSupported { get; } = InitializeIsSupported();
 
-        private static bool InitializeIsSupported() => AppContext.TryGetSwitch("System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting", out bool isSupported) ? isSupported : true;
+        private static bool InitializeIsSupported() =>
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting",
+                out bool isSupported
+            )
+                ? isSupported
+                : true;
 
         public delegate int ComponentEntryPoint(IntPtr args, int sizeBytes);
 
@@ -52,19 +65,24 @@ namespace Internal.Runtime.InteropServices
         /// <param name="delegateTypeNative">Assembly qualified delegate type name</param>
         /// <param name="reserved">Extensibility parameter (currently unused)</param>
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("maccatalyst")]
         [UnsupportedOSPlatform("tvos")]
         [UnmanagedCallersOnly]
-        public static unsafe int LoadAssemblyAndGetFunctionPointer(IntPtr assemblyPathNative,
-                                                                   IntPtr typeNameNative,
-                                                                   IntPtr methodNameNative,
-                                                                   IntPtr delegateTypeNative,
-                                                                   IntPtr reserved,
-                                                                   IntPtr functionHandle)
+        public static unsafe int LoadAssemblyAndGetFunctionPointer(
+            IntPtr assemblyPathNative,
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr reserved,
+            IntPtr functionHandle
+        )
         {
             if (!IsSupported)
                 return HostFeatureDisabled;
@@ -72,7 +90,10 @@ namespace Internal.Runtime.InteropServices
             try
             {
                 // Validate all parameters first.
-                string assemblyPath = MarshalToString(assemblyPathNative, nameof(assemblyPathNative));
+                string assemblyPath = MarshalToString(
+                    assemblyPathNative,
+                    nameof(assemblyPathNative)
+                );
                 string typeName = MarshalToString(typeNameNative, nameof(typeNameNative));
                 string methodName = MarshalToString(methodNameNative, nameof(methodNameNative));
 
@@ -90,7 +111,12 @@ namespace Internal.Runtime.InteropServices
                 AssemblyLoadContext alc = GetIsolatedComponentLoadContext(assemblyPath);
 
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(alc, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    alc,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
             }
             catch (Exception e)
             {
@@ -110,12 +136,14 @@ namespace Internal.Runtime.InteropServices
         /// <param name="reserved">Extensibility parameter (currently unused)</param>
         /// <param name="functionHandle">Pointer where to store the function pointer result</param>
         [UnmanagedCallersOnly]
-        public static unsafe int GetFunctionPointer(IntPtr typeNameNative,
-                                                    IntPtr methodNameNative,
-                                                    IntPtr delegateTypeNative,
-                                                    IntPtr loadContext,
-                                                    IntPtr reserved,
-                                                    IntPtr functionHandle)
+        public static unsafe int GetFunctionPointer(
+            IntPtr typeNameNative,
+            IntPtr methodNameNative,
+            IntPtr delegateTypeNative,
+            IntPtr loadContext,
+            IntPtr reserved,
+            IntPtr functionHandle
+        )
         {
             if (!IsSupported)
                 return HostFeatureDisabled;
@@ -142,7 +170,12 @@ namespace Internal.Runtime.InteropServices
                 }
 
                 // Create the function pointer.
-                *(IntPtr*)functionHandle = InternalGetFunctionPointer(AssemblyLoadContext.Default, typeName, methodName, delegateTypeNative);
+                *(IntPtr*)functionHandle = InternalGetFunctionPointer(
+                    AssemblyLoadContext.Default,
+                    typeName,
+                    methodName,
+                    delegateTypeNative
+                );
             }
             catch (Exception e)
             {
@@ -152,12 +185,17 @@ namespace Internal.Runtime.InteropServices
             return 0;
         }
 
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(string assemblyPath)
+        private static IsolatedComponentLoadContext GetIsolatedComponentLoadContext(
+            string assemblyPath
+        )
         {
             IsolatedComponentLoadContext? alc;
 
@@ -173,11 +211,16 @@ namespace Internal.Runtime.InteropServices
             return alc;
         }
 
-        [RequiresUnreferencedCode(TrimIncompatibleWarningMessage, Url = "https://aka.ms/dotnet-illink/nativehost")]
-        private static IntPtr InternalGetFunctionPointer(AssemblyLoadContext alc,
-                                                         string typeName,
-                                                         string methodName,
-                                                         IntPtr delegateTypeNative)
+        [RequiresUnreferencedCode(
+            TrimIncompatibleWarningMessage,
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
+        private static IntPtr InternalGetFunctionPointer(
+            AssemblyLoadContext alc,
+            string typeName,
+            string methodName,
+            IntPtr delegateTypeNative
+        )
         {
             // Create a resolver callback for types.
             Func<AssemblyName, Assembly> resolver = name => alc.LoadFromAssemblyName(name);
@@ -198,7 +241,10 @@ namespace Internal.Runtime.InteropServices
             }
             else
             {
-                string delegateTypeName = MarshalToString(delegateTypeNative, nameof(delegateTypeNative));
+                string delegateTypeName = MarshalToString(
+                    delegateTypeNative,
+                    nameof(delegateTypeNative)
+                );
                 delegateType = Type.GetType(delegateTypeName, resolver, null, throwOnError: true)!;
             }
 
@@ -209,14 +255,17 @@ namespace Internal.Runtime.InteropServices
             if (delegateType == null)
             {
                 // Match search semantics of the CreateDelegate() function below.
-                BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+                BindingFlags bindingFlags =
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
                 MethodInfo? methodInfo = type.GetMethod(methodName, bindingFlags);
                 if (methodInfo == null)
                     throw new MissingMethodException(typeName, methodName);
 
                 // Verify the function is properly marked.
                 if (null == methodInfo.GetCustomAttribute<UnmanagedCallersOnlyAttribute>())
-                    throw new InvalidOperationException(SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_FunctionMissingUnmanagedCallersOnly
+                    );
 
                 functionPtr = methodInfo.MethodHandle.GetFunctionPointer();
             }

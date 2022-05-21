@@ -18,44 +18,56 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer :
-        AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer
+    internal sealed class CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer
+        : AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer
     {
         private static readonly LocalizableString s_TitleAndMessageFormat =
-            new LocalizableResourceString(nameof(CSharpAnalyzersResources.Using_directive_is_unnecessary), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources));
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Using_directive_is_unnecessary),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            );
 
-        protected override LocalizableString GetTitleAndMessageFormatForClassificationIdDescriptor()
-            => s_TitleAndMessageFormat;
+        protected override LocalizableString GetTitleAndMessageFormatForClassificationIdDescriptor() =>
+            s_TitleAndMessageFormat;
 
         // C# has no need to do any merging of using statements.  Only VB needs to
         // merge import clauses to an import statement if it all the import clauses
         // are unnecessary.
-        protected override ImmutableArray<SyntaxNode> MergeImports(ImmutableArray<SyntaxNode> unnecessaryImports)
-            => unnecessaryImports;
+        protected override ImmutableArray<SyntaxNode> MergeImports(
+            ImmutableArray<SyntaxNode> unnecessaryImports
+        ) => unnecessaryImports;
 
-        protected override IUnnecessaryImportsProvider UnnecessaryImportsProvider
-            => CSharpUnnecessaryImportsProvider.Instance;
+        protected override IUnnecessaryImportsProvider UnnecessaryImportsProvider =>
+            CSharpUnnecessaryImportsProvider.Instance;
 
-        protected override bool IsRegularCommentOrDocComment(SyntaxTrivia trivia)
-            => trivia.IsRegularComment() || trivia.IsDocComment();
+        protected override bool IsRegularCommentOrDocComment(SyntaxTrivia trivia) =>
+            trivia.IsRegularComment() || trivia.IsDocComment();
 
         protected override IEnumerable<TextSpan> GetFixableDiagnosticSpans(
-            IEnumerable<SyntaxNode> nodes, SyntaxTree tree, CancellationToken cancellationToken)
+            IEnumerable<SyntaxNode> nodes,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(nodes.Any());
 
             var nodesContainingUnnecessaryUsings = new HashSet<SyntaxNode>();
             foreach (var node in nodes)
             {
-                var nodeContainingUnnecessaryUsings = node.GetAncestors().First(n => n is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax);
+                var nodeContainingUnnecessaryUsings = node.GetAncestors()
+                    .First(n => n is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax);
                 if (!nodesContainingUnnecessaryUsings.Add(nodeContainingUnnecessaryUsings))
                 {
                     continue;
                 }
 
-                yield return nodeContainingUnnecessaryUsings is BaseNamespaceDeclarationSyntax namespaceDeclaration
+                yield return nodeContainingUnnecessaryUsings
+                    is BaseNamespaceDeclarationSyntax namespaceDeclaration
                     ? namespaceDeclaration.Usings.GetContainedSpan()
-                    : ((CompilationUnitSyntax)nodeContainingUnnecessaryUsings).Usings.GetContainedSpan();
+                    : (
+                        (CompilationUnitSyntax)nodeContainingUnnecessaryUsings
+                    ).Usings.GetContainedSpan();
             }
         }
     }

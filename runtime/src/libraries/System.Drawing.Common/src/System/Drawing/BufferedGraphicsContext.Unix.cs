@@ -37,9 +37,17 @@ namespace System.Drawing
 {
     public sealed partial class BufferedGraphicsContext : IDisposable
     {
-        private BufferedGraphics AllocBuffer(Graphics? targetGraphics, IntPtr targetDC, Rectangle targetRectangle)
+        private BufferedGraphics AllocBuffer(
+            Graphics? targetGraphics,
+            IntPtr targetDC,
+            Rectangle targetRectangle
+        )
         {
-            BufferedGraphics graphics = new BufferedGraphics(targetGraphics, targetDC, targetRectangle);
+            BufferedGraphics graphics = new BufferedGraphics(
+                targetGraphics,
+                targetDC,
+                targetRectangle
+            );
             return graphics;
         }
 
@@ -48,8 +56,6 @@ namespace System.Drawing
             // Do nothing on Unix.
         }
 
-        public void Invalidate()
-        {
-        }
+        public void Invalidate() { }
     }
 }

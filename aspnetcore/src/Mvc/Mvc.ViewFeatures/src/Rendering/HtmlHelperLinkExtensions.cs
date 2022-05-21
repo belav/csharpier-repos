@@ -21,7 +21,8 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent ActionLink(
         this IHtmlHelper helper,
         string linkText,
-        string actionName)
+        string actionName
+    )
     {
         if (helper == null)
         {
@@ -41,7 +42,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -62,7 +64,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper helper,
         string linkText,
         string actionName,
-        object routeValues)
+        object routeValues
+    )
     {
         if (helper == null)
         {
@@ -82,7 +85,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -109,7 +113,8 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string actionName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (helper == null)
         {
@@ -129,7 +134,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -144,7 +150,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper helper,
         string linkText,
         string actionName,
-        string controllerName)
+        string controllerName
+    )
     {
         if (helper == null)
         {
@@ -164,7 +171,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -187,7 +195,8 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string actionName,
         string controllerName,
-        object routeValues)
+        object routeValues
+    )
     {
         if (helper == null)
         {
@@ -207,7 +216,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -236,7 +246,8 @@ public static class HtmlHelperLinkExtensions
         string actionName,
         string controllerName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (helper == null)
         {
@@ -256,7 +267,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -275,7 +287,8 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent RouteLink(
         this IHtmlHelper htmlHelper,
         string linkText,
-        object routeValues)
+        object routeValues
+    )
     {
         if (htmlHelper == null)
         {
@@ -288,13 +301,14 @@ public static class HtmlHelperLinkExtensions
         }
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName: null,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: null);
+            linkText,
+            routeName: null,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -307,7 +321,8 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent RouteLink(
         this IHtmlHelper htmlHelper,
         string linkText,
-        string routeName)
+        string routeName
+    )
     {
         if (htmlHelper == null)
         {
@@ -320,13 +335,14 @@ public static class HtmlHelperLinkExtensions
         }
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: null,
-                            htmlAttributes: null);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: null,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -347,7 +363,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper htmlHelper,
         string linkText,
         string routeName,
-        object routeValues)
+        object routeValues
+    )
     {
         if (htmlHelper == null)
         {
@@ -360,13 +377,14 @@ public static class HtmlHelperLinkExtensions
         }
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: null);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -391,7 +409,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper htmlHelper,
         string linkText,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -404,13 +423,14 @@ public static class HtmlHelperLinkExtensions
         }
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName: null,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: htmlAttributes);
+            linkText,
+            routeName: null,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -437,7 +457,8 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string routeName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -450,12 +471,13 @@ public static class HtmlHelperLinkExtensions
         }
 
         return htmlHelper.RouteLink(
-                             linkText,
-                             routeName,
-                             protocol: null,
-                             hostName: null,
-                             fragment: null,
-                             routeValues: routeValues,
-                             htmlAttributes: htmlAttributes);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: htmlAttributes
+        );
     }
 }

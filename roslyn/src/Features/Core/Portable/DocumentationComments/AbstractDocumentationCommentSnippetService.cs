@@ -13,24 +13,44 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.DocumentationComments
 {
-    internal abstract class AbstractDocumentationCommentSnippetService<TDocumentationComment, TMemberNode> : IDocumentationCommentSnippetService
+    internal abstract class AbstractDocumentationCommentSnippetService<
+        TDocumentationComment,
+        TMemberNode
+    > : IDocumentationCommentSnippetService
         where TDocumentationComment : SyntaxNode, IStructuredTriviaSyntax
         where TMemberNode : SyntaxNode
     {
-        protected abstract TMemberNode? GetContainingMember(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
+        protected abstract TMemberNode? GetContainingMember(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
         protected abstract bool SupportsDocumentationComments(TMemberNode member);
         protected abstract bool HasDocumentationComment(TMemberNode member);
         protected abstract int GetPrecedingDocumentationCommentCount(TMemberNode member);
         protected abstract bool IsMemberDeclaration(TMemberNode member);
         protected abstract List<string> GetDocumentationCommentStubLines(TMemberNode member);
 
-        protected abstract SyntaxToken GetTokenToRight(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
-        protected abstract SyntaxToken GetTokenToLeft(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
+        protected abstract SyntaxToken GetTokenToRight(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
+        protected abstract SyntaxToken GetTokenToLeft(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
         protected abstract bool IsDocCommentNewLine(SyntaxToken token);
         protected abstract bool IsEndOfLineTrivia(SyntaxTrivia trivia);
 
-        protected abstract bool IsSingleExteriorTrivia(TDocumentationComment documentationComment, bool allowWhitespace = false);
-        protected abstract bool EndsWithSingleExteriorTrivia(TDocumentationComment? documentationComment);
+        protected abstract bool IsSingleExteriorTrivia(
+            TDocumentationComment documentationComment,
+            bool allowWhitespace = false
+        );
+        protected abstract bool EndsWithSingleExteriorTrivia(
+            TDocumentationComment? documentationComment
+        );
         protected abstract bool IsMultilineDocComment(TDocumentationComment? documentationComment);
         protected abstract bool HasSkippedTrailingTrivia(SyntaxToken token);
 
@@ -44,17 +64,20 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SourceText text,
             int position,
             in DocumentationCommentOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!options.AutoXmlDocCommentGeneration)
             {
                 return null;
             }
 
-            // Only generate if the position is immediately after '///', 
+            // Only generate if the position is immediately after '///',
             // and that is the only documentation comment on the target member.
 
-            var token = syntaxTree.GetRoot(cancellationToken).FindToken(position, findInsideTrivia: true);
+            var token = syntaxTree
+                .GetRoot(cancellationToken)
+                .FindToken(position, findInsideTrivia: true);
             if (position != token.SpanStart)
             {
                 return null;
@@ -80,7 +103,12 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return new DocumentationCommentSnippet(replaceSpan, comments, offset);
         }
 
-        private List<string>? GetDocumentationCommentLines(SyntaxToken token, SourceText text, in DocumentationCommentOptions options, out string? indentText)
+        private List<string>? GetDocumentationCommentLines(
+            SyntaxToken token,
+            SourceText text,
+            in DocumentationCommentOptions options,
+            out string? indentText
+        )
         {
             indentText = null;
             var documentationComment = token.GetAncestor<TDocumentationComment>();
@@ -113,17 +141,28 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             lines[0] = lines[0][3..];
 
             // Add indents
-            var lineOffset = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+            var lineOffset = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                options.TabSize
+            );
             indentText = lineOffset.CreateIndentationString(options.UseTabs, options.TabSize);
 
             IndentLines(lines, indentText);
             return lines;
         }
 
-        public bool IsValidTargetMember(SyntaxTree syntaxTree, SourceText text, int position, CancellationToken cancellationToken)
-            => GetTargetMember(syntaxTree, text, position, cancellationToken) != null;
+        public bool IsValidTargetMember(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            CancellationToken cancellationToken
+        ) => GetTargetMember(syntaxTree, text, position, cancellationToken) != null;
 
-        private TMemberNode? GetTargetMember(SyntaxTree syntaxTree, SourceText text, int position, CancellationToken cancellationToken)
+        private TMemberNode? GetTargetMember(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var member = GetContainingMember(syntaxTree, position, cancellationToken);
             if (member == null)
@@ -180,7 +219,13 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             }
         }
 
-        public DocumentationCommentSnippet? GetDocumentationCommentSnippetOnEnterTyped(SyntaxTree syntaxTree, SourceText text, int position, in DocumentationCommentOptions options, CancellationToken cancellationToken)
+        public DocumentationCommentSnippet? GetDocumentationCommentSnippetOnEnterTyped(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            in DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // Don't attempt to generate a new XML doc comment on ENTER if the option to auto-generate
             // them isn't set. Regardless of the option, we should generate exterior trivia (i.e. /// or ''')
@@ -188,17 +233,35 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (options.AutoXmlDocCommentGeneration)
             {
-                var result = GenerateDocumentationCommentAfterEnter(syntaxTree, text, position, options, cancellationToken);
+                var result = GenerateDocumentationCommentAfterEnter(
+                    syntaxTree,
+                    text,
+                    position,
+                    options,
+                    cancellationToken
+                );
                 if (result != null)
                 {
                     return result;
                 }
             }
 
-            return GenerateExteriorTriviaAfterEnter(syntaxTree, text, position, options, cancellationToken);
+            return GenerateExteriorTriviaAfterEnter(
+                syntaxTree,
+                text,
+                position,
+                options,
+                cancellationToken
+            );
         }
 
-        private DocumentationCommentSnippet? GenerateDocumentationCommentAfterEnter(SyntaxTree syntaxTree, SourceText text, int position, in DocumentationCommentOptions options, CancellationToken cancellationToken)
+        private DocumentationCommentSnippet? GenerateDocumentationCommentAfterEnter(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            in DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // Find the documentation comment before the new line that was just pressed
             var token = GetTokenToLeft(syntaxTree, position, cancellationToken);
@@ -218,7 +281,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             var offset = lines[0].Length + lines[1].Length - newLine.Length;
 
             // Shave off final line break or add trailing indent if necessary
-            var trivia = syntaxTree.GetRoot(cancellationToken).FindTrivia(position, findInsideTrivia: false);
+            var trivia = syntaxTree
+                .GetRoot(cancellationToken)
+                .FindTrivia(position, findInsideTrivia: false);
             if (IsEndOfLineTrivia(trivia))
             {
                 newText = newText.Substring(0, newText.Length - newLine.Length);
@@ -240,7 +305,13 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return new DocumentationCommentSnippet(replaceSpan, newText, offset);
         }
 
-        public DocumentationCommentSnippet? GetDocumentationCommentSnippetOnCommandInvoke(SyntaxTree syntaxTree, SourceText text, int position, in DocumentationCommentOptions options, CancellationToken cancellationToken)
+        public DocumentationCommentSnippet? GetDocumentationCommentSnippetOnCommandInvoke(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            in DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var targetMember = GetTargetMember(syntaxTree, text, position, cancellationToken);
             if (targetMember == null)
@@ -260,7 +331,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             AddLineBreaks(lines, newLine);
 
             // Add indents
-            var lineOffset = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+            var lineOffset = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                options.TabSize
+            );
             Debug.Assert(line.Start + lineOffset == startPosition);
 
             var indentText = lineOffset.CreateIndentationString(options.UseTabs, options.TabSize);
@@ -277,7 +350,13 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             return new DocumentationCommentSnippet(replaceSpan, comments, offset);
         }
 
-        private DocumentationCommentSnippet? GenerateExteriorTriviaAfterEnter(SyntaxTree syntaxTree, SourceText text, int position, in DocumentationCommentOptions options, CancellationToken cancellationToken)
+        private DocumentationCommentSnippet? GenerateExteriorTriviaAfterEnter(
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            in DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // Find the documentation comment before the new line that was just pressed
             var token = GetTokenToLeft(syntaxTree, position, cancellationToken);
@@ -308,14 +387,20 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return null;
             }
 
-            var nextLineStartsWithDocComment = text.Lines.Count > currentLine.LineNumber + 1 &&
-                text.Lines[currentLine.LineNumber + 1].ToString().Trim().StartsWith(ExteriorTriviaText, StringComparison.Ordinal);
+            var nextLineStartsWithDocComment =
+                text.Lines.Count > currentLine.LineNumber + 1
+                && text.Lines[currentLine.LineNumber + 1]
+                    .ToString()
+                    .Trim()
+                    .StartsWith(ExteriorTriviaText, StringComparison.Ordinal);
 
             // if previous line has only exterior trivia, current line is empty and next line doesn't begin
             // with exterior trivia then stop inserting auto generated xml doc string
-            if (previousLineText.Equals(ExteriorTriviaText) &&
-                string.IsNullOrWhiteSpace(currentLine.ToString()) &&
-                !nextLineStartsWithDocComment)
+            if (
+                previousLineText.Equals(ExteriorTriviaText)
+                && string.IsNullOrWhiteSpace(currentLine.ToString())
+                && !nextLineStartsWithDocComment
+            )
             {
                 return null;
             }
@@ -326,44 +411,81 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return null;
             }
 
-            if (EndsWithSingleExteriorTrivia(documentationComment) && currentLine.IsEmptyOrWhitespace() && !nextLineStartsWithDocComment)
+            if (
+                EndsWithSingleExteriorTrivia(documentationComment)
+                && currentLine.IsEmptyOrWhitespace()
+                && !nextLineStartsWithDocComment
+            )
             {
                 return null;
             }
 
-            return GetDocumentationCommentSnippetFromPreviousLine(options, currentLine, previousLine);
+            return GetDocumentationCommentSnippetFromPreviousLine(
+                options,
+                currentLine,
+                previousLine
+            );
         }
 
-        public DocumentationCommentSnippet GetDocumentationCommentSnippetFromPreviousLine(in DocumentationCommentOptions options, TextLine currentLine, TextLine previousLine)
+        public DocumentationCommentSnippet GetDocumentationCommentSnippetFromPreviousLine(
+            in DocumentationCommentOptions options,
+            TextLine currentLine,
+            TextLine previousLine
+        )
         {
             var insertionText = CreateInsertionTextFromPreviousLine(previousLine, options);
 
             var firstNonWhitespaceOffset = currentLine.GetFirstNonWhitespaceOffset();
-            var replaceSpan = firstNonWhitespaceOffset != null
-                ? TextSpan.FromBounds(currentLine.Start, currentLine.Start + firstNonWhitespaceOffset.Value)
-                : currentLine.Span;
+            var replaceSpan =
+                firstNonWhitespaceOffset != null
+                    ? TextSpan.FromBounds(
+                        currentLine.Start,
+                        currentLine.Start + firstNonWhitespaceOffset.Value
+                    )
+                    : currentLine.Span;
 
-            return new DocumentationCommentSnippet(replaceSpan, insertionText, insertionText.Length);
+            return new DocumentationCommentSnippet(
+                replaceSpan,
+                insertionText,
+                insertionText.Length
+            );
         }
 
-        private string CreateInsertionTextFromPreviousLine(TextLine previousLine, in DocumentationCommentOptions options)
+        private string CreateInsertionTextFromPreviousLine(
+            TextLine previousLine,
+            in DocumentationCommentOptions options
+        )
         {
             var previousLineText = previousLine.ToString();
-            var firstNonWhitespaceColumn = previousLineText.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+            var firstNonWhitespaceColumn =
+                previousLineText.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
 
             var trimmedPreviousLine = previousLineText.Trim();
-            Debug.Assert(trimmedPreviousLine.StartsWith(ExteriorTriviaText), "Unexpected: previous line does not begin with doc comment exterior trivia.");
+            Debug.Assert(
+                trimmedPreviousLine.StartsWith(ExteriorTriviaText),
+                "Unexpected: previous line does not begin with doc comment exterior trivia."
+            );
 
             // skip exterior trivia.
             trimmedPreviousLine = trimmedPreviousLine[3..];
 
-            var firstNonWhitespaceOffsetInPreviousXmlText = trimmedPreviousLine.GetFirstNonWhitespaceOffset();
+            var firstNonWhitespaceOffsetInPreviousXmlText =
+                trimmedPreviousLine.GetFirstNonWhitespaceOffset();
 
-            var extraIndent = firstNonWhitespaceOffsetInPreviousXmlText != null
-                ? trimmedPreviousLine.Substring(0, firstNonWhitespaceOffsetInPreviousXmlText.Value)
-                : " ";
+            var extraIndent =
+                firstNonWhitespaceOffsetInPreviousXmlText != null
+                    ? trimmedPreviousLine.Substring(
+                        0,
+                        firstNonWhitespaceOffsetInPreviousXmlText.Value
+                    )
+                    : " ";
 
-            return firstNonWhitespaceColumn.CreateIndentationString(options.UseTabs, options.TabSize) + ExteriorTriviaText + extraIndent;
+            return firstNonWhitespaceColumn.CreateIndentationString(
+                    options.UseTabs,
+                    options.TabSize
+                )
+                + ExteriorTriviaText
+                + extraIndent;
         }
     }
 }

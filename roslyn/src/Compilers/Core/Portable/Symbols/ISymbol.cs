@@ -135,12 +135,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if this symbol was automatically created by the compiler, and does not have
         /// an explicit corresponding source code declaration.
-        /// </summary> 
+        /// </summary>
         /// <remarks>
         /// This is intended for symbols that are ordinary symbols in the language sense, and may be
         /// used by code, but that are simply declared implicitly rather than with explicit language
         /// syntax.
-        /// 
+        ///
         /// <para>
         /// Examples include (this list is not exhaustive):
         /// <list type="bullet">
@@ -175,8 +175,8 @@ namespace Microsoft.CodeAnalysis
         /// Get the syntax node(s) where this symbol was declared in source. Some symbols (for example,
         /// partial classes) may be defined in more than one location. This property should return
         /// one or more syntax nodes only if the symbol was declared in source code and also was
-        /// not implicitly declared (see the IsImplicitlyDeclared property). 
-        /// 
+        /// not implicitly declared (see the IsImplicitlyDeclared property).
+        ///
         /// <para>
         /// Note that for namespace symbol, the declaring syntax might be declaring a nested namespace.
         /// For example, the declaring syntax node for N1 in "namespace N1.N2 {...}" is the entire
@@ -225,7 +225,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="expandIncludes">Optionally, expand &lt;include&gt; elements.  No impact on non-source documentation comments.</param>
         /// <param name="cancellationToken">Token allowing cancellation of request.</param>
         /// <returns>The XML that would be written to the documentation file for the symbol.</returns>
-        string? GetDocumentationCommentXml(CultureInfo? preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default);
+        string? GetDocumentationCommentXml(
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Converts the symbol to a string representation.
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis
         string ToMinimalDisplayString(
             SemanticModel semanticModel,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Convert a symbol to an array of string parts, each of which has a kind. May be tailored
@@ -271,11 +276,12 @@ namespace Microsoft.CodeAnalysis
         ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
             SemanticModel semanticModel,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Indicates that this symbol uses metadata that cannot be supported by the language.
-        /// 
+        ///
         /// <para>
         /// Examples include:
         /// <list type="bullet">
@@ -284,12 +290,12 @@ namespace Microsoft.CodeAnalysis
         /// <item><description>Required custom modifiers</description></item>
         /// </list>
         /// </para>
-        /// 
+        ///
         /// <para>
         /// This is distinguished from, for example, references to metadata symbols defined in assemblies that weren't referenced.
         /// Symbols where this returns true can never be used successfully, and thus should never appear in any IDE feature.
         /// </para>
-        /// 
+        ///
         /// <para>
         /// This is set for metadata symbols, as follows:
         /// <list type="bullet">
@@ -310,6 +316,9 @@ namespace Microsoft.CodeAnalysis
         /// <param name="other">The other symbol to compare against</param>
         /// <param name="equalityComparer">The <see cref="SymbolEqualityComparer"/> to use when comparing symbols</param>
         /// <returns>True if the symbols are equivalent.</returns>
-        bool Equals([NotNullWhen(returnValue: true)] ISymbol? other, SymbolEqualityComparer equalityComparer);
+        bool Equals(
+            [NotNullWhen(returnValue: true)] ISymbol? other,
+            SymbolEqualityComparer equalityComparer
+        );
     }
 }

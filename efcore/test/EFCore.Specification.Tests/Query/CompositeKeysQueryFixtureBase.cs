@@ -11,14 +11,15 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class CompositeKeysQueryFixtureBase : SharedStoreFixtureBase<CompositeKeysContext>, IQueryFixtureBase
+    public abstract class CompositeKeysQueryFixtureBase
+        : SharedStoreFixtureBase<CompositeKeysContext>,
+            IQueryFixtureBase
     {
         private CompositeKeysDefaultData _expectedData;
 
         protected override string StoreName { get; } = "CompositeKeys";
 
-        public Func<DbContext> GetContextCreator()
-            => () => CreateContext();
+        public Func<DbContext> GetContextCreator() => () => CreateContext();
 
         public virtual ISetSource GetExpectedData()
         {
@@ -41,191 +42,319 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 {
                     (typeof(CompositeOne), "OneToOne_Optional_Self1Id1"),
-                    e => l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)?.OneToOne_Optional_Self1?.Id1
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeOne)e)?.Id1
+                        )?.OneToOne_Optional_Self1?.Id1
                 },
                 {
                     (typeof(CompositeOne), "OneToOne_Optional_Self1Id2"),
-                    e => l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)?.OneToOne_Optional_Self1?.Id2
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeOne)e)?.Id2
+                        )?.OneToOne_Optional_Self1?.Id2
                 },
                 {
                     (typeof(CompositeOne), "OneToMany_Required_Self_Inverse1Id1"),
-                    e => l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)?.OneToMany_Required_Self_Inverse1?.Id1
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeOne)e)?.Id1
+                        )?.OneToMany_Required_Self_Inverse1?.Id1
                 },
                 {
                     (typeof(CompositeOne), "OneToMany_Required_Self_Inverse1Id2"),
-                    e => l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)?.OneToMany_Required_Self_Inverse1?.Id2
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeOne)e)?.Id2
+                        )?.OneToMany_Required_Self_Inverse1?.Id2
                 },
                 {
                     (typeof(CompositeOne), "OneToMany_Optional_Self_Inverse1Id1"),
-                    e => l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)?.OneToMany_Optional_Self_Inverse1?.Id1
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeOne)e)?.Id1
+                        )?.OneToMany_Optional_Self_Inverse1?.Id1
                 },
                 {
                     (typeof(CompositeOne), "OneToMany_Optional_Self_Inverse1Id2"),
-                    e => l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)?.OneToMany_Optional_Self_Inverse1?.Id2
+                    e =>
+                        l1s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeOne)e)?.Id2
+                        )?.OneToMany_Optional_Self_Inverse1?.Id2
                 },
-
                 {
                     (typeof(CompositeTwo), "OneToOne_Optional_PK_Inverse2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToOne_Optional_PK_Inverse2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToOne_Optional_PK_Inverse2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToOne_Optional_PK_Inverse2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToOne_Optional_PK_Inverse2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToOne_Optional_PK_Inverse2?.Id2
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Required_Inverse2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToMany_Required_Inverse2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToMany_Required_Inverse2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Required_Inverse2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToMany_Required_Inverse2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToMany_Required_Inverse2?.Id2
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Optional_Inverse2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToMany_Optional_Inverse2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToMany_Optional_Inverse2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Optional_Inverse2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToMany_Optional_Inverse2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToMany_Optional_Inverse2?.Id2
                 },
                 {
                     (typeof(CompositeTwo), "OneToOne_Optional_Self2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToOne_Optional_Self2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToOne_Optional_Self2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToOne_Optional_Self2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToOne_Optional_Self2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToOne_Optional_Self2?.Id2
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Required_Self_Inverse2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToMany_Required_Self_Inverse2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToMany_Required_Self_Inverse2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Required_Self_Inverse2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToMany_Required_Self_Inverse2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToMany_Required_Self_Inverse2?.Id2
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Optional_Self_Inverse2Id1"),
-                    e => l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)?.OneToMany_Optional_Self_Inverse2?.Id1
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeTwo)e)?.Id1
+                        )?.OneToMany_Optional_Self_Inverse2?.Id1
                 },
                 {
                     (typeof(CompositeTwo), "OneToMany_Optional_Self_Inverse2Id2"),
-                    e => l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)?.OneToMany_Optional_Self_Inverse2?.Id2
+                    e =>
+                        l2s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeTwo)e)?.Id2
+                        )?.OneToMany_Optional_Self_Inverse2?.Id2
                 },
-
                 {
                     (typeof(CompositeThree), "OneToOne_Optional_PK_Inverse3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToOne_Optional_PK_Inverse3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToOne_Optional_PK_Inverse3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToOne_Optional_PK_Inverse3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToOne_Optional_PK_Inverse3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToOne_Optional_PK_Inverse3?.Id2
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Required_Inverse3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToMany_Required_Inverse3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToMany_Required_Inverse3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Required_Inverse3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToMany_Required_Inverse3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToMany_Required_Inverse3?.Id2
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Optional_Inverse3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToMany_Optional_Inverse3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToMany_Optional_Inverse3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Optional_Inverse3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToMany_Optional_Inverse3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToMany_Optional_Inverse3?.Id2
                 },
                 {
                     (typeof(CompositeThree), "OneToOne_Optional_Self3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToOne_Optional_Self3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToOne_Optional_Self3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToOne_Optional_Self3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToOne_Optional_Self3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToOne_Optional_Self3?.Id2
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Required_Self_Inverse3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToMany_Required_Self_Inverse3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToMany_Required_Self_Inverse3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Required_Self_Inverse3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToMany_Required_Self_Inverse3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToMany_Required_Self_Inverse3?.Id2
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Optional_Self_Inverse3Id1"),
-                    e => l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)?.OneToMany_Optional_Self_Inverse3?.Id1
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeThree)e)?.Id1
+                        )?.OneToMany_Optional_Self_Inverse3?.Id1
                 },
                 {
                     (typeof(CompositeThree), "OneToMany_Optional_Self_Inverse3Id2"),
-                    e => l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)?.OneToMany_Optional_Self_Inverse3?.Id2
+                    e =>
+                        l3s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeThree)e)?.Id2
+                        )?.OneToMany_Optional_Self_Inverse3?.Id2
                 },
-
                 {
                     (typeof(CompositeFour), "OneToOne_Optional_PK_Inverse4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToOne_Optional_PK_Inverse4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToOne_Optional_PK_Inverse4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToOne_Optional_PK_Inverse4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToOne_Optional_PK_Inverse4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToOne_Optional_PK_Inverse4?.Id2
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Required_Inverse4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToMany_Required_Inverse4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToMany_Required_Inverse4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Required_Inverse4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToMany_Required_Inverse4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToMany_Required_Inverse4?.Id2
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Optional_Inverse4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToMany_Optional_Inverse4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToMany_Optional_Inverse4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Optional_Inverse4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToMany_Optional_Inverse4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToMany_Optional_Inverse4?.Id2
                 },
                 {
                     (typeof(CompositeFour), "OneToOne_Optional_Self4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToOne_Optional_Self4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToOne_Optional_Self4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToOne_Optional_Self4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToOne_Optional_Self4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToOne_Optional_Self4?.Id2
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Required_Self_Inverse4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToMany_Required_Self_Inverse4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToMany_Required_Self_Inverse4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Required_Self_Inverse4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToMany_Required_Self_Inverse4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToMany_Required_Self_Inverse4?.Id2
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Optional_Self_Inverse4Id1"),
-                    e => l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)?.OneToMany_Optional_Self_Inverse4?.Id1
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id1 == ((CompositeFour)e)?.Id1
+                        )?.OneToMany_Optional_Self_Inverse4?.Id1
                 },
                 {
                     (typeof(CompositeFour), "OneToMany_Optional_Self_Inverse4Id2"),
-                    e => l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)?.OneToMany_Optional_Self_Inverse4?.Id2
+                    e =>
+                        l4s.SingleOrDefault(
+                            l => l.Id2 == ((CompositeFour)e)?.Id2
+                        )?.OneToMany_Optional_Self_Inverse4?.Id2
                 },
             };
         }
-        public IReadOnlyDictionary<Type, object> GetEntitySorters()
-            => new Dictionary<Type, Func<object, object>>
+
+        public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+            new Dictionary<Type, Func<object, object>>
             {
-                { typeof(CompositeOne), e => (((CompositeOne)e)?.Id1 ,((CompositeOne)e)?.Id2) },
-                { typeof(CompositeTwo), e => (((CompositeTwo)e)?.Id1 ,((CompositeTwo)e)?.Id2) },
-                { typeof(CompositeThree), e => (((CompositeThree)e)?.Id1 ,((CompositeThree)e)?.Id2) },
-                { typeof(CompositeFour), e => (((CompositeFour)e)?.Id1 ,((CompositeFour)e)?.Id2) },
+                { typeof(CompositeOne), e => (((CompositeOne)e)?.Id1, ((CompositeOne)e)?.Id2) },
+                { typeof(CompositeTwo), e => (((CompositeTwo)e)?.Id1, ((CompositeTwo)e)?.Id2) },
+                {
+                    typeof(CompositeThree),
+                    e => (((CompositeThree)e)?.Id1, ((CompositeThree)e)?.Id2)
+                },
+                { typeof(CompositeFour), e => (((CompositeFour)e)?.Id1, ((CompositeFour)e)?.Id2) },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-            => new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+            new Dictionary<Type, Action<object, object>>
             {
                 {
-                    typeof(CompositeOne), (e, a) =>
+                    typeof(CompositeOne),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -242,7 +371,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(CompositeTwo), (e, a) =>
+                    typeof(CompositeTwo),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -263,7 +393,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(CompositeThree), (e, a) =>
+                    typeof(CompositeThree),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -283,7 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(CompositeFour), (e, a) =>
+                    typeof(CompositeFour),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -312,71 +444,196 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<CompositeFour>().HasKey(x => new { x.Id1, x.Id2 });
 
             modelBuilder.Entity<CompositeOne>().HasOne(e => e.OneToOne_Optional_Self1).WithOne();
-            modelBuilder.Entity<CompositeOne>().HasOne(e => e.OneToOne_Required_PK1).WithOne(e => e.OneToOne_Required_PK_Inverse2)
-                .HasPrincipalKey<CompositeOne>(e => new { e.Id1, e.Id2 }).HasForeignKey<CompositeTwo>(e => new { e.Id1, e.Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeOne>().HasOne(e => e.OneToOne_Optional_PK1).WithOne(e => e.OneToOne_Optional_PK_Inverse2)
-                .HasPrincipalKey<CompositeOne>(e => new { e.Id1, e.Id2 }).IsRequired(false);
-            modelBuilder.Entity<CompositeOne>().HasOne(e => e.OneToOne_Required_FK1).WithOne(e => e.OneToOne_Required_FK_Inverse2)
-                .HasForeignKey<CompositeTwo>(e => new { e.Level1_Required_Id1, e.Level1_Required_Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeOne>().HasOne(e => e.OneToOne_Optional_FK1).WithOne(e => e.OneToOne_Optional_FK_Inverse2)
-                .HasForeignKey<CompositeTwo>(e => new { e.Level1_Optional_Id1, e.Level1_Optional_Id2 } ).IsRequired(false);
-            modelBuilder.Entity<CompositeOne>().HasMany(e => e.OneToMany_Required1).WithOne(e => e.OneToMany_Required_Inverse2).IsRequired()
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasOne(e => e.OneToOne_Required_PK1)
+                .WithOne(e => e.OneToOne_Required_PK_Inverse2)
+                .HasPrincipalKey<CompositeOne>(e => new { e.Id1, e.Id2 })
+                .HasForeignKey<CompositeTwo>(e => new { e.Id1, e.Id2 })
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeOne>().HasMany(e => e.OneToMany_Optional1).WithOne(e => e.OneToMany_Optional_Inverse2).IsRequired(false);
-            modelBuilder.Entity<CompositeOne>().HasMany(e => e.OneToMany_Required_Self1).WithOne(e => e.OneToMany_Required_Self_Inverse1)
-                .IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeOne>().HasMany(e => e.OneToMany_Optional_Self1).WithOne(e => e.OneToMany_Optional_Self_Inverse1)
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasOne(e => e.OneToOne_Optional_PK1)
+                .WithOne(e => e.OneToOne_Optional_PK_Inverse2)
+                .HasPrincipalKey<CompositeOne>(e => new { e.Id1, e.Id2 })
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasOne(e => e.OneToOne_Required_FK1)
+                .WithOne(e => e.OneToOne_Required_FK_Inverse2)
+                .HasForeignKey<CompositeTwo>(
+                    e => new { e.Level1_Required_Id1, e.Level1_Required_Id2 }
+                )
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasOne(e => e.OneToOne_Optional_FK1)
+                .WithOne(e => e.OneToOne_Optional_FK_Inverse2)
+                .HasForeignKey<CompositeTwo>(
+                    e => new { e.Level1_Optional_Id1, e.Level1_Optional_Id2 }
+                )
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasMany(e => e.OneToMany_Required1)
+                .WithOne(e => e.OneToMany_Required_Inverse2)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasMany(e => e.OneToMany_Optional1)
+                .WithOne(e => e.OneToMany_Optional_Inverse2)
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasMany(e => e.OneToMany_Required_Self1)
+                .WithOne(e => e.OneToMany_Required_Self_Inverse1)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeOne>()
+                .HasMany(e => e.OneToMany_Optional_Self1)
+                .WithOne(e => e.OneToMany_Optional_Self_Inverse1)
                 .IsRequired(false);
 
             modelBuilder.Entity<CompositeTwo>().HasOne(e => e.OneToOne_Optional_Self2).WithOne();
-            modelBuilder.Entity<CompositeTwo>().HasOne(e => e.OneToOne_Required_PK2).WithOne(e => e.OneToOne_Required_PK_Inverse3)
-                .HasPrincipalKey<CompositeTwo>(e => new { e.Id1, e.Id2 }).HasForeignKey<CompositeThree>(e => new { e.Id1, e.Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeTwo>().HasOne(e => e.OneToOne_Optional_PK2).WithOne(e => e.OneToOne_Optional_PK_Inverse3)
-                .HasPrincipalKey<CompositeTwo>(e => new { e.Id1, e.Id2 }).IsRequired(false);
-            modelBuilder.Entity<CompositeTwo>().HasOne(e => e.OneToOne_Required_FK2).WithOne(e => e.OneToOne_Required_FK_Inverse3)
-                .HasForeignKey<CompositeThree>(e => new { e.Level2_Required_Id1, e.Level2_Required_Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeTwo>().HasOne(e => e.OneToOne_Optional_FK2).WithOne(e => e.OneToOne_Optional_FK_Inverse3)
-                .HasForeignKey<CompositeThree>(e => new { e.Level2_Optional_Id1, e.Level2_Optional_Id2 }).IsRequired(false);
-            modelBuilder.Entity<CompositeTwo>().HasMany(e => e.OneToMany_Required2).WithOne(e => e.OneToMany_Required_Inverse3).IsRequired()
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasOne(e => e.OneToOne_Required_PK2)
+                .WithOne(e => e.OneToOne_Required_PK_Inverse3)
+                .HasPrincipalKey<CompositeTwo>(e => new { e.Id1, e.Id2 })
+                .HasForeignKey<CompositeThree>(e => new { e.Id1, e.Id2 })
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeTwo>().HasMany(e => e.OneToMany_Optional2).WithOne(e => e.OneToMany_Optional_Inverse3).IsRequired(false);
-            modelBuilder.Entity<CompositeTwo>().HasMany(e => e.OneToMany_Required_Self2).WithOne(e => e.OneToMany_Required_Self_Inverse2)
-                .IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeTwo>().HasMany(e => e.OneToMany_Optional_Self2).WithOne(e => e.OneToMany_Optional_Self_Inverse2)
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasOne(e => e.OneToOne_Optional_PK2)
+                .WithOne(e => e.OneToOne_Optional_PK_Inverse3)
+                .HasPrincipalKey<CompositeTwo>(e => new { e.Id1, e.Id2 })
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasOne(e => e.OneToOne_Required_FK2)
+                .WithOne(e => e.OneToOne_Required_FK_Inverse3)
+                .HasForeignKey<CompositeThree>(
+                    e => new { e.Level2_Required_Id1, e.Level2_Required_Id2 }
+                )
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasOne(e => e.OneToOne_Optional_FK2)
+                .WithOne(e => e.OneToOne_Optional_FK_Inverse3)
+                .HasForeignKey<CompositeThree>(
+                    e => new { e.Level2_Optional_Id1, e.Level2_Optional_Id2 }
+                )
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasMany(e => e.OneToMany_Required2)
+                .WithOne(e => e.OneToMany_Required_Inverse3)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasMany(e => e.OneToMany_Optional2)
+                .WithOne(e => e.OneToMany_Optional_Inverse3)
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasMany(e => e.OneToMany_Required_Self2)
+                .WithOne(e => e.OneToMany_Required_Self_Inverse2)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeTwo>()
+                .HasMany(e => e.OneToMany_Optional_Self2)
+                .WithOne(e => e.OneToMany_Optional_Self_Inverse2)
                 .IsRequired(false);
 
             modelBuilder.Entity<CompositeThree>().HasOne(e => e.OneToOne_Optional_Self3).WithOne();
-            modelBuilder.Entity<CompositeThree>().HasOne(e => e.OneToOne_Required_PK3).WithOne(e => e.OneToOne_Required_PK_Inverse4)
-                .HasPrincipalKey<CompositeThree>(e => new { e.Id1, e.Id2 }).HasForeignKey<CompositeFour>(e => new { e.Id1, e.Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeThree>().HasOne(e => e.OneToOne_Optional_PK3).WithOne(e => e.OneToOne_Optional_PK_Inverse4)
-                .HasPrincipalKey<CompositeThree>(e => new { e.Id1, e.Id2 }).IsRequired(false);
-            modelBuilder.Entity<CompositeThree>().HasOne(e => e.OneToOne_Required_FK3).WithOne(e => e.OneToOne_Required_FK_Inverse4)
-                .HasForeignKey<CompositeFour>(e => new { e.Level3_Required_Id1, e.Level3_Required_Id2 }).IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeThree>().HasOne(e => e.OneToOne_Optional_FK3).WithOne(e => e.OneToOne_Optional_FK_Inverse4)
-                .HasForeignKey<CompositeFour>(e => new { e.Level3_Optional_Id1, e.Level3_Optional_Id2 }).IsRequired(false);
-            modelBuilder.Entity<CompositeThree>().HasMany(e => e.OneToMany_Required3).WithOne(e => e.OneToMany_Required_Inverse4).IsRequired()
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasOne(e => e.OneToOne_Required_PK3)
+                .WithOne(e => e.OneToOne_Required_PK_Inverse4)
+                .HasPrincipalKey<CompositeThree>(e => new { e.Id1, e.Id2 })
+                .HasForeignKey<CompositeFour>(e => new { e.Id1, e.Id2 })
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeThree>().HasMany(e => e.OneToMany_Optional3).WithOne(e => e.OneToMany_Optional_Inverse4).IsRequired(false);
-            modelBuilder.Entity<CompositeThree>().HasMany(e => e.OneToMany_Required_Self3).WithOne(e => e.OneToMany_Required_Self_Inverse3)
-                .IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeThree>().HasMany(e => e.OneToMany_Optional_Self3).WithOne(e => e.OneToMany_Optional_Self_Inverse3)
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasOne(e => e.OneToOne_Optional_PK3)
+                .WithOne(e => e.OneToOne_Optional_PK_Inverse4)
+                .HasPrincipalKey<CompositeThree>(e => new { e.Id1, e.Id2 })
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasOne(e => e.OneToOne_Required_FK3)
+                .WithOne(e => e.OneToOne_Required_FK_Inverse4)
+                .HasForeignKey<CompositeFour>(
+                    e => new { e.Level3_Required_Id1, e.Level3_Required_Id2 }
+                )
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasOne(e => e.OneToOne_Optional_FK3)
+                .WithOne(e => e.OneToOne_Optional_FK_Inverse4)
+                .HasForeignKey<CompositeFour>(
+                    e => new { e.Level3_Optional_Id1, e.Level3_Optional_Id2 }
+                )
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasMany(e => e.OneToMany_Required3)
+                .WithOne(e => e.OneToMany_Required_Inverse4)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasMany(e => e.OneToMany_Optional3)
+                .WithOne(e => e.OneToMany_Optional_Inverse4)
+                .IsRequired(false);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasMany(e => e.OneToMany_Required_Self3)
+                .WithOne(e => e.OneToMany_Required_Self_Inverse3)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeThree>()
+                .HasMany(e => e.OneToMany_Optional_Self3)
+                .WithOne(e => e.OneToMany_Optional_Self_Inverse3)
                 .IsRequired(false);
 
             modelBuilder.Entity<CompositeFour>().HasOne(e => e.OneToOne_Optional_Self4).WithOne();
-            modelBuilder.Entity<CompositeFour>().HasMany(e => e.OneToMany_Required_Self4).WithOne(e => e.OneToMany_Required_Self_Inverse4)
-                .IsRequired().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<CompositeFour>().HasMany(e => e.OneToMany_Optional_Self4).WithOne(e => e.OneToMany_Optional_Self_Inverse4)
+            modelBuilder
+                .Entity<CompositeFour>()
+                .HasMany(e => e.OneToMany_Required_Self4)
+                .WithOne(e => e.OneToMany_Required_Self_Inverse4)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder
+                .Entity<CompositeFour>()
+                .HasMany(e => e.OneToMany_Optional_Self4)
+                .WithOne(e => e.OneToMany_Optional_Self_Inverse4)
                 .IsRequired(false);
         }
 
-        protected override void Seed(CompositeKeysContext context)
-            => CompositeKeysData.Seed(context);
+        protected override void Seed(CompositeKeysContext context) =>
+            CompositeKeysData.Seed(context);
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                c => c
-                    .Log(CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning)
-                    .Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(
+                    c =>
+                        c.Log(
+                                CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning
+                            )
+                            .Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
+                );
 
         public override CompositeKeysContext CreateContext()
         {
@@ -413,5 +670,4 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
     }
-
 }

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CanBeReferencedByName()
         {
-            var vbText = @"
+            var vbText =
+                @"
 Public Interface I
     Property P(x As Integer)
 End Interface
@@ -26,7 +27,8 @@ End Interface
                 "Test",
                 new[] { VisualBasicSyntaxTree.ParseText(vbText) },
                 new[] { MscorlibRef_v4_0_30316_17626 },
-                new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             var ref1 = vbcomp.EmitToImageReference(embedInteropTypes: true);
 
@@ -35,8 +37,16 @@ End Interface
             var comp = CreateEmptyCompilation(new[] { tree }, new[] { ref1 });
 
             var t = comp.GetTypeByMetadataName("I");
-            Assert.Empty(t.GetMembersUnordered().Where(x => x.Kind == SymbolKind.Method && !x.CanBeReferencedByName));
-            Assert.False(t.GetMembersUnordered().Where(x => x.Kind == SymbolKind.Property).First().CanBeReferencedByName); //there's only one.
+            Assert.Empty(
+                t.GetMembersUnordered()
+                    .Where(x => x.Kind == SymbolKind.Method && !x.CanBeReferencedByName)
+            );
+            Assert.False(
+                t.GetMembersUnordered()
+                    .Where(x => x.Kind == SymbolKind.Property)
+                    .First()
+                    .CanBeReferencedByName
+            ); //there's only one.
         }
     }
 }

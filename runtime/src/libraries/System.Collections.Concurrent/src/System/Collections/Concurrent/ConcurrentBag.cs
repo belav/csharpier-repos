@@ -34,8 +34,10 @@ namespace System.Collections.Concurrent
     {
         /// <summary>The per-bag, per-thread work-stealing queues.</summary>
         private readonly ThreadLocal<WorkStealingQueue> _locals;
+
         /// <summary>The head work stealing queue in a linked list of queues.</summary>
         private volatile WorkStealingQueue? _workStealingQueues;
+
         /// <summary>Number of times any list transitions from empty to non-empty.</summary>
         private long _emptyToNonEmptyListTransitionCount;
 
@@ -57,7 +59,10 @@ namespace System.Collections.Concurrent
         {
             if (collection == null)
             {
-                throw new ArgumentNullException(nameof(collection), SR.ConcurrentBag_Ctor_ArgumentNullException);
+                throw new ArgumentNullException(
+                    nameof(collection),
+                    SR.ConcurrentBag_Ctor_ArgumentNullException
+                );
             }
 
             _locals = new ThreadLocal<WorkStealingQueue>();
@@ -77,7 +82,7 @@ namespace System.Collections.Concurrent
         /// (Nothing in Visual Basic) for reference types.</param>
         public void Add(T item) =>
             GetCurrentThreadWorkStealingQueue(forceCreate: true)!
-            .LocalPush(item, ref _emptyToNonEmptyListTransitionCount);
+                .LocalPush(item, ref _emptyToNonEmptyListTransitionCount);
 
         /// <summary>
         /// Attempts to add an object to the <see cref="ConcurrentBag{T}"/>.
@@ -102,7 +107,8 @@ namespace System.Collections.Concurrent
         public bool TryTake([MaybeNullWhen(false)] out T result)
         {
             WorkStealingQueue? queue = GetCurrentThreadWorkStealingQueue(forceCreate: false);
-            return (queue != null && queue.TryLocalPop(out result)) || TrySteal(out result, take: true);
+            return (queue != null && queue.TryLocalPop(out result))
+                || TrySteal(out result, take: true);
         }
 
         /// <summary>
@@ -115,15 +121,15 @@ namespace System.Collections.Concurrent
         public bool TryPeek([MaybeNullWhen(false)] out T result)
         {
             WorkStealingQueue? queue = GetCurrentThreadWorkStealingQueue(forceCreate: false);
-            return (queue != null && queue.TryLocalPeek(out result)) || TrySteal(out result, take: false);
+            return (queue != null && queue.TryLocalPeek(out result))
+                || TrySteal(out result, take: false);
         }
 
         /// <summary>Gets the work-stealing queue data structure for the current thread.</summary>
         /// <param name="forceCreate">Whether to create a new queue if this thread doesn't have one.</param>
         /// <returns>The local queue object, or null if the thread doesn't have one.</returns>
         private WorkStealingQueue? GetCurrentThreadWorkStealingQueue(bool forceCreate) =>
-            _locals.Value ??
-            (forceCreate ? CreateWorkStealingQueueForCurrentThread() : null);
+            _locals.Value ?? (forceCreate ? CreateWorkStealingQueueForCurrentThread() : null);
 
         private WorkStealingQueue CreateWorkStealingQueueForCurrentThread()
         {
@@ -155,7 +161,11 @@ namespace System.Collections.Concurrent
             // but if our thread ID is reused, we know that no other thread can have the same ID and thus
             // no other thread can be using this queue.
             int currentThreadId = Environment.CurrentManagedThreadId;
-            for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+            for (
+                WorkStealingQueue? queue = _workStealingQueues;
+                queue != null;
+                queue = queue._nextQueue
+            )
             {
                 if (queue._ownerThreadId == currentThreadId)
                 {
@@ -207,16 +217,24 @@ namespace System.Collections.Concurrent
                 // We work around this by looking at the number of times any list transitions from == 0 to > 0,
                 // checking that before and after the steal attempts.  We don't care about > 0 to > 0 transitions,
                 // because a steal from a list with > 0 elements would have been successful.
-                long initialEmptyToNonEmptyCounts = Interlocked.Read(ref _emptyToNonEmptyListTransitionCount);
+                long initialEmptyToNonEmptyCounts = Interlocked.Read(
+                    ref _emptyToNonEmptyListTransitionCount
+                );
 
                 // If there's no local queue for this thread, just start from the head queue
                 // and try to steal from each queue until we get a result. If there is a local queue from this thread,
                 // then start from the next queue after it, and then iterate around back from the head to this queue,
                 // not including it.
-                WorkStealingQueue? localQueue = GetCurrentThreadWorkStealingQueue(forceCreate: false);
-                bool gotItem = localQueue == null ?
-                    TryStealFromTo(_workStealingQueues, null, out result, take) :
-                    (TryStealFromTo(localQueue._nextQueue, null, out result, take) || TryStealFromTo(_workStealingQueues, localQueue, out result, take));
+                WorkStealingQueue? localQueue = GetCurrentThreadWorkStealingQueue(
+                    forceCreate: false
+                );
+                bool gotItem =
+                    localQueue == null
+                        ? TryStealFromTo(_workStealingQueues, null, out result, take)
+                        : (
+                            TryStealFromTo(localQueue._nextQueue, null, out result, take)
+                            || TryStealFromTo(_workStealingQueues, localQueue, out result, take)
+                        );
                 if (gotItem)
                 {
 #pragma warning disable CS8762
@@ -227,7 +245,10 @@ namespace System.Collections.Concurrent
 #pragma warning restore CS8762
                 }
 
-                if (Interlocked.Read(ref _emptyToNonEmptyListTransitionCount) == initialEmptyToNonEmptyCounts)
+                if (
+                    Interlocked.Read(ref _emptyToNonEmptyListTransitionCount)
+                    == initialEmptyToNonEmptyCounts
+                )
                 {
                     // The version number matched, so we didn't get an item and we're confident enough
                     // in our steal attempt to say so.
@@ -243,9 +264,18 @@ namespace System.Collections.Concurrent
         /// <summary>
         /// Attempts to steal from each queue starting from <paramref name="startInclusive"/> to <paramref name="endExclusive"/>.
         /// </summary>
-        private bool TryStealFromTo(WorkStealingQueue? startInclusive, WorkStealingQueue? endExclusive, [MaybeNullWhen(false)] out T result, bool take)
+        private bool TryStealFromTo(
+            WorkStealingQueue? startInclusive,
+            WorkStealingQueue? endExclusive,
+            [MaybeNullWhen(false)] out T result,
+            bool take
+        )
         {
-            for (WorkStealingQueue? queue = startInclusive; queue != endExclusive; queue = queue._nextQueue)
+            for (
+                WorkStealingQueue? queue = startInclusive;
+                queue != endExclusive;
+                queue = queue._nextQueue
+            )
             {
                 if (queue!.TrySteal(out result, take))
                 {
@@ -281,11 +311,17 @@ namespace System.Collections.Concurrent
         {
             if (array == null)
             {
-                throw new ArgumentNullException(nameof(array), SR.ConcurrentBag_CopyTo_ArgumentNullException);
+                throw new ArgumentNullException(
+                    nameof(array),
+                    SR.ConcurrentBag_CopyTo_ArgumentNullException
+                );
             }
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.Collection_CopyTo_ArgumentOutOfRangeException);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.Collection_CopyTo_ArgumentOutOfRangeException
+                );
             }
 
             // Short path if the bag is empty
@@ -330,7 +366,11 @@ namespace System.Collections.Concurrent
             Debug.Assert(Monitor.IsEntered(GlobalQueuesLock));
 
             int i = index;
-            for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+            for (
+                WorkStealingQueue? queue = _workStealingQueues;
+                queue != null;
+                queue = queue._nextQueue
+            )
             {
                 i += queue.DangerousCopyTo(array, i);
             }
@@ -377,7 +417,10 @@ namespace System.Collections.Concurrent
             // and then relying on its CopyTo to copy to the target Array.
             if (array == null)
             {
-                throw new ArgumentNullException(nameof(array), SR.ConcurrentBag_CopyTo_ArgumentNullException);
+                throw new ArgumentNullException(
+                    nameof(array),
+                    SR.ConcurrentBag_CopyTo_ArgumentNullException
+                );
             }
             ToArray().CopyTo(array, index);
         }
@@ -447,10 +490,15 @@ namespace System.Collections.Concurrent
             try
             {
                 FreezeBag(ref lockTaken);
-                for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+                for (
+                    WorkStealingQueue? queue = _workStealingQueues;
+                    queue != null;
+                    queue = queue._nextQueue
+                )
                 {
                     T? ignored;
-                    while (queue.TrySteal(out ignored, take: true));
+                    while (queue.TrySteal(out ignored, take: true))
+                        ;
                 }
             }
             finally
@@ -525,9 +573,16 @@ namespace System.Collections.Concurrent
             get
             {
                 int count = 0;
-                for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+                for (
+                    WorkStealingQueue? queue = _workStealingQueues;
+                    queue != null;
+                    queue = queue._nextQueue
+                )
                 {
-                    checked { count += queue.DangerousCount; }
+                    checked
+                    {
+                        count += queue.DangerousCount;
+                    }
                 }
 
                 Debug.Assert(count >= 0);
@@ -572,7 +627,11 @@ namespace System.Collections.Concurrent
                 try
                 {
                     FreezeBag(ref lockTaken);
-                    for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+                    for (
+                        WorkStealingQueue? queue = _workStealingQueues;
+                        queue != null;
+                        queue = queue._nextQueue
+                    )
                     {
                         if (!queue.IsEmpty)
                         {
@@ -643,8 +702,10 @@ namespace System.Collections.Concurrent
                 if (queue._currentOp != (int)Operation.None)
                 {
                     SpinWait spinner = default;
-                    do { spinner.SpinOnce(); }
-                    while (queue._currentOp != (int)Operation.None);
+                    do
+                    {
+                        spinner.SpinOnce();
+                    } while (queue._currentOp != (int)Operation.None);
                 }
             }
         }
@@ -657,7 +718,11 @@ namespace System.Collections.Concurrent
             if (lockTaken)
             {
                 // Release all of the individual queue locks.
-                for (WorkStealingQueue? queue = _workStealingQueues; queue != null; queue = queue._nextQueue)
+                for (
+                    WorkStealingQueue? queue = _workStealingQueues;
+                    queue != null;
+                    queue = queue._nextQueue
+                )
                 {
                     if (queue._frozen)
                     {
@@ -676,31 +741,42 @@ namespace System.Collections.Concurrent
         {
             /// <summary>Initial size of the queue's array.</summary>
             private const int InitialSize = 32;
+
             /// <summary>Starting index for the head and tail indices.</summary>
             private const int StartIndex =
 #if DEBUG
-                int.MaxValue; // in debug builds, start at the end so we exercise the index reset logic
+            int.MaxValue; // in debug builds, start at the end so we exercise the index reset logic
 #else
                 0;
 #endif
+
             /// <summary>Head index from which to steal.  This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
             private volatile int _headIndex = StartIndex;
+
             /// <summary>Tail index at which local pushes/pops happen. This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
             private volatile int _tailIndex = StartIndex;
+
             /// <summary>The array storing the queue's data.</summary>
             private volatile T[] _array = new T[InitialSize];
+
             /// <summary>Mask and'd with <see cref="_headIndex"/> and <see cref="_tailIndex"/> to get an index into <see cref="_array"/>.</summary>
             private volatile int _mask = InitialSize - 1;
+
             /// <summary>Numbers of elements in the queue from the local perspective; needs to be combined with <see cref="_stealCount"/> to get an actual Count.</summary>
             private int _addTakeCount;
+
             /// <summary>Number of steals; needs to be combined with <see cref="_addTakeCount"/> to get an actual Count.</summary>
             private int _stealCount;
+
             /// <summary>The current queue operation. Used to quiesce before performing operations from one thread onto another.</summary>
             internal volatile int _currentOp;
+
             /// <summary>true if this queue's lock is held as part of a global freeze.</summary>
             internal bool _frozen;
+
             /// <summary>Next queue in the <see cref="ConcurrentBag{T}"/>'s set of thread-local queues.</summary>
             internal readonly WorkStealingQueue? _nextQueue;
+
             /// <summary>Thread ID that owns this queue.</summary>
             internal readonly int _ownerThreadId;
 
@@ -748,7 +824,10 @@ namespace System.Collections.Concurrent
                         _currentOp = (int)Operation.None; // set back to None temporarily to avoid a deadlock
                         lock (this)
                         {
-                            Debug.Assert(_tailIndex == tail, "No other thread should be changing _tailIndex");
+                            Debug.Assert(
+                                _tailIndex == tail,
+                                "No other thread should be changing _tailIndex"
+                            );
 
                             // Rather than resetting to zero, we'll just mask off the bits we don't care about.
                             // This way we don't need to rearrange the items already in the queue; they'll be found
@@ -836,9 +915,11 @@ namespace System.Collections.Concurrent
                         _addTakeCount -= _stealCount;
                         _stealCount = 0;
                     }
-
                     // Increment the count from the add/take perspective
-                    checked { _addTakeCount++; }
+                    checked
+                    {
+                        _addTakeCount++;
+                    }
                 }
                 finally
                 {
@@ -993,8 +1074,7 @@ namespace System.Collections.Concurrent
                             do
                             {
                                 spinner.SpinOnce();
-                            }
-                            while (_currentOp == (int)Operation.Add);
+                            } while (_currentOp == (int)Operation.Add);
                         }
 
                         // Increment head to tentatively take an element: a full fence is used to ensure the read
@@ -1044,10 +1124,10 @@ namespace System.Collections.Concurrent
                 int headIndex = _headIndex;
                 int count = DangerousCount;
                 Debug.Assert(
-                    count == (_tailIndex - _headIndex) ||
-                    count == (_tailIndex + 1 - _headIndex),
-                    "Count should be the same as tail - head, but allowing for the possibility that " +
-                    "a peek decremented _tailIndex before seeing that a freeze was happening.");
+                    count == (_tailIndex - _headIndex) || count == (_tailIndex + 1 - _headIndex),
+                    "Count should be the same as tail - head, but allowing for the possibility that "
+                        + "a peek decremented _tailIndex before seeing that a freeze was happening."
+                );
                 Debug.Assert(arrayIndex <= array.Length - count);
 
                 // Copy from this queue's array to the destination array, but in reverse
@@ -1073,7 +1153,10 @@ namespace System.Collections.Concurrent
                     int stealCount = _stealCount;
                     int addTakeCount = _addTakeCount;
                     int count = addTakeCount - stealCount;
-                    Debug.Assert(count >= 0, $"Expected _addTakeCount ({addTakeCount}) >= _stealCount ({stealCount}).");
+                    Debug.Assert(
+                        count >= 0,
+                        $"Expected _addTakeCount ({addTakeCount}) >= _stealCount ({stealCount})."
+                    );
                     return count;
                 }
             }
@@ -1128,7 +1211,9 @@ namespace System.Collections.Concurrent
                 {
                     if (_index == 0 || _index == _array.Length + 1)
                     {
-                        throw new InvalidOperationException(SR.ConcurrentBag_Enumerator_EnumerationNotStartedOrAlreadyFinished);
+                        throw new InvalidOperationException(
+                            SR.ConcurrentBag_Enumerator_EnumerationNotStartedOrAlreadyFinished
+                        );
                     }
                     return Current;
                 }

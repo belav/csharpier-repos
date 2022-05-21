@@ -37,16 +37,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
                 return false;
             }
 
-            return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((CompositeOne)obj);
+            return ReferenceEquals(this, obj)
+                ? true
+                : obj.GetType() == GetType() && Equals((CompositeOne)obj);
         }
 
         private bool Equals(CompositeOne other)
         {
-            return Id1 == other.Id1 && string.Equals(Id2, other.Id2) && string.Equals(Name, other.Name) && Date.Equals(other.Date);
+            return Id1 == other.Id1
+                && string.Equals(Id2, other.Id2)
+                && string.Equals(Name, other.Name)
+                && Date.Equals(other.Date);
         }
 
-        public override int GetHashCode()
-            => HashCode.Combine(Id1, Id2, Name, Date);
+        public override int GetHashCode() => HashCode.Combine(Id1, Id2, Name, Date);
     }
 }
-

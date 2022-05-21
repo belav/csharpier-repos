@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public ManagedExceptionRegionUpdate(
             ManagedModuleMethodId method,
             int delta,
-            SourceSpan newSpan)
+            SourceSpan newSpan
+        )
         {
             Method = method;
             Delta = delta;
@@ -36,7 +37,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
 
         /// <summary>
         /// The delta is the total of lines modified after the update. This value is inverse:
-        /// 
+        ///
         ///   OldSpan = NewSpan + Delta
         ///   NewSpan = OldSpan - Delta
         ///

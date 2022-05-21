@@ -13,7 +13,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         internal const string PropertyName = "EqualityContract";
 
-        public SynthesizedRecordEqualityContractProperty(SourceMemberContainerTypeSymbol containingType, BindingDiagnosticBag diagnostics)
+        public SynthesizedRecordEqualityContractProperty(
+            SourceMemberContainerTypeSymbol containingType,
+            BindingDiagnosticBag diagnostics
+        )
             : base(
                 containingType,
                 syntax: (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
@@ -22,7 +25,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 isExplicitInterfaceImplementation: false,
                 explicitInterfaceType: null,
                 aliasQualifierOpt: null,
-                modifiers: (containingType.IsSealed, containingType.BaseTypeNoUseSiteDiagnostics.IsObjectType()) switch
+                modifiers: (
+                    containingType.IsSealed,
+                    containingType.BaseTypeNoUseSiteDiagnostics.IsObjectType()
+                ) switch
                 {
                     (true, true) => DeclarationModifiers.Private,
                     (false, true) => DeclarationModifiers.Protected | DeclarationModifiers.Virtual,
@@ -36,43 +42,66 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 PropertyName,
                 indexerNameAttributeLists: new SyntaxList<AttributeListSyntax>(),
                 containingType.Locations[0],
-                diagnostics)
+                diagnostics
+            )
         {
             Debug.Assert(!containingType.IsRecordStruct);
         }
 
         public override bool IsImplicitlyDeclared => true;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
-        public override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
-            => new SyntaxList<AttributeListSyntax>();
+        public override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
+            new SyntaxList<AttributeListSyntax>();
 
         public override IAttributeTargetSymbol AttributesOwner => this;
 
-        protected override Location TypeLocation
-            => ContainingType.Locations[0];
+        protected override Location TypeLocation => ContainingType.Locations[0];
 
-        protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(bool isAutoPropertyAccessor, BindingDiagnosticBag diagnostics)
+        protected override SourcePropertyAccessorSymbol CreateGetAccessorSymbol(
+            bool isAutoPropertyAccessor,
+            BindingDiagnosticBag diagnostics
+        )
         {
             return SourcePropertyAccessorSymbol.CreateAccessorSymbol(
                 ContainingType,
                 this,
                 _modifiers,
                 ContainingType.Locations[0],
-                (CSharpSyntaxNode)((SourceMemberContainerTypeSymbol)ContainingType).SyntaxReferences[0].GetSyntax(),
-                diagnostics);
+                (CSharpSyntaxNode)
+                    ((SourceMemberContainerTypeSymbol)ContainingType).SyntaxReferences[
+                        0
+                    ].GetSyntax(),
+                diagnostics
+            );
         }
 
-        protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(bool isAutoPropertyAccessor, BindingDiagnosticBag diagnostics)
+        protected override SourcePropertyAccessorSymbol CreateSetAccessorSymbol(
+            bool isAutoPropertyAccessor,
+            BindingDiagnosticBag diagnostics
+        )
         {
             throw ExceptionUtilities.Unreachable;
         }
 
-        protected override (TypeWithAnnotations Type, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindType(BindingDiagnosticBag diagnostics)
+        protected override (TypeWithAnnotations Type, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindType(
+            BindingDiagnosticBag diagnostics
+        )
         {
-            return (TypeWithAnnotations.Create(Binder.GetWellKnownType(DeclaringCompilation, WellKnownType.System_Type, diagnostics, Location), NullableAnnotation.NotAnnotated),
-                    ImmutableArray<ParameterSymbol>.Empty);
+            return (
+                TypeWithAnnotations.Create(
+                    Binder.GetWellKnownType(
+                        DeclaringCompilation,
+                        WellKnownType.System_Type,
+                        diagnostics,
+                        Location
+                    ),
+                    NullableAnnotation.NotAnnotated
+                ),
+                ImmutableArray<ParameterSymbol>.Empty
+            );
         }
 
         protected override bool HasPointerTypeSyntactically => false;
@@ -83,7 +112,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VerifyOverridesEqualityContractFromBase(this, diagnostics);
         }
 
-        internal static void VerifyOverridesEqualityContractFromBase(PropertySymbol overriding, BindingDiagnosticBag diagnostics)
+        internal static void VerifyOverridesEqualityContractFromBase(
+            PropertySymbol overriding,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (overriding.ContainingType.BaseTypeNoUseSiteDiagnostics.IsObjectType())
             {
@@ -100,8 +132,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var overridden = overriding.OverriddenProperty;
 
-                if (overridden is object &&
-                    !overridden.ContainingType.Equals(overriding.ContainingType.BaseTypeNoUseSiteDiagnostics, TypeCompareKind.AllIgnoreOptions))
+                if (
+                    overridden is object
+                    && !overridden.ContainingType.Equals(
+                        overriding.ContainingType.BaseTypeNoUseSiteDiagnostics,
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                )
                 {
                     reportAnError = true;
                 }
@@ -109,7 +146,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (reportAnError)
             {
-                diagnostics.Add(ErrorCode.ERR_DoesNotOverrideBaseEqualityContract, overriding.Locations[0], overriding, overriding.ContainingType.BaseTypeNoUseSiteDiagnostics);
+                diagnostics.Add(
+                    ErrorCode.ERR_DoesNotOverrideBaseEqualityContract,
+                    overriding.Locations[0],
+                    overriding,
+                    overriding.ContainingType.BaseTypeNoUseSiteDiagnostics
+                );
             }
         }
 
@@ -121,32 +163,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 DeclarationModifiers propertyModifiers,
                 Location location,
                 CSharpSyntaxNode syntax,
-                BindingDiagnosticBag diagnostics)
+                BindingDiagnosticBag diagnostics
+            )
                 : base(
-                       containingType,
-                       property,
-                       propertyModifiers,
-                       location,
-                       syntax,
-                       hasBody: false,
-                       hasExpressionBody: false,
-                       isIterator: false,
-                       modifiers: new SyntaxTokenList(),
-                       MethodKind.PropertyGet,
-                       usesInit: false,
-                       isAutoPropertyAccessor: true,
-                       isNullableAnalysisEnabled: false,
-                       diagnostics)
-            {
-            }
+                    containingType,
+                    property,
+                    propertyModifiers,
+                    location,
+                    syntax,
+                    hasBody: false,
+                    hasExpressionBody: false,
+                    isIterator: false,
+                    modifiers: new SyntaxTokenList(),
+                    MethodKind.PropertyGet,
+                    usesInit: false,
+                    isAutoPropertyAccessor: true,
+                    isNullableAnalysisEnabled: false,
+                    diagnostics
+                ) { }
 
-            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+                ImmutableArray<SyntaxReference>.Empty;
 
             internal override bool SynthesizesLoweredBoundBody => true;
 
-            internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+            internal override void GenerateMethodBody(
+                TypeCompilationState compilationState,
+                BindingDiagnosticBag diagnostics
+            )
             {
-                var F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+                var F = new SyntheticBoundNodeFactory(
+                    this,
+                    this.GetNonNullSyntaxNode(),
+                    compilationState,
+                    diagnostics
+                );
 
                 try
                 {

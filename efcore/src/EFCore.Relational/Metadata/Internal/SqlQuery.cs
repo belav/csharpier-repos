@@ -22,8 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlQuery(string name, RelationalModel model, string sql)
-            : base(name, null, model)
+        public SqlQuery(string name, RelationalModel model, string sql) : base(name, null, model)
         {
             Sql = sql;
         }
@@ -32,8 +31,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual string Sql { get; set; }
 
         /// <inheritdoc />
-        public override IColumnBase? FindColumn(IProperty property)
-            => property.GetSqlQueryColumnMappings()
+        public override IColumnBase? FindColumn(IProperty property) =>
+            property
+                .GetSqlQueryColumnMappings()
                 .FirstOrDefault(cm => cm.TableMapping.Table == this)
                 ?.Column;
 
@@ -43,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((ISqlQuery)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ISqlQuery)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
         IEnumerable<ISqlQueryMapping> ISqlQuery.EntityTypeMappings
@@ -62,12 +62,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        ISqlQueryColumn? ISqlQuery.FindColumn(string name)
-            => (ISqlQueryColumn?)base.FindColumn(name);
+        ISqlQueryColumn? ISqlQuery.FindColumn(string name) =>
+            (ISqlQueryColumn?)base.FindColumn(name);
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        ISqlQueryColumn? ISqlQuery.FindColumn(IProperty property)
-            => (ISqlQueryColumn?)FindColumn(property);
+        ISqlQueryColumn? ISqlQuery.FindColumn(IProperty property) =>
+            (ISqlQueryColumn?)FindColumn(property);
     }
 }

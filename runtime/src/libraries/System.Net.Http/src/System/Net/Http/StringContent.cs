@@ -13,22 +13,19 @@ namespace System.Net.Http
     {
         private const string DefaultMediaType = "text/plain";
 
-        public StringContent(string content)
-            : this(content, null, null)
-        {
-        }
+        public StringContent(string content) : this(content, null, null) { }
 
-        public StringContent(string content, Encoding? encoding)
-            : this(content, encoding, null)
-        {
-        }
+        public StringContent(string content, Encoding? encoding) : this(content, encoding, null) { }
 
         public StringContent(string content, Encoding? encoding, string? mediaType)
             : base(GetContentByteArray(content, encoding))
         {
             // Initialize the 'Content-Type' header with information provided by parameters.
-            MediaTypeHeaderValue headerValue = new MediaTypeHeaderValue((mediaType == null) ? DefaultMediaType : mediaType);
-            headerValue.CharSet = (encoding == null) ? HttpContent.DefaultStringEncoding.WebName : encoding.WebName;
+            MediaTypeHeaderValue headerValue = new MediaTypeHeaderValue(
+                (mediaType == null) ? DefaultMediaType : mediaType
+            );
+            headerValue.CharSet =
+                (encoding == null) ? HttpContent.DefaultStringEncoding.WebName : encoding.WebName;
 
             Headers.ContentType = headerValue;
         }
@@ -53,14 +50,21 @@ namespace System.Net.Http
             return encoding.GetBytes(content);
         }
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken) =>
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) =>
             // Only skip the original protected virtual SerializeToStreamAsync if this
             // isn't a derived type that may have overridden the behavior.
-            GetType() == typeof(StringContent) ? SerializeToStreamAsyncCore(stream, cancellationToken) :
-            base.SerializeToStreamAsync(stream, context, cancellationToken);
+            GetType() == typeof(StringContent)
+                ? SerializeToStreamAsyncCore(stream, cancellationToken)
+                : base.SerializeToStreamAsync(stream, context, cancellationToken);
 
         internal override Stream? TryCreateContentReadStream() =>
-            GetType() == typeof(StringContent) ? CreateMemoryStreamForByteArray() : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-            null;
+            GetType() == typeof(StringContent)
+                ? CreateMemoryStreamForByteArray()
+                : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
+                null;
     }
 }

@@ -10,7 +10,9 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsODataQueryTestFixture : ComplexNavigationsQuerySqlServerFixture, IODataQueryTestFixture
+    public class ComplexNavigationsODataQueryTestFixture
+        : ComplexNavigationsQuerySqlServerFixture,
+            IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 
@@ -18,8 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public ComplexNavigationsODataQueryTestFixture()
         {
-            (BaseAddress, ClientFactory, _selfHostServer)
-                = ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(StoreName, GetEdmModel());
+            (BaseAddress, ClientFactory, _selfHostServer) =
+                ODataQueryTestFixtureInitializer.Initialize<ComplexNavigationsODataContext>(
+                    StoreName,
+                    GetEdmModel()
+                );
         }
 
         private static IEdmModel GetEdmModel()

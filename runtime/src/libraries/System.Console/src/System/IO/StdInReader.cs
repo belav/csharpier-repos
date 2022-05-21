@@ -16,7 +16,7 @@ namespace System.IO
     internal sealed class StdInReader : TextReader
     {
         private static string? s_moveLeftString; // string written to move the cursor to the left
-        private static string? s_clearToEol;     // string written to clear from cursor to end of line
+        private static string? s_clearToEol; // string written to clear from cursor to end of line
 
         private readonly StringBuilder _readLineSB; // SB that holds readLine output.  This is a field simply to enable reuse; it's only used in ReadLine.
         private readonly Stack<ConsoleKeyInfo> _tmpKeys = new Stack<ConsoleKeyInfo>(); // temporary working stack; should be empty outside of ReadLine
@@ -65,7 +65,10 @@ namespace System.IO
                 int spaceRemaining = _unprocessedBufferToBeRead.Length - _endIndex;
                 if (spaceRemaining < chars.Length)
                 {
-                    Array.Resize(ref _unprocessedBufferToBeRead, _unprocessedBufferToBeRead.Length * 2);
+                    Array.Resize(
+                        ref _unprocessedBufferToBeRead,
+                        _unprocessedBufferToBeRead.Length * 2
+                    );
                 }
             }
 
@@ -116,7 +119,14 @@ namespace System.IO
             int charsUsedTotal = 0;
             foreach (ReadOnlyMemory<char> chunk in _readLineSB.GetChunks())
             {
-                encoder.Convert(chunk.Span, buffer, flush: false, out int charsUsed, out int bytesUsed, out bool completed);
+                encoder.Convert(
+                    chunk.Span,
+                    buffer,
+                    flush: false,
+                    out int charsUsed,
+                    out int bytesUsed,
+                    out bool completed
+                );
                 buffer = buffer.Slice(bytesUsed);
                 bytesUsedTotal += bytesUsed;
                 charsUsedTotal += charsUsed;
@@ -142,7 +152,7 @@ namespace System.IO
             // or we need to read a new line from stdin.
             bool freshKeys = _availableKeys.Count == 0;
 
-           // Don't carry over chars from previous ReadLine call.
+            // Don't carry over chars from previous ReadLine call.
             _readLineSB.Clear();
 
             Interop.Sys.InitializeConsoleBeforeRead();
@@ -196,25 +206,42 @@ namespace System.IO
                         {
                             // The ReadLine input may wrap across terminal rows and we need to handle that.
                             // note: ConsolePal will cache the cursor position to avoid making many slow cursor position fetch operations.
-                            if (ConsolePal.TryGetCursorPosition(out int left, out int top, reinitializeForRead: true) &&
-                                left == 0 && top > 0)
+                            if (
+                                ConsolePal.TryGetCursorPosition(
+                                    out int left,
+                                    out int top,
+                                    reinitializeForRead: true
+                                )
+                                && left == 0
+                                && top > 0
+                            )
                             {
                                 if (s_clearToEol == null)
                                 {
-                                    s_clearToEol = ConsolePal.TerminalFormatStrings.Instance.ClrEol ?? string.Empty;
+                                    s_clearToEol =
+                                        ConsolePal.TerminalFormatStrings.Instance.ClrEol
+                                        ?? string.Empty;
                                 }
 
                                 // Move to end of previous line
                                 ConsolePal.SetCursorPosition(ConsolePal.WindowWidth - 1, top - 1);
                                 // Clear from cursor to end of the line
-                                ConsolePal.WriteStdoutAnsiString(s_clearToEol, mayChangeCursorPosition: false);
+                                ConsolePal.WriteStdoutAnsiString(
+                                    s_clearToEol,
+                                    mayChangeCursorPosition: false
+                                );
                             }
                             else
                             {
                                 if (s_moveLeftString == null)
                                 {
-                                    string? moveLeft = ConsolePal.TerminalFormatStrings.Instance.CursorLeft;
-                                    s_moveLeftString = !string.IsNullOrEmpty(moveLeft) ? moveLeft + " " + moveLeft : string.Empty;
+                                    string? moveLeft = ConsolePal
+                                        .TerminalFormatStrings
+                                        .Instance
+                                        .CursorLeft;
+                                    s_moveLeftString = !string.IsNullOrEmpty(moveLeft)
+                                        ? moveLeft + " " + moveLeft
+                                        : string.Empty;
                                 }
 
                                 Console.Write(s_moveLeftString);
@@ -293,9 +320,12 @@ namespace System.IO
 
         private static bool IsEol(char c)
         {
-            return
-                c != ConsolePal.s_posixDisableValue &&
-                (c == ConsolePal.s_veolCharacter || c == ConsolePal.s_veol2Character || c == ConsolePal.s_veofCharacter);
+            return c != ConsolePal.s_posixDisableValue
+                && (
+                    c == ConsolePal.s_veolCharacter
+                    || c == ConsolePal.s_veol2Character
+                    || c == ConsolePal.s_veofCharacter
+                );
         }
 
         internal ConsoleKey GetKeyFromCharValue(char x, out bool isShift, out bool isCtrl)
@@ -369,14 +399,28 @@ namespace System.IO
             return default(ConsoleKey);
         }
 
-        internal bool MapBufferToConsoleKey(out ConsoleKey key, out char ch, out bool isShift, out bool isAlt, out bool isCtrl)
+        internal bool MapBufferToConsoleKey(
+            out ConsoleKey key,
+            out char ch,
+            out bool isShift,
+            out bool isAlt,
+            out bool isCtrl
+        )
         {
             Debug.Assert(!IsUnprocessedBufferEmpty());
 
             // Try to get the special key match from the TermInfo static information.
             ConsoleKeyInfo keyInfo;
             int keyLength;
-            if (ConsolePal.TryGetSpecialConsoleKey(_unprocessedBufferToBeRead, _startIndex, _endIndex, out keyInfo, out keyLength))
+            if (
+                ConsolePal.TryGetSpecialConsoleKey(
+                    _unprocessedBufferToBeRead,
+                    _startIndex,
+                    _endIndex,
+                    out keyInfo,
+                    out keyLength
+                )
+            )
             {
                 key = keyInfo.Key;
                 isShift = (keyInfo.Modifiers & ConsoleModifiers.Shift) != 0;
@@ -390,8 +434,11 @@ namespace System.IO
 
             // Check if we can match Esc + combination and guess if alt was pressed.
             isAlt = isCtrl = isShift = false;
-            if (_unprocessedBufferToBeRead[_startIndex] == (char)0x1B && // Alt is send as an escape character
-                _endIndex - _startIndex >= 2) // We have at least two characters to read
+            if (
+                _unprocessedBufferToBeRead[_startIndex] == (char)0x1B
+                && // Alt is send as an escape character
+                _endIndex - _startIndex >= 2
+            ) // We have at least two characters to read
             {
                 _startIndex++;
                 if (MapBufferToConsoleKey(out key, out ch, out isShift, out isAlt, out isCtrl))
@@ -449,7 +496,9 @@ namespace System.IO
             {
                 ConsoleKey key;
                 char ch;
-                bool isAlt, isCtrl, isShift;
+                bool isAlt,
+                    isCtrl,
+                    isShift;
 
                 if (IsUnprocessedBufferEmpty())
                 {
@@ -465,12 +514,22 @@ namespace System.IO
                     {
                         // Could be empty if EOL entered on its own.  Pick one of the EOL characters we have,
                         // or just use 0 if none are available.
-                        return new ConsoleKeyInfo((char)
-                            (ConsolePal.s_veolCharacter != ConsolePal.s_posixDisableValue ? ConsolePal.s_veolCharacter :
-                             ConsolePal.s_veol2Character != ConsolePal.s_posixDisableValue ? ConsolePal.s_veol2Character :
-                             ConsolePal.s_veofCharacter != ConsolePal.s_posixDisableValue ? ConsolePal.s_veofCharacter :
-                             0),
-                            default(ConsoleKey), false, false, false);
+                        return new ConsoleKeyInfo(
+                            (char)(
+                                ConsolePal.s_veolCharacter != ConsolePal.s_posixDisableValue
+                                    ? ConsolePal.s_veolCharacter
+                                    : ConsolePal.s_veol2Character != ConsolePal.s_posixDisableValue
+                                        ? ConsolePal.s_veol2Character
+                                        : ConsolePal.s_veofCharacter
+                                        != ConsolePal.s_posixDisableValue
+                                            ? ConsolePal.s_veofCharacter
+                                            : 0
+                            ),
+                            default(ConsoleKey),
+                            false,
+                            false,
+                            false
+                        );
                     }
                 }
 
@@ -491,6 +550,9 @@ namespace System.IO
         }
 
         /// <summary>Gets whether there's input waiting on stdin.</summary>
-        internal bool StdinReady { get { return Interop.Sys.StdinReady(); } }
+        internal bool StdinReady
+        {
+            get { return Interop.Sys.StdinReady(); }
+        }
     }
 }

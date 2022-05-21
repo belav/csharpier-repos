@@ -33,6 +33,7 @@ namespace System.Threading
         // if null, it implicitly represents the same thing as new CancellationToken(false).
         // When required, it will be instantiated to reflect this.
         private readonly CancellationTokenSource? _source;
+
         // !! warning. If more fields are added, the assumptions in CreateLinkedToken may no longer be valid
 
         /// <summary>
@@ -84,7 +85,8 @@ namespace System.Threading
         /// </remarks>
         /// <exception cref="System.ObjectDisposedException">The associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        public WaitHandle WaitHandle => (_source ?? CancellationTokenSource.s_neverCanceledSource).WaitHandle;
+        public WaitHandle WaitHandle =>
+            (_source ?? CancellationTokenSource.s_neverCanceledSource).WaitHandle;
 
         // public CancellationToken()
         // this constructor is implicit for structs
@@ -108,9 +110,8 @@ namespace System.Threading
         /// If <paramref name="canceled"/> is true,
         /// both <see cref="CanBeCanceled"/> and <see cref="IsCancellationRequested"/> will be true.
         /// </remarks>
-        public CancellationToken(bool canceled) : this(canceled ? CancellationTokenSource.s_canceledSource : null)
-        {
-        }
+        public CancellationToken(bool canceled)
+            : this(canceled ? CancellationTokenSource.s_canceledSource : null) { }
 
         /// <summary>
         /// Registers a delegate that will be called when this <see cref="System.Threading.CancellationToken">CancellationToken</see> is canceled.
@@ -130,7 +131,8 @@ namespace System.Threading
         /// <returns>The <see cref="System.Threading.CancellationTokenRegistration"/> instance that can
         /// be used to unregister the callback.</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="callback"/> is null.</exception>
-        public CancellationTokenRegistration Register(Action callback) => Register(callback, useSynchronizationContext: false);
+        public CancellationTokenRegistration Register(Action callback) =>
+            Register(callback, useSynchronizationContext: false);
 
         /// <summary>
         /// Registers a delegate that will be called when this
@@ -154,12 +156,16 @@ namespace System.Threading
         /// <returns>The <see cref="System.Threading.CancellationTokenRegistration"/> instance that can
         /// be used to unregister the callback.</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="callback"/> is null.</exception>
-        public CancellationTokenRegistration Register(Action callback, bool useSynchronizationContext) =>
+        public CancellationTokenRegistration Register(
+            Action callback,
+            bool useSynchronizationContext
+        ) =>
             Register(
                 (Action<object?>)(static obj => ((Action)obj!)()),
                 callback ?? throw new ArgumentNullException(nameof(callback)),
                 useSynchronizationContext,
-                useExecutionContext: true);
+                useExecutionContext: true
+            );
 
         /// <summary>
         /// Registers a delegate that will be called when this
@@ -194,8 +200,10 @@ namespace System.Threading
         /// <param name="state">The state to pass to the <paramref name="callback"/> when the delegate is invoked.  This may be null.</param>
         /// <returns>The <see cref="CancellationTokenRegistration"/> instance that can be used to unregister the callback.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="callback"/> is null.</exception>
-        public CancellationTokenRegistration Register(Action<object?, CancellationToken> callback, object? state) =>
-            Register(callback, state, useSynchronizationContext: false, useExecutionContext: true);
+        public CancellationTokenRegistration Register(
+            Action<object?, CancellationToken> callback,
+            object? state
+        ) => Register(callback, state, useSynchronizationContext: false, useExecutionContext: true);
 
         /// <summary>
         /// Registers a delegate that will be called when this
@@ -222,8 +230,11 @@ namespace System.Threading
         /// <exception cref="System.ArgumentNullException"><paramref name="callback"/> is null.</exception>
         /// <exception cref="System.ObjectDisposedException">The associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        public CancellationTokenRegistration Register(Action<object?> callback, object? state, bool useSynchronizationContext) =>
-            Register(callback, state, useSynchronizationContext, useExecutionContext: true);
+        public CancellationTokenRegistration Register(
+            Action<object?> callback,
+            object? state,
+            bool useSynchronizationContext
+        ) => Register(callback, state, useSynchronizationContext, useExecutionContext: true);
 
         /// <summary>
         /// Registers a delegate that will be called when this
@@ -244,7 +255,10 @@ namespace System.Threading
         /// <returns>The <see cref="System.Threading.CancellationTokenRegistration"/> instance that can
         /// be used to unregister the callback.</returns>
         /// <exception cref="System.ArgumentNullException"><paramref name="callback"/> is null.</exception>
-        public CancellationTokenRegistration UnsafeRegister(Action<object?> callback, object? state) =>
+        public CancellationTokenRegistration UnsafeRegister(
+            Action<object?> callback,
+            object? state
+        ) =>
             Register(callback, state, useSynchronizationContext: false, useExecutionContext: false);
 
         /// <summary>Registers a delegate that will be called when this <see cref="CancellationToken">CancellationToken</see> is canceled.</summary>
@@ -256,7 +270,10 @@ namespace System.Threading
         /// <param name="state">The state to pass to the <paramref name="callback"/> when the delegate is invoked.  This may be null.</param>
         /// <returns>The <see cref="CancellationTokenRegistration"/> instance that can be used to unregister the callback.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="callback"/> is null.</exception>
-        public CancellationTokenRegistration UnsafeRegister(Action<object?, CancellationToken> callback, object? state) =>
+        public CancellationTokenRegistration UnsafeRegister(
+            Action<object?, CancellationToken> callback,
+            object? state
+        ) =>
             Register(callback, state, useSynchronizationContext: false, useExecutionContext: false);
 
         /// <summary>
@@ -281,15 +298,25 @@ namespace System.Threading
         /// <exception cref="System.ArgumentNullException"><paramref name="callback"/> is null.</exception>
         /// <exception cref="System.ObjectDisposedException">The associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        private CancellationTokenRegistration Register(Delegate callback, object? state, bool useSynchronizationContext, bool useExecutionContext)
+        private CancellationTokenRegistration Register(
+            Delegate callback,
+            object? state,
+            bool useSynchronizationContext,
+            bool useExecutionContext
+        )
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 
             CancellationTokenSource? source = _source;
-            return source != null ?
-                source.Register(callback, state, useSynchronizationContext ? SynchronizationContext.Current : null, useExecutionContext ? ExecutionContext.Capture() : null) :
-                default; // Nothing to do for tokens than can never reach the canceled state. Give back a dummy registration.
+            return source != null
+                ? source.Register(
+                    callback,
+                    state,
+                    useSynchronizationContext ? SynchronizationContext.Current : null,
+                    useExecutionContext ? ExecutionContext.Capture() : null
+                )
+                : default; // Nothing to do for tokens than can never reach the canceled state. Give back a dummy registration.
         }
 
         /// <summary>
@@ -314,13 +341,15 @@ namespace System.Threading
         /// from public CancellationToken constructors and their <see cref="IsCancellationRequested"/> values are equal.</returns>
         /// <exception cref="System.ObjectDisposedException">An associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        public override bool Equals([NotNullWhen(true)] object? other) => other is CancellationToken && Equals((CancellationToken)other);
+        public override bool Equals([NotNullWhen(true)] object? other) =>
+            other is CancellationToken && Equals((CancellationToken)other);
 
         /// <summary>
         /// Serves as a hash function for a <see cref="System.Threading.CancellationToken">CancellationToken</see>.
         /// </summary>
         /// <returns>A hash code for the current <see cref="System.Threading.CancellationToken">CancellationToken</see> instance.</returns>
-        public override int GetHashCode() => (_source ?? CancellationTokenSource.s_neverCanceledSource).GetHashCode();
+        public override int GetHashCode() =>
+            (_source ?? CancellationTokenSource.s_neverCanceledSource).GetHashCode();
 
         /// <summary>
         /// Determines whether two <see cref="System.Threading.CancellationToken">CancellationToken</see> instances are equal.
@@ -330,7 +359,8 @@ namespace System.Threading
         /// <returns>True if the instances are equal; otherwise, false.</returns>
         /// <exception cref="System.ObjectDisposedException">An associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        public static bool operator ==(CancellationToken left, CancellationToken right) => left.Equals(right);
+        public static bool operator ==(CancellationToken left, CancellationToken right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Determines whether two <see cref="System.Threading.CancellationToken">CancellationToken</see> instances are not equal.
@@ -340,7 +370,8 @@ namespace System.Threading
         /// <returns>True if the instances are not equal; otherwise, false.</returns>
         /// <exception cref="System.ObjectDisposedException">An associated <see
         /// cref="System.Threading.CancellationTokenSource">CancellationTokenSource</see> has been disposed.</exception>
-        public static bool operator !=(CancellationToken left, CancellationToken right) => !left.Equals(right);
+        public static bool operator !=(CancellationToken left, CancellationToken right) =>
+            !left.Equals(right);
 
         /// <summary>
         /// Throws a <see cref="System.OperationCanceledException">OperationCanceledException</see> if

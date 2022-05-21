@@ -21,9 +21,46 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx2.IsSupported)
             {
-                using (TestTable<byte> byteTable = new TestTable<byte>(new byte[32] { 255, 2, 0, 80, 0, 7, 0, 1, 2, 7, 80, 0, 123, 127, 5, 255, 255, 2, 0, 80, 0, 7, 0, 1, 2, 7, 80, 0, 123, 127, 5, 255 }))
+                using (
+                    TestTable<byte> byteTable = new TestTable<byte>(
+                        new byte[32]
+                        {
+                            255,
+                            2,
+                            0,
+                            80,
+                            0,
+                            7,
+                            0,
+                            1,
+                            2,
+                            7,
+                            80,
+                            0,
+                            123,
+                            127,
+                            5,
+                            255,
+                            255,
+                            2,
+                            0,
+                            80,
+                            0,
+                            7,
+                            0,
+                            1,
+                            2,
+                            7,
+                            80,
+                            0,
+                            123,
+                            127,
+                            5,
+                            255
+                        }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<byte>>(byteTable.inArray1Ptr);
                     var res = Avx2.MoveMask(vf1);
 
@@ -35,9 +72,46 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<sbyte> sbyteTable = new TestTable<sbyte>(new sbyte[32] { -1, 2, 0, 6, 0, 7, 111, 1, 2, 55, 80, 0, 11, 127, 5, -9, -1, 2, 0, 6, 0, 7, 111, 1, 2, 55, 80, 0, 11, 127, 5, -9 }))
+                using (
+                    TestTable<sbyte> sbyteTable = new TestTable<sbyte>(
+                        new sbyte[32]
+                        {
+                            -1,
+                            2,
+                            0,
+                            6,
+                            0,
+                            7,
+                            111,
+                            1,
+                            2,
+                            55,
+                            80,
+                            0,
+                            11,
+                            127,
+                            5,
+                            -9,
+                            -1,
+                            2,
+                            0,
+                            6,
+                            0,
+                            7,
+                            111,
+                            1,
+                            2,
+                            55,
+                            80,
+                            0,
+                            11,
+                            127,
+                            5,
+                            -9
+                        }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<sbyte>>(sbyteTable.inArray1Ptr);
                     var res = Avx2.MoveMask(vf1);
 
@@ -49,7 +123,6 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
             }
-
 
             return testResult;
         }
@@ -71,6 +144,5 @@ namespace IntelHardwareIntrinsicTest
                 inHandle1.Free();
             }
         }
-
     }
 }

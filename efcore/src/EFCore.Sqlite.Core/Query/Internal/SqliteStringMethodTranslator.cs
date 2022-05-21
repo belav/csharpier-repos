@@ -21,74 +21,89 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteStringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _indexOfMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IndexOf), typeof(string));
+        private static readonly MethodInfo _indexOfMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.IndexOf), typeof(string));
 
-        private static readonly MethodInfo _replaceMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Replace), typeof(string), typeof(string));
+        private static readonly MethodInfo _replaceMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.Replace),
+                typeof(string),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _toLowerMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
+        private static readonly MethodInfo _toLowerMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToLower), Array.Empty<Type>());
 
-        private static readonly MethodInfo _toUpperMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
+        private static readonly MethodInfo _toUpperMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.ToUpper), Array.Empty<Type>());
 
-        private static readonly MethodInfo _substringMethodInfoWithOneArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), typeof(int));
+        private static readonly MethodInfo _substringMethodInfoWithOneArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), typeof(int));
 
-        private static readonly MethodInfo _substringMethodInfoWithTwoArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Substring), typeof(int), typeof(int));
+        private static readonly MethodInfo _substringMethodInfoWithTwoArgs =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.Substring),
+                typeof(int),
+                typeof(int)
+            );
 
-        private static readonly MethodInfo _isNullOrWhiteSpaceMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrWhiteSpace), typeof(string));
+        private static readonly MethodInfo _isNullOrWhiteSpaceMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.IsNullOrWhiteSpace),
+                typeof(string)
+            );
 
         // Method defined in netcoreapp2.0 only
-        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
+        private static readonly MethodInfo _trimStartMethodInfoWithoutArgs =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimStartMethodInfoWithCharArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), typeof(char));
+        private static readonly MethodInfo _trimStartMethodInfoWithCharArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), typeof(char));
 
-        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
+        private static readonly MethodInfo _trimEndMethodInfoWithoutArgs =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimEndMethodInfoWithCharArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), typeof(char));
+        private static readonly MethodInfo _trimEndMethodInfoWithCharArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), typeof(char));
 
-        private static readonly MethodInfo _trimMethodInfoWithoutArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
+        private static readonly MethodInfo _trimMethodInfoWithoutArgs =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), Array.Empty<Type>());
 
-        private static readonly MethodInfo _trimMethodInfoWithCharArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), typeof(char));
+        private static readonly MethodInfo _trimMethodInfoWithCharArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), typeof(char));
 
         // Method defined in netstandard2.0
-        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), typeof(char[]));
+        private static readonly MethodInfo _trimStartMethodInfoWithCharArrayArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimStart), typeof(char[]));
 
-        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), typeof(char[]));
+        private static readonly MethodInfo _trimEndMethodInfoWithCharArrayArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.TrimEnd), typeof(char[]));
 
-        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), typeof(char[]));
+        private static readonly MethodInfo _trimMethodInfoWithCharArrayArg =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.Trim), typeof(char[]));
 
-        private static readonly MethodInfo _startsWithMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.StartsWith), typeof(string));
+        private static readonly MethodInfo _startsWithMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.StartsWith), typeof(string));
 
-        private static readonly MethodInfo _containsMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Contains), typeof(string));
+        private static readonly MethodInfo _containsMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.Contains), typeof(string));
 
-        private static readonly MethodInfo _endsWithMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.EndsWith), typeof(string));
+        private static readonly MethodInfo _endsWithMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.EndsWith), typeof(string));
 
-        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs
-            = typeof(Enumerable).GetRuntimeMethods().Single(
-                m => m.Name == nameof(Enumerable.FirstOrDefault)
-                    && m.GetParameters().Length == 1).MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _firstOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.FirstOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
-        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs
-            = typeof(Enumerable).GetRuntimeMethods().Single(
-                m => m.Name == nameof(Enumerable.LastOrDefault)
-                    && m.GetParameters().Length == 1).MakeGenericMethod(typeof(char));
+        private static readonly MethodInfo _lastOrDefaultMethodInfoWithoutArgs = typeof(Enumerable)
+            .GetRuntimeMethods()
+            .Single(
+                m => m.Name == nameof(Enumerable.LastOrDefault) && m.GetParameters().Length == 1
+            )
+            .MakeGenericMethod(typeof(char));
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
         private const char LikeEscapeChar = '\\';
@@ -114,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -125,7 +141,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 if (_indexOfMethodInfo.Equals(method))
                 {
                     var argument = arguments[0];
-                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, argument);
+                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
+                        instance,
+                        argument
+                    );
 
                     return _sqlExpressionFactory.Subtract(
                         _sqlExpressionFactory.Function(
@@ -137,32 +156,44 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, true },
-                            method.ReturnType),
-                        _sqlExpressionFactory.Constant(1));
+                            method.ReturnType
+                        ),
+                        _sqlExpressionFactory.Constant(1)
+                    );
                 }
 
                 if (_replaceMethodInfo.Equals(method))
                 {
                     var firstArgument = arguments[0];
                     var secondArgument = arguments[1];
-                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, firstArgument, secondArgument);
+                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
+                        instance,
+                        firstArgument,
+                        secondArgument
+                    );
 
                     return _sqlExpressionFactory.Function(
                         "replace",
                         new[]
                         {
                             _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping),
-                            _sqlExpressionFactory.ApplyTypeMapping(firstArgument, stringTypeMapping),
-                            _sqlExpressionFactory.ApplyTypeMapping(secondArgument, stringTypeMapping)
+                            _sqlExpressionFactory.ApplyTypeMapping(
+                                firstArgument,
+                                stringTypeMapping
+                            ),
+                            _sqlExpressionFactory.ApplyTypeMapping(
+                                secondArgument,
+                                stringTypeMapping
+                            )
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true, true },
                         method.ReturnType,
-                        stringTypeMapping);
+                        stringTypeMapping
+                    );
                 }
 
-                if (_toLowerMethodInfo.Equals(method)
-                    || _toUpperMethodInfo.Equals(method))
+                if (_toLowerMethodInfo.Equals(method) || _toUpperMethodInfo.Equals(method))
                 {
                     return _sqlExpressionFactory.Function(
                         _toLowerMethodInfo.Equals(method) ? "lower" : "upper",
@@ -170,48 +201,72 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         nullable: true,
                         argumentsPropagateNullability: new[] { true },
                         method.ReturnType,
-                        instance.TypeMapping);
+                        instance.TypeMapping
+                    );
                 }
 
                 if (_substringMethodInfoWithOneArg.Equals(method))
                 {
                     return _sqlExpressionFactory.Function(
                         "substr",
-                        new[] { instance, _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)) },
+                        new[]
+                        {
+                            instance,
+                            _sqlExpressionFactory.Add(
+                                arguments[0],
+                                _sqlExpressionFactory.Constant(1)
+                            )
+                        },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
                         method.ReturnType,
-                        instance.TypeMapping);
+                        instance.TypeMapping
+                    );
                 }
 
                 if (_substringMethodInfoWithTwoArgs.Equals(method))
                 {
                     return _sqlExpressionFactory.Function(
                         "substr",
-                        new[] { instance, _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)), arguments[1] },
+                        new[]
+                        {
+                            instance,
+                            _sqlExpressionFactory.Add(
+                                arguments[0],
+                                _sqlExpressionFactory.Constant(1)
+                            ),
+                            arguments[1]
+                        },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true, true },
                         method.ReturnType,
-                        instance.TypeMapping);
+                        instance.TypeMapping
+                    );
                 }
 
-                if (_trimStartMethodInfoWithoutArgs?.Equals(method) == true
+                if (
+                    _trimStartMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimStartMethodInfoWithCharArg?.Equals(method) == true
-                    || _trimStartMethodInfoWithCharArrayArg.Equals(method))
+                    || _trimStartMethodInfoWithCharArrayArg.Equals(method)
+                )
                 {
                     return ProcessTrimMethod(instance, arguments, "ltrim");
                 }
 
-                if (_trimEndMethodInfoWithoutArgs?.Equals(method) == true
+                if (
+                    _trimEndMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimEndMethodInfoWithCharArg?.Equals(method) == true
-                    || _trimEndMethodInfoWithCharArrayArg.Equals(method))
+                    || _trimEndMethodInfoWithCharArrayArg.Equals(method)
+                )
                 {
                     return ProcessTrimMethod(instance, arguments, "rtrim");
                 }
 
-                if (_trimMethodInfoWithoutArgs?.Equals(method) == true
+                if (
+                    _trimMethodInfoWithoutArgs?.Equals(method) == true
                     || _trimMethodInfoWithCharArg?.Equals(method) == true
-                    || _trimMethodInfoWithCharArrayArg.Equals(method))
+                    || _trimMethodInfoWithCharArrayArg.Equals(method)
+                )
                 {
                     return ProcessTrimMethod(instance, arguments, "trim");
                 }
@@ -219,7 +274,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 if (_containsMethodInfo.Equals(method))
                 {
                     var pattern = arguments[0];
-                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, pattern);
+                    var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
+                        instance,
+                        pattern
+                    );
 
                     instance = _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping);
                     pattern = _sqlExpressionFactory.ApplyTypeMapping(pattern, stringTypeMapping);
@@ -227,15 +285,19 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     return _sqlExpressionFactory.OrElse(
                         _sqlExpressionFactory.Equal(
                             pattern,
-                            _sqlExpressionFactory.Constant(string.Empty, stringTypeMapping)),
+                            _sqlExpressionFactory.Constant(string.Empty, stringTypeMapping)
+                        ),
                         _sqlExpressionFactory.GreaterThan(
                             _sqlExpressionFactory.Function(
                                 "instr",
                                 new[] { instance, pattern },
                                 nullable: true,
                                 argumentsPropagateNullability: new[] { true, true },
-                                typeof(int)),
-                            _sqlExpressionFactory.Constant(0)));
+                                typeof(int)
+                            ),
+                            _sqlExpressionFactory.Constant(0)
+                        )
+                    );
                 }
 
                 if (_startsWithMethodInfo.Equals(method))
@@ -262,8 +324,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             nullable: true,
                             argumentsPropagateNullability: new[] { true },
                             argument.Type,
-                            argument.TypeMapping),
-                        _sqlExpressionFactory.Constant(string.Empty)));
+                            argument.TypeMapping
+                        ),
+                        _sqlExpressionFactory.Constant(string.Empty)
+                    )
+                );
             }
 
             if (_firstOrDefaultMethodInfoWithoutArgs.Equals(method))
@@ -271,10 +336,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 var argument = arguments[0];
                 return _sqlExpressionFactory.Function(
                     "substr",
-                    new[] { argument, _sqlExpressionFactory.Constant(1), _sqlExpressionFactory.Constant(1) },
+                    new[]
+                    {
+                        argument,
+                        _sqlExpressionFactory.Constant(1),
+                        _sqlExpressionFactory.Constant(1)
+                    },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true, true },
-                    method.ReturnType);
+                    method.ReturnType
+                );
             }
 
             if (_lastOrDefaultMethodInfoWithoutArgs.Equals(method))
@@ -290,18 +361,24 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                             new[] { argument },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true },
-                            typeof(int)),
+                            typeof(int)
+                        ),
                         _sqlExpressionFactory.Constant(1)
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true, true },
-                    method.ReturnType);
+                    method.ReturnType
+                );
             }
 
             return null;
         }
 
-        private SqlExpression TranslateStartsEndsWith(SqlExpression instance, SqlExpression pattern, bool startsWith)
+        private SqlExpression TranslateStartsEndsWith(
+            SqlExpression instance,
+            SqlExpression pattern,
+            bool startsWith
+        )
         {
             var stringTypeMapping = ExpressionExtensions.InferTypeMapping(instance, pattern);
 
@@ -314,7 +391,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 // in C# and send a simple LIKE
                 if (!(constantExpression.Value is string constantString))
                 {
-                    return _sqlExpressionFactory.Like(instance, _sqlExpressionFactory.Constant(null, stringTypeMapping));
+                    return _sqlExpressionFactory.Like(
+                        instance,
+                        _sqlExpressionFactory.Constant(null, stringTypeMapping)
+                    );
                 }
 
                 if (constantString.Length == 0)
@@ -328,12 +408,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         _sqlExpressionFactory.Constant(
                             startsWith
                                 ? EscapeLikePattern(constantString) + '%'
-                                : '%' + EscapeLikePattern(constantString)),
-                        _sqlExpressionFactory.Constant(
-                            LikeEscapeChar.ToString())) // SQL Server has no char mapping, avoid value conversion warning)
+                                : '%' + EscapeLikePattern(constantString)
+                        ),
+                        _sqlExpressionFactory.Constant(LikeEscapeChar.ToString())
+                    ) // SQL Server has no char mapping, avoid value conversion warning)
                     : _sqlExpressionFactory.Like(
                         instance,
-                        _sqlExpressionFactory.Constant(startsWith ? constantString + '%' : '%' + constantString));
+                        _sqlExpressionFactory.Constant(
+                            startsWith ? constantString + '%' : '%' + constantString
+                        )
+                    );
             }
 
             // The pattern is non-constant, we use LEFT or RIGHT to extract substring and compare.
@@ -345,9 +429,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     _sqlExpressionFactory.AndAlso(
                         _sqlExpressionFactory.Like(
                             instance,
-                            _sqlExpressionFactory.Add(
-                                pattern,
-                                _sqlExpressionFactory.Constant("%"))),
+                            _sqlExpressionFactory.Add(pattern, _sqlExpressionFactory.Constant("%"))
+                        ),
                         _sqlExpressionFactory.Equal(
                             _sqlExpressionFactory.Function(
                                 "substr",
@@ -360,16 +443,22 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                         new[] { pattern },
                                         nullable: true,
                                         argumentsPropagateNullability: new[] { true },
-                                        typeof(int))
+                                        typeof(int)
+                                    )
                                 },
                                 nullable: true,
                                 argumentsPropagateNullability: new[] { true, false, true },
                                 typeof(string),
-                                stringTypeMapping),
-                            pattern)),
+                                stringTypeMapping
+                            ),
+                            pattern
+                        )
+                    ),
                     _sqlExpressionFactory.Equal(
                         pattern,
-                        _sqlExpressionFactory.Constant(string.Empty)));
+                        _sqlExpressionFactory.Constant(string.Empty)
+                    )
+                );
             }
 
             return _sqlExpressionFactory.OrElse(
@@ -385,21 +474,23 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                     new[] { pattern },
                                     nullable: true,
                                     argumentsPropagateNullability: new[] { true },
-                                    typeof(int)))
+                                    typeof(int)
+                                )
+                            )
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
                         typeof(string),
-                        stringTypeMapping),
-                    pattern),
-                _sqlExpressionFactory.Equal(
-                    pattern,
-                    _sqlExpressionFactory.Constant(string.Empty)));
+                        stringTypeMapping
+                    ),
+                    pattern
+                ),
+                _sqlExpressionFactory.Equal(pattern, _sqlExpressionFactory.Constant(string.Empty))
+            );
         }
 
         // See https://www.sqlite.org/lang_expr.html
-        private bool IsLikeWildChar(char c)
-            => c == '%' || c == '_';
+        private bool IsLikeWildChar(char c) => c == '%' || c == '_';
 
         private string EscapeLikePattern(string pattern)
         {
@@ -407,8 +498,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             for (var i = 0; i < pattern.Length; i++)
             {
                 var c = pattern[i];
-                if (IsLikeWildChar(c)
-                    || c == LikeEscapeChar)
+                if (IsLikeWildChar(c) || c == LikeEscapeChar)
                 {
                     builder.Append(LikeEscapeChar);
                 }
@@ -419,7 +509,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             return builder.ToString();
         }
 
-        private SqlExpression? ProcessTrimMethod(SqlExpression instance, IReadOnlyList<SqlExpression> arguments, string functionName)
+        private SqlExpression? ProcessTrimMethod(
+            SqlExpression instance,
+            IReadOnlyList<SqlExpression> arguments,
+            string functionName
+        )
         {
             var typeMapping = instance.TypeMapping;
             if (typeMapping == null)
@@ -448,7 +542,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
                 if (charactersToTrim.Count > 0)
                 {
-                    sqlArguments.Add(_sqlExpressionFactory.Constant(new string(charactersToTrim.ToArray()), typeMapping));
+                    sqlArguments.Add(
+                        _sqlExpressionFactory.Constant(
+                            new string(charactersToTrim.ToArray()),
+                            typeMapping
+                        )
+                    );
                 }
             }
 
@@ -458,7 +557,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 nullable: true,
                 argumentsPropagateNullability: sqlArguments.Select(a => true).ToList(),
                 typeof(string),
-                typeMapping);
+                typeMapping
+            );
         }
     }
 }

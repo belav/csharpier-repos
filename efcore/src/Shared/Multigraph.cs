@@ -10,8 +10,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore.Utilities
 {
-    internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
-        where TVertex : notnull
+    internal class Multigraph<TVertex, TEdge> : Graph<TVertex> where TVertex : notnull
     {
         private readonly HashSet<TVertex> _vertices = new();
         private readonly Dictionary<TVertex, Dictionary<TVertex, object?>> _successorMap = new();
@@ -23,18 +22,18 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 if (successorSet.TryGetValue(to, out var edges))
                 {
-                    return edges is IEnumerable<TEdge> edgeList ? edgeList : (new[] { (TEdge)edges! });
+                    return edges is IEnumerable<TEdge> edgeList
+                        ? edgeList
+                        : (new[] { (TEdge)edges! });
                 }
             }
 
             return Enumerable.Empty<TEdge>();
         }
 
-        public void AddVertex(TVertex vertex)
-            => _vertices.Add(vertex);
+        public void AddVertex(TVertex vertex) => _vertices.Add(vertex);
 
-        public void AddVertices(IEnumerable<TVertex> vertices)
-            => _vertices.UnionWith(vertices);
+        public void AddVertices(IEnumerable<TVertex> vertices) => _vertices.UnionWith(vertices);
 
         public void AddEdge(TVertex from, TVertex to, TEdge edge)
         {
@@ -132,21 +131,21 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             _predecessorMap.Clear();
         }
 
-        public IReadOnlyList<TVertex> TopologicalSort()
-            => TopologicalSort(null, null);
+        public IReadOnlyList<TVertex> TopologicalSort() => TopologicalSort(null, null);
 
         public IReadOnlyList<TVertex> TopologicalSort(
-            Func<TVertex, TVertex, IEnumerable<TEdge>, bool> tryBreakEdge)
-            => TopologicalSort(tryBreakEdge, null);
+            Func<TVertex, TVertex, IEnumerable<TEdge>, bool> tryBreakEdge
+        ) => TopologicalSort(tryBreakEdge, null);
 
         public IReadOnlyList<TVertex> TopologicalSort(
-            Func<IEnumerable<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string> formatCycle)
-            => TopologicalSort(null, formatCycle);
+            Func<IEnumerable<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string> formatCycle
+        ) => TopologicalSort(null, formatCycle);
 
         public IReadOnlyList<TVertex> TopologicalSort(
             Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? tryBreakEdge,
             Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-            Func<string, string>? formatException = null)
+            Func<string, string>? formatException = null
+        )
         {
             var queue = new List<TVertex>();
             var predecessorCounts = new Dictionary<TVertex, int>(_predecessorMap.Count);
@@ -189,9 +188,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     var candidateVertices = predecessorCounts.Keys.ToList();
                     var candidateIndex = 0;
 
-                    while ((candidateIndex < candidateVertices.Count)
+                    while (
+                        (candidateIndex < candidateVertices.Count)
                         && !broken
-                        && tryBreakEdge != null)
+                        && tryBreakEdge != null
+                    )
                     {
                         var candidateVertex = candidateVertices[candidateIndex];
                         if (predecessorCounts[candidateVertex] != 1)
@@ -203,10 +204,21 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         // Find a vertex in the unsorted portion of the graph that has edges to the candidate
                         var incomingNeighbor = GetIncomingNeighbors(candidateVertex)
                             .First(
-                                neighbor => predecessorCounts.TryGetValue(neighbor, out var neighborPredecessors)
-                                    && neighborPredecessors > 0);
+                                neighbor =>
+                                    predecessorCounts.TryGetValue(
+                                        neighbor,
+                                        out var neighborPredecessors
+                                    )
+                                    && neighborPredecessors > 0
+                            );
 
-                        if (tryBreakEdge(incomingNeighbor, candidateVertex, GetEdges(incomingNeighbor, candidateVertex)))
+                        if (
+                            tryBreakEdge(
+                                incomingNeighbor,
+                                candidateVertex,
+                                GetEdges(incomingNeighbor, candidateVertex)
+                            )
+                        )
                         {
                             _successorMap[incomingNeighbor].Remove(candidateVertex);
                             _predecessorMap[candidateVertex].Remove(incomingNeighbor);
@@ -225,15 +237,23 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     }
 
                     var currentCycleVertex = _vertices.First(
-                        v => predecessorCounts.TryGetValue(v, out var predecessorCount) && predecessorCount != 0);
+                        v =>
+                            predecessorCounts.TryGetValue(v, out var predecessorCount)
+                            && predecessorCount != 0
+                    );
                     var cycle = new List<TVertex> { currentCycleVertex };
                     var finished = false;
                     while (!finished)
                     {
                         foreach (var predecessor in GetIncomingNeighbors(currentCycleVertex))
                         {
-                            if (!predecessorCounts.TryGetValue(predecessor, out var predecessorCount)
-                                || predecessorCount == 0)
+                            if (
+                                !predecessorCounts.TryGetValue(
+                                    predecessor,
+                                    out var predecessorCount
+                                )
+                                || predecessorCount == 0
+                            )
                             {
                                 continue;
                             }
@@ -271,7 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         private void ThrowCycle(
             List<TVertex> cycle,
             Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-            Func<string, string>? formatException = null)
+            Func<string, string>? formatException = null
+        )
         {
             string cycleString;
             if (formatCycle == null)
@@ -285,26 +306,35 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
                 foreach (var vertex in cycle.Skip(1))
                 {
-                    cycleData.Add(Tuple.Create(currentCycleVertex, vertex, GetEdges(currentCycleVertex, vertex)));
+                    cycleData.Add(
+                        Tuple.Create(
+                            currentCycleVertex,
+                            vertex,
+                            GetEdges(currentCycleVertex, vertex)
+                        )
+                    );
                     currentCycleVertex = vertex;
                 }
 
                 cycleString = formatCycle(cycleData);
             }
 
-            var message = formatException == null ? CoreStrings.CircularDependency(cycleString) : formatException(cycleString);
+            var message =
+                formatException == null
+                    ? CoreStrings.CircularDependency(cycleString)
+                    : formatException(cycleString);
             throw new InvalidOperationException(message);
         }
 
-        protected virtual string? ToString(TVertex vertex)
-            => vertex.ToString();
+        protected virtual string? ToString(TVertex vertex) => vertex.ToString();
 
-        public IReadOnlyList<List<TVertex>> BatchingTopologicalSort()
-            => BatchingTopologicalSort(null, null);
+        public IReadOnlyList<List<TVertex>> BatchingTopologicalSort() =>
+            BatchingTopologicalSort(null, null);
 
         public IReadOnlyList<List<TVertex>> BatchingTopologicalSort(
             Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? tryBreakEdge,
-            Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle)
+            Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle
+        )
         {
             var currentRootsQueue = new List<TVertex>();
             var predecessorCounts = new Dictionary<TVertex, int>(_predecessorMap.Count);
@@ -364,9 +394,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     var candidateVertices = predecessorCounts.Keys.ToList();
                     var candidateIndex = 0;
 
-                    while ((candidateIndex < candidateVertices.Count)
+                    while (
+                        (candidateIndex < candidateVertices.Count)
                         && !broken
-                        && tryBreakEdge != null)
+                        && tryBreakEdge != null
+                    )
                     {
                         var candidateVertex = candidateVertices[candidateIndex];
                         if (predecessorCounts[candidateVertex] != 1)
@@ -378,10 +410,21 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         // Find a vertex in the unsorted portion of the graph that has edges to the candidate
                         var incomingNeighbor = GetIncomingNeighbors(candidateVertex)
                             .First(
-                                neighbor => predecessorCounts.TryGetValue(neighbor, out var neighborPredecessors)
-                                    && neighborPredecessors > 0);
+                                neighbor =>
+                                    predecessorCounts.TryGetValue(
+                                        neighbor,
+                                        out var neighborPredecessors
+                                    )
+                                    && neighborPredecessors > 0
+                            );
 
-                        if (tryBreakEdge(incomingNeighbor, candidateVertex, GetEdges(incomingNeighbor, candidateVertex)))
+                        if (
+                            tryBreakEdge(
+                                incomingNeighbor,
+                                candidateVertex,
+                                GetEdges(incomingNeighbor, candidateVertex)
+                            )
+                        )
                         {
                             _successorMap[incomingNeighbor].Remove(candidateVertex);
                             _predecessorMap[candidateVertex].Remove(incomingNeighbor);
@@ -401,15 +444,23 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     }
 
                     var currentCycleVertex = _vertices.First(
-                        v => predecessorCounts.TryGetValue(v, out var predecessorCount) && predecessorCount != 0);
+                        v =>
+                            predecessorCounts.TryGetValue(v, out var predecessorCount)
+                            && predecessorCount != 0
+                    );
                     var cycle = new List<TVertex> { currentCycleVertex };
                     var finished = false;
                     while (!finished)
                     {
                         foreach (var predecessor in GetIncomingNeighbors(currentCycleVertex))
                         {
-                            if (!predecessorCounts.TryGetValue(predecessor, out var predecessorCount)
-                                || predecessorCount == 0)
+                            if (
+                                !predecessorCounts.TryGetValue(
+                                    predecessor,
+                                    out var predecessorCount
+                                )
+                                || predecessorCount == 0
+                            )
                             {
                                 continue;
                             }
@@ -444,16 +495,15 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             return result;
         }
 
-        public override IEnumerable<TVertex> Vertices
-            => _vertices;
+        public override IEnumerable<TVertex> Vertices => _vertices;
 
-        public override IEnumerable<TVertex> GetOutgoingNeighbors(TVertex from)
-            => _successorMap.TryGetValue(from, out var successorSet)
+        public override IEnumerable<TVertex> GetOutgoingNeighbors(TVertex from) =>
+            _successorMap.TryGetValue(from, out var successorSet)
                 ? successorSet.Keys
                 : Enumerable.Empty<TVertex>();
 
-        public override IEnumerable<TVertex> GetIncomingNeighbors(TVertex to)
-            => _predecessorMap.TryGetValue(to, out var predecessors)
+        public override IEnumerable<TVertex> GetIncomingNeighbors(TVertex to) =>
+            _predecessorMap.TryGetValue(to, out var predecessors)
                 ? predecessors
                 : Enumerable.Empty<TVertex>();
     }

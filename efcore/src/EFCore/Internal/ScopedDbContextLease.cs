@@ -12,8 +12,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public sealed class ScopedDbContextLease<TContext> : IScopedDbContextLease<TContext>, IDisposable, IAsyncDisposable
-        where TContext : DbContext
+    public sealed class ScopedDbContextLease<TContext>
+        : IScopedDbContextLease<TContext>,
+            IDisposable,
+            IAsyncDisposable where TContext : DbContext
     {
         private DbContextLease _lease;
 
@@ -35,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public TContext Context
-            => (TContext)_lease.Context;
+        public TContext Context => (TContext)_lease.Context;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        void IDisposable.Dispose()
-            => _lease.Release();
+        void IDisposable.Dispose() => _lease.Release();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,7 +53,6 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        ValueTask IAsyncDisposable.DisposeAsync()
-            => _lease.ReleaseAsync();
+        ValueTask IAsyncDisposable.DisposeAsync() => _lease.ReleaseAsync();
     }
 }

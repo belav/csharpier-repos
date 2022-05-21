@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
     /// <summary>
-    /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).  
+    /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).
     /// The difference between this and the result from token.ValueText is that for each collapsed character
     /// returned the original span of text in the original token can be found.  i.e. if you had the
     /// following in C#:
@@ -27,13 +27,17 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
     /// </summary>
     internal partial struct VirtualCharSequence
     {
-        public static readonly VirtualCharSequence Empty = Create(ImmutableArray<VirtualChar>.Empty);
+        public static readonly VirtualCharSequence Empty = Create(
+            ImmutableArray<VirtualChar>.Empty
+        );
 
-        public static VirtualCharSequence Create(ImmutableArray<VirtualChar> virtualChars)
-            => new(new ImmutableArrayChunk(virtualChars));
+        public static VirtualCharSequence Create(ImmutableArray<VirtualChar> virtualChars) =>
+            new(new ImmutableArrayChunk(virtualChars));
 
-        public static VirtualCharSequence Create(int firstVirtualCharPosition, string underlyingData)
-            => new(new StringChunk(firstVirtualCharPosition, underlyingData));
+        public static VirtualCharSequence Create(
+            int firstVirtualCharPosition,
+            string underlyingData
+        ) => new(new StringChunk(firstVirtualCharPosition, underlyingData));
 
         /// <summary>
         /// The actual characters that this <see cref="VirtualCharSequence"/> is a portion of.
@@ -41,14 +45,13 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         private readonly Chunk _leafCharacters;
 
         /// <summary>
-        /// The portion of <see cref="_leafCharacters"/> that is being exposed.  This span 
+        /// The portion of <see cref="_leafCharacters"/> that is being exposed.  This span
         /// is `[inclusive, exclusive)`.
         /// </summary>
         private readonly TextSpan _span;
 
-        private VirtualCharSequence(Chunk sequence) : this(sequence, new TextSpan(0, sequence.Length))
-        {
-        }
+        private VirtualCharSequence(Chunk sequence)
+            : this(sequence, new TextSpan(0, sequence.Length)) { }
 
         private VirtualCharSequence(Chunk sequence, TextSpan span)
         {
@@ -73,15 +76,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public bool IsEmpty => Length == 0;
         public bool IsDefaultOrEmpty => IsDefault || IsEmpty;
 
-        public VirtualCharSequence GetSubSequence(TextSpan span)
-           => new(
-               _leafCharacters, new TextSpan(_span.Start + span.Start, span.Length));
+        public VirtualCharSequence GetSubSequence(TextSpan span) =>
+            new(_leafCharacters, new TextSpan(_span.Start + span.Start, span.Length));
 
         public VirtualChar First() => this[0];
+
         public VirtualChar Last() => this[this.Length - 1];
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         public VirtualChar? FirstOrNull(Func<VirtualChar, bool> predicate)
         {
@@ -96,8 +98,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             return null;
         }
 
-        public bool Contains(VirtualChar @char)
-            => IndexOf(@char) >= 0;
+        public bool Contains(VirtualChar @char) => IndexOf(@char) >= 0;
 
         public int IndexOf(VirtualChar @char)
         {
@@ -133,16 +134,19 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
         /// <summary>
         /// Combines two <see cref="VirtualCharSequence"/>s, producing a final
-        /// sequence that points at the same underlying data, but spans from the 
+        /// sequence that points at the same underlying data, but spans from the
         /// start of <paramref name="chars1"/> to the end of <paramref name="chars2"/>.
-        /// </summary>  
+        /// </summary>
         public static VirtualCharSequence FromBounds(
-            VirtualCharSequence chars1, VirtualCharSequence chars2)
+            VirtualCharSequence chars1,
+            VirtualCharSequence chars2
+        )
         {
             Debug.Assert(chars1._leafCharacters == chars2._leafCharacters);
             return new VirtualCharSequence(
                 chars1._leafCharacters,
-                TextSpan.FromBounds(chars1._span.Start, chars2._span.End));
+                TextSpan.FromBounds(chars1._span.Start, chars2._span.End)
+            );
         }
     }
 }

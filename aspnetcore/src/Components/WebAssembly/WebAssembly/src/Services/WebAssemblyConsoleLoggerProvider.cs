@@ -29,11 +29,12 @@ internal class WebAssemblyConsoleLoggerProvider : ILoggerProvider
     /// <inheritdoc />
     public ILogger CreateLogger(string name)
     {
-        return _loggers.GetOrAdd(name, loggerName => new WebAssemblyConsoleLogger<object>(name, _jsRuntime));
+        return _loggers.GetOrAdd(
+            name,
+            loggerName => new WebAssemblyConsoleLogger<object>(name, _jsRuntime)
+        );
     }
 
     /// <inheritdoc />
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

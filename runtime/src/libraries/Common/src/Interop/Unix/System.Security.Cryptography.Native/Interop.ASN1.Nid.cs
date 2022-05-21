@@ -15,10 +15,18 @@ internal static partial class Interop
 
         internal const int NID_undef = 0;
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjSn2Nid", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_ObjSn2Nid",
+            CharSet = CharSet.Ansi
+        )]
         internal static partial int ObjSn2Nid(string sn);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjTxt2Nid", CharSet = CharSet.Ansi)]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_ObjTxt2Nid",
+            CharSet = CharSet.Ansi
+        )]
         private static partial int ObjTxt2Nid(string oid);
 
         internal static int ResolveRequiredNid(string oid)
@@ -32,7 +40,9 @@ internal static partial class Interop
 
             if (nid == NID_undef)
             {
-                Debug.Fail($"NID Lookup for {oid} failed, only well-known types should be queried.");
+                Debug.Fail(
+                    $"NID Lookup for {oid} failed, only well-known types should be queried."
+                );
                 throw new CryptographicException();
             }
 

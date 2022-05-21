@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
         public void GetValueAsyncReturnsCompletedTaskIfAsyncComputationCompletesImmediately()
         {
-            // Note, this test may pass even if GetValueAsync posted a task to the threadpool, since the 
+            // Note, this test may pass even if GetValueAsync posted a task to the threadpool, since the
             // current thread may context switch out and allow the threadpool to complete the task before
             // we check the state.  However, a failure here definitely indicates a bug in AsyncLazy.
             var lazy = new AsyncLazy<int>(c => Task.FromResult(5), cacheResult: true);
@@ -31,29 +31,36 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-        public void SynchronousContinuationsDoNotRunWithinGetValueCallForCompletedTask()
-            => SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.RanToCompletion);
+        public void SynchronousContinuationsDoNotRunWithinGetValueCallForCompletedTask() =>
+            SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.RanToCompletion);
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-        public void SynchronousContinuationsDoNotRunWithinGetValueCallForCancelledTask()
-            => SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.Canceled);
+        public void SynchronousContinuationsDoNotRunWithinGetValueCallForCancelledTask() =>
+            SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.Canceled);
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-        public void SynchronousContinuationsDoNotRunWithinGetValueCallForFaultedTask()
-            => SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.Faulted);
+        public void SynchronousContinuationsDoNotRunWithinGetValueCallForFaultedTask() =>
+            SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus.Faulted);
 
-        private static void SynchronousContinuationsDoNotRunWithinGetValueCallCore(TaskStatus expectedTaskStatus)
+        private static void SynchronousContinuationsDoNotRunWithinGetValueCallCore(
+            TaskStatus expectedTaskStatus
+        )
         {
             var synchronousComputationStartedEvent = new ManualResetEvent(initialState: false);
-            var synchronousComputationShouldCompleteEvent = new ManualResetEvent(initialState: false);
+            var synchronousComputationShouldCompleteEvent = new ManualResetEvent(
+                initialState: false
+            );
 
             var requestCancellationTokenSource = new CancellationTokenSource();
 
             // First, create an async lazy that will only ever do synchronous computations.
             var lazy = new AsyncLazy<int>(
-                asynchronousComputeFunction: c => { throw new Exception("We should not get an asynchronous computation."); },
+                asynchronousComputeFunction: c =>
+                {
+                    throw new Exception("We should not get an asynchronous computation.");
+                },
                 synchronousComputeFunction: c =>
                 {
                     // Notify that the synchronous computation started
@@ -72,22 +79,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                     return 42;
                 },
-                cacheResult: false);
+                cacheResult: false
+            );
 
             // Second, start a synchronous request. While we are in the GetValue, we will record which thread is being occupied by the request
             Thread synchronousRequestThread = null;
-            Task.Factory.StartNew(() =>
-            {
-                try
+            Task.Factory.StartNew(
+                () =>
                 {
-                    synchronousRequestThread = Thread.CurrentThread;
-                    lazy.GetValue(requestCancellationTokenSource.Token);
-                }
-                finally // we do test GetValue in exceptional scenarios, so we should deal with this
-                {
-                    synchronousRequestThread = null;
-                }
-            }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Current);
+                    try
+                    {
+                        synchronousRequestThread = Thread.CurrentThread;
+                        lazy.GetValue(requestCancellationTokenSource.Token);
+                    }
+                    finally // we do test GetValue in exceptional scenarios, so we should deal with this
+                    {
+                        synchronousRequestThread = null;
+                    }
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                TaskScheduler.Current
+            );
 
             // Wait until this request has actually started
             synchronousComputationStartedEvent.WaitOne();
@@ -98,16 +111,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             bool? asyncContinuationRanSynchronously = null;
             TaskStatus? observedAntecedentTaskStatus = null;
 
-            var asyncContinuation = lazy.GetValueAsync(requestCancellationTokenSource.Token).ContinueWith(antecedent =>
-                {
-                    var currentSynchronousRequestThread = synchronousRequestThread;
+            var asyncContinuation = lazy.GetValueAsync(requestCancellationTokenSource.Token)
+                .ContinueWith(
+                    antecedent =>
+                    {
+                        var currentSynchronousRequestThread = synchronousRequestThread;
 
-                    asyncContinuationRanSynchronously = currentSynchronousRequestThread != null && currentSynchronousRequestThread == Thread.CurrentThread;
-                    observedAntecedentTaskStatus = antecedent.Status;
-                },
-                CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default);
+                        asyncContinuationRanSynchronously =
+                            currentSynchronousRequestThread != null
+                            && currentSynchronousRequestThread == Thread.CurrentThread;
+                        observedAntecedentTaskStatus = antecedent.Status;
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
             // Excellent, the async continuation is scheduled. Let's complete the underlying computation.
             if (expectedTaskStatus == TaskStatus.Canceled)
@@ -120,19 +138,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // And wait for our continuation to run
             asyncContinuation.Wait();
 
-            Assert.False(asyncContinuationRanSynchronously.Value, "The continuation did not run asynchronously.");
+            Assert.False(
+                asyncContinuationRanSynchronously.Value,
+                "The continuation did not run asynchronously."
+            );
             Assert.Equal(expectedTaskStatus, observedAntecedentTaskStatus.Value);
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-        public void GetValueThrowsCorrectExceptionDuringCancellation()
-            => GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation((lazy, ct) => lazy.GetValue(ct), includeSynchronousComputation: false);
+        public void GetValueThrowsCorrectExceptionDuringCancellation() =>
+            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
+                (lazy, ct) => lazy.GetValue(ct),
+                includeSynchronousComputation: false
+            );
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
-        public void GetValueThrowsCorrectExceptionDuringCancellationWithSynchronousComputation()
-            => GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation((lazy, ct) => lazy.GetValue(ct), includeSynchronousComputation: true);
+        public void GetValueThrowsCorrectExceptionDuringCancellationWithSynchronousComputation() =>
+            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
+                (lazy, ct) => lazy.GetValue(ct),
+                includeSynchronousComputation: true
+            );
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.AsyncLazy)]
@@ -140,7 +167,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // NOTE: since GetValueAsync inlines the call to the async computation, the GetValueAsync call will throw
             // immediately instead of returning a task that transitions to the cancelled state
-            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation((lazy, ct) => lazy.GetValueAsync(ct), includeSynchronousComputation: false);
+            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
+                (lazy, ct) => lazy.GetValueAsync(ct),
+                includeSynchronousComputation: false
+            );
         }
 
         [Fact]
@@ -148,10 +178,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void GetValueAsyncThrowsCorrectExceptionDuringCancellationWithSynchronousComputation()
         {
             // In theory the synchronous computation isn't used during GetValueAsync, but just in case...
-            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation((lazy, ct) => lazy.GetValueAsync(ct), includeSynchronousComputation: true);
+            GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
+                (lazy, ct) => lazy.GetValueAsync(ct),
+                includeSynchronousComputation: true
+            );
         }
 
-        private static void GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(Action<AsyncLazy<object>, CancellationToken> doGetValue, bool includeSynchronousComputation)
+        private static void GetValueOrGetValueAsyncThrowsCorrectExceptionDuringCancellation(
+            Action<AsyncLazy<object>, CancellationToken> doGetValue,
+            bool includeSynchronousComputation
+        )
         {
             // A call to GetValue/GetValueAsync with a token that is cancelled should throw an OperationCancelledException, but it's
             // important to make sure the correct token is cancelled. It should be cancelled with the token passed
@@ -174,23 +210,29 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 };
             }
 
-            lazy = new AsyncLazy<object>(c =>
-            {
-                computeFunctionRunning.Set();
-                while (true)
+            lazy = new AsyncLazy<object>(
+                c =>
                 {
-                    c.ThrowIfCancellationRequested();
-                }
-            }, synchronousComputeFunction: synchronousComputation, cacheResult: false);
+                    computeFunctionRunning.Set();
+                    while (true)
+                    {
+                        c.ThrowIfCancellationRequested();
+                    }
+                },
+                synchronousComputeFunction: synchronousComputation,
+                cacheResult: false
+            );
 
             var cancellationTokenSource = new CancellationTokenSource();
 
             // Create a task that will cancel the request once it's started
-            Task.Run(() =>
-            {
-                computeFunctionRunning.WaitOne();
-                cancellationTokenSource.Cancel();
-            });
+            Task.Run(
+                () =>
+                {
+                    computeFunctionRunning.WaitOne();
+                    cancellationTokenSource.Cancel();
+                }
+            );
 
             try
             {
@@ -209,14 +251,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var cancellationTokenSource = new CancellationTokenSource();
 
-            var lazy = new AsyncLazy<object>(c => Task.Run((Func<object>)(() =>
-            {
-                cancellationTokenSource.Cancel();
-                while (true)
-                {
-                    c.ThrowIfCancellationRequested();
-                }
-            }), c), cacheResult: true);
+            var lazy = new AsyncLazy<object>(
+                c =>
+                    Task.Run(
+                        (Func<object>)(
+                            () =>
+                            {
+                                cancellationTokenSource.Cancel();
+                                while (true)
+                                {
+                                    c.ThrowIfCancellationRequested();
+                                }
+                            }
+                        ),
+                        c
+                    ),
+                cacheResult: true
+            );
 
             var task = lazy.GetValueAsync(cancellationTokenSource.Token);
 
@@ -224,12 +275,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             try
             {
                 task.Wait();
-                AssertEx.Fail(nameof(AsyncLazy<object>.GetValueAsync) + " did not throw an exception.");
+                AssertEx.Fail(
+                    nameof(AsyncLazy<object>.GetValueAsync) + " did not throw an exception."
+                );
             }
             catch (AggregateException ex)
             {
-                var operationCancelledException = (OperationCanceledException)ex.Flatten().InnerException;
-                Assert.Equal(cancellationTokenSource.Token, operationCancelledException.CancellationToken);
+                var operationCancelledException = (OperationCanceledException)
+                    ex.Flatten().InnerException;
+                Assert.Equal(
+                    cancellationTokenSource.Token,
+                    operationCancelledException.CancellationToken
+                );
             }
         }
     }

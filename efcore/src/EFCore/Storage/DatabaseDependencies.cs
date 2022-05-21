@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [EntityFrameworkInternal]
         public DatabaseDependencies(
             IQueryCompilationContextFactory queryCompilationContextFactory,
-            IUpdateAdapterFactory updateAdapterFactory)
+            IUpdateAdapterFactory updateAdapterFactory
+        )
         {
             QueryCompilationContextFactory = queryCompilationContextFactory;
             UpdateAdapterFactory = updateAdapterFactory;

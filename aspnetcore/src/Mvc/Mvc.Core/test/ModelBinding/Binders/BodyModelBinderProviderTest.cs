@@ -17,11 +17,11 @@ public class BodyModelBinderProviderTest
         get
         {
             return new TheoryData<BindingSource>()
-                {
-                    BindingSource.Header,
-                    BindingSource.Form,
-                    null,
-                };
+            {
+                BindingSource.Header,
+                BindingSource.Form,
+                null,
+            };
         }
     }
 
@@ -46,8 +46,9 @@ public class BodyModelBinderProviderTest
     public void GetBinder_WhenNoInputFormatters_Throws()
     {
         // Arrange
-        var expected = $"'{typeof(MvcOptions).FullName}.{nameof(MvcOptions.InputFormatters)}' must not be empty. " +
-            $"At least one '{typeof(IInputFormatter).FullName}' is required to bind from the body.";
+        var expected =
+            $"'{typeof(MvcOptions).FullName}.{nameof(MvcOptions.InputFormatters)}' must not be empty. "
+            + $"At least one '{typeof(IInputFormatter).FullName}' is required to bind from the body.";
         var provider = CreateProvider();
         var context = new TestModelBinderProviderContext(typeof(Person));
         context.BindingInfo.BindingSource = BindingSource.Body;
@@ -80,7 +81,10 @@ public class BodyModelBinderProviderTest
         context.BindingInfo.BindingSource = BindingSource.Body;
         var formatter = new TestInputFormatter();
         var formatterList = new List<IInputFormatter> { formatter };
-        var provider = new BodyModelBinderProvider(formatterList, new TestHttpRequestStreamReaderFactory());
+        var provider = new BodyModelBinderProvider(
+            formatterList,
+            new TestHttpRequestStreamReaderFactory()
+        );
 
         // Act & Assert (does not throw)
         provider.GetBinder(context);
@@ -93,7 +97,10 @@ public class BodyModelBinderProviderTest
         var options = new MvcOptions { AllowEmptyInputInBodyModelBinding = true };
 
         // Act
-        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(EmptyBodyBehavior.Default, options);
+        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(
+            EmptyBodyBehavior.Default,
+            options
+        );
 
         // Assert
         Assert.True(allowEmpty);
@@ -103,7 +110,10 @@ public class BodyModelBinderProviderTest
     public void CalculateAllowEmptyBody_EmptyBodyBehaviorIsDefaultValue_DefaultsToFalseWhenOptionsIsUnavailable()
     {
         // Act
-        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(EmptyBodyBehavior.Default, options: null);
+        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(
+            EmptyBodyBehavior.Default,
+            options: null
+        );
 
         // Assert
         Assert.False(allowEmpty);
@@ -113,7 +123,10 @@ public class BodyModelBinderProviderTest
     public void CalculateAllowEmptyBody_EmptyBodyBehaviorIsAllow()
     {
         // Act
-        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(EmptyBodyBehavior.Allow, options: new MvcOptions());
+        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(
+            EmptyBodyBehavior.Allow,
+            options: new MvcOptions()
+        );
 
         // Assert
         Assert.True(allowEmpty);
@@ -127,7 +140,10 @@ public class BodyModelBinderProviderTest
         var options = new MvcOptions { AllowEmptyInputInBodyModelBinding = true };
 
         // Act
-        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(EmptyBodyBehavior.Disallow, options);
+        var allowEmpty = BodyModelBinderProvider.CalculateAllowEmptyBody(
+            EmptyBodyBehavior.Disallow,
+            options
+        );
 
         // Assert
         Assert.False(allowEmpty);
@@ -140,7 +156,8 @@ public class BodyModelBinderProviderTest
         return new BodyModelBinderProvider(
             new List<IInputFormatter>(formatters),
             new TestHttpRequestStreamReaderFactory(),
-            loggerFactory);
+            loggerFactory
+        );
     }
 
     private class Person

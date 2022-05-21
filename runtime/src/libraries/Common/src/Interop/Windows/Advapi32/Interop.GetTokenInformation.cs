@@ -15,7 +15,8 @@ internal static partial class Interop
             uint TokenInformationClass,
             SafeLocalAllocHandle TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
 
         [GeneratedDllImport(Interop.Libraries.Advapi32, SetLastError = true)]
         internal static partial bool GetTokenInformation(
@@ -23,7 +24,8 @@ internal static partial class Interop
             uint TokenInformationClass,
             SafeLocalAllocHandle TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
 
         [GeneratedDllImport(Interop.Libraries.Advapi32, SetLastError = true)]
         internal static partial bool GetTokenInformation(
@@ -31,6 +33,7 @@ internal static partial class Interop
             uint TokenInformationClass,
             IntPtr TokenInformation,
             uint TokenInformationLength,
-            out uint ReturnLength);
+            out uint ReturnLength
+        );
     }
 }

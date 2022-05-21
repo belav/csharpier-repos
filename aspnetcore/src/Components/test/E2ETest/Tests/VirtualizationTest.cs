@@ -22,10 +22,8 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public VirtualizationTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -46,14 +44,18 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Equal(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
 
         // Scroll halfway.
-        Browser.ExecuteJavaScript("const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight * 0.5;");
+        Browser.ExecuteJavaScript(
+            "const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight * 0.5;"
+        );
 
         // Validate that we get the same item count after scrolling halfway.
         Browser.Equal(initialItemCount, GetItemCount);
         Browser.NotEqual(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
 
         // Scroll to the bottom.
-        Browser.ExecuteJavaScript("const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight;");
+        Browser.ExecuteJavaScript(
+            "const container = document.getElementById('sync-container');container.scrollTop = container.scrollHeight;"
+        );
 
         // Validate that we get the same item count after scrolling to the bottom.
         Browser.Equal(initialItemCount, GetItemCount);
@@ -83,7 +85,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Equal(0, GetPlaceholderCount);
 
         // Scroll halfway.
-        Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight * 0.5;");
+        Browser.ExecuteJavaScript(
+            "const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight * 0.5;"
+        );
 
         // Validate that items are replaced by the same number of placeholders.
         Browser.Equal(0, GetItemCount);
@@ -97,7 +101,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Equal(0, GetPlaceholderCount);
 
         // Scroll to the bottom.
-        Browser.ExecuteJavaScript("const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight;");
+        Browser.ExecuteJavaScript(
+            "const container = document.getElementById('async-container');container.scrollTop = container.scrollHeight;"
+        );
 
         // Validate that items are replaced by the same number of placeholders.
         Browser.Equal(0, GetItemCount);
@@ -186,8 +192,17 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // Validate that scrolling causes cancellations
         for (var y = 1000; y <= 5000; y += 1000)
         {
-            js.ExecuteScript($"document.getElementById('async-container').scrollTo({{ top: {y} }})");
-            Browser.Equal(y, () => (long)js.ExecuteScript("return document.getElementById('async-container').scrollTop"));
+            js.ExecuteScript(
+                $"document.getElementById('async-container').scrollTo({{ top: {y} }})"
+            );
+            Browser.Equal(
+                y,
+                () =>
+                    (long)
+                        js.ExecuteScript(
+                            "return document.getElementById('async-container').scrollTop"
+                        )
+            );
         }
 
         Browser.True(() => int.Parse(cancellationCount.Text, CultureInfo.InvariantCulture) > 0);
@@ -200,7 +215,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         var expectedInitialSpacerStyle = "height: 0px;";
         var topSpacer = Browser.Exists(By.Id("viewport-as-root")).FindElement(By.TagName("div"));
 
-        Browser.ExecuteJavaScript("const element = document.getElementById('viewport-as-root'); element.scrollIntoView();");
+        Browser.ExecuteJavaScript(
+            "const element = document.getElementById('viewport-as-root'); element.scrollIntoView();"
+        );
 
         // Validate that the top spacer has a height of zero.
         Browser.Equal(expectedInitialSpacerStyle, () => topSpacer.GetAttribute("style"));
@@ -219,7 +236,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public async Task ToleratesIncorrectItemSize()
     {
         Browser.MountTestComponent<VirtualizationComponent>();
-        var topSpacer = Browser.Exists(By.Id("incorrect-size-container")).FindElement(By.TagName("div"));
+        var topSpacer = Browser
+            .Exists(By.Id("incorrect-size-container"))
+            .FindElement(By.TagName("div"));
         var expectedInitialSpacerStyle = "height: 0px;";
 
         // Wait until items have been rendered.
@@ -232,7 +251,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // we're already showing all the items we need to show.
         for (var pos = 0; pos < 1000; pos += 50)
         {
-            Browser.ExecuteJavaScript($"document.getElementById('incorrect-size-container').scrollTop = {pos};");
+            Browser.ExecuteJavaScript(
+                $"document.getElementById('incorrect-size-container').scrollTop = {pos};"
+            );
             await Task.Delay(200);
         }
 
@@ -249,20 +270,24 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Initial data
         var container = Browser.Exists(By.Id("using-items"));
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Mutate one of them
         var itemToMutate = container.FindElements(By.ClassName("person"))[1];
         itemToMutate.FindElement(By.TagName("button")).Click();
 
         // See changes
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2 MUTATED", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
     }
 
     [Fact]
@@ -272,20 +297,24 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Initial data
         var container = Browser.Exists(By.Id("using-itemsprovider"));
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Mutate one of them
         var itemToMutate = container.FindElements(By.ClassName("person"))[1];
         itemToMutate.FindElement(By.TagName("button")).Click();
 
         // See changes
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2 MUTATED", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
     }
 
     [Fact]
@@ -295,20 +324,24 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Initial data
         var container = Browser.Exists(By.Id("using-items"));
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Add another item
         Browser.Exists(By.Id("add-person-to-fixed-list")).Click();
 
         // See changes
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
             name => Assert.Equal("Person 3", name),
-            name => Assert.Equal("Person 4", name));
+            name => Assert.Equal("Person 4", name)
+        );
     }
 
     [Fact]
@@ -318,29 +351,35 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Initial data
         var container = Browser.Exists(By.Id("using-itemsprovider"));
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Add another item
         Browser.Exists(By.Id("add-person-to-itemsprovider")).Click();
 
         // Initially this has no effect because we don't re-query the provider until told to do so
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Request refresh
         Browser.Exists(By.Id("refresh-itemsprovider")).Click();
 
         // See changes
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
             name => Assert.Equal("Person 3", name),
-            name => Assert.Equal("Person 4", name));
+            name => Assert.Equal("Person 4", name)
+        );
     }
 
     [Fact]
@@ -354,17 +393,21 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         itemToMutate.FindElement(By.TagName("button")).Click();
 
         // Verify the mutation was applied
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2 MUTATED", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
 
         // Refresh and verify the mutation was reverted
         Browser.Exists(By.Id("refresh-itemsprovider")).Click();
-        Browser.Collection(() => GetPeopleNames(container),
+        Browser.Collection(
+            () => GetPeopleNames(container),
             name => Assert.Equal("Person 1", name),
             name => Assert.Equal("Person 2", name),
-            name => Assert.Equal("Person 3", name));
+            name => Assert.Equal("Person 3", name)
+        );
     }
 
     [Theory]
@@ -378,26 +421,36 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void CanLoadNewDataWithHorizontalScrollToRight(string containerId)
     {
         Browser.MountTestComponent<VirtualizationDataChanges>();
-        var dataSetLengthSelector = new SelectElement(Browser.Exists(By.Id("large-dataset-length")));
-        var dataSetLengthLastRendered = () => int.Parse(Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text, CultureInfo.InvariantCulture);
+        var dataSetLengthSelector = new SelectElement(
+            Browser.Exists(By.Id("large-dataset-length"))
+        );
+        var dataSetLengthLastRendered = () =>
+            int.Parse(
+                Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text,
+                CultureInfo.InvariantCulture
+            );
         var container = Browser.Exists(By.Id(containerId));
 
         // Scroll to the end of a medium list
         dataSetLengthSelector.SelectByText("1000");
         Browser.Equal(1000, dataSetLengthLastRendered);
-        Browser.True(() =>
-        {
-            ScrollLeftToEnd(Browser, container);
-            ScrollTopToEnd(Browser, container);
-            return GetPeopleNames(container).Contains("Person 1000");
-        });
+        Browser.True(
+            () =>
+            {
+                ScrollLeftToEnd(Browser, container);
+                ScrollTopToEnd(Browser, container);
+                return GetPeopleNames(container).Contains("Person 1000");
+            }
+        );
 
-        Browser.True(() =>
-        {
-            ScrollLeftToEnd(Browser, container);
-            ScrollTopToBeginning(Browser, container);
-            return GetPeopleNames(container).Contains("Person 1");
-        });
+        Browser.True(
+            () =>
+            {
+                ScrollLeftToEnd(Browser, container);
+                ScrollTopToBeginning(Browser, container);
+                return GetPeopleNames(container).Contains("Person 1");
+            }
+        );
     }
 
     [Theory]
@@ -412,18 +465,26 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public void CanExpandDataSetAndRetainScrollPosition(string containerId)
     {
         Browser.MountTestComponent<VirtualizationDataChanges>();
-        var dataSetLengthSelector = new SelectElement(Browser.Exists(By.Id("large-dataset-length")));
-        var dataSetLengthLastRendered = () => int.Parse(Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text, CultureInfo.InvariantCulture);
+        var dataSetLengthSelector = new SelectElement(
+            Browser.Exists(By.Id("large-dataset-length"))
+        );
+        var dataSetLengthLastRendered = () =>
+            int.Parse(
+                Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text,
+                CultureInfo.InvariantCulture
+            );
         var container = Browser.Exists(By.Id(containerId));
 
         // Scroll to the end of a medium list
         dataSetLengthSelector.SelectByText("1000");
         Browser.Equal(1000, dataSetLengthLastRendered);
-        Browser.True(() =>
-        {
-            ScrollTopToEnd(Browser, container);
-            return GetPeopleNames(container).Contains("Person 1000");
-        });
+        Browser.True(
+            () =>
+            {
+                ScrollTopToEnd(Browser, container);
+                return GetPeopleNames(container).Contains("Person 1000");
+            }
+        );
 
         // Expand the data set
         dataSetLengthSelector.SelectByText("100000");
@@ -443,22 +504,32 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
     [InlineData("simple-display-table-scroll-horizontal")]
     [InlineData("complex-display-table-scroll-horizontal")]
     [InlineData("removing-many")]
-    public void CanHandleDataSetShrinkingWithExistingOffsetAlreadyBeyondNewListEnd(string containerId)
+    public void CanHandleDataSetShrinkingWithExistingOffsetAlreadyBeyondNewListEnd(
+        string containerId
+    )
     {
         // Represents https://github.com/dotnet/aspnetcore/issues/37245
         Browser.MountTestComponent<VirtualizationDataChanges>();
-        var dataSetLengthSelector = new SelectElement(Browser.Exists(By.Id("large-dataset-length")));
-        var dataSetLengthLastRendered = () => int.Parse(Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text, CultureInfo.InvariantCulture);
+        var dataSetLengthSelector = new SelectElement(
+            Browser.Exists(By.Id("large-dataset-length"))
+        );
+        var dataSetLengthLastRendered = () =>
+            int.Parse(
+                Browser.FindElement(By.Id("large-dataset-length-lastrendered")).Text,
+                CultureInfo.InvariantCulture
+            );
         var container = Browser.Exists(By.Id(containerId));
 
         // Scroll to the end of a very long list
         dataSetLengthSelector.SelectByText("100000");
         Browser.Equal(100000, dataSetLengthLastRendered);
-        Browser.True(() =>
-        {
-            ScrollTopToEnd(Browser, container);
-            return GetPeopleNames(container).Contains("Person 100000");
-        });
+        Browser.True(
+            () =>
+            {
+                ScrollTopToEnd(Browser, container);
+                return GetPeopleNames(container).Contains("Person 100000");
+            }
+        );
 
         // Now make the dataset much shorter
         // We should automatically have the scroll position reduced to the new maximum

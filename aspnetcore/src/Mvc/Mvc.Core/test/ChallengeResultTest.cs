@@ -25,15 +25,18 @@ public class ChallengeResultTest
         var auth = new Mock<IAuthenticationService>();
 
         var httpContext = new Mock<HttpContext>();
-        httpContext.SetupGet(c => c.RequestServices)
+        httpContext
+            .SetupGet(c => c.RequestServices)
             .Returns(CreateServices().AddSingleton(auth.Object).BuildServiceProvider());
 
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        var actionContext = new ActionContext(httpContext.Object,
-                                              routeData,
-                                              new ActionDescriptor());
+        var actionContext = new ActionContext(
+            httpContext.Object,
+            routeData,
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -50,15 +53,18 @@ public class ChallengeResultTest
 
         var auth = new Mock<IAuthenticationService>();
         var httpContext = new Mock<HttpContext>();
-        httpContext.SetupGet(c => c.RequestServices)
+        httpContext
+            .SetupGet(c => c.RequestServices)
             .Returns(CreateServices().AddSingleton(auth.Object).BuildServiceProvider());
 
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        var actionContext = new ActionContext(httpContext.Object,
-                                              routeData,
-                                              new ActionDescriptor());
+        var actionContext = new ActionContext(
+            httpContext.Object,
+            routeData,
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);

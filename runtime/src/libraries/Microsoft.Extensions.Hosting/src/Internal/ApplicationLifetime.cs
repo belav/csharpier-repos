@@ -59,9 +59,11 @@ namespace Microsoft.Extensions.Hosting.Internal
                 }
                 catch (Exception ex)
                 {
-                    _logger.ApplicationError(LoggerEventIds.ApplicationStoppingException,
-                                             "An error occurred stopping the application",
-                                             ex);
+                    _logger.ApplicationError(
+                        LoggerEventIds.ApplicationStoppingException,
+                        "An error occurred stopping the application",
+                        ex
+                    );
                 }
             }
         }
@@ -77,9 +79,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStartupException,
-                                         "An error occurred starting the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStartupException,
+                    "An error occurred starting the application",
+                    ex
+                );
             }
         }
 
@@ -94,9 +98,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStoppedException,
-                                         "An error occurred stopping the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStoppedException,
+                    "An error occurred stopping the application",
+                    ex
+                );
             }
         }
 

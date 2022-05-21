@@ -15,22 +15,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(Methods.TextDocumentHoverName)]
-    internal class HoverHandler : AbstractStatelessRequestHandler<TextDocumentPositionParams, Hover?>
+    internal class HoverHandler
+        : AbstractStatelessRequestHandler<TextDocumentPositionParams, Hover?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public HoverHandler()
-        {
-        }
+        public HoverHandler() { }
 
         public override string Method => Methods.TextDocumentHoverName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(TextDocumentPositionParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public override async Task<Hover?> HandleRequestAsync(TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<Hover?> HandleRequestAsync(
+            TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -38,10 +43,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return null;
             }
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var quickInfoService = document.Project.LanguageServices.GetRequiredService<QuickInfoService>();
-            var info = await quickInfoService.GetQuickInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var quickInfoService =
+                document.Project.LanguageServices.GetRequiredService<QuickInfoService>();
+            var info = await quickInfoService
+                .GetQuickInfoAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (info == null)
             {
                 return null;
@@ -54,9 +67,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return new VSHover
             {
                 Range = ProtocolConversions.TextSpanToRange(info.Span, text),
-                Contents = new SumType<SumType<string, MarkedString>, SumType<string, MarkedString>[], MarkupContent>(string.Empty),
+                Contents = new SumType<
+                    SumType<string, MarkedString>,
+                    SumType<string, MarkedString>[],
+                    MarkupContent
+                >(string.Empty),
                 // Build the classified text without navigation actions - they are not serializable.
-                RawContent = await IntellisenseQuickInfoBuilder.BuildContentWithoutNavigationActionsAsync(info, document, cancellationToken).ConfigureAwait(false)
+                RawContent = await IntellisenseQuickInfoBuilder
+                    .BuildContentWithoutNavigationActionsAsync(info, document, cancellationToken)
+                    .ConfigureAwait(false)
             };
         }
     }

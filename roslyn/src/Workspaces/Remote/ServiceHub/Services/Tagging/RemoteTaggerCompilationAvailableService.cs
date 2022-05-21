@@ -10,31 +10,39 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteCompilationAvailableService : BrokeredServiceBase, IRemoteCompilationAvailableService
+    internal sealed class RemoteCompilationAvailableService
+        : BrokeredServiceBase,
+            IRemoteCompilationAvailableService
     {
         internal sealed class Factory : FactoryBase<IRemoteCompilationAvailableService>
         {
-            protected override IRemoteCompilationAvailableService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteCompilationAvailableService(arguments);
+            protected override IRemoteCompilationAvailableService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteCompilationAvailableService(arguments);
         }
 
         public RemoteCompilationAvailableService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         public ValueTask ComputeCompilationAsync(
             PinnedSolutionInfo solutionInfo,
             ProjectId projectId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var project = solution.GetRequiredProject(projectId);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var project = solution.GetRequiredProject(projectId);
 
-                await CompilationAvailableTaggerEventSource.ComputeCompilationInCurrentProcessAsync(project, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                    await CompilationAvailableTaggerEventSource
+                        .ComputeCompilationInCurrentProcessAsync(project, cancellationToken)
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

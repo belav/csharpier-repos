@@ -18,13 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
     {
         public static readonly IVirtualCharService Instance = new CSharpVirtualCharService();
 
-        protected CSharpVirtualCharService()
-        {
-        }
+        protected CSharpVirtualCharService() { }
 
-        protected override bool IsStringOrCharLiteralToken(SyntaxToken token)
-            => token.Kind() is SyntaxKind.StringLiteralToken or
-               SyntaxKind.CharacterLiteralToken;
+        protected override bool IsStringOrCharLiteralToken(SyntaxToken token) =>
+            token.Kind() is SyntaxKind.StringLiteralToken or SyntaxKind.CharacterLiteralToken;
 
         protected override VirtualCharSequence TryConvertToVirtualCharsWorker(SyntaxToken token)
         {
@@ -47,7 +44,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             if (token.Kind() == SyntaxKind.StringLiteralToken)
             {
                 return token.IsVerbatimStringLiteral()
-                    ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"", escapeBraces: false)
+                    ? TryConvertVerbatimStringToVirtualChars(
+                        token,
+                        "@\"",
+                        "\"",
+                        escapeBraces: false
+                    )
                     : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
             }
 
@@ -62,9 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
                 if (parent.Parent is InterpolatedStringExpressionSyntax interpolatedString)
                 {
-                    return interpolatedString.StringStartToken.Kind() == SyntaxKind.InterpolatedVerbatimStringStartToken
-                       ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
-                       : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
+                    return
+                        interpolatedString.StringStartToken.Kind()
+                        == SyntaxKind.InterpolatedVerbatimStringStartToken
+                        ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
+                        : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
                 }
             }
 
@@ -86,22 +90,34 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             return false;
         }
 
-        private static VirtualCharSequence TryConvertVerbatimStringToVirtualChars(SyntaxToken token, string startDelimiter, string endDelimiter, bool escapeBraces)
-            => TryConvertSimpleDoubleQuoteString(token, startDelimiter, endDelimiter, escapeBraces);
+        private static VirtualCharSequence TryConvertVerbatimStringToVirtualChars(
+            SyntaxToken token,
+            string startDelimiter,
+            string endDelimiter,
+            bool escapeBraces
+        ) => TryConvertSimpleDoubleQuoteString(token, startDelimiter, endDelimiter, escapeBraces);
 
         private static VirtualCharSequence TryConvertStringToVirtualChars(
-            SyntaxToken token, string startDelimiter, string endDelimiter, bool escapeBraces)
+            SyntaxToken token,
+            string startDelimiter,
+            string endDelimiter,
+            bool escapeBraces
+        )
         {
             var tokenText = token.Text;
             if (startDelimiter.Length > 0 && !tokenText.StartsWith(startDelimiter))
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return default;
             }
 
             if (endDelimiter.Length > 0 && !tokenText.EndsWith(endDelimiter))
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return default;
             }
 
@@ -116,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
             // First pass, just convert everything in the string (i.e. escapes) to plain 16-bit characters.
             var offset = token.SpanStart;
-            for (var index = startIndexInclusive; index < endIndexExclusive;)
+            for (var index = startIndexInclusive; index < endIndexExclusive; )
             {
                 var ch = tokenText[index];
                 if (ch == '\\')
@@ -144,7 +160,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             // Second pass.  Convert those characters to Runes.
             using var _2 = ArrayBuilder<VirtualChar>.GetInstance(out var runeResults);
 
-            for (var i = 0; i < charResults.Count;)
+            for (var i = 0; i < charResults.Count; )
             {
                 var (ch, span) = charResults[i];
 
@@ -162,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                     var (nextCh, nextSpan) = charResults[i + 1];
                     if (Rune.TryCreate(ch, nextCh, out rune))
                     {
-                        runeResults.Add(VirtualChar.Create(rune, TextSpan.FromBounds(span.Start, nextSpan.End)));
+                        runeResults.Add(
+                            VirtualChar.Create(rune, TextSpan.FromBounds(span.Start, nextSpan.End))
+                        );
                         i += 2;
                         continue;
                     }
@@ -175,17 +193,26 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             }
 
             return CreateVirtualCharSequence(
-                tokenText, offset, startIndexInclusive, endIndexExclusive, runeResults);
+                tokenText,
+                offset,
+                startIndexInclusive,
+                endIndexExclusive,
+                runeResults
+            );
         }
 
         private static bool TryAddEscape(
-            ArrayBuilder<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+            ArrayBuilder<(char ch, TextSpan span)> result,
+            string tokenText,
+            int offset,
+            int index
+        )
         {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
 
-            return TryAddSingleCharacterEscape(result, tokenText, offset, index) ||
-                   TryAddMultiCharacterEscape(result, tokenText, offset, index);
+            return TryAddSingleCharacterEscape(result, tokenText, offset, index)
+                || TryAddMultiCharacterEscape(result, tokenText, offset, index);
         }
 
         public override bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar)
@@ -198,19 +225,39 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
                 // case '\'':
 
-                // escaped characters that translate to themselves.  
-                case '"': escapedChar = '"'; return true;
-                case '\\': escapedChar = '\\'; return true;
+                // escaped characters that translate to themselves.
+                case '"':
+                    escapedChar = '"';
+                    return true;
+                case '\\':
+                    escapedChar = '\\';
+                    return true;
 
                 // translate escapes as per C# spec 2.4.4.4
-                case '\0': escapedChar = '0'; return true;
-                case '\a': escapedChar = 'a'; return true;
-                case '\b': escapedChar = 'b'; return true;
-                case '\f': escapedChar = 'f'; return true;
-                case '\n': escapedChar = 'n'; return true;
-                case '\r': escapedChar = 'r'; return true;
-                case '\t': escapedChar = 't'; return true;
-                case '\v': escapedChar = 'v'; return true;
+                case '\0':
+                    escapedChar = '0';
+                    return true;
+                case '\a':
+                    escapedChar = 'a';
+                    return true;
+                case '\b':
+                    escapedChar = 'b';
+                    return true;
+                case '\f':
+                    escapedChar = 'f';
+                    return true;
+                case '\n':
+                    escapedChar = 'n';
+                    return true;
+                case '\r':
+                    escapedChar = 'r';
+                    return true;
+                case '\t':
+                    escapedChar = 't';
+                    return true;
+                case '\v':
+                    escapedChar = 'v';
+                    return true;
             }
 
             escapedChar = default;
@@ -218,7 +265,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
         }
 
         private static bool TryAddSingleCharacterEscape(
-            ArrayBuilder<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+            ArrayBuilder<(char ch, TextSpan span)> result,
+            string tokenText,
+            int offset,
+            int index
+        )
         {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
@@ -234,14 +285,30 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 case '\\':
                     break;
                 // translate escapes as per C# spec 2.4.4.4
-                case '0': ch = '\0'; break;
-                case 'a': ch = '\a'; break;
-                case 'b': ch = '\b'; break;
-                case 'f': ch = '\f'; break;
-                case 'n': ch = '\n'; break;
-                case 'r': ch = '\r'; break;
-                case 't': ch = '\t'; break;
-                case 'v': ch = '\v'; break;
+                case '0':
+                    ch = '\0';
+                    break;
+                case 'a':
+                    ch = '\a';
+                    break;
+                case 'b':
+                    ch = '\b';
+                    break;
+                case 'f':
+                    ch = '\f';
+                    break;
+                case 'n':
+                    ch = '\n';
+                    break;
+                case 'r':
+                    ch = '\r';
+                    break;
+                case 't':
+                    ch = '\t';
+                    break;
+                case 'v':
+                    ch = '\v';
+                    break;
                 default:
                     return false;
             }
@@ -251,7 +318,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
         }
 
         private static bool TryAddMultiCharacterEscape(
-            ArrayBuilder<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+            ArrayBuilder<(char ch, TextSpan span)> result,
+            string tokenText,
+            int offset,
+            int index
+        )
         {
             // Copied from Lexer.ScanEscapeSequence.
             Debug.Assert(tokenText[index] == '\\');
@@ -264,13 +335,20 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 case 'U':
                     return TryAddMultiCharacterEscape(result, tokenText, offset, index, ch);
                 default:
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
             }
         }
 
         private static bool TryAddMultiCharacterEscape(
-            ArrayBuilder<(char ch, TextSpan span)> result, string tokenText, int offset, int index, char character)
+            ArrayBuilder<(char ch, TextSpan span)> result,
+            string tokenText,
+            int offset,
+            int index,
+            char character
+        )
         {
             var startIndex = index;
             Debug.Assert(tokenText[index] == '\\');
@@ -284,7 +362,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
                 if (!IsHexDigit(tokenText[index]))
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -293,7 +373,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                     character = tokenText[index + i];
                     if (!IsHexDigit(character))
                     {
-                        Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                        Debug.Fail(
+                            "This should not be reachable as long as the compiler added no diagnostics."
+                        );
                         return false;
                     }
 
@@ -304,7 +386,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
                 if (uintChar > 0x0010FFFF)
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -336,7 +420,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 var intChar = 0;
                 if (!IsHexDigit(tokenText[index]))
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -345,7 +431,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                     var ch2 = tokenText[index + i];
                     if (!IsHexDigit(ch2))
                     {
-                        Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                        Debug.Fail(
+                            "This should not be reachable as long as the compiler added no diagnostics."
+                        );
                         return false;
                     }
 
@@ -364,7 +452,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 var intChar = 0;
                 if (!IsHexDigit(tokenText[index]))
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -383,7 +473,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                 }
 
                 character = (char)intChar;
-                result.Add((character, TextSpan.FromBounds(startIndex + offset, endIndex + offset)));
+                result.Add(
+                    (character, TextSpan.FromBounds(startIndex + offset, endIndex + offset))
+                );
                 return true;
             }
         }
@@ -396,9 +488,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
         private static bool IsHexDigit(char c)
         {
-            return c is >= '0' and <= '9' or
-                   >= 'A' and <= 'F' or
-                   >= 'a' and <= 'f';
+            return c is >= '0' and <= '9' or >= 'A' and <= 'F' or >= 'a' and <= 'f';
         }
     }
 }

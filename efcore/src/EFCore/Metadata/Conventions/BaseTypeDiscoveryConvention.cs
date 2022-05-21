@@ -18,47 +18,49 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class BaseTypeDiscoveryConvention :
+    public class BaseTypeDiscoveryConvention
+        :
 #pragma warning disable CS0612 // Type or member is obsolete
         InheritanceDiscoveryConventionBase,
 #pragma warning restore CS0612 // Type or member is obsolete
-        IEntityTypeAddedConvention,
-        IForeignKeyRemovedConvention
+            IEntityTypeAddedConvention,
+            IForeignKeyRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="BaseTypeDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public BaseTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             var entityType = entityTypeBuilder.Metadata;
-            if (entityType.HasSharedClrType
-                || entityType.IsOwned())
+            if (entityType.HasSharedClrType || entityType.IsOwned())
             {
                 return;
             }
 
             Check.DebugAssert(
                 entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership) == null,
-                "Ownerships present on non-owned entity type");
+                "Ownerships present on non-owned entity type"
+            );
             ProcessEntityType(entityTypeBuilder, context);
         }
 
         private static void ProcessEntityType(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             var entityType = entityTypeBuilder.Metadata;
             var model = entityType.Model;
-            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)model[CoreAnnotationNames.DerivedTypes];
+            var derivedTypesMap = (Dictionary<Type, List<IConventionEntityType>>?)
+                model[CoreAnnotationNames.DerivedTypes];
             if (derivedTypesMap == null)
             {
                 derivedTypesMap = new Dictionary<Type, List<IConventionEntityType>>();
@@ -97,9 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             IConventionEntityType? baseEntityType = null;
-            while (baseEntityType == null
-                && baseType != typeof(object)
-                && baseType != null)
+            while (baseEntityType == null && baseType != typeof(object) && baseType != null)
             {
                 baseEntityType = model.FindEntityType(baseType);
                 if (baseEntityType == null)
@@ -115,8 +115,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            if (!baseEntityType.HasSharedClrType
-                && !baseEntityType.IsOwned())
+            if (!baseEntityType.HasSharedClrType && !baseEntityType.IsOwned())
             {
                 entityTypeBuilder.HasBaseType(baseEntityType);
             }
@@ -126,10 +125,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context)
+            IConventionContext<IConventionForeignKey> context
+        )
         {
-            if (foreignKey.IsOwnership
-                && !entityTypeBuilder.Metadata.IsOwned())
+            if (foreignKey.IsOwnership && !entityTypeBuilder.Metadata.IsOwned())
             {
                 ProcessEntityType(entityTypeBuilder, context);
             }

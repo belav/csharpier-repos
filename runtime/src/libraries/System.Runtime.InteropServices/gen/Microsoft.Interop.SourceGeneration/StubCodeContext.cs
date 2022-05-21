@@ -100,7 +100,10 @@ namespace Microsoft.Interop
         /// <returns>Managed and native identifiers</returns>
         public virtual (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {
-            return (info.InstanceIdentifier, $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}");
+            return (
+                info.InstanceIdentifier,
+                $"__{info.InstanceIdentifier.TrimStart('@')}{GeneratedNativeIdentifierSuffix}"
+            );
         }
 
         public virtual string GetAdditionalIdentifier(TypePositionInfo info, string name)

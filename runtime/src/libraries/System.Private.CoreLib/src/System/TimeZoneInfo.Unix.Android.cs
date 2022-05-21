@@ -75,7 +75,7 @@ namespace System
             int min = 0;
             for (; where < name.Length; where++)
             {
-                char c = name [where];
+                char c = name[where];
 
                 if (c >= '0' && c <= '9')
                 {
@@ -105,11 +105,27 @@ namespace System
         {
             if (name == "GMT" || name == "UTC")
             {
-                return new TimeZoneInfo(id, TimeSpan.FromSeconds(0), id, name, name, null, disableDaylightSavingTime:true);
+                return new TimeZoneInfo(
+                    id,
+                    TimeSpan.FromSeconds(0),
+                    id,
+                    name,
+                    name,
+                    null,
+                    disableDaylightSavingTime: true
+                );
             }
             if (name.StartsWith("GMT", StringComparison.Ordinal))
             {
-                return new TimeZoneInfo(id, TimeSpan.FromSeconds(ParseGMTNumericZone(name)), id, name, name, null, disableDaylightSavingTime:true);
+                return new TimeZoneInfo(
+                    id,
+                    TimeSpan.FromSeconds(ParseGMTNumericZone(name)),
+                    id,
+                    name,
+                    name,
+                    null,
+                    disableDaylightSavingTime: true
+                );
             }
 
             try
@@ -142,14 +158,23 @@ namespace System
             return Utc;
         }
 
-        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(string id, out TimeZoneInfo? value, out Exception? e)
+        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(
+            string id,
+            out TimeZoneInfo? value,
+            out Exception? e
+        )
         {
-
             value = id == LocalId ? GetLocalTimeZoneCore() : GetTimeZone(id, id);
 
             if (value == null)
             {
-                e = new InvalidTimeZoneException(SR.Format(SR.InvalidTimeZone_InvalidFileData, id, AndroidTzDataInstance.GetTimeZoneDirectory() + TimeZoneFileName));
+                e = new InvalidTimeZoneException(
+                    SR.Format(
+                        SR.InvalidTimeZone_InvalidFileData,
+                        id,
+                        AndroidTzDataInstance.GetTimeZoneDirectory() + TimeZoneFileName
+                    )
+                );
                 return TimeZoneInfoResult.TimeZoneNotFoundException;
             }
 
@@ -223,10 +248,13 @@ namespace System
                 // On Android, time zone data is found in tzdata
                 // Based on https://github.com/mono/mono/blob/main/mcs/class/corlib/System/TimeZoneInfo.Android.cs
                 // Also follows the locations found at the bottom of https://github.com/aosp-mirror/platform_bionic/blob/master/libc/tzcode/bionic.cpp
-                string[] tzFileDirList = new string[] {GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
-                                                       GetApexRuntimeRoot() + "/etc/tz/", // Android 10+, Fallback location if the above isn't found or corrupted
-                                                       Environment.GetEnvironmentVariable("ANDROID_DATA") + "/misc/zoneinfo/",
-                                                       Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory};
+                string[] tzFileDirList = new string[]
+                {
+                    GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
+                    GetApexRuntimeRoot() + "/etc/tz/", // Android 10+, Fallback location if the above isn't found or corrupted
+                    Environment.GetEnvironmentVariable("ANDROID_DATA") + "/misc/zoneinfo/",
+                    Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory
+                };
                 foreach (var tzFileDir in tzFileDirList)
                 {
                     string tzFilePath = Path.Combine(tzFileDir, TimeZoneFileName);
@@ -258,7 +286,7 @@ namespace System
                     }
                     return true;
                 }
-                catch {}
+                catch { }
 
                 return false;
             }
@@ -293,7 +321,9 @@ namespace System
                         b.Append(' ').Append(HexConverter.ToCharLower(buffer[i]));
                     }
 
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadTZHeader, TimeZoneFileName, b.ToString()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_BadTZHeader, TimeZoneFileName, b.ToString())
+                    );
                 }
 
                 indexOffset = TZif_ToInt32(buffer.Slice(12, 4));
@@ -315,7 +345,13 @@ namespace System
 
                 for (int i = 0; i < entryCount; ++i)
                 {
-                    LoadEntryAt(fs, indexOffset + (entrySize*i), out string id, out int byteOffset, out int length);
+                    LoadEntryAt(
+                        fs,
+                        indexOffset + (entrySize * i),
+                        out string id,
+                        out int byteOffset,
+                        out int length
+                    );
 
                     _byteOffsets[i] = byteOffset + dataOffset;
                     _ids[i] = id;
@@ -349,11 +385,26 @@ namespace System
 
                 if (bytesLeft != 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ReadTZError, _tzFilePath, position, buffer.Length, bytesRead, buffer.Length));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.InvalidOperation_ReadTZError,
+                            _tzFilePath,
+                            position,
+                            buffer.Length,
+                            bytesRead,
+                            buffer.Length
+                        )
+                    );
                 }
             }
 
-            private void LoadEntryAt(Stream fs, long position, out string id, out int byteOffset, out int length)
+            private void LoadEntryAt(
+                Stream fs,
+                long position,
+                out string id,
+                out int byteOffset,
+                out int length
+            )
             {
                 const int size = 52; // data entry size
                 Span<byte> entryBuffer = stackalloc byte[size];
@@ -385,7 +436,9 @@ namespace System
                 int i = Array.BinarySearch(_ids, id, StringComparer.Ordinal);
                 if (i < 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.TimeZoneNotFound_MissingData, id));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.TimeZoneNotFound_MissingData, id)
+                    );
                 }
 
                 int offset = _byteOffsets[i];

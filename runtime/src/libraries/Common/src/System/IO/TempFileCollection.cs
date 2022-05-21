@@ -25,13 +25,9 @@ namespace System.IO.Internal
         private readonly string _tempDir;
         private readonly Hashtable _files;
 
-        public TempFileCollection() : this(null, false)
-        {
-        }
+        public TempFileCollection() : this(null, false) { }
 
-        public TempFileCollection(string tempDir) : this(tempDir, false)
-        {
-        }
+        public TempFileCollection(string tempDir) : this(tempDir, false) { }
 
         public TempFileCollection(string tempDir, bool keepFiles)
         {
@@ -62,7 +58,10 @@ namespace System.IO.Internal
         {
             if (string.IsNullOrEmpty(fileExtension))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidNullEmptyArgument, nameof(fileExtension)), nameof(fileExtension));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidNullEmptyArgument, nameof(fileExtension)),
+                    nameof(fileExtension)
+                );
             }
 
             string fileName = BasePath + "." + fileExtension;
@@ -74,12 +73,18 @@ namespace System.IO.Internal
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidNullEmptyArgument, nameof(fileName)), nameof(fileName));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidNullEmptyArgument, nameof(fileName)),
+                    nameof(fileName)
+                );
             }
 
             if (_files[fileName] != null)
             {
-                throw new ArgumentException(SR.Format(SR.DuplicateFileName, fileName), nameof(fileName));
+                throw new ArgumentException(
+                    SR.Format(SR.DuplicateFileName, fileName),
+                    nameof(fileName)
+                );
             }
 
             _files.Add(fileName, keepFile);
@@ -123,12 +128,17 @@ namespace System.IO.Internal
                 {
                     _basePath = Path.Combine(
                         string.IsNullOrEmpty(TempDir) ? Path.GetTempPath() : TempDir,
-                        Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
+                        Path.GetFileNameWithoutExtension(Path.GetRandomFileName())
+                    );
                     tempFileName = _basePath + ".tmp";
 
                     try
                     {
-                        new FileStream(tempFileName, FileMode.CreateNew, FileAccess.Write).Dispose();
+                        new FileStream(
+                            tempFileName,
+                            FileMode.CreateNew,
+                            FileAccess.Write
+                        ).Dispose();
                         uniqueFile = true;
                     }
                     catch (IOException ex)

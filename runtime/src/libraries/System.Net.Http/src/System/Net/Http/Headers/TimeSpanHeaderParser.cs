@@ -10,10 +10,7 @@ namespace System.Net.Http.Headers
     {
         internal static readonly TimeSpanHeaderParser Parser = new TimeSpanHeaderParser();
 
-        private TimeSpanHeaderParser()
-            : base(false)
-        {
-        }
+        private TimeSpanHeaderParser() : base(false) { }
 
         public override string ToString(object value)
         {
@@ -22,8 +19,12 @@ namespace System.Net.Http.Headers
             return ((int)((TimeSpan)value).TotalSeconds).ToString(NumberFormatInfo.InvariantInfo);
         }
 
-        protected override int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue)
+        protected override int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        )
         {
             parsedValue = null;
 

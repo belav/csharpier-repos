@@ -17,7 +17,6 @@ public class ArrayClass
     }
 }
 
-
 public class intmm
 {
     public static int size;
@@ -29,7 +28,9 @@ public class intmm
 
     public static void Init2DMatrix(out ArrayClass m, out int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         //m = new int[size, size];
@@ -53,7 +54,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct2D(out int res, ref ArrayClass a2d, ref ArrayClass b, int row, int col)
+    public static void InnerProduct2D(
+        out int res,
+        ref ArrayClass a2d,
+        ref ArrayClass b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -65,7 +72,13 @@ public class intmm
         }
     }
 
-    public static void InnerProduct2DRef(out int res, ref int[][] a2d, ref int[][] b, int row, int col)
+    public static void InnerProduct2DRef(
+        out int res,
+        ref int[][] a2d,
+        ref int[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = 0;
@@ -79,7 +92,9 @@ public class intmm
 
     public static void Init3DMatrix(ArrayClass m, int[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         while (i < size)
@@ -126,7 +141,8 @@ public class intmm
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -136,7 +152,10 @@ public class intmm
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
         Console.WriteLine("Testing inner product of {0} by {0} matrices", size);
         Console.WriteLine("the matrices are members of class");
         Console.WriteLine("Matrix element stores random integer");
@@ -176,15 +195,26 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr.a2d[i, j] != refr2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr.a2d[i,j] {2}!=refr2d[i][j] {3}", i, j, imr.a2d[i, j], refr2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr.a2d[i,j] {2}!=refr2d[i][j] {3}",
+                        i,
+                        j,
+                        imr.a2d[i, j],
+                        refr2d[i][j]
+                    );
                     pass = false;
                 }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Testing inner product of one slice of two {0} by {0} by {0} matrices", size);
-        Console.WriteLine("the matrices are members of class and matrix element stores random integer");
+        Console.WriteLine(
+            "Testing inner product of one slice of two {0} by {0} by {0} matrices",
+            size
+        );
+        Console.WriteLine(
+            "the matrices are members of class and matrix element stores random integer"
+        );
 
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++)
@@ -224,7 +254,13 @@ public class intmm
             for (int j = 0; j < size; j++)
                 if (imr.a3d[i, j, 0] != refr3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr.a3d[i,j,0] {2}!=refr3d[i][j] {3}", i, j, imr.a3d[i, j, 0], refr3d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr.a3d[i,j,0] {2}!=refr3d[i][j] {3}",
+                        i,
+                        j,
+                        imr.a3d[i, j, 0],
+                        refr3d[i][j]
+                    );
                     pass = false;
                 }
         }

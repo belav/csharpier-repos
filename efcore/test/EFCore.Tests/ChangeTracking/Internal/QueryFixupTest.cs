@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.CategoryId);
                     Assert.Same(principal, dependent.Category);
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.CategoryId);
                     Assert.Same(principal, dependent.Category);
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -67,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.CategoryId);
                     Assert.Same(principal, dependent.Category);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -85,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.CategoryId);
                     Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -104,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentId);
                     Assert.Same(principal, dependent.Parent);
                     Assert.Same(dependent, principal.Child);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -123,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentId);
                     Assert.Same(principal, dependent.Parent);
                     Assert.Same(dependent, principal.Child);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -141,7 +147,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentId);
                     Assert.Same(principal, dependent.Parent);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -159,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentId);
                     Assert.Same(dependent, principal.Child);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -179,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Same(principal, dependent.ParentWidget);
                     Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -199,7 +208,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Same(principal, dependent.ParentWidget);
                     Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -219,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Same(principal, dependent.ParentWidget);
                     Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -238,7 +249,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -257,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Same(principal, dependent.ParentWidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -276,7 +289,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Same(principal, dependent.ParentWidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -295,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentWidgetId);
                     Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -315,7 +330,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(principal, dependent.ParentSmidget);
                     Assert.Same(dependent, principal.ChildSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -335,7 +351,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(principal, dependent.ParentSmidget);
                     Assert.Same(dependent, principal.ChildSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -355,7 +372,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(principal, dependent.ParentSmidget);
                     Assert.Same(dependent, principal.ChildSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -374,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(dependent, principal.ChildSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -393,7 +412,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(principal, dependent.ParentSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -412,7 +432,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(principal, dependent.ParentSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -431,7 +452,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     Assert.Equal(principal.Id, dependent.ParentSmidgetId);
                     Assert.Same(dependent, principal.ChildSmidget);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -453,7 +475,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(dependent.Id, principal.TopPostId);
                     Assert.Same(dependent, principal.TopPost);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -475,7 +498,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(dependent.Id, principal.TopPostId);
                     Assert.Same(dependent, principal.TopPost);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -504,7 +528,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.CategoryId);
                     Assert.Same(principal, newDependent.Category);
                     Assert.Contains(newDependent, principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -533,14 +558,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.CategoryId);
                     Assert.Same(principal, newDependent.Category);
                     Assert.Contains(newDependent, principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_dependent_include_principal_unidirectional_with_existing(EntityState existingState)
+        public void Query_dependent_include_principal_unidirectional_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -560,14 +588,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.CategoryId);
                     Assert.Same(principal, newDependent.Category);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_principal_include_dependent_unidirectional_with_existing(EntityState existingState)
+        public void Query_principal_include_dependent_unidirectional_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -587,7 +618,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.CategoryId);
                     Assert.Contains(newDependent, principal.Products);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -617,14 +649,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Same(principal, newDependent.ParentWidget);
                     Assert.Contains(newDependent, principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_dependent_include_principal_self_ref_with_existing(EntityState existingState)
+        public void Query_dependent_include_principal_self_ref_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -647,14 +682,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Same(principal, newDependent.ParentWidget);
                     Assert.Contains(newDependent, principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_principal_include_dependent_self_ref_with_existing(EntityState existingState)
+        public void Query_principal_include_dependent_self_ref_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -677,7 +715,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Same(principal, newDependent.ParentWidget);
                     Assert.Contains(newDependent, principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -705,7 +744,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Contains(newDependent, principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -733,14 +773,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Same(principal, newDependent.ParentWidget);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_dependent_include_principal_self_ref_unidirectional_with_existing(EntityState existingState)
+        public void Query_dependent_include_principal_self_ref_unidirectional_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -761,14 +804,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Same(principal, newDependent.ParentWidget);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(EntityState.Added)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Unchanged)]
-        public void Query_principal_include_dependent_self_ref_unidirectional_with_existing(EntityState existingState)
+        public void Query_principal_include_dependent_self_ref_unidirectional_with_existing(
+            EntityState existingState
+        )
         {
             Seed();
 
@@ -789,7 +835,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                     Assert.Equal(principal.Id, newDependent.ParentWidgetId);
                     Assert.Contains(newDependent, principal.ChildWidgets);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -798,8 +845,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Seed();
 
             using var context = new QueryFixupContext();
-            var principal = context.Set<Order>()
-                .Single();
+            var principal = context.Set<Order>().Single();
 
             AssertFixup(
                 context,
@@ -823,18 +869,46 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     var dependentEntry = principalEntry.Reference(p => p.OrderDetails).TargetEntry;
                     Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
                     Assert.Equal(EntityState.Unchanged, dependentEntry.State);
-                    Assert.Equal(nameof(OrderDetails), dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name);
+                    Assert.Equal(
+                        nameof(OrderDetails),
+                        dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
+                    );
 
-                    var subDependent1Entry = dependentEntry.Reference(p => p.BillingAddress).TargetEntry;
-                    Assert.Equal(principal.Id, subDependent1Entry.Property("OrderDetailsId").CurrentValue);
+                    var subDependent1Entry = dependentEntry
+                        .Reference(p => p.BillingAddress)
+                        .TargetEntry;
+                    Assert.Equal(
+                        principal.Id,
+                        subDependent1Entry.Property("OrderDetailsId").CurrentValue
+                    );
                     Assert.Equal(EntityState.Unchanged, subDependent1Entry.State);
-                    Assert.Equal(typeof(OrderDetails).DisplayName() + "." + nameof(OrderDetails.BillingAddress) + "#" + typeof(Address).ShortDisplayName(), subDependent1Entry.Metadata.Name);
+                    Assert.Equal(
+                        typeof(OrderDetails).DisplayName()
+                            + "."
+                            + nameof(OrderDetails.BillingAddress)
+                            + "#"
+                            + typeof(Address).ShortDisplayName(),
+                        subDependent1Entry.Metadata.Name
+                    );
 
-                    var subDependent2Entry = dependentEntry.Reference(p => p.ShippingAddress).TargetEntry;
-                    Assert.Equal(principal.Id, subDependent2Entry.Property("OrderDetailsId").CurrentValue);
+                    var subDependent2Entry = dependentEntry
+                        .Reference(p => p.ShippingAddress)
+                        .TargetEntry;
+                    Assert.Equal(
+                        principal.Id,
+                        subDependent2Entry.Property("OrderDetailsId").CurrentValue
+                    );
                     Assert.Equal(EntityState.Unchanged, subDependent2Entry.State);
-                    Assert.Equal(typeof(OrderDetails).DisplayName() + "." + nameof(OrderDetails.ShippingAddress) + "#" + typeof(Address).ShortDisplayName(), subDependent2Entry.Metadata.Name);
-                });
+                    Assert.Equal(
+                        typeof(OrderDetails).DisplayName()
+                            + "."
+                            + nameof(OrderDetails.ShippingAddress)
+                            + "#"
+                            + typeof(Address).ShortDisplayName(),
+                        subDependent2Entry.Metadata.Name
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -843,13 +917,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Seed();
 
             using var context = new QueryFixupContext();
-            var foreignKeyValue = context.Set<Order>()
-                .Select(o => EF.Property<int?>(o.OrderDetails, "OrderId")).Single();
+            var foreignKeyValue = context
+                .Set<Order>()
+                .Select(o => EF.Property<int?>(o.OrderDetails, "OrderId"))
+                .Single();
             var principal = context.Set<Order>().AsNoTracking().Single();
 
-            AssertFixup(
-                context,
-                () => Assert.Equal(principal.Id, foreignKeyValue));
+            AssertFixup(context, () => Assert.Equal(principal.Id, foreignKeyValue));
         }
 
         [ConditionalFact]
@@ -858,13 +932,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Seed();
 
             using var context = new QueryFixupContext();
-            var foreignKeyValue = context.Set<Order>()
-                .Select(o => EF.Property<int?>(o.OrderDetails.BillingAddress, "OrderDetailsId")).Single();
+            var foreignKeyValue = context
+                .Set<Order>()
+                .Select(o => EF.Property<int?>(o.OrderDetails.BillingAddress, "OrderDetailsId"))
+                .Single();
             var principal = context.Set<Order>().AsNoTracking().Single();
 
-            AssertFixup(
-                context,
-                () => Assert.Equal(principal.Id, foreignKeyValue));
+            AssertFixup(context, () => Assert.Equal(principal.Id, foreignKeyValue));
         }
 
         [ConditionalFact]
@@ -882,8 +956,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     var dependentEntry = context.Entry(owned);
                     Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
-                    Assert.Equal(nameof(Order.OrderDetails), dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name);
-                });
+                    Assert.Equal(
+                        nameof(Order.OrderDetails),
+                        dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -896,14 +974,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             // Owned entity without owner. Issue #24807.
             Assert.Equal(
                 CoreStrings.OwnedEntitiesCannotBeTrackedWithoutTheirOwner,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var subDependent1 = context.Set<Order>()
-                            .Include(a => a.OrderDetails.BillingAddress.OrderDetails.Order)
-                            .Select(o => o.OrderDetails.BillingAddress)
-                            .Single();
-                    }).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                        {
+                            var subDependent1 = context
+                                .Set<Order>()
+                                .Include(a => a.OrderDetails.BillingAddress.OrderDetails.Order)
+                                .Select(o => o.OrderDetails.BillingAddress)
+                                .Single();
+                        }
+                    )
+                    .Message
+            );
 
             // var subDependent2 = context.Set<Order>()
             //     .Include(a => a.OrderDetails.ShippingAddress.OrderDetails.Order)
@@ -970,9 +1053,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Id = 77,
                     OrderDetails = new OrderDetails
                     {
-                        BillingAddress = new Address { Street = "BillMe" }, ShippingAddress = new Address { Street = "ShipMe" }
+                        BillingAddress = new Address { Street = "BillMe" },
+                        ShippingAddress = new Address { Street = "ShipMe" }
                     }
-                });
+                }
+            );
 
             context.SaveChanges();
         }
@@ -1159,71 +1244,82 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Widget>()
+                modelBuilder
+                    .Entity<Widget>()
                     .HasMany(e => e.ChildWidgets)
                     .WithOne(e => e.ParentWidget)
                     .HasForeignKey(e => e.ParentWidgetId);
 
-                modelBuilder.Entity<WidgetPN>()
+                modelBuilder
+                    .Entity<WidgetPN>()
                     .HasMany(e => e.ChildWidgets)
                     .WithOne()
                     .HasForeignKey(e => e.ParentWidgetId);
 
-                modelBuilder.Entity<WidgetDN>()
+                modelBuilder
+                    .Entity<WidgetDN>()
                     .HasOne(e => e.ParentWidget)
                     .WithMany()
                     .HasForeignKey(e => e.ParentWidgetId);
 
-                modelBuilder.Entity<Smidget>()
+                modelBuilder
+                    .Entity<Smidget>()
                     .HasOne(e => e.ParentSmidget)
                     .WithOne(e => e.ChildSmidget)
                     .HasForeignKey<Smidget>(e => e.ParentSmidgetId);
 
-                modelBuilder.Entity<SmidgetPN>()
+                modelBuilder
+                    .Entity<SmidgetPN>()
                     .HasOne<SmidgetPN>()
                     .WithOne(e => e.ChildSmidget)
                     .HasForeignKey<SmidgetPN>(e => e.ParentSmidgetId);
 
-                modelBuilder.Entity<SmidgetDN>()
+                modelBuilder
+                    .Entity<SmidgetDN>()
                     .HasOne(e => e.ParentSmidget)
                     .WithOne()
                     .HasForeignKey<SmidgetDN>(e => e.ParentSmidgetId);
 
-                modelBuilder.Entity<Category>()
-                    .HasMany(e => e.Products)
-                    .WithOne(e => e.Category);
+                modelBuilder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
-                modelBuilder.Entity<CategoryPN>()
+                modelBuilder
+                    .Entity<CategoryPN>()
                     .HasMany(e => e.Products)
                     .WithOne()
                     .HasForeignKey(e => e.CategoryId);
 
-                modelBuilder.Entity<ProductDN>()
+                modelBuilder
+                    .Entity<ProductDN>()
                     .HasOne(e => e.Category)
                     .WithMany()
                     .HasForeignKey(e => e.CategoryId);
 
-                modelBuilder.Entity<Parent>()
+                modelBuilder
+                    .Entity<Parent>()
                     .HasOne(e => e.Child)
                     .WithOne(e => e.Parent)
                     .HasForeignKey<Child>(e => e.ParentId);
 
-                modelBuilder.Entity<ParentPN>()
+                modelBuilder
+                    .Entity<ParentPN>()
                     .HasOne(e => e.Child)
                     .WithOne()
                     .HasForeignKey<ChildPN>(e => e.ParentId);
 
-                modelBuilder.Entity<ChildDN>()
+                modelBuilder
+                    .Entity<ChildDN>()
                     .HasOne(e => e.Parent)
                     .WithOne()
                     .HasForeignKey<ChildDN>(e => e.ParentId);
 
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId);
 
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .HasOne(e => e.TopPost)
                     .WithOne()
                     .HasForeignKey<Blog>(e => e.TopPostId);
@@ -1233,11 +1329,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     {
                         pb.Property(p => p.Id).ValueGeneratedNever();
                         pb.OwnsOne(
-                            p => p.OrderDetails, cb =>
+                            p => p.OrderDetails,
+                            cb =>
                             {
                                 cb.Property<int?>("OrderId");
-                                cb.WithOwner(c => c.Order)
-                                    .HasForeignKey("OrderId");
+                                cb.WithOwner(c => c.Order).HasForeignKey("OrderId");
 
                                 cb.OwnsOne(c => c.BillingAddress)
                                     .WithOwner(c => c.OrderDetails)
@@ -1246,12 +1342,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                 cb.OwnsOne(c => c.ShippingAddress)
                                     .WithOwner(c => c.OrderDetails)
                                     .HasForeignKey("OrderDetailsId");
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
             }
 
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(QueryFixupContext));
         }

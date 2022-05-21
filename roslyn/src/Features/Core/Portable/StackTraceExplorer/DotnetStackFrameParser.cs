@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// Tries to parse a StackFrame following convention from Environment.StackTrace
         /// https://docs.microsoft.com/en-us/dotnet/api/system.environment.stacktrace has
         /// details on output format and expected strings
-        /// 
+        ///
         /// Example:
         /// at ConsoleApp4.MyClass.M() in C:\repos\ConsoleApp4\ConsoleApp4\Program.cs:line 26
         /// </summary>
@@ -30,7 +30,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 return false;
             }
 
-            var success = StackFrameParserHelpers.TryParseMethodSignature(line.AsSpan(), out var classSpan, out var methodSpan, out var argsSpan);
+            var success = StackFrameParserHelpers.TryParseMethodSignature(
+                line.AsSpan(),
+                out var classSpan,
+                out var methodSpan,
+                out var argsSpan
+            );
             if (!success)
             {
                 return false;
@@ -42,9 +47,18 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             if (splitIndex > 0)
             {
                 var fileInformationStart = splitIndex + StackTraceSymbolAndFileSplit.Length;
-                var fileInformationSpan = new TextSpan(fileInformationStart, line.Length - fileInformationStart);
+                var fileInformationSpan = new TextSpan(
+                    fileInformationStart,
+                    line.Length - fileInformationStart
+                );
 
-                parsedFrame = new ParsedStackFrame(line, classSpan, methodSpan, argsSpan, fileInformationSpan);
+                parsedFrame = new ParsedStackFrame(
+                    line,
+                    classSpan,
+                    methodSpan,
+                    argsSpan,
+                    fileInformationSpan
+                );
                 return true;
             }
 

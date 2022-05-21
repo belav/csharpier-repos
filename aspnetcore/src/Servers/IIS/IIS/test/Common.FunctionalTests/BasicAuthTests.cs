@@ -17,25 +17,28 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 public class BasicAuthTests : IISFunctionalTestBase
 {
-    public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels();
@@ -58,7 +61,10 @@ public class BasicAuthTests : IISFunctionalTestBase
         var deploymentResult = await DeployAsync(deploymentParameters);
         var request = new HttpRequestMessage(HttpMethod.Get, "/Auth");
         var byteArray = new UTF8Encoding().GetBytes(username + ":" + password);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+        request.Headers.Authorization = new AuthenticationHeaderValue(
+            "Basic",
+            Convert.ToBase64String(byteArray)
+        );
 
         var response = await deploymentResult.HttpClient.SendAsync(request);
 

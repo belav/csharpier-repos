@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         INamespaceOrTypeSymbol IAliasSymbol.Target
         {
-            get
-            {
-                return _underlying.Target.GetPublicSymbol();
-            }
+            get { return _underlying.Target.GetPublicSymbol(); }
         }
 
         #region ISymbol Members

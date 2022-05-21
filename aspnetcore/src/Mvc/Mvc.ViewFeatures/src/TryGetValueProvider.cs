@@ -17,11 +17,13 @@ public static class TryGetValueProvider
 {
     private static readonly Dictionary<Type, TryGetValueDelegate> _tryGetValueDelegateCache =
         new Dictionary<Type, TryGetValueDelegate>();
-    private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock = new ReaderWriterLockSlim();
+    private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock =
+        new ReaderWriterLockSlim();
 
     // Information about private static method declared below.
-    private static readonly MethodInfo _strongTryGetValueImplInfo =
-        typeof(TryGetValueProvider).GetTypeInfo().GetDeclaredMethod(nameof(StrongTryGetValueImpl));
+    private static readonly MethodInfo _strongTryGetValueImplInfo = typeof(TryGetValueProvider)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(StrongTryGetValueImpl));
 
     /// <summary>
     /// Returns a <see cref="TryGetValueDelegate"/> for the specified <see cref="IDictionary{TKey, TValue}"/> type.
@@ -51,7 +53,10 @@ public static class TryGetValueProvider
             _tryGetValueDelegateCacheLock.ExitReadLock();
         }
 
-        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(targetType, typeof(IDictionary<,>));
+        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
+            targetType,
+            typeof(IDictionary<,>)
+        );
 
         // Just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be cast to
         // TKey.
@@ -63,8 +68,12 @@ public static class TryGetValueProvider
 
             if (keyType.IsAssignableFrom(typeof(string)))
             {
-                var implementationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
-                result = (TryGetValueDelegate)implementationMethod.CreateDelegate(typeof(TryGetValueDelegate));
+                var implementationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(
+                    keyType,
+                    returnType
+                );
+                result = (TryGetValueDelegate)
+                    implementationMethod.CreateDelegate(typeof(TryGetValueDelegate));
             }
         }
 
@@ -87,7 +96,11 @@ public static class TryGetValueProvider
         return result;
     }
 
-    private static bool StrongTryGetValueImpl<TKey, TValue>(object dictionary, string key, out object value)
+    private static bool StrongTryGetValueImpl<TKey, TValue>(
+        object dictionary,
+        string key,
+        out object value
+    )
     {
         var strongDict = (IDictionary<TKey, TValue>)dictionary;
 
@@ -97,7 +110,11 @@ public static class TryGetValueProvider
         return success;
     }
 
-    private static bool TryGetValueFromNonGenericDictionary(object dictionary, string key, out object value)
+    private static bool TryGetValueFromNonGenericDictionary(
+        object dictionary,
+        string key,
+        out object value
+    )
     {
         var weakDict = (IDictionary)dictionary;
 

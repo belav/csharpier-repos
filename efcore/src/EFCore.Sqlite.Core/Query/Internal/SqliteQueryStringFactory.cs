@@ -55,12 +55,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         value == null || value == DBNull.Value
                             ? "NULL"
                             : _typeMapper.FindMapping(value.GetType())?.GenerateSqlLiteral(value)
-                            ?? value.ToString());
+                                ?? value.ToString()
+                    );
             }
 
-            return builder
-                .AppendLine()
-                .Append(command.CommandText).ToString();
+            return builder.AppendLine().Append(command.CommandText).ToString();
         }
     }
 }

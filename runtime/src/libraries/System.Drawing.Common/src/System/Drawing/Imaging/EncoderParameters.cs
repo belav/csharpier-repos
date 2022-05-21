@@ -22,14 +22,8 @@ namespace System.Drawing.Imaging
 
         public EncoderParameter[] Param
         {
-            get
-            {
-                return _param;
-            }
-            set
-            {
-                _param = value;
-            }
+            get { return _param; }
+            set { _param = value; }
         }
 
         /// <summary>
@@ -89,9 +83,11 @@ namespace System.Drawing.Imaging
 
             for (int i = 0; i < count; i++)
             {
-                Guid guid = (Guid)Marshal.PtrToStructure((IntPtr)(i * size + arrayOffset), typeof(Guid))!;
+                Guid guid = (Guid)
+                    Marshal.PtrToStructure((IntPtr)(i * size + arrayOffset), typeof(Guid))!;
                 int numberOfValues = Marshal.ReadInt32((IntPtr)(i * size + arrayOffset + 16));
-                EncoderParameterValueType type = (EncoderParameterValueType)Marshal.ReadInt32((IntPtr)(i * size + arrayOffset + 20));
+                EncoderParameterValueType type = (EncoderParameterValueType)
+                    Marshal.ReadInt32((IntPtr)(i * size + arrayOffset + 20));
                 IntPtr value = Marshal.ReadIntPtr((IntPtr)(i * size + arrayOffset + 24));
 
                 p._param[i] = new EncoderParameter(new Encoder(guid), numberOfValues, type, value);

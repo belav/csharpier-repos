@@ -18,9 +18,7 @@ namespace System.Composition.UnitTests
 {
     public class ImportOrderingTests
     {
-        public interface IItem
-        {
-        }
+        public interface IItem { }
 
         [Shared, Export(typeof(IItem)), ExportMetadata("Order", 1)]
         public class Item1 : IItem { }
@@ -50,7 +48,13 @@ namespace System.Composition.UnitTests
         [Fact]
         public void CollectionsImportedWithAnOrderingAttributeComeInOrder()
         {
-            var container = CreateExtendedContainer(typeof(HasImportedItems), typeof(Item1), typeof(Item4), typeof(Item2), typeof(Item3));
+            var container = CreateExtendedContainer(
+                typeof(HasImportedItems),
+                typeof(Item1),
+                typeof(Item4),
+                typeof(Item2),
+                typeof(Item3)
+            );
 
             var hasImportedItems = container.GetExport<HasImportedItems>();
 
@@ -63,9 +67,18 @@ namespace System.Composition.UnitTests
         [Fact]
         public void IfAnItemIsMissingMetadataAnInformativeExceptionIsThrown()
         {
-            var container = CreateExtendedContainer(typeof(HasImportedItems), typeof(Item1), typeof(ItemWithoutOrder));
-            var x = Assert.Throws<CompositionFailedException>(() => container.GetExport<HasImportedItems>());
-            Assert.Equal("The metadata 'Order' cannot be used for ordering because it is missing from exports on part(s) 'ItemWithoutOrder'.", x.Message);
+            var container = CreateExtendedContainer(
+                typeof(HasImportedItems),
+                typeof(Item1),
+                typeof(ItemWithoutOrder)
+            );
+            var x = Assert.Throws<CompositionFailedException>(
+                () => container.GetExport<HasImportedItems>()
+            );
+            Assert.Equal(
+                "The metadata 'Order' cannot be used for ordering because it is missing from exports on part(s) 'ItemWithoutOrder'.",
+                x.Message
+            );
         }
 
         private CompositionContext CreateExtendedContainer(params Type[] partTypes)

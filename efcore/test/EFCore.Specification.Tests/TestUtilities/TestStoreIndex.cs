@@ -38,8 +38,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
         }
 
-        public virtual void RemoveShared(string name)
-            => _createdDatabases.Remove(name);
+        public virtual void RemoveShared(string name) => _createdDatabases.Remove(name);
 
         public virtual void CreateNonShared(string name, Action initializeDatabase)
         {
@@ -56,14 +55,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     Monitor.Exit(creationLock);
                     if (!_creationLocks.TryRemove(name, out _))
                     {
-                        throw new InvalidOperationException($"An attempt was made to initialize a non-shared store {name} from two different threads.");
+                        throw new InvalidOperationException(
+                            $"An attempt was made to initialize a non-shared store {name} from two different threads."
+                        );
                     }
                 }
             }
             else
             {
                 _creationLocks.TryRemove(name, out _);
-                throw new InvalidOperationException($"An attempt was made to initialize a non-shared store {name} from two different threads.");
+                throw new InvalidOperationException(
+                    $"An attempt was made to initialize a non-shared store {name} from two different threads."
+                );
             }
         }
     }

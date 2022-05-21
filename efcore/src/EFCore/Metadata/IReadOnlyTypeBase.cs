@@ -53,16 +53,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <returns><see langword="true" /> if the type is abstract, <see langword="false" /> otherwise.</returns>
         [DebuggerStepThrough]
-        bool IsAbstract()
-            => ClrType.IsAbstract;
+        bool IsAbstract() => ClrType.IsAbstract;
 
         /// <summary>
         ///     Gets the friendly display name for the given <see cref="IReadOnlyTypeBase" />.
         /// </summary>
         /// <returns>The display name.</returns>
         [DebuggerStepThrough]
-        string DisplayName()
-            => DisplayName(omitSharedType: false);
+        string DisplayName() => DisplayName(omitSharedType: false);
 
         /// <summary>
         ///     Gets the friendly display name for the given <see cref="IReadOnlyTypeBase" />.
@@ -94,10 +92,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             else
             {
                 var length = shortName.Length;
-                var dotIndex = shortName.LastIndexOf(".", hashIndex, hashIndex + 1, StringComparison.Ordinal);
+                var dotIndex = shortName.LastIndexOf(
+                    ".",
+                    hashIndex,
+                    hashIndex + 1,
+                    StringComparison.Ordinal
+                );
                 if (dotIndex != -1)
                 {
-                    dotIndex = shortName.LastIndexOf(".", dotIndex - 1, dotIndex, StringComparison.Ordinal);
+                    dotIndex = shortName.LastIndexOf(
+                        ".",
+                        dotIndex - 1,
+                        dotIndex,
+                        StringComparison.Ordinal
+                    );
                     if (dotIndex != -1)
                     {
                         shortName = shortName[(dotIndex + 1)..];
@@ -129,9 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 if (plusIndex == -1)
                 {
                     var dotIndex = Name.LastIndexOf(".", StringComparison.Ordinal);
-                    return dotIndex == -1
-                        ? Name
-                        : Name[(dotIndex + 1)..];
+                    return dotIndex == -1 ? Name : Name[(dotIndex + 1)..];
                 }
 
                 return Name[(plusIndex + 1)..];

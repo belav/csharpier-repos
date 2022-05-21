@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// Base class for tests that exercise basic identity functionality that all stores should support.
 /// </summary>
 /// <typeparam name="TUser">The type of the user.</typeparam>
-public abstract class UserManagerSpecificationTestBase<TUser> : UserManagerSpecificationTestBase<TUser, string> where TUser : class { }
+public abstract class UserManagerSpecificationTestBase<TUser>
+    : UserManagerSpecificationTestBase<TUser, string> where TUser : class { }
 
 /// <summary>
 /// Base class for tests that exercise basic identity functionality that all stores should support.
@@ -45,8 +46,8 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     /// </summary>
     /// <param name="services"></param>
     /// <param name="context"></param>
-    protected virtual void SetupIdentityServices(IServiceCollection services, object context)
-        => SetupBuilder(services, context);
+    protected virtual void SetupIdentityServices(IServiceCollection services, object context) =>
+        SetupBuilder(services, context);
 
     /// <summary>
     /// Configure the service collection used for tests.
@@ -58,14 +59,18 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         services.AddHttpContextAccessor();
         services.AddDataProtection();
         services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
-        var builder = services.AddIdentityCore<TUser>(options =>
-        {
-            options.Password.RequireDigit = false;
-            options.Password.RequireLowercase = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.User.AllowedUserNameCharacters = null;
-        }).AddDefaultTokenProviders();
+        var builder = services
+            .AddIdentityCore<TUser>(
+                options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.User.AllowedUserNameCharacters = null;
+                }
+            )
+            .AddDefaultTokenProviders();
         AddUserStore(services, context);
         services.AddLogging();
         services.AddSingleton<ILogger<UserManager<TUser>>>(new TestLogger<UserManager<TUser>>());
@@ -79,7 +84,11 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     /// <param name="services">The service collection to use, optional.</param>
     /// <param name="configureServices">Delegate used to configure the services, optional.</param>
     /// <returns>The user manager to use for tests.</returns>
-    protected virtual UserManager<TUser> CreateManager(object context = null, IServiceCollection services = null, Action<IServiceCollection> configureServices = null)
+    protected virtual UserManager<TUser> CreateManager(
+        object context = null,
+        IServiceCollection services = null,
+        Action<IServiceCollection> configureServices = null
+    )
     {
         if (services == null)
         {
@@ -124,8 +133,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     /// <param name="lockoutEnd">Optional lockout end.</param>
     /// <param name="useNamePrefixAsUserName">If true, the prefix should be used as the username without a random pad.</param>
     /// <returns>The new test user instance.</returns>
-    protected abstract TUser CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-        bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = null, bool useNamePrefixAsUserName = false);
+    protected abstract TUser CreateTestUser(
+        string namePrefix = "",
+        string email = "",
+        string phoneNumber = "",
+        bool lockoutEnabled = false,
+        DateTimeOffset? lockoutEnd = null,
+        bool useNamePrefixAsUserName = false
+    );
 
     /// <summary>
     /// Query used to do name equality checks.
@@ -141,12 +156,19 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     /// <returns>The query to use.</returns>
     protected abstract Expression<Func<TUser, bool>> UserNameStartsWithPredicate(string userName);
 
-    private class AlwaysBadValidator : IUserValidator<TUser>,
-        IPasswordValidator<TUser>
+    private class AlwaysBadValidator : IUserValidator<TUser>, IPasswordValidator<TUser>
     {
-        public static readonly IdentityError ErrorMessage = new IdentityError { Description = "I'm Bad.", Code = "BadValidator" };
+        public static readonly IdentityError ErrorMessage = new IdentityError
+        {
+            Description = "I'm Bad.",
+            Code = "BadValidator"
+        };
 
-        public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
+        public Task<IdentityResult> ValidateAsync(
+            UserManager<TUser> manager,
+            TUser user,
+            string password
+        )
         {
             return Task.FromResult(IdentityResult.Failed(ErrorMessage));
         }
@@ -157,10 +179,13 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         }
     }
 
-    private class EmptyBadValidator : IUserValidator<TUser>,
-        IPasswordValidator<TUser>
+    private class EmptyBadValidator : IUserValidator<TUser>, IPasswordValidator<TUser>
     {
-        public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
+        public Task<IdentityResult> ValidateAsync(
+            UserManager<TUser> manager,
+            TUser user,
+            string password
+        )
         {
             return Task.FromResult(IdentityResult.Failed());
         }
@@ -254,11 +279,17 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(newUser));
         var error = _errorDescriber.InvalidUserName("");
         IdentityResultAssert.IsFailure(await manager.SetUserNameAsync(newUser, ""), error);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User validation failed: {error.Code}.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User validation failed: {error.Code}."
+        );
 
         error = _errorDescriber.DuplicateUserName(newUsername);
         IdentityResultAssert.IsFailure(await manager.SetUserNameAsync(newUser, newUsername), error);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User validation failed: {error.Code}.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User validation failed: {error.Code}."
+        );
     }
 
     /// <summary>
@@ -313,8 +344,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
         var newUser = CreateTestUser(email: email);
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(newUser));
-        IdentityResultAssert.IsFailure(await manager.SetEmailAsync(newUser, newEmail), _errorDescriber.DuplicateEmail(newEmail));
-        IdentityResultAssert.IsFailure(await manager.SetEmailAsync(newUser, ""), _errorDescriber.InvalidEmail(""));
+        IdentityResultAssert.IsFailure(
+            await manager.SetEmailAsync(newUser, newEmail),
+            _errorDescriber.DuplicateEmail(newEmail)
+        );
+        IdentityResultAssert.IsFailure(
+            await manager.SetEmailAsync(newUser, ""),
+            _errorDescriber.InvalidEmail("")
+        );
     }
 
     /// <summary>
@@ -361,8 +398,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         manager.UserValidators.Clear();
         manager.UserValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user), AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
     }
 
     /// <summary>
@@ -377,8 +420,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         manager.UserValidators.Clear();
         manager.UserValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.UpdateAsync(user), AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.UpdateAsync(user),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
     }
 
     /// <summary>
@@ -395,7 +444,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         manager.UserValidators.Add(new AlwaysBadValidator());
         var result = await manager.CreateAsync(user);
         IdentityResultAssert.IsFailure(result, AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code};{AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User validation failed: {AlwaysBadValidator.ErrorMessage.Code};{AlwaysBadValidator.ErrorMessage.Code}."
+        );
         Assert.Equal(2, result.Errors.Count());
     }
 
@@ -411,7 +463,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var manager = CreateManager();
         var user = CreateTestUser();
         manager.Options.User.RequireUniqueEmail = true;
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user), _errorDescriber.InvalidEmail(email));
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user),
+            _errorDescriber.InvalidEmail(email)
+        );
     }
 
     /// <summary>
@@ -426,7 +481,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var manager = CreateManager();
         var user = CreateTestUser("UpdateBlocked", email);
         manager.Options.User.RequireUniqueEmail = true;
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user), _errorDescriber.InvalidEmail(email));
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user),
+            _errorDescriber.InvalidEmail(email)
+        );
     }
 
     /// <summary>
@@ -441,9 +499,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         manager.PasswordValidators.Clear();
         manager.PasswordValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.AddPasswordAsync(user, "password"),
-            AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.AddPasswordAsync(user, "password"),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
     }
 
     /// <summary>
@@ -529,9 +592,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user, "password"));
         manager.PasswordValidators.Clear();
         manager.PasswordValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.ChangePasswordAsync(user, "password", "new"),
-            AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.ChangePasswordAsync(user, "password", "new"),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
     }
 
     /// <summary>
@@ -545,8 +613,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         manager.PasswordValidators.Clear();
         manager.PasswordValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user, "password"), AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user, "password"),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
     }
 
     /// <summary>
@@ -558,7 +632,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     {
         var manager = CreateManager();
         var username = "CreateUserTest" + Guid.NewGuid();
-        IdentityResultAssert.IsSuccess(await manager.CreateAsync(CreateTestUser(username, useNamePrefixAsUserName: true)));
+        IdentityResultAssert.IsSuccess(
+            await manager.CreateAsync(CreateTestUser(username, useNamePrefixAsUserName: true))
+        );
         var user = await manager.FindByNameAsync(username);
         Assert.NotNull(user);
         Assert.False(await manager.HasPasswordAsync(user));
@@ -581,7 +657,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         var providerKey = await manager.GetUserIdAsync(user);
-        IdentityResultAssert.IsSuccess(await manager.AddLoginAsync(user, new UserLoginInfo(provider, providerKey, display)));
+        IdentityResultAssert.IsSuccess(
+            await manager.AddLoginAsync(user, new UserLoginInfo(provider, providerKey, display))
+        );
         var logins = await manager.GetLoginsAsync(user);
         Assert.NotNull(logins);
         Assert.Single(logins);
@@ -624,8 +702,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user, "Password"));
         Assert.True(await manager.HasPasswordAsync(user));
-        IdentityResultAssert.IsFailure(await manager.AddPasswordAsync(user, "password"),
-            "User already has a password set.");
+        IdentityResultAssert.IsFailure(
+            await manager.AddPasswordAsync(user, "password"),
+            "User already has a password set."
+        );
         IdentityResultAssert.VerifyLogMessage(manager.Logger, "User already has a password.");
     }
 
@@ -652,7 +732,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.Equal(login.ProviderKey, logins.Last().ProviderKey);
         Assert.Equal(login.ProviderDisplayName, logins.Last().ProviderDisplayName);
         var stamp = await manager.GetSecurityStampAsync(user);
-        IdentityResultAssert.IsSuccess(await manager.RemoveLoginAsync(user, login.LoginProvider, login.ProviderKey));
+        IdentityResultAssert.IsSuccess(
+            await manager.RemoveLoginAsync(user, login.LoginProvider, login.ProviderKey)
+        );
         Assert.Null(await manager.FindByLoginAsync(login.LoginProvider, login.ProviderKey));
         logins = await manager.GetLoginsAsync(user);
         Assert.NotNull(logins);
@@ -694,7 +776,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user, password));
         var stamp = await manager.GetSecurityStampAsync(user);
         Assert.NotNull(stamp);
-        IdentityResultAssert.IsSuccess(await manager.ChangePasswordAsync(user, password, newPassword));
+        IdentityResultAssert.IsSuccess(
+            await manager.ChangePasswordAsync(user, password, newPassword)
+        );
         Assert.False(await manager.CheckPasswordAsync(user, password));
         Assert.True(await manager.CheckPasswordAsync(user, newPassword));
         Assert.NotEqual(stamp, await manager.GetSecurityStampAsync(user));
@@ -845,7 +929,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser(username, useNamePrefixAsUserName: true);
         var user2 = CreateTestUser(username, useNamePrefixAsUserName: true);
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user2), _errorDescriber.DuplicateUserName(username));
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user2),
+            _errorDescriber.DuplicateUserName(username)
+        );
     }
 
     /// <summary>
@@ -860,7 +947,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user2 = CreateTestUser(email: "yup@yup.com");
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user2));
-        IdentityResultAssert.IsSuccess(await manager.SetEmailAsync(user2, await manager.GetEmailAsync(user)));
+        IdentityResultAssert.IsSuccess(
+            await manager.SetEmailAsync(user2, await manager.GetEmailAsync(user))
+        );
     }
 
     /// <summary>
@@ -875,7 +964,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser(email: "FooUser@yup.com");
         var user2 = CreateTestUser(email: "FooUser@yup.com");
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-        IdentityResultAssert.IsFailure(await manager.CreateAsync(user2), _errorDescriber.DuplicateEmail("FooUser@yup.com"));
+        IdentityResultAssert.IsFailure(
+            await manager.CreateAsync(user2),
+            _errorDescriber.DuplicateEmail("FooUser@yup.com")
+        );
     }
 
     /// <summary>
@@ -907,7 +999,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.AddLoginAsync(user, login));
         var result = await manager.AddLoginAsync(user, login);
         IdentityResultAssert.IsFailure(result, _errorDescriber.LoginAlreadyAssociated());
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, "AddLogin for user failed because it was already associated with another user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            "AddLogin for user failed because it was already associated with another user."
+        );
     }
 
     // Email tests
@@ -942,7 +1037,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
             {
                 IdentityResultAssert.IsSuccess(await mgr.CreateAsync(u));
             }
-            Assert.Equal(users.Count, mgr.Users.Count(UserNameStartsWithPredicate("CanFindUsersViaUserQuerable")));
+            Assert.Equal(
+                users.Count,
+                mgr.Users.Count(UserNameStartsWithPredicate("CanFindUsersViaUserQuerable"))
+            );
             Assert.Null(mgr.Users.FirstOrDefault(UserNameEqualsPredicate("bogus")));
         }
     }
@@ -962,12 +1060,21 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
     private class StaticTokenProvider : IUserTwoFactorTokenProvider<TUser>
     {
-        public async Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
+        public async Task<string> GenerateAsync(
+            string purpose,
+            UserManager<TUser> manager,
+            TUser user
+        )
         {
             return MakeToken(purpose, await manager.GetUserIdAsync(user));
         }
 
-        public async Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
+        public async Task<bool> ValidateAsync(
+            string purpose,
+            string token,
+            UserManager<TUser> manager,
+            TUser user
+        )
         {
             return token == MakeToken(purpose, await manager.GetUserIdAsync(user));
         }
@@ -1027,9 +1134,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var token = await manager.GeneratePasswordResetTokenAsync(user);
         Assert.NotNull(token);
         manager.PasswordValidators.Add(new AlwaysBadValidator());
-        IdentityResultAssert.IsFailure(await manager.ResetPasswordAsync(user, token, newPassword),
-            AlwaysBadValidator.ErrorMessage);
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+        IdentityResultAssert.IsFailure(
+            await manager.ResetPasswordAsync(user, token, newPassword),
+            AlwaysBadValidator.ErrorMessage
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"User password validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+        );
         Assert.True(await manager.CheckPasswordAsync(user, password));
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
     }
@@ -1050,8 +1162,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user, password));
         var stamp = await manager.GetSecurityStampAsync(user);
         Assert.NotNull(stamp);
-        IdentityResultAssert.IsFailure(await manager.ResetPasswordAsync(user, "bogus", newPassword), "Invalid token.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ResetPassword for user.");
+        IdentityResultAssert.IsFailure(
+            await manager.ResetPasswordAsync(user, "bogus", newPassword),
+            "Invalid token."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ResetPassword for user."
+        );
         Assert.True(await manager.CheckPasswordAsync(user, password));
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
     }
@@ -1075,13 +1193,22 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.True(await manager.VerifyUserTokenAsync(user, "Static", "test", token));
 
         Assert.False(await manager.VerifyUserTokenAsync(user, "Static", "test2", token));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: test2 for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: test2 for user."
+        );
 
         Assert.False(await manager.VerifyUserTokenAsync(user, "Static", "test", token + "a"));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: test for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: test for user."
+        );
 
         Assert.False(await manager.VerifyUserTokenAsync(user2, "Static", "test", token));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: test for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: test for user."
+        );
     }
 
     /// <summary>
@@ -1119,9 +1246,15 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         Assert.False(await manager.IsEmailConfirmedAsync(user));
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-        IdentityResultAssert.IsFailure(await manager.ConfirmEmailAsync(user, "bogus"), "Invalid token.");
+        IdentityResultAssert.IsFailure(
+            await manager.ConfirmEmailAsync(user, "bogus"),
+            "Invalid token."
+        );
         Assert.False(await manager.IsEmailConfirmedAsync(user));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: EmailConfirmation for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: EmailConfirmation for user."
+        );
     }
 
     /// <summary>
@@ -1137,9 +1270,17 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user, "password"));
         var token = await manager.GenerateEmailConfirmationTokenAsync(user);
         Assert.NotNull(token);
-        IdentityResultAssert.IsSuccess(await manager.ChangePasswordAsync(user, "password", "newpassword"));
-        IdentityResultAssert.IsFailure(await manager.ConfirmEmailAsync(user, token), "Invalid token.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: EmailConfirmation for user.");
+        IdentityResultAssert.IsSuccess(
+            await manager.ChangePasswordAsync(user, "password", "newpassword")
+        );
+        IdentityResultAssert.IsFailure(
+            await manager.ConfirmEmailAsync(user, token),
+            "Invalid token."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: EmailConfirmation for user."
+        );
         Assert.False(await manager.IsEmailConfirmedAsync(user));
     }
 
@@ -1259,7 +1400,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await mgr.CreateAsync(user));
         Assert.True(await mgr.GetLockoutEnabledAsync(user));
-        IdentityResultAssert.IsSuccess(await mgr.SetLockoutEndDateAsync(user, new DateTimeOffset()));
+        IdentityResultAssert.IsSuccess(
+            await mgr.SetLockoutEndDateAsync(user, new DateTimeOffset())
+        );
         Assert.False(await mgr.IsLockedOutAsync(user));
         Assert.Equal(new DateTimeOffset(), await mgr.GetLockoutEndDateAsync(user));
     }
@@ -1276,9 +1419,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await mgr.CreateAsync(user));
         Assert.False(await mgr.GetLockoutEnabledAsync(user));
-        IdentityResultAssert.IsFailure(await mgr.SetLockoutEndDateAsync(user, new DateTimeOffset()),
-            "Lockout is not enabled for this user.");
-        IdentityResultAssert.VerifyLogMessage(mgr.Logger, $"Lockout for user failed because lockout is not enabled for this user.");
+        IdentityResultAssert.IsFailure(
+            await mgr.SetLockoutEndDateAsync(user, new DateTimeOffset()),
+            "Lockout is not enabled for this user."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            mgr.Logger,
+            $"Lockout for user failed because lockout is not enabled for this user."
+        );
         Assert.False(await mgr.IsLockedOutAsync(user));
     }
 
@@ -1307,7 +1455,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await mgr.CreateAsync(user));
         Assert.True(await mgr.GetLockoutEnabledAsync(user));
-        IdentityResultAssert.IsSuccess(await mgr.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow.AddSeconds(-1)));
+        IdentityResultAssert.IsSuccess(
+            await mgr.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow.AddSeconds(-1))
+        );
         Assert.False(await mgr.IsLockedOutAsync(user));
     }
 
@@ -1374,7 +1524,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
         var token1 = await manager.GenerateChangePhoneNumberTokenAsync(user, "111-111-1111");
-        IdentityResultAssert.IsSuccess(await manager.ChangePhoneNumberAsync(user, "111-111-1111", token1));
+        IdentityResultAssert.IsSuccess(
+            await manager.ChangePhoneNumberAsync(user, "111-111-1111", token1)
+        );
         Assert.True(await manager.IsPhoneNumberConfirmedAsync(user));
         Assert.Equal("111-111-1111", await manager.GetPhoneNumberAsync(user));
         Assert.NotEqual(stamp, await manager.GetSecurityStampAsync(user));
@@ -1406,9 +1558,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
-        IdentityResultAssert.IsFailure(await manager.ChangePhoneNumberAsync(user, "111-111-1111", "bogus"),
-            "Invalid token.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:111-111-1111 for user.");
+        IdentityResultAssert.IsFailure(
+            await manager.ChangePhoneNumberAsync(user, "111-111-1111", "bogus"),
+            "Invalid token."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:111-111-1111 for user."
+        );
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         Assert.Equal("123-456-7890", await manager.GetPhoneNumberAsync(user));
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
@@ -1416,14 +1573,18 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
     private class YesPhoneNumberProvider : IUserTwoFactorTokenProvider<TUser>
     {
-        public Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user)
-            => Task.FromResult(true);
+        public Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user) =>
+            Task.FromResult(true);
 
-        public Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
-            => Task.FromResult(purpose);
+        public Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user) =>
+            Task.FromResult(purpose);
 
-        public Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
-            => Task.FromResult(true);
+        public Task<bool> ValidateAsync(
+            string purpose,
+            string token,
+            UserManager<TUser> manager,
+            TUser user
+        ) => Task.FromResult(true);
     }
 
     /// <summary>
@@ -1440,7 +1601,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
-        IdentityResultAssert.IsSuccess(await manager.ChangePhoneNumberAsync(user, "111-111-1111", "whatever"));
+        IdentityResultAssert.IsSuccess(
+            await manager.ChangePhoneNumberAsync(user, "111-111-1111", "whatever")
+        );
         Assert.True(await manager.IsPhoneNumberConfirmedAsync(user));
         Assert.Equal("111-111-1111", await manager.GetPhoneNumberAsync(user));
         Assert.NotEqual(stamp, await manager.GetSecurityStampAsync(user));
@@ -1459,8 +1622,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
         var token1 = await manager.GenerateChangePhoneNumberTokenAsync(user, "111-111-1111");
-        IdentityResultAssert.IsFailure(await manager.ChangePhoneNumberAsync(user, "bogus", token1),
-            "Invalid token.");
+        IdentityResultAssert.IsFailure(
+            await manager.ChangePhoneNumberAsync(user, "bogus", token1),
+            "Invalid token."
+        );
         Assert.False(await manager.IsPhoneNumberConfirmedAsync(user));
         Assert.Equal("123-456-7890", await manager.GetPhoneNumberAsync(user));
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
@@ -1487,8 +1652,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.True(await manager.VerifyChangePhoneNumberTokenAsync(user, token2, num2));
         Assert.False(await manager.VerifyChangePhoneNumberTokenAsync(user, "bogus", num1));
         Assert.False(await manager.VerifyChangePhoneNumberTokenAsync(user, "bogus", num2));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:{num1} for user.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:{num2} for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:{num1} for user."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ChangePhoneNumber:{num2} for user."
+        );
     }
 
     /// <summary>
@@ -1534,7 +1705,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.True(await manager.IsEmailConfirmedAsync(user));
         Assert.Equal(await manager.GetEmailAsync(user), newEmail);
         Assert.NotEqual(stamp, await manager.GetSecurityStampAsync(user));
-        IdentityResultAssert.IsFailure(await manager.ChangeEmailAsync(user, "should@fail.com", token2));
+        IdentityResultAssert.IsFailure(
+            await manager.ChangeEmailAsync(user, "should@fail.com", token2)
+        );
     }
 
     /// <summary>
@@ -1544,9 +1717,17 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     [Fact]
     public async Task CanChangeEmailWithDifferentTokenProvider()
     {
-        var manager = CreateManager(context: null, services: null,
-            configureServices: s => s.Configure<IdentityOptions>(
-                o => o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(typeof(EmailTokenProvider<TUser>))));
+        var manager = CreateManager(
+            context: null,
+            services: null,
+            configureServices: s =>
+                s.Configure<IdentityOptions>(
+                    o =>
+                        o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(
+                            typeof(EmailTokenProvider<TUser>)
+                        )
+                )
+        );
         manager.Options.Tokens.ChangeEmailTokenProvider = "NewProvider2";
         var user = CreateTestUser("foouser");
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
@@ -1600,9 +1781,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         string oldEmail = email;
         Assert.False(await manager.IsEmailConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
-        IdentityResultAssert.IsFailure(await manager.ChangeEmailAsync(user, "whatevah@foo.boop", "bogus"),
-            "Invalid token.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ChangeEmail:whatevah@foo.boop for user.");
+        IdentityResultAssert.IsFailure(
+            await manager.ChangeEmailAsync(user, "whatevah@foo.boop", "bogus"),
+            "Invalid token."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ChangeEmail:whatevah@foo.boop for user."
+        );
         Assert.False(await manager.IsEmailConfirmedAsync(user));
         Assert.Equal(await manager.GetEmailAsync(user), oldEmail);
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
@@ -1624,9 +1810,14 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.False(await manager.IsEmailConfirmedAsync(user));
         var stamp = await manager.GetSecurityStampAsync(user);
         var token1 = await manager.GenerateChangeEmailTokenAsync(user, "forgot@alrea.dy");
-        IdentityResultAssert.IsFailure(await manager.ChangeEmailAsync(user, "oops@foo.boop", token1),
-            "Invalid token.");
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyUserTokenAsync() failed with purpose: ChangeEmail:oops@foo.boop for user.");
+        IdentityResultAssert.IsFailure(
+            await manager.ChangeEmailAsync(user, "oops@foo.boop", token1),
+            "Invalid token."
+        );
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyUserTokenAsync() failed with purpose: ChangeEmail:oops@foo.boop for user."
+        );
         Assert.False(await manager.IsEmailConfirmedAsync(user));
         Assert.Equal(await manager.GetEmailAsync(user), oldEmail);
         Assert.Equal(stamp, await manager.GetSecurityStampAsync(user));
@@ -1659,7 +1850,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
             IdentityResultAssert.IsSuccess(await manager.UpdateSecurityStampAsync(user));
         }
         Assert.False(await manager.VerifyTwoFactorTokenAsync(user, factorId, token));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyTwoFactorTokenAsync() failed for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyTwoFactorTokenAsync() failed for user."
+        );
     }
 
     /// <summary>
@@ -1691,16 +1885,20 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         var error = $"No IUserTwoFactorTokenProvider<{nameof(TUser)}> named 'bogus' is registered.";
         var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.GenerateTwoFactorTokenAsync(user, "bogus"));
+            () => manager.GenerateTwoFactorTokenAsync(user, "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus"));
+            () => manager.VerifyTwoFactorTokenAsync(user, "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus"));
+            () => manager.VerifyUserTokenAsync(user, "bogus", "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
         ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => manager.GenerateUserTokenAsync(user, "bogus", "bogus"));
+            () => manager.GenerateUserTokenAsync(user, "bogus", "bogus")
+        );
         Assert.Equal(error, ex.Message);
     }
 
@@ -1730,16 +1928,24 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser();
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         Assert.Null(await manager.GetAuthenticationTokenAsync(user, "provider", "name"));
-        IdentityResultAssert.IsSuccess(await manager.SetAuthenticationTokenAsync(user, "provider", "name", "value"));
+        IdentityResultAssert.IsSuccess(
+            await manager.SetAuthenticationTokenAsync(user, "provider", "name", "value")
+        );
         Assert.Equal("value", await manager.GetAuthenticationTokenAsync(user, "provider", "name"));
 
-        IdentityResultAssert.IsSuccess(await manager.SetAuthenticationTokenAsync(user, "provider", "name", "value2"));
+        IdentityResultAssert.IsSuccess(
+            await manager.SetAuthenticationTokenAsync(user, "provider", "name", "value2")
+        );
         Assert.Equal("value2", await manager.GetAuthenticationTokenAsync(user, "provider", "name"));
 
-        IdentityResultAssert.IsSuccess(await manager.RemoveAuthenticationTokenAsync(user, "whatevs", "name"));
+        IdentityResultAssert.IsSuccess(
+            await manager.RemoveAuthenticationTokenAsync(user, "whatevs", "name")
+        );
         Assert.Equal("value2", await manager.GetAuthenticationTokenAsync(user, "provider", "name"));
 
-        IdentityResultAssert.IsSuccess(await manager.RemoveAuthenticationTokenAsync(user, "provider", "name"));
+        IdentityResultAssert.IsSuccess(
+            await manager.RemoveAuthenticationTokenAsync(user, "provider", "name")
+        );
         Assert.Null(await manager.GetAuthenticationTokenAsync(user, "provider", "name"));
     }
 
@@ -1760,14 +1966,20 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
         foreach (var code in newCodes)
         {
-            IdentityResultAssert.IsSuccess(await manager.RedeemTwoFactorRecoveryCodeAsync(user, code));
-            IdentityResultAssert.IsFailure(await manager.RedeemTwoFactorRecoveryCodeAsync(user, code));
+            IdentityResultAssert.IsSuccess(
+                await manager.RedeemTwoFactorRecoveryCodeAsync(user, code)
+            );
+            IdentityResultAssert.IsFailure(
+                await manager.RedeemTwoFactorRecoveryCodeAsync(user, code)
+            );
             Assert.Equal(--numCodes, await manager.CountRecoveryCodesAsync(user));
         }
         // One last time to be sure
         foreach (var code in newCodes)
         {
-            IdentityResultAssert.IsFailure(await manager.RedeemTwoFactorRecoveryCodeAsync(user, code));
+            IdentityResultAssert.IsFailure(
+                await manager.RedeemTwoFactorRecoveryCodeAsync(user, code)
+            );
         }
     }
 
@@ -1790,12 +2002,16 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
         foreach (var code in newCodes)
         {
-            IdentityResultAssert.IsFailure(await manager.RedeemTwoFactorRecoveryCodeAsync(user, code));
+            IdentityResultAssert.IsFailure(
+                await manager.RedeemTwoFactorRecoveryCodeAsync(user, code)
+            );
         }
 
         foreach (var code in realCodes)
         {
-            IdentityResultAssert.IsSuccess(await manager.RedeemTwoFactorRecoveryCodeAsync(user, code));
+            IdentityResultAssert.IsSuccess(
+                await manager.RedeemTwoFactorRecoveryCodeAsync(user, code)
+            );
         }
     }
 
@@ -1815,7 +2031,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.False(factors.Any());
         IdentityResultAssert.IsSuccess(await manager.SetPhoneNumberAsync(user, "111-111-1111"));
         var token = await manager.GenerateChangePhoneNumberTokenAsync(user, "111-111-1111");
-        IdentityResultAssert.IsSuccess(await manager.ChangePhoneNumberAsync(user, "111-111-1111", token));
+        IdentityResultAssert.IsSuccess(
+            await manager.ChangePhoneNumberAsync(user, "111-111-1111", token)
+        );
         await manager.UpdateAsync(user);
         factors = await manager.GetValidTwoFactorProvidersAsync(user);
         Assert.NotNull(factors);
@@ -1856,7 +2074,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         Assert.NotNull(token);
         IdentityResultAssert.IsSuccess(await manager.UpdateSecurityStampAsync(user));
         Assert.False(await manager.VerifyTwoFactorTokenAsync(user, factorId, token));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyTwoFactorTokenAsync() failed for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyTwoFactorTokenAsync() failed for user."
+        );
     }
 
     /// <summary>
@@ -1872,7 +2093,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var token = await manager.GenerateTwoFactorTokenAsync(user, "Phone");
         Assert.NotNull(token);
         Assert.False(await manager.VerifyTwoFactorTokenAsync(user, "Email", token));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyTwoFactorTokenAsync() failed for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyTwoFactorTokenAsync() failed for user."
+        );
     }
 
     /// <summary>
@@ -1886,7 +2110,10 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
         var user = CreateTestUser(phoneNumber: "4251234567");
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
         Assert.False(await manager.VerifyTwoFactorTokenAsync(user, "Phone", "bogus"));
-        IdentityResultAssert.VerifyLogMessage(manager.Logger, $"VerifyTwoFactorTokenAsync() failed for user.");
+        IdentityResultAssert.VerifyLogMessage(
+            manager.Logger,
+            $"VerifyTwoFactorTokenAsync() failed for user."
+        );
     }
 
     /// <summary>
@@ -1928,7 +2155,9 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
 
             if ((i % 2) == 0)
             {
-                IdentityResultAssert.IsSuccess(await manager.AddClaimAsync(user, new Claim("foo", "bar")));
+                IdentityResultAssert.IsSuccess(
+                    await manager.AddClaimAsync(user, new Claim("foo", "bar"))
+                );
             }
         }
 

@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [EntityFrameworkInternal]
         public RelationalModelRuntimeInitializerDependencies(
             RelationalModelDependencies relationalModelDependencies,
-            IRelationalAnnotationProvider relationalAnnotationProvider)
+            IRelationalAnnotationProvider relationalAnnotationProvider
+        )
         {
             RelationalModelDependencies = relationalModelDependencies;
             RelationalAnnotationProvider = relationalAnnotationProvider;

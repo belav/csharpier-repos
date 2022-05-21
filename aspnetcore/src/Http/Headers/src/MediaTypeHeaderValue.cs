@@ -30,10 +30,10 @@ public class MediaTypeHeaderValue
 
     private static readonly char[] PeriodCharacterArray = new char[] { PeriodCharacter };
 
-    private static readonly HttpHeaderParser<MediaTypeHeaderValue> SingleValueParser
-        = new GenericHeaderParser<MediaTypeHeaderValue>(false, GetMediaTypeLength);
-    private static readonly HttpHeaderParser<MediaTypeHeaderValue> MultipleValueParser
-        = new GenericHeaderParser<MediaTypeHeaderValue>(true, GetMediaTypeLength);
+    private static readonly HttpHeaderParser<MediaTypeHeaderValue> SingleValueParser =
+        new GenericHeaderParser<MediaTypeHeaderValue>(false, GetMediaTypeLength);
+    private static readonly HttpHeaderParser<MediaTypeHeaderValue> MultipleValueParser =
+        new GenericHeaderParser<MediaTypeHeaderValue>(true, GetMediaTypeLength);
 
     // Use a collection instead of a dictionary since we may have multiple parameters with the same name.
     private ObjectCollection<NameValueHeaderValue>? _parameters;
@@ -62,8 +62,7 @@ public class MediaTypeHeaderValue
     /// <param name="mediaType">A <see cref="StringSegment"/> representation of a media type.
     /// The text provided must be a single media type without parameters. </param>
     /// <param name="quality">The <see cref="double"/> with the quality of the media type.</param>
-    public MediaTypeHeaderValue(StringSegment mediaType, double quality)
-        : this(mediaType)
+    public MediaTypeHeaderValue(StringSegment mediaType, double quality) : this(mediaType)
     {
         Quality = quality;
     }
@@ -74,10 +73,7 @@ public class MediaTypeHeaderValue
     /// </summary>
     public StringSegment Charset
     {
-        get
-        {
-            return NameValueHeaderValue.Find(_parameters, CharsetString)?.Value ?? default;
-        }
+        get { return NameValueHeaderValue.Find(_parameters, CharsetString)?.Value ?? default; }
         set
         {
             HeaderUtilities.ThrowIfReadOnly(IsReadOnly);
@@ -152,7 +148,8 @@ public class MediaTypeHeaderValue
     {
         get
         {
-            return NameValueHeaderValue.Find(_parameters, BoundaryString)?.Value ?? default(StringSegment);
+            return NameValueHeaderValue.Find(_parameters, BoundaryString)?.Value
+                ?? default(StringSegment);
         }
         set
         {
@@ -245,10 +242,7 @@ public class MediaTypeHeaderValue
     /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on the type.</remarks>
     public StringSegment Type
     {
-        get
-        {
-            return _mediaType.Subsegment(0, _mediaType.IndexOf(ForwardSlashCharacter));
-        }
+        get { return _mediaType.Subsegment(0, _mediaType.IndexOf(ForwardSlashCharacter)); }
     }
 
     /// <summary>
@@ -261,10 +255,7 @@ public class MediaTypeHeaderValue
     /// <remarks>See <see href="https://tools.ietf.org/html/rfc6838#section-4.2"/> for more details on the subtype.</remarks>
     public StringSegment SubType
     {
-        get
-        {
-            return _mediaType.Subsegment(_mediaType.IndexOf(ForwardSlashCharacter) + 1);
-        }
+        get { return _mediaType.Subsegment(_mediaType.IndexOf(ForwardSlashCharacter) + 1); }
     }
 
     /// <summary>
@@ -317,7 +308,6 @@ public class MediaTypeHeaderValue
         }
     }
 
-
     /// <summary>
     /// Get a <see cref="IList{T}"/> of facets of the <see cref="MediaTypeHeaderValue"/>. Facets are a
     /// period separated list of StringSegments in the <see cref="SubTypeWithoutSuffix"/>.
@@ -329,10 +319,7 @@ public class MediaTypeHeaderValue
     /// </example>
     public IEnumerable<StringSegment> Facets
     {
-        get
-        {
-            return SubTypeWithoutSuffix.Split(PeriodCharacterArray);
-        }
+        get { return SubTypeWithoutSuffix.Split(PeriodCharacterArray); }
     }
 
     /// <summary>
@@ -394,9 +381,9 @@ public class MediaTypeHeaderValue
         }
 
         // "text/plain" is a subset of "text/plain", "text/*" and "*/*". "*/*" is a subset only of "*/*".
-        return MatchesType(otherMediaType) &&
-            MatchesSubtype(otherMediaType) &&
-            MatchesParameters(otherMediaType);
+        return MatchesType(otherMediaType)
+            && MatchesSubtype(otherMediaType)
+            && MatchesParameters(otherMediaType);
     }
 
     /// <summary>
@@ -412,7 +399,8 @@ public class MediaTypeHeaderValue
         if (_parameters != null)
         {
             other._parameters = new ObjectCollection<NameValueHeaderValue>(
-                _parameters.Select(item => item.Copy()));
+                _parameters.Select(item => item.Copy())
+            );
         }
         return other;
     }
@@ -434,7 +422,9 @@ public class MediaTypeHeaderValue
         if (_parameters != null)
         {
             other._parameters = new ObjectCollection<NameValueHeaderValue>(
-                _parameters.Select(item => item.CopyAsReadOnly()), isReadOnly: true);
+                _parameters.Select(item => item.CopyAsReadOnly()),
+                isReadOnly: true
+            );
         }
         other._isReadOnly = true;
         return other;
@@ -470,7 +460,12 @@ public class MediaTypeHeaderValue
     {
         var builder = new StringBuilder();
         builder.Append(_mediaType.AsSpan());
-        NameValueHeaderValue.ToString(_parameters, separator: ';', leadingSeparator: true, destination: builder);
+        NameValueHeaderValue.ToString(
+            _parameters,
+            separator: ';',
+            leadingSeparator: true,
+            destination: builder
+        );
         return builder.ToString();
     }
 
@@ -484,15 +479,16 @@ public class MediaTypeHeaderValue
             return false;
         }
 
-        return _mediaType.Equals(other._mediaType, StringComparison.OrdinalIgnoreCase) &&
-            HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
+        return _mediaType.Equals(other._mediaType, StringComparison.OrdinalIgnoreCase)
+            && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
     }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
         // The media-type string is case-insensitive.
-        return StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(_mediaType) ^ NameValueHeaderValue.GetHashCode(_parameters);
+        return StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(_mediaType)
+            ^ NameValueHeaderValue.GetHashCode(_parameters);
     }
 
     /// <summary>
@@ -512,7 +508,10 @@ public class MediaTypeHeaderValue
     /// <param name="input">The <see cref="StringSegment"/> with the media type. The media type constructed here must not have an y</param>
     /// <param name="parsedValue">The parsed <see cref="MediaTypeHeaderValue"/></param>
     /// <returns>True if the value was successfully parsed.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out MediaTypeHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out MediaTypeHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
@@ -545,7 +544,10 @@ public class MediaTypeHeaderValue
     /// <param name="inputs">A list of media types</param>
     /// <param name="parsedValues">The parsed <see cref="MediaTypeHeaderValue"/>.</param>
     /// <returns>True if the value was successfully parsed.</returns>
-    public static bool TryParseList(IList<string>? inputs, [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues)
+    public static bool TryParseList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseValues(inputs, out parsedValues);
     }
@@ -556,12 +558,19 @@ public class MediaTypeHeaderValue
     /// <param name="inputs">A list of media types</param>
     /// <param name="parsedValues">The parsed <see cref="MediaTypeHeaderValue"/>.</param>
     /// <returns>True if the value was successfully parsed.</returns>
-    public static bool TryParseStrictList(IList<string>? inputs, [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues)
+    public static bool TryParseStrictList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<MediaTypeHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
     }
 
-    private static int GetMediaTypeLength(StringSegment input, int startIndex, out MediaTypeHeaderValue? parsedValue)
+    private static int GetMediaTypeLength(
+        StringSegment input,
+        int startIndex,
+        out MediaTypeHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -573,7 +582,11 @@ public class MediaTypeHeaderValue
         }
 
         // Caller must remove leading whitespace. If not, we'll return 0.
-        var mediaTypeLength = MediaTypeHeaderValue.GetMediaTypeExpressionLength(input, startIndex, out var mediaType);
+        var mediaTypeLength = MediaTypeHeaderValue.GetMediaTypeExpressionLength(
+            input,
+            startIndex,
+            out var mediaType
+        );
 
         if (mediaTypeLength == 0)
         {
@@ -591,8 +604,12 @@ public class MediaTypeHeaderValue
             mediaTypeHeader._mediaType = mediaType;
 
             current++; // skip delimiter.
-            var parameterLength = NameValueHeaderValue.GetNameValueListLength(input, current, ';',
-                mediaTypeHeader.Parameters);
+            var parameterLength = NameValueHeaderValue.GetNameValueListLength(
+                input,
+                current,
+                ';',
+                mediaTypeHeader.Parameters
+            );
 
             parsedValue = mediaTypeHeader;
             return current + parameterLength - startIndex;
@@ -605,7 +622,11 @@ public class MediaTypeHeaderValue
         return current - startIndex;
     }
 
-    private static int GetMediaTypeExpressionLength(StringSegment input, int startIndex, out StringSegment mediaType)
+    private static int GetMediaTypeExpressionLength(
+        StringSegment input,
+        int startIndex,
+        out StringSegment mediaType
+    )
     {
         Contract.Requires((input.Length > 0) && (startIndex < input.Length));
 
@@ -648,7 +669,11 @@ public class MediaTypeHeaderValue
         }
         else
         {
-            mediaType = string.Concat(input.AsSpan().Slice(startIndex, typeLength), "/", input.AsSpan().Slice(current, subtypeLength));
+            mediaType = string.Concat(
+                input.AsSpan().Slice(startIndex, typeLength),
+                "/",
+                input.AsSpan().Slice(current, subtypeLength)
+            );
         }
 
         return mediaTypeLength;
@@ -666,22 +691,22 @@ public class MediaTypeHeaderValue
         var mediaTypeLength = GetMediaTypeExpressionLength(mediaType, 0, out var tempMediaType);
         if ((mediaTypeLength == 0) || (tempMediaType.Length != mediaType.Length))
         {
-            throw new FormatException(string.Format(CultureInfo.InvariantCulture, "Invalid media type '{0}'.", mediaType));
+            throw new FormatException(
+                string.Format(CultureInfo.InvariantCulture, "Invalid media type '{0}'.", mediaType)
+            );
         }
     }
 
     private bool MatchesType(MediaTypeHeaderValue set)
     {
-        return set.MatchesAllTypes ||
-            set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
+        return set.MatchesAllTypes || set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesType(StringSegment mediaType)
     {
         var type = mediaType.Subsegment(0, mediaType.IndexOf(ForwardSlashCharacter));
 
-        return MatchesAllTypes ||
-            Type.Equals(type, StringComparison.OrdinalIgnoreCase);
+        return MatchesAllTypes || Type.Equals(type, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesSubtype(MediaTypeHeaderValue set)
@@ -735,7 +760,8 @@ public class MediaTypeHeaderValue
         {
             if (suffix.HasValue)
             {
-                return MatchesSubtypeWithoutSuffix(subType, startOfSuffix) && MatchesSubtypeSuffix(suffix);
+                return MatchesSubtypeWithoutSuffix(subType, startOfSuffix)
+                    && MatchesSubtypeSuffix(suffix);
             }
             else
             {
@@ -753,8 +779,11 @@ public class MediaTypeHeaderValue
 
     private bool MatchesSubtypeWithoutSuffix(MediaTypeHeaderValue set)
     {
-        return set.MatchesAllSubTypesWithoutSuffix ||
-            set.SubTypeWithoutSuffix.Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
+        return set.MatchesAllSubTypesWithoutSuffix
+            || set.SubTypeWithoutSuffix.Equals(
+                SubTypeWithoutSuffix,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private bool MatchesSubtypeWithoutSuffix(StringSegment subType, int startOfSuffix)
@@ -768,20 +797,23 @@ public class MediaTypeHeaderValue
         {
             subTypeWithoutSuffix = subType.Subsegment(0, startOfSuffix);
         }
-        return SubTypeWithoutSuffix.Equals(WildcardString, StringComparison.OrdinalIgnoreCase) ||
-            SubTypeWithoutSuffix.Equals(subTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
+        return SubTypeWithoutSuffix.Equals(WildcardString, StringComparison.OrdinalIgnoreCase)
+            || SubTypeWithoutSuffix.Equals(
+                subTypeWithoutSuffix,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private bool MatchesEitherSubtypeOrSuffix(MediaTypeHeaderValue set)
     {
-        return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase) ||
-            set.SubType.Equals(Suffix, StringComparison.OrdinalIgnoreCase);
+        return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase)
+            || set.SubType.Equals(Suffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesEitherSubtypeOrSuffix(StringSegment subType, StringSegment suffix)
     {
-        return subType.Equals(SubType, StringComparison.OrdinalIgnoreCase) ||
-            SubType.Equals(suffix, StringComparison.OrdinalIgnoreCase);
+        return subType.Equals(SubType, StringComparison.OrdinalIgnoreCase)
+            || SubType.Equals(suffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesParameters(MediaTypeHeaderValue set)
@@ -813,7 +845,13 @@ public class MediaTypeHeaderValue
                     return false;
                 }
 
-                if (!StringSegment.Equals(parameter.Value, localParameter.Value, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !StringSegment.Equals(
+                        parameter.Value,
+                        localParameter.Value,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return false;
                 }

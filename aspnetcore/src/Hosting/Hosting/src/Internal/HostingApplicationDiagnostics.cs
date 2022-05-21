@@ -15,16 +15,20 @@ namespace Microsoft.AspNetCore.Hosting;
 
 internal class HostingApplicationDiagnostics
 {
-    private static readonly double TimestampToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
+    private static readonly double TimestampToTicks =
+        TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
 
     // internal so it can be used in tests
     internal const string ActivityName = "Microsoft.AspNetCore.Hosting.HttpRequestIn";
     private const string ActivityStartKey = ActivityName + ".Start";
     private const string ActivityStopKey = ActivityName + ".Stop";
 
-    private const string DeprecatedDiagnosticsBeginRequestKey = "Microsoft.AspNetCore.Hosting.BeginRequest";
-    private const string DeprecatedDiagnosticsEndRequestKey = "Microsoft.AspNetCore.Hosting.EndRequest";
-    private const string DiagnosticsUnhandledExceptionKey = "Microsoft.AspNetCore.Hosting.UnhandledException";
+    private const string DeprecatedDiagnosticsBeginRequestKey =
+        "Microsoft.AspNetCore.Hosting.BeginRequest";
+    private const string DeprecatedDiagnosticsEndRequestKey =
+        "Microsoft.AspNetCore.Hosting.EndRequest";
+    private const string DiagnosticsUnhandledExceptionKey =
+        "Microsoft.AspNetCore.Hosting.UnhandledException";
 
     private readonly ActivitySource _activitySource;
     private readonly DiagnosticListener _diagnosticListener;
@@ -35,7 +39,8 @@ internal class HostingApplicationDiagnostics
         ILogger logger,
         DiagnosticListener diagnosticListener,
         ActivitySource activitySource,
-        DistributedContextPropagator propagator)
+        DistributedContextPropagator propagator
+    )
     {
         _logger = logger;
         _diagnosticListener = diagnosticListener;
@@ -56,18 +61,30 @@ internal class HostingApplicationDiagnostics
         }
 
         var diagnosticListenerEnabled = _diagnosticListener.IsEnabled();
-        var diagnosticListenerActivityCreationEnabled = (diagnosticListenerEnabled && _diagnosticListener.IsEnabled(ActivityName, httpContext));
+        var diagnosticListenerActivityCreationEnabled = (
+            diagnosticListenerEnabled && _diagnosticListener.IsEnabled(ActivityName, httpContext)
+        );
         var loggingEnabled = _logger.IsEnabled(LogLevel.Critical);
 
-
-        if (loggingEnabled || diagnosticListenerActivityCreationEnabled || _activitySource.HasListeners())
+        if (
+            loggingEnabled
+            || diagnosticListenerActivityCreationEnabled
+            || _activitySource.HasListeners()
+        )
         {
-            context.Activity = StartActivity(httpContext, loggingEnabled, diagnosticListenerActivityCreationEnabled, out var hasDiagnosticListener);
+            context.Activity = StartActivity(
+                httpContext,
+                loggingEnabled,
+                diagnosticListenerActivityCreationEnabled,
+                out var hasDiagnosticListener
+            );
             context.HasDiagnosticListener = hasDiagnosticListener;
 
             if (context.Activity is Activity activity)
             {
-                if (httpContext.Features.Get<IHttpActivityFeature>() is IHttpActivityFeature feature)
+                if (
+                    httpContext.Features.Get<IHttpActivityFeature>() is IHttpActivityFeature feature
+                )
                 {
                     feature.Activity = activity;
                 }
@@ -110,7 +127,11 @@ internal class HostingApplicationDiagnostics
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void RequestEnd(HttpContext httpContext, Exception? exception, HostingApplication.Context context)
+    public void RequestEnd(
+        HttpContext httpContext,
+        Exception? exception,
+        HostingApplication.Context context
+    )
     {
         // Local cache items resolved multiple items, in order of use so they are primed in cpu pipeline when used
         var startTimestamp = context.StartTimestamp;
@@ -151,7 +172,6 @@ internal class HostingApplicationDiagnostics
                     // so call GetTimestamp if currentTimestamp is zero (from above)
                     RecordUnhandledExceptionDiagnostics(httpContext, currentTimestamp, exception);
                 }
-
             }
         }
 
@@ -203,25 +223,33 @@ internal class HostingApplicationDiagnostics
             eventId: LoggerEventIds.RequestStarting,
             state: startLog,
             exception: null,
-            formatter: HostingRequestStartingLog.Callback);
+            formatter: HostingRequestStartingLog.Callback
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void LogRequestFinished(HostingApplication.Context context, long startTimestamp, long currentTimestamp)
+    private void LogRequestFinished(
+        HostingApplication.Context context,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
         // IsEnabled isn't checked in the caller, startTimestamp > 0 is used as a fast proxy check
         // but that may be because diagnostics are enabled, which also uses startTimestamp,
         // so check if we logged the start event
         if (context.StartLog != null)
         {
-            var elapsed = new TimeSpan((long)(TimestampToTicks * (currentTimestamp - startTimestamp)));
+            var elapsed = new TimeSpan(
+                (long)(TimestampToTicks * (currentTimestamp - startTimestamp))
+            );
 
             _logger.Log(
                 logLevel: LogLevel.Information,
                 eventId: LoggerEventIds.RequestFinished,
                 state: new HostingRequestFinishedLog(context, elapsed),
                 exception: null,
-                formatter: HostingRequestFinishedLog.Callback);
+                formatter: HostingRequestFinishedLog.Callback
+            );
         }
     }
 
@@ -230,11 +258,8 @@ internal class HostingApplicationDiagnostics
     {
         _diagnosticListener.Write(
             DeprecatedDiagnosticsBeginRequestKey,
-            new
-            {
-                httpContext = httpContext,
-                timestamp = startTimestamp
-            });
+            new { httpContext = httpContext, timestamp = startTimestamp }
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -242,24 +267,21 @@ internal class HostingApplicationDiagnostics
     {
         _diagnosticListener.Write(
             DeprecatedDiagnosticsEndRequestKey,
-            new
-            {
-                httpContext = httpContext,
-                timestamp = currentTimestamp
-            });
+            new { httpContext = httpContext, timestamp = currentTimestamp }
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void RecordUnhandledExceptionDiagnostics(HttpContext httpContext, long currentTimestamp, Exception exception)
+    private void RecordUnhandledExceptionDiagnostics(
+        HttpContext httpContext,
+        long currentTimestamp,
+        Exception exception
+    )
     {
         _diagnosticListener.Write(
             DiagnosticsUnhandledExceptionKey,
-            new
-            {
-                httpContext = httpContext,
-                timestamp = currentTimestamp,
-                exception = exception
-            });
+            new { httpContext = httpContext, timestamp = currentTimestamp, exception = exception }
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -269,7 +291,12 @@ internal class HostingApplicationDiagnostics
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private Activity? StartActivity(HttpContext httpContext, bool loggingEnabled, bool diagnosticListenerActivityCreationEnabled, out bool hasDiagnosticListener)
+    private Activity? StartActivity(
+        HttpContext httpContext,
+        bool loggingEnabled,
+        bool diagnosticListenerActivityCreationEnabled,
+        out bool hasDiagnosticListener
+    )
     {
         var activity = _activitySource.CreateActivity(ActivityName, ActivityKind.Server);
         if (activity is null && (loggingEnabled || diagnosticListenerActivityCreationEnabled))
@@ -283,15 +310,22 @@ internal class HostingApplicationDiagnostics
             return null;
         }
         var headers = httpContext.Request.Headers;
-        _propagator.ExtractTraceIdAndState(headers,
-            static (object? carrier, string fieldName, out string? fieldValue, out IEnumerable<string>? fieldValues) =>
+        _propagator.ExtractTraceIdAndState(
+            headers,
+            static (
+                object? carrier,
+                string fieldName,
+                out string? fieldValue,
+                out IEnumerable<string>? fieldValues
+            ) =>
             {
                 fieldValues = default;
                 var headers = (IHeaderDictionary)carrier!;
                 fieldValue = headers[fieldName];
             },
             out var requestId,
-            out var traceState);
+            out var traceState
+        );
 
         if (!string.IsNullOrEmpty(requestId))
         {
@@ -300,15 +334,23 @@ internal class HostingApplicationDiagnostics
             {
                 activity.TraceStateString = traceState;
             }
-            var baggage = _propagator.ExtractBaggage(headers, static (object? carrier, string fieldName, out string? fieldValue, out IEnumerable<string>? fieldValues) =>
-            {
-                fieldValues = default;
-                var headers = (IHeaderDictionary)carrier!;
-                fieldValue = headers[fieldName];
-            });
+            var baggage = _propagator.ExtractBaggage(
+                headers,
+                static (
+                    object? carrier,
+                    string fieldName,
+                    out string? fieldValue,
+                    out IEnumerable<string>? fieldValues
+                ) =>
+                {
+                    fieldValues = default;
+                    var headers = (IHeaderDictionary)carrier!;
+                    fieldValue = headers[fieldName];
+                }
+            );
 
             // AddBaggage adds items at the beginning  of the list, so we need to add them in reverse to keep the same order as the client
-            // By contract, the propagator has already reversed the order of items so we need not reverse it again 
+            // By contract, the propagator has already reversed the order of items so we need not reverse it again
             // Order could be important if baggage has two items with the same key (that is allowed by the contract)
             if (baggage is not null)
             {
@@ -335,7 +377,11 @@ internal class HostingApplicationDiagnostics
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void StopActivity(HttpContext httpContext, Activity activity, bool hasDiagnosticListener)
+    private void StopActivity(
+        HttpContext httpContext,
+        Activity activity,
+        bool hasDiagnosticListener
+    )
     {
         if (hasDiagnosticListener)
         {
@@ -364,7 +410,7 @@ internal class HostingApplicationDiagnostics
             activity.SetEndTime(DateTime.UtcNow);
         }
         _diagnosticListener.Write(ActivityStopKey, httpContext);
-        activity.Stop();    // Resets Activity.Current (we want this after the Write)
+        activity.Stop(); // Resets Activity.Current (we want this after the Write)
     }
 
     private static class Log
@@ -403,9 +449,11 @@ internal class HostingApplicationDiagnostics
             public HostingLogScope(HttpContext httpContext)
             {
                 _traceIdentifier = httpContext.TraceIdentifier;
-                _path = (httpContext.Request.PathBase.HasValue
-                         ? httpContext.Request.PathBase + httpContext.Request.Path
-                         : httpContext.Request.Path).ToString();
+                _path = (
+                    httpContext.Request.PathBase.HasValue
+                        ? httpContext.Request.PathBase + httpContext.Request.Path
+                        : httpContext.Request.Path
+                ).ToString();
             }
 
             public override string ToString()
@@ -416,7 +464,8 @@ internal class HostingApplicationDiagnostics
                         CultureInfo.InvariantCulture,
                         "RequestPath:{0} RequestId:{1}",
                         _path,
-                        _traceIdentifier);
+                        _traceIdentifier
+                    );
                 }
 
                 return _cachedToString;

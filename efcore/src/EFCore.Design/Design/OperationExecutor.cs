@@ -69,8 +69,10 @@ namespace Microsoft.EntityFrameworkCore.Design
 
             var toolsVersion = (string?)args["toolsVersion"];
             var runtimeVersion = ProductInfo.GetVersion();
-            if (toolsVersion != null
-                && new SemanticVersionComparer().Compare(toolsVersion, runtimeVersion) < 0)
+            if (
+                toolsVersion != null
+                && new SemanticVersionComparer().Compare(toolsVersion, runtimeVersion) < 0
+            )
             {
                 _reporter.WriteWarning(DesignStrings.VersionMismatch(toolsVersion, runtimeVersion));
             }
@@ -90,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                     {
                         throw new OperationException(
                             DesignStrings.UnreferencedAssembly(_targetName, _startupTargetName),
-                            ex);
+                            ex
+                        );
                     }
                 }
 
@@ -98,45 +101,44 @@ namespace Microsoft.EntityFrameworkCore.Design
             }
         }
 
-        private Assembly StartupAssembly
-            => _startupAssembly
-                ??= Assembly.Load(new AssemblyName(_startupTargetName));
+        private Assembly StartupAssembly =>
+            _startupAssembly ??= Assembly.Load(new AssemblyName(_startupTargetName));
 
-        private MigrationsOperations MigrationsOperations
-            => _migrationsOperations
-                ??= new MigrationsOperations(
-                    _reporter,
-                    Assembly,
-                    StartupAssembly,
-                    _projectDir,
-                    _rootNamespace,
-                    _language,
-                    _nullable,
-                    _designArgs);
+        private MigrationsOperations MigrationsOperations =>
+            _migrationsOperations ??= new MigrationsOperations(
+                _reporter,
+                Assembly,
+                StartupAssembly,
+                _projectDir,
+                _rootNamespace,
+                _language,
+                _nullable,
+                _designArgs
+            );
 
-        private DbContextOperations ContextOperations
-            => _contextOperations
-                ??= new DbContextOperations(
-                    _reporter,
-                    Assembly,
-                    StartupAssembly,
-                    _projectDir,
-                    _rootNamespace,
-                    _language,
-                    _nullable,
-                    _designArgs);
+        private DbContextOperations ContextOperations =>
+            _contextOperations ??= new DbContextOperations(
+                _reporter,
+                Assembly,
+                StartupAssembly,
+                _projectDir,
+                _rootNamespace,
+                _language,
+                _nullable,
+                _designArgs
+            );
 
-        private DatabaseOperations DatabaseOperations
-            => _databaseOperations
-                ??= new DatabaseOperations(
-                    _reporter,
-                    Assembly,
-                    StartupAssembly,
-                    _projectDir,
-                    _rootNamespace,
-                    _language,
-                    _nullable,
-                    _designArgs);
+        private DatabaseOperations DatabaseOperations =>
+            _databaseOperations ??= new DatabaseOperations(
+                _reporter,
+                Assembly,
+                StartupAssembly,
+                _projectDir,
+                _rootNamespace,
+                _language,
+                _nullable,
+                _designArgs
+            );
 
         /// <summary>
         ///     Represents an operation to add a new migration.
@@ -161,8 +163,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public AddMigration(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -180,15 +182,12 @@ namespace Microsoft.EntityFrameworkCore.Design
             string name,
             string? outputDir,
             string? contextType,
-            string? @namespace)
+            string? @namespace
+        )
         {
             Check.NotEmpty(name, nameof(name));
 
-            var files = MigrationsOperations.AddMigration(
-                name,
-                outputDir,
-                contextType,
-                @namespace);
+            var files = MigrationsOperations.AddMigration(name, outputDir, contextType, @namespace);
 
             return new Hashtable
             {
@@ -216,8 +215,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public GetContextInfo(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -267,8 +266,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public UpdateDatabase(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -277,15 +276,18 @@ namespace Microsoft.EntityFrameworkCore.Design
                 var connectionString = (string?)args["connectionString"];
                 var contextType = (string?)args["contextType"];
 
-                Execute(() => executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType));
+                Execute(
+                    () =>
+                        executor.UpdateDatabaseImpl(targetMigration, connectionString, contextType)
+                );
             }
         }
 
         private void UpdateDatabaseImpl(
             string? targetMigration,
             string? connectionString,
-            string? contextType)
-            => MigrationsOperations.UpdateDatabase(targetMigration, connectionString, contextType);
+            string? contextType
+        ) => MigrationsOperations.UpdateDatabase(targetMigration, connectionString, contextType);
 
         /// <summary>
         ///     Represents an operation to generate a SQL script from migrations.
@@ -309,8 +311,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public ScriptMigration(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -321,7 +323,16 @@ namespace Microsoft.EntityFrameworkCore.Design
                 var noTransactions = (bool)(args["noTransactions"] ?? false);
                 var contextType = (string?)args["contextType"];
 
-                Execute(() => executor.ScriptMigrationImpl(fromMigration, toMigration, idempotent, noTransactions, contextType));
+                Execute(
+                    () =>
+                        executor.ScriptMigrationImpl(
+                            fromMigration,
+                            toMigration,
+                            idempotent,
+                            noTransactions,
+                            contextType
+                        )
+                );
             }
         }
 
@@ -330,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             string? toMigration,
             bool idempotent,
             bool noTransactions,
-            string? contextType)
+            string? contextType
+        )
         {
             var options = MigrationsSqlGenerationOptions.Default;
             if (idempotent)
@@ -347,7 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 fromMigration,
                 toMigration,
                 options,
-                contextType);
+                contextType
+            );
         }
 
         /// <summary>
@@ -369,8 +382,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public RemoveMigration(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -411,8 +424,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public GetContextTypes(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -428,17 +441,20 @@ namespace Microsoft.EntityFrameworkCore.Design
             var fullNameGroups = contextTypes.GroupBy(t => t.FullName).ToList();
 
             return contextTypes.Select(
-                t => new Hashtable
-                {
-                    ["AssemblyQualifiedName"] = t.AssemblyQualifiedName,
-                    ["FullName"] = t.FullName,
-                    ["Name"] = t.Name,
-                    ["SafeName"] = nameGroups.Count(g => g.Key == t.Name) == 1
-                        ? t.Name
-                        : fullNameGroups.Count(g => g.Key == t.FullName) == 1
-                            ? t.FullName
-                            : t.AssemblyQualifiedName
-                });
+                t =>
+                    new Hashtable
+                    {
+                        ["AssemblyQualifiedName"] = t.AssemblyQualifiedName,
+                        ["FullName"] = t.FullName,
+                        ["Name"] = t.Name,
+                        ["SafeName"] =
+                            nameGroups.Count(g => g.Key == t.Name) == 1
+                                ? t.Name
+                                : fullNameGroups.Count(g => g.Key == t.FullName) == 1
+                                    ? t.FullName
+                                    : t.AssemblyQualifiedName
+                    }
+            );
         }
 
         /// <summary>
@@ -465,8 +481,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public GetMigrations(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -482,21 +498,24 @@ namespace Microsoft.EntityFrameworkCore.Design
         private IEnumerable<IDictionary> GetMigrationsImpl(
             string? contextType,
             string? connectionString,
-            bool noConnect)
+            bool noConnect
+        )
         {
-            var migrations = MigrationsOperations.GetMigrations(contextType, connectionString, noConnect).ToList();
+            var migrations = MigrationsOperations
+                .GetMigrations(contextType, connectionString, noConnect)
+                .ToList();
             var nameGroups = migrations.GroupBy(m => m.Name).ToList();
 
             return migrations.Select(
-                m => new Hashtable
-                {
-                    ["Id"] = m.Id,
-                    ["Name"] = m.Name,
-                    ["SafeName"] = nameGroups.Count(g => g.Key == m.Name) == 1
-                        ? m.Name
-                        : m.Id,
-                    ["Applied"] = m.Applied
-                });
+                m =>
+                    new Hashtable
+                    {
+                        ["Id"] = m.Id,
+                        ["Name"] = m.Name,
+                        ["SafeName"] = nameGroups.Count(g => g.Key == m.Name) == 1 ? m.Name : m.Id,
+                        ["Applied"] = m.Applied
+                    }
+            );
         }
 
         /// <summary>
@@ -519,8 +538,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public OptimizeContext(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -533,8 +552,11 @@ namespace Microsoft.EntityFrameworkCore.Design
             }
         }
 
-        private void OptimizeContextImpl(string? outputDir, string? modelNamespace, string? contextType)
-            => ContextOperations.Optimize(outputDir, modelNamespace, contextType);
+        private void OptimizeContextImpl(
+            string? outputDir,
+            string? modelNamespace,
+            string? contextType
+        ) => ContextOperations.Optimize(outputDir, modelNamespace, contextType);
 
         /// <summary>
         ///     Represents an operation to scaffold a <see cref="DbContext" /> and entity types for a database.
@@ -566,8 +588,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public ScaffoldContext(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -588,10 +610,24 @@ namespace Microsoft.EntityFrameworkCore.Design
                 var noPluralize = (bool)(args["noPluralize"] ?? false);
 
                 Execute(
-                    () => executor.ScaffoldContextImpl(
-                        provider, connectionString, outputDir, outputDbContextDir, dbContextClassName,
-                        schemaFilters, tableFilters, modelNamespace, contextNamespace, useDataAnnotations,
-                        overwriteFiles, useDatabaseNames, suppressOnConfiguring, noPluralize));
+                    () =>
+                        executor.ScaffoldContextImpl(
+                            provider,
+                            connectionString,
+                            outputDir,
+                            outputDbContextDir,
+                            dbContextClassName,
+                            schemaFilters,
+                            tableFilters,
+                            modelNamespace,
+                            contextNamespace,
+                            useDataAnnotations,
+                            overwriteFiles,
+                            useDatabaseNames,
+                            suppressOnConfiguring,
+                            noPluralize
+                        )
+                );
             }
         }
 
@@ -609,7 +645,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             bool overwriteFiles,
             bool useDatabaseNames,
             bool suppressOnConfiguring,
-            bool noPluralize)
+            bool noPluralize
+        )
         {
             Check.NotNull(provider, nameof(provider));
             Check.NotNull(connectionString, nameof(connectionString));
@@ -617,11 +654,27 @@ namespace Microsoft.EntityFrameworkCore.Design
             Check.NotNull(tableFilters, nameof(tableFilters));
 
             var files = DatabaseOperations.ScaffoldContext(
-                provider, connectionString, outputDir, outputDbContextDir, dbContextClassName,
-                schemaFilters, tableFilters, modelNamespace, contextNamespace, useDataAnnotations,
-                overwriteFiles, useDatabaseNames, suppressOnConfiguring, noPluralize);
+                provider,
+                connectionString,
+                outputDir,
+                outputDbContextDir,
+                dbContextClassName,
+                schemaFilters,
+                tableFilters,
+                modelNamespace,
+                contextNamespace,
+                useDataAnnotations,
+                overwriteFiles,
+                useDatabaseNames,
+                suppressOnConfiguring,
+                noPluralize
+            );
 
-            return new Hashtable { ["ContextFile"] = files.ContextFile, ["EntityTypeFiles"] = files.AdditionalFiles.ToArray() };
+            return new Hashtable
+            {
+                ["ContextFile"] = files.ContextFile,
+                ["EntityTypeFiles"] = files.AdditionalFiles.ToArray()
+            };
         }
 
         /// <summary>
@@ -642,8 +695,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public DropDatabase(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -654,8 +707,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             }
         }
 
-        private void DropDatabaseImpl(string? contextType)
-            => ContextOperations.DropDatabase(contextType);
+        private void DropDatabaseImpl(string? contextType) =>
+            ContextOperations.DropDatabase(contextType);
 
         /// <summary>
         ///     Represents an operation to generate a SQL script from the DbContext.
@@ -675,8 +728,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             public ScriptDbContext(
                 OperationExecutor executor,
                 IOperationResultHandler resultHandler,
-                IDictionary args)
-                : base(resultHandler)
+                IDictionary args
+            ) : base(resultHandler)
             {
                 Check.NotNull(executor, nameof(executor));
                 Check.NotNull(args, nameof(args));
@@ -687,8 +740,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             }
         }
 
-        private string ScriptDbContextImpl(string? contextType)
-            => ContextOperations.ScriptDbContext(contextType);
+        private string ScriptDbContextImpl(string? contextType) =>
+            ContextOperations.ScriptDbContext(contextType);
 
         /// <summary>
         ///     Represents an operation.
@@ -727,16 +780,16 @@ namespace Microsoft.EntityFrameworkCore.Design
             /// </summary>
             /// <typeparam name="T">The result type.</typeparam>
             /// <param name="action">The action to execute.</param>
-            protected virtual void Execute<T>(Func<T> action)
-                => Execute(() => _resultHandler.OnResult(action()));
+            protected virtual void Execute<T>(Func<T> action) =>
+                Execute(() => _resultHandler.OnResult(action()));
 
             /// <summary>
             ///     Executes an action passing results or exceptions to the <see cref="IOperationResultHandler" />.
             /// </summary>
             /// <typeparam name="T">The type of results.</typeparam>
             /// <param name="action">The action to execute.</param>
-            protected virtual void Execute<T>(Func<IEnumerable<T>> action)
-                => Execute(() => _resultHandler.OnResult(action().ToArray()));
+            protected virtual void Execute<T>(Func<IEnumerable<T>> action) =>
+                Execute(() => _resultHandler.OnResult(action().ToArray()));
         }
     }
 }

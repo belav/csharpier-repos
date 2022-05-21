@@ -31,9 +31,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var nonNullableModelType = modelType.UnwrapNullableType();
             if (IsGenericComparable(modelType, nonNullableModelType))
             {
-                return (IComparer<IUpdateEntry>)Activator.CreateInstance(
-                    typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
-                    propertyBase)!;
+                return (IComparer<IUpdateEntry>)
+                    Activator.CreateInstance(
+                        typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
+                        propertyBase
+                    )!;
             }
 
             if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableModelType))
@@ -56,18 +58,29 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (IsGenericComparable(providerType, nonNullableProviderType))
                     {
                         var comparerType = modelType.IsClass
-                            ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(modelType, converter.ProviderClrType)
+                            ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(
+                                modelType,
+                                converter.ProviderClrType
+                            )
                             : modelType == converter.ModelClrType
-                                ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(modelType, converter.ProviderClrType)
-                                : typeof(NullableStructCurrentProviderValueComparer<,>).MakeGenericType(
-                                    nonNullableModelType, converter.ProviderClrType);
+                                ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(
+                                    modelType,
+                                    converter.ProviderClrType
+                                )
+                                : typeof(NullableStructCurrentProviderValueComparer<
+                                    ,
+                                >).MakeGenericType(nonNullableModelType, converter.ProviderClrType);
 
-                        return (IComparer<IUpdateEntry>)Activator.CreateInstance(comparerType, propertyBase, converter)!;
+                        return (IComparer<IUpdateEntry>)
+                            Activator.CreateInstance(comparerType, propertyBase, converter)!;
                     }
 
                     if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableProviderType))
                     {
-                        return new StructuralEntryCurrentProviderValueComparer(propertyBase, converter);
+                        return new StructuralEntryCurrentProviderValueComparer(
+                            propertyBase,
+                            converter
+                        );
                     }
 
                     if (typeof(IComparable).IsAssignableFrom(nonNullableProviderType))
@@ -80,7 +93,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             propertyBase.DeclaringType.DisplayName(),
                             propertyBase.Name,
                             modelType.ShortDisplayName(),
-                            providerType.ShortDisplayName()));
+                            providerType.ShortDisplayName()
+                        )
+                    );
                 }
             }
 
@@ -88,13 +103,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 CoreStrings.NonComparableKeyType(
                     propertyBase.DeclaringType.DisplayName(),
                     propertyBase.Name,
-                    modelType.ShortDisplayName()));
+                    modelType.ShortDisplayName()
+                )
+            );
 
-            static bool IsGenericComparable(Type type, Type nonNullableType)
-                => typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
-                    || typeof(IComparable<>).MakeGenericType(nonNullableType).IsAssignableFrom(nonNullableType)
-                    || type.IsEnum
-                    || nonNullableType.IsEnum;
+            static bool IsGenericComparable(Type type, Type nonNullableType) =>
+                typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
+                || typeof(IComparable<>)
+                    .MakeGenericType(nonNullableType)
+                    .IsAssignableFrom(nonNullableType)
+                || type.IsEnum
+                || nonNullableType.IsEnum;
         }
     }
 }

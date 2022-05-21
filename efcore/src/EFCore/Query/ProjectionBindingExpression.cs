@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public ProjectionBindingExpression(
             Expression queryExpression,
             ProjectionMember projectionMember,
-            Type type)
+            Type type
+        )
         {
             QueryExpression = queryExpression;
             ProjectionMember = projectionMember;
@@ -48,10 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryExpression">The query expression to get the value from.</param>
         /// <param name="index">The index to bind with query expression projection.</param>
         /// <param name="type">The clr type of value being read.</param>
-        public ProjectionBindingExpression(
-            Expression queryExpression,
-            int index,
-            Type type)
+        public ProjectionBindingExpression(Expression queryExpression, int index, Type type)
         {
             QueryExpression = queryExpression;
             Index = index;
@@ -77,12 +75,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Type Type { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
@@ -99,21 +95,25 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ProjectionBindingExpression projectionBindingExpression
-                    && Equals(projectionBindingExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ProjectionBindingExpression projectionBindingExpression
+                    && Equals(projectionBindingExpression)
+            );
 
-        private bool Equals(ProjectionBindingExpression projectionBindingExpression)
-            => QueryExpression.Equals(projectionBindingExpression.QueryExpression)
-                && Type == projectionBindingExpression.Type
-                && (ProjectionMember?.Equals(projectionBindingExpression.ProjectionMember)
-                    ?? projectionBindingExpression.ProjectionMember == null)
-                && Index == projectionBindingExpression.Index;
+        private bool Equals(ProjectionBindingExpression projectionBindingExpression) =>
+            QueryExpression.Equals(projectionBindingExpression.QueryExpression)
+            && Type == projectionBindingExpression.Type
+            && (
+                ProjectionMember?.Equals(projectionBindingExpression.ProjectionMember)
+                ?? projectionBindingExpression.ProjectionMember == null
+            )
+            && Index == projectionBindingExpression.Index;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(QueryExpression, ProjectionMember, Index);
+        public override int GetHashCode() =>
+            HashCode.Combine(QueryExpression, ProjectionMember, Index);
     }
 }

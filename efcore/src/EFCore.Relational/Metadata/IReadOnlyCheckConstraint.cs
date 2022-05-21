@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ModelName.StartsWith(prefix, StringComparison.Ordinal)
                     ? ModelName
                     : prefix + ModelName,
-                EntityType.Model.GetMaxIdentifierLength());
+                EntityType.Model.GetMaxIdentifierLength()
+            );
         }
 
         /// <summary>

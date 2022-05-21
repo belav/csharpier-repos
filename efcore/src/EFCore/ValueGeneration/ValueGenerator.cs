@@ -24,8 +24,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// </remarks>
         /// <param name="entry">The change tracking entry of the entity for which the value is being generated.</param>
         /// <returns>The value to be assigned to a property.</returns>
-        public virtual object? Next(EntityEntry entry)
-            => NextValue(entry);
+        public virtual object? Next(EntityEntry entry) => NextValue(entry);
 
         /// <summary>
         ///     Template method to be overridden by implementations to perform value generation.
@@ -49,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public virtual ValueTask<object?> NextAsync(
             EntityEntry entry,
-            CancellationToken cancellationToken = default)
-            => NextValueAsync(entry, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => NextValueAsync(entry, cancellationToken);
 
         /// <summary>
         ///     Template method to be overridden by implementations to perform value generation.
@@ -64,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         protected virtual ValueTask<object?> NextValueAsync(
             EntityEntry entry,
-            CancellationToken cancellationToken = default)
-            => new(NextValue(entry));
+            CancellationToken cancellationToken = default
+        ) => new(NextValue(entry));
 
         /// <summary>
         ///     Gets a value indicating whether the values generated are temporary (i.e they should be replaced
@@ -94,7 +93,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information.
         /// </remarks>
-        public virtual bool GeneratesStableValues
-            => false;
+        public virtual bool GeneratesStableValues => false;
     }
 }

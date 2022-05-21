@@ -36,10 +36,12 @@ internal class SpaProxyMiddleware
         SpaProxyLaunchManager spaProxyLaunchManager,
         IOptions<SpaDevelopmentServerOptions> options,
         IHostApplicationLifetime hostLifetime,
-        ILogger<SpaProxyMiddleware> logger)
+        ILogger<SpaProxyMiddleware> logger
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
-        _spaProxyLaunchManager = spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
+        _spaProxyLaunchManager =
+            spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
         _options = options ?? throw new ArgumentNullException(nameof(options));
         _hostLifetime = hostLifetime ?? throw new ArgumentNullException(nameof(hostLifetime));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -56,7 +58,8 @@ internal class SpaProxyMiddleware
 
     private async Task InvokeCore(HttpContext context)
     {
-        context.Response.Headers[HeaderNames.CacheControl] = "no-cache, no-store, must-revalidate, max-age=0";
+        context.Response.Headers[HeaderNames.CacheControl] =
+            "no-cache, no-store, must-revalidate, max-age=0";
         if (!await _spaProxyLaunchManager.IsSpaProxyRunning(context.RequestAborted))
         {
             _spaProxyLaunchManager.StartInBackground(_hostLifetime.ApplicationStopping);
@@ -68,7 +71,9 @@ internal class SpaProxyMiddleware
         }
         else
         {
-            _logger.LogInformation($"SPA proxy is ready. Redirecting to {_options.Value.ServerUrl}.");
+            _logger.LogInformation(
+                $"SPA proxy is ready. Redirecting to {_options.Value.ServerUrl}."
+            );
             context.Response.Redirect(_options.Value.ServerUrl);
         }
 

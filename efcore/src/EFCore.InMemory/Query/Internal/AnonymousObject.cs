@@ -24,10 +24,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static readonly ConstructorInfo AnonymousObjectCtor
-            = typeof(AnonymousObject).GetTypeInfo()
-                .DeclaredConstructors
-                .Single(c => c.GetParameters().Length == 1);
+        public static readonly ConstructorInfo AnonymousObjectCtor = typeof(AnonymousObject)
+            .GetTypeInfo()
+            .DeclaredConstructors.Single(c => c.GetParameters().Length == 1);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [UsedImplicitly]
-        public AnonymousObject(object[] values)
-            => _values = values;
+        public AnonymousObject(object[] values) => _values = values;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +43,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static bool operator ==(AnonymousObject x, AnonymousObject y)
-            => x.Equals(y);
+        public static bool operator ==(AnonymousObject x, AnonymousObject y) => x.Equals(y);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +51,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static bool operator !=(AnonymousObject x, AnonymousObject y)
-            => !x.Equals(y);
+        public static bool operator !=(AnonymousObject x, AnonymousObject y) => !x.Equals(y);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,11 +59,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj is null
+        public override bool Equals(object? obj) =>
+            obj is null
                 ? false
                 : obj is AnonymousObject anonymousObject
-                && _values.SequenceEqual(anonymousObject._values);
+                    && _values.SequenceEqual(anonymousObject._values);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

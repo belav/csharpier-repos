@@ -12,11 +12,15 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
 {
-    public abstract class AbstractSyntaxTriviaStructureProviderTests : AbstractSyntaxStructureProviderTests
+    public abstract class AbstractSyntaxTriviaStructureProviderTests
+        : AbstractSyntaxStructureProviderTests
     {
         internal abstract AbstractSyntaxStructureProvider CreateProvider();
 
-        internal sealed override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(Document document, int position)
+        internal sealed override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
+            Document document,
+            int position
+        )
         {
             var root = await document.GetSyntaxRootAsync();
             var trivia = root.FindTrivia(position, findInsideTrivia: true);
@@ -24,7 +28,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             var outliner = CreateProvider();
             using var actualRegions = TemporaryArray<BlockSpan>.Empty;
             var options = BlockStructureOptions.From(document.Project);
-            outliner.CollectBlockSpans(trivia, ref actualRegions.AsRef(), options, CancellationToken.None);
+            outliner.CollectBlockSpans(
+                trivia,
+                ref actualRegions.AsRef(),
+                options,
+                CancellationToken.None
+            );
 
             // TODO: Determine why we get null outlining spans.
             return actualRegions.ToImmutableAndClear();

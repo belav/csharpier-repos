@@ -6,32 +6,56 @@ using System.Security;
 
 namespace System.DirectoryServices.Interop
 {
-
     [StructLayout(LayoutKind.Explicit)]
     internal struct Variant
     {
         [FieldOffset(0)]
         public ushort varType;
+
         [FieldOffset(2)]
         public ushort reserved1;
+
         [FieldOffset(4)]
         public ushort reserved2;
+
         [FieldOffset(6)]
         public ushort reserved3;
+
         [FieldOffset(8)]
         public short boolvalue;
+
         [FieldOffset(8)]
         public IntPtr ptr1;
+
         [FieldOffset(12)]
         public IntPtr ptr2;
     }
 
     internal static class UnsafeNativeMethods
     {
-        [DllImport(global::Interop.Libraries.Activeds, ExactSpelling = true, EntryPoint = "ADsOpenObject", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
-        private static extern int IntADsOpenObject(string path, string? userName, string? password, int flags, [In, Out] ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject);
+        [DllImport(
+            global::Interop.Libraries.Activeds,
+            ExactSpelling = true,
+            EntryPoint = "ADsOpenObject",
+            CharSet = System.Runtime.InteropServices.CharSet.Unicode
+        )]
+        private static extern int IntADsOpenObject(
+            string path,
+            string? userName,
+            string? password,
+            int flags,
+            [In, Out] ref Guid iid,
+            [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject
+        );
 
-        public static int ADsOpenObject(string path, string? userName, string? password, int flags, [In, Out] ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject)
+        public static int ADsOpenObject(
+            string path,
+            string? userName,
+            string? password,
+            int flags,
+            [In, Out] ref Guid iid,
+            [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject
+        )
         {
             try
             {
@@ -96,9 +120,13 @@ namespace System.DirectoryServices.Interop
             void PutEx(
                 [In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
                 [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
-                [In] object? vProp);
+                [In] object? vProp
+            );
 
-            void GetInfoEx([In] object vProperties, [In, MarshalAs(UnmanagedType.U4)] int lnReserved);
+            void GetInfoEx(
+                [In] object vProperties,
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved
+            );
         }
 
         [ComImport, Guid("001677D0-FD16-11CE-ABC4-02608C9E7553")]
@@ -123,26 +151,31 @@ namespace System.DirectoryServices.Interop
             [return: MarshalAs(UnmanagedType.Interface)]
             object GetObject(
                 [In, MarshalAs(UnmanagedType.BStr)] string? className,
-                [In, MarshalAs(UnmanagedType.BStr)] string relativeName);
+                [In, MarshalAs(UnmanagedType.BStr)] string relativeName
+            );
 
             [return: MarshalAs(UnmanagedType.Interface)]
             object Create(
                 [In, MarshalAs(UnmanagedType.BStr)] string className,
-                [In, MarshalAs(UnmanagedType.BStr)] string relativeName);
+                [In, MarshalAs(UnmanagedType.BStr)] string relativeName
+            );
 
             void Delete(
                 [In, MarshalAs(UnmanagedType.BStr)] string className,
-                [In, MarshalAs(UnmanagedType.BStr)] string relativeName);
+                [In, MarshalAs(UnmanagedType.BStr)] string relativeName
+            );
 
             [return: MarshalAs(UnmanagedType.Interface)]
             object CopyHere(
                 [In, MarshalAs(UnmanagedType.BStr)] string sourceName,
-                [In, MarshalAs(UnmanagedType.BStr)] string? newName);
+                [In, MarshalAs(UnmanagedType.BStr)] string? newName
+            );
 
             [return: MarshalAs(UnmanagedType.Interface)]
             object MoveHere(
                 [In, MarshalAs(UnmanagedType.BStr)] string sourceName,
-                [In, MarshalAs(UnmanagedType.BStr)] string? newName);
+                [In, MarshalAs(UnmanagedType.BStr)] string? newName
+            );
         }
 
         [ComImport, Guid("B2BD0902-8878-11D1-8C21-00C04FD8D503")]
@@ -155,9 +188,7 @@ namespace System.DirectoryServices.Interop
         /// PropertyValue as a co-class that implements the IAdsPropertyValue interface.
         /// </summary>
         [ComImport, Guid("7b9e38b0-a97c-11d0-8534-00c04fd8d503")]
-        public class PropertyValue
-        {
-        }
+        public class PropertyValue { }
 
         [ComImport, Guid("9068270B-0939-11D1-8BE1-00C04FD8D503")]
         public interface IADsLargeInteger
@@ -171,11 +202,7 @@ namespace System.DirectoryServices.Interop
         {
             void Clear();
 
-            int ADsType
-            {
-                get;
-                set;
-            }
+            int ADsType { get; set; }
 
             string DNString
             {
@@ -221,42 +248,20 @@ namespace System.DirectoryServices.Interop
 
             int Integer { get; set; }
 
-            object OctetString
-            {
-                get;
+            object OctetString { get; set; }
 
-                set;
-            }
+            object SecurityDescriptor { get; set; }
 
-            object SecurityDescriptor
-            {
-                get;
+            object LargeInteger { get; set; }
 
-                set;
-            }
-
-            object LargeInteger
-            {
-                get;
-
-                set;
-            }
-
-            object UTCTime
-            {
-                get;
-
-                set;
-            }
+            object UTCTime { get; set; }
         }
 
         /// <summary>
         ///  PropertyEntry as a co-class that implements the IAdsPropertyEntry interface.
         /// </summary>
         [ComImport, Guid("72D3EDC2-A4C4-11D0-8533-00C04FD8D503")]
-        public class PropertyEntry
-        {
-        }
+        public class PropertyEntry { }
 
         [ComImport, Guid("05792C8E-941F-11D0-8529-00C04FD8D503")]
         public interface IAdsPropertyEntry
@@ -271,17 +276,9 @@ namespace System.DirectoryServices.Interop
                 set;
             }
 
-            int ADsType
-            {
-                get;
-                set;
-            }
+            int ADsType { get; set; }
 
-            int ControlCode
-            {
-                get;
-                set;
-            }
+            int ControlCode { get; set; }
 
             object Values { get; set; }
         }
@@ -305,7 +302,10 @@ namespace System.DirectoryServices.Interop
 
             object Item([In] object varIndex);
 
-            object GetPropertyItem([In, MarshalAs(UnmanagedType.BStr)] string bstrName, int ADsType);
+            object GetPropertyItem(
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                int ADsType
+            );
 
             void PutPropertyItem([In] object varData);
 
@@ -314,16 +314,28 @@ namespace System.DirectoryServices.Interop
             void PurgePropertyList();
         }
 
-        [ComImport, Guid("109BA8EC-92F0-11D0-A790-00C04FD8D5A8"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport,
+            Guid("109BA8EC-92F0-11D0-A790-00C04FD8D5A8"),
+            System.Runtime.InteropServices.InterfaceTypeAttribute(
+                System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
+            )
+        ]
         public interface IDirectorySearch
         {
-            void SetSearchPreference([In] IntPtr /*ads_searchpref_info * */pSearchPrefs, int dwNumPrefs);
+            void SetSearchPreference(
+                [In]
+                    IntPtr /*ads_searchpref_info * */
+                pSearchPrefs,
+                int dwNumPrefs
+            );
 
             void ExecuteSearch(
                 [In, MarshalAs(UnmanagedType.LPWStr)] string? pszSearchFilter,
                 [In, MarshalAs(UnmanagedType.LPArray)] string[]? pAttributeNames,
                 [In] int dwNumberAttributes,
-                [Out] out IntPtr hSearchResult);
+                [Out] out IntPtr hSearchResult
+            );
 
             void AbandonSearch([In] IntPtr hSearchResult);
 
@@ -341,14 +353,15 @@ namespace System.DirectoryServices.Interop
 
             [return: MarshalAs(UnmanagedType.U4)]
             [PreserveSig]
-            int GetNextColumnName(
-                [In] IntPtr hSearchResult,
-                [Out] IntPtr ppszColumnName);
+            int GetNextColumnName([In] IntPtr hSearchResult, [Out] IntPtr ppszColumnName);
 
             void GetColumn(
                 [In] IntPtr hSearchResult,
-                [In] IntPtr /* char * */ szColumnName,
-                [In] IntPtr pSearchColumn);
+                [In]
+                    IntPtr /* char * */
+                szColumnName,
+                [In] IntPtr pSearchColumn
+            );
 
             void FreeColumn([In] IntPtr pSearchColumn);
 

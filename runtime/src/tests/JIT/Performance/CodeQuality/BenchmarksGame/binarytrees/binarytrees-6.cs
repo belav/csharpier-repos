@@ -15,6 +15,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
 //using BenchmarkDotNet.Attributes;
 //using MicroBenchmarks;
 
@@ -51,19 +52,27 @@ namespace BenchmarksGame
         {
             int maxDepth = Math.Max(MinDepth + 2, param);
 
-            var stretchTreeCheck = Task.Run(() =>
-            {
-                int stretchDepth = maxDepth + 1;
-                return "stretch tree of depth " + stretchDepth + "\t check: " +
-                            TreeNode.Create(stretchDepth).Check();
-            });
+            var stretchTreeCheck = Task.Run(
+                () =>
+                {
+                    int stretchDepth = maxDepth + 1;
+                    return "stretch tree of depth "
+                        + stretchDepth
+                        + "\t check: "
+                        + TreeNode.Create(stretchDepth).Check();
+                }
+            );
 
             var longLivedTree = TreeNode.Create(maxDepth);
-            var longLivedText = Task.Run(() =>
-            {
-                return "long lived tree of depth " + maxDepth +
-                            "\t check: " + longLivedTree.Check();
-            });
+            var longLivedText = Task.Run(
+                () =>
+                {
+                    return "long lived tree of depth "
+                        + maxDepth
+                        + "\t check: "
+                        + longLivedTree.Check();
+                }
+            );
 
             var results = new string[(maxDepth - MinDepth) / 2 + 1];
 
@@ -74,19 +83,20 @@ namespace BenchmarksGame
                 var tasks = new Task<int>[NoTasks];
                 for (int t = 0; t < tasks.Length; t++)
                 {
-                    tasks[t] = Task.Run(() =>
-                    {
-                        var check2 = 0;
-                        for (int i2 = n; i2 > 0; i2--)
-                            check2 += TreeNode.Create(depth).Check();
-                        return check2;
-                    });
+                    tasks[t] = Task.Run(
+                        () =>
+                        {
+                            var check2 = 0;
+                            for (int i2 = n; i2 > 0; i2--)
+                                check2 += TreeNode.Create(depth).Check();
+                            return check2;
+                        }
+                    );
                 }
                 var check = tasks[0].Result;
                 for (int t = 1; t < tasks.Length; t++)
                     check += tasks[t].Result;
-                results[i] = (n * NoTasks) + "\t trees of depth " + depth +
-                                "\t check: " + check;
+                results[i] = (n * NoTasks) + "\t trees of depth " + depth + "\t check: " + check;
             }
 
             if (verbose)
@@ -111,7 +121,12 @@ namespace BenchmarksGame
 
         struct TreeNode
         {
-            class Next { public TreeNode left, right; }
+            class Next
+            {
+                public TreeNode left,
+                    right;
+            }
+
             readonly Next next;
 
             TreeNode(TreeNode left, TreeNode right) =>
@@ -119,8 +134,9 @@ namespace BenchmarksGame
 
             internal static TreeNode Create(int d)
             {
-                return d == 1 ? new TreeNode(new TreeNode(), new TreeNode())
-                              : new TreeNode(Create(d - 1), Create(d - 1));
+                return d == 1
+                    ? new TreeNode(new TreeNode(), new TreeNode())
+                    : new TreeNode(Create(d - 1), Create(d - 1));
             }
 
             internal int Check()

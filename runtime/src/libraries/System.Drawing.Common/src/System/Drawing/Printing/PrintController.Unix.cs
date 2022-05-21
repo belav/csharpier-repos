@@ -34,12 +34,8 @@ namespace System.Drawing.Printing
 {
     public abstract partial class PrintController
     {
-        public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e)
-        {
-        }
+        public virtual void OnStartPrint(PrintDocument document, PrintEventArgs e) { }
 
-        public virtual void OnEndPrint(PrintDocument document, PrintEventArgs e)
-        {
-        }
+        public virtual void OnEndPrint(PrintDocument document, PrintEventArgs e) { }
     }
 }

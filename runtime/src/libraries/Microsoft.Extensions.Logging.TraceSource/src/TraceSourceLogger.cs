@@ -16,7 +16,13 @@ namespace Microsoft.Extensions.Logging.TraceSource
             _traceSource = traceSource;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             if (!IsEnabled(logLevel))
             {
@@ -36,7 +42,7 @@ namespace Microsoft.Extensions.Logging.TraceSource
 
             if (exception != null)
             {
-                string exceptionDelimiter = string.IsNullOrEmpty(message) ? string.Empty : " " ;
+                string exceptionDelimiter = string.IsNullOrEmpty(message) ? string.Empty : " ";
                 message += exceptionDelimiter + exception;
             }
 
@@ -61,12 +67,17 @@ namespace Microsoft.Extensions.Logging.TraceSource
         {
             switch (logLevel)
             {
-                case LogLevel.Critical: return TraceEventType.Critical;
-                case LogLevel.Error: return TraceEventType.Error;
-                case LogLevel.Warning: return TraceEventType.Warning;
-                case LogLevel.Information: return TraceEventType.Information;
+                case LogLevel.Critical:
+                    return TraceEventType.Critical;
+                case LogLevel.Error:
+                    return TraceEventType.Error;
+                case LogLevel.Warning:
+                    return TraceEventType.Warning;
+                case LogLevel.Information:
+                    return TraceEventType.Information;
                 case LogLevel.Trace:
-                default: return TraceEventType.Verbose;
+                default:
+                    return TraceEventType.Verbose;
             }
         }
 

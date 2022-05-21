@@ -40,9 +40,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     ContextDir = Path.Combine("..", "TestContextDir" + Path.DirectorySeparatorChar),
                     ContextName = "TestContext",
                     ConnectionString = "Data Source=Test"
-                });
+                }
+            );
 
-            Assert.Equal(Path.Combine("..", "TestContextDir", "TestContext.cs"), result.ContextFile.Path);
+            Assert.Equal(
+                Path.Combine("..", "TestContextDir", "TestContext.cs"),
+                result.ContextFile.Path
+            );
             Assert.NotEmpty(result.ContextFile.Code);
 
             Assert.Equal(1, result.AdditionalFiles.Count);
@@ -54,7 +58,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var testAssembly = typeof(CSharpModelGeneratorTest).Assembly;
             var reporter = new TestOperationReporter();
-            return new DesignTimeServicesBuilder(testAssembly, testAssembly, reporter, new string[0])
+            return new DesignTimeServicesBuilder(
+                testAssembly,
+                testAssembly,
+                reporter,
+                new string[0]
+            )
                 .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer")
                 .AddSingleton<IAnnotationCodeGenerator, AnnotationCodeGenerator>()
                 .AddSingleton<IProviderConfigurationCodeGenerator, TestProviderCodeGenerator>()

@@ -45,23 +45,38 @@ namespace System.Net.Test.Common
 #if TARGET_BROWSER
                 _listenSocket = new ClientWebSocket();
 
-                await _listenSocket.ConnectAsync(Configuration.Http.RemoteLoopServer, CancellationToken.None);
+                await _listenSocket.ConnectAsync(
+                    Configuration.Http.RemoteLoopServer,
+                    CancellationToken.None
+                );
 
                 byte[] buffer = new byte[128 * 1024];
-                var message = Encoding.ASCII.GetBytes($"{_options.ListenBacklog},{_options.Address}");
-                await _listenSocket.SendAsync(message, WebSocketMessageType.Binary, true, CancellationToken.None);
+                var message = Encoding.ASCII.GetBytes(
+                    $"{_options.ListenBacklog},{_options.Address}"
+                );
+                await _listenSocket.SendAsync(
+                    message,
+                    WebSocketMessageType.Binary,
+                    true,
+                    CancellationToken.None
+                );
                 var first = await _listenSocket.ReceiveAsync(buffer, CancellationToken.None);
                 localEndPoint = IPEndPoint.Parse(Encoding.ASCII.GetString(buffer, 0, first.Count));
 #else
-                _listenSocket = new Socket(_options.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                _listenSocket = new Socket(
+                    _options.Address.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 _listenSocket.Bind(new IPEndPoint(_options.Address, 0));
                 _listenSocket.Listen(_options.ListenBacklog);
                 localEndPoint = (IPEndPoint)_listenSocket.LocalEndPoint;
 #endif
 
-                string host = _options.Address.AddressFamily == AddressFamily.InterNetworkV6 ?
-                    $"[{localEndPoint.Address}]" :
-                    localEndPoint.Address.ToString();
+                string host =
+                    _options.Address.AddressFamily == AddressFamily.InterNetworkV6
+                        ? $"[{localEndPoint.Address}]"
+                        : localEndPoint.Address.ToString();
 
                 string scheme = _options.UseSsl ? "https" : "http";
                 if (_options.WebSocketEndpoint)
@@ -93,7 +108,10 @@ namespace System.Net.Test.Common
         public SocketWrapper ListenSocket => _socketWrapper;
         public override Uri Address => _uri;
 
-        public static async Task CreateServerAsync(Func<LoopbackServer, Task> funcAsync, Options options = null)
+        public static async Task CreateServerAsync(
+            Func<LoopbackServer, Task> funcAsync,
+            Options options = null
+        )
         {
             using (var server = new LoopbackServer(options))
             {
@@ -102,20 +120,32 @@ namespace System.Net.Test.Common
             }
         }
 
-        public static Task CreateServerAsync(Func<LoopbackServer, Uri, Task> funcAsync, Options options = null)
+        public static Task CreateServerAsync(
+            Func<LoopbackServer, Uri, Task> funcAsync,
+            Options options = null
+        )
         {
             return CreateServerAsync(server => funcAsync(server, server.Address), options);
         }
 
-        public static Task CreateClientAndServerAsync(Func<Uri, Task> clientFunc, Func<LoopbackServer, Task> serverFunc, Options options = null)
+        public static Task CreateClientAndServerAsync(
+            Func<Uri, Task> clientFunc,
+            Func<LoopbackServer, Task> serverFunc,
+            Options options = null
+        )
         {
-            return CreateServerAsync(async server =>
-            {
-                Task clientTask = clientFunc(server.Address);
-                Task serverTask = serverFunc(server);
+            return CreateServerAsync(
+                async server =>
+                {
+                    Task clientTask = clientFunc(server.Address);
+                    Task serverTask = serverFunc(server);
 
-                await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed().ConfigureAwait(false);
-            }, options);
+                    await new Task[] { clientTask, serverTask }
+                        .WhenAllOrAnyFailed()
+                        .ConfigureAwait(false);
+                },
+                options
+            );
         }
 
         public override async Task<GenericLoopbackConnection> EstablishGenericConnectionAsync()
@@ -141,11 +171,16 @@ namespace System.Net.Test.Common
                     socket.NoDelay = true;
                 }
                 // OSX can throw if socket is in weird state during close or cancellation
-                catch (SocketException ex) when (ex.SocketErrorCode == SocketError.InvalidArgument && PlatformDetection.IsOSXLike) { }
+                catch (SocketException ex)
+                    when (ex.SocketErrorCode == SocketError.InvalidArgument
+                        && PlatformDetection.IsOSXLike
+                    ) { }
 
                 stream = new NetworkStream(socket, ownsSocket: false);
 #endif
-                return await Connection.CreateAsync(closableWrapper, stream, _options).ConfigureAwait(false);
+                return await Connection
+                    .CreateAsync(closableWrapper, stream, _options)
+                    .ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -162,44 +197,71 @@ namespace System.Net.Test.Common
             }
         }
 
-        public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(string response)
+        public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(
+            string response
+        )
         {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(async connection =>
-            {
-                lines = await connection.ReadRequestHeaderAndSendCustomResponseAsync(response).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            await AcceptConnectionAsync(
+                    async connection =>
+                    {
+                        lines = await connection
+                            .ReadRequestHeaderAndSendCustomResponseAsync(response)
+                            .ConfigureAwait(false);
+                    }
+                )
+                .ConfigureAwait(false);
 
             return lines;
         }
 
-        public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(byte[] response)
+        public async Task<List<string>> AcceptConnectionSendCustomResponseAndCloseAsync(
+            byte[] response
+        )
         {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(async connection =>
-            {
-                lines = await connection.ReadRequestHeaderAndSendCustomResponseAsync(response).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            await AcceptConnectionAsync(
+                    async connection =>
+                    {
+                        lines = await connection
+                            .ReadRequestHeaderAndSendCustomResponseAsync(response)
+                            .ConfigureAwait(false);
+                    }
+                )
+                .ConfigureAwait(false);
 
             return lines;
         }
 
-        public async Task<List<string>> AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null)
+        public async Task<List<string>> AcceptConnectionSendResponseAndCloseAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null
+        )
         {
             List<string> lines = null;
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(async connection =>
-            {
-                lines = await connection.ReadRequestHeaderAndSendResponseAsync(statusCode, additionalHeaders + "Connection: close\r\n", content).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            await AcceptConnectionAsync(
+                    async connection =>
+                    {
+                        lines = await connection
+                            .ReadRequestHeaderAndSendResponseAsync(
+                                statusCode,
+                                additionalHeaders + "Connection: close\r\n",
+                                content
+                            )
+                            .ConfigureAwait(false);
+                    }
+                )
+                .ConfigureAwait(false);
 
             return lines;
         }
@@ -220,7 +282,6 @@ namespace System.Net.Test.Common
 
         public static string GetRequestMethod(List<string> headers)
         {
-
             if (headers != null && headers.Count > 1)
             {
                 return headers[0].Split()[1].Trim();
@@ -343,16 +404,26 @@ namespace System.Net.Test.Common
             ConnectionClose
         }
 
-        public static string GetContentModeResponse(ContentMode mode, string content, bool connectionClose = false)
+        public static string GetContentModeResponse(
+            ContentMode mode,
+            string content,
+            bool connectionClose = false
+        )
         {
             switch (mode)
             {
                 case ContentMode.ContentLength:
                     return GetHttpResponse(content: content, connectionClose: connectionClose);
                 case ContentMode.SingleChunk:
-                    return GetSingleChunkHttpResponse(content: content, connectionClose: connectionClose);
+                    return GetSingleChunkHttpResponse(
+                        content: content,
+                        connectionClose: connectionClose
+                    );
                 case ContentMode.BytePerChunk:
-                    return GetBytePerChunkHttpResponse(content: content, connectionClose: connectionClose);
+                    return GetBytePerChunkHttpResponse(
+                        content: content,
+                        connectionClose: connectionClose
+                    );
                 case ContentMode.ConnectionClose:
                     Assert.True(connectionClose);
                     return GetConnectionCloseResponse(content: content);
@@ -362,63 +433,99 @@ namespace System.Net.Test.Common
             }
         }
 
-        public static string GetHttpResponse(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null, bool connectionClose = false) =>
-            GetHttpResponseHeaders(statusCode, additionalHeaders, content, connectionClose) +
-            content;
+        public static string GetHttpResponse(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null,
+            bool connectionClose = false
+        ) =>
+            GetHttpResponseHeaders(statusCode, additionalHeaders, content, connectionClose)
+            + content;
 
-        public static string GetHttpResponseHeaders(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null, bool connectionClose = false) =>
-            GetHttpResponseHeaders(statusCode, additionalHeaders, content == null ? 0 : content.Length, connectionClose);
+        public static string GetHttpResponseHeaders(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null,
+            bool connectionClose = false
+        ) =>
+            GetHttpResponseHeaders(
+                statusCode,
+                additionalHeaders,
+                content == null ? 0 : content.Length,
+                connectionClose
+            );
 
         public static string CorsHeaders = PlatformDetection.IsBrowser
-                ? "Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE\r\n" +
-                  "Access-Control-Expose-Headers: *\r\n" +
-                  "Access-Control-Allow-Headers: *\r\n" +
-                  "Access-Control-Allow-Origin: *\r\n"
-                : "";
+            ? "Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE\r\n"
+                + "Access-Control-Expose-Headers: *\r\n"
+                + "Access-Control-Allow-Headers: *\r\n"
+                + "Access-Control-Allow-Origin: *\r\n"
+            : "";
 
-        public static string GetHttpResponseHeaders(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, int contentLength = 0, bool connectionClose = false) =>
-            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n" +
-            (connectionClose ? "Connection: close\r\n" : "") +
-            $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-            $"Content-Length: {contentLength}\r\n" +
-            CorsHeaders +
-            additionalHeaders +
-            "\r\n";
+        public static string GetHttpResponseHeaders(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            int contentLength = 0,
+            bool connectionClose = false
+        ) =>
+            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+            + (connectionClose ? "Connection: close\r\n" : "")
+            + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+            + $"Content-Length: {contentLength}\r\n"
+            + CorsHeaders
+            + additionalHeaders
+            + "\r\n";
 
-        public static string GetSingleChunkHttpResponse(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null, bool connectionClose = false) =>
-            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n" +
-            (connectionClose ? "Connection: close\r\n" : "") +
-            $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-            "Transfer-Encoding: chunked\r\n" +
-            CorsHeaders +
-            additionalHeaders +
-            "\r\n" +
-            (string.IsNullOrEmpty(content) ? "" :
-                $"{content.Length:X}\r\n" +
-                $"{content}\r\n") +
-            $"0\r\n" +
-            $"\r\n";
+        public static string GetSingleChunkHttpResponse(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null,
+            bool connectionClose = false
+        ) =>
+            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+            + (connectionClose ? "Connection: close\r\n" : "")
+            + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+            + "Transfer-Encoding: chunked\r\n"
+            + CorsHeaders
+            + additionalHeaders
+            + "\r\n"
+            + (string.IsNullOrEmpty(content) ? "" : $"{content.Length:X}\r\n" + $"{content}\r\n")
+            + $"0\r\n"
+            + $"\r\n";
 
-        public static string GetBytePerChunkHttpResponse(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null, bool connectionClose = false) =>
-            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n" +
-            (connectionClose ? "Connection: close\r\n" : "") +
-            $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-            "Transfer-Encoding: chunked\r\n" +
-            CorsHeaders +
-            additionalHeaders +
-            "\r\n" +
-            (string.IsNullOrEmpty(content) ? "" : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))) +
-            $"0\r\n" +
-            $"\r\n";
+        public static string GetBytePerChunkHttpResponse(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null,
+            bool connectionClose = false
+        ) =>
+            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+            + (connectionClose ? "Connection: close\r\n" : "")
+            + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+            + "Transfer-Encoding: chunked\r\n"
+            + CorsHeaders
+            + additionalHeaders
+            + "\r\n"
+            + (
+                string.IsNullOrEmpty(content)
+                    ? ""
+                    : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))
+            )
+            + $"0\r\n"
+            + $"\r\n";
 
-        public static string GetConnectionCloseResponse(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null) =>
-            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n" +
-            "Connection: close\r\n" +
-            $"Date: {DateTimeOffset.UtcNow:R}\r\n" +
-            CorsHeaders +
-            additionalHeaders +
-            "\r\n" +
-            content;
+        public static string GetConnectionCloseResponse(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            string additionalHeaders = null,
+            string content = null
+        ) =>
+            $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+            + "Connection: close\r\n"
+            + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+            + CorsHeaders
+            + additionalHeaders
+            + "\r\n"
+            + content;
 
         public class Options : GenericLoopbackOptions
         {
@@ -434,9 +541,12 @@ namespace System.Net.Test.Common
                 UseSsl = false;
                 SslProtocols =
 #if !NETSTANDARD2_0 && !NETFRAMEWORK
-                SslProtocols.Tls13 |
+                    SslProtocols.Tls13
+                    |
 #endif
-                SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
+                    SslProtocols.Tls
+                    | SslProtocols.Tls11
+                    | SslProtocols.Tls12;
             }
         }
 
@@ -464,18 +574,36 @@ namespace System.Net.Test.Common
             public SocketWrapper Socket => _socket;
             public Stream Stream => _stream;
 
-            public static async Task<Connection> CreateAsync(SocketWrapper socket, Stream stream, Options httpOptions)
+            public static async Task<Connection> CreateAsync(
+                SocketWrapper socket,
+                Stream stream,
+                Options httpOptions
+            )
             {
                 if (httpOptions.UseSsl)
                 {
-                    var sslStream = new SslStream(stream, false, delegate { return true; });
-                    using (X509Certificate2 cert = httpOptions.Certificate ?? Configuration.Certificates.GetServerCertificate())
+                    var sslStream = new SslStream(
+                        stream,
+                        false,
+                        delegate
+                        {
+                            return true;
+                        }
+                    );
+                    using (
+                        X509Certificate2 cert =
+                            httpOptions.Certificate
+                            ?? Configuration.Certificates.GetServerCertificate()
+                    )
                     {
-                        await sslStream.AuthenticateAsServerAsync(
-                            cert,
-                            clientCertificateRequired: true, // allowed but not required
-                            enabledSslProtocols: httpOptions.SslProtocols,
-                            checkCertificateRevocation: false).ConfigureAwait(false);
+                        await sslStream
+                            .AuthenticateAsServerAsync(
+                                cert,
+                                clientCertificateRequired: true, // allowed but not required
+                                enabledSslProtocols: httpOptions.SslProtocols,
+                                checkCertificateRevocation: false
+                            )
+                            .ConfigureAwait(false);
                     }
                     stream = sslStream;
                 }
@@ -494,7 +622,10 @@ namespace System.Net.Test.Common
                 {
                     // Use buffered data first.
                     int copyLength = Math.Min(size, _readEnd - _readStart);
-                    Memory<byte> source = new Memory<byte>(_readBuffer).Slice(_readStart, copyLength);
+                    Memory<byte> source = new Memory<byte>(_readBuffer).Slice(
+                        _readStart,
+                        copyLength
+                    );
                     source.CopyTo(buffer.Slice(offset));
 
                     _readStart += copyLength;
@@ -512,7 +643,9 @@ namespace System.Net.Test.Common
                 return readLength;
 #elif NETFRAMEWORK
                 var tmpBuffer = new byte[buffer.Length];
-                int readBytes = await _stream.ReadAsync(tmpBuffer, offset, size).ConfigureAwait(false);
+                int readBytes = await _stream
+                    .ReadAsync(tmpBuffer, offset, size)
+                    .ConfigureAwait(false);
                 tmpBuffer.CopyTo(buffer);
                 return readBytes;
 #else
@@ -565,7 +698,8 @@ namespace System.Net.Test.Common
 
                 do
                 {
-                    bytesRead = await ReadAsync(buffer, offset, buffer.Length - offset).ConfigureAwait(false);
+                    bytesRead = await ReadAsync(buffer, offset, buffer.Length - offset)
+                        .ConfigureAwait(false);
                     totalLength += bytesRead;
                     offset += bytesRead;
 
@@ -622,7 +756,9 @@ namespace System.Net.Test.Common
                             }
                         }
 
-                        int bytesRead = await _stream.ReadAsync(_readBuffer, _readEnd, _readBuffer.Length - _readEnd).ConfigureAwait(false);
+                        int bytesRead = await _stream
+                            .ReadAsync(_readBuffer, _readEnd, _readBuffer.Length - _readEnd)
+                            .ConfigureAwait(false);
                         if (bytesRead == 0)
                         {
                             break;
@@ -631,7 +767,12 @@ namespace System.Net.Test.Common
                         _readEnd += bytesRead;
                     }
 
-                    index = Array.IndexOf(_readBuffer, (byte)'\n', startSearch, _readEnd - startSearch);
+                    index = Array.IndexOf(
+                        _readBuffer,
+                        (byte)'\n',
+                        startSearch,
+                        _readEnd - startSearch
+                    );
                     if (index == -1)
                     {
                         // We did not find it, look for more data.
@@ -641,8 +782,14 @@ namespace System.Net.Test.Common
 
                     int stringLength = index - _readStart;
                     // Consume CRLF if present.
-                    if (_readBuffer[_readStart + stringLength] == '\n') { stringLength--; }
-                    if (_readBuffer[_readStart + stringLength] == '\r') { stringLength--; }
+                    if (_readBuffer[_readStart + stringLength] == '\n')
+                    {
+                        stringLength--;
+                    }
+                    if (_readBuffer[_readStart + stringLength] == '\r')
+                    {
+                        stringLength--;
+                    }
 
                     byte[] line = _readBuffer.AsSpan(_readStart, stringLength + 1).ToArray();
                     _readStart = index + 1;
@@ -732,26 +879,39 @@ namespace System.Net.Test.Common
                 await _stream.WriteAsync(response);
             }
 
-            public async Task SendResponseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null)
+            public async Task SendResponseAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                string additionalHeaders = null,
+                string content = null
+            )
             {
-                await SendResponseAsync(GetHttpResponse(statusCode, additionalHeaders, content)).ConfigureAwait(false);
+                await SendResponseAsync(GetHttpResponse(statusCode, additionalHeaders, content))
+                    .ConfigureAwait(false);
             }
 
-            public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(string response)
+            public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(
+                string response
+            )
             {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
                 await WriteStringAsync(response);
                 return lines;
             }
 
-            public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(byte[] response)
+            public async Task<List<string>> ReadRequestHeaderAndSendCustomResponseAsync(
+                byte[] response
+            )
             {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
                 await _stream.WriteAsync(response, 0, response.Length).ConfigureAwait(false);
                 return lines;
             }
 
-            public async Task<List<string>> ReadRequestHeaderAndSendResponseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, string additionalHeaders = null, string content = null)
+            public async Task<List<string>> ReadRequestHeaderAndSendResponseAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                string additionalHeaders = null,
+                string content = null
+            )
             {
                 List<string> lines = await ReadRequestHeaderAsync().ConfigureAwait(false);
 
@@ -759,10 +919,10 @@ namespace System.Net.Test.Common
                 lines = await HandleCORSPreFlight(lines);
 #endif
 
-                await SendResponseAsync(statusCode, additionalHeaders, content).ConfigureAwait(false);
+                await SendResponseAsync(statusCode, additionalHeaders, content)
+                    .ConfigureAwait(false);
                 return lines;
             }
-
 
             //
             // GenericLoopbackServer implementation
@@ -772,13 +932,16 @@ namespace System.Net.Test.Common
             {
                 HttpRequestData requestData = new HttpRequestData();
 
-                List<byte[]> headerLines = await ReadRequestHeaderBytesAsync().ConfigureAwait(false);
+                List<byte[]> headerLines = await ReadRequestHeaderBytesAsync()
+                    .ConfigureAwait(false);
 
                 // Parse method and path
                 string[] splits = Encoding.ASCII.GetString(headerLines[0]).Split(' ');
                 requestData.Method = splits[0];
                 requestData.Path = splits[1];
-                requestData.Version = Version.Parse(splits[2].Substring(splits[2].IndexOf('/') + 1));
+                requestData.Version = Version.Parse(
+                    splits[2].Substring(splits[2].IndexOf('/') + 1)
+                );
 
                 // Convert header lines to key/value pairs
                 // Skip first line since it's the status line
@@ -795,9 +958,14 @@ namespace System.Net.Test.Common
                 {
                     if (requestData.GetHeaderValueCount("Content-Length") != 0)
                     {
-                        _contentLength = int.Parse(requestData.GetSingleHeaderValue("Content-Length"));
+                        _contentLength = int.Parse(
+                            requestData.GetSingleHeaderValue("Content-Length")
+                        );
                     }
-                    else if (requestData.GetHeaderValueCount("Transfer-Encoding") != 0 && requestData.GetSingleHeaderValue("Transfer-Encoding") == "chunked")
+                    else if (
+                        requestData.GetHeaderValueCount("Transfer-Encoding") != 0
+                        && requestData.GetSingleHeaderValue("Transfer-Encoding") == "chunked"
+                    )
                     {
                         _contentLength = -1;
                     }
@@ -828,7 +996,8 @@ namespace System.Net.Test.Common
                 if (_contentLength > 0)
                 {
                     buffer = new byte[_contentLength];
-                    int bytesRead = await ReadBlockAsync(buffer, 0, _contentLength).ConfigureAwait(false);
+                    int bytesRead = await ReadBlockAsync(buffer, 0, _contentLength)
+                        .ConfigureAwait(false);
                     Assert.Equal(_contentLength, bytesRead);
                 }
                 else if (_contentLength < 0)
@@ -837,7 +1006,10 @@ namespace System.Net.Test.Common
                     while (true)
                     {
                         string chunkHeader = await ReadLineAsync().ConfigureAwait(false);
-                        int chunkLength = int.Parse(chunkHeader, System.Globalization.NumberStyles.HexNumber);
+                        int chunkLength = int.Parse(
+                            chunkHeader,
+                            System.Globalization.NumberStyles.HexNumber
+                        );
                         if (chunkLength == 0)
                         {
                             // Last chunk. Read CRLF and exit.
@@ -872,19 +1044,30 @@ namespace System.Net.Test.Common
                 _bodyRead = false;
             }
 
-            public override async Task SendResponseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "", bool isFinal = true, int requestId = 0)
+            public override async Task SendResponseAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                IList<HttpHeaderData> headers = null,
+                string content = "",
+                bool isFinal = true,
+                int requestId = 0
+            )
             {
                 MemoryStream headerBytes = new MemoryStream();
                 int contentLength = -1;
                 bool isChunked = false;
-                bool hasContentLength  = false;
+                bool hasContentLength = false;
 
                 if (headers != null)
                 {
                     // Process given headers and look for some well-known cases.
                     foreach (HttpHeaderData headerData in headers)
                     {
-                        if (headerData.Name.Equals("Content-Length", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            headerData.Name.Equals(
+                                "Content-Length",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             hasContentLength = true;
                             if (headerData.Value == null)
@@ -894,7 +1077,16 @@ namespace System.Net.Test.Common
 
                             contentLength = int.Parse(headerData.Value);
                         }
-                        else if (headerData.Name.Equals("Transfer-Encoding", StringComparison.OrdinalIgnoreCase) && headerData.Value.Equals("chunked", StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            headerData.Name.Equals(
+                                "Transfer-Encoding",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                            && headerData.Value.Equals(
+                                "chunked",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             isChunked = true;
                         }
@@ -903,7 +1095,9 @@ namespace System.Net.Test.Common
                         headerBytes.Write(nameBytes, 0, nameBytes.Length);
                         headerBytes.Write(s_colonSpaceBytes, 0, s_colonSpaceBytes.Length);
 
-                        byte[] valueBytes = (headerData.ValueEncoding ?? Encoding.ASCII).GetBytes(headerData.Value);
+                        byte[] valueBytes = (headerData.ValueEncoding ?? Encoding.ASCII).GetBytes(
+                            headerData.Value
+                        );
                         headerBytes.Write(valueBytes, 0, valueBytes.Length);
                         headerBytes.Write(s_newLineBytes, 0, s_newLineBytes.Length);
                     }
@@ -920,8 +1114,13 @@ namespace System.Net.Test.Common
                 headerBytes.SetLength(0);
 
                 byte[] headerStartBytes = Encoding.ASCII.GetBytes(
-                    $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n" +
-                    (!hasContentLength && !isChunked && content != null ? $"Content-length: {content.Length}\r\n" : ""));
+                    $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+                        + (
+                            !hasContentLength && !isChunked && content != null
+                                ? $"Content-length: {content.Length}\r\n"
+                                : ""
+                        )
+                );
 
                 headerBytes.Write(headerStartBytes, 0, headerStartBytes.Length);
                 headerBytes.Write(temp, 0, temp.Length);
@@ -933,11 +1132,15 @@ namespace System.Net.Test.Common
 
                 if (content != null)
                 {
-                    await SendResponseBodyAsync(content, isFinal: isFinal, requestId: requestId).ConfigureAwait(false);
+                    await SendResponseBodyAsync(content, isFinal: isFinal, requestId: requestId)
+                        .ConfigureAwait(false);
                 }
             }
 
-            private string GetResponseHeaderString(HttpStatusCode statusCode, IList<HttpHeaderData> headers)
+            private string GetResponseHeaderString(
+                HttpStatusCode statusCode,
+                IList<HttpHeaderData> headers
+            )
             {
                 string headerString = null;
 
@@ -950,18 +1153,31 @@ namespace System.Net.Test.Common
                 }
                 headerString += CorsHeaders;
 
-                headerString = GetHttpResponseHeaders(statusCode, headerString, 0, connectionClose: true);
+                headerString = GetHttpResponseHeaders(
+                    statusCode,
+                    headerString,
+                    0,
+                    connectionClose: true
+                );
 
                 return headerString;
             }
 
-            public override async Task SendResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, int requestId = 0)
+            public override async Task SendResponseHeadersAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                IList<HttpHeaderData> headers = null,
+                int requestId = 0
+            )
             {
                 string headerString = GetResponseHeaderString(statusCode, headers);
                 await SendResponseAsync(headerString).ConfigureAwait(false);
             }
 
-            public override async Task SendPartialResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, int requestId = 0)
+            public override async Task SendPartialResponseHeadersAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                IList<HttpHeaderData> headers = null,
+                int requestId = 0
+            )
             {
                 string headerString = GetResponseHeaderString(statusCode, headers);
 
@@ -971,14 +1187,24 @@ namespace System.Net.Test.Common
                 await SendResponseAsync(headerString).ConfigureAwait(false);
             }
 
-            public override async Task SendResponseBodyAsync(byte[] content, bool isFinal = true, int requestId = 0)
+            public override async Task SendResponseBodyAsync(
+                byte[] content,
+                bool isFinal = true,
+                int requestId = 0
+            )
             {
                 await SendResponseAsync(content).ConfigureAwait(false);
             }
 
             public async Task<HttpRequestData> HandleCORSPreFlight(HttpRequestData requestData)
             {
-                if (PlatformDetection.IsBrowser && requestData.Method == "OPTIONS" && requestData.Headers.Any(h => h.Name.StartsWith("Access-Control-Request-Method")))
+                if (
+                    PlatformDetection.IsBrowser
+                    && requestData.Method == "OPTIONS"
+                    && requestData.Headers.Any(
+                        h => h.Name.StartsWith("Access-Control-Request-Method")
+                    )
+                )
                 {
                     // handle CORS pre-flight
                     await SendResponseAsync(HttpStatusCode.OK).ConfigureAwait(false);
@@ -997,7 +1223,11 @@ namespace System.Net.Test.Common
 
             public async Task<List<string>> HandleCORSPreFlight(List<string> lines)
             {
-                if (PlatformDetection.IsBrowser && lines[0].Contains("OPTIONS") && lines.Any(h => h.StartsWith("Access-Control-Request-Method")))
+                if (
+                    PlatformDetection.IsBrowser
+                    && lines[0].Contains("OPTIONS")
+                    && lines.Any(h => h.StartsWith("Access-Control-Request-Method"))
+                )
                 {
                     // handle CORS pre-flight
                     await SendResponseAsync(HttpStatusCode.OK).ConfigureAwait(false);
@@ -1014,7 +1244,11 @@ namespace System.Net.Test.Common
                 return lines;
             }
 
-            public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+            public override async Task<HttpRequestData> HandleRequestAsync(
+                HttpStatusCode statusCode = HttpStatusCode.OK,
+                IList<HttpHeaderData> headers = null,
+                string content = ""
+            )
             {
                 HttpRequestData requestData = await ReadRequestDataAsync().ConfigureAwait(false);
 
@@ -1043,11 +1277,15 @@ namespace System.Net.Test.Common
                     newHeaders.Add(new HttpHeaderData("Date", $"{DateTimeOffset.UtcNow:R}"));
                 }
 
-                await SendResponseAsync(statusCode, newHeaders, content: content).ConfigureAwait(false);
+                await SendResponseAsync(statusCode, newHeaders, content: content)
+                    .ConfigureAwait(false);
                 return requestData;
             }
 
-            public override async Task WaitForCancellationAsync(bool ignoreIncomingData = true, int requestId = 0)
+            public override async Task WaitForCancellationAsync(
+                bool ignoreIncomingData = true,
+                int requestId = 0
+            )
             {
                 var buffer = new byte[1024];
                 while (true)
@@ -1067,11 +1305,17 @@ namespace System.Net.Test.Common
             }
         }
 
-        public override async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
             using (Connection connection = await EstablishConnectionAsync().ConfigureAwait(false))
             {
-                return await connection.HandleRequestAsync(statusCode, headers, content).ConfigureAwait(false);
+                return await connection
+                    .HandleRequestAsync(statusCode, headers, content)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -1083,7 +1327,8 @@ namespace System.Net.Test.Common
 
     public sealed class Http11LoopbackServerFactory : LoopbackServerFactory
     {
-        public static readonly Http11LoopbackServerFactory Singleton = new Http11LoopbackServerFactory();
+        public static readonly Http11LoopbackServerFactory Singleton =
+            new Http11LoopbackServerFactory();
 
         public override GenericLoopbackServer CreateServer(GenericLoopbackOptions options = null)
         {
@@ -1092,14 +1337,29 @@ namespace System.Net.Test.Common
             return loopbackServer;
         }
 
-        public override Task CreateServerAsync(Func<GenericLoopbackServer, Uri, Task> funcAsync, int millisecondsTimeout = 60_000, GenericLoopbackOptions options = null)
+        public override Task CreateServerAsync(
+            Func<GenericLoopbackServer, Uri, Task> funcAsync,
+            int millisecondsTimeout = 60_000,
+            GenericLoopbackOptions options = null
+        )
         {
-            return LoopbackServer.CreateServerAsync((server, uri) => funcAsync(server, uri), options: CreateOptions(options));
+            return LoopbackServer.CreateServerAsync(
+                (server, uri) => funcAsync(server, uri),
+                options: CreateOptions(options)
+            );
         }
 
-        public override async Task<GenericLoopbackConnection> CreateConnectionAsync(SocketWrapper socket, Stream stream, GenericLoopbackOptions options = null)
+        public override async Task<GenericLoopbackConnection> CreateConnectionAsync(
+            SocketWrapper socket,
+            Stream stream,
+            GenericLoopbackOptions options = null
+        )
         {
-            return await LoopbackServer.Connection.CreateAsync(socket, stream, CreateOptions(options));
+            return await LoopbackServer.Connection.CreateAsync(
+                socket,
+                stream,
+                CreateOptions(options)
+            );
         }
 
         private static LoopbackServer.Options CreateOptions(GenericLoopbackOptions options)

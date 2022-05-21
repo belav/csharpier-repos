@@ -18,7 +18,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IValueTaskSource<FlushResult>, IDisposable
+internal class Http2OutputProducer
+    : IHttpOutputProducer,
+        IHttpOutputAborter,
+        IValueTaskSource<FlushResult>,
+        IDisposable
 {
     private int StreamId => _stream.StreamId;
     private readonly Http2FrameWriter _frameWriter;
@@ -34,7 +38,8 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
     private readonly Pipe _pipe;
     private readonly ConcurrentPipeWriter _pipeWriter;
     private readonly PipeReader _pipeReader;
-    private readonly ManualResetValueTaskSource<object?> _resetAwaitable = new ManualResetValueTaskSource<object?>();
+    private readonly ManualResetValueTaskSource<object?> _resetAwaitable =
+        new ManualResetValueTaskSource<object?>();
     private IMemoryOwner<byte>? _fakeMemoryOwner;
     private byte[]? _fakeMemory;
     private bool _startedWritingDataFrames;
@@ -48,17 +53,33 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
     internal bool _disposed;
 
     /// <summary>The core logic for the IValueTaskSource implementation.</summary>
-    private ManualResetValueTaskSourceCore<FlushResult> _responseCompleteTaskSource = new ManualResetValueTaskSourceCore<FlushResult> { RunContinuationsAsynchronously = true }; // mutable struct, do not make this readonly
+    private ManualResetValueTaskSourceCore<FlushResult> _responseCompleteTaskSource =
+        new ManualResetValueTaskSourceCore<FlushResult> { RunContinuationsAsynchronously = true }; // mutable struct, do not make this readonly
 
     // This object is itself usable as a backing source for ValueTask.  Since there's only ever one awaiter
     // for this object's state transitions at a time, we allow the object to be awaited directly. All functionality
     // associated with the implementation is just delegated to the ManualResetValueTaskSourceCore.
-    private ValueTask<FlushResult> GetWaiterTask() => new ValueTask<FlushResult>(this, _responseCompleteTaskSource.Version);
-    ValueTaskSourceStatus IValueTaskSource<FlushResult>.GetStatus(short token) => _responseCompleteTaskSource.GetStatus(token);
-    void IValueTaskSource<FlushResult>.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) => _responseCompleteTaskSource.OnCompleted(continuation, state, token, flags);
-    FlushResult IValueTaskSource<FlushResult>.GetResult(short token) => _responseCompleteTaskSource.GetResult(token);
+    private ValueTask<FlushResult> GetWaiterTask() =>
+        new ValueTask<FlushResult>(this, _responseCompleteTaskSource.Version);
 
-    public Http2OutputProducer(Http2Stream stream, Http2StreamContext context, StreamOutputFlowControl flowControl)
+    ValueTaskSourceStatus IValueTaskSource<FlushResult>.GetStatus(short token) =>
+        _responseCompleteTaskSource.GetStatus(token);
+
+    void IValueTaskSource<FlushResult>.OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    ) => _responseCompleteTaskSource.OnCompleted(continuation, state, token, flags);
+
+    FlushResult IValueTaskSource<FlushResult>.GetResult(short token) =>
+        _responseCompleteTaskSource.GetResult(token);
+
+    public Http2OutputProducer(
+        Http2Stream stream,
+        Http2StreamContext context,
+        StreamOutputFlowControl flowControl
+    )
     {
         _stream = stream;
         _frameWriter = context.FrameWriter;
@@ -84,7 +105,10 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
         // Data background task must still be running.
         Debug.Assert(!_dataWriteProcessingTask.IsCompleted);
         // Response should have been completed.
-        Debug.Assert(_responseCompleteTaskSource.GetStatus(_responseCompleteTaskSource.Version) == ValueTaskSourceStatus.Succeeded);
+        Debug.Assert(
+            _responseCompleteTaskSource.GetStatus(_responseCompleteTaskSource.Version)
+                == ValueTaskSourceStatus.Succeeded
+        );
 
         _streamEnded = false;
         _suffixSent = false;
@@ -139,7 +163,12 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
 
     void IHttpOutputAborter.OnInputOrOutputCompleted()
     {
-        _stream.ResetAndAbort(new ConnectionAbortedException($"{nameof(Http2OutputProducer)}.{nameof(ProcessDataWrites)} has completed."), Http2ErrorCode.INTERNAL_ERROR);
+        _stream.ResetAndAbort(
+            new ConnectionAbortedException(
+                $"{nameof(Http2OutputProducer)}.{nameof(ProcessDataWrites)} has completed."
+            ),
+            Http2ErrorCode.INTERNAL_ERROR
+        );
     }
 
     public ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken)
@@ -188,7 +217,13 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
         }
     }
 
-    public void WriteResponseHeaders(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, bool appCompleted)
+    public void WriteResponseHeaders(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        bool appCompleted
+    )
     {
         lock (_dataWriterLock)
         {
@@ -208,7 +243,11 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
             // 2. There is no trailing HEADERS frame.
             Http2HeadersFrameFlags http2HeadersFrame;
 
-            if (appCompleted && !_startedWritingDataFrames && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0))
+            if (
+                appCompleted
+                && !_startedWritingDataFrames
+                && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0)
+            )
             {
                 _streamEnded = true;
                 _stream.DecrementActiveClientStreamCount();
@@ -219,7 +258,12 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
                 http2HeadersFrame = Http2HeadersFrameFlags.NONE;
             }
 
-            _frameWriter.WriteResponseHeaders(StreamId, statusCode, http2HeadersFrame, responseHeaders);
+            _frameWriter.WriteResponseHeaders(
+                StreamId,
+                statusCode,
+                http2HeadersFrame,
+                responseHeaders
+            );
         }
     }
 
@@ -336,7 +380,10 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
         }
     }
 
-    public ValueTask<FlushResult> WriteDataToPipeAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteDataToPipeAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -361,22 +408,45 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
         }
     }
 
-    public ValueTask<FlushResult> FirstWriteAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         lock (_dataWriterLock)
         {
-            WriteResponseHeaders(statusCode, reasonPhrase, responseHeaders, autoChunk, appCompleted: false);
+            WriteResponseHeaders(
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk,
+                appCompleted: false
+            );
 
             return WriteDataToPipeAsync(data, cancellationToken);
         }
     }
 
-    ValueTask<FlushResult> IHttpOutputProducer.WriteChunkAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    ValueTask<FlushResult> IHttpOutputProducer.WriteChunkAsync(
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
 
-    public ValueTask<FlushResult> FirstWriteChunkedAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteChunkedAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> data,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
@@ -398,9 +468,7 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
         }
     }
 
-    public void Reset()
-    {
-    }
+    public void Reset() { }
 
     private async Task ProcessDataWrites()
     {
@@ -415,7 +483,6 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
             ReadResult readResult = default;
             try
             {
-
                 do
                 {
                     var firstWrite = true;
@@ -438,11 +505,20 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
                         if (readResult.Buffer.Length > 0)
                         {
                             // It is faster to write data and trailers together. Locking once reduces lock contention.
-                            flushResult = await _frameWriter.WriteDataAndTrailersAsync(StreamId, _flowControl, readResult.Buffer, firstWrite, _stream.ResponseTrailers);
+                            flushResult = await _frameWriter.WriteDataAndTrailersAsync(
+                                StreamId,
+                                _flowControl,
+                                readResult.Buffer,
+                                firstWrite,
+                                _stream.ResponseTrailers
+                            );
                         }
                         else
                         {
-                            flushResult = await _frameWriter.WriteResponseTrailersAsync(StreamId, _stream.ResponseTrailers);
+                            flushResult = await _frameWriter.WriteResponseTrailersAsync(
+                                StreamId,
+                                _stream.ResponseTrailers
+                            );
                         }
                     }
                     else if (readResult.IsCompleted && _streamEnded)
@@ -453,7 +529,10 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
                         }
 
                         // Headers have already been written and there is no other content to write
-                        flushResult = await _frameWriter.FlushAsync(outputAborter: null, cancellationToken: default);
+                        flushResult = await _frameWriter.FlushAsync(
+                            outputAborter: null,
+                            cancellationToken: default
+                        );
                     }
                     else
                     {
@@ -464,7 +543,14 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
                             _stream.DecrementActiveClientStreamCount();
                         }
 
-                        flushResult = await _frameWriter.WriteDataAsync(StreamId, _flowControl, readResult.Buffer, endStream, firstWrite, forceFlush: true);
+                        flushResult = await _frameWriter.WriteDataAsync(
+                            StreamId,
+                            _flowControl,
+                            readResult.Buffer,
+                            endStream,
+                            firstWrite,
+                            forceFlush: true
+                        );
                     }
 
                     firstWrite = false;
@@ -473,7 +559,13 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
             }
             catch (Exception ex)
             {
-                _log.LogCritical(ex, nameof(Http2OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected exception.");
+                _log.LogCritical(
+                    ex,
+                    nameof(Http2OutputProducer)
+                        + "."
+                        + nameof(ProcessDataWrites)
+                        + " observed an unexpected exception."
+                );
             }
 
             await _pipeReader.CompleteAsync();
@@ -489,7 +581,12 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
 
         static void ThrowUnexpectedState()
         {
-            throw new InvalidOperationException(nameof(Http2OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected state where the streams output ended with data still remaining in the pipe.");
+            throw new InvalidOperationException(
+                nameof(Http2OutputProducer)
+                    + "."
+                    + nameof(ProcessDataWrites)
+                    + " observed an unexpected state where the streams output ended with data still remaining in the pipe."
+            );
         }
     }
 
@@ -560,20 +657,23 @@ internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter, IV
     [StackTraceHidden]
     private static void ThrowWriterComplete()
     {
-        throw new InvalidOperationException("Cannot write to response after the request has completed.");
+        throw new InvalidOperationException(
+            "Cannot write to response after the request has completed."
+        );
     }
 
-    private static Pipe CreateDataPipe(MemoryPool<byte> pool)
-        => new Pipe(new PipeOptions
-        (
-            pool: pool,
-            readerScheduler: PipeScheduler.Inline,
-            writerScheduler: PipeScheduler.ThreadPool,
-            pauseWriterThreshold: 1,
-            resumeWriterThreshold: 1,
-            useSynchronizationContext: false,
-            minimumSegmentSize: pool.GetMinimumSegmentSize()
-        ));
+    private static Pipe CreateDataPipe(MemoryPool<byte> pool) =>
+        new Pipe(
+            new PipeOptions(
+                pool: pool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.ThreadPool,
+                pauseWriterThreshold: 1,
+                resumeWriterThreshold: 1,
+                useSynchronizationContext: false,
+                minimumSegmentSize: pool.GetMinimumSegmentSize()
+            )
+        );
 
     public void Dispose()
     {

@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IReadOnlyList<ValueComparer>? selfIdentifierValueComparers,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
+            Type elementType
+        )
         {
             ParentIdentifier = parentIdentifier;
             OuterIdentifier = outerIdentifier;
@@ -101,12 +102,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Type ElementType { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -132,16 +132,24 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression parentIdentifier,
             Expression outerIdentifier,
             Expression selfIdentifier,
-            Expression innerShaper)
-            => parentIdentifier != ParentIdentifier
-                || outerIdentifier != OuterIdentifier
-                || selfIdentifier != SelfIdentifier
-                || innerShaper != InnerShaper
-                    ? new RelationalCollectionShaperExpression(
-                        parentIdentifier, outerIdentifier, selfIdentifier,
-                        ParentIdentifierValueComparers, OuterIdentifierValueComparers, SelfIdentifierValueComparers,
-                        innerShaper, Navigation, ElementType)
-                    : this;
+            Expression innerShaper
+        ) =>
+            parentIdentifier != ParentIdentifier
+            || outerIdentifier != OuterIdentifier
+            || selfIdentifier != SelfIdentifier
+            || innerShaper != InnerShaper
+                ? new RelationalCollectionShaperExpression(
+                    parentIdentifier,
+                    outerIdentifier,
+                    selfIdentifier,
+                    ParentIdentifierValueComparers,
+                    OuterIdentifierValueComparers,
+                    SelfIdentifierValueComparers,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
+                : this;
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)

@@ -19,14 +19,14 @@ internal static partial class Interop
             internal ushort Milliseconds;
 
             internal bool Equals(in SYSTEMTIME other) =>
-                    Year == other.Year &&
-                    Month == other.Month &&
-                    DayOfWeek == other.DayOfWeek &&
-                    Day == other.Day &&
-                    Hour == other.Hour &&
-                    Minute == other.Minute &&
-                    Second == other.Second &&
-                    Milliseconds == other.Milliseconds;
+                Year == other.Year
+                && Month == other.Month
+                && DayOfWeek == other.DayOfWeek
+                && Day == other.Day
+                && Hour == other.Hour
+                && Minute == other.Minute
+                && Second == other.Second
+                && Milliseconds == other.Milliseconds;
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -83,10 +83,24 @@ internal static partial class Interop
 
         internal const uint TIME_ZONE_ID_INVALID = unchecked((uint)-1);
 
-        [DllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
-        internal static extern uint GetDynamicTimeZoneInformation(out TIME_DYNAMIC_ZONE_INFORMATION pTimeZoneInformation);
+        [DllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
+        internal static extern uint GetDynamicTimeZoneInformation(
+            out TIME_DYNAMIC_ZONE_INFORMATION pTimeZoneInformation
+        );
 
-        [DllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
-        internal static extern uint GetTimeZoneInformation(out TIME_ZONE_INFORMATION lpTimeZoneInformation);
+        [DllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
+        internal static extern uint GetTimeZoneInformation(
+            out TIME_ZONE_INFORMATION lpTimeZoneInformation
+        );
     }
 }

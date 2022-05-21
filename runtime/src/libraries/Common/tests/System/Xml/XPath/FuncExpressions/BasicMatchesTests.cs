@@ -70,8 +70,11 @@ namespace XPathTests.FunctionalTests.Expressions.Basics
             var startingNodePath = "/Doc";
             var testExpression = @"child::$$Var";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

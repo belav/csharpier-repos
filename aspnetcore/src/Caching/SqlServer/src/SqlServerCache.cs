@@ -37,31 +37,38 @@ public class SqlServerCache : IDistributedCache
         if (string.IsNullOrEmpty(cacheOptions.ConnectionString))
         {
             throw new ArgumentException(
-                $"{nameof(SqlServerCacheOptions.ConnectionString)} cannot be empty or null.");
+                $"{nameof(SqlServerCacheOptions.ConnectionString)} cannot be empty or null."
+            );
         }
         if (string.IsNullOrEmpty(cacheOptions.SchemaName))
         {
             throw new ArgumentException(
-                $"{nameof(SqlServerCacheOptions.SchemaName)} cannot be empty or null.");
+                $"{nameof(SqlServerCacheOptions.SchemaName)} cannot be empty or null."
+            );
         }
         if (string.IsNullOrEmpty(cacheOptions.TableName))
         {
             throw new ArgumentException(
-                $"{nameof(SqlServerCacheOptions.TableName)} cannot be empty or null.");
+                $"{nameof(SqlServerCacheOptions.TableName)} cannot be empty or null."
+            );
         }
-        if (cacheOptions.ExpiredItemsDeletionInterval.HasValue &&
-            cacheOptions.ExpiredItemsDeletionInterval.Value < MinimumExpiredItemsDeletionInterval)
+        if (
+            cacheOptions.ExpiredItemsDeletionInterval.HasValue
+            && cacheOptions.ExpiredItemsDeletionInterval.Value < MinimumExpiredItemsDeletionInterval
+        )
         {
             throw new ArgumentException(
-                $"{nameof(SqlServerCacheOptions.ExpiredItemsDeletionInterval)} cannot be less than the minimum " +
-                $"value of {MinimumExpiredItemsDeletionInterval.TotalMinutes} minutes.");
+                $"{nameof(SqlServerCacheOptions.ExpiredItemsDeletionInterval)} cannot be less than the minimum "
+                    + $"value of {MinimumExpiredItemsDeletionInterval.TotalMinutes} minutes."
+            );
         }
         if (cacheOptions.DefaultSlidingExpiration <= TimeSpan.Zero)
         {
             throw new ArgumentOutOfRangeException(
                 nameof(cacheOptions.DefaultSlidingExpiration),
                 cacheOptions.DefaultSlidingExpiration,
-                "The sliding expiration value must be positive.");
+                "The sliding expiration value must be positive."
+            );
         }
 
         _systemClock = cacheOptions.SystemClock ?? new SystemClock();
@@ -79,7 +86,8 @@ public class SqlServerCache : IDistributedCache
                 cacheOptions.ConnectionString,
                 cacheOptions.SchemaName,
                 cacheOptions.TableName,
-                _systemClock);
+                _systemClock
+            );
         }
         else
         {
@@ -87,7 +95,8 @@ public class SqlServerCache : IDistributedCache
                 cacheOptions.ConnectionString,
                 cacheOptions.SchemaName,
                 cacheOptions.TableName,
-                _systemClock);
+                _systemClock
+            );
         }
     }
 
@@ -107,7 +116,10 @@ public class SqlServerCache : IDistributedCache
     }
 
     /// <inheritdoc />
-    public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
+    public async Task<byte[]> GetAsync(
+        string key,
+        CancellationToken token = default(CancellationToken)
+    )
     {
         if (key == null)
         {
@@ -209,7 +221,8 @@ public class SqlServerCache : IDistributedCache
         string key,
         byte[] value,
         DistributedCacheEntryOptions options,
-        CancellationToken token = default(CancellationToken))
+        CancellationToken token = default(CancellationToken)
+    )
     {
         if (key == null)
         {
@@ -257,9 +270,11 @@ public class SqlServerCache : IDistributedCache
 
     private void GetOptions(ref DistributedCacheEntryOptions options)
     {
-        if (!options.AbsoluteExpiration.HasValue
+        if (
+            !options.AbsoluteExpiration.HasValue
             && !options.AbsoluteExpirationRelativeToNow.HasValue
-            && !options.SlidingExpiration.HasValue)
+            && !options.SlidingExpiration.HasValue
+        )
         {
             options = new DistributedCacheEntryOptions()
             {

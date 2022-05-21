@@ -17,7 +17,8 @@ namespace System.Net.Sockets
 #pragma warning restore CS0618
 
                 case AddressFamily.InterNetworkV6:
-                    Span<byte> addressBytes = stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
+                    Span<byte> addressBytes =
+                        stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
                     original.TryWriteBytes(addressBytes, out int bytesWritten);
                     Debug.Assert(bytesWritten == IPAddressParserStatics.IPv6AddressBytes);
                     return new IPAddress(addressBytes, (uint)original.ScopeId);

@@ -17,37 +17,57 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.UseCoalesceExpressionForNullable), Shared]
-    internal class UseCoalesceExpressionForNullableCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.UseCoalesceExpressionForNullable
+        ),
+        Shared
+    ]
+    internal class UseCoalesceExpressionForNullableCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseCoalesceExpressionForNullableCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseCoalesceExpressionForNullableCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionForNullableDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionForNullableDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.Descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.Descriptor
+                .ImmutableCustomTags()
+                .Contains(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var expressionTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
+                "System.Linq.Expressions.Expression`1"
+            );
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
@@ -56,41 +76,73 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 
             foreach (var diagnostic in diagnostics)
             {
-                var conditionalExpression = root.FindNode(diagnostic.AdditionalLocations[0].SourceSpan, getInnermostNodeForTie: true);
-                var conditionExpression = root.FindNode(diagnostic.AdditionalLocations[1].SourceSpan);
+                var conditionalExpression = root.FindNode(
+                    diagnostic.AdditionalLocations[0].SourceSpan,
+                    getInnermostNodeForTie: true
+                );
+                var conditionExpression = root.FindNode(
+                    diagnostic.AdditionalLocations[1].SourceSpan
+                );
                 var whenPart = root.FindNode(diagnostic.AdditionalLocations[2].SourceSpan);
                 syntaxFacts.GetPartsOfConditionalExpression(
-                    conditionalExpression, out var condition, out var whenTrue, out var whenFalse);
+                    conditionalExpression,
+                    out var condition,
+                    out var whenTrue,
+                    out var whenFalse
+                );
 
-                editor.ReplaceNode(conditionalExpression,
+                editor.ReplaceNode(
+                    conditionalExpression,
                     (c, g) =>
                     {
                         syntaxFacts.GetPartsOfConditionalExpression(
-                            c, out var currentCondition, out var currentWhenTrue, out var currentWhenFalse);
+                            c,
+                            out var currentCondition,
+                            out var currentWhenTrue,
+                            out var currentWhenFalse
+                        );
 
-                        var coalesceExpression = whenPart == whenTrue
-                            ? g.CoalesceExpression(conditionExpression, syntaxFacts.WalkDownParentheses(currentWhenTrue))
-                            : g.CoalesceExpression(conditionExpression, syntaxFacts.WalkDownParentheses(currentWhenFalse));
+                        var coalesceExpression =
+                            whenPart == whenTrue
+                                ? g.CoalesceExpression(
+                                    conditionExpression,
+                                    syntaxFacts.WalkDownParentheses(currentWhenTrue)
+                                )
+                                : g.CoalesceExpression(
+                                    conditionExpression,
+                                    syntaxFacts.WalkDownParentheses(currentWhenFalse)
+                                );
 
-                        if (semanticFacts.IsInExpressionTree(
-                                semanticModel, conditionalExpression, expressionTypeOpt, cancellationToken))
+                        if (
+                            semanticFacts.IsInExpressionTree(
+                                semanticModel,
+                                conditionalExpression,
+                                expressionTypeOpt,
+                                cancellationToken
+                            )
+                        )
                         {
                             coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime));
+                                WarningAnnotation.Create(
+                                    AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
+                                )
+                            );
                         }
 
                         return coalesceExpression;
-                    });
+                    }
+                );
             }
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Use_coalesce_expression, createChangedDocument, nameof(AnalyzersResources.Use_coalesce_expression))
-            {
-
-            }
+                : base(
+                    AnalyzersResources.Use_coalesce_expression,
+                    createChangedDocument,
+                    nameof(AnalyzersResources.Use_coalesce_expression)
+                ) { }
         }
     }
 }

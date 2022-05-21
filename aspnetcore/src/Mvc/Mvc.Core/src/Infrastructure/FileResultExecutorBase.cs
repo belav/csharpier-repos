@@ -59,7 +59,8 @@ public class FileResultExecutorBase
         long? fileLength,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? etag = null)
+        EntityTagHeaderValue? etag = null
+    )
     {
         var fileResultInfo = new FileResultInfo
         {
@@ -70,7 +71,15 @@ public class FileResultExecutorBase
             LastModified = result.LastModified,
         };
 
-        return FileResultHelper.SetHeadersAndLog(context.HttpContext, fileResultInfo, fileLength, enableRangeProcessing, lastModified, etag, Logger);
+        return FileResultHelper.SetHeadersAndLog(
+            context.HttpContext,
+            fileResultInfo,
+            fileLength,
+            enableRangeProcessing,
+            lastModified,
+            etag,
+            Logger
+        );
     }
 
     /// <summary>
@@ -97,7 +106,12 @@ public class FileResultExecutorBase
     /// <param name="range">The <see cref="RangeItemHeaderValue"/>.</param>
     /// <param name="rangeLength">The range length.</param>
     /// <returns>The async task.</returns>
-    protected static async Task WriteFileAsync(HttpContext context, Stream fileStream, RangeItemHeaderValue? range, long rangeLength)
+    protected static async Task WriteFileAsync(
+        HttpContext context,
+        Stream fileStream,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         await FileResultHelper.WriteFileAsync(context, fileStream, range, rangeLength);
     }

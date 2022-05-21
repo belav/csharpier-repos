@@ -20,7 +20,12 @@ internal partial class WebSocketsServerTransport : IHttpTransport
     private readonly HttpConnectionContext _connection;
     private volatile bool _aborted;
 
-    public WebSocketsServerTransport(WebSocketOptions options, IDuplexPipe application, HttpConnectionContext connection, ILoggerFactory loggerFactory)
+    public WebSocketsServerTransport(
+        WebSocketOptions options,
+        IDuplexPipe application,
+        HttpConnectionContext connection,
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
@@ -42,14 +47,18 @@ internal partial class WebSocketsServerTransport : IHttpTransport
         _connection = connection;
 
         // We create the logger with a string to preserve the logging namespace after the server side transport renames.
-        _logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Connections.Internal.Transports.WebSocketsTransport");
+        _logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Connections.Internal.Transports.WebSocketsTransport"
+        );
     }
 
     public async Task ProcessRequestAsync(HttpContext context, CancellationToken token)
     {
         Debug.Assert(context.WebSockets.IsWebSocketRequest, "Not a websocket request");
 
-        var subProtocol = _options.SubProtocolSelector?.Invoke(context.WebSockets.WebSocketRequestedProtocols);
+        var subProtocol = _options.SubProtocolSelector?.Invoke(
+            context.WebSockets.WebSocketRequestedProtocols
+        );
 
         using (var ws = await context.WebSockets.AcceptWebSocketAsync(subProtocol))
         {
@@ -88,7 +97,10 @@ internal partial class WebSocketsServerTransport : IHttpTransport
 
             using (var delayCts = new CancellationTokenSource())
             {
-                var resultTask = await Task.WhenAny(sending, Task.Delay(_options.CloseTimeout, delayCts.Token));
+                var resultTask = await Task.WhenAny(
+                    sending,
+                    Task.Delay(_options.CloseTimeout, delayCts.Token)
+                );
 
                 if (resultTask != sending)
                 {
@@ -116,7 +128,10 @@ internal partial class WebSocketsServerTransport : IHttpTransport
 
             using (var delayCts = new CancellationTokenSource())
             {
-                var resultTask = await Task.WhenAny(receiving, Task.Delay(_options.CloseTimeout, delayCts.Token));
+                var resultTask = await Task.WhenAny(
+                    receiving,
+                    Task.Delay(_options.CloseTimeout, delayCts.Token)
+                );
 
                 if (resultTask != receiving)
                 {
@@ -162,7 +177,12 @@ internal partial class WebSocketsServerTransport : IHttpTransport
                     return;
                 }
 
-                Log.MessageReceived(_logger, receiveResult.MessageType, receiveResult.Count, receiveResult.EndOfMessage);
+                Log.MessageReceived(
+                    _logger,
+                    receiveResult.MessageType,
+                    receiveResult.Count,
+                    receiveResult.EndOfMessage
+                );
 
                 _application.Output.Advance(receiveResult.Count);
 
@@ -176,7 +196,8 @@ internal partial class WebSocketsServerTransport : IHttpTransport
                 }
             }
         }
-        catch (WebSocketException ex) when (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
+        catch (WebSocketException ex)
+            when (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
         {
             // Client has closed the WebSocket connection without completing the close handshake
             Log.ClosedPrematurely(_logger, ex);
@@ -225,14 +246,20 @@ internal partial class WebSocketsServerTransport : IHttpTransport
                         {
                             Log.SendPayload(_logger, buffer.Length);
 
-                            var webSocketMessageType = (_connection.ActiveFormat == TransferFormat.Binary
-                                ? WebSocketMessageType.Binary
-                                : WebSocketMessageType.Text);
+                            var webSocketMessageType = (
+                                _connection.ActiveFormat == TransferFormat.Binary
+                                    ? WebSocketMessageType.Binary
+                                    : WebSocketMessageType.Text
+                            );
 
                             if (WebSocketCanSend(socket))
                             {
                                 _connection.StartSendCancellation();
-                                await socket.SendAsync(buffer, webSocketMessageType, _connection.SendingToken);
+                                await socket.SendAsync(
+                                    buffer,
+                                    webSocketMessageType,
+                                    _connection.SendingToken
+                                );
                             }
                             else
                             {
@@ -272,7 +299,13 @@ internal partial class WebSocketsServerTransport : IHttpTransport
                 try
                 {
                     // We're done sending, send the close frame to the client if the websocket is still open
-                    await socket.CloseOutputAsync(error != null ? WebSocketCloseStatus.InternalServerError : WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                    await socket.CloseOutputAsync(
+                        error != null
+                            ? WebSocketCloseStatus.InternalServerError
+                            : WebSocketCloseStatus.NormalClosure,
+                        "",
+                        CancellationToken.None
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -282,13 +315,14 @@ internal partial class WebSocketsServerTransport : IHttpTransport
 
             _application.Input.Complete();
         }
-
     }
 
     private static bool WebSocketCanSend(WebSocket ws)
     {
-        return !(ws.State == WebSocketState.Aborted ||
-               ws.State == WebSocketState.Closed ||
-               ws.State == WebSocketState.CloseSent);
+        return !(
+            ws.State == WebSocketState.Aborted
+            || ws.State == WebSocketState.Closed
+            || ws.State == WebSocketState.CloseSent
+        );
     }
 }

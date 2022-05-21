@@ -12,7 +12,13 @@ namespace Microsoft.Extensions.Logging
         public MessageLogger[] MessageLoggers { get; set; }
         public ScopeLogger[] ScopeLoggers { get; set; }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             MessageLogger[] loggers = MessageLoggers;
             if (loggers == null)
@@ -29,7 +35,15 @@ namespace Microsoft.Extensions.Logging
                     continue;
                 }
 
-                LoggerLog(logLevel, eventId, loggerInfo.Logger, exception, formatter, ref exceptions, state);
+                LoggerLog(
+                    logLevel,
+                    eventId,
+                    loggerInfo.Logger,
+                    exception,
+                    formatter,
+                    ref exceptions,
+                    state
+                );
             }
 
             if (exceptions != null && exceptions.Count > 0)
@@ -37,7 +51,15 @@ namespace Microsoft.Extensions.Logging
                 ThrowLoggingError(exceptions);
             }
 
-            static void LoggerLog(LogLevel logLevel, EventId eventId, ILogger logger, Exception exception, Func<TState, Exception, string> formatter, ref List<Exception> exceptions, in TState state)
+            static void LoggerLog(
+                LogLevel logLevel,
+                EventId eventId,
+                ILogger logger,
+                Exception exception,
+                Func<TState, Exception, string> formatter,
+                ref List<Exception> exceptions,
+                in TState state
+            )
             {
                 try
                 {
@@ -86,7 +108,11 @@ namespace Microsoft.Extensions.Logging
 
             return i < loggers.Length ? true : false;
 
-            static bool LoggerIsEnabled(LogLevel logLevel, ILogger logger, ref List<Exception> exceptions)
+            static bool LoggerIsEnabled(
+                LogLevel logLevel,
+                ILogger logger,
+                ref List<Exception> exceptions
+            )
             {
                 try
                 {
@@ -155,7 +181,9 @@ namespace Microsoft.Extensions.Logging
         private static void ThrowLoggingError(List<Exception> exceptions)
         {
             throw new AggregateException(
-                message: "An error occurred while writing to logger(s).", innerExceptions: exceptions);
+                message: "An error occurred while writing to logger(s).",
+                innerExceptions: exceptions
+            );
         }
 
         private sealed class Scope : IDisposable

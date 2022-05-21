@@ -32,8 +32,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private readonly ConcurrentDictionary<T, object> _map =
                 new(concurrencyLevel: 2, capacity: 5);
 
-            public object GetOrCreate(T value)
-                => _map.GetOrAdd(value, s_boxer);
+            public object GetOrCreate(T value) => _map.GetOrAdd(value, s_boxer);
         }
     }
 }

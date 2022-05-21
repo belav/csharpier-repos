@@ -19,23 +19,32 @@ public class Startup
         services
             .AddMvcCore()
             .AddAuthorization()
-            .AddFormatterMappings(m => m.SetMediaTypeMappingForFormat("js", new MediaTypeHeaderValue("application/json")))
-            .AddNewtonsoftJson(options => options.SerializerSettings.Formatting = Formatting.Indented);
+            .AddFormatterMappings(
+                m =>
+                    m.SetMediaTypeMappingForFormat(
+                        "js",
+                        new MediaTypeHeaderValue("application/json")
+                    )
+            )
+            .AddNewtonsoftJson(
+                options => options.SerializerSettings.Formatting = Formatting.Indented
+            );
     }
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            }
+        );
     }
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -47,4 +56,3 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 }
-

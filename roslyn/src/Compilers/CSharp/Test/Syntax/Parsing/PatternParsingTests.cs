@@ -19,17 +19,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private new void UsingStatement(string text, params DiagnosticDescription[] expectedErrors)
         {
-            UsingStatement(text, options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8), expectedErrors);
+            UsingStatement(
+                text,
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8),
+                expectedErrors
+            );
         }
 
-        public PatternParsingTests(ITestOutputHelper output) : base(output)
-        {
-        }
+        public PatternParsingTests(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void CasePatternVersusFeatureFlag()
         {
-            var test = @"
+            var test =
+                @"
 class C 
 {
     public static void Main(string[] args)
@@ -47,29 +50,47 @@ class C
     }
 }
 ";
-            CreateCompilation(test, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)).VerifyDiagnostics(
-                // (9,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
-                //             case 2 when args.Length == 2:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case 2 when args.Length == 2:").WithArguments("pattern matching", "7.0").WithLocation(9, 13),
-                // (11,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
-                //             case string s:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case string s:").WithArguments("pattern matching", "7.0").WithLocation(11, 13),
-                // (15,18): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
-                //         bool b = args[0] is string s;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "args[0] is string s").WithArguments("pattern matching", "7.0").WithLocation(15, 18),
-                // (11,18): error CS8121: An expression of type 'int' cannot be handled by a pattern of type 'string'.
-                //             case string s:
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "string").WithArguments("int", "string").WithLocation(11, 18),
-                // (11,25): error CS0136: A local or parameter named 's' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             case string s:
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "s").WithArguments("s").WithLocation(11, 25)
-            );
+            CreateCompilation(
+                    test,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+                .VerifyDiagnostics(
+                    // (9,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    //             case 2 when args.Length == 2:
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "case 2 when args.Length == 2:"
+                        )
+                        .WithArguments("pattern matching", "7.0")
+                        .WithLocation(9, 13),
+                    // (11,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    //             case string s:
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case string s:")
+                        .WithArguments("pattern matching", "7.0")
+                        .WithLocation(11, 13),
+                    // (15,18): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         bool b = args[0] is string s;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "args[0] is string s")
+                        .WithArguments("pattern matching", "7.0")
+                        .WithLocation(15, 18),
+                    // (11,18): error CS8121: An expression of type 'int' cannot be handled by a pattern of type 'string'.
+                    //             case string s:
+                    Diagnostic(ErrorCode.ERR_PatternWrongType, "string")
+                        .WithArguments("int", "string")
+                        .WithLocation(11, 18),
+                    // (11,25): error CS0136: A local or parameter named 's' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             case string s:
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "s")
+                        .WithArguments("s")
+                        .WithLocation(11, 25)
+                );
         }
 
         [Fact]
         public void ThrowExpression_Good()
         {
-            var test = @"using System;
+            var test =
+                @"using System;
 class C
 {
     public static void Sample(bool b, string s)
@@ -84,38 +105,74 @@ class C
     public static void NeverReturns() => throw new NullReferenceException();
 }";
             CreateCompilation(test).VerifyDiagnostics();
-            CreateCompilation(test, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
-                // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
-                //         void NeverReturnsFunction() => throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "NeverReturnsFunction").WithArguments("local functions", "7.0").WithLocation(6, 14),
-                // (6,40): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         void NeverReturnsFunction() => throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException()").WithArguments("throw expression", "7.0").WithLocation(6, 40),
-                // (7,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         int x = b ? throw new NullReferenceException() : 1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException()").WithArguments("throw expression", "7.0").WithLocation(7, 21),
-                // (8,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         x = b ? 2 : throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException()").WithArguments("throw expression", "7.0").WithLocation(8, 21),
-                // (9,18): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         s = s ?? throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException()").WithArguments("throw expression", "7.0").WithLocation(9, 18),
-                // (11,47): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException() ?? throw null").WithArguments("throw expression", "7.0").WithLocation(11, 47),
-                // (11,85): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw null").WithArguments("throw expression", "7.0").WithLocation(11, 85),
-                // (13,42): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
-                //     public static void NeverReturns() => throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw new NullReferenceException()").WithArguments("throw expression", "7.0").WithLocation(13, 42)
+            CreateCompilation(test, parseOptions: TestOptions.Regular6)
+                .VerifyDiagnostics(
+                    // (6,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         void NeverReturnsFunction() => throw new NullReferenceException();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "NeverReturnsFunction")
+                        .WithArguments("local functions", "7.0")
+                        .WithLocation(6, 14),
+                    // (6,40): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         void NeverReturnsFunction() => throw new NullReferenceException();
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException()"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(6, 40),
+                    // (7,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         int x = b ? throw new NullReferenceException() : 1;
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException()"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(7, 21),
+                    // (8,21): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         x = b ? 2 : throw new NullReferenceException();
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException()"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(8, 21),
+                    // (9,18): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         s = s ?? throw new NullReferenceException();
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException()"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(9, 18),
+                    // (11,47): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException() ?? throw null"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(11, 47),
+                    // (11,85): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         throw new NullReferenceException() ?? throw new NullReferenceException() ?? throw null;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "throw null")
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(11, 85),
+                    // (13,42): error CS8059: Feature 'throw expression' is not available in C# 6. Please use language version 7.0 or greater.
+                    //     public static void NeverReturns() => throw new NullReferenceException();
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "throw new NullReferenceException()"
+                        )
+                        .WithArguments("throw expression", "7.0")
+                        .WithLocation(13, 42)
                 );
         }
 
         [Fact]
         public void ThrowExpression_Bad()
         {
-            var test = @"using System;
+            var test =
+                @"using System;
 class C
 {
     public static void Sample(bool b, string s)
@@ -133,48 +190,60 @@ class C
     }
     static void M(string s) {}
 }";
-            CreateCompilationWithMscorlib46(test).VerifyDiagnostics(
-                // (7,17): error CS1525: Invalid expression term 'throw'
-                //         s = s + throw new NullReferenceException();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()").WithArguments("throw").WithLocation(7, 17),
-                // (8,18): error CS1525: Invalid expression term 'throw'
-                //         if (b || throw new NullReferenceException()) { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()").WithArguments("throw").WithLocation(8, 18),
-                // (11,27): error CS8115: A throw expression is not allowed in this context.
-                //         var z = from x in throw new NullReferenceException() select x;
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 27),
-                // (12,11): error CS8115: A throw expression is not allowed in this context.
-                //         M(throw new NullReferenceException());
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(12, 11),
-                // (13,15): error CS8115: A throw expression is not allowed in this context.
-                //         throw throw null;
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(13, 15),
-                // (14,9): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
-                //         (int, int) w = (1, throw null);
-                Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(int, int)").WithArguments("System.ValueTuple`2").WithLocation(14, 9),
-                // (14,28): error CS8115: A throw expression is not allowed in this context.
-                //         (int, int) w = (1, throw null);
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(14, 28),
-                // (14,24): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
-                //         (int, int) w = (1, throw null);
-                Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1, throw null)").WithArguments("System.ValueTuple`2").WithLocation(14, 24),
-                // (15,16): error CS8115: A throw expression is not allowed in this context.
-                //         return throw null;
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(15, 16),
-                // (14,9): warning CS0162: Unreachable code detected
-                //         (int, int) w = (1, throw null);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "(").WithLocation(14, 9)
+            CreateCompilationWithMscorlib46(test)
+                .VerifyDiagnostics(
+                    // (7,17): error CS1525: Invalid expression term 'throw'
+                    //         s = s + throw new NullReferenceException();
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
+                        .WithArguments("throw")
+                        .WithLocation(7, 17),
+                    // (8,18): error CS1525: Invalid expression term 'throw'
+                    //         if (b || throw new NullReferenceException()) { }
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "throw new NullReferenceException()")
+                        .WithArguments("throw")
+                        .WithLocation(8, 18),
+                    // (11,27): error CS8115: A throw expression is not allowed in this context.
+                    //         var z = from x in throw new NullReferenceException() select x;
+                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(11, 27),
+                    // (12,11): error CS8115: A throw expression is not allowed in this context.
+                    //         M(throw new NullReferenceException());
+                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(12, 11),
+                    // (13,15): error CS8115: A throw expression is not allowed in this context.
+                    //         throw throw null;
+                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(13, 15),
+                    // (14,9): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
+                    //         (int, int) w = (1, throw null);
+                    Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(int, int)")
+                        .WithArguments("System.ValueTuple`2")
+                        .WithLocation(14, 9),
+                    // (14,28): error CS8115: A throw expression is not allowed in this context.
+                    //         (int, int) w = (1, throw null);
+                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(14, 28),
+                    // (14,24): error CS8179: Predefined type 'System.ValueTuple`2' is not defined or imported
+                    //         (int, int) w = (1, throw null);
+                    Diagnostic(ErrorCode.ERR_PredefinedValueTupleTypeNotFound, "(1, throw null)")
+                        .WithArguments("System.ValueTuple`2")
+                        .WithLocation(14, 24),
+                    // (15,16): error CS8115: A throw expression is not allowed in this context.
+                    //         return throw null;
+                    Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(15, 16),
+                    // (14,9): warning CS0162: Unreachable code detected
+                    //         (int, int) w = (1, throw null);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "(").WithLocation(14, 9)
                 );
         }
 
         [Fact]
         public void ThrowExpression()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     int x = y ?? throw null;
-}", options: TestOptions.Regular);
+}",
+                options: TestOptions.Regular
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -286,7 +355,6 @@ class C
                     {
                         N(SyntaxKind.IdentifierToken, "B");
                     }
-
                 }
                 N(SyntaxKind.GreaterThanToken);
                 N(SyntaxKind.IdentifierName);
@@ -309,7 +377,10 @@ class C
             SyntaxFactory.ParseExpression("new { X = e is A<B> }").GetDiagnostics().Verify();
             SyntaxFactory.ParseExpression("e is A<B>").GetDiagnostics().Verify();
 
-            SyntaxFactory.ParseExpression("(item is Dictionary<string, object>[])").GetDiagnostics().Verify();
+            SyntaxFactory
+                .ParseExpression("(item is Dictionary<string, object>[])")
+                .GetDiagnostics()
+                .Verify();
             SyntaxFactory.ParseExpression("A is B < C, D > [ ]").GetDiagnostics().Verify();
             SyntaxFactory.ParseExpression("A is B < C, D > [ ] E").GetDiagnostics().Verify();
             SyntaxFactory.ParseExpression("A < B > C").GetDiagnostics().Verify();
@@ -318,18 +389,23 @@ class C
         [Fact]
         public void QueryContextualPatternVariable_01()
         {
-            SyntaxFactory.ParseExpression("from s in a where s is string where s.Length > 1 select s").GetDiagnostics().Verify();
+            SyntaxFactory
+                .ParseExpression("from s in a where s is string where s.Length > 1 select s")
+                .GetDiagnostics()
+                .Verify();
             SyntaxFactory.ParseExpression("M(out int? x)").GetDiagnostics().Verify();
         }
 
         [Fact]
         public void TypeDisambiguation_01()
         {
-            UsingStatement(@"
+            UsingStatement(
+                @"
                 var r = from s in a
                         where s is X<T> // should disambiguate as a type here
                         where M(s)
-                        select s as X<T>;");
+                        select s as X<T>;"
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -444,9 +520,11 @@ class C
         [Fact]
         public void TypeDisambiguation_02()
         {
-            UsingStatement(@"
+            UsingStatement(
+                @"
                 var r = a is X<T> // should disambiguate as a type here
-                        is bool;");
+                        is bool;"
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -501,9 +579,11 @@ class C
         [Fact]
         public void TypeDisambiguation_03()
         {
-            UsingStatement(@"
+            UsingStatement(
+                @"
                 var r = a is X<T> // should disambiguate as a type here
-                        > Z;");
+                        > Z;"
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -795,7 +875,8 @@ class C
         [Fact, WorkItem(15734, "https://github.com/dotnet/roslyn/issues/15734")]
         public void PatternExpressionPrecedence06()
         {
-            UsingStatement(@"switch (e) {
+            UsingStatement(
+                @"switch (e) {
 case 1 << 2:
 case B << C:
 case null < B:
@@ -803,7 +884,8 @@ case null == B:
 case null & B:
 case null && B:
     break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -933,11 +1015,13 @@ case null && B:
         public void PatternExpressionPrecedence07()
         {
             // This should actually be error-free.
-            UsingStatement(@"switch (array) {
+            UsingStatement(
+                @"switch (array) {
 case KeyValuePair<string, DateTime>[] pairs1:
 case KeyValuePair<String, DateTime>[] pairs2:
     break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -1048,11 +1132,12 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact, WorkItem(23100, "https://github.com/dotnet/roslyn/issues/23100")]
         public void ArrayOfPointer_01()
         {
-            UsingExpression("A is B***",
+            UsingExpression(
+                "A is B***",
                 // (1,10): error CS1733: Expected expression
                 // A is B***
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 10)
-                );
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -1571,7 +1656,6 @@ case KeyValuePair<String, DateTime>[] pairs2:
             EOF();
         }
 
-
         [Fact]
         public void NameofInPattern_01()
         {
@@ -1843,12 +1927,18 @@ case KeyValuePair<String, DateTime>[] pairs2:
         public void ParenthesizedExpression_03()
         {
             var expect = new[]
-            { 
+            {
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case (x: ((3))): ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(x: ((3)))").WithArguments("recursive patterns", "8.0").WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(x: ((3)))")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19)
             };
-            UsingStatement(@"switch (e) { case (x: ((3))): ; }", TestOptions.RegularWithoutRecursivePatterns, expect);
+            UsingStatement(
+                @"switch (e) { case (x: ((3))): ; }",
+                TestOptions.RegularWithoutRecursivePatterns,
+                expect
+            );
             checkNodes();
 
             UsingStatement(@"switch (e) { case (x: ((3))): ; }", TestOptions.Regular8);
@@ -1923,14 +2013,20 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void ParenthesizedExpression_04()
         {
-            UsingStatement(@"switch (e) { case (((x: 3))): ; }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case (((x: 3))): ; }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8370: Feature 'parenthesized pattern' is not available in C# 7.3. Please use language version 9.0 or greater.
                 // switch (e) { case (((x: 3))): ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(((x: 3)))").WithArguments("parenthesized pattern", "9.0").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(((x: 3)))")
+                    .WithArguments("parenthesized pattern", "9.0")
+                    .WithLocation(1, 19),
                 // (1,20): error CS8370: Feature 'parenthesized pattern' is not available in C# 7.3. Please use language version 9.0 or greater.
                 // switch (e) { case (((x: 3))): ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "((x: 3))").WithArguments("parenthesized pattern", "9.0").WithLocation(1, 20)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "((x: 3))")
+                    .WithArguments("parenthesized pattern", "9.0")
+                    .WithLocation(1, 20)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -1997,11 +2093,15 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void RecursivePattern_01()
         {
-            UsingStatement(@"switch (e) { case T(X: 3, Y: 4){L: 5} p: ; }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case T(X: 3, Y: 4){L: 5} p: ; }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case T(X: 3, Y: 4){L: 5} p: ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "T(X: 3, Y: 4){L: 5} p").WithArguments("recursive patterns", "8.0").WithLocation(1, 19)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "T(X: 3, Y: 4){L: 5} p")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2108,10 +2208,14 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void BrokenPattern_06()
         {
-            UsingStatement(@"switch (e) { case (: ; }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case (: ; }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case (: ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(: ").WithArguments("recursive patterns", "8.0").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(: ")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19),
                 // (1,20): error CS1001: Identifier expected
                 // switch (e) { case (: ; }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 20),
@@ -2120,7 +2224,9 @@ case KeyValuePair<String, DateTime>[] pairs2:
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(1, 22),
                 // (1,22): error CS1003: Syntax error, ':' expected
                 // switch (e) { case (: ; }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":", ";").WithLocation(1, 22)
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(":", ";")
+                    .WithLocation(1, 22)
             );
             N(SyntaxKind.SwitchStatement);
             {
@@ -2160,16 +2266,22 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void BrokenPattern_07()
         {
-            UsingStatement(@"switch (e) { case (", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case (",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case (
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(").WithArguments("recursive patterns", "8.0").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19),
                 // (1,20): error CS1026: ) expected
                 // switch (e) { case (
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 20),
                 // (1,20): error CS1003: Syntax error, ':' expected
                 // switch (e) { case (
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":", "").WithLocation(1, 20),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments(":", "")
+                    .WithLocation(1, 20),
                 // (1,20): error CS1513: } expected
                 // switch (e) { case (
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 20)
@@ -2209,10 +2321,15 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void ParenthesizedExpression_07()
         {
-            UsingStatement(@"switch (e) { case (): }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case (): }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case (): }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "()").WithArguments("recursive patterns", "8.0").WithLocation(1, 19));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "()")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2247,17 +2364,20 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void BrokenPattern_08()
         {
-            UsingStatement(@"switch (e) { case",
-            // (1,18): error CS1733: Expected expression
-            // switch (e) { case
-            Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18),
+            UsingStatement(
+                @"switch (e) { case",
+                // (1,18): error CS1733: Expected expression
+                // switch (e) { case
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18),
                 // (1,18): error CS1003: Syntax error, ':' expected
                 // switch (e) { case
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":", "").WithLocation(1, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments(":", "")
+                    .WithLocation(1, 18),
                 // (1,18): error CS1513: } expected
                 // switch (e) { case
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 18)
-                );
+            );
 
             N(SyntaxKind.SwitchStatement);
             {
@@ -2289,14 +2409,18 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void ParenthesizedExpression_05()
         {
-            UsingStatement(@"switch (e) { case (x: ): ; }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                @"switch (e) { case (x: ): ; }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // switch (e) { case (x: ): ; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(x: )").WithArguments("recursive patterns", "8.0").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "(x: )")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19),
                 // (1,23): error CS8504: Pattern missing
                 // switch (e) { case (x: ): ; }
                 Diagnostic(ErrorCode.ERR_MissingPattern, ")").WithLocation(1, 23)
-                );
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2353,11 +2477,15 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void EmptySwitchExpression()
         {
-            UsingExpression("1 switch {}", TestOptions.RegularWithoutRecursivePatterns,
+            UsingExpression(
+                "1 switch {}",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch {}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch {}").WithArguments("recursive patterns", "8.0").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch {}")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.NumericLiteralExpression);
@@ -2374,11 +2502,18 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void SwitchExpression01()
         {
-            UsingExpression("1 switch {a => b, c => d}", TestOptions.RegularWithoutRecursivePatterns,
+            UsingExpression(
+                "1 switch {a => b, c => d}",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch {a => b, c => d}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch {a => b, c => d}").WithArguments("recursive patterns", "8.0").WithLocation(1, 1)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        "1 switch {a => b, c => d}"
+                    )
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.NumericLiteralExpression);
@@ -2426,17 +2561,25 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void SwitchExpression02()
         {
-            UsingExpression("1 switch { a?b:c => d }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingExpression(
+                "1 switch { a?b:c => d }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch { a?b:c => d }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch { a?b:c => d }").WithArguments("recursive patterns", "8.0").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch { a?b:c => d }")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 1),
                 // (1,13): error CS1003: Syntax error, '=>' expected
                 // 1 switch { a?b:c => d }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments("=>", "?").WithLocation(1, 13),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "?")
+                    .WithArguments("=>", "?")
+                    .WithLocation(1, 13),
                 // (1,13): error CS1525: Invalid expression term '?'
                 // 1 switch { a?b:c => d }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(1, 13)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                    .WithArguments("?")
+                    .WithLocation(1, 13)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.NumericLiteralExpression);
@@ -2489,11 +2632,18 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact]
         public void SwitchExpression03()
         {
-            UsingExpression("1 switch { (a, b, c) => d }", TestOptions.RegularWithoutRecursivePatterns,
+            UsingExpression(
+                "1 switch { (a, b, c) => d }",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,1): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // 1 switch { (a, b, c) => d }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch { (a, b, c) => d }").WithArguments("recursive patterns", "8.0").WithLocation(1, 1)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        "1 switch { (a, b, c) => d }"
+                    )
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.NumericLiteralExpression);
@@ -2560,26 +2710,36 @@ case KeyValuePair<String, DateTime>[] pairs2:
         {
             // This put the parser into an infinite loop at one time. The precise diagnostics and nodes
             // are not as important as the fact that it terminates.
-            UsingStatement("switch (e) { case T( : Q x = n; break; } ", TestOptions.RegularWithoutRecursivePatterns,
+            UsingStatement(
+                "switch (e) { case T( : Q x = n; break; } ",
+                TestOptions.RegularWithoutRecursivePatterns,
                 // (1,19): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
-                // switch (e) { case T( : Q x = n; break; } 
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "T( : Q x = n").WithArguments("recursive patterns", "8.0").WithLocation(1, 19),
+                // switch (e) { case T( : Q x = n; break; }
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "T( : Q x = n")
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(1, 19),
                 // (1,22): error CS1001: Identifier expected
-                // switch (e) { case T( : Q x = n; break; } 
+                // switch (e) { case T( : Q x = n; break; }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ":").WithLocation(1, 22),
                 // (1,28): error CS1003: Syntax error, ',' expected
-                // switch (e) { case T( : Q x = n; break; } 
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments(",", "=").WithLocation(1, 28),
+                // switch (e) { case T( : Q x = n; break; }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=")
+                    .WithArguments(",", "=")
+                    .WithLocation(1, 28),
                 // (1,30): error CS1003: Syntax error, ',' expected
-                // switch (e) { case T( : Q x = n; break; } 
-                Diagnostic(ErrorCode.ERR_SyntaxError, "n").WithArguments(",", "").WithLocation(1, 30),
+                // switch (e) { case T( : Q x = n; break; }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "n")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 30),
                 // (1,31): error CS1026: ) expected
-                // switch (e) { case T( : Q x = n; break; } 
+                // switch (e) { case T( : Q x = n; break; }
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(1, 31),
                 // (1,31): error CS1003: Syntax error, ':' expected
-                // switch (e) { case T( : Q x = n; break; } 
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":", ";").WithLocation(1, 31)
-                );
+                // switch (e) { case T( : Q x = n; break; }
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(":", ";")
+                    .WithLocation(1, 31)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2718,11 +2878,14 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact, WorkItem(26000, "https://github.com/dotnet/roslyn/issues/26000")]
         public void WhenAsPatternVariable01()
         {
-            UsingStatement("switch (e) { case var when: break; }",
+            UsingStatement(
+                "switch (e) { case var when: break; }",
                 // (1,27): error CS1525: Invalid expression term ':'
                 // switch (e) { case var when: break; }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":").WithArguments(":").WithLocation(1, 27)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":")
+                    .WithArguments(":")
+                    .WithLocation(1, 27)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2769,11 +2932,14 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact, WorkItem(26000, "https://github.com/dotnet/roslyn/issues/26000")]
         public void WhenAsPatternVariable02()
         {
-            UsingStatement("switch (e) { case K when: break; }",
+            UsingStatement(
+                "switch (e) { case K when: break; }",
                 // (1,25): error CS1525: Invalid expression term ':'
                 // switch (e) { case K when: break; }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":").WithArguments(":").WithLocation(1, 25)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ":")
+                    .WithArguments(":")
+                    .WithLocation(1, 25)
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -2817,13 +2983,16 @@ case KeyValuePair<String, DateTime>[] pairs2:
             EOF();
         }
 
-        [Fact(Skip = "This is not a reliable test, and its failure modes are hard to capture. But it is helpful to run by hand to find parser issues.")]
+        [Fact(
+            Skip = "This is not a reliable test, and its failure modes are hard to capture. But it is helpful to run by hand to find parser issues."
+        )]
         public void ParseFuzz()
         {
             Random random = new Random();
             for (int i = 0; i < 4000; i++)
             {
-                string source = $"class C{{void M(){{switch(e){{case {makePattern0()}:T v = e;}}}}}}";
+                string source =
+                    $"class C{{void M(){{switch(e){{case {makePattern0()}:T v = e;}}}}}}";
                 try
                 {
                     Parse(source, options: TestOptions.RegularWithRecursivePatterns);
@@ -2854,8 +3023,10 @@ case KeyValuePair<String, DateTime>[] pairs2:
                 var builder = new StringBuilder();
                 for (int i = 0; i < nProps; i++)
                 {
-                    if (i != 0) builder.Append(", ");
-                    if (needNames || random.Next(5) == 0) builder.Append("N: ");
+                    if (i != 0)
+                        builder.Append(", ");
+                    if (needNames || random.Next(5) == 0)
+                        builder.Append("N: ");
                     builder.Append(makePattern(maxDepth - 1));
                 }
                 return builder.ToString();
@@ -2885,7 +3056,8 @@ case KeyValuePair<String, DateTime>[] pairs2:
                         bool parensPart = random.Next(2) == 0;
                         bool propsPart = random.Next(2) == 0;
                         bool name = random.Next(2) == 0;
-                        if (!parensPart && !propsPart && !(nameType && name)) continue;
+                        if (!parensPart && !propsPart && !(nameType && name))
+                            continue;
                         return $"{(nameType ? "N" : "")} {(parensPart ? $"({makeProps(maxDepth, false)})" : "")} {(propsPart ? $"{{ {makeProps(maxDepth, true)} }}" : "")} {(name ? "n" : "")}";
                     }
                 }
@@ -5540,7 +5712,7 @@ case KeyValuePair<String, DateTime>[] pairs2:
         public void ShortTuplePatterns()
         {
             UsingExpression(
-@"e switch {
+                @"e switch {
     var () => 1,
     () => 2,
     var (x) => 3,
@@ -5550,7 +5722,8 @@ case KeyValuePair<String, DateTime>[] pairs2:
     (Item1: 1) => 7,
     C(1) => 8
 }",
-                expectedErrors: new DiagnosticDescription[0]);
+                expectedErrors: new DiagnosticDescription[0]
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -5784,7 +5957,7 @@ case KeyValuePair<String, DateTime>[] pairs2:
         public void NestedShortTuplePatterns()
         {
             UsingExpression(
-@"e switch {
+                @"e switch {
     {X: var ()} => 1,
     {X: ()} => 2,
     {X: var (x)} => 3,
@@ -5794,7 +5967,8 @@ case KeyValuePair<String, DateTime>[] pairs2:
     {X: (Item1: 1)} => 7,
     {X: C(1)} => 8
 }",
-                expectedErrors: new DiagnosticDescription[0]);
+                expectedErrors: new DiagnosticDescription[0]
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6225,14 +6399,17 @@ case KeyValuePair<String, DateTime>[] pairs2:
         public void IsNullableArray02()
         {
             // error: 'cannot use nullable reference type for a pattern' or 'expected :'
-            UsingExpression("o is A[] ? b && c",
+            UsingExpression(
+                "o is A[] ? b && c",
                 // (1,18): error CS1003: Syntax error, ':' expected
                 // o is A[] ? b && c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":", "").WithLocation(1, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "")
+                    .WithArguments(":", "")
+                    .WithLocation(1, 18),
                 // (1,18): error CS1733: Expected expression
                 // o is A[] ? b && c
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18)
-                );
+            );
             N(SyntaxKind.ConditionalExpression);
             {
                 N(SyntaxKind.IsExpression);
@@ -6406,7 +6583,8 @@ case KeyValuePair<String, DateTime>[] pairs2:
         [Fact, WorkItem(32161, "https://github.com/dotnet/roslyn/issues/32161")]
         public void ParenthesizedSwitchCase()
         {
-            var text = @"
+            var text =
+                @"
 switch (e)
 {
     case (0): break;
@@ -6415,9 +6593,19 @@ switch (e)
     case (~3): break;
 }
 ";
-            foreach (var langVersion in new[] { LanguageVersion.CSharp6, LanguageVersion.CSharp7, LanguageVersion.CSharp8 })
+            foreach (
+                var langVersion in new[]
+                {
+                    LanguageVersion.CSharp6,
+                    LanguageVersion.CSharp7,
+                    LanguageVersion.CSharp8
+                }
+            )
             {
-                UsingStatement(text, options: CSharpParseOptions.Default.WithLanguageVersion(langVersion));
+                UsingStatement(
+                    text,
+                    options: CSharpParseOptions.Default.WithLanguageVersion(langVersion)
+                );
                 N(SyntaxKind.SwitchStatement);
                 {
                     N(SyntaxKind.SwitchKeyword);
@@ -6570,17 +6758,22 @@ switch (e)
         [Fact]
         public void TrailingCommaInSwitchExpression_02()
         {
-            UsingExpression("1 switch { , }",
+            UsingExpression(
+                "1 switch { , }",
                 // (1,12): error CS8504: Pattern missing
                 // 1 switch { , }
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 12),
                 // (1,12): error CS1003: Syntax error, '=>' expected
                 // 1 switch { , }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>", ",").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
+                    .WithArguments("=>", ",")
+                    .WithLocation(1, 12),
                 // (1,12): error CS1525: Invalid expression term ','
                 // 1 switch { , }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 12)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 12)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.NumericLiteralExpression);
@@ -6655,11 +6848,12 @@ switch (e)
         [Fact]
         public void TrailingCommaInPropertyPattern_02()
         {
-            UsingExpression("e is { , }",
+            UsingExpression(
+                "e is { , }",
                 // (1,8): error CS8504: Pattern missing
                 // e is { , }
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 8)
-                );
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6693,11 +6887,12 @@ switch (e)
         [Fact]
         public void TrailingCommaInPositionalPattern_01()
         {
-            UsingExpression("e is ( X: 3, )",
+            UsingExpression(
+                "e is ( X: 3, )",
                 // (1,14): error CS8504: Pattern missing
                 // e is ( X: 3, )
                 Diagnostic(ErrorCode.ERR_MissingPattern, ")").WithLocation(1, 14)
-                );
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6749,14 +6944,15 @@ switch (e)
         [Fact]
         public void TrailingCommaInPositionalPattern_02()
         {
-            UsingExpression("e is ( , )",
+            UsingExpression(
+                "e is ( , )",
                 // (1,8): error CS8504: Pattern missing
                 // e is ( , )
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 8),
                 // (1,10): error CS8504: Pattern missing
                 // e is ( , )
                 Diagnostic(ErrorCode.ERR_MissingPattern, ")").WithLocation(1, 10)
-                );
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6800,17 +6996,22 @@ switch (e)
         [Fact]
         public void ExtraCommaInSwitchExpression()
         {
-            UsingExpression("e switch { 1 => 2,, }",
+            UsingExpression(
+                "e switch { 1 => 2,, }",
                 // (1,19): error CS8504: Pattern missing
                 // e switch { 1 => 2,, }
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 19),
                 // (1,19): error CS1003: Syntax error, '=>' expected
                 // e switch { 1 => 2,, }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>", ",").WithLocation(1, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
+                    .WithArguments("=>", ",")
+                    .WithLocation(1, 19),
                 // (1,19): error CS1525: Invalid expression term ','
                 // e switch { 1 => 2,, }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 19)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 19)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6859,11 +7060,12 @@ switch (e)
         [Fact]
         public void ExtraCommaInPropertyPattern()
         {
-            UsingExpression("e is { A: 1,, }",
+            UsingExpression(
+                "e is { A: 1,, }",
                 // (1,13): error CS8504: Pattern missing
                 // e is { A: 1,, }
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 13)
-                );
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -6917,9 +7119,10 @@ switch (e)
         public void ParenthesizedExpressionInPattern_01()
         {
             UsingStatement(
-@"switch (e) {
+                @"switch (e) {
     case (('C') << 24) + (('g') << 16) + (('B') << 8) + 'I': break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -7034,9 +7237,10 @@ switch (e)
         public void ParenthesizedExpressionInPattern_02()
         {
             UsingStatement(
-@"switch (e) {
+                @"switch (e) {
     case ((2) + (2)): break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -7096,9 +7300,10 @@ switch (e)
         public void ParenthesizedExpressionInPattern_03()
         {
             UsingStatement(
-@"switch (e) {
+                @"switch (e) {
     case ((2 + 2) - 2): break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -7161,9 +7366,10 @@ switch (e)
         public void ParenthesizedExpressionInPattern_04()
         {
             UsingStatement(
-@"switch (e) {
+                @"switch (e) {
     case (2) | (2): break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -7218,9 +7424,10 @@ switch (e)
         public void ParenthesizedExpressionInPattern_05()
         {
             UsingStatement(
-@"switch (e) {
+                @"switch (e) {
     case ((2 << 2) | 2): break;
-}");
+}"
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -7634,10 +7841,14 @@ switch (e)
         [Fact]
         public void SwitchExpressionPrecedence_09()
         {
-            UsingExpression("a switch {}.X",
+            UsingExpression(
+                "a switch {}.X",
                 // (1,1): error CS1073: Unexpected token '.'
                 // a switch {}.X
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}").WithArguments(".").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}")
+                    .WithArguments(".")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7654,10 +7865,14 @@ switch (e)
         [Fact]
         public void SwitchExpressionPrecedence_10()
         {
-            UsingExpression("a switch {}[i]",
+            UsingExpression(
+                "a switch {}[i]",
                 // (1,1): error CS1073: Unexpected token '['
                 // a switch {}[i]
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}").WithArguments("[").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}")
+                    .WithArguments("[")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7674,10 +7889,14 @@ switch (e)
         [Fact]
         public void SwitchExpressionPrecedence_11()
         {
-            UsingExpression("a switch {}(b)",
+            UsingExpression(
+                "a switch {}(b)",
                 // (1,1): error CS1073: Unexpected token '('
                 // a switch {}(b)
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}").WithArguments("(").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}")
+                    .WithArguments("(")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7694,10 +7913,14 @@ switch (e)
         [Fact]
         public void SwitchExpressionPrecedence_12()
         {
-            UsingExpression("a switch {}!",
+            UsingExpression(
+                "a switch {}!",
                 // (1,1): error CS1073: Unexpected token '!'
                 // a switch {}!
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}").WithArguments("!").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "a switch {}")
+                    .WithArguments("!")
+                    .WithLocation(1, 1)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7714,11 +7937,12 @@ switch (e)
         [Fact, WorkItem(32749, "https://github.com/dotnet/roslyn/issues/32749")]
         public void BrokenSwitchExpression_01()
         {
-            UsingExpression("(e switch {)",
+            UsingExpression(
+                "(e switch {)",
                 // (1,12): error CS1513: } expected
                 // (e switch {)
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(1, 12)
-                );
+            );
             N(SyntaxKind.ParenthesizedExpression);
             {
                 N(SyntaxKind.OpenParenToken);
@@ -7740,20 +7964,25 @@ switch (e)
         [Fact, WorkItem(32749, "https://github.com/dotnet/roslyn/issues/32749")]
         public void BrokenSwitchExpression_02()
         {
-            UsingExpression("(e switch {,)",
+            UsingExpression(
+                "(e switch {,)",
                 // (1,12): error CS8504: Pattern missing
                 // (e switch {,)
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 12),
                 // (1,12): error CS1003: Syntax error, '=>' expected
                 // (e switch {,)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>", ",").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
+                    .WithArguments("=>", ",")
+                    .WithLocation(1, 12),
                 // (1,12): error CS1525: Invalid expression term ','
                 // (e switch {,)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 12),
                 // (1,13): error CS1513: } expected
                 // (e switch {,)
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(1, 13)
-                );
+            );
             N(SyntaxKind.ParenthesizedExpression);
             {
                 N(SyntaxKind.OpenParenToken);
@@ -7791,20 +8020,25 @@ switch (e)
         [Fact, WorkItem(32749, "https://github.com/dotnet/roslyn/issues/32749")]
         public void BrokenSwitchExpression_03()
         {
-            UsingExpression("e switch {,",
+            UsingExpression(
+                "e switch {,",
                 // (1,11): error CS8504: Pattern missing
                 // e switch {,
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, '=>' expected
                 // e switch {,
-                Diagnostic(ErrorCode.ERR_SyntaxError, ",").WithArguments("=>", ",").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ",")
+                    .WithArguments("=>", ",")
+                    .WithLocation(1, 11),
                 // (1,11): error CS1525: Invalid expression term ','
                 // e switch {,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 11),
                 // (1,12): error CS1513: } expected
                 // e switch {,
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 12)
-                );
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7874,11 +8108,14 @@ switch (e)
         [Fact, WorkItem(34482, "https://github.com/dotnet/roslyn/issues/34482")]
         public void SwitchCaseArmErrorRecovery_01()
         {
-            UsingExpression("e switch { 1 => 1; 2 => 2 }",
+            UsingExpression(
+                "e switch { 1 => 1; 2 => 2 }",
                 // (1,18): error CS1003: Syntax error, ',' expected
                 // e switch { 1 => 1; 2 => 2 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 18)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -7926,11 +8163,14 @@ switch (e)
         [Fact, WorkItem(34482, "https://github.com/dotnet/roslyn/issues/34482")]
         public void SwitchCaseArmErrorRecovery_02()
         {
-            UsingExpression("e switch { 1 => 1, 2 => 2; }",
+            UsingExpression(
+                "e switch { 1 => 1, 2 => 2; }",
                 // (1,26): error CS1003: Syntax error, ',' expected
                 // e switch { 1 => 1, 2 => 2; }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 26)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 26)
+            );
             N(SyntaxKind.SwitchExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -8015,11 +8255,14 @@ switch (e)
         [Fact, WorkItem(10492, "https://github.com/dotnet/roslyn/issues/10492")]
         public void PrecedenceInversionWithDeclarationPattern()
         {
-            UsingExpression("o is C c + d",
+            UsingExpression(
+                "o is C c + d",
                 // (1,10): error CS1073: Unexpected token '+'
                 // o is C c + d
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+").WithArguments("+").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.AddExpression);
             {
                 N(SyntaxKind.IsPatternExpression);
@@ -8053,11 +8296,14 @@ switch (e)
         [Fact, WorkItem(10492, "https://github.com/dotnet/roslyn/issues/10492")]
         public void PrecedenceInversionWithRecursivePattern()
         {
-            UsingExpression("o is {} + d",
+            UsingExpression(
+                "o is {} + d",
                 // (1,9): error CS1073: Unexpected token '+'
                 // o is {} + d
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+").WithArguments("+").WithLocation(1, 9)
-                );
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 9)
+            );
             N(SyntaxKind.AddExpression);
             {
                 N(SyntaxKind.IsPatternExpression);
@@ -8088,11 +8334,15 @@ switch (e)
         [Fact]
         public void PatternCombinators_01()
         {
-            UsingStatement("_ = e is a or b;", TestOptions.RegularWithoutPatternCombinators,
+            UsingStatement(
+                "_ = e is a or b;",
+                TestOptions.RegularWithoutPatternCombinators,
                 // (1,10): error CS8400: Feature 'or pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // _ = e is a or b;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a or b").WithArguments("or pattern", "9.0").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a or b")
+                    .WithArguments("or pattern", "9.0")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8137,11 +8387,15 @@ switch (e)
         [Fact]
         public void PatternCombinators_02()
         {
-            UsingStatement("_ = e is a and b;", TestOptions.RegularWithoutPatternCombinators,
+            UsingStatement(
+                "_ = e is a and b;",
+                TestOptions.RegularWithoutPatternCombinators,
                 // (1,10): error CS8400: Feature 'and pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // _ = e is a and b;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a and b").WithArguments("and pattern", "9.0").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a and b")
+                    .WithArguments("and pattern", "9.0")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8186,11 +8440,15 @@ switch (e)
         [Fact]
         public void PatternCombinators_03()
         {
-            UsingStatement("_ = e is not b;", TestOptions.RegularWithoutPatternCombinators,
+            UsingStatement(
+                "_ = e is not b;",
+                TestOptions.RegularWithoutPatternCombinators,
                 // (1,10): error CS8400: Feature 'not pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // _ = e is not b;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not b").WithArguments("not pattern", "9.0").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not b")
+                    .WithArguments("not pattern", "9.0")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8228,11 +8486,15 @@ switch (e)
         [Fact]
         public void PatternCombinators_04()
         {
-            UsingStatement("_ = e is not null;", TestOptions.RegularWithoutPatternCombinators,
+            UsingStatement(
+                "_ = e is not null;",
+                TestOptions.RegularWithoutPatternCombinators,
                 // (1,10): error CS8400: Feature 'not pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // _ = e is not null;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not null").WithArguments("not pattern", "9.0").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not null")
+                    .WithArguments("not pattern", "9.0")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8271,7 +8533,7 @@ switch (e)
         public void PatternCombinators_05()
         {
             UsingStatement(
-@"_ = e switch {
+                @"_ = e switch {
     a or b => 1,
     c and d => 2,
     not e => 3,
@@ -8280,17 +8542,25 @@ switch (e)
                 TestOptions.RegularWithoutPatternCombinators,
                 // (2,5): error CS8400: Feature 'or pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     a or b => 1,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a or b").WithArguments("or pattern", "9.0").WithLocation(2, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "a or b")
+                    .WithArguments("or pattern", "9.0")
+                    .WithLocation(2, 5),
                 // (3,5): error CS8400: Feature 'and pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     c and d => 2,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "c and d").WithArguments("and pattern", "9.0").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "c and d")
+                    .WithArguments("and pattern", "9.0")
+                    .WithLocation(3, 5),
                 // (4,5): error CS8400: Feature 'not pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     not e => 3,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not e").WithArguments("not pattern", "9.0").WithLocation(4, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not e")
+                    .WithArguments("not pattern", "9.0")
+                    .WithLocation(4, 5),
                 // (5,5): error CS8400: Feature 'not pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     not null => 4,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not null").WithArguments("not pattern", "9.0").WithLocation(5, 5)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "not null")
+                    .WithArguments("not pattern", "9.0")
+                    .WithLocation(5, 5)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8414,7 +8684,7 @@ switch (e)
         public void RelationalPattern_01()
         {
             UsingStatement(
-@"_ = e switch {
+                @"_ = e switch {
     < 0 => 0,
     <= 1 => 1,
     > 2 => 2,
@@ -8425,23 +8695,35 @@ switch (e)
                 TestOptions.RegularWithoutPatternCombinators,
                 // (2,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     < 0 => 0,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "< 0").WithArguments("relational pattern", "9.0").WithLocation(2, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "< 0")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(2, 5),
                 // (3,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     <= 1 => 1,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "<= 1").WithArguments("relational pattern", "9.0").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "<= 1")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(3, 5),
                 // (4,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     > 2 => 2,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "> 2").WithArguments("relational pattern", "9.0").WithLocation(4, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "> 2")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(4, 5),
                 // (5,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     >= 3 => 3,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, ">= 3").WithArguments("relational pattern", "9.0").WithLocation(5, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, ">= 3")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(5, 5),
                 // (6,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     == 4 => 4,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "== 4").WithArguments("relational pattern", "9.0").WithLocation(6, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "== 4")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(6, 5),
                 // (7,5): error CS8400: Feature 'relational pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     != 5 => 5,
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "!= 5").WithArguments("relational pattern", "9.0").WithLocation(7, 5)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "!= 5")
+                    .WithArguments("relational pattern", "9.0")
+                    .WithLocation(7, 5)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8573,7 +8855,7 @@ switch (e)
         public void RelationalPatternPrecedence_01()
         {
             UsingStatement(
-@"_ = e switch {
+                @"_ = e switch {
     < 0 < 0 => 0,
     == 4 < 4 => 4,
     != 5 < 5 => 5,
@@ -8581,41 +8863,59 @@ switch (e)
                 TestOptions.RegularWithPatternCombinators,
                 // (2,9): error CS1003: Syntax error, '=>' expected
                 //     < 0 < 0 => 0,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "<").WithArguments("=>", "<").WithLocation(2, 9),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "<")
+                    .WithArguments("=>", "<")
+                    .WithLocation(2, 9),
                 // (2,9): error CS1525: Invalid expression term '<'
                 //     < 0 < 0 => 0,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(2, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(2, 9),
                 // (2,13): error CS1003: Syntax error, ',' expected
                 //     < 0 < 0 => 0,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",", "=>").WithLocation(2, 13),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",", "=>")
+                    .WithLocation(2, 13),
                 // (2,13): error CS8504: Pattern missing
                 //     < 0 < 0 => 0,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(2, 13),
                 // (3,10): error CS1003: Syntax error, '=>' expected
                 //     == 4 < 4 => 4,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "<").WithArguments("=>", "<").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "<")
+                    .WithArguments("=>", "<")
+                    .WithLocation(3, 10),
                 // (3,10): error CS1525: Invalid expression term '<'
                 //     == 4 < 4 => 4,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(3, 10),
                 // (3,14): error CS1003: Syntax error, ',' expected
                 //     == 4 < 4 => 4,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",", "=>").WithLocation(3, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",", "=>")
+                    .WithLocation(3, 14),
                 // (3,14): error CS8504: Pattern missing
                 //     == 4 < 4 => 4,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(3, 14),
                 // (4,10): error CS1003: Syntax error, '=>' expected
                 //     != 5 < 5 => 5,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "<").WithArguments("=>", "<").WithLocation(4, 10),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "<")
+                    .WithArguments("=>", "<")
+                    .WithLocation(4, 10),
                 // (4,10): error CS1525: Invalid expression term '<'
                 //     != 5 < 5 => 5,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<").WithArguments("<").WithLocation(4, 10),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<")
+                    .WithArguments("<")
+                    .WithLocation(4, 10),
                 // (4,14): error CS1003: Syntax error, ',' expected
                 //     != 5 < 5 => 5,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",", "=>").WithLocation(4, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",", "=>")
+                    .WithLocation(4, 14),
                 // (4,14): error CS8504: Pattern missing
                 //     != 5 < 5 => 5,
                 Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(4, 14)
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8768,13 +9068,13 @@ switch (e)
         public void RelationalPatternPrecedence_02()
         {
             UsingStatement(
-@"_ = e switch {
+                @"_ = e switch {
     < 0 << 0 => 0,
     == 4 << 4 => 4,
     != 5 << 5 => 5,
 };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8878,10 +9178,7 @@ switch (e)
         [Fact]
         public void RelationalPatternPrecedence_03()
         {
-            UsingStatement(
-@"_ = e is < 4;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is < 4;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8916,10 +9213,7 @@ switch (e)
         [Fact]
         public void RelationalPatternPrecedence_04()
         {
-            UsingStatement(
-@"_ = e is < 4 < 4;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is < 4 < 4;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -8962,10 +9256,7 @@ switch (e)
         [Fact]
         public void RelationalPatternPrecedence_05()
         {
-            UsingStatement(
-@"_ = e is < 4 << 4;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is < 4 << 4;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9008,9 +9299,7 @@ switch (e)
         [Fact]
         public void WhenIsNotKeywordInIsExpression()
         {
-            UsingStatement(@"_ = e is T when;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is T when;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9048,9 +9337,10 @@ switch (e)
         [Fact]
         public void WhenIsNotKeywordInRecursivePattern()
         {
-            UsingStatement(@"_ = e switch { T(X when) => 1, };",
+            UsingStatement(
+                @"_ = e switch { T(X when) => 1, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9114,9 +9404,7 @@ switch (e)
         [Fact]
         public void TypePattern_01()
         {
-            UsingStatement(@"_ = e is int or long;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int or long;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9161,9 +9449,10 @@ switch (e)
         [Fact]
         public void TypePattern_02()
         {
-            UsingStatement(@"_ = e is int or System.Int64;",
+            UsingStatement(
+                @"_ = e is int or System.Int64;",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9216,9 +9505,10 @@ switch (e)
         [Fact]
         public void TypePattern_03()
         {
-            UsingStatement(@"_ = e switch { int or long => 1, };",
+            UsingStatement(
+                @"_ = e switch { int or long => 1, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9274,9 +9564,10 @@ switch (e)
         [Fact]
         public void TypePattern_04()
         {
-            UsingStatement(@"_ = e switch { int or System.Int64 => 1, };",
+            UsingStatement(
+                @"_ = e switch { int or System.Int64 => 1, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9340,9 +9631,10 @@ switch (e)
         [Fact]
         public void TypePattern_05()
         {
-            UsingStatement(@"_ = e switch { T(int) => 1, };",
+            UsingStatement(
+                @"_ = e switch { T(int) => 1, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9402,9 +9694,10 @@ switch (e)
         [Fact]
         public void TypePattern_06()
         {
-            UsingStatement(@"_ = e switch { int => 1, long => 2, };",
+            UsingStatement(
+                @"_ = e switch { int => 1, long => 2, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9465,9 +9758,7 @@ switch (e)
         [Fact, WorkItem(49354, "https://github.com/dotnet/roslyn/issues/49354")]
         public void TypePattern_07()
         {
-            UsingStatement(@"_ = e is (int) or string;",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement(@"_ = e is (int) or string;", TestOptions.RegularWithPatternCombinators);
 
             N(SyntaxKind.ExpressionStatement);
             {
@@ -9518,9 +9809,7 @@ switch (e)
         [Fact]
         public void TypePattern_08()
         {
-            UsingStatement($"_ = e is (a) or b;",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement($"_ = e is (a) or b;", TestOptions.RegularWithPatternCombinators);
 
             N(SyntaxKind.ExpressionStatement);
             {
@@ -9571,9 +9860,10 @@ switch (e)
         [Fact]
         public void CompoundPattern_01()
         {
-            UsingStatement(@"bool isLetter(char c) => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';",
+            UsingStatement(
+                @"bool isLetter(char c) => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -9658,9 +9948,7 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_01()
         {
-            UsingStatement(@"_ = e is int and;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int and;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9698,9 +9986,7 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_02()
         {
-            UsingStatement(@"_ = e is int and < Z;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int and < Z;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9746,9 +10032,7 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_03()
         {
-            UsingStatement(@"_ = e is int and && b;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int and && b;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9794,9 +10078,10 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_04()
         {
-            UsingStatement(@"_ = e is int and int.MaxValue;",
+            UsingStatement(
+                @"_ = e is int and int.MaxValue;",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9849,9 +10134,10 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_05()
         {
-            UsingStatement(@"_ = e is int and MaxValue;",
+            UsingStatement(
+                @"_ = e is int and MaxValue;",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9896,9 +10182,7 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_06()
         {
-            UsingStatement(@"_ = e is int and ?? Z;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int and ?? Z;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9944,9 +10228,7 @@ switch (e)
         [Fact]
         public void CombinatorAsDesignator_07()
         {
-            UsingStatement(@"_ = e is int and ? a : b;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is int and ? a : b;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -9997,11 +10279,14 @@ switch (e)
         [Fact, WorkItem(10492, "https://github.com/dotnet/roslyn/issues/10492")]
         public void PrecedenceInversionWithTypeTest()
         {
-            UsingExpression("o is int + d",
+            UsingExpression(
+                "o is int + d",
                 // (1,6): error CS1525: Invalid expression term 'int'
                 // o is int + d
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 6)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 6)
+            );
             N(SyntaxKind.IsPatternExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -10031,11 +10316,14 @@ switch (e)
         [Fact, WorkItem(10492, "https://github.com/dotnet/roslyn/issues/10492")]
         public void PrecedenceInversionWithBlockLambda()
         {
-            UsingExpression("() => {} + d",
+            UsingExpression(
+                "() => {} + d",
                 // (1,10): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to disambiguate.
                 // () => {} + d
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+").WithArguments("+").WithLocation(1, 10)
-                );
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.AddExpression);
             {
                 N(SyntaxKind.ParenthesizedLambdaExpression);
@@ -10064,11 +10352,14 @@ switch (e)
         [Fact, WorkItem(10492, "https://github.com/dotnet/roslyn/issues/10492")]
         public void PrecedenceInversionWithAnonymousMethod()
         {
-            UsingExpression("delegate {} + d",
+            UsingExpression(
+                "delegate {} + d",
                 // (1,13): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to disambiguate.
                 // delegate {} + d
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+").WithArguments("+").WithLocation(1, 13)
-                );
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 13)
+            );
             N(SyntaxKind.AddExpression);
             {
                 N(SyntaxKind.AnonymousMethodExpression);
@@ -10092,9 +10383,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_01()
         {
-            UsingStatement(@"_ = e is (3);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (3);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10133,9 +10422,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_02()
         {
-            UsingStatement(@"_ = e is (A);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (A);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10174,9 +10461,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_03()
         {
-            UsingStatement(@"_ = e is (int);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (int);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10215,9 +10500,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_04()
         {
-            UsingStatement(@"_ = e is (Item1: int);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (Item1: int);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10270,9 +10553,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_05()
         {
-            UsingStatement(@"_ = e is (A) x;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (A) x;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10315,9 +10596,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void OneElementPositional_06()
         {
-            UsingStatement(@"_ = e is ((A, A)) x;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is ((A, A)) x;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10388,9 +10667,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void ZeroElementPositional_01()
         {
-            UsingStatement(@"_ = e is ();",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is ();", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10425,9 +10702,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void ZeroElementPositional_02()
         {
-            UsingStatement(@"_ = e is () x;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is () x;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10466,9 +10741,7 @@ switch (e)
         [Fact, WorkItem(36515, "https://github.com/dotnet/roslyn/issues/36515")]
         public void ZeroElementPositional_03()
         {
-            UsingStatement(@"_ = e is () {};",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is () {};", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10508,9 +10781,7 @@ switch (e)
         [Fact]
         public void CastExpressionInPattern_01()
         {
-            UsingStatement(@"_ = e is (int)+1;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (int)+1;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10560,7 +10831,8 @@ switch (e)
         [InlineData("not")]
         public void CastExpressionInPattern_02(string identifier)
         {
-            UsingStatement($"_ = e is (int){identifier};",
+            UsingStatement(
+                $"_ = e is (int){identifier};",
                 TestOptions.RegularWithPatternCombinators
             );
 
@@ -10608,9 +10880,11 @@ switch (e)
         public void CastExpressionInPattern_03(
             [CombinatorialValues("and", "or")] string left,
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
-            [CombinatorialValues("and", "or")] string right)
+            [CombinatorialValues("and", "or")] string right
+        )
         {
-            UsingStatement($"_ = e is (int){left} {SyntaxFacts.GetText(opKind)} {right};",
+            UsingStatement(
+                $"_ = e is (int){left} {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -10629,7 +10903,11 @@ switch (e)
                             N(SyntaxKind.IdentifierToken, "e");
                         }
                         N(SyntaxKind.IsKeyword);
-                        N(opKind == SyntaxKind.AndKeyword ? SyntaxKind.AndPattern : SyntaxKind.OrPattern);
+                        N(
+                            opKind == SyntaxKind.AndKeyword
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
+                        );
                         {
                             N(SyntaxKind.ConstantPattern);
                             {
@@ -10666,9 +10944,7 @@ switch (e)
         [Fact]
         public void CastExpressionInPattern_04()
         {
-            UsingStatement($"_ = e is (a)42 or b;",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement($"_ = e is (a)42 or b;", TestOptions.RegularWithPatternCombinators);
 
             N(SyntaxKind.ExpressionStatement);
             {
@@ -10725,9 +11001,11 @@ switch (e)
         public void CombinatorAsConstant_00(
             [CombinatorialValues("and", "or")] string left,
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
-            [CombinatorialValues("and", "or")] string right)
+            [CombinatorialValues("and", "or")] string right
+        )
         {
-            UsingStatement($"_ = e is {left} {SyntaxFacts.GetText(opKind)} {right};",
+            UsingStatement(
+                $"_ = e is {left} {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators
             );
 
@@ -10747,7 +11025,11 @@ switch (e)
                             N(SyntaxKind.IdentifierToken, "e");
                         }
                         N(SyntaxKind.IsKeyword);
-                        N(opKind == SyntaxKind.AndKeyword ? SyntaxKind.AndPattern : SyntaxKind.OrPattern);
+                        N(
+                            opKind == SyntaxKind.AndKeyword
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
+                        );
                         {
                             N(SyntaxKind.ConstantPattern);
                             {
@@ -10776,9 +11058,11 @@ switch (e)
         [CombinatorialData]
         public void CombinatorAsConstant_01(
             [CombinatorialValues(SyntaxKind.AndKeyword, SyntaxKind.OrKeyword)] SyntaxKind opKind,
-            [CombinatorialValues("and", "or")] string right)
+            [CombinatorialValues("and", "or")] string right
+        )
         {
-            UsingStatement($"_ = e is (int) {SyntaxFacts.GetText(opKind)} {right};",
+            UsingStatement(
+                $"_ = e is (int) {SyntaxFacts.GetText(opKind)} {right};",
                 TestOptions.RegularWithPatternCombinators
             );
 
@@ -10798,7 +11082,11 @@ switch (e)
                             N(SyntaxKind.IdentifierToken, "e");
                         }
                         N(SyntaxKind.IsKeyword);
-                        N(opKind == SyntaxKind.AndKeyword ? SyntaxKind.AndPattern : SyntaxKind.OrPattern);
+                        N(
+                            opKind == SyntaxKind.AndKeyword
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
+                        );
                         {
                             N(SyntaxKind.ParenthesizedPattern);
                             {
@@ -10831,9 +11119,7 @@ switch (e)
         [Fact]
         public void CombinatorAsConstant_02()
         {
-            UsingStatement($"_ = e is (int) or >= 0;",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement($"_ = e is (int) or >= 0;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10884,9 +11170,7 @@ switch (e)
         [Fact]
         public void CombinatorAsConstant_03()
         {
-            UsingStatement($"_ = e is (int)or or >= 0;",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement($"_ = e is (int)or or >= 0;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -10941,7 +11225,8 @@ switch (e)
         [Fact]
         public void CombinatorAsConstant_04()
         {
-            UsingStatement($"_ = e is (int) or or or >= 0;",
+            UsingStatement(
+                $"_ = e is (int) or or or >= 0;",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -11005,9 +11290,10 @@ switch (e)
         [Fact]
         public void ConjunctiveFollowedByPropertyPattern_01()
         {
-            UsingStatement(@"switch (e) { case {} and {}: break; }",
+            UsingStatement(
+                @"switch (e) { case {} and {}: break; }",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -11059,9 +11345,10 @@ switch (e)
         [Fact]
         public void ConjunctiveFollowedByTuplePattern_01()
         {
-            UsingStatement(@"switch (e) { case {} and (): break; }",
+            UsingStatement(
+                @"switch (e) { case {} and (): break; }",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.SwitchStatement);
             {
                 N(SyntaxKind.SwitchKeyword);
@@ -11114,9 +11401,7 @@ switch (e)
         [WorkItem(42107, "https://github.com/dotnet/roslyn/issues/42107")]
         public void ParenthesizedRelationalPattern_01()
         {
-            UsingStatement(@"_ = e is (>= 1);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (>= 1);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11157,9 +11442,10 @@ switch (e)
         [WorkItem(42107, "https://github.com/dotnet/roslyn/issues/42107")]
         public void ParenthesizedRelationalPattern_02()
         {
-            UsingStatement(@"_ = e switch { (>= 1) => 1 };",
+            UsingStatement(
+                @"_ = e switch { (>= 1) => 1 };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11210,9 +11496,10 @@ switch (e)
         [WorkItem(42107, "https://github.com/dotnet/roslyn/issues/42107")]
         public void ParenthesizedRelationalPattern_03()
         {
-            UsingStatement(@"bool isAsciiLetter(char c) => c is (>= 'A' and <= 'Z') or (>= 'a' and <= 'z');",
+            UsingStatement(
+                @"bool isAsciiLetter(char c) => c is (>= 'A' and <= 'Z') or (>= 'a' and <= 'z');",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.LocalFunctionStatement);
             {
                 N(SyntaxKind.PredefinedType);
@@ -11308,9 +11595,7 @@ switch (e)
         [WorkItem(42107, "https://github.com/dotnet/roslyn/issues/42107")]
         public void ParenthesizedRelationalPattern_04()
         {
-            UsingStatement(@"_ = e is (<= 1, >= 2);",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is (<= 1, >= 2);", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11368,9 +11653,7 @@ switch (e)
         [Fact]
         public void AndPatternAssociativity_01()
         {
-            UsingStatement(@"_ = e is A and B and C;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is A and B and C;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11426,9 +11709,7 @@ switch (e)
         [Fact]
         public void OrPatternAssociativity_01()
         {
-            UsingStatement(@"_ = e is A or B or C;",
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(@"_ = e is A or B or C;", TestOptions.RegularWithPatternCombinators);
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11485,13 +11766,9 @@ switch (e)
         public void NamespaceQualifiedEnumConstantInSwitchCase()
         {
             var source = @"switch (e) { case global::E.A: break; }";
-            UsingStatement(source,
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(source, TestOptions.RegularWithPatternCombinators);
             verifyTree();
-            UsingStatement(source,
-                TestOptions.RegularWithoutPatternCombinators
-                );
+            UsingStatement(source, TestOptions.RegularWithoutPatternCombinators);
             verifyTree();
 
             void verifyTree()
@@ -11549,13 +11826,9 @@ switch (e)
         public void NamespaceQualifiedEnumConstantInIsPattern()
         {
             var source = @"_ = e is global::E.A;";
-            UsingStatement(source,
-                TestOptions.RegularWithPatternCombinators
-                );
+            UsingStatement(source, TestOptions.RegularWithPatternCombinators);
             verifyTree();
-            UsingStatement(source,
-                TestOptions.RegularWithoutPatternCombinators
-                );
+            UsingStatement(source, TestOptions.RegularWithoutPatternCombinators);
             verifyTree();
 
             void verifyTree()
@@ -11617,15 +11890,9 @@ switch (e)
                 // _ = this is Program { P1: (1,  }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 33)
             };
-            UsingStatement(source,
-                TestOptions.RegularWithPatternCombinators,
-                expectedErrors
-                );
+            UsingStatement(source, TestOptions.RegularWithPatternCombinators, expectedErrors);
             verifyTree();
-            UsingStatement(source,
-                TestOptions.RegularWithoutPatternCombinators,
-                expectedErrors
-                );
+            UsingStatement(source, TestOptions.RegularWithoutPatternCombinators, expectedErrors);
             verifyTree();
 
             void verifyTree()
@@ -11704,7 +11971,9 @@ switch (e)
             {
                 // (1,1): error CS1073: Unexpected token '}'
                 // _ = i is (1,   }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = i is (1,   ").WithArguments("}").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = i is (1,   ")
+                    .WithArguments("}")
+                    .WithLocation(1, 1),
                 // (1,16): error CS1026: ) expected
                 // _ = i is (1,   }
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "}").WithLocation(1, 16),
@@ -11712,15 +11981,9 @@ switch (e)
                 // _ = i is (1,   }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(1, 16)
             };
-            UsingStatement(source,
-                TestOptions.RegularWithPatternCombinators,
-                expectedErrors
-                );
+            UsingStatement(source, TestOptions.RegularWithPatternCombinators, expectedErrors);
             verifyTree();
-            UsingStatement(source,
-                TestOptions.RegularWithoutPatternCombinators,
-                expectedErrors
-                );
+            UsingStatement(source, TestOptions.RegularWithoutPatternCombinators, expectedErrors);
             verifyTree();
 
             void verifyTree()
@@ -11771,9 +12034,10 @@ switch (e)
         [Fact, WorkItem(47614, "https://github.com/dotnet/roslyn/issues/47614")]
         public void GenericTypeAsTypePatternInSwitchExpression()
         {
-            UsingStatement(@"_ = e switch { List<X> => 1, List<Y> => 2, };",
+            UsingStatement(
+                @"_ = e switch { List<X> => 1, List<Y> => 2, };",
                 TestOptions.RegularWithPatternCombinators
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -11852,7 +12116,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchExpression_PredefinedType()
         {
-            UsingStatement(@"_ = e switch { int? => 1 };",
+            UsingStatement(
+                @"_ = e switch { int? => 1 };",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -11902,7 +12167,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchStatement_PredefinedType()
         {
-            UsingStatement(@"switch(a) { case int?: break; }",
+            UsingStatement(
+                @"switch(a) { case int?: break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);
@@ -11947,7 +12213,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchExpression_PredefinedType_Parenthesized()
         {
-            UsingStatement(@"_ = e switch { (int?) => 1 };",
+            UsingStatement(
+                @"_ = e switch { (int?) => 1 };",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -12002,7 +12269,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchStatement_PredefinedType_Parenthesized()
         {
-            UsingStatement(@"switch(a) { case (int?): break; }",
+            UsingStatement(
+                @"switch(a) { case (int?): break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);
@@ -12052,9 +12320,7 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchExpression()
         {
-            UsingStatement(@"_ = e switch { a? => 1 };",
-                TestOptions.RegularWithPatternCombinators
-            );
+            UsingStatement(@"_ = e switch { a? => 1 };", TestOptions.RegularWithPatternCombinators);
 
             N(SyntaxKind.ExpressionStatement);
             {
@@ -12103,7 +12369,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchStatement()
         {
-            UsingStatement(@"switch(a) { case a?: break; }",
+            UsingStatement(
+                @"switch(a) { case a?: break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);
@@ -12148,7 +12415,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchExpression_Parenthesized()
         {
-            UsingStatement(@"_ = e switch { (a?) => 1 };",
+            UsingStatement(
+                @"_ = e switch { (a?) => 1 };",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -12203,7 +12471,8 @@ switch (e)
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypeAsTypePatternInSwitchStatement_Parenthesized()
         {
-            UsingStatement(@"switch(a) { case (a?): break; }",
+            UsingStatement(
+                @"switch(a) { case (a?): break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);
@@ -12253,7 +12522,8 @@ switch (e)
         [Fact]
         public void ConditionalAsConstantPatternInSwitchExpression()
         {
-            UsingStatement(@"_ = e switch { (a?x:y) => 1 };",
+            UsingStatement(
+                @"_ = e switch { (a?x:y) => 1 };",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.ExpressionStatement);
@@ -12317,7 +12587,8 @@ switch (e)
         [Fact]
         public void ConditionalAsConstantPatternInSwitchStatement()
         {
-            UsingStatement(@"switch(a) { case a?x:y: break; }",
+            UsingStatement(
+                @"switch(a) { case a?x:y: break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);
@@ -12368,7 +12639,8 @@ switch (e)
         [Fact]
         public void ConditionalAsConstantPatternInSwitchStatement_Parenthesized()
         {
-            UsingStatement(@"switch(a) { case (a?x:y): break; }",
+            UsingStatement(
+                @"switch(a) { case (a?x:y): break; }",
                 TestOptions.RegularWithPatternCombinators
             );
             N(SyntaxKind.SwitchStatement);

@@ -87,10 +87,20 @@ namespace System.IO.Pipelines
         {
             ThrowIfCompleted();
 
-            AdvanceTo((BufferSegment?)consumed.GetObject(), consumed.GetInteger(), (BufferSegment?)examined.GetObject(), examined.GetInteger());
+            AdvanceTo(
+                (BufferSegment?)consumed.GetObject(),
+                consumed.GetInteger(),
+                (BufferSegment?)examined.GetObject(),
+                examined.GetInteger()
+            );
         }
 
-        private void AdvanceTo(BufferSegment? consumedSegment, int consumedIndex, BufferSegment? examinedSegment, int examinedIndex)
+        private void AdvanceTo(
+            BufferSegment? consumedSegment,
+            int consumedIndex,
+            BufferSegment? examinedSegment,
+            int examinedIndex
+        )
         {
             if (consumedSegment == null || examinedSegment == null)
             {
@@ -105,7 +115,12 @@ namespace System.IO.Pipelines
             BufferSegment returnStart = _readHead;
             BufferSegment? returnEnd = consumedSegment;
 
-            long consumedBytes = BufferSegment.GetLength(returnStart, _readIndex, consumedSegment, consumedIndex);
+            long consumedBytes = BufferSegment.GetLength(
+                returnStart,
+                _readIndex,
+                consumedSegment,
+                consumedIndex
+            );
 
             _bufferedBytes -= consumedBytes;
 
@@ -189,7 +204,9 @@ namespace System.IO.Pipelines
         }
 
         /// <inheritdoc />
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             // TODO ReadyAsync needs to throw if there are overlapping reads.
             ThrowIfCompleted();
@@ -208,18 +225,29 @@ namespace System.IO.Pipelines
 
             if (_isStreamCompleted)
             {
-                ReadResult completedResult = new ReadResult(buffer: default, isCanceled: false, isCompleted: true);
+                ReadResult completedResult = new ReadResult(
+                    buffer: default,
+                    isCanceled: false,
+                    isCompleted: true
+                );
                 return new ValueTask<ReadResult>(completedResult);
             }
 
             return Core(this, tokenSource, cancellationToken);
 
-            static async ValueTask<ReadResult> Core(StreamPipeReader reader, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+            static async ValueTask<ReadResult> Core(
+                StreamPipeReader reader,
+                CancellationTokenSource tokenSource,
+                CancellationToken cancellationToken
+            )
             {
                 CancellationTokenRegistration reg = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    reg = cancellationToken.UnsafeRegister(state => ((StreamPipeReader)state!).Cancel(), reader);
+                    reg = cancellationToken.UnsafeRegister(
+                        state => ((StreamPipeReader)state!).Cancel(),
+                        reader
+                    );
                 }
 
                 using (reg)
@@ -231,16 +259,24 @@ namespace System.IO.Pipelines
                         if (reader.UseZeroByteReads && reader._bufferedBytes == 0)
                         {
                             // Wait for data by doing 0 byte read before
-                            await reader.InnerStream.ReadAsync(Memory<byte>.Empty, tokenSource.Token).ConfigureAwait(false);
+                            await reader.InnerStream
+                                .ReadAsync(Memory<byte>.Empty, tokenSource.Token)
+                                .ConfigureAwait(false);
                         }
 
                         reader.AllocateReadTail();
 
-                        Memory<byte> buffer = reader._readTail!.AvailableMemory.Slice(reader._readTail.End);
+                        Memory<byte> buffer = reader._readTail!.AvailableMemory.Slice(
+                            reader._readTail.End
+                        );
 
-                        int length = await reader.InnerStream.ReadAsync(buffer, tokenSource.Token).ConfigureAwait(false);
+                        int length = await reader.InnerStream
+                            .ReadAsync(buffer, tokenSource.Token)
+                            .ConfigureAwait(false);
 
-                        Debug.Assert(length + reader._readTail.End <= reader._readTail.AvailableMemory.Length);
+                        Debug.Assert(
+                            length + reader._readTail.End <= reader._readTail.AvailableMemory.Length
+                        );
 
                         reader._readTail.End += length;
                         reader._bufferedBytes += length;
@@ -254,7 +290,10 @@ namespace System.IO.Pipelines
                     {
                         reader.ClearCancellationToken();
 
-                        if (tokenSource.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+                        if (
+                            tokenSource.IsCancellationRequested
+                            && !cancellationToken.IsCancellationRequested
+                        )
                         {
                             // Catch cancellation and translate it into setting isCanceled = true
                             isCanceled = true;
@@ -263,15 +302,21 @@ namespace System.IO.Pipelines
                         {
                             throw;
                         }
-
                     }
 
-                    return new ReadResult(reader.GetCurrentReadOnlySequence(), isCanceled, reader._isStreamCompleted);
+                    return new ReadResult(
+                        reader.GetCurrentReadOnlySequence(),
+                        isCanceled,
+                        reader._isStreamCompleted
+                    );
                 }
             }
         }
 
-        protected override ValueTask<ReadResult> ReadAtLeastAsyncCore(int minimumSize, CancellationToken cancellationToken)
+        protected override ValueTask<ReadResult> ReadAtLeastAsyncCore(
+            int minimumSize,
+            CancellationToken cancellationToken
+        )
         {
             // TODO ReadyAsync needs to throw if there are overlapping reads.
             ThrowIfCompleted();
@@ -285,7 +330,11 @@ namespace System.IO.Pipelines
             CancellationTokenSource tokenSource = InternalTokenSource;
             if (TryReadInternal(tokenSource, out ReadResult readResult))
             {
-                if (readResult.Buffer.Length >= minimumSize || readResult.IsCompleted || readResult.IsCanceled)
+                if (
+                    readResult.Buffer.Length >= minimumSize
+                    || readResult.IsCompleted
+                    || readResult.IsCanceled
+                )
                 {
                     return new ValueTask<ReadResult>(readResult);
                 }
@@ -293,18 +342,30 @@ namespace System.IO.Pipelines
 
             if (_isStreamCompleted)
             {
-                ReadResult completedResult = new ReadResult(buffer: default, isCanceled: false, isCompleted: true);
+                ReadResult completedResult = new ReadResult(
+                    buffer: default,
+                    isCanceled: false,
+                    isCompleted: true
+                );
                 return new ValueTask<ReadResult>(completedResult);
             }
 
             return Core(this, minimumSize, tokenSource, cancellationToken);
 
-            static async ValueTask<ReadResult> Core(StreamPipeReader reader, int minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+            static async ValueTask<ReadResult> Core(
+                StreamPipeReader reader,
+                int minimumSize,
+                CancellationTokenSource tokenSource,
+                CancellationToken cancellationToken
+            )
             {
                 CancellationTokenRegistration reg = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    reg = cancellationToken.UnsafeRegister(state => ((StreamPipeReader)state!).Cancel(), reader);
+                    reg = cancellationToken.UnsafeRegister(
+                        state => ((StreamPipeReader)state!).Cancel(),
+                        reader
+                    );
                 }
 
                 using (reg)
@@ -316,18 +377,27 @@ namespace System.IO.Pipelines
                         if (reader.UseZeroByteReads && reader._bufferedBytes == 0)
                         {
                             // Wait for data by doing 0 byte read before
-                            await reader.InnerStream.ReadAsync(Memory<byte>.Empty, tokenSource.Token).ConfigureAwait(false);
+                            await reader.InnerStream
+                                .ReadAsync(Memory<byte>.Empty, tokenSource.Token)
+                                .ConfigureAwait(false);
                         }
 
                         do
                         {
                             reader.AllocateReadTail(minimumSize);
 
-                            Memory<byte> buffer = reader._readTail!.AvailableMemory.Slice(reader._readTail.End);
+                            Memory<byte> buffer = reader._readTail!.AvailableMemory.Slice(
+                                reader._readTail.End
+                            );
 
-                            int length = await reader.InnerStream.ReadAsync(buffer, tokenSource.Token).ConfigureAwait(false);
+                            int length = await reader.InnerStream
+                                .ReadAsync(buffer, tokenSource.Token)
+                                .ConfigureAwait(false);
 
-                            Debug.Assert(length + reader._readTail.End <= reader._readTail.AvailableMemory.Length);
+                            Debug.Assert(
+                                length + reader._readTail.End
+                                    <= reader._readTail.AvailableMemory.Length
+                            );
 
                             reader._readTail.End += length;
                             reader._bufferedBytes += length;
@@ -343,7 +413,10 @@ namespace System.IO.Pipelines
                     {
                         reader.ClearCancellationToken();
 
-                        if (tokenSource.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+                        if (
+                            tokenSource.IsCancellationRequested
+                            && !cancellationToken.IsCancellationRequested
+                        )
                         {
                             // Catch cancellation and translate it into setting isCanceled = true
                             isCanceled = true;
@@ -352,16 +425,22 @@ namespace System.IO.Pipelines
                         {
                             throw;
                         }
-
                     }
 
-                    return new ReadResult(reader.GetCurrentReadOnlySequence(), isCanceled, reader._isStreamCompleted);
+                    return new ReadResult(
+                        reader.GetCurrentReadOnlySequence(),
+                        isCanceled,
+                        reader._isStreamCompleted
+                    );
                 }
             }
         }
 
         /// <inheritdoc />
-        public override async Task CopyToAsync(PipeWriter destination, CancellationToken cancellationToken = default)
+        public override async Task CopyToAsync(
+            PipeWriter destination,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfCompleted();
 
@@ -375,7 +454,10 @@ namespace System.IO.Pipelines
             CancellationTokenRegistration reg = default;
             if (cancellationToken.CanBeCanceled)
             {
-                reg = cancellationToken.UnsafeRegister(state => ((StreamPipeReader)state!).Cancel(), this);
+                reg = cancellationToken.UnsafeRegister(
+                    state => ((StreamPipeReader)state!).Cancel(),
+                    this
+                );
             }
 
             using (reg)
@@ -389,7 +471,9 @@ namespace System.IO.Pipelines
                     {
                         while (segment != null)
                         {
-                            FlushResult flushResult = await destination.WriteAsync(segment.Memory.Slice(segmentIndex), tokenSource.Token).ConfigureAwait(false);
+                            FlushResult flushResult = await destination
+                                .WriteAsync(segment.Memory.Slice(segmentIndex), tokenSource.Token)
+                                .ConfigureAwait(false);
 
                             if (flushResult.IsCanceled)
                             {
@@ -420,7 +504,9 @@ namespace System.IO.Pipelines
                         return;
                     }
 
-                    await InnerStream.CopyToAsync(destination, tokenSource.Token).ConfigureAwait(false);
+                    await InnerStream
+                        .CopyToAsync(destination, tokenSource.Token)
+                        .ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
                 {
@@ -432,7 +518,10 @@ namespace System.IO.Pipelines
         }
 
         /// <inheritdoc />
-        public override async Task CopyToAsync(Stream destination, CancellationToken cancellationToken = default)
+        public override async Task CopyToAsync(
+            Stream destination,
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfCompleted();
 
@@ -446,7 +535,10 @@ namespace System.IO.Pipelines
             CancellationTokenRegistration reg = default;
             if (cancellationToken.CanBeCanceled)
             {
-                reg = cancellationToken.UnsafeRegister(state => ((StreamPipeReader)state!).Cancel(), this);
+                reg = cancellationToken.UnsafeRegister(
+                    state => ((StreamPipeReader)state!).Cancel(),
+                    this
+                );
             }
 
             using (reg)
@@ -460,7 +552,9 @@ namespace System.IO.Pipelines
                     {
                         while (segment != null)
                         {
-                            await destination.WriteAsync(segment.Memory.Slice(segmentIndex), tokenSource.Token).ConfigureAwait(false);
+                            await destination
+                                .WriteAsync(segment.Memory.Slice(segmentIndex), tokenSource.Token)
+                                .ConfigureAwait(false);
 
                             segment = segment.NextSegment;
                             segmentIndex = 0;
@@ -481,7 +575,9 @@ namespace System.IO.Pipelines
                         return;
                     }
 
-                    await InnerStream.CopyToAsync(destination, tokenSource.Token).ConfigureAwait(false);
+                    await InnerStream
+                        .CopyToAsync(destination, tokenSource.Token)
+                        .ConfigureAwait(false);
                 }
                 catch (OperationCanceledException)
                 {
@@ -518,7 +614,10 @@ namespace System.IO.Pipelines
         private bool TryReadInternal(CancellationTokenSource source, out ReadResult result)
         {
             bool isCancellationRequested = source.IsCancellationRequested;
-            if (isCancellationRequested || _bufferedBytes > 0 && (!_examinedEverything || _isStreamCompleted))
+            if (
+                isCancellationRequested
+                || _bufferedBytes > 0 && (!_examinedEverything || _isStreamCompleted)
+            )
             {
                 if (isCancellationRequested)
                 {
@@ -538,7 +637,9 @@ namespace System.IO.Pipelines
         private ReadOnlySequence<byte> GetCurrentReadOnlySequence()
         {
             // If _readHead is null then _readTail is also null
-            return _readHead is null ? default : new ReadOnlySequence<byte>(_readHead, _readIndex, _readTail!, _readTail!.End);
+            return _readHead is null
+                ? default
+                : new ReadOnlySequence<byte>(_readHead, _readIndex, _readTail!, _readTail!.End);
         }
 
         private void AllocateReadTail(int? minimumSize = null)

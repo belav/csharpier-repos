@@ -12,32 +12,44 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.ViewModel
 {
-    internal partial class FormattingViewModel : SettingsViewModelBase<
-        FormattingSetting,
-        FormattingViewModel.SettingsSnapshotFactory,
-        FormattingViewModel.SettingsEntriesSnapshot>
+    internal partial class FormattingViewModel
+        : SettingsViewModelBase<
+            FormattingSetting,
+            FormattingViewModel.SettingsSnapshotFactory,
+            FormattingViewModel.SettingsEntriesSnapshot
+        >
     {
-        public FormattingViewModel(ISettingsProvider<FormattingSetting> data,
-                                   IWpfTableControlProvider controlProvider,
-                                   ITableManagerProvider tableMangerProvider)
-            : base(data, controlProvider, tableMangerProvider)
-        { }
+        public FormattingViewModel(
+            ISettingsProvider<FormattingSetting> data,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider
+        ) : base(data, controlProvider, tableMangerProvider) { }
 
         public override string Identifier => "Whitespace";
 
-        protected override SettingsSnapshotFactory CreateSnapshotFactory(ISettingsProvider<FormattingSetting> data)
-            => new(data);
+        protected override SettingsSnapshotFactory CreateSnapshotFactory(
+            ISettingsProvider<FormattingSetting> data
+        ) => new(data);
 
-        protected override IEnumerable<ColumnState2> GetInitialColumnStates()
-            => new[]
+        protected override IEnumerable<ColumnState2> GetInitialColumnStates() =>
+            new[]
             {
-                new ColumnState2(ColumnDefinitions.Formatting.Category, isVisible: false, width: 0, groupingPriority: 1),
-                new ColumnState2(ColumnDefinitions.Formatting.Description, isVisible: true, width: 0),
+                new ColumnState2(
+                    ColumnDefinitions.Formatting.Category,
+                    isVisible: false,
+                    width: 0,
+                    groupingPriority: 1
+                ),
+                new ColumnState2(
+                    ColumnDefinitions.Formatting.Description,
+                    isVisible: true,
+                    width: 0
+                ),
                 new ColumnState2(ColumnDefinitions.Formatting.Value, isVisible: true, width: 0)
             };
 
-        protected override string[] GetFixedColumns()
-            => new[]
+        protected override string[] GetFixedColumns() =>
+            new[]
             {
                 ColumnDefinitions.Formatting.Category,
                 ColumnDefinitions.Formatting.Description,

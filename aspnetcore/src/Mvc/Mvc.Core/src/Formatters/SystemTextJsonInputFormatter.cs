@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON content that uses <see cref="JsonSerializer"/>.
 /// </summary>
-public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
+public partial class SystemTextJsonInputFormatter
+    : TextInputFormatter,
+        IInputFormatterExceptionPolicy
 {
     private readonly JsonOptions _jsonOptions;
     private readonly ILogger<SystemTextJsonInputFormatter> _logger;
@@ -26,7 +28,8 @@ public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFo
     /// <param name="logger">The <see cref="ILogger"/>.</param>
     public SystemTextJsonInputFormatter(
         JsonOptions options,
-        ILogger<SystemTextJsonInputFormatter> logger)
+        ILogger<SystemTextJsonInputFormatter> logger
+    )
     {
         SerializerOptions = options.JsonSerializerOptions;
         _jsonOptions = options;
@@ -50,12 +53,14 @@ public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFo
     public JsonSerializerOptions SerializerOptions { get; }
 
     /// <inheritdoc />
-    InputFormatterExceptionPolicy IInputFormatterExceptionPolicy.ExceptionPolicy => InputFormatterExceptionPolicy.MalformedInputExceptions;
+    InputFormatterExceptionPolicy IInputFormatterExceptionPolicy.ExceptionPolicy =>
+        InputFormatterExceptionPolicy.MalformedInputExceptions;
 
     /// <inheritdoc />
     public sealed override async Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding)
+        Encoding encoding
+    )
     {
         if (context == null)
         {
@@ -73,7 +78,11 @@ public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFo
         object? model;
         try
         {
-            model = await JsonSerializer.DeserializeAsync(inputStream, context.ModelType, SerializerOptions);
+            model = await JsonSerializer.DeserializeAsync(
+                inputStream,
+                context.ModelType,
+                SerializerOptions
+            );
         }
         catch (JsonException jsonException)
         {
@@ -87,7 +96,8 @@ public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFo
 
             return InputFormatterResult.Failure();
         }
-        catch (Exception exception) when (exception is FormatException || exception is OverflowException)
+        catch (Exception exception)
+            when (exception is FormatException || exception is OverflowException)
         {
             // The code in System.Text.Json never throws these exceptions. However a custom converter could produce these errors for instance when
             // parsing a value. These error messages are considered safe to report to users using ModelState.
@@ -133,29 +143,47 @@ public partial class SystemTextJsonInputFormatter : TextInputFormatter, IInputFo
         return new InputFormatterException(jsonException.Message, jsonException);
     }
 
-    private (Stream inputStream, bool usesTranscodingStream) GetInputStream(HttpContext httpContext, Encoding encoding)
+    private (Stream inputStream, bool usesTranscodingStream) GetInputStream(
+        HttpContext httpContext,
+        Encoding encoding
+    )
     {
         if (encoding.CodePage == Encoding.UTF8.CodePage)
         {
             return (httpContext.Request.Body, false);
         }
 
-        var inputStream = Encoding.CreateTranscodingStream(httpContext.Request.Body, encoding, Encoding.UTF8, leaveOpen: true);
+        var inputStream = Encoding.CreateTranscodingStream(
+            httpContext.Request.Body,
+            encoding,
+            Encoding.UTF8,
+            leaveOpen: true
+        );
         return (inputStream, true);
     }
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "JSON input formatter threw an exception: {Message}", EventName = "SystemTextJsonInputException")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "JSON input formatter threw an exception: {Message}",
+            EventName = "SystemTextJsonInputException"
+        )]
         private static partial void JsonInputException(ILogger logger, string message);
 
-        public static void JsonInputException(ILogger logger, Exception exception)
-            => JsonInputException(logger, exception.Message);
+        public static void JsonInputException(ILogger logger, Exception exception) =>
+            JsonInputException(logger, exception.Message);
 
-        [LoggerMessage(2, LogLevel.Debug, "JSON input formatter succeeded, deserializing to type '{TypeName}'", EventName = "SystemTextJsonInputSuccess")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "JSON input formatter succeeded, deserializing to type '{TypeName}'",
+            EventName = "SystemTextJsonInputSuccess"
+        )]
         private static partial void JsonInputSuccess(ILogger logger, string? typeName);
 
-        public static void JsonInputSuccess(ILogger logger, Type modelType)
-            => JsonInputSuccess(logger, modelType.FullName);
+        public static void JsonInputSuccess(ILogger logger, Type modelType) =>
+            JsonInputSuccess(logger, modelType.FullName);
     }
 }

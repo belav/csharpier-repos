@@ -8,7 +8,9 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
-    internal sealed class RazorDocumentServiceProviderWrapper : IDocumentServiceProvider, IDocumentOperationService
+    internal sealed class RazorDocumentServiceProviderWrapper
+        : IDocumentServiceProvider,
+            IDocumentOperationService
     {
         private readonly IRazorDocumentServiceProvider _innerDocumentServiceProvider;
         private readonly object _lock;
@@ -17,9 +19,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         private RazorDocumentExcerptServiceWrapper? _excerptService;
         private RazorDocumentPropertiesServiceWrapper? _documentPropertiesService;
 
-        public RazorDocumentServiceProviderWrapper(IRazorDocumentServiceProvider innerDocumentServiceProvider)
+        public RazorDocumentServiceProviderWrapper(
+            IRazorDocumentServiceProvider innerDocumentServiceProvider
+        )
         {
-            _innerDocumentServiceProvider = innerDocumentServiceProvider ?? throw new ArgumentNullException(nameof(innerDocumentServiceProvider));
+            _innerDocumentServiceProvider =
+                innerDocumentServiceProvider
+                ?? throw new ArgumentNullException(nameof(innerDocumentServiceProvider));
 
             _lock = new object();
         }
@@ -39,10 +45,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     {
                         if (_spanMappingService == null)
                         {
-                            var razorMappingService = _innerDocumentServiceProvider.GetService<IRazorSpanMappingService>();
+                            var razorMappingService =
+                                _innerDocumentServiceProvider.GetService<IRazorSpanMappingService>();
                             if (razorMappingService != null)
                             {
-                                _spanMappingService = new RazorSpanMappingServiceWrapper(razorMappingService);
+                                _spanMappingService = new RazorSpanMappingServiceWrapper(
+                                    razorMappingService
+                                );
                             }
                             else
                             {
@@ -63,10 +72,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     {
                         if (_excerptService == null)
                         {
-                            var excerptService = _innerDocumentServiceProvider.GetService<IRazorDocumentExcerptService>();
+                            var excerptService =
+                                _innerDocumentServiceProvider.GetService<IRazorDocumentExcerptService>();
                             if (excerptService != null)
                             {
-                                _excerptService = new RazorDocumentExcerptServiceWrapper(excerptService);
+                                _excerptService = new RazorDocumentExcerptServiceWrapper(
+                                    excerptService
+                                );
                             }
                             else
                             {
@@ -87,11 +99,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     {
                         if (_documentPropertiesService == null)
                         {
-                            var documentPropertiesService = _innerDocumentServiceProvider.GetService<IRazorDocumentPropertiesService>();
+                            var documentPropertiesService =
+                                _innerDocumentServiceProvider.GetService<IRazorDocumentPropertiesService>();
 
                             if (documentPropertiesService != null)
                             {
-                                _documentPropertiesService = new RazorDocumentPropertiesServiceWrapper(documentPropertiesService);
+                                _documentPropertiesService =
+                                    new RazorDocumentPropertiesServiceWrapper(
+                                        documentPropertiesService
+                                    );
                             }
                             else
                             {

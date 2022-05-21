@@ -38,8 +38,10 @@ public class KestrelServerOptions
 
     // The following two lists configure the endpoints that Kestrel should listen to. If both lists are empty, the "urls" config setting (e.g. UseUrls) is used.
     internal List<ListenOptions> CodeBackedListenOptions { get; } = new List<ListenOptions>();
-    internal List<ListenOptions> ConfigurationBackedListenOptions { get; } = new List<ListenOptions>();
-    internal IEnumerable<ListenOptions> ListenOptions => CodeBackedListenOptions.Concat(ConfigurationBackedListenOptions);
+    internal List<ListenOptions> ConfigurationBackedListenOptions { get; } =
+        new List<ListenOptions>();
+    internal IEnumerable<ListenOptions> ListenOptions =>
+        CodeBackedListenOptions.Concat(ConfigurationBackedListenOptions);
 
     // For testing and debugging.
     internal List<ListenOptions> OptionsInUse { get; } = new List<ListenOptions>();
@@ -101,7 +103,10 @@ public class KestrelServerOptions
     /// <remarks>
     /// Defaults to false.
     /// </remarks>
-    [Obsolete($"This property is obsolete and will be removed in a future version. It no longer has any impact on runtime behavior. Use {nameof(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions)}.{nameof(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.DisableAltSvcHeader)} to configure \"Alt-Svc\" behavior.", error: true)]
+    [Obsolete(
+        $"This property is obsolete and will be removed in a future version. It no longer has any impact on runtime behavior. Use {nameof(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions)}.{nameof(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.DisableAltSvcHeader)} to configure \"Alt-Svc\" behavior.",
+        error: true
+    )]
     public bool EnableAltSvc { get; set; }
 
     /// <summary>
@@ -111,7 +116,9 @@ public class KestrelServerOptions
     public Func<string, Encoding?> RequestHeaderEncodingSelector
     {
         get => _requestHeaderEncodingSelector;
-        set => _requestHeaderEncodingSelector = value ?? throw new ArgumentNullException(nameof(value));
+        set =>
+            _requestHeaderEncodingSelector =
+                value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
@@ -121,7 +128,9 @@ public class KestrelServerOptions
     public Func<string, Encoding?> ResponseHeaderEncodingSelector
     {
         get => _responseHeaderEncodingSelector;
-        set => _responseHeaderEncodingSelector = value ?? throw new ArgumentNullException(nameof(value));
+        set =>
+            _responseHeaderEncodingSelector =
+                value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
@@ -167,7 +176,8 @@ public class KestrelServerOptions
     /// </summary>
     public void ConfigureEndpointDefaults(Action<ListenOptions> configureOptions)
     {
-        EndpointDefaults = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        EndpointDefaults =
+            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
     }
 
     internal void ApplyEndpointDefaults(ListenOptions listenOptions)
@@ -183,7 +193,8 @@ public class KestrelServerOptions
     /// </summary>
     public void ConfigureHttpsDefaults(Action<HttpsConnectionAdapterOptions> configureOptions)
     {
-        HttpsDefaults = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        HttpsDefaults =
+            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
     }
 
     internal void ApplyHttpsDefaults(HttpsConnectionAdapterOptions httpsOptions)
@@ -194,7 +205,9 @@ public class KestrelServerOptions
 
     internal void ApplyDefaultCert(HttpsConnectionAdapterOptions httpsOptions)
     {
-        if (httpsOptions.ServerCertificate != null || httpsOptions.ServerCertificateSelector != null)
+        if (
+            httpsOptions.ServerCertificate != null || httpsOptions.ServerCertificateSelector != null
+        )
         {
             return;
         }
@@ -224,8 +237,18 @@ public class KestrelServerOptions
         writer.WritePropertyName(nameof(IsDevCertLoaded));
         writer.WriteBooleanValue(IsDevCertLoaded);
 
-        writer.WriteString(nameof(RequestHeaderEncodingSelector), RequestHeaderEncodingSelector == DefaultHeaderEncodingSelector ? "default" : "configured");
-        writer.WriteString(nameof(ResponseHeaderEncodingSelector), ResponseHeaderEncodingSelector == DefaultHeaderEncodingSelector ? "default" : "configured");
+        writer.WriteString(
+            nameof(RequestHeaderEncodingSelector),
+            RequestHeaderEncodingSelector == DefaultHeaderEncodingSelector
+                ? "default"
+                : "configured"
+        );
+        writer.WriteString(
+            nameof(ResponseHeaderEncodingSelector),
+            ResponseHeaderEncodingSelector == DefaultHeaderEncodingSelector
+                ? "default"
+                : "configured"
+        );
 
         // Limits
         writer.WritePropertyName(nameof(Limits));
@@ -256,24 +279,34 @@ public class KestrelServerOptions
             var logger = ApplicationServices!.GetRequiredService<ILogger<KestrelServer>>();
             try
             {
-                DefaultCertificate = CertificateManager.Instance.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true)
+                DefaultCertificate = CertificateManager.Instance
+                    .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true)
                     .FirstOrDefault();
 
                 if (DefaultCertificate != null)
                 {
-                    var status = CertificateManager.Instance.CheckCertificateState(DefaultCertificate, interactive: false);
+                    var status = CertificateManager.Instance.CheckCertificateState(
+                        DefaultCertificate,
+                        interactive: false
+                    );
                     if (!status.Success)
                     {
                         // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that
                         // case. The underlying implementation of this check is specific to Mac OS and is handled within CheckCertificateState.
                         // Kestrel must NEVER cause a UI prompt on a production system. We only attempt this here because Mac OS is not supported
                         // in production.
-                        Debug.Assert(status.FailureMessage != null, "Status with a failure result must have a message.");
+                        Debug.Assert(
+                            status.FailureMessage != null,
+                            "Status with a failure result must have a message."
+                        );
                         logger.DeveloperCertificateFirstRun(status.FailureMessage);
 
                         // Now that we've displayed a warning in the logs so that the user gets a notification that a prompt might appear, try
                         // and access the certificate key, which might trigger a prompt.
-                        status = CertificateManager.Instance.CheckCertificateState(DefaultCertificate, interactive: true);
+                        status = CertificateManager.Instance.CheckCertificateState(
+                            DefaultCertificate,
+                            interactive: true
+                        );
                         if (!status.Success)
                         {
                             logger.BadDeveloperCertificateState();
@@ -307,7 +340,8 @@ public class KestrelServerOptions
     /// </summary>
     /// <param name="config">The configuration section for Kestrel.</param>
     /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint configuration.</returns>
-    public KestrelConfigurationLoader Configure(IConfiguration config) => Configure(config, reloadOnChange: false);
+    public KestrelConfigurationLoader Configure(IConfiguration config) =>
+        Configure(config, reloadOnChange: false);
 
     /// <summary>
     /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/> as input.
@@ -323,14 +357,25 @@ public class KestrelServerOptions
     {
         if (ApplicationServices is null)
         {
-            throw new InvalidOperationException($"{nameof(ApplicationServices)} must not be null. This is normally set automatically via {nameof(IConfigureOptions<KestrelServerOptions>)}.");
+            throw new InvalidOperationException(
+                $"{nameof(ApplicationServices)} must not be null. This is normally set automatically via {nameof(IConfigureOptions<KestrelServerOptions>)}."
+            );
         }
 
         var hostEnvironment = ApplicationServices.GetRequiredService<IHostEnvironment>();
         var logger = ApplicationServices.GetRequiredService<ILogger<KestrelServer>>();
-        var httpsLogger = ApplicationServices.GetRequiredService<ILogger<HttpsConnectionMiddleware>>();
+        var httpsLogger = ApplicationServices.GetRequiredService<
+            ILogger<HttpsConnectionMiddleware>
+        >();
 
-        var loader = new KestrelConfigurationLoader(this, config, hostEnvironment, reloadOnChange, logger, httpsLogger);
+        var loader = new KestrelConfigurationLoader(
+            this,
+            config,
+            hostEnvironment,
+            reloadOnChange,
+            logger,
+            httpsLogger
+        );
         ConfigurationLoader = loader;
         return loader;
     }
@@ -469,7 +514,10 @@ public class KestrelServerOptions
 
         if (!Path.IsPathRooted(socketPath))
         {
-            throw new ArgumentException(CoreStrings.UnixSocketPathMustBeAbsolute, nameof(socketPath));
+            throw new ArgumentException(
+                CoreStrings.UnixSocketPathMustBeAbsolute,
+                nameof(socketPath)
+            );
         }
         if (configure == null)
         {

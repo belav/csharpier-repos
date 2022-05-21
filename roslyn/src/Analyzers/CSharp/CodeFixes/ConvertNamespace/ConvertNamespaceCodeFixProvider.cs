@@ -23,18 +23,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
     using static ConvertNamespaceAnalysis;
     using static ConvertNamespaceTransform;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertNamespace), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertNamespace
+        ),
+        Shared
+    ]
     internal class ConvertNamespaceCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertNamespaceCodeFixProvider()
-        {
-        }
+        public ConvertNamespaceCodeFixProvider() { }
 
         internal override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId, IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId,
+                IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId
+            );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -43,25 +50,37 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             var (title, equivalenceKey) = GetInfo(
                 diagnostic.Id switch
                 {
-                    IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId => NamespaceDeclarationPreference.BlockScoped,
-                    IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId => NamespaceDeclarationPreference.FileScoped,
+                    IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId
+                        => NamespaceDeclarationPreference.BlockScoped,
+                    IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId
+                        => NamespaceDeclarationPreference.FileScoped,
                     _ => throw ExceptionUtilities.UnexpectedValue(diagnostic.Id),
-                });
+                }
+            );
 
             context.RegisterCodeFix(
-                new MyCodeAction(title, c => FixAsync(context.Document, diagnostic, c), equivalenceKey),
-                context.Diagnostics);
+                new MyCodeAction(
+                    title,
+                    c => FixAsync(context.Document, diagnostic, c),
+                    equivalenceKey
+                ),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var diagnostic = diagnostics.First();
 
-            var namespaceDecl = (BaseNamespaceDeclarationSyntax)diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
+            var namespaceDecl = (BaseNamespaceDeclarationSyntax)
+                diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
             var converted = Convert(namespaceDecl);
 
             editor.ReplaceNode(namespaceDecl, converted);
@@ -70,10 +89,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument, string equivalenceKey)
-                : base(title, createChangedDocument, equivalenceKey)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                string equivalenceKey
+            ) : base(title, createChangedDocument, equivalenceKey) { }
         }
     }
 }

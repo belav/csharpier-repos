@@ -19,9 +19,7 @@ public sealed class RequiredAttributeAdapter : AttributeAdapterBase<RequiredAttr
     /// <param name="attribute">The <see cref="RequiredAttribute"/>.</param>
     /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/>.</param>
     public RequiredAttributeAdapter(RequiredAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
-    {
-    }
+        : base(attribute, stringLocalizer) { }
 
     /// <inheritdoc />
     public override void AddValidation(ClientModelValidationContext context)
@@ -43,6 +41,9 @@ public sealed class RequiredAttributeAdapter : AttributeAdapterBase<RequiredAttr
             throw new ArgumentNullException(nameof(validationContext));
         }
 
-        return GetErrorMessage(validationContext.ModelMetadata, validationContext.ModelMetadata.GetDisplayName());
+        return GetErrorMessage(
+            validationContext.ModelMetadata,
+            validationContext.ModelMetadata.GetDisplayName()
+        );
     }
 }

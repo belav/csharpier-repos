@@ -35,7 +35,19 @@ namespace System.Globalization
     public sealed class NumberFormatInfo : IFormatProvider, ICloneable
     {
         private static volatile NumberFormatInfo? s_invariantInfo;
-        internal static readonly string[] s_asciiDigits = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        internal static readonly string[] s_asciiDigits = new string[]
+        {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+        };
 
         internal int[] _numberGroupSizes = new int[] { 3 };
         internal int[] _currencyGroupSizes = new int[] { 3 };
@@ -46,7 +58,7 @@ namespace System.Globalization
         internal string _numberGroupSeparator = ",";
         internal string _currencyGroupSeparator = ",";
         internal string _currencyDecimalSeparator = ".";
-        internal string _currencySymbol = "\x00a4";  // U+00a4 is the symbol for International Monetary Fund.
+        internal string _currencySymbol = "\x00a4"; // U+00a4 is the symbol for International Monetary Fund.
         internal string _nanSymbol = "NaN";
         internal string _positiveInfinitySymbol = "Infinity";
         internal string _negativeInfinitySymbol = "-Infinity";
@@ -76,9 +88,7 @@ namespace System.Globalization
         // negative sign is not the hyphen. For example, the Swedish culture (e.g. "sv-SE") has U+2212 as the negative sign.
         private bool _allowHyphenDuringParsing;
 
-        public NumberFormatInfo()
-        {
-        }
+        public NumberFormatInfo() { }
 
         private static void VerifyDecimalSeparator(string decSep, string propertyName)
         {
@@ -125,17 +135,26 @@ namespace System.Globalization
                     if (nativeDig[i].Length != 2)
                     {
                         // Not 1 or 2 UTF-16 code points
-                        throw new ArgumentException(SR.Argument_InvalidNativeDigitValue, propertyName);
+                        throw new ArgumentException(
+                            SR.Argument_InvalidNativeDigitValue,
+                            propertyName
+                        );
                     }
                     else if (!char.IsSurrogatePair(nativeDig[i][0], nativeDig[i][1]))
                     {
                         // 2 UTF-6 code points, but not a surrogate pair
-                        throw new ArgumentException(SR.Argument_InvalidNativeDigitValue, propertyName);
+                        throw new ArgumentException(
+                            SR.Argument_InvalidNativeDigitValue,
+                            propertyName
+                        );
                     }
                 }
 
-                if (CharUnicodeInfo.GetDecimalDigitValue(nativeDig[i], 0) != i &&
-                    CharUnicodeInfo.GetUnicodeCategory(nativeDig[i], 0) != UnicodeCategory.PrivateUse)
+                if (
+                    CharUnicodeInfo.GetDecimalDigitValue(nativeDig[i], 0) != i
+                    && CharUnicodeInfo.GetUnicodeCategory(nativeDig[i], 0)
+                        != UnicodeCategory.PrivateUse
+                )
                 {
                     // Not the appropriate digit according to the Unicode data properties
                     // (Digit 0 must be a 0, etc.).
@@ -169,17 +188,26 @@ namespace System.Globalization
             // The list of the Minus characters are picked up from the CLDR parse lenient data.
             // e.g. https://github.com/unicode-org/cldr/blob/feb602b06bd18ba7333464bd648b68292e8aa54d/common/main/sw.xml#L1001
 
-            _allowHyphenDuringParsing = _negativeSign.Length == 1 &&
-                                        _negativeSign[0] switch {
-                                            '\u2012' or         // Figure Dash
-                                            '\u207B' or         // Superscript Minus
-                                            '\u208B' or         // Subscript Minus
-                                            '\u2212' or         // Minus Sign
-                                            '\u2796' or         // Heavy Minus Sign
-                                            '\uFE63' or         // Small Hyphen-Minus
-                                            '\uFF0D' => true,   // Fullwidth Hyphen-Minus
-                                            _ => false
-                                        };
+            _allowHyphenDuringParsing =
+                _negativeSign.Length == 1
+                && _negativeSign[0] switch
+                {
+                    '\u2012'
+                    or // Figure Dash
+                    '\u207B'
+                    or // Superscript Minus
+                    '\u208B'
+                    or // Subscript Minus
+                    '\u2212'
+                    or // Minus Sign
+                    '\u2796'
+                    or // Heavy Minus Sign
+                    '\uFE63'
+                    or // Small Hyphen-Minus
+                    '\uFF0D'
+                        => true, // Fullwidth Hyphen-Minus
+                    _ => false
+                };
         }
 
         internal NumberFormatInfo(CultureData? cultureData)
@@ -207,15 +235,17 @@ namespace System.Globalization
         /// supported and constant irrespective of the current culture.
         /// Used by FromString methods.
         /// </summary>
-        public static NumberFormatInfo InvariantInfo => s_invariantInfo ??=
+        public static NumberFormatInfo InvariantInfo =>
+            s_invariantInfo ??=
             // Lazy create the invariant info. This cannot be done in a .cctor because exceptions can
             // be thrown out of a .cctor stack that will need this.
             new NumberFormatInfo { _isReadOnly = true };
 
         public static NumberFormatInfo GetInstance(IFormatProvider? formatProvider)
         {
-            return formatProvider == null ?
-                CurrentInfo : // Fast path for a null provider
+            return formatProvider == null
+                ? CurrentInfo
+                : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);
 
             static NumberFormatInfo GetProviderNonNull(IFormatProvider provider)
@@ -226,10 +256,10 @@ namespace System.Globalization
                     return cultureProvider._numInfo ?? cultureProvider.NumberFormat;
                 }
 
-                return
-                    provider as NumberFormatInfo ?? // Fast path for an NFI
-                    provider.GetFormat(typeof(NumberFormatInfo)) as NumberFormatInfo ??
-                    CurrentInfo;
+                return provider as NumberFormatInfo
+                    ?? // Fast path for an NFI
+                    provider.GetFormat(typeof(NumberFormatInfo)) as NumberFormatInfo
+                    ?? CurrentInfo;
             }
         }
 
@@ -250,7 +280,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99)
+                    );
                 }
 
                 VerifyWritable();
@@ -422,7 +453,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 15));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 15)
+                    );
                 }
 
                 VerifyWritable();
@@ -441,7 +473,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 4));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 4)
+                    );
                 }
 
                 VerifyWritable();
@@ -460,7 +493,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 3));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 3)
+                    );
                 }
 
                 VerifyWritable();
@@ -479,7 +513,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 11));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 11)
+                    );
                 }
 
                 VerifyWritable();
@@ -528,7 +563,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99)
+                    );
                 }
 
                 VerifyWritable();
@@ -568,7 +604,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 3));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 3)
+                    );
                 }
 
                 VerifyWritable();
@@ -617,7 +654,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 0, 99)
+                    );
                 }
 
                 VerifyWritable();
@@ -722,17 +760,26 @@ namespace System.Globalization
         }
 
         // private const NumberStyles InvalidNumberStyles = unchecked((NumberStyles) 0xFFFFFC00);
-        private const NumberStyles InvalidNumberStyles = ~(NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite
-                                                           | NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign
-                                                           | NumberStyles.AllowParentheses | NumberStyles.AllowDecimalPoint
-                                                           | NumberStyles.AllowThousands | NumberStyles.AllowExponent
-                                                           | NumberStyles.AllowCurrencySymbol | NumberStyles.AllowHexSpecifier);
+        private const NumberStyles InvalidNumberStyles = ~(
+            NumberStyles.AllowLeadingWhite
+            | NumberStyles.AllowTrailingWhite
+            | NumberStyles.AllowLeadingSign
+            | NumberStyles.AllowTrailingSign
+            | NumberStyles.AllowParentheses
+            | NumberStyles.AllowDecimalPoint
+            | NumberStyles.AllowThousands
+            | NumberStyles.AllowExponent
+            | NumberStyles.AllowCurrencySymbol
+            | NumberStyles.AllowHexSpecifier
+        );
 
         internal static void ValidateParseStyleInteger(NumberStyles style)
         {
             // Check for undefined flags or invalid hex number flags
-            if ((style & (InvalidNumberStyles | NumberStyles.AllowHexSpecifier)) != 0
-                && (style & ~NumberStyles.HexNumber) != 0)
+            if (
+                (style & (InvalidNumberStyles | NumberStyles.AllowHexSpecifier)) != 0
+                && (style & ~NumberStyles.HexNumber) != 0
+            )
             {
                 ThrowInvalid(style);
 

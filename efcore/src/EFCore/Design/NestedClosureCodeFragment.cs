@@ -30,7 +30,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// </summary>
         /// <param name="parameter">The nested closure parameter's name.</param>
         /// <param name="methodCalls">The list of method calls used as the body of the nested closure.</param>
-        public NestedClosureCodeFragment(string parameter, IReadOnlyList<MethodCallCodeFragment> methodCalls)
+        public NestedClosureCodeFragment(
+            string parameter,
+            IReadOnlyList<MethodCallCodeFragment> methodCalls
+        )
         {
             Parameter = parameter;
             MethodCalls = methodCalls;

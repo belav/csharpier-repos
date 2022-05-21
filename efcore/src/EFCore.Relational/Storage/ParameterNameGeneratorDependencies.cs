@@ -48,8 +48,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public ParameterNameGeneratorDependencies()
-        {
-        }
+        public ParameterNameGeneratorDependencies() { }
     }
 }

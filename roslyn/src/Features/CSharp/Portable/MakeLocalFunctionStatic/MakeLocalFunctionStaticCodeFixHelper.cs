@@ -25,11 +25,21 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             Document document,
             LocalFunctionStatementSyntax localFunction,
             ImmutableArray<ISymbol> captures,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false))!;
+            var root = (
+                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
+            )!;
             var syntaxEditor = new SyntaxEditor(root, document.Project.Solution.Workspace);
-            await MakeLocalFunctionStaticAsync(document, localFunction, captures, syntaxEditor, cancellationToken).ConfigureAwait(false);
+            await MakeLocalFunctionStaticAsync(
+                    document,
+                    localFunction,
+                    captures,
+                    syntaxEditor,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return document.WithSyntaxRoot(syntaxEditor.GetChangedRoot());
         }
 
@@ -38,27 +48,46 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             LocalFunctionStatementSyntax localFunction,
             ImmutableArray<ISymbol> captures,
             SyntaxEditor syntaxEditor,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false))!;
-            var semanticModel = (await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false))!;
-            var localFunctionSymbol = semanticModel.GetDeclaredSymbol(localFunction, cancellationToken);
-            Contract.ThrowIfNull(localFunctionSymbol, "We should have gotten a method symbol for a local function.");
+            var root = (
+                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
+            )!;
+            var semanticModel = (
+                await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false)
+            )!;
+            var localFunctionSymbol = semanticModel.GetDeclaredSymbol(
+                localFunction,
+                cancellationToken
+            );
+            Contract.ThrowIfNull(
+                localFunctionSymbol,
+                "We should have gotten a method symbol for a local function."
+            );
             var documentImmutableSet = ImmutableHashSet.Create(document);
 
             // Finds all the call sites of the local function
-            var referencedSymbols = await SymbolFinder.FindReferencesAsync(
-                localFunctionSymbol, document.Project.Solution, documentImmutableSet, cancellationToken).ConfigureAwait(false);
+            var referencedSymbols = await SymbolFinder
+                .FindReferencesAsync(
+                    localFunctionSymbol,
+                    document.Project.Solution,
+                    documentImmutableSet,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Now we need to find all the references to the local function that we might need to fix.
             var shouldWarn = false;
-            using var builderDisposer = ArrayBuilder<InvocationExpressionSyntax>.GetInstance(out var invocations);
+            using var builderDisposer = ArrayBuilder<InvocationExpressionSyntax>.GetInstance(
+                out var invocations
+            );
 
             foreach (var referencedSymbol in referencedSymbols)
             {
                 foreach (var location in referencedSymbol.Locations)
                 {
-                    // We limited the search scope to the single document, 
+                    // We limited the search scope to the single document,
                     // so all reference should be in the same tree.
                     var referenceNode = root.FindNode(location.Location.SourceSpan);
                     if (referenceNode is not IdentifierNameSyntax identifierNode)
@@ -74,8 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     }
                     else
                     {
-                        // We won't be able to fix non-invocation references, 
-                        // e.g. creating a delegate. 
+                        // We won't be able to fix non-invocation references,
+                        // e.g. creating a delegate.
                         shouldWarn = true;
                     }
                 }
@@ -91,18 +120,31 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(a => a.NameColon != null);
-                        var seenDefaultArgumentValue = currentInvocation.ArgumentList.Arguments.Count < localFunction.ParameterList.Parameters.Count;
+                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(
+                            a => a.NameColon != null
+                        );
+                        var seenDefaultArgumentValue =
+                            currentInvocation.ArgumentList.Arguments.Count
+                            < localFunction.ParameterList.Parameters.Count;
 
                         var newArguments = parameterAndCapturedSymbols.Select(
-                            p => (ArgumentSyntax)generator.Argument(
-                                seenNamedArgument || seenDefaultArgumentValue ? p.symbol.Name : null,
-                                p.symbol.RefKind,
-                                p.capture.Name.ToIdentifierName()));
+                            p =>
+                                (ArgumentSyntax)
+                                    generator.Argument(
+                                        seenNamedArgument || seenDefaultArgumentValue
+                                            ? p.symbol.Name
+                                            : null,
+                                        p.symbol.RefKind,
+                                        p.capture.Name.ToIdentifierName()
+                                    )
+                        );
 
-                        var newArgList = currentInvocation.ArgumentList.WithArguments(currentInvocation.ArgumentList.Arguments.AddRange(newArguments));
+                        var newArgList = currentInvocation.ArgumentList.WithArguments(
+                            currentInvocation.ArgumentList.Arguments.AddRange(newArguments)
+                        );
                         return currentInvocation.WithArgumentList(newArgList);
-                    });
+                    }
+                );
             }
 
             // In case any of the captured variable isn't camel-cased,
@@ -114,8 +156,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     continue;
                 }
 
-                var referencedCaptureSymbols = await SymbolFinder.FindReferencesAsync(
-                    capture, document.Project.Solution, documentImmutableSet, cancellationToken).ConfigureAwait(false);
+                var referencedCaptureSymbols = await SymbolFinder
+                    .FindReferencesAsync(
+                        capture,
+                        document.Project.Solution,
+                        documentImmutableSet,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 foreach (var referencedSymbol in referencedCaptureSymbols)
                 {
@@ -132,7 +180,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                         {
                             syntaxEditor.ReplaceNode(
                                 identifierNode,
-                                (node, generator) => generator.IdentifierName(parameter.Name.ToIdentifierToken()).WithTriviaFrom(node));
+                                (node, generator) =>
+                                    generator
+                                        .IdentifierName(parameter.Name.ToIdentifierToken())
+                                        .WithTriviaFrom(node)
+                            );
                         }
                     }
                 }
@@ -146,37 +198,57 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     var localFunctionWithNewParameters = CodeGenerator.AddParameterDeclarations(
                         node,
                         parameterAndCapturedSymbols.SelectAsArray(p => p.symbol),
-                        document.Project.Solution.Workspace);
+                        document.Project.Solution.Workspace
+                    );
 
                     if (shouldWarn)
                     {
-                        var annotation = WarningAnnotation.Create(CSharpCodeFixesResources.Warning_colon_Adding_parameters_to_local_function_declaration_may_produce_invalid_code);
-                        localFunctionWithNewParameters = localFunctionWithNewParameters.WithAdditionalAnnotations(annotation);
+                        var annotation = WarningAnnotation.Create(
+                            CSharpCodeFixesResources.Warning_colon_Adding_parameters_to_local_function_declaration_may_produce_invalid_code
+                        );
+                        localFunctionWithNewParameters =
+                            localFunctionWithNewParameters.WithAdditionalAnnotations(annotation);
                     }
 
-                    return AddStaticModifier(localFunctionWithNewParameters, CSharpSyntaxGenerator.Instance);
-                });
+                    return AddStaticModifier(
+                        localFunctionWithNewParameters,
+                        CSharpSyntaxGenerator.Instance
+                    );
+                }
+            );
         }
 
-        public static SyntaxNode AddStaticModifier(SyntaxNode localFunction, SyntaxGenerator generator)
-            => generator.WithModifiers(
+        public static SyntaxNode AddStaticModifier(
+            SyntaxNode localFunction,
+            SyntaxGenerator generator
+        ) =>
+            generator.WithModifiers(
                 localFunction,
-                generator.GetModifiers(localFunction).WithIsStatic(true));
+                generator.GetModifiers(localFunction).WithIsStatic(true)
+            );
 
         /// <summary>
         /// Creates a new parameter symbol paired with the original captured symbol for each captured variables.
         /// </summary>
-        private static ImmutableArray<(IParameterSymbol symbol, ISymbol capture)> CreateParameterSymbols(ImmutableArray<ISymbol> captures)
-            => captures.SelectAsArray(static c =>
-            {
-                var symbolType = c.GetSymbolType();
-                Contract.ThrowIfNull(symbolType);
-                return (CodeGenerationSymbolFactory.CreateParameterSymbol(
-                    attributes: default,
-                    refKind: RefKind.None,
-                    isParams: false,
-                    type: symbolType,
-                    name: c.Name.ToCamelCase()), c);
-            });
+        private static ImmutableArray<(IParameterSymbol symbol, ISymbol capture)> CreateParameterSymbols(
+            ImmutableArray<ISymbol> captures
+        ) =>
+            captures.SelectAsArray(
+                static c =>
+                {
+                    var symbolType = c.GetSymbolType();
+                    Contract.ThrowIfNull(symbolType);
+                    return (
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(
+                            attributes: default,
+                            refKind: RefKind.None,
+                            isParams: false,
+                            type: symbolType,
+                            name: c.Name.ToCamelCase()
+                        ),
+                        c
+                    );
+                }
+            );
     }
 }

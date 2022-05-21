@@ -12,42 +12,79 @@ using Microsoft.CodeAnalysis.UseObjectInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseObjectInitializer), Shared]
-    internal class CSharpUseObjectInitializerCodeFixProvider :
-        AbstractUseObjectInitializerCodeFixProvider<
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseObjectInitializer
+        ),
+        Shared
+    ]
+    internal class CSharpUseObjectInitializerCodeFixProvider
+        : AbstractUseObjectInitializerCodeFixProvider<
             SyntaxKind,
             ExpressionSyntax,
             StatementSyntax,
             ObjectCreationExpressionSyntax,
             MemberAccessExpressionSyntax,
             ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseObjectInitializerCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseObjectInitializerCodeFixProvider() { }
 
         protected override StatementSyntax GetNewStatement(
-            StatementSyntax statement, ObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<Match<ExpressionSyntax, StatementSyntax, MemberAccessExpressionSyntax, ExpressionStatementSyntax>> matches)
+            StatementSyntax statement,
+            ObjectCreationExpressionSyntax objectCreation,
+            ImmutableArray<
+                Match<
+                    ExpressionSyntax,
+                    StatementSyntax,
+                    MemberAccessExpressionSyntax,
+                    ExpressionStatementSyntax
+                >
+            > matches
+        )
         {
             return statement.ReplaceNode(
                 objectCreation,
-                GetNewObjectCreation(objectCreation, matches));
+                GetNewObjectCreation(objectCreation, matches)
+            );
         }
 
         private static ObjectCreationExpressionSyntax GetNewObjectCreation(
             ObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<Match<ExpressionSyntax, StatementSyntax, MemberAccessExpressionSyntax, ExpressionStatementSyntax>> matches)
+            ImmutableArray<
+                Match<
+                    ExpressionSyntax,
+                    StatementSyntax,
+                    MemberAccessExpressionSyntax,
+                    ExpressionStatementSyntax
+                >
+            > matches
+        )
         {
             return UseInitializerHelpers.GetNewObjectCreation(
-                objectCreation, CreateExpressions(matches));
+                objectCreation,
+                CreateExpressions(matches)
+            );
         }
 
         private static SeparatedSyntaxList<ExpressionSyntax> CreateExpressions(
-            ImmutableArray<Match<ExpressionSyntax, StatementSyntax, MemberAccessExpressionSyntax, ExpressionStatementSyntax>> matches)
+            ImmutableArray<
+                Match<
+                    ExpressionSyntax,
+                    StatementSyntax,
+                    MemberAccessExpressionSyntax,
+                    ExpressionStatementSyntax
+                >
+            > matches
+        )
         {
             var nodesAndTokens = new List<SyntaxNodeOrToken>();
             for (var i = 0; i < matches.Length; i++)
@@ -57,12 +94,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                 var assignment = (AssignmentExpressionSyntax)expressionStatement.Expression;
 
                 var newAssignment = assignment.WithLeft(
-                    match.MemberAccessExpression.Name.WithLeadingTrivia(match.MemberAccessExpression.GetLeadingTrivia()));
+                    match.MemberAccessExpression.Name.WithLeadingTrivia(
+                        match.MemberAccessExpression.GetLeadingTrivia()
+                    )
+                );
 
                 if (i < matches.Length - 1)
                 {
                     nodesAndTokens.Add(newAssignment);
-                    var commaToken = SyntaxFactory.Token(SyntaxKind.CommaToken)
+                    var commaToken = SyntaxFactory
+                        .Token(SyntaxKind.CommaToken)
                         .WithTriviaFrom(expressionStatement.SemicolonToken);
 
                     nodesAndTokens.Add(commaToken);
@@ -70,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                 else
                 {
                     newAssignment = newAssignment.WithTrailingTrivia(
-                        expressionStatement.GetTrailingTrivia());
+                        expressionStatement.GetTrailingTrivia()
+                    );
                     nodesAndTokens.Add(newAssignment);
                 }
             }
