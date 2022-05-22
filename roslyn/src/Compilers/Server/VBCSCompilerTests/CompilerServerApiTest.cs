@@ -167,20 +167,18 @@ class Hello
                 // Use a thread instead of Task to guarantee this code runs on a different
                 // thread and we can validate the mutex state.
                 var tcs = new TaskCompletionSource<IClientConnection>();
-                var thread = new Thread(
-                    _ =>
-                    {
-                        wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(mutexName);
+                var thread = new Thread(_ =>
+                {
+                    wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(mutexName);
 
-                        var client = new TestableClientConnection()
-                        {
-                            ReadBuildRequestFunc = _ =>
-                                Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
-                            WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
-                        };
-                        tcs.SetResult(client);
-                    }
-                );
+                    var client = new TestableClientConnection()
+                    {
+                        ReadBuildRequestFunc = _ =>
+                            Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
+                        WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
+                    };
+                    tcs.SetResult(client);
+                });
 
                 thread.Start();
                 return tcs.Task;

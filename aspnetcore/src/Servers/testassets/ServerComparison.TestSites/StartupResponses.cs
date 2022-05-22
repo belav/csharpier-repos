@@ -16,13 +16,11 @@ public class StartupResponses
             "/contentlength",
             subApp =>
             {
-                subApp.Run(
-                    context =>
-                    {
-                        context.Response.ContentLength = 14;
-                        return context.Response.WriteAsync("Content Length");
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    context.Response.ContentLength = 14;
+                    return context.Response.WriteAsync("Content Length");
+                });
             }
         );
 
@@ -30,14 +28,12 @@ public class StartupResponses
             "/connectionclose",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
-                    {
-                        context.Response.Headers.Connection = "close";
-                        await context.Response.WriteAsync("Connnection Close");
-                        await context.Response.Body.FlushAsync(); // Bypass IIS write-behind buffering
-                    }
-                );
+                subApp.Run(async context =>
+                {
+                    context.Response.Headers.Connection = "close";
+                    await context.Response.WriteAsync("Connnection Close");
+                    await context.Response.Body.FlushAsync(); // Bypass IIS write-behind buffering
+                });
             }
         );
 
@@ -45,13 +41,11 @@ public class StartupResponses
             "/chunked",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("Chunked");
-                        await context.Response.Body.FlushAsync(); // Bypass IIS write-behind buffering
-                    }
-                );
+                subApp.Run(async context =>
+                {
+                    await context.Response.WriteAsync("Chunked");
+                    await context.Response.Body.FlushAsync(); // Bypass IIS write-behind buffering
+                });
             }
         );
 
@@ -59,13 +53,11 @@ public class StartupResponses
             "/manuallychunked",
             subApp =>
             {
-                subApp.Run(
-                    context =>
-                    {
-                        context.Response.Headers.TransferEncoding = "chunked";
-                        return context.Response.WriteAsync("10\r\nManually Chunked\r\n0\r\n\r\n");
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    context.Response.Headers.TransferEncoding = "chunked";
+                    return context.Response.WriteAsync("10\r\nManually Chunked\r\n0\r\n\r\n");
+                });
             }
         );
 
@@ -73,24 +65,20 @@ public class StartupResponses
             "/manuallychunkedandclose",
             subApp =>
             {
-                subApp.Run(
-                    context =>
-                    {
-                        context.Response.Headers.Connection = "close";
-                        context.Response.Headers.TransferEncoding = "chunked";
-                        return context.Response.WriteAsync(
-                            "1A\r\nManually Chunked and Close\r\n0\r\n\r\n"
-                        );
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    context.Response.Headers.Connection = "close";
+                    context.Response.Headers.TransferEncoding = "chunked";
+                    return context.Response.WriteAsync(
+                        "1A\r\nManually Chunked and Close\r\n0\r\n\r\n"
+                    );
+                });
             }
         );
 
-        app.Run(
-            context =>
-            {
-                return context.Response.WriteAsync("Running");
-            }
-        );
+        app.Run(context =>
+        {
+            return context.Response.WriteAsync("Running");
+        });
     }
 }

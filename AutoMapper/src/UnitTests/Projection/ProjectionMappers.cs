@@ -25,14 +25,11 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.Internal()
-                        .ProjectionMappers.Add(new EnumToUnderlyingTypeProjectionMapper());
-                    cfg.CreateProjection<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.Internal().ProjectionMappers.Add(new EnumToUnderlyingTypeProjectionMapper());
+                cfg.CreateProjection<Source, Destination>();
+            });
 
         [Fact]
         public void Should_work_with_projections()

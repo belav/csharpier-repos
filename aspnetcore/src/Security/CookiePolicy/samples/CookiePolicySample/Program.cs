@@ -14,23 +14,19 @@ public static class Program
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseIISIntegration()
-                        .UseStartup<Startup>();
-                }
-            )
-            .ConfigureLogging(
-                factory =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter("Microsoft", LogLevel.Trace);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
+            .ConfigureLogging(factory =>
+            {
+                factory.AddConsole();
+                factory.AddFilter("Microsoft", LogLevel.Trace);
+            })
             .Build();
 
         return host.RunAsync();

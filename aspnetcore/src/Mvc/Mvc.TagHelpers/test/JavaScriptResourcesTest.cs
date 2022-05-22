@@ -67,13 +67,11 @@ public class JavaScriptResourcesTest
         var resource = "window.alert('An alert');";
         var stream = new MemoryStream(Encoding.UTF8.GetBytes(resource));
         var callCount = 0;
-        var getManifestResourceStream = new Func<string, Stream>(
-            name =>
-            {
-                callCount++;
-                return stream;
-            }
-        );
+        var getManifestResourceStream = new Func<string, Stream>(name =>
+        {
+            callCount++;
+            return stream;
+        });
         var cache = new ConcurrentDictionary<string, string>();
 
         // Act

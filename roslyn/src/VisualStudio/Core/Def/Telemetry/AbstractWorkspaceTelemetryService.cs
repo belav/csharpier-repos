@@ -67,22 +67,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                         AssemblyVersion = assemblyGroup.Key.Identity.Version.ToString(),
                         Namespaces = assemblyGroup
                             .GroupBy(symbol => symbol.ContainingNamespace)
-                            .Select(
-                                namespaceGroup =>
-                                {
-                                    var namespaceName =
-                                        namespaceGroup.Key?.ToString() ?? string.Empty;
+                            .Select(namespaceGroup =>
+                            {
+                                var namespaceName = namespaceGroup.Key?.ToString() ?? string.Empty;
 
-                                    return new
-                                    {
-                                        Namespace = new TelemetryPiiProperty(namespaceName),
-                                        Symbols = namespaceGroup
-                                            .Select(symbol => symbol.GetDocumentationCommentId())
-                                            .Where(id => id != null)
-                                            .Select(id => new TelemetryPiiProperty(id))
-                                    };
-                                }
-                            )
+                                return new
+                                {
+                                    Namespace = new TelemetryPiiProperty(namespaceName),
+                                    Symbols = namespaceGroup
+                                        .Select(symbol => symbol.GetDocumentationCommentId())
+                                        .Where(id => id != null)
+                                        .Select(id => new TelemetryPiiProperty(id))
+                                };
+                            })
                     }
             );
 

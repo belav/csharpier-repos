@@ -538,13 +538,11 @@ namespace BuildBoss
             var regex = $@"{partialName}.\d.*\.nupkg";
             var file = Directory
                 .EnumerateFiles(directory, "*.nupkg")
-                .Where(
-                    filePath =>
-                    {
-                        var fileName = Path.GetFileName(filePath);
-                        return Regex.IsMatch(fileName, regex);
-                    }
-                )
+                .Where(filePath =>
+                {
+                    var fileName = Path.GetFileName(filePath);
+                    return Regex.IsMatch(fileName, regex);
+                })
                 .SingleOrDefault();
             return file
                 ?? throw new Exception($"Unable to find unique '{partialName}' in '{directory}'");

@@ -1364,16 +1364,14 @@ public class RequestDelegateFactoryTests : LoggedTest
 
         var mock = new Mock<IServiceProvider>();
         mock.Setup(m => m.GetService(It.IsAny<Type>()))
-            .Returns<Type>(
-                t =>
+            .Returns<Type>(t =>
+            {
+                if (t == typeof(IOptions<JsonOptions>))
                 {
-                    if (t == typeof(IOptions<JsonOptions>))
-                    {
-                        return Options.Create(jsonOptions);
-                    }
-                    return null;
+                    return Options.Create(jsonOptions);
                 }
-            );
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -1426,16 +1424,14 @@ public class RequestDelegateFactoryTests : LoggedTest
 
         var mock = new Mock<IServiceProvider>();
         mock.Setup(m => m.GetService(It.IsAny<Type>()))
-            .Returns<Type>(
-                t =>
+            .Returns<Type>(t =>
+            {
+                if (t == typeof(IOptions<JsonOptions>))
                 {
-                    if (t == typeof(IOptions<JsonOptions>))
-                    {
-                        return Options.Create(jsonOptions);
-                    }
-                    return null;
+                    return Options.Create(jsonOptions);
                 }
-            );
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -1592,16 +1588,14 @@ public class RequestDelegateFactoryTests : LoggedTest
 
         var mock = new Mock<IServiceProvider>();
         mock.Setup(m => m.GetService(It.IsAny<Type>()))
-            .Returns<Type>(
-                t =>
+            .Returns<Type>(t =>
+            {
+                if (t == typeof(IOptions<JsonOptions>))
                 {
-                    if (t == typeof(IOptions<JsonOptions>))
-                    {
-                        return Options.Create(jsonOptions);
-                    }
-                    return null;
+                    return Options.Create(jsonOptions);
                 }
-            );
+                return null;
+            });
         httpContext.RequestServices = mock.Object;
 
         var factoryResult = RequestDelegateFactory.Create(action);

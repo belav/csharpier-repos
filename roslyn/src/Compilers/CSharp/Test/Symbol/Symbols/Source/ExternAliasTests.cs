@@ -436,20 +436,18 @@ class A : Bar::NS.Goo {}
 
             var targets = comp3.SyntaxTrees
                 .AsParallel()
-                .Select(
-                    tree =>
-                    {
-                        var model = comp3.GetSemanticModel(tree);
+                .Select(tree =>
+                {
+                    var model = comp3.GetSemanticModel(tree);
 
-                        var aliasSyntax = tree.GetCompilationUnitRoot()
-                            .DescendantNodes()
-                            .OfType<ExternAliasDirectiveSyntax>()
-                            .Single();
+                    var aliasSyntax = tree.GetCompilationUnitRoot()
+                        .DescendantNodes()
+                        .OfType<ExternAliasDirectiveSyntax>()
+                        .Single();
 
-                        var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
-                        return (INamespaceSymbol)aliasSymbol.Target;
-                    }
-                )
+                    var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
+                    return (INamespaceSymbol)aliasSymbol.Target;
+                })
                 .ToArray(); //force evaluation
 
             var firstTarget = targets.First();
@@ -473,20 +471,18 @@ class A : Bar::NS.Goo {}
 
             var targets = comp3.SyntaxTrees
                 .AsParallel()
-                .Select(
-                    tree =>
-                    {
-                        var model = comp3.GetSemanticModel(tree);
+                .Select(tree =>
+                {
+                    var model = comp3.GetSemanticModel(tree);
 
-                        var aliasSyntax = tree.GetCompilationUnitRoot()
-                            .DescendantNodes()
-                            .OfType<ExternAliasDirectiveSyntax>()
-                            .Single();
+                    var aliasSyntax = tree.GetCompilationUnitRoot()
+                        .DescendantNodes()
+                        .OfType<ExternAliasDirectiveSyntax>()
+                        .Single();
 
-                        var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
-                        return (INamespaceSymbol)aliasSymbol.Target;
-                    }
-                )
+                    var aliasSymbol = model.GetDeclaredSymbol(aliasSyntax);
+                    return (INamespaceSymbol)aliasSymbol.Target;
+                })
                 .ToArray(); //force evaluation
 
             var firstTarget = targets.First();

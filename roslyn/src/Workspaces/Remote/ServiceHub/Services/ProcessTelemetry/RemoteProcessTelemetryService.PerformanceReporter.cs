@@ -94,20 +94,18 @@ namespace Microsoft.CodeAnalysis.Remote
                             // this will report telemetry under VS. this will let us see how accurate our performance tracking is
                             RoslynLogger.Log(
                                 FunctionId.Diagnostics_BadAnalyzer,
-                                KeyValueLogMessage.Create(
-                                    m =>
-                                    {
-                                        // since it is telemetry, we hash analyzer name if it is not builtin analyzer
-                                        m[nameof(analyzerInfo.AnalyzerId)] = isInternalUser
-                                            ? analyzerInfo.AnalyzerId
-                                            : analyzerInfo.PIISafeAnalyzerId;
-                                        m[nameof(analyzerInfo.LocalOutlierFactor)] =
-                                            analyzerInfo.LocalOutlierFactor;
-                                        m[nameof(analyzerInfo.Average)] = analyzerInfo.Average;
-                                        m[nameof(analyzerInfo.AdjustedStandardDeviation)] =
-                                            analyzerInfo.AdjustedStandardDeviation;
-                                    }
-                                )
+                                KeyValueLogMessage.Create(m =>
+                                {
+                                    // since it is telemetry, we hash analyzer name if it is not builtin analyzer
+                                    m[nameof(analyzerInfo.AnalyzerId)] = isInternalUser
+                                        ? analyzerInfo.AnalyzerId
+                                        : analyzerInfo.PIISafeAnalyzerId;
+                                    m[nameof(analyzerInfo.LocalOutlierFactor)] =
+                                        analyzerInfo.LocalOutlierFactor;
+                                    m[nameof(analyzerInfo.Average)] = analyzerInfo.Average;
+                                    m[nameof(analyzerInfo.AdjustedStandardDeviation)] =
+                                        analyzerInfo.AdjustedStandardDeviation;
+                                })
                             );
                         }
 

@@ -4797,12 +4797,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         );
         mockHttpContextFactory
             .Setup(f => f.Dispose(It.IsAny<HttpContext>()))
-            .Callback<HttpContext>(
-                c =>
-                {
-                    disposedTcs.TrySetResult(c.Response.StatusCode);
-                }
-            );
+            .Callback<HttpContext>(c =>
+            {
+                disposedTcs.TrySetResult(c.Response.StatusCode);
+            });
 
         await using (
             var server = new TestServer(

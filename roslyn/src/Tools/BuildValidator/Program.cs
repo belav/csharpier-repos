@@ -120,20 +120,18 @@ namespace BuildValidator
             );
 
             // TODO: remove the DemoLoggerProvider or convert it to something more permanent
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder.SetMinimumLevel(
-                        (options.Verbose, options.Quiet) switch
-                        {
-                            (_, true) => LogLevel.Error,
-                            (true, _) => LogLevel.Trace,
-                            _ => LogLevel.Information
-                        }
-                    );
-                    builder.AddProvider(new DemoLoggerProvider());
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.SetMinimumLevel(
+                    (options.Verbose, options.Quiet) switch
+                    {
+                        (_, true) => LogLevel.Error,
+                        (true, _) => LogLevel.Trace,
+                        _ => LogLevel.Information
+                    }
+                );
+                builder.AddProvider(new DemoLoggerProvider());
+            });
 
             var logger = loggerFactory.CreateLogger<Program>();
             try

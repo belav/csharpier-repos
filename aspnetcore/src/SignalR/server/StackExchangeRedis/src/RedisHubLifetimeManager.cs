@@ -475,91 +475,85 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
     {
         RedisLog.Subscribing(_logger, _channels.All);
         var channel = await _bus!.SubscribeAsync(_channels.All);
-        channel.OnMessage(
-            async channelMessage =>
+        channel.OnMessage(async channelMessage =>
+        {
+            try
             {
-                try
+                RedisLog.ReceivedFromChannel(_logger, _channels.All);
+
+                var invocation = _protocol.ReadInvocation((byte[])channelMessage.Message);
+
+                var tasks = new List<Task>(_connections.Count);
+
+                foreach (var connection in _connections)
                 {
-                    RedisLog.ReceivedFromChannel(_logger, _channels.All);
-
-                    var invocation = _protocol.ReadInvocation((byte[])channelMessage.Message);
-
-                    var tasks = new List<Task>(_connections.Count);
-
-                    foreach (var connection in _connections)
+                    if (
+                        invocation.ExcludedConnectionIds == null
+                        || !invocation.ExcludedConnectionIds.Contains(connection.ConnectionId)
+                    )
                     {
-                        if (
-                            invocation.ExcludedConnectionIds == null
-                            || !invocation.ExcludedConnectionIds.Contains(connection.ConnectionId)
-                        )
-                        {
-                            tasks.Add(connection.WriteAsync(invocation.Message).AsTask());
-                        }
+                        tasks.Add(connection.WriteAsync(invocation.Message).AsTask());
                     }
+                }
 
-                    await Task.WhenAll(tasks);
-                }
-                catch (Exception ex)
-                {
-                    RedisLog.FailedWritingMessage(_logger, ex);
-                }
+                await Task.WhenAll(tasks);
             }
-        );
+            catch (Exception ex)
+            {
+                RedisLog.FailedWritingMessage(_logger, ex);
+            }
+        });
     }
 
     private async Task SubscribeToGroupManagementChannel()
     {
         var channel = await _bus!.SubscribeAsync(_channels.GroupManagement);
-        channel.OnMessage(
-            async channelMessage =>
+        channel.OnMessage(async channelMessage =>
+        {
+            try
             {
-                try
+                var groupMessage = _protocol.ReadGroupCommand((byte[])channelMessage.Message);
+
+                var connection = _connections[groupMessage.ConnectionId];
+                if (connection == null)
                 {
-                    var groupMessage = _protocol.ReadGroupCommand((byte[])channelMessage.Message);
-
-                    var connection = _connections[groupMessage.ConnectionId];
-                    if (connection == null)
-                    {
-                        // user not on this server
-                        return;
-                    }
-
-                    if (groupMessage.Action == GroupAction.Remove)
-                    {
-                        await RemoveGroupAsyncCore(connection, groupMessage.GroupName);
-                    }
-
-                    if (groupMessage.Action == GroupAction.Add)
-                    {
-                        await AddGroupAsyncCore(connection, groupMessage.GroupName);
-                    }
-
-                    // Send an ack to the server that sent the original command.
-                    await PublishAsync(
-                        _channels.Ack(groupMessage.ServerName),
-                        _protocol.WriteAck(groupMessage.Id)
-                    );
+                    // user not on this server
+                    return;
                 }
-                catch (Exception ex)
+
+                if (groupMessage.Action == GroupAction.Remove)
                 {
-                    RedisLog.InternalMessageFailed(_logger, ex);
+                    await RemoveGroupAsyncCore(connection, groupMessage.GroupName);
                 }
+
+                if (groupMessage.Action == GroupAction.Add)
+                {
+                    await AddGroupAsyncCore(connection, groupMessage.GroupName);
+                }
+
+                // Send an ack to the server that sent the original command.
+                await PublishAsync(
+                    _channels.Ack(groupMessage.ServerName),
+                    _protocol.WriteAck(groupMessage.Id)
+                );
             }
-        );
+            catch (Exception ex)
+            {
+                RedisLog.InternalMessageFailed(_logger, ex);
+            }
+        });
     }
 
     private async Task SubscribeToAckChannel()
     {
         // Create server specific channel in order to send an ack to a single server
         var channel = await _bus!.SubscribeAsync(_channels.Ack(_serverName));
-        channel.OnMessage(
-            channelMessage =>
-            {
-                var ackId = _protocol.ReadAck((byte[])channelMessage.Message);
+        channel.OnMessage(channelMessage =>
+        {
+            var ackId = _protocol.ReadAck((byte[])channelMessage.Message);
 
-                _ackHandler.TriggerAck(ackId);
-            }
-        );
+            _ackHandler.TriggerAck(ackId);
+        });
     }
 
     private async Task SubscribeToConnection(HubConnectionContext connection)
@@ -568,13 +562,11 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
 
         RedisLog.Subscribing(_logger, connectionChannel);
         var channel = await _bus!.SubscribeAsync(connectionChannel);
-        channel.OnMessage(
-            channelMessage =>
-            {
-                var invocation = _protocol.ReadInvocation((byte[])channelMessage.Message);
-                return connection.WriteAsync(invocation.Message).AsTask();
-            }
-        );
+        channel.OnMessage(channelMessage =>
+        {
+            var invocation = _protocol.ReadInvocation((byte[])channelMessage.Message);
+            return connection.WriteAsync(invocation.Message).AsTask();
+        });
     }
 
     private Task SubscribeToUser(HubConnectionContext connection)
@@ -588,29 +580,25 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
             {
                 RedisLog.Subscribing(_logger, channelName);
                 var channel = await _bus!.SubscribeAsync(channelName);
-                channel.OnMessage(
-                    async channelMessage =>
+                channel.OnMessage(async channelMessage =>
+                {
+                    try
                     {
-                        try
-                        {
-                            var invocation = _protocol.ReadInvocation(
-                                (byte[])channelMessage.Message
-                            );
+                        var invocation = _protocol.ReadInvocation((byte[])channelMessage.Message);
 
-                            var tasks = new List<Task>(subscriptions.Count);
-                            foreach (var userConnection in subscriptions)
-                            {
-                                tasks.Add(userConnection.WriteAsync(invocation.Message).AsTask());
-                            }
-
-                            await Task.WhenAll(tasks);
-                        }
-                        catch (Exception ex)
+                        var tasks = new List<Task>(subscriptions.Count);
+                        foreach (var userConnection in subscriptions)
                         {
-                            RedisLog.FailedWritingMessage(_logger, ex);
+                            tasks.Add(userConnection.WriteAsync(invocation.Message).AsTask());
                         }
+
+                        await Task.WhenAll(tasks);
                     }
-                );
+                    catch (Exception ex)
+                    {
+                        RedisLog.FailedWritingMessage(_logger, ex);
+                    }
+                });
             }
         );
     }

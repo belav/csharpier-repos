@@ -16,18 +16,14 @@ internal static class Http2CatIHostBuilderExtensions
         Func<Http2Utilities, Task> scenario
     )
     {
-        hostBuilder.ConfigureServices(
-            services =>
+        hostBuilder.ConfigureServices(services =>
+        {
+            services.UseHttp2Cat(options =>
             {
-                services.UseHttp2Cat(
-                    options =>
-                    {
-                        options.Url = address;
-                        options.Scenaro = scenario;
-                    }
-                );
-            }
-        );
+                options.Url = address;
+                options.Scenaro = scenario;
+            });
+        });
         return hostBuilder;
     }
 }

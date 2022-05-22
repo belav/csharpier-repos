@@ -13,17 +13,15 @@ namespace AutoMapper.UnitTests
         {
             var featureA = new ConfigurationExpressionFeatureA(1);
             var featureB = new ConfigurationExpressionFeatureB(1);
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.SetFeature(new ConfigurationExpressionFeatureA(3));
-                    cfg.SetFeature(new ConfigurationExpressionFeatureA(2));
-                    cfg.SetFeature(featureA);
-                    cfg.SetFeature(new ConfigurationExpressionFeatureB(3));
-                    cfg.SetFeature(new ConfigurationExpressionFeatureB(2));
-                    cfg.SetFeature(featureB);
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.SetFeature(new ConfigurationExpressionFeatureA(3));
+                cfg.SetFeature(new ConfigurationExpressionFeatureA(2));
+                cfg.SetFeature(featureA);
+                cfg.SetFeature(new ConfigurationExpressionFeatureB(3));
+                cfg.SetFeature(new ConfigurationExpressionFeatureB(2));
+                cfg.SetFeature(featureB);
+            });
 
             Validate<ConfigurationFeatureA>(featureA, config);
             Validate<ConfigurationFeatureB>(featureB, config);
@@ -33,12 +31,10 @@ namespace AutoMapper.UnitTests
         public void Add_single_feature()
         {
             var featureA = new ConfigurationExpressionFeatureA(1);
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.SetFeature(featureA);
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.SetFeature(featureA);
+            });
 
             Validate<ConfigurationFeatureA>(featureA, config);
         }
@@ -48,13 +44,11 @@ namespace AutoMapper.UnitTests
         {
             var featureA = new ConfigurationExpressionFeatureA(1);
             var featureB = new ConfigurationExpressionFeatureB(2);
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.SetFeature(featureA);
-                    cfg.SetFeature(featureB);
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.SetFeature(featureA);
+                cfg.SetFeature(featureB);
+            });
 
             Validate<ConfigurationFeatureA>(featureA, config);
             Validate<ConfigurationFeatureB>(featureB, config);

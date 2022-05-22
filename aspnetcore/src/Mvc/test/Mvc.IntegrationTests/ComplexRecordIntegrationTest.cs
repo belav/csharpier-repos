@@ -44,13 +44,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -97,13 +95,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Customer.Name=bill");
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Customer.Name=bill");
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -150,13 +146,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+            request.ContentType = "application/json";
+        });
 
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
@@ -207,15 +201,13 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Customer.Name=bill&paramater.Customer.Address=not-used"
-                );
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Customer.Name=bill&paramater.Customer.Address=not-used"
+            );
+            request.ContentType = "application/json";
+        });
 
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
@@ -263,13 +255,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.ProductId=10");
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.ProductId=10");
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -315,13 +305,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -366,14 +354,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -423,14 +409,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -480,12 +464,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -535,13 +517,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-                SetFormFileBodyContent(request, "Hello, World!", "parameter.Customer.Documents");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+            SetFormFileBodyContent(request, "Hello, World!", "parameter.Customer.Documents");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -591,13 +571,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Customer.Name=bill");
-                SetFormFileBodyContent(request, "Hello, World!", "Customer.Documents");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Customer.Name=bill");
+            SetFormFileBodyContent(request, "Hello, World!", "Customer.Documents");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -647,14 +625,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
 
-                // Deliberately leaving out any form data.
-            }
-        );
+            // Deliberately leaving out any form data.
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -701,13 +677,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.ProductId=10");
-                SetFormFileBodyContent(request, "Hello, World!", "parameter.Customer.Documents");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.ProductId=10");
+            SetFormFileBodyContent(request, "Hello, World!", "parameter.Customer.Documents");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -761,13 +735,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-                SetFormFileBodyContent(request, "Hello, World!", "Customer.Documents");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+            SetFormFileBodyContent(request, "Hello, World!", "Customer.Documents");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -818,14 +790,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -878,14 +848,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Name=bill&ProductIds[0]=10&ProductIds[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Name=bill&ProductIds[0]=10&ProductIds[1]=11");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -938,12 +904,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -988,12 +952,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1036,14 +998,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1096,14 +1056,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Name=bill&ProductIds[0]=10&ProductIds[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Name=bill&ProductIds[0]=10&ProductIds[1]=11");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1156,12 +1112,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1206,12 +1160,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1254,14 +1206,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1314,14 +1264,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1374,12 +1322,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1424,12 +1370,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1475,20 +1419,18 @@ public class ComplexRecordIntegrationTest
         // Arrange
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car1) };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var queryString =
-                    "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1585,20 +1527,18 @@ public class ComplexRecordIntegrationTest
         // Arrange
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car2) };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var queryString =
-                    "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1695,20 +1635,18 @@ public class ComplexRecordIntegrationTest
         // Arrange
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car3) };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var queryString =
-                    "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1812,14 +1750,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1872,14 +1808,12 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Name=bill&ProductId.Key=key0&ProductId.Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductId.Key=key0&ProductId.Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -1930,20 +1864,18 @@ public class ComplexRecordIntegrationTest
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car4) };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var queryString =
-                    "?p.Name=Accord"
-                    + "&p.Specs.Key=camera_specs"
-                    + "&p.Specs.Value[0].Key=spec1"
-                    + "&p.Specs.Value[0].Value=spec1.txt"
-                    + "&p.Specs.Value[1].Key=spec2"
-                    + "&p.Specs.Value[1].Value=spec2.txt";
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs.Key=camera_specs"
+                + "&p.Specs.Value[0].Key=spec1"
+                + "&p.Specs.Value[0].Value=spec1.txt"
+                + "&p.Specs.Value[1].Key=spec2"
+                + "&p.Specs.Value[1].Value=spec2.txt";
 
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2027,13 +1959,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2197,12 +2127,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Id=123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Id=123");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2257,12 +2185,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Customer.Id=123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Customer.Id=123");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2318,12 +2244,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?customParameter.Customer.Id=123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?customParameter.Customer.Id=123");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2380,12 +2304,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2435,12 +2357,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2489,12 +2409,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?ProductName=abc");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?ProductName=abc");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2540,12 +2458,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2595,12 +2511,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // No Data
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2648,12 +2562,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(Order13),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?OrderIds[0]=123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?OrderIds[0]=123");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2701,12 +2613,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.ProductId=");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.ProductId=");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2758,12 +2668,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.ProductId");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.ProductId");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3054,13 +2962,11 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexTypeModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-                SetJsonBodyContent(request, AddressBodyContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+            SetJsonBodyContent(request, AddressBodyContent);
+        });
 
         var metadata = GetMetadata(testContext, parameter);
         var modelBinder = GetModelBinder(testContext, parameter, metadata);
@@ -3102,15 +3008,13 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Headers.Add("GpsCoordinates", "10,20");
-                request.QueryString = new QueryString(
-                    "?Id=1&Info.Key=location1&Info.Value.Zipcode=98052"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Headers.Add("GpsCoordinates", "10,20");
+            request.QueryString = new QueryString(
+                "?Id=1&Info.Key=location1&Info.Value.Zipcode=98052"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3174,15 +3078,13 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(IList<Person5>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                SetFormFileBodyContent(request, "Hello world!", "[0].Photo");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            SetFormFileBodyContent(request, "Hello world!", "[0].Photo");
 
-                // CollectionModelBinder binds an empty collection when value providers are all empty.
-                request.QueryString = new QueryString("?a=b");
-            }
-        );
+            // CollectionModelBinder binds an empty collection when value providers are all empty.
+            request.QueryString = new QueryString("?a=b");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3254,14 +3156,12 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(TestModel),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3325,12 +3225,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(Person6),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                SetFormFileBodyContent(request, "Hello world!", "Photo");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            SetFormFileBodyContent(request, "Hello world!", "Photo");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3379,13 +3277,11 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(Person6),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                SetFormFileBodyContent(request, "Hello world!", "Photo");
-                SetFormFileBodyContent(request, "Hello Mom!", "Mother.Photo");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            SetFormFileBodyContent(request, "Hello world!", "Photo");
+            SetFormFileBodyContent(request, "Hello Mom!", "Mother.Photo");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3455,18 +3351,14 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(Person7),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                SetFormFileBodyContent(request, "Hello world!", "Photo");
-                SetFormFileBodyContent(request, "Hello Fred!", "Children[0].Photo");
-                SetFormFileBodyContent(request, "Hello Ginger!", "Children[1].Photo");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            SetFormFileBodyContent(request, "Hello world!", "Photo");
+            SetFormFileBodyContent(request, "Hello Fred!", "Children[0].Photo");
+            SetFormFileBodyContent(request, "Hello Ginger!", "Children[1].Photo");
 
-                request.QueryString = new QueryString(
-                    "?Children[0].Name=Fred&Children[1].Name=Ginger"
-                );
-            }
-        );
+            request.QueryString = new QueryString("?Children[0].Name=Fred&Children[1].Name=Ginger");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3698,12 +3590,10 @@ public class ComplexRecordIntegrationTest
         };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3743,12 +3633,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithSettableProperty1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?name=TestName");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?name=TestName");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3789,12 +3677,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithSettableProperty1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?age=28");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?age=28");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3835,12 +3721,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithSettableProperty1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Name=test&age=28");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Name=test&age=28");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3889,12 +3773,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithFilteredProperty1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=not-bound&Name=test");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=not-bound&Name=test");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3938,12 +3820,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithFilteredProperty2)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=not-bound&Name=test");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=not-bound&Name=test");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3995,13 +3875,11 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDifferentMetadataOnParameterAndProperty)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Headers.Add("Id", "not-bound");
-                request.QueryString = new QueryString("?Id=testId&Name=test");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Headers.Add("Id", "not-bound");
+            request.QueryString = new QueryString("?Id=testId&Name=test");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4043,13 +3921,11 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDifferentMetadataOnParameterAndProperty)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Headers.Add("Id", "not-bound");
-                request.QueryString = new QueryString("?Name=test");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Headers.Add("Id", "not-bound");
+            request.QueryString = new QueryString("?Name=test");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4094,12 +3970,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithCollectionParameter)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4140,12 +4014,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithCollectionParameter)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=test");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=test");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4187,12 +4059,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithReadOnlyCollectionParameter)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4240,12 +4110,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDefaultParameterValue)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=test&Tags[0]=tag1&Tags[1]=tag2");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4287,12 +4155,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDefaultParameterValue)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4331,12 +4197,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDefaultParameterValue)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Tags[0]=tag");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Tags[0]=tag");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4377,12 +4241,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypesWithDefaultParameterValue)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Tags[0]=tag");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Tags[0]=tag");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4425,12 +4287,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithBindRequiredParameters)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Name=test&Age=7");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Name=test&Age=7");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -4473,12 +4333,10 @@ public class ComplexRecordIntegrationTest
             ParameterType = typeof(RecordTypeWithBindRequiredParameters)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Age=7");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Age=7");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);

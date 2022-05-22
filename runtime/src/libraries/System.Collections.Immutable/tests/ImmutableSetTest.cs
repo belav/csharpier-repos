@@ -92,13 +92,11 @@ namespace System.Collections.Immutable.Tests
                 .Except(
                     Enumerable
                         .Range(1, 1)
-                        .Select(
-                            n =>
-                            {
-                                enumerated = true;
-                                return n;
-                            }
-                        )
+                        .Select(n =>
+                        {
+                            enumerated = true;
+                            return n;
+                        })
                 );
             Assert.True(enumerated);
         }

@@ -384,14 +384,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceA, DestA>();
-                    cfg.CreateMap<SourceB, DestB>();
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceA, DestA>();
+                cfg.CreateMap<SourceB, DestB>();
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -645,25 +643,21 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         [Fact]
         public void Should_report_missing_map()
         {
             new Action(
                 Configuration.AssertConfigurationIsValid
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.MemberMap.SourceMember.ShouldBe(typeof(SourceItem).GetProperty("ShipsTo"));
-                    ex.Types.Value.ShouldBe(new TypePair(typeof(SourceItem), typeof(DestItem)));
-                }
-            );
+            ).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+            {
+                ex.MemberMap.SourceMember.ShouldBe(typeof(SourceItem).GetProperty("ShipsTo"));
+                ex.Types.Value.ShouldBe(new TypePair(typeof(SourceItem), typeof(DestItem)));
+            });
         }
     }
 
@@ -692,14 +686,12 @@ namespace AutoMapper.UnitTests
         public class SpecificDestinationItem : DestinationItemBase { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceItem, DestinationItemBase>().As<SpecificDestinationItem>();
-                    cfg.CreateMap<SourceItem, SpecificDestinationItem>();
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceItem, DestinationItemBase>().As<SpecificDestinationItem>();
+                cfg.CreateMap<SourceItem, SpecificDestinationItem>();
+                cfg.CreateMap<Source, Destination>();
+            });
     }
 
     public class When_passing_a_not_empty_collection : AutoMapperSpecBase
@@ -722,13 +714,11 @@ namespace AutoMapper.UnitTests
         class DestinationItem { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<SourceItem, DestinationItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<SourceItem, DestinationItem>();
+            });
 
         protected override void Because_of()
         {
@@ -761,13 +751,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Bar, BarDTO>();
-                    cfg.CreateMap<Foo, FooDTO>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Bar, BarDTO>();
+                cfg.CreateMap<Foo, FooDTO>();
+            });
 
         protected override void Because_of()
         {
@@ -850,14 +838,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_keep_and_fill_destination_collection_when_collection_is_implemented_as_list()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithCollection>()
-                        .ForMember(d => d.Details, o => o.UseDestinationValue());
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithCollection>()
+                    .ForMember(d => d.Details, o => o.UseDestinationValue());
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -881,14 +867,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_keep_and_fill_destination_collection_when_collection_is_implemented_as_set()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithCollection>()
-                        .ForMember(d => d.Details, o => o.UseDestinationValue());
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithCollection>()
+                    .ForMember(d => d.Details, o => o.UseDestinationValue());
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -912,17 +896,13 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_keep_and_fill_destination_collection_when_collection_is_implemented_as_set_with_aftermap()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithCollection>()
-                        .ForMember(d => d.Details, o => o.Ignore())
-                        .AfterMap(
-                            (s, d) => FillCollection(s, d, ss => ss.Details, dd => dd.Details)
-                        );
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithCollection>()
+                    .ForMember(d => d.Details, o => o.Ignore())
+                    .AfterMap((s, d) => FillCollection(s, d, ss => ss.Details, dd => dd.Details));
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -948,14 +928,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_keep_and_fill_destination_list()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithList>()
-                        .ForMember(d => d.Details, o => o.UseDestinationValue());
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithList>()
+                    .ForMember(d => d.Details, o => o.UseDestinationValue());
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -979,14 +957,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_not_replace_destination_collection()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithCollection>()
-                        .ForMember(d => d.Details, opt => opt.UseDestinationValue());
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithCollection>()
+                    .ForMember(d => d.Details, opt => opt.UseDestinationValue());
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -1009,13 +985,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_be_able_to_map_to_a_collection_type_that_implements_ICollection_of_T()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithNoExistingCollection>();
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithNoExistingCollection>();
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -1035,14 +1009,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_not_replace_destination_list()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<MasterDto, MasterWithList>()
-                        .ForMember(d => d.Details, opt => opt.UseDestinationValue());
-                    cfg.CreateMap<DetailDto, Detail>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<MasterDto, MasterWithList>()
+                    .ForMember(d => d.Details, opt => opt.UseDestinationValue());
+                cfg.CreateMap<DetailDto, Detail>();
+            });
 
             var dto = new MasterDto
             {
@@ -1099,13 +1071,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>();
-                    cfg.CreateMap<Source.Item, Dest.Item>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+                cfg.CreateMap<Source.Item, Dest.Item>();
+            });
 
         [Fact]
         public void Should_map_items()
@@ -1148,15 +1118,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullCollections = true;
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullCollections = true;
 
-                    cfg.CreateMap<Source, Target>();
-                    cfg.CreateMap<SourceItem, TargetItem>();
-                }
-            );
+                cfg.CreateMap<Source, Target>();
+                cfg.CreateMap<SourceItem, TargetItem>();
+            });
 
         [Fact]
         public void IncludedMappings()

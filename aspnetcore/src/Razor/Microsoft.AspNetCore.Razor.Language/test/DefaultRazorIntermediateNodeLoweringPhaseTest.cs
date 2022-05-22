@@ -25,14 +25,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             }
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(directive);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(directive);
+        });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
         var importSource = TestRazorSourceDocument.Create(
             "@custom \"hello\"",
@@ -66,14 +64,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             }
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(directive);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(directive);
+        });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
         var importSource = TestRazorSourceDocument.Create(
             "@custom \"hello\"",
@@ -107,14 +103,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             }
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(directive);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(directive);
+        });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
         var importSource1 = TestRazorSourceDocument.Create(
             "@custom \"hello\"",
@@ -158,22 +152,18 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b => b.AddStringToken()
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(codeBlockDirective);
-                b.AddDirective(razorBlockDirective);
-            }
-        );
-        var options = RazorParserOptions.Create(
-            builder =>
-            {
-                builder.Directives.Add(codeBlockDirective);
-                builder.Directives.Add(razorBlockDirective);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(codeBlockDirective);
+            b.AddDirective(razorBlockDirective);
+        });
+        var options = RazorParserOptions.Create(builder =>
+        {
+            builder.Directives.Add(codeBlockDirective);
+            builder.Directives.Add(razorBlockDirective);
+        });
         var importSource = TestRazorSourceDocument.Create(
             @"@code ""code block"" { }
 @razor ""razor block"" { }",
@@ -201,14 +191,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(directive);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(directive);
+        });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
         var importSource = TestRazorSourceDocument.Create("@custom { }", filePath: "import.cshtml");
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
@@ -237,14 +225,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
             b => b.Usage = DirectiveUsage.FileScopedSinglyOccurring
         );
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-                b.AddDirective(directive);
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+            b.AddDirective(directive);
+        });
         var options = RazorParserOptions.Create(builder => builder.Directives.Add(directive));
         var importSource = TestRazorSourceDocument.Create("@custom { }", filePath: "import.cshtml");
         var codeDocument = TestRazorCodeDocument.Create("<p>NonDirective</p>");
@@ -270,13 +256,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
         // Arrange
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
 
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+        });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
 
@@ -293,13 +277,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+        });
         var codeDocument = TestRazorCodeDocument.Create("<p class=@(");
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source));
 
@@ -320,13 +302,11 @@ public class DefaultRazorIntermediateNodeLoweringPhaseTest
     {
         // Arrange
         var phase = new DefaultRazorIntermediateNodeLoweringPhase();
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
-                b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
-            }
-        );
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
+            b.Features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
+        });
 
         var codeDocument = TestRazorCodeDocument.CreateEmpty();
         codeDocument.SetSyntaxTree(RazorSyntaxTree.Parse(codeDocument.Source));

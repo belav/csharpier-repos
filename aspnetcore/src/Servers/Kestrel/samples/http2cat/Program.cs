@@ -16,12 +16,10 @@ public class Program
     public static async Task Main(string[] args)
     {
         using var host = new HostBuilder()
-            .ConfigureLogging(
-                loggingBuilder =>
-                {
-                    loggingBuilder.AddConsole();
-                }
-            )
+            .ConfigureLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+            })
             .UseHttp2Cat("https://localhost:5001", RunTestCase)
             .Build();
 

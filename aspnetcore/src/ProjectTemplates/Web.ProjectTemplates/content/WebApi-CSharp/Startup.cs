@@ -69,15 +69,13 @@ namespace Company.WebApplication1
 
             services.AddControllers();
 #if (EnableOpenAPI)
-            services.AddSwaggerGen(
-                c =>
-                {
-                    c.SwaggerDoc(
-                        "v1",
-                        new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
-                    );
-                }
-            );
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
+                );
+            });
 #endif
         }
 
@@ -106,12 +104,10 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapControllers();
-                }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

@@ -61,16 +61,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Person>(
-                    b =>
-                    {
-                        b.Property(o => o.ConvertedComingOut)
-                            .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+                modelBuilder.Entity<Person>(b =>
+                {
+                    b.Property(o => o.ConvertedComingOut)
+                        .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
-                        b.Property(o => o.ConvertedGoingIn)
-                            .HasConversion(v => DateTime.SpecifyKind(v, DateTimeKind.Utc), v => v);
-                    }
-                );
+                    b.Property(o => o.ConvertedGoingIn)
+                        .HasConversion(v => DateTime.SpecifyKind(v, DateTimeKind.Utc), v => v);
+                });
             }
         }
 

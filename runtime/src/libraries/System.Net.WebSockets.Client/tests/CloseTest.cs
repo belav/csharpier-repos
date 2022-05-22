@@ -637,16 +637,14 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            Dictionary<string, string> headers =
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection);
-                            Assert.NotNull(headers);
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        Dictionary<string, string> headers =
+                            await LoopbackHelper.WebSocketHandshakeAsync(connection);
+                        Assert.NotNull(headers);
 
-                            await tcs.Task;
-                        }
-                    ),
+                        await tcs.Task;
+                    }),
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );
         }

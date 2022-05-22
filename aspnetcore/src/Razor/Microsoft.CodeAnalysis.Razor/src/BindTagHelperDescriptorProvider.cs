@@ -158,79 +158,66 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         // a C# property will crash trying to create the toolips.
         builder.SetTypeName("Microsoft.AspNetCore.Components.Bind");
 
-        builder.TagMatchingRule(
-            rule =>
+        builder.TagMatchingRule(rule =>
+        {
+            rule.TagName = "*";
+            rule.Attribute(attribute =>
             {
-                rule.TagName = "*";
-                rule.Attribute(
-                    attribute =>
-                    {
-                        attribute.Name = "@bind-";
-                        attribute.NameComparisonMode = RequiredAttributeDescriptor
-                            .NameComparisonMode
-                            .PrefixMatch;
-                        attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                            bool.TrueString;
-                    }
-                );
-            }
-        );
-
-        builder.BindAttribute(
-            attribute =>
-            {
+                attribute.Name = "@bind-";
+                attribute.NameComparisonMode = RequiredAttributeDescriptor
+                    .NameComparisonMode
+                    .PrefixMatch;
                 attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-                attribute.Documentation = ComponentResources.BindTagHelper_Fallback_Documentation;
+            });
+        });
 
-                var attributeName = "@bind-...";
-                attribute.Name = attributeName;
-                attribute.AsDictionary("@bind-", typeof(object).FullName);
+        builder.BindAttribute(attribute =>
+        {
+            attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+            attribute.Documentation = ComponentResources.BindTagHelper_Fallback_Documentation;
 
-                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                // a C# property will crash trying to create the toolips.
-                attribute.SetPropertyName("Bind");
-                attribute.TypeName = "System.Collections.Generic.Dictionary<string, object>";
+            var attributeName = "@bind-...";
+            attribute.Name = attributeName;
+            attribute.AsDictionary("@bind-", typeof(object).FullName);
 
-                attribute.BindAttributeParameter(
-                    parameter =>
-                    {
-                        parameter.Name = "format";
-                        parameter.TypeName = typeof(string).FullName;
-                        parameter.Documentation =
-                            ComponentResources.BindTagHelper_Fallback_Format_Documentation;
+            // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+            // a C# property will crash trying to create the toolips.
+            attribute.SetPropertyName("Bind");
+            attribute.TypeName = "System.Collections.Generic.Dictionary<string, object>";
 
-                        parameter.SetPropertyName("Format");
-                    }
+            attribute.BindAttributeParameter(parameter =>
+            {
+                parameter.Name = "format";
+                parameter.TypeName = typeof(string).FullName;
+                parameter.Documentation =
+                    ComponentResources.BindTagHelper_Fallback_Format_Documentation;
+
+                parameter.SetPropertyName("Format");
+            });
+
+            attribute.BindAttributeParameter(parameter =>
+            {
+                parameter.Name = "event";
+                parameter.TypeName = typeof(string).FullName;
+                parameter.Documentation = string.Format(
+                    CultureInfo.CurrentCulture,
+                    ComponentResources.BindTagHelper_Fallback_Event_Documentation,
+                    attributeName
                 );
 
-                attribute.BindAttributeParameter(
-                    parameter =>
-                    {
-                        parameter.Name = "event";
-                        parameter.TypeName = typeof(string).FullName;
-                        parameter.Documentation = string.Format(
-                            CultureInfo.CurrentCulture,
-                            ComponentResources.BindTagHelper_Fallback_Event_Documentation,
-                            attributeName
-                        );
+                parameter.SetPropertyName("Event");
+            });
 
-                        parameter.SetPropertyName("Event");
-                    }
-                );
+            attribute.BindAttributeParameter(parameter =>
+            {
+                parameter.Name = "culture";
+                parameter.TypeName = typeof(CultureInfo).FullName;
+                parameter.Documentation =
+                    ComponentResources.BindTagHelper_Element_Culture_Documentation;
 
-                attribute.BindAttributeParameter(
-                    parameter =>
-                    {
-                        parameter.Name = "culture";
-                        parameter.TypeName = typeof(CultureInfo).FullName;
-                        parameter.Documentation =
-                            ComponentResources.BindTagHelper_Element_Culture_Documentation;
-
-                        parameter.SetPropertyName("Culture");
-                    }
-                );
-            }
-        );
+                parameter.SetPropertyName("Culture");
+            });
+        });
 
         return builder.Build();
     }
@@ -409,120 +396,101 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
             // a C# property will crash trying to create the toolips.
             builder.SetTypeName(entry.TypeName);
 
-            builder.TagMatchingRule(
-                rule =>
+            builder.TagMatchingRule(rule =>
+            {
+                rule.TagName = entry.Element;
+                if (entry.TypeAttribute != null)
                 {
-                    rule.TagName = entry.Element;
-                    if (entry.TypeAttribute != null)
+                    rule.Attribute(a =>
                     {
-                        rule.Attribute(
-                            a =>
-                            {
-                                a.Name = "type";
-                                a.NameComparisonMode = RequiredAttributeDescriptor
-                                    .NameComparisonMode
-                                    .FullMatch;
-                                a.Value = entry.TypeAttribute;
-                                a.ValueComparisonMode = RequiredAttributeDescriptor
-                                    .ValueComparisonMode
-                                    .FullMatch;
-                            }
-                        );
-                    }
-
-                    rule.Attribute(
-                        a =>
-                        {
-                            a.Name = attributeName;
-                            a.NameComparisonMode = RequiredAttributeDescriptor
-                                .NameComparisonMode
-                                .FullMatch;
-                            a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                                bool.TrueString;
-                        }
-                    );
+                        a.Name = "type";
+                        a.NameComparisonMode = RequiredAttributeDescriptor
+                            .NameComparisonMode
+                            .FullMatch;
+                        a.Value = entry.TypeAttribute;
+                        a.ValueComparisonMode = RequiredAttributeDescriptor
+                            .ValueComparisonMode
+                            .FullMatch;
+                    });
                 }
-            );
 
-            builder.BindAttribute(
-                a =>
+                rule.Attribute(a =>
                 {
-                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-                    a.Documentation = string.Format(
-                        CultureInfo.CurrentCulture,
-                        ComponentResources.BindTagHelper_Element_Documentation,
-                        entry.ValueAttribute,
-                        entry.ChangeAttribute
-                    );
-
                     a.Name = attributeName;
-                    a.TypeName = typeof(object).FullName;
+                    a.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+                });
+            });
 
-                    // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                    // a C# property will crash trying to create the toolips.
-                    a.SetPropertyName(name);
+            builder.BindAttribute(a =>
+            {
+                a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+                a.Documentation = string.Format(
+                    CultureInfo.CurrentCulture,
+                    ComponentResources.BindTagHelper_Element_Documentation,
+                    entry.ValueAttribute,
+                    entry.ChangeAttribute
+                );
 
-                    a.BindAttributeParameter(
-                        parameter =>
-                        {
-                            parameter.Name = "format";
-                            parameter.TypeName = typeof(string).FullName;
-                            parameter.Documentation = string.Format(
-                                CultureInfo.CurrentCulture,
-                                ComponentResources.BindTagHelper_Element_Format_Documentation,
-                                attributeName
-                            );
+                a.Name = attributeName;
+                a.TypeName = typeof(object).FullName;
 
-                            parameter.SetPropertyName(formatName);
-                        }
-                    );
+                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+                // a C# property will crash trying to create the toolips.
+                a.SetPropertyName(name);
 
-                    a.BindAttributeParameter(
-                        parameter =>
-                        {
-                            parameter.Name = "event";
-                            parameter.TypeName = typeof(string).FullName;
-                            parameter.Documentation = string.Format(
-                                CultureInfo.CurrentCulture,
-                                ComponentResources.BindTagHelper_Element_Event_Documentation,
-                                attributeName
-                            );
-
-                            parameter.SetPropertyName(eventName);
-                        }
-                    );
-
-                    a.BindAttributeParameter(
-                        parameter =>
-                        {
-                            parameter.Name = "culture";
-                            parameter.TypeName = typeof(CultureInfo).FullName;
-                            parameter.Documentation =
-                                ComponentResources.BindTagHelper_Element_Culture_Documentation;
-
-                            parameter.SetPropertyName("Culture");
-                        }
-                    );
-                }
-            );
-
-            // This is no longer supported. This is just here so we can add a diagnostic later on when this matches.
-            builder.BindAttribute(
-                attribute =>
+                a.BindAttributeParameter(parameter =>
                 {
-                    attribute.Name = formatAttributeName;
-                    attribute.TypeName = "System.String";
-                    attribute.Documentation = string.Format(
+                    parameter.Name = "format";
+                    parameter.TypeName = typeof(string).FullName;
+                    parameter.Documentation = string.Format(
                         CultureInfo.CurrentCulture,
                         ComponentResources.BindTagHelper_Element_Format_Documentation,
                         attributeName
                     );
 
-                    // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                    // a C# property will crash trying to create the toolips.
-                    attribute.SetPropertyName(formatName);
-                }
-            );
+                    parameter.SetPropertyName(formatName);
+                });
+
+                a.BindAttributeParameter(parameter =>
+                {
+                    parameter.Name = "event";
+                    parameter.TypeName = typeof(string).FullName;
+                    parameter.Documentation = string.Format(
+                        CultureInfo.CurrentCulture,
+                        ComponentResources.BindTagHelper_Element_Event_Documentation,
+                        attributeName
+                    );
+
+                    parameter.SetPropertyName(eventName);
+                });
+
+                a.BindAttributeParameter(parameter =>
+                {
+                    parameter.Name = "culture";
+                    parameter.TypeName = typeof(CultureInfo).FullName;
+                    parameter.Documentation =
+                        ComponentResources.BindTagHelper_Element_Culture_Documentation;
+
+                    parameter.SetPropertyName("Culture");
+                });
+            });
+
+            // This is no longer supported. This is just here so we can add a diagnostic later on when this matches.
+            builder.BindAttribute(attribute =>
+            {
+                attribute.Name = formatAttributeName;
+                attribute.TypeName = "System.String";
+                attribute.Documentation = string.Format(
+                    CultureInfo.CurrentCulture,
+                    ComponentResources.BindTagHelper_Element_Format_Documentation,
+                    attributeName
+                );
+
+                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+                // a C# property will crash trying to create the toolips.
+                attribute.SetPropertyName(formatName);
+            });
 
             results.Add(builder.Build());
         }
@@ -636,45 +604,39 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                 builder.SetTypeName(tagHelper.GetTypeName());
 
                 // Match the component and attribute name
-                builder.TagMatchingRule(
-                    rule =>
+                builder.TagMatchingRule(rule =>
+                {
+                    rule.TagName = tagHelper.TagMatchingRules.Single().TagName;
+                    rule.Attribute(attribute =>
                     {
-                        rule.TagName = tagHelper.TagMatchingRules.Single().TagName;
-                        rule.Attribute(
-                            attribute =>
-                            {
-                                attribute.Name = "@bind-" + valueAttribute.Name;
-                                attribute.NameComparisonMode = RequiredAttributeDescriptor
-                                    .NameComparisonMode
-                                    .FullMatch;
-                                attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                                    bool.TrueString;
-                            }
-                        );
-                    }
-                );
-
-                builder.BindAttribute(
-                    attribute =>
-                    {
+                        attribute.Name = "@bind-" + valueAttribute.Name;
+                        attribute.NameComparisonMode = RequiredAttributeDescriptor
+                            .NameComparisonMode
+                            .FullMatch;
                         attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
                             bool.TrueString;
-                        attribute.Documentation = string.Format(
-                            CultureInfo.CurrentCulture,
-                            ComponentResources.BindTagHelper_Component_Documentation,
-                            valueAttribute.Name,
-                            changeAttribute.Name
-                        );
+                    });
+                });
 
-                        attribute.Name = "@bind-" + valueAttribute.Name;
-                        attribute.TypeName = changeAttribute.TypeName;
-                        attribute.IsEnum = valueAttribute.IsEnum;
+                builder.BindAttribute(attribute =>
+                {
+                    attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
+                        bool.TrueString;
+                    attribute.Documentation = string.Format(
+                        CultureInfo.CurrentCulture,
+                        ComponentResources.BindTagHelper_Component_Documentation,
+                        valueAttribute.Name,
+                        changeAttribute.Name
+                    );
 
-                        // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                        // a C# property will crash trying to create the toolips.
-                        attribute.SetPropertyName(valueAttribute.GetPropertyName());
-                    }
-                );
+                    attribute.Name = "@bind-" + valueAttribute.Name;
+                    attribute.TypeName = changeAttribute.TypeName;
+                    attribute.IsEnum = valueAttribute.IsEnum;
+
+                    // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+                    // a C# property will crash trying to create the toolips.
+                    attribute.SetPropertyName(valueAttribute.GetPropertyName());
+                });
 
                 if (tagHelper.IsComponentFullyQualifiedNameMatch())
                 {

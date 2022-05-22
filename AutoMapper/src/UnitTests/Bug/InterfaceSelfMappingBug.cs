@@ -23,13 +23,11 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Example()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullCollections = true;
-                    cfg.CreateMap<IFoo, IFoo>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullCollections = true;
+                cfg.CreateMap<IFoo, IFoo>();
+            });
             config.AssertConfigurationIsValid();
 
             IFoo bar = new Bar { Value = 5 };

@@ -434,17 +434,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         private TextSpan[] Deserialize(string[] v)
         {
             // returned tag looks something like 'text'[12-13]
-            return v.Select(
-                    tag =>
-                    {
-                        var open = tag.LastIndexOf('[') + 1;
-                        var comma = tag.LastIndexOf('-');
-                        var close = tag.LastIndexOf(']');
-                        var start = tag.Substring(open, comma - open);
-                        var end = tag.Substring(comma + 1, close - comma - 1);
-                        return TextSpan.FromBounds(int.Parse(start), int.Parse(end));
-                    }
-                )
+            return v.Select(tag =>
+                {
+                    var open = tag.LastIndexOf('[') + 1;
+                    var comma = tag.LastIndexOf('-');
+                    var close = tag.LastIndexOf(']');
+                    var start = tag.Substring(open, comma - open);
+                    var end = tag.Substring(comma + 1, close - comma - 1);
+                    return TextSpan.FromBounds(int.Parse(start), int.Parse(end));
+                })
                 .ToArray();
         }
 

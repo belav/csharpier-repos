@@ -11,12 +11,10 @@ public class ThrowingOnAfterRenderAsyncComponent : IComponent, IHandleAfterRende
 {
     public void Attach(RenderHandle renderHandle)
     {
-        renderHandle.Render(
-            builder =>
-            {
-                // Do nothing.
-            }
-        );
+        renderHandle.Render(builder =>
+        {
+            // Do nothing.
+        });
     }
 
     public async Task OnAfterRenderAsync()

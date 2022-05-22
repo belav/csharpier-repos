@@ -189,13 +189,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnModelCreating(ModelBuilder builder)
             {
-                builder.Entity<Customer>(
-                    b =>
-                    {
-                        b.HasKey(c => c.Id);
-                        b.Property(c => c.ETag).IsETagConcurrency();
-                    }
-                );
+                builder.Entity<Customer>(b =>
+                {
+                    b.HasKey(c => c.Id);
+                    b.Property(c => c.ETag).IsETagConcurrency();
+                });
             }
         }
 

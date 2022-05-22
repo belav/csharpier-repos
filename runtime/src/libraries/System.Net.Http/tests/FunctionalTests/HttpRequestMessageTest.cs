@@ -288,25 +288,23 @@ namespace System.Net.Http.Functional.Tests
                         request.Method = new HttpMethod(method);
 
                         Task<HttpResponseMessage> requestTask = client.SendAsync(request);
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                var requestData = await connection
-                                    .ReadRequestDataAsync()
-                                    .ConfigureAwait(false);
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            var requestData = await connection
+                                .ReadRequestDataAsync()
+                                .ConfigureAwait(false);
 #if TARGET_BROWSER
-                                requestData = await connection.HandleCORSPreFlight(requestData);
+                            requestData = await connection.HandleCORSPreFlight(requestData);
 #endif
 
-                                Assert.DoesNotContain(
-                                    requestData.Headers,
-                                    line => line.Name.StartsWith("Content-length")
-                                );
+                            Assert.DoesNotContain(
+                                requestData.Headers,
+                                line => line.Name.StartsWith("Content-length")
+                            );
 
-                                await connection.SendResponseAsync();
-                                await requestTask;
-                            }
-                        );
+                            await connection.SendResponseAsync();
+                            await requestTask;
+                        });
                     }
                 );
             }
@@ -324,19 +322,17 @@ namespace System.Net.Http.Functional.Tests
 
                         Task<HttpResponseMessage> requestTask = client.SendAsync(request);
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                // Content-Length greater than 2GB.
-                                string response = LoopbackServer.GetConnectionCloseResponse(
-                                    HttpStatusCode.OK,
-                                    "Content-Length: 2167849215\r\n\r\n"
-                                );
-                                await connection.SendResponseAsync(response);
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            // Content-Length greater than 2GB.
+                            string response = LoopbackServer.GetConnectionCloseResponse(
+                                HttpStatusCode.OK,
+                                "Content-Length: 2167849215\r\n\r\n"
+                            );
+                            await connection.SendResponseAsync(response);
 
-                                await requestTask;
-                            }
-                        );
+                            await requestTask;
+                        });
 
                         using (HttpResponseMessage result = requestTask.Result)
                         {

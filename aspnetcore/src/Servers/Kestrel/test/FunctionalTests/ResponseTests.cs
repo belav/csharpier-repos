@@ -53,38 +53,32 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0/")
-                        .Configure(
-                            app =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0/")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            var bytes = new byte[1024];
+                            for (int i = 0; i < bytes.Length; i++)
                             {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        var bytes = new byte[1024];
-                                        for (int i = 0; i < bytes.Length; i++)
-                                        {
-                                            bytes[i] = (byte)i;
-                                        }
+                                bytes[i] = (byte)i;
+                            }
 
-                                        context.Response.ContentLength = bytes.Length * 1024;
+                            context.Response.ContentLength = bytes.Length * 1024;
 
-                                        for (int i = 0; i < 1024; i++)
-                                        {
-                                            await context.Response.BodyWriter.WriteAsync(
-                                                new Memory<byte>(bytes, 0, bytes.Length)
-                                            );
-                                        }
-                                    }
+                            for (int i = 0; i < 1024; i++)
+                            {
+                                await context.Response.BodyWriter.WriteAsync(
+                                    new Memory<byte>(bytes, 0, bytes.Length)
                                 );
                             }
-                        );
-                }
-            )
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -124,27 +118,21 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0/")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.Headers.Add(headerName, headerValue);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0/")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            context.Response.Headers.Add(headerName, headerValue);
 
-                                        await context.Response.WriteAsync("");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                            await context.Response.WriteAsync("");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())

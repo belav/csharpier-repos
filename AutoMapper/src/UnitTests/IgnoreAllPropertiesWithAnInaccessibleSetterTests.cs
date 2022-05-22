@@ -20,13 +20,11 @@ namespace AutoMapper.UnitTests
         public void AutoMapper_SimpleObject_IgnoresPrivateSettersInBaseClasses()
         {
             // Arrange
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SomeSource, Destination>()
-                        .IgnoreAllPropertiesWithAnInaccessibleSetter();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SomeSource, Destination>()
+                    .IgnoreAllPropertiesWithAnInaccessibleSetter();
+            });
             var mapper = config.CreateMapper();
 
             var source = new SomeSource { IgnoreMe = 666 };

@@ -18,12 +18,10 @@ namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                config =>
-                {
-                    config.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(config =>
+            {
+                config.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_map_readonly_values()
@@ -50,12 +48,10 @@ namespace AutoMapper.UnitTests.Mappers.ReadOnlyDictionaryMapper
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                config =>
-                {
-                    config.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(config =>
+            {
+                config.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_map_readonly_values()

@@ -69,13 +69,11 @@ public class CommonFilterTest
 
         mock.As<IActionFilter>()
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Result = new NoOpResult();
-                }
-            );
+            .Callback<ActionExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Result = new NoOpResult();
+            });
 
         mock.As<IActionFilter>()
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
@@ -153,13 +151,11 @@ public class CommonFilterTest
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Result = new NoOpResult();
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Result = new NoOpResult();
+            });
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
@@ -199,13 +195,11 @@ public class CommonFilterTest
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Cancel = true;
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Cancel = true;
+            });
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))

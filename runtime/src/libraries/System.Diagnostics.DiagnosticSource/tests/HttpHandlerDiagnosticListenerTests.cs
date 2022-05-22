@@ -28,15 +28,13 @@ namespace System.Diagnostics.Tests
             bool listenerFound = false;
             using (
                 DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(
-                        diagnosticListener =>
+                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
+                    {
+                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
                         {
-                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
-                            {
-                                listenerFound = true;
-                            }
+                            listenerFound = true;
                         }
-                    )
+                    })
                 )
             )
             {
@@ -458,12 +456,10 @@ namespace System.Diagnostics.Tests
         {
             CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             using (
-                var eventRecords = new EventObserverAndRecorder(
-                    _ =>
-                    {
-                        cts.Cancel();
-                    }
-                )
+                var eventRecords = new EventObserverAndRecorder(_ =>
+                {
+                    cts.Cancel();
+                })
             )
             {
                 using (var client = new HttpClient())
@@ -702,15 +698,13 @@ namespace System.Diagnostics.Tests
 
                         // wait up to 10 sec for all requests and suppress exceptions
                         Task.WhenAll(tasks.Select(t => t.Value).ToArray())
-                            .ContinueWith(
-                                tt =>
+                            .ContinueWith(tt =>
+                            {
+                                foreach (var task in tasks)
                                 {
-                                    foreach (var task in tasks)
-                                    {
-                                        task.Value.Result?.Dispose();
-                                    }
+                                    task.Value.Result?.Dispose();
                                 }
-                            )
+                            })
                             .Wait();
 
                         // Examine the result. Make sure we got all successful requests.
@@ -871,15 +865,13 @@ namespace System.Diagnostics.Tests
             public EventObserverAndRecorder(Action<KeyValuePair<string, object>> onEvent = null)
             {
                 listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(
-                        diagnosticListener =>
+                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
+                    {
+                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
                         {
-                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
-                            {
-                                httpSubscription = diagnosticListener.Subscribe(this);
-                            }
+                            httpSubscription = diagnosticListener.Subscribe(this);
                         }
-                    )
+                    })
                 );
 
                 this.onEvent = onEvent;
@@ -888,30 +880,26 @@ namespace System.Diagnostics.Tests
             public EventObserverAndRecorder(Predicate<string> isEnabled)
             {
                 listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(
-                        diagnosticListener =>
+                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
+                    {
+                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
                         {
-                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
-                            {
-                                httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
-                            }
+                            httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
                         }
-                    )
+                    })
                 );
             }
 
             public EventObserverAndRecorder(Func<string, object, object, bool> isEnabled)
             {
                 listSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(
-                        diagnosticListener =>
+                    new CallbackObserver<DiagnosticListener>(diagnosticListener =>
+                    {
+                        if (diagnosticListener.Name == "System.Net.Http.Desktop")
                         {
-                            if (diagnosticListener.Name == "System.Net.Http.Desktop")
-                            {
-                                httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
-                            }
+                            httpSubscription = diagnosticListener.Subscribe(this, isEnabled);
                         }
-                    )
+                    })
                 );
             }
 

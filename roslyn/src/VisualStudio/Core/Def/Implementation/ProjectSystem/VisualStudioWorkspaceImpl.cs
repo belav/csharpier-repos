@@ -2074,17 +2074,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var asyncToken = listenerProvider
                 .GetListener()
                 .BeginAsyncOperation(nameof(RefreshProjectExistsUIContextForLanguage));
-            _threadingContext.RunWithShutdownBlockAsync(
-                async cancellationToken =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        cancellationToken
-                    );
-                    RefreshProjectExistsUIContextForLanguage(languageName);
-                    asyncToken.Dispose();
-                }
-            );
+            _threadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
+            {
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    alwaysYield: true,
+                    cancellationToken
+                );
+                RefreshProjectExistsUIContextForLanguage(languageName);
+                asyncToken.Dispose();
+            });
         }
 
         private sealed class ProjectReferenceInformation

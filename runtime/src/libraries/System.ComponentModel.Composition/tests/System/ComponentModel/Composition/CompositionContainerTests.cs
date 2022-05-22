@@ -2437,15 +2437,13 @@ namespace System.ComponentModel.Composition
         {
             bool finalizerCalled = false;
 
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                if (!disposing)
                 {
-                    if (!disposing)
-                    {
-                        finalizerCalled = true;
-                    }
+                    finalizerCalled = true;
                 }
-            );
+            });
 
             container.Dispose();
 
@@ -2459,12 +2457,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_CallsDisposeBoolWithTrue()
         {
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
-                {
-                    Assert.True(disposing);
-                }
-            );
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                Assert.True(disposing);
+            });
 
             container.Dispose();
         }
@@ -2474,12 +2470,10 @@ namespace System.ComponentModel.Composition
         {
             int disposeCount = 0;
 
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
-                {
-                    disposeCount++;
-                }
-            );
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                disposeCount++;
+            });
 
             container.Dispose();
 

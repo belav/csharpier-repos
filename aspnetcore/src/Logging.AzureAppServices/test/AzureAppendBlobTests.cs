@@ -18,20 +18,18 @@ public class AzureAppendBlobTests
     [Fact]
     public async Task SendsDataAsStream()
     {
-        var testMessageHandler = new TestMessageHandler(
-            async message =>
-            {
-                Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal(
-                    "https://host/container/blob/path?query=1&comp=appendblock",
-                    message.RequestUri.ToString()
-                );
-                Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
-                AssertDefaultHeaders(message);
+        var testMessageHandler = new TestMessageHandler(async message =>
+        {
+            Assert.Equal(HttpMethod.Put, message.Method);
+            Assert.Equal(
+                "https://host/container/blob/path?query=1&comp=appendblock",
+                message.RequestUri.ToString()
+            );
+            Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
+            AssertDefaultHeaders(message);
 
-                return new HttpResponseMessage(HttpStatusCode.OK);
-            }
-        );
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        });
 
         var blob = new BlobAppendReferenceWrapper(
             _containerUrl,
@@ -57,66 +55,58 @@ public class AzureAppendBlobTests
     public async Task CreatesBlobIfNotExist(HttpStatusCode createStatusCode)
     {
         var stage = 0;
-        var testMessageHandler = new TestMessageHandler(
-            async message =>
+        var testMessageHandler = new TestMessageHandler(async message =>
+        {
+            // First PUT request
+            if (stage == 0)
             {
-                // First PUT request
-                if (stage == 0)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1&comp=appendblock",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(
-                        new byte[] { 0, 2, 3 },
-                        await message.Content.ReadAsByteArrayAsync()
-                    );
-                    Assert.Equal(3, message.Content.Headers.ContentLength);
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
+                Assert.Equal(3, message.Content.Headers.ContentLength);
 
-                    AssertDefaultHeaders(message);
+                AssertDefaultHeaders(message);
 
-                    stage++;
-                    return new HttpResponseMessage(HttpStatusCode.NotFound);
-                }
-                // Create request
-                if (stage == 1)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(0, message.Content.Headers.ContentLength);
-                    Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
-
-                    AssertDefaultHeaders(message);
-
-                    stage++;
-                    return new HttpResponseMessage(createStatusCode);
-                }
-                // First PUT request
-                if (stage == 2)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1&comp=appendblock",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(
-                        new byte[] { 0, 2, 3 },
-                        await message.Content.ReadAsByteArrayAsync()
-                    );
-                    Assert.Equal(3, message.Content.Headers.ContentLength);
-
-                    AssertDefaultHeaders(message);
-
-                    stage++;
-                    return new HttpResponseMessage(HttpStatusCode.Created);
-                }
-                throw new NotImplementedException();
+                stage++;
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
-        );
+            // Create request
+            if (stage == 1)
+            {
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(0, message.Content.Headers.ContentLength);
+                Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
+
+                AssertDefaultHeaders(message);
+
+                stage++;
+                return new HttpResponseMessage(createStatusCode);
+            }
+            // First PUT request
+            if (stage == 2)
+            {
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
+                Assert.Equal(3, message.Content.Headers.ContentLength);
+
+                AssertDefaultHeaders(message);
+
+                stage++;
+                return new HttpResponseMessage(HttpStatusCode.Created);
+            }
+            throw new NotImplementedException();
+        });
 
         var blob = new BlobAppendReferenceWrapper(
             _containerUrl,
@@ -135,32 +125,27 @@ public class AzureAppendBlobTests
     public async Task ThrowsForUnknownStatus()
     {
         var stage = 0;
-        var testMessageHandler = new TestMessageHandler(
-            async message =>
+        var testMessageHandler = new TestMessageHandler(async message =>
+        {
+            // First PUT request
+            if (stage == 0)
             {
-                // First PUT request
-                if (stage == 0)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1&comp=appendblock",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(
-                        new byte[] { 0, 2, 3 },
-                        await message.Content.ReadAsByteArrayAsync()
-                    );
-                    Assert.Equal(3, message.Content.Headers.ContentLength);
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
+                Assert.Equal(3, message.Content.Headers.ContentLength);
 
-                    AssertDefaultHeaders(message);
+                AssertDefaultHeaders(message);
 
-                    stage++;
-                    return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                }
-
-                throw new NotImplementedException();
+                stage++;
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
-        );
+
+            throw new NotImplementedException();
+        });
 
         var blob = new BlobAppendReferenceWrapper(
             _containerUrl,
@@ -182,48 +167,43 @@ public class AzureAppendBlobTests
     public async Task ThrowsForUnknownStatusDuringCreation()
     {
         var stage = 0;
-        var testMessageHandler = new TestMessageHandler(
-            async message =>
+        var testMessageHandler = new TestMessageHandler(async message =>
+        {
+            // First PUT request
+            if (stage == 0)
             {
-                // First PUT request
-                if (stage == 0)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1&comp=appendblock",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(
-                        new byte[] { 0, 2, 3 },
-                        await message.Content.ReadAsByteArrayAsync()
-                    );
-                    Assert.Equal(3, message.Content.Headers.ContentLength);
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
+                Assert.Equal(3, message.Content.Headers.ContentLength);
 
-                    AssertDefaultHeaders(message);
+                AssertDefaultHeaders(message);
 
-                    stage++;
-                    return new HttpResponseMessage(HttpStatusCode.NotFound);
-                }
-                // Create request
-                if (stage == 1)
-                {
-                    Assert.Equal(HttpMethod.Put, message.Method);
-                    Assert.Equal(
-                        "https://host/container/blob/path?query=1",
-                        message.RequestUri.ToString()
-                    );
-                    Assert.Equal(0, message.Content.Headers.ContentLength);
-                    Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
-
-                    AssertDefaultHeaders(message);
-
-                    stage++;
-                    return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                }
-
-                throw new NotImplementedException();
+                stage++;
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
-        );
+            // Create request
+            if (stage == 1)
+            {
+                Assert.Equal(HttpMethod.Put, message.Method);
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1",
+                    message.RequestUri.ToString()
+                );
+                Assert.Equal(0, message.Content.Headers.ContentLength);
+                Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
+
+                AssertDefaultHeaders(message);
+
+                stage++;
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+
+            throw new NotImplementedException();
+        });
 
         var blob = new BlobAppendReferenceWrapper(
             _containerUrl,

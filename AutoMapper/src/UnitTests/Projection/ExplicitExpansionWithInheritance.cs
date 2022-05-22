@@ -49,22 +49,20 @@ namespace AutoMapper.UnitTests.Projection
         private Script _source;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<User, UserModel>();
-                    cfg.CreateProjection<EntityBase, EntityBaseModel>()
-                        .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-                        .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-                    cfg.CreateProjection<Computer, ComputerModel>()
-                        .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-                        .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-                    cfg.CreateProjection<Script, ScriptModel>()
-                        .ForMember(d => d.Computer, o => o.ExplicitExpansion())
-                        .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-                        .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<User, UserModel>();
+                cfg.CreateProjection<EntityBase, EntityBaseModel>()
+                    .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                    .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+                cfg.CreateProjection<Computer, ComputerModel>()
+                    .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                    .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+                cfg.CreateProjection<Script, ScriptModel>()
+                    .ForMember(d => d.Computer, o => o.ExplicitExpansion())
+                    .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                    .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+            });
 
         protected override void Because_of()
         {

@@ -20,52 +20,46 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
-        context.RegisterCompilationStartAction(
-            compilationStartAnalysisContext =>
+        context.RegisterCompilationStartAction(compilationStartAnalysisContext =>
+        {
+            var compilation = compilationStartAnalysisContext.Compilation;
+
+            if (!WellKnownTypes.TryCreate(compilation, out var wellKnownTypes))
             {
-                var compilation = compilationStartAnalysisContext.Compilation;
-
-                if (!WellKnownTypes.TryCreate(compilation, out var wellKnownTypes))
-                {
-                    return;
-                }
-
-                compilationStartAnalysisContext.RegisterOperationAction(
-                    operationAnalysisContext =>
-                    {
-                        var invocation = (IInvocationOperation)operationAnalysisContext.Operation;
-
-                        if (
-                            !IsRenderTreeBuilderMethodWithSequenceParameter(
-                                wellKnownTypes,
-                                invocation.TargetMethod
-                            )
-                        )
-                        {
-                            return;
-                        }
-
-                        var sequenceArgument = invocation.Arguments[0];
-
-                        if (
-                            !sequenceArgument.Value.Syntax.IsKind(
-                                SyntaxKind.NumericLiteralExpression
-                            )
-                        )
-                        {
-                            operationAnalysisContext.ReportDiagnostic(
-                                Diagnostic.Create(
-                                    DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers,
-                                    sequenceArgument.Syntax.GetLocation(),
-                                    sequenceArgument.Syntax.ToString()
-                                )
-                            );
-                        }
-                    },
-                    OperationKind.Invocation
-                );
+                return;
             }
-        );
+
+            compilationStartAnalysisContext.RegisterOperationAction(
+                operationAnalysisContext =>
+                {
+                    var invocation = (IInvocationOperation)operationAnalysisContext.Operation;
+
+                    if (
+                        !IsRenderTreeBuilderMethodWithSequenceParameter(
+                            wellKnownTypes,
+                            invocation.TargetMethod
+                        )
+                    )
+                    {
+                        return;
+                    }
+
+                    var sequenceArgument = invocation.Arguments[0];
+
+                    if (!sequenceArgument.Value.Syntax.IsKind(SyntaxKind.NumericLiteralExpression))
+                    {
+                        operationAnalysisContext.ReportDiagnostic(
+                            Diagnostic.Create(
+                                DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers,
+                                sequenceArgument.Syntax.GetLocation(),
+                                sequenceArgument.Syntax.ToString()
+                            )
+                        );
+                    }
+                },
+                OperationKind.Invocation
+            );
+        });
     }
 
     private static bool IsRenderTreeBuilderMethodWithSequenceParameter(

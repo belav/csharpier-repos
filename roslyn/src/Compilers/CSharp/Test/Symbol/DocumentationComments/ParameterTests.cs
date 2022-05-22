@@ -972,22 +972,20 @@ class C<T>
             CSharpCompilation compilation
         )
         {
-            return compilation.SyntaxTrees.SelectMany(
-                tree =>
-                {
-                    var docComments = tree.GetCompilationUnitRoot()
-                        .DescendantTrivia()
-                        .Select(trivia => trivia.GetStructure())
-                        .OfType<DocumentationCommentTriviaSyntax>();
-                    return docComments.SelectMany(
-                        docComment =>
-                            docComment
-                                .DescendantNodes()
-                                .OfType<XmlNameAttributeSyntax>()
-                                .Select(attr => attr.Identifier)
-                    );
-                }
-            );
+            return compilation.SyntaxTrees.SelectMany(tree =>
+            {
+                var docComments = tree.GetCompilationUnitRoot()
+                    .DescendantTrivia()
+                    .Select(trivia => trivia.GetStructure())
+                    .OfType<DocumentationCommentTriviaSyntax>();
+                return docComments.SelectMany(
+                    docComment =>
+                        docComment
+                            .DescendantNodes()
+                            .OfType<XmlNameAttributeSyntax>()
+                            .Select(attr => attr.Identifier)
+                );
+            });
         }
     }
 }

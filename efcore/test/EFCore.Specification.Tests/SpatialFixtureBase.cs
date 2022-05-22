@@ -21,14 +21,11 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity<PolygonEntity>().Property(e => e.Id).ValueGeneratedNever();
             modelBuilder.Entity<MultiLineStringEntity>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<GeoPointEntity>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.Location)
-                        .HasConversion(new GeoPointConverter(_geometryFactory));
-                }
-            );
+            modelBuilder.Entity<GeoPointEntity>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.Location).HasConversion(new GeoPointConverter(_geometryFactory));
+            });
         }
 
         protected override void Seed(SpatialContext context) =>

@@ -19,15 +19,13 @@ public static class WebHostBuilderQuicExtensions
     {
         if (QuicImplementationProviders.Default.IsSupported)
         {
-            return hostBuilder.ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<
-                        IMultiplexedConnectionListenerFactory,
-                        QuicTransportFactory
-                    >();
-                }
-            );
+            return hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton<
+                    IMultiplexedConnectionListenerFactory,
+                    QuicTransportFactory
+                >();
+            });
         }
 
         return hostBuilder;
@@ -40,11 +38,9 @@ public static class WebHostBuilderQuicExtensions
     {
         return hostBuilder
             .UseQuic()
-            .ConfigureServices(
-                services =>
-                {
-                    services.Configure(configureOptions);
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

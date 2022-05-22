@@ -66,19 +66,17 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
 
-                            string response = LoopbackServer.GetContentModeResponse(
-                                mode,
-                                simpleContent
-                            );
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                        }
-                    );
+                        string response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            simpleContent
+                        );
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                    });
                 }
             );
         }
@@ -152,21 +150,19 @@ namespace System.Net.Http.Functional.Tests
                 {
                     string content = new string('a', totalSize);
                     string response = LoopbackServer.GetContentModeResponse(mode, content);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Process the first request, with some introduced delays in the response to
+                        // stress the draining.
+                        await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                        foreach (char c in response)
                         {
-                            // Process the first request, with some introduced delays in the response to
-                            // stress the draining.
-                            await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                            foreach (char c in response)
-                            {
-                                await connection.WriteStringAsync(c.ToString());
-                            }
-
-                            // Process the second request.
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                            await connection.WriteStringAsync(c.ToString());
                         }
-                    );
+
+                        // Process the second request.
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                    });
                 }
             );
         }
@@ -246,31 +242,29 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     string content = new string('a', totalSize);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            try
-                            {
-                                await connection.WriteStringAsync(
-                                    LoopbackServer.GetContentModeResponse(
-                                        mode,
-                                        content,
-                                        connectionClose: false
-                                    )
-                                );
-                            }
-                            catch (Exception) { } // Eat errors from client disconnect.
-
-                            await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            await connection.WriteStringAsync(
                                 LoopbackServer.GetContentModeResponse(
                                     mode,
                                     content,
-                                    connectionClose: true
+                                    connectionClose: false
                                 )
                             );
                         }
-                    );
+                        catch (Exception) { } // Eat errors from client disconnect.
+
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            LoopbackServer.GetContentModeResponse(
+                                mode,
+                                content,
+                                connectionClose: true
+                            )
+                        );
+                    });
                 }
             );
         }

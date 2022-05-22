@@ -1890,94 +1890,86 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual void ConcurrencyCheckAttribute_throws_if_value_in_database_changed()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var clientRow = context.Set<One>().First(r => r.UniqueNo == 1);
-                    clientRow.RowVersion = new Guid("00000000-0000-0000-0002-000000000001");
-                    clientRow.RequiredColumn = "ChangedData";
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var clientRow = context.Set<One>().First(r => r.UniqueNo == 1);
+                clientRow.RowVersion = new Guid("00000000-0000-0000-0002-000000000001");
+                clientRow.RequiredColumn = "ChangedData";
 
-                    using var innerContext = CreateContext();
-                    UseTransaction(innerContext.Database, context.Database.CurrentTransaction);
-                    var storeRow = innerContext.Set<One>().First(r => r.UniqueNo == 1);
-                    storeRow.RowVersion = new Guid("00000000-0000-0000-0003-000000000001");
-                    storeRow.RequiredColumn = "ModifiedData";
+                using var innerContext = CreateContext();
+                UseTransaction(innerContext.Database, context.Database.CurrentTransaction);
+                var storeRow = innerContext.Set<One>().First(r => r.UniqueNo == 1);
+                storeRow.RowVersion = new Guid("00000000-0000-0000-0003-000000000001");
+                storeRow.RequiredColumn = "ModifiedData";
 
-                    innerContext.SaveChanges();
+                innerContext.SaveChanges();
 
-                    Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalFact]
         public virtual void DatabaseGeneratedAttribute_autogenerates_values_when_set_to_identity()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context
-                        .Set<One>()
-                        .Add(
-                            new One
-                            {
-                                RequiredColumn = "Third",
-                                RowVersion = new Guid("00000000-0000-0000-0000-000000000003"),
-                                Details = new Details { Name = "Third Name" },
-                                AdditionalDetails = new Details { Name = "Third Additional Name" }
-                            }
-                        );
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context
+                    .Set<One>()
+                    .Add(
+                        new One
+                        {
+                            RequiredColumn = "Third",
+                            RowVersion = new Guid("00000000-0000-0000-0000-000000000003"),
+                            Details = new Details { Name = "Third Name" },
+                            AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        }
+                    );
 
-                    context.SaveChanges();
-                }
-            );
+                context.SaveChanges();
+            });
         }
 
         [ConditionalFact]
         public virtual void MaxLengthAttribute_throws_while_inserting_value_longer_than_max_length()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context
-                        .Set<One>()
-                        .Add(
-                            new One
-                            {
-                                RequiredColumn = "ValidString",
-                                RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
-                                MaxLengthProperty = "Short",
-                                Details = new Details { Name = "Third Name" },
-                                AdditionalDetails = new Details { Name = "Third Additional Name" }
-                            }
-                        );
-
-                    context.SaveChanges();
-                }
-            );
-
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context
-                        .Set<One>()
-                        .Add(
-                            new One
-                            {
-                                RequiredColumn = "ValidString",
-                                RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
-                                MaxLengthProperty = "VeryVeryVeryVeryVeryVeryLongString",
-                                Details = new Details { Name = "Third Name" },
-                                AdditionalDetails = new Details { Name = "Third Additional Name" }
-                            }
-                        );
-
-                    Assert.Equal(
-                        "An error occurred while saving the entity changes. See the inner exception for details.",
-                        Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context
+                    .Set<One>()
+                    .Add(
+                        new One
+                        {
+                            RequiredColumn = "ValidString",
+                            RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
+                            MaxLengthProperty = "Short",
+                            Details = new Details { Name = "Third Name" },
+                            AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        }
                     );
-                }
-            );
+
+                context.SaveChanges();
+            });
+
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context
+                    .Set<One>()
+                    .Add(
+                        new One
+                        {
+                            RequiredColumn = "ValidString",
+                            RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
+                            MaxLengthProperty = "VeryVeryVeryVeryVeryVeryLongString",
+                            Details = new Details { Name = "Third Name" },
+                            AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        }
+                    );
+
+                Assert.Equal(
+                    "An error occurred while saving the entity changes. See the inner exception for details.",
+                    Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+                );
+            });
         }
 
         [ConditionalFact]
@@ -2928,14 +2920,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<User13694>(
-                m =>
-                {
-                    m.Property("_email");
+            modelBuilder.Entity<User13694>(m =>
+            {
+                m.Property("_email");
 
-                    m.HasMany<Profile13694>("_profiles").WithOne("User").HasPrincipalKey("_email");
-                }
-            );
+                m.HasMany<Profile13694>("_profiles").WithOne("User").HasPrincipalKey("_email");
+            });
 
             modelBuilder.Entity<Profile13694>().Property<string>("Email");
 
@@ -2967,117 +2957,103 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual void RequiredAttribute_for_navigation_throws_while_inserting_null_value()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.Set<BookDetails>().Add(new BookDetails { AnotherBookId = 1 });
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.Set<BookDetails>().Add(new BookDetails { AnotherBookId = 1 });
 
-                    context.SaveChanges();
-                }
-            );
+                context.SaveChanges();
+            });
 
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.Set<BookDetails>().Add(new BookDetails());
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.Set<BookDetails>().Add(new BookDetails());
 
-                    Assert.Equal(
-                        "An error occurred while saving the entity changes. See the inner exception for details.",
-                        Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
-                    );
-                }
-            );
+                Assert.Equal(
+                    "An error occurred while saving the entity changes. See the inner exception for details.",
+                    Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+                );
+            });
         }
 
         [ConditionalFact]
         public virtual void RequiredAttribute_for_property_throws_while_inserting_null_value()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context
-                        .Set<One>()
-                        .Add(
-                            new One
-                            {
-                                RequiredColumn = "ValidString",
-                                RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
-                                Details = new Details { Name = "One" },
-                                AdditionalDetails = new Details { Name = "Two" }
-                            }
-                        );
-
-                    context.SaveChanges();
-                }
-            );
-
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context
-                        .Set<One>()
-                        .Add(
-                            new One
-                            {
-                                RequiredColumn = null,
-                                RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
-                                Details = new Details { Name = "One" },
-                                AdditionalDetails = new Details { Name = "Two" }
-                            }
-                        );
-
-                    Assert.Equal(
-                        "An error occurred while saving the entity changes. See the inner exception for details.",
-                        Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context
+                    .Set<One>()
+                    .Add(
+                        new One
+                        {
+                            RequiredColumn = "ValidString",
+                            RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Details = new Details { Name = "One" },
+                            AdditionalDetails = new Details { Name = "Two" }
+                        }
                     );
-                }
-            );
+
+                context.SaveChanges();
+            });
+
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context
+                    .Set<One>()
+                    .Add(
+                        new One
+                        {
+                            RequiredColumn = null,
+                            RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Details = new Details { Name = "One" },
+                            AdditionalDetails = new Details { Name = "Two" }
+                        }
+                    );
+
+                Assert.Equal(
+                    "An error occurred while saving the entity changes. See the inner exception for details.",
+                    Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+                );
+            });
         }
 
         [ConditionalFact]
         public virtual void StringLengthAttribute_throws_while_inserting_value_longer_than_max_length()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.Set<Two>().Add(new Two { Data = "ValidString" });
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.Set<Two>().Add(new Two { Data = "ValidString" });
 
-                    context.SaveChanges();
-                }
-            );
+                context.SaveChanges();
+            });
 
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.Set<Two>().Add(new Two { Data = "ValidButLongString" });
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.Set<Two>().Add(new Two { Data = "ValidButLongString" });
 
-                    Assert.Equal(
-                        "An error occurred while saving the entity changes. See the inner exception for details.",
-                        Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
-                    );
-                }
-            );
+                Assert.Equal(
+                    "An error occurred while saving the entity changes. See the inner exception for details.",
+                    Assert.Throws<DbUpdateException>(() => context.SaveChanges()).Message
+                );
+            });
         }
 
         [ConditionalFact]
         public virtual void TimestampAttribute_throws_if_value_in_database_changed()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var clientRow = context.Set<Two>().First(r => r.Id == 1);
-                    clientRow.Data = "ChangedData";
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var clientRow = context.Set<Two>().First(r => r.Id == 1);
+                clientRow.Data = "ChangedData";
 
-                    using var innerContext = CreateContext();
-                    UseTransaction(innerContext.Database, context.Database.CurrentTransaction);
-                    var storeRow = innerContext.Set<Two>().First(r => r.Id == 1);
-                    storeRow.Data = "ModifiedData";
+                using var innerContext = CreateContext();
+                UseTransaction(innerContext.Database, context.Database.CurrentTransaction);
+                var storeRow = innerContext.Set<Two>().First(r => r.Id == 1);
+                storeRow.Data = "ModifiedData";
 
-                    innerContext.SaveChanges();
+                innerContext.SaveChanges();
 
-                    Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalFact]
@@ -3085,13 +3061,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<UnicodeAnnotationClass>(
-                b =>
-                {
-                    b.Property(e => e.PersonMiddleName);
-                    b.Property(e => e.PersonAddress);
-                }
-            );
+            modelBuilder.Entity<UnicodeAnnotationClass>(b =>
+            {
+                b.Property(e => e.PersonMiddleName);
+                b.Property(e => e.PersonAddress);
+            });
 
             var model = Validate(modelBuilder);
 
@@ -3124,14 +3098,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<PrecisionAnnotationClass>(
-                b =>
-                {
-                    b.Property(e => e.DecimalField);
-                    b.Property(e => e.DateTimeField);
-                    b.Property(e => e.DateTimeOffsetField);
-                }
-            );
+            modelBuilder.Entity<PrecisionAnnotationClass>(b =>
+            {
+                b.Property(e => e.DecimalField);
+                b.Property(e => e.DateTimeField);
+                b.Property(e => e.DateTimeOffsetField);
+            });
 
             var model = Validate(modelBuilder);
 

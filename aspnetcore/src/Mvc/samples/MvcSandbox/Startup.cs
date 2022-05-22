@@ -25,14 +25,12 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
-        app.UseEndpoints(
-            builder =>
-            {
-                builder.MapControllers();
-                builder.MapDefaultControllerRoute();
-                builder.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(builder =>
+        {
+            builder.MapControllers();
+            builder.MapDefaultControllerRoute();
+            builder.MapRazorPages();
+        });
     }
 
     public static void Main(string[] args)
@@ -45,12 +43,10 @@ public class Startup
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
             .UseContentRoot(Directory.GetCurrentDirectory())
-            .ConfigureLogging(
-                factory =>
-                {
-                    factory.AddConsole().AddDebug();
-                }
-            )
+            .ConfigureLogging(factory =>
+            {
+                factory.AddConsole().AddDebug();
+            })
             .UseKestrel()
             .UseStartup<Startup>();
 }

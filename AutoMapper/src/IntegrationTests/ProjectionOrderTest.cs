@@ -55,18 +55,16 @@ namespace AutoMapper.IntegrationTests.ProjectionOrder
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source1, Destination>()
-                        .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
-                        .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source1, Destination>()
+                    .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
+                    .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
 
-                    cfg.CreateProjection<Source2, Destination>()
-                        .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
-                        .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.MinValue));
-                }
-            );
+                cfg.CreateProjection<Source2, Destination>()
+                    .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
+                    .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.MinValue));
+            });
 
         [Fact]
         public void Should_Not_Throw_NotSupportedException_On_Union()

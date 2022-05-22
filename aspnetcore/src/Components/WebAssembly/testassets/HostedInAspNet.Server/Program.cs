@@ -15,15 +15,13 @@ public class Program
 
     public static IHost BuildWebHost(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webHostBuilder =>
-                {
-                    // We require this line because we run in Production environment
-                    // and static web assets are only on by default during development.
-                    webHostBuilder.UseStaticWebAssets();
+            .ConfigureWebHostDefaults(webHostBuilder =>
+            {
+                // We require this line because we run in Production environment
+                // and static web assets are only on by default during development.
+                webHostBuilder.UseStaticWebAssets();
 
-                    webHostBuilder.UseStartup<Startup>();
-                }
-            )
+                webHostBuilder.UseStartup<Startup>();
+            })
             .Build();
 }

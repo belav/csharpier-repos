@@ -71,12 +71,10 @@ public class SectionDirectivePassTest
 
     private static RazorProjectEngine CreateProjectEngine()
     {
-        return RazorProjectEngine.Create(
-            b =>
-            {
-                SectionDirective.Register(b);
-            }
-        );
+        return RazorProjectEngine.Create(b =>
+        {
+            SectionDirective.Register(b);
+        });
     }
 
     private static DocumentIntermediateNode Lower(

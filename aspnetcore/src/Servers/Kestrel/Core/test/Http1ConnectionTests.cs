@@ -1031,13 +1031,11 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
     [Fact]
     public async Task ConsumesRequestWhenApplicationDoesNotConsumeIt()
     {
-        var httpApplication = new DummyApplication(
-            async context =>
-            {
-                var buffer = new byte[10];
-                await context.Response.Body.WriteAsync(buffer, 0, 10);
-            }
-        );
+        var httpApplication = new DummyApplication(async context =>
+        {
+            var buffer = new byte[10];
+            await context.Response.Body.WriteAsync(buffer, 0, 10);
+        });
         var mockMessageBody = new Mock<MessageBody>(null);
         _http1Connection.NextMessageBody = mockMessageBody.Object;
 

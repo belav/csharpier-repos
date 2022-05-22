@@ -2937,142 +2937,130 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder.Entity<SingleShadowFk>().Property<int?>("ParentId");
 
-                modelBuilder.Entity<Parent>(
-                    b =>
-                    {
-                        b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
+                modelBuilder.Entity<Parent>(b =>
+                {
+                    b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
 
-                        b.HasMany(e => e.Children)
-                            .WithOne(e => e.Parent)
-                            .HasForeignKey(e => e.ParentId);
+                    b.HasMany(e => e.Children)
+                        .WithOne(e => e.Parent)
+                        .HasForeignKey(e => e.ParentId);
 
-                        b.HasOne(e => e.SinglePkToPk)
-                            .WithOne(e => e.Parent)
-                            .HasForeignKey<SinglePkToPk>(e => e.Id)
-                            .IsRequired();
+                    b.HasOne(e => e.SinglePkToPk)
+                        .WithOne(e => e.Parent)
+                        .HasForeignKey<SinglePkToPk>(e => e.Id)
+                        .IsRequired();
 
-                        b.HasOne(e => e.Single)
-                            .WithOne(e => e.Parent)
-                            .HasForeignKey<Single>(e => e.ParentId);
+                    b.HasOne(e => e.Single)
+                        .WithOne(e => e.Parent)
+                        .HasForeignKey<Single>(e => e.ParentId);
 
-                        b.HasMany(e => e.ChildrenAk)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey(e => e.AlternateId)
-                            .HasForeignKey(e => e.ParentId);
+                    b.HasMany(e => e.ChildrenAk)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey(e => e.AlternateId)
+                        .HasForeignKey(e => e.ParentId);
 
-                        b.HasOne(e => e.SingleAk)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => e.AlternateId)
-                            .HasForeignKey<SingleAk>(e => e.ParentId);
+                    b.HasOne(e => e.SingleAk)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => e.AlternateId)
+                        .HasForeignKey<SingleAk>(e => e.ParentId);
 
-                        b.HasMany(e => e.ChildrenShadowFk)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey(e => e.Id)
-                            .HasForeignKey("ParentId");
+                    b.HasMany(e => e.ChildrenShadowFk)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey(e => e.Id)
+                        .HasForeignKey("ParentId");
 
-                        b.HasOne(e => e.SingleShadowFk)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => e.Id)
-                            .HasForeignKey<SingleShadowFk>("ParentId");
+                    b.HasOne(e => e.SingleShadowFk)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => e.Id)
+                        .HasForeignKey<SingleShadowFk>("ParentId");
 
-                        b.HasMany(e => e.ChildrenCompositeKey)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey(e => new { e.AlternateId, e.Id })
-                            .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
+                    b.HasMany(e => e.ChildrenCompositeKey)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey(e => new { e.AlternateId, e.Id })
+                        .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
 
-                        b.HasOne(e => e.SingleCompositeKey)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
-                            .HasForeignKey<SingleCompositeKey>(
-                                e => new { e.ParentAlternateId, e.ParentId }
-                            );
+                    b.HasOne(e => e.SingleCompositeKey)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
+                        .HasForeignKey<SingleCompositeKey>(
+                            e => new { e.ParentAlternateId, e.ParentId }
+                        );
 
-                        b.HasMany(e => e.ManyChildren).WithMany(e => e.ManyParents);
-                    }
-                );
+                    b.HasMany(e => e.ManyChildren).WithMany(e => e.ManyParents);
+                });
 
                 modelBuilder.Entity<Mother>();
                 modelBuilder.Entity<Father>();
 
-                modelBuilder.Entity<Blog>(
-                    e =>
-                    {
-                        e.OwnsOne(x => x.Writer);
-                        e.OwnsOne(x => x.Reader);
-                        e.OwnsOne(x => x.Host);
-                    }
-                );
+                modelBuilder.Entity<Blog>(e =>
+                {
+                    e.OwnsOne(x => x.Writer);
+                    e.OwnsOne(x => x.Reader);
+                    e.OwnsOne(x => x.Host);
+                });
 
-                modelBuilder.Entity<Blog>(
-                    e =>
-                    {
-                        e.OwnsOne(x => x.Writer);
-                        e.OwnsOne(x => x.Reader);
-                        e.OwnsOne(x => x.Host);
-                    }
-                );
+                modelBuilder.Entity<Blog>(e =>
+                {
+                    e.OwnsOne(x => x.Writer);
+                    e.OwnsOne(x => x.Reader);
+                    e.OwnsOne(x => x.Host);
+                });
 
-                modelBuilder.Entity<Address>(
-                    builder =>
-                    {
-                        builder.HasKey(prop => prop.AddressId);
+                modelBuilder.Entity<Address>(builder =>
+                {
+                    builder.HasKey(prop => prop.AddressId);
 
-                        builder.Property(prop => prop.Line1).IsRequired().HasMaxLength(50);
+                    builder.Property(prop => prop.Line1).IsRequired().HasMaxLength(50);
 
-                        builder.Property(prop => prop.Line2).IsRequired(false).HasMaxLength(50);
-                    }
-                );
+                    builder.Property(prop => prop.Line2).IsRequired(false).HasMaxLength(50);
+                });
 
-                modelBuilder.Entity<Applicant>(
-                    builder =>
-                    {
-                        builder.HasKey(prop => prop.ApplicantId);
+                modelBuilder.Entity<Applicant>(builder =>
+                {
+                    builder.HasKey(prop => prop.ApplicantId);
 
-                        builder.OwnsOne(
-                            prop => prop.Name,
-                            name =>
-                            {
-                                name.OwnsOne(prop => prop.FirstName)
-                                    .Property("_value")
-                                    .HasMaxLength(50)
-                                    .IsRequired();
+                    builder.OwnsOne(
+                        prop => prop.Name,
+                        name =>
+                        {
+                            name.OwnsOne(prop => prop.FirstName)
+                                .Property("_value")
+                                .HasMaxLength(50)
+                                .IsRequired();
 
-                                name.OwnsOne(prop => prop.LastName)
-                                    .Property("_value")
-                                    .HasMaxLength(50)
-                                    .IsRequired();
-                            }
-                        );
-                    }
-                );
+                            name.OwnsOne(prop => prop.LastName)
+                                .Property("_value")
+                                .HasMaxLength(50)
+                                .IsRequired();
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<Pyrson>(
-                    builder =>
-                    {
-                        builder.HasKey(prop => prop.PyrsonId);
+                modelBuilder.Entity<Pyrson>(builder =>
+                {
+                    builder.HasKey(prop => prop.PyrsonId);
 
-                        builder.OwnsOne(
-                            prop => prop.Name,
-                            name =>
-                            {
-                                name.OwnsOne(prop => prop.FirstName)
-                                    .Property("_value")
-                                    .HasMaxLength(50)
-                                    .IsRequired();
+                    builder.OwnsOne(
+                        prop => prop.Name,
+                        name =>
+                        {
+                            name.OwnsOne(prop => prop.FirstName)
+                                .Property("_value")
+                                .HasMaxLength(50)
+                                .IsRequired();
 
-                                name.OwnsOne(prop => prop.LastName)
-                                    .Property("_value")
-                                    .HasMaxLength(50)
-                                    .IsRequired();
-                            }
-                        );
+                            name.OwnsOne(prop => prop.LastName)
+                                .Property("_value")
+                                .HasMaxLength(50)
+                                .IsRequired();
+                        }
+                    );
 
-                        builder
-                            .HasOne(prop => prop.Address)
-                            .WithOne()
-                            .HasForeignKey<Address>(prop => prop.PyrsonId);
-                    }
-                );
+                    builder
+                        .HasOne(prop => prop.Address)
+                        .WithOne()
+                        .HasForeignKey<Address>(prop => prop.PyrsonId);
+                });
 
                 modelBuilder.Entity<NonVirtualOneToOneOwner>();
                 modelBuilder.Entity<VirtualOneToOneOwner>();

@@ -29,20 +29,18 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The <see cref="IHostBuilder"/>.</returns>
         public static IHostBuilder UseEnvironment(this IHostBuilder hostBuilder, string environment)
         {
-            return hostBuilder.ConfigureHostConfiguration(
-                configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>(
-                                HostDefaults.EnvironmentKey,
-                                environment ?? throw new ArgumentNullException(nameof(environment))
-                            )
-                        }
-                    );
-                }
-            );
+            return hostBuilder.ConfigureHostConfiguration(configBuilder =>
+            {
+                configBuilder.AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            HostDefaults.EnvironmentKey,
+                            environment ?? throw new ArgumentNullException(nameof(environment))
+                        )
+                    }
+                );
+            });
         }
 
         /// <summary>
@@ -54,20 +52,18 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The <see cref="IHostBuilder"/>.</returns>
         public static IHostBuilder UseContentRoot(this IHostBuilder hostBuilder, string contentRoot)
         {
-            return hostBuilder.ConfigureHostConfiguration(
-                configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>(
-                                HostDefaults.ContentRootKey,
-                                contentRoot ?? throw new ArgumentNullException(nameof(contentRoot))
-                            )
-                        }
-                    );
-                }
-            );
+            return hostBuilder.ConfigureHostConfiguration(configBuilder =>
+            {
+                configBuilder.AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            HostDefaults.ContentRootKey,
+                            contentRoot ?? throw new ArgumentNullException(nameof(contentRoot))
+                        )
+                    }
+                );
+            });
         }
 
         /// <summary>
@@ -92,14 +88,12 @@ namespace Microsoft.Extensions.Hosting
             Action<HostBuilderContext, ServiceProviderOptions> configure
         )
         {
-            return hostBuilder.UseServiceProviderFactory(
-                context =>
-                {
-                    var options = new ServiceProviderOptions();
-                    configure(context, options);
-                    return new DefaultServiceProviderFactory(options);
-                }
-            );
+            return hostBuilder.UseServiceProviderFactory(context =>
+            {
+                var options = new ServiceProviderOptions();
+                configure(context, options);
+                return new DefaultServiceProviderFactory(options);
+            });
         }
 
         /// <summary>
@@ -243,16 +237,14 @@ namespace Microsoft.Extensions.Hosting
         public static IHostBuilder ConfigureDefaults(this IHostBuilder builder, string[] args)
         {
             builder.UseContentRoot(Directory.GetCurrentDirectory());
-            builder.ConfigureHostConfiguration(
-                config =>
+            builder.ConfigureHostConfiguration(config =>
+            {
+                config.AddEnvironmentVariables(prefix: "DOTNET_");
+                if (args is { Length: > 0 })
                 {
-                    config.AddEnvironmentVariables(prefix: "DOTNET_");
-                    if (args is { Length: > 0 })
-                    {
-                        config.AddCommandLine(args);
-                    }
+                    config.AddCommandLine(args);
                 }
-            );
+            });
 
             builder
                 .ConfigureAppConfiguration(
@@ -332,15 +324,13 @@ namespace Microsoft.Extensions.Hosting
                             logging.AddEventLog();
                         }
 
-                        logging.Configure(
-                            options =>
-                            {
-                                options.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.SpanId
-                                    | ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.ParentId;
-                            }
-                        );
+                        logging.Configure(options =>
+                        {
+                            options.ActivityTrackingOptions =
+                                ActivityTrackingOptions.SpanId
+                                | ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.ParentId;
+                        });
                     }
                 )
                 .UseDefaultServiceProvider(
@@ -399,13 +389,11 @@ namespace Microsoft.Extensions.Hosting
             Action<ConsoleLifetimeOptions> configureOptions
         )
         {
-            return hostBuilder.ConfigureServices(
-                collection =>
-                {
-                    collection.AddSingleton<IHostLifetime, ConsoleLifetime>();
-                    collection.Configure(configureOptions);
-                }
-            );
+            return hostBuilder.ConfigureServices(collection =>
+            {
+                collection.AddSingleton<IHostLifetime, ConsoleLifetime>();
+                collection.Configure(configureOptions);
+            });
         }
 
         /// <summary>

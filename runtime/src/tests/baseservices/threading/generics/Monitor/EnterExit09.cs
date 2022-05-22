@@ -22,12 +22,10 @@ class Gen<T>
 
         for (int i = 0; i < Test_EnterExit09.nThreads; i++)
         {
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.Consumer(monitor);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.Consumer(monitor);
+            });
         }
 
         for (int i = 0; i < 6; i++)

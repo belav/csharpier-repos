@@ -433,33 +433,29 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var previousChangesMap = new Dictionary<SyntaxToken, int>();
                 var alignmentOperations = nodeOperationsCollector.AlignmentOperation;
 
-                alignmentOperations.Do(
-                    operation =>
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        applier.ApplyAlignment(operation, previousChangesMap, cancellationToken);
-                    }
-                );
+                alignmentOperations.Do(operation =>
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    applier.ApplyAlignment(operation, previousChangesMap, cancellationToken);
+                });
 
                 // go through all relative indent block operation, and see whether it is affected by previous operations
                 context
                     .GetAllRelativeIndentBlockOperations()
-                    .Do(
-                        o =>
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                            applier.ApplyBaseTokenIndentationChangesFromTo(
-                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
-                                    o,
-                                    context.TokenStream
-                                ),
-                                o.StartToken,
-                                o.EndToken,
-                                previousChangesMap,
-                                cancellationToken
-                            );
-                        }
-                    );
+                    .Do(o =>
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        applier.ApplyBaseTokenIndentationChangesFromTo(
+                            FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                o,
+                                context.TokenStream
+                            ),
+                            o.StartToken,
+                            o.EndToken,
+                            previousChangesMap,
+                            cancellationToken
+                        );
+                    });
             }
         }
 
@@ -493,22 +489,20 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // go through all relative indent block operation, and see whether it is affected by the anchor operation
                 context
                     .GetAllRelativeIndentBlockOperations()
-                    .Do(
-                        o =>
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                            applier.ApplyBaseTokenIndentationChangesFromTo(
-                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
-                                    o,
-                                    context.TokenStream
-                                ),
-                                o.StartToken,
-                                o.EndToken,
-                                previousChangesMap,
-                                cancellationToken
-                            );
-                        }
-                    );
+                    .Do(o =>
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        applier.ApplyBaseTokenIndentationChangesFromTo(
+                            FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                o,
+                                context.TokenStream
+                            ),
+                            o.StartToken,
+                            o.EndToken,
+                            previousChangesMap,
+                            cancellationToken
+                        );
+                    });
             }
         }
 

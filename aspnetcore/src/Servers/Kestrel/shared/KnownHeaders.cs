@@ -1442,24 +1442,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         var groupedHeaders = staticHeaders
             .GroupBy(h => Encoding.ASCII.GetString(h.HeaderField.Name))
-            .Select(
-                g =>
+            .Select(g =>
+            {
+                return new HPackGroup
                 {
-                    return new HPackGroup
-                    {
-                        Name = g.Key,
-                        Header = headers.SingleOrDefault(
-                            knownHeader =>
-                                string.Equals(
-                                    knownHeader.Name,
-                                    g.Key,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                        ),
-                        HPackStaticTableIndexes = g.Select(h => h.Index).ToArray()
-                    };
-                }
-            )
+                    Name = g.Key,
+                    Header = headers.SingleOrDefault(
+                        knownHeader =>
+                            string.Equals(
+                                knownHeader.Name,
+                                g.Key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    ),
+                    HPackStaticTableIndexes = g.Select(h => h.Index).ToArray()
+                };
+            })
             .Where(g => g.Header != null)
             .ToList();
 

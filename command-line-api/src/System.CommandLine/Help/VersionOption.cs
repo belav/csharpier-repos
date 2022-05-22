@@ -32,24 +32,20 @@ namespace System.CommandLine.Help
 
         private void AddValidators()
         {
-            AddValidator(
-                result =>
+            AddValidator(result =>
+            {
+                if (
+                    result.Parent is { } parent
+                    && parent.Children.Where(r => r.Symbol is not VersionOption).Any(IsNotImplicit)
+                )
                 {
-                    if (
-                        result.Parent is { } parent
-                        && parent.Children
-                            .Where(r => r.Symbol is not VersionOption)
-                            .Any(IsNotImplicit)
-                    )
-                    {
-                        return result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
-                            result.Token?.Value ?? result.Symbol.Name
-                        );
-                    }
-
-                    return null;
+                    return result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
+                        result.Token?.Value ?? result.Symbol.Name
+                    );
                 }
-            );
+
+                return null;
+            });
         }
 
         private static bool IsNotImplicit(SymbolResult symbolResult)

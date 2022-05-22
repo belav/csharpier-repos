@@ -51,15 +51,13 @@ public class SyntaxTreeGenerationBenchmark
     [Benchmark(Description = "Razor Design Time Syntax Tree Generation of MSN.com")]
     public void SyntaxTreeGeneration_DesignTime_LargeStaticFile()
     {
-        var options = RazorParserOptions.CreateDesignTime(
-            o =>
+        var options = RazorParserOptions.CreateDesignTime(o =>
+        {
+            foreach (var directive in Directives)
             {
-                foreach (var directive in Directives)
-                {
-                    o.Directives.Add(directive);
-                }
+                o.Directives.Add(directive);
             }
-        );
+        });
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 
         if (syntaxTree.Diagnostics.Count != 0)
@@ -75,15 +73,13 @@ public class SyntaxTreeGenerationBenchmark
     [Benchmark(Description = "Razor Runtime Syntax Tree Generation of MSN.com")]
     public void SyntaxTreeGeneration_Runtime_LargeStaticFile()
     {
-        var options = RazorParserOptions.Create(
-            o =>
+        var options = RazorParserOptions.Create(o =>
+        {
+            foreach (var directive in Directives)
             {
-                foreach (var directive in Directives)
-                {
-                    o.Directives.Add(directive);
-                }
+                o.Directives.Add(directive);
             }
-        );
+        });
         var syntaxTree = RazorSyntaxTree.Parse(MSN, options);
 
         if (syntaxTree.Diagnostics.Count != 0)

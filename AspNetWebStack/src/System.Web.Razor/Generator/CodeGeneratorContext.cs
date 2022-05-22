@@ -339,30 +339,28 @@ namespace System.Web.Razor.Generator
         public void AddContextCall(Span contentSpan, string methodName, bool isLiteral)
         {
             AddStatement(
-                BuildCodeString(
-                    cw =>
+                BuildCodeString(cw =>
+                {
+                    cw.WriteStartMethodInvoke(methodName);
+                    if (!String.IsNullOrEmpty(TargetWriterName))
                     {
-                        cw.WriteStartMethodInvoke(methodName);
-                        if (!String.IsNullOrEmpty(TargetWriterName))
-                        {
-                            cw.WriteSnippet(TargetWriterName);
-                            cw.WriteParameterSeparator();
-                        }
-                        cw.WriteStringLiteral(Host.InstrumentedSourceFilePath);
+                        cw.WriteSnippet(TargetWriterName);
                         cw.WriteParameterSeparator();
-                        cw.WriteSnippet(
-                            contentSpan.Start.AbsoluteIndex.ToString(CultureInfo.InvariantCulture)
-                        );
-                        cw.WriteParameterSeparator();
-                        cw.WriteSnippet(
-                            contentSpan.Content.Length.ToString(CultureInfo.InvariantCulture)
-                        );
-                        cw.WriteParameterSeparator();
-                        cw.WriteSnippet(isLiteral.ToString().ToLowerInvariant());
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteEndStatement();
                     }
-                )
+                    cw.WriteStringLiteral(Host.InstrumentedSourceFilePath);
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(
+                        contentSpan.Start.AbsoluteIndex.ToString(CultureInfo.InvariantCulture)
+                    );
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(
+                        contentSpan.Content.Length.ToString(CultureInfo.InvariantCulture)
+                    );
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(isLiteral.ToString().ToLowerInvariant());
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                })
             );
         }
 

@@ -114,13 +114,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             serviceCollection
                 .AddSignalR()
-                .AddHubOptions<CustomHub>(
-                    options =>
-                    {
-                        options.SupportedProtocols.Clear();
-                        options.AddFilter(new CustomHubFilter());
-                    }
-                );
+                .AddHubOptions<CustomHub>(options =>
+                {
+                    options.SupportedProtocols.Clear();
+                    options.AddFilter(new CustomHubFilter());
+                });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(
@@ -183,12 +181,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             serviceCollection
                 .AddSignalR()
-                .AddHubOptions<CustomHub>(
-                    options =>
-                    {
-                        options.StreamBufferCapacity = 42;
-                    }
-                );
+                .AddHubOptions<CustomHub>(options =>
+                {
+                    options.StreamBufferCapacity = 42;
+                });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(
@@ -206,19 +202,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             // null is special when the default options setup runs, so we set to null to verify that our options run after the default
             // setup runs
-            serviceCollection.AddSignalR(
-                options =>
-                {
-                    options.MaximumReceiveMessageSize = null;
-                    options.StreamBufferCapacity = null;
-                    options.EnableDetailedErrors = null;
-                    options.KeepAliveInterval = null;
-                    options.HandshakeTimeout = null;
-                    options.SupportedProtocols = null;
-                    options.ClientTimeoutInterval = TimeSpan.FromSeconds(1);
-                    options.MaximumParallelInvocationsPerClient = 3;
-                }
-            );
+            serviceCollection.AddSignalR(options =>
+            {
+                options.MaximumReceiveMessageSize = null;
+                options.StreamBufferCapacity = null;
+                options.EnableDetailedErrors = null;
+                options.KeepAliveInterval = null;
+                options.HandshakeTimeout = null;
+                options.SupportedProtocols = null;
+                options.ClientTimeoutInterval = TimeSpan.FromSeconds(1);
+                options.MaximumParallelInvocationsPerClient = 3;
+            });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 

@@ -15,18 +15,14 @@ class Program
     static int Main(string[] args)
     {
         IServiceCollection descriptors = new ServiceCollection();
-        descriptors.AddLogging(
-            builder =>
+        descriptors.AddLogging(builder =>
+        {
+            builder.AddConsoleFormatter<CustomFormatter, CustomOptions>();
+            builder.AddConsole(o =>
             {
-                builder.AddConsoleFormatter<CustomFormatter, CustomOptions>();
-                builder.AddConsole(
-                    o =>
-                    {
-                        o.FormatterName = "custom";
-                    }
-                );
-            }
-        );
+                o.FormatterName = "custom";
+            });
+        });
 
         ServiceProvider provider = descriptors.BuildServiceProvider();
 

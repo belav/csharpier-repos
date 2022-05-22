@@ -45,16 +45,14 @@ internal sealed class GenericWebHostBuilder
 
         _config = configBuilder.Build();
 
-        _builder.ConfigureHostConfiguration(
-            config =>
-            {
-                config.AddConfiguration(_config);
+        _builder.ConfigureHostConfiguration(config =>
+        {
+            config.AddConfiguration(_config);
 
-                // We do this super early but still late enough that we can process the configuration
-                // wired up by calls to UseSetting
-                ExecuteHostingStartups();
-            }
-        );
+            // We do this super early but still late enough that we can process the configuration
+            // wired up by calls to UseSetting
+            ExecuteHostingStartups();
+        });
 
         // IHostingStartup needs to be executed before any direct methods on the builder
         // so register these callbacks first
@@ -87,15 +85,13 @@ internal sealed class GenericWebHostBuilder
                 services.AddSingleton<IApplicationLifetime, GenericWebHostApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                services.Configure<GenericWebHostServiceOptions>(
-                    options =>
-                    {
-                        // Set the options
-                        options.WebHostOptions = webHostOptions;
-                        // Store and forward any startup errors
-                        options.HostingStartupExceptions = _hostingStartupErrors;
-                    }
-                );
+                services.Configure<GenericWebHostServiceOptions>(options =>
+                {
+                    // Set the options
+                    options.WebHostOptions = webHostOptions;
+                    // Store and forward any startup errors
+                    options.HostingStartupExceptions = _hostingStartupErrors;
+                });
 
                 // REVIEW: This is bad since we don't own this type. Anybody could add one of these and it would mess things up
                 // We need to flow this differently
@@ -128,16 +124,14 @@ internal sealed class GenericWebHostBuilder
                     {
                         var capture = ExceptionDispatchInfo.Capture(ex);
 
-                        services.Configure<GenericWebHostServiceOptions>(
-                            options =>
+                        services.Configure<GenericWebHostServiceOptions>(options =>
+                        {
+                            options.ConfigureApplication = app =>
                             {
-                                options.ConfigureApplication = app =>
-                                {
-                                    // Throw if there was any errors initializing startup
-                                    capture.Throw();
-                                };
-                            }
-                        );
+                                // Throw if there was any errors initializing startup
+                                capture.Throw();
+                            };
+                        });
                     }
                 }
             }
@@ -245,15 +239,13 @@ internal sealed class GenericWebHostBuilder
         Action<WebHostBuilderContext, ServiceProviderOptions> configure
     )
     {
-        _builder.UseServiceProviderFactory(
-            context =>
-            {
-                var webHostBuilderContext = GetWebHostBuilderContext(context);
-                var options = new ServiceProviderOptions();
-                configure(webHostBuilderContext, options);
-                return new DefaultServiceProviderFactory(options);
-            }
-        );
+        _builder.UseServiceProviderFactory(context =>
+        {
+            var webHostBuilderContext = GetWebHostBuilderContext(context);
+            var options = new ServiceProviderOptions();
+            configure(webHostBuilderContext, options);
+            return new DefaultServiceProviderFactory(options);
+        });
 
         return this;
     }
@@ -414,22 +406,20 @@ internal sealed class GenericWebHostBuilder
         }
 
         // Startup.Configure
-        services.Configure<GenericWebHostServiceOptions>(
-            options =>
+        services.Configure<GenericWebHostServiceOptions>(options =>
+        {
+            options.ConfigureApplication = app =>
             {
-                options.ConfigureApplication = app =>
-                {
-                    // Throw if there was any errors initializing startup
-                    startupError?.Throw();
+                // Throw if there was any errors initializing startup
+                startupError?.Throw();
 
-                    // Execute Startup.Configure
-                    if (instance != null && configureBuilder != null)
-                    {
-                        configureBuilder.Build(instance)(app);
-                    }
-                };
-            }
-        );
+                // Execute Startup.Configure
+                if (instance != null && configureBuilder != null)
+                {
+                    configureBuilder.Build(instance)(app);
+                }
+            };
+        });
     }
 
     private void ConfigureContainerImpl<TContainer>(
@@ -457,12 +447,10 @@ internal sealed class GenericWebHostBuilder
             {
                 if (object.ReferenceEquals(_startupObject, configure))
                 {
-                    services.Configure<GenericWebHostServiceOptions>(
-                        options =>
-                        {
-                            options.ConfigureApplication = app => configure(app);
-                        }
-                    );
+                    services.Configure<GenericWebHostServiceOptions>(options =>
+                    {
+                        options.ConfigureApplication = app => configure(app);
+                    });
                 }
             }
         );
@@ -484,14 +472,11 @@ internal sealed class GenericWebHostBuilder
             {
                 if (object.ReferenceEquals(_startupObject, configure))
                 {
-                    services.Configure<GenericWebHostServiceOptions>(
-                        options =>
-                        {
-                            var webhostBuilderContext = GetWebHostBuilderContext(context);
-                            options.ConfigureApplication = app =>
-                                configure(webhostBuilderContext, app);
-                        }
-                    );
+                    services.Configure<GenericWebHostServiceOptions>(options =>
+                    {
+                        var webhostBuilderContext = GetWebHostBuilderContext(context);
+                        options.ConfigureApplication = app => configure(webhostBuilderContext, app);
+                    });
                 }
             }
         );

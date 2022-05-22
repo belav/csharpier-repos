@@ -109,16 +109,14 @@ namespace Microsoft.Extensions.Configuration
                 throw new ArgumentException(SR.Error_InvalidFilePath, nameof(path));
             }
 
-            return builder.AddIniFile(
-                s =>
-                {
-                    s.FileProvider = provider;
-                    s.Path = path;
-                    s.Optional = optional;
-                    s.ReloadOnChange = reloadOnChange;
-                    s.ResolveFileProvider();
-                }
-            );
+            return builder.AddIniFile(s =>
+            {
+                s.FileProvider = provider;
+                s.Path = path;
+                s.Optional = optional;
+                s.ReloadOnChange = reloadOnChange;
+                s.ResolveFileProvider();
+            });
         }
 
         /// <summary>

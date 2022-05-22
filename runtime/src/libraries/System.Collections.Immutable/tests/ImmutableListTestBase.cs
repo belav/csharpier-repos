@@ -66,23 +66,19 @@ namespace System.Collections.Immutable.Tests
         public void ForEachTest()
         {
             this.GetListQuery(ImmutableList<int>.Empty)
-                .ForEach(
-                    n =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                );
+                .ForEach(n =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                });
 
             var list = ImmutableList<int>.Empty.AddRange(Enumerable.Range(5, 3));
             var hitTest = new bool[list.Max() + 1];
             this.GetListQuery(list)
-                .ForEach(
-                    i =>
-                    {
-                        Assert.False(hitTest[i]);
-                        hitTest[i] = true;
-                    }
-                );
+                .ForEach(i =>
+                {
+                    Assert.False(hitTest[i]);
+                    hitTest[i] = true;
+                });
 
             for (int i = 0; i < hitTest.Length; i++)
             {
@@ -125,12 +121,10 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(
                 0,
                 this.GetListQuery(ImmutableList<int>.Empty)
-                    .FindLast(
-                        n =>
-                        {
-                            throw new ShouldNotBeInvokedException();
-                        }
-                    )
+                    .FindLast(n =>
+                    {
+                        throw new ShouldNotBeInvokedException();
+                    })
             );
             var list = ImmutableList<int>.Empty.AddRange(new[] { 2, 3, 4, 5, 6 });
             Assert.Equal(5, this.GetListQuery(list).FindLast(n => (n % 2) == 1));

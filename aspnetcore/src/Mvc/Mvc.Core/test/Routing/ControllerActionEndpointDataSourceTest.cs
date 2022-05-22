@@ -270,18 +270,13 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource.DefaultBuilder.Add(
-            b =>
+        dataSource.DefaultBuilder.Add(b =>
+        {
+            if (b.Metadata.OfType<ActionDescriptor>().FirstOrDefault()?.AttributeRouteInfo != null)
             {
-                if (
-                    b.Metadata.OfType<ActionDescriptor>().FirstOrDefault()?.AttributeRouteInfo
-                    != null
-                )
-                {
-                    b.Metadata.Add(new EndpointNameMetadata("NewName"));
-                }
+                b.Metadata.Add(new EndpointNameMetadata("NewName"));
             }
-        );
+        });
 
         // Act
         var endpoints = dataSource.Endpoints;

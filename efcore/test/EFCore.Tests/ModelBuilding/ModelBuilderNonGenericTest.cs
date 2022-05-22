@@ -133,18 +133,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<ComplexCaseChild13108>(
-                    e =>
-                    {
-                        e.HasKey(c => c.Key);
-                        ((NonGenericTestEntityTypeBuilder<ComplexCaseChild13108>)e)
-                            .GetInfrastructure()
-                            .Property("ParentKey");
-                        e.HasOne(c => c.Parent)
-                            .WithMany(c => c.Children)
-                            .HasForeignKey("ParentKey");
-                    }
-                );
+                modelBuilder.Entity<ComplexCaseChild13108>(e =>
+                {
+                    e.HasKey(c => c.Key);
+                    ((NonGenericTestEntityTypeBuilder<ComplexCaseChild13108>)e)
+                        .GetInfrastructure()
+                        .Property("ParentKey");
+                    e.HasOne(c => c.Parent).WithMany(c => c.Children).HasForeignKey("ParentKey");
+                });
 
                 modelBuilder.Entity<ComplexCaseParent13108>().HasKey(c => c.Key);
 

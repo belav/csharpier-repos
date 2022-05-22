@@ -38,72 +38,70 @@ namespace System.Net.Http.Functional.Tests
                             HttpCompletionOption.ResponseHeadersRead
                         );
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            // Verify that Host header exist and has same value and URI authority.
+                            List<string> lines = await connection
+                                .ReadRequestHeaderAsync()
+                                .ConfigureAwait(false);
+                            string authority = lines[0].Split()[1];
+                            foreach (string line in lines)
                             {
-                                // Verify that Host header exist and has same value and URI authority.
-                                List<string> lines = await connection
-                                    .ReadRequestHeaderAsync()
-                                    .ConfigureAwait(false);
-                                string authority = lines[0].Split()[1];
-                                foreach (string line in lines)
-                                {
-                                    if (
-                                        line.StartsWith(
-                                            "Host:",
-                                            StringComparison.InvariantCultureIgnoreCase
-                                        )
+                                if (
+                                    line.StartsWith(
+                                        "Host:",
+                                        StringComparison.InvariantCultureIgnoreCase
                                     )
-                                    {
-                                        Assert.Equal("Host: foo.com:345", line);
-                                        break;
-                                    }
-                                }
-
-                                Task serverTask = connection.SendResponseAsync(HttpStatusCode.OK);
-                                await TestHelper
-                                    .WhenAllCompletedOrAnyFailed(responseTask, serverTask)
-                                    .ConfigureAwait(false);
-
-                                using (
-                                    Stream clientStream = await (
-                                        await responseTask
-                                    ).Content.ReadAsStreamAsync(TestAsync)
                                 )
                                 {
-                                    Assert.True(clientStream.CanWrite);
-                                    Assert.True(clientStream.CanRead);
-                                    Assert.False(clientStream.CanSeek);
-
-                                    TextReader clientReader = new StreamReader(clientStream);
-                                    TextWriter clientWriter = new StreamWriter(clientStream)
-                                    {
-                                        AutoFlush = true
-                                    };
-                                    TextWriter serverWriter = new StreamWriter(
-                                        connection.Stream,
-                                        leaveOpen: true
-                                    )
-                                    {
-                                        AutoFlush = true
-                                    };
-
-                                    const string helloServer = "hello server";
-                                    const string helloClient = "hello client";
-                                    const string goodbyeServer = "goodbye server";
-                                    const string goodbyeClient = "goodbye client";
-
-                                    clientWriter.WriteLine(helloServer);
-                                    Assert.Equal(helloServer, connection.ReadLine());
-                                    serverWriter.WriteLine(helloClient);
-                                    Assert.Equal(helloClient, clientReader.ReadLine());
-                                    clientWriter.WriteLine(goodbyeServer);
-                                    Assert.Equal(goodbyeServer, connection.ReadLine());
-                                    serverWriter.WriteLine(goodbyeClient);
-                                    Assert.Equal(goodbyeClient, clientReader.ReadLine());
+                                    Assert.Equal("Host: foo.com:345", line);
+                                    break;
                                 }
                             }
-                        );
+
+                            Task serverTask = connection.SendResponseAsync(HttpStatusCode.OK);
+                            await TestHelper
+                                .WhenAllCompletedOrAnyFailed(responseTask, serverTask)
+                                .ConfigureAwait(false);
+
+                            using (
+                                Stream clientStream = await (
+                                    await responseTask
+                                ).Content.ReadAsStreamAsync(TestAsync)
+                            )
+                            {
+                                Assert.True(clientStream.CanWrite);
+                                Assert.True(clientStream.CanRead);
+                                Assert.False(clientStream.CanSeek);
+
+                                TextReader clientReader = new StreamReader(clientStream);
+                                TextWriter clientWriter = new StreamWriter(clientStream)
+                                {
+                                    AutoFlush = true
+                                };
+                                TextWriter serverWriter = new StreamWriter(
+                                    connection.Stream,
+                                    leaveOpen: true
+                                )
+                                {
+                                    AutoFlush = true
+                                };
+
+                                const string helloServer = "hello server";
+                                const string helloClient = "hello client";
+                                const string goodbyeServer = "goodbye server";
+                                const string goodbyeClient = "goodbye client";
+
+                                clientWriter.WriteLine(helloServer);
+                                Assert.Equal(helloServer, connection.ReadLine());
+                                serverWriter.WriteLine(helloClient);
+                                Assert.Equal(helloClient, clientReader.ReadLine());
+                                clientWriter.WriteLine(goodbyeServer);
+                                Assert.Equal(goodbyeServer, connection.ReadLine());
+                                serverWriter.WriteLine(goodbyeClient);
+                                Assert.Equal(goodbyeClient, clientReader.ReadLine());
+                            }
+                        });
                     }
                 }
             );
@@ -131,24 +129,19 @@ namespace System.Net.Http.Functional.Tests
                             request,
                             HttpCompletionOption.ResponseHeadersRead
                         );
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                Task<List<string>> serverTask =
-                                    connection.ReadRequestHeaderAndSendResponseAsync(
-                                        HttpStatusCode.Forbidden,
-                                        content: "error"
-                                    );
-
-                                await TestHelper.WhenAllCompletedOrAnyFailed(
-                                    responseTask,
-                                    serverTask
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            Task<List<string>> serverTask =
+                                connection.ReadRequestHeaderAndSendResponseAsync(
+                                    HttpStatusCode.Forbidden,
+                                    content: "error"
                                 );
-                                HttpResponseMessage response = await responseTask;
 
-                                Assert.True(response.StatusCode == HttpStatusCode.Forbidden);
-                            }
-                        );
+                            await TestHelper.WhenAllCompletedOrAnyFailed(responseTask, serverTask);
+                            HttpResponseMessage response = await responseTask;
+
+                            Assert.True(response.StatusCode == HttpStatusCode.Forbidden);
+                        });
                     }
                 }
             );

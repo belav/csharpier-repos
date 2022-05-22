@@ -38,43 +38,35 @@ public class MapSignalRTests
         var executedConfigure = false;
         var builder = new HostBuilder();
 
-        builder.ConfigureWebHost(
-            webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel()
-                    .ConfigureServices(
-                        services =>
-                        {
-                            services.AddRouting();
-                        }
-                    )
-                    .Configure(
-                        app =>
-                        {
-                            executedConfigure = true;
+        builder.ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseKestrel()
+                .ConfigureServices(services =>
+                {
+                    services.AddRouting();
+                })
+                .Configure(app =>
+                {
+                    executedConfigure = true;
 
-                            var ex = Assert.Throws<InvalidOperationException>(() =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    endpoints =>
-                                    {
-                                        endpoints.MapHub<AuthHub>("/overloads");
-                                    }
-                                );
-                            });
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapHub<AuthHub>("/overloads");
+                        });
+                    });
 
-                            Assert.Equal(
-                                "Unable to find the required services. Please add all the required services by calling "
-                                    + "'IServiceCollection.AddSignalR' inside the call to 'ConfigureServices(...)' in the application startup code.",
-                                ex.Message
-                            );
-                        }
-                    )
-                    .UseUrls("http://127.0.0.1:0");
-            }
-        );
+                    Assert.Equal(
+                        "Unable to find the required services. Please add all the required services by calling "
+                            + "'IServiceCollection.AddSignalR' inside the call to 'ConfigureServices(...)' in the application startup code.",
+                        ex.Message
+                    );
+                })
+                .UseUrls("http://127.0.0.1:0");
+        });
 
         using (var host = builder.Build())
         {
@@ -423,27 +415,21 @@ public class MapSignalRTests
     private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSignalR();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(endpoints => configure(endpoints));
-                            }
-                        )
-                        .UseUrls("http://127.0.0.1:0");
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSignalR();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints => configure(endpoints));
+                    })
+                    .UseUrls("http://127.0.0.1:0");
+            })
             .Build();
     }
 }

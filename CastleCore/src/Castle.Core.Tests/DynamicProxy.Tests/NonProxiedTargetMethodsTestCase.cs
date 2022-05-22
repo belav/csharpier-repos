@@ -141,15 +141,13 @@ namespace Castle.DynamicProxy.Tests
                 )
             );
 
-            var convertToLowerThenProceed = new WithCallbackInterceptor(
-                invocation =>
-                {
-                    string value = (string)invocation.GetArgumentValue(0);
-                    string lowerCase = value?.ToLowerInvariant();
-                    invocation.SetArgumentValue(0, lowerCase);
-                    invocation.Proceed();
-                }
-            );
+            var convertToLowerThenProceed = new WithCallbackInterceptor(invocation =>
+            {
+                string value = (string)invocation.GetArgumentValue(0);
+                string lowerCase = value?.ToLowerInvariant();
+                invocation.SetArgumentValue(0, lowerCase);
+                invocation.Proceed();
+            });
 
             var proxy = generator.CreateClassProxyWithTarget(
                 target,

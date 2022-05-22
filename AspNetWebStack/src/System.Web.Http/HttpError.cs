@@ -105,21 +105,19 @@ namespace System.Web.Http
                 if (errors != null && errors.Count > 0)
                 {
                     IEnumerable<string> errorMessages = errors
-                        .Select(
-                            error =>
+                        .Select(error =>
+                        {
+                            if (includeErrorDetail && error.Exception != null)
                             {
-                                if (includeErrorDetail && error.Exception != null)
-                                {
-                                    return error.Exception.Message;
-                                }
-                                else
-                                {
-                                    return String.IsNullOrEmpty(error.ErrorMessage)
-                                        ? SRResources.ErrorOccurred
-                                        : error.ErrorMessage;
-                                }
+                                return error.Exception.Message;
                             }
-                        )
+                            else
+                            {
+                                return String.IsNullOrEmpty(error.ErrorMessage)
+                                    ? SRResources.ErrorOccurred
+                                    : error.ErrorMessage;
+                            }
+                        })
                         .ToArray();
                     modelStateError.Add(key, errorMessages);
                 }

@@ -15,13 +15,11 @@ class StartupCaseInsensitive
     public static IServiceProvider ConfigureCaseInsensitiveServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "ConfigureCaseInsensitiveServices";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "ConfigureCaseInsensitiveServices";
+        });
         return services.BuildServiceProvider();
     }
 

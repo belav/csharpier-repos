@@ -23,12 +23,10 @@ namespace AutoMapper.UnitTests.Mappers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    config =>
-                    {
-                        config.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
@@ -57,12 +55,10 @@ namespace AutoMapper.UnitTests.Mappers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    config =>
-                    {
-                        config.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
@@ -91,12 +87,10 @@ namespace AutoMapper.UnitTests.Mappers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    config =>
-                    {
-                        config.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(config =>
+                {
+                    config.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_map_readonly_values()
@@ -130,14 +124,12 @@ namespace AutoMapper.UnitTests.Mappers
                         new UserSource("x", 19)
                     },
                 };
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<SourceAsEnumerable, DestinationAsReadOnlyCollectionNull>();
-                        cfg.CreateMap<SourceAsEnumerable, DestinationAsReadOnlyCollectionNotNull>();
-                        cfg.CreateMap<UserSource, UserDestination>();
-                    }
-                );
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<SourceAsEnumerable, DestinationAsReadOnlyCollectionNull>();
+                    cfg.CreateMap<SourceAsEnumerable, DestinationAsReadOnlyCollectionNotNull>();
+                    cfg.CreateMap<UserSource, UserDestination>();
+                });
                 _mapper = config.CreateMapper();
             }
 

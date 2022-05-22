@@ -17,12 +17,10 @@ namespace AutoMapper.UnitTests.Projection
             [Fact]
             public void Should_not_fail()
             {
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Source, Destination>();
-                    }
-                );
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Source, Destination>();
+                });
 
                 typeof(NullReferenceException).ShouldNotBeThrownBy(
                     () =>
@@ -33,12 +31,10 @@ namespace AutoMapper.UnitTests.Projection
             [Fact]
             public void Should_map_values()
             {
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Source, Destination>();
-                    }
-                );
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Source, Destination>();
+                });
 
                 var sources = new List<Source>
                 {

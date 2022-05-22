@@ -688,23 +688,21 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 });
 
                 services.AddSingleton<Thing0>();
-                services.AddTransient(
-                    sp =>
+                services.AddTransient(sp =>
+                {
+                    if (ThreadId == 2)
                     {
-                        if (ThreadId == 2)
-                        {
-                            sb.Append("1");
-                            mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
-                            mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
+                        sb.Append("1");
+                        mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
+                        mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
 
-                            sb.Append("4");
-                        }
-
-                        // Let Thread 1 over take Thread 2
-                        Thing1 value = lazy.Value;
-                        return value;
+                        sb.Append("4");
                     }
-                );
+
+                    // Let Thread 1 over take Thread 2
+                    Thing1 value = lazy.Value;
+                    return value;
+                });
                 services.AddSingleton<Thing2>();
 
                 sp = CreateServiceProvider(services);
@@ -773,23 +771,21 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                     return new Thing4(thing3);
                 });
 
-                services.AddTransient(
-                    sp =>
+                services.AddTransient(sp =>
+                {
+                    if (ThreadId == 2)
                     {
-                        if (ThreadId == 2)
-                        {
-                            sb.Append("1");
-                            mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
-                            mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
+                        sb.Append("1");
+                        mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
+                        mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
 
-                            sb.Append("4");
-                        }
-
-                        // Let Thread 1 over take Thread 2
-                        Thing4 value = lazy.Value;
-                        return value;
+                        sb.Append("4");
                     }
-                );
+
+                    // Let Thread 1 over take Thread 2
+                    Thing4 value = lazy.Value;
+                    return value;
+                });
                 services.AddSingleton<Thing5>();
 
                 sp = CreateServiceProvider(services);

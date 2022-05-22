@@ -419,17 +419,15 @@ namespace System.Security.Cryptography
 
             public override byte[] ExportRSAPublicKey()
             {
-                return ExportPublicKey(
-                    static spki =>
-                    {
-                        ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
-                            spki,
-                            out int read
-                        );
-                        Debug.Assert(read == spki.Length);
-                        return pkcs1.ToArray();
-                    }
-                );
+                return ExportPublicKey(static spki =>
+                {
+                    ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
+                        spki,
+                        out int read
+                    );
+                    Debug.Assert(read == spki.Length);
+                    return pkcs1.ToArray();
+                });
             }
 
             public override bool TryExportRSAPublicKey(Span<byte> destination, out int bytesWritten)
@@ -477,20 +475,14 @@ namespace System.Security.Cryptography
                     );
                 }
 
-                return ExportPublicKey(
-                    static spki =>
-                    {
-                        RSAParameters ret;
-                        RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
-                            spki.Span,
-                            out int read,
-                            out ret
-                        );
+                return ExportPublicKey(static spki =>
+                {
+                    RSAParameters ret;
+                    RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(spki.Span, out int read, out ret);
 
-                        Debug.Assert(read == spki.Length);
-                        return ret;
-                    }
-                );
+                    Debug.Assert(read == spki.Length);
+                    return ret;
+                });
             }
 
             public override void ImportParameters(RSAParameters parameters)

@@ -121,35 +121,31 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
         services.TryAddSingleton<CSharpCompiler>();
 
         services.TryAddSingleton<RazorProjectFileSystem, FileProviderRazorProjectFileSystem>();
-        services.TryAddSingleton(
-            s =>
-            {
-                var fileSystem = s.GetRequiredService<RazorProjectFileSystem>();
-                var csharpCompiler = s.GetRequiredService<CSharpCompiler>();
-                var projectEngine = RazorProjectEngine.Create(
-                    RazorConfiguration.Default,
-                    fileSystem,
-                    builder =>
-                    {
-                        RazorExtensions.Register(builder);
+        services.TryAddSingleton(s =>
+        {
+            var fileSystem = s.GetRequiredService<RazorProjectFileSystem>();
+            var csharpCompiler = s.GetRequiredService<CSharpCompiler>();
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                builder =>
+                {
+                    RazorExtensions.Register(builder);
 
-                        // Roslyn + TagHelpers infrastructure
-                        var referenceManager = s.GetRequiredService<RazorReferenceManager>();
-                        builder.Features.Add(new LazyMetadataReferenceFeature(referenceManager));
-                        builder.Features.Add(new CompilationTagHelperFeature());
+                    // Roslyn + TagHelpers infrastructure
+                    var referenceManager = s.GetRequiredService<RazorReferenceManager>();
+                    builder.Features.Add(new LazyMetadataReferenceFeature(referenceManager));
+                    builder.Features.Add(new CompilationTagHelperFeature());
 
-                        // TagHelperDescriptorProviders (actually do tag helper discovery)
-                        builder.Features.Add(new DefaultTagHelperDescriptorProvider());
-                        builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
-                        builder.SetCSharpLanguageVersion(
-                            csharpCompiler.ParseOptions.LanguageVersion
-                        );
-                    }
-                );
+                    // TagHelperDescriptorProviders (actually do tag helper discovery)
+                    builder.Features.Add(new DefaultTagHelperDescriptorProvider());
+                    builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
+                    builder.SetCSharpLanguageVersion(csharpCompiler.ParseOptions.LanguageVersion);
+                }
+            );
 
-                return projectEngine;
-            }
-        );
+            return projectEngine;
+        });
 
         //
         // Razor Pages

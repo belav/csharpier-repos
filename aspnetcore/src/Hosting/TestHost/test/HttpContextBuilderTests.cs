@@ -26,14 +26,12 @@ public class HttpContextBuilderTests
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
         server.BaseAddress = new Uri("https://example.com/A/Path/");
-        var context = await server.SendAsync(
-            c =>
-            {
-                c.Request.Method = HttpMethods.Post;
-                c.Request.Path = "/and/file.txt";
-                c.Request.QueryString = new QueryString("?and=query");
-            }
-        );
+        var context = await server.SendAsync(c =>
+        {
+            c.Request.Method = HttpMethods.Post;
+            c.Request.Path = "/and/file.txt";
+            c.Request.QueryString = new QueryString("?and=query");
+        });
 
         Assert.True(context.RequestAborted.CanBeCanceled);
         Assert.Equal(HttpProtocol.Http11, context.Request.Protocol);
@@ -60,12 +58,10 @@ public class HttpContextBuilderTests
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
         server.BaseAddress = new Uri("https://example.com/");
-        var context = await server.SendAsync(
-            c =>
-            {
-                c.Request.Headers.UserAgent = userAgent;
-            }
-        );
+        var context = await server.SendAsync(c =>
+        {
+            c.Request.Headers.UserAgent = userAgent;
+        });
 
         var actualResult = context.Request.Headers.UserAgent;
         Assert.Equal(userAgent, actualResult);
@@ -76,12 +72,10 @@ public class HttpContextBuilderTests
     {
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
-        var context = await server.SendAsync(
-            c =>
-            {
-                c.Request.Path = "/";
-            }
-        );
+        var context = await server.SendAsync(c =>
+        {
+            c.Request.Path = "/";
+        });
 
         Assert.Equal("", context.Request.PathBase.Value);
         Assert.Equal("/", context.Request.Path.Value);
@@ -90,18 +84,14 @@ public class HttpContextBuilderTests
     [Fact]
     public async Task MiddlewareOnlySetsHeaders()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(c =>
             {
-                app.Run(
-                    c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        return Task.FromResult(0);
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                return Task.FromResult(0);
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -112,18 +102,14 @@ public class HttpContextBuilderTests
     public async Task BlockingMiddlewareShouldNotBlockClient()
     {
         var block = new ManualResetEvent(false);
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(c =>
             {
-                app.Run(
-                    c =>
-                    {
-                        block.WaitOne();
-                        return Task.FromResult(0);
-                    }
-                );
-            }
-        );
+                block.WaitOne();
+                return Task.FromResult(0);
+            });
+        });
         var server = new TestServer(builder);
         var task = server.SendAsync(c => { });
 
@@ -139,23 +125,19 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        var bytes = Encoding.UTF8.GetBytes("BodyStarted" + Environment.NewLine);
-                        c.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                        c.Response.Body.Write(bytes, 0, bytes.Length);
-                        await block.Task;
-                        bytes = Encoding.UTF8.GetBytes("BodyFinished");
-                        c.Response.Body.Write(bytes, 0, bytes.Length);
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                var bytes = Encoding.UTF8.GetBytes("BodyStarted" + Environment.NewLine);
+                c.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                c.Response.Body.Write(bytes, 0, bytes.Length);
+                await block.Task;
+                bytes = Encoding.UTF8.GetBytes("BodyFinished");
+                c.Response.Body.Write(bytes, 0, bytes.Length);
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -172,20 +154,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        await c.Response.WriteAsync("BodyStarted" + Environment.NewLine);
-                        await block.Task;
-                        await c.Response.WriteAsync("BodyFinished");
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                await c.Response.WriteAsync("BodyStarted" + Environment.NewLine);
+                await block.Task;
+                await c.Response.WriteAsync("BodyFinished");
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -202,20 +180,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        await c.Response.Body.FlushAsync();
-                        await block.Task;
-                        await c.Response.WriteAsync("BodyFinished");
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                await c.Response.Body.FlushAsync();
+                await block.Task;
+                await c.Response.WriteAsync("BodyFinished");
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -230,20 +204,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        await c.Response.Body.FlushAsync();
-                        await block.Task;
-                        await c.Response.WriteAsync("BodyFinished");
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                await c.Response.Body.FlushAsync();
+                await block.Task;
+                await c.Response.WriteAsync("BodyFinished");
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -262,20 +232,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(c =>
             {
-                app.Run(
-                    c =>
-                    {
-                        block.SetResult(0);
-                        Assert.True(c.RequestAborted.WaitHandle.WaitOne(TimeSpan.FromSeconds(10)));
-                        c.RequestAborted.ThrowIfCancellationRequested();
-                        return Task.CompletedTask;
-                    }
-                );
-            }
-        );
+                block.SetResult(0);
+                Assert.True(c.RequestAborted.WaitHandle.WaitOne(TimeSpan.FromSeconds(10)));
+                c.RequestAborted.ThrowIfCancellationRequested();
+                return Task.CompletedTask;
+            });
+        });
         var server = new TestServer(builder);
         var cts = new CancellationTokenSource();
         var contextTask = server.SendAsync(c => { }, cts.Token);
@@ -291,20 +257,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        await c.Response.Body.FlushAsync();
-                        await block.Task;
-                        await c.Response.WriteAsync("BodyFinished");
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                await c.Response.Body.FlushAsync();
+                await block.Task;
+                await c.Response.WriteAsync("BodyFinished");
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -321,17 +283,13 @@ public class HttpContextBuilderTests
     [Fact]
     public Task ExceptionBeforeFirstWriteIsReported()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(c =>
             {
-                app.Run(
-                    c =>
-                    {
-                        throw new InvalidOperationException("Test Exception");
-                    }
-                );
-            }
-        );
+                throw new InvalidOperationException("Test Exception");
+            });
+        });
         var server = new TestServer(builder);
         return Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync(c => { }));
     }
@@ -342,20 +300,16 @@ public class HttpContextBuilderTests
         var block = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async c =>
             {
-                app.Run(
-                    async c =>
-                    {
-                        c.Response.Headers["TestHeader"] = "TestValue";
-                        await c.Response.WriteAsync("BodyStarted");
-                        await block.Task;
-                        throw new InvalidOperationException("Test Exception");
-                    }
-                );
-            }
-        );
+                c.Response.Headers["TestHeader"] = "TestValue";
+                await c.Response.WriteAsync("BodyStarted");
+                await block.Task;
+                throw new InvalidOperationException("Test Exception");
+            });
+        });
         var server = new TestServer(builder);
         var context = await server.SendAsync(c => { });
 
@@ -374,23 +328,17 @@ public class HttpContextBuilderTests
         // This logger will attempt to access information from HttpRequest once the HttpContext is created
         var logger = new VerifierLogger();
         var builder = new WebHostBuilder()
-            .ConfigureServices(
-                services =>
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<ILogger<IWebHost>>(logger);
+            })
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    services.AddSingleton<ILogger<IWebHost>>(logger);
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.Run(
-                        context =>
-                        {
-                            return Task.FromResult(0);
-                        }
-                    );
-                }
-            );
+                    return Task.FromResult(0);
+                });
+            });
         var server = new TestServer(builder);
 
         // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values
@@ -403,19 +351,15 @@ public class HttpContextBuilderTests
         var requestAborted = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        context.RequestAborted.Register(() => requestAborted.SetResult(0));
-                        context.Abort();
-                        return Task.CompletedTask;
-                    }
-                );
-            }
-        );
+                context.RequestAborted.Register(() => requestAborted.SetResult(0));
+                context.Abort();
+                return Task.CompletedTask;
+            });
+        });
         var server = new TestServer(builder);
 
         var ex = await Assert.ThrowsAsync<Exception>(() => server.SendAsync(c => { }));

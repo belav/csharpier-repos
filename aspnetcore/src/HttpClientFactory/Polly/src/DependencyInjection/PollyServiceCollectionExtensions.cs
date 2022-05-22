@@ -96,16 +96,14 @@ public static class PollyServiceCollectionExtensions
 
         // Create an empty registry, configure it and register it as an instance.
         // This is the best way to get a single instance registered using all the interfaces.
-        services.AddSingleton(
-            serviceProvider =>
-            {
-                var registry = new PolicyRegistry();
+        services.AddSingleton(serviceProvider =>
+        {
+            var registry = new PolicyRegistry();
 
-                configureRegistry(serviceProvider, registry);
+            configureRegistry(serviceProvider, registry);
 
-                return registry;
-            }
-        );
+            return registry;
+        });
 
         services.AddSingleton<IConcurrentPolicyRegistry<string>>(
             serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()

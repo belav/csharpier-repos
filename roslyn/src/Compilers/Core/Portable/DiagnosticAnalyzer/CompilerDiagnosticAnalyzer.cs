@@ -42,14 +42,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
             );
 
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    var analyzer = new CompilationAnalyzer(c.Compilation);
-                    c.RegisterSyntaxTreeAction(analyzer.AnalyzeSyntaxTree);
-                    c.RegisterSemanticModelAction(CompilationAnalyzer.AnalyzeSemanticModel);
-                }
-            );
+            context.RegisterCompilationStartAction(c =>
+            {
+                var analyzer = new CompilationAnalyzer(c.Compilation);
+                c.RegisterSyntaxTreeAction(analyzer.AnalyzeSyntaxTree);
+                c.RegisterSemanticModelAction(CompilationAnalyzer.AnalyzeSemanticModel);
+            });
         }
     }
 }

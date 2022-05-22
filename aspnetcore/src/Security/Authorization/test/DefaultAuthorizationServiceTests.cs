@@ -49,20 +49,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldAllowIfClaimIsPresent()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage") })
         );
@@ -78,24 +74,20 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldAllowIfClaimIsPresentWithSpecifiedAuthType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
+                options.AddPolicy(
+                    "Basic",
+                    policy =>
                     {
-                        options.AddPolicy(
-                            "Basic",
-                            policy =>
-                            {
-                                policy.AddAuthenticationSchemes("Basic");
-                                policy.RequireClaim("Permission", "CanViewPage");
-                            }
-                        );
+                        policy.AddAuthenticationSchemes("Basic");
+                        policy.RequireClaim("Permission", "CanViewPage");
                     }
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage") }, "Basic")
         );
@@ -111,21 +103,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldAllowIfClaimIsAmongValues()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy =>
-                                policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(
                 new Claim[]
@@ -150,22 +137,18 @@ public class DefaultAuthorizationServiceTests
         // Arrange
         var handler1 = new FailHandler();
         var handler2 = new FailHandler();
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(handler1);
+            services.AddSingleton<IAuthorizationHandler>(handler2);
+            services.AddAuthorization(options =>
             {
-                services.AddSingleton<IAuthorizationHandler>(handler1);
-                services.AddSingleton<IAuthorizationHandler>(handler2);
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Custom",
-                            policy => policy.Requirements.Add(new CustomRequirement())
-                        );
-                    }
+                options.AddPolicy(
+                    "Custom",
+                    policy => policy.Requirements.Add(new CustomRequirement())
                 );
-            }
-        );
+            });
+        });
 
         // Act
         var allowed = await authorizationService.AuthorizeAsync(new ClaimsPrincipal(), "Custom");
@@ -185,23 +168,19 @@ public class DefaultAuthorizationServiceTests
         // Arrange
         var handler1 = new FailHandler();
         var handler2 = new FailHandler();
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(handler1);
+            services.AddSingleton<IAuthorizationHandler>(handler2);
+            services.AddAuthorization(options =>
             {
-                services.AddSingleton<IAuthorizationHandler>(handler1);
-                services.AddSingleton<IAuthorizationHandler>(handler2);
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.InvokeHandlersAfterFailure = invokeAllHandlers;
-                        options.AddPolicy(
-                            "Custom",
-                            policy => policy.Requirements.Add(new CustomRequirement())
-                        );
-                    }
+                options.InvokeHandlersAfterFailure = invokeAllHandlers;
+                options.AddPolicy(
+                    "Custom",
+                    policy => policy.Requirements.Add(new CustomRequirement())
                 );
-            }
-        );
+            });
+        });
 
         // Act
         var allowed = await authorizationService.AuthorizeAsync(new ClaimsPrincipal(), "Custom");
@@ -246,23 +225,19 @@ public class DefaultAuthorizationServiceTests
         var handler1 = new ReasonableFailHandler("1");
         var handler2 = new FailHandler();
         var handler3 = new ReasonableFailHandler("3");
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(handler1);
+            services.AddSingleton<IAuthorizationHandler>(handler2);
+            services.AddSingleton<IAuthorizationHandler>(handler3);
+            services.AddAuthorization(options =>
             {
-                services.AddSingleton<IAuthorizationHandler>(handler1);
-                services.AddSingleton<IAuthorizationHandler>(handler2);
-                services.AddSingleton<IAuthorizationHandler>(handler3);
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Custom",
-                            policy => policy.Requirements.Add(new CustomRequirement())
-                        );
-                    }
+                options.AddPolicy(
+                    "Custom",
+                    policy => policy.Requirements.Add(new CustomRequirement())
                 );
-            }
-        );
+            });
+        });
 
         // Act
         var allowed = await authorizationService.AuthorizeAsync(new ClaimsPrincipal(), "Custom");
@@ -283,21 +258,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldFailWhenAllRequirementsNotHandled()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy =>
-                                policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage"), }, "Basic")
         );
@@ -314,21 +284,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldNotAllowIfClaimTypeIsNotPresent()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy =>
-                                policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage"), }, "Basic")
         );
@@ -344,20 +309,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldNotAllowIfClaimValueIsNotPresent()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewComment"), }, "Basic")
         );
@@ -373,20 +334,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldNotAllowIfNoClaims()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[0], "Basic"));
 
         // Act
@@ -400,20 +357,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldNotAllowIfUserIsNull()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
 
         // Act
         var allowed = await authorizationService.AuthorizeAsync(null, null, "Basic");
@@ -426,20 +379,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldNotAllowIfNotCorrectAuthType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity());
 
         // Act
@@ -453,20 +402,16 @@ public class DefaultAuthorizationServiceTests
     public async Task Authorize_ShouldAllowWithNoAuthType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireClaim("Permission", "CanViewPage")
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireClaim("Permission", "CanViewPage")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage"), }, "Basic")
         );
@@ -612,17 +557,13 @@ public class DefaultAuthorizationServiceTests
     public async Task RolePolicyCanBlockNoRole()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Basic", policy => policy.RequireRole("Admin", "Users"));
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Basic", policy => policy.RequireRole("Admin", "Users"));
+            });
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { }, "AuthType"));
 
         // Act
@@ -637,17 +578,13 @@ public class DefaultAuthorizationServiceTests
     {
         Assert.Throws<InvalidOperationException>(
             () =>
-                BuildAuthorizationService(
-                    services =>
+                BuildAuthorizationService(services =>
+                {
+                    services.AddAuthorization(options =>
                     {
-                        services.AddAuthorization(
-                            options =>
-                            {
-                                options.AddPolicy("Basic", policy => { });
-                            }
-                        );
-                    }
-                )
+                        options.AddPolicy("Basic", policy => { });
+                    });
+                })
         );
     }
 
@@ -655,17 +592,13 @@ public class DefaultAuthorizationServiceTests
     public async Task RequireUserNameFailsForWrongUserName()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Tek"), }, "AuthType")
         );
@@ -681,17 +614,13 @@ public class DefaultAuthorizationServiceTests
     public async Task CanRequireUserName()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Hao"), }, "AuthType")
         );
@@ -707,17 +636,13 @@ public class DefaultAuthorizationServiceTests
     public async Task CanRequireUserNameWithDiffClaimType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Hao", policy => policy.RequireUserName("Hao"));
+            });
+        });
         var identity = new ClaimsIdentity("AuthType", "Name", "Role");
         identity.AddClaim(new Claim("Name", "Hao"));
         var user = new ClaimsPrincipal(identity);
@@ -733,17 +658,13 @@ public class DefaultAuthorizationServiceTests
     public async Task CanRequireRoleWithDiffClaimType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Hao", policy => policy.RequireRole("Hao"));
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Hao", policy => policy.RequireRole("Hao"));
+            });
+        });
         var identity = new ClaimsIdentity("AuthType", "Name", "Role");
         identity.AddClaim(new Claim("Role", "Hao"));
         var user = new ClaimsPrincipal(identity);
@@ -759,17 +680,13 @@ public class DefaultAuthorizationServiceTests
     public async Task CanApproveAnyAuthenticatedUser()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Any", policy => policy.RequireAuthenticatedUser());
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Any", policy => policy.RequireAuthenticatedUser());
+            });
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity());
         user.AddIdentity(
             new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Name"), }, "AuthType")
@@ -786,17 +703,13 @@ public class DefaultAuthorizationServiceTests
     public async Task CanBlockNonAuthenticatedUser()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy("Any", policy => policy.RequireAuthenticatedUser());
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Any", policy => policy.RequireAuthenticatedUser());
+            });
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity());
 
         // Act
@@ -827,20 +740,16 @@ public class DefaultAuthorizationServiceTests
     public async Task CustomReqWithNoHandlerFails()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Custom",
-                            policy => policy.Requirements.Add(new CustomRequirement())
-                        );
-                    }
+                options.AddPolicy(
+                    "Custom",
+                    policy => policy.Requirements.Add(new CustomRequirement())
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -854,21 +763,17 @@ public class DefaultAuthorizationServiceTests
     public async Task CustomReqWithHandlerSucceeds()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddTransient<IAuthorizationHandler, CustomHandler>();
+            services.AddAuthorization(options =>
             {
-                services.AddTransient<IAuthorizationHandler, CustomHandler>();
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Custom",
-                            policy => policy.Requirements.Add(new CustomRequirement())
-                        );
-                    }
+                options.AddPolicy(
+                    "Custom",
+                    policy => policy.Requirements.Add(new CustomRequirement())
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -908,21 +813,16 @@ public class DefaultAuthorizationServiceTests
     public async Task PassThroughRequirementWillSucceedWithoutCustomHandler(bool shouldSucceed)
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Passthrough",
-                            policy =>
-                                policy.Requirements.Add(new PassThroughRequirement(shouldSucceed))
-                        );
-                    }
+                options.AddPolicy(
+                    "Passthrough",
+                    policy => policy.Requirements.Add(new PassThroughRequirement(shouldSucceed))
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -936,23 +836,19 @@ public class DefaultAuthorizationServiceTests
     public async Task CanCombinePolicies()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        var basePolicy = new AuthorizationPolicyBuilder()
-                            .RequireClaim("Base", "Value")
-                            .Build();
-                        options.AddPolicy(
-                            "Combined",
-                            policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
-                        );
-                    }
+                var basePolicy = new AuthorizationPolicyBuilder()
+                    .RequireClaim("Base", "Value")
+                    .Build();
+                options.AddPolicy(
+                    "Combined",
+                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(
                 new Claim[] { new Claim("Base", "Value"), new Claim("Claim", "Exists") },
@@ -971,23 +867,19 @@ public class DefaultAuthorizationServiceTests
     public async Task CombinePoliciesWillFailIfBasePolicyFails()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        var basePolicy = new AuthorizationPolicyBuilder()
-                            .RequireClaim("Base", "Value")
-                            .Build();
-                        options.AddPolicy(
-                            "Combined",
-                            policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
-                        );
-                    }
+                var basePolicy = new AuthorizationPolicyBuilder()
+                    .RequireClaim("Base", "Value")
+                    .Build();
+                options.AddPolicy(
+                    "Combined",
+                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Claim", "Exists") }, "AuthType")
         );
@@ -1003,23 +895,19 @@ public class DefaultAuthorizationServiceTests
     public async Task CombinedPoliciesWillFailIfExtraRequirementFails()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        var basePolicy = new AuthorizationPolicyBuilder()
-                            .RequireClaim("Base", "Value")
-                            .Build();
-                        options.AddPolicy(
-                            "Combined",
-                            policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
-                        );
-                    }
+                var basePolicy = new AuthorizationPolicyBuilder()
+                    .RequireClaim("Base", "Value")
+                    .Build();
+                options.AddPolicy(
+                    "Combined",
+                    policy => policy.Combine(basePolicy).RequireClaim("Claim", "Exists")
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("Base", "Value"), }, "AuthType")
         );
@@ -1090,17 +978,15 @@ public class DefaultAuthorizationServiceTests
     public async Task CanAuthorizeAllSuperuserOperations()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandler>(
-                    new ExpenseReportAuthorizationHandler(
-                        new OperationAuthorizationRequirement[] { Operations.Edit }
-                    )
-                );
-                services.AddTransient<IAuthorizationHandler, SuperUserHandler>();
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(
+                new ExpenseReportAuthorizationHandler(
+                    new OperationAuthorizationRequirement[] { Operations.Edit }
+                )
+            );
+            services.AddTransient<IAuthorizationHandler, SuperUserHandler>();
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("SuperUser", "yes"), }, "AuthType")
         );
@@ -1150,12 +1036,10 @@ public class DefaultAuthorizationServiceTests
     public async Task CanUseValueTypeResource()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddTransient<IAuthorizationHandler, EvenHandler>();
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddTransient<IAuthorizationHandler, EvenHandler>();
+        });
         var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { }, "AuthType"));
 
         // Act
@@ -1172,12 +1056,10 @@ public class DefaultAuthorizationServiceTests
     public async Task DoesNotCallHandlerWithWrongResourceType()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddTransient<IAuthorizationHandler, NotCalledHandler>();
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddTransient<IAuthorizationHandler, NotCalledHandler>();
+        });
         var user = new ClaimsPrincipal(
             new ClaimsIdentity(new Claim[] { new Claim("SuperUser", "yes") }, "AuthType")
         );
@@ -1193,16 +1075,14 @@ public class DefaultAuthorizationServiceTests
     public async Task CanAuthorizeOnlyAllowedOperations()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandler>(
-                    new ExpenseReportAuthorizationHandler(
-                        new OperationAuthorizationRequirement[] { Operations.Edit }
-                    )
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(
+                new ExpenseReportAuthorizationHandler(
+                    new OperationAuthorizationRequirement[] { Operations.Edit }
+                )
+            );
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -1240,16 +1120,14 @@ public class DefaultAuthorizationServiceTests
     public async Task AuthorizeHandlerNotCalledWithNullResource()
     {
         // Arrange
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandler>(
-                    new ExpenseReportAuthorizationHandler(
-                        new OperationAuthorizationRequirement[] { Operations.Edit }
-                    )
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler>(
+                new ExpenseReportAuthorizationHandler(
+                    new OperationAuthorizationRequirement[] { Operations.Edit }
+                )
+            );
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -1262,20 +1140,13 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanAuthorizeWithAssertionRequirement()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireAssertion(context => true)
-                        );
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Basic", policy => policy.RequireAssertion(context => true));
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -1288,20 +1159,16 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanAuthorizeWithAsyncAssertionRequirement()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireAssertion(context => Task.FromResult(true))
-                        );
-                    }
+                options.AddPolicy(
+                    "Basic",
+                    policy => policy.RequireAssertion(context => Task.FromResult(true))
                 );
-            }
-        );
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -1336,22 +1203,15 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanReplaceDefaultPolicyProvider()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            // This will ignore the policy options
+            services.AddSingleton<IAuthorizationPolicyProvider, StaticPolicyProvider>();
+            services.AddAuthorization(options =>
             {
-                // This will ignore the policy options
-                services.AddSingleton<IAuthorizationPolicyProvider, StaticPolicyProvider>();
-                services.AddAuthorization(
-                    options =>
-                    {
-                        options.AddPolicy(
-                            "Basic",
-                            policy => policy.RequireAssertion(context => true)
-                        );
-                    }
-                );
-            }
-        );
+                options.AddPolicy("Basic", policy => policy.RequireAssertion(context => true));
+            });
+        });
         var user = new ClaimsPrincipal();
 
         // Act
@@ -1386,14 +1246,12 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanUseDynamicPolicyProvider()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                // This will ignore the policy options
-                services.AddSingleton<IAuthorizationPolicyProvider, DynamicPolicyProvider>();
-                services.AddAuthorization(options => { });
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            // This will ignore the policy options
+            services.AddSingleton<IAuthorizationPolicyProvider, DynamicPolicyProvider>();
+            services.AddAuthorization(options => { });
+        });
         var id = new ClaimsIdentity();
         id.AddClaim(new Claim("1", "1"));
         id.AddClaim(new Claim("2", "2"));
@@ -1416,15 +1274,13 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanUseCustomEvaluatorThatOverridesRequirement()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationEvaluator, SuccessEvaluator>();
-                services.AddAuthorization(
-                    options => options.AddPolicy("Fail", p => p.RequireAssertion(c => false))
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationEvaluator, SuccessEvaluator>();
+            services.AddAuthorization(
+                options => options.AddPolicy("Fail", p => p.RequireAssertion(c => false))
+            );
+        });
         var result = await authorizationService.AuthorizeAsync(null, "Fail");
         Assert.True(result.Succeeded);
     }
@@ -1459,15 +1315,13 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanUseCustomContextThatAlwaysFails()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandlerContextFactory, BadContextMaker>();
-                services.AddAuthorization(
-                    options => options.AddPolicy("Success", p => p.RequireAssertion(c => true))
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandlerContextFactory, BadContextMaker>();
+            services.AddAuthorization(
+                options => options.AddPolicy("Success", p => p.RequireAssertion(c => true))
+            );
+        });
         Assert.False((await authorizationService.AuthorizeAsync(null, "Success")).Succeeded);
     }
 
@@ -1486,15 +1340,13 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public async Task CanUseCustomHandlerProvider()
     {
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandlerProvider, SadHandlerProvider>();
-                services.AddAuthorization(
-                    options => options.AddPolicy("Success", p => p.RequireAssertion(c => true))
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandlerProvider, SadHandlerProvider>();
+            services.AddAuthorization(
+                options => options.AddPolicy("Success", p => p.RequireAssertion(c => true))
+            );
+        });
         Assert.False((await authorizationService.AuthorizeAsync(null, "Success")).Succeeded);
     }
 
@@ -1579,25 +1431,23 @@ public class DefaultAuthorizationServiceTests
             );
         }
 
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<ILogger<DefaultAuthorizationService>>(
-                    new DefaultAuthorizationServiceTestLogger(Assertion)
-                );
-                services.AddAuthorization(
-                    options =>
-                        options.AddPolicy(
-                            "Log",
-                            p =>
-                            {
-                                p.Requirements.Add(new LogRequirement());
-                                p.Requirements.Add(new LogRequirement());
-                            }
-                        )
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<ILogger<DefaultAuthorizationService>>(
+                new DefaultAuthorizationServiceTestLogger(Assertion)
+            );
+            services.AddAuthorization(
+                options =>
+                    options.AddPolicy(
+                        "Log",
+                        p =>
+                        {
+                            p.Requirements.Add(new LogRequirement());
+                            p.Requirements.Add(new LogRequirement());
+                        }
+                    )
+            );
+        });
 
         var user = new ClaimsPrincipal();
 
@@ -1628,26 +1478,24 @@ public class DefaultAuthorizationServiceTests
             Assert.Equal("Authorization failed. Fail() was explicitly called.", message);
         }
 
-        var authorizationService = BuildAuthorizationService(
-            services =>
-            {
-                services.AddSingleton<IAuthorizationHandler, FailHandler>();
-                services.AddSingleton<ILogger<DefaultAuthorizationService>>(
-                    new DefaultAuthorizationServiceTestLogger(Assertion)
-                );
-                services.AddAuthorization(
-                    options =>
-                        options.AddPolicy(
-                            "Log",
-                            p =>
-                            {
-                                p.Requirements.Add(new LogRequirement());
-                                p.Requirements.Add(new LogRequirement());
-                            }
-                        )
-                );
-            }
-        );
+        var authorizationService = BuildAuthorizationService(services =>
+        {
+            services.AddSingleton<IAuthorizationHandler, FailHandler>();
+            services.AddSingleton<ILogger<DefaultAuthorizationService>>(
+                new DefaultAuthorizationServiceTestLogger(Assertion)
+            );
+            services.AddAuthorization(
+                options =>
+                    options.AddPolicy(
+                        "Log",
+                        p =>
+                        {
+                            p.Requirements.Add(new LogRequirement());
+                            p.Requirements.Add(new LogRequirement());
+                        }
+                    )
+            );
+        });
 
         var user = new ClaimsPrincipal();
 

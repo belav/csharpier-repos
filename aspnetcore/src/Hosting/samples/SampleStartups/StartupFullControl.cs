@@ -26,39 +26,33 @@ public class StartupFullControl
             .Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseConfiguration(config) // Default set of configurations to use, may be subsequently overridden
-                        .UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory()) // Override the content root with the current directory
-                        .UseUrls("http://*:1000", "https://*:902")
-                        .UseEnvironment(Environments.Development)
-                        .UseWebRoot("public")
-                        .Configure(
-                            app =>
-                            {
-                                // Write the application inline, this won't call any startup class in the assembly
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseConfiguration(config) // Default set of configurations to use, may be subsequently overridden
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory()) // Override the content root with the current directory
+                    .UseUrls("http://*:1000", "https://*:902")
+                    .UseEnvironment(Environments.Development)
+                    .UseWebRoot("public")
+                    .Configure(app =>
+                    {
+                        // Write the application inline, this won't call any startup class in the assembly
 
-                                app.Use(
-                                    next =>
-                                        context =>
-                                        {
-                                            return next(context);
-                                        }
-                                );
-                            }
+                        app.Use(
+                            next =>
+                                context =>
+                                {
+                                    return next(context);
+                                }
                         );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    // Configure services that the application can see
-                    services.AddSingleton<IMyCustomService, MyCustomService>();
-                }
-            )
+                    });
+            })
+            .ConfigureServices(services =>
+            {
+                // Configure services that the application can see
+                services.AddSingleton<IMyCustomService, MyCustomService>();
+            })
             .Build();
 
         return host.RunAsync();

@@ -25,33 +25,29 @@ public class StartupForFallback
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapFallbackToAreaController(
-                    "admin/{*path:nonfile}",
-                    "Index",
-                    "Fallback",
-                    "Admin"
-                );
-                endpoints.MapFallbackToPage("/FallbackPage");
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapFallbackToAreaController(
+                "admin/{*path:nonfile}",
+                "Index",
+                "Fallback",
+                "Admin"
+            );
+            endpoints.MapFallbackToPage("/FallbackPage");
 
-                endpoints.MapControllerRoute(
-                    "admin",
-                    "link_generation/{area}/{controller}/{action}/{id?}"
-                );
-            }
-        );
+            endpoints.MapControllerRoute(
+                "admin",
+                "link_generation/{area}/{controller}/{action}/{id?}"
+            );
+        });
 
         app.Map(
             "/afterrouting",
             b =>
-                b.Run(
-                    c =>
-                    {
-                        return c.Response.WriteAsync("Hello from middleware after routing");
-                    }
-                )
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
         );
     }
 }

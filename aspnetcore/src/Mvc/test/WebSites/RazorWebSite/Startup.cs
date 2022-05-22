@@ -21,29 +21,25 @@ public class Startup
 
         services
             .AddMvc()
-            .AddRazorOptions(
-                options =>
-                {
-                    options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
-                    options.ViewLocationExpanders.Add(new BackSlashExpander());
-                }
-            )
-            .AddViewOptions(
-                options =>
-                {
-                    options.HtmlHelperOptions.ClientValidationEnabled = false;
-                    options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft
-                        .AspNetCore
-                        .Mvc
-                        .Rendering
-                        .Html5DateRenderingMode
-                        .Rfc3339;
-                    options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
-                    options.HtmlHelperOptions.ValidationMessageElement = "validationMessageElement";
-                    options.HtmlHelperOptions.ValidationSummaryMessageElement =
-                        "validationSummaryElement";
-                }
-            )
+            .AddRazorOptions(options =>
+            {
+                options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
+                options.ViewLocationExpanders.Add(new BackSlashExpander());
+            })
+            .AddViewOptions(options =>
+            {
+                options.HtmlHelperOptions.ClientValidationEnabled = false;
+                options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft
+                    .AspNetCore
+                    .Mvc
+                    .Rendering
+                    .Html5DateRenderingMode
+                    .Rfc3339;
+                options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
+                options.HtmlHelperOptions.ValidationMessageElement = "validationMessageElement";
+                options.HtmlHelperOptions.ValidationSummaryMessageElement =
+                    "validationSummaryElement";
+            })
             .AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
 
         services.AddTransient<InjectedHelper>();
@@ -76,12 +72,10 @@ public class Startup
             }
         );
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
+        });
     }
 }

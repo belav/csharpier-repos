@@ -369,13 +369,11 @@ public class WebHostBuilder : IWebHostBuilder
             catch (Exception ex)
             {
                 var capture = ExceptionDispatchInfo.Capture(ex);
-                services.AddSingleton<IStartup>(
-                    _ =>
-                    {
-                        capture.Throw();
-                        return null;
-                    }
-                );
+                services.AddSingleton<IStartup>(_ =>
+                {
+                    capture.Throw();
+                    return null;
+                });
             }
         }
 

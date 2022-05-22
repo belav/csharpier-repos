@@ -286,11 +286,9 @@ public static class AzureADAuthenticationBuilderExtensions
     {
         var mvcBuilder = services
             .AddMvc()
-            .ConfigureApplicationPartManager(
-                apm =>
-                {
-                    apm.FeatureProviders.Add(new AzureADAccountControllerFeatureProvider());
-                }
-            );
+            .ConfigureApplicationPartManager(apm =>
+            {
+                apm.FeatureProviders.Add(new AzureADAccountControllerFeatureProvider());
+            });
     }
 }

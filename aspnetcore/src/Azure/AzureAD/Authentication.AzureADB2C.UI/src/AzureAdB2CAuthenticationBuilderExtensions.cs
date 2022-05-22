@@ -275,20 +275,18 @@ public static class AzureADB2CAuthenticationBuilderExtensions
         var additionalParts = GetAdditionalParts();
         var mvcBuilder = services
             .AddMvc()
-            .ConfigureApplicationPartManager(
-                apm =>
+            .ConfigureApplicationPartManager(apm =>
+            {
+                foreach (var part in additionalParts)
                 {
-                    foreach (var part in additionalParts)
+                    if (!apm.ApplicationParts.Any(ap => HasSameName(ap.Name, part.Name)))
                     {
-                        if (!apm.ApplicationParts.Any(ap => HasSameName(ap.Name, part.Name)))
-                        {
-                            apm.ApplicationParts.Add(part);
-                        }
+                        apm.ApplicationParts.Add(part);
                     }
-
-                    apm.FeatureProviders.Add(new AzureADB2CAccountControllerFeatureProvider());
                 }
-            );
+
+                apm.FeatureProviders.Add(new AzureADB2CAccountControllerFeatureProvider());
+            });
 
         bool HasSameName(string left, string right) =>
             string.Equals(left, right, StringComparison.Ordinal);

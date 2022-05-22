@@ -172,90 +172,70 @@ public static class HeaderDictionaryTypeExtensions
     {
         {
             typeof(CacheControlHeaderValue),
-            new Func<string, CacheControlHeaderValue?>(
-                value =>
-                {
-                    return CacheControlHeaderValue.TryParse(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, CacheControlHeaderValue?>(value =>
+            {
+                return CacheControlHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(ContentDispositionHeaderValue),
-            new Func<string, ContentDispositionHeaderValue?>(
-                value =>
-                {
-                    return ContentDispositionHeaderValue.TryParse(value, out var result)
-                        ? result
-                        : null;
-                }
-            )
+            new Func<string, ContentDispositionHeaderValue?>(value =>
+            {
+                return ContentDispositionHeaderValue.TryParse(value, out var result)
+                    ? result
+                    : null;
+            })
         },
         {
             typeof(ContentRangeHeaderValue),
-            new Func<string, ContentRangeHeaderValue?>(
-                value =>
-                {
-                    return ContentRangeHeaderValue.TryParse(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, ContentRangeHeaderValue?>(value =>
+            {
+                return ContentRangeHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(MediaTypeHeaderValue),
-            new Func<string, MediaTypeHeaderValue?>(
-                value =>
-                {
-                    return MediaTypeHeaderValue.TryParse(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, MediaTypeHeaderValue?>(value =>
+            {
+                return MediaTypeHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(RangeConditionHeaderValue),
-            new Func<string, RangeConditionHeaderValue?>(
-                value =>
-                {
-                    return RangeConditionHeaderValue.TryParse(value, out var result)
-                        ? result
-                        : null;
-                }
-            )
+            new Func<string, RangeConditionHeaderValue?>(value =>
+            {
+                return RangeConditionHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(RangeHeaderValue),
-            new Func<string, RangeHeaderValue?>(
-                value =>
-                {
-                    return RangeHeaderValue.TryParse(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, RangeHeaderValue?>(value =>
+            {
+                return RangeHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(EntityTagHeaderValue),
-            new Func<string, EntityTagHeaderValue?>(
-                value =>
-                {
-                    return EntityTagHeaderValue.TryParse(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, EntityTagHeaderValue?>(value =>
+            {
+                return EntityTagHeaderValue.TryParse(value, out var result) ? result : null;
+            })
         },
         {
             typeof(DateTimeOffset?),
-            new Func<string, DateTimeOffset?>(
-                value =>
-                {
-                    return HeaderUtilities.TryParseDate(value, out var result) ? result : null;
-                }
-            )
+            new Func<string, DateTimeOffset?>(value =>
+            {
+                return HeaderUtilities.TryParseDate(value, out var result) ? result : null;
+            })
         },
         {
             typeof(long?),
-            new Func<string, long?>(
-                value =>
-                {
-                    return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
-                        ? result
-                        : null;
-                }
-            )
+            new Func<string, long?>(value =>
+            {
+                return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
+                    ? result
+                    : null;
+            })
         },
     };
 
@@ -266,58 +246,48 @@ public static class HeaderDictionaryTypeExtensions
     {
         {
             typeof(MediaTypeHeaderValue),
-            new Func<IList<string>, IList<MediaTypeHeaderValue>>(
-                value =>
-                {
-                    return MediaTypeHeaderValue.TryParseList(value, out var result)
-                        ? result
-                        : Array.Empty<MediaTypeHeaderValue>();
-                }
-            )
+            new Func<IList<string>, IList<MediaTypeHeaderValue>>(value =>
+            {
+                return MediaTypeHeaderValue.TryParseList(value, out var result)
+                    ? result
+                    : Array.Empty<MediaTypeHeaderValue>();
+            })
         },
         {
             typeof(StringWithQualityHeaderValue),
-            new Func<IList<string>, IList<StringWithQualityHeaderValue>>(
-                value =>
-                {
-                    return StringWithQualityHeaderValue.TryParseList(value, out var result)
-                        ? result
-                        : Array.Empty<StringWithQualityHeaderValue>();
-                }
-            )
+            new Func<IList<string>, IList<StringWithQualityHeaderValue>>(value =>
+            {
+                return StringWithQualityHeaderValue.TryParseList(value, out var result)
+                    ? result
+                    : Array.Empty<StringWithQualityHeaderValue>();
+            })
         },
         {
             typeof(CookieHeaderValue),
-            new Func<IList<string>, IList<CookieHeaderValue>>(
-                value =>
-                {
-                    return CookieHeaderValue.TryParseList(value, out var result)
-                        ? result
-                        : Array.Empty<CookieHeaderValue>();
-                }
-            )
+            new Func<IList<string>, IList<CookieHeaderValue>>(value =>
+            {
+                return CookieHeaderValue.TryParseList(value, out var result)
+                    ? result
+                    : Array.Empty<CookieHeaderValue>();
+            })
         },
         {
             typeof(EntityTagHeaderValue),
-            new Func<IList<string>, IList<EntityTagHeaderValue>>(
-                value =>
-                {
-                    return EntityTagHeaderValue.TryParseList(value, out var result)
-                        ? result
-                        : Array.Empty<EntityTagHeaderValue>();
-                }
-            )
+            new Func<IList<string>, IList<EntityTagHeaderValue>>(value =>
+            {
+                return EntityTagHeaderValue.TryParseList(value, out var result)
+                    ? result
+                    : Array.Empty<EntityTagHeaderValue>();
+            })
         },
         {
             typeof(SetCookieHeaderValue),
-            new Func<IList<string>, IList<SetCookieHeaderValue>>(
-                value =>
-                {
-                    return SetCookieHeaderValue.TryParseList(value, out var result)
-                        ? result
-                        : Array.Empty<SetCookieHeaderValue>();
-                }
-            )
+            new Func<IList<string>, IList<SetCookieHeaderValue>>(value =>
+            {
+                return SetCookieHeaderValue.TryParseList(value, out var result)
+                    ? result
+                    : Array.Empty<SetCookieHeaderValue>();
+            })
         },
     };
 
@@ -377,23 +347,21 @@ public static class HeaderDictionaryTypeExtensions
         // TODO: Cache the reflected type for later? Only if success?
         var type = typeof(T);
         var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-            .FirstOrDefault(
-                methodInfo =>
+            .FirstOrDefault(methodInfo =>
+            {
+                if (
+                    string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
+                    && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
+                )
                 {
-                    if (
-                        string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
-                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
-                    )
-                    {
-                        var methodParams = methodInfo.GetParameters();
-                        return methodParams.Length == 2
-                            && methodParams[0].ParameterType.Equals(typeof(string))
-                            && methodParams[1].IsOut
-                            && methodParams[1].ParameterType.Equals(type.MakeByRefType());
-                    }
-                    return false;
+                    var methodParams = methodInfo.GetParameters();
+                    return methodParams.Length == 2
+                        && methodParams[0].ParameterType.Equals(typeof(string))
+                        && methodParams[1].IsOut
+                        && methodParams[1].ParameterType.Equals(type.MakeByRefType());
                 }
-            );
+                return false;
+            });
 
         if (method == null)
         {
@@ -420,25 +388,21 @@ public static class HeaderDictionaryTypeExtensions
         // TODO: Cache the reflected type for later? Only if success?
         var type = typeof(T);
         var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-            .FirstOrDefault(
-                methodInfo =>
+            .FirstOrDefault(methodInfo =>
+            {
+                if (
+                    string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
+                    && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
+                )
                 {
-                    if (
-                        string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
-                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
-                    )
-                    {
-                        var methodParams = methodInfo.GetParameters();
-                        return methodParams.Length == 2
-                            && methodParams[0].ParameterType.Equals(typeof(IList<string>))
-                            && methodParams[1].IsOut
-                            && methodParams[1].ParameterType.Equals(
-                                typeof(IList<T>).MakeByRefType()
-                            );
-                    }
-                    return false;
+                    var methodParams = methodInfo.GetParameters();
+                    return methodParams.Length == 2
+                        && methodParams[0].ParameterType.Equals(typeof(IList<string>))
+                        && methodParams[1].IsOut
+                        && methodParams[1].ParameterType.Equals(typeof(IList<T>).MakeByRefType());
                 }
-            );
+                return false;
+            });
 
         if (method == null)
         {

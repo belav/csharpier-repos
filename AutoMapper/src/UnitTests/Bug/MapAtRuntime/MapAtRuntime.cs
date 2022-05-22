@@ -9,38 +9,36 @@ namespace AutoMapper.UnitTests
     public class MapAtRuntime : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Entity1, EntityDTO1>().ReverseMap();
-                    cfg.CreateMap<Entity2, EntityDTO2>().ReverseMap();
-                    cfg.CreateMap<Entity3, EntityDTO3>().ReverseMap();
-                    cfg.CreateMap<Entity4, EntityDTO4>().ReverseMap();
-                    cfg.CreateMap<Entity5, EntityDTO5>().ReverseMap();
-                    cfg.CreateMap<Entity6, EntityDTO6>().ReverseMap();
-                    cfg.CreateMap<Entity7, EntityDTO7>().ReverseMap();
-                    cfg.CreateMap<Entity8, EntityDTO8>().ReverseMap();
-                    cfg.CreateMap<Entity9, EntityDTO9>().ReverseMap();
-                    cfg.CreateMap<Entity10, EntityDTO10>().ReverseMap();
-                    cfg.CreateMap<Entity11, EntityDTO11>().ReverseMap();
-                    cfg.CreateMap<Entity12, EntityDTO12>().ReverseMap();
-                    cfg.CreateMap<Entity13, EntityDTO13>().ReverseMap();
-                    cfg.CreateMap<Entity14, EntityDTO14>().ReverseMap();
-                    cfg.CreateMap<Entity15, EntityDTO15>().ReverseMap();
-                    cfg.CreateMap<Entity16, EntityDTO16>().ReverseMap();
-                    cfg.CreateMap<Entity17, EntityDTO17>().ReverseMap();
-                    cfg.CreateMap<Entity18, EntityDTO18>().ReverseMap();
-                    cfg.CreateMap<Entity19, EntityDTO19>().ReverseMap();
-                    cfg.CreateMap<Entity20, EntityDTO20>().ReverseMap();
-                    cfg.CreateMap<Entity21, EntityDTO21>().ReverseMap();
-                    cfg.CreateMap<Entity22, EntityDTO22>().ReverseMap();
-                    cfg.CreateMap<Entity23, EntityDTO23>().ReverseMap();
-                    cfg.CreateMap<Entity24, EntityDTO24>().ReverseMap();
-                    cfg.CreateMap<Entity25, EntityDTO25>().ReverseMap();
-                    cfg.CreateMap<Entity26, EntityDTO26>().ReverseMap();
-                    //cfg.ForAllPropertyMaps(p => !p.SourceType.IsValueType, (pm, o) => o.MapAtRuntime());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Entity1, EntityDTO1>().ReverseMap();
+                cfg.CreateMap<Entity2, EntityDTO2>().ReverseMap();
+                cfg.CreateMap<Entity3, EntityDTO3>().ReverseMap();
+                cfg.CreateMap<Entity4, EntityDTO4>().ReverseMap();
+                cfg.CreateMap<Entity5, EntityDTO5>().ReverseMap();
+                cfg.CreateMap<Entity6, EntityDTO6>().ReverseMap();
+                cfg.CreateMap<Entity7, EntityDTO7>().ReverseMap();
+                cfg.CreateMap<Entity8, EntityDTO8>().ReverseMap();
+                cfg.CreateMap<Entity9, EntityDTO9>().ReverseMap();
+                cfg.CreateMap<Entity10, EntityDTO10>().ReverseMap();
+                cfg.CreateMap<Entity11, EntityDTO11>().ReverseMap();
+                cfg.CreateMap<Entity12, EntityDTO12>().ReverseMap();
+                cfg.CreateMap<Entity13, EntityDTO13>().ReverseMap();
+                cfg.CreateMap<Entity14, EntityDTO14>().ReverseMap();
+                cfg.CreateMap<Entity15, EntityDTO15>().ReverseMap();
+                cfg.CreateMap<Entity16, EntityDTO16>().ReverseMap();
+                cfg.CreateMap<Entity17, EntityDTO17>().ReverseMap();
+                cfg.CreateMap<Entity18, EntityDTO18>().ReverseMap();
+                cfg.CreateMap<Entity19, EntityDTO19>().ReverseMap();
+                cfg.CreateMap<Entity20, EntityDTO20>().ReverseMap();
+                cfg.CreateMap<Entity21, EntityDTO21>().ReverseMap();
+                cfg.CreateMap<Entity22, EntityDTO22>().ReverseMap();
+                cfg.CreateMap<Entity23, EntityDTO23>().ReverseMap();
+                cfg.CreateMap<Entity24, EntityDTO24>().ReverseMap();
+                cfg.CreateMap<Entity25, EntityDTO25>().ReverseMap();
+                cfg.CreateMap<Entity26, EntityDTO26>().ReverseMap();
+                //cfg.ForAllPropertyMaps(p => !p.SourceType.IsValueType, (pm, o) => o.MapAtRuntime());
+            });
 
         public class Initialize
         {

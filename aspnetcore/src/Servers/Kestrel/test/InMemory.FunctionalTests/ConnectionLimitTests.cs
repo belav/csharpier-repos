@@ -243,17 +243,15 @@ public class ConnectionLimitTests : LoggedTest
         var serviceContext = new TestServiceContext(LoggerFactory);
 
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.Use(
-            next =>
-            {
-                var middleware = new ConnectionLimitMiddleware<ConnectionContext>(
-                    c => next(c),
-                    concurrentConnectionCounter,
-                    serviceContext.Log
-                );
-                return middleware.OnConnectionAsync;
-            }
-        );
+        listenOptions.Use(next =>
+        {
+            var middleware = new ConnectionLimitMiddleware<ConnectionContext>(
+                c => next(c),
+                concurrentConnectionCounter,
+                serviceContext.Log
+            );
+            return middleware.OnConnectionAsync;
+        });
 
         return new TestServer(app, serviceContext, listenOptions);
     }

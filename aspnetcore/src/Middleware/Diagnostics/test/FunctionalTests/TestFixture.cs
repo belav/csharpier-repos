@@ -23,12 +23,10 @@ public class TestFixture<TStartup> : IDisposable
         using (new CultureReplacer())
         {
             _host = new HostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
+                })
                 .Build();
 
             _host.Start();

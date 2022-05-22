@@ -4199,42 +4199,40 @@ namespace System.Net.Http.Functional.Tests
                             uri.ToString().Replace("http://", "https://")
                         );
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                // negotiate TLS with ALPN H/2
-                                var sslStream = new SslStream(
-                                    connection.Stream,
-                                    false,
-                                    delegate
-                                    {
-                                        return true;
-                                    }
-                                );
-                                SslServerAuthenticationOptions options =
-                                    new SslServerAuthenticationOptions();
-                                options.ServerCertificate =
-                                    Net.Test.Common.Configuration.Certificates.GetServerCertificate();
-                                options.ApplicationProtocols = new List<SslApplicationProtocol>()
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            // negotiate TLS with ALPN H/2
+                            var sslStream = new SslStream(
+                                connection.Stream,
+                                false,
+                                delegate
                                 {
-                                    SslApplicationProtocol.Http2
-                                };
-                                options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
+                                    return true;
+                                }
+                            );
+                            SslServerAuthenticationOptions options =
+                                new SslServerAuthenticationOptions();
+                            options.ServerCertificate =
+                                Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+                            options.ApplicationProtocols = new List<SslApplicationProtocol>()
+                            {
+                                SslApplicationProtocol.Http2
+                            };
+                            options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
 
-                                // Negotiate TLS.
-                                await sslStream
-                                    .AuthenticateAsServerAsync(options, CancellationToken.None)
-                                    .ConfigureAwait(false);
+                            // Negotiate TLS.
+                            await sslStream
+                                .AuthenticateAsServerAsync(options, CancellationToken.None)
+                                .ConfigureAwait(false);
 
-                                // Send back HTTP/1.1 response
-                                await sslStream.WriteAsync(
-                                    Encoding.ASCII.GetBytes(
-                                        "HTTP/1.1 400 Unrecognized request\r\n\r\n"
-                                    ),
-                                    CancellationToken.None
-                                );
-                            }
-                        );
+                            // Send back HTTP/1.1 response
+                            await sslStream.WriteAsync(
+                                Encoding.ASCII.GetBytes(
+                                    "HTTP/1.1 400 Unrecognized request\r\n\r\n"
+                                ),
+                                CancellationToken.None
+                            );
+                        });
 
                         Exception e = await Assert.ThrowsAsync<HttpRequestException>(
                             () => requestTask

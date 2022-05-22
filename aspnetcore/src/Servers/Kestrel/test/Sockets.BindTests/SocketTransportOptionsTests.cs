@@ -123,15 +123,13 @@ public class SocketTransportOptionsTests : LoggedTestBase
     ) =>
         TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSockets(configureSocketOptions)
-                        .UseKestrel(options => options.Listen(endpoint))
-                        .Configure(app => app.Run(ctx => ctx.Response.WriteAsync("Hello World")));
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseSockets(configureSocketOptions)
+                    .UseKestrel(options => options.Listen(endpoint))
+                    .Configure(app => app.Run(ctx => ctx.Response.WriteAsync("Hello World")));
+            })
             .ConfigureServices(AddTestLogging)
             .Build();
 }

@@ -89,14 +89,12 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.ReadAsync(new byte[1], 0, 1);
-                            await connection.SendResponseAsync();
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.ReadAsync(new byte[1], 0, 1);
+                        await connection.SendResponseAsync();
+                    });
                 }
             );
         }

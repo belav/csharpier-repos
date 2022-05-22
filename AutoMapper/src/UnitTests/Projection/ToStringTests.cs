@@ -20,12 +20,10 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Dest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
@@ -56,12 +54,10 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Dest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>();
+            });
 
         protected override void Because_of()
         {

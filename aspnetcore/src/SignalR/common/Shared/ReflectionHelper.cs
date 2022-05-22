@@ -50,18 +50,16 @@ internal static class ReflectionHelper
         }
 
         return type.GetInterfaces()
-            .Any(
-                t =>
+            .Any(t =>
+            {
+                if (t.IsGenericType)
                 {
-                    if (t.IsGenericType)
-                    {
-                        return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
                 }
-            );
+                else
+                {
+                    return false;
+                }
+            });
     }
 }

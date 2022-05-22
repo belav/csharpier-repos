@@ -1868,12 +1868,10 @@ namespace System.Web.Helpers.Test
                         "P3",
                         format: item =>
                         {
-                            return new HelperResult(
-                                tw =>
-                                {
-                                    tw.Write("<span>P3: " + item.P3 + "</span>");
-                                }
-                            );
+                            return new HelperResult(tw =>
+                            {
+                                tw.Write("<span>P3: " + item.P3 + "</span>");
+                            });
                         }
                     )
                 }

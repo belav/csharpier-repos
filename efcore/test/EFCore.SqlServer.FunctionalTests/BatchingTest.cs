@@ -429,25 +429,17 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Owner>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedOnAdd();
-                        b.Property(e => e.Version)
-                            .IsConcurrencyToken()
-                            .ValueGeneratedOnAddOrUpdate();
-                        b.Property(e => e.Name).HasColumnType("nvarchar(450)");
-                    }
-                );
-                modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).HasDefaultValueSql("NEWID()");
-                        b.Property(e => e.Version)
-                            .IsConcurrencyToken()
-                            .ValueGeneratedOnAddOrUpdate();
-                    }
-                );
+                modelBuilder.Entity<Owner>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedOnAdd();
+                    b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+                    b.Property(e => e.Name).HasColumnType("nvarchar(450)");
+                });
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+                    b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+                });
             }
 
             // ReSharper disable once UnusedMember.Local

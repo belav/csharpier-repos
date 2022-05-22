@@ -37,12 +37,10 @@ public class ByteArrayModelBinderIntegrationTest
         // any valid base64 string
         var expectedValue = new byte[] { 12, 13 };
         var value = Convert.ToBase64String(expectedValue);
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(queryStringKey, value);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(queryStringKey, value);
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -114,12 +112,10 @@ public class ByteArrayModelBinderIntegrationTest
         // any valid base64 string
         var value = "four";
         var expectedValue = Convert.FromBase64String(value);
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("CustomParameter", value);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("CustomParameter", value);
+        });
 
         var modelState = testContext.ModelState;
 

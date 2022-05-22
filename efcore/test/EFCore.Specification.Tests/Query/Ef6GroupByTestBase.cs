@@ -946,13 +946,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
-                modelBuilder.Entity<ArubaOwner>(
-                    b =>
-                    {
-                        b.Property(p => p.Id).ValueGeneratedNever();
-                        b.Property(o => o.FirstName).HasMaxLength(30);
-                    }
-                );
+                modelBuilder.Entity<ArubaOwner>(b =>
+                {
+                    b.Property(p => p.Id).ValueGeneratedNever();
+                    b.Property(o => o.FirstName).HasMaxLength(30);
+                });
 
                 modelBuilder.Entity<NumberForLinq>();
                 modelBuilder
@@ -962,24 +960,20 @@ namespace Microsoft.EntityFrameworkCore.Query
                 modelBuilder.Entity<FeaturedProductForLinq>();
                 modelBuilder.Entity<CustomerForLinq>().Property(e => e.Id).ValueGeneratedNever();
 
-                modelBuilder.Entity<OrderForLinq>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Total).HasPrecision(18, 6);
-                    }
-                );
+                modelBuilder.Entity<OrderForLinq>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Total).HasPrecision(18, 6);
+                });
 
                 modelBuilder.Entity<Person>().Property(e => e.Id).ValueGeneratedNever();
                 modelBuilder.Entity<Shoes>().Property(e => e.Id).ValueGeneratedNever();
 
-                modelBuilder.Entity<Feet>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.HasOne(e => e.Person).WithOne(e => e.Feet).HasForeignKey<Feet>();
-                    }
-                );
+                modelBuilder.Entity<Feet>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.HasOne(e => e.Person).WithOne(e => e.Feet).HasForeignKey<Feet>();
+                });
             }
 
             protected override void Seed(ArubaContext context)

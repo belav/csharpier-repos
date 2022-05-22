@@ -825,12 +825,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             mock.Setup(m => m.Submit("good", "bad"))
                 .Returns(
-                    new InvocationFunc(
-                        invocation =>
-                        {
-                            throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
-                        }
-                    )
+                    new InvocationFunc(invocation =>
+                    {
+                        throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
+                    })
                 );
 
             var ex = Assert.Throws<Exception>(() => mock.Object.Submit("good", "bad"));

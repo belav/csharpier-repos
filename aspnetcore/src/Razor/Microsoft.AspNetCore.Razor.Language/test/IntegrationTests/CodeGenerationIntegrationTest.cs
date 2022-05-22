@@ -985,17 +985,15 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     private void DesignTimeTest()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(
-            builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+        var projectEngine = CreateProjectEngine(builder =>
+        {
+            builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            }
-        );
+            SectionDirective.Register(builder);
+        });
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -1013,17 +1011,15 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     private void RunTimeTest()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(
-            builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+        var projectEngine = CreateProjectEngine(builder =>
+        {
+            builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            }
-        );
+            SectionDirective.Register(builder);
+        });
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -1039,17 +1035,15 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     private void RunRuntimeTagHelpersTest(IEnumerable<TagHelperDescriptor> descriptors)
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(
-            builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+        var projectEngine = CreateProjectEngine(builder =>
+        {
+            builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            }
-        );
+            SectionDirective.Register(builder);
+        });
 
         var projectItem = CreateProjectItemFromFile();
         var imports = GetImports(projectEngine, projectItem);
@@ -1070,17 +1064,15 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     private void RunDesignTimeTagHelpersTest(IEnumerable<TagHelperDescriptor> descriptors)
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(
-            builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+        var projectEngine = CreateProjectEngine(builder =>
+        {
+            builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+            // Some of these tests use templates
+            builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            }
-        );
+            SectionDirective.Register(builder);
+        });
 
         var projectItem = CreateProjectItemFromFile();
         var imports = GetImports(projectEngine, projectItem);

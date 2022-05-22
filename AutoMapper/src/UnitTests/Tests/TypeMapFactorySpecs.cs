@@ -104,13 +104,11 @@ namespace AutoMapper.UnitTests.Tests
             profile
                 .Internal()
                 .AddMemberConfiguration()
-                .AddMember<NameSplitMember>(
-                    _ =>
-                    {
-                        _.SourceMemberNamingConvention = namingConvention;
-                        _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
-                    }
-                );
+                .AddMember<NameSplitMember>(_ =>
+                {
+                    _.SourceMemberNamingConvention = namingConvention;
+                    _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
+                });
             _mappingOptions = new ProfileMap(profile);
         }
 
@@ -163,13 +161,11 @@ namespace AutoMapper.UnitTests.Tests
             profile
                 .Internal()
                 .AddMemberConfiguration()
-                .AddMember<NameSplitMember>(
-                    _ =>
-                    {
-                        _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
-                        _.DestinationMemberNamingConvention = namingConvention;
-                    }
-                );
+                .AddMember<NameSplitMember>(_ =>
+                {
+                    _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
+                    _.DestinationMemberNamingConvention = namingConvention;
+                });
             _mappingOptions = new ProfileMap(profile);
         }
 
@@ -204,15 +200,13 @@ namespace AutoMapper.UnitTests.Tests
         [Fact]
         public void Should_map_properties_with_different_names()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ReplaceMemberName("A", "Ä");
-                    cfg.ReplaceMemberName("i", "í");
-                    cfg.ReplaceMemberName("Airline", "Airlina");
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.ReplaceMemberName("A", "Ä");
+                cfg.ReplaceMemberName("i", "í");
+                cfg.ReplaceMemberName("Airline", "Airlina");
+                cfg.CreateMap<Source, Destination>();
+            });
 
             var mapper = config.CreateMapper();
             var dest = mapper.Map<Destination>(
@@ -256,15 +250,13 @@ namespace AutoMapper.UnitTests.Tests
         [Fact]
         public void Should_map_properties_with_different_names()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ReplaceMemberName("A", "Ä");
-                    cfg.ReplaceMemberName("i", "í");
-                    cfg.ReplaceMemberName("Airline", "Airlina");
-                    cfg.AddProfile<TestProfile>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.ReplaceMemberName("A", "Ä");
+                cfg.ReplaceMemberName("i", "í");
+                cfg.ReplaceMemberName("Airline", "Airlina");
+                cfg.AddProfile<TestProfile>();
+            });
 
             var mapper = config.CreateMapper();
             var dest = mapper.Map<Destination>(

@@ -25,32 +25,22 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
             Todo EchoTodo([FromRoute] int id, [FromBody] Todo todo) => todo with { Id = id };
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        b =>
-                                            b.MapPost(
-                                                "/EchoTodo/{id}",
-                                                (Func<int, Todo, Todo>)EchoTodo
-                                            )
-                                    );
-                                }
-                            )
-                            .UseTestServer();
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddRouting();
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .Configure(app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(
+                                b => b.MapPost("/EchoTodo/{id}", (Func<int, Todo, Todo>)EchoTodo)
+                            );
+                        })
+                        .UseTestServer();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddRouting();
+                })
                 .Build();
 
             using var server = host.GetTestServer();

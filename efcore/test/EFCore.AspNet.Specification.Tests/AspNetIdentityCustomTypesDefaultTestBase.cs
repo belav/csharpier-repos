@@ -424,97 +424,83 @@ namespace Microsoft.EntityFrameworkCore
 
             modelBuilder.HasDefaultSchema("notdbo");
 
-            modelBuilder.Entity<CustomUserString>(
-                b =>
-                {
-                    b.HasMany(e => e.Roles)
-                        .WithMany(e => e.Users)
-                        .UsingEntity<CustomUserRoleString>(
-                            j =>
-                                j.HasOne(e => e.Role)
-                                    .WithMany(e => e.UserRoles)
-                                    .HasForeignKey(e => e.RoleId),
-                            j =>
-                                j.HasOne(e => e.User)
-                                    .WithMany(e => e.UserRoles)
-                                    .HasForeignKey(e => e.RoleId)
-                        );
+            modelBuilder.Entity<CustomUserString>(b =>
+            {
+                b.HasMany(e => e.Roles)
+                    .WithMany(e => e.Users)
+                    .UsingEntity<CustomUserRoleString>(
+                        j =>
+                            j.HasOne(e => e.Role)
+                                .WithMany(e => e.UserRoles)
+                                .HasForeignKey(e => e.RoleId),
+                        j =>
+                            j.HasOne(e => e.User)
+                                .WithMany(e => e.UserRoles)
+                                .HasForeignKey(e => e.RoleId)
+                    );
 
-                    b.HasMany(e => e.Claims)
-                        .WithOne(e => e.User)
-                        .HasForeignKey(uc => uc.UserId)
-                        .IsRequired();
-                    b.HasMany(e => e.Logins)
-                        .WithOne(e => e.User)
-                        .HasForeignKey(ul => ul.UserId)
-                        .IsRequired();
-                    b.HasMany(e => e.Tokens)
-                        .WithOne(e => e.User)
-                        .HasForeignKey(ut => ut.UserId)
-                        .IsRequired();
-                    b.HasMany(e => e.UserRoles)
-                        .WithOne(e => e.User)
-                        .HasForeignKey(ur => ur.UserId)
-                        .IsRequired();
-                    b.ToTable("MyUsers");
-                    b.Property(u => u.UserName).HasMaxLength(128);
-                    b.Property(u => u.NormalizedUserName).HasMaxLength(128);
-                    b.Property(u => u.Email).HasMaxLength(128);
-                    b.Property(u => u.NormalizedEmail).HasMaxLength(128);
-                }
-            );
+                b.HasMany(e => e.Claims)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(uc => uc.UserId)
+                    .IsRequired();
+                b.HasMany(e => e.Logins)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ul => ul.UserId)
+                    .IsRequired();
+                b.HasMany(e => e.Tokens)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ut => ut.UserId)
+                    .IsRequired();
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+                b.ToTable("MyUsers");
+                b.Property(u => u.UserName).HasMaxLength(128);
+                b.Property(u => u.NormalizedUserName).HasMaxLength(128);
+                b.Property(u => u.Email).HasMaxLength(128);
+                b.Property(u => u.NormalizedEmail).HasMaxLength(128);
+            });
 
-            modelBuilder.Entity<CustomRoleString>(
-                b =>
-                {
-                    b.HasMany(e => e.UserRoles)
-                        .WithOne(e => e.Role)
-                        .HasForeignKey(ur => ur.RoleId)
-                        .IsRequired();
-                    b.HasMany(e => e.RoleClaims)
-                        .WithOne(e => e.Role)
-                        .HasForeignKey(rc => rc.RoleId)
-                        .IsRequired();
-                    b.ToTable("MyRoles");
-                }
-            );
+            modelBuilder.Entity<CustomRoleString>(b =>
+            {
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+                b.HasMany(e => e.RoleClaims)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(rc => rc.RoleId)
+                    .IsRequired();
+                b.ToTable("MyRoles");
+            });
 
-            modelBuilder.Entity<CustomUserClaimString>(
-                b =>
-                {
-                    b.ToTable("MyUserClaims");
-                }
-            );
+            modelBuilder.Entity<CustomUserClaimString>(b =>
+            {
+                b.ToTable("MyUserClaims");
+            });
 
-            modelBuilder.Entity<CustomUserLoginString>(
-                b =>
-                {
-                    b.ToTable("MyUserLogins");
-                }
-            );
+            modelBuilder.Entity<CustomUserLoginString>(b =>
+            {
+                b.ToTable("MyUserLogins");
+            });
 
-            modelBuilder.Entity<CustomUserTokenString>(
-                b =>
-                {
-                    b.Property(t => t.LoginProvider).HasMaxLength(128);
-                    b.Property(t => t.Name).HasMaxLength(128);
-                    b.ToTable("MyUserTokens");
-                }
-            );
+            modelBuilder.Entity<CustomUserTokenString>(b =>
+            {
+                b.Property(t => t.LoginProvider).HasMaxLength(128);
+                b.Property(t => t.Name).HasMaxLength(128);
+                b.ToTable("MyUserTokens");
+            });
 
-            modelBuilder.Entity<CustomRoleClaimString>(
-                b =>
-                {
-                    b.ToTable("MyRoleClaims");
-                }
-            );
+            modelBuilder.Entity<CustomRoleClaimString>(b =>
+            {
+                b.ToTable("MyRoleClaims");
+            });
 
-            modelBuilder.Entity<CustomUserRoleString>(
-                b =>
-                {
-                    b.ToTable("MyUserRoles");
-                }
-            );
+            modelBuilder.Entity<CustomUserRoleString>(b =>
+            {
+                b.ToTable("MyUserRoles");
+            });
         }
     }
 

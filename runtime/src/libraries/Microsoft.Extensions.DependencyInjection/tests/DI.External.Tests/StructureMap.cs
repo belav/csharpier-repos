@@ -26,12 +26,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         )
         {
             var container = new Container();
-            container.Configure(
-                config =>
-                {
-                    config.Populate(serviceCollection);
-                }
-            );
+            container.Configure(config =>
+            {
+                config.Populate(serviceCollection);
+            });
 
             return container.GetInstance<IServiceProvider>();
         }

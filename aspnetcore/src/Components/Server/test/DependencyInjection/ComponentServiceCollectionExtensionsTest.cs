@@ -36,13 +36,11 @@ public class ComponentServiceCollectionExtensionsTest
         var services = new ServiceCollection();
         services.AddServerSideBlazor();
 
-        services.Configure<HubOptions>(
-            options =>
-            {
-                options.SupportedProtocols.Add("test");
-                options.HandshakeTimeout = TimeSpan.FromMinutes(10);
-            }
-        );
+        services.Configure<HubOptions>(options =>
+        {
+            options.SupportedProtocols.Add("test");
+            options.HandshakeTimeout = TimeSpan.FromMinutes(10);
+        });
 
         // Act
         var options = services
@@ -62,21 +60,17 @@ public class ComponentServiceCollectionExtensionsTest
         var services = new ServiceCollection();
         services
             .AddServerSideBlazor()
-            .AddHubOptions(
-                options =>
-                {
-                    Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
-                    options.HandshakeTimeout = TimeSpan.FromMinutes(5);
-                }
-            );
-
-        services.Configure<HubOptions>(
-            options =>
+            .AddHubOptions(options =>
             {
-                options.SupportedProtocols.Add("test");
-                options.HandshakeTimeout = TimeSpan.FromMinutes(10);
-            }
-        );
+                Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
+                options.HandshakeTimeout = TimeSpan.FromMinutes(5);
+            });
+
+        services.Configure<HubOptions>(options =>
+        {
+            options.SupportedProtocols.Add("test");
+            options.HandshakeTimeout = TimeSpan.FromMinutes(10);
+        });
 
         // Act
         var options = services

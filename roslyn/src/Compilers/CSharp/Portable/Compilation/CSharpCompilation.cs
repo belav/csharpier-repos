@@ -3161,18 +3161,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     RoslynParallel.For(
                         0,
                         syntaxTrees.Length,
-                        UICultureUtilities.WithCurrentUICulture<int>(
-                            i =>
-                            {
-                                var syntaxTree = syntaxTrees[i];
-                                AppendLoadDirectiveDiagnostics(
-                                    builder.DiagnosticBag,
-                                    _syntaxAndDeclarations,
-                                    syntaxTree
-                                );
-                                builder.AddRange(syntaxTree.GetDiagnostics(cancellationToken));
-                            }
-                        ),
+                        UICultureUtilities.WithCurrentUICulture<int>(i =>
+                        {
+                            var syntaxTree = syntaxTrees[i];
+                            AppendLoadDirectiveDiagnostics(
+                                builder.DiagnosticBag,
+                                _syntaxAndDeclarations,
+                                syntaxTree
+                            );
+                            builder.AddRange(syntaxTree.GetDiagnostics(cancellationToken));
+                        }),
                         cancellationToken
                     );
                 }

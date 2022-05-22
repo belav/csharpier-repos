@@ -46,12 +46,10 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.Configure<DataProtectionOptions>(
-            options =>
-            {
-                options.ApplicationDiscriminator = applicationName;
-            }
-        );
+        builder.Services.Configure<DataProtectionOptions>(options =>
+        {
+            options.ApplicationDiscriminator = applicationName;
+        });
 
         return builder;
     }
@@ -80,12 +78,10 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(sink));
         }
 
-        builder.Services.Configure<KeyManagementOptions>(
-            options =>
-            {
-                options.KeyEscrowSinks.Add(sink);
-            }
-        );
+        builder.Services.Configure<KeyManagementOptions>(options =>
+        {
+            options.KeyEscrowSinks.Add(sink);
+        });
 
         return builder;
     }
@@ -108,18 +104,14 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var implementationInstance = services.GetRequiredService<TImplementation>();
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var implementationInstance = services.GetRequiredService<TImplementation>();
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.KeyEscrowSinks.Add(implementationInstance);
-                    }
-                );
-            }
-        );
+                options.KeyEscrowSinks.Add(implementationInstance);
+            });
+        });
 
         return builder;
     }
@@ -148,18 +140,14 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(factory));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var instance = factory(services);
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var instance = factory(services);
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.KeyEscrowSinks.Add(instance);
-                    }
-                );
-            }
-        );
+                options.KeyEscrowSinks.Add(instance);
+            });
+        });
 
         return builder;
     }
@@ -207,12 +195,10 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.Configure<KeyManagementOptions>(
-            options =>
-            {
-                options.AutoGenerateKeys = false;
-            }
-        );
+        builder.Services.Configure<KeyManagementOptions>(options =>
+        {
+            options.AutoGenerateKeys = false;
+        });
         return builder;
     }
 
@@ -238,22 +224,14 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(directory));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.XmlRepository = new FileSystemXmlRepository(
-                            directory,
-                            loggerFactory
-                        );
-                    }
-                );
-            }
-        );
+                options.XmlRepository = new FileSystemXmlRepository(directory, loggerFactory);
+            });
+        });
 
         return builder;
     }
@@ -280,22 +258,14 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(registryKey));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.XmlRepository = new RegistryXmlRepository(
-                            registryKey,
-                            loggerFactory
-                        );
-                    }
-                );
-            }
-        );
+                options.XmlRepository = new RegistryXmlRepository(registryKey, loggerFactory);
+            });
+        });
 
         return builder;
     }
@@ -321,22 +291,14 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(certificate));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.XmlEncryptor = new CertificateXmlEncryptor(
-                            certificate,
-                            loggerFactory
-                        );
-                    }
-                );
-            }
-        );
+                options.XmlEncryptor = new CertificateXmlEncryptor(certificate, loggerFactory);
+            });
+        });
 
         builder.Services.Configure<XmlKeyDecryptionOptions>(
             o => o.AddKeyDecryptionCertificate(certificate)
@@ -376,24 +338,19 @@ public static class DataProtectionBuilderExtensions
         // if it doesn't already exist.
         builder.Services.TryAddSingleton<ICertificateResolver, CertificateResolver>();
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            var certificateResolver = services.GetRequiredService<ICertificateResolver>();
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                var certificateResolver = services.GetRequiredService<ICertificateResolver>();
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.XmlEncryptor = new CertificateXmlEncryptor(
-                            thumbprint,
-                            certificateResolver,
-                            loggerFactory
-                        );
-                    }
+                options.XmlEncryptor = new CertificateXmlEncryptor(
+                    thumbprint,
+                    certificateResolver,
+                    loggerFactory
                 );
-            }
-        );
+            });
+        });
 
         return builder;
     }
@@ -414,18 +371,16 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.Configure<XmlKeyDecryptionOptions>(
-            o =>
+        builder.Services.Configure<XmlKeyDecryptionOptions>(o =>
+        {
+            if (certificates != null)
             {
-                if (certificates != null)
+                foreach (var certificate in certificates)
                 {
-                    foreach (var certificate in certificates)
-                    {
-                        o.AddKeyDecryptionCertificate(certificate);
-                    }
+                    o.AddKeyDecryptionCertificate(certificate);
                 }
             }
-        );
+        });
 
         return builder;
     }
@@ -473,23 +428,15 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        CryptoUtil.AssertPlatformIsWindows();
-                        options.XmlEncryptor = new DpapiXmlEncryptor(
-                            protectToLocalMachine,
-                            loggerFactory
-                        );
-                    }
-                );
-            }
-        );
+                CryptoUtil.AssertPlatformIsWindows();
+                options.XmlEncryptor = new DpapiXmlEncryptor(protectToLocalMachine, loggerFactory);
+            });
+        });
 
         return builder;
     }
@@ -550,24 +497,19 @@ public static class DataProtectionBuilderExtensions
             throw new ArgumentNullException(nameof(protectionDescriptorRule));
         }
 
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            services =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
+        {
+            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var loggerFactory =
-                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        CryptoUtil.AssertPlatformIsWindows8OrLater();
-                        options.XmlEncryptor = new DpapiNGXmlEncryptor(
-                            protectionDescriptorRule,
-                            flags,
-                            loggerFactory
-                        );
-                    }
+                CryptoUtil.AssertPlatformIsWindows8OrLater();
+                options.XmlEncryptor = new DpapiNGXmlEncryptor(
+                    protectionDescriptorRule,
+                    flags,
+                    loggerFactory
                 );
-            }
-        );
+            });
+        });
 
         return builder;
     }
@@ -597,12 +539,10 @@ public static class DataProtectionBuilderExtensions
             );
         }
 
-        builder.Services.Configure<KeyManagementOptions>(
-            options =>
-            {
-                options.NewKeyLifetime = lifetime;
-            }
-        );
+        builder.Services.Configure<KeyManagementOptions>(options =>
+        {
+            options.NewKeyLifetime = lifetime;
+        });
 
         return builder;
     }
@@ -731,12 +671,10 @@ public static class DataProtectionBuilderExtensions
     {
         ((IInternalAlgorithmConfiguration)configuration).Validate(); // perform self-test
 
-        builder.Services.Configure<KeyManagementOptions>(
-            options =>
-            {
-                options.AuthenticatedEncryptorConfiguration = configuration;
-            }
-        );
+        builder.Services.Configure<KeyManagementOptions>(options =>
+        {
+            options.AuthenticatedEncryptorConfiguration = configuration;
+        });
 
         return builder;
     }

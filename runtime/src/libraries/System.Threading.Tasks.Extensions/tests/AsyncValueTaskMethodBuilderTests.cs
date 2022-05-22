@@ -802,20 +802,18 @@ namespace System.Threading.Tasks.Tests
             await Task.WhenAll(
                 Enumerable
                     .Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+                    .Select(async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                await ValueTaskAsync();
+                            await ValueTaskAsync();
 
-                                static async ValueTask ValueTaskAsync()
-                                {
-                                    await Task.Delay(1);
-                                }
+                            static async ValueTask ValueTaskAsync()
+                            {
+                                await Task.Delay(1);
                             }
                         }
-                    )
+                    })
             );
         }
 
@@ -825,21 +823,19 @@ namespace System.Threading.Tasks.Tests
             await Task.WhenAll(
                 Enumerable
                     .Range(0, Environment.ProcessorCount)
-                    .Select(
-                        async _ =>
+                    .Select(async _ =>
+                    {
+                        for (int i = 0; i < 10; i++)
                         {
-                            for (int i = 0; i < 10; i++)
-                            {
-                                Assert.Equal(42 + i, await ValueTaskAsync(i));
+                            Assert.Equal(42 + i, await ValueTaskAsync(i));
 
-                                static async ValueTask<int> ValueTaskAsync(int i)
-                                {
-                                    await Task.Delay(1);
-                                    return 42 + i;
-                                }
+                            static async ValueTask<int> ValueTaskAsync(int i)
+                            {
+                                await Task.Delay(1);
+                                return 42 + i;
                             }
                         }
-                    )
+                    })
             );
         }
 

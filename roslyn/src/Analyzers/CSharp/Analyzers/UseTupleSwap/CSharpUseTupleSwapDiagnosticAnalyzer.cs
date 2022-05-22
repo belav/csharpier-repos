@@ -49,20 +49,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context =>
-                {
-                    // Tuples are only available in C# 7 and above.
-                    var compilation = context.Compilation;
-                    if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp7)
-                        return;
+            context.RegisterCompilationStartAction(context =>
+            {
+                // Tuples are only available in C# 7 and above.
+                var compilation = context.Compilation;
+                if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp7)
+                    return;
 
-                    context.RegisterSyntaxNodeAction(
-                        AnalyzeLocalDeclarationStatement,
-                        SyntaxKind.LocalDeclarationStatement
-                    );
-                }
-            );
+                context.RegisterSyntaxNodeAction(
+                    AnalyzeLocalDeclarationStatement,
+                    SyntaxKind.LocalDeclarationStatement
+                );
+            });
         }
 
         private void AnalyzeLocalDeclarationStatement(SyntaxNodeAnalysisContext syntaxContext)

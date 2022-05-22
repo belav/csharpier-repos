@@ -46,12 +46,10 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var projectEngine = CreateProjectEngine(
-            b =>
-            {
-                b.SetRootNamespace("MyApp");
-            }
-        );
+        var projectEngine = CreateProjectEngine(b =>
+        {
+            b.SetRootNamespace("MyApp");
+        });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
@@ -78,12 +76,10 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var projectEngine = CreateProjectEngine(
-            b =>
-            {
-                b.SetRootNamespace("MyApp");
-            }
-        );
+        var projectEngine = CreateProjectEngine(b =>
+        {
+            b.SetRootNamespace("MyApp");
+        });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
@@ -113,12 +109,10 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var projectEngine = CreateProjectEngine(
-            b =>
-            {
-                b.SetRootNamespace("MyApp");
-            }
-        );
+        var projectEngine = CreateProjectEngine(b =>
+        {
+            b.SetRootNamespace("MyApp");
+        });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };
@@ -146,12 +140,10 @@ public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
         );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var projectEngine = CreateProjectEngine(
-            b =>
-            {
-                b.SetRootNamespace("My.+App");
-            }
-        );
+        var projectEngine = CreateProjectEngine(b =>
+        {
+            b.SetRootNamespace("My.+App");
+        });
 
         var irDocument = CreateIRDocument(projectEngine, codeDocument);
         var pass = new ComponentDocumentClassifierPass { Engine = projectEngine.Engine };

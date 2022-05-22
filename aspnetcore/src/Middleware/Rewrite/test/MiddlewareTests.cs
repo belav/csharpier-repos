@@ -26,29 +26,25 @@ public class MiddlewareTests
             skipRemainingRules: false
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -69,29 +65,25 @@ public class MiddlewareTests
             skipRemainingRules: true
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -110,29 +102,25 @@ public class MiddlewareTests
             .AddRewrite("(.*)", "http://example.com/$1", skipRemainingRules: true)
             .AddRewrite("(.*)", "http://example.com/42", skipRemainingRules: false);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -151,29 +139,25 @@ public class MiddlewareTests
             .AddRewrite("(.*)", "http://example.com/$1s", skipRemainingRules: false)
             .AddRewrite("(.*)", "http://example.com/$1/42", skipRemainingRules: false);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -227,19 +211,15 @@ public class MiddlewareTests
             statusCode: StatusCodes.Status301MovedPermanently
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -259,34 +239,26 @@ public class MiddlewareTests
     public async Task RewriteRulesCanComeFromConfigureOptions()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.Configure<RewriteOptions>(
-                                    options =>
-                                    {
-                                        options.AddRedirect(
-                                            "(.*)",
-                                            "http://example.com/$1",
-                                            statusCode: StatusCodes.Status301MovedPermanently
-                                        );
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter();
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.Configure<RewriteOptions>(options =>
+                        {
+                            options.AddRedirect(
+                                "(.*)",
+                                "http://example.com/$1",
+                                statusCode: StatusCodes.Status301MovedPermanently
+                            );
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRewriter();
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -307,19 +279,15 @@ public class MiddlewareTests
             statusCode: StatusCodes.Status301MovedPermanently
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -340,19 +308,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToHttps(statusCode: statusCode);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -375,19 +339,15 @@ public class MiddlewareTests
             sslPort: sslPort
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -433,19 +393,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToHttps();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -469,19 +425,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToHttpsPermanent();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -504,19 +456,15 @@ public class MiddlewareTests
             sslPort: sslPort
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -538,19 +486,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww(statusCode: statusCode);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -572,19 +516,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -602,19 +542,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWwwPermanent();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -642,19 +578,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -675,19 +607,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToNonWww(statusCode: statusCode);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -709,19 +637,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToNonWww();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -739,19 +663,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToNonWwwPermanent();
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -773,19 +693,15 @@ public class MiddlewareTests
             statusCode: StatusCodes.Status301MovedPermanently
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -803,43 +719,35 @@ public class MiddlewareTests
         // relies on it, so we have this test
         var options = new RewriteOptions().AddRewrite("(.*)", "$1s", skipRemainingRules: false);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            s =>
-                            {
-                                s.AddRouting();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseRewriter(options);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(s =>
+                    {
+                        s.AddRouting();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseRewriter(options);
 
-                                app.UseEndpoints(
-                                    endpoints =>
-                                    {
-                                        endpoints.MapGet(
-                                            "/foos",
-                                            context => context.Response.WriteAsync("bad")
-                                        );
-                                        endpoints.MapGet(
-                                            "/foo",
-                                            context =>
-                                                context.Response.WriteAsync(
-                                                    $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
-                                                )
-                                        );
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapGet(
+                                "/foos",
+                                context => context.Response.WriteAsync("bad")
+                            );
+                            endpoints.MapGet(
+                                "/foo",
+                                context =>
+                                    context.Response.WriteAsync(
+                                        $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
+                                    )
+                            );
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -856,25 +764,21 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRewrite("(.*)", "$1", skipRemainingRules: false);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -891,25 +795,21 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirect("(.*)", "$1");
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -932,19 +832,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww("example2.com");
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -965,19 +861,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww("example.com");
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -995,19 +887,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWwwPermanent("example.com");
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -1029,19 +917,15 @@ public class MiddlewareTests
     {
         var options = new RewriteOptions().AddRedirectToWww(statusCode: statusCode, "example.com");
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -1075,24 +959,22 @@ public class MiddlewareTests
 
         app.UseRewriter(options);
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-                endpoints.MapGet(
-                    "/g",
-                    context =>
-                        context.Response.WriteAsync(
-                            context.Request.Scheme
-                                + "://"
-                                + context.Request.Host
-                                + context.Request.Path
-                                + context.Request.QueryString
-                        )
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/g",
+                context =>
+                    context.Response.WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
+            );
+        });
 
         await app.StartAsync();
 
@@ -1113,35 +995,31 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(
-            options =>
-            {
-                options.AddRewrite(regex, "http://example.com/g", skipRemainingRules: false);
-            }
-        );
+        builder.Services.Configure<RewriteOptions>(options =>
+        {
+            options.AddRewrite(regex, "http://example.com/g", skipRemainingRules: false);
+        });
         await using var app = builder.Build();
 
         app.UseRouting();
         app.UseRewriter();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-                endpoints.MapGet(
-                    "/g",
-                    context =>
-                        context.Response.WriteAsync(
-                            context.Request.Scheme
-                                + "://"
-                                + context.Request.Host
-                                + context.Request.Path
-                                + context.Request.QueryString
-                        )
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/g",
+                context =>
+                    context.Response.WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
+            );
+        });
 
         await app.StartAsync();
 
@@ -1157,35 +1035,31 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(
-            options =>
-            {
-                options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
-            }
-        );
+        builder.Services.Configure<RewriteOptions>(options =>
+        {
+            options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
+        });
         await using var app = builder.Build();
         app.UseRouting();
 
         app.UseRewriter();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-                endpoints.MapGet(
-                    "/g",
-                    context =>
-                        context.Response.WriteAsync(
-                            context.Request.Scheme
-                                + "://"
-                                + context.Request.Host
-                                + context.Request.Path
-                                + context.Request.QueryString
-                        )
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/g",
+                context =>
+                    context.Response.WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
+            );
+        });
 
         await app.StartAsync();
 
@@ -1201,37 +1075,33 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(
-            options =>
-            {
-                options
-                    .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: false)
-                    .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
-            }
-        );
+        builder.Services.Configure<RewriteOptions>(options =>
+        {
+            options
+                .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: false)
+                .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
+        });
         await using var app = builder.Build();
         app.UseRouting();
 
         app.UseRewriter();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-                endpoints.MapGet(
-                    "/g/h",
-                    context =>
-                        context.Response.WriteAsync(
-                            context.Request.Scheme
-                                + "://"
-                                + context.Request.Host
-                                + context.Request.Path
-                                + context.Request.QueryString
-                        )
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/g/h",
+                context =>
+                    context.Response.WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
+            );
+        });
 
         await app.StartAsync();
 
@@ -1247,37 +1117,33 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(
-            options =>
-            {
-                options
-                    .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true)
-                    .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
-            }
-        );
+        builder.Services.Configure<RewriteOptions>(options =>
+        {
+            options
+                .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true)
+                .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
+        });
         await using var app = builder.Build();
         app.UseRouting();
 
         app.UseRewriter();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/foo", context => context.Response.WriteAsync("no rule"));
 
-                endpoints.MapGet(
-                    "/g",
-                    context =>
-                        context.Response.WriteAsync(
-                            context.Request.Scheme
-                                + "://"
-                                + context.Request.Host
-                                + context.Request.Path
-                                + context.Request.QueryString
-                        )
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/g",
+                context =>
+                    context.Response.WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
+            );
+        });
 
         await app.StartAsync();
 
@@ -1293,12 +1159,10 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(
-            options =>
-            {
-                options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
-            }
-        );
+        builder.Services.Configure<RewriteOptions>(options =>
+        {
+            options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
+        });
         await using var app = builder.Build();
 
         app.UseRewriter();

@@ -637,13 +637,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
         )
         {
             var containsExpression = false;
-            var descendantNodes = node.DescendantNodes(
-                n =>
-                {
-                    // Don't go into sub block. They may contain expressions but we only care about the top level.
-                    return !(n.Parent is CSharpCodeBlockSyntax);
-                }
-            );
+            var descendantNodes = node.DescendantNodes(n =>
+            {
+                // Don't go into sub block. They may contain expressions but we only care about the top level.
+                return !(n.Parent is CSharpCodeBlockSyntax);
+            });
             foreach (var child in descendantNodes)
             {
                 if (
@@ -1081,15 +1079,14 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(
-                        a =>
+                    var associatedAttributeDescriptor =
+                        associatedDescriptor.BoundAttributes.First(a =>
                         {
                             return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
                                 attributeName,
                                 a
                             );
-                        }
-                    );
+                        });
 
                     var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(
                         attributeName
@@ -1151,15 +1148,14 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(
-                        a =>
+                    var associatedAttributeDescriptor =
+                        associatedDescriptor.BoundAttributes.First(a =>
                         {
                             return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
                                 attributeName,
                                 a
                             );
-                        }
-                    );
+                        });
 
                     var setTagHelperProperty = new TagHelperPropertyIntermediateNode()
                     {
@@ -1555,13 +1551,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
         )
         {
             var containsExpression = false;
-            var descendantNodes = node.DescendantNodes(
-                n =>
-                {
-                    // Don't go into sub block. They may contain expressions but we only care about the top level.
-                    return !(n.Parent is CSharpCodeBlockSyntax);
-                }
-            );
+            var descendantNodes = node.DescendantNodes(n =>
+            {
+                // Don't go into sub block. They may contain expressions but we only care about the top level.
+                return !(n.Parent is CSharpCodeBlockSyntax);
+            });
             foreach (var child in descendantNodes)
             {
                 if (

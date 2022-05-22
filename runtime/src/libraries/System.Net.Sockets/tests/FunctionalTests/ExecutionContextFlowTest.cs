@@ -834,18 +834,16 @@ namespace System.Net.Sockets.Tests
                     {
                         var stackLog = new StringBuilder();
                         int executionContextChanges = 0;
-                        var asyncLocal = new AsyncLocal<int>(
-                            _ =>
+                        var asyncLocal = new AsyncLocal<int>(_ =>
+                        {
+                            lock (stackLog)
                             {
-                                lock (stackLog)
-                                {
-                                    executionContextChanges++;
-                                    stackLog.AppendLine(
-                                        $"#{executionContextChanges}: {Environment.StackTrace}"
-                                    );
-                                }
+                                executionContextChanges++;
+                                stackLog.AppendLine(
+                                    $"#{executionContextChanges}: {Environment.StackTrace}"
+                                );
                             }
-                        );
+                        });
                         Assert.Equal(0, executionContextChanges);
 
                         int numAwaits = 20;

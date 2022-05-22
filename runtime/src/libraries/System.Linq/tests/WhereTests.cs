@@ -488,13 +488,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Empty<int>();
             bool wasSelectorCalled = false;
 
-            IEnumerable<int> result = source.Where(
-                value =>
-                {
-                    wasSelectorCalled = true;
-                    return true;
-                }
-            );
+            IEnumerable<int> result = source.Where(value =>
+            {
+                wasSelectorCalled = true;
+                return true;
+            });
 
             Assert.Equal(0, result.Count());
             Assert.False(wasSelectorCalled);

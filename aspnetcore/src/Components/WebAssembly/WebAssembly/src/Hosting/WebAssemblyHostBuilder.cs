@@ -314,13 +314,11 @@ public sealed class WebAssemblyHostBuilder
             sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State
         );
         Services.AddSingleton<IErrorBoundaryLogger, WebAssemblyErrorBoundaryLogger>();
-        Services.AddLogging(
-            builder =>
-            {
-                builder.AddProvider(
-                    new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance)
-                );
-            }
-        );
+        Services.AddLogging(builder =>
+        {
+            builder.AddProvider(
+                new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance)
+            );
+        });
     }
 }

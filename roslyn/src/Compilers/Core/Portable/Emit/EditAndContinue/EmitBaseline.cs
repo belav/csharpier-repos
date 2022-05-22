@@ -149,20 +149,21 @@ namespace Microsoft.CodeAnalysis.Emit
                 .ReadDebugDirectory()
                 .Any(entry => entry.IsPortableCodeView);
 
-            var localSigProvider = new Func<MethodDefinitionHandle, StandaloneSignatureHandle>(
-                methodHandle =>
+            var localSigProvider = new Func<
+                MethodDefinitionHandle,
+                StandaloneSignatureHandle
+            >(methodHandle =>
+            {
+                try
                 {
-                    try
-                    {
-                        return module.Module.GetMethodBodyOrThrow(methodHandle)?.LocalSignature
-                            ?? default;
-                    }
-                    catch (Exception e) when (e is BadImageFormatException || e is IOException)
-                    {
-                        throw new InvalidDataException(e.Message, e);
-                    }
+                    return module.Module.GetMethodBodyOrThrow(methodHandle)?.LocalSignature
+                        ?? default;
                 }
-            );
+                catch (Exception e) when (e is BadImageFormatException || e is IOException)
+                {
+                    throw new InvalidDataException(e.Message, e);
+                }
+            });
 
             return CreateInitialBaseline(
                 module,

@@ -156,13 +156,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public void GetService_CustomServiceProvider_ReturnsNull()
         {
             var validationContext = new ValidationContext(new object());
-            validationContext.InitializeServiceProvider(
-                type =>
-                {
-                    Assert.Equal(typeof(int), type);
-                    return typeof(bool);
-                }
-            );
+            validationContext.InitializeServiceProvider(type =>
+            {
+                Assert.Equal(typeof(int), type);
+                return typeof(bool);
+            });
             Assert.Equal(typeof(bool), validationContext.GetService(typeof(int)));
         }
 

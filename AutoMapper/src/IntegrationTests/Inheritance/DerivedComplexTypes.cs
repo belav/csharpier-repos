@@ -68,13 +68,11 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>();
-                    cfg.CreateProjection<LocalizedString, string>().ConvertUsing(v => v.Value);
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>();
+                cfg.CreateProjection<LocalizedString, string>().ConvertUsing(v => v.Value);
+            });
 
         [Fact]
         public void Can_map_with_projection()

@@ -104,13 +104,11 @@ namespace System.Linq.Parallel.Tests
                     Functions.SumRange(0, count),
                     labeled.Item
                         .WithDegreeOfParallelism(degree)
-                        .Sum(
-                            x =>
-                            {
-                                barrier.SignalAndWait();
-                                return x;
-                            }
-                        )
+                        .Sum(x =>
+                        {
+                            barrier.SignalAndWait();
+                            return x;
+                        })
                 );
             }
         }
@@ -166,15 +164,13 @@ namespace System.Linq.Parallel.Tests
                 Assert.True(
                     labeled.Item
                         .WithDegreeOfParallelism(degree)
-                        .Select(
-                            x =>
-                            {
-                                var sw = new SpinWait();
-                                while (!sw.NextSpinWillYield)
-                                    sw.SpinOnce(); // brief spin to wait a small amount of time
-                                return -x;
-                            }
-                        )
+                        .Select(x =>
+                        {
+                            var sw = new SpinWait();
+                            while (!sw.NextSpinWillYield)
+                                sw.SpinOnce(); // brief spin to wait a small amount of time
+                            return -x;
+                        })
                         .OrderBy(x => x)
                         .SequenceEqual(ParallelEnumerable.Range(1 - count, count).AsOrdered())
                 );

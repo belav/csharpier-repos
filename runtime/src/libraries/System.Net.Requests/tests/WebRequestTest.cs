@@ -227,15 +227,13 @@ namespace System.Net.Tests
                                 WebRequest request = WebRequest.Create(uri);
                                 Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                                await server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        List<string> headers =
-                                            await connection.ReadRequestHeaderAndSendResponseAsync();
-                                        Assert.Contains(eh0, headers);
-                                        Assert.Contains(eh1, headers);
-                                    }
-                                );
+                                await server.AcceptConnectionAsync(async connection =>
+                                {
+                                    List<string> headers =
+                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                                    Assert.Contains(eh0, headers);
+                                    Assert.Contains(eh1, headers);
+                                });
 
                                 using (var response = (HttpWebResponse)await getResponse)
                                 {
@@ -266,19 +264,17 @@ namespace System.Net.Tests
                             WebRequest request = WebRequest.Create(uri);
                             Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    List<string> headers =
-                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                List<string> headers =
+                                    await connection.ReadRequestHeaderAndSendResponseAsync();
 
-                                    foreach (string header in headers)
-                                    {
-                                        Assert.DoesNotContain("Pragma", header);
-                                        Assert.DoesNotContain("Cache-Control", header);
-                                    }
+                                foreach (string header in headers)
+                                {
+                                    Assert.DoesNotContain("Pragma", header);
+                                    Assert.DoesNotContain("Cache-Control", header);
                                 }
-                            );
+                            });
 
                             using (var response = (HttpWebResponse)await getResponse)
                             {

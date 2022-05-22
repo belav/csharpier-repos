@@ -14,20 +14,18 @@ public class ExtensibleDirectiveTest : IntegrationTestBase
     public void NamespaceToken()
     {
         // Arrange
-        var engine = CreateProjectEngine(
-            builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+        var engine = CreateProjectEngine(builder =>
+        {
+            builder.ConfigureDocumentClassifier();
 
-                builder.AddDirective(
-                    DirectiveDescriptor.CreateDirective(
-                        "custom",
-                        DirectiveKind.SingleLine,
-                        b => b.AddNamespaceToken()
-                    )
-                );
-            }
-        );
+            builder.AddDirective(
+                DirectiveDescriptor.CreateDirective(
+                    "custom",
+                    DirectiveKind.SingleLine,
+                    b => b.AddNamespaceToken()
+                )
+            );
+        });
 
         var projectItem = CreateProjectItemFromFile();
 

@@ -241,16 +241,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .GetTypeInfo()
                     .GetDeclaredMethods(nameof(EntityFrameworkQueryableExtensions.ThenInclude))
                     .Where(mi => mi.GetGenericArguments().Count() == 3)
-                    .Single(
-                        mi =>
-                        {
-                            var typeInfo = mi.GetParameters()[0].ParameterType.GenericTypeArguments[
-                                1
-                            ];
-                            return typeInfo.IsGenericType
-                                && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>);
-                        }
-                    );
+                    .Single(mi =>
+                    {
+                        var typeInfo = mi.GetParameters()[0].ParameterType.GenericTypeArguments[1];
+                        return typeInfo.IsGenericType
+                            && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+                    });
 
             protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
             {

@@ -99,18 +99,16 @@ public static class StatusCodePagesExtensions
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseStatusCodePages(
-            context =>
-            {
-                var body = string.Format(
-                    CultureInfo.InvariantCulture,
-                    bodyFormat,
-                    context.HttpContext.Response.StatusCode
-                );
-                context.HttpContext.Response.ContentType = contentType;
-                return context.HttpContext.Response.WriteAsync(body);
-            }
-        );
+        return app.UseStatusCodePages(context =>
+        {
+            var body = string.Format(
+                CultureInfo.InvariantCulture,
+                bodyFormat,
+                context.HttpContext.Response.StatusCode
+            );
+            context.HttpContext.Response.ContentType = contentType;
+            return context.HttpContext.Response.WriteAsync(body);
+        });
     }
 
     /// <summary>
@@ -134,35 +132,31 @@ public static class StatusCodePagesExtensions
         if (locationFormat.StartsWith('~'))
         {
             locationFormat = locationFormat.Substring(1);
-            return app.UseStatusCodePages(
-                context =>
-                {
-                    var location = string.Format(
-                        CultureInfo.InvariantCulture,
-                        locationFormat,
-                        context.HttpContext.Response.StatusCode
-                    );
-                    context.HttpContext.Response.Redirect(
-                        context.HttpContext.Request.PathBase + location
-                    );
-                    return Task.CompletedTask;
-                }
-            );
+            return app.UseStatusCodePages(context =>
+            {
+                var location = string.Format(
+                    CultureInfo.InvariantCulture,
+                    locationFormat,
+                    context.HttpContext.Response.StatusCode
+                );
+                context.HttpContext.Response.Redirect(
+                    context.HttpContext.Request.PathBase + location
+                );
+                return Task.CompletedTask;
+            });
         }
         else
         {
-            return app.UseStatusCodePages(
-                context =>
-                {
-                    var location = string.Format(
-                        CultureInfo.InvariantCulture,
-                        locationFormat,
-                        context.HttpContext.Response.StatusCode
-                    );
-                    context.HttpContext.Response.Redirect(location);
-                    return Task.CompletedTask;
-                }
-            );
+            return app.UseStatusCodePages(context =>
+            {
+                var location = string.Format(
+                    CultureInfo.InvariantCulture,
+                    locationFormat,
+                    context.HttpContext.Response.StatusCode
+                );
+                context.HttpContext.Response.Redirect(location);
+                return Task.CompletedTask;
+            });
         }
     }
 
@@ -215,31 +209,29 @@ public static class StatusCodePagesExtensions
             && routeBuilder is not null
         )
         {
-            return app.Use(
-                next =>
-                {
-                    RequestDelegate? newNext = null;
-                    // start a new middleware pipeline
-                    var builder = app.New();
-                    // use the old routing pipeline if it exists so we preserve all the routes and matching logic
-                    // ((IApplicationBuilder)WebApplication).New() does not copy globalRouteBuilderKey automatically like it does for all other properties.
-                    builder.Properties[globalRouteBuilderKey] = routeBuilder;
-                    builder.UseRouting();
-                    // apply the next middleware
-                    builder.Run(next);
-                    newNext = builder.Build();
+            return app.Use(next =>
+            {
+                RequestDelegate? newNext = null;
+                // start a new middleware pipeline
+                var builder = app.New();
+                // use the old routing pipeline if it exists so we preserve all the routes and matching logic
+                // ((IApplicationBuilder)WebApplication).New() does not copy globalRouteBuilderKey automatically like it does for all other properties.
+                builder.Properties[globalRouteBuilderKey] = routeBuilder;
+                builder.UseRouting();
+                // apply the next middleware
+                builder.Run(next);
+                newNext = builder.Build();
 
-                    return new StatusCodePagesMiddleware(
-                        next,
-                        Options.Create(
-                            new StatusCodePagesOptions()
-                            {
-                                HandleAsync = CreateHandler(pathFormat, queryFormat, newNext)
-                            }
-                        )
-                    ).Invoke;
-                }
-            );
+                return new StatusCodePagesMiddleware(
+                    next,
+                    Options.Create(
+                        new StatusCodePagesOptions()
+                        {
+                            HandleAsync = CreateHandler(pathFormat, queryFormat, newNext)
+                        }
+                    )
+                ).Invoke;
+            });
         }
 
         return app.UseStatusCodePages(CreateHandler(pathFormat, queryFormat));

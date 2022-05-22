@@ -661,13 +661,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Empty<int>();
             bool wasSelectorCalled = false;
 
-            IEnumerable<int> result = source.Select(
-                i =>
-                {
-                    wasSelectorCalled = true;
-                    return i + 1;
-                }
-            );
+            IEnumerable<int> result = source.Select(i =>
+            {
+                wasSelectorCalled = true;
+                return i + 1;
+            });
 
             bool hadItems = false;
             foreach (var item in result)

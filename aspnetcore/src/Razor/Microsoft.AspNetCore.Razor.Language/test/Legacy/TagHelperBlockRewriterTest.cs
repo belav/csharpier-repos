@@ -292,22 +292,18 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         {
             TagHelperDescriptorBuilder
                 .Create("InputTagHelper1", "SomeAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule =>
-                    {
-                        rule.RequireTagName("*")
-                            .RequireAttributeDescriptor(
-                                b =>
-                                {
-                                    b.Name = "@onclick";
-                                    b.Metadata.Add(
-                                        ComponentMetadata.Common.DirectiveAttribute,
-                                        bool.TrueString
-                                    );
-                                }
+                .TagMatchingRuleDescriptor(rule =>
+                {
+                    rule.RequireTagName("*")
+                        .RequireAttributeDescriptor(b =>
+                        {
+                            b.Name = "@onclick";
+                            b.Metadata.Add(
+                                ComponentMetadata.Common.DirectiveAttribute,
+                                bool.TrueString
                             );
-                    }
-                )
+                        });
+                })
                 .AddMetadata(
                     ComponentMetadata.SpecialKindKey,
                     ComponentMetadata.EventHandler.TagHelperKind
@@ -327,22 +323,18 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
         {
             TagHelperDescriptorBuilder
                 .Create("InputTagHelper1", "SomeAssembly")
-                .TagMatchingRuleDescriptor(
-                    rule =>
-                    {
-                        rule.RequireTagName("*")
-                            .RequireAttributeDescriptor(
-                                b =>
-                                {
-                                    b.Name = "@onclick";
-                                    b.Metadata.Add(
-                                        ComponentMetadata.Common.DirectiveAttribute,
-                                        bool.TrueString
-                                    );
-                                }
+                .TagMatchingRuleDescriptor(rule =>
+                {
+                    rule.RequireTagName("*")
+                        .RequireAttributeDescriptor(b =>
+                        {
+                            b.Name = "@onclick";
+                            b.Metadata.Add(
+                                ComponentMetadata.Common.DirectiveAttribute,
+                                bool.TrueString
                             );
-                    }
-                )
+                        });
+                })
                 .AddMetadata(
                     ComponentMetadata.SpecialKindKey,
                     ComponentMetadata.EventHandler.TagHelperKind
@@ -2502,19 +2494,17 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .TagMatchingRuleDescriptor(
                     rule =>
                         rule.RequireTagName("*")
-                            .RequireAttributeDescriptor(
-                                r =>
-                                {
-                                    r.Name = "@bind-";
-                                    r.NameComparisonMode = RequiredAttributeDescriptor
-                                        .NameComparisonMode
-                                        .PrefixMatch;
-                                    r.Metadata.Add(
-                                        ComponentMetadata.Common.DirectiveAttribute,
-                                        bool.TrueString
-                                    );
-                                }
-                            )
+                            .RequireAttributeDescriptor(r =>
+                            {
+                                r.Name = "@bind-";
+                                r.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .PrefixMatch;
+                                r.Metadata.Add(
+                                    ComponentMetadata.Common.DirectiveAttribute,
+                                    bool.TrueString
+                                );
+                            })
                 )
                 .BoundAttributeDescriptor(
                     attribute =>
@@ -2527,14 +2517,12 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                                 ComponentMetadata.Common.DirectiveAttribute,
                                 bool.TrueString
                             )
-                            .BindAttributeParameter(
-                                p =>
-                                {
-                                    p.Name = "event";
-                                    p.TypeName = typeof(string).FullName;
-                                    p.SetPropertyName("Event");
-                                }
-                            )
+                            .BindAttributeParameter(p =>
+                            {
+                                p.Name = "event";
+                                p.TypeName = typeof(string).FullName;
+                                p.SetPropertyName("Event");
+                            })
                 )
                 .Build(),
         };
@@ -2562,19 +2550,17 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                 .TagMatchingRuleDescriptor(
                     rule =>
                         rule.RequireTagName("*")
-                            .RequireAttributeDescriptor(
-                                r =>
-                                {
-                                    r.Name = "@bind-";
-                                    r.NameComparisonMode = RequiredAttributeDescriptor
-                                        .NameComparisonMode
-                                        .PrefixMatch;
-                                    r.Metadata.Add(
-                                        ComponentMetadata.Common.DirectiveAttribute,
-                                        bool.TrueString
-                                    );
-                                }
-                            )
+                            .RequireAttributeDescriptor(r =>
+                            {
+                                r.Name = "@bind-";
+                                r.NameComparisonMode = RequiredAttributeDescriptor
+                                    .NameComparisonMode
+                                    .PrefixMatch;
+                                r.Metadata.Add(
+                                    ComponentMetadata.Common.DirectiveAttribute,
+                                    bool.TrueString
+                                );
+                            })
                 )
                 .BoundAttributeDescriptor(
                     attribute =>
@@ -2587,14 +2573,12 @@ public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
                                 ComponentMetadata.Common.DirectiveAttribute,
                                 bool.TrueString
                             )
-                            .BindAttributeParameter(
-                                p =>
-                                {
-                                    p.Name = "param";
-                                    p.TypeName = typeof(string).FullName;
-                                    p.SetPropertyName("Param");
-                                }
-                            )
+                            .BindAttributeParameter(p =>
+                            {
+                                p.Name = "param";
+                                p.TypeName = typeof(string).FullName;
+                                p.SetPropertyName("Param");
+                            })
                 )
                 .Build(),
         };

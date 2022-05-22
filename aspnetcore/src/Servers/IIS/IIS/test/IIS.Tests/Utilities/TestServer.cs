@@ -156,38 +156,30 @@ public class TestServer : IDisposable
     private int Main(IntPtr argc, IntPtr argv)
     {
         _host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseIIS()
-                        .UseSetting(
-                            WebHostDefaults.ApplicationKey,
-                            typeof(TestServer).GetTypeInfo().Assembly.FullName
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Map(
-                                    "/start",
-                                    builder =>
-                                        builder.Run(context => context.Response.WriteAsync("Done"))
-                                );
-                                _appBuilder(app);
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.Configure<IISServerOptions>(
-                                    options =>
-                                        options.MaxRequestBodySize = _options.MaxRequestBodySize
-                                );
-                                services.AddSingleton(_loggerFactory);
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseIIS()
+                    .UseSetting(
+                        WebHostDefaults.ApplicationKey,
+                        typeof(TestServer).GetTypeInfo().Assembly.FullName
+                    )
+                    .Configure(app =>
+                    {
+                        app.Map(
+                            "/start",
+                            builder => builder.Run(context => context.Response.WriteAsync("Done"))
                         );
-                }
-            )
+                        _appBuilder(app);
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.Configure<IISServerOptions>(
+                            options => options.MaxRequestBodySize = _options.MaxRequestBodySize
+                        );
+                        services.AddSingleton(_loggerFactory);
+                    });
+            })
             .Build();
 
         var doneEvent = new ManualResetEventSlim();

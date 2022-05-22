@@ -103,12 +103,10 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             // Test that exceptions get passed all the way through PostOperationCompleted(callback, AsyncCompletedEventArgs)
             Task.Run(() =>
                 {
-                    var operation = new TestAsyncOperation(
-                        op =>
-                        {
-                            throw new TestException("Test throw");
-                        }
-                    );
+                    var operation = new TestAsyncOperation(op =>
+                    {
+                        throw new TestException("Test throw");
+                    });
 
                     Assert.Throws<TestException>(() => operation.Wait());
                 })

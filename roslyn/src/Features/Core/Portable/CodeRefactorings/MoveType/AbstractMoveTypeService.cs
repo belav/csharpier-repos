@@ -272,21 +272,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             var semanticModel = state.SemanticDocument.SemanticModel;
 
             return TopLevelTypeDeclarations(root)
-                .Any(
-                    typeDeclaration =>
-                    {
-                        var typeName = semanticModel
-                            .GetDeclaredSymbol(typeDeclaration, cancellationToken)
-                            .Name;
-                        return TypeMatchesDocumentName(
-                            typeDeclaration,
-                            typeName,
-                            state.DocumentNameWithoutExtension,
-                            semanticModel,
-                            cancellationToken
-                        );
-                    }
-                );
+                .Any(typeDeclaration =>
+                {
+                    var typeName = semanticModel
+                        .GetDeclaredSymbol(typeDeclaration, cancellationToken)
+                        .Name;
+                    return TypeMatchesDocumentName(
+                        typeDeclaration,
+                        typeName,
+                        state.DocumentNameWithoutExtension,
+                        semanticModel,
+                        cancellationToken
+                    );
+                });
         }
 
         /// <summary>

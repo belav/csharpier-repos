@@ -70,34 +70,28 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void ConfigureHostConfigurationPropagated()
         {
             var host = new HostBuilder()
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("key1", "value1") }
-                        );
-                    }
-                )
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("key2", "value2") }
-                        );
-                    }
-                )
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[]
-                            {
-                                // Hides value2
-                                new KeyValuePair<string, string>("key2", "value3")
-                            }
-                        );
-                    }
-                )
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("key1", "value1") }
+                    );
+                })
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("key2", "value2") }
+                    );
+                })
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            // Hides value2
+                            new KeyValuePair<string, string>("key2", "value3")
+                        }
+                    );
+                })
                 .ConfigureAppConfiguration(
                     (context, configBuilder) =>
                     {
@@ -327,12 +321,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (
                 var host = new HostBuilder()
-                    .ConfigureHostConfiguration(
-                        config =>
-                        {
-                            config.AddInMemoryCollection(parameters);
-                        }
-                    )
+                    .ConfigureHostConfiguration(config =>
+                    {
+                        config.AddInMemoryCollection(parameters);
+                    })
                     .Build()
             )
             {
@@ -421,13 +413,11 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var host = new HostBuilder()
                 .ConfigureDefaults(Array.Empty<string>())
-                .ConfigureHostOptions(
-                    options =>
-                    {
-                        options.BackgroundServiceExceptionBehavior = testBehavior;
-                        options.ShutdownTimeout = testShutdown;
-                    }
-                )
+                .ConfigureHostOptions(options =>
+                {
+                    options.BackgroundServiceExceptionBehavior = testBehavior;
+                    options.ShutdownTimeout = testShutdown;
+                })
                 .Build();
 
             var options = host.Services.GetRequiredService<IOptions<HostOptions>>();
@@ -536,14 +526,12 @@ namespace Microsoft.Extensions.Hosting.Tests
                         s.AddScoped<ServiceC>();
                     }
                 )
-                .ConfigureHostConfiguration(
-                    config =>
-                    {
-                        config.AddInMemoryCollection(
-                            new[] { new KeyValuePair<string, string>("Key", "Value"), }
-                        );
-                    }
-                )
+                .ConfigureHostConfiguration(config =>
+                {
+                    config.AddInMemoryCollection(
+                        new[] { new KeyValuePair<string, string>("Key", "Value"), }
+                    );
+                })
                 .UseDefaultServiceProvider(
                     (context, options) =>
                     {
@@ -679,20 +667,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using (
                 var host = new HostBuilder()
-                    .ConfigureHostConfiguration(
-                        config =>
-                        {
-                            config.AddInMemoryCollection(
-                                new[]
-                                {
-                                    new KeyValuePair<string, string>(
-                                        HostDefaults.ContentRootKey,
-                                        Path.GetFullPath(".")
-                                    )
-                                }
-                            );
-                        }
-                    )
+                    .ConfigureHostConfiguration(config =>
+                    {
+                        config.AddInMemoryCollection(
+                            new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    HostDefaults.ContentRootKey,
+                                    Path.GetFullPath(".")
+                                )
+                            }
+                        );
+                    })
                     .Build()
             )
             {

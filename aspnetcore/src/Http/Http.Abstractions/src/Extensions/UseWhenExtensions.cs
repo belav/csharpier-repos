@@ -47,26 +47,24 @@ public static class UseWhenExtensions
         var branchBuilder = app.New();
         configuration(branchBuilder);
 
-        return app.Use(
-            main =>
-            {
-                // This is called only when the main application builder
-                // is built, not per request.
-                branchBuilder.Run(main);
-                var branch = branchBuilder.Build();
+        return app.Use(main =>
+        {
+            // This is called only when the main application builder
+            // is built, not per request.
+            branchBuilder.Run(main);
+            var branch = branchBuilder.Build();
 
-                return context =>
+            return context =>
+            {
+                if (predicate(context))
                 {
-                    if (predicate(context))
-                    {
-                        return branch(context);
-                    }
-                    else
-                    {
-                        return main(context);
-                    }
-                };
-            }
-        );
+                    return branch(context);
+                }
+                else
+                {
+                    return main(context);
+                }
+            };
+        });
     }
 }

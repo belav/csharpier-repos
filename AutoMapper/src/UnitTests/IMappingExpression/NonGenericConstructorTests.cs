@@ -32,14 +32,12 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddIgnoreMapAttribute();
-                    cfg.CreateMap(typeof(Source), typeof(Dest))
-                        .ConstructUsing(src => new Dest(((Source)src).Value + 10));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AddIgnoreMapAttribute();
+                cfg.CreateMap(typeof(Source), typeof(Dest))
+                    .ConstructUsing(src => new Dest(((Source)src).Value + 10));
+            });
 
         protected override void Because_of()
         {

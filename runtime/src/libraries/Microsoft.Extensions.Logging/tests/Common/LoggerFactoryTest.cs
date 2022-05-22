@@ -251,14 +251,12 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(o => o.ActivityTrackingOptions = options)
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(o => o.ActivityTrackingOptions = options)
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 
@@ -294,14 +292,12 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentException>(
                 () =>
-                    LoggerFactory.Create(
-                        builder =>
-                        {
-                            builder.Configure(
-                                o => o.ActivityTrackingOptions = (ActivityTrackingOptions)0xFF00
-                            );
-                        }
-                    )
+                    LoggerFactory.Create(builder =>
+                    {
+                        builder.Configure(
+                            o => o.ActivityTrackingOptions = (ActivityTrackingOptions)0xFF00
+                        );
+                    })
             );
         }
 
@@ -310,14 +306,12 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(o => o.ActivityTrackingOptions = ActivityTrackingOptions.Baggage)
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(o => o.ActivityTrackingOptions = ActivityTrackingOptions.Baggage)
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 
@@ -345,18 +339,16 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId | ActivityTrackingOptions.Tags
-                        )
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId | ActivityTrackingOptions.Tags
+                    )
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 
@@ -383,20 +375,18 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.Baggage
-                                    | ActivityTrackingOptions.Tags
-                        )
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.Baggage
+                                | ActivityTrackingOptions.Tags
+                    )
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 
@@ -419,18 +409,16 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.Baggage | ActivityTrackingOptions.Tags
-                        )
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.Baggage | ActivityTrackingOptions.Tags
+                    )
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 
@@ -505,20 +493,18 @@ namespace Microsoft.Extensions.Logging.Test
         {
             var loggerProvider = new ExternalScopeLoggerProvider();
 
-            var loggerFactory = LoggerFactory.Create(
-                builder =>
-                {
-                    builder
-                        .Configure(
-                            o =>
-                                o.ActivityTrackingOptions =
-                                    ActivityTrackingOptions.TraceId
-                                    | ActivityTrackingOptions.Baggage
-                                    | ActivityTrackingOptions.Tags
-                        )
-                        .AddProvider(loggerProvider);
-                }
-            );
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .Configure(
+                        o =>
+                            o.ActivityTrackingOptions =
+                                ActivityTrackingOptions.TraceId
+                                | ActivityTrackingOptions.Baggage
+                                | ActivityTrackingOptions.Tags
+                    )
+                    .AddProvider(loggerProvider);
+            });
 
             var logger = loggerFactory.CreateLogger("Logger");
 

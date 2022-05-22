@@ -15,15 +15,13 @@ namespace AutoMapper.IntegrationTests.Net4
         TrainingCourseDto _course;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Category, CategoryDto>();
-                    cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
-                    cfg.CreateProjection<TrainingContent, TrainingContentDto>()
-                        .ForMember(c => c.Category, o => o.ExplicitExpansion());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Category, CategoryDto>();
+                cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
+                cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                    .ForMember(c => c.Category, o => o.ExplicitExpansion());
+            });
 
         protected override void Because_of()
         {

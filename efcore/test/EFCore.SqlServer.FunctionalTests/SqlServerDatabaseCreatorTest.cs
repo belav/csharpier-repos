@@ -908,15 +908,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Key1, e.Key2 });
-                        b.Property(e => e.AndRow)
-                            .IsConcurrencyToken()
-                            .ValueGeneratedOnAddOrUpdate();
-                    }
-                );
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Key1, e.Key2 });
+                    b.Property(e => e.AndRow).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+                });
             }
 
             public DbSet<Blog> Blogs { get; set; }

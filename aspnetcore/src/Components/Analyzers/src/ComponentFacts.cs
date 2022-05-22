@@ -24,19 +24,17 @@ internal static class ComponentFacts
 
         return property
             .GetAttributes()
-            .Any(
-                a =>
-                {
-                    return SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            symbols.ParameterAttribute
-                        )
-                        || SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            symbols.CascadingParameterAttribute
-                        );
-                }
-            );
+            .Any(a =>
+            {
+                return SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        symbols.ParameterAttribute
+                    )
+                    || SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        symbols.CascadingParameterAttribute
+                    );
+            });
     }
 
     public static bool IsParameter(ComponentSymbols symbols, IPropertySymbol property)

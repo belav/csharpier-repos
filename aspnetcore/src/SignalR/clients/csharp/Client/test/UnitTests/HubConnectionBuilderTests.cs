@@ -63,15 +63,13 @@ public class HubConnectionBuilderTests
     public void AddJsonProtocolSetsHubProtocolToJsonWithProvidedOptions()
     {
         var serviceProvider = new HubConnectionBuilder()
-            .AddNewtonsoftJsonProtocol(
-                options =>
+            .AddNewtonsoftJsonProtocol(options =>
+            {
+                options.PayloadSerializerSettings = new JsonSerializerSettings
                 {
-                    options.PayloadSerializerSettings = new JsonSerializerSettings
-                    {
-                        DateFormatString = "JUST A TEST"
-                    };
-                }
-            )
+                    DateFormatString = "JUST A TEST"
+                };
+            })
             .Services.BuildServiceProvider();
 
         var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(

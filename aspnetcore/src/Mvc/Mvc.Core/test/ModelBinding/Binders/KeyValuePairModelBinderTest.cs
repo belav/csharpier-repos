@@ -129,13 +129,11 @@ public class KeyValuePairModelBinderTest
             innerResult = ModelBindingResult.Failed();
         }
 
-        var innerBinder = new StubModelBinder(
-            context =>
-            {
-                Assert.Equal("someName.Key", context.ModelName);
-                return innerResult;
-            }
-        );
+        var innerBinder = new StubModelBinder(context =>
+        {
+            Assert.Equal("someName.Key", context.ModelName);
+            return innerResult;
+        });
 
         var valueProvider = new SimpleValueProvider();
 
@@ -255,33 +253,29 @@ public class KeyValuePairModelBinderTest
 
     private static IModelBinder CreateIntBinder(bool success = true)
     {
-        var mockIntBinder = new StubModelBinder(
-            mbc =>
+        var mockIntBinder = new StubModelBinder(mbc =>
+        {
+            if (mbc.ModelType == typeof(int) && success)
             {
-                if (mbc.ModelType == typeof(int) && success)
-                {
-                    var model = 42;
-                    return ModelBindingResult.Success(model);
-                }
-                return ModelBindingResult.Failed();
+                var model = 42;
+                return ModelBindingResult.Success(model);
             }
-        );
+            return ModelBindingResult.Failed();
+        });
         return mockIntBinder;
     }
 
     private static IModelBinder CreateStringBinder(bool success = true)
     {
-        return new StubModelBinder(
-            mbc =>
+        return new StubModelBinder(mbc =>
+        {
+            if (mbc.ModelType == typeof(string) && success)
             {
-                if (mbc.ModelType == typeof(string) && success)
-                {
-                    var model = "some-value";
-                    return ModelBindingResult.Success(model);
-                }
-                return ModelBindingResult.Failed();
+                var model = "some-value";
+                return ModelBindingResult.Success(model);
             }
-        );
+            return ModelBindingResult.Failed();
+        });
     }
 
     private class ModelWithKeyValuePairProperty

@@ -44,30 +44,26 @@ public class InternationalizationStartup
                 app.UseBlazorFrameworkFiles();
                 app.UseStaticFiles();
 
-                app.UseRequestLocalization(
-                    options =>
-                    {
-                        options.AddSupportedCultures("en-US", "fr-FR");
-                        options.AddSupportedUICultures("en-US", "fr-FR");
+                app.UseRequestLocalization(options =>
+                {
+                    options.AddSupportedCultures("en-US", "fr-FR");
+                    options.AddSupportedUICultures("en-US", "fr-FR");
 
-                        // Cookie culture provider is included by default, but we want it to be the only one.
-                        options.RequestCultureProviders.Clear();
-                        options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
+                    // Cookie culture provider is included by default, but we want it to be the only one.
+                    options.RequestCultureProviders.Clear();
+                    options.RequestCultureProviders.Add(new CookieRequestCultureProvider());
 
-                        // We want the default to be en-US so that the tests for bind can work consistently.
-                        options.SetDefaultCulture("en-US");
-                    }
-                );
+                    // We want the default to be en-US so that the tests for bind can work consistently.
+                    options.SetDefaultCulture("en-US");
+                });
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapControllers();
-                        endpoints.MapBlazorHub();
-                        endpoints.MapFallbackToPage("/_ServerHost");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
             }
         );
     }

@@ -454,15 +454,13 @@ namespace Microsoft.CodeAnalysis.Editing
             CheckSymbolArgument(currentSymbol, symbol);
 
             var decl = this.GetDeclarations(currentSymbol)
-                .FirstOrDefault(
-                    d =>
-                    {
-                        var doc = _currentSolution.GetDocument(d.SyntaxTree);
-                        return doc != null
-                            && doc.Id == documentId
-                            && d.FullSpan.IntersectsWith(position);
-                    }
-                );
+                .FirstOrDefault(d =>
+                {
+                    var doc = _currentSolution.GetDocument(d.SyntaxTree);
+                    return doc != null
+                        && doc.Id == documentId
+                        && d.FullSpan.IntersectsWith(position);
+                });
 
             if (decl == null)
             {

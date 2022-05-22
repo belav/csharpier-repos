@@ -165,53 +165,44 @@ namespace System.Net.Http.Functional.Tests
                             .Dispose();
                     }),
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        const string headerName = "Proxy-Authorization";
+                        List<string> lines = await connection
+                            .ReadRequestHeaderAsync()
+                            .ConfigureAwait(false);
+
+                        // First request should not have proxy credentials in either case.
+                        for (int i = 1; i < lines.Count; i++)
                         {
-                            const string headerName = "Proxy-Authorization";
-                            List<string> lines = await connection
-                                .ReadRequestHeaderAsync()
+                            Assert.False(lines[i].StartsWith(headerName));
+                        }
+
+                        if (useProxy)
+                        {
+                            // Reject request and wait for authenticated one.
+                            await connection
+                                .SendResponseAsync(
+                                    HttpStatusCode.ProxyAuthenticationRequired,
+                                    "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n"
+                                )
                                 .ConfigureAwait(false);
 
-                            // First request should not have proxy credentials in either case.
+                            lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                            bool valid = false;
                             for (int i = 1; i < lines.Count; i++)
                             {
-                                Assert.False(lines[i].StartsWith(headerName));
-                            }
-
-                            if (useProxy)
-                            {
-                                // Reject request and wait for authenticated one.
-                                await connection
-                                    .SendResponseAsync(
-                                        HttpStatusCode.ProxyAuthenticationRequired,
-                                        "Proxy-Authenticate: Basic realm=\"NetCore\"\r\n"
-                                    )
-                                    .ConfigureAwait(false);
-
-                                lines = await connection
-                                    .ReadRequestHeaderAsync()
-                                    .ConfigureAwait(false);
-                                bool valid = false;
-                                for (int i = 1; i < lines.Count; i++)
+                                if (lines[i].StartsWith(headerName))
                                 {
-                                    if (lines[i].StartsWith(headerName))
-                                    {
-                                        valid = LoopbackServer.IsBasicAuthTokenValid(
-                                            lines[i],
-                                            options
-                                        );
-                                    }
+                                    valid = LoopbackServer.IsBasicAuthTokenValid(lines[i], options);
                                 }
-
-                                Assert.True(valid);
                             }
 
-                            await connection
-                                .SendResponseAsync(HttpStatusCode.OK)
-                                .ConfigureAwait(false);
+                            Assert.True(valid);
                         }
-                    )
+
+                        await connection.SendResponseAsync(HttpStatusCode.OK).ConfigureAwait(false);
+                    })
             );
         }
 #endif

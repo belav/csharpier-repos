@@ -57,12 +57,10 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>();
+            });
 
         [Fact]
         public void Can_map_with_projection()
@@ -70,12 +68,10 @@ namespace AutoMapper.IntegrationTests
             using (var context = new Context())
             {
                 var customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
-                customerVms.ForEach(
-                    x =>
-                    {
-                        x.RowVersion.SequenceEqual(new byte[] { 1, 2, 3 }).ShouldBeTrue();
-                    }
-                );
+                customerVms.ForEach(x =>
+                {
+                    x.RowVersion.SequenceEqual(new byte[] { 1, 2, 3 }).ShouldBeTrue();
+                });
             }
         }
     }

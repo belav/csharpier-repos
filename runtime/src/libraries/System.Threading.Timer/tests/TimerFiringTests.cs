@@ -569,13 +569,11 @@ namespace System.Threading.Tests
         {
             var tcs = new TaskCompletionSource();
             using (
-                var t = new Timer(
-                    _ =>
-                    {
-                        if (Interlocked.Decrement(ref iterations) == 0)
-                            tcs.SetResult();
-                    }
-                )
+                var t = new Timer(_ =>
+                {
+                    if (Interlocked.Decrement(ref iterations) == 0)
+                        tcs.SetResult();
+                })
             ) // rely on Timer(TimerCallback) rooting itself
             {
                 t.Change(period, period);

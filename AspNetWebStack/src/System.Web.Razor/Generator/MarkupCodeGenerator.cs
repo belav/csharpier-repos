@@ -25,28 +25,26 @@ namespace System.Web.Razor.Generator
 
             if (!String.IsNullOrEmpty(target.Content) && !context.Host.DesignTimeMode)
             {
-                string code = context.BuildCodeString(
-                    cw =>
+                string code = context.BuildCodeString(cw =>
+                {
+                    if (!String.IsNullOrEmpty(context.TargetWriterName))
                     {
-                        if (!String.IsNullOrEmpty(context.TargetWriterName))
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteLiteralToMethodName
-                            );
-                            cw.WriteSnippet(context.TargetWriterName);
-                            cw.WriteParameterSeparator();
-                        }
-                        else
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteLiteralMethodName
-                            );
-                        }
-                        cw.WriteStringLiteral(target.Content);
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteEndStatement();
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteLiteralToMethodName
+                        );
+                        cw.WriteSnippet(context.TargetWriterName);
+                        cw.WriteParameterSeparator();
                     }
-                );
+                    else
+                    {
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteLiteralMethodName
+                        );
+                    }
+                    cw.WriteStringLiteral(target.Content);
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                });
                 context.AddStatement(code);
             }
 

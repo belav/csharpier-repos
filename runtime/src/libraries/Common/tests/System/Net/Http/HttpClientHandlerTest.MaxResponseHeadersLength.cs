@@ -89,44 +89,42 @@ namespace System.Net.Http.Functional.Tests
                             url,
                             HttpCompletionOption.ResponseHeadersRead
                         );
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                var cts = new CancellationTokenSource();
-                                Task serverTask = Task.Run(
-                                    async delegate
-                                    {
-                                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                            "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nMyInfiniteHeader: "
-                                        );
-                                        try
-                                        {
-                                            while (!cts.IsCancellationRequested)
-                                            {
-                                                await connection.WriteStringAsync(
-                                                    new string('s', 16000)
-                                                );
-                                                await Task.Delay(1);
-                                            }
-                                        }
-                                        catch { }
-                                    }
-                                );
-
-                                Exception e = await Assert.ThrowsAsync<HttpRequestException>(
-                                    () => getAsync
-                                );
-                                cts.Cancel();
-                                if (!IsWinHttpHandler)
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            var cts = new CancellationTokenSource();
+                            Task serverTask = Task.Run(
+                                async delegate
                                 {
-                                    Assert.Contains(
-                                        (handler.MaxResponseHeadersLength * 1024).ToString(),
-                                        e.ToString()
+                                    await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nMyInfiniteHeader: "
                                     );
+                                    try
+                                    {
+                                        while (!cts.IsCancellationRequested)
+                                        {
+                                            await connection.WriteStringAsync(
+                                                new string('s', 16000)
+                                            );
+                                            await Task.Delay(1);
+                                        }
+                                    }
+                                    catch { }
                                 }
-                                await serverTask;
+                            );
+
+                            Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                () => getAsync
+                            );
+                            cts.Cancel();
+                            if (!IsWinHttpHandler)
+                            {
+                                Assert.Contains(
+                                    (handler.MaxResponseHeadersLength * 1024).ToString(),
+                                    e.ToString()
+                                );
                             }
-                        );
+                            await serverTask;
+                        });
                     }
                 }
             );
@@ -155,39 +153,37 @@ namespace System.Net.Http.Functional.Tests
                             HttpCompletionOption.ResponseHeadersRead
                         );
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                Task serverTask =
-                                    connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                        responseHeaders
-                                    );
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            Task serverTask =
+                                connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                    responseHeaders
+                                );
 
-                                if (shouldSucceed)
+                            if (shouldSucceed)
+                            {
+                                (await getAsync).Dispose();
+                                await serverTask;
+                            }
+                            else
+                            {
+                                Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                    () => getAsync
+                                );
+                                if (!IsWinHttpHandler)
                                 {
-                                    (await getAsync).Dispose();
+                                    Assert.Contains(
+                                        (handler.MaxResponseHeadersLength * 1024).ToString(),
+                                        e.ToString()
+                                    );
+                                }
+                                try
+                                {
                                     await serverTask;
                                 }
-                                else
-                                {
-                                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
-                                        () => getAsync
-                                    );
-                                    if (!IsWinHttpHandler)
-                                    {
-                                        Assert.Contains(
-                                            (handler.MaxResponseHeadersLength * 1024).ToString(),
-                                            e.ToString()
-                                        );
-                                    }
-                                    try
-                                    {
-                                        await serverTask;
-                                    }
-                                    catch { }
-                                }
+                                catch { }
                             }
-                        );
+                        });
                     }
                 }
             );

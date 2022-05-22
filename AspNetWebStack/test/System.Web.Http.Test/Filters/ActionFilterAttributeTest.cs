@@ -158,12 +158,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage response = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnActionExecuting(It.IsAny<HttpActionContext>()))
-                .Callback<HttpActionContext>(
-                    c =>
-                    {
-                        c.Response = response;
-                    }
-                );
+                .Callback<HttpActionContext>(c =>
+                {
+                    c.Response = response;
+                });
             bool continuationCalled = false;
             var filter = (IActionFilter)filterMock.Object;
 
@@ -431,12 +429,10 @@ namespace System.Web.Http.Filters
             Exception exception = new Exception("{1EC330A2-33D0-4892-9335-2D833849D54E}");
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        ec.Response = null;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    ec.Response = null;
+                });
 
             // Act
             Exception result = await Assert.ThrowsAsync<Exception>(
@@ -466,12 +462,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage newResponse = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        ec.Response = newResponse;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    ec.Response = newResponse;
+                });
 
             // Act
             HttpResponseMessage result = await filter.ExecuteActionFilterAsync(
@@ -501,12 +495,10 @@ namespace System.Web.Http.Filters
             Exception exception = new Exception("{AC32AD02-36A7-45E5-8955-76A4E3B461C6}");
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        throw exception;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    throw exception;
+                });
 
             // Act
             Exception actual = await Assert.ThrowsAsync<Exception>(
@@ -536,12 +528,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage newResponse = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        ec.Response = newResponse;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    ec.Response = newResponse;
+                });
 
             // Act
             HttpResponseMessage result = await filter.ExecuteActionFilterAsync(
@@ -568,12 +558,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage response = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        ec.Response = ec.Response;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    ec.Response = ec.Response;
+                });
 
             // Act
             HttpResponseMessage result = await filter.ExecuteActionFilterAsync(
@@ -600,12 +588,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage response = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnActionExecuted(It.IsAny<HttpActionExecutedContext>()))
-                .Callback<HttpActionExecutedContext>(
-                    ec =>
-                    {
-                        ec.Response = null;
-                    }
-                );
+                .Callback<HttpActionExecutedContext>(ec =>
+                {
+                    ec.Response = null;
+                });
 
             // Act and Assert
             return Assert.ThrowsAsync<InvalidOperationException>(

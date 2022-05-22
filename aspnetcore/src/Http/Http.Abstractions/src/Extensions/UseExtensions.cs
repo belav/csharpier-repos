@@ -33,16 +33,14 @@ public static class UseExtensions
         Func<HttpContext, Func<Task>, Task> middleware
     )
     {
-        return app.Use(
-            next =>
+        return app.Use(next =>
+        {
+            return context =>
             {
-                return context =>
-                {
-                    Func<Task> simpleNext = () => next(context);
-                    return middleware(context, simpleNext);
-                };
-            }
-        );
+                Func<Task> simpleNext = () => next(context);
+                return middleware(context, simpleNext);
+            };
+        });
     }
 
     /// <summary>

@@ -47,21 +47,19 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
                 webHostBuilder =>
                     webHostBuilder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    if (testpath != null)
                                     {
-                                        if (testpath != null)
-                                        {
-                                            await testpath(context);
-                                        }
-                                        await next(context);
+                                        await testpath(context);
                                     }
-                                );
-                            }
-                        )
+                                    await next(context);
+                                }
+                            );
+                        })
                         .ConfigureServices(configureServices)
             )
             .Build();

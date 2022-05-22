@@ -103,13 +103,11 @@ namespace Company.WebApplication1
 #endif
 #if (OrganizationalAuth)
 
-            services.AddAuthorization(
-                options =>
-                {
-                    // By default, all incoming requests will be authorized according to the default policy
-                    options.FallbackPolicy = options.DefaultPolicy;
-                }
-            );
+            services.AddAuthorization(options =>
+            {
+                // By default, all incoming requests will be authorized according to the default policy
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
             services.AddRazorPages().AddMvcOptions(options => { }).AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
             services
@@ -152,15 +150,13 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
 #if (IndividualB2CAuth || OrganizationalAuth)
-                    endpoints.MapControllers();
+                endpoints.MapControllers();
 #endif
-                }
-            );
+            });
         }
     }
 }

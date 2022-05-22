@@ -29,18 +29,16 @@ namespace AutoMapper.UnitTests.Bug
         {
             protected override IGlobalConfiguration CreateConfigurationProvider()
             {
-                return new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Target>()
-                            .Include<SourceA, TargetA>()
-                            .Include<SourceB, TargetB>();
+                return new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Target>()
+                        .Include<SourceA, TargetA>()
+                        .Include<SourceB, TargetB>();
 
-                        cfg.CreateMap<SourceA, TargetA>();
+                    cfg.CreateMap<SourceA, TargetA>();
 
-                        cfg.CreateMap<SourceB, TargetB>();
-                    }
-                );
+                    cfg.CreateMap<SourceB, TargetB>();
+                });
             }
         }
 
@@ -48,16 +46,14 @@ namespace AutoMapper.UnitTests.Bug
         {
             protected override IGlobalConfiguration CreateConfigurationProvider()
             {
-                return new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Target>();
+                return new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Target>();
 
-                        cfg.CreateMap<SourceA, TargetA>().IncludeBase<Source, Target>();
+                    cfg.CreateMap<SourceA, TargetA>().IncludeBase<Source, Target>();
 
-                        cfg.CreateMap<SourceB, TargetB>().IncludeBase<Source, Target>();
-                    }
-                );
+                    cfg.CreateMap<SourceB, TargetB>().IncludeBase<Source, Target>();
+                });
             }
         }
 

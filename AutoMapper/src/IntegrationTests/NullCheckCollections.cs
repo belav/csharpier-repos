@@ -195,16 +195,14 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Student, StudentViewModel>()
-                        .ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
-                    cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
-                        .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
-                        .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Student, StudentViewModel>()
+                    .ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
+                cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
+                    .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
+                    .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
+            });
 
         [Fact]
         public void Can_map_with_projection()

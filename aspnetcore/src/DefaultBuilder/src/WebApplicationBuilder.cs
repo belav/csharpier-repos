@@ -51,38 +51,32 @@ public sealed class WebApplicationBuilder
         // we order those configuration providers appropriately without duplicating them
         if (args is { Length: > 0 })
         {
-            _bootstrapHostBuilder.ConfigureAppConfiguration(
-                config =>
-                {
-                    config.AddCommandLine(args);
-                }
-            );
+            _bootstrapHostBuilder.ConfigureAppConfiguration(config =>
+            {
+                config.AddCommandLine(args);
+            });
         }
 
-        _bootstrapHostBuilder.ConfigureWebHostDefaults(
-            webHostBuilder =>
-            {
-                // Runs inline.
-                webHostBuilder.Configure(ConfigureApplication);
+        _bootstrapHostBuilder.ConfigureWebHostDefaults(webHostBuilder =>
+        {
+            // Runs inline.
+            webHostBuilder.Configure(ConfigureApplication);
 
-                // Attempt to set the application name from options
-                options.ApplyApplicationName(webHostBuilder);
-            }
-        );
+            // Attempt to set the application name from options
+            options.ApplyApplicationName(webHostBuilder);
+        });
 
         // Apply the args to host configuration last since ConfigureWebHostDefaults overrides a host specific setting (the application name).
-        _bootstrapHostBuilder.ConfigureHostConfiguration(
-            config =>
+        _bootstrapHostBuilder.ConfigureHostConfiguration(config =>
+        {
+            if (args is { Length: > 0 })
             {
-                if (args is { Length: > 0 })
-                {
-                    config.AddCommandLine(args);
-                }
-
-                // Apply the options after the args
-                options.ApplyHostConfiguration(config);
+                config.AddCommandLine(args);
             }
-        );
+
+            // Apply the options after the args
+            options.ApplyHostConfiguration(config);
+        });
 
         Configuration = new();
 
@@ -156,28 +150,24 @@ public sealed class WebApplicationBuilder
     {
         // Wire up the host configuration here. We don't try to preserve the configuration
         // source itself here since we don't support mutating the host values after creating the builder.
-        _hostBuilder.ConfigureHostConfiguration(
-            builder =>
-            {
-                builder.AddInMemoryCollection(_hostConfigurationValues);
-            }
-        );
+        _hostBuilder.ConfigureHostConfiguration(builder =>
+        {
+            builder.AddInMemoryCollection(_hostConfigurationValues);
+        });
 
         // Wire up the _hostBuilder's application configuration with a ChainedConfigurationSource to the ConfigurationManager.
         // We use a "tracking" source to avoid creating a circular reference when copying providers in ConfigureServices.
         var chainedConfigSource = new TrackingChainedConfigurationSource(Configuration);
 
-        _hostBuilder.ConfigureAppConfiguration(
-            builder =>
-            {
-                builder.Add(chainedConfigSource);
+        _hostBuilder.ConfigureAppConfiguration(builder =>
+        {
+            builder.Add(chainedConfigSource);
 
-                foreach (var (key, value) in ((IConfigurationBuilder)Configuration).Properties)
-                {
-                    builder.Properties[key] = value;
-                }
+            foreach (var (key, value) in ((IConfigurationBuilder)Configuration).Properties)
+            {
+                builder.Properties[key] = value;
             }
-        );
+        });
 
         // This needs to go here to avoid adding the IHostedService that boots the server twice (the GenericWebHostService).
         // Copy the services that were added via WebApplicationBuilder.Services into the final IServiceCollection
@@ -297,13 +287,11 @@ public sealed class WebApplicationBuilder
         }
 
         // Wire the source pipeline to run in the destination pipeline
-        app.Use(
-            next =>
-            {
-                _builtApplication.Run(next);
-                return _builtApplication.BuildRequestDelegate();
-            }
-        );
+        app.Use(next =>
+        {
+            _builtApplication.Run(next);
+            return _builtApplication.BuildRequestDelegate();
+        });
 
         if (_builtApplication.DataSources.Count > 0)
         {

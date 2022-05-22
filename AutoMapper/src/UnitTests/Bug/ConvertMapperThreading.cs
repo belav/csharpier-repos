@@ -39,16 +39,14 @@ namespace AutoMapper.UnitTests
             }
             catch (AggregateException ex)
             {
-                ex.Handle(
-                    e =>
+                ex.Handle(e =>
+                {
+                    if (e is InvalidOperationException)
                     {
-                        if (e is InvalidOperationException)
-                        {
-                            throw e;
-                        }
-                        return false;
+                        throw e;
                     }
-                );
+                    return false;
+                });
             }
         }
     }

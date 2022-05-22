@@ -94,12 +94,10 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         app.UseRouting();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.DataSources.Add(new DefaultEndpointDataSource(endpoint));
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.DataSources.Add(new DefaultEndpointDataSource(endpoint));
+        });
 
         var appFunc = app.Build();
         var httpContext = new DefaultHttpContext();
@@ -201,22 +199,18 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Act
         app.UseRouting();
-        app.UseEndpoints(
-            builder =>
-            {
-                builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
-                builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
-            }
-        );
+        app.UseEndpoints(builder =>
+        {
+            builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
+            builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
+        });
 
         app.UseRouting();
-        app.UseEndpoints(
-            builder =>
-            {
-                builder.Map("/3", d => null).WithDisplayName("Test endpoint 3");
-                builder.Map("/4", d => null).WithDisplayName("Test endpoint 4");
-            }
-        );
+        app.UseEndpoints(builder =>
+        {
+            builder.Map("/3", d => null).WithDisplayName("Test endpoint 3");
+            builder.Map("/4", d => null).WithDisplayName("Test endpoint 4");
+        });
 
         // This triggers the middleware to be created and the matcher factory to be called
         // with the datasource we want to test
@@ -280,23 +274,19 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
             b =>
             {
                 b.UseRouting();
-                b.UseEndpoints(
-                    builder =>
-                    {
-                        builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
-                        builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
-                    }
-                );
+                b.UseEndpoints(builder =>
+                {
+                    builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
+                    builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
+                });
             }
         );
 
-        app.UseEndpoints(
-            builder =>
-            {
-                builder.Map("/3", d => null).WithDisplayName("Test endpoint 3");
-                builder.Map("/4", d => null).WithDisplayName("Test endpoint 4");
-            }
-        );
+        app.UseEndpoints(builder =>
+        {
+            builder.Map("/3", d => null).WithDisplayName("Test endpoint 3");
+            builder.Map("/4", d => null).WithDisplayName("Test endpoint 4");
+        });
 
         // This triggers the middleware to be created and the matcher factory to be called
         // with the datasource we want to test
@@ -347,12 +337,10 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         app.Properties.Add("__GlobalEndpointRouteBuilder", routeBuilder);
         app.UseRouting();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.Map("/1", d => Task.CompletedTask).WithDisplayName("Test endpoint 1");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.Map("/1", d => Task.CompletedTask).WithDisplayName("Test endpoint 1");
+        });
 
         var requestDelegate = app.Build();
 

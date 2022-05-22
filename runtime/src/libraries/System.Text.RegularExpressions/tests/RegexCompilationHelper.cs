@@ -51,14 +51,12 @@ namespace System.Text.RegularExpressions.Tests
             );
             var data = methodInfo?.Invoke(null, null) as IEnumerable<object[]>;
 
-            return data?.Select(
-                obj =>
-                {
-                    obj[regexOptionsArrayIndex] =
-                        (RegexOptions)obj[regexOptionsArrayIndex] | RegexOptions.Compiled;
-                    return obj;
-                }
-            );
+            return data?.Select(obj =>
+            {
+                obj[regexOptionsArrayIndex] =
+                    (RegexOptions)obj[regexOptionsArrayIndex] | RegexOptions.Compiled;
+                return obj;
+            });
         }
     }
 }

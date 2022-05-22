@@ -35,28 +35,26 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "areaRoute",
-                    pattern: "{area:exists}/{controller}/{action}/{id?}",
-                    defaults: new { action = "Index" }
-                );
-                endpoints.MapControllerRoute(
-                    name: "productRoute",
-                    pattern: "Product/{action}",
-                    defaults: new { controller = "Product" }
-                );
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "HtmlGeneration_Home", action = "Index" }
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "areaRoute",
+                pattern: "{area:exists}/{controller}/{action}/{id?}",
+                defaults: new { action = "Index" }
+            );
+            endpoints.MapControllerRoute(
+                name: "productRoute",
+                pattern: "Product/{action}",
+                defaults: new { controller = "Product" }
+            );
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller}/{action}/{id?}",
+                defaults: new { controller = "HtmlGeneration_Home", action = "Index" }
+            );
 
-                endpoints.MapRazorPages();
-            }
-        );
+            endpoints.MapRazorPages();
+        });
     }
 
     public static void Main(string[] args)

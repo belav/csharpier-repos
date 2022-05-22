@@ -21,13 +21,11 @@ public class CascadingAuthenticationStateTest
     {
         // Arrange
         var renderer = new TestRenderer();
-        var component = new AutoRenderFragmentComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingAuthenticationState>(0);
-                builder.CloseComponent();
-            }
-        );
+        var component = new AutoRenderFragmentComponent(builder =>
+        {
+            builder.OpenComponent<CascadingAuthenticationState>(0);
+            builder.CloseComponent();
+        });
 
         // Act/Assert
         renderer.AssignRootComponentId(component);
@@ -219,13 +217,11 @@ public class CascadingAuthenticationStateTest
             builder.AddAttribute(
                 1,
                 "ChildContent",
-                new RenderFragment(
-                    childBuilder =>
-                    {
-                        childBuilder.OpenComponent<ReceiveAuthStateComponent>(0);
-                        childBuilder.CloseComponent();
-                    }
-                )
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<ReceiveAuthStateComponent>(0);
+                    childBuilder.CloseComponent();
+                })
             );
             builder.CloseComponent();
         }

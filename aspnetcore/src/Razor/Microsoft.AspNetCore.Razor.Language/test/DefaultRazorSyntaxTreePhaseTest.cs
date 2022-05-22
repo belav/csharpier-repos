@@ -19,15 +19,13 @@ public class DefaultRazorSyntaxTreePhaseTest
         var first = Mock.Of<IRazorSyntaxTreePass>(p => p.Order == 15);
         var second = Mock.Of<IRazorSyntaxTreePass>(p => p.Order == 17);
 
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
 
-                b.Features.Add(second);
-                b.Features.Add(first);
-            }
-        );
+            b.Features.Add(second);
+            b.Features.Add(first);
+        });
 
         // Assert
         Assert.Collection(phase.Passes, p => Assert.Same(first, p), p => Assert.Same(second, p));
@@ -80,15 +78,13 @@ public class DefaultRazorSyntaxTreePhaseTest
 
         var phase = new DefaultRazorSyntaxTreePhase();
 
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
 
-                b.Features.Add(firstPass.Object);
-                b.Features.Add(secondPass.Object);
-            }
-        );
+            b.Features.Add(firstPass.Object);
+            b.Features.Add(secondPass.Object);
+        });
 
         // Act
         phase.Execute(codeDocument);

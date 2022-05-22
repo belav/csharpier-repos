@@ -97,15 +97,11 @@ public static class FunctionalTestsServiceCollectionExtensions
 
     public static IServiceCollection SetupGlobalAuthorizeFilter(this IServiceCollection services) =>
         services
-            .AddMvc(
-                config =>
-                {
-                    var policy = new AuthorizationPolicyBuilder()
-                        .RequireAuthenticatedUser()
-                        .Build();
-                    config.Filters.Add(new AuthorizeFilter(policy));
-                }
-            )
+            .AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            })
             .Services;
 
     public static IServiceCollection SetupMaxFailedAccessAttempts(

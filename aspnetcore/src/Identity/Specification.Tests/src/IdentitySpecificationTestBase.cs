@@ -46,16 +46,14 @@ public abstract class IdentitySpecificationTestBase<TUser, TRole, TKey>
         services.AddHttpContextAccessor();
         services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
         services
-            .AddIdentity<TUser, TRole>(
-                options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.User.AllowedUserNameCharacters = null;
-                }
-            )
+            .AddIdentity<TUser, TRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.User.AllowedUserNameCharacters = null;
+            })
             .AddDefaultTokenProviders();
         AddUserStore(services, context);
         AddRoleStore(services, context);

@@ -3706,14 +3706,12 @@ public class C { public static FrameworkName Goo() { return null; }}";
         {
             return type.GetMembers()
                 .OfType<IPropertySymbol>()
-                .SelectAsArray(
-                    p =>
-                    {
-                        var result = p.Type.NullableAnnotation;
-                        Assert.Equal(result, p.NullableAnnotation);
-                        return result;
-                    }
-                );
+                .SelectAsArray(p =>
+                {
+                    var result = p.Type.NullableAnnotation;
+                    Assert.Equal(result, p.NullableAnnotation);
+                    return result;
+                });
         }
 
         [Fact]

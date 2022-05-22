@@ -45,22 +45,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context =>
-                {
-                    // "x is not Type y" is only available in C# 9.0 and above. Don't offer this refactoring
-                    // in projects targeting a lesser version.
-                    if (
-                        !((CSharpCompilation)context.Compilation).LanguageVersion.IsCSharp9OrAbove()
-                    )
-                        return;
+            context.RegisterCompilationStartAction(context =>
+            {
+                // "x is not Type y" is only available in C# 9.0 and above. Don't offer this refactoring
+                // in projects targeting a lesser version.
+                if (!((CSharpCompilation)context.Compilation).LanguageVersion.IsCSharp9OrAbove())
+                    return;
 
-                    context.RegisterSyntaxNodeAction(
-                        n => SyntaxNodeAction(n),
-                        SyntaxKind.LogicalNotExpression
-                    );
-                }
-            );
+                context.RegisterSyntaxNodeAction(
+                    n => SyntaxNodeAction(n),
+                    SyntaxKind.LogicalNotExpression
+                );
+            });
         }
 
         private void SyntaxNodeAction(SyntaxNodeAnalysisContext syntaxContext)

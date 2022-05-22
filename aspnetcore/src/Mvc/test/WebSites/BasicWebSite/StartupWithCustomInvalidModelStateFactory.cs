@@ -20,19 +20,17 @@ public class StartupWithCustomInvalidModelStateFactory
 
         services.AddMvc().AddNewtonsoftJson();
 
-        services.Configure<ApiBehaviorOptions>(
-            options =>
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.InvalidModelStateResponseFactory = context =>
             {
-                options.InvalidModelStateResponseFactory = context =>
-                {
-                    var result = new BadRequestObjectResult(context.ModelState);
-                    result.ContentTypes.Clear();
-                    result.ContentTypes.Add("application/vnd.error+json");
+                var result = new BadRequestObjectResult(context.ModelState);
+                result.ContentTypes.Clear();
+                result.ContentTypes.Add("application/vnd.error+json");
 
-                    return result;
-                };
-            }
-        );
+                return result;
+            };
+        });
 
         services.ConfigureBaseWebSiteAuthPolicies();
 
@@ -45,11 +43,9 @@ public class StartupWithCustomInvalidModelStateFactory
         app.UseDeveloperExceptionPage();
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }

@@ -36,14 +36,12 @@ namespace System.Linq.Parallel.Tests
         {
             return Enumerable
                 .Range(0, count)
-                .Select(
-                    i =>
-                    {
-                        if (i == count - 1)
-                            throw e;
-                        return default(T);
-                    }
-                );
+                .Select(i =>
+                {
+                    if (i == count - 1)
+                        throw e;
+                    return default(T);
+                });
         }
     }
 }

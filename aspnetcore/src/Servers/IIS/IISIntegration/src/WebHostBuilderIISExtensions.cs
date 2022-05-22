@@ -101,43 +101,33 @@ public static class WebHostBuilderIISExtensions
             var address = "http://127.0.0.1:" + port;
             hostBuilder.CaptureStartupErrors(true);
 
-            hostBuilder.ConfigureServices(
-                services =>
+            hostBuilder.ConfigureServices(services =>
+            {
+                // Delay register the url so users don't accidentally overwrite it.
+                hostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, address);
+                hostBuilder.PreferHostingUrls(true);
+                services.AddSingleton<IServerIntegratedAuth>(
+                    _ =>
+                        new ServerIntegratedAuth()
+                        {
+                            IsEnabled = enableAuth,
+                            AuthenticationScheme = IISDefaults.AuthenticationScheme
+                        }
+                );
+                services.AddSingleton<IStartupFilter>(
+                    new IISSetupFilter(pairingToken, new PathString(path), isWebSocketsSupported)
+                );
+                services.Configure<ForwardedHeadersOptions>(options =>
                 {
-                    // Delay register the url so users don't accidentally overwrite it.
-                    hostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, address);
-                    hostBuilder.PreferHostingUrls(true);
-                    services.AddSingleton<IServerIntegratedAuth>(
-                        _ =>
-                            new ServerIntegratedAuth()
-                            {
-                                IsEnabled = enableAuth,
-                                AuthenticationScheme = IISDefaults.AuthenticationScheme
-                            }
-                    );
-                    services.AddSingleton<IStartupFilter>(
-                        new IISSetupFilter(
-                            pairingToken,
-                            new PathString(path),
-                            isWebSocketsSupported
-                        )
-                    );
-                    services.Configure<ForwardedHeadersOptions>(
-                        options =>
-                        {
-                            options.ForwardedHeaders =
-                                ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-                        }
-                    );
-                    services.Configure<IISOptions>(
-                        options =>
-                        {
-                            options.ForwardWindowsAuthentication = enableAuth;
-                        }
-                    );
-                    services.AddAuthenticationCore();
-                }
-            );
+                    options.ForwardedHeaders =
+                        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                });
+                services.Configure<IISOptions>(options =>
+                {
+                    options.ForwardWindowsAuthentication = enableAuth;
+                });
+                services.AddAuthenticationCore();
+            });
         }
 
         return hostBuilder;

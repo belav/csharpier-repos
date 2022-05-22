@@ -84,13 +84,11 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAndSendResponseAsync();
-                            await clientCompleted.Task;
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                        await clientCompleted.Task;
+                    });
                 }
             );
         }
@@ -285,32 +283,30 @@ namespace System.Net.Http.Functional.Tests
                             Task<string> request1 = client.GetStringAsync(uri);
                             Task<string> request2 = client.GetStringAsync(uri);
 
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    Task secondResponse = server.AcceptConnectionAsync(
-                                        connection2 =>
-                                            connection2.ReadRequestHeaderAndSendCustomResponseAsync(
-                                                LoopbackServer.GetConnectionCloseResponse()
-                                            )
-                                    );
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                Task secondResponse = server.AcceptConnectionAsync(
+                                    connection2 =>
+                                        connection2.ReadRequestHeaderAndSendCustomResponseAsync(
+                                            LoopbackServer.GetConnectionCloseResponse()
+                                        )
+                                );
 
-                                    // Wait a small amount of time before sending the first response, so the connection lifetime will expire.
-                                    Debug.Assert(lifetimeMilliseconds < 100);
-                                    await Task.Delay(1000);
+                                // Wait a small amount of time before sending the first response, so the connection lifetime will expire.
+                                Debug.Assert(lifetimeMilliseconds < 100);
+                                await Task.Delay(1000);
 
-                                    // Second request should not have completed yet, as we haven't completed the first yet.
-                                    Assert.False(request2.IsCompleted);
-                                    Assert.False(secondResponse.IsCompleted);
+                                // Second request should not have completed yet, as we haven't completed the first yet.
+                                Assert.False(request2.IsCompleted);
+                                Assert.False(secondResponse.IsCompleted);
 
-                                    // Send the first response and wait for the first request to complete.
-                                    await connection.ReadRequestHeaderAndSendResponseAsync();
-                                    await request1;
+                                // Send the first response and wait for the first request to complete.
+                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                                await request1;
 
-                                    // Now the second request should complete.
-                                    await secondResponse.WaitAsync(TestHelper.PassingTestTimeout);
-                                }
-                            );
+                                // Now the second request should complete.
+                                await secondResponse.WaitAsync(TestHelper.PassingTestTimeout);
+                            });
                         }
                     );
                 }
@@ -509,14 +505,12 @@ namespace System.Net.Http.Functional.Tests
                 {
                     string content = new string('a', totalSize);
                     string response = LoopbackServer.GetContentModeResponse(mode, content);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                    });
                 }
             );
         }
@@ -563,31 +557,29 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     string content = new string('a', totalSize);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            try
-                            {
-                                await connection.WriteStringAsync(
-                                    LoopbackServer.GetContentModeResponse(
-                                        mode,
-                                        content,
-                                        connectionClose: false
-                                    )
-                                );
-                            }
-                            catch (Exception) { } // Eat errors from client disconnect.
-
-                            await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            await connection.WriteStringAsync(
                                 LoopbackServer.GetContentModeResponse(
                                     mode,
                                     content,
-                                    connectionClose: true
+                                    connectionClose: false
                                 )
                             );
                         }
-                    );
+                        catch (Exception) { } // Eat errors from client disconnect.
+
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            LoopbackServer.GetContentModeResponse(
+                                mode,
+                                content,
+                                connectionClose: true
+                            )
+                        );
+                    });
                 }
             );
         }
@@ -636,32 +628,30 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     string content = new string('a', ContentLength);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        string response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            content,
+                            connectionClose: false
+                        );
+                        await connection.ReadRequestHeaderAsync();
+                        try
                         {
-                            string response = LoopbackServer.GetContentModeResponse(
-                                mode,
-                                content,
-                                connectionClose: false
+                            // Write out only part of the response
+                            await connection.WriteStringAsync(
+                                response.Substring(0, response.Length / 2)
                             );
-                            await connection.ReadRequestHeaderAsync();
-                            try
-                            {
-                                // Write out only part of the response
-                                await connection.WriteStringAsync(
-                                    response.Substring(0, response.Length / 2)
-                                );
-                            }
-                            catch (Exception) { } // Eat errors from client disconnect.
-
-                            response = LoopbackServer.GetContentModeResponse(
-                                mode,
-                                content,
-                                connectionClose: true
-                            );
-                            await server.AcceptConnectionSendCustomResponseAndCloseAsync(response);
                         }
-                    );
+                        catch (Exception) { } // Eat errors from client disconnect.
+
+                        response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            content,
+                            connectionClose: true
+                        );
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(response);
+                    });
                 }
             );
         }
@@ -1848,16 +1838,14 @@ namespace System.Net.Http.Functional.Tests
 
                         // Make multiple requests iteratively.
 
-                        Task serverTask1 = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.WriteStringAsync(
-                                    LoopbackServer.GetHttpResponse(connectionClose: false)
-                                        + "here is a bunch of garbage"
-                                );
-                                await releaseServer.Task; // keep connection alive on the server side
-                            }
-                        );
+                        Task serverTask1 = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.WriteStringAsync(
+                                LoopbackServer.GetHttpResponse(connectionClose: false)
+                                    + "here is a bunch of garbage"
+                            );
+                            await releaseServer.Task; // keep connection alive on the server side
+                        });
                         await client.GetStringAsync(uri);
 
                         Task serverTask2 = server.AcceptConnectionSendCustomResponseAndCloseAsync(
@@ -1893,27 +1881,23 @@ namespace System.Net.Http.Functional.Tests
 
                         // Make first request.
                         Task<string> request1 = client.GetStringAsync(uri);
-                        await server.AcceptConnectionAsync(
-                            async connection1 =>
+                        await server.AcceptConnectionAsync(async connection1 =>
+                        {
+                            await connection1.ReadRequestHeaderAndSendCustomResponseAsync(
+                                responseBody
+                            );
+                            await request1;
+
+                            // Make second request and expect it to be served from a different connection.
+                            Task<string> request2 = client.GetStringAsync(uri);
+                            await server.AcceptConnectionAsync(async connection2 =>
                             {
-                                await connection1.ReadRequestHeaderAndSendCustomResponseAsync(
+                                await connection2.ReadRequestHeaderAndSendCustomResponseAsync(
                                     responseBody
                                 );
-                                await request1;
-
-                                // Make second request and expect it to be served from a different connection.
-                                Task<string> request2 = client.GetStringAsync(uri);
-                                await server.AcceptConnectionAsync(
-                                    async connection2 =>
-                                    {
-                                        await connection2.ReadRequestHeaderAndSendCustomResponseAsync(
-                                            responseBody
-                                        );
-                                        await request2;
-                                    }
-                                );
-                            }
-                        );
+                                await request2;
+                            });
+                        });
                     }
                 );
             }
@@ -1947,26 +1931,22 @@ namespace System.Net.Http.Functional.Tests
                         {
                             // Make first request.
                             Task<string> request1 = client.GetStringAsync(uri);
-                            await server.AcceptConnectionAsync(
-                                async connection =>
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                                await request1;
+
+                                // Wait a small amount of time before making the second request, to give the first request time to timeout.
+                                await Task.Delay(100);
+
+                                // Make second request and expect it to be served from a different connection.
+                                Task<string> request2 = client.GetStringAsync(uri);
+                                await server.AcceptConnectionAsync(async connection2 =>
                                 {
-                                    await connection.ReadRequestHeaderAndSendResponseAsync();
-                                    await request1;
-
-                                    // Wait a small amount of time before making the second request, to give the first request time to timeout.
-                                    await Task.Delay(100);
-
-                                    // Make second request and expect it to be served from a different connection.
-                                    Task<string> request2 = client.GetStringAsync(uri);
-                                    await server.AcceptConnectionAsync(
-                                        async connection2 =>
-                                        {
-                                            await connection2.ReadRequestHeaderAndSendResponseAsync();
-                                            await request2;
-                                        }
-                                    );
-                                }
-                            );
+                                    await connection2.ReadRequestHeaderAndSendResponseAsync();
+                                    await request2;
+                                });
+                            });
                         }
                     );
                 }
@@ -2075,15 +2055,13 @@ namespace System.Net.Http.Functional.Tests
                                 }
                             },
                             server =>
-                                server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        await connection.ReadRequestHeaderAndSendResponseAsync(
-                                            content: "hello world"
-                                        );
-                                        await releaseServer.Task;
-                                    }
-                                ),
+                                server.AcceptConnectionAsync(async connection =>
+                                {
+                                    await connection.ReadRequestHeaderAndSendResponseAsync(
+                                        content: "hello world"
+                                    );
+                                    await releaseServer.Task;
+                                }),
                             new LoopbackServer.Options { UseSsl = bool.Parse(secureString) }
                         );
                     },
@@ -2175,19 +2153,17 @@ namespace System.Net.Http.Functional.Tests
                                 $"http://notarealserver.com/"
                             );
 
-                            await proxyServer.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    // Get first request, no body for GET.
-                                    await connection
-                                        .ReadRequestHeaderAndSendCustomResponseAsync(responseBody)
-                                        .ConfigureAwait(false);
-                                    // Client should send another request after being rejected with 407.
-                                    await connection
-                                        .ReadRequestHeaderAndSendResponseAsync(content: "OK")
-                                        .ConfigureAwait(false);
-                                }
-                            );
+                            await proxyServer.AcceptConnectionAsync(async connection =>
+                            {
+                                // Get first request, no body for GET.
+                                await connection
+                                    .ReadRequestHeaderAndSendCustomResponseAsync(responseBody)
+                                    .ConfigureAwait(false);
+                                // Client should send another request after being rejected with 407.
+                                await connection
+                                    .ReadRequestHeaderAndSendResponseAsync(content: "OK")
+                                    .ConfigureAwait(false);
+                            });
 
                             string response = await request;
                             Assert.Equal("OK", response);

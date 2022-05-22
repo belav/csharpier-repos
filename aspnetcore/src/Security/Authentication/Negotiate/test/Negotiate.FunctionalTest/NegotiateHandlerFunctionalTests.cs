@@ -305,33 +305,27 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
                         .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                         .AddNegotiate(configureOptions)
             )
-            .ConfigureWebHost(
-                webHostBuilder =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseKestrel(options =>
                 {
-                    webHostBuilder.UseKestrel(
-                        options =>
+                    options.Listen(
+                        IPAddress.Loopback,
+                        0,
+                        endpoint =>
                         {
-                            options.Listen(
-                                IPAddress.Loopback,
-                                0,
-                                endpoint =>
-                                {
-                                    endpoint.UseHttps("negotiateAuthCert.pfx", "testPassword");
-                                }
-                            );
+                            endpoint.UseHttps("negotiateAuthCert.pfx", "testPassword");
                         }
                     );
-                    webHostBuilder.Configure(
-                        app =>
-                        {
-                            app.UseRouting();
-                            app.UseAuthentication();
-                            app.UseWebSockets();
-                            app.UseEndpoints(ConfigureEndpoints);
-                        }
-                    );
-                }
-            );
+                });
+                webHostBuilder.Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseAuthentication();
+                    app.UseWebSockets();
+                    app.UseEndpoints(ConfigureEndpoints);
+                });
+            });
 
         return builder.StartAsync();
     }

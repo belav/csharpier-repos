@@ -61,33 +61,25 @@ public class KestrelWebSocketHelpers
         var config = configBuilder.Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .ConfigureServices(
-                            s =>
-                            {
-                                s.AddWebSockets(configure);
-                                s.AddSingleton(loggerFactory);
-                            }
-                        )
-                        .UseConfiguration(config)
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, 0);
-                            }
-                        )
-                        .Configure(startup);
-                }
-            )
-            .ConfigureHostOptions(
-                o =>
-                {
-                    o.ShutdownTimeout = TimeSpan.FromSeconds(30);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .ConfigureServices(s =>
+                    {
+                        s.AddWebSockets(configure);
+                        s.AddSingleton(loggerFactory);
+                    })
+                    .UseConfiguration(config)
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 0);
+                    })
+                    .Configure(startup);
+            })
+            .ConfigureHostOptions(o =>
+            {
+                o.ShutdownTimeout = TimeSpan.FromSeconds(30);
+            })
             .Build();
 
         host.Start();

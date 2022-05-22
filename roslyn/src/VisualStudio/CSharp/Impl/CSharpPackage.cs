@@ -136,16 +136,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-                this.RegisterService<ICSharpTempPECompilerService>(
-                    async ct =>
-                    {
-                        var workspace = this.ComponentModel.GetService<VisualStudioWorkspace>();
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
-                        return new TempPECompilerService(
-                            workspace.Services.GetService<IMetadataService>()
-                        );
-                    }
-                );
+                this.RegisterService<ICSharpTempPECompilerService>(async ct =>
+                {
+                    var workspace = this.ComponentModel.GetService<VisualStudioWorkspace>();
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
+                    return new TempPECompilerService(
+                        workspace.Services.GetService<IMetadataService>()
+                    );
+                });
             }
             catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e)) { }
         }

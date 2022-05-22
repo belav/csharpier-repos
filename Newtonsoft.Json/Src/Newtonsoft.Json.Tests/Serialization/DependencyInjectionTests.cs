@@ -225,13 +225,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
             builder
-                .Register(
-                    c =>
-                    {
-                        count++;
-                        return new LogManager(new DateTime(2000, 12, 12));
-                    }
-                )
+                .Register(c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                })
                 .As<ILogger>();
 
             IContainer container = builder.Build();
@@ -263,23 +261,19 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             ContainerBuilder builder = new ContainerBuilder();
             builder
-                .Register(
-                    c =>
-                    {
-                        count++;
-                        return new TaskRepository();
-                    }
-                )
+                .Register(c =>
+                {
+                    count++;
+                    return new TaskRepository();
+                })
                 .As<ITaskRepository>();
             builder.RegisterType<HasSettableProperty>();
             builder
-                .Register(
-                    c =>
-                    {
-                        count++;
-                        return new LogManager(new DateTime(2000, 12, 12));
-                    }
-                )
+                .Register(c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                })
                 .As<ILogger>();
 
             IContainer container = builder.Build();

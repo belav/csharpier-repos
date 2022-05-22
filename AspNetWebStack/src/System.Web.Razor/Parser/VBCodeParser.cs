@@ -341,14 +341,11 @@ namespace System.Web.Razor.Parser
                             Action<SpanBuilder> oldConfig = SpanConfig;
                             using (PushSpanConfig())
                             {
-                                ConfigureSpan(
-                                    span =>
-                                    {
-                                        oldConfig(span);
-                                        span.EditHandler.AcceptedCharacters =
-                                            AcceptedCharacters.Any;
-                                    }
-                                );
+                                ConfigureSpan(span =>
+                                {
+                                    oldConfig(span);
+                                    span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
+                                });
                                 Balance(
                                     BalancingModes.AllowCommentsAndTemplates,
                                     VBSymbolType.LeftParenthesis,

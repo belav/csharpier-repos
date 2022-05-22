@@ -28,18 +28,16 @@ namespace AutoMapper.UnitTests.MappingInheritance
         public class DDto : ADto { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<A, ADto>()
-                        .ForMember(d => d.Value, opt => opt.MapFrom(src => 5))
-                        .IncludeAllDerived();
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<A, ADto>()
+                    .ForMember(d => d.Value, opt => opt.MapFrom(src => 5))
+                    .IncludeAllDerived();
 
-                    cfg.CreateMap<B, BDto>();
-                    cfg.CreateMap<C, CDto>();
-                    cfg.CreateMap<D, DDto>();
-                }
-            );
+                cfg.CreateMap<B, BDto>();
+                cfg.CreateMap<C, CDto>();
+                cfg.CreateMap<D, DDto>();
+            });
 
         [Fact]
         public void Should_apply_configuration_to_all_derived()

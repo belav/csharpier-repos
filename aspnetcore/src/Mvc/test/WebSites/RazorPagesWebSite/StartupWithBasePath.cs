@@ -27,19 +27,17 @@ public class StartupWithBasePath
         var builder = services
             .AddMvc()
             .AddCookieTempDataProvider()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AuthorizePage("/Conventions/Auth");
-                    options.Conventions.AuthorizeFolder("/Conventions/AuthFolder");
-                    options.Conventions.AuthorizeAreaFolder("Accounts", "/RequiresAuth");
-                    options.Conventions.AllowAnonymousToAreaPage(
-                        "Accounts",
-                        "/RequiresAuth/AllowAnonymous"
-                    );
-                    options.Conventions.Add(new CustomModelTypeConvention());
-                }
-            );
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Conventions/Auth");
+                options.Conventions.AuthorizeFolder("/Conventions/AuthFolder");
+                options.Conventions.AuthorizeAreaFolder("Accounts", "/RequiresAuth");
+                options.Conventions.AllowAnonymousToAreaPage(
+                    "Accounts",
+                    "/RequiresAuth/AllowAnonymous"
+                );
+                options.Conventions.Add(new CustomModelTypeConvention());
+            });
     }
 
     public void Configure(IApplicationBuilder app)
@@ -51,15 +49,13 @@ public class StartupWithBasePath
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    "areaRoute",
-                    "{area:exists}/{controller=Home}/{action=Index}"
-                );
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                "areaRoute",
+                "{area:exists}/{controller=Home}/{action=Index}"
+            );
+            endpoints.MapRazorPages();
+        });
     }
 }

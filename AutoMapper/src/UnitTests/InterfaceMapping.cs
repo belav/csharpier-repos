@@ -240,13 +240,11 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<iclass1, iclass1DTO>();
-                    cfg.CreateMap<iclass2, iclass2DTO>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<iclass1, iclass1DTO>();
+                cfg.CreateMap<iclass2, iclass2DTO>();
+            });
 
         protected override void Because_of()
         {
@@ -302,17 +300,15 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, DtoObject>();
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, DtoObject>();
 
-                    cfg.CreateMap<IChildModelObject, DtoChildObject>()
-                        .Include<SubChildModelObject, SubDtoChildObject>();
+                cfg.CreateMap<IChildModelObject, DtoChildObject>()
+                    .Include<SubChildModelObject, SubDtoChildObject>();
 
-                    cfg.CreateMap<SubChildModelObject, SubDtoChildObject>();
-                }
-            );
+                cfg.CreateMap<SubChildModelObject, SubDtoChildObject>();
+            });
 
         [Fact]
         public void Should_map_Child_to_SubDtoChildObject_type()
@@ -469,12 +465,10 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ISource, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ISource, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -542,12 +536,10 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ISource, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ISource, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -595,12 +587,10 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -638,15 +628,13 @@ namespace AutoMapper.UnitTests.InterfaceMapping
 
         //and following mappings:
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Base, BaseDto>().Include<Derived, DerivedDto>();
-                    cfg.CreateMap<Derived, DerivedDto>();
-                    cfg.CreateMap<IBase, BaseDto>().Include<IDerived, DerivedDto>();
-                    cfg.CreateMap<IDerived, DerivedDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Base, BaseDto>().Include<Derived, DerivedDto>();
+                cfg.CreateMap<Derived, DerivedDto>();
+                cfg.CreateMap<IBase, BaseDto>().Include<IDerived, DerivedDto>();
+                cfg.CreateMap<IDerived, DerivedDto>();
+            });
 
         protected override void Because_of()
         {

@@ -25,14 +25,12 @@ public class StartupResponseCompression
             "/NoAppCompression",
             subApp =>
             {
-                subApp.Run(
-                    context =>
-                    {
-                        context.Response.ContentType = "text/plain";
-                        context.Response.ContentLength = helloWorldBody.Length;
-                        return context.Response.WriteAsync(helloWorldBody);
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.ContentLength = helloWorldBody.Length;
+                    return context.Response.WriteAsync(helloWorldBody);
+                });
             }
         );
 
@@ -41,33 +39,29 @@ public class StartupResponseCompression
             subApp =>
             {
                 subApp.UseResponseCompression();
-                subApp.Run(
-                    context =>
-                    {
-                        context.Response.ContentType = "text/plain";
-                        context.Response.ContentLength = helloWorldBody.Length;
-                        return context.Response.WriteAsync(helloWorldBody);
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.ContentLength = helloWorldBody.Length;
+                    return context.Response.WriteAsync(helloWorldBody);
+                });
             }
         );
-        app.Run(
-            context =>
+        app.Run(context =>
+        {
+            context.Response.ContentType = "text/plain";
+            string body;
+            if (context.Request.Path.Value == "/")
             {
-                context.Response.ContentType = "text/plain";
-                string body;
-                if (context.Request.Path.Value == "/")
-                {
-                    body = "Running";
-                }
-                else
-                {
-                    body = "Not Implemented: " + context.Request.Path;
-                }
-
-                context.Response.ContentLength = body.Length;
-                return context.Response.WriteAsync(body);
+                body = "Running";
             }
-        );
+            else
+            {
+                body = "Not Implemented: " + context.Request.Path;
+            }
+
+            context.Response.ContentLength = body.Length;
+            return context.Response.WriteAsync(body);
+        });
     }
 }

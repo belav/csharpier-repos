@@ -17,26 +17,24 @@ public class MapFallbackStartup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapFallback(
-                    "/prefix/{*path:nonfile}",
-                    (context) =>
-                    {
-                        return context.Response.WriteAsync("FallbackCustomPattern");
-                    }
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapFallback(
+                "/prefix/{*path:nonfile}",
+                (context) =>
+                {
+                    return context.Response.WriteAsync("FallbackCustomPattern");
+                }
+            );
 
-                endpoints.MapFallback(
-                    (context) =>
-                    {
-                        return context.Response.WriteAsync("FallbackDefaultPattern");
-                    }
-                );
+            endpoints.MapFallback(
+                (context) =>
+                {
+                    return context.Response.WriteAsync("FallbackDefaultPattern");
+                }
+            );
 
-                endpoints.MapHello("/helloworld", "World");
-            }
-        );
+            endpoints.MapHello("/helloworld", "World");
+        });
     }
 }

@@ -20,49 +20,41 @@ public class Startup : StartupBase
     public void ConfigureDevServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "Dev";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "Dev";
+        });
     }
 
     public void ConfigureRetailServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "Retail";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "Retail";
+        });
     }
 
     public static void ConfigureStaticServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "Static";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "Static";
+        });
     }
 
     public static IServiceProvider ConfigureStaticProviderServices()
     {
         var services = new ServiceCollection().AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "StaticProvider";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "StaticProvider";
+        });
         return services.BuildServiceProvider();
     }
 
@@ -79,26 +71,22 @@ public class Startup : StartupBase
     public IServiceProvider ConfigureProviderServices(IServiceCollection services)
     {
         services.AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "Provider";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "Provider";
+        });
         return services.BuildServiceProvider();
     }
 
     public IServiceProvider ConfigureProviderArgsServices()
     {
         var services = new ServiceCollection().AddOptions();
-        services.Configure<FakeOptions>(
-            o =>
-            {
-                o.Configured = true;
-                o.Environment = "ProviderArgs";
-            }
-        );
+        services.Configure<FakeOptions>(o =>
+        {
+            o.Configured = true;
+            o.Environment = "ProviderArgs";
+        });
         return services.BuildServiceProvider();
     }
 

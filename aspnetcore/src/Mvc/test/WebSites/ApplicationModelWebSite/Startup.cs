@@ -14,18 +14,14 @@ public class Startup
     // Set up application services
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers(
-            options =>
-            {
-                options.Conventions.Add(
-                    new ApplicationDescription("Common Application Description")
-                );
-                options.Conventions.Add(new ControllerLicenseConvention());
-                options.Conventions.Add(new FromHeaderConvention());
-                options.Conventions.Add(new MultipleAreasControllerConvention());
-                options.Conventions.Add(new CloneActionConvention());
-            }
-        );
+        services.AddControllers(options =>
+        {
+            options.Conventions.Add(new ApplicationDescription("Common Application Description"));
+            options.Conventions.Add(new ControllerLicenseConvention());
+            options.Conventions.Add(new FromHeaderConvention());
+            options.Conventions.Add(new MultipleAreasControllerConvention());
+            options.Conventions.Add(new CloneActionConvention());
+        });
 
         services.AddRazorPages();
     }
@@ -33,21 +29,16 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "areaRoute",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}"
-                );
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action}/{id?}"
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "areaRoute",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}"
+            );
+            endpoints.MapControllerRoute(name: "default", pattern: "{controller}/{action}/{id?}");
 
-                endpoints.MapRazorPages();
-            }
-        );
+            endpoints.MapRazorPages();
+        });
     }
 
     public static void Main(string[] args)

@@ -176,16 +176,14 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<ConvertingEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
-                        b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
-                        b.Property(e => e.NullableEnumerableOfInt)
-                            .HasDefaultValue(Enumerable.Empty<int>());
-                        b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
-                    }
-                );
+                modelBuilder.Entity<ConvertingEntity>(b =>
+                {
+                    b.Property(e => e.NullableListOfInt).HasDefaultValue(new List<int>());
+                    b.Property(e => e.ListOfInt).HasDefaultValue(new List<int>());
+                    b.Property(e => e.NullableEnumerableOfInt)
+                        .HasDefaultValue(Enumerable.Empty<int>());
+                    b.Property(e => e.EnumerableOfInt).HasDefaultValue(Enumerable.Empty<int>());
+                });
             }
         }
     }

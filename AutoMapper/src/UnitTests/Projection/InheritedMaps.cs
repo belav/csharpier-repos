@@ -24,16 +24,14 @@
             private Dest[] _dest;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<SourceBase, Dest>()
-                            .Include<Source, Dest>()
-                            .ForMember(d => d.Value, opt => opt.MapFrom(src => src.OtherValue));
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<SourceBase, Dest>()
+                        .Include<Source, Dest>()
+                        .ForMember(d => d.Value, opt => opt.MapFrom(src => src.OtherValue));
 
-                        cfg.CreateProjection<Source, Dest>();
-                    }
-                );
+                    cfg.CreateProjection<Source, Dest>();
+                });
 
             protected override void Because_of()
             {

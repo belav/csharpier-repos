@@ -417,34 +417,30 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 var category = modelBuilder.Entity<Category>().Metadata;
 
-                modelBuilder.Entity<Product>(
-                    b =>
-                    {
-                        var fk = b.Metadata.AddForeignKey(
-                            new[] { b.Property<int>("CategoryId").Metadata },
-                            category.FindPrimaryKey(),
-                            category
-                        );
-                        fk.SetDependentToPrincipal("Category");
-                        fk.SetPrincipalToDependent("Products");
-                    }
-                );
+                modelBuilder.Entity<Product>(b =>
+                {
+                    var fk = b.Metadata.AddForeignKey(
+                        new[] { b.Property<int>("CategoryId").Metadata },
+                        category.FindPrimaryKey(),
+                        category
+                    );
+                    fk.SetDependentToPrincipal("Category");
+                    fk.SetPrincipalToDependent("Products");
+                });
 
                 var parent = modelBuilder.Entity<Parent>().Metadata;
 
-                modelBuilder.Entity<Child>(
-                    b =>
-                    {
-                        var fk = b.Metadata.AddForeignKey(
-                            new[] { b.Property<int>("ParentId").Metadata },
-                            parent.FindPrimaryKey(),
-                            parent
-                        );
-                        fk.IsUnique = true;
-                        fk.SetDependentToPrincipal("Parent");
-                        fk.SetPrincipalToDependent("Child");
-                    }
-                );
+                modelBuilder.Entity<Child>(b =>
+                {
+                    var fk = b.Metadata.AddForeignKey(
+                        new[] { b.Property<int>("ParentId").Metadata },
+                        parent.FindPrimaryKey(),
+                        parent
+                    );
+                    fk.IsUnique = true;
+                    fk.SetDependentToPrincipal("Parent");
+                    fk.SetPrincipalToDependent("Child");
+                });
             }
 
             protected internal override void OnConfiguring(

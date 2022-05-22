@@ -251,13 +251,11 @@ namespace Newtonsoft.Json.Utilities
 
         private static IEnumerable<Expression> GetArgs(params DynamicMetaObject[] args)
         {
-            return args.Select(
-                arg =>
-                {
-                    Expression exp = arg.Expression;
-                    return exp.Type.IsValueType() ? Expression.Convert(exp, typeof(object)) : exp;
-                }
-            );
+            return args.Select(arg =>
+            {
+                Expression exp = arg.Expression;
+                return exp.Type.IsValueType() ? Expression.Convert(exp, typeof(object)) : exp;
+            });
         }
 
         private static Expression[] GetArgArray(DynamicMetaObject[] args)

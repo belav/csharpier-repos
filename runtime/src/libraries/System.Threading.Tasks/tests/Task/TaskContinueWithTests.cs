@@ -22,12 +22,10 @@ namespace System.Threading.Tasks.Tests
         {
             Task t = new Task(() => { });
             var c1 = t.ContinueWith(_ => { });
-            var c2 = t.ContinueWith(
-                _ =>
-                {
-                    return 42;
-                }
-            );
+            var c2 = t.ContinueWith(_ =>
+            {
+                return 42;
+            });
 
             Task<int> f = new Task<int>(() => 1);
             var c3 = f.ContinueWith(_ => { });
@@ -145,12 +143,10 @@ namespace System.Threading.Tasks.Tests
                     doneCount[0]++;
                 }
             );
-            Task c1 = t1.ContinueWith(
-                _ =>
-                {
-                    doneCount[1]++;
-                }
-            );
+            Task c1 = t1.ContinueWith(_ =>
+            {
+                doneCount[1]++;
+            });
             Task c2 = c1.ContinueWith(
                 _ =>
                 {
@@ -159,13 +155,11 @@ namespace System.Threading.Tasks.Tests
                 },
                 cts.Token
             );
-            Task c3 = c2.ContinueWith(
-                _ =>
-                {
-                    mres.WaitOne();
-                    doneCount[3]++;
-                }
-            );
+            Task c3 = c2.ContinueWith(_ =>
+            {
+                mres.WaitOne();
+                doneCount[3]++;
+            });
 
             Task c4 = c3.ContinueWith(
                 _ =>
@@ -178,13 +172,11 @@ namespace System.Threading.Tasks.Tests
                 TaskScheduler.Default
             );
 
-            Task c5 = c4.ContinueWith(
-                _ =>
-                {
-                    mres.WaitOne();
-                    doneCount[5]++;
-                }
-            );
+            Task c5 = c4.ContinueWith(_ =>
+            {
+                mres.WaitOne();
+                doneCount[5]++;
+            });
             EnsureCompletionStatus(
                 c2,
                 true,

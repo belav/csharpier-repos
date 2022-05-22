@@ -98,13 +98,11 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<DbUpdateException>(() =>
                     {
                         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<AnotherEntityWithCompositeKeys>(
-                            eb =>
-                            {
-                                eb.Property(p => p.Property).IsRequired();
-                                eb.HasKey(c => new { c.Id, c.SecondId });
-                            }
-                        );
+                        modelBuilder.Entity<AnotherEntityWithCompositeKeys>(eb =>
+                        {
+                            eb.Property(p => p.Property).IsRequired();
+                            eb.HasKey(c => new { c.Id, c.SecondId });
+                        });
 
                         var optionsBuilder = new DbContextOptionsBuilder()
                             .UseModel(modelBuilder.FinalizeModel())

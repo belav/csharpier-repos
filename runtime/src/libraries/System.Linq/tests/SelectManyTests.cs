@@ -573,13 +573,11 @@ namespace System.Linq.Tests
             int[] timesCalledMap = new int[count];
 
             IEnumerable<int> source = Enumerable.Range(0, 10);
-            IEnumerable<int> iterator = source.SelectMany(
-                index =>
-                {
-                    timesCalledMap[index]++;
-                    return new[] { index };
-                }
-            );
+            IEnumerable<int> iterator = source.SelectMany(index =>
+            {
+                timesCalledMap[index]++;
+                return new[] { index };
+            });
 
             // Iteration
             foreach (int index in iterator)

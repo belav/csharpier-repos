@@ -50,23 +50,21 @@ public class AttributeRouteTest
             var handler = new Mock<IRouter>();
             handler
                 .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                .Returns<RouteContext>(
-                    routeContext =>
+                .Returns<RouteContext>(routeContext =>
+                {
+                    if (routeContext.RouteData.Values.ContainsKey("key1"))
                     {
-                        if (routeContext.RouteData.Values.ContainsKey("key1"))
-                        {
-                            selected = actions[0];
-                        }
-                        else if (routeContext.RouteData.Values.ContainsKey("key2"))
-                        {
-                            selected = actions[1];
-                        }
-
-                        routeContext.Handler = (c) => Task.CompletedTask;
-
-                        return Task.CompletedTask;
+                        selected = actions[0];
                     }
-                );
+                    else if (routeContext.RouteData.Values.ContainsKey("key2"))
+                    {
+                        selected = actions[1];
+                    }
+
+                    routeContext.Handler = (c) => Task.CompletedTask;
+
+                    return Task.CompletedTask;
+                });
             return handler.Object;
         };
 

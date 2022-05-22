@@ -687,12 +687,10 @@ namespace System.Web.Http.WebHost
             IPrincipal principal = null;
             webContextMock
                 .SetupSet(r => r.User = It.IsAny<IPrincipal>())
-                .Callback<IPrincipal>(
-                    value =>
-                    {
-                        principal = value;
-                    }
-                );
+                .Callback<IPrincipal>(value =>
+                {
+                    principal = value;
+                });
             HttpContextBase webContext = webContextMock.Object;
             HttpRequestBase webRequest = CreateDummyWebRequest();
 

@@ -23,12 +23,10 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Foo, FooDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Foo, FooDto>();
+            });
 
         [Fact]
         public void Should_work()
@@ -47,13 +45,11 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectTest()
         {
-            _config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Address, AddressDto>();
-                    cfg.CreateProjection<Customer, CustomerDto>();
-                }
-            );
+            _config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Address, AddressDto>();
+                cfg.CreateProjection<Customer, CustomerDto>();
+            });
         }
 
         [Fact]

@@ -781,23 +781,21 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.SendResponseAsync(
+                            LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
+                        );
+                        await Task.Delay(250);
+                        cts.Cancel();
+                        await Task.Delay(500);
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.SendResponseAsync(
-                                LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
-                            );
-                            await Task.Delay(250);
-                            cts.Cancel();
-                            await Task.Delay(500);
-                            try
-                            {
-                                await connection.SendResponseAsync(new string('a', 100));
-                            }
-                            catch { }
+                            await connection.SendResponseAsync(new string('a', 100));
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -883,23 +881,21 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.SendResponseAsync(
+                            LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
+                        );
+                        await Task.Delay(250);
+                        cts.Cancel();
+                        await Task.Delay(500);
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.SendResponseAsync(
-                                LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
-                            );
-                            await Task.Delay(250);
-                            cts.Cancel();
-                            await Task.Delay(500);
-                            try
-                            {
-                                await connection.SendResponseAsync(new string('a', 100));
-                            }
-                            catch { }
+                            await connection.SendResponseAsync(new string('a', 100));
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }

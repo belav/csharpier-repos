@@ -35,14 +35,12 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Source, Destination>();
-                    c.CreateMap<DateTimeOffset?, DateTime?>()
-                        .ConvertUsing<NullableDateTimeOffsetConverter>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Source, Destination>();
+                c.CreateMap<DateTimeOffset?, DateTime?>()
+                    .ConvertUsing<NullableDateTimeOffsetConverter>();
+            });
 
         protected override void Because_of()
         {
@@ -130,17 +128,15 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<int, bool>().ConvertUsing<IntToBoolConverter>();
-                    cfg.CreateMap<bool, int>().ConvertUsing<BoolToIntConverter>();
-                    cfg.CreateMap<int?, bool>().ConvertUsing<NullableIntToBoolConverter>();
-                    cfg.CreateMap<bool, int?>().ConvertUsing<BoolToNullableIntConverter>();
-                    cfg.CreateMap<IntEntity, BoolModel>().ReverseMap();
-                    cfg.CreateMap<NullableIntEntity, BoolModel>().ReverseMap();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<int, bool>().ConvertUsing<IntToBoolConverter>();
+                cfg.CreateMap<bool, int>().ConvertUsing<BoolToIntConverter>();
+                cfg.CreateMap<int?, bool>().ConvertUsing<NullableIntToBoolConverter>();
+                cfg.CreateMap<bool, int?>().ConvertUsing<BoolToNullableIntConverter>();
+                cfg.CreateMap<IntEntity, BoolModel>().ReverseMap();
+                cfg.CreateMap<NullableIntEntity, BoolModel>().ReverseMap();
+            });
 
         [Fact]
         public void CheckConverters()

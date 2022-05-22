@@ -21,12 +21,10 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // These two middleware are registered via an IStartupFilter in UseIISIntegration but you can configure them here.
-        services.Configure<IISOptions>(
-            options =>
-            {
-                options.AuthenticationDisplayName = "Windows Auth";
-            }
-        );
+        services.Configure<IISOptions>(options =>
+        {
+            options.AuthenticationDisplayName = "Windows Auth";
+        });
         services.Configure<ForwardedHeadersOptions>(options => { });
     }
 
@@ -135,12 +133,10 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuidler =>
-                {
-                    webHostBuidler.UseKestrel().UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuidler =>
+            {
+                webHostBuidler.UseKestrel().UseStartup<Startup>();
+            })
             .ConfigureLogging(
                 (_, factory) =>
                 {

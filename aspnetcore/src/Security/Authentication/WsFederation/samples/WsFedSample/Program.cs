@@ -18,39 +18,33 @@ public class Program
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            IPAddress.Loopback,
+                            44307,
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    IPAddress.Loopback,
-                                    44307,
-                                    listenOptions =>
-                                    {
-                                        // Configure SSL
-                                        var serverCertificate = LoadCertificate();
-                                        listenOptions.UseHttps(serverCertificate);
-                                    }
-                                );
+                                // Configure SSL
+                                var serverCertificate = LoadCertificate();
+                                listenOptions.UseHttps(serverCertificate);
                             }
-                        )
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseIISIntegration()
-                        .UseStartup<Startup>();
-                }
-            )
-            .ConfigureLogging(
-                factory =>
-                {
-                    factory.AddConsole();
-                    factory.AddDebug();
-                    factory.AddFilter("Console", level => level >= LogLevel.Information);
-                    factory.AddFilter("Debug", level => level >= LogLevel.Information);
-                }
-            )
+                        );
+                    })
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
+            .ConfigureLogging(factory =>
+            {
+                factory.AddConsole();
+                factory.AddDebug();
+                factory.AddFilter("Console", level => level >= LogLevel.Information);
+                factory.AddFilter("Debug", level => level >= LogLevel.Information);
+            })
             .Build();
 
         return host.RunAsync();

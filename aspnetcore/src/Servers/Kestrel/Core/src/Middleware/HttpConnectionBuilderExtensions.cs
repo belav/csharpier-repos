@@ -22,12 +22,10 @@ internal static class HttpConnectionBuilderExtensions
             protocols,
             addAltSvcHeader
         );
-        return builder.Use(
-            next =>
-            {
-                return middleware.OnConnectionAsync;
-            }
-        );
+        return builder.Use(next =>
+        {
+            return middleware.OnConnectionAsync;
+        });
     }
 
     public static IMultiplexedConnectionBuilder UseHttp3Server<TContext>(
@@ -44,11 +42,9 @@ internal static class HttpConnectionBuilderExtensions
             protocols,
             addAltSvcHeader
         );
-        return builder.Use(
-            next =>
-            {
-                return middleware.OnConnectionAsync;
-            }
-        );
+        return builder.Use(next =>
+        {
+            return middleware.OnConnectionAsync;
+        });
     }
 }

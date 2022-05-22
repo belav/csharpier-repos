@@ -72,14 +72,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Address, AddressDTO>();
-                    cfg.CreateMap<Customer, CustomerDTO>();
-                    cfg.CreateMap<Foo, Foo>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Address, AddressDTO>();
+                cfg.CreateMap<Customer, CustomerDTO>();
+                cfg.CreateMap<Foo, Foo>();
+            });
 
         [Fact]
         public void Should_map()
@@ -155,12 +153,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -208,13 +204,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<OrderModel, OrderDTO>();
-                    cfg.CreateMap<CurrencyModel, CurrencyDTO>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<OrderModel, OrderDTO>();
+                cfg.CreateMap<CurrencyModel, CurrencyDTO>();
+            });
 
         protected override void Because_of()
         {

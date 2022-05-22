@@ -36,18 +36,16 @@ public class ExcludeBindingMetadataProviderIntegrationTest
             ParameterType = typeof(TypesBundle),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues>
-                    {
-                        { "name", new[] { "Fred" } },
-                        { "type", new[] { "SomeType" } },
-                    }
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>
+                {
+                    { "name", new[] { "Fred" } },
+                    { "type", new[] { "SomeType" } },
+                }
+            );
+        });
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext);

@@ -23,12 +23,10 @@ namespace Microsoft.EntityFrameworkCore
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(builder)
-                .ConfigureWarnings(
-                    w =>
-                    {
-                        w.Log(SqlServerEventId.ByteIdentityColumnWarning);
-                        w.Log(SqlServerEventId.DecimalTypeKeyWarning);
-                    }
-                );
+                .ConfigureWarnings(w =>
+                {
+                    w.Log(SqlServerEventId.ByteIdentityColumnWarning);
+                    w.Log(SqlServerEventId.DecimalTypeKeyWarning);
+                });
     }
 }

@@ -8,18 +8,16 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Example()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ContainsASrc, ContainsADest>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ContainsASrc, ContainsADest>();
 
-                    cfg.CreateMap<ASrc, ADest>().Include<BSrc, BDest>().Include<CSrc, CDest>();
+                cfg.CreateMap<ASrc, ADest>().Include<BSrc, BDest>().Include<CSrc, CDest>();
 
-                    cfg.CreateMap<BSrc, BDest>().Include<CSrc, CDest>();
+                cfg.CreateMap<BSrc, BDest>().Include<CSrc, CDest>();
 
-                    cfg.CreateMap<CSrc, CDest>();
-                }
-            );
+                cfg.CreateMap<CSrc, CDest>();
+            });
 
             var expectedCSrc = new CSrc()
             {

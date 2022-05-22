@@ -177,28 +177,26 @@ namespace System.CommandLine
         {
             var invalidPathChars = Path.GetInvalidPathChars();
 
-            argument.AddValidator(
-                symbol =>
+            argument.AddValidator(symbol =>
+            {
+                for (var i = 0; i < symbol.Tokens.Count; i++)
                 {
-                    for (var i = 0; i < symbol.Tokens.Count; i++)
+                    var token = symbol.Tokens[i];
+
+                    // File class no longer check invalid character
+                    // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
+                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
+
+                    if (invalidCharactersIndex >= 0)
                     {
-                        var token = symbol.Tokens[i];
-
-                        // File class no longer check invalid character
-                        // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
-                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
-
-                        if (invalidCharactersIndex >= 0)
-                        {
-                            return symbol.LocalizationResources.InvalidCharactersInPath(
-                                token.Value[invalidCharactersIndex]
-                            );
-                        }
+                        return symbol.LocalizationResources.InvalidCharactersInPath(
+                            token.Value[invalidCharactersIndex]
+                        );
                     }
-
-                    return null;
                 }
-            );
+
+                return null;
+            });
 
             return argument;
         }
@@ -214,25 +212,23 @@ namespace System.CommandLine
         {
             var invalidFileNameChars = Path.GetInvalidFileNameChars();
 
-            argument.AddValidator(
-                symbol =>
+            argument.AddValidator(symbol =>
+            {
+                for (var i = 0; i < symbol.Tokens.Count; i++)
                 {
-                    for (var i = 0; i < symbol.Tokens.Count; i++)
+                    var token = symbol.Tokens[i];
+                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
+
+                    if (invalidCharactersIndex >= 0)
                     {
-                        var token = symbol.Tokens[i];
-                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
-
-                        if (invalidCharactersIndex >= 0)
-                        {
-                            return symbol.LocalizationResources.InvalidCharactersInFileName(
-                                token.Value[invalidCharactersIndex]
-                            );
-                        }
+                        return symbol.LocalizationResources.InvalidCharactersInFileName(
+                            token.Value[invalidCharactersIndex]
+                        );
                     }
-
-                    return null;
                 }
-            );
+
+                return null;
+            });
 
             return argument;
         }

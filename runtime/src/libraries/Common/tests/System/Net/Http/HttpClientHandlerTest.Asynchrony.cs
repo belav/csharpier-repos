@@ -94,19 +94,17 @@ namespace System.Net.Http.Functional.Tests
                         },
                         async server =>
                         {
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    await connection.ReadRequestHeaderAsync();
-                                    await connection.WriteStringAsync(
-                                        LoopbackServer.GetContentModeResponse(
-                                            contentMode,
-                                            string.Concat(Enumerable.Repeat('s', 10_000)),
-                                            connectionClose: true
-                                        )
-                                    );
-                                }
-                            );
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                await connection.ReadRequestHeaderAsync();
+                                await connection.WriteStringAsync(
+                                    LoopbackServer.GetContentModeResponse(
+                                        contentMode,
+                                        string.Concat(Enumerable.Repeat('s', 10_000)),
+                                        connectionClose: true
+                                    )
+                                );
+                            });
                         },
                         new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
                     );

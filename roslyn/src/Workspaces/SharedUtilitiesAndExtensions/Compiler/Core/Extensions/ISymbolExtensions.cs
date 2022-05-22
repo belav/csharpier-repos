@@ -821,17 +821,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 !members
                     .OfType<IMethodSymbol>()
-                    .Any(
-                        x =>
-                        {
-                            return x
-                                is {
-                                    Name: WellKnownMemberNames.MoveNextMethodName,
-                                    ReturnType: { SpecialType: SpecialType.System_Boolean },
-                                    Parameters: { Length: 0 },
-                                };
-                        }
-                    )
+                    .Any(x =>
+                    {
+                        return x
+                            is {
+                                Name: WellKnownMemberNames.MoveNextMethodName,
+                                ReturnType: { SpecialType: SpecialType.System_Boolean },
+                                Parameters: { Length: 0 },
+                            };
+                    })
             )
             {
                 return false;

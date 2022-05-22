@@ -2934,14 +2934,12 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
-                modelBuilder.Entity<Employee>(
-                    b =>
-                    {
-                        b.Property(e => e.EmployeeId).ValueGeneratedNever();
-                        b.Property<int>("Shadow1");
-                        b.Property<string>("Shadow2");
-                    }
-                );
+                modelBuilder.Entity<Employee>(b =>
+                {
+                    b.Property(e => e.EmployeeId).ValueGeneratedNever();
+                    b.Property<int>("Shadow1");
+                    b.Property<string>("Shadow2");
+                });
 
                 modelBuilder.Entity<CurrentEmployee>(b => b.Property<int>("Shadow3"));
 
@@ -2963,24 +2961,20 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder.Ignore<UnMappedOffice>();
 
-                modelBuilder.Entity<BuildingDetail>(
-                    b =>
-                    {
-                        b.HasKey(d => d.BuildingId);
-                        b.HasOne(d => d.Building)
-                            .WithOne()
-                            .HasPrincipalKey<Building>(e => e.BuildingId);
-                    }
-                );
+                modelBuilder.Entity<BuildingDetail>(b =>
+                {
+                    b.HasKey(d => d.BuildingId);
+                    b.HasOne(d => d.Building)
+                        .WithOne()
+                        .HasPrincipalKey<Building>(e => e.BuildingId);
+                });
 
-                modelBuilder.Entity<Building>(
-                    b =>
-                    {
-                        b.Ignore(e => e.NotInModel);
-                        b.Property<int>("Shadow1");
-                        b.Property<string>("Shadow2");
-                    }
-                );
+                modelBuilder.Entity<Building>(b =>
+                {
+                    b.Ignore(e => e.NotInModel);
+                    b.Property<int>("Shadow1");
+                    b.Property<string>("Shadow2");
+                });
             }
 
             protected override void Seed(PoolableDbContext context)

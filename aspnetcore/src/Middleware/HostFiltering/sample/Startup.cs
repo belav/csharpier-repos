@@ -27,21 +27,19 @@ public class Startup
         services.AddHostFiltering(options => { });
 
         // Fallback
-        services.PostConfigure<HostFilteringOptions>(
-            options =>
+        services.PostConfigure<HostFilteringOptions>(options =>
+        {
+            if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
             {
-                if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
-                {
-                    // "AllowedHosts": "localhost;127.0.0.1;[::1]"
-                    var hosts = Config["AllowedHosts"]?.Split(
-                        new[] { ';' },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
-                    // Fall back to "*" to disable.
-                    options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
-                }
+                // "AllowedHosts": "localhost;127.0.0.1;[::1]"
+                var hosts = Config["AllowedHosts"]?.Split(
+                    new[] { ';' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
+                // Fall back to "*" to disable.
+                options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
             }
-        );
+        });
         // Change notification
         services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
             new ConfigurationChangeTokenSource<HostFilteringOptions>(Config)
@@ -52,11 +50,9 @@ public class Startup
     {
         app.UseHostFiltering();
 
-        app.Run(
-            context =>
-            {
-                return context.Response.WriteAsync("Hello World! " + context.Request.Host);
-            }
-        );
+        app.Run(context =>
+        {
+            return context.Response.WriteAsync("Hello World! " + context.Request.Host);
+        });
     }
 }

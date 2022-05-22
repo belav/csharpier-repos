@@ -33,33 +33,31 @@ namespace System.Web.Razor.Generator
             }
             context.FlushBufferedStatement();
             context.AddStatement(
-                context.BuildCodeString(
-                    cw =>
+                context.BuildCodeString(cw =>
+                {
+                    if (!String.IsNullOrEmpty(context.TargetWriterName))
                     {
-                        if (!String.IsNullOrEmpty(context.TargetWriterName))
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteAttributeToMethodName
-                            );
-                            cw.WriteSnippet(context.TargetWriterName);
-                            cw.WriteParameterSeparator();
-                        }
-                        else
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteAttributeMethodName
-                            );
-                        }
-                        cw.WriteStringLiteral(Name);
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteAttributeToMethodName
+                        );
+                        cw.WriteSnippet(context.TargetWriterName);
                         cw.WriteParameterSeparator();
-                        cw.WriteLocationTaggedString(Prefix);
-                        cw.WriteParameterSeparator();
-                        cw.WriteLocationTaggedString(Suffix);
-
-                        // In VB, we need a line continuation
-                        cw.WriteLineContinuation();
                     }
-                )
+                    else
+                    {
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteAttributeMethodName
+                        );
+                    }
+                    cw.WriteStringLiteral(Name);
+                    cw.WriteParameterSeparator();
+                    cw.WriteLocationTaggedString(Prefix);
+                    cw.WriteParameterSeparator();
+                    cw.WriteLocationTaggedString(Suffix);
+
+                    // In VB, we need a line continuation
+                    cw.WriteLineContinuation();
+                })
             );
         }
 
@@ -71,13 +69,11 @@ namespace System.Web.Razor.Generator
             }
             context.FlushBufferedStatement();
             context.AddStatement(
-                context.BuildCodeString(
-                    cw =>
-                    {
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteEndStatement();
-                    }
-                )
+                context.BuildCodeString(cw =>
+                {
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                })
             );
         }
 

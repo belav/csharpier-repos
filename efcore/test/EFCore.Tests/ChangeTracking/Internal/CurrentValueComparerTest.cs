@@ -571,46 +571,44 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Godzilla>(
-                    b =>
-                    {
-                        b.Property(e => e.IntStruct).HasConversion(IntStruct.Converter);
-                        b.Property(e => e.BytesStruct).HasConversion(BytesStruct.Converter);
-                        b.Property(e => e.ComparableIntStruct)
-                            .HasConversion(ComparableIntStruct.Converter);
-                        b.Property(e => e.ComparableBytesStruct)
-                            .HasConversion(ComparableBytesStruct.Converter);
-                        b.Property(e => e.GenericComparableIntStruct)
-                            .HasConversion(GenericComparableIntStruct.Converter);
-                        b.Property(e => e.GenericComparableBytesStruct)
-                            .HasConversion(GenericComparableBytesStruct.Converter);
-                        b.Property(e => e.StructuralComparableBytesStruct)
-                            .HasConversion(StructuralComparableBytesStruct.Converter);
+                modelBuilder.Entity<Godzilla>(b =>
+                {
+                    b.Property(e => e.IntStruct).HasConversion(IntStruct.Converter);
+                    b.Property(e => e.BytesStruct).HasConversion(BytesStruct.Converter);
+                    b.Property(e => e.ComparableIntStruct)
+                        .HasConversion(ComparableIntStruct.Converter);
+                    b.Property(e => e.ComparableBytesStruct)
+                        .HasConversion(ComparableBytesStruct.Converter);
+                    b.Property(e => e.GenericComparableIntStruct)
+                        .HasConversion(GenericComparableIntStruct.Converter);
+                    b.Property(e => e.GenericComparableBytesStruct)
+                        .HasConversion(GenericComparableBytesStruct.Converter);
+                    b.Property(e => e.StructuralComparableBytesStruct)
+                        .HasConversion(StructuralComparableBytesStruct.Converter);
 
-                        b.Property(e => e.NullableIntStruct).HasConversion(IntStruct.Converter);
-                        b.Property(e => e.NullableBytesStruct).HasConversion(BytesStruct.Converter);
-                        b.Property(e => e.NullableComparableIntStruct)
-                            .HasConversion(ComparableIntStruct.Converter);
-                        b.Property(e => e.NullableComparableBytesStruct)
-                            .HasConversion(ComparableBytesStruct.Converter);
-                        b.Property(e => e.NullableGenericComparableIntStruct)
-                            .HasConversion(GenericComparableIntStruct.Converter);
-                        b.Property(e => e.NullableGenericComparableBytesStruct)
-                            .HasConversion(GenericComparableBytesStruct.Converter);
-                        b.Property(e => e.NullableStructuralComparableBytesStruct)
-                            .HasConversion(StructuralComparableBytesStruct.Converter);
+                    b.Property(e => e.NullableIntStruct).HasConversion(IntStruct.Converter);
+                    b.Property(e => e.NullableBytesStruct).HasConversion(BytesStruct.Converter);
+                    b.Property(e => e.NullableComparableIntStruct)
+                        .HasConversion(ComparableIntStruct.Converter);
+                    b.Property(e => e.NullableComparableBytesStruct)
+                        .HasConversion(ComparableBytesStruct.Converter);
+                    b.Property(e => e.NullableGenericComparableIntStruct)
+                        .HasConversion(GenericComparableIntStruct.Converter);
+                    b.Property(e => e.NullableGenericComparableBytesStruct)
+                        .HasConversion(GenericComparableBytesStruct.Converter);
+                    b.Property(e => e.NullableStructuralComparableBytesStruct)
+                        .HasConversion(StructuralComparableBytesStruct.Converter);
 
-                        b.Property(e => e.IntClass).HasConversion(IntClass.Converter);
-                        b.Property(e => e.ComparableIntClass)
-                            .HasConversion(ComparableIntClass.Converter);
-                        b.Property(e => e.GenericComparableIntClass)
-                            .HasConversion(GenericComparableIntClass.Converter);
+                    b.Property(e => e.IntClass).HasConversion(IntClass.Converter);
+                    b.Property(e => e.ComparableIntClass)
+                        .HasConversion(ComparableIntClass.Converter);
+                    b.Property(e => e.GenericComparableIntClass)
+                        .HasConversion(GenericComparableIntClass.Converter);
 
-                        b.Property(e => e.NotComparable);
-                        b.Property(e => e.NotComparableConverted)
-                            .HasConversion(NotComparable.Converter);
-                    }
-                );
+                    b.Property(e => e.NotComparable);
+                    b.Property(e => e.NotComparableConverted)
+                        .HasConversion(NotComparable.Converter);
+                });
             }
         }
 

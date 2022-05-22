@@ -254,13 +254,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var collection = new TestServiceCollection();
             collection.AddTransient<IFakeService, FakeService>();
-            collection.AddTransient<IFactoryService>(
-                p =>
-                {
-                    var fakeService = p.GetRequiredService<IFakeService>();
-                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
-                }
-            );
+            collection.AddTransient<IFactoryService>(p =>
+            {
+                var fakeService = p.GetRequiredService<IFakeService>();
+                return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+            });
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -279,20 +277,16 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var collection = new TestServiceCollection();
             collection.AddTransient<IFakeService, FakeService>();
-            collection.AddTransient<IFactoryService>(
-                p =>
-                {
-                    var fakeService = p.GetService<IFakeService>();
-                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
-                }
-            );
-            collection.AddScoped(
-                p =>
-                {
-                    var fakeService = p.GetService<IFakeService>();
-                    return new ScopedFactoryService { FakeService = fakeService, };
-                }
-            );
+            collection.AddTransient<IFactoryService>(p =>
+            {
+                var fakeService = p.GetService<IFakeService>();
+                return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+            });
+            collection.AddScoped(p =>
+            {
+                var fakeService = p.GetService<IFakeService>();
+                return new ScopedFactoryService { FakeService = fakeService, };
+            });
             collection.AddTransient<ServiceAcceptingFactoryService>();
             var provider = CreateServiceProvider(collection);
 

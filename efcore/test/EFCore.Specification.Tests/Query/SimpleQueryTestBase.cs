@@ -238,38 +238,34 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<IceCream>(
-                    entity =>
-                    {
-                        entity.HasData(
-                            new IceCream
-                            {
-                                IceCreamId = 1,
-                                Name = "Vanilla",
-                                Taste = (byte)Taste.Sweet
-                            },
-                            new IceCream
-                            {
-                                IceCreamId = 2,
-                                Name = "Chocolate",
-                                Taste = (byte)Taste.Sweet
-                            },
-                            new IceCream
-                            {
-                                IceCreamId = 3,
-                                Name = "Match",
-                                Taste = (byte)Taste.Bitter
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<IceCream>(entity =>
+                {
+                    entity.HasData(
+                        new IceCream
+                        {
+                            IceCreamId = 1,
+                            Name = "Vanilla",
+                            Taste = (byte)Taste.Sweet
+                        },
+                        new IceCream
+                        {
+                            IceCreamId = 2,
+                            Name = "Chocolate",
+                            Taste = (byte)Taste.Sweet
+                        },
+                        new IceCream
+                        {
+                            IceCreamId = 3,
+                            Name = "Match",
+                            Taste = (byte)Taste.Bitter
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<Food>(
-                    entity =>
-                    {
-                        entity.HasData(new Food { Id = 1, Taste = null });
-                    }
-                );
+                modelBuilder.Entity<Food>(entity =>
+                {
+                    entity.HasData(new Food { Id = 1, Taste = null });
+                });
             }
         }
 

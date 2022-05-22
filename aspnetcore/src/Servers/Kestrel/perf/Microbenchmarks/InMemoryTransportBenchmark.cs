@@ -44,18 +44,16 @@ public class InMemoryTransportBenchmark
         var transportFactory = new InMemoryTransportFactory(connectionsPerEndPoint: 1);
 
         _host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        // Prevent VS from attaching to hosting startup which could impact results
-                        .UseSetting("preventHostingStartup", "true")
-                        .UseKestrel()
-                        // Bind to a single non-HTTPS endpoint
-                        .UseUrls("http://127.0.0.1:5000")
-                        .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    // Prevent VS from attaching to hosting startup which could impact results
+                    .UseSetting("preventHostingStartup", "true")
+                    .UseKestrel()
+                    // Bind to a single non-HTTPS endpoint
+                    .UseUrls("http://127.0.0.1:5000")
+                    .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
+            })
             .ConfigureServices(
                 services => services.AddSingleton<IConnectionListenerFactory>(transportFactory)
             )

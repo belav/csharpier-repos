@@ -15,11 +15,9 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder.UseKestrel();
-                    webBuilder.UseStartup<Startup>();
-                }
-            );
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder.UseKestrel();
+                webBuilder.UseStartup<Startup>();
+            });
 }

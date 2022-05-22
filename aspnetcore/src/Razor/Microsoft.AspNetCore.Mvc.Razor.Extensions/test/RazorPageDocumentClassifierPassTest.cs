@@ -376,12 +376,10 @@ public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 
     private RazorEngine CreateRuntimeEngine()
     {
-        return CreateProjectEngine(
-            b =>
-            {
-                PageDirective.Register(b);
-            }
-        ).Engine;
+        return CreateProjectEngine(b =>
+        {
+            PageDirective.Register(b);
+        }).Engine;
     }
 
     private static DocumentIntermediateNode CreateIRDocument(

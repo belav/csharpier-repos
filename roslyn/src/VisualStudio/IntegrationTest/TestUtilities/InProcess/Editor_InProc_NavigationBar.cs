@@ -58,14 +58,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void ExpandNavigationBar(int index)
         {
-            ExecuteOnActiveView(
-                v =>
-                {
-                    var combobox = GetNavigationBarComboBoxes(v)[index];
-                    FocusManager.SetFocusedElement(FocusManager.GetFocusScope(combobox), combobox);
-                    combobox.IsDropDownOpen = true;
-                }
-            );
+            ExecuteOnActiveView(v =>
+            {
+                var combobox = GetNavigationBarComboBoxes(v)[index];
+                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(combobox), combobox);
+                combobox.IsDropDownOpen = true;
+            });
         }
 
         public void SelectNavBarItem(int comboboxIndex, string selection)

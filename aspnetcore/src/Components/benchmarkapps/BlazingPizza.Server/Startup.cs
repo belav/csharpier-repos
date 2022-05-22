@@ -28,14 +28,12 @@ namespace BlazingPizza.Server
             services.AddScoped<SpecialsService>();
             services.AddScoped<ToppingsService>();
 
-            services.AddResponseCompression(
-                options =>
-                {
-                    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                        new[] { MediaTypeNames.Application.Octet }
-                    );
-                }
-            );
+            services.AddResponseCompression(options =>
+            {
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { MediaTypeNames.Application.Octet }
+                );
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,13 +49,11 @@ namespace BlazingPizza.Server
 
             app.UseRouting();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapBlazorHub();
-                    endpoints.MapFallbackToPage("/_Host");
-                }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+            });
         }
     }
 }

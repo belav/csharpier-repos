@@ -276,19 +276,17 @@ namespace Microsoft.EntityFrameworkCore.Update
             "{"
             + string.Join(
                 ", ",
-                properties.Select(
-                    p =>
-                    {
-                        var currentValue = entry.GetCurrentValue(p);
-                        return p.Name
-                            + ": "
-                            + (
-                                currentValue == null
-                                    ? "<null>"
-                                    : Convert.ToString(currentValue, CultureInfo.InvariantCulture)
-                            );
-                    }
-                )
+                properties.Select(p =>
+                {
+                    var currentValue = entry.GetCurrentValue(p);
+                    return p.Name
+                        + ": "
+                        + (
+                            currentValue == null
+                                ? "<null>"
+                                : Convert.ToString(currentValue, CultureInfo.InvariantCulture)
+                        );
+                })
             )
             + "}";
 
@@ -307,19 +305,17 @@ namespace Microsoft.EntityFrameworkCore.Update
             "{"
             + string.Join(
                 ", ",
-                properties.Select(
-                    p =>
-                    {
-                        var originalValue = entry.GetOriginalValue(p);
-                        return p.Name
-                            + ": "
-                            + (
-                                originalValue == null
-                                    ? "<null>"
-                                    : Convert.ToString(originalValue, CultureInfo.InvariantCulture)
-                            );
-                    }
-                )
+                properties.Select(p =>
+                {
+                    var originalValue = entry.GetOriginalValue(p);
+                    return p.Name
+                        + ": "
+                        + (
+                            originalValue == null
+                                ? "<null>"
+                                : Convert.ToString(originalValue, CultureInfo.InvariantCulture)
+                        );
+                })
             )
             + "}";
     }

@@ -73,18 +73,16 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Entity20277>(
-                    cfg =>
-                    {
-                        cfg.OwnsMany(
-                            e => e.Children,
-                            inner =>
-                            {
-                                inner.OwnsOne(e => e.Owned);
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Entity20277>(cfg =>
+                {
+                    cfg.OwnsMany(
+                        e => e.Children,
+                        inner =>
+                        {
+                            inner.OwnsOne(e => e.Owned);
+                        }
+                    );
+                });
             }
         }
 
@@ -207,19 +205,17 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog24133>(
-                    blog =>
-                    {
-                        blog.OwnsMany(
-                            b => b.Posts,
-                            p =>
-                            {
-                                p.WithOwner().HasForeignKey("BlogId");
-                                p.Property("BlogId").HasMaxLength(40);
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Blog24133>(blog =>
+                {
+                    blog.OwnsMany(
+                        b => b.Posts,
+                        p =>
+                        {
+                            p.WithOwner().HasForeignKey("BlogId");
+                            p.Property("BlogId").HasMaxLength(40);
+                        }
+                    );
+                });
             }
         }
 

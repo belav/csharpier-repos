@@ -231,31 +231,25 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Flyer>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2, e.Discriminator });
-                    }
-                );
+                modelBuilder.Entity<Flyer>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2, e.Discriminator });
+                });
 
                 modelBuilder.Entity<Pegasus>();
 
-                modelBuilder.Entity<Unicorn>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2, e.Id3 });
-                        b.Property(e => e.Id1).ValueGeneratedOnAdd();
-                        b.Property(e => e.Id3).ValueGeneratedOnAdd();
-                    }
-                );
+                modelBuilder.Entity<Unicorn>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2, e.Id3 });
+                    b.Property(e => e.Id1).ValueGeneratedOnAdd();
+                    b.Property(e => e.Id3).ValueGeneratedOnAdd();
+                });
 
-                modelBuilder.Entity<EarthPony>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
-                        b.Property(e => e.Id1);
-                    }
-                );
+                modelBuilder.Entity<EarthPony>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
+                    b.Property(e => e.Id1);
+                });
             }
         }
 

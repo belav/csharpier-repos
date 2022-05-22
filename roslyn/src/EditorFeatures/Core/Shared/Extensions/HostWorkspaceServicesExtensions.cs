@@ -149,14 +149,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             return items
-                .Where(
-                    lazy =>
-                    {
-                        var metadata = lazy.Metadata;
-                        return LanguageMatches(metadata.Language, contentType, workspaceServices)
-                            && RolesMatch(metadata.Roles, roleSet);
-                    }
-                )
+                .Where(lazy =>
+                {
+                    var metadata = lazy.Metadata;
+                    return LanguageMatches(metadata.Language, contentType, workspaceServices)
+                        && RolesMatch(metadata.Roles, roleSet);
+                })
                 .Select(lazy => lazy.Value)
                 .ToList();
         }

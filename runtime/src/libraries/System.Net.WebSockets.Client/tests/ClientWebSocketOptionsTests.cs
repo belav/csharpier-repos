@@ -252,14 +252,10 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            Assert.NotNull(
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
-                            );
-                        }
-                    ),
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
+                    }),
                 new LoopbackServer.Options { UseSsl = secure, WebSocketEndpoint = true }
             );
 
@@ -296,25 +292,23 @@ namespace System.Net.WebSockets.Client.Tests
                         }
                     },
                     server =>
-                        server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                // Validate that the client certificate received by the server matches the one configured on
-                                // the client-side socket.
-                                SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
-                                Assert.NotNull(sslStream.RemoteCertificate);
-                                Assert.Equal(
-                                    clientCert,
-                                    new X509Certificate2(sslStream.RemoteCertificate)
-                                );
+                        server.AcceptConnectionAsync(async connection =>
+                        {
+                            // Validate that the client certificate received by the server matches the one configured on
+                            // the client-side socket.
+                            SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
+                            Assert.NotNull(sslStream.RemoteCertificate);
+                            Assert.Equal(
+                                clientCert,
+                                new X509Certificate2(sslStream.RemoteCertificate)
+                            );
 
-                                // Complete the WebSocket upgrade over the secure channel. After this is done, the client-side
-                                // ConnectAsync should complete.
-                                Assert.NotNull(
-                                    await LoopbackHelper.WebSocketHandshakeAsync(connection)
-                                );
-                            }
-                        ),
+                            // Complete the WebSocket upgrade over the secure channel. After this is done, the client-side
+                            // ConnectAsync should complete.
+                            Assert.NotNull(
+                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
+                            );
+                        }),
                     new LoopbackServer.Options { UseSsl = true, WebSocketEndpoint = true }
                 );
             }
@@ -361,20 +355,16 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            var lines = await connection.ReadRequestHeaderAsync();
-                            Assert.Contains("CONNECT", lines[0]);
-                            connectionAccepted = true;
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        var lines = await connection.ReadRequestHeaderAsync();
+                        Assert.Contains("CONNECT", lines[0]);
+                        connectionAccepted = true;
 
-                            // Send non-success error code so that SocketsHttpHandler won't retry.
-                            await connection.SendResponseAsync(
-                                statusCode: HttpStatusCode.Forbidden
-                            );
-                            connection.Dispose();
-                        }
-                    )
+                        // Send non-success error code so that SocketsHttpHandler won't retry.
+                        await connection.SendResponseAsync(statusCode: HttpStatusCode.Forbidden);
+                        connection.Dispose();
+                    })
             );
 
             Assert.True(connectionAccepted);

@@ -21,16 +21,14 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    int value = 0;
+            new MapperConfiguration(cfg =>
+            {
+                int value = 0;
 
-                    Expression<Func<Source, int>> sourceMember = src => value + 5;
-                    cfg.CreateProjection<Source, Dest>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
-                }
-            );
+                Expression<Func<Source, int>> sourceMember = src => value + 5;
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
+            });
 
         protected override void Because_of()
         {
@@ -67,16 +65,14 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    int value = 0;
+            new MapperConfiguration(cfg =>
+            {
+                int value = 0;
 
-                    Expression<Func<Source, int>> sourceMember = src => value + 5;
-                    cfg.CreateProjection<Source, Dest>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
-                }
-            );
+                Expression<Func<Source, int>> sourceMember = src => value + 5;
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
+            });
 
         protected override void Because_of()
         {
@@ -113,16 +109,14 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    int value = 0;
+            new MapperConfiguration(cfg =>
+            {
+                int value = 0;
 
-                    Expression<Func<Source, int>> sourceMember = src => value + 5;
-                    cfg.CreateProjection<Source, Dest>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
-                }
-            );
+                Expression<Func<Source, int>> sourceMember = src => value + 5;
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(sourceMember));
+            });
 
         protected override void Because_of()
         {
@@ -198,21 +192,19 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    DB db = null;
+            new MapperConfiguration(cfg =>
+            {
+                DB db = null;
 
-                    cfg.CreateProjection<User, UserViewModel>()
-                        .ForMember(
-                            a => a.position,
-                            opt =>
-                                opt.MapFrom(
-                                    src => db.Users.Count(u => u.DateActivated < src.DateActivated)
-                                )
-                        );
-                }
-            );
+                cfg.CreateProjection<User, UserViewModel>()
+                    .ForMember(
+                        a => a.position,
+                        opt =>
+                            opt.MapFrom(
+                                src => db.Users.Count(u => u.DateActivated < src.DateActivated)
+                            )
+                    );
+            });
 
         [Fact]
         public void Should_only_replace_outer_parameters()

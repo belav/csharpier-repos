@@ -26,56 +26,50 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddConnections();
-        services.AddSignalR(
-            options =>
-            {
-                options.EnableDetailedErrors = true;
-            }
-        );
+        services.AddSignalR(options =>
+        {
+            options.EnableDetailedErrors = true;
+        });
 
         services
-            .AddAuthentication(
-                options =>
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }
-            )
-            .AddJwtBearer(
-                options =>
+                    LifetimeValidator = (before, expires, token, parameters) =>
+                        expires > DateTime.UtcNow,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateActor = false,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = SecurityKey
+                };
+
+                options.Events = new JwtBearerEvents
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    OnMessageReceived = context =>
                     {
-                        LifetimeValidator = (before, expires, token, parameters) =>
-                            expires > DateTime.UtcNow,
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateActor = false,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = SecurityKey
-                    };
+                        var accessToken = context.Request.Query["access_token"];
 
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            var accessToken = context.Request.Query["access_token"];
-
-                            if (
-                                !string.IsNullOrEmpty(accessToken)
-                                && (
-                                    context.HttpContext.WebSockets.IsWebSocketRequest
-                                    || context.Request.Headers["Accept"] == "text/event-stream"
-                                )
+                        if (
+                            !string.IsNullOrEmpty(accessToken)
+                            && (
+                                context.HttpContext.WebSockets.IsWebSocketRequest
+                                || context.Request.Headers["Accept"] == "text/event-stream"
                             )
-                            {
-                                context.Token = context.Request.Query["access_token"];
-                            }
-                            return Task.CompletedTask;
+                        )
+                        {
+                            context.Token = context.Request.Query["access_token"];
                         }
-                    };
-                }
-            );
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
         services.AddAuthorization();
 
@@ -94,26 +88,24 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapHub<UncreatableHub>("/uncreatable");
-                endpoints.MapHub<AuthHub>("/authHub");
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<UncreatableHub>("/uncreatable");
+            endpoints.MapHub<AuthHub>("/authHub");
 
-                endpoints.MapConnectionHandler<EchoConnectionHandler>("/echo");
-                endpoints.MapConnectionHandler<WriteThenCloseConnectionHandler>("/echoAndClose");
-                endpoints.MapConnectionHandler<HttpHeaderConnectionHandler>("/httpheader");
-                endpoints.MapConnectionHandler<AuthConnectionHandler>("/auth");
+            endpoints.MapConnectionHandler<EchoConnectionHandler>("/echo");
+            endpoints.MapConnectionHandler<WriteThenCloseConnectionHandler>("/echoAndClose");
+            endpoints.MapConnectionHandler<HttpHeaderConnectionHandler>("/httpheader");
+            endpoints.MapConnectionHandler<AuthConnectionHandler>("/auth");
 
-                endpoints.MapGet(
-                    "/generatetoken",
-                    context =>
-                    {
-                        return context.Response.WriteAsync(GenerateToken(context));
-                    }
-                );
-            }
-        );
+            endpoints.MapGet(
+                "/generatetoken",
+                context =>
+                {
+                    return context.Response.WriteAsync(GenerateToken(context));
+                }
+            );
+        });
     }
 
     private string GenerateToken(HttpContext httpContext)

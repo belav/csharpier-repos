@@ -48,26 +48,24 @@ public static class TestStartup
             }
         }
 
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            foreach (var requestDelegate in delegates)
             {
-                foreach (var requestDelegate in delegates)
-                {
-                    if (
-                        context.Request.Path.StartsWithSegments(
-                            requestDelegate.Key,
-                            out var matchedPath,
-                            out var remainingPath
-                        )
+                if (
+                    context.Request.Path.StartsWithSegments(
+                        requestDelegate.Key,
+                        out var matchedPath,
+                        out var remainingPath
                     )
-                    {
-                        var pathBase = context.Request.PathBase;
-                        context.Request.PathBase = pathBase.Add(matchedPath);
-                        context.Request.Path = remainingPath;
-                        await requestDelegate.Value(context);
-                    }
+                )
+                {
+                    var pathBase = context.Request.PathBase;
+                    context.Request.PathBase = pathBase.Add(matchedPath);
+                    context.Request.Path = remainingPath;
+                    await requestDelegate.Value(context);
                 }
             }
-        );
+        });
     }
 }

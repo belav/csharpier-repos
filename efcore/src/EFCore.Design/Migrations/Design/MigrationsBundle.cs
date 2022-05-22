@@ -86,18 +86,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             var noColor = app.Option("--no-color", DesignStrings.NoColorDescription);
             var prefixOutput = app.Option("--prefix-output", DesignStrings.PrefixDescription);
 
-            app.OnExecute(
-                args =>
-                {
-                    Reporter.IsVerbose = verbose.HasValue();
-                    Reporter.NoColor = noColor.HasValue();
-                    Reporter.PrefixOutput = prefixOutput.HasValue();
+            app.OnExecute(args =>
+            {
+                Reporter.IsVerbose = verbose.HasValue();
+                Reporter.NoColor = noColor.HasValue();
+                Reporter.PrefixOutput = prefixOutput.HasValue();
 
-                    ExecuteInternal(args);
+                ExecuteInternal(args);
 
-                    return 0;
-                }
-            );
+                return 0;
+            });
         }
 
         private static void ExecuteInternal(string[] args)

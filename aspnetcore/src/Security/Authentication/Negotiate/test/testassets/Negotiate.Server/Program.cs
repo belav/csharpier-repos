@@ -22,31 +22,23 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(
-                        (context, options) =>
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+                webBuilder.ConfigureKestrel(
+                    (context, options) =>
+                    {
+                        if (string.Equals("true", context.Configuration["Persist"]))
                         {
-                            if (string.Equals("true", context.Configuration["Persist"]))
-                            {
-                                options.ListenAnyIP(5000);
-                                options.ListenAnyIP(
-                                    5001,
-                                    listenOptions => listenOptions.UseHttps()
-                                );
-                            }
-                            else
-                            {
-                                options.ListenAnyIP(5002);
-                                options.ListenAnyIP(
-                                    5003,
-                                    listenOptions => listenOptions.UseHttps()
-                                );
-                            }
+                            options.ListenAnyIP(5000);
+                            options.ListenAnyIP(5001, listenOptions => listenOptions.UseHttps());
                         }
-                    );
-                }
-            );
+                        else
+                        {
+                            options.ListenAnyIP(5002);
+                            options.ListenAnyIP(5003, listenOptions => listenOptions.UseHttps());
+                        }
+                    }
+                );
+            });
 }

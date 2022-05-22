@@ -31,12 +31,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[0]=10&parameter[1]=11");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0]=10&parameter[1]=11");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -82,12 +80,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -122,12 +118,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(ICollection<int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -156,12 +150,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -204,12 +196,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -247,12 +237,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -282,12 +270,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -322,12 +308,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person2>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Id=10&parameter[1].Id=11");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Id=10&parameter[1].Id=11");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -386,12 +370,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person2>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?prefix[0].Id=10&prefix[1].Id=11");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?prefix[0].Id=10&prefix[1].Id=11");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -439,12 +421,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(ICollection<Person2>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0].Id=10&[1].Id=11");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0].Id=10&[1].Id=11");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -492,14 +472,12 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.index=low&parameter.index=high&parameter[low]=10&parameter[high]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.index=low&parameter.index=high&parameter[low]=10&parameter[high]=11"
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -539,14 +517,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(ICollection<Person2>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?index=low&index=high&[high].Id=11&[low].Id=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?index=low&index=high&[high].Id=11&[low].Id=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -594,12 +568,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(List<Person2>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -638,22 +610,20 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(Person4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var formCollection = new FormCollection(
-                    new Dictionary<string, StringValues>()
-                    {
-                        { "Addresses.index", new[] { "Key1", "Key2" } },
-                        { "Addresses[Key1].Street", new[] { "Street1" } },
-                        { "Addresses[Key2].Street", new[] { "Street2" } },
-                    }
-                );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>()
+                {
+                    { "Addresses.index", new[] { "Key1", "Key2" } },
+                    { "Addresses[Key1].Street", new[] { "Street1" } },
+                    { "Addresses[Key2].Street", new[] { "Street2" } },
+                }
+            );
 
-                request.Form = formCollection;
-                request.ContentType = "application/x-www-form-urlencoded";
-            }
-        );
+            request.Form = formCollection;
+            request.ContentType = "application/x-www-form-urlencoded";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -700,21 +670,19 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var formCollection = new FormCollection(
-                    new Dictionary<string, StringValues>()
-                    {
-                        { "Addresses.index", new[] { "Key1" } },
-                        { "Addresses[Key1].Street", new[] { "Street1" } },
-                    }
-                );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>()
+                {
+                    { "Addresses.index", new[] { "Key1" } },
+                    { "Addresses[Key1].Street", new[] { "Street1" } },
+                }
+            );
 
-                request.Form = formCollection;
-                request.ContentType = "application/x-www-form-urlencoded";
-            }
-        );
+            request.Form = formCollection;
+            request.ContentType = "application/x-www-form-urlencoded";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -755,12 +723,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(ICollection<Address5>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -990,12 +956,10 @@ public class CollectionModelBinderIntegrationTest
         };
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Form = new FormCollection(formContent);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Form = new FormCollection(formContent);
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -1033,13 +997,11 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(IList<SuccessfulModel>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // CollectionModelBinder binds an empty collection when value providers are all empty.
-                request.QueryString = new QueryString("?a=b");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // CollectionModelBinder binds an empty collection when value providers are all empty.
+            request.QueryString = new QueryString("?a=b");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -1166,13 +1128,11 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(SuccessfulContainer),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // CollectionModelBinder binds an empty collection when value providers lack matching data.
-                request.QueryString = new QueryString("?Successes[0]=b");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // CollectionModelBinder binds an empty collection when value providers lack matching data.
+            request.QueryString = new QueryString("?Successes[0]=b");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -1197,12 +1157,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(Collection<string>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0]=hello&[1]=");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0]=hello&[1]=");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -1245,12 +1203,10 @@ public class CollectionModelBinderIntegrationTest
             ParameterType = typeof(Collection<string>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0]=hello&[1]=");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0]=hello&[1]=");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);

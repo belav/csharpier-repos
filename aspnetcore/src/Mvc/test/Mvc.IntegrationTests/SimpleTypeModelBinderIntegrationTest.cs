@@ -30,12 +30,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(Person)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("CustomParameter.Address.Zip", "1");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("CustomParameter.Address.Zip", "1");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -76,12 +74,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(Person)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "1");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Zip", "1");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -122,12 +118,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(string)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "someValue");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", "someValue");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -167,12 +161,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(string)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?=someValue");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?=someValue");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -202,12 +194,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(decimal),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "32,000.99");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", "32,000.99");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -248,12 +238,10 @@ public class SimpleTypeModelBinderIntegrationTest
             BindingInfo = new BindingInfo(),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "2020-02-01");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", "2020-02-01");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -295,13 +283,11 @@ public class SimpleTypeModelBinderIntegrationTest
             BindingInfo = new BindingInfo { BindingSource = BindingSource.Body, }
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -333,14 +319,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(string)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?Parameter1=someValue&Parameter1=otherValue"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Parameter1=someValue&Parameter1=otherValue");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -380,12 +362,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(int)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "abcd");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", "abcd");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -426,15 +406,13 @@ public class SimpleTypeModelBinderIntegrationTest
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForType(parameterType)
-            .BindingDetails(
-                binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-                        (value) => $"Hmm, '{value}' is not a valid value."
-                    );
-                }
-            );
+            .BindingDetails(binding =>
+            {
+                // A real details provider could customize message based on BindingMetadataProviderContext.
+                binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
+                    (value) => $"Hmm, '{value}' is not a valid value."
+                );
+            });
 
         var testContext = ModelBindingTestHelper.GetTestContext(
             request =>
@@ -497,12 +475,10 @@ public class SimpleTypeModelBinderIntegrationTest
             BindingInfo = new BindingInfo(),
             ParameterType = parameterType
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", "");
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -538,15 +514,13 @@ public class SimpleTypeModelBinderIntegrationTest
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForType(parameterType)
-            .BindingDetails(
-                binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                        value => $"Hurts when '{value}' is provided."
-                    );
-                }
-            );
+            .BindingDetails(binding =>
+            {
+                // A real details provider could customize message based on BindingMetadataProviderContext.
+                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                    value => $"Hurts when '{value}' is provided."
+                );
+            });
 
         var testContext = ModelBindingTestHelper.GetTestContext(
             request =>
@@ -604,12 +578,10 @@ public class SimpleTypeModelBinderIntegrationTest
             BindingInfo = new BindingInfo(),
             ParameterType = parameterType
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", string.Empty);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Parameter1", string.Empty);
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -699,12 +671,10 @@ public class SimpleTypeModelBinderIntegrationTest
             ParameterType = typeof(Person),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Form = new FormCollection(personStore);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Form = new FormCollection(personStore);
+        });
         var modelState = testContext.ModelState;
 
         // Act

@@ -31,13 +31,11 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
         RewritingConnectionMiddleware middleware = null;
 
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.Use(
-            next =>
-            {
-                middleware = new RewritingConnectionMiddleware(next);
-                return middleware.OnConnectionAsync;
-            }
-        );
+        listenOptions.Use(next =>
+        {
+            middleware = new RewritingConnectionMiddleware(next);
+            return middleware.OnConnectionAsync;
+        });
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 
@@ -174,16 +172,14 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.Use(
-            next =>
+        listenOptions.Use(next =>
+        {
+            return async context =>
             {
-                return async context =>
-                {
-                    await tcs.Task;
-                    await next(context);
-                };
-            }
-        );
+                await tcs.Task;
+                await next(context);
+            };
+        });
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 

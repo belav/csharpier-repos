@@ -23,15 +23,13 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                mapConfig =>
-                {
-                    mapConfig
-                        .CreateMap<Client, ClientModel>()
-                        .ForMember(m => m.Address, opt => opt.MapFrom(x => x));
-                    mapConfig.CreateMap<Client, AddressModel>();
-                }
-            );
+            new MapperConfiguration(mapConfig =>
+            {
+                mapConfig
+                    .CreateMap<Client, ClientModel>()
+                    .ForMember(m => m.Address, opt => opt.MapFrom(x => x));
+                mapConfig.CreateMap<Client, AddressModel>();
+            });
 
         protected override void Because_of()
         {

@@ -430,81 +430,69 @@ namespace System.Net.Http.Functional.Tests
             return LoopbackServer.CreateClientAndServerAsync(
                 clientFunc,
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Read past request headers.
+                        await connection.ReadRequestHeaderAsync();
+
+                        // Determine response transfer headers.
+                        string transferHeader = null;
+                        string content = "This is some response content.";
+                        if (transferType == TransferType.ContentLength)
                         {
-                            // Read past request headers.
-                            await connection.ReadRequestHeaderAsync();
+                            transferHeader =
+                                transferError == TransferError.ContentLengthTooLarge
+                                    ? $"Content-Length: {content.Length + 42}\r\n"
+                                    : $"Content-Length: {content.Length}\r\n";
+                        }
+                        else if (transferType == TransferType.Chunked)
+                        {
+                            transferHeader = "Transfer-Encoding: chunked\r\n";
+                        }
 
-                            // Determine response transfer headers.
-                            string transferHeader = null;
-                            string content = "This is some response content.";
-                            if (transferType == TransferType.ContentLength)
-                            {
-                                transferHeader =
-                                    transferError == TransferError.ContentLengthTooLarge
-                                        ? $"Content-Length: {content.Length + 42}\r\n"
-                                        : $"Content-Length: {content.Length}\r\n";
-                            }
-                            else if (transferType == TransferType.Chunked)
-                            {
-                                transferHeader = "Transfer-Encoding: chunked\r\n";
-                            }
+                        // Write response header
+                        await connection
+                            .WriteStringAsync("HTTP/1.1 200 OK\r\n")
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n")
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync(LoopbackServer.CorsHeaders)
+                            .ConfigureAwait(false);
+                        await connection
+                            .WriteStringAsync("Content-Type: text/plain\r\n")
+                            .ConfigureAwait(false);
+                        if (!string.IsNullOrEmpty(transferHeader))
+                        {
+                            await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
+                        }
+                        await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
 
-                            // Write response header
+                        // Write response body
+                        if (transferType == TransferType.Chunked)
+                        {
+                            string chunkSizeInHex = string.Format(
+                                "{0:x}\r\n",
+                                content.Length
+                                    + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0)
+                            );
+                            await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
                             await connection
-                                .WriteStringAsync("HTTP/1.1 200 OK\r\n")
+                                .WriteStringAsync($"{content}\r\n")
                                 .ConfigureAwait(false);
-                            await connection
-                                .WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n")
-                                .ConfigureAwait(false);
-                            await connection
-                                .WriteStringAsync(LoopbackServer.CorsHeaders)
-                                .ConfigureAwait(false);
-                            await connection
-                                .WriteStringAsync("Content-Type: text/plain\r\n")
-                                .ConfigureAwait(false);
-                            if (!string.IsNullOrEmpty(transferHeader))
+                            if (transferError != TransferError.MissingChunkTerminator)
                             {
                                 await connection
-                                    .WriteStringAsync(transferHeader)
-                                    .ConfigureAwait(false);
-                            }
-                            await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
-
-                            // Write response body
-                            if (transferType == TransferType.Chunked)
-                            {
-                                string chunkSizeInHex = string.Format(
-                                    "{0:x}\r\n",
-                                    content.Length
-                                        + (
-                                            transferError == TransferError.ChunkSizeTooLarge
-                                                ? 42
-                                                : 0
-                                        )
-                                );
-                                await connection
-                                    .WriteStringAsync(chunkSizeInHex)
-                                    .ConfigureAwait(false);
-                                await connection
-                                    .WriteStringAsync($"{content}\r\n")
-                                    .ConfigureAwait(false);
-                                if (transferError != TransferError.MissingChunkTerminator)
-                                {
-                                    await connection
-                                        .WriteStringAsync("0\r\n\r\n")
-                                        .ConfigureAwait(false);
-                                }
-                            }
-                            else
-                            {
-                                await connection
-                                    .WriteStringAsync($"{content}")
+                                    .WriteStringAsync("0\r\n\r\n")
                                     .ConfigureAwait(false);
                             }
                         }
-                    )
+                        else
+                        {
+                            await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
+                        }
+                    })
             );
         }
 

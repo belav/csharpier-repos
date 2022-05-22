@@ -22,13 +22,11 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         var builder = CreateBuilder();
 
         MvcViewFeaturesMvcCoreBuilderExtensions.AddViewServices(builder.Services);
-        builder.ConfigureApplicationPartManager(
-            manager =>
-            {
-                manager.ApplicationParts.Add(new TestApplicationPart());
-                manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
-            }
-        );
+        builder.ConfigureApplicationPartManager(manager =>
+        {
+            manager.ApplicationParts.Add(new TestApplicationPart());
+            manager.FeatureProviders.Add(new ViewComponentFeatureProvider());
+        });
 
         // Act
         builder.AddViewComponentsAsServices();

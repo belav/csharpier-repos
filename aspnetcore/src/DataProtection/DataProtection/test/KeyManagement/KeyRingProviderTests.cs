@@ -673,25 +673,23 @@ public class KeyRingProviderTests
             );
         mockCacheableKeyRingProvider
             .Setup(o => o.GetCacheableKeyRing(updatedKeyRingTime))
-            .Returns<DateTimeOffset>(
-                dto =>
+            .Returns<DateTimeOffset>(dto =>
+            {
+                // at this point we're inside the critical section - spawn the background thread now
+                var backgroundGetKeyRingTask = Task.Run(() =>
                 {
-                    // at this point we're inside the critical section - spawn the background thread now
-                    var backgroundGetKeyRingTask = Task.Run(() =>
-                    {
-                        keyRingReturnedToBackgroundThread = keyRingProvider.GetCurrentKeyRingCore(
-                            updatedKeyRingTime
-                        );
-                    });
-                    Assert.True(backgroundGetKeyRingTask.Wait(testTimeout), "Test timed out.");
-
-                    return new CacheableKeyRing(
-                        CancellationToken.None,
-                        StringToDateTime("2015-03-03 00:00:00Z"),
-                        updatedKeyRing
+                    keyRingReturnedToBackgroundThread = keyRingProvider.GetCurrentKeyRingCore(
+                        updatedKeyRingTime
                     );
-                }
-            );
+                });
+                Assert.True(backgroundGetKeyRingTask.Wait(testTimeout), "Test timed out.");
+
+                return new CacheableKeyRing(
+                    CancellationToken.None,
+                    StringToDateTime("2015-03-03 00:00:00Z"),
+                    updatedKeyRing
+                );
+            });
 
         // Assert - underlying provider only should have been called once with the updated time (by the foreground thread)
         Assert.Same(originalKeyRing, keyRingProvider.GetCurrentKeyRingCore(originalKeyRingTime));

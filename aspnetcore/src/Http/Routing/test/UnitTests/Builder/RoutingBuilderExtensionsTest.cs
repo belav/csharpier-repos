@@ -112,12 +112,10 @@ public class RoutingBuilderExtensionsTest
             .Returns(Task.CompletedTask)
             .Verifiable();
 
-        app.UseRouter(
-            b =>
-            {
-                b.Routes.Add(router.Object);
-            }
-        );
+        app.UseRouter(b =>
+        {
+            b.Routes.Add(router.Object);
+        });
 
         var appFunc = app.Build();
 

@@ -30,29 +30,27 @@ namespace AutoMapper.UnitTests.Projection
     public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()

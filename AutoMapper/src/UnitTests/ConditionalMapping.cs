@@ -22,25 +22,23 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForAllMembers(
-                            o =>
-                                o.Condition(
-                                    (source, destination, sourceProperty, destinationProperty) =>
-                                    {
-                                        source.ShouldBeSameAs(_source);
-                                        destination.ShouldBeSameAs(_destination);
-                                        ((int)sourceProperty).ShouldBe(3);
-                                        ((int)destinationProperty).ShouldBe(7);
-                                        return true;
-                                    }
-                                )
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForAllMembers(
+                        o =>
+                            o.Condition(
+                                (source, destination, sourceProperty, destinationProperty) =>
+                                {
+                                    source.ShouldBeSameAs(_source);
+                                    destination.ShouldBeSameAs(_destination);
+                                    ((int)sourceProperty).ShouldBe(3);
+                                    ((int)destinationProperty).ShouldBe(7);
+                                    return true;
+                                }
+                            )
+                    );
+            });
 
         protected override void Because_of()
         {
@@ -94,13 +92,11 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Value, opt => opt.Condition(src => src.Value > 0));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Value, opt => opt.Condition(src => src.Value > 0));
+            });
 
         [Fact]
         public void Should_skip_the_mapping_when_the_condition_is_true()
@@ -133,20 +129,18 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            dest => dest.Value,
-                            opt =>
-                            {
-                                opt.Condition(src => src.Value > 0);
-                                opt.MapFrom(src => 10);
-                            }
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(
+                        dest => dest.Value,
+                        opt =>
+                        {
+                            opt.Condition(src => src.Value > 0);
+                            opt.MapFrom(src => 10);
+                        }
+                    );
+            });
 
         [Fact]
         public void Should_skip_the_mapping_when_the_condition_is_true()
@@ -201,18 +195,13 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            dest => dest.ScreenName,
-                            opt => opt.MapFrom(src => src.ScreenName)
-                        )
-                        .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                        .ForMember(dest => dest.Nickname, opt => opt.MapFrom(src => src.Nickname));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.ScreenName, opt => opt.MapFrom(src => src.ScreenName))
+                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                    .ForMember(dest => dest.Nickname, opt => opt.MapFrom(src => src.Nickname));
+            });
 
         protected override void Because_of()
         {
@@ -291,22 +280,20 @@ namespace AutoMapper.UnitTests.ConditionalMapping
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                        .ForMember(dest => dest.IsVisible, opt => opt.Ignore())
-                        .ForMember(dest => dest.Force, opt => opt.MapFrom(src => src.Force))
-                        .ReverseMap()
-                        .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
-                        .ForMember(
-                            dest => dest.ReverseForce,
-                            opt => opt.MapFrom(src => src.ReverseForce)
-                        )
-                        .ForSourceMember(dest => dest.IsVisible, opt => opt.DoNotValidate());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
+                    .ForMember(dest => dest.IsVisible, opt => opt.Ignore())
+                    .ForMember(dest => dest.Force, opt => opt.MapFrom(src => src.Force))
+                    .ReverseMap()
+                    .IgnoreAllSourcePropertiesWithAnInaccessibleSetter()
+                    .ForMember(
+                        dest => dest.ReverseForce,
+                        opt => opt.MapFrom(src => src.ReverseForce)
+                    )
+                    .ForSourceMember(dest => dest.IsVisible, opt => opt.DoNotValidate());
+            });
 
         protected override void Because_of()
         {

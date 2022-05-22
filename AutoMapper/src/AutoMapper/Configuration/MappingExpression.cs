@@ -49,15 +49,13 @@ namespace AutoMapper.Configuration
 
         public void ForAllMembers(Action<IMemberConfigurationExpression> memberOptions)
         {
-            TypeMapActions.Add(
-                typeMap =>
+            TypeMapActions.Add(typeMap =>
+            {
+                foreach (var accessor in typeMap.DestinationSetters)
                 {
-                    foreach (var accessor in typeMap.DestinationSetters)
-                    {
-                        ForMember(accessor, memberOptions);
-                    }
+                    ForMember(accessor, memberOptions);
                 }
-            );
+            });
         }
 
         public IMappingExpression ForMember(
@@ -151,20 +149,18 @@ namespace AutoMapper.Configuration
                 string sourceMemberName
             )
             {
-                PropertyMapActions.Add(
-                    pm =>
+                PropertyMapActions.Add(pm =>
+                {
+                    var config = new ValueResolverConfiguration(
+                        valueConverter,
+                        typeof(IValueConverter<TSourceMember, TDestinationMember>)
+                    )
                     {
-                        var config = new ValueResolverConfiguration(
-                            valueConverter,
-                            typeof(IValueConverter<TSourceMember, TDestinationMember>)
-                        )
-                        {
-                            SourceMemberName = sourceMemberName
-                        };
+                        SourceMemberName = sourceMemberName
+                    };
 
-                        pm.ValueConverterConfig = config;
-                    }
-                );
+                    pm.ValueConverterConfig = config;
+                });
             }
 
             private static void ConvertUsing(
@@ -281,15 +277,13 @@ namespace AutoMapper.Configuration
             Action<IMemberConfigurationExpression<TSource, TDestination, object>> memberOptions
         )
         {
-            TypeMapActions.Add(
-                typeMap =>
+            TypeMapActions.Add(typeMap =>
+            {
+                foreach (var accessor in typeMap.DestinationSetters)
                 {
-                    foreach (var accessor in typeMap.DestinationSetters)
-                    {
-                        ForDestinationMember(accessor, memberOptions);
-                    }
+                    ForDestinationMember(accessor, memberOptions);
                 }
-            );
+            });
         }
 
         public IMappingExpression<TSource, TDestination> Include<TOtherSource, TOtherDestination>()

@@ -35,13 +35,11 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // Accept first connection
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Read request headers, then close connection
-                            await connection.ReadRequestHeaderAsync();
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Read request headers, then close connection
+                        await connection.ReadRequestHeaderAsync();
+                    });
 
                     // Client should reconnect.  Accept that connection and send response.
                     await server.AcceptConnectionSendResponseAndCloseAsync(content: SimpleContent);
@@ -72,18 +70,16 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // Accept first connection
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Initial response
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: SimpleContent
-                            );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Initial response
+                        await connection.ReadRequestHeaderAndSendResponseAsync(
+                            content: SimpleContent
+                        );
 
-                            // Second response: Read request headers, then close connection
-                            await connection.ReadRequestHeaderAsync();
-                        }
-                    );
+                        // Second response: Read request headers, then close connection
+                        await connection.ReadRequestHeaderAsync();
+                    });
 
                     // Client should reconnect.  Accept that connection and send response.
                     await server.AcceptConnectionSendResponseAndCloseAsync(content: SimpleContent);
@@ -114,12 +110,10 @@ namespace System.Net.Http.Functional.Tests
                     for (int i = 0; i <= MaxRetries; i++)
                     {
                         // Establish connection and then close it before sending a response
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                            }
-                        );
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestHeaderAsync();
+                        });
                     }
 
                     // Client should not attempt any further connections.
@@ -164,23 +158,21 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // Accept connection
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Shut down the listen socket so no additional connections can happen
-                            server.ListenSocket.Close();
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Shut down the listen socket so no additional connections can happen
+                        server.ListenSocket.Close();
 
-                            // Initial response
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: SimpleContent
-                            );
+                        // Initial response
+                        await connection.ReadRequestHeaderAndSendResponseAsync(
+                            content: SimpleContent
+                        );
 
-                            // Second response: Read request headers, then close connection
-                            List<string> lines = await connection.ReadRequestHeaderAsync();
-                            Assert.Contains("Expect: 100-continue", lines);
-                            await contentSending.Task;
-                        }
-                    );
+                        // Second response: Read request headers, then close connection
+                        List<string> lines = await connection.ReadRequestHeaderAsync();
+                        Assert.Contains("Expect: 100-continue", lines);
+                        await contentSending.Task;
+                    });
                     connectionClosed.SetResult(true);
                 }
             );

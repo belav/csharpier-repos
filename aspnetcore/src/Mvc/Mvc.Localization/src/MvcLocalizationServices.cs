@@ -35,12 +35,10 @@ internal static class MvcLocalizationServices
         LanguageViewLocationExpanderFormat format
     )
     {
-        services.Configure<RazorViewEngineOptions>(
-            options =>
-            {
-                options.ViewLocationExpanders.Add(new LanguageViewLocationExpander(format));
-            }
-        );
+        services.Configure<RazorViewEngineOptions>(options =>
+        {
+            options.ViewLocationExpanders.Add(new LanguageViewLocationExpander(format));
+        });
 
         services.TryAdd(ServiceDescriptor.Singleton<IHtmlLocalizerFactory, HtmlLocalizerFactory>());
         services.TryAdd(

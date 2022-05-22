@@ -1973,19 +1973,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<A20359>(
-                    builder =>
-                    {
-                        builder.OwnsOne(x => x.Sub);
-                    }
-                );
+                modelBuilder.Entity<A20359>(builder =>
+                {
+                    builder.OwnsOne(x => x.Sub);
+                });
 
-                modelBuilder.Entity<Root20359>(
-                    builder =>
-                    {
-                        builder.OwnsOne(x => x.B);
-                    }
-                );
+                modelBuilder.Entity<Root20359>(builder =>
+                {
+                    builder.OwnsOne(x => x.B);
+                });
             }
         }
 

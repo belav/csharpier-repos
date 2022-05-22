@@ -221,179 +221,152 @@ namespace ILCompiler.DependencyAnalysis
 
         private void CreateNodeCaches()
         {
-            _allMethodsOnType = new NodeCache<TypeDesc, AllMethodsOnTypeNode>(
-                type =>
-                {
-                    return new AllMethodsOnTypeNode(type);
-                }
-            );
+            _allMethodsOnType = new NodeCache<TypeDesc, AllMethodsOnTypeNode>(type =>
+            {
+                return new AllMethodsOnTypeNode(type);
+            });
 
             _genericReadyToRunHelpersFromDict = new NodeCache<
                 ReadyToRunGenericHelperKey,
                 ISymbolNode
-            >(
-                helperKey =>
-                {
-                    return new DelayLoadHelperImport(
-                        this,
-                        HelperImports,
-                        GetGenericStaticHelper(helperKey.HelperId),
-                        TypeSignature(ReadyToRunFixupKind.Invalid, (TypeDesc)helperKey.Target)
-                    );
-                }
-            );
+            >(helperKey =>
+            {
+                return new DelayLoadHelperImport(
+                    this,
+                    HelperImports,
+                    GetGenericStaticHelper(helperKey.HelperId),
+                    TypeSignature(ReadyToRunFixupKind.Invalid, (TypeDesc)helperKey.Target)
+                );
+            });
 
             _genericReadyToRunHelpersFromType = new NodeCache<
                 ReadyToRunGenericHelperKey,
                 ISymbolNode
-            >(
-                helperKey =>
-                {
-                    return new DelayLoadHelperImport(
-                        this,
-                        HelperImports,
-                        GetGenericStaticHelper(helperKey.HelperId),
-                        TypeSignature(ReadyToRunFixupKind.Invalid, (TypeDesc)helperKey.Target)
-                    );
-                }
-            );
+            >(helperKey =>
+            {
+                return new DelayLoadHelperImport(
+                    this,
+                    HelperImports,
+                    GetGenericStaticHelper(helperKey.HelperId),
+                    TypeSignature(ReadyToRunFixupKind.Invalid, (TypeDesc)helperKey.Target)
+                );
+            });
 
-            _constructedHelpers = new NodeCache<ReadyToRunHelper, Import>(
-                helperId =>
-                {
-                    return new Import(EagerImports, new ReadyToRunHelperSignature(helperId));
-                }
-            );
+            _constructedHelpers = new NodeCache<ReadyToRunHelper, Import>(helperId =>
+            {
+                return new Import(EagerImports, new ReadyToRunHelperSignature(helperId));
+            });
 
-            _importThunks = new NodeCache<ImportThunkKey, ImportThunk>(
-                key =>
-                {
-                    return new ImportThunk(
-                        this,
-                        key.Helper,
-                        key.ContainingImportSection,
-                        key.UseVirtualCall,
-                        key.UseJumpableStub
-                    );
-                }
-            );
+            _importThunks = new NodeCache<ImportThunkKey, ImportThunk>(key =>
+            {
+                return new ImportThunk(
+                    this,
+                    key.Helper,
+                    key.ContainingImportSection,
+                    key.UseVirtualCall,
+                    key.UseJumpableStub
+                );
+            });
 
             _importMethods = new NodeCache<TypeAndMethod, IMethodNode>(CreateMethodEntrypoint);
 
-            _localMethodCache = new NodeCache<MethodDesc, MethodWithGCInfo>(
-                key =>
-                {
-                    return new MethodWithGCInfo(key);
-                }
-            );
+            _localMethodCache = new NodeCache<MethodDesc, MethodWithGCInfo>(key =>
+            {
+                return new MethodWithGCInfo(key);
+            });
 
-            _methodSignatures = new NodeCache<MethodFixupKey, MethodFixupSignature>(
-                key =>
-                {
-                    return new MethodFixupSignature(
-                        key.FixupKind,
-                        key.TypeAndMethod.Method,
-                        key.TypeAndMethod.IsInstantiatingStub
-                    );
-                }
-            );
+            _methodSignatures = new NodeCache<MethodFixupKey, MethodFixupSignature>(key =>
+            {
+                return new MethodFixupSignature(
+                    key.FixupKind,
+                    key.TypeAndMethod.Method,
+                    key.TypeAndMethod.IsInstantiatingStub
+                );
+            });
 
-            _typeSignatures = new NodeCache<TypeFixupKey, TypeFixupSignature>(
-                key =>
-                {
-                    return new TypeFixupSignature(key.FixupKind, key.TypeDesc);
-                }
-            );
+            _typeSignatures = new NodeCache<TypeFixupKey, TypeFixupSignature>(key =>
+            {
+                return new TypeFixupSignature(key.FixupKind, key.TypeDesc);
+            });
 
             _virtualResolutionSignatures = new NodeCache<
                 VirtualResolutionFixupSignatureFixupKey,
                 VirtualResolutionFixupSignature
-            >(
-                key =>
-                {
-                    return new ReadyToRun.VirtualResolutionFixupSignature(
-                        key.FixupKind,
-                        key.DeclMethod,
-                        key.ImplType,
-                        key.ImplMethod
-                    );
-                }
-            );
+            >(key =>
+            {
+                return new ReadyToRun.VirtualResolutionFixupSignature(
+                    key.FixupKind,
+                    key.DeclMethod,
+                    key.ImplType,
+                    key.ImplMethod
+                );
+            });
 
-            _dynamicHelperCellCache = new NodeCache<DynamicHelperCellKey, ISymbolNode>(
-                key =>
-                {
-                    return new DelayLoadHelperMethodImport(
-                        this,
-                        DispatchImports,
-                        ReadyToRunHelper.DelayLoad_Helper_Obj,
+            _dynamicHelperCellCache = new NodeCache<DynamicHelperCellKey, ISymbolNode>(key =>
+            {
+                return new DelayLoadHelperMethodImport(
+                    this,
+                    DispatchImports,
+                    ReadyToRunHelper.DelayLoad_Helper_Obj,
+                    key.Method,
+                    useVirtualCall: false,
+                    useInstantiatingStub: true,
+                    MethodSignature(
+                        ReadyToRunFixupKind.VirtualEntry,
                         key.Method,
-                        useVirtualCall: false,
-                        useInstantiatingStub: true,
-                        MethodSignature(
-                            ReadyToRunFixupKind.VirtualEntry,
-                            key.Method,
-                            isInstantiatingStub: key.IsInstantiatingStub
-                        )
-                    );
-                }
-            );
+                        isInstantiatingStub: key.IsInstantiatingStub
+                    )
+                );
+            });
 
-            _copiedCorHeaders = new NodeCache<EcmaModule, CopiedCorHeaderNode>(
-                module =>
-                {
-                    return new CopiedCorHeaderNode(module);
-                }
-            );
+            _copiedCorHeaders = new NodeCache<EcmaModule, CopiedCorHeaderNode>(module =>
+            {
+                return new CopiedCorHeaderNode(module);
+            });
 
-            _debugDirectoryEntries = new NodeCache<ModuleAndIntValueKey, DebugDirectoryEntryNode>(
-                key =>
-                {
-                    return new CopiedDebugDirectoryEntryNode(key.Module, key.IntValue);
-                }
-            );
+            _debugDirectoryEntries = new NodeCache<
+                ModuleAndIntValueKey,
+                DebugDirectoryEntryNode
+            >(key =>
+            {
+                return new CopiedDebugDirectoryEntryNode(key.Module, key.IntValue);
+            });
 
-            _copiedMetadataBlobs = new NodeCache<EcmaModule, CopiedMetadataBlobNode>(
-                module =>
-                {
-                    return new CopiedMetadataBlobNode(module);
-                }
-            );
+            _copiedMetadataBlobs = new NodeCache<EcmaModule, CopiedMetadataBlobNode>(module =>
+            {
+                return new CopiedMetadataBlobNode(module);
+            });
 
-            _copiedMethodIL = new NodeCache<MethodDesc, CopiedMethodILNode>(
-                method =>
-                {
-                    return new CopiedMethodILNode((EcmaMethod)method);
-                }
-            );
+            _copiedMethodIL = new NodeCache<MethodDesc, CopiedMethodILNode>(method =>
+            {
+                return new CopiedMethodILNode((EcmaMethod)method);
+            });
 
-            _copiedFieldRvas = new NodeCache<ModuleAndIntValueKey, CopiedFieldRvaNode>(
-                key =>
-                {
-                    return new CopiedFieldRvaNode(key.Module, key.IntValue);
-                }
-            );
+            _copiedFieldRvas = new NodeCache<ModuleAndIntValueKey, CopiedFieldRvaNode>(key =>
+            {
+                return new CopiedFieldRvaNode(key.Module, key.IntValue);
+            });
 
-            _copiedStrongNameSignatures = new NodeCache<EcmaModule, CopiedStrongNameSignatureNode>(
-                module =>
-                {
-                    return new CopiedStrongNameSignatureNode(module);
-                }
-            );
+            _copiedStrongNameSignatures = new NodeCache<
+                EcmaModule,
+                CopiedStrongNameSignatureNode
+            >(module =>
+            {
+                return new CopiedStrongNameSignatureNode(module);
+            });
 
-            _copiedManagedResources = new NodeCache<EcmaModule, CopiedManagedResourcesNode>(
-                module =>
-                {
-                    return new CopiedManagedResourcesNode(module);
-                }
-            );
+            _copiedManagedResources = new NodeCache<
+                EcmaModule,
+                CopiedManagedResourcesNode
+            >(module =>
+            {
+                return new CopiedManagedResourcesNode(module);
+            });
 
-            _profileDataCountsNodes = new NodeCache<MethodWithGCInfo, ProfileDataNode>(
-                method =>
-                {
-                    return new ProfileDataNode(method, Target);
-                }
-            );
+            _profileDataCountsNodes = new NodeCache<MethodWithGCInfo, ProfileDataNode>(method =>
+            {
+                return new ProfileDataNode(method, Target);
+            });
         }
 
         public int CompilationCurrentPhase { get; private set; }

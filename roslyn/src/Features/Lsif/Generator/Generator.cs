@@ -203,34 +203,27 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 semanticModel.Compilation,
                 idFactory
             );
-            var symbolResultsTracker = new DelegatingResultSetTracker(
-                symbol =>
+            var symbolResultsTracker = new DelegatingResultSetTracker(symbol =>
+            {
+                if (symbol.Kind is SymbolKind.Local or SymbolKind.RangeVariable or SymbolKind.Label)
                 {
-                    if (
-                        symbol.Kind
-                        is SymbolKind.Local
-                            or SymbolKind.RangeVariable
-                            or SymbolKind.Label
-                    )
-                    {
-                        // These symbols can go in the document local one because they can't escape methods
-                        return documentLocalSymbolsResultSetTracker;
-                    }
-                    else if (
-                        symbol.ContainingType != null
-                        && symbol.DeclaredAccessibility == Accessibility.Private
-                        && symbol.ContainingType.Locations.Length == 1
-                    )
-                    {
-                        // This is a private member in a class that isn't partial, so it can't escape the file
-                        return documentLocalSymbolsResultSetTracker;
-                    }
-                    else
-                    {
-                        return topLevelSymbolsResultSetTracker;
-                    }
+                    // These symbols can go in the document local one because they can't escape methods
+                    return documentLocalSymbolsResultSetTracker;
                 }
-            );
+                else if (
+                    symbol.ContainingType != null
+                    && symbol.DeclaredAccessibility == Accessibility.Private
+                    && symbol.ContainingType.Locations.Length == 1
+                )
+                {
+                    // This is a private member in a class that isn't partial, so it can't escape the file
+                    return documentLocalSymbolsResultSetTracker;
+                }
+                else
+                {
+                    return topLevelSymbolsResultSetTracker;
+                }
+            });
 
             // We will walk the file token-by-token, making a range for each one and then attaching information for it
             var rangeVertices = new List<Id<Graph.Range>>();

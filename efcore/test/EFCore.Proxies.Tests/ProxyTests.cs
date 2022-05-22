@@ -525,21 +525,17 @@ namespace Microsoft.EntityFrameworkCore
             {
                 modelBuilder.Entity<March82GGtp>();
 
-                modelBuilder.Entity<March881>(
-                    b =>
-                    {
-                        b.Property(e => e.Id);
-                        b.Property(e => e.Sponsor);
-                    }
-                );
+                modelBuilder.Entity<March881>(b =>
+                {
+                    b.Property(e => e.Id);
+                    b.Property(e => e.Sponsor);
+                });
 
-                modelBuilder.Entity<WilliamsFw14>(
-                    b =>
-                    {
-                        b.Property(e => e.Id);
-                        b.Property(e => e.Sponsor);
-                    }
-                );
+                modelBuilder.Entity<WilliamsFw14>(b =>
+                {
+                    b.Property(e => e.Id);
+                    b.Property(e => e.Sponsor);
+                });
 
                 modelBuilder.SharedTypeEntity<SharedTypeEntityType>("STET1");
                 modelBuilder.SharedTypeEntity<SharedTypeEntityType>("STET2");

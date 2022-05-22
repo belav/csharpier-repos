@@ -27,12 +27,10 @@ public static class CorsEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Add(
-            endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(new EnableCorsAttribute(policyName));
-            }
-        );
+        builder.Add(endpointBuilder =>
+        {
+            endpointBuilder.Metadata.Add(new EnableCorsAttribute(policyName));
+        });
         return builder;
     }
 
@@ -61,12 +59,10 @@ public static class CorsEndpointConventionBuilderExtensions
         configurePolicy(policyBuilder);
         var policy = policyBuilder.Build();
 
-        builder.Add(
-            endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(new CorsPolicyMetadata(policy));
-            }
-        );
+        builder.Add(endpointBuilder =>
+        {
+            endpointBuilder.Metadata.Add(new CorsPolicyMetadata(policy));
+        });
         return builder;
     }
 }

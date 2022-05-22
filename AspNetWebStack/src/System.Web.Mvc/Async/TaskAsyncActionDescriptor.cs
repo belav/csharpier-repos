@@ -229,12 +229,10 @@ namespace System.Web.Mvc.Async
                     //   on an arbitrary ThreadPool thread with no SynchronizationContext set up, so
                     //   ContinueWith gets us closer to the desired semantic.
                     result.CompletedSynchronously = false;
-                    taskUser.ContinueWith(
-                        _ =>
-                        {
-                            callback(result);
-                        }
-                    );
+                    taskUser.ContinueWith(_ =>
+                    {
+                        callback(result);
+                    });
                 }
             }
 

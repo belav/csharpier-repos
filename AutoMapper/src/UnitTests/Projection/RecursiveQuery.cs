@@ -24,13 +24,11 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateProjection<Source, Destination>();
-                    c.Internal().RecursiveQueriesMaxDepth = 1;
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateProjection<Source, Destination>();
+                c.Internal().RecursiveQueriesMaxDepth = 1;
+            });
 
         [Fact]
         public void Should_work()

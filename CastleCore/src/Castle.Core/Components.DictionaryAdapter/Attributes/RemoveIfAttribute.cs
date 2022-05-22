@@ -114,16 +114,14 @@ namespace Castle.Components.DictionaryAdapter
 
             public bool SatisfiedBy(object value)
             {
-                return values.Any(
-                    valueToMatch =>
+                return values.Any(valueToMatch =>
+                {
+                    if (comparer == null)
                     {
-                        if (comparer == null)
-                        {
-                            return Equals(value, valueToMatch);
-                        }
-                        return comparer.Equals(value, valueToMatch);
+                        return Equals(value, valueToMatch);
                     }
-                );
+                    return comparer.Equals(value, valueToMatch);
+                });
             }
         }
 

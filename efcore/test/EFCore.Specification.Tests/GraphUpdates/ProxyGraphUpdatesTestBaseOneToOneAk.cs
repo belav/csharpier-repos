@@ -68,28 +68,22 @@ namespace Microsoft.EntityFrameworkCore
                         e => e.AlternateId = Guid.NewGuid()
                     );
                     new2c = context.CreateProxy<OptionalSingleComposite2>();
-                    new1 = context.CreateProxy<OptionalSingleAk1>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2;
-                            e.SingleComposite = new2c;
-                        }
-                    );
-                    new1d = context.CreateProxy<OptionalSingleAk1Derived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2d;
-                        }
-                    );
-                    new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2dd;
-                        }
-                    );
+                    new1 = context.CreateProxy<OptionalSingleAk1>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2;
+                        e.SingleComposite = new2c;
+                    });
+                    new1d = context.CreateProxy<OptionalSingleAk1Derived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2d;
+                    });
+                    new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2dd;
+                    });
 
                     if (useExistingEntities)
                     {
@@ -269,28 +263,22 @@ namespace Microsoft.EntityFrameworkCore
                         e => e.AlternateId = Guid.NewGuid()
                     );
                     new2c = context.CreateProxy<OptionalSingleComposite2>();
-                    new1 = context.CreateProxy<OptionalSingleAk1>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2;
-                            e.SingleComposite = new2c;
-                        }
-                    );
-                    new1d = context.CreateProxy<OptionalSingleAk1Derived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2d;
-                        }
-                    );
-                    new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2dd;
-                        }
-                    );
+                    new1 = context.CreateProxy<OptionalSingleAk1>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2;
+                        e.SingleComposite = new2c;
+                    });
+                    new1d = context.CreateProxy<OptionalSingleAk1Derived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2d;
+                    });
+                    new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2dd;
+                    });
 
                     var root = LoadRoot(context);
 
@@ -484,21 +472,17 @@ namespace Microsoft.EntityFrameworkCore
                         e => e.AlternateId = Guid.NewGuid()
                     );
                     new2c = context.CreateProxy<RequiredSingleComposite2>();
-                    new1 = context.CreateProxy<RequiredSingleAk1>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2;
-                            e.SingleComposite = new2c;
-                        }
-                    );
-                    newRoot = context.CreateProxy<Root>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.RequiredSingleAk = new1;
-                        }
-                    );
+                    new1 = context.CreateProxy<RequiredSingleAk1>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2;
+                        e.SingleComposite = new2c;
+                    });
+                    newRoot = context.CreateProxy<Root>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.RequiredSingleAk = new1;
+                    });
 
                     if (useExistingEntities)
                     {
@@ -640,39 +624,31 @@ namespace Microsoft.EntityFrameworkCore
                     new2dd = context.CreateProxy<RequiredNonPkSingleAk2MoreDerived>(
                         e => e.AlternateId = Guid.NewGuid()
                     );
-                    new1 = context.CreateProxy<RequiredNonPkSingleAk1>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2;
-                        }
-                    );
-                    new1d = context.CreateProxy<RequiredNonPkSingleAk1Derived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2d;
-                            e.Root = context.CreateProxy<Root>();
-                        }
-                    );
-                    new1dd = context.CreateProxy<RequiredNonPkSingleAk1MoreDerived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Single = new2dd;
-                            e.Root = context.CreateProxy<Root>();
-                            e.DerivedRoot = context.CreateProxy<Root>();
-                        }
-                    );
-                    newRoot = context.CreateProxy<Root>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.RequiredNonPkSingleAk = new1;
-                            e.RequiredNonPkSingleAkDerived = new1d;
-                            e.RequiredNonPkSingleAkMoreDerived = new1dd;
-                        }
-                    );
+                    new1 = context.CreateProxy<RequiredNonPkSingleAk1>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2;
+                    });
+                    new1d = context.CreateProxy<RequiredNonPkSingleAk1Derived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2d;
+                        e.Root = context.CreateProxy<Root>();
+                    });
+                    new1dd = context.CreateProxy<RequiredNonPkSingleAk1MoreDerived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Single = new2dd;
+                        e.Root = context.CreateProxy<Root>();
+                        e.DerivedRoot = context.CreateProxy<Root>();
+                    });
+                    newRoot = context.CreateProxy<Root>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.RequiredNonPkSingleAk = new1;
+                        e.RequiredNonPkSingleAkDerived = new1d;
+                        e.RequiredNonPkSingleAkMoreDerived = new1dd;
+                    });
 
                     if (useExistingEntities)
                     {

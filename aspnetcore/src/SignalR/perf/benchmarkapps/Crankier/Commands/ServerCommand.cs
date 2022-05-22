@@ -86,12 +86,10 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
-                .ConfigureLogging(
-                    loggerFactory =>
-                    {
-                        loggerFactory.AddConsole().SetMinimumLevel(logLevel);
-                    }
-                )
+                .ConfigureLogging(loggerFactory =>
+                {
+                    loggerFactory.AddConsole().SetMinimumLevel(logLevel);
+                })
                 .UseKestrel()
                 .UseStartup<Startup>();
 

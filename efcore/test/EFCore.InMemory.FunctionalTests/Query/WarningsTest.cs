@@ -304,27 +304,25 @@ namespace Microsoft.EntityFrameworkCore.Query
                 optionsBuilder
                     .UseInternalServiceProvider(_serviceProvider)
                     .UseInMemoryDatabase(nameof(WarningAsErrorContext))
-                    .ConfigureWarnings(
-                        c =>
+                    .ConfigureWarnings(c =>
+                    {
+                        if (_toThrow != null)
                         {
-                            if (_toThrow != null)
-                            {
-                                c.Throw(_toThrow.Value);
-                            }
-                            else if (_toLog != null)
-                            {
-                                c.Log(_toLog.Value);
-                            }
-                            else if (_toChangeLevel != null)
-                            {
-                                c.Log(_toChangeLevel.Value);
-                            }
-                            else if (_defaultThrow)
-                            {
-                                c.Default(WarningBehavior.Throw);
-                            }
+                            c.Throw(_toThrow.Value);
                         }
-                    );
+                        else if (_toLog != null)
+                        {
+                            c.Log(_toLog.Value);
+                        }
+                        else if (_toChangeLevel != null)
+                        {
+                            c.Log(_toChangeLevel.Value);
+                        }
+                        else if (_defaultThrow)
+                        {
+                            c.Default(WarningBehavior.Throw);
+                        }
+                    });
         }
 
         private class WarningAsErrorEntity

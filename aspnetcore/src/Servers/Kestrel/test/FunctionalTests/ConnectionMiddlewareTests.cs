@@ -60,17 +60,15 @@ public class ConnectionMiddlewareTests : LoggedTest
         );
         var mockDuplexPipe = new MockDuplexPipe();
 
-        listenOptions.Use(
-            next =>
+        listenOptions.Use(next =>
+        {
+            return async context =>
             {
-                return async context =>
-                {
-                    context.Transport = mockDuplexPipe;
-                    await context.DisposeAsync();
-                    await connectionCloseTcs.Task;
-                };
-            }
-        );
+                context.Transport = mockDuplexPipe;
+                await context.DisposeAsync();
+                await connectionCloseTcs.Task;
+            };
+        });
 
         var serviceContext = new TestServiceContext(LoggerFactory);
 

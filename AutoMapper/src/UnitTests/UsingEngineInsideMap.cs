@@ -24,26 +24,24 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>()
-                        .ForMember(
-                            dest => dest.Child,
-                            opt =>
-                                opt.MapFrom(
-                                    (src, dest, destMember, context) =>
-                                        context.Mapper.Map(
-                                            src,
-                                            destMember,
-                                            typeof(Source),
-                                            typeof(ChildDest)
-                                        )
-                                )
-                        );
-                    cfg.CreateMap<Source, ChildDest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>()
+                    .ForMember(
+                        dest => dest.Child,
+                        opt =>
+                            opt.MapFrom(
+                                (src, dest, destMember, context) =>
+                                    context.Mapper.Map(
+                                        src,
+                                        destMember,
+                                        typeof(Source),
+                                        typeof(ChildDest)
+                                    )
+                            )
+                    );
+                cfg.CreateMap<Source, ChildDest>();
+            });
 
         protected override void Because_of()
         {

@@ -4955,121 +4955,101 @@ namespace Microsoft.EntityFrameworkCore
             {
                 modelBuilder.Entity<SingleShadowFk>().Property<int?>("ParentId");
 
-                modelBuilder.Entity<Parent>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
+                modelBuilder.Entity<Parent>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
 
-                        b.HasMany<Child>(nameof(Parent.Children))
-                            .WithOne(nameof(Child.Parent))
-                            .HasForeignKey(e => e.ParentId);
+                    b.HasMany<Child>(nameof(Parent.Children))
+                        .WithOne(nameof(Child.Parent))
+                        .HasForeignKey(e => e.ParentId);
 
-                        b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
-                            .WithOne(nameof(SinglePkToPk.Parent))
-                            .HasForeignKey<SinglePkToPk>(e => e.Id)
-                            .IsRequired();
+                    b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
+                        .WithOne(nameof(SinglePkToPk.Parent))
+                        .HasForeignKey<SinglePkToPk>(e => e.Id)
+                        .IsRequired();
 
-                        b.HasOne<Single>(nameof(Parent.Single))
-                            .WithOne(e => e.Parent)
-                            .HasForeignKey<Single>(e => e.ParentId);
+                    b.HasOne<Single>(nameof(Parent.Single))
+                        .WithOne(e => e.Parent)
+                        .HasForeignKey<Single>(e => e.ParentId);
 
-                        b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey(e => e.AlternateId)
-                            .HasForeignKey(e => e.ParentId);
+                    b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey(e => e.AlternateId)
+                        .HasForeignKey(e => e.ParentId);
 
-                        b.HasOne<SingleAk>(nameof(Parent.SingleAk))
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => e.AlternateId)
-                            .HasForeignKey<SingleAk>(e => e.ParentId);
+                    b.HasOne<SingleAk>(nameof(Parent.SingleAk))
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => e.AlternateId)
+                        .HasForeignKey<SingleAk>(e => e.ParentId);
 
-                        b.HasMany(e => e.ChildrenShadowFk)
-                            .WithOne(nameof(ChildShadowFk.Parent))
-                            .HasPrincipalKey(e => e.Id)
-                            .HasForeignKey("ParentId");
+                    b.HasMany(e => e.ChildrenShadowFk)
+                        .WithOne(nameof(ChildShadowFk.Parent))
+                        .HasPrincipalKey(e => e.Id)
+                        .HasForeignKey("ParentId");
 
-                        b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => e.Id)
-                            .HasForeignKey<SingleShadowFk>("ParentId");
+                    b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => e.Id)
+                        .HasForeignKey<SingleShadowFk>("ParentId");
 
-                        b.HasMany(e => e.ChildrenCompositeKey)
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey(e => new { e.AlternateId, e.Id })
-                            .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
+                    b.HasMany(e => e.ChildrenCompositeKey)
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey(e => new { e.AlternateId, e.Id })
+                        .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
 
-                        b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
-                            .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
-                            .HasForeignKey<SingleCompositeKey>(
-                                e => new { e.ParentAlternateId, e.ParentId }
-                            );
-                    }
-                );
+                    b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
+                        .WithOne(e => e.Parent)
+                        .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
+                        .HasForeignKey<SingleCompositeKey>(
+                            e => new { e.ParentAlternateId, e.ParentId }
+                        );
+                });
 
-                modelBuilder.Entity<SingleShadowFk>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<SingleShadowFk>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<ChildShadowFk>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<ChildShadowFk>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<SingleCompositeKey>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<SingleCompositeKey>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<ChildCompositeKey>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<ChildCompositeKey>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<SingleAk>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<SingleAk>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<ChildAk>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<ChildAk>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<Single>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<Single>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<SinglePkToPk>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<SinglePkToPk>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<Child>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<Child>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
             }
 
             protected override void Seed(PoolableDbContext context)

@@ -52,20 +52,18 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<CategoryModel, CategoryDto>(MemberList.Destination)
-                        .PreserveReferences()
-                        .ReverseMap();
-                    cfg.CreateMap<UserModel, UserDto>(MemberList.Destination)
-                        .PreserveReferences()
-                        .ReverseMap();
-                    cfg.CreateMap<UserGroupModel, UserGroupDto>(MemberList.Destination)
-                        .PreserveReferences()
-                        .ReverseMap();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CategoryModel, CategoryDto>(MemberList.Destination)
+                    .PreserveReferences()
+                    .ReverseMap();
+                cfg.CreateMap<UserModel, UserDto>(MemberList.Destination)
+                    .PreserveReferences()
+                    .ReverseMap();
+                cfg.CreateMap<UserGroupModel, UserGroupDto>(MemberList.Destination)
+                    .PreserveReferences()
+                    .ReverseMap();
+            });
 
         protected override void Because_of()
         {

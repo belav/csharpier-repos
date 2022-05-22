@@ -52,14 +52,12 @@ namespace AutoMapper.IntegrationTests.Parameterization
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    string username = null;
-                    cfg.CreateProjection<Entity, EntityDto>()
-                        .ForMember(d => d.UserName, opt => opt.MapFrom(s => username));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                string username = null;
+                cfg.CreateProjection<Entity, EntityDto>()
+                    .ForMember(d => d.UserName, opt => opt.MapFrom(s => username));
+            });
 
         [Fact]
         public async Task Should_parameterize_value()

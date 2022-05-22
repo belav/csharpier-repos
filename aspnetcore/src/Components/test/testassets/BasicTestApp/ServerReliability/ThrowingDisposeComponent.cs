@@ -11,12 +11,10 @@ public class ThrowingDisposeComponent : IComponent, IDisposable
 {
     public void Attach(RenderHandle renderHandle)
     {
-        renderHandle.Render(
-            builder =>
-            {
-                // Do nothing.
-            }
-        );
+        renderHandle.Render(builder =>
+        {
+            // Do nothing.
+        });
     }
 
     public void Dispose()

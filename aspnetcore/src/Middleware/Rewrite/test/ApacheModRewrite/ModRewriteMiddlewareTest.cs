@@ -23,22 +23,16 @@ public class ModRewriteMiddlewareTest
             new StringReader("RewriteRule /hey/(.*) /$1 ")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -57,22 +51,16 @@ public class ModRewriteMiddlewareTest
             .AddApacheModRewrite(new StringReader("RewriteRule /hey/(.*) /$1 [L]"))
             .AddApacheModRewrite(new StringReader("RewriteRule /hello /what"));
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -91,22 +79,16 @@ public class ModRewriteMiddlewareTest
             .AddApacheModRewrite(new StringReader("RewriteRule /hey/(.*) /$1"))
             .AddApacheModRewrite(new StringReader("RewriteRule /hello /what"));
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -125,22 +107,16 @@ public class ModRewriteMiddlewareTest
             new StringReader("#RewriteRule ^/hey/(.*) /$1 ")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -159,22 +135,16 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule ^/$ /homepage.html")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -193,22 +163,16 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule ^/$ /homepage.html")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -227,22 +191,16 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule !^/$ /homepage.html")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -269,22 +227,16 @@ public class ModRewriteMiddlewareTest
     {
         var options = new RewriteOptions().AddApacheModRewrite(new StringReader(rule));
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -331,22 +283,16 @@ public class ModRewriteMiddlewareTest
     {
         var options = new RewriteOptions().AddApacheModRewrite(new StringReader(rule));
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -365,22 +311,16 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context => context.Response.WriteAsync(context.Request.Path)
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(context => context.Response.WriteAsync(context.Request.Path));
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -401,29 +341,25 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -444,29 +380,25 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule (.+) http://www.example.com$1/")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -490,29 +422,25 @@ public class ModRewriteMiddlewareTest
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -535,29 +463,25 @@ public class ModRewriteMiddlewareTest
             new StringReader("RewriteRule ^(.*)$ $1 [R=301,L]")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -578,25 +502,21 @@ public class ModRewriteMiddlewareTest
             new StringReader("RewriteRule ^(.*)$ $1 [L]")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -614,25 +534,21 @@ public class ModRewriteMiddlewareTest
             new StringReader(@"RewriteRule ^(.*)$ $1 [R=301,L]")
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -656,25 +572,21 @@ RewriteRule (.*) http://localhost:80/home/report/%1 [R=301,L,QSD]"
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();

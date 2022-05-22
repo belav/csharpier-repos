@@ -95,13 +95,11 @@ public class EncryptedXmlDecryptorTests
             "password"
         );
         var services = new ServiceCollection()
-            .Configure<XmlKeyDecryptionOptions>(
-                o =>
-                {
-                    o.AddKeyDecryptionCertificate(testCert1);
-                    o.AddKeyDecryptionCertificate(testCert2);
-                }
-            )
+            .Configure<XmlKeyDecryptionOptions>(o =>
+            {
+                o.AddKeyDecryptionCertificate(testCert1);
+                o.AddKeyDecryptionCertificate(testCert2);
+            })
             .BuildServiceProvider();
         var encryptor = new CertificateXmlEncryptor(testCert1, NullLoggerFactory.Instance);
         var data = new XElement("SampleData", "Lorem ipsum");

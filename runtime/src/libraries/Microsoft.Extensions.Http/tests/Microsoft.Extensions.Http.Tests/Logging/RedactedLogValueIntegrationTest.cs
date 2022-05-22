@@ -48,14 +48,11 @@ namespace Microsoft.Extensions.Http.Logging
             var messages = sink.Writes.ToArray();
 
             var message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId
-                                == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -68,13 +65,11 @@ Cache-Control: no-cache
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -87,13 +82,11 @@ Cache-Control: no-cache
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -106,14 +99,11 @@ Y-Non-Sensitive: innocuous value
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId
-                                == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -142,12 +132,10 @@ Y-Non-Sensitive: innocuous value
             serviceCollection
                 .AddHttpClient("test")
                 .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler())
-                .RedactLoggedHeaders(
-                    header =>
-                    {
-                        return header.StartsWith("Auth") || header.StartsWith("X-");
-                    }
-                );
+                .RedactLoggedHeaders(header =>
+                {
+                    return header.StartsWith("Auth") || header.StartsWith("X-");
+                });
 
             // Assert
             var services = serviceCollection.BuildServiceProvider();
@@ -163,14 +151,11 @@ Y-Non-Sensitive: innocuous value
             var messages = sink.Writes.ToArray();
 
             var message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId
-                                == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -183,13 +168,11 @@ Cache-Control: no-cache
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.RequestHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -202,13 +185,11 @@ Cache-Control: no-cache
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.ClientHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(
@@ -221,14 +202,11 @@ Y-Non-Sensitive: innocuous value
             );
 
             message = Assert.Single(
-                messages.Where(
-                    m =>
-                    {
-                        return m.EventId
-                                == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
-                            && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
-                    }
-                )
+                messages.Where(m =>
+                {
+                    return m.EventId == LoggingScopeHttpMessageHandler.Log.EventIds.ResponseHeader
+                        && m.LoggerName == "System.Net.Http.HttpClient.test.LogicalHandler";
+                })
             );
             Assert.StartsWith(
                 LineEndingsHelper.Normalize(

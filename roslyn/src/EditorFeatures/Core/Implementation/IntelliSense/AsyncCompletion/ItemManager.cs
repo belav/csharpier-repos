@@ -665,21 +665,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             CompletionHelper completionHelper
         )
         {
-            return matchResults.SelectAsArray(
-                matchResult =>
-                {
-                    var highlightedSpans = GetHighlightedSpans(
-                        matchResult,
-                        completionHelper,
-                        filterText,
-                        highlightMatchingPortions
-                    );
-                    return new CompletionItemWithHighlight(
-                        matchResult.EditorCompletionItem,
-                        highlightedSpans
-                    );
-                }
-            );
+            return matchResults.SelectAsArray(matchResult =>
+            {
+                var highlightedSpans = GetHighlightedSpans(
+                    matchResult,
+                    completionHelper,
+                    filterText,
+                    highlightMatchingPortions
+                );
+                return new CompletionItemWithHighlight(
+                    matchResult.EditorCompletionItem,
+                    highlightedSpans
+                );
+            });
 
             static ImmutableArray<Span> GetHighlightedSpans(
                 MatchResult<VSCompletionItem> matchResult,

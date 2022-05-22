@@ -25,12 +25,10 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Picture, PictureDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Picture, PictureDto>();
+                });
 
             protected override void Because_of()
             {

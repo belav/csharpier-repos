@@ -237,14 +237,12 @@ public class ViewComponentTagHelperPassTest
     private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine
-            .Create(
-                b =>
-                {
-                    b.Features.Add(new MvcViewDocumentClassifierPass());
+            .Create(b =>
+            {
+                b.Features.Add(new MvcViewDocumentClassifierPass());
 
-                    b.Features.Add(new TestTagHelperFeature(tagHelpers));
-                }
-            )
+                b.Features.Add(new TestTagHelperFeature(tagHelpers));
+            })
             .Engine;
     }
 

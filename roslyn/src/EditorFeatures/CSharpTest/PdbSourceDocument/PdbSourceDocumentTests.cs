@@ -484,31 +484,29 @@ public class C
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // Now delete the PDB
-                    File.Delete(GetPdbPath(path));
+                // Now delete the PDB
+                File.Delete(GetPdbPath(path));
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -521,31 +519,29 @@ public class C
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // Now delete the DLL
-                    File.Delete(GetDllPath(path));
+                // Now delete the DLL
+                File.Delete(GetDllPath(path));
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -557,31 +553,29 @@ public class C
 {
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // Now delete the source
-                    File.Delete(GetSourceFilePath(path));
+                // Now delete the source
+                File.Delete(GetSourceFilePath(path));
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -593,30 +587,28 @@ public class C
 {
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E"),
-                        windowsPdb: true
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E"),
+                    windowsPdb: true
+                );
 
-                    //TODO: This should not be a null result: https://github.com/dotnet/roslyn/issues/55834
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                //TODO: This should not be a null result: https://github.com/dotnet/roslyn/issues/55834
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -629,31 +621,29 @@ public class C
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // Now make the PDB a zero byte file
-                    File.WriteAllBytes(GetPdbPath(path), new byte[0]);
+                // Now make the PDB a zero byte file
+                File.WriteAllBytes(GetPdbPath(path), new byte[0]);
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -666,33 +656,31 @@ public class C
     public event System.EventHandler [|E|] { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // The first four bytes of this are BSJB so it is identified as a portable PDB.
-                    // The next two bytes are unimportant, they're just not valid PDB data.
-                    var corruptPdb = new byte[] { 66, 83, 74, 66, 68, 87 };
-                    File.WriteAllBytes(GetPdbPath(path), corruptPdb);
+                // The first four bytes of this are BSJB so it is identified as a portable PDB.
+                // The next two bytes are unimportant, they're just not valid PDB data.
+                var corruptPdb = new byte[] { 66, 83, 74, 66, 68, 87 };
+                File.WriteAllBytes(GetPdbPath(path), corruptPdb);
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Fact]
@@ -712,47 +700,45 @@ public class C
     public event System.EventHandler E { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    // Archive off the current PDB so we can restore it later
-                    var pdbFilePath = GetPdbPath(path);
-                    var archivePdbFilePath = pdbFilePath + ".old";
-                    File.Move(pdbFilePath, archivePdbFilePath);
+                // Archive off the current PDB so we can restore it later
+                var pdbFilePath = GetPdbPath(path);
+                var archivePdbFilePath = pdbFilePath + ".old";
+                File.Move(pdbFilePath, archivePdbFilePath);
 
-                    CompileTestSource(
-                        path,
-                        source2,
-                        project,
-                        Location.OnDisk,
-                        Location.OnDisk,
-                        buildReferenceAssembly: false,
-                        windowsPdb: false
-                    );
+                CompileTestSource(
+                    path,
+                    source2,
+                    project,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
-                    // Move the old file back, so the PDB is now old
-                    File.Delete(pdbFilePath);
-                    File.Move(archivePdbFilePath, pdbFilePath);
+                // Move the old file back, so the PDB is now old
+                File.Delete(pdbFilePath);
+                File.Move(archivePdbFilePath, pdbFilePath);
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        source1,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    source1,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         [Theory]
@@ -773,30 +759,28 @@ public class C
     public event System.EventHandler E { add { } remove { } }
 }";
 
-            await RunTestAsync(
-                async path =>
-                {
-                    MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
+            await RunTestAsync(async path =>
+            {
+                MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
 
-                    var (project, symbol) = await CompileAndFindSymbolAsync(
-                        path,
-                        pdbLocation,
-                        Location.OnDisk,
-                        metadataSource,
-                        c => c.GetMember("C.E")
-                    );
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    pdbLocation,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
-                    File.WriteAllText(GetSourceFilePath(path), source2, Encoding.UTF8);
+                File.WriteAllText(GetSourceFilePath(path), source2, Encoding.UTF8);
 
-                    await GenerateFileAndVerifyAsync(
-                        project,
-                        symbol,
-                        metadataSource,
-                        expectedSpan,
-                        expectNullResult: true
-                    );
-                }
-            );
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    metadataSource,
+                    expectedSpan,
+                    expectNullResult: true
+                );
+            });
         }
 
         private static Task TestAsync(

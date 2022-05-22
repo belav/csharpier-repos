@@ -448,31 +448,29 @@ class Test
             var actual_lookupNames = info.Names;
 
             // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
-            var actual_lookupSymbols = actual_lookupNames.SelectMany(
-                name =>
-                {
-                    var lookupResult = LookupResult.GetInstance();
-                    HashSet<DiagnosticInfo> useSiteDiagnostics = null;
-                    binder.LookupSymbolsSimpleName(
-                        lookupResult,
-                        qualifierOpt: null,
-                        plainName: name,
-                        arity: 0,
-                        basesBeingResolved: null,
-                        options: LookupOptions.MustBeInvocableIfMember,
-                        diagnose: false,
-                        useSiteDiagnostics: ref useSiteDiagnostics
-                    );
-                    Assert.Null(useSiteDiagnostics);
-                    Assert.True(
-                        lookupResult.IsMultiViable
-                            || lookupResult.Kind == LookupResultKind.NotReferencable
-                    );
-                    var result = lookupResult.Symbols.ToArray();
-                    lookupResult.Free();
-                    return result;
-                }
-            );
+            var actual_lookupSymbols = actual_lookupNames.SelectMany(name =>
+            {
+                var lookupResult = LookupResult.GetInstance();
+                HashSet<DiagnosticInfo> useSiteDiagnostics = null;
+                binder.LookupSymbolsSimpleName(
+                    lookupResult,
+                    qualifierOpt: null,
+                    plainName: name,
+                    arity: 0,
+                    basesBeingResolved: null,
+                    options: LookupOptions.MustBeInvocableIfMember,
+                    diagnose: false,
+                    useSiteDiagnostics: ref useSiteDiagnostics
+                );
+                Assert.Null(useSiteDiagnostics);
+                Assert.True(
+                    lookupResult.IsMultiViable
+                        || lookupResult.Kind == LookupResultKind.NotReferencable
+                );
+                var result = lookupResult.Symbols.ToArray();
+                lookupResult.Free();
+                return result;
+            });
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(
                 e => e.ToTestDisplayString()
             );

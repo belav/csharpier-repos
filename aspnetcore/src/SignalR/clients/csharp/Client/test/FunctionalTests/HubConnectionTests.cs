@@ -1895,14 +1895,12 @@ public class HubConnectionTests : FunctionalTestBase
 
         var protocol = HubProtocols[protocolName];
         await using (
-            var server = await StartServer<Startup>(
-                write =>
-                {
-                    return write.EventId.Name == "FailedWritingMessage"
-                        || write.EventId.Name == "ReceivedCloseWithError"
-                        || write.EventId.Name == "ShutdownWithError";
-                }
-            )
+            var server = await StartServer<Startup>(write =>
+            {
+                return write.EventId.Name == "FailedWritingMessage"
+                    || write.EventId.Name == "ReceivedCloseWithError"
+                    || write.EventId.Name == "ShutdownWithError";
+            })
         )
         {
             var connection = CreateHubConnection(
@@ -1978,14 +1976,12 @@ public class HubConnectionTests : FunctionalTestBase
 
         var protocol = HubProtocols[protocolName];
         await using (
-            var server = await StartServer<Startup>(
-                write =>
-                {
-                    return write.EventId.Name == "FailedWritingMessage"
-                        || write.EventId.Name == "ReceivedCloseWithError"
-                        || write.EventId.Name == "ShutdownWithError";
-                }
-            )
+            var server = await StartServer<Startup>(write =>
+            {
+                return write.EventId.Name == "FailedWritingMessage"
+                    || write.EventId.Name == "ReceivedCloseWithError"
+                    || write.EventId.Name == "ShutdownWithError";
+            })
         )
         {
             var connection = CreateHubConnection(
@@ -2757,12 +2753,10 @@ public class HubConnectionTests : FunctionalTestBase
                 .WithUrl(server.Url + HubPaths.First(), HttpTransportType.WebSockets)
                 .WithAutomaticReconnect();
 
-            connectionBuilder.Services.Configure<HttpConnectionOptions>(
-                o =>
-                {
-                    o.SkipNegotiation = true;
-                }
-            );
+            connectionBuilder.Services.Configure<HttpConnectionOptions>(o =>
+            {
+                o.SkipNegotiation = true;
+            });
 
             var connection = connectionBuilder.Build();
 

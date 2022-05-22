@@ -13,28 +13,24 @@ public class StartupWithJsonFormatter
     public void ConfigureServices(IServiceCollection services)
     {
         services
-            .AddMvc(
-                options =>
-                {
-                    options.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(Developer))
-                    );
-                    options.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(Supplier))
-                    );
-                }
-            )
+            .AddMvc(options =>
+            {
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Developer))
+                );
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Supplier))
+                );
+            })
             .AddXmlDataContractSerializerFormatters();
     }
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 }

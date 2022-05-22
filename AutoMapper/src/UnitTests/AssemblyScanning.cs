@@ -11,18 +11,16 @@ namespace AutoMapper.UnitTests
         public class When_scanning_by_assembly : NonValidatingSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.AddMaps(
-                            new[]
-                            {
-                                typeof(When_scanning_by_assembly).Assembly,
-                                typeof(Mapper).Assembly
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.AddMaps(
+                        new[]
+                        {
+                            typeof(When_scanning_by_assembly).Assembly,
+                            typeof(Mapper).Assembly
+                        }
+                    );
+                });
 
             [Fact]
             public void Should_load_profiles()
@@ -45,12 +43,10 @@ namespace AutoMapper.UnitTests
         public class When_scanning_by_type : NonValidatingSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.AddMaps(new[] { typeof(When_scanning_by_assembly) });
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.AddMaps(new[] { typeof(When_scanning_by_assembly) });
+                });
 
             [Fact]
             public void Should_load_profiles()
@@ -65,14 +61,12 @@ namespace AutoMapper.UnitTests
                 typeof(When_scanning_by_name).Assembly;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
-                        cfg.AddMaps(new[] { AutoMapperAssembly.FullName });
-                        AppDomain.CurrentDomain.AssemblyResolve -= OnAssemblyResolve;
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+                    cfg.AddMaps(new[] { AutoMapperAssembly.FullName });
+                    AppDomain.CurrentDomain.AssemblyResolve -= OnAssemblyResolve;
+                });
 
             private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args) =>
                 args.Name == AutoMapperAssembly.FullName ? AutoMapperAssembly : null;

@@ -18,13 +18,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                });
 
             [Fact]
             public void Should_transform_value()
@@ -49,14 +47,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                });
 
             [Fact]
             public void Should_stack_transformers_in_order()
@@ -81,17 +77,15 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        cfg.CreateProfile(
-                            "Other",
-                            p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.CreateProfile(
+                        "Other",
+                        p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
+                    );
+                });
 
             [Fact]
             public void Should_not_apply_other_transform()
@@ -116,22 +110,18 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateMap<Source, Dest>();
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateMap<Source, Dest>();
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public void ShouldApplyProfileFirstThenRoot()
@@ -156,20 +146,18 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<int>(dest => dest * 2);
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateMap<Source, Dest>();
-                                p.ValueTransformers.Add<int>(dest => dest + 3);
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<int>(dest => dest * 2);
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateMap<Source, Dest>();
+                            p.ValueTransformers.Add<int>(dest => dest + 3);
+                        }
+                    );
+                });
 
             [Fact]
             public void ShouldApplyProfileFirstThenRoot()
@@ -194,23 +182,19 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateMap<Source, Dest>()
-                                    .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateMap<Source, Dest>()
+                                .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public void ShouldApplyTypeMapThenProfileThenRoot()
@@ -235,27 +219,23 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateMap<Source, Dest>()
-                                    .AddTransform<string>(dest => dest + ", for real,")
-                                    .ForMember(
-                                        d => d.Value,
-                                        opt => opt.AddTransform(d => d + ", seriously")
-                                    );
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateMap<Source, Dest>()
+                                .AddTransform<string>(dest => dest + ", for real,")
+                                .ForMember(
+                                    d => d.Value,
+                                    opt => opt.AddTransform(d => d + ", seriously")
                                 );
-                            }
-                        );
-                    }
-                );
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public void ShouldApplyTypeMapThenProfileThenRoot()
@@ -285,16 +265,14 @@ namespace AutoMapper.UnitTests
         public class Dest : DestBase { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceBase, DestBase>()
-                        .Include<Source, Dest>()
-                        .AddTransform<string>(dest => dest + " was cool");
-                    cfg.CreateMap<Source, Dest>()
-                        .AddTransform<string>(dest => dest + " and now is straight up dope");
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceBase, DestBase>()
+                    .Include<Source, Dest>()
+                    .AddTransform<string>(dest => dest + " was cool");
+                cfg.CreateMap<Source, Dest>()
+                    .AddTransform<string>(dest => dest + " and now is straight up dope");
+            });
 
         [Fact]
         public void Should_transform_value()
@@ -323,19 +301,17 @@ namespace AutoMapper.UnitTests
         public class Dest : DestBase { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceBase, DestBase>()
-                        .Include<Source, Dest>()
-                        .ForMember(d => d.Value, o => o.AddTransform(dest => dest + " was cool"));
-                    cfg.CreateMap<Source, Dest>()
-                        .ForMember(
-                            d => d.Value,
-                            o => o.AddTransform(dest => dest + " and now is straight up dope")
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceBase, DestBase>()
+                    .Include<Source, Dest>()
+                    .ForMember(d => d.Value, o => o.AddTransform(dest => dest + " was cool"));
+                cfg.CreateMap<Source, Dest>()
+                    .ForMember(
+                        d => d.Value,
+                        o => o.AddTransform(dest => dest + " and now is straight up dope")
+                    );
+            });
 
         [Fact]
         public void Should_transform_value()

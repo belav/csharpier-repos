@@ -22,20 +22,16 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     context.AddRange(
-                        context.CreateProxy<Car>(
-                            car =>
-                            {
-                                car.Owner = context.CreateProxy<Person>();
-                                car.Id = Guid.NewGuid();
-                            }
-                        ),
-                        context.CreateProxy<Car>(
-                            car =>
-                            {
-                                car.Owner = context.CreateProxy<Person>();
-                                car.Id = Guid.NewGuid();
-                            }
-                        )
+                        context.CreateProxy<Car>(car =>
+                        {
+                            car.Owner = context.CreateProxy<Person>();
+                            car.Id = Guid.NewGuid();
+                        }),
+                        context.CreateProxy<Car>(car =>
+                        {
+                            car.Owner = context.CreateProxy<Person>();
+                            car.Id = Guid.NewGuid();
+                        })
                     );
 
                     context.SaveChanges();

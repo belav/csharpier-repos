@@ -236,14 +236,12 @@ public class ViewComponentTagHelperPassTest
 
     private RazorProjectEngine CreateProjectEngine(params TagHelperDescriptor[] tagHelpers)
     {
-        return RazorProjectEngine.Create(
-            b =>
-            {
-                b.Features.Add(new MvcViewDocumentClassifierPass());
+        return RazorProjectEngine.Create(b =>
+        {
+            b.Features.Add(new MvcViewDocumentClassifierPass());
 
-                b.Features.Add(new TestTagHelperFeature(tagHelpers));
-            }
-        );
+            b.Features.Add(new TestTagHelperFeature(tagHelpers));
+        });
     }
 
     private DocumentIntermediateNode CreateIRDocument(

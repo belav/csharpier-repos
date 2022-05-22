@@ -27,12 +27,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ExistingModel_EmptyPrefix_OverwritesBoundValues()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Address { Street = "DefaultStreet", City = "Toronto", };
@@ -65,12 +63,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ExistingModel_EmptyPrefix_GetsBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Address();
@@ -108,18 +104,16 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_TopLevelCollection_EmptyPrefix_BindsAfterClearing()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(
-                    new Dictionary<string, string>
-                    {
-                        { "[0].Name", "One Name" },
-                        { "[1].Address.Street", "Two Street" },
-                    }
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
+                {
+                    { "[0].Name", "One Name" },
+                    { "[1].Address.Street", "Two Street" },
+                }
+            );
+        });
 
         var modelState = testContext.ModelState;
         var model = new List<Person1>
@@ -167,12 +161,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NestedPoco_EmptyPrefix_DoesNotTrounceUnboundValues()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person1
@@ -215,12 +207,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableCollectionModel_EmptyPrefix_CreatesCollection()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person2();
@@ -253,12 +243,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableCollectionModel_EmptyPrefix_MaintainsCollectionIfNonNull()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person2 { Address = new List<Address>(), };
@@ -303,12 +291,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableCollectionModel_EmptyPrefix_GetsBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person3
@@ -353,12 +339,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ReadOnlyCollectionModel_EmptyPrefix_DoesNotGetBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person6();
@@ -384,12 +368,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ReadOnlyCollectionModel_WithPrefix_DoesNotGetBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person6();
@@ -420,12 +402,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableArrayModel_EmptyPrefix_CreatesArray()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person4();
@@ -458,12 +438,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableArrayModel_EmptyPrefix_OverwritesArray()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person4
@@ -509,12 +487,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableArrayModel_EmptyPrefix_IsNotBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person5();
@@ -549,12 +525,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableIEnumerableModel_EmptyPrefix_IsNotBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person7();
@@ -596,12 +570,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableICollectionModel_EmptyPrefix_IsNotBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person8();
@@ -634,12 +606,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ExistingModel_WithPrefix_ValuesGetOverwritten()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Address { Street = "DefaultStreet", City = "Toronto", };
@@ -672,12 +642,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ExistingModel_WithPrefix_GetsBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Address();
@@ -708,18 +676,16 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_TopLevelCollection_WithPrefix_BindsAfterClearing()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(
-                    new Dictionary<string, string>
-                    {
-                        { "prefix[0].Name", "One Name" },
-                        { "prefix[1].Address.Street", "Two Street" },
-                    }
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
+                {
+                    { "prefix[0].Name", "One Name" },
+                    { "prefix[1].Address.Street", "Two Street" },
+                }
+            );
+        });
 
         var modelState = testContext.ModelState;
         var model = new List<Person1>
@@ -767,12 +733,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NestedPoco_WithPrefix_DoesNotTrounceUnboundValues()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person1
@@ -810,12 +774,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableCollectionModel_WithPrefix_CreatesCollection()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person2();
@@ -848,12 +810,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableCollectionModel_WithPrefix_MaintainsCollectionIfNonNull()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person2 { Address = new List<Address>(), };
@@ -888,12 +848,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableCollectionModel_WithPrefix_GetsBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person3
@@ -933,12 +891,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableArrayModel_WithPrefix_CreatesArray()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person4();
@@ -971,12 +927,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_SettableArrayModel_WithPrefix_OverwritesArray()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person4
@@ -1017,12 +971,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_NonSettableArrayModel_WithPrefix_GetsBound()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person5();
@@ -1121,12 +1073,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_ExistingModelWithNoParameterlessConstructor_OverwritesBoundValues()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new AddressWithNoParameterlessConstructor(10)
@@ -1168,12 +1118,10 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_RecordTypeModel_Throws()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new AddressRecord("DefaultStreet", "Toronto") { ZipCode = "98001", };
@@ -1198,14 +1146,12 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_RecordTypeProperty()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString
-                    .Create("Address.ZipCode", "98007")
-                    .Add("Address.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString
+                .Create("Address.ZipCode", "98007")
+                .Add("Address.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new ModelWithRecordTypeProperty();
@@ -1248,14 +1194,12 @@ public class TryUpdateModelIntegrationTest
     public async Task TryUpdateModel_RecordTypePropertyIsOverwritten()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString
-                    .Create("Address.ZipCode", "98007")
-                    .Add("Address.Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString
+                .Create("Address.ZipCode", "98007")
+                .Add("Address.Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new ModelWithRecordTypeProperty

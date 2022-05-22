@@ -208,24 +208,20 @@ public partial class WebHostTests
         var server = new Mock<IServer>();
         server
             .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-            .Returns<CancellationToken>(
-                token =>
+            .Returns<CancellationToken>(token =>
+            {
+                return Task.Run(() =>
                 {
-                    return Task.Run(() =>
-                    {
-                        token.WaitHandle.WaitOne();
-                    });
-                }
-            );
+                    token.WaitHandle.WaitOne();
+                });
+            });
 
         using (
             var host = CreateBuilder(config)
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton(server.Object);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(server.Object);
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -251,24 +247,20 @@ public partial class WebHostTests
         var server = new Mock<IServer>();
         server
             .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-            .Returns<CancellationToken>(
-                token =>
+            .Returns<CancellationToken>(token =>
+            {
+                return Task.Run(() =>
                 {
-                    return Task.Run(() =>
-                    {
-                        token.WaitHandle.WaitOne();
-                    });
-                }
-            );
+                    token.WaitHandle.WaitOne();
+                });
+            });
 
         using (
             var host = CreateBuilder(config)
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton(server.Object);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(server.Object);
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -291,24 +283,20 @@ public partial class WebHostTests
         var server = new Mock<IServer>();
         server
             .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-            .Returns<CancellationToken>(
-                token =>
+            .Returns<CancellationToken>(token =>
+            {
+                return Task.Run(() =>
                 {
-                    return Task.Run(() =>
-                    {
-                        token.WaitHandle.WaitOne();
-                    });
-                }
-            );
+                    token.WaitHandle.WaitOne();
+                });
+            });
 
         using (
             var host = CreateBuilder(config)
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton(server.Object);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(server.Object);
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -396,13 +384,11 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    s =>
-                    {
-                        s.AddTransient<IFakeService, FakeService>();
-                        s.AddSingleton<IFakeSingletonService, FakeService>();
-                    }
-                )
+                .ConfigureServices(s =>
+                {
+                    s.AddTransient<IFakeService, FakeService>();
+                    s.AddSingleton<IFakeSingletonService, FakeService>();
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -488,13 +474,11 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
-                    {
-                        hostedSeviceCalls1 = RegisterCallbacksThatThrow(services);
-                        hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    hostedSeviceCalls1 = RegisterCallbacksThatThrow(services);
+                    hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
+                })
                 .Build()
         )
         {
@@ -516,26 +500,24 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
+                .ConfigureServices(services =>
+                {
+                    Action started = () => { };
+
+                    Action stopping = () =>
                     {
-                        Action started = () => { };
+                        stoppingCalls++;
+                    };
 
-                        Action stopping = () =>
-                        {
-                            stoppingCalls++;
-                        };
+                    Action disposing = () =>
+                    {
+                        disposingCalls++;
+                    };
 
-                        Action disposing = () =>
-                        {
-                            disposingCalls++;
-                        };
-
-                        services.AddSingleton<IHostedService>(
-                            _ => new DelegateHostedService(started, stopping, disposing)
-                        );
-                    }
-                )
+                    services.AddSingleton<IHostedService>(
+                        _ => new DelegateHostedService(started, stopping, disposing)
+                    );
+                })
                 .Build()
         )
         {
@@ -557,12 +539,10 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<IHostedService, TestHostedService>();
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IHostedService, TestHostedService>();
+                })
                 .Build()
         )
         {
@@ -585,12 +565,10 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService<TestHostedService>();
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<TestHostedService>();
+                })
                 .Build()
         )
         {
@@ -617,29 +595,27 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
+                .ConfigureServices(services =>
+                {
+                    Action started = () =>
                     {
-                        Action started = () =>
-                        {
-                            startedCalls++;
-                        };
+                        startedCalls++;
+                    };
 
-                        Action stopping = () =>
-                        {
-                            stoppingCalls++;
-                        };
+                    Action stopping = () =>
+                    {
+                        stoppingCalls++;
+                    };
 
-                        Action disposing = () =>
-                        {
-                            disposingCalls++;
-                        };
+                    Action disposing = () =>
+                    {
+                        disposingCalls++;
+                    };
 
-                        services.AddSingleton<IHostedService>(
-                            _ => new DelegateHostedService(started, stopping, disposing)
-                        );
-                    }
-                )
+                    services.AddSingleton<IHostedService>(
+                        _ => new DelegateHostedService(started, stopping, disposing)
+                    );
+                })
                 .Build()
         )
         {
@@ -676,29 +652,27 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
+                .ConfigureServices(services =>
+                {
+                    Action started = () =>
                     {
-                        Action started = () =>
-                        {
-                            startedCalls++;
-                        };
+                        startedCalls++;
+                    };
 
-                        Action stopping = () =>
-                        {
-                            stoppingCalls++;
-                        };
+                    Action stopping = () =>
+                    {
+                        stoppingCalls++;
+                    };
 
-                        Action disposing = () =>
-                        {
-                            disposingCalls++;
-                        };
+                    Action disposing = () =>
+                    {
+                        disposingCalls++;
+                    };
 
-                        services.AddSingleton<IHostedService>(
-                            _ => new DelegateHostedService(started, stopping, disposing)
-                        );
-                    }
-                )
+                    services.AddSingleton<IHostedService>(
+                        _ => new DelegateHostedService(started, stopping, disposing)
+                    );
+                })
                 .Build()
         )
         {
@@ -725,13 +699,11 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
-                    {
-                        hostedServiceCalls1 = RegisterCallbacksThatThrow(services);
-                        hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    hostedServiceCalls1 = RegisterCallbacksThatThrow(services);
+                    hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
+                })
                 .Build()
         )
         {
@@ -785,12 +757,10 @@ public partial class WebHostTests
     public void CanReplaceStartupLoader()
     {
         var builder = CreateBuilder()
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddTransient<IStartup, TestStartup>();
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                services.AddTransient<IStartup, TestStartup>();
+            })
             .UseFakeServer()
             .UseStartup("Microsoft.AspNetCore.Hosting.Tests");
 
@@ -819,27 +789,25 @@ public partial class WebHostTests
         using (
             var host = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddTransient<IStartupFilter>(
-                            serviceProvider =>
-                                new TestFilter(
-                                    () => Assert.Equal(1, configureOrder++),
-                                    () => Assert.Equal(2, configureOrder++),
-                                    () => Assert.Equal(5, configureOrder++)
-                                )
-                        );
-                        services.AddTransient<IStartupFilter>(
-                            serviceProvider =>
-                                new TestFilter(
-                                    () => Assert.Equal(0, configureOrder++),
-                                    () => Assert.Equal(3, configureOrder++),
-                                    () => Assert.Equal(4, configureOrder++)
-                                )
-                        );
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddTransient<IStartupFilter>(
+                        serviceProvider =>
+                            new TestFilter(
+                                () => Assert.Equal(1, configureOrder++),
+                                () => Assert.Equal(2, configureOrder++),
+                                () => Assert.Equal(5, configureOrder++)
+                            )
+                    );
+                    services.AddTransient<IStartupFilter>(
+                        serviceProvider =>
+                            new TestFilter(
+                                () => Assert.Equal(0, configureOrder++),
+                                () => Assert.Equal(3, configureOrder++),
+                                () => Assert.Equal(4, configureOrder++)
+                            )
+                    );
+                })
                 .Build()
         )
         {
@@ -948,20 +916,18 @@ public partial class WebHostTests
     public async Task WebHost_CreatesDefaultRequestIdentifierFeature_IfNotPresent()
     {
         // Arrange
-        var requestDelegate = new RequestDelegate(
-            httpContext =>
-            {
-                // Assert
-                Assert.NotNull(httpContext);
-                var featuresTraceIdentifier = httpContext.Features
-                    .Get<IHttpRequestIdentifierFeature>()
-                    .TraceIdentifier;
-                Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
-                Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);
+        var requestDelegate = new RequestDelegate(httpContext =>
+        {
+            // Assert
+            Assert.NotNull(httpContext);
+            var featuresTraceIdentifier = httpContext.Features
+                .Get<IHttpRequestIdentifierFeature>()
+                .TraceIdentifier;
+            Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
+            Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         using (var host = CreateHost(requestDelegate))
         {
@@ -975,19 +941,17 @@ public partial class WebHostTests
     {
         // Arrange
         var requestIdentifierFeature = new StubHttpRequestIdentifierFeature();
-        var requestDelegate = new RequestDelegate(
-            httpContext =>
-            {
-                // Assert
-                Assert.NotNull(httpContext);
-                Assert.Same(
-                    requestIdentifierFeature,
-                    httpContext.Features.Get<IHttpRequestIdentifierFeature>()
-                );
+        var requestDelegate = new RequestDelegate(httpContext =>
+        {
+            // Assert
+            Assert.NotNull(httpContext);
+            Assert.Same(
+                requestIdentifierFeature,
+                httpContext.Features.Get<IHttpRequestIdentifierFeature>()
+            );
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         using (var host = CreateHost(requestDelegate))
         {
@@ -1022,15 +986,13 @@ public partial class WebHostTests
         // Arrange
         HttpContext capturedContext = null;
         HttpRequest capturedRequest = null;
-        var requestDelegate = new RequestDelegate(
-            httpContext =>
-            {
-                capturedContext = httpContext;
-                capturedRequest = httpContext.Request;
+        var requestDelegate = new RequestDelegate(httpContext =>
+        {
+            capturedContext = httpContext;
+            capturedRequest = httpContext.Request;
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         using (var host = CreateHost(requestDelegate))
         {
@@ -1087,12 +1049,10 @@ public partial class WebHostTests
             .Returns((ConfigurationProvider)providerMock.Object);
 
         var host = CreateBuilder()
-            .ConfigureAppConfiguration(
-                configuration =>
-                {
-                    configuration.Add(sourceMock.Object);
-                }
-            )
+            .ConfigureAppConfiguration(configuration =>
+            {
+                configuration.Add(sourceMock.Object);
+            })
             .Build();
 
         providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1114,12 +1074,10 @@ public partial class WebHostTests
             .Returns((ConfigurationProvider)providerMock.Object);
 
         var host = CreateBuilder()
-            .ConfigureAppConfiguration(
-                configuration =>
-                {
-                    configuration.Add(sourceMock.Object);
-                }
-            )
+            .ConfigureAppConfiguration(configuration =>
+            {
+                configuration.Add(sourceMock.Object);
+            })
             .Build();
 
         providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1136,12 +1094,10 @@ public partial class WebHostTests
 
         using (
             var host = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton(server.Object);
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(server.Object);
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -1159,13 +1115,11 @@ public partial class WebHostTests
 
         using (
             var host = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton(server.Object);
-                        services.AddSingleton<IHostedService, TestHostedService>();
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(server.Object);
+                    services.AddSingleton<IHostedService, TestHostedService>();
+                })
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
                 .Build()
         )
@@ -1194,12 +1148,10 @@ public partial class WebHostTests
                     factory.AddProvider(new AllMessagesAreNeeded());
                 }
             )
-            .Configure(
-                appBuilder =>
-                {
-                    appBuilder.Run(requestDelegate);
-                }
-            );
+            .Configure(appBuilder =>
+            {
+                appBuilder.Run(requestDelegate);
+            });
         return builder.Build();
     }
 

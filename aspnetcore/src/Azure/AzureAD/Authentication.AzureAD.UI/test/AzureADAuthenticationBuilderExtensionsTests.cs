@@ -44,17 +44,15 @@ public class AzureADAuthenticationBuilderExtensionsTests
         // Act
         services
             .AddAuthentication()
-            .AddAzureAD(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com";
-                    o.ClientId = "ClientId";
-                    o.ClientSecret = "ClientSecret";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "Common";
-                }
-            );
+            .AddAzureAD(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com";
+                o.ClientId = "ClientId";
+                o.ClientSecret = "ClientSecret";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "Common";
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -101,17 +99,15 @@ public class AzureADAuthenticationBuilderExtensionsTests
         // Act
         services
             .AddAuthentication()
-            .AddAzureAD(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com";
-                    o.ClientId = "ClientId";
-                    o.ClientSecret = "ClientSecret";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "Common";
-                }
-            );
+            .AddAzureAD(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com";
+                o.ClientId = "ClientId";
+                o.ClientSecret = "ClientSecret";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "Common";
+            });
 
         services.Configure<OpenIdConnectOptions>(
             AzureADDefaults.OpenIdScheme,
@@ -161,17 +157,15 @@ public class AzureADAuthenticationBuilderExtensionsTests
             .AddAuthentication()
             .AddOpenIdConnect()
             .AddCookie()
-            .AddAzureAD(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com";
-                    o.ClientId = "ClientId";
-                    o.ClientSecret = "ClientSecret";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "Common";
-                }
-            );
+            .AddAzureAD(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com";
+                o.ClientId = "ClientId";
+                o.ClientSecret = "ClientSecret";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "Common";
+            });
 
         services.Configure<OpenIdConnectOptions>(
             AzureADDefaults.OpenIdScheme,
@@ -345,16 +339,14 @@ public class AzureADAuthenticationBuilderExtensionsTests
         // Act
         services
             .AddAuthentication()
-            .AddAzureADBearer(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com/";
-                    o.ClientId = "ClientId";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "TenantId";
-                }
-            );
+            .AddAzureADBearer(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com/";
+                o.ClientId = "ClientId";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "TenantId";
+            });
         var provider = services.BuildServiceProvider();
 
         // Assert
@@ -383,16 +375,14 @@ public class AzureADAuthenticationBuilderExtensionsTests
         // Act
         services
             .AddAuthentication()
-            .AddAzureADBearer(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com/";
-                    o.ClientId = "ClientId";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "TenantId";
-                }
-            );
+            .AddAzureADBearer(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com/";
+                o.ClientId = "ClientId";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "TenantId";
+            });
 
         services.Configure<JwtBearerOptions>(
             AzureADDefaults.JwtBearerAuthenticationScheme,
@@ -423,16 +413,14 @@ public class AzureADAuthenticationBuilderExtensionsTests
         services
             .AddAuthentication()
             .AddJwtBearer()
-            .AddAzureADBearer(
-                o =>
-                {
-                    o.Instance = "https://login.microsoftonline.com/";
-                    o.ClientId = "ClientId";
-                    o.CallbackPath = "/signin-oidc";
-                    o.Domain = "domain.onmicrosoft.com";
-                    o.TenantId = "TenantId";
-                }
-            );
+            .AddAzureADBearer(o =>
+            {
+                o.Instance = "https://login.microsoftonline.com/";
+                o.ClientId = "ClientId";
+                o.CallbackPath = "/signin-oidc";
+                o.Domain = "domain.onmicrosoft.com";
+                o.TenantId = "TenantId";
+            });
 
         services.Configure<JwtBearerOptions>(
             AzureADDefaults.JwtBearerAuthenticationScheme,

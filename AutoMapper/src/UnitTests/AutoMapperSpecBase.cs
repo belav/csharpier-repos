@@ -46,15 +46,13 @@ namespace AutoMapper.UnitTests
         {
             configuration.ForAllMaps(
                 (typeMap, mapExpression) =>
-                    mapExpression.ForAllMembers(
-                        memberOptions =>
+                    mapExpression.ForAllMembers(memberOptions =>
+                    {
+                        if (memberOptions.DestinationMember.Has<IgnoreMapAttribute>())
                         {
-                            if (memberOptions.DestinationMember.Has<IgnoreMapAttribute>())
-                            {
-                                memberOptions.Ignore();
-                            }
+                            memberOptions.Ignore();
                         }
-                    )
+                    })
             );
             configuration.ForAllPropertyMaps(
                 propertyMap => propertyMap.SourceMember?.Has<IgnoreMapAttribute>() == true,

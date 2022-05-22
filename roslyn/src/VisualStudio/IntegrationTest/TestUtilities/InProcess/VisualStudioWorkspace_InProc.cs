@@ -42,14 +42,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public static VisualStudioWorkspace_InProc Create() => new VisualStudioWorkspace_InProc();
 
         public void SetOptionInfer(string projectName, bool value) =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var convertedValue = value ? 1 : 0;
-                    var project = GetProject(projectName);
-                    project.Properties.Item("OptionInfer").Value = convertedValue;
-                }
-            );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var convertedValue = value ? 1 : 0;
+                var project = GetProject(projectName);
+                project.Properties.Item("OptionInfer").Value = convertedValue;
+            });
 
         private EnvDTE.Project GetProject(string nameOrFileName) =>
             GetDTE().Solution.Projects
@@ -72,35 +70,29 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             _globalOptions.GetOption(FeatureOnOffOptions.PrettyListing, languageName);
 
         public void SetPrettyListing(string languageName, bool value) =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    _globalOptions.SetGlobalOption(
-                        new OptionKey(FeatureOnOffOptions.PrettyListing, languageName),
-                        value
-                    );
-                }
-            );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(FeatureOnOffOptions.PrettyListing, languageName),
+                    value
+                );
+            });
 
         public void SetFileScopedNamespaces(bool value) =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    _visualStudioWorkspace.SetOptions(
-                        _visualStudioWorkspace.Options.WithChangedOption(
-                            new OptionKey(
-                                GetOption("NamespaceDeclarations", "CSharpCodeStyleOptions")
-                            ),
-                            new CodeStyleOption2<NamespaceDeclarationPreference>(
-                                value
-                                    ? NamespaceDeclarationPreference.FileScoped
-                                    : NamespaceDeclarationPreference.BlockScoped,
-                                NotificationOption2.Suggestion
-                            )
+            InvokeOnUIThread(cancellationToken =>
+            {
+                _visualStudioWorkspace.SetOptions(
+                    _visualStudioWorkspace.Options.WithChangedOption(
+                        new OptionKey(GetOption("NamespaceDeclarations", "CSharpCodeStyleOptions")),
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            value
+                                ? NamespaceDeclarationPreference.FileScoped
+                                : NamespaceDeclarationPreference.BlockScoped,
+                            NotificationOption2.Suggestion
                         )
-                    );
-                }
-            );
+                    )
+                );
+            });
 
         public void SetPerLanguageOption(
             string optionName,
@@ -236,13 +228,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         }
 
         public void CleanUpWorkspace() =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    LoadRoslynPackage();
-                    _visualStudioWorkspace.TestHookPartialSolutionsDisabled = true;
-                }
-            );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                LoadRoslynPackage();
+                _visualStudioWorkspace.TestHookPartialSolutionsDisabled = true;
+            });
 
         /// <summary>
         /// Reset options that are manipulated by integration tests back to their default values.
@@ -274,22 +264,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         }
 
         public void CleanUpWaitingService() =>
-            InvokeOnUIThread(
-                cancellationToken =>
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var provider =
+                    GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+
+                if (provider == null)
                 {
-                    var provider =
-                        GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
-
-                    if (provider == null)
-                    {
-                        throw new InvalidOperationException(
-                            "The test waiting service could not be located."
-                        );
-                    }
-
-                    GetWaitingService().EnableActiveTokenTracking(true);
+                    throw new InvalidOperationException(
+                        "The test waiting service could not be located."
+                    );
                 }
-            );
+
+                GetWaitingService().EnableActiveTokenTracking(true);
+            });
 
         public void SetFeatureOption(
             string feature,
@@ -297,21 +285,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             string language,
             string? valueString
         ) =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var option = GetOption(optionName, feature);
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var option = GetOption(optionName, feature);
 
-                    var value = TypeDescriptor
-                        .GetConverter(option.Type)
-                        .ConvertFromString(valueString);
-                    var optionKey = string.IsNullOrWhiteSpace(language)
-                        ? new OptionKey(option)
-                        : new OptionKey(option, language);
+                var value = TypeDescriptor.GetConverter(option.Type).ConvertFromString(valueString);
+                var optionKey = string.IsNullOrWhiteSpace(language)
+                    ? new OptionKey(option)
+                    : new OptionKey(option, language);
 
-                    SetOption(optionKey, value);
-                }
-            );
+                SetOption(optionKey, value);
+            });
 
         public string? GetWorkingFolder()
         {

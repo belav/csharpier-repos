@@ -43,105 +43,87 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
             const bool encryptPersonalData = true;
             var converter = new PersonalDataConverter(new PersonalDataProtector());
 
-            builder.Entity<TUser>(
-                b =>
+            builder.Entity<TUser>(b =>
+            {
+                b.HasKey(u => u.Id);
+                b.HasIndex(u => u.NormalizedUserName).IsUnique();
+                b.HasIndex(u => u.NormalizedEmail);
+                b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
+
+                b.Property(u => u.UserName).HasMaxLength(256);
+                b.Property(u => u.NormalizedUserName).HasMaxLength(256);
+                b.Property(u => u.Email).HasMaxLength(256);
+                b.Property(u => u.NormalizedEmail).HasMaxLength(256);
+
+                if (encryptPersonalData)
                 {
-                    b.HasKey(u => u.Id);
-                    b.HasIndex(u => u.NormalizedUserName).IsUnique();
-                    b.HasIndex(u => u.NormalizedEmail);
-                    b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
-
-                    b.Property(u => u.UserName).HasMaxLength(256);
-                    b.Property(u => u.NormalizedUserName).HasMaxLength(256);
-                    b.Property(u => u.Email).HasMaxLength(256);
-                    b.Property(u => u.NormalizedEmail).HasMaxLength(256);
-
-                    if (encryptPersonalData)
+                    var personalDataProps = typeof(TUser)
+                        .GetProperties()
+                        .Where(
+                            prop =>
+                                Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                        );
+                    foreach (var p in personalDataProps)
                     {
-                        var personalDataProps = typeof(TUser)
-                            .GetProperties()
-                            .Where(
-                                prop =>
-                                    Attribute.IsDefined(
-                                        prop,
-                                        typeof(ProtectedPersonalDataAttribute)
-                                    )
-                            );
-                        foreach (var p in personalDataProps)
+                        if (p.PropertyType != typeof(string))
                         {
-                            if (p.PropertyType != typeof(string))
-                            {
-                                throw new InvalidOperationException(
-                                    "Resources.CanOnlyProtectStrings"
-                                );
-                            }
-
-                            b.Property(typeof(string), p.Name).HasConversion(converter);
+                            throw new InvalidOperationException("Resources.CanOnlyProtectStrings");
                         }
-                    }
 
-                    b.HasMany<TUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-                    b.HasMany<TUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-                    b.HasMany<TUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-                }
-            );
-
-            builder.Entity<TUserClaim>(
-                b =>
-                {
-                    b.HasKey(uc => uc.Id);
-                }
-            );
-
-            builder.Entity<TUserLogin>(
-                b =>
-                {
-                    b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
-
-                    if (maxKeyLength > 0)
-                    {
-                        b.Property(l => l.LoginProvider).HasMaxLength(maxKeyLength);
-                        b.Property(l => l.ProviderKey).HasMaxLength(maxKeyLength);
+                        b.Property(typeof(string), p.Name).HasConversion(converter);
                     }
                 }
-            );
 
-            builder.Entity<TUserToken>(
-                b =>
+                b.HasMany<TUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+                b.HasMany<TUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+                b.HasMany<TUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+            });
+
+            builder.Entity<TUserClaim>(b =>
+            {
+                b.HasKey(uc => uc.Id);
+            });
+
+            builder.Entity<TUserLogin>(b =>
+            {
+                b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
+
+                if (maxKeyLength > 0)
                 {
-                    b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+                    b.Property(l => l.LoginProvider).HasMaxLength(maxKeyLength);
+                    b.Property(l => l.ProviderKey).HasMaxLength(maxKeyLength);
+                }
+            });
 
-                    if (maxKeyLength > 0)
-                    {
-                        b.Property(t => t.LoginProvider).HasMaxLength(maxKeyLength);
-                        b.Property(t => t.Name).HasMaxLength(maxKeyLength);
-                    }
+            builder.Entity<TUserToken>(b =>
+            {
+                b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
-                    if (encryptPersonalData)
+                if (maxKeyLength > 0)
+                {
+                    b.Property(t => t.LoginProvider).HasMaxLength(maxKeyLength);
+                    b.Property(t => t.Name).HasMaxLength(maxKeyLength);
+                }
+
+                if (encryptPersonalData)
+                {
+                    var tokenProps = typeof(TUserToken)
+                        .GetProperties()
+                        .Where(
+                            prop =>
+                                Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                        );
+                    foreach (var p in tokenProps)
                     {
-                        var tokenProps = typeof(TUserToken)
-                            .GetProperties()
-                            .Where(
-                                prop =>
-                                    Attribute.IsDefined(
-                                        prop,
-                                        typeof(ProtectedPersonalDataAttribute)
-                                    )
-                            );
-                        foreach (var p in tokenProps)
+                        if (p.PropertyType != typeof(string))
                         {
-                            if (p.PropertyType != typeof(string))
-                            {
-                                throw new InvalidOperationException(
-                                    "Resources.CanOnlyProtectStrings"
-                                );
-                            }
-
-                            b.Property(typeof(string), p.Name).HasConversion(converter);
+                            throw new InvalidOperationException("Resources.CanOnlyProtectStrings");
                         }
+
+                        b.Property(typeof(string), p.Name).HasConversion(converter);
                     }
                 }
-            );
+            });
         }
     }
 }

@@ -22,23 +22,19 @@ public class CompositeModelValidatorProviderTest
         var provider1 = new Mock<IModelValidatorProvider>();
         provider1
             .Setup(p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>()))
-            .Callback<ModelValidatorProviderContext>(
-                c =>
-                {
-                    c.Results.Add(validator1);
-                    c.Results.Add(validator2);
-                }
-            );
+            .Callback<ModelValidatorProviderContext>(c =>
+            {
+                c.Results.Add(validator1);
+                c.Results.Add(validator2);
+            });
 
         var provider2 = new Mock<IModelValidatorProvider>();
         provider2
             .Setup(p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>()))
-            .Callback<ModelValidatorProviderContext>(
-                c =>
-                {
-                    c.Results.Add(validator3);
-                }
-            );
+            .Callback<ModelValidatorProviderContext>(c =>
+            {
+                c.Results.Add(validator3);
+            });
 
         var compositeModelValidator = new CompositeModelValidatorProvider(
             new[] { provider1.Object, provider2.Object }

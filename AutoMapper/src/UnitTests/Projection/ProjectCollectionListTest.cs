@@ -18,13 +18,11 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectCollectionListTest()
         {
-            _config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Address, AddressDto>();
-                    cfg.CreateProjection<Customer, CustomerDto>();
-                }
-            );
+            _config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Address, AddressDto>();
+                cfg.CreateProjection<Customer, CustomerDto>();
+            });
         }
 
         [Fact]

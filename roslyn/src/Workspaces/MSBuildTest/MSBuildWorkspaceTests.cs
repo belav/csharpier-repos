@@ -3291,14 +3291,12 @@ class C1
             var expectedEventKind = WorkspaceChangeKind.DocumentChanged;
             var originalSolution = workspace.CurrentSolution;
 
-            using var eventWaiter = workspace.VerifyWorkspaceChangedEvent(
-                args =>
-                {
-                    Assert.Equal(expectedEventKind, args.Kind);
-                    Assert.NotNull(args.NewSolution);
-                    Assert.NotSame(originalSolution, args.NewSolution);
-                }
-            );
+            using var eventWaiter = workspace.VerifyWorkspaceChangedEvent(args =>
+            {
+                Assert.Equal(expectedEventKind, args.Kind);
+                Assert.NotNull(args.NewSolution);
+                Assert.NotSame(originalSolution, args.NewSolution);
+            });
             // change document text (should fire SolutionChanged event)
             var doc = workspace.CurrentSolution.Projects.First().Documents.First();
             var text = await doc.GetTextAsync();
@@ -3336,14 +3334,12 @@ class C1
             var expectedEventKind = WorkspaceChangeKind.DocumentChanged;
             var originalSolution = workspace.CurrentSolution;
 
-            using var eventWanter = workspace.VerifyWorkspaceChangedEvent(
-                args =>
-                {
-                    Assert.Equal(expectedEventKind, args.Kind);
-                    Assert.NotNull(args.NewSolution);
-                    Assert.NotSame(originalSolution, args.NewSolution);
-                }
-            );
+            using var eventWanter = workspace.VerifyWorkspaceChangedEvent(args =>
+            {
+                Assert.Equal(expectedEventKind, args.Kind);
+                Assert.NotNull(args.NewSolution);
+                Assert.NotSame(originalSolution, args.NewSolution);
+            });
             // change document text (should fire SolutionChanged event)
             var doc = workspace.CurrentSolution.Projects.First().Documents.First();
             var text = await doc.GetTextAsync();

@@ -19,36 +19,30 @@ public class Startup
     {
         services
             .AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-            .AddCertificate(
-                options =>
+            .AddCertificate(options =>
+            {
+                options.Events = new CertificateAuthenticationEvents()
                 {
-                    options.Events = new CertificateAuthenticationEvents()
+                    // If there is no certificate we must be on HostWithoutCert that does not require one. Redirect to HostWithCert to prompt for a certificate.
+                    OnChallenge = context =>
                     {
-                        // If there is no certificate we must be on HostWithoutCert that does not require one. Redirect to HostWithCert to prompt for a certificate.
-                        OnChallenge = context =>
-                        {
-                            var request = context.Request;
-                            var redirect = UriHelper.BuildAbsolute(
-                                "https",
-                                new HostString(
-                                    Program.HostWithCert,
-                                    context.HttpContext.Connection.LocalPort
-                                ),
-                                request.PathBase,
-                                request.Path,
-                                request.QueryString
-                            );
-                            context.Response.Redirect(
-                                redirect,
-                                permanent: false,
-                                preserveMethod: true
-                            );
-                            context.HandleResponse(); // Don't do the default behavior that would send a 403 response.
-                            return Task.CompletedTask;
-                        }
-                    };
-                }
-            );
+                        var request = context.Request;
+                        var redirect = UriHelper.BuildAbsolute(
+                            "https",
+                            new HostString(
+                                Program.HostWithCert,
+                                context.HttpContext.Connection.LocalPort
+                            ),
+                            request.PathBase,
+                            request.Path,
+                            request.QueryString
+                        );
+                        context.Response.Redirect(redirect, permanent: false, preserveMethod: true);
+                        context.HandleResponse(); // Don't do the default behavior that would send a 403 response.
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
         services.AddAuthorization();
     }
@@ -61,31 +55,29 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints
-                    .Map(
-                        "/auth",
-                        context =>
-                        {
-                            return context.Response.WriteAsync(
-                                $"Hello {context.User.Identity.Name} at {context.Request.Host}"
-                            );
-                        }
-                    )
-                    .RequireAuthorization();
-
-                endpoints.Map(
-                    "{*url}",
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints
+                .Map(
+                    "/auth",
                     context =>
                     {
                         return context.Response.WriteAsync(
-                            $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                            $"Hello {context.User.Identity.Name} at {context.Request.Host}"
                         );
                     }
-                );
-            }
-        );
+                )
+                .RequireAuthorization();
+
+            endpoints.Map(
+                "{*url}",
+                context =>
+                {
+                    return context.Response.WriteAsync(
+                        $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                    );
+                }
+            );
+        });
     }
 }

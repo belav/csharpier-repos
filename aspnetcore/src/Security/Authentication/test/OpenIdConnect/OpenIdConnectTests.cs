@@ -31,17 +31,15 @@ public class OpenIdConnectTests
     [Fact]
     public async Task SignOutSettingMessage()
     {
-        var setting = new TestSettings(
-            opt =>
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.Configuration = new OpenIdConnectConfiguration
             {
-                opt.ClientId = "Test Id";
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.Configuration = new OpenIdConnectConfiguration
-                {
-                    EndSessionEndpoint = "https://example.com/signout_test/signout_request"
-                };
-            }
-        );
+                EndSessionEndpoint = "https://example.com/signout_test/signout_request"
+            };
+        });
 
         var server = setting.CreateTestServer();
 
@@ -61,17 +59,15 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RedirectToIdentityProvider_SetsNonceCookiePath_ToCallBackPath()
     {
-        var setting = new TestSettings(
-            opt =>
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.Configuration = new OpenIdConnectConfiguration
             {
-                opt.ClientId = "Test Id";
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.Configuration = new OpenIdConnectConfiguration
-                {
-                    AuthorizationEndpoint = "https://example.com/provider/login"
-                };
-            }
-        );
+                AuthorizationEndpoint = "https://example.com/provider/login"
+            };
+        });
 
         var server = setting.CreateTestServer();
 
@@ -91,18 +87,16 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RedirectToIdentityProvider_NonceCookieOptions_CanBeOverriden()
     {
-        var setting = new TestSettings(
-            opt =>
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.Configuration = new OpenIdConnectConfiguration
             {
-                opt.ClientId = "Test Id";
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.Configuration = new OpenIdConnectConfiguration
-                {
-                    AuthorizationEndpoint = "https://example.com/provider/login"
-                };
-                opt.NonceCookie.Path = "/";
-            }
-        );
+                AuthorizationEndpoint = "https://example.com/provider/login"
+            };
+            opt.NonceCookie.Path = "/";
+        });
 
         var server = setting.CreateTestServer();
 
@@ -122,17 +116,15 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RedirectToIdentityProvider_SetsCorrelationIdCookiePath_ToCallBackPath()
     {
-        var setting = new TestSettings(
-            opt =>
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.Configuration = new OpenIdConnectConfiguration
             {
-                opt.ClientId = "Test Id";
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.Configuration = new OpenIdConnectConfiguration
-                {
-                    AuthorizationEndpoint = "https://example.com/provider/login"
-                };
-            }
-        );
+                AuthorizationEndpoint = "https://example.com/provider/login"
+            };
+        });
 
         var server = setting.CreateTestServer();
 
@@ -152,18 +144,16 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RedirectToIdentityProvider_CorrelationIdCookieOptions_CanBeOverriden()
     {
-        var setting = new TestSettings(
-            opt =>
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.Configuration = new OpenIdConnectConfiguration
             {
-                opt.ClientId = "Test Id";
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.Configuration = new OpenIdConnectConfiguration
-                {
-                    AuthorizationEndpoint = "https://example.com/provider/login"
-                };
-                opt.CorrelationCookie.Path = "/";
-            }
-        );
+                AuthorizationEndpoint = "https://example.com/provider/login"
+            };
+            opt.CorrelationCookie.Path = "/";
+        });
 
         var server = setting.CreateTestServer();
 
@@ -184,15 +174,13 @@ public class OpenIdConnectTests
     public async Task EndSessionRequestDoesNotIncludeTelemetryParametersWhenDisabled()
     {
         var configuration = TestServerBuilder.CreateDefaultOpenIdConnectConfiguration();
-        var setting = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Configuration = configuration;
-                opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                opt.DisableTelemetry = true;
-            }
-        );
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Configuration = configuration;
+            opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            opt.DisableTelemetry = true;
+        });
 
         var server = setting.CreateTestServer();
 
@@ -211,14 +199,12 @@ public class OpenIdConnectTests
     [Fact]
     public async Task SignOutFormPostWithDefaultRedirectUri()
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+        });
         var server = settings.CreateTestServer();
 
         var transaction = await server.SendAsync(DefaultHost + TestServerBuilder.Signout);
@@ -233,14 +219,12 @@ public class OpenIdConnectTests
     [Fact]
     public async Task SignOutRedirectWithDefaultRedirectUri()
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+        });
         var server = settings.CreateTestServer();
 
         var transaction = await server.SendAsync(DefaultHost + TestServerBuilder.Signout);
@@ -261,17 +245,15 @@ public class OpenIdConnectTests
                 "OIDCTest"
             )
         );
-        var server = TestServerBuilder.CreateServer(
-            o =>
-            {
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-                o.Configuration = configuration;
-                o.StateDataFormat = stateFormat;
-                o.SignedOutCallbackPath = "/thelogout";
-                o.SignedOutRedirectUri = "https://example.com/postlogout";
-            }
-        );
+        var server = TestServerBuilder.CreateServer(o =>
+        {
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+            o.Configuration = configuration;
+            o.StateDataFormat = stateFormat;
+            o.SignedOutCallbackPath = "/thelogout";
+            o.SignedOutRedirectUri = "https://example.com/postlogout";
+        });
 
         var transaction = await server.SendAsync(DefaultHost + TestServerBuilder.Signout);
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -301,16 +283,14 @@ public class OpenIdConnectTests
                 "OIDCTest"
             )
         );
-        var server = TestServerBuilder.CreateServer(
-            o =>
-            {
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.StateDataFormat = stateFormat;
-                o.ClientId = "Test Id";
-                o.Configuration = configuration;
-                o.SignedOutRedirectUri = "https://example.com/postlogout";
-            }
-        );
+        var server = TestServerBuilder.CreateServer(o =>
+        {
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.StateDataFormat = stateFormat;
+            o.ClientId = "Test Id";
+            o.Configuration = configuration;
+            o.SignedOutRedirectUri = "https://example.com/postlogout";
+        });
 
         var transaction = await server.SendAsync(
             "https://example.com/signout_with_specific_redirect_uri"
@@ -340,13 +320,11 @@ public class OpenIdConnectTests
     [Fact]
     public async Task SignOut_WithMissingConfig_Throws()
     {
-        var setting = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Configuration = new OpenIdConnectConfiguration();
-            }
-        );
+        var setting = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Configuration = new OpenIdConnectConfiguration();
+        });
         var server = setting.CreateTestServer();
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -361,22 +339,18 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RemoteSignOut_WithMissingIssuer()
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-            }
-        );
-        var server = settings.CreateTestServer(
-            handler: async context =>
-            {
-                var claimsIdentity = new ClaimsIdentity("Cookies");
-                claimsIdentity.AddClaim(new Claim("iss", "test"));
-                await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+        });
+        var server = settings.CreateTestServer(handler: async context =>
+        {
+            var claimsIdentity = new ClaimsIdentity("Cookies");
+            claimsIdentity.AddClaim(new Claim("iss", "test"));
+            await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+        });
 
         var signInTransaction = await server.SendAsync(DefaultHost);
 
@@ -394,22 +368,18 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RemoteSignOut_WithInvalidIssuer()
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-            }
-        );
-        var server = settings.CreateTestServer(
-            handler: async context =>
-            {
-                var claimsIdentity = new ClaimsIdentity("Cookies");
-                claimsIdentity.AddClaim(new Claim("iss", "test"));
-                await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+        });
+        var server = settings.CreateTestServer(handler: async context =>
+        {
+            var claimsIdentity = new ClaimsIdentity("Cookies");
+            claimsIdentity.AddClaim(new Claim("iss", "test"));
+            await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+        });
 
         var signInTransaction = await server.SendAsync(DefaultHost);
 
@@ -427,23 +397,19 @@ public class OpenIdConnectTests
     [Fact]
     public async Task RemoteSignOut_Get_Successful()
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.ClientId = "Test Id";
-            }
-        );
-        var server = settings.CreateTestServer(
-            handler: async context =>
-            {
-                var claimsIdentity = new ClaimsIdentity("Cookies");
-                claimsIdentity.AddClaim(new Claim("iss", "test"));
-                claimsIdentity.AddClaim(new Claim("sid", "something"));
-                await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.ClientId = "Test Id";
+        });
+        var server = settings.CreateTestServer(handler: async context =>
+        {
+            var claimsIdentity = new ClaimsIdentity("Cookies");
+            claimsIdentity.AddClaim(new Claim("iss", "test"));
+            claimsIdentity.AddClaim(new Claim("sid", "something"));
+            await context.SignInAsync(new ClaimsPrincipal(claimsIdentity));
+        });
 
         var signInTransaction = await server.SendAsync(DefaultHost);
 

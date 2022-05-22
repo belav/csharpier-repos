@@ -17,12 +17,10 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().ConstructUsing((Source source) => null);
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ConstructUsing((Source source) => null);
+            });
 
         [Fact]
         public void Should_throw_when_construct_using_returns_null()

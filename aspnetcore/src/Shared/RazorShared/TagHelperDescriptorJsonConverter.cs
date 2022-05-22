@@ -36,50 +36,48 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
         var assemblyName = reader.ReadNextStringProperty(nameof(TagHelperDescriptor.AssemblyName));
         var builder = TagHelperDescriptorBuilder.Create(descriptorKind, typeName, assemblyName);
 
-        reader.ReadProperties(
-            propertyName =>
+        reader.ReadProperties(propertyName =>
+        {
+            switch (propertyName)
             {
-                switch (propertyName)
-                {
-                    case nameof(TagHelperDescriptor.Documentation):
-                        if (reader.Read())
-                        {
-                            var documentation = (string)reader.Value;
-                            builder.Documentation = documentation;
-                        }
-                        break;
-                    case nameof(TagHelperDescriptor.TagOutputHint):
-                        if (reader.Read())
-                        {
-                            var tagOutputHint = (string)reader.Value;
-                            builder.TagOutputHint = tagOutputHint;
-                        }
-                        break;
-                    case nameof(TagHelperDescriptor.CaseSensitive):
-                        if (reader.Read())
-                        {
-                            var caseSensitive = (bool)reader.Value;
-                            builder.CaseSensitive = caseSensitive;
-                        }
-                        break;
-                    case nameof(TagHelperDescriptor.TagMatchingRules):
-                        ReadTagMatchingRules(reader, builder);
-                        break;
-                    case nameof(TagHelperDescriptor.BoundAttributes):
-                        ReadBoundAttributes(reader, builder);
-                        break;
-                    case nameof(TagHelperDescriptor.AllowedChildTags):
-                        ReadAllowedChildTags(reader, builder);
-                        break;
-                    case nameof(TagHelperDescriptor.Diagnostics):
-                        ReadDiagnostics(reader, builder.Diagnostics);
-                        break;
-                    case nameof(TagHelperDescriptor.Metadata):
-                        ReadMetadata(reader, builder.Metadata);
-                        break;
-                }
+                case nameof(TagHelperDescriptor.Documentation):
+                    if (reader.Read())
+                    {
+                        var documentation = (string)reader.Value;
+                        builder.Documentation = documentation;
+                    }
+                    break;
+                case nameof(TagHelperDescriptor.TagOutputHint):
+                    if (reader.Read())
+                    {
+                        var tagOutputHint = (string)reader.Value;
+                        builder.TagOutputHint = tagOutputHint;
+                    }
+                    break;
+                case nameof(TagHelperDescriptor.CaseSensitive):
+                    if (reader.Read())
+                    {
+                        var caseSensitive = (bool)reader.Value;
+                        builder.CaseSensitive = caseSensitive;
+                    }
+                    break;
+                case nameof(TagHelperDescriptor.TagMatchingRules):
+                    ReadTagMatchingRules(reader, builder);
+                    break;
+                case nameof(TagHelperDescriptor.BoundAttributes):
+                    ReadBoundAttributes(reader, builder);
+                    break;
+                case nameof(TagHelperDescriptor.AllowedChildTags):
+                    ReadAllowedChildTags(reader, builder);
+                    break;
+                case nameof(TagHelperDescriptor.Diagnostics):
+                    ReadDiagnostics(reader, builder.Diagnostics);
+                    break;
+                case nameof(TagHelperDescriptor.Metadata):
+                    ReadMetadata(reader, builder.Metadata);
+                    break;
             }
-        );
+        });
 
         return builder.Build();
     }
@@ -421,85 +419,81 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        builder.BindAttribute(
-            attribute =>
+        builder.BindAttribute(attribute =>
+        {
+            reader.ReadProperties(propertyName =>
             {
-                reader.ReadProperties(
-                    propertyName =>
-                    {
-                        switch (propertyName)
+                switch (propertyName)
+                {
+                    case nameof(BoundAttributeDescriptor.Name):
+                        if (reader.Read())
                         {
-                            case nameof(BoundAttributeDescriptor.Name):
-                                if (reader.Read())
-                                {
-                                    var name = (string)reader.Value;
-                                    attribute.Name = name;
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.TypeName):
-                                if (reader.Read())
-                                {
-                                    var typeName = (string)reader.Value;
-                                    attribute.TypeName = typeName;
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.Documentation):
-                                if (reader.Read())
-                                {
-                                    var documentation = (string)reader.Value;
-                                    attribute.Documentation = documentation;
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.IndexerNamePrefix):
-                                if (reader.Read())
-                                {
-                                    var indexerNamePrefix = (string)reader.Value;
-                                    if (indexerNamePrefix != null)
-                                    {
-                                        attribute.IsDictionary = true;
-                                        attribute.IndexerAttributeNamePrefix = indexerNamePrefix;
-                                    }
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.IndexerTypeName):
-                                if (reader.Read())
-                                {
-                                    var indexerTypeName = (string)reader.Value;
-                                    if (indexerTypeName != null)
-                                    {
-                                        attribute.IsDictionary = true;
-                                        attribute.IndexerValueTypeName = indexerTypeName;
-                                    }
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.IsEnum):
-                                if (reader.Read())
-                                {
-                                    var isEnum = (bool)reader.Value;
-                                    attribute.IsEnum = isEnum;
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.IsEditorRequired):
-                                if (reader.Read())
-                                {
-                                    var value = (bool)reader.Value;
-                                    attribute.IsEditorRequired = value;
-                                }
-                                break;
-                            case nameof(BoundAttributeDescriptor.BoundAttributeParameters):
-                                ReadBoundAttributeParameters(reader, attribute);
-                                break;
-                            case nameof(BoundAttributeDescriptor.Diagnostics):
-                                ReadDiagnostics(reader, attribute.Diagnostics);
-                                break;
-                            case nameof(BoundAttributeDescriptor.Metadata):
-                                ReadMetadata(reader, attribute.Metadata);
-                                break;
+                            var name = (string)reader.Value;
+                            attribute.Name = name;
                         }
-                    }
-                );
-            }
-        );
+                        break;
+                    case nameof(BoundAttributeDescriptor.TypeName):
+                        if (reader.Read())
+                        {
+                            var typeName = (string)reader.Value;
+                            attribute.TypeName = typeName;
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.Documentation):
+                        if (reader.Read())
+                        {
+                            var documentation = (string)reader.Value;
+                            attribute.Documentation = documentation;
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.IndexerNamePrefix):
+                        if (reader.Read())
+                        {
+                            var indexerNamePrefix = (string)reader.Value;
+                            if (indexerNamePrefix != null)
+                            {
+                                attribute.IsDictionary = true;
+                                attribute.IndexerAttributeNamePrefix = indexerNamePrefix;
+                            }
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.IndexerTypeName):
+                        if (reader.Read())
+                        {
+                            var indexerTypeName = (string)reader.Value;
+                            if (indexerTypeName != null)
+                            {
+                                attribute.IsDictionary = true;
+                                attribute.IndexerValueTypeName = indexerTypeName;
+                            }
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.IsEnum):
+                        if (reader.Read())
+                        {
+                            var isEnum = (bool)reader.Value;
+                            attribute.IsEnum = isEnum;
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.IsEditorRequired):
+                        if (reader.Read())
+                        {
+                            var value = (bool)reader.Value;
+                            attribute.IsEditorRequired = value;
+                        }
+                        break;
+                    case nameof(BoundAttributeDescriptor.BoundAttributeParameters):
+                        ReadBoundAttributeParameters(reader, attribute);
+                        break;
+                    case nameof(BoundAttributeDescriptor.Diagnostics):
+                        ReadDiagnostics(reader, attribute.Diagnostics);
+                        break;
+                    case nameof(BoundAttributeDescriptor.Metadata):
+                        ReadMetadata(reader, attribute.Metadata);
+                        break;
+                }
+            });
+        });
     }
 
     private static void ReadBoundAttributeParameters(
@@ -538,53 +532,49 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        builder.BindAttributeParameter(
-            parameter =>
+        builder.BindAttributeParameter(parameter =>
+        {
+            reader.ReadProperties(propertyName =>
             {
-                reader.ReadProperties(
-                    propertyName =>
-                    {
-                        switch (propertyName)
+                switch (propertyName)
+                {
+                    case nameof(BoundAttributeParameterDescriptor.Name):
+                        if (reader.Read())
                         {
-                            case nameof(BoundAttributeParameterDescriptor.Name):
-                                if (reader.Read())
-                                {
-                                    var name = (string)reader.Value;
-                                    parameter.Name = name;
-                                }
-                                break;
-                            case nameof(BoundAttributeParameterDescriptor.TypeName):
-                                if (reader.Read())
-                                {
-                                    var typeName = (string)reader.Value;
-                                    parameter.TypeName = typeName;
-                                }
-                                break;
-                            case nameof(BoundAttributeParameterDescriptor.IsEnum):
-                                if (reader.Read())
-                                {
-                                    var isEnum = (bool)reader.Value;
-                                    parameter.IsEnum = isEnum;
-                                }
-                                break;
-                            case nameof(BoundAttributeParameterDescriptor.Documentation):
-                                if (reader.Read())
-                                {
-                                    var documentation = (string)reader.Value;
-                                    parameter.Documentation = documentation;
-                                }
-                                break;
-                            case nameof(BoundAttributeParameterDescriptor.Metadata):
-                                ReadMetadata(reader, parameter.Metadata);
-                                break;
-                            case nameof(BoundAttributeParameterDescriptor.Diagnostics):
-                                ReadDiagnostics(reader, parameter.Diagnostics);
-                                break;
+                            var name = (string)reader.Value;
+                            parameter.Name = name;
                         }
-                    }
-                );
-            }
-        );
+                        break;
+                    case nameof(BoundAttributeParameterDescriptor.TypeName):
+                        if (reader.Read())
+                        {
+                            var typeName = (string)reader.Value;
+                            parameter.TypeName = typeName;
+                        }
+                        break;
+                    case nameof(BoundAttributeParameterDescriptor.IsEnum):
+                        if (reader.Read())
+                        {
+                            var isEnum = (bool)reader.Value;
+                            parameter.IsEnum = isEnum;
+                        }
+                        break;
+                    case nameof(BoundAttributeParameterDescriptor.Documentation):
+                        if (reader.Read())
+                        {
+                            var documentation = (string)reader.Value;
+                            parameter.Documentation = documentation;
+                        }
+                        break;
+                    case nameof(BoundAttributeParameterDescriptor.Metadata):
+                        ReadMetadata(reader, parameter.Metadata);
+                        break;
+                    case nameof(BoundAttributeParameterDescriptor.Diagnostics):
+                        ReadDiagnostics(reader, parameter.Diagnostics);
+                        break;
+                }
+            });
+        });
     }
 
     private static void ReadTagMatchingRules(JsonReader reader, TagHelperDescriptorBuilder builder)
@@ -617,42 +607,38 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        builder.TagMatchingRule(
-            rule =>
+        builder.TagMatchingRule(rule =>
+        {
+            reader.ReadProperties(propertyName =>
             {
-                reader.ReadProperties(
-                    propertyName =>
-                    {
-                        switch (propertyName)
+                switch (propertyName)
+                {
+                    case nameof(TagMatchingRuleDescriptor.TagName):
+                        if (reader.Read())
                         {
-                            case nameof(TagMatchingRuleDescriptor.TagName):
-                                if (reader.Read())
-                                {
-                                    var tagName = (string)reader.Value;
-                                    rule.TagName = tagName;
-                                }
-                                break;
-                            case nameof(TagMatchingRuleDescriptor.ParentTag):
-                                if (reader.Read())
-                                {
-                                    var parentTag = (string)reader.Value;
-                                    rule.ParentTag = parentTag;
-                                }
-                                break;
-                            case nameof(TagMatchingRuleDescriptor.TagStructure):
-                                rule.TagStructure = (TagStructure)reader.ReadAsInt32();
-                                break;
-                            case nameof(TagMatchingRuleDescriptor.Attributes):
-                                ReadRequiredAttributeValues(reader, rule);
-                                break;
-                            case nameof(TagMatchingRuleDescriptor.Diagnostics):
-                                ReadDiagnostics(reader, rule.Diagnostics);
-                                break;
+                            var tagName = (string)reader.Value;
+                            rule.TagName = tagName;
                         }
-                    }
-                );
-            }
-        );
+                        break;
+                    case nameof(TagMatchingRuleDescriptor.ParentTag):
+                        if (reader.Read())
+                        {
+                            var parentTag = (string)reader.Value;
+                            rule.ParentTag = parentTag;
+                        }
+                        break;
+                    case nameof(TagMatchingRuleDescriptor.TagStructure):
+                        rule.TagStructure = (TagStructure)reader.ReadAsInt32();
+                        break;
+                    case nameof(TagMatchingRuleDescriptor.Attributes):
+                        ReadRequiredAttributeValues(reader, rule);
+                        break;
+                    case nameof(TagMatchingRuleDescriptor.Diagnostics):
+                        ReadDiagnostics(reader, rule.Diagnostics);
+                        break;
+                }
+            });
+        });
     }
 
     private static void ReadRequiredAttributeValues(
@@ -691,51 +677,45 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        builder.Attribute(
-            attribute =>
+        builder.Attribute(attribute =>
+        {
+            reader.ReadProperties(propertyName =>
             {
-                reader.ReadProperties(
-                    propertyName =>
-                    {
-                        switch (propertyName)
+                switch (propertyName)
+                {
+                    case nameof(RequiredAttributeDescriptor.Name):
+                        if (reader.Read())
                         {
-                            case nameof(RequiredAttributeDescriptor.Name):
-                                if (reader.Read())
-                                {
-                                    var name = (string)reader.Value;
-                                    attribute.Name = name;
-                                }
-                                break;
-                            case nameof(RequiredAttributeDescriptor.NameComparison):
-                                var nameComparison =
-                                    (RequiredAttributeDescriptor.NameComparisonMode)
-                                        reader.ReadAsInt32();
-                                attribute.NameComparisonMode = nameComparison;
-                                break;
-                            case nameof(RequiredAttributeDescriptor.Value):
-                                if (reader.Read())
-                                {
-                                    var value = (string)reader.Value;
-                                    attribute.Value = value;
-                                }
-                                break;
-                            case nameof(RequiredAttributeDescriptor.ValueComparison):
-                                var valueComparison =
-                                    (RequiredAttributeDescriptor.ValueComparisonMode)
-                                        reader.ReadAsInt32();
-                                attribute.ValueComparisonMode = valueComparison;
-                                break;
-                            case nameof(RequiredAttributeDescriptor.Diagnostics):
-                                ReadDiagnostics(reader, attribute.Diagnostics);
-                                break;
-                            case nameof(RequiredAttributeDescriptor.Metadata):
-                                ReadMetadata(reader, attribute.Metadata);
-                                break;
+                            var name = (string)reader.Value;
+                            attribute.Name = name;
                         }
-                    }
-                );
-            }
-        );
+                        break;
+                    case nameof(RequiredAttributeDescriptor.NameComparison):
+                        var nameComparison = (RequiredAttributeDescriptor.NameComparisonMode)
+                            reader.ReadAsInt32();
+                        attribute.NameComparisonMode = nameComparison;
+                        break;
+                    case nameof(RequiredAttributeDescriptor.Value):
+                        if (reader.Read())
+                        {
+                            var value = (string)reader.Value;
+                            attribute.Value = value;
+                        }
+                        break;
+                    case nameof(RequiredAttributeDescriptor.ValueComparison):
+                        var valueComparison = (RequiredAttributeDescriptor.ValueComparisonMode)
+                            reader.ReadAsInt32();
+                        attribute.ValueComparisonMode = valueComparison;
+                        break;
+                    case nameof(RequiredAttributeDescriptor.Diagnostics):
+                        ReadDiagnostics(reader, attribute.Diagnostics);
+                        break;
+                    case nameof(RequiredAttributeDescriptor.Metadata):
+                        ReadMetadata(reader, attribute.Metadata);
+                        break;
+                }
+            });
+        });
     }
 
     private static void ReadAllowedChildTags(JsonReader reader, TagHelperDescriptorBuilder builder)
@@ -768,36 +748,32 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        builder.AllowChildTag(
-            childTag =>
+        builder.AllowChildTag(childTag =>
+        {
+            reader.ReadProperties(propertyName =>
             {
-                reader.ReadProperties(
-                    propertyName =>
-                    {
-                        switch (propertyName)
+                switch (propertyName)
+                {
+                    case nameof(AllowedChildTagDescriptor.Name):
+                        if (reader.Read())
                         {
-                            case nameof(AllowedChildTagDescriptor.Name):
-                                if (reader.Read())
-                                {
-                                    var name = (string)reader.Value;
-                                    childTag.Name = name;
-                                }
-                                break;
-                            case nameof(AllowedChildTagDescriptor.DisplayName):
-                                if (reader.Read())
-                                {
-                                    var displayName = (string)reader.Value;
-                                    childTag.DisplayName = displayName;
-                                }
-                                break;
-                            case nameof(AllowedChildTagDescriptor.Diagnostics):
-                                ReadDiagnostics(reader, childTag.Diagnostics);
-                                break;
+                            var name = (string)reader.Value;
+                            childTag.Name = name;
                         }
-                    }
-                );
-            }
-        );
+                        break;
+                    case nameof(AllowedChildTagDescriptor.DisplayName):
+                        if (reader.Read())
+                        {
+                            var displayName = (string)reader.Value;
+                            childTag.DisplayName = displayName;
+                        }
+                        break;
+                    case nameof(AllowedChildTagDescriptor.Diagnostics):
+                        ReadDiagnostics(reader, childTag.Diagnostics);
+                        break;
+                }
+            });
+        });
     }
 
     private static void ReadMetadata(JsonReader reader, IDictionary<string, string> metadata)
@@ -812,16 +788,14 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
             return;
         }
 
-        reader.ReadProperties(
-            propertyName =>
+        reader.ReadProperties(propertyName =>
+        {
+            if (reader.Read())
             {
-                if (reader.Read())
-                {
-                    var value = (string)reader.Value;
-                    metadata[propertyName] = value;
-                }
+                var value = (string)reader.Value;
+                metadata[propertyName] = value;
             }
-        );
+        });
     }
 
     private static void ReadDiagnostics(JsonReader reader, RazorDiagnosticCollection diagnostics)
@@ -859,32 +833,30 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
         string message = default;
         SourceSpan sourceSpan = default;
 
-        reader.ReadProperties(
-            propertyName =>
+        reader.ReadProperties(propertyName =>
+        {
+            switch (propertyName)
             {
-                switch (propertyName)
-                {
-                    case nameof(RazorDiagnostic.Id):
-                        if (reader.Read())
-                        {
-                            id = (string)reader.Value;
-                        }
-                        break;
-                    case nameof(RazorDiagnostic.Severity):
-                        severity = reader.ReadAsInt32().Value;
-                        break;
-                    case "Message":
-                        if (reader.Read())
-                        {
-                            message = (string)reader.Value;
-                        }
-                        break;
-                    case nameof(RazorDiagnostic.Span):
-                        sourceSpan = ReadSourceSpan(reader);
-                        break;
-                }
+                case nameof(RazorDiagnostic.Id):
+                    if (reader.Read())
+                    {
+                        id = (string)reader.Value;
+                    }
+                    break;
+                case nameof(RazorDiagnostic.Severity):
+                    severity = reader.ReadAsInt32().Value;
+                    break;
+                case "Message":
+                    if (reader.Read())
+                    {
+                        message = (string)reader.Value;
+                    }
+                    break;
+                case nameof(RazorDiagnostic.Span):
+                    sourceSpan = ReadSourceSpan(reader);
+                    break;
             }
-        );
+        });
 
         var descriptor = new RazorDiagnosticDescriptor(
             id,
@@ -914,32 +886,30 @@ internal class TagHelperDescriptorJsonConverter : JsonConverter
         int characterIndex = default;
         int length = default;
 
-        reader.ReadProperties(
-            propertyName =>
+        reader.ReadProperties(propertyName =>
+        {
+            switch (propertyName)
             {
-                switch (propertyName)
-                {
-                    case nameof(SourceSpan.FilePath):
-                        if (reader.Read())
-                        {
-                            filePath = (string)reader.Value;
-                        }
-                        break;
-                    case nameof(SourceSpan.AbsoluteIndex):
-                        absoluteIndex = reader.ReadAsInt32().Value;
-                        break;
-                    case nameof(SourceSpan.LineIndex):
-                        lineIndex = reader.ReadAsInt32().Value;
-                        break;
-                    case nameof(SourceSpan.CharacterIndex):
-                        characterIndex = reader.ReadAsInt32().Value;
-                        break;
-                    case nameof(SourceSpan.Length):
-                        length = reader.ReadAsInt32().Value;
-                        break;
-                }
+                case nameof(SourceSpan.FilePath):
+                    if (reader.Read())
+                    {
+                        filePath = (string)reader.Value;
+                    }
+                    break;
+                case nameof(SourceSpan.AbsoluteIndex):
+                    absoluteIndex = reader.ReadAsInt32().Value;
+                    break;
+                case nameof(SourceSpan.LineIndex):
+                    lineIndex = reader.ReadAsInt32().Value;
+                    break;
+                case nameof(SourceSpan.CharacterIndex):
+                    characterIndex = reader.ReadAsInt32().Value;
+                    break;
+                case nameof(SourceSpan.Length):
+                    length = reader.ReadAsInt32().Value;
+                    break;
             }
-        );
+        });
 
         var sourceSpan = new SourceSpan(filePath, absoluteIndex, lineIndex, characterIndex, length);
         return sourceSpan;

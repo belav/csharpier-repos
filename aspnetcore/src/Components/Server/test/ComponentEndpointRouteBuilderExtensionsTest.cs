@@ -25,12 +25,10 @@ public class ComponentEndpointRouteBuilderExtensionsTest
         // Act
         var app = applicationBuilder
             .UseRouting()
-            .UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapBlazorHub(dispatchOptions => called = true);
-                }
-            )
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub(dispatchOptions => called = true);
+            })
             .Build();
 
         // Assert
@@ -47,12 +45,10 @@ public class ComponentEndpointRouteBuilderExtensionsTest
         // Act
         var app = applicationBuilder
             .UseRouting()
-            .UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapBlazorHub("_blazor", dispatchOptions => called = true);
-                }
-            )
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub("_blazor", dispatchOptions => called = true);
+            })
             .Build();
 
         // Assert

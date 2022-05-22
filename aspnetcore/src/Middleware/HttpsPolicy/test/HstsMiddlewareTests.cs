@@ -48,26 +48,20 @@ public class HstsMiddlewareTests
     public async Task SetOptionsWithDefault_SetsMaxAgeToCorrectValue()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(services => { })
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services => { })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -102,38 +96,28 @@ public class HstsMiddlewareTests
     )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.Configure<HstsOptions>(
-                                    options =>
-                                    {
-                                        options.Preload = preload;
-                                        options.IncludeSubDomains = includeSubDomains;
-                                        options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.Configure<HstsOptions>(options =>
+                        {
+                            options.Preload = preload;
+                            options.IncludeSubDomains = includeSubDomains;
+                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -167,38 +151,28 @@ public class HstsMiddlewareTests
     )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddHsts(
-                                    options =>
-                                    {
-                                        options.Preload = preload;
-                                        options.IncludeSubDomains = includeSubDomains;
-                                        options.MaxAge = TimeSpan.FromSeconds(maxAge);
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddHsts(options =>
+                        {
+                            options.Preload = preload;
+                            options.IncludeSubDomains = includeSubDomains;
+                            options.MaxAge = TimeSpan.FromSeconds(maxAge);
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -232,31 +206,23 @@ public class HstsMiddlewareTests
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<ILoggerFactory>(loggerFactory);
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -296,38 +262,28 @@ public class HstsMiddlewareTests
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<ILoggerFactory>(loggerFactory);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-                                services.AddHsts(
-                                    options =>
-                                    {
-                                        options.ExcludedHosts.Clear();
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                        services.AddHsts(options =>
+                        {
+                            options.ExcludedHosts.Clear();
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -363,38 +319,28 @@ public class HstsMiddlewareTests
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<ILoggerFactory>(loggerFactory);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-                                services.AddHsts(
-                                    options =>
-                                    {
-                                        options.ExcludedHosts.Add(hostUrl);
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                        services.AddHsts(options =>
+                        {
+                            options.ExcludedHosts.Add(hostUrl);
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -431,31 +377,23 @@ public class HstsMiddlewareTests
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<ILoggerFactory>(loggerFactory);
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -488,31 +426,23 @@ public class HstsMiddlewareTests
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<ILoggerFactory>(loggerFactory);
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHsts();
-                                app.Run(
-                                    context =>
-                                    {
-                                        return context.Response.WriteAsync("Hello world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseHsts();
+                        app.Run(context =>
+                        {
+                            return context.Response.WriteAsync("Hello world");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();

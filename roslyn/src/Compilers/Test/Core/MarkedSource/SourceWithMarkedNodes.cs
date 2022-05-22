@@ -183,23 +183,18 @@ namespace Roslyn.Test.Utilities
 #if DUMP
             Console.WriteLine("========");
 #endif
-            return new Func<SyntaxNode, SyntaxNode>(
-                node1 =>
+            return new Func<SyntaxNode, SyntaxNode>(node1 =>
+            {
+                if (map1.TryGetValue(node1, out var mark) && map0.TryGetValue(mark, out var result))
                 {
-                    if (
-                        map1.TryGetValue(node1, out var mark)
-                        && map0.TryGetValue(mark, out var result)
-                    )
-                    {
-                        return result;
-                    }
+                    return result;
+                }
 
 #if DUMP
-                    Console.WriteLine($"? {node1.RawKind} [[{node1}]]");
+                Console.WriteLine($"? {node1.RawKind} [[{node1}]]");
 #endif
-                    return null;
-                }
-            );
+                return null;
+            });
         }
     }
 }

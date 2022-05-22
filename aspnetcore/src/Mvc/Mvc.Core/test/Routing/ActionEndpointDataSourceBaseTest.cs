@@ -182,12 +182,10 @@ public abstract class ActionEndpointDataSourceBaseTest
 
         var routeOptionsSetup = new MvcCoreRouteOptionsSetup();
         services.Configure<RouteOptions>(routeOptionsSetup.Configure);
-        services.AddRouting(
-            options =>
-            {
-                options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-            }
-        );
+        services.AddRouting(options =>
+        {
+            options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+        });
 
         var serviceProvider = services.BuildServiceProvider();
 

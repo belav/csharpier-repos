@@ -125,19 +125,17 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var kinds = from i in Enumerable.Range(0, 255) let index = new Func<
                     HandleKind,
                     TableIndex?
-                >(
-                    k =>
+                >(k =>
+                {
+                    TableIndex ti;
+                    if (MetadataTokens.TryGetTableIndex(k, out ti))
                     {
-                        TableIndex ti;
-                        if (MetadataTokens.TryGetTableIndex(k, out ti))
-                        {
-                            Assert.Equal((int)k, (int)ti);
-                            return ti;
-                        }
-
-                        return null;
+                        Assert.Equal((int)k, (int)ti);
+                        return ti;
                     }
-                )((HandleKind)i) where index != null select index.Value;
+
+                    return null;
+                })((HandleKind)i) where index != null select index.Value;
 
             AssertEx.Equal(
                 new TableIndex[]

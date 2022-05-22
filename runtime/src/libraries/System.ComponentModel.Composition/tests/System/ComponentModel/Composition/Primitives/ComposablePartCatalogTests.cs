@@ -62,15 +62,13 @@ namespace System.ComponentModel.Composition
         {
             bool finalizerCalled = false;
 
-            var catalog = CatalogFactory.CreateDisposable(
-                disposing =>
+            var catalog = CatalogFactory.CreateDisposable(disposing =>
+            {
+                if (!disposing)
                 {
-                    if (!disposing)
-                    {
-                        finalizerCalled = true;
-                    }
+                    finalizerCalled = true;
                 }
-            );
+            });
 
             catalog.Dispose();
 
@@ -84,12 +82,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_CallsDisposeBoolWithTrue()
         {
-            var catalog = CatalogFactory.CreateDisposable(
-                disposing =>
-                {
-                    Assert.True(disposing);
-                }
-            );
+            var catalog = CatalogFactory.CreateDisposable(disposing =>
+            {
+                Assert.True(disposing);
+            });
 
             catalog.Dispose();
         }
@@ -98,12 +94,10 @@ namespace System.ComponentModel.Composition
         public void Dispose_CallsDisposeBoolOnce()
         {
             int disposeCount = 0;
-            var catalog = CatalogFactory.CreateDisposable(
-                disposing =>
-                {
-                    disposeCount++;
-                }
-            );
+            var catalog = CatalogFactory.CreateDisposable(disposing =>
+            {
+                disposeCount++;
+            });
 
             catalog.Dispose();
 

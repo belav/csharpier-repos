@@ -41,13 +41,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ItemToMap, ItemToMapDto>();
-                    cfg.CreateMap<Tag, TagDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ItemToMap, ItemToMapDto>();
+                cfg.CreateMap<Tag, TagDto>();
+            });
 
         [Fact]
         public void Should_map_all_null_values_to_its_substitute()

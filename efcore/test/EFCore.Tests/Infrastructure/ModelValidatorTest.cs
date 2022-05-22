@@ -28,13 +28,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            modelBuilder.Entity<WithNonComparableKey>(
-                eb =>
-                {
-                    eb.Property(e => e.Id);
-                    eb.HasKey(e => e.Id);
-                }
-            );
+            modelBuilder.Entity<WithNonComparableKey>(eb =>
+            {
+                eb.Property(e => e.Id);
+                eb.HasKey(e => e.Id);
+            });
 
             VerifyError(
                 CoreStrings.NonComparableKeyType(
@@ -56,12 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            modelBuilder.Entity<WithNonComparableUniqueIndex>(
-                eb =>
-                {
-                    eb.HasIndex(e => e.Index).IsUnique();
-                }
-            );
+            modelBuilder.Entity<WithNonComparableUniqueIndex>(eb =>
+            {
+                eb.HasIndex(e => e.Index).IsUnique();
+            });
 
             VerifyError(
                 CoreStrings.NonComparableKeyType(
@@ -84,14 +80,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            modelBuilder.Entity<WithNonComparableNormalProperty>(
-                eb =>
-                {
-                    eb.Property(e => e.Id);
-                    eb.HasKey(e => e.Id);
-                    eb.Property(e => e.Foo);
-                }
-            );
+            modelBuilder.Entity<WithNonComparableNormalProperty>(eb =>
+            {
+                eb.Property(e => e.Id);
+                eb.HasKey(e => e.Id);
+                eb.Property(e => e.Foo);
+            });
 
             Validate(modelBuilder);
         }
@@ -110,19 +104,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder();
 
             IMutableProperty convertedProperty = null;
-            modelBuilder.Entity<WithCollectionConversion>(
-                eb =>
-                {
-                    eb.Property(e => e.Id);
-                    convertedProperty = eb.Property(e => e.SomeStrings).Metadata;
-                    convertedProperty.SetValueConverter(
-                        new ValueConverter<string[], string>(
-                            v => string.Join(',', v),
-                            v => v.Split(',', StringSplitOptions.None)
-                        )
-                    );
-                }
-            );
+            modelBuilder.Entity<WithCollectionConversion>(eb =>
+            {
+                eb.Property(e => e.Id);
+                convertedProperty = eb.Property(e => e.SomeStrings).Metadata;
+                convertedProperty.SetValueConverter(
+                    new ValueConverter<string[], string>(
+                        v => string.Join(',', v),
+                        v => v.Split(',', StringSplitOptions.None)
+                    )
+                );
+            });
 
             VerifyWarning(
                 CoreResources
@@ -138,19 +130,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder();
 
             IMutableProperty convertedProperty = null;
-            modelBuilder.Entity<WithCollectionConversion>(
-                eb =>
-                {
-                    eb.Property(e => e.Id);
-                    convertedProperty = eb.Property(e => e.SomeStrings).Metadata;
-                    convertedProperty.SetValueConverter(
-                        new ValueConverter<string[], string>(
-                            v => string.Join(',', v),
-                            v => v.Split(',', StringSplitOptions.None)
-                        )
-                    );
-                }
-            );
+            modelBuilder.Entity<WithCollectionConversion>(eb =>
+            {
+                eb.Property(e => e.Id);
+                convertedProperty = eb.Property(e => e.SomeStrings).Metadata;
+                convertedProperty.SetValueConverter(
+                    new ValueConverter<string[], string>(
+                        v => string.Join(',', v),
+                        v => v.Split(',', StringSplitOptions.None)
+                    )
+                );
+            });
 
             convertedProperty.SetValueComparer(
                 new ValueComparer<string[]>((v1, v2) => v1.SequenceEqual(v2), v => v.GetHashCode())
@@ -475,16 +465,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Detects_a_null_primary_key()
         {
             var modelBuilder = CreateConventionlessModelBuilder();
-            modelBuilder.Entity<A>(
-                b =>
-                {
-                    b.Property(e => e.Id);
-                    b.Property(e => e.P0);
-                    b.Property(e => e.P1);
-                    b.Property(e => e.P2);
-                    b.Property(e => e.P3);
-                }
-            );
+            modelBuilder.Entity<A>(b =>
+            {
+                b.Property(e => e.Id);
+                b.Property(e => e.P0);
+                b.Property(e => e.P1);
+                b.Property(e => e.P2);
+                b.Property(e => e.P3);
+            });
 
             VerifyError(CoreStrings.EntityRequiresKey(nameof(A)), modelBuilder);
         }
@@ -1497,26 +1485,24 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Passes_for_ignored_invalid_seeded_properties()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<EntityWithInvalidProperties>(
-                eb =>
-                {
-                    eb.Ignore(e => e.NotImplemented);
+            modelBuilder.Entity<EntityWithInvalidProperties>(eb =>
+            {
+                eb.Ignore(e => e.NotImplemented);
 
-                    eb.HasData(new EntityWithInvalidProperties { Id = -1 });
+                eb.HasData(new EntityWithInvalidProperties { Id = -1 });
 
-                    eb.HasData(
-                        new
-                        {
-                            Id = -2,
-                            NotImplemented = true,
-                            Static = 1,
-                            WriteOnly = 1,
-                            ReadOnly = 1,
-                            PrivateGetter = 1
-                        }
-                    );
-                }
-            );
+                eb.HasData(
+                    new
+                    {
+                        Id = -2,
+                        NotImplemented = true,
+                        Static = 1,
+                        WriteOnly = 1,
+                        ReadOnly = 1,
+                        PrivateGetter = 1
+                    }
+                );
+            });
 
             Validate(modelBuilder);
 
@@ -1563,13 +1549,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Detects_missing_required_values_in_seeds()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<A>(
-                e =>
-                {
-                    e.Property(a => a.P0).IsRequired();
-                    e.HasData(new A { Id = 1 });
-                }
-            );
+            modelBuilder.Entity<A>(e =>
+            {
+                e.Property(a => a.P0).IsRequired();
+                e.HasData(new A { Id = 1 });
+            });
 
             VerifyError(CoreStrings.SeedDatumMissingValue(nameof(A), nameof(A.P0)), modelBuilder);
         }
@@ -1578,13 +1562,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Passes_on_missing_required_store_generated_values_in_seeds()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<A>(
-                e =>
-                {
-                    e.Property(a => a.P0).IsRequired().ValueGeneratedOnAddOrUpdate();
-                    e.HasData(new A { Id = 1 });
-                }
-            );
+            modelBuilder.Entity<A>(e =>
+            {
+                e.Property(a => a.P0).IsRequired().ValueGeneratedOnAddOrUpdate();
+                e.HasData(new A { Id = 1 });
+            });
 
             Validate(modelBuilder);
         }
@@ -1653,12 +1635,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder(
                 sensitiveDataLoggingEnabled: sensitiveDataLoggingEnabled
             );
-            modelBuilder.Entity<A>(
-                e =>
-                {
-                    e.HasData(new { Id = 1, P0 = "invalid" });
-                }
-            );
+            modelBuilder.Entity<A>(e =>
+            {
+                e.HasData(new { Id = 1, P0 = "invalid" });
+            });
 
             VerifyError(
                 sensitiveDataLoggingEnabled
@@ -1682,18 +1662,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder(
                 sensitiveDataLoggingEnabled: sensitiveDataLoggingEnabled
             );
-            modelBuilder.Entity<SampleEntity>(
-                e =>
-                {
-                    e.HasData(
-                        new SampleEntity
-                        {
-                            Id = 1,
-                            ReferencedEntity = new ReferencedEntity { Id = 2 }
-                        }
-                    );
-                }
-            );
+            modelBuilder.Entity<SampleEntity>(e =>
+            {
+                e.HasData(
+                    new SampleEntity
+                    {
+                        Id = 1,
+                        ReferencedEntity = new ReferencedEntity { Id = 2 }
+                    }
+                );
+            });
 
             VerifyError(
                 sensitiveDataLoggingEnabled
@@ -1725,19 +1703,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder(
                 sensitiveDataLoggingEnabled: sensitiveDataLoggingEnabled
             );
-            modelBuilder.Entity<Order>(
-                e =>
-                {
-                    e.HasMany(o => o.Products).WithMany(p => p.Orders);
-                    e.HasData(
-                        new Order
-                        {
-                            Id = 1,
-                            Products = new List<Product> { new() }
-                        }
-                    );
-                }
-            );
+            modelBuilder.Entity<Order>(e =>
+            {
+                e.HasMany(o => o.Products).WithMany(p => p.Orders);
+                e.HasData(
+                    new Order
+                    {
+                        Id = 1,
+                        Products = new List<Product> { new() }
+                    }
+                );
+            });
 
             VerifyError(
                 sensitiveDataLoggingEnabled
@@ -1769,20 +1745,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var modelBuilder = CreateConventionalModelBuilder(
                 sensitiveDataLoggingEnabled: sensitiveDataLoggingEnabled
             );
-            modelBuilder.Entity<SampleEntity>(
-                e =>
-                {
-                    e.HasData(
-                        new SampleEntity
-                        {
-                            Id = 1,
-                            OtherSamples = new HashSet<SampleEntity>(
-                                new[] { new SampleEntity { Id = 2 } }
-                            )
-                        }
-                    );
-                }
-            );
+            modelBuilder.Entity<SampleEntity>(e =>
+            {
+                e.HasData(
+                    new SampleEntity
+                    {
+                        Id = 1,
+                        OtherSamples = new HashSet<SampleEntity>(
+                            new[] { new SampleEntity { Id = 2 } }
+                        )
+                    }
+                );
+            });
 
             VerifyError(
                 sensitiveDataLoggingEnabled
@@ -1968,13 +1942,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Seeding_keyless_entity_throws()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<KeylessSeed>(
-                e =>
-                {
-                    e.HasNoKey();
-                    e.HasData(new KeylessSeed { Species = "Apple" });
-                }
-            );
+            modelBuilder.Entity<KeylessSeed>(e =>
+            {
+                e.HasNoKey();
+                e.HasData(new KeylessSeed { Species = "Apple" });
+            });
 
             VerifyError(CoreStrings.SeedKeylessEntity(nameof(KeylessSeed)), modelBuilder);
         }

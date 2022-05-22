@@ -606,17 +606,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         )
         {
             var entries = featuresAttribute.Value.Split(';');
-            var features = entries.Select(
-                x =>
-                {
-                    var split = x.Split('=');
+            var features = entries.Select(x =>
+            {
+                var split = x.Split('=');
 
-                    var key = split[0];
-                    var value = split.Length == 2 ? split[1] : "true";
+                var key = split[0];
+                var value = split.Length == 2 ? split[1] : "true";
 
-                    return new KeyValuePair<string, string>(key, value);
-                }
-            );
+                return new KeyValuePair<string, string>(key, value);
+            });
 
             return parseOptions.WithFeatures(features);
         }
@@ -989,21 +987,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
                 var originalProject = workspaceElement
                     .Elements(ProjectElementName)
-                    .FirstOrDefault(
-                        p =>
+                    .FirstOrDefault(p =>
+                    {
+                        if (originalAssemblyName != null)
                         {
-                            if (originalAssemblyName != null)
-                            {
-                                return p.Attribute(AssemblyNameAttributeName)?.Value
-                                    == originalAssemblyName;
-                            }
-                            else
-                            {
-                                return p.Attribute(ProjectNameAttribute)?.Value
-                                    == originalProjectName;
-                            }
+                            return p.Attribute(AssemblyNameAttributeName)?.Value
+                                == originalAssemblyName;
                         }
-                    );
+                        else
+                        {
+                            return p.Attribute(ProjectNameAttribute)?.Value == originalProjectName;
+                        }
+                    });
 
                 if (originalProject == null)
                 {
@@ -1034,13 +1029,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
                 documentElement = originalProject
                     .Elements(DocumentElementName)
-                    .FirstOrDefault(
-                        d =>
-                        {
-                            return d.Attribute(FilePathAttributeName)?.Value
-                                == originalDocumentPath;
-                        }
-                    );
+                    .FirstOrDefault(d =>
+                    {
+                        return d.Attribute(FilePathAttributeName)?.Value == originalDocumentPath;
+                    });
 
                 if (documentElement == null)
                 {

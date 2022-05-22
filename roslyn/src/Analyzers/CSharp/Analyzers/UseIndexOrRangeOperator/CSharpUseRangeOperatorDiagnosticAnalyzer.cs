@@ -69,20 +69,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                {
-                    // We're going to be checking every invocation in the compilation. Cache information
-                    // we compute in this object so we don't have to continually recompute it.
-                    if (!InfoCache.TryCreate(compilationContext.Compilation, out var infoCache))
-                        return;
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                // We're going to be checking every invocation in the compilation. Cache information
+                // we compute in this object so we don't have to continually recompute it.
+                if (!InfoCache.TryCreate(compilationContext.Compilation, out var infoCache))
+                    return;
 
-                    compilationContext.RegisterOperationAction(
-                        c => AnalyzeInvocation(c, infoCache),
-                        OperationKind.Invocation
-                    );
-                }
-            );
+                compilationContext.RegisterOperationAction(
+                    c => AnalyzeInvocation(c, infoCache),
+                    OperationKind.Invocation
+                );
+            });
         }
 
         private void AnalyzeInvocation(OperationAnalysisContext context, InfoCache infoCache)

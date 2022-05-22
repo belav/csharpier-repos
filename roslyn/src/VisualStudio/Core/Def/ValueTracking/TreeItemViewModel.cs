@@ -133,15 +133,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 return ImmutableArray<Inline>.Empty;
             }
 
-            var classifiedTexts = ClassifiedSpans.SelectAsArray(
-                cs =>
-                {
-                    return new ClassifiedText(
-                        cs.ClassificationType,
-                        _sourceText.ToString(cs.TextSpan)
-                    );
-                }
-            );
+            var classifiedTexts = ClassifiedSpans.SelectAsArray(cs =>
+            {
+                return new ClassifiedText(cs.ClassificationType, _sourceText.ToString(cs.TextSpan));
+            });
 
             var spanStartPosition = TextSpan.Start - ClassifiedSpans[0].TextSpan.Start;
             var highlightSpan = new TextSpan(spanStartPosition, TextSpan.Length);

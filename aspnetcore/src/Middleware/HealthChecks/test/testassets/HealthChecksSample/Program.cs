@@ -51,23 +51,19 @@ public class Program
         }
 
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseConfiguration(config)
-                        .ConfigureLogging(
-                            builder =>
-                            {
-                                builder.SetMinimumLevel(LogLevel.Trace);
-                                builder.AddConfiguration(config);
-                                builder.AddConsole();
-                            }
-                        )
-                        .UseKestrel()
-                        .UseStartup(startupType);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseConfiguration(config)
+                    .ConfigureLogging(builder =>
+                    {
+                        builder.SetMinimumLevel(LogLevel.Trace);
+                        builder.AddConfiguration(config);
+                        builder.AddConsole();
+                    })
+                    .UseKestrel()
+                    .UseStartup(startupType);
+            })
             .Build();
     }
 }

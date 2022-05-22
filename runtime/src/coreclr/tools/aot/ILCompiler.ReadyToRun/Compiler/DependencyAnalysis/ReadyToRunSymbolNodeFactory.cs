@@ -53,179 +53,155 @@ namespace ILCompiler.DependencyAnalysis
 
         private void CreateNodeCaches()
         {
-            _importStrings = new NodeCache<ModuleToken, ISymbolNode>(
-                key =>
-                {
-                    return new StringImport(_codegenNodeFactory.StringImports, key);
-                }
-            );
+            _importStrings = new NodeCache<ModuleToken, ISymbolNode>(key =>
+            {
+                return new StringImport(_codegenNodeFactory.StringImports, key);
+            });
 
             _r2rHelpers = new NodeCache<ReadyToRunHelperKey, ISymbolNode>(CreateReadyToRunHelper);
 
-            _instructionSetSupportFixups = new NodeCache<string, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        new ReadyToRunInstructionSetSupportSignature(key)
-                    );
-                }
-            );
+            _instructionSetSupportFixups = new NodeCache<string, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    new ReadyToRunInstructionSetSupportSignature(key)
+                );
+            });
 
-            _fieldAddressCache = new NodeCache<FieldDesc, ISymbolNode>(
-                key =>
-                {
-                    return new DelayLoadHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.HelperImports,
-                        ReadyToRunHelper.DelayLoad_Helper,
-                        new FieldFixupSignature(
-                            ReadyToRunFixupKind.FieldAddress,
-                            key,
-                            _codegenNodeFactory
-                        )
-                    );
-                }
-            );
+            _fieldAddressCache = new NodeCache<FieldDesc, ISymbolNode>(key =>
+            {
+                return new DelayLoadHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.HelperImports,
+                    ReadyToRunHelper.DelayLoad_Helper,
+                    new FieldFixupSignature(
+                        ReadyToRunFixupKind.FieldAddress,
+                        key,
+                        _codegenNodeFactory
+                    )
+                );
+            });
 
-            _fieldOffsetCache = new NodeCache<FieldDesc, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        new FieldFixupSignature(
-                            ReadyToRunFixupKind.FieldOffset,
-                            key,
-                            _codegenNodeFactory
-                        )
-                    );
-                }
-            );
+            _fieldOffsetCache = new NodeCache<FieldDesc, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    new FieldFixupSignature(
+                        ReadyToRunFixupKind.FieldOffset,
+                        key,
+                        _codegenNodeFactory
+                    )
+                );
+            });
 
-            _fieldBaseOffsetCache = new NodeCache<TypeDesc, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.TypeSignature(ReadyToRunFixupKind.FieldBaseOffset, key)
-                    );
-                }
-            );
+            _fieldBaseOffsetCache = new NodeCache<TypeDesc, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.TypeSignature(ReadyToRunFixupKind.FieldBaseOffset, key)
+                );
+            });
 
-            _checkFieldOffsetCache = new NodeCache<FieldDesc, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        new FieldFixupSignature(
-                            _verifyTypeAndFieldLayout
-                                ? ReadyToRunFixupKind.Verify_FieldOffset
-                                : ReadyToRunFixupKind.Check_FieldOffset,
-                            key,
-                            _codegenNodeFactory
-                        )
-                    );
-                }
-            );
+            _checkFieldOffsetCache = new NodeCache<FieldDesc, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    new FieldFixupSignature(
+                        _verifyTypeAndFieldLayout
+                            ? ReadyToRunFixupKind.Verify_FieldOffset
+                            : ReadyToRunFixupKind.Check_FieldOffset,
+                        key,
+                        _codegenNodeFactory
+                    )
+                );
+            });
 
-            _interfaceDispatchCells = new NodeCache<MethodAndCallSite, ISymbolNode>(
-                cellKey =>
-                {
-                    return new DelayLoadHelperMethodImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.DispatchImports,
-                        ReadyToRunHelper.DelayLoad_MethodCall,
+            _interfaceDispatchCells = new NodeCache<MethodAndCallSite, ISymbolNode>(cellKey =>
+            {
+                return new DelayLoadHelperMethodImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.DispatchImports,
+                    ReadyToRunHelper.DelayLoad_MethodCall,
+                    cellKey.Method,
+                    useVirtualCall: true,
+                    useInstantiatingStub: false,
+                    _codegenNodeFactory.MethodSignature(
+                        ReadyToRunFixupKind.VirtualEntry,
                         cellKey.Method,
-                        useVirtualCall: true,
-                        useInstantiatingStub: false,
-                        _codegenNodeFactory.MethodSignature(
-                            ReadyToRunFixupKind.VirtualEntry,
-                            cellKey.Method,
-                            isInstantiatingStub: false
-                        ),
-                        cellKey.CallingMethod
-                    );
-                }
-            );
+                        isInstantiatingStub: false
+                    ),
+                    cellKey.CallingMethod
+                );
+            });
 
-            _delegateCtors = new NodeCache<TypeAndMethod, ISymbolNode>(
-                ctorKey =>
-                {
-                    IMethodNode targetMethodNode = _codegenNodeFactory.MethodEntrypoint(
-                        ctorKey.Method,
-                        isInstantiatingStub: ctorKey.Method.Method.HasInstantiation,
-                        isPrecodeImportRequired: false,
-                        isJumpableImportRequired: false
-                    );
+            _delegateCtors = new NodeCache<TypeAndMethod, ISymbolNode>(ctorKey =>
+            {
+                IMethodNode targetMethodNode = _codegenNodeFactory.MethodEntrypoint(
+                    ctorKey.Method,
+                    isInstantiatingStub: ctorKey.Method.Method.HasInstantiation,
+                    isPrecodeImportRequired: false,
+                    isJumpableImportRequired: false
+                );
 
-                    return new DelayLoadHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.HelperImports,
-                        ReadyToRunHelper.DelayLoad_Helper_ObjObj,
-                        new DelegateCtorSignature(ctorKey.Type, targetMethodNode, ctorKey.Method)
-                    );
-                }
-            );
+                return new DelayLoadHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.HelperImports,
+                    ReadyToRunHelper.DelayLoad_Helper_ObjObj,
+                    new DelegateCtorSignature(ctorKey.Type, targetMethodNode, ctorKey.Method)
+                );
+            });
 
-            _checkTypeLayoutCache = new NodeCache<TypeDesc, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.TypeSignature(
-                            _verifyTypeAndFieldLayout
-                                ? ReadyToRunFixupKind.Verify_TypeLayout
-                                : ReadyToRunFixupKind.Check_TypeLayout,
-                            key
-                        )
-                    );
-                }
-            );
+            _checkTypeLayoutCache = new NodeCache<TypeDesc, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.TypeSignature(
+                        _verifyTypeAndFieldLayout
+                            ? ReadyToRunFixupKind.Verify_TypeLayout
+                            : ReadyToRunFixupKind.Check_TypeLayout,
+                        key
+                    )
+                );
+            });
 
             _virtualFunctionOverrideCache = new NodeCache<
                 VirtualResolutionFixupSignature,
                 ISymbolNode
-            >(
-                key =>
-                {
-                    return new PrecodeHelperImport(_codegenNodeFactory, key);
-                }
-            );
+            >(key =>
+            {
+                return new PrecodeHelperImport(_codegenNodeFactory, key);
+            });
 
-            _genericLookupHelpers = new NodeCache<GenericLookupKey, ISymbolNode>(
-                key =>
-                {
-                    return new DelayLoadHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.HelperImports,
-                        ReadyToRunHelper.DelayLoad_Helper,
-                        new GenericLookupSignature(
-                            key.LookupKind,
-                            key.FixupKind,
-                            key.TypeArgument,
-                            key.MethodArgument,
-                            key.FieldArgument,
-                            key.MethodContext
-                        )
-                    );
-                }
-            );
+            _genericLookupHelpers = new NodeCache<GenericLookupKey, ISymbolNode>(key =>
+            {
+                return new DelayLoadHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.HelperImports,
+                    ReadyToRunHelper.DelayLoad_Helper,
+                    new GenericLookupSignature(
+                        key.LookupKind,
+                        key.FixupKind,
+                        key.TypeArgument,
+                        key.MethodArgument,
+                        key.FieldArgument,
+                        key.MethodContext
+                    )
+                );
+            });
 
-            _pInvokeTargetNodes = new NodeCache<PInvokeTargetKey, ISymbolNode>(
-                key =>
-                {
-                    return new PrecodeHelperImport(
-                        _codegenNodeFactory,
-                        _codegenNodeFactory.MethodSignature(
-                            key.IsIndirect
-                                ? ReadyToRunFixupKind.IndirectPInvokeTarget
-                                : ReadyToRunFixupKind.PInvokeTarget,
-                            key.MethodWithToken,
-                            isInstantiatingStub: false
-                        )
-                    );
-                }
-            );
+            _pInvokeTargetNodes = new NodeCache<PInvokeTargetKey, ISymbolNode>(key =>
+            {
+                return new PrecodeHelperImport(
+                    _codegenNodeFactory,
+                    _codegenNodeFactory.MethodSignature(
+                        key.IsIndirect
+                            ? ReadyToRunFixupKind.IndirectPInvokeTarget
+                            : ReadyToRunFixupKind.PInvokeTarget,
+                        key.MethodWithToken,
+                        isInstantiatingStub: false
+                    )
+                );
+            });
         }
 
         private NodeCache<ModuleToken, ISymbolNode> _importStrings;

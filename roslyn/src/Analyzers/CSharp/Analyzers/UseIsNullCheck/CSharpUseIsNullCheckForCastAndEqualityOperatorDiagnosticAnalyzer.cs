@@ -37,24 +37,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (
+                    ((CSharpCompilation)context.Compilation).LanguageVersion
+                    < LanguageVersion.CSharp7
+                )
                 {
-                    if (
-                        ((CSharpCompilation)context.Compilation).LanguageVersion
-                        < LanguageVersion.CSharp7
-                    )
-                    {
-                        return;
-                    }
-
-                    context.RegisterSyntaxNodeAction(
-                        n => AnalyzeSyntax(n),
-                        SyntaxKind.EqualsExpression,
-                        SyntaxKind.NotEqualsExpression
-                    );
+                    return;
                 }
-            );
+
+                context.RegisterSyntaxNodeAction(
+                    n => AnalyzeSyntax(n),
+                    SyntaxKind.EqualsExpression,
+                    SyntaxKind.NotEqualsExpression
+                );
+            });
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {

@@ -77,13 +77,11 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>();
-                    cfg.CreateProjection<Item, ItemModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>();
+                cfg.CreateProjection<Item, ItemModel>();
+            });
 
         [Fact]
         public void Can_map_to_ienumerable()

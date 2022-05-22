@@ -19,18 +19,14 @@ public class WebHostBuilderKestrelExtensionsTests
         // Arrange
         var hostBuilder = new WebHostBuilder().UseKestrel().Configure(app => { });
 
-        hostBuilder.ConfigureServices(
-            services =>
+        hostBuilder.ConfigureServices(services =>
+        {
+            services.Configure<KestrelServerOptions>(options =>
             {
-                services.Configure<KestrelServerOptions>(
-                    options =>
-                    {
-                        // Assert
-                        Assert.NotNull(options.ApplicationServices);
-                    }
-                );
-            }
-        );
+                // Assert
+                Assert.NotNull(options.ApplicationServices);
+            });
+        });
 
         // Act
         hostBuilder.Build();
@@ -41,13 +37,11 @@ public class WebHostBuilderKestrelExtensionsTests
     {
         // Arrange
         var hostBuilder = new WebHostBuilder()
-            .UseKestrel(
-                options =>
-                {
-                    // Assert
-                    Assert.NotNull(options.ApplicationServices);
-                }
-            )
+            .UseKestrel(options =>
+            {
+                // Assert
+                Assert.NotNull(options.ApplicationServices);
+            })
             .Configure(app => { });
 
         // Act

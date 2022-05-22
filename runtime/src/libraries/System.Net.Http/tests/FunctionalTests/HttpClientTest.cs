@@ -194,12 +194,10 @@ namespace System.Net.Http.Functional.Tests
             bool exceptionExpected
         )
         {
-            var content = new CustomContent(
-                async s =>
-                {
-                    await s.WriteAsync(TestHelper.GenerateRandomContent(contentLength));
-                }
-            );
+            var content = new CustomContent(async s =>
+            {
+                await s.WriteAsync(TestHelper.GenerateRandomContent(contentLength));
+            });
 
             var handler = new CustomResponseHandler(
                 (r, c) => Task.FromResult(new HttpResponseMessage() { Content = content })
@@ -393,12 +391,10 @@ namespace System.Net.Http.Functional.Tests
                             Task.FromResult(
                                 new HttpResponseMessage()
                                 {
-                                    Content = new CustomContent(
-                                        stream =>
-                                        {
-                                            throw e;
-                                        }
-                                    )
+                                    Content = new CustomContent(stream =>
+                                    {
+                                        throw e;
+                                    })
                                 }
                             )
                     )
@@ -664,17 +660,15 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                            }
-                            catch { }
-                            cts.Cancel();
+                            await connection.ReadRequestHeaderAsync();
                         }
-                    );
+                        catch { }
+                        cts.Cancel();
+                    });
                 }
             );
         }
@@ -739,37 +733,35 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    Task serverHandling = server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestDataAsync(readBody: false);
-                            await connection.SendResponseAsync(
-                                HttpStatusCode.OK,
-                                headers: new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData("Content-Length", "5")
-                                }
-                            );
-                            await connection.SendResponseBodyAsync("he");
-
-                            switch (cancelMode)
+                    Task serverHandling = server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync(readBody: false);
+                        await connection.SendResponseAsync(
+                            HttpStatusCode.OK,
+                            headers: new HttpHeaderData[]
                             {
-                                case 0:
-                                    await Task.Delay(100);
-                                    cts.Cancel();
-                                    break;
-
-                                case 1:
-                                    await Task.Delay(100);
-                                    httpClient.CancelPendingRequests();
-                                    break;
-
-                                // case 2: timeout fires on its own
+                                new HttpHeaderData("Content-Length", "5")
                             }
+                        );
+                        await connection.SendResponseBodyAsync("he");
 
-                            await tcs.Task;
+                        switch (cancelMode)
+                        {
+                            case 0:
+                                await Task.Delay(100);
+                                cts.Cancel();
+                                break;
+
+                            case 1:
+                                await Task.Delay(100);
+                                httpClient.CancelPendingRequests();
+                                break;
+
+                            // case 2: timeout fires on its own
                         }
-                    );
+
+                        await tcs.Task;
+                    });
 
                     // The client may have completed before even sending a request when testing HttpClient.Timeout.
                     await Task.WhenAny(serverHandling, tcs.Task);
@@ -851,17 +843,15 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                            }
-                            catch { }
-                            cts.Cancel();
+                            await connection.ReadRequestHeaderAsync();
                         }
-                    );
+                        catch { }
+                        cts.Cancel();
+                    });
                 }
             );
         }
@@ -937,17 +927,15 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                            }
-                            catch { }
-                            cts.Cancel();
+                            await connection.ReadRequestHeaderAsync();
                         }
-                    );
+                        catch { }
+                        cts.Cancel();
+                    });
                 }
             );
         }
@@ -1278,15 +1266,13 @@ namespace System.Net.Http.Functional.Tests
                         return Task.FromResult(
                             new HttpResponseMessage()
                             {
-                                Content = new CustomContent(
-                                    stream =>
-                                    {
-                                        Assert.Equal(
-                                            currentThreadId,
-                                            Environment.CurrentManagedThreadId
-                                        );
-                                    }
-                                )
+                                Content = new CustomContent(stream =>
+                                {
+                                    Assert.Equal(
+                                        currentThreadId,
+                                        Environment.CurrentManagedThreadId
+                                    );
+                                })
                             }
                         );
                     }
@@ -1297,12 +1283,10 @@ namespace System.Net.Http.Functional.Tests
                 HttpResponseMessage response = client.Send(
                     new HttpRequestMessage(HttpMethod.Get, CreateFakeUri())
                     {
-                        Content = new CustomContent(
-                            stream =>
-                            {
-                                Assert.Equal(currentThreadId, Environment.CurrentManagedThreadId);
-                            }
-                        )
+                        Content = new CustomContent(stream =>
+                        {
+                            Assert.Equal(currentThreadId, Environment.CurrentManagedThreadId);
+                        })
                     },
                     completionOption
                 );
@@ -1337,16 +1321,14 @@ namespace System.Net.Http.Functional.Tests
                         HttpResponseMessage response = httpClient.Send(
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
-                                Content = new CustomContent(
-                                    stream =>
-                                    {
-                                        Assert.Equal(
-                                            currentThreadId,
-                                            Environment.CurrentManagedThreadId
-                                        );
-                                        stream.Write(Encoding.UTF8.GetBytes(content));
-                                    }
-                                )
+                                Content = new CustomContent(stream =>
+                                {
+                                    Assert.Equal(
+                                        currentThreadId,
+                                        Environment.CurrentManagedThreadId
+                                    );
+                                    stream.Write(Encoding.UTF8.GetBytes(content));
+                                })
                             },
                             completionOption
                         );
@@ -1365,17 +1347,13 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: content
-                            );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAndSendResponseAsync(content: content);
 
-                            // To keep the connection open until the response is fully read.
-                            mres.Wait();
-                        }
-                    );
+                        // To keep the connection open until the response is fully read.
+                        mres.Wait();
+                    });
                 }
             );
         }
@@ -1399,17 +1377,15 @@ namespace System.Net.Http.Functional.Tests
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
                                 Content = new CustomContent(
-                                    new Action<Stream>(
-                                        stream =>
+                                    new Action<Stream>(stream =>
+                                    {
+                                        for (int i = 0; i < 100; ++i)
                                         {
-                                            for (int i = 0; i < 100; ++i)
-                                            {
-                                                stream.Write(new byte[] { 0xff });
-                                                stream.Flush();
-                                                Thread.Sleep(TimeSpan.FromSeconds(0.1));
-                                            }
+                                            stream.Write(new byte[] { 0xff });
+                                            stream.Flush();
+                                            Thread.Sleep(TimeSpan.FromSeconds(0.1));
                                         }
-                                    )
+                                    })
                                 )
                             },
                             cts.Token
@@ -1424,18 +1400,16 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                                cts.Cancel();
-                                await connection.ReadRequestBodyAsync();
-                            }
-                            catch { }
+                            await connection.ReadRequestHeaderAsync();
+                            cts.Cancel();
+                            await connection.ReadRequestBodyAsync();
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -1457,18 +1431,16 @@ namespace System.Net.Http.Functional.Tests
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
                                 Content = new CustomContent(
-                                    new Action<Stream>(
-                                        stream =>
+                                    new Action<Stream>(stream =>
+                                    {
+                                        Thread.Sleep(TimeSpan.FromSeconds(0.5));
+                                        for (int i = 0; i < 100; ++i)
                                         {
-                                            Thread.Sleep(TimeSpan.FromSeconds(0.5));
-                                            for (int i = 0; i < 100; ++i)
-                                            {
-                                                stream.Write(new byte[] { 0xff });
-                                                stream.Flush();
-                                                Thread.Sleep(TimeSpan.FromSeconds(0.1));
-                                            }
+                                            stream.Write(new byte[] { 0xff });
+                                            stream.Flush();
+                                            Thread.Sleep(TimeSpan.FromSeconds(0.1));
                                         }
-                                    )
+                                    })
                                 )
                             }
                         );
@@ -1481,17 +1453,15 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestHeaderAsync();
-                                await connection.ReadRequestBodyAsync();
-                            }
-                            catch { }
+                            await connection.ReadRequestHeaderAsync();
+                            await connection.ReadRequestBodyAsync();
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -1516,12 +1486,10 @@ namespace System.Net.Http.Functional.Tests
                         HttpResponseMessage response = httpClient.Send(
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
-                                Content = new CustomContent(
-                                    stream =>
-                                    {
-                                        stream.Write(Encoding.UTF8.GetBytes(content));
-                                    }
-                                )
+                                Content = new CustomContent(stream =>
+                                {
+                                    stream.Write(Encoding.UTF8.GetBytes(content));
+                                })
                             },
                             cts.Token
                         );
@@ -1535,31 +1503,29 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendResponseAsync(
-                                    headers: new List<HttpHeaderData>()
-                                    {
-                                        new HttpHeaderData(
-                                            "Content-Length",
-                                            (content.Length * 100).ToString()
-                                        )
-                                    }
-                                );
-                                cts.Cancel();
-                                for (int i = 0; i < 100; ++i)
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                headers: new List<HttpHeaderData>()
                                 {
-                                    await connection.WriteStringAsync(content);
-                                    await Task.Delay(TimeSpan.FromSeconds(0.1));
+                                    new HttpHeaderData(
+                                        "Content-Length",
+                                        (content.Length * 100).ToString()
+                                    )
                                 }
+                            );
+                            cts.Cancel();
+                            for (int i = 0; i < 100; ++i)
+                            {
+                                await connection.WriteStringAsync(content);
+                                await Task.Delay(TimeSpan.FromSeconds(0.1));
                             }
-                            catch { }
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -1576,23 +1542,21 @@ namespace System.Net.Http.Functional.Tests
 
             // Ignore all failures from the server. This includes being disposed of before ever accepting a connection,
             // which is possible if the client times out so quickly that it hasn't initiated a connection yet.
-            _ = server.AcceptConnectionAsync(
-                async connection =>
-                {
-                    await connection.ReadRequestDataAsync();
-                    await connection.SendResponseAsync(
-                        headers: new[]
-                        {
-                            new HttpHeaderData("Content-Length", (Content.Length * 100).ToString())
-                        }
-                    );
-                    for (int i = 0; i < 100; ++i)
+            _ = server.AcceptConnectionAsync(async connection =>
+            {
+                await connection.ReadRequestDataAsync();
+                await connection.SendResponseAsync(
+                    headers: new[]
                     {
-                        await connection.WriteStringAsync(Content);
-                        await Task.Delay(TimeSpan.FromSeconds(0.1));
+                        new HttpHeaderData("Content-Length", (Content.Length * 100).ToString())
                     }
+                );
+                for (int i = 0; i < 100; ++i)
+                {
+                    await connection.WriteStringAsync(Content);
+                    await Task.Delay(TimeSpan.FromSeconds(0.1));
                 }
-            );
+            });
 
             TaskCanceledException ex = Assert.Throws<TaskCanceledException>(() =>
             {

@@ -27,14 +27,12 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             protected override MapperConfiguration Configuration =>
-                new MapperConfiguration(
-                    c =>
-                    {
-                        var mappers = c.Internal().DefaultMemberConfig.MemberMappers;
-                        mappers.Remove(mappers.OfType<NameSplitMember>().Single());
-                        c.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(c =>
+                {
+                    var mappers = c.Internal().DefaultMemberConfig.MemberMappers;
+                    mappers.Remove(mappers.OfType<NameSplitMember>().Single());
+                    c.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_not_validate() =>
@@ -61,14 +59,12 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             protected override MapperConfiguration Configuration =>
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.DestinationMemberNamingConvention =
-                            new AutoMapper.ExactMatchNamingConvention();
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.DestinationMemberNamingConvention =
+                        new AutoMapper.ExactMatchNamingConvention();
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             [Fact]
             public void Should_not_use_pascal_naming_convention() =>
@@ -106,29 +102,27 @@ namespace AutoMapper.UnitTests.Bug
             private Neda _neda;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProfile(
-                            "MyMapperProfile",
-                            prf =>
-                            {
-                                prf.SourceMemberNamingConvention =
-                                    new LowerUnderscoreNamingConvention();
-                                prf.CreateMap<Neda, Dario>();
-                            }
-                        );
-                        cfg.CreateProfile(
-                            "MyMapperProfile2",
-                            prf =>
-                            {
-                                prf.DestinationMemberNamingConvention =
-                                    new LowerUnderscoreNamingConvention();
-                                prf.CreateMap<Dario, Neda>();
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProfile(
+                        "MyMapperProfile",
+                        prf =>
+                        {
+                            prf.SourceMemberNamingConvention =
+                                new LowerUnderscoreNamingConvention();
+                            prf.CreateMap<Neda, Dario>();
+                        }
+                    );
+                    cfg.CreateProfile(
+                        "MyMapperProfile2",
+                        prf =>
+                        {
+                            prf.DestinationMemberNamingConvention =
+                                new LowerUnderscoreNamingConvention();
+                            prf.CreateMap<Dario, Neda>();
+                        }
+                    );
+                });
 
             protected override void Because_of()
             {

@@ -227,18 +227,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<CustomUserInt>(
-                b =>
-                {
-                    b.HasMany(e => e.Claims).WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-                    b.HasMany(e => e.Logins).WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-                    b.HasMany(e => e.Tokens).WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-                    b.HasMany(e => e.UserRoles)
-                        .WithOne()
-                        .HasForeignKey(ur => ur.UserId)
-                        .IsRequired();
-                }
-            );
+            modelBuilder.Entity<CustomUserInt>(b =>
+            {
+                b.HasMany(e => e.Claims).WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+                b.HasMany(e => e.Logins).WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+                b.HasMany(e => e.Tokens).WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+                b.HasMany(e => e.UserRoles).WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+            });
         }
     }
 

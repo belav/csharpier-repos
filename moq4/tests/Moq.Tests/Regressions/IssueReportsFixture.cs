@@ -3337,25 +3337,21 @@ namespace Moq.Tests.Regressions
             [Fact]
             public void Setup_ToString_before_Name()
             {
-                this.TestImpl(
-                    contentMock =>
-                    {
-                        contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
-                        contentMock.Setup(c => c.Name);
-                    }
-                );
+                this.TestImpl(contentMock =>
+                {
+                    contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
+                    contentMock.Setup(c => c.Name);
+                });
             }
 
             [Fact]
             public void Setup_ToString_after_Name()
             {
-                this.TestImpl(
-                    contentMock =>
-                    {
-                        contentMock.Setup(c => c.Name);
-                        contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
-                    }
-                );
+                this.TestImpl(contentMock =>
+                {
+                    contentMock.Setup(c => c.Name);
+                    contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
+                });
             }
 
             private void TestImpl(Action<Mock<IContent>> setup)

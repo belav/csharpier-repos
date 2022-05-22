@@ -89,13 +89,11 @@ builder.Services
 #endif
 #if (OrganizationalAuth)
 
-builder.Services.AddControllersWithViews(
-    options =>
-    {
-        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        options.Filters.Add(new AuthorizeFilter(policy));
-    }
-);
+builder.Services.AddControllersWithViews(options =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+});
 #else
 builder.Services.AddControllersWithViews();
 #endif
@@ -108,13 +106,11 @@ builder.Services
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-builder.Services.AddAuthorization(
-    options =>
-    {
-        // By default, all incoming requests will be authorized according to the default policy.
-        options.FallbackPolicy = options.DefaultPolicy;
-    }
-);
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
 builder.Services.AddRazorPages();
 #endif
 

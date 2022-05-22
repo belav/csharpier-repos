@@ -34,16 +34,14 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                c =>
+            context.RegisterCompilationStartAction(c =>
+            {
+                // var hashCodeType = c.Compilation.GetTypeByMetadataName("System.HashCode");
+                if (Analyzer.TryGetAnalyzer(c.Compilation, out var analyzer))
                 {
-                    // var hashCodeType = c.Compilation.GetTypeByMetadataName("System.HashCode");
-                    if (Analyzer.TryGetAnalyzer(c.Compilation, out var analyzer))
-                    {
-                        c.RegisterOperationBlockAction(ctx => AnalyzeOperationBlock(analyzer, ctx));
-                    }
+                    c.RegisterOperationBlockAction(ctx => AnalyzeOperationBlock(analyzer, ctx));
                 }
-            );
+            });
         }
 
         private void AnalyzeOperationBlock(Analyzer analyzer, OperationBlockAnalysisContext context)

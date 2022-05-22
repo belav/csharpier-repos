@@ -311,33 +311,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<PrivateUnmappedBaseSuper>(
-                    b =>
-                    {
-                        // Because private properties on un-mapped base types are not found by convention
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!
-                        );
-                        b.Metadata.AddServiceProperty(
-                            typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
-                        );
-                    }
-                );
+                modelBuilder.Entity<PrivateUnmappedBaseSuper>(b =>
+                {
+                    // Because private properties on un-mapped base types are not found by convention
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!
+                    );
+                    b.Metadata.AddServiceProperty(
+                        typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
+                    );
+                });
             }
         }
 

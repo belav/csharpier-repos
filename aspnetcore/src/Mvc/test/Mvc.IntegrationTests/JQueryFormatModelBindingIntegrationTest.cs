@@ -68,17 +68,15 @@ public class JQueryFormatModelBindingIntegrationTest
             ParameterType = typeof(Customer)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(
-                    Encoding.UTF8.GetBytes(
-                        "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
-                    )
-                );
-                request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(
+                Encoding.UTF8.GetBytes(
+                    "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
+                )
+            );
+            request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+        });
 
         var modelState = testContext.ModelState;
 

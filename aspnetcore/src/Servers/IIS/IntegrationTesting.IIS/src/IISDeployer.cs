@@ -266,60 +266,56 @@ public class IISDeployer : IISDeployerBase
             serviceController.WaitForStatus(ServiceControllerStatus.Running, _timeout);
         }
 
-        RetryServerManagerAction(
-            serverManager =>
+        RetryServerManagerAction(serverManager =>
+        {
+            var site = serverManager.Sites.Single();
+            var appPool = serverManager.ApplicationPools.Single();
+
+            var actualPath = site.Applications
+                .FirstOrDefault()
+                .VirtualDirectories.Single()
+                .PhysicalPath;
+            if (actualPath != contentRoot)
             {
-                var site = serverManager.Sites.Single();
-                var appPool = serverManager.ApplicationPools.Single();
-
-                var actualPath = site.Applications
-                    .FirstOrDefault()
-                    .VirtualDirectories.Single()
-                    .PhysicalPath;
-                if (actualPath != contentRoot)
-                {
-                    throw new InvalidOperationException(
-                        $"Wrong physical path. Expected: {contentRoot} Actual: {actualPath}"
-                    );
-                }
-
-                if (appPool.State != ObjectState.Started && appPool.State != ObjectState.Starting)
-                {
-                    var state = appPool.Start();
-                    Logger.LogInformation($"Starting pool, state: {state.ToString()}");
-                }
-
-                if (site.State != ObjectState.Started && site.State != ObjectState.Starting)
-                {
-                    var state = site.Start();
-                    Logger.LogInformation($"Starting site, state: {state.ToString()}");
-                }
-
-                if (site.State != ObjectState.Started)
-                {
-                    throw new InvalidOperationException("Site not started yet");
-                }
-
-                var workerProcess = appPool.WorkerProcesses.SingleOrDefault();
-                if (workerProcess == null)
-                {
-                    throw new InvalidOperationException(
-                        "Site is started but no worked process found"
-                    );
-                }
-
-                HostProcess = Process.GetProcessById(workerProcess.ProcessId);
-
-                // Ensure w3wp.exe is killed if test process termination is non-graceful.
-                // Prevents locked files when stop debugging unit test.
-                ProcessTracker.Add(HostProcess);
-
-                // cache the process start time for verifying log file name.
-                var _ = HostProcess.StartTime;
-
-                Logger.LogInformation("Site has started.");
+                throw new InvalidOperationException(
+                    $"Wrong physical path. Expected: {contentRoot} Actual: {actualPath}"
+                );
             }
-        );
+
+            if (appPool.State != ObjectState.Started && appPool.State != ObjectState.Starting)
+            {
+                var state = appPool.Start();
+                Logger.LogInformation($"Starting pool, state: {state.ToString()}");
+            }
+
+            if (site.State != ObjectState.Started && site.State != ObjectState.Starting)
+            {
+                var state = site.Start();
+                Logger.LogInformation($"Starting site, state: {state.ToString()}");
+            }
+
+            if (site.State != ObjectState.Started)
+            {
+                throw new InvalidOperationException("Site not started yet");
+            }
+
+            var workerProcess = appPool.WorkerProcesses.SingleOrDefault();
+            if (workerProcess == null)
+            {
+                throw new InvalidOperationException("Site is started but no worked process found");
+            }
+
+            HostProcess = Process.GetProcessById(workerProcess.ProcessId);
+
+            // Ensure w3wp.exe is killed if test process termination is non-graceful.
+            // Prevents locked files when stop debugging unit test.
+            ProcessTracker.Add(HostProcess);
+
+            // cache the process start time for verifying log file name.
+            var _ = HostProcess.StartTime;
+
+            Logger.LogInformation("Site has started.");
+        });
     }
 
     private void AddTemporaryAppHostConfig(string contentRoot, int port)
@@ -335,37 +331,33 @@ public class IISDeployer : IISDeployerBase
 
         config.Save(appHostConfigPath);
 
-        RetryServerManagerAction(
-            serverManager =>
+        RetryServerManagerAction(serverManager =>
+        {
+            var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
+            var redirectionSection = redirectionConfiguration.GetSection(
+                "configurationRedirection"
+            );
+
+            if ((bool)redirectionSection.Attributes["enabled"].Value)
             {
-                var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-                var redirectionSection = redirectionConfiguration.GetSection(
-                    "configurationRedirection"
-                );
-
-                if ((bool)redirectionSection.Attributes["enabled"].Value)
-                {
-                    // redirection wasn't removed before starting another site.
-                    redirectionSection.Attributes["enabled"].Value = false;
-                    var redirectedFilePath = (string)redirectionSection.Attributes["path"].Value;
-                    Logger.LogWarning($"Name of redirected file: {redirectedFilePath}");
-
-                    serverManager.CommitChanges();
-
-                    throw new InvalidOperationException(
-                        "Redirection is enabled between test runs."
-                    );
-                }
-
-                redirectionSection.Attributes["path"].Value = _configPath;
-
-                redirectionSection.Attributes["enabled"].Value = true;
-
-                Logger.LogInformation("applicationhost.config path {configPath}", _configPath);
+                // redirection wasn't removed before starting another site.
+                redirectionSection.Attributes["enabled"].Value = false;
+                var redirectedFilePath = (string)redirectionSection.Attributes["path"].Value;
+                Logger.LogWarning($"Name of redirected file: {redirectedFilePath}");
 
                 serverManager.CommitChanges();
+
+                throw new InvalidOperationException("Redirection is enabled between test runs.");
             }
-        );
+
+            redirectionSection.Attributes["path"].Value = _configPath;
+
+            redirectionSection.Attributes["enabled"].Value = true;
+
+            Logger.LogInformation("applicationhost.config path {configPath}", _configPath);
+
+            serverManager.CommitChanges();
+        });
     }
 
     private void ConfigureAppHostConfig(XElement config, string contentRoot, int port)
@@ -407,98 +399,89 @@ public class IISDeployer : IISDeployerBase
     {
         try
         {
-            RetryServerManagerAction(
-                serverManager =>
+            RetryServerManagerAction(serverManager =>
+            {
+                var site = serverManager.Sites.SingleOrDefault();
+                if (site == null)
                 {
-                    var site = serverManager.Sites.SingleOrDefault();
-                    if (site == null)
-                    {
-                        throw new InvalidOperationException("Site not found");
-                    }
+                    throw new InvalidOperationException("Site not found");
+                }
 
-                    if (site.State != ObjectState.Stopped && site.State != ObjectState.Stopping)
-                    {
-                        var state = site.Stop();
-                        Logger.LogInformation($"Stopping site, state: {state.ToString()}");
-                    }
+                if (site.State != ObjectState.Stopped && site.State != ObjectState.Stopping)
+                {
+                    var state = site.Stop();
+                    Logger.LogInformation($"Stopping site, state: {state.ToString()}");
+                }
 
-                    var appPool = serverManager.ApplicationPools.SingleOrDefault();
-                    if (appPool == null)
-                    {
-                        throw new InvalidOperationException("Application pool not found");
-                    }
+                var appPool = serverManager.ApplicationPools.SingleOrDefault();
+                if (appPool == null)
+                {
+                    throw new InvalidOperationException("Application pool not found");
+                }
 
+                if (appPool.State != ObjectState.Stopped && appPool.State != ObjectState.Stopping)
+                {
+                    var state = appPool.Stop();
+                    Logger.LogInformation($"Stopping pool, state: {state.ToString()}");
+                }
+
+                if (site.State != ObjectState.Stopped)
+                {
+                    throw new InvalidOperationException("Site not stopped yet");
+                }
+
+                try
+                {
                     if (
-                        appPool.State != ObjectState.Stopped
-                        && appPool.State != ObjectState.Stopping
+                        appPool.WorkerProcesses != null
+                        && appPool.WorkerProcesses.Any(
+                            wp =>
+                                wp.State == WorkerProcessState.Running
+                                || wp.State == WorkerProcessState.Stopping
+                        )
                     )
                     {
-                        var state = appPool.Stop();
-                        Logger.LogInformation($"Stopping pool, state: {state.ToString()}");
+                        throw new InvalidOperationException("WorkerProcess not stopped yet");
                     }
-
-                    if (site.State != ObjectState.Stopped)
-                    {
-                        throw new InvalidOperationException("Site not stopped yet");
-                    }
-
-                    try
-                    {
-                        if (
-                            appPool.WorkerProcesses != null
-                            && appPool.WorkerProcesses.Any(
-                                wp =>
-                                    wp.State == WorkerProcessState.Running
-                                    || wp.State == WorkerProcessState.Stopping
-                            )
-                        )
-                        {
-                            throw new InvalidOperationException("WorkerProcess not stopped yet");
-                        }
-                    }
-                    // If WAS was stopped for some reason appPool.WorkerProcesses
-                    // would throw UnauthorizedAccessException.
-                    // check if it's the case and continue shutting down deployer
-                    catch (UnauthorizedAccessException)
-                    {
-                        var serviceController = new ServiceController("was");
-                        if (serviceController.Status != ServiceControllerStatus.Stopped)
-                        {
-                            throw;
-                        }
-                    }
-
-                    if (!HostProcess.HasExited)
-                    {
-                        throw new InvalidOperationException(
-                            "Site is stopped but host process is not"
-                        );
-                    }
-
-                    Logger.LogInformation($"Site has stopped successfully.");
                 }
-            );
+                // If WAS was stopped for some reason appPool.WorkerProcesses
+                // would throw UnauthorizedAccessException.
+                // check if it's the case and continue shutting down deployer
+                catch (UnauthorizedAccessException)
+                {
+                    var serviceController = new ServiceController("was");
+                    if (serviceController.Status != ServiceControllerStatus.Stopped)
+                    {
+                        throw;
+                    }
+                }
+
+                if (!HostProcess.HasExited)
+                {
+                    throw new InvalidOperationException("Site is stopped but host process is not");
+                }
+
+                Logger.LogInformation($"Site has stopped successfully.");
+            });
         }
         finally
         {
             // Undo redirection.config changes unconditionally
-            RetryServerManagerAction(
-                serverManager =>
+            RetryServerManagerAction(serverManager =>
+            {
+                var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
+                var redirectionSection = redirectionConfiguration.GetSection(
+                    "configurationRedirection"
+                );
+
+                redirectionSection.Attributes["enabled"].Value = false;
+
+                serverManager.CommitChanges();
+                if (Directory.Exists(_configPath))
                 {
-                    var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-                    var redirectionSection = redirectionConfiguration.GetSection(
-                        "configurationRedirection"
-                    );
-
-                    redirectionSection.Attributes["enabled"].Value = false;
-
-                    serverManager.CommitChanges();
-                    if (Directory.Exists(_configPath))
-                    {
-                        Directory.Delete(_configPath, true);
-                    }
+                    Directory.Delete(_configPath, true);
                 }
-            );
+            });
         }
     }
 

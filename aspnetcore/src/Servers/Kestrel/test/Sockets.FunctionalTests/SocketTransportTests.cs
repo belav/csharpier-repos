@@ -26,37 +26,26 @@ public class SocketTransportTests : LoggedTestBase
     {
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    context =>
-                                    {
-                                        var socket = context.Features
-                                            .Get<IConnectionSocketFeature>()
-                                            .Socket;
-                                        Assert.NotNull(socket);
-                                        Assert.Equal(ProtocolType.Tcp, socket.ProtocolType);
-                                        var ip = (IPEndPoint)socket.RemoteEndPoint;
-                                        Assert.Equal(
-                                            ip.Address,
-                                            context.Connection.RemoteIpAddress
-                                        );
-                                        Assert.Equal(ip.Port, context.Connection.RemotePort);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(app =>
+                    {
+                        app.Run(context =>
+                        {
+                            var socket = context.Features.Get<IConnectionSocketFeature>().Socket;
+                            Assert.NotNull(socket);
+                            Assert.Equal(ProtocolType.Tcp, socket.ProtocolType);
+                            var ip = (IPEndPoint)socket.RemoteEndPoint;
+                            Assert.Equal(ip.Address, context.Connection.RemoteIpAddress);
+                            Assert.Equal(ip.Port, context.Connection.RemotePort);
 
-                                        return Task.CompletedTask;
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                            return Task.CompletedTask;
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();

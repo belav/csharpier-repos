@@ -96,31 +96,25 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
                     .SelectMany(a => _analyzerService.AnalyzerInfoCache.GetDiagnosticDescriptors(a))
                     .GroupBy(d => d.Id)
                     .OrderBy(g => g.Key, StringComparer.CurrentCulture)
-                    .Select(
-                        g =>
-                        {
-                            var selectedDiagnostic = g.First();
-                            var isEditorconfig = selectedDiagnostic.IsDefinedInEditorConfig(
-                                editorConfigOptions
-                            );
-                            var settingLocation = new SettingLocation(
-                                isEditorconfig
-                                    ? LocationKind.EditorConfig
-                                    : LocationKind.VisualStudio,
-                                FileName
-                            );
-                            var severity = selectedDiagnostic.GetEffectiveSeverity(
-                                editorConfigOptions
-                            );
-                            return new AnalyzerSetting(
-                                selectedDiagnostic,
-                                severity,
-                                SettingsUpdater,
-                                language,
-                                settingLocation
-                            );
-                        }
-                    );
+                    .Select(g =>
+                    {
+                        var selectedDiagnostic = g.First();
+                        var isEditorconfig = selectedDiagnostic.IsDefinedInEditorConfig(
+                            editorConfigOptions
+                        );
+                        var settingLocation = new SettingLocation(
+                            isEditorconfig ? LocationKind.EditorConfig : LocationKind.VisualStudio,
+                            FileName
+                        );
+                        var severity = selectedDiagnostic.GetEffectiveSeverity(editorConfigOptions);
+                        return new AnalyzerSetting(
+                            selectedDiagnostic,
+                            severity,
+                            SettingsUpdater,
+                            language,
+                            settingLocation
+                        );
+                    });
             }
         }
 

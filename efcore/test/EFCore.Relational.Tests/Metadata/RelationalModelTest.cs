@@ -798,134 +798,124 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         )
         {
             var modelBuilder = CreateConventionModelBuilder();
-            modelBuilder.Entity<Customer>(
-                cb =>
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                if (mapToViews)
                 {
-                    if (mapToViews)
-                    {
-                        cb.ToView("CustomerView", "viewSchema");
-                    }
-
-                    if (mapToTables)
-                    {
-                        cb.ToTable("Customer");
-                    }
-
-                    cb.Property<string>("SpecialityAk");
+                    cb.ToView("CustomerView", "viewSchema");
                 }
-            );
 
-            modelBuilder.Entity<SpecialCustomer>(
-                cb =>
+                if (mapToTables)
                 {
-                    if (mapToViews && mapping == Mapping.TPT)
-                    {
-                        cb.ToView("SpecialCustomerView");
-                    }
-
-                    if (mapToTables && mapping == Mapping.TPT)
-                    {
-                        cb.ToTable("SpecialCustomer", "SpecialSchema");
-                    }
-
-                    cb.Property(s => s.Speciality).IsRequired();
-
-                    cb.HasOne(c => c.RelatedCustomer)
-                        .WithOne()
-                        .HasForeignKey<SpecialCustomer>(c => c.RelatedCustomerSpeciality)
-                        .HasPrincipalKey<SpecialCustomer>("SpecialityAk"); // TODO: Use the derived one, #2611
-
-                    cb.HasOne<SpecialCustomer>()
-                        .WithOne()
-                        .HasForeignKey<SpecialCustomer>("AnotherRelatedCustomerId");
-
-                    cb.OwnsOne(c => c.Details).Property(d => d.Address).IsRequired();
-                    cb.Navigation(c => c.Details).IsRequired();
+                    cb.ToTable("Customer");
                 }
-            );
 
-            modelBuilder.Entity<ExtraSpecialCustomer>(
-                cb =>
+                cb.Property<string>("SpecialityAk");
+            });
+
+            modelBuilder.Entity<SpecialCustomer>(cb =>
+            {
+                if (mapToViews && mapping == Mapping.TPT)
                 {
-                    if (mapToViews && mapping == Mapping.TPT)
-                    {
-                        cb.ToView("ExtraSpecialCustomerView");
-                    }
-
-                    if (mapToTables && mapping == Mapping.TPT)
-                    {
-                        cb.ToTable("ExtraSpecialCustomer", "ExtraSpecialSchema");
-                    }
+                    cb.ToView("SpecialCustomerView");
                 }
-            );
 
-            modelBuilder.Entity<Order>(
-                ob =>
+                if (mapToTables && mapping == Mapping.TPT)
                 {
-                    ob.Property(o => o.OrderDate).HasColumnName("OrderDate");
-                    ob.Property(o => o.AlternateId).HasColumnName("AlternateId");
-
-                    ob.HasAlternateKey(o => o.AlternateId).HasName("AK_AlternateId");
-                    ob.HasOne(o => o.DateDetails)
-                        .WithOne()
-                        .HasForeignKey<Order>(o => o.OrderDate)
-                        .HasPrincipalKey<DateDetails>(o => o.Date)
-                        .HasConstraintName("FK_DateDetails");
-
-                    // Note: the below is resetting the name of the anonymous index
-                    // created in HasForeignKey() above, not creating a new index.
-                    ob.HasIndex(o => o.OrderDate).HasDatabaseName("IX_OrderDate");
-
-                    ob.OwnsOne(
-                        o => o.Details,
-                        odb =>
-                        {
-                            odb.Property(od => od.OrderDate).HasColumnName("OrderDate");
-                            var alternateId = odb.Property(o => o.AlternateId)
-                                .HasColumnName("AlternateId")
-                                .Metadata;
-
-                            odb.OwnedEntityType.AddKey(new[] { alternateId });
-                            // Issue #20948
-                            //odb.HasAlternateKey(o => o.AlternateId);
-                            odb.HasOne(od => od.DateDetails)
-                                .WithOne()
-                                .HasForeignKey<OrderDetails>(o => o.OrderDate)
-                                .HasPrincipalKey<DateDetails>(o => o.Date);
-
-                            odb.OwnsOne(od => od.BillingAddress);
-                            odb.OwnsOne(od => od.ShippingAddress);
-                        }
-                    );
-
-                    if (mapToViews)
-                    {
-                        ob.ToView("OrderView", "viewSchema");
-                    }
-
-                    if (mapToTables)
-                    {
-                        ob.ToTable("Order");
-                    }
+                    cb.ToTable("SpecialCustomer", "SpecialSchema");
                 }
-            );
 
-            modelBuilder.Entity<DateDetails>(
-                db =>
+                cb.Property(s => s.Speciality).IsRequired();
+
+                cb.HasOne(c => c.RelatedCustomer)
+                    .WithOne()
+                    .HasForeignKey<SpecialCustomer>(c => c.RelatedCustomerSpeciality)
+                    .HasPrincipalKey<SpecialCustomer>("SpecialityAk"); // TODO: Use the derived one, #2611
+
+                cb.HasOne<SpecialCustomer>()
+                    .WithOne()
+                    .HasForeignKey<SpecialCustomer>("AnotherRelatedCustomerId");
+
+                cb.OwnsOne(c => c.Details).Property(d => d.Address).IsRequired();
+                cb.Navigation(c => c.Details).IsRequired();
+            });
+
+            modelBuilder.Entity<ExtraSpecialCustomer>(cb =>
+            {
+                if (mapToViews && mapping == Mapping.TPT)
                 {
-                    db.HasKey(d => d.Date);
-
-                    if (mapToViews)
-                    {
-                        db.ToView("DateDetailsView", "viewSchema");
-                    }
-
-                    if (mapToTables)
-                    {
-                        db.ToTable("DateDetails");
-                    }
+                    cb.ToView("ExtraSpecialCustomerView");
                 }
-            );
+
+                if (mapToTables && mapping == Mapping.TPT)
+                {
+                    cb.ToTable("ExtraSpecialCustomer", "ExtraSpecialSchema");
+                }
+            });
+
+            modelBuilder.Entity<Order>(ob =>
+            {
+                ob.Property(o => o.OrderDate).HasColumnName("OrderDate");
+                ob.Property(o => o.AlternateId).HasColumnName("AlternateId");
+
+                ob.HasAlternateKey(o => o.AlternateId).HasName("AK_AlternateId");
+                ob.HasOne(o => o.DateDetails)
+                    .WithOne()
+                    .HasForeignKey<Order>(o => o.OrderDate)
+                    .HasPrincipalKey<DateDetails>(o => o.Date)
+                    .HasConstraintName("FK_DateDetails");
+
+                // Note: the below is resetting the name of the anonymous index
+                // created in HasForeignKey() above, not creating a new index.
+                ob.HasIndex(o => o.OrderDate).HasDatabaseName("IX_OrderDate");
+
+                ob.OwnsOne(
+                    o => o.Details,
+                    odb =>
+                    {
+                        odb.Property(od => od.OrderDate).HasColumnName("OrderDate");
+                        var alternateId = odb.Property(o => o.AlternateId)
+                            .HasColumnName("AlternateId")
+                            .Metadata;
+
+                        odb.OwnedEntityType.AddKey(new[] { alternateId });
+                        // Issue #20948
+                        //odb.HasAlternateKey(o => o.AlternateId);
+                        odb.HasOne(od => od.DateDetails)
+                            .WithOne()
+                            .HasForeignKey<OrderDetails>(o => o.OrderDate)
+                            .HasPrincipalKey<DateDetails>(o => o.Date);
+
+                        odb.OwnsOne(od => od.BillingAddress);
+                        odb.OwnsOne(od => od.ShippingAddress);
+                    }
+                );
+
+                if (mapToViews)
+                {
+                    ob.ToView("OrderView", "viewSchema");
+                }
+
+                if (mapToTables)
+                {
+                    ob.ToTable("Order");
+                }
+            });
+
+            modelBuilder.Entity<DateDetails>(db =>
+            {
+                db.HasKey(d => d.Date);
+
+                if (mapToViews)
+                {
+                    db.ToView("DateDetailsView", "viewSchema");
+                }
+
+                if (mapToTables)
+                {
+                    db.ToTable("DateDetails");
+                }
+            });
 
             return Finalize(modelBuilder);
         }
@@ -935,21 +925,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            modelBuilder.Entity<Customer>(
-                cb =>
-                {
-                    cb.Ignore(c => c.Orders);
-                    cb.ToView("CustomerView");
-                }
-            );
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                cb.Ignore(c => c.Orders);
+                cb.ToView("CustomerView");
+            });
 
-            modelBuilder.Entity<SpecialCustomer>(
-                cb =>
-                {
-                    cb.Ignore(c => c.Details);
-                    cb.Property(s => s.Speciality).IsRequired();
-                }
-            );
+            modelBuilder.Entity<SpecialCustomer>(cb =>
+            {
+                cb.Ignore(c => c.Details);
+                cb.Property(s => s.Speciality).IsRequired();
+            });
 
             var model = Finalize(modelBuilder);
 
@@ -985,18 +971,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_use_relational_model_with_SQL_queries()
         {
             var modelBuilder = CreateConventionModelBuilder();
-            modelBuilder.Entity<Order>(
-                cb =>
-                {
-                    cb.ToSqlQuery("GetOrders()");
-                    cb.Ignore(c => c.Customer);
-                    cb.Ignore(c => c.Details);
-                    cb.Ignore(c => c.DateDetails);
+            modelBuilder.Entity<Order>(cb =>
+            {
+                cb.ToSqlQuery("GetOrders()");
+                cb.Ignore(c => c.Customer);
+                cb.Ignore(c => c.Details);
+                cb.Ignore(c => c.DateDetails);
 
-                    cb.Property(c => c.AlternateId).HasColumnName("SomeName");
-                    cb.HasNoKey();
-                }
-            );
+                cb.Property(c => c.AlternateId).HasColumnName("SomeName");
+                cb.HasNoKey();
+            });
 
             var model = Finalize(modelBuilder);
 
@@ -1081,18 +1065,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_use_relational_model_with_functions()
         {
             var modelBuilder = CreateConventionModelBuilder();
-            modelBuilder.Entity<Order>(
-                cb =>
-                {
-                    cb.ToFunction("GetOrders");
-                    cb.Ignore(c => c.Customer);
-                    cb.Ignore(c => c.Details);
-                    cb.Ignore(c => c.DateDetails);
+            modelBuilder.Entity<Order>(cb =>
+            {
+                cb.ToFunction("GetOrders");
+                cb.Ignore(c => c.Customer);
+                cb.Ignore(c => c.Details);
+                cb.Ignore(c => c.DateDetails);
 
-                    cb.Property(c => c.AlternateId).HasColumnName("SomeName");
-                    cb.HasNoKey();
-                }
-            );
+                cb.Property(c => c.AlternateId).HasColumnName("SomeName");
+                cb.HasNoKey();
+            });
 
             modelBuilder.HasDbFunction(
                 typeof(RelationalModelTest).GetMethod(

@@ -21,35 +21,25 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
-                            {
-                                o.ConfigureEndpointDefaults(
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
-                                    }
-                                );
-                            }
-                        )
-                        .UseUrls("https://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.ConfigureEndpointDefaults(listenOptions =>
+                        {
+                            listenOptions.Protocols = Core.HttpProtocols.Http3;
+                        });
+                    })
+                    .UseUrls("https://127.0.0.1:0")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -88,46 +78,38 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.Listen(
+                            IPAddress.Parse("127.0.0.1"),
+                            http3Port,
+                            listenOptions =>
                             {
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    http3Port,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    http1Port,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols = Core.HttpProtocols.Http1;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
+                                listenOptions.Protocols = Core.HttpProtocols.Http3;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
                         );
-                }
-            )
+                        o.Listen(
+                            IPAddress.Parse("127.0.0.1"),
+                            http1Port,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = Core.HttpProtocols.Http1;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
+                            }
+                        );
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -144,38 +126,29 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.Listen(
+                            IPAddress.Parse("127.0.0.1"),
+                            5005,
+                            listenOptions =>
                             {
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    5005,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
+                                listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
                         );
-                }
-            )
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -192,38 +165,29 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.Listen(
+                            IPAddress.Parse("127.0.0.1"),
+                            0,
+                            listenOptions =>
                             {
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    0,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
+                                listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
                         );
-                }
-            )
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -275,44 +239,33 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.ConfigureEndpointDefaults(listenOptions =>
+                        {
+                            listenOptions.DisableAltSvcHeader = true;
+                        });
+                        o.Listen(
+                            IPAddress.Parse("127.0.0.1"),
+                            0,
+                            listenOptions =>
                             {
-                                o.ConfigureEndpointDefaults(
-                                    listenOptions =>
-                                    {
-                                        listenOptions.DisableAltSvcHeader = true;
-                                    }
-                                );
-                                o.Listen(
-                                    IPAddress.Parse("127.0.0.1"),
-                                    0,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols =
-                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
+                                listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
                         );
-                }
-            )
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -400,36 +353,28 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.ListenUnixSocket(
+                            "/test-path",
+                            listenOptions =>
                             {
-                                o.ListenUnixSocket(
-                                    "/test-path",
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
+                                listenOptions.Protocols = Core.HttpProtocols.Http3;
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
                         );
-                }
-            )
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();

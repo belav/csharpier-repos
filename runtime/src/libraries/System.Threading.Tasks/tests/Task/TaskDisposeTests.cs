@@ -50,13 +50,11 @@ namespace System.Threading.Tasks.Tests
             // Verify that a task can be disposed by a continuation
             var endTask = new ManualResetEvent(false);
             var task = new Task(() => { });
-            var task2 = task.ContinueWith(
-                completedTask =>
-                {
-                    completedTask.Dispose();
-                    endTask.WaitOne();
-                }
-            );
+            var task2 = task.ContinueWith(completedTask =>
+            {
+                completedTask.Dispose();
+                endTask.WaitOne();
+            });
             task.Start();
             endTask.Set();
             ((IAsyncResult)task2).AsyncWaitHandle.WaitOne();

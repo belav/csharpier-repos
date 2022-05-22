@@ -983,12 +983,10 @@ namespace System.Threading.Tasks.Tests
                 LineNumber(),
                 Task.Factory.FromAsync(
                     generic,
-                    new Action<IAsyncResult>(
-                        ar =>
-                        {
-                            throw oce;
-                        }
-                    )
+                    new Action<IAsyncResult>(ar =>
+                    {
+                        throw oce;
+                    })
                 ),
                 oce
             };
@@ -997,12 +995,10 @@ namespace System.Threading.Tasks.Tests
                 LineNumber(),
                 Task<int>.Factory.FromAsync(
                     nonGeneric,
-                    new Func<IAsyncResult, int>(
-                        ar =>
-                        {
-                            throw oce;
-                        }
-                    )
+                    new Func<IAsyncResult, int>(ar =>
+                    {
+                        throw oce;
+                    })
                 ),
                 oce
             };

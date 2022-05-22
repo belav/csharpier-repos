@@ -443,17 +443,15 @@ namespace Moq
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                     )
                     .Cast<PropertyInfo>()
-                    .SingleOrDefault(
-                        p =>
-                        {
-                            return p.PropertyType == property.PropertyType
-                                && new ParameterTypes(p.GetIndexParameters()).CompareTo(
-                                    parameterTypes,
-                                    true,
-                                    false
-                                );
-                        }
-                    );
+                    .SingleOrDefault(p =>
+                    {
+                        return p.PropertyType == property.PropertyType
+                            && new ParameterTypes(p.GetIndexParameters()).CompareTo(
+                                parameterTypes,
+                                true,
+                                false
+                            );
+                    });
                 if (derivedProperty != null)
                 {
                     if (

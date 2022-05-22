@@ -241,20 +241,16 @@ public class NegotiateHandlerTests
         var claimsCache = new MemoryCache(new MemoryCacheOptions());
         claimsCache.Set("name", new string[] { "CN=Domain Admins,CN=Users,DC=domain,DC=net" });
         NegotiateOptions negotiateOptions = null;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.EnableLdap(ldapSettings =>
             {
-                options.EnableLdap(
-                    ldapSettings =>
-                    {
-                        ldapSettings.Domain = "domain.NET";
-                        ldapSettings.ClaimsCache = claimsCache;
-                        ldapSettings.EnableLdapClaimResolution = false; // This disables binding to the LDAP connection on startup
-                    }
-                );
-                negotiateOptions = options;
-            }
-        );
+                ldapSettings.Domain = "domain.NET";
+                ldapSettings.ClaimsCache = claimsCache;
+                ldapSettings.EnableLdapClaimResolution = false; // This disables binding to the LDAP connection on startup
+            });
+            negotiateOptions = options;
+        });
         var server = host.GetTestServer();
         var testConnection = new TestConnection();
         negotiateOptions.EnableLdap(_ => { }); // Forcefully re-enable ldap claims resolution to trigger RBAC claims retrieval from cache
@@ -293,38 +289,30 @@ public class NegotiateHandlerTests
                 services =>
                     services
                         .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                        .AddNegotiate(
-                            options =>
-                            {
-                                options.StateFactory = new TestNegotiateStateFactory();
-                            }
-                        )
-            )
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer();
-                    webHostBuilder.Configure(
-                        app =>
+                        .AddNegotiate(options =>
                         {
-                            app.UseExceptionHandler("/error");
-                            app.UseAuthentication();
-                            app.Run(
-                                context =>
-                                {
-                                    Assert.True(context.User.Identity.IsAuthenticated);
-                                    if (context.Request.Path.Equals("/error"))
-                                    {
-                                        return context.Response.WriteAsync("Error Handler");
-                                    }
-
-                                    throw new TimeZoneNotFoundException();
-                                }
-                            );
+                            options.StateFactory = new TestNegotiateStateFactory();
+                        })
+            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer();
+                webHostBuilder.Configure(app =>
+                {
+                    app.UseExceptionHandler("/error");
+                    app.UseAuthentication();
+                    app.Run(context =>
+                    {
+                        Assert.True(context.User.Identity.IsAuthenticated);
+                        if (context.Request.Path.Equals("/error"))
+                        {
+                            return context.Response.WriteAsync("Error Handler");
                         }
-                    );
-                }
-            );
+
+                        throw new TimeZoneNotFoundException();
+                    });
+                });
+            });
 
         using var host = await builder.StartAsync();
         var server = host.GetTestServer();
@@ -477,28 +465,22 @@ public class NegotiateHandlerTests
                     services
                         .AddRouting()
                         .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                        .AddNegotiate(
-                            options =>
-                            {
-                                options.StateFactory = new TestNegotiateStateFactory();
-                                configureOptions?.Invoke(options);
-                            }
-                        )
-            )
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer();
-                    webHostBuilder.Configure(
-                        app =>
+                        .AddNegotiate(options =>
                         {
-                            app.UseRouting();
-                            app.UseAuthentication();
-                            app.UseEndpoints(ConfigureEndpoints);
-                        }
-                    );
-                }
-            );
+                            options.StateFactory = new TestNegotiateStateFactory();
+                            configureOptions?.Invoke(options);
+                        })
+            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer();
+                webHostBuilder.Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseAuthentication();
+                    app.UseEndpoints(ConfigureEndpoints);
+                });
+            });
 
         return await builder.StartAsync();
     }
@@ -614,22 +596,20 @@ public class NegotiateHandlerTests
         bool http2 = false
     )
     {
-        return server.SendAsync(
-            context =>
+        return server.SendAsync(context =>
+        {
+            context.Request.Protocol = http2 ? "HTTP/2" : "HTTP/1.1";
+            context.Request.Path = path;
+            if (!string.IsNullOrEmpty(authorizationHeader))
             {
-                context.Request.Protocol = http2 ? "HTTP/2" : "HTTP/1.1";
-                context.Request.Path = path;
-                if (!string.IsNullOrEmpty(authorizationHeader))
-                {
-                    context.Request.Headers.Authorization = authorizationHeader;
-                }
-                if (connection != null)
-                {
-                    context.Features.Set<IConnectionItemsFeature>(connection);
-                    context.Features.Set<IConnectionCompleteFeature>(connection);
-                }
+                context.Request.Headers.Authorization = authorizationHeader;
             }
-        );
+            if (connection != null)
+            {
+                context.Features.Set<IConnectionItemsFeature>(connection);
+                context.Features.Set<IConnectionCompleteFeature>(connection);
+            }
+        });
     }
 
     private class TestConnection : IConnectionItemsFeature, IConnectionCompleteFeature

@@ -30,35 +30,31 @@ namespace System.Web.Razor.Generator
                 }
             }
 
-            string writeInvocation = context.BuildCodeString(
-                cw =>
+            string writeInvocation = context.BuildCodeString(cw =>
+            {
+                if (context.Host.DesignTimeMode)
                 {
-                    if (context.Host.DesignTimeMode)
+                    context.EnsureExpressionHelperVariable();
+                    cw.WriteStartAssignment("__o");
+                }
+                else if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+                {
+                    if (!String.IsNullOrEmpty(context.TargetWriterName))
                     {
-                        context.EnsureExpressionHelperVariable();
-                        cw.WriteStartAssignment("__o");
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteToMethodName
+                        );
+                        cw.WriteSnippet(context.TargetWriterName);
+                        cw.WriteParameterSeparator();
                     }
-                    else if (
-                        context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                    )
+                    else
                     {
-                        if (!String.IsNullOrEmpty(context.TargetWriterName))
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteToMethodName
-                            );
-                            cw.WriteSnippet(context.TargetWriterName);
-                            cw.WriteParameterSeparator();
-                        }
-                        else
-                        {
-                            cw.WriteStartMethodInvoke(
-                                context.Host.GeneratedClassContext.WriteMethodName
-                            );
-                        }
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteMethodName
+                        );
                     }
                 }
-            );
+            });
 
             context.BufferStatementFragment(writeInvocation);
             context.MarkStartOfGeneratedCode();
@@ -66,23 +62,21 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
         {
-            string endBlock = context.BuildCodeString(
-                cw =>
+            string endBlock = context.BuildCodeString(cw =>
+            {
+                if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
                 {
-                    if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+                    if (!context.Host.DesignTimeMode)
                     {
-                        if (!context.Host.DesignTimeMode)
-                        {
-                            cw.WriteEndMethodInvoke();
-                        }
-                        cw.WriteEndStatement();
+                        cw.WriteEndMethodInvoke();
                     }
-                    else
-                    {
-                        cw.WriteLineContinuation();
-                    }
+                    cw.WriteEndStatement();
                 }
-            );
+                else
+                {
+                    cw.WriteLineContinuation();
+                }
+            });
 
             context.MarkEndOfGeneratedCode();
             context.BufferStatementFragment(endBlock);

@@ -27,13 +27,11 @@ public class DeferredKeyTests
         var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
         mockInternalKeyManager
             .Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
-            .Returns<XElement>(
-                element =>
-                {
-                    XmlAssert.Equal(@"<node />", element);
-                    return mockDescriptor;
-                }
-            );
+            .Returns<XElement>(element =>
+            {
+                XmlAssert.Equal(@"<node />", element);
+                return mockDescriptor;
+            });
         var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
 
         // Act
@@ -85,13 +83,11 @@ public class DeferredKeyTests
         var mockKeyManager = new Mock<IInternalXmlKeyManager>();
         mockKeyManager
             .Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
-            .Returns<XElement>(
-                element =>
-                {
-                    numTimesCalled++;
-                    throw new Exception("How exceptional.");
-                }
-            );
+            .Returns<XElement>(element =>
+            {
+                numTimesCalled++;
+                throw new Exception("How exceptional.");
+            });
 
         var now = DateTimeOffset.UtcNow;
         var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();

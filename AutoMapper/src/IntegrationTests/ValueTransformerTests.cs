@@ -45,13 +45,11 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                });
 
             [Fact]
             public async Task Should_transform_value()
@@ -100,14 +98,12 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                });
 
             [Fact]
             public async Task Should_stack_transformers_in_order()
@@ -136,17 +132,15 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Source, Dest>();
-                        cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        cfg.CreateProfile(
-                            "Other",
-                            p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>();
+                    cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    cfg.CreateProfile(
+                        "Other",
+                        p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
+                    );
+                });
 
             public class Context : DbContext
             {
@@ -215,22 +209,18 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateProjection<Source, Dest>();
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>();
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -279,20 +269,18 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<int>(dest => dest * 2);
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateProjection<Source, Dest>();
-                                p.ValueTransformers.Add<int>(dest => dest + 3);
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<int>(dest => dest * 2);
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>();
+                            p.ValueTransformers.Add<int>(dest => dest + 3);
+                        }
+                    );
+                });
 
             [Fact]
             public async Task ShouldApplyProfileFirstThenRoot()
@@ -341,23 +329,19 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateProjection<Source, Dest>()
-                                    .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
-                                );
-                            }
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>()
+                                .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()
@@ -406,27 +390,23 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                        cfg.CreateProfile(
-                            "Other",
-                            p =>
-                            {
-                                p.CreateProjection<Source, Dest>()
-                                    .AddTransform<string>(dest => dest + ", for real,")
-                                    .ForMember(
-                                        d => d.Value,
-                                        opt => opt.AddTransform(d => d + ", seriously")
-                                    );
-                                p.ValueTransformers.Add<string>(
-                                    dest => dest + " is straight up dope"
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
+                    cfg.CreateProfile(
+                        "Other",
+                        p =>
+                        {
+                            p.CreateProjection<Source, Dest>()
+                                .AddTransform<string>(dest => dest + ", for real,")
+                                .ForMember(
+                                    d => d.Value,
+                                    opt => opt.AddTransform(d => d + ", seriously")
                                 );
-                            }
-                        );
-                    }
-                );
+                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                        }
+                    );
+                });
 
             [Fact]
             public async Task ShouldApplyTypeMapThenProfileThenRoot()

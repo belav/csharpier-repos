@@ -103,15 +103,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Product>(
-                    eb =>
-                    {
-                        eb.Property(e => e.Version)
-                            .ValueGeneratedOnAddOrUpdate()
-                            .IsConcurrencyToken();
-                        eb.Ignore(e => e.StoreUpdated);
-                    }
-                );
+                modelBuilder.Entity<Product>(eb =>
+                {
+                    eb.Property(e => e.Version).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
+                    eb.Ignore(e => e.StoreUpdated);
+                });
 
                 modelBuilder.Entity<ProductBackup>().Property(e => e.Id).ValueGeneratedNever();
             }

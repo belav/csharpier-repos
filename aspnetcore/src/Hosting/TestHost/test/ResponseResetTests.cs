@@ -21,14 +21,12 @@ public class ResponseResetTests
     // Reset is only present for HTTP/2
     public async Task ResetFeature_Http11_Missing()
     {
-        using var host = await CreateHost(
-            httpContext =>
-            {
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                Assert.Null(feature);
-                return Task.CompletedTask;
-            }
-        );
+        using var host = await CreateHost(httpContext =>
+        {
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            Assert.Null(feature);
+            return Task.CompletedTask;
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version11;
@@ -39,14 +37,12 @@ public class ResponseResetTests
     [Fact]
     public async Task ResetFeature_Http2_Present()
     {
-        using var host = await CreateHost(
-            httpContext =>
-            {
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                Assert.NotNull(feature);
-                return Task.CompletedTask;
-            }
-        );
+        using var host = await CreateHost(httpContext =>
+        {
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            Assert.NotNull(feature);
+            return Task.CompletedTask;
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
@@ -57,14 +53,12 @@ public class ResponseResetTests
     [Fact]
     public async Task ResetFeature_Http3_Present()
     {
-        using var host = await CreateHost(
-            httpContext =>
-            {
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                Assert.NotNull(feature);
-                return Task.CompletedTask;
-            }
-        );
+        using var host = await CreateHost(httpContext =>
+        {
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            Assert.NotNull(feature);
+            return Task.CompletedTask;
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version30;
@@ -78,16 +72,14 @@ public class ResponseResetTests
         var requestAborted = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                httpContext.RequestAborted.Register(() => requestAborted.SetResult(0));
+        using var host = await CreateHost(async httpContext =>
+        {
+            httpContext.RequestAborted.Register(() => requestAborted.SetResult(0));
 
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                feature.Reset(12345);
-                await requestAborted.Task.DefaultTimeout();
-            }
-        );
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            feature.Reset(12345);
+            await requestAborted.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
@@ -103,14 +95,12 @@ public class ResponseResetTests
         var resetReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                feature.Reset(12345);
-                await resetReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            feature.Reset(12345);
+            await resetReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
@@ -131,16 +121,14 @@ public class ResponseResetTests
         var resetReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                await httpContext.Response.Body.FlushAsync();
-                await responseReceived.Task.DefaultTimeout();
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                feature.Reset(12345);
-                await resetReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            await httpContext.Response.Body.FlushAsync();
+            await responseReceived.Task.DefaultTimeout();
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            feature.Reset(12345);
+            await resetReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
@@ -165,16 +153,14 @@ public class ResponseResetTests
         var resetReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                await httpContext.Response.WriteAsync("Hello World");
-                await responseReceived.Task.DefaultTimeout();
-                var feature = httpContext.Features.Get<IHttpResetFeature>();
-                feature.Reset(12345);
-                await resetReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            await httpContext.Response.WriteAsync("Hello World");
+            await responseReceived.Task.DefaultTimeout();
+            var feature = httpContext.Features.Get<IHttpResetFeature>();
+            feature.Reset(12345);
+            await resetReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
@@ -195,19 +181,15 @@ public class ResponseResetTests
     private Task<IHost> CreateHost(RequestDelegate appDelegate)
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(appDelegate);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.Run(appDelegate);
+                    });
+            })
             .StartAsync();
     }
 }

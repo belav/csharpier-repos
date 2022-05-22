@@ -43,12 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             );
             Content = new StackTraceExplorer(_stackExplorerVM);
 
-            CloseClick = new DelegateCommand(
-                _ =>
-                {
-                    OnClosed?.Invoke(this, null);
-                }
-            );
+            CloseClick = new DelegateCommand(_ =>
+            {
+                OnClosed?.Invoke(this, null);
+            });
         }
     }
 }

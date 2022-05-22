@@ -24,30 +24,28 @@ public class DataProtectionProviderTests
     [Fact]
     public void System_UsesProvidedDirectory()
     {
-        WithUniqueTempDirectory(
-            directory =>
-            {
-                // Step 1: directory should be completely empty
-                directory.Create();
-                Assert.Empty(directory.GetFiles());
+        WithUniqueTempDirectory(directory =>
+        {
+            // Step 1: directory should be completely empty
+            directory.Create();
+            Assert.Empty(directory.GetFiles());
 
-                // Step 2: instantiate the system and round-trip a payload
-                var protector = DataProtectionProvider.Create(directory).CreateProtector("purpose");
-                Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
+            // Step 2: instantiate the system and round-trip a payload
+            var protector = DataProtectionProvider.Create(directory).CreateProtector("purpose");
+            Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
-                // Step 3: validate that there's now a single key in the directory and that it's not protected
-                var allFiles = directory.GetFiles();
-                Assert.Single(allFiles);
-                Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
-                string fileText = File.ReadAllText(allFiles[0].FullName);
-                Assert.Contains(
-                    "Warning: the key below is in an unencrypted form.",
-                    fileText,
-                    StringComparison.Ordinal
-                );
-                Assert.DoesNotContain("Windows DPAPI", fileText, StringComparison.Ordinal);
-            }
-        );
+            // Step 3: validate that there's now a single key in the directory and that it's not protected
+            var allFiles = directory.GetFiles();
+            Assert.Single(allFiles);
+            Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
+            string fileText = File.ReadAllText(allFiles[0].FullName);
+            Assert.Contains(
+                "Warning: the key below is in an unencrypted form.",
+                fileText,
+                StringComparison.Ordinal
+            );
+            Assert.DoesNotContain("Windows DPAPI", fileText, StringComparison.Ordinal);
+        });
     }
 
     [Fact]
@@ -112,38 +110,36 @@ public class DataProtectionProviderTests
     [ConditionalRunTestOnlyOnWindows]
     public void System_UsesProvidedDirectory_WithConfigurationCallback()
     {
-        WithUniqueTempDirectory(
-            directory =>
-            {
-                // Step 1: directory should be completely empty
-                directory.Create();
-                Assert.Empty(directory.GetFiles());
+        WithUniqueTempDirectory(directory =>
+        {
+            // Step 1: directory should be completely empty
+            directory.Create();
+            Assert.Empty(directory.GetFiles());
 
-                // Step 2: instantiate the system and round-trip a payload
-                var protector = DataProtectionProvider
-                    .Create(
-                        directory,
-                        configure =>
-                        {
-                            configure.ProtectKeysWithDpapi();
-                        }
-                    )
-                    .CreateProtector("purpose");
-                Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
+            // Step 2: instantiate the system and round-trip a payload
+            var protector = DataProtectionProvider
+                .Create(
+                    directory,
+                    configure =>
+                    {
+                        configure.ProtectKeysWithDpapi();
+                    }
+                )
+                .CreateProtector("purpose");
+            Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
-                // Step 3: validate that there's now a single key in the directory and that it's protected with DPAPI
-                var allFiles = directory.GetFiles();
-                Assert.Single(allFiles);
-                Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
-                string fileText = File.ReadAllText(allFiles[0].FullName);
-                Assert.DoesNotContain(
-                    "Warning: the key below is in an unencrypted form.",
-                    fileText,
-                    StringComparison.Ordinal
-                );
-                Assert.Contains("Windows DPAPI", fileText, StringComparison.Ordinal);
-            }
-        );
+            // Step 3: validate that there's now a single key in the directory and that it's protected with DPAPI
+            var allFiles = directory.GetFiles();
+            Assert.Single(allFiles);
+            Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
+            string fileText = File.ReadAllText(allFiles[0].FullName);
+            Assert.DoesNotContain(
+                "Warning: the key below is in an unencrypted form.",
+                fileText,
+                StringComparison.Ordinal
+            );
+            Assert.Contains("Windows DPAPI", fileText, StringComparison.Ordinal);
+        });
     }
 
     [ConditionalFact]
@@ -167,65 +163,56 @@ public class DataProtectionProviderTests
                 store.Close();
             }
 
-            WithUniqueTempDirectory(
-                directory =>
+            WithUniqueTempDirectory(directory =>
+            {
+                var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+                certificateStore.Open(OpenFlags.ReadWrite);
+                var certificate = certificateStore.Certificates.Find(
+                    X509FindType.FindBySubjectName,
+                    "TestCert",
+                    false
+                )[0];
+                Assert.True(certificate.HasPrivateKey, "Cert should have a private key");
+                try
                 {
-                    var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-                    certificateStore.Open(OpenFlags.ReadWrite);
-                    var certificate = certificateStore.Certificates.Find(
-                        X509FindType.FindBySubjectName,
-                        "TestCert",
-                        false
-                    )[0];
-                    Assert.True(certificate.HasPrivateKey, "Cert should have a private key");
-                    try
-                    {
-                        // Step 1: directory should be completely empty
-                        directory.Create();
-                        Assert.Empty(directory.GetFiles());
+                    // Step 1: directory should be completely empty
+                    directory.Create();
+                    Assert.Empty(directory.GetFiles());
 
-                        // Step 2: instantiate the system and round-trip a payload
-                        var protector = DataProtectionProvider
-                            .Create(directory, certificate)
-                            .CreateProtector("purpose");
-                        var data = protector.Protect("payload");
+                    // Step 2: instantiate the system and round-trip a payload
+                    var protector = DataProtectionProvider
+                        .Create(directory, certificate)
+                        .CreateProtector("purpose");
+                    var data = protector.Protect("payload");
 
-                        // add a cert without the private key to ensure the decryption will still fallback to the cert store
-                        var certWithoutKey = new X509Certificate2(
-                            Path.Combine(GetTestFilesPath(), "TestCertWithoutPrivateKey.pfx"),
-                            "password"
-                        );
-                        var unprotector = DataProtectionProvider
-                            .Create(
-                                directory,
-                                o => o.UnprotectKeysWithAnyCertificate(certWithoutKey)
-                            )
-                            .CreateProtector("purpose");
-                        Assert.Equal("payload", unprotector.Unprotect(data));
+                    // add a cert without the private key to ensure the decryption will still fallback to the cert store
+                    var certWithoutKey = new X509Certificate2(
+                        Path.Combine(GetTestFilesPath(), "TestCertWithoutPrivateKey.pfx"),
+                        "password"
+                    );
+                    var unprotector = DataProtectionProvider
+                        .Create(directory, o => o.UnprotectKeysWithAnyCertificate(certWithoutKey))
+                        .CreateProtector("purpose");
+                    Assert.Equal("payload", unprotector.Unprotect(data));
 
-                        // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
-                        var allFiles = directory.GetFiles();
-                        Assert.Single(allFiles);
-                        Assert.StartsWith(
-                            "key-",
-                            allFiles[0].Name,
-                            StringComparison.OrdinalIgnoreCase
-                        );
-                        string fileText = File.ReadAllText(allFiles[0].FullName);
-                        Assert.DoesNotContain(
-                            "Warning: the key below is in an unencrypted form.",
-                            fileText,
-                            StringComparison.Ordinal
-                        );
-                        Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
-                    }
-                    finally
-                    {
-                        certificateStore.Remove(certificate);
-                        certificateStore.Close();
-                    }
+                    // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+                    var allFiles = directory.GetFiles();
+                    Assert.Single(allFiles);
+                    Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
+                    string fileText = File.ReadAllText(allFiles[0].FullName);
+                    Assert.DoesNotContain(
+                        "Warning: the key below is in an unencrypted form.",
+                        fileText,
+                        StringComparison.Ordinal
+                    );
+                    Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
                 }
-            );
+                finally
+                {
+                    certificateStore.Remove(certificate);
+                    certificateStore.Close();
+                }
+            });
         }
     }
 
@@ -246,57 +233,51 @@ public class DataProtectionProviderTests
             store.Close();
         }
 
-        WithUniqueTempDirectory(
-            directory =>
+        WithUniqueTempDirectory(directory =>
+        {
+            using (var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             {
-                using (
-                    var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser)
-                )
+                certificateStore.Open(OpenFlags.ReadWrite);
+                var certInStore = certificateStore.Certificates.Find(
+                    X509FindType.FindBySubjectName,
+                    "TestCert",
+                    false
+                )[0];
+                Assert.NotNull(certInStore);
+                Assert.False(certInStore.HasPrivateKey, "Cert should not have private key");
+
+                try
                 {
-                    certificateStore.Open(OpenFlags.ReadWrite);
-                    var certInStore = certificateStore.Certificates.Find(
-                        X509FindType.FindBySubjectName,
-                        "TestCert",
-                        false
-                    )[0];
-                    Assert.NotNull(certInStore);
-                    Assert.False(certInStore.HasPrivateKey, "Cert should not have private key");
+                    var certWithKey = new X509Certificate2(
+                        Path.Combine(GetTestFilesPath(), "TestCert3.pfx"),
+                        "password3"
+                    );
 
-                    try
-                    {
-                        var certWithKey = new X509Certificate2(
-                            Path.Combine(GetTestFilesPath(), "TestCert3.pfx"),
-                            "password3"
-                        );
+                    var protector = DataProtectionProvider
+                        .Create(directory, certWithKey)
+                        .CreateProtector("purpose");
+                    var data = protector.Protect("payload");
 
-                        var protector = DataProtectionProvider
-                            .Create(directory, certWithKey)
-                            .CreateProtector("purpose");
-                        var data = protector.Protect("payload");
+                    var keylessUnprotector = DataProtectionProvider
+                        .Create(directory)
+                        .CreateProtector("purpose");
+                    Assert.Throws<CryptographicException>(() => keylessUnprotector.Unprotect(data));
 
-                        var keylessUnprotector = DataProtectionProvider
-                            .Create(directory)
-                            .CreateProtector("purpose");
-                        Assert.Throws<CryptographicException>(
-                            () => keylessUnprotector.Unprotect(data)
-                        );
-
-                        var unprotector = DataProtectionProvider
-                            .Create(
-                                directory,
-                                o => o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
-                            )
-                            .CreateProtector("purpose");
-                        Assert.Equal("payload", unprotector.Unprotect(data));
-                    }
-                    finally
-                    {
-                        certificateStore.Remove(certInStore);
-                        certificateStore.Close();
-                    }
+                    var unprotector = DataProtectionProvider
+                        .Create(
+                            directory,
+                            o => o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
+                        )
+                        .CreateProtector("purpose");
+                    Assert.Equal("payload", unprotector.Unprotect(data));
+                }
+                finally
+                {
+                    certificateStore.Remove(certInStore);
+                    certificateStore.Close();
                 }
             }
-        );
+        });
     }
 
     [Fact]
@@ -307,32 +288,30 @@ public class DataProtectionProviderTests
 
         AssetStoreDoesNotContain(certificate);
 
-        WithUniqueTempDirectory(
-            directory =>
-            {
-                // Step 1: directory should be completely empty
-                directory.Create();
-                Assert.Empty(directory.GetFiles());
+        WithUniqueTempDirectory(directory =>
+        {
+            // Step 1: directory should be completely empty
+            directory.Create();
+            Assert.Empty(directory.GetFiles());
 
-                // Step 2: instantiate the system and round-trip a payload
-                var protector = DataProtectionProvider
-                    .Create(directory, certificate)
-                    .CreateProtector("purpose");
-                Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
+            // Step 2: instantiate the system and round-trip a payload
+            var protector = DataProtectionProvider
+                .Create(directory, certificate)
+                .CreateProtector("purpose");
+            Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
-                // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
-                var allFiles = directory.GetFiles();
-                Assert.Single(allFiles);
-                Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
-                string fileText = File.ReadAllText(allFiles[0].FullName);
-                Assert.DoesNotContain(
-                    "Warning: the key below is in an unencrypted form.",
-                    fileText,
-                    StringComparison.Ordinal
-                );
-                Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
-            }
-        );
+            // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+            var allFiles = directory.GetFiles();
+            Assert.Single(allFiles);
+            Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
+            string fileText = File.ReadAllText(allFiles[0].FullName);
+            Assert.DoesNotContain(
+                "Warning: the key below is in an unencrypted form.",
+                fileText,
+                StringComparison.Ordinal
+            );
+            Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
+        });
     }
 
     private static void AssetStoreDoesNotContain(X509Certificate2 certificate)
@@ -365,40 +344,38 @@ public class DataProtectionProviderTests
         var filePath = Path.Combine(GetTestFilesPath(), "TestCert2.pfx");
         var certificate = new X509Certificate2(filePath, "password");
 
-        WithUniqueTempDirectory(
-            directory =>
-            {
-                // Step 1: directory should be completely empty
-                directory.Create();
-                Assert.Empty(directory.GetFiles());
+        WithUniqueTempDirectory(directory =>
+        {
+            // Step 1: directory should be completely empty
+            directory.Create();
+            Assert.Empty(directory.GetFiles());
 
-                // Step 2: instantiate the system and create some data
-                var protector = DataProtectionProvider
-                    .Create(directory, certificate)
-                    .CreateProtector("purpose");
+            // Step 2: instantiate the system and create some data
+            var protector = DataProtectionProvider
+                .Create(directory, certificate)
+                .CreateProtector("purpose");
 
-                var data = protector.Protect("payload");
+            var data = protector.Protect("payload");
 
-                // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
-                var allFiles = directory.GetFiles();
-                Assert.Single(allFiles);
-                Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
-                string fileText = File.ReadAllText(allFiles[0].FullName);
-                Assert.DoesNotContain(
-                    "Warning: the key below is in an unencrypted form.",
-                    fileText,
-                    StringComparison.Ordinal
-                );
-                Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
+            // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+            var allFiles = directory.GetFiles();
+            Assert.Single(allFiles);
+            Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
+            string fileText = File.ReadAllText(allFiles[0].FullName);
+            Assert.DoesNotContain(
+                "Warning: the key below is in an unencrypted form.",
+                fileText,
+                StringComparison.Ordinal
+            );
+            Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
 
-                // Step 4: setup a second system and validate it can decrypt keys and unprotect data
-                var unprotector = DataProtectionProvider.Create(
-                    directory,
-                    b => b.UnprotectKeysWithAnyCertificate(certificate)
-                );
-                Assert.Equal("payload", unprotector.CreateProtector("purpose").Unprotect(data));
-            }
-        );
+            // Step 4: setup a second system and validate it can decrypt keys and unprotect data
+            var unprotector = DataProtectionProvider.Create(
+                directory,
+                b => b.UnprotectKeysWithAnyCertificate(certificate)
+            );
+            Assert.Equal("payload", unprotector.CreateProtector("purpose").Unprotect(data));
+        });
     }
 
     /// <summary>

@@ -17,13 +17,11 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                var page = new ApplicationStartPageTest().CreateStartPage(
-                    p =>
-                    {
-                        p.AppState["x"] = "y";
-                        p.WriteLiteral("test");
-                    }
-                );
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
+                {
+                    p.AppState["x"] = "y";
+                    p.WriteLiteral("test");
+                });
                 page.ExecuteInternal();
                 Assert.Equal("y", page.ApplicationState["x"]);
                 Assert.Equal("test", ApplicationStartPage.Markup.ToHtmlString());
@@ -35,13 +33,11 @@ namespace System.Web.WebPages.Test
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                var page = new ApplicationStartPageTest().CreateStartPage(
-                    p =>
-                    {
-                        p.App.x = "y";
-                        p.WriteLiteral("test");
-                    }
-                );
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
+                {
+                    p.App.x = "y";
+                    p.WriteLiteral("test");
+                });
                 page.ExecuteInternal();
                 Assert.Equal("y", page.ApplicationState["x"]);
                 Assert.Equal("y", page.App["x"]);
@@ -57,12 +53,10 @@ namespace System.Web.WebPages.Test
             {
                 var msg = "This is an error message";
                 var e = new InvalidOperationException(msg);
-                var page = new ApplicationStartPageTest().CreateStartPage(
-                    p =>
-                    {
-                        throw e;
-                    }
-                );
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
+                {
+                    throw e;
+                });
                 var ex = Assert.Throws<HttpException>(() => page.ExecuteStartPage());
                 Assert.Equal(msg, ex.InnerException.Message);
                 Assert.Equal(e, ApplicationStartPage.Exception);
@@ -86,12 +80,10 @@ namespace System.Web.WebPages.Test
                 hideRequestResponse.SetValue(context, true);
 
                 HttpContext.Current = context;
-                var page = new ApplicationStartPageTest().CreateStartPage(
-                    p =>
-                    {
-                        p.Write("test");
-                    }
-                );
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
+                {
+                    p.Write("test");
+                });
                 page.ExecuteStartPage();
             });
         }

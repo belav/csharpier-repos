@@ -582,14 +582,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 
             obj = Enumerable
                 .Range(0, 10)
-                .Where(
-                    i =>
-                    {
-                        if (i == 5)
-                            throw new Exception("xxx");
-                        return i < 7;
-                    }
-                );
+                .Where(i =>
+                {
+                    if (i == 5)
+                        throw new Exception("xxx");
+                    return i < 7;
+                });
             str = s_formatter.FormatObject(obj, SingleLineOptions);
             Assert.Equal(
                 "Enumerable.WhereEnumerableIterator<int> { 0, 1, 2, 3, 4, !<Exception> ... }",

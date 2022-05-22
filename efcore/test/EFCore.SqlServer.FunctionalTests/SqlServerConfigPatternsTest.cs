@@ -505,12 +505,10 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static void ConfigureModel(ModelBuilder builder) =>
-            builder.Entity<Customer>(
-                b =>
-                {
-                    b.HasKey(c => c.CustomerID);
-                    b.ToTable("Customers");
-                }
-            );
+            builder.Entity<Customer>(b =>
+            {
+                b.HasKey(c => c.CustomerID);
+                b.ToTable("Customers");
+            });
     }
 }

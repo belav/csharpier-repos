@@ -17,33 +17,29 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         {
             base.BuildModelExternal(modelBuilder);
 
-            modelBuilder.Entity<Engine>(
-                b =>
-                {
-                    b.Property(e => e.EngineSupplierId).IsConcurrencyToken(false);
-                    b.Property(e => e.Name).IsConcurrencyToken(false);
-                    b.OwnsOne(
-                        e => e.StorageLocation,
-                        lb =>
-                        {
-                            lb.Property(l => l.Latitude).IsConcurrencyToken(false);
-                            lb.Property(l => l.Longitude).IsConcurrencyToken(false);
-                        }
-                    );
-                }
-            );
+            modelBuilder.Entity<Engine>(b =>
+            {
+                b.Property(e => e.EngineSupplierId).IsConcurrencyToken(false);
+                b.Property(e => e.Name).IsConcurrencyToken(false);
+                b.OwnsOne(
+                    e => e.StorageLocation,
+                    lb =>
+                    {
+                        lb.Property(l => l.Latitude).IsConcurrencyToken(false);
+                        lb.Property(l => l.Longitude).IsConcurrencyToken(false);
+                    }
+                );
+            });
 
             modelBuilder.Entity<Chassis>().Property<string>("Version").IsETagConcurrency();
             modelBuilder.Entity<Driver>().Property<string>("Version").IsETagConcurrency();
             modelBuilder.Entity<Team>().Property<string>("Version").IsETagConcurrency();
 
-            modelBuilder.Entity<Sponsor>(
-                eb =>
-                {
-                    eb.Property<string>("Version").IsETagConcurrency();
-                    eb.Property<int?>(Sponsor.ClientTokenPropertyName).IsConcurrencyToken(false);
-                }
-            );
+            modelBuilder.Entity<Sponsor>(eb =>
+            {
+                eb.Property<string>("Version").IsETagConcurrency();
+                eb.Property<int?>(Sponsor.ClientTokenPropertyName).IsConcurrencyToken(false);
+            });
 
             modelBuilder
                 .Entity<TitleSponsor>()

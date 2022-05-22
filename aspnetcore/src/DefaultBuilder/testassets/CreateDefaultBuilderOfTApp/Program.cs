@@ -48,33 +48,31 @@ public class Program
             )
             .Configure(
                 app =>
-                    app.Run(
-                        context =>
-                        {
-                            // Verify allowed hosts were loaded
-                            var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
-                                IOptions<HostFilteringOptions>
-                            >();
-                            var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
-                            if (
-                                responseMessage == null
-                                && !string.Equals(
-                                    "example.com,127.0.0.1",
-                                    hosts,
-                                    StringComparison.Ordinal
-                                )
+                    app.Run(context =>
+                    {
+                        // Verify allowed hosts were loaded
+                        var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
+                            IOptions<HostFilteringOptions>
+                        >();
+                        var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
+                        if (
+                            responseMessage == null
+                            && !string.Equals(
+                                "example.com,127.0.0.1",
+                                hosts,
+                                StringComparison.Ordinal
                             )
-                            {
-                                responseMessage = "AllowedHosts not loaded into Options.";
-                            }
-
-                            var hostingEnvironment =
-                                app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-                            return context.Response.WriteAsync(
-                                responseMessage ?? hostingEnvironment.ApplicationName
-                            );
+                        )
+                        {
+                            responseMessage = "AllowedHosts not loaded into Options.";
                         }
-                    )
+
+                        var hostingEnvironment =
+                            app.ApplicationServices.GetRequiredService<IHostEnvironment>();
+                        return context.Response.WriteAsync(
+                            responseMessage ?? hostingEnvironment.ApplicationName
+                        );
+                    })
             )
             .Build()
             .Run();

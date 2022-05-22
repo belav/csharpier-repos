@@ -48,36 +48,30 @@ namespace System.Web.Razor.Generator
             if (child != null && child.Type == BlockType.Expression)
             {
                 _isExpression = true;
-                generatedCode = context.BuildCodeString(
-                    cw =>
-                    {
-                        cw.WriteParameterSeparator();
-                        cw.WriteStartMethodInvoke("Tuple.Create");
-                        cw.WriteLocationTaggedString(Prefix);
-                        cw.WriteParameterSeparator();
-                        cw.WriteStartMethodInvoke("Tuple.Create", "System.Object", "System.Int32");
-                    }
-                );
+                generatedCode = context.BuildCodeString(cw =>
+                {
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartMethodInvoke("Tuple.Create");
+                    cw.WriteLocationTaggedString(Prefix);
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartMethodInvoke("Tuple.Create", "System.Object", "System.Int32");
+                });
 
                 _oldRenderingMode = context.ExpressionRenderingMode;
                 context.ExpressionRenderingMode = ExpressionRenderingMode.InjectCode;
             }
             else
             {
-                generatedCode = context.BuildCodeString(
-                    cw =>
-                    {
-                        cw.WriteParameterSeparator();
-                        cw.WriteStartMethodInvoke("Tuple.Create");
-                        cw.WriteLocationTaggedString(Prefix);
-                        cw.WriteParameterSeparator();
-                        cw.WriteStartMethodInvoke("Tuple.Create", "System.Object", "System.Int32");
-                        cw.WriteStartConstructor(
-                            context.Host.GeneratedClassContext.TemplateTypeName
-                        );
-                        cw.WriteStartLambdaDelegate(ValueWriterName);
-                    }
-                );
+                generatedCode = context.BuildCodeString(cw =>
+                {
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartMethodInvoke("Tuple.Create");
+                    cw.WriteLocationTaggedString(Prefix);
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartMethodInvoke("Tuple.Create", "System.Object", "System.Int32");
+                    cw.WriteStartConstructor(context.Host.GeneratedClassContext.TemplateTypeName);
+                    cw.WriteStartLambdaDelegate(ValueWriterName);
+                });
             }
 
             context.MarkEndOfGeneratedCode();
@@ -97,42 +91,34 @@ namespace System.Web.Razor.Generator
             string generatedCode;
             if (_isExpression)
             {
-                generatedCode = context.BuildCodeString(
-                    cw =>
-                    {
-                        cw.WriteParameterSeparator();
-                        cw.WriteSnippet(
-                            ValueStart.AbsoluteIndex.ToString(CultureInfo.CurrentCulture)
-                        );
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteParameterSeparator();
-                        // literal: false - This attribute value is not a literal value, it is dynamically generated
-                        cw.WriteBooleanLiteral(false);
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteLineContinuation();
-                    }
-                );
+                generatedCode = context.BuildCodeString(cw =>
+                {
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(ValueStart.AbsoluteIndex.ToString(CultureInfo.CurrentCulture));
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteParameterSeparator();
+                    // literal: false - This attribute value is not a literal value, it is dynamically generated
+                    cw.WriteBooleanLiteral(false);
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteLineContinuation();
+                });
                 context.ExpressionRenderingMode = _oldRenderingMode;
             }
             else
             {
-                generatedCode = context.BuildCodeString(
-                    cw =>
-                    {
-                        cw.WriteEndLambdaDelegate();
-                        cw.WriteEndConstructor();
-                        cw.WriteParameterSeparator();
-                        cw.WriteSnippet(
-                            ValueStart.AbsoluteIndex.ToString(CultureInfo.CurrentCulture)
-                        );
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteParameterSeparator();
-                        // literal: false - This attribute value is not a literal value, it is dynamically generated
-                        cw.WriteBooleanLiteral(false);
-                        cw.WriteEndMethodInvoke();
-                        cw.WriteLineContinuation();
-                    }
-                );
+                generatedCode = context.BuildCodeString(cw =>
+                {
+                    cw.WriteEndLambdaDelegate();
+                    cw.WriteEndConstructor();
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(ValueStart.AbsoluteIndex.ToString(CultureInfo.CurrentCulture));
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteParameterSeparator();
+                    // literal: false - This attribute value is not a literal value, it is dynamically generated
+                    cw.WriteBooleanLiteral(false);
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteLineContinuation();
+                });
             }
 
             context.AddStatement(generatedCode);

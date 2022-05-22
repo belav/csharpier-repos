@@ -70,97 +70,91 @@ public class Startup
             "/errors",
             error =>
             {
-                error.Run(
-                    async context =>
+                error.Run(async context =>
+                {
+                    var builder = new StringBuilder();
+                    builder.AppendLine("<html><body>");
+                    builder.AppendLine(
+                        "An error occurred, Status Code: "
+                            + HtmlEncoder.Default.Encode(
+                                context.Request.Path.ToString().Substring(1)
+                            )
+                            + "<br>"
+                    );
+                    var referrer = context.Request.Headers["referer"];
+                    if (!string.IsNullOrEmpty(referrer))
                     {
-                        var builder = new StringBuilder();
-                        builder.AppendLine("<html><body>");
                         builder.AppendLine(
-                            "An error occurred, Status Code: "
-                                + HtmlEncoder.Default.Encode(
-                                    context.Request.Path.ToString().Substring(1)
-                                )
-                                + "<br>"
+                            "<a href=\""
+                                + HtmlEncoder.Default.Encode(referrer)
+                                + "\">Retry "
+                                + WebUtility.HtmlEncode(referrer)
+                                + "</a><br>"
                         );
-                        var referrer = context.Request.Headers["referer"];
-                        if (!string.IsNullOrEmpty(referrer))
-                        {
-                            builder.AppendLine(
-                                "<a href=\""
-                                    + HtmlEncoder.Default.Encode(referrer)
-                                    + "\">Retry "
-                                    + WebUtility.HtmlEncode(referrer)
-                                    + "</a><br>"
-                            );
-                        }
-                        builder.AppendLine("</body></html>");
-                        context.Response.ContentType = "text/html";
-                        await context.Response.WriteAsync(builder.ToString());
                     }
-                );
+                    builder.AppendLine("</body></html>");
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync(builder.ToString());
+                });
             }
         );
 
-        app.Run(
-            async context =>
-            {
-                // Generates the HTML with all status codes.
-                var builder = new StringBuilder();
-                builder.AppendLine("<html><body>");
-                builder.AppendLine(
-                    "<a href=\""
-                        + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
-                        + "/missingpage/\">"
-                        + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
-                        + "/missingpage/</a><br>"
-                );
+        app.Run(async context =>
+        {
+            // Generates the HTML with all status codes.
+            var builder = new StringBuilder();
+            builder.AppendLine("<html><body>");
+            builder.AppendLine(
+                "<a href=\""
+                    + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
+                    + "/missingpage/\">"
+                    + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
+                    + "/missingpage/</a><br>"
+            );
 
-                var space = string.Concat(Enumerable.Repeat("&nbsp;", 12));
+            var space = string.Concat(Enumerable.Repeat("&nbsp;", 12));
+            builder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "<br><b>{0}{1}{2}</b><br>",
+                "Status Code",
+                space,
+                "Status Code Pages"
+            );
+            for (int statusCode = 400; statusCode < 600; statusCode++)
+            {
                 builder.AppendFormat(
                     CultureInfo.InvariantCulture,
-                    "<br><b>{0}{1}{2}</b><br>",
-                    "Status Code",
-                    space,
-                    "Status Code Pages"
-                );
-                for (int statusCode = 400; statusCode < 600; statusCode++)
-                {
-                    builder.AppendFormat(
+                    "{0}{1}{2}{3}<br>",
+                    statusCode,
+                    space + space,
+                    string.Format(
                         CultureInfo.InvariantCulture,
-                        "{0}{1}{2}{3}<br>",
+                        "<a href=\"?statuscode={0}\">[Enabled]</a>{1}",
                         statusCode,
-                        space + space,
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "<a href=\"?statuscode={0}\">[Enabled]</a>{1}",
-                            statusCode,
-                            space
-                        ),
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}",
-                            statusCode,
-                            space
-                        )
-                    );
-                }
-
-                builder.AppendLine("</body></html>");
-                context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync(builder.ToString());
+                        space
+                    ),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}",
+                        statusCode,
+                        space
+                    )
+                );
             }
-        );
+
+            builder.AppendLine("</body></html>");
+            context.Response.ContentType = "text/html";
+            await context.Response.WriteAsync(builder.ToString());
+        });
     }
 
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

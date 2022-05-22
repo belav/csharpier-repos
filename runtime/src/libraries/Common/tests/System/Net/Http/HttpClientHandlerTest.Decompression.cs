@@ -104,19 +104,17 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.WriteStringAsync(
+                            $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
+                        );
+                        using (Stream compressedStream = compress(connection.Stream))
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.WriteStringAsync(
-                                $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
-                            );
-                            using (Stream compressedStream = compress(connection.Stream))
-                            {
-                                await compressedStream.WriteAsync(expectedContent);
-                            }
+                            await compressedStream.WriteAsync(expectedContent);
                         }
-                    );
+                    });
                 }
             );
         }
@@ -194,16 +192,14 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.WriteStringAsync(
-                                $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
-                            );
-                            await connection.Stream.WriteAsync(compressedContent);
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.WriteStringAsync(
+                            $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
+                        );
+                        await connection.Stream.WriteAsync(compressedContent);
+                    });
                 }
             );
         }
@@ -235,15 +231,13 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.WriteStringAsync(
-                                $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
-                            );
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.WriteStringAsync(
+                            $"HTTP/1.1 200 OK\r\nContent-Encoding: {encodingName}\r\n\r\n"
+                        );
+                    });
                 }
             );
         }

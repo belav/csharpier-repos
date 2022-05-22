@@ -19,12 +19,10 @@ namespace HostingPlayground
                     _ => Host.CreateDefaultBuilder(),
                     host =>
                     {
-                        host.ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<IGreeter, Greeter>();
-                            }
-                        );
+                        host.ConfigureServices(services =>
+                        {
+                            services.AddSingleton<IGreeter, Greeter>();
+                        });
                     }
                 )
                 .UseDefaults()

@@ -651,14 +651,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                             );
                         dotnetCustomizer
                             .Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                {
-                                    runtimeConfig.GetFramework(MiddleWare).Version = "2.0.0";
-                                    runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
-                                        "5.0.0";
-                                }
-                            );
+                            .RuntimeConfig(runtimeConfig =>
+                            {
+                                runtimeConfig.GetFramework(MiddleWare).Version = "2.0.0";
+                                runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version = "5.0.0";
+                            });
                     }
                 )
                 .Should()

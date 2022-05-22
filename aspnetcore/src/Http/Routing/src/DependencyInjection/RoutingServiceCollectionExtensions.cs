@@ -35,28 +35,22 @@ public static class RoutingServiceCollectionExtensions
 
         services.TryAddTransient<IInlineConstraintResolver, DefaultInlineConstraintResolver>();
         services.TryAddTransient<ObjectPoolProvider, DefaultObjectPoolProvider>();
-        services.TryAddSingleton<ObjectPool<UriBuildingContext>>(
-            s =>
-            {
-                var provider = s.GetRequiredService<ObjectPoolProvider>();
-                return provider.Create<UriBuildingContext>(
-                    new UriBuilderContextPooledObjectPolicy()
-                );
-            }
-        );
+        services.TryAddSingleton<ObjectPool<UriBuildingContext>>(s =>
+        {
+            var provider = s.GetRequiredService<ObjectPoolProvider>();
+            return provider.Create<UriBuildingContext>(new UriBuilderContextPooledObjectPolicy());
+        });
 
         // The TreeRouteBuilder is a builder for creating routes, it should stay transient because it's
         // stateful.
         services.TryAdd(
-            ServiceDescriptor.Transient<TreeRouteBuilder>(
-                s =>
-                {
-                    var loggerFactory = s.GetRequiredService<ILoggerFactory>();
-                    var objectPool = s.GetRequiredService<ObjectPool<UriBuildingContext>>();
-                    var constraintResolver = s.GetRequiredService<IInlineConstraintResolver>();
-                    return new TreeRouteBuilder(loggerFactory, objectPool, constraintResolver);
-                }
-            )
+            ServiceDescriptor.Transient<TreeRouteBuilder>(s =>
+            {
+                var loggerFactory = s.GetRequiredService<ILoggerFactory>();
+                var objectPool = s.GetRequiredService<ObjectPool<UriBuildingContext>>();
+                var constraintResolver = s.GetRequiredService<IInlineConstraintResolver>();
+                return new TreeRouteBuilder(loggerFactory, objectPool, constraintResolver);
+            })
         );
 
         services.TryAddSingleton(typeof(RoutingMarkerService));
@@ -70,13 +64,11 @@ public static class RoutingServiceCollectionExtensions
         );
 
         // Allow global access to the list of endpoints.
-        services.TryAddSingleton<EndpointDataSource>(
-            s =>
-            {
-                // Call internal ctor and pass global collection
-                return new CompositeEndpointDataSource(dataSources);
-            }
-        );
+        services.TryAddSingleton<EndpointDataSource>(s =>
+        {
+            // Call internal ctor and pass global collection
+            return new CompositeEndpointDataSource(dataSources);
+        });
 
         //
         // Default matcher implementation
@@ -86,13 +78,11 @@ public static class RoutingServiceCollectionExtensions
         services.TryAddTransient<DfaMatcherBuilder>();
         services.TryAddSingleton<DfaGraphWriter>();
         services.TryAddTransient<DataSourceDependentMatcher.Lifetime>();
-        services.TryAddSingleton<EndpointMetadataComparer>(
-            services =>
-            {
-                // This has no public constructor.
-                return new EndpointMetadataComparer(services);
-            }
-        );
+        services.TryAddSingleton<EndpointMetadataComparer>(services =>
+        {
+            // This has no public constructor.
+            return new EndpointMetadataComparer(services);
+        });
 
         // Link generation related services
         services.TryAddSingleton<LinkGenerator, DefaultLinkGenerator>();

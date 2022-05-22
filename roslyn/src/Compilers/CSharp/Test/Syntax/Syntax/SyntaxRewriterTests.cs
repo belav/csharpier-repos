@@ -142,17 +142,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             //delete one comma
             bool first = true;
-            var rewriter = new RedRewriter(
-                rewriteToken: token =>
+            var rewriter = new RedRewriter(rewriteToken: token =>
+            {
+                if (token.Kind() == SyntaxKind.CommaToken && first)
                 {
-                    if (token.Kind() == SyntaxKind.CommaToken && first)
-                    {
-                        first = false;
-                        return default(SyntaxToken);
-                    }
-                    return token;
+                    first = false;
+                    return default(SyntaxToken);
                 }
-            );
+                return token;
+            });
 
             TestRed(input, output, rewriter, isExpr: false);
         }
@@ -285,17 +283,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var input = "int[,,]a;"; //NB: no whitespace, since it would be deleted
 
             bool first = true;
-            var rewriter = new RedRewriter(
-                rewriteNode: node =>
+            var rewriter = new RedRewriter(rewriteNode: node =>
+            {
+                if (node != null && node.IsKind(SyntaxKind.OmittedArraySizeExpression) && first)
                 {
-                    if (node != null && node.IsKind(SyntaxKind.OmittedArraySizeExpression) && first)
-                    {
-                        first = false;
-                        return null;
-                    }
-                    return node;
+                    first = false;
+                    return null;
                 }
-            );
+                return node;
+            });
 
             Exception caught = null;
             try

@@ -674,13 +674,11 @@ namespace System.Threading.Threads.Tests
             Assert.False(isThreadPoolThread);
 
             var e = new ManualResetEvent(false);
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    isThreadPoolThread = Thread.CurrentThread.IsThreadPoolThread;
-                    e.Set();
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                isThreadPoolThread = Thread.CurrentThread.IsThreadPoolThread;
+                e.Set();
+            });
             e.CheckedWait();
             Assert.True(isThreadPoolThread);
         }

@@ -55,28 +55,26 @@ public sealed class HostMatcherPolicy
 
     private static bool AppliesToEndpointsCore(IReadOnlyList<Endpoint> endpoints)
     {
-        return endpoints.Any(
-            e =>
+        return endpoints.Any(e =>
+        {
+            var hosts = e.Metadata.GetMetadata<IHostMetadata>()?.Hosts;
+            if (hosts == null || hosts.Count == 0)
             {
-                var hosts = e.Metadata.GetMetadata<IHostMetadata>()?.Hosts;
-                if (hosts == null || hosts.Count == 0)
-                {
-                    return false;
-                }
-
-                foreach (var host in hosts)
-                {
-                    // Don't run policy on endpoints that match everything
-                    var key = CreateEdgeKey(host);
-                    if (!key.MatchesAll)
-                    {
-                        return true;
-                    }
-                }
-
                 return false;
             }
-        );
+
+            foreach (var host in hosts)
+            {
+                // Don't run policy on endpoints that match everything
+                var key = CreateEdgeKey(host);
+                if (!key.MatchesAll)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        });
     }
 
     /// <inheritdoc />

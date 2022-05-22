@@ -31,33 +31,29 @@ public class ApiAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         var client = Factory
             .WithWebHostBuilder(
                 builder =>
-                    builder.ConfigureTestServices(
-                        services =>
-                        {
-                            services
-                                .AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-                                .AddAzureADBearer(
-                                    o =>
-                                    {
-                                        o.Instance = "https://login.microsoftonline.com/";
-                                        o.Domain = "test.onmicrosoft.com";
-                                        o.ClientId = "ClientId";
-                                        o.TenantId = "TenantId";
-                                    }
-                                );
+                    builder.ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+                            .AddAzureADBearer(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.TenantId = "TenantId";
+                            });
 
-                            services.Configure<JwtBearerOptions>(
-                                AzureADDefaults.JwtBearerAuthenticationScheme,
-                                o =>
+                        services.Configure<JwtBearerOptions>(
+                            AzureADDefaults.JwtBearerAuthenticationScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        Issuer = "https://www.example.com",
-                                    };
-                                }
-                            );
-                        }
-                    )
+                                    Issuer = "https://www.example.com",
+                                };
+                            }
+                        );
+                    })
             )
             .CreateDefaultClient();
 
@@ -75,33 +71,29 @@ public class ApiAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         var client = Factory
             .WithWebHostBuilder(
                 builder =>
-                    builder.ConfigureTestServices(
-                        services =>
-                        {
-                            services
-                                .AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
-                                .AddAzureADB2CBearer(
-                                    o =>
-                                    {
-                                        o.Instance = "https://login.microsoftonline.com/";
-                                        o.Domain = "test.onmicrosoft.com";
-                                        o.ClientId = "ClientId";
-                                        o.SignUpSignInPolicyId = "B2c_1_SiSu";
-                                    }
-                                );
+                    builder.ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
+                            .AddAzureADB2CBearer(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.SignUpSignInPolicyId = "B2c_1_SiSu";
+                            });
 
-                            services.Configure<JwtBearerOptions>(
-                                AzureADB2CDefaults.JwtBearerAuthenticationScheme,
-                                o =>
+                        services.Configure<JwtBearerOptions>(
+                            AzureADB2CDefaults.JwtBearerAuthenticationScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        Issuer = "https://www.example.com",
-                                    };
-                                }
-                            );
-                        }
-                    )
+                                    Issuer = "https://www.example.com",
+                                };
+                            }
+                        );
+                    })
             )
             .CreateDefaultClient();
 

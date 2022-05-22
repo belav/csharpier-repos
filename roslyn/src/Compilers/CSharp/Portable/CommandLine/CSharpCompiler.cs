@@ -87,20 +87,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 RoslynParallel.For(
                     0,
                     sourceFiles.Length,
-                    UICultureUtilities.WithCurrentUICulture<int>(
-                        i =>
-                        {
-                            //NOTE: order of trees is important!!
-                            trees[i] = ParseFile(
-                                parseOptions,
-                                scriptParseOptions,
-                                ref hadErrors,
-                                sourceFiles[i],
-                                diagnosticBag,
-                                out normalizedFilePaths[i]
-                            );
-                        }
-                    ),
+                    UICultureUtilities.WithCurrentUICulture<int>(i =>
+                    {
+                        //NOTE: order of trees is important!!
+                        trees[i] = ParseFile(
+                            parseOptions,
+                            scriptParseOptions,
+                            ref hadErrors,
+                            sourceFiles[i],
+                            diagnosticBag,
+                            out normalizedFilePaths[i]
+                        );
+                    }),
                     CancellationToken.None
                 );
             }

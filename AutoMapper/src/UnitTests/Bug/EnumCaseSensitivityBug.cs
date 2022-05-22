@@ -22,12 +22,10 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    // not creating a map on purpose to trigger use of EnumToEnumMapper
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                // not creating a map on purpose to trigger use of EnumToEnumMapper
+            });
 
         protected override void Because_of()
         {

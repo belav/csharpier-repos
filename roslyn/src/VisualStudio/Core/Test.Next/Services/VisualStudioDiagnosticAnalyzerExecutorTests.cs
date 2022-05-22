@@ -429,20 +429,18 @@ End Class";
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
+                context.RegisterSyntaxTreeAction(c =>
+                {
+                    for (var i = 0; i < 10000; i++)
                     {
-                        for (var i = 0; i < 10000; i++)
-                        {
-                            c.ReportDiagnostic(
-                                Diagnostic.Create(
-                                    _supportedDiagnostics[0],
-                                    c.Tree.GetLocation(TextSpan.FromBounds(0, 1))
-                                )
-                            );
-                        }
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(
+                                _supportedDiagnostics[0],
+                                c.Tree.GetLocation(TextSpan.FromBounds(0, 1))
+                            )
+                        );
                     }
-                );
+                });
             }
         }
 
@@ -466,17 +464,15 @@ End Class";
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                    {
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(
-                                _supportedDiagnostics[0],
-                                c.Tree.GetLocation(TextSpan.FromBounds(0, 1))
-                            )
-                        );
-                    }
-                );
+                context.RegisterSyntaxTreeAction(c =>
+                {
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(
+                            _supportedDiagnostics[0],
+                            c.Tree.GetLocation(TextSpan.FromBounds(0, 1))
+                        )
+                    );
+                });
             }
         }
 

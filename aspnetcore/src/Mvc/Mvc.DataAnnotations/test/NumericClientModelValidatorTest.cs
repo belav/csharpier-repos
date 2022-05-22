@@ -59,14 +59,12 @@ public class NumericClientModelValidatorTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty(typeof(TypeWithNumericProperty), nameof(TypeWithNumericProperty.Id))
-            .BindingDetails(
-                d =>
-                {
-                    d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
-                        name => $"Error message about '{name}' from override."
-                    );
-                }
-            );
+            .BindingDetails(d =>
+            {
+                d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
+                    name => $"Error message about '{name}' from override."
+                );
+            });
         var metadata = provider.GetMetadataForProperty(
             typeof(TypeWithNumericProperty),
             nameof(TypeWithNumericProperty.Id)
@@ -114,14 +112,12 @@ public class NumericClientModelValidatorTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForParameter(parameter)
-            .BindingDetails(
-                d =>
-                {
-                    d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
-                        name => $"Error message about '{name}' from override."
-                    );
-                }
-            );
+            .BindingDetails(d =>
+            {
+                d.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(
+                    name => $"Error message about '{name}' from override."
+                );
+            });
         var metadata = provider.GetMetadataForParameter(parameter);
 
         var adapter = new NumericClientModelValidator();

@@ -62,21 +62,19 @@ namespace Microsoft.Extensions.FileProviders.Internal
                 _entries = new DirectoryInfo(_directory)
                     .EnumerateFileSystemInfos()
                     .Where(info => !FileSystemInfoHelper.IsExcluded(info, _filters))
-                    .Select<FileSystemInfo, IFileInfo>(
-                        info =>
+                    .Select<FileSystemInfo, IFileInfo>(info =>
+                    {
+                        if (info is FileInfo file)
                         {
-                            if (info is FileInfo file)
-                            {
-                                return new PhysicalFileInfo(file);
-                            }
-                            else if (info is DirectoryInfo dir)
-                            {
-                                return new PhysicalDirectoryInfo(dir);
-                            }
-                            // shouldn't happen unless BCL introduces new implementation of base type
-                            throw new InvalidOperationException(SR.UnexpectedFileSystemInfo);
+                            return new PhysicalFileInfo(file);
                         }
-                    );
+                        else if (info is DirectoryInfo dir)
+                        {
+                            return new PhysicalDirectoryInfo(dir);
+                        }
+                        // shouldn't happen unless BCL introduces new implementation of base type
+                        throw new InvalidOperationException(SR.UnexpectedFileSystemInfo);
+                    });
             }
             catch (Exception ex) when (ex is DirectoryNotFoundException || ex is IOException)
             {

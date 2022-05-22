@@ -40,13 +40,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ShouldMapMethod = (m => m.Name != nameof(Source.AnotherNumber));
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ShouldMapMethod = (m => m.Name != nameof(Source.AnotherNumber));
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -58,18 +56,14 @@ namespace AutoMapper.UnitTests
         {
             new Action(
                 () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.Errors.ShouldNotBeNull();
-                    ex.Errors.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(
-                        nameof(Destination.AnotherNumber)
-                    );
-                }
-            );
+            ).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+            {
+                ex.Errors.ShouldNotBeNull();
+                ex.Errors.ShouldNotBeEmpty();
+                ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
+                ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
+                ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Destination.AnotherNumber));
+            });
         }
 
         [Fact]
@@ -113,14 +107,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.IncludeSourceExtensionMethods(typeof(SourceExtensions));
-                    cfg.ShouldMapMethod = (m => m.Name != nameof(SourceExtensions.AnotherNumber));
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.IncludeSourceExtensionMethods(typeof(SourceExtensions));
+                cfg.ShouldMapMethod = (m => m.Name != nameof(SourceExtensions.AnotherNumber));
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -134,18 +126,14 @@ namespace AutoMapper.UnitTests
         {
             new Action(
                 () => Configuration.AssertConfigurationIsValid()
-            ).ShouldThrowException<AutoMapperConfigurationException>(
-                ex =>
-                {
-                    ex.Errors.ShouldNotBeNull();
-                    ex.Errors.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
-                    ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
-                    ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(
-                        nameof(Destination.AnotherNumber)
-                    );
-                }
-            );
+            ).ShouldThrowException<AutoMapperConfigurationException>(ex =>
+            {
+                ex.Errors.ShouldNotBeNull();
+                ex.Errors.ShouldNotBeEmpty();
+                ex.Errors[0].UnmappedPropertyNames.ShouldNotBeNull();
+                ex.Errors[0].UnmappedPropertyNames.ShouldNotBeEmpty();
+                ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Destination.AnotherNumber));
+            });
         }
 
         [Fact]

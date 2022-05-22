@@ -34,15 +34,13 @@ public class StartupExternallyControlled : StartupBase
     public void Start()
     {
         _host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseStartup<StartupExternallyControlled>()
-                        .UseUrls(_urls.ToArray());
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseStartup<StartupExternallyControlled>()
+                    .UseUrls(_urls.ToArray());
+            })
             .Start();
     }
 

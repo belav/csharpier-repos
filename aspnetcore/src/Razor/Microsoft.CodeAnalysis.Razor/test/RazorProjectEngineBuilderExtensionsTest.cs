@@ -17,12 +17,10 @@ public class RazorProjectEngineBuilderExtensionsTest
         var csharpLanguageVersion = CSharp.LanguageVersion.Latest;
 
         // Act
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.SetCSharpLanguageVersion(csharpLanguageVersion);
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.SetCSharpLanguageVersion(csharpLanguageVersion);
+        });
 
         // Assert
         var feature = projectEngine.EngineFeatures

@@ -132,13 +132,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return TimeSpan.Zero;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -256,15 +254,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return context.PreviousRetryCount == 0
-                                ? TimeSpan.Zero
-                                : (TimeSpan?)null;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return context.PreviousRetryCount == 0 ? TimeSpan.Zero : (TimeSpan?)null;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -371,15 +365,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return context.PreviousRetryCount == 0
-                                ? TimeSpan.Zero
-                                : (TimeSpan?)null;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return context.PreviousRetryCount == 0 ? TimeSpan.Zero : (TimeSpan?)null;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -477,13 +467,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return TimeSpan.Zero;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -599,13 +587,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return TimeSpan.Zero;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -708,13 +694,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            nextRetryDelayCallCount++;
-                            return TimeSpan.Zero;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        nextRetryDelayCallCount++;
+                        return TimeSpan.Zero;
+                    });
 
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
@@ -913,19 +897,17 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+
+                        if (retryContexts.Count == 2)
                         {
-                            retryContexts.Add(context);
-
-                            if (retryContexts.Count == 2)
-                            {
-                                secondRetryDelayTcs.SetResult();
-                            }
-
-                            return TimeSpan.Zero;
+                            secondRetryDelayTcs.SetResult();
                         }
-                    );
+
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -1042,19 +1024,17 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+
+                        if (retryContexts.Count == 2)
                         {
-                            retryContexts.Add(context);
-
-                            if (retryContexts.Count == 2)
-                            {
-                                secondRetryDelayTcs.SetResult();
-                            }
-
-                            return TimeSpan.Zero;
+                            secondRetryDelayTcs.SetResult();
                         }
-                    );
+
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -1202,13 +1182,11 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            return TimeSpan.Zero;
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        return TimeSpan.Zero;
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();
@@ -1295,14 +1273,12 @@ public partial class HubConnectionTests
                 var mockReconnectPolicy = new Mock<IRetryPolicy>();
                 mockReconnectPolicy
                     .Setup(p => p.NextRetryDelay(It.IsAny<RetryContext>()))
-                    .Returns<RetryContext>(
-                        context =>
-                        {
-                            retryContexts.Add(context);
-                            // Hopefully this test never takes over a minute.
-                            return TimeSpan.FromMinutes(1);
-                        }
-                    );
+                    .Returns<RetryContext>(context =>
+                    {
+                        retryContexts.Add(context);
+                        // Hopefully this test never takes over a minute.
+                        return TimeSpan.FromMinutes(1);
+                    });
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
 
                 await using var hubConnection = builder.Build();

@@ -213,20 +213,18 @@ public class FormActionTagHelperTest
         var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
         urlHelper
             .Setup(mock => mock.Action(It.IsAny<UrlActionContext>()))
-            .Callback<UrlActionContext>(
-                param =>
-                {
-                    Assert.Equal("delete", param.Action, StringComparer.Ordinal);
-                    Assert.Equal("books", param.Controller, StringComparer.Ordinal);
-                    Assert.Equal("test", param.Fragment, StringComparer.Ordinal);
-                    Assert.Null(param.Host);
-                    Assert.Null(param.Protocol);
-                    Assert.Equal<KeyValuePair<string, object>>(
-                        expectedRouteValues,
-                        param.Values as RouteValueDictionary
-                    );
-                }
-            )
+            .Callback<UrlActionContext>(param =>
+            {
+                Assert.Equal("delete", param.Action, StringComparer.Ordinal);
+                Assert.Equal("books", param.Controller, StringComparer.Ordinal);
+                Assert.Equal("test", param.Fragment, StringComparer.Ordinal);
+                Assert.Null(param.Host);
+                Assert.Null(param.Protocol);
+                Assert.Equal<KeyValuePair<string, object>>(
+                    expectedRouteValues,
+                    param.Values as RouteValueDictionary
+                );
+            })
             .Returns("home/index");
 
         var viewContext = new ViewContext();
@@ -279,19 +277,17 @@ public class FormActionTagHelperTest
         var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
         urlHelper
             .Setup(mock => mock.RouteUrl(It.IsAny<UrlRouteContext>()))
-            .Callback<UrlRouteContext>(
-                param =>
-                {
-                    Assert.Null(param.Host);
-                    Assert.Null(param.Protocol);
-                    Assert.Equal("test", param.Fragment, StringComparer.Ordinal);
-                    Assert.Equal("Default", param.RouteName, StringComparer.Ordinal);
-                    Assert.Equal<KeyValuePair<string, object>>(
-                        expectedRouteValues,
-                        param.Values as RouteValueDictionary
-                    );
-                }
-            )
+            .Callback<UrlRouteContext>(param =>
+            {
+                Assert.Null(param.Host);
+                Assert.Null(param.Protocol);
+                Assert.Equal("test", param.Fragment, StringComparer.Ordinal);
+                Assert.Equal("Default", param.RouteName, StringComparer.Ordinal);
+                Assert.Equal<KeyValuePair<string, object>>(
+                    expectedRouteValues,
+                    param.Values as RouteValueDictionary
+                );
+            })
             .Returns("home/index");
 
         var viewContext = new ViewContext();
@@ -483,25 +479,23 @@ public class FormActionTagHelperTest
         var urlHelper = new Mock<IUrlHelper>();
         urlHelper
             .Setup(mock => mock.RouteUrl(It.IsAny<UrlRouteContext>()))
-            .Callback<UrlRouteContext>(
-                routeContext =>
-                {
-                    var rvd = Assert.IsType<RouteValueDictionary>(routeContext.Values);
-                    Assert.Collection(
-                        rvd.OrderBy(item => item.Key),
-                        item =>
-                        {
-                            Assert.Equal("area", item.Key);
-                            Assert.Equal("test-area", item.Value);
-                        },
-                        item =>
-                        {
-                            Assert.Equal("page", item.Key);
-                            Assert.Equal("/my-page", item.Value);
-                        }
-                    );
-                }
-            )
+            .Callback<UrlRouteContext>(routeContext =>
+            {
+                var rvd = Assert.IsType<RouteValueDictionary>(routeContext.Values);
+                Assert.Collection(
+                    rvd.OrderBy(item => item.Key),
+                    item =>
+                    {
+                        Assert.Equal("area", item.Key);
+                        Assert.Equal("test-area", item.Value);
+                    },
+                    item =>
+                    {
+                        Assert.Equal("page", item.Key);
+                        Assert.Equal("/my-page", item.Value);
+                    }
+                );
+            })
             .Returns("admin/dashboard/index")
             .Verifiable();
 

@@ -44,18 +44,14 @@ public class Program
             AuthenticationStateProvider,
             ServerAuthenticationStateProvider
         >();
-        builder.Services.AddAuthorizationCore(
-            options =>
-            {
-                options.AddPolicy(
-                    "NameMustStartWithB",
-                    policy =>
-                        policy.RequireAssertion(
-                            ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false
-                        )
-                );
-            }
-        );
+        builder.Services.AddAuthorizationCore(options =>
+        {
+            options.AddPolicy(
+                "NameMustStartWithB",
+                policy =>
+                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
+            );
+        });
 
         builder.Services.AddScoped<PreserveStateService>();
 

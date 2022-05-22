@@ -643,14 +643,12 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api._timeoutControl.Initialize(mockSystemClock.UtcNow.Ticks);
 
-        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(
-            context =>
-            {
-                // Completely disable rate limiting for this stream.
-                context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = null;
-                return _readRateApplication(context);
-            }
-        );
+        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(context =>
+        {
+            // Completely disable rate limiting for this stream.
+            context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = null;
+            return _readRateApplication(context);
+        });
 
         var inboundControlStream = await Http3Api.GetInboundControlStream();
         await inboundControlStream.ExpectSettingsAsync();

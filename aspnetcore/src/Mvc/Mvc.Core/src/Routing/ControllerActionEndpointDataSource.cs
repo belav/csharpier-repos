@@ -158,19 +158,14 @@ internal class ControllerActionEndpointDataSource : ActionEndpointDataSourceBase
                         );
                     }
                 )
-                .Add(
-                    b =>
-                    {
-                        ((RouteEndpointBuilder)b).Order = order.Value;
-                        b.Metadata.Add(
-                            new DynamicControllerRouteValueTransformerMetadata(
-                                transformerType,
-                                state
-                            )
-                        );
-                        b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(DataSourceId));
-                    }
-                );
+                .Add(b =>
+                {
+                    ((RouteEndpointBuilder)b).Order = order.Value;
+                    b.Metadata.Add(
+                        new DynamicControllerRouteValueTransformerMetadata(transformerType, state)
+                    );
+                    b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(DataSourceId));
+                });
         }
     }
 }

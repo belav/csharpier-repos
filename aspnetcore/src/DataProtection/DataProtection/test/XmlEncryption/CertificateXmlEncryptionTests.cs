@@ -36,12 +36,10 @@ public class CertificateXmlEncryptorTests
         var mockInternalDecryptor = new Mock<IInternalEncryptedXmlDecryptor>();
         mockInternalDecryptor
             .Setup(o => o.PerformPreDecryptionSetup(It.IsAny<EncryptedXml>()))
-            .Callback<EncryptedXml>(
-                encryptedXml =>
-                {
-                    encryptedXml.AddKeyNameMapping("theKey", symmetricAlgorithm); // use symmetric encryption
-                }
-            );
+            .Callback<EncryptedXml>(encryptedXml =>
+            {
+                encryptedXml.AddKeyNameMapping("theKey", symmetricAlgorithm); // use symmetric encryption
+            });
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IInternalEncryptedXmlDecryptor>(

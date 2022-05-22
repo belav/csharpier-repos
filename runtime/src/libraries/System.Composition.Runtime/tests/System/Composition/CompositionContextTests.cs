@@ -17,16 +17,14 @@ namespace System.Composition.Runtime.Tests
         [InlineData(false, "contractName")]
         public void GetExport_Invoke_ReturnsExpected(bool success, string contractName)
         {
-            var context = new SubContext(
-                contract =>
-                {
-                    Assert.Equal(typeof(int), contract.ContractType);
-                    Assert.Equal(contractName, contract.ContractName);
-                    Assert.Null(contract.MetadataConstraints);
+            var context = new SubContext(contract =>
+            {
+                Assert.Equal(typeof(int), contract.ContractType);
+                Assert.Equal(contractName, contract.ContractName);
+                Assert.Null(contract.MetadataConstraints);
 
-                    return (success, 10);
-                }
-            );
+                return (success, 10);
+            });
             if (success)
             {
                 if (contractName == null)
@@ -94,19 +92,17 @@ namespace System.Composition.Runtime.Tests
         [InlineData(false, "contractName")]
         public void GetExports_Invoke_ReturnsExpected(bool success, string contractName)
         {
-            var context = new SubContext(
-                contract =>
-                {
-                    Assert.Equal(typeof(object[]), contract.ContractType);
-                    Assert.Equal(contractName, contract.ContractName);
-                    Assert.Equal(
-                        new Dictionary<string, object> { { "IsImportMany", true } },
-                        contract.MetadataConstraints
-                    );
+            var context = new SubContext(contract =>
+            {
+                Assert.Equal(typeof(object[]), contract.ContractType);
+                Assert.Equal(contractName, contract.ContractName);
+                Assert.Equal(
+                    new Dictionary<string, object> { { "IsImportMany", true } },
+                    contract.MetadataConstraints
+                );
 
-                    return (success, new object[] { 10 });
-                }
-            );
+                return (success, new object[] { 10 });
+            });
             if (success)
             {
                 if (contractName == null)

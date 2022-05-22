@@ -54,14 +54,12 @@ public class Test
             {
                 var j = i;
                 dones[j] = false;
-                ThreadPool.QueueUserWorkItem(
-                    _ =>
-                    {
-                        //Console.WriteLine ("done " + j);
-                        Thread.Sleep(1);
-                        dones[j] = true;
-                    }
-                );
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    //Console.WriteLine ("done " + j);
+                    Thread.Sleep(1);
+                    dones[j] = true;
+                });
             }
 
             bool all_done;

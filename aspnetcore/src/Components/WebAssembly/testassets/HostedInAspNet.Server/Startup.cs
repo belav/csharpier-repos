@@ -75,19 +75,17 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseEndpoints(
-            endpoints =>
+        app.UseEndpoints(endpoints =>
+        {
+            if (mapAllApps || mapAlternativePathApp)
             {
-                if (mapAllApps || mapAlternativePathApp)
-                {
-                    endpoints.MapFallbackToFile("/app/{**slug:nonfile}", "app/index.html");
-                }
-
-                if (mapAllApps || !mapAlternativePathApp)
-                {
-                    endpoints.MapFallbackToFile("index.html");
-                }
+                endpoints.MapFallbackToFile("/app/{**slug:nonfile}", "app/index.html");
             }
-        );
+
+            if (mapAllApps || !mapAlternativePathApp)
+            {
+                endpoints.MapFallbackToFile("index.html");
+            }
+        });
     }
 }

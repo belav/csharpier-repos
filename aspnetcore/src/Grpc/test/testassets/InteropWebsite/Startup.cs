@@ -56,11 +56,9 @@ public class Startup
         });
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGrpcService<TestServiceImpl>();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGrpcService<TestServiceImpl>();
+        });
     }
 }

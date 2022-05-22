@@ -182,40 +182,32 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(
-                c =>
-                {
-                    instance = c.HandlerInstance;
-                }
-            );
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                instance = c.HandlerInstance;
+            });
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.HandlerInstance);
-                }
-            );
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.HandlerInstance);
+            });
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
         resultFilter
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    result = c.Result;
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                result = c.Result;
+            });
         resultFilter
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
-            .Callback<ResultExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    Assert.Same(result, c.Result);
-                }
-            );
+            .Callback<ResultExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                Assert.Same(result, c.Result);
+            });
 
         var filters = new IFilterMetadata[] { pageFilter.Object, resultFilter.Object };
 
@@ -246,40 +238,32 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(
-                c =>
-                {
-                    instance = c.HandlerInstance;
-                }
-            );
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                instance = c.HandlerInstance;
+            });
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.HandlerInstance);
-                }
-            );
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.HandlerInstance);
+            });
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
         resultFilter
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    result = c.Result;
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                result = c.Result;
+            });
         resultFilter
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
-            .Callback<ResultExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    Assert.Same(result, c.Result);
-                }
-            );
+            .Callback<ResultExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                Assert.Same(result, c.Result);
+            });
 
         var filters = new IFilterMetadata[] { pageFilter.Object, resultFilter.Object };
 
@@ -310,40 +294,32 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(
-                c =>
-                {
-                    instance = c.HandlerInstance;
-                }
-            );
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                instance = c.HandlerInstance;
+            });
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.HandlerInstance);
-                }
-            );
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.HandlerInstance);
+            });
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
         resultFilter
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    result = c.Result;
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                result = c.Result;
+            });
         resultFilter
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
-            .Callback<ResultExecutedContext>(
-                c =>
-                {
-                    Assert.Same(instance, c.Controller);
-                    Assert.Same(result, c.Result);
-                }
-            );
+            .Callback<ResultExecutedContext>(c =>
+            {
+                Assert.Same(instance, c.Controller);
+                Assert.Same(result, c.Result);
+            });
 
         var filters = new IFilterMetadata[] { pageFilter.Object, resultFilter.Object };
 
@@ -380,12 +356,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(
-                c =>
-                {
-                    instance = c.HandlerInstance;
-                }
-            );
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                instance = c.HandlerInstance;
+            });
         var invoker = CreateInvoker(new[] { pageFilter.Object }, descriptor);
 
         // Act
@@ -408,12 +382,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter1 = new Mock<IPageFilter>(MockBehavior.Strict);
         filter1
             .Setup(f => f.OnPageHandlerSelected(It.IsAny<PageHandlerSelectedContext>()))
-            .Callback<PageHandlerSelectedContext>(
-                c =>
-                {
-                    handler = c.HandlerMethod = c.ActionDescriptor.HandlerMethods[1];
-                }
-            )
+            .Callback<PageHandlerSelectedContext>(c =>
+            {
+                handler = c.HandlerMethod = c.ActionDescriptor.HandlerMethods[1];
+            })
             .Verifiable();
         filter1
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
@@ -482,12 +454,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter1 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         filter1
             .Setup(f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()))
-            .Callback<PageHandlerSelectedContext>(
-                c =>
-                {
-                    handler = c.HandlerMethod = c.ActionDescriptor.HandlerMethods[1];
-                }
-            )
+            .Callback<PageHandlerSelectedContext>(c =>
+            {
+                handler = c.HandlerMethod = c.ActionDescriptor.HandlerMethods[1];
+            })
             .Returns(Task.CompletedTask)
             .Verifiable();
         filter1
@@ -578,17 +548,15 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    pageHandlerExecutedCalled = true;
-                    var result = c.Result;
-                    var pageResult = Assert.IsType<PageResult>(result);
-                    Assert.IsType<ViewDataDictionary<TestPage>>(pageResult.ViewData);
-                    Assert.IsType<TestPage>(pageResult.Model);
-                    Assert.Null(pageResult.Page);
-                }
-            );
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                pageHandlerExecutedCalled = true;
+                var result = c.Result;
+                var pageResult = Assert.IsType<PageResult>(result);
+                Assert.IsType<ViewDataDictionary<TestPage>>(pageResult.ViewData);
+                Assert.IsType<TestPage>(pageResult.Model);
+                Assert.Null(pageResult.Page);
+            });
         var invoker = CreateInvoker(
             new IFilterMetadata[] { pageFilter.Object },
             result: new PageResult()
@@ -1342,17 +1310,15 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
         filter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception so the test doesn't throw.
-                    Assert.Same(Exception, c.Exception);
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception so the test doesn't throw.
+                Assert.Same(Exception, c.Exception);
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object, exception: Exception);
@@ -1388,28 +1354,24 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
         filter1
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception so the test doesn't throw.
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception so the test doesn't throw.
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var filter2 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(filter2);
         filter2
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(
-                c =>
-                {
-                    throw exception;
-                }
-            )
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object });
@@ -1476,12 +1438,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
         filter2
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    throw exception;
-                }
-            )
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new IFilterMetadata[] { filter1.Object, filter2.Object });
@@ -1525,16 +1485,14 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(
-                c =>
-                {
-                    // Handle the exception so the test doesn't throw.
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                // Handle the exception so the test doesn't throw.
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
 
-                    c.Result = result.Object;
-                }
-            )
+                c.Result = result.Object;
+            })
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);

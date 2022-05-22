@@ -82,28 +82,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             // We have a client name, so we need to filter to only documents that match that name
-            return documents.WhereAsArray(
-                document =>
+            return documents.WhereAsArray(document =>
+            {
+                var documentPropertiesService =
+                    document.Services.GetService<DocumentPropertiesService>();
+
+                // When a client name is specified, only return documents that have a matching client name.
+                // Allows the razor lsp server to return results only for razor documents.
+                // This workaround should be removed when https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1106064/
+                // is fixed (so that the razor language server is only asked about razor buffers).
+                var documentClientName = documentPropertiesService?.DiagnosticsLspClientName;
+                var clientNameMatch = Equals(documentClientName, clientName);
+                if (!clientNameMatch && logger is not null)
                 {
-                    var documentPropertiesService =
-                        document.Services.GetService<DocumentPropertiesService>();
-
-                    // When a client name is specified, only return documents that have a matching client name.
-                    // Allows the razor lsp server to return results only for razor documents.
-                    // This workaround should be removed when https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1106064/
-                    // is fixed (so that the razor language server is only asked about razor buffers).
-                    var documentClientName = documentPropertiesService?.DiagnosticsLspClientName;
-                    var clientNameMatch = Equals(documentClientName, clientName);
-                    if (!clientNameMatch && logger is not null)
-                    {
-                        logger.TraceInformation(
-                            $"Found matching document but it's client name '{documentClientName}' is not a match."
-                        );
-                    }
-
-                    return clientNameMatch;
+                    logger.TraceInformation(
+                        $"Found matching document but it's client name '{documentClientName}' is not a match."
+                    );
                 }
-            );
+
+                return clientNameMatch;
+            });
         }
 
         public static Document? GetDocument(

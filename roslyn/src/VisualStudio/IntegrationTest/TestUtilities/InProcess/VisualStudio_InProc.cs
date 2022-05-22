@@ -48,25 +48,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         }
 
         public void ActivateMainWindow() =>
-            InvokeOnUIThread(
-                cancellationToken =>
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var dte = GetDTE();
+
+                var activeVisualStudioWindow = dte.ActiveWindow.HWnd;
+                Debug.WriteLine($"DTE.ActiveWindow.HWnd = {activeVisualStudioWindow}");
+                if (activeVisualStudioWindow != IntPtr.Zero)
                 {
-                    var dte = GetDTE();
-
-                    var activeVisualStudioWindow = dte.ActiveWindow.HWnd;
-                    Debug.WriteLine($"DTE.ActiveWindow.HWnd = {activeVisualStudioWindow}");
-                    if (activeVisualStudioWindow != IntPtr.Zero)
-                    {
-                        if (IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
-                            return;
-                    }
-
-                    activeVisualStudioWindow = dte.MainWindow.HWnd;
-                    Debug.WriteLine($"DTE.MainWindow.HWnd = {activeVisualStudioWindow}");
-                    if (!IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
-                        throw new InvalidOperationException("Failed to set the foreground window.");
+                    if (IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
+                        return;
                 }
-            );
+
+                activeVisualStudioWindow = dte.MainWindow.HWnd;
+                Debug.WriteLine($"DTE.MainWindow.HWnd = {activeVisualStudioWindow}");
+                if (!IntegrationHelper.TrySetForegroundWindow(activeVisualStudioWindow))
+                    throw new InvalidOperationException("Failed to set the foreground window.");
+            });
 
         public int GetErrorListErrorCount()
         {

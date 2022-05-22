@@ -171,20 +171,18 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
             // There's no helper for UseApplicationName, but we need to
             // set the application name to the target entry point
             // assembly name.
-            deferredHostBuilder.ConfigureHostConfiguration(
-                config =>
-                {
-                    config.AddInMemoryCollection(
-                        new Dictionary<string, string?>
+            deferredHostBuilder.ConfigureHostConfiguration(config =>
+            {
+                config.AddInMemoryCollection(
+                    new Dictionary<string, string?>
+                    {
                         {
-                            {
-                                HostDefaults.ApplicationKey,
-                                typeof(TEntryPoint).Assembly.GetName()?.Name ?? string.Empty
-                            }
+                            HostDefaults.ApplicationKey,
+                            typeof(TEntryPoint).Assembly.GetName()?.Name ?? string.Empty
                         }
-                    );
-                }
-            );
+                    }
+                );
+            });
             // This helper call does the hard work to determine if we can fallback to diagnostic source events to get the host instance
             var factory = HostFactoryResolver.ResolveHostFactory(
                 typeof(TEntryPoint).Assembly,
@@ -225,14 +223,12 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
     [MemberNotNull(nameof(_server))]
     private void ConfigureHostBuilder(IHostBuilder hostBuilder)
     {
-        hostBuilder.ConfigureWebHost(
-            webHostBuilder =>
-            {
-                SetContentRoot(webHostBuilder);
-                _configuration(webHostBuilder);
-                webHostBuilder.UseTestServer();
-            }
-        );
+        hostBuilder.ConfigureWebHost(webHostBuilder =>
+        {
+            SetContentRoot(webHostBuilder);
+            _configuration(webHostBuilder);
+            webHostBuilder.UseTestServer();
+        });
         _host = CreateHost(hostBuilder);
         _server = (TestServer)_host.Services.GetRequiredService<IServer>();
     }

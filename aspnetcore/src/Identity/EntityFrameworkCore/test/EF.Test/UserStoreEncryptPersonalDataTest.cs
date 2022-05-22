@@ -20,17 +20,15 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
     protected override void SetupAddIdentity(IServiceCollection services)
     {
         services
-            .AddIdentity<IdentityUser, IdentityRole>(
-                options =>
-                {
-                    options.Stores.ProtectPersonalData = true;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.User.AllowedUserNameCharacters = null;
-                }
-            )
+            .AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Stores.ProtectPersonalData = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.User.AllowedUserNameCharacters = null;
+            })
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<TestDbContext>()
             .AddPersonalDataProtection<SillyEncryptor, DefaultKeyRing>();
@@ -186,12 +184,10 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         {
             var services = new ServiceCollection().AddLogging();
             services
-                .AddIdentity<CustomUser, IdentityRole>(
-                    options =>
-                    {
-                        options.Stores.ProtectPersonalData = protect;
-                    }
-                )
+                .AddIdentity<CustomUser, IdentityRole>(options =>
+                {
+                    options.Stores.ProtectPersonalData = protect;
+                })
                 .AddEntityFrameworkStores<TContext>()
                 .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
 
@@ -289,12 +285,10 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
         {
             var services = new ServiceCollection().AddLogging();
             services
-                .AddIdentity<CustomUser, IdentityRole>(
-                    options =>
-                    {
-                        options.Stores.ProtectPersonalData = true;
-                    }
-                )
+                .AddIdentity<CustomUser, IdentityRole>(options =>
+                {
+                    options.Stores.ProtectPersonalData = true;
+                })
                 .AddEntityFrameworkStores<IdentityDbContext<CustomUser>>()
                 .AddPersonalDataProtection<InkProtector, DefaultKeyRing>();
             var dbOptions = new DbContextOptionsBuilder()

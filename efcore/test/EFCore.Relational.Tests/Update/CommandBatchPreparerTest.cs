@@ -1253,20 +1253,16 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         {
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<FakeEntity>(
-                b =>
-                {
-                    b.Ignore(c => c.UniqueValue);
-                    b.Ignore(c => c.RelatedId);
-                }
-            );
+            modelBuilder.Entity<FakeEntity>(b =>
+            {
+                b.Ignore(c => c.UniqueValue);
+                b.Ignore(c => c.RelatedId);
+            });
 
-            modelBuilder.Entity<RelatedFakeEntity>(
-                b =>
-                {
-                    b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.Id);
-                }
-            );
+            modelBuilder.Entity<RelatedFakeEntity>(b =>
+            {
+                b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.Id);
+            });
 
             return modelBuilder.Model.FinalizeModel();
         }
@@ -1275,22 +1271,16 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         {
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<FakeEntity>(
-                b =>
-                {
-                    b.HasIndex(c => c.Value);
-                    b.HasIndex(c => c.UniqueValue).IsUnique();
-                }
-            );
+            modelBuilder.Entity<FakeEntity>(b =>
+            {
+                b.HasIndex(c => c.Value);
+                b.HasIndex(c => c.UniqueValue).IsUnique();
+            });
 
-            modelBuilder.Entity<RelatedFakeEntity>(
-                b =>
-                {
-                    b.HasOne<FakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
-                }
-            );
+            modelBuilder.Entity<RelatedFakeEntity>(b =>
+            {
+                b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
+            });
 
             modelBuilder
                 .Entity<FakeEntity>()
@@ -1305,22 +1295,16 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         {
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<FakeEntity>(
-                b =>
-                {
-                    b.HasIndex(c => c.Value);
-                    b.HasIndex(c => c.UniqueValue).IsUnique();
-                }
-            );
+            modelBuilder.Entity<FakeEntity>(b =>
+            {
+                b.HasIndex(c => c.Value);
+                b.HasIndex(c => c.UniqueValue).IsUnique();
+            });
 
-            modelBuilder.Entity<RelatedFakeEntity>(
-                b =>
-                {
-                    b.HasOne<FakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
-                }
-            );
+            modelBuilder.Entity<RelatedFakeEntity>(b =>
+            {
+                b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
+            });
 
             modelBuilder
                 .Entity<FakeEntity>()
@@ -1328,14 +1312,12 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
                 .WithOne()
                 .HasForeignKey<FakeEntity>(c => c.RelatedId);
 
-            modelBuilder.Entity<AnotherFakeEntity>(
-                b =>
-                {
-                    b.HasOne<RelatedFakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<AnotherFakeEntity>(e => e.AnotherId);
-                }
-            );
+            modelBuilder.Entity<AnotherFakeEntity>(b =>
+            {
+                b.HasOne<RelatedFakeEntity>()
+                    .WithOne()
+                    .HasForeignKey<AnotherFakeEntity>(e => e.AnotherId);
+            });
 
             return modelBuilder.Model.FinalizeModel();
         }
@@ -1346,23 +1328,17 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
 
             modelBuilder.Entity<FakeEntity>();
 
-            modelBuilder.Entity<RelatedFakeEntity>(
-                b =>
-                {
-                    b.HasOne<FakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
-                }
-            );
+            modelBuilder.Entity<RelatedFakeEntity>(b =>
+            {
+                b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.RelatedId);
+            });
 
-            modelBuilder.Entity<AnotherFakeEntity>(
-                b =>
-                {
-                    b.HasOne<RelatedFakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<AnotherFakeEntity>(c => c.AnotherId);
-                }
-            );
+            modelBuilder.Entity<AnotherFakeEntity>(b =>
+            {
+                b.HasOne<RelatedFakeEntity>()
+                    .WithOne()
+                    .HasForeignKey<AnotherFakeEntity>(c => c.AnotherId);
+            });
 
             return modelBuilder.Model.FinalizeModel();
         }
@@ -1371,31 +1347,23 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         {
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<FakeEntity>(
-                b =>
-                {
-                    b.Ignore(c => c.UniqueValue);
-                    b.Property(c => c.RelatedId).IsConcurrencyToken().HasColumnName("RelatedId");
-                }
-            );
+            modelBuilder.Entity<FakeEntity>(b =>
+            {
+                b.Ignore(c => c.UniqueValue);
+                b.Property(c => c.RelatedId).IsConcurrencyToken().HasColumnName("RelatedId");
+            });
 
-            modelBuilder.Entity<RelatedFakeEntity>(
-                b =>
-                {
-                    b.Property(c => c.RelatedId).IsConcurrencyToken().HasColumnName("RelatedId");
-                    b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.Id);
-                    b.ToTable(nameof(FakeEntity));
-                }
-            );
+            modelBuilder.Entity<RelatedFakeEntity>(b =>
+            {
+                b.Property(c => c.RelatedId).IsConcurrencyToken().HasColumnName("RelatedId");
+                b.HasOne<FakeEntity>().WithOne().HasForeignKey<RelatedFakeEntity>(c => c.Id);
+                b.ToTable(nameof(FakeEntity));
+            });
 
-            modelBuilder.Entity<DerivedRelatedFakeEntity>(
-                b =>
-                {
-                    b.HasOne<AnotherFakeEntity>()
-                        .WithOne()
-                        .HasForeignKey<AnotherFakeEntity>(c => c.Id);
-                }
-            );
+            modelBuilder.Entity<DerivedRelatedFakeEntity>(b =>
+            {
+                b.HasOne<AnotherFakeEntity>().WithOne().HasForeignKey<AnotherFakeEntity>(c => c.Id);
+            });
 
             modelBuilder.Entity<AnotherFakeEntity>().ToTable(nameof(FakeEntity));
 

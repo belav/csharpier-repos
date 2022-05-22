@@ -29,13 +29,11 @@ namespace AutoMapper.UnitTests
             : AutoMapperSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ITestDomainItem, TestDtoItem>()
-                            .ForMember(d => d.Id, s => s.MapFrom(x => x.ItemId));
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ITestDomainItem, TestDtoItem>()
+                        .ForMember(d => d.Id, s => s.MapFrom(x => x.ItemId));
+                });
 
             [Fact]
             public void should_map_the_id_property()
@@ -81,23 +79,21 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>();
-                        cfg.CreateMap<DateTime?, MyCustomDate>()
-                            .ConvertUsing(
-                                src =>
-                                    src.HasValue
-                                        ? new MyCustomDate(
-                                            src.Value.Day,
-                                            src.Value.Month,
-                                            src.Value.Year
-                                        )
-                                        : null
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<DateTime?, MyCustomDate>()
+                        .ConvertUsing(
+                            src =>
+                                src.HasValue
+                                    ? new MyCustomDate(
+                                        src.Value.Day,
+                                        src.Value.Month,
+                                        src.Value.Year
+                                    )
+                                    : null
+                        );
+                });
 
             protected override void Because_of()
             {
@@ -123,12 +119,10 @@ namespace AutoMapper.UnitTests
         public class TestEnumerable : AutoMapperSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Person, PersonModel>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Person, PersonModel>();
+                });
 
             [Fact]
             public void MapsEnumerableTypes()

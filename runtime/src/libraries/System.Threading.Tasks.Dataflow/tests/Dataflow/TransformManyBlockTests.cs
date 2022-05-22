@@ -842,14 +842,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                     dbo
                                 );
 
-                            TransformBlock<int, int> verifier = new TransformBlock<int, int>(
-                                i =>
-                                {
-                                    Assert.Equal(expected: nextExpectedValue, actual: i);
-                                    nextExpectedValue++;
-                                    return i;
-                                }
-                            );
+                            TransformBlock<int, int> verifier = new TransformBlock<int, int>(i =>
+                            {
+                                Assert.Equal(expected: nextExpectedValue, actual: i);
+                                nextExpectedValue++;
+                                return i;
+                            });
 
                             transform.LinkTo(verifier);
                             verifier.LinkTo(transform);

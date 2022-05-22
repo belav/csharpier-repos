@@ -233,22 +233,20 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
         private static ImmutableArray<(IParameterSymbol symbol, ISymbol capture)> CreateParameterSymbols(
             ImmutableArray<ISymbol> captures
         ) =>
-            captures.SelectAsArray(
-                static c =>
-                {
-                    var symbolType = c.GetSymbolType();
-                    Contract.ThrowIfNull(symbolType);
-                    return (
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            attributes: default,
-                            refKind: RefKind.None,
-                            isParams: false,
-                            type: symbolType,
-                            name: c.Name.ToCamelCase()
-                        ),
-                        c
-                    );
-                }
-            );
+            captures.SelectAsArray(static c =>
+            {
+                var symbolType = c.GetSymbolType();
+                Contract.ThrowIfNull(symbolType);
+                return (
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        attributes: default,
+                        refKind: RefKind.None,
+                        isParams: false,
+                        type: symbolType,
+                        name: c.Name.ToCamelCase()
+                    ),
+                    c
+                );
+            });
     }
 }

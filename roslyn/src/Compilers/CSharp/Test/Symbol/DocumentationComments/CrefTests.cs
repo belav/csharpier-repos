@@ -7812,22 +7812,20 @@ class Cat { }
 
         private static IEnumerable<CrefSyntax> GetCrefSyntaxes(CSharpCompilation compilation)
         {
-            return compilation.SyntaxTrees.SelectMany(
-                tree =>
-                {
-                    var docComments = tree.GetCompilationUnitRoot()
-                        .DescendantTrivia()
-                        .Select(trivia => trivia.GetStructure())
-                        .OfType<DocumentationCommentTriviaSyntax>();
-                    return docComments.SelectMany(
-                        docComment =>
-                            docComment
-                                .DescendantNodes()
-                                .OfType<XmlCrefAttributeSyntax>()
-                                .Select(attr => attr.Cref)
-                    );
-                }
-            );
+            return compilation.SyntaxTrees.SelectMany(tree =>
+            {
+                var docComments = tree.GetCompilationUnitRoot()
+                    .DescendantTrivia()
+                    .Select(trivia => trivia.GetStructure())
+                    .OfType<DocumentationCommentTriviaSyntax>();
+                return docComments.SelectMany(
+                    docComment =>
+                        docComment
+                            .DescendantNodes()
+                            .OfType<XmlCrefAttributeSyntax>()
+                            .Select(attr => attr.Cref)
+                );
+            });
         }
 
         private static Symbol GetReferencedSymbol(

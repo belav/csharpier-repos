@@ -122,20 +122,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
                 var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
-                var accessorReferences = propertyReferences.WhereAsArray(
-                    loc =>
-                    {
-                        var accessors = GetReferencedAccessorSymbols(
-                            syntaxFacts,
-                            semanticFacts,
-                            semanticModel,
-                            property,
-                            loc.Node,
-                            cancellationToken
-                        );
-                        return accessors.Contains(symbol);
-                    }
-                );
+                var accessorReferences = propertyReferences.WhereAsArray(loc =>
+                {
+                    var accessors = GetReferencedAccessorSymbols(
+                        syntaxFacts,
+                        semanticFacts,
+                        semanticModel,
+                        property,
+                        loc.Node,
+                        cancellationToken
+                    );
+                    return accessors.Contains(symbol);
+                });
 
                 references = references.AddRange(accessorReferences);
             }

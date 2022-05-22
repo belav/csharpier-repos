@@ -325,12 +325,10 @@ namespace System.Net.NetworkInformation
                     SendOrPostCallback callback =
                         _onPingCompletedDelegate
                         ?? (
-                            _onPingCompletedDelegate = new SendOrPostCallback(
-                                o =>
-                                {
-                                    OnPingCompleted((PingCompletedEventArgs)o!);
-                                }
-                            )
+                            _onPingCompletedDelegate = new SendOrPostCallback(o =>
+                            {
+                                OnPingCompleted((PingCompletedEventArgs)o!);
+                            })
                         );
                     asyncOp.PostOperationCompleted(callback, e);
                 },

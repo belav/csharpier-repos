@@ -1848,50 +1848,47 @@ namespace Microsoft.EntityFrameworkCore
             CascadeTiming? deleteOrphansTiming
         )
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
+
+                var root = LoadRequiredCompositeGraph(context);
+                var parent = root.RequiredCompositeChildren.OrderBy(e => e.Id).First();
+                var child = parent.CompositeChildren.OrderBy(e => e.Id).First();
+
+                var childCount = context.Set<OptionalOverlapping2>().Count();
+
+                if ((changeMechanism & ChangeMechanism.Principal) != 0)
                 {
-                    context.ChangeTracker.DeleteOrphansTiming =
-                        deleteOrphansTiming ?? CascadeTiming.Never;
-
-                    var root = LoadRequiredCompositeGraph(context);
-                    var parent = root.RequiredCompositeChildren.OrderBy(e => e.Id).First();
-                    var child = parent.CompositeChildren.OrderBy(e => e.Id).First();
-
-                    var childCount = context.Set<OptionalOverlapping2>().Count();
-
-                    if ((changeMechanism & ChangeMechanism.Principal) != 0)
-                    {
-                        context.Entry(parent).Collection(p => p.CompositeChildren).IsModified =
-                            true;
-                    }
-
-                    if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                    {
-                        context.Entry(child).Reference(c => c.Parent).IsModified = true;
-                    }
-
-                    if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                    {
-                        context.Entry(child).Property(c => c.ParentId).IsModified = true;
-                    }
-
-                    Assert.True(context.ChangeTracker.HasChanges());
-
-                    context.SaveChanges();
-
-                    Assert.False(context.ChangeTracker.HasChanges());
-
-                    Assert.Same(child, parent.CompositeChildren.OrderBy(e => e.Id).First());
-                    Assert.Same(parent, child.Parent);
-                    Assert.Equal(parent.Id, child.ParentId);
-                    Assert.Equal(parent.ParentAlternateId, child.ParentAlternateId);
-                    Assert.Equal(root.AlternateId, child.ParentAlternateId);
-                    Assert.Same(root, child.Root);
-
-                    Assert.Equal(childCount, context.Set<OptionalOverlapping2>().Count());
+                    context.Entry(parent).Collection(p => p.CompositeChildren).IsModified = true;
                 }
-            );
+
+                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+                {
+                    context.Entry(child).Reference(c => c.Parent).IsModified = true;
+                }
+
+                if ((changeMechanism & ChangeMechanism.Fk) != 0)
+                {
+                    context.Entry(child).Property(c => c.ParentId).IsModified = true;
+                }
+
+                Assert.True(context.ChangeTracker.HasChanges());
+
+                context.SaveChanges();
+
+                Assert.False(context.ChangeTracker.HasChanges());
+
+                Assert.Same(child, parent.CompositeChildren.OrderBy(e => e.Id).First());
+                Assert.Same(parent, child.Parent);
+                Assert.Equal(parent.Id, child.ParentId);
+                Assert.Equal(parent.ParentAlternateId, child.ParentAlternateId);
+                Assert.Equal(root.AlternateId, child.ParentAlternateId);
+                Assert.Same(root, child.Root);
+
+                Assert.Equal(childCount, context.Set<OptionalOverlapping2>().Count());
+            });
         }
 
         [ConditionalTheory]

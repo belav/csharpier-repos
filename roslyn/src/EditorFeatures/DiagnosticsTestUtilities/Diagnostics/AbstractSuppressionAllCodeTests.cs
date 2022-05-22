@@ -222,17 +222,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             public override void Initialize(AnalysisContext analysisContext)
             {
-                analysisContext.RegisterSyntaxTreeAction(
-                    context =>
+                analysisContext.RegisterSyntaxTreeAction(context =>
+                {
+                    foreach (var node in AllNodes)
                     {
-                        foreach (var node in AllNodes)
-                        {
-                            context.ReportDiagnostic(
-                                Diagnostic.Create(_descriptor, node.GetLocation())
-                            );
-                        }
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(_descriptor, node.GetLocation())
+                        );
                     }
-                );
+                });
             }
         }
     }

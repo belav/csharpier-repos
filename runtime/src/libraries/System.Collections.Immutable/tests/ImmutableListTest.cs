@@ -479,12 +479,10 @@ namespace System.Collections.Immutable.Tests
             list.RemoveRange(
                 Enumerable
                     .Range(1, 1)
-                    .Select<int, int>(
-                        n =>
-                        {
-                            throw new ShouldNotBeInvokedException();
-                        }
-                    )
+                    .Select<int, int>(n =>
+                    {
+                        throw new ShouldNotBeInvokedException();
+                    })
             );
         }
 

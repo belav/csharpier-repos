@@ -435,15 +435,13 @@ public class ActionConstraintMatcherPolicyTest
         var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
         actionDescriptorProvider
             .Setup(a => a.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>()))
-            .Callback<ActionDescriptorProviderContext>(
-                c =>
+            .Callback<ActionDescriptorProviderContext>(c =>
+            {
+                for (var i = 0; i < actions.Length; i++)
                 {
-                    for (var i = 0; i < actions.Length; i++)
-                    {
-                        c.Results.Add(actions[i]);
-                    }
+                    c.Results.Add(actions[i]);
                 }
-            );
+            });
 
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
             new IActionDescriptorProvider[] { actionDescriptorProvider.Object, },

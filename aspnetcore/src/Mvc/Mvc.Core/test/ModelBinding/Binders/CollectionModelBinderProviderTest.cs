@@ -49,14 +49,12 @@ public class CollectionModelBinderProviderTest
         var context = new TestModelBinderProviderContext(modelType);
 
         Type elementType = null;
-        context.OnCreatingBinder(
-            m =>
-            {
-                Assert.Equal(typeof(int), m.ModelType);
-                elementType = m.ModelType;
-                return Mock.Of<IModelBinder>();
-            }
-        );
+        context.OnCreatingBinder(m =>
+        {
+            Assert.Equal(typeof(int), m.ModelType);
+            elementType = m.ModelType;
+            return Mock.Of<IModelBinder>();
+        });
 
         // Act
         var result = provider.GetBinder(context);
@@ -73,13 +71,11 @@ public class CollectionModelBinderProviderTest
         var provider = new CollectionModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(typeof(List<int>));
-        context.OnCreatingBinder(
-            m =>
-            {
-                Assert.Equal(typeof(int), m.ModelType);
-                return Mock.Of<IModelBinder>();
-            }
-        );
+        context.OnCreatingBinder(m =>
+        {
+            Assert.Equal(typeof(int), m.ModelType);
+            return Mock.Of<IModelBinder>();
+        });
 
         // Act
         var result = provider.GetBinder(context);

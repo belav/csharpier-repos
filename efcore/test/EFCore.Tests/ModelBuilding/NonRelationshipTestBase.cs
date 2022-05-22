@@ -118,15 +118,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Property<int>(Customer.IdProperty.Name + 1);
-                        b.Ignore(p => p.Details);
-                        b.Ignore(p => p.Orders);
-                        b.HasKey(Customer.IdProperty.Name + 1);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Property<int>(Customer.IdProperty.Name + 1);
+                    b.Ignore(p => p.Details);
+                    b.Ignore(p => p.Orders);
+                    b.HasKey(Customer.IdProperty.Name + 1);
+                });
 
                 var entity = model.FindEntityType(typeof(Customer));
 
@@ -142,14 +140,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.HasNoKey();
-                        b.Ignore(Customer.IdProperty.Name);
-                        b.HasKey(e => e.Id);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.HasNoKey();
+                    b.Ignore(Customer.IdProperty.Name);
+                    b.HasKey(e => e.Id);
+                });
 
                 var entity = modelBuilder.Model.FindEntityType(typeof(Customer));
 
@@ -189,13 +185,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<CustomerDetails>();
                 modelBuilder.Ignore<Order>();
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Property<string>(Customer.NameProperty.Name + "Shadow");
-                        b.HasKey(Customer.IdProperty.Name, Customer.NameProperty.Name + "Shadow");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Property<string>(Customer.NameProperty.Name + "Shadow");
+                    b.HasKey(Customer.IdProperty.Name, Customer.NameProperty.Name + "Shadow");
+                });
 
                 var entity = model.FindEntityType(typeof(Customer));
 
@@ -282,13 +276,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Property<int>(Customer.AlternateKeyProperty.Name + 1);
-                        b.HasAlternateKey(Customer.AlternateKeyProperty.Name + 1);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Property<int>(Customer.AlternateKeyProperty.Name + 1);
+                    b.HasAlternateKey(Customer.AlternateKeyProperty.Name + 1);
+                });
 
                 var entity = model.FindEntityType(typeof(Customer));
 
@@ -306,13 +298,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Can_set_alternate_key_from_clr_property_when_property_ignored()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Ignore(Customer.AlternateKeyProperty.Name);
-                        b.HasAlternateKey(e => e.AlternateKey);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Ignore(Customer.AlternateKeyProperty.Name);
+                    b.HasAlternateKey(e => e.AlternateKey);
+                });
 
                 var entity = modelBuilder.Model.FindEntityType(typeof(Customer));
 
@@ -412,17 +402,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down);
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down);
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(Quarks));
 
@@ -439,18 +427,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Ignore(e => e.Up);
-                        b.Ignore(e => e.Down);
-                        b.Ignore("Charm");
-                        b.Ignore("Strange");
-                        b.Ignore("Top");
-                        b.Ignore("Bottom");
-                        b.Ignore("Shadow");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Ignore(e => e.Up);
+                    b.Ignore(e => e.Down);
+                    b.Ignore("Charm");
+                    b.Ignore("Strange");
+                    b.Ignore("Top");
+                    b.Ignore("Bottom");
+                    b.Ignore("Shadow");
+                });
 
                 var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(Quarks));
                 Assert.Contains(nameof(Quarks.Id), entityType.GetProperties().Select(p => p.Name));
@@ -532,13 +518,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Ignore<Product>();
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Ignore("Shadow");
-                        b.Property<string>("Shadow");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Ignore("Shadow");
+                    b.Property<string>("Shadow");
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -566,13 +550,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Ignore(c => c.Details);
-                        b.Ignore(c => c.Orders);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Ignore(c => c.Details);
+                    b.Ignore(c => c.Orders);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -584,13 +566,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Ignore(c => c.Details);
-                        b.Ignore(c => c.Orders);
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Ignore(c => c.Details);
+                    b.Ignore(c => c.Orders);
+                });
                 modelBuilder.Entity<CustomerDetails>(b => b.Ignore(c => c.Customer));
 
                 var model = modelBuilder.FinalizeModel();
@@ -617,17 +597,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).IsRequired();
-                        b.Property(e => e.Down).IsRequired();
-                        b.Property<int>("Charm").IsRequired();
-                        b.Property<string>("Strange").IsRequired();
-                        b.Property<int>("Top").IsRequired();
-                        b.Property<string>("Bottom").IsRequired();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).IsRequired();
+                    b.Property(e => e.Down).IsRequired();
+                    b.Property<int>("Charm").IsRequired();
+                    b.Property<string>("Strange").IsRequired();
+                    b.Property<int>("Top").IsRequired();
+                    b.Property<string>("Bottom").IsRequired();
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -645,14 +623,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Down).IsRequired(false);
-                        b.Property<string>("Strange").IsRequired(false);
-                        b.Property<string>("Bottom").IsRequired(false);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Down).IsRequired(false);
+                    b.Property<string>("Strange").IsRequired(false);
+                    b.Property<string>("Bottom").IsRequired(false);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -675,13 +651,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         .Throws<InvalidOperationException>(
                             () =>
                                 CreateModelBuilder()
-                                    .Entity<Quarks>(
-                                        b =>
-                                        {
-                                            b.HasAlternateKey(e => new { e.Down });
-                                            b.Property(e => e.Down).IsRequired(false);
-                                        }
-                                    )
+                                    .Entity<Quarks>(b =>
+                                    {
+                                        b.HasAlternateKey(e => new { e.Down });
+                                        b.Property(e => e.Down).IsRequired(false);
+                                    })
                         )
                         .Message
                 );
@@ -692,37 +666,35 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        Assert.Equal(
-                            CoreStrings.CannotBeNullable("Up", "Quarks", "int"),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Up).IsRequired(false)
-                                )
-                                .Message
-                        );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    Assert.Equal(
+                        CoreStrings.CannotBeNullable("Up", "Quarks", "int"),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.Property(e => e.Up).IsRequired(false)
+                            )
+                            .Message
+                    );
 
-                        Assert.Equal(
-                            CoreStrings.CannotBeNullable("Charm", "Quarks", "int"),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property<int>("Charm").IsRequired(false)
-                                )
-                                .Message
-                        );
+                    Assert.Equal(
+                        CoreStrings.CannotBeNullable("Charm", "Quarks", "int"),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.Property<int>("Charm").IsRequired(false)
+                            )
+                            .Message
+                    );
 
-                        Assert.Equal(
-                            CoreStrings.CannotBeNullable("Top", "Quarks", "int"),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property<int>("Top").IsRequired(false)
-                                )
-                                .Message
-                        );
-                    }
-                );
+                    Assert.Equal(
+                        CoreStrings.CannotBeNullable("Top", "Quarks", "int"),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.Property<int>("Top").IsRequired(false)
+                            )
+                            .Message
+                    );
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -737,15 +709,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Up");
-                        b.Property<int>("Gluon");
-                        b.Property<string>("Down");
-                        b.Property<string>("Photon");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Up");
+                    b.Property<int>("Gluon");
+                    b.Property<string>("Down");
+                    b.Property<string>("Photon");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(Quarks));
@@ -770,20 +740,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).IsConcurrencyToken();
-                        b.Property(e => e.Down).IsConcurrencyToken(false);
-                        b.Property<int>("Charm").IsConcurrencyToken();
-                        b.Property<string>("Strange").IsConcurrencyToken(false);
-                        b.Property<int>("Top").IsConcurrencyToken();
-                        b.Property<string>("Bottom").IsConcurrencyToken(false);
-                        b.HasChangeTrackingStrategy(
-                            ChangeTrackingStrategy.ChangingAndChangedNotifications
-                        );
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).IsConcurrencyToken();
+                    b.Property(e => e.Down).IsConcurrencyToken(false);
+                    b.Property<int>("Charm").IsConcurrencyToken();
+                    b.Property<string>("Strange").IsConcurrencyToken(false);
+                    b.Property<int>("Top").IsConcurrencyToken();
+                    b.Property<string>("Bottom").IsConcurrencyToken(false);
+                    b.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangingAndChangedNotifications
+                    );
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(Quarks));
@@ -818,18 +786,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down)
-                            .HasField("_forDown")
-                            .UsePropertyAccessMode(PropertyAccessMode.Field);
-                        b.Property<int>("Charm").UsePropertyAccessMode(PropertyAccessMode.Property);
-                        b.Property<string>("Strange")
-                            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down)
+                        .HasField("_forDown")
+                        .UsePropertyAccessMode(PropertyAccessMode.Field);
+                    b.Property<int>("Charm").UsePropertyAccessMode(PropertyAccessMode.Property);
+                    b.Property<string>("Strange")
+                        .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -859,22 +825,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                modelBuilder.Entity<Hob>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id1);
-                    }
-                );
+                modelBuilder.Entity<Hob>(b =>
+                {
+                    b.HasKey(e => e.Id1);
+                });
                 modelBuilder.Ignore<Nob>();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
-                        b.Property(e => e.Up).UsePropertyAccessMode(PropertyAccessMode.Property);
-                        b.Property(e => e.Down).HasField("_forDown");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+                    b.Property(e => e.Up).UsePropertyAccessMode(PropertyAccessMode.Property);
+                    b.Property(e => e.Down).HasField("_forDown");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 Assert.Equal(PropertyAccessMode.Field, model.GetPropertyAccessMode());
@@ -906,17 +868,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down).HasConversion<byte[]>();
-                        b.Property<int>("Charm")
-                            .HasConversion(typeof(long), typeof(CustomValueComparer<int>));
-                        b.Property<string>("Strange").HasConversion<byte[]>();
-                        b.Property<string>("Strange").HasConversion((Type)null);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down).HasConversion<byte[]>();
+                    b.Property<int>("Charm")
+                        .HasConversion(typeof(long), typeof(CustomValueComparer<int>));
+                    b.Property<string>("Strange").HasConversion<byte[]>();
+                    b.Property<string>("Strange").HasConversion((Type)null);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -947,15 +907,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     c => c.Properties<string>().HaveConversion<byte[]>()
                 );
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down);
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down);
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -977,16 +935,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 ValueConverter stringConverter = new StringToBytesConverter(Encoding.UTF8);
                 ValueConverter intConverter = new CastingConverter<int, long>();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down).HasConversion(stringConverter);
-                        b.Property<int>("Charm").HasConversion(intConverter);
-                        b.Property<string>("Strange").HasConversion(stringConverter);
-                        b.Property<string>("Strange").HasConversion((ValueConverter)null);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down).HasConversion(stringConverter);
+                    b.Property<int>("Charm").HasConversion(intConverter);
+                    b.Property<string>("Strange").HasConversion(stringConverter);
+                    b.Property<string>("Strange").HasConversion((ValueConverter)null);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -1002,21 +958,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down).HasConversion(typeof(UTF8StringToBytesConverter));
-                        b.Property<int>("Charm")
-                            .HasConversion<CastingConverter<int, long>, CustomValueComparer<int>>();
-                        b.Property<string>("Strange")
-                            .HasConversion(
-                                typeof(UTF8StringToBytesConverter),
-                                typeof(CustomValueComparer<string>)
-                            );
-                        b.Property<string>("Strange").HasConversion((ValueConverter)null, null);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down).HasConversion(typeof(UTF8StringToBytesConverter));
+                    b.Property<int>("Charm")
+                        .HasConversion<CastingConverter<int, long>, CustomValueComparer<int>>();
+                    b.Property<string>("Strange")
+                        .HasConversion(
+                            typeof(UTF8StringToBytesConverter),
+                            typeof(CustomValueComparer<string>)
+                        );
+                    b.Property<string>("Strange").HasConversion((ValueConverter)null, null);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -1052,15 +1006,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down)
-                            .HasConversion(v => v.ToCharArray(), v => new string(v));
-                        b.Property<int>("Charm").HasConversion(v => (long)v, v => (int)v);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down).HasConversion(v => v.ToCharArray(), v => new string(v));
+                    b.Property<int>("Charm").HasConversion(v => (long)v, v => (int)v);
+                });
 
                 var model = (IReadOnlyModel)modelBuilder.Model;
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1075,23 +1026,21 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<DynamicProperty>(
-                    b =>
-                    {
-                        b.Property(e => e.ExpandoObject)
-                            .HasConversion(
-                                v => (string)((IDictionary<string, object>)v)["Value"],
-                                v => DeserializeExpandoObject(v)
-                            );
-
-                        var comparer = new ValueComparer<ExpandoObject>(
-                            (v1, v2) => v1.SequenceEqual(v2),
-                            v => v.GetHashCode()
+                modelBuilder.Entity<DynamicProperty>(b =>
+                {
+                    b.Property(e => e.ExpandoObject)
+                        .HasConversion(
+                            v => (string)((IDictionary<string, object>)v)["Value"],
+                            v => DeserializeExpandoObject(v)
                         );
 
-                        b.Property(e => e.ExpandoObject).Metadata.SetValueComparer(comparer);
-                    }
-                );
+                    var comparer = new ValueComparer<ExpandoObject>(
+                        (v1, v2) => v1.SequenceEqual(v2),
+                        v => v.GetHashCode()
+                    );
+
+                    b.Property(e => e.ExpandoObject).Metadata.SetValueComparer(comparer);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1134,15 +1083,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Properties_can_have_value_converter_configured_by_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties(typeof(IWrapped<>)).AreUnicode(false);
-                        c.Properties<WrappedStringBase>().HaveMaxLength(20);
-                        c.Properties<WrappedString>()
-                            .HaveConversion(typeof(WrappedStringToStringConverter));
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties(typeof(IWrapped<>)).AreUnicode(false);
+                    c.Properties<WrappedStringBase>().HaveMaxLength(20);
+                    c.Properties<WrappedString>()
+                        .HaveConversion(typeof(WrappedStringToStringConverter));
+                });
 
                 modelBuilder.Entity<WrappedStringEntity>();
 
@@ -1161,23 +1108,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Value_converter_configured_on_non_nullable_type_is_applied()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>()
-                            .HaveConversion<
-                                NumberToStringConverter<int>,
-                                CustomValueComparer<int>
-                            >();
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>()
+                        .HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>();
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int?>("Wierd");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int?>("Wierd");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1194,28 +1134,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Value_converter_configured_on_nullable_type_overrides_non_nullable()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int?>()
-                            .HaveConversion<
-                                NumberToStringConverter<int?>,
-                                CustomValueComparer<int?>
-                            >();
-                        c.Properties<int>()
-                            .HaveConversion<
-                                NumberToStringConverter<int>,
-                                CustomValueComparer<int>
-                            >();
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int?>()
+                        .HaveConversion<NumberToStringConverter<int?>, CustomValueComparer<int?>>();
+                    c.Properties<int>()
+                        .HaveConversion<NumberToStringConverter<int>, CustomValueComparer<int>>();
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int?>("Wierd");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int?>("Wierd");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1232,13 +1162,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Value_converter_configured_on_base_type_is_not_applied()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<WrappedStringBase>()
-                            .HaveConversion(typeof(WrappedStringToStringConverter));
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<WrappedStringBase>()
+                        .HaveConversion(typeof(WrappedStringToStringConverter));
+                });
 
                 modelBuilder.Entity<WrappedStringEntity>();
 
@@ -1284,13 +1212,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Throws_for_conflicting_base_configurations_by_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<WrappedString>();
-                        c.IgnoreAny<IWrapped<string>>();
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<WrappedString>();
+                    c.IgnoreAny<IWrapped<string>>();
+                });
 
                 Assert.Equal(
                     CoreStrings.TypeConfigurationConflict(
@@ -1312,23 +1238,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        Assert.Equal(
-                            CoreStrings.ConverterPropertyMismatch("string", "Quarks", "Up", "int"),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () =>
-                                        b.Property(e => e.Up)
-                                            .HasConversion(
-                                                new StringToBytesConverter(Encoding.UTF8)
-                                            )
-                                )
-                                .Message
-                        );
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    Assert.Equal(
+                        CoreStrings.ConverterPropertyMismatch("string", "Quarks", "Up", "int"),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () =>
+                                    b.Property(e => e.Up)
+                                        .HasConversion(new StringToBytesConverter(Encoding.UTF8))
+                            )
+                            .Message
+                    );
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1340,14 +1262,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Up").HasField("_forUp");
-                        b.Property(e => e.Down).HasField("_forDown");
-                        b.Property<int?>("_forWierd").HasField("_forWierd");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Up").HasField("_forUp");
+                    b.Property(e => e.Down).HasField("_forDown");
+                    b.Property<int?>("_forWierd").HasField("_forWierd");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1362,23 +1282,21 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        Assert.Equal(
-                            CoreStrings.MissingBackingField(
-                                "_notFound",
-                                nameof(Quarks.Down),
-                                nameof(Quarks)
-                            ),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Down).HasField("_notFound")
-                                )
-                                .Message
-                        );
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    Assert.Equal(
+                        CoreStrings.MissingBackingField(
+                            "_notFound",
+                            nameof(Quarks.Down),
+                            nameof(Quarks)
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.Property(e => e.Down).HasField("_notFound")
+                            )
+                            .Message
+                    );
+                });
             }
 
             [ConditionalFact]
@@ -1386,25 +1304,23 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        Assert.Equal(
-                            CoreStrings.BadBackingFieldType(
-                                "_forUp",
-                                "int",
-                                nameof(Quarks),
-                                nameof(Quarks.Down),
-                                "string"
-                            ),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.Property(e => e.Down).HasField("_forUp")
-                                )
-                                .Message
-                        );
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    Assert.Equal(
+                        CoreStrings.BadBackingFieldType(
+                            "_forUp",
+                            "int",
+                            nameof(Quarks),
+                            nameof(Quarks.Down),
+                            "string"
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.Property(e => e.Down).HasField("_forUp")
+                            )
+                            .Message
+                    );
+                });
             }
 
             [ConditionalFact]
@@ -1412,19 +1328,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.Up).ValueGeneratedOnAddOrUpdate();
-                        b.Property(e => e.Down).ValueGeneratedNever();
-                        b.Property<int>("Charm").Metadata.ValueGenerated =
-                            ValueGenerated.OnUpdateSometimes;
-                        b.Property<string>("Strange").ValueGeneratedNever();
-                        b.Property<int>("Top").ValueGeneratedOnAddOrUpdate();
-                        b.Property<string>("Bottom").ValueGeneratedOnUpdate();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.Up).ValueGeneratedOnAddOrUpdate();
+                    b.Property(e => e.Down).ValueGeneratedNever();
+                    b.Property<int>("Charm").Metadata.ValueGenerated =
+                        ValueGenerated.OnUpdateSometimes;
+                    b.Property<string>("Strange").ValueGeneratedNever();
+                    b.Property<int>("Top").ValueGeneratedOnAddOrUpdate();
+                    b.Property<string>("Bottom").ValueGeneratedOnUpdate();
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1460,15 +1374,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.Up).IsRowVersion();
-                        b.Property(e => e.Down).ValueGeneratedNever();
-                        b.Property<int>("Charm").IsRowVersion();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.Up).IsRowVersion();
+                    b.Property(e => e.Down).ValueGeneratedNever();
+                    b.Property<int>("Charm").IsRowVersion();
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1494,17 +1406,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).HasMaxLength(0);
-                        b.Property(e => e.Down).HasMaxLength(100);
-                        b.Property<int>("Charm").HasMaxLength(0);
-                        b.Property<string>("Strange").HasMaxLength(100);
-                        b.Property<int>("Top").HasMaxLength(0);
-                        b.Property<string>("Bottom").HasMaxLength(100);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).HasMaxLength(0);
+                    b.Property(e => e.Down).HasMaxLength(100);
+                    b.Property<int>("Charm").HasMaxLength(0);
+                    b.Property<string>("Strange").HasMaxLength(100);
+                    b.Property<int>("Top").HasMaxLength(0);
+                    b.Property<string>("Bottom").HasMaxLength(100);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1521,23 +1431,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_max_length_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().HaveMaxLength(0);
-                        c.Properties<string>().HaveMaxLength(100);
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().HaveMaxLength(0);
+                    c.Properties<string>().HaveMaxLength(100);
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1556,17 +1462,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).HasPrecision(1, 0);
-                        b.Property(e => e.Down).HasPrecision(100, 10);
-                        b.Property<int>("Charm").HasPrecision(1, 0);
-                        b.Property<string>("Strange").HasPrecision(100, 10);
-                        b.Property<int>("Top").HasPrecision(1, 0);
-                        b.Property<string>("Bottom").HasPrecision(100, 10);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).HasPrecision(1, 0);
+                    b.Property(e => e.Down).HasPrecision(100, 10);
+                    b.Property<int>("Charm").HasPrecision(1, 0);
+                    b.Property<string>("Strange").HasPrecision(100, 10);
+                    b.Property<int>("Top").HasPrecision(1, 0);
+                    b.Property<string>("Bottom").HasPrecision(100, 10);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1590,23 +1494,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_precision_and_scale_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().HavePrecision(1, 0);
-                        c.Properties<string>().HavePrecision(100, 10);
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().HavePrecision(1, 0);
+                    c.Properties<string>().HavePrecision(100, 10);
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -1632,20 +1532,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).HasValueGenerator<CustomValueGenerator>();
-                        b.Property(e => e.Down).HasValueGenerator(typeof(CustomValueGenerator));
-                        b.Property<int>("Charm")
-                            .HasValueGenerator((_, __) => new CustomValueGenerator());
-                        b.Property<string>("Strange").HasValueGenerator<CustomValueGenerator>();
-                        b.Property<int>("Top")
-                            .HasValueGeneratorFactory(typeof(CustomValueGeneratorFactory));
-                        b.Property<string>("Bottom")
-                            .HasValueGeneratorFactory<CustomValueGeneratorFactory>();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).HasValueGenerator<CustomValueGenerator>();
+                    b.Property(e => e.Down).HasValueGenerator(typeof(CustomValueGenerator));
+                    b.Property<int>("Charm")
+                        .HasValueGenerator((_, __) => new CustomValueGenerator());
+                    b.Property<string>("Strange").HasValueGenerator<CustomValueGenerator>();
+                    b.Property<int>("Top")
+                        .HasValueGeneratorFactory(typeof(CustomValueGeneratorFactory));
+                    b.Property<string>("Bottom")
+                        .HasValueGeneratorFactory<CustomValueGeneratorFactory>();
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -1695,22 +1593,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        Assert.Equal(
-                            CoreStrings.BadValueGeneratorType(
-                                nameof(Random),
-                                nameof(ValueGenerator)
-                            ),
-                            Assert
-                                .Throws<ArgumentException>(
-                                    () => b.Property(e => e.Down).HasValueGenerator(typeof(Random))
-                                )
-                                .Message
-                        );
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    Assert.Equal(
+                        CoreStrings.BadValueGeneratorType(nameof(Random), nameof(ValueGenerator)),
+                        Assert
+                            .Throws<ArgumentException>(
+                                () => b.Property(e => e.Down).HasValueGenerator(typeof(Random))
+                            )
+                            .Message
+                    );
+                });
             }
 
             [ConditionalFact]
@@ -1719,13 +1612,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).HasValueGenerator<BadCustomValueGenerator1>();
-                        b.Property(e => e.Down).HasValueGenerator<BadCustomValueGenerator2>();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).HasValueGenerator<BadCustomValueGenerator1>();
+                    b.Property(e => e.Down).HasValueGenerator<BadCustomValueGenerator2>();
+                });
 
                 var entityType = model.FindEntityType(typeof(Quarks));
 
@@ -1983,17 +1874,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up).IsUnicode();
-                        b.Property(e => e.Down).IsUnicode(false);
-                        b.Property<int>("Charm").IsUnicode();
-                        b.Property<string>("Strange").IsUnicode(false);
-                        b.Property<int>("Top").IsUnicode();
-                        b.Property<string>("Bottom").IsUnicode(false);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up).IsUnicode();
+                    b.Property(e => e.Down).IsUnicode(false);
+                    b.Property<int>("Charm").IsUnicode();
+                    b.Property<string>("Strange").IsUnicode(false);
+                    b.Property<int>("Top").IsUnicode();
+                    b.Property<string>("Bottom").IsUnicode(false);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -2010,23 +1899,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_unicode_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().AreUnicode();
-                        c.Properties<string>().AreUnicode(false);
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().AreUnicode();
+                    c.Properties<string>().AreUnicode(false);
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -2085,13 +1970,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Ignore<Product>();
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.Property<int>("Index");
-                        b.HasIndex("Index");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.Property<int>("Index");
+                    b.HasIndex("Index");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Customer));
@@ -2366,14 +2249,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
                 modelBuilder.Ignore<Theta>();
-                modelBuilder.Entity<Beta>(
-                    c =>
-                    {
-                        c.HasData(new Beta { Id = -1, Name = " -1" });
-                        var customers = new List<Beta> { new() { Id = -2 } };
-                        c.HasData(customers);
-                    }
-                );
+                modelBuilder.Entity<Beta>(c =>
+                {
+                    c.HasData(new Beta { Id = -1, Name = " -1" });
+                    var customers = new List<Beta> { new() { Id = -2 } };
+                    c.HasData(customers);
+                });
 
                 var finalModel = modelBuilder.FinalizeModel();
 
@@ -2392,14 +2273,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
                 modelBuilder.Ignore<Theta>();
-                modelBuilder.Entity<Beta>(
-                    c =>
-                    {
-                        c.HasData(new { Id = -1 });
-                        var customers = new List<object> { new { Id = -2 } };
-                        c.HasData(customers);
-                    }
-                );
+                modelBuilder.Entity<Beta>(c =>
+                {
+                    c.HasData(new { Id = -1 });
+                    var customers = new List<object> { new { Id = -2 } };
+                    c.HasData(customers);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -2433,16 +2312,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<IndexedClass>(
-                    b =>
-                    {
-                        b.IndexerProperty<int>("Required");
-                        b.IndexerProperty<string>("Optional");
-                        var d = new IndexedClass { Id = -1 };
-                        d["Required"] = 2;
-                        b.HasData(d);
-                    }
-                );
+                modelBuilder.Entity<IndexedClass>(b =>
+                {
+                    b.IndexerProperty<int>("Required");
+                    b.IndexerProperty<string>("Optional");
+                    var d = new IndexedClass { Id = -1 };
+                    d["Required"] = 2;
+                    b.HasData(d);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -2458,14 +2335,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<IndexedClass>(
-                    b =>
-                    {
-                        b.IndexerProperty<int>("Required");
-                        b.IndexerProperty<string>("Optional");
-                        b.HasData(new { Id = -1, Required = 2 });
-                    }
-                );
+                modelBuilder.Entity<IndexedClass>(b =>
+                {
+                    b.IndexerProperty<int>("Required");
+                    b.IndexerProperty<string>("Optional");
+                    b.HasData(new { Id = -1, Required = 2 });
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -2480,16 +2355,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Can_add_seed_data_objects_indexed_property_dictionary()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<IndexedClassByDictionary>(
-                    b =>
-                    {
-                        b.IndexerProperty<int>("Required");
-                        b.IndexerProperty<string>("Optional");
-                        var d = new IndexedClassByDictionary { Id = -1 };
-                        d["Required"] = 2;
-                        b.HasData(d);
-                    }
-                );
+                modelBuilder.Entity<IndexedClassByDictionary>(b =>
+                {
+                    b.IndexerProperty<int>("Required");
+                    b.IndexerProperty<string>("Optional");
+                    var d = new IndexedClassByDictionary { Id = -1 };
+                    d["Required"] = 2;
+                    b.HasData(d);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -2504,14 +2377,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Can_add_seed_data_anonymous_objects_indexed_property_dictionary()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<IndexedClassByDictionary>(
-                    b =>
-                    {
-                        b.IndexerProperty<int>("Required");
-                        b.IndexerProperty<string>("Optional");
-                        b.HasData(new { Id = -1, Required = 2 });
-                    }
-                );
+                modelBuilder.Entity<IndexedClassByDictionary>(b =>
+                {
+                    b.IndexerProperty<int>("Required");
+                    b.IndexerProperty<string>("Optional");
+                    b.HasData(new { Id = -1, Required = 2 });
+                });
 
                 var model = modelBuilder.FinalizeModel();
 

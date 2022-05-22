@@ -70,34 +70,27 @@ internal class RefTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         // a C# property will crash trying to create the tooltips.
         builder.SetTypeName("Microsoft.AspNetCore.Components.Ref");
 
-        builder.TagMatchingRule(
-            rule =>
+        builder.TagMatchingRule(rule =>
+        {
+            rule.TagName = "*";
+            rule.Attribute(attribute =>
             {
-                rule.TagName = "*";
-                rule.Attribute(
-                    attribute =>
-                    {
-                        attribute.Name = "@ref";
-                        attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                            bool.TrueString;
-                    }
-                );
-            }
-        );
-
-        builder.BindAttribute(
-            attribute =>
-            {
-                attribute.Documentation = ComponentResources.RefTagHelper_Documentation;
                 attribute.Name = "@ref";
-
-                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                // a C# property will crash trying to create the tooltips.
-                attribute.SetPropertyName("Ref");
-                attribute.TypeName = typeof(object).FullName;
                 attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-            }
-        );
+            });
+        });
+
+        builder.BindAttribute(attribute =>
+        {
+            attribute.Documentation = ComponentResources.RefTagHelper_Documentation;
+            attribute.Name = "@ref";
+
+            // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+            // a C# property will crash trying to create the tooltips.
+            attribute.SetPropertyName("Ref");
+            attribute.TypeName = typeof(object).FullName;
+            attribute.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+        });
 
         return builder.Build();
     }

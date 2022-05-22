@@ -93,22 +93,20 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 
         protected sealed override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                var suppressMessageAttributeType =
+                    context.Compilation.SuppressMessageAttributeType();
+                if (suppressMessageAttributeType == null)
                 {
-                    var suppressMessageAttributeType =
-                        context.Compilation.SuppressMessageAttributeType();
-                    if (suppressMessageAttributeType == null)
-                    {
-                        return;
-                    }
-
-                    RegisterAttributeSyntaxAction(
-                        context,
-                        new CompilationAnalyzer(context.Compilation, suppressMessageAttributeType)
-                    );
+                    return;
                 }
-            );
+
+                RegisterAttributeSyntaxAction(
+                    context,
+                    new CompilationAnalyzer(context.Compilation, suppressMessageAttributeType)
+                );
+            });
         }
 
         protected sealed class CompilationAnalyzer

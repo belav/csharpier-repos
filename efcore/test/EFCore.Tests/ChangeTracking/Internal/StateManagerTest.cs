@@ -482,25 +482,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<SingleKey>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.HasAlternateKey(e => e.AlternateId);
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.AlternateId).ValueGeneratedNever();
-                        b.OwnsOne(e => e.Owned);
-                    }
-                );
+                modelBuilder.Entity<SingleKey>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.HasAlternateKey(e => e.AlternateId);
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.AlternateId).ValueGeneratedNever();
+                    b.OwnsOne(e => e.Owned);
+                });
 
-                modelBuilder.Entity<CompositeKey>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
-                        b.HasAlternateKey(e => new { e.AlternateId1, e.AlternateId2 });
-                        b.OwnsOne(e => e.Owned);
-                    }
-                );
+                modelBuilder.Entity<CompositeKey>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
+                    b.HasAlternateKey(e => new { e.AlternateId1, e.AlternateId2 });
+                    b.OwnsOne(e => e.Owned);
+                });
             }
         }
 

@@ -159,24 +159,21 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-                        .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(OtherSource<>), typeof(OtherDestination<>))
-                        .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(Source<>), typeof(int)).ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(int), typeof(Destination<>))
-                        .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(OtherSource<>), typeof(Destination<object>))
-                        .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(Source<object>), typeof(OtherDestination<>))
-                        .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(Hashtable), typeof(IReadOnlyDictionary<,>))
-                        .ConvertUsing(typeof(Converter<,>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
+                    .ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(OtherSource<>), typeof(OtherDestination<>))
+                    .ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(Source<>), typeof(int)).ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(int), typeof(Destination<>)).ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(OtherSource<>), typeof(Destination<object>))
+                    .ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(Source<object>), typeof(OtherDestination<>))
+                    .ConvertUsing(typeof(Converter<>));
+                cfg.CreateMap(typeof(Hashtable), typeof(IReadOnlyDictionary<,>))
+                    .ConvertUsing(typeof(Converter<,>));
+            });
 
         protected override void Because_of()
         {

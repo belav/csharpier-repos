@@ -68,65 +68,59 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void MissingRoamingFilename()
         {
-            TestUtil.RunWithTempFile(
-                filename =>
-                {
-                    var map = new ExeConfigurationFileMap();
-                    map.ExeConfigFilename = filename;
+            TestUtil.RunWithTempFile(filename =>
+            {
+                var map = new ExeConfigurationFileMap();
+                map.ExeConfigFilename = filename;
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "fileMap.RoamingUserConfigFilename",
-                        () =>
-                            ConfigurationManager.OpenMappedExeConfiguration(
-                                map,
-                                ConfigurationUserLevel.PerUserRoaming
-                            )
-                    );
-                }
-            );
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileMap.RoamingUserConfigFilename",
+                    () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoaming
+                        )
+                );
+            });
         }
 
         [Fact]
         public void MissingRoamingFilename2()
         {
-            TestUtil.RunWithTempFile(
-                filename =>
-                {
-                    var map = new ExeConfigurationFileMap();
-                    map.LocalUserConfigFilename = filename;
+            TestUtil.RunWithTempFile(filename =>
+            {
+                var map = new ExeConfigurationFileMap();
+                map.LocalUserConfigFilename = filename;
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "fileMap.RoamingUserConfigFilename",
-                        () =>
-                            ConfigurationManager.OpenMappedExeConfiguration(
-                                map,
-                                ConfigurationUserLevel.PerUserRoamingAndLocal
-                            )
-                    );
-                }
-            );
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileMap.RoamingUserConfigFilename",
+                    () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoamingAndLocal
+                        )
+                );
+            });
         }
 
         [Fact]
         public void MissingLocalFilename()
         {
-            TestUtil.RunWithTempFile(
-                filename =>
-                {
-                    var map = new ExeConfigurationFileMap();
-                    map.ExeConfigFilename = filename;
-                    map.RoamingUserConfigFilename = filename;
+            TestUtil.RunWithTempFile(filename =>
+            {
+                var map = new ExeConfigurationFileMap();
+                map.ExeConfigFilename = filename;
+                map.RoamingUserConfigFilename = filename;
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "fileMap.LocalUserConfigFilename",
-                        () =>
-                            ConfigurationManager.OpenMappedExeConfiguration(
-                                map,
-                                ConfigurationUserLevel.PerUserRoamingAndLocal
-                            )
-                    );
-                }
-            );
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileMap.LocalUserConfigFilename",
+                    () =>
+                        ConfigurationManager.OpenMappedExeConfiguration(
+                            map,
+                            ConfigurationUserLevel.PerUserRoamingAndLocal
+                        )
+                );
+            });
         }
 
         [Fact]

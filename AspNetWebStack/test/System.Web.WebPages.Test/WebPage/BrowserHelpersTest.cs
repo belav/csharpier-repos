@@ -352,13 +352,11 @@ namespace System.Web.WebPages.Test
             bool overridenBrowserWasCreated = false;
 
             // Act
-            var overriden = context.GetOverriddenBrowser(
-                x =>
-                {
-                    overridenBrowserWasCreated = true;
-                    return null;
-                }
-            );
+            var overriden = context.GetOverriddenBrowser(x =>
+            {
+                overridenBrowserWasCreated = true;
+                return null;
+            });
 
             // Assert
             Assert.False(overridenBrowserWasCreated);

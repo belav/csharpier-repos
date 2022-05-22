@@ -68,13 +68,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var rb = new RegistrationBuilder();
 
             rb.ForType<ClassWithLifetimeConcerns>()
-                .ExportInterfaces(
-                    i =>
-                    {
-                        seenInterfaces.Add(i);
-                        return true;
-                    }
-                );
+                .ExportInterfaces(i =>
+                {
+                    seenInterfaces.Add(i);
+                    return true;
+                });
 
             rb.MapType(typeof(ClassWithLifetimeConcerns).GetTypeInfo());
 

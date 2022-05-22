@@ -58,13 +58,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinatorRegistrationService_Register,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                        m[Kind] = workspace.Kind;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[Kind] = workspace.Kind;
+                })
             );
         }
 
@@ -72,12 +70,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinatorRegistrationService_Unregister,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                })
             );
         }
 
@@ -91,16 +87,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinatorRegistrationService_Reanalyze,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                        m[Analyzer] = analyzer.ToString();
-                        m[DocumentCount] = documentCount;
-                        m[HighPriority] = highPriority;
-                        m[Languages] = languages;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[Analyzer] = analyzer.ToString();
+                    m[DocumentCount] = documentCount;
+                    m[HighPriority] = highPriority;
+                    m[Languages] = languages;
+                })
             );
         }
 
@@ -108,13 +102,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinator_SolutionCrawlerOption,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                        m[Enabled] = value;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[Enabled] = value;
+                })
             );
         }
 
@@ -163,26 +155,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             // log registered analyzers.
             Logger.Log(
                 analyzersId,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                        m[AnalyzerCount] = reordered.Length;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                    m[AnalyzerCount] = reordered.Length;
+                })
             );
 
             foreach (var analyzer in reordered)
             {
                 Logger.Log(
                     analyzerId,
-                    KeyValueLogMessage.Create(
-                        m =>
-                        {
-                            m[Id] = correlationId;
-                            m[Analyzer] = analyzer.ToString();
-                        }
-                    )
+                    KeyValueLogMessage.Create(m =>
+                    {
+                        m[Id] = correlationId;
+                        m[Analyzer] = analyzer.ToString();
+                    })
                 );
             }
         }
@@ -191,12 +179,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinator_ShutdownTimeout,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
+                })
             );
         }
 
@@ -210,18 +196,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.WorkCoordinator_Shutdown,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m[Id] = correlationId;
+                KeyValueLogMessage.Create(m =>
+                {
+                    m[Id] = correlationId;
 
-                        foreach (var kv in logAggregator)
-                        {
-                            var change = ((WorkspaceChangeKind)kv.Key).ToString();
-                            m[change] = kv.Value.GetCount();
-                        }
+                    foreach (var kv in logAggregator)
+                    {
+                        var change = ((WorkspaceChangeKind)kv.Key).ToString();
+                        m[change] = kv.Value.GetCount();
                     }
-                )
+                })
             );
         }
 
@@ -282,50 +266,48 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             Logger.Log(
                 FunctionId.IncrementalAnalyzerProcessor_Shutdown,
-                KeyValueLogMessage.Create(
-                    m =>
+                KeyValueLogMessage.Create(m =>
+                {
+                    var solutionHash = GetSolutionHash(solution);
+
+                    m[Id] = correlationId;
+                    m[SolutionHash] = solutionHash.ToString();
+
+                    var statMap = new Dictionary<string, List<int>>();
+                    foreach (var (key, counter) in logAggregator)
                     {
-                        var solutionHash = GetSolutionHash(solution);
-
-                        m[Id] = correlationId;
-                        m[SolutionHash] = solutionHash.ToString();
-
-                        var statMap = new Dictionary<string, List<int>>();
-                        foreach (var (key, counter) in logAggregator)
+                        if (key is string stringKey)
                         {
-                            if (key is string stringKey)
-                            {
-                                m[stringKey] = counter.GetCount();
-                                continue;
-                            }
-
-                            if (key is ValueTuple<string, Guid> propertyNameAndId)
-                            {
-                                var list = statMap.GetOrAdd(
-                                    propertyNameAndId.Item1,
-                                    _ => new List<int>()
-                                );
-                                list.Add(counter.GetCount());
-                                continue;
-                            }
-
-                            throw ExceptionUtilities.Unreachable;
+                            m[stringKey] = counter.GetCount();
+                            continue;
                         }
 
-                        foreach (var (propertyName, propertyValues) in statMap)
+                        if (key is ValueTuple<string, Guid> propertyNameAndId)
                         {
-                            var result = LogAggregator.GetStatistics(propertyValues);
-
-                            m[CreateProperty(propertyName, Max)] = result.Maximum;
-                            m[CreateProperty(propertyName, Min)] = result.Minimum;
-                            m[CreateProperty(propertyName, Median)] = result.Median!.Value;
-                            m[CreateProperty(propertyName, Mean)] = result.Mean;
-                            m[CreateProperty(propertyName, Mode)] = result.Mode!.Value;
-                            m[CreateProperty(propertyName, Range)] = result.Range;
-                            m[CreateProperty(propertyName, Count)] = result.Count;
+                            var list = statMap.GetOrAdd(
+                                propertyNameAndId.Item1,
+                                _ => new List<int>()
+                            );
+                            list.Add(counter.GetCount());
+                            continue;
                         }
+
+                        throw ExceptionUtilities.Unreachable;
                     }
-                )
+
+                    foreach (var (propertyName, propertyValues) in statMap)
+                    {
+                        var result = LogAggregator.GetStatistics(propertyValues);
+
+                        m[CreateProperty(propertyName, Max)] = result.Maximum;
+                        m[CreateProperty(propertyName, Min)] = result.Minimum;
+                        m[CreateProperty(propertyName, Median)] = result.Median!.Value;
+                        m[CreateProperty(propertyName, Mean)] = result.Mean;
+                        m[CreateProperty(propertyName, Mode)] = result.Mode!.Value;
+                        m[CreateProperty(propertyName, Range)] = result.Range;
+                        m[CreateProperty(propertyName, Count)] = result.Count;
+                    }
+                })
             );
 
             foreach (var analyzer in analyzers)

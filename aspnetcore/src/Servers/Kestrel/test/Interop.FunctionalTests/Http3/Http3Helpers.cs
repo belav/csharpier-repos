@@ -56,54 +56,45 @@ public static class Http3Helpers
     )
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
-                            {
-                                if (configureKestrel == null)
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        if (configureKestrel == null)
+                        {
+                            o.Listen(
+                                IPAddress.Parse("127.0.0.1"),
+                                0,
+                                listenOptions =>
                                 {
-                                    o.Listen(
-                                        IPAddress.Parse("127.0.0.1"),
-                                        0,
-                                        listenOptions =>
-                                        {
-                                            listenOptions.Protocols =
-                                                protocol ?? HttpProtocols.Http3;
-                                            listenOptions.UseHttps();
-                                        }
-                                    );
+                                    listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
+                                    listenOptions.UseHttps();
                                 }
-                                else
-                                {
-                                    configureKestrel(o);
-                                }
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(requestDelegate);
-                            }
-                        );
-                }
-            )
+                            );
+                        }
+                        else
+                        {
+                            configureKestrel(o);
+                        }
+                    })
+                    .Configure(app =>
+                    {
+                        app.Run(requestDelegate);
+                    });
+            })
             .ConfigureServices(configureServices)
-            .ConfigureHostOptions(
-                o =>
+            .ConfigureHostOptions(o =>
+            {
+                if (Debugger.IsAttached)
                 {
-                    if (Debugger.IsAttached)
-                    {
-                        // Avoid timeout while debugging.
-                        o.ShutdownTimeout = TimeSpan.FromHours(1);
-                    }
-                    else
-                    {
-                        o.ShutdownTimeout = TimeSpan.FromSeconds(1);
-                    }
+                    // Avoid timeout while debugging.
+                    o.ShutdownTimeout = TimeSpan.FromHours(1);
                 }
-            );
+                else
+                {
+                    o.ShutdownTimeout = TimeSpan.FromSeconds(1);
+                }
+            });
     }
 }

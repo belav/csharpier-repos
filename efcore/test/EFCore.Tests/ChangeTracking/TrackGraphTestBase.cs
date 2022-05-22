@@ -1354,14 +1354,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private class TheShadows : DbContext
         {
             protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<Dark>(
-                    b =>
-                    {
-                        b.Property<int>("Id").ValueGeneratedOnAdd();
-                        b.Property<int>("SomeInt");
-                        b.Property<string>("SomeString");
-                    }
-                );
+                modelBuilder.Entity<Dark>(b =>
+                {
+                    b.Property<int>("Id").ValueGeneratedOnAdd();
+                    b.Property<int>("SomeInt");
+                    b.Property<string>("SomeString");
+                });
 
             protected internal override void OnConfiguring(
                 DbContextOptionsBuilder optionsBuilder
@@ -1523,37 +1521,29 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<NullbileProduct>(
-                    b =>
-                    {
-                        b.Property<int?>("Id");
-                        b.Property<int?>("CategoryId");
-                        b.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity<NullbileProduct>(b =>
+                {
+                    b.Property<int?>("Id");
+                    b.Property<int?>("CategoryId");
+                    b.HasKey("Id");
+                });
 
-                modelBuilder.Entity<NullbileCategoryInfo>(
-                    b =>
-                    {
-                        b.Property<int?>("Id");
-                        b.Property<int?>("CategoryId");
-                        b.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity<NullbileCategoryInfo>(b =>
+                {
+                    b.Property<int?>("Id");
+                    b.Property<int?>("CategoryId");
+                    b.HasKey("Id");
+                });
 
-                modelBuilder.Entity<NullbileCategory>(
-                    b =>
-                    {
-                        b.Property<int?>("Id");
-                        b.HasKey("Id");
-                        b.HasMany(e => e.Products)
-                            .WithOne(e => e.Category)
-                            .HasForeignKey("CategoryId");
-                        b.HasOne(e => e.Info)
-                            .WithOne(e => e.Category)
-                            .HasForeignKey<NullbileCategoryInfo>("CategoryId");
-                    }
-                );
+                modelBuilder.Entity<NullbileCategory>(b =>
+                {
+                    b.Property<int?>("Id");
+                    b.HasKey("Id");
+                    b.HasMany(e => e.Products).WithOne(e => e.Category).HasForeignKey("CategoryId");
+                    b.HasOne(e => e.Info)
+                        .WithOne(e => e.Category)
+                        .HasForeignKey<NullbileCategoryInfo>("CategoryId");
+                });
 
                 modelBuilder
                     .Entity<Sweet>()
@@ -1588,18 +1578,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     .WithOne(e => e.Product)
                     .HasForeignKey<ProductDetails>(e => e.Id);
 
-                modelBuilder.Entity<OrderDetails>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.OrderId, e.ProductId });
-                        b.HasOne(e => e.Order)
-                            .WithMany(e => e.OrderDetails)
-                            .HasForeignKey(e => e.OrderId);
-                        b.HasOne(e => e.Product)
-                            .WithMany(e => e.OrderDetails)
-                            .HasForeignKey(e => e.ProductId);
-                    }
-                );
+                modelBuilder.Entity<OrderDetails>(b =>
+                {
+                    b.HasKey(e => new { e.OrderId, e.ProductId });
+                    b.HasOne(e => e.Order)
+                        .WithMany(e => e.OrderDetails)
+                        .HasForeignKey(e => e.OrderId);
+                    b.HasOne(e => e.Product)
+                        .WithMany(e => e.OrderDetails)
+                        .HasForeignKey(e => e.ProductId);
+                });
             }
 
             protected internal override void OnConfiguring(

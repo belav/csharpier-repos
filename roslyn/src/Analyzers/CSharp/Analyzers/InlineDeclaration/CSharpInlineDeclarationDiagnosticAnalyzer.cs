@@ -58,19 +58,17 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                {
-                    var compilation = compilationContext.Compilation;
-                    var expressionTypeOpt = compilation.GetTypeByMetadataName(
-                        typeof(Expression<>).FullName
-                    );
-                    compilationContext.RegisterSyntaxNodeAction(
-                        syntaxContext => AnalyzeSyntaxNode(syntaxContext, expressionTypeOpt),
-                        SyntaxKind.Argument
-                    );
-                }
-            );
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                var compilation = compilationContext.Compilation;
+                var expressionTypeOpt = compilation.GetTypeByMetadataName(
+                    typeof(Expression<>).FullName
+                );
+                compilationContext.RegisterSyntaxNodeAction(
+                    syntaxContext => AnalyzeSyntaxNode(syntaxContext, expressionTypeOpt),
+                    SyntaxKind.Argument
+                );
+            });
         }
 
         private void AnalyzeSyntaxNode(

@@ -187,13 +187,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             {
                 // sort operations and add them to interval tree
                 operations.Sort(CommonFormattingHelpers.IndentBlockOperationComparer);
-                operations.Do(
-                    o =>
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        this.AddIndentBlockOperation(o);
-                    }
-                );
+                operations.Do(o =>
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    this.AddIndentBlockOperation(o);
+                });
 
                 return;
             }
@@ -228,13 +226,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             mergedList.Sort(CommonFormattingHelpers.IndentBlockOperationComparer);
-            mergedList.Do(
-                o =>
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    this.AddIndentBlockOperation(o);
-                }
-            );
+            mergedList.Do(o =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                this.AddIndentBlockOperation(o);
+            });
         }
 
         public void AddIndentBlockOperation(IndentBlockOperation operation)

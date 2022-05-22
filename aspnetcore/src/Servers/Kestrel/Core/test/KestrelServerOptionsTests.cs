@@ -30,12 +30,10 @@ public class KestrelServerOptionsTests
 
         Assert.Equal(HttpProtocols.Http1AndHttp2, options.CodeBackedListenOptions[0].Protocols);
 
-        options.ConfigureEndpointDefaults(
-            opt =>
-            {
-                opt.Protocols = HttpProtocols.Http1;
-            }
-        );
+        options.ConfigureEndpointDefaults(opt =>
+        {
+            opt.Protocols = HttpProtocols.Http1;
+        });
 
         options.Listen(
             new IPEndPoint(IPAddress.Loopback, 5000),

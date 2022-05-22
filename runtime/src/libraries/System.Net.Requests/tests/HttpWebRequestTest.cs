@@ -631,14 +631,12 @@ namespace System.Net.Tests
                     request.Host = host;
                     Task<WebResponse> getResponse = GetResponseAsync(request);
 
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"Host: {host}", headers);
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"Host: {host}", headers);
+                    });
 
                     using (var response = (HttpWebResponse)await getResponse)
                     {
@@ -1479,21 +1477,19 @@ namespace System.Net.Tests
                 {
                     try
                     {
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.ReadRequestHeaderAsync();
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestHeaderAsync();
 
-                                // Make sure to send at least one byte, or the request retry logic in SocketsHttpHandler
-                                // will consider this a retryable request, since we never received any response.
-                                await connection.WriteStringAsync(
-                                    forceTimeoutDuringHeaders
-                                        ? "H"
-                                        : "HTTP/1.1 200 OK\r\nContent-Length: 10\r\n\r\nHello Wor"
-                                );
-                                await tcs.Task;
-                            }
-                        );
+                            // Make sure to send at least one byte, or the request retry logic in SocketsHttpHandler
+                            // will consider this a retryable request, since we never received any response.
+                            await connection.WriteStringAsync(
+                                forceTimeoutDuringHeaders
+                                    ? "H"
+                                    : "HTTP/1.1 200 OK\r\nContent-Length: 10\r\n\r\nHello Wor"
+                            );
+                            await tcs.Task;
+                        });
                     }
                     catch { }
                 }
@@ -2587,18 +2583,16 @@ namespace System.Net.Tests
                             : new HttpRequestCachePolicy(requestCacheLevel);
                     Task<WebResponse> getResponse = GetResponseAsync(request);
 
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
 
-                            foreach (string header in expectedHeaders)
-                            {
-                                Assert.Contains(header, headers);
-                            }
+                        foreach (string header in expectedHeaders)
+                        {
+                            Assert.Contains(header, headers);
                         }
-                    );
+                    });
 
                     using (var response = (HttpWebResponse)await getResponse)
                     {
@@ -2629,18 +2623,16 @@ namespace System.Net.Tests
                     request.CachePolicy = new RequestCachePolicy(requestCacheLevel);
                     Task<WebResponse> getResponse = GetResponseAsync(request);
 
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
 
-                            foreach (string header in expectedHeaders)
-                            {
-                                Assert.Contains(header, headers);
-                            }
+                        foreach (string header in expectedHeaders)
+                        {
+                            Assert.Contains(header, headers);
                         }
-                    );
+                    });
 
                     using (var response = (HttpWebResponse)await getResponse)
                     {
@@ -2679,15 +2671,13 @@ namespace System.Net.Tests
                                     ? request.GetResponseAsync()
                                     : Task.Run(() => request.GetResponse());
 
-                                await server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        List<string> headers =
-                                            await connection.ReadRequestHeaderAndSendResponseAsync();
-                                        Assert.Contains(eh0, headers);
-                                        Assert.Contains(eh1, headers);
-                                    }
-                                );
+                                await server.AcceptConnectionAsync(async connection =>
+                                {
+                                    List<string> headers =
+                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                                    Assert.Contains(eh0, headers);
+                                    Assert.Contains(eh1, headers);
+                                });
 
                                 using (var response = (HttpWebResponse)await getResponse)
                                 {
@@ -2736,19 +2726,17 @@ namespace System.Net.Tests
                             HttpWebRequest request = WebRequest.CreateHttp(uri);
                             Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    List<string> headers =
-                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                List<string> headers =
+                                    await connection.ReadRequestHeaderAndSendResponseAsync();
 
-                                    foreach (string header in headers)
-                                    {
-                                        Assert.DoesNotContain("Pragma", header);
-                                        Assert.DoesNotContain("Cache-Control", header);
-                                    }
+                                foreach (string header in headers)
+                                {
+                                    Assert.DoesNotContain("Pragma", header);
+                                    Assert.DoesNotContain("Cache-Control", header);
                                 }
-                            );
+                            });
 
                             using (var response = (HttpWebResponse)await getResponse)
                             {
@@ -2770,19 +2758,17 @@ namespace System.Net.Tests
                     request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
                     Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
 
-                            foreach (string header in headers)
-                            {
-                                Assert.DoesNotContain("Pragma", header);
-                                Assert.DoesNotContain("Cache-Control", header);
-                            }
+                        foreach (string header in headers)
+                        {
+                            Assert.DoesNotContain("Pragma", header);
+                            Assert.DoesNotContain("Cache-Control", header);
                         }
-                    );
+                    });
 
                     using (var response = (HttpWebResponse)await getResponse)
                     {

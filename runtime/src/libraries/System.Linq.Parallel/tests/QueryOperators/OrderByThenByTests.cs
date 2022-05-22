@@ -920,12 +920,10 @@ namespace System.Linq.Parallel.Tests
             _ = count;
             ParallelQuery<int> query = labeled.Item
                 .WithDegreeOfParallelism(degree)
-                .OrderBy<int, int>(
-                    x =>
-                    {
-                        throw new DeliberateTestException();
-                    }
-                );
+                .OrderBy<int, int>(x =>
+                {
+                    throw new DeliberateTestException();
+                });
 
             AggregateException ae = Assert.Throws<AggregateException>(() =>
             {
@@ -954,14 +952,12 @@ namespace System.Linq.Parallel.Tests
 
             ParallelQuery<int> query = labeled.Item
                 .WithDegreeOfParallelism(degree)
-                .OrderBy(
-                    x =>
-                    {
-                        if (Interlocked.Decrement(ref countdown) == 0)
-                            throw new DeliberateTestException();
-                        return x;
-                    }
-                );
+                .OrderBy(x =>
+                {
+                    if (Interlocked.Decrement(ref countdown) == 0)
+                        throw new DeliberateTestException();
+                    return x;
+                });
 
             AggregateException ae = Assert.Throws<AggregateException>(() =>
             {

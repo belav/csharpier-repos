@@ -38,14 +38,12 @@ public class Startup
     {
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(
-                o =>
-                {
-                    // You also need to update /wwwroot/app/scripts/app.js
-                    o.Authority = Configuration["oidc:authority"];
-                    o.Audience = Configuration["oidc:clientid"];
-                }
-            );
+            .AddJwtBearer(o =>
+            {
+                // You also need to update /wwwroot/app/scripts/app.js
+                o.Authority = Configuration["oidc:authority"];
+                o.Audience = Configuration["oidc:clientid"];
+            });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,35 +85,33 @@ public class Startup
             "/api/TodoList",
             todoApp =>
             {
-                todoApp.Run(
-                    async context =>
+                todoApp.Run(async context =>
+                {
+                    var response = context.Response;
+                    if (HttpMethods.IsPost(context.Request.Method))
                     {
-                        var response = context.Response;
-                        if (HttpMethods.IsPost(context.Request.Method))
+                        var reader = new StreamReader(context.Request.Body);
+                        var body = await reader.ReadToEndAsync();
+                        using (var json = JsonDocument.Parse(body))
                         {
-                            var reader = new StreamReader(context.Request.Body);
-                            var body = await reader.ReadToEndAsync();
-                            using (var json = JsonDocument.Parse(body))
+                            var obj = json.RootElement;
+                            var todo = new Todo()
                             {
-                                var obj = json.RootElement;
-                                var todo = new Todo()
-                                {
-                                    Description = obj.GetProperty("Description").GetString(),
-                                    Owner = context.User.Identity.Name
-                                };
-                                Todos.Add(todo);
-                            }
-                        }
-                        else
-                        {
-                            response.ContentType = "application/json";
-                            response.Headers.CacheControl = "no-cache";
-                            await response.StartAsync();
-                            Serialize(Todos, response.BodyWriter);
-                            await response.BodyWriter.FlushAsync();
+                                Description = obj.GetProperty("Description").GetString(),
+                                Owner = context.User.Identity.Name
+                            };
+                            Todos.Add(todo);
                         }
                     }
-                );
+                    else
+                    {
+                        response.ContentType = "application/json";
+                        response.Headers.CacheControl = "no-cache";
+                        await response.StartAsync();
+                        Serialize(Todos, response.BodyWriter);
+                        await response.BodyWriter.FlushAsync();
+                    }
+                });
             }
         );
     }

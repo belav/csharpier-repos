@@ -24,59 +24,51 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<RewriteOptions>(
-            options =>
-            {
-                options
-                    .AddRedirect("(.*)/$", "$1")
-                    .AddRewrite(@"app/(\d+)", "app?id=$1", skipRemainingRules: false)
-                    .AddRedirectToHttps(302, 5001)
-                    .AddIISUrlRewrite(Environment.ContentRootFileProvider, "UrlRewrite.xml")
-                    .AddApacheModRewrite(Environment.ContentRootFileProvider, "Rewrite.txt");
-            }
-        );
+        services.Configure<RewriteOptions>(options =>
+        {
+            options
+                .AddRedirect("(.*)/$", "$1")
+                .AddRewrite(@"app/(\d+)", "app?id=$1", skipRemainingRules: false)
+                .AddRedirectToHttps(302, 5001)
+                .AddIISUrlRewrite(Environment.ContentRootFileProvider, "UrlRewrite.xml")
+                .AddApacheModRewrite(Environment.ContentRootFileProvider, "Rewrite.txt");
+        });
     }
 
     public void Configure(IApplicationBuilder app)
     {
         app.UseRewriter();
 
-        app.Run(
-            context =>
-            {
-                return context.Response.WriteAsync(
-                    $"Rewritten Url: {context.Request.Path + context.Request.QueryString}"
-                );
-            }
-        );
+        app.Run(context =>
+        {
+            return context.Response.WriteAsync(
+                $"Rewritten Url: {context.Request.Path + context.Request.QueryString}"
+            );
+        });
     }
 
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 5000);
+                        options.Listen(
+                            IPAddress.Loopback,
+                            5001,
+                            listenOptions =>
                             {
-                                options.Listen(IPAddress.Loopback, 5000);
-                                options.Listen(
-                                    IPAddress.Loopback,
-                                    5001,
-                                    listenOptions =>
-                                    {
-                                        // Configure SSL
-                                        listenOptions.UseHttps("testCert.pfx", "testPassword");
-                                    }
-                                );
+                                // Configure SSL
+                                listenOptions.UseHttps("testCert.pfx", "testPassword");
                             }
-                        )
-                        .UseStartup<Startup>()
-                        .UseContentRoot(Directory.GetCurrentDirectory());
-                }
-            )
+                        );
+                    })
+                    .UseStartup<Startup>()
+                    .UseContentRoot(Directory.GetCurrentDirectory());
+            })
             .Build();
 
         return host.RunAsync();

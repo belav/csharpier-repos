@@ -25,15 +25,13 @@ namespace System.Web.Http.ApiExplorer
                 .OrderBy(description => description.ID)
                 .ToArray();
             object[] sortedExpectedResults = expectedResults
-                .OrderBy(
-                    r =>
-                    {
-                        dynamic expectedResult = r;
-                        HttpMethod expectedHttpMethod = expectedResult.HttpMethod;
-                        string expectedRelativePath = expectedResult.RelativePath;
-                        return expectedHttpMethod + expectedRelativePath;
-                    }
-                )
+                .OrderBy(r =>
+                {
+                    dynamic expectedResult = r;
+                    HttpMethod expectedHttpMethod = expectedResult.HttpMethod;
+                    string expectedRelativePath = expectedResult.RelativePath;
+                    return expectedHttpMethod + expectedRelativePath;
+                })
                 .ToArray();
 
             for (int i = 0; i < sortedDescriptions.Length; i++)

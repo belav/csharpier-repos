@@ -77,24 +77,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_store_type_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().HaveColumnType("smallint");
-                        c.Properties<string>().HaveColumnType("nchar(max)");
-                        c.Properties(typeof(Nullable<>)).HavePrecision(2);
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().HaveColumnType("smallint");
+                    c.Properties<string>().HaveColumnType("nchar(max)");
+                    c.Properties(typeof(Nullable<>)).HavePrecision(2);
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int?>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int?>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -118,23 +114,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_fixed_length_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().AreFixedLength(false);
-                        c.Properties<string>().AreFixedLength();
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().AreFixedLength(false);
+                    c.Properties<string>().AreFixedLength();
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -151,23 +143,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             [ConditionalFact]
             public virtual void Can_set_collation_for_property_type()
             {
-                var modelBuilder = CreateModelBuilder(
-                    c =>
-                    {
-                        c.Properties<int>().UseCollation("Latin1_General_CS_AS_KS_WS");
-                        c.Properties<string>().UseCollation("Latin1_General_BIN");
-                    }
-                );
+                var modelBuilder = CreateModelBuilder(c =>
+                {
+                    c.Properties<int>().UseCollation("Latin1_General_CS_AS_KS_WS");
+                    c.Properties<string>().UseCollation("Latin1_General_BIN");
+                });
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<int>("Top");
-                        b.Property<string>("Bottom");
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<int>("Top");
+                    b.Property<string>("Bottom");
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -294,26 +282,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
                 modelBuilder.Entity<BigMak>().Ignore(b => b.Bun).Ignore(b => b.Pickles);
-                modelBuilder.Entity<Ingredient>(
-                    b =>
-                    {
-                        b.ToTable("Ingredients");
-                        b.Ignore(i => i.BigMak);
-                    }
-                );
-                modelBuilder.Entity<Bun>(
-                    b =>
-                    {
-                        b.ToTable("Buns");
-                        b.HasOne(i => i.BigMak).WithOne().HasForeignKey<Bun>(i => i.Id);
-                    }
-                );
-                modelBuilder.Entity<SesameBun>(
-                    b =>
-                    {
-                        b.ToTable("SesameBuns");
-                    }
-                );
+                modelBuilder.Entity<Ingredient>(b =>
+                {
+                    b.ToTable("Ingredients");
+                    b.Ignore(i => i.BigMak);
+                });
+                modelBuilder.Entity<Bun>(b =>
+                {
+                    b.ToTable("Buns");
+                    b.HasOne(i => i.BigMak).WithOne().HasForeignKey<Bun>(i => i.Id);
+                });
+                modelBuilder.Entity<SesameBun>(b =>
+                {
+                    b.ToTable("SesameBuns");
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -369,23 +351,19 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
                 modelBuilder.Entity<BigMak>().Ignore(b => b.Bun).Ignore(b => b.Pickles);
-                modelBuilder.Entity<Ingredient>(
-                    b =>
-                    {
-                        b.ToTable("Ingredients");
-                        b.Property<int?>("NullableProp");
-                        b.Ignore(i => i.BigMak);
-                    }
-                );
-                modelBuilder.Entity<Bun>(
-                    b =>
-                    {
-                        b.ToTable("Buns");
-                        b.HasIndex(bun => bun.BurgerId);
-                        b.HasIndex("NullableProp");
-                        b.HasOne(i => i.BigMak).WithOne().HasForeignKey<Bun>(i => i.Id);
-                    }
-                );
+                modelBuilder.Entity<Ingredient>(b =>
+                {
+                    b.ToTable("Ingredients");
+                    b.Property<int?>("NullableProp");
+                    b.Ignore(i => i.BigMak);
+                });
+                modelBuilder.Entity<Bun>(b =>
+                {
+                    b.ToTable("Buns");
+                    b.HasIndex(bun => bun.BurgerId);
+                    b.HasIndex("NullableProp");
+                    b.HasOne(i => i.BigMak).WithOne().HasForeignKey<Bun>(i => i.Id);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -793,84 +771,78 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<Book>(
-                    bb =>
-                    {
-                        bb.ToTable("BT", "BS", t => t.ExcludeFromMigrations());
-                        bb.OwnsOne(
-                            b => b.AlternateLabel,
-                            tb =>
-                            {
-                                tb.Ignore(l => l.Book);
-                                tb.WithOwner().HasConstraintName("AlternateLabelFK");
-                                tb.ToTable("TT", "TS");
-                                tb.IsMemoryOptimized();
-                                tb.OwnsOne(
-                                    l => l.AnotherBookLabel,
-                                    ab =>
-                                    {
-                                        ab.Ignore(l => l.Book);
-                                        ab.ToTable(
-                                            "AT1",
-                                            "AS1",
-                                            t => t.ExcludeFromMigrations(false)
-                                        );
-                                        ab.OwnsOne(s => s.SpecialBookLabel)
-                                            .ToTable("ST11", "SS11")
-                                            .Ignore(l => l.Book)
-                                            .Ignore(l => l.BookLabel);
+                modelBuilder.Entity<Book>(bb =>
+                {
+                    bb.ToTable("BT", "BS", t => t.ExcludeFromMigrations());
+                    bb.OwnsOne(
+                        b => b.AlternateLabel,
+                        tb =>
+                        {
+                            tb.Ignore(l => l.Book);
+                            tb.WithOwner().HasConstraintName("AlternateLabelFK");
+                            tb.ToTable("TT", "TS");
+                            tb.IsMemoryOptimized();
+                            tb.OwnsOne(
+                                l => l.AnotherBookLabel,
+                                ab =>
+                                {
+                                    ab.Ignore(l => l.Book);
+                                    ab.ToTable("AT1", "AS1", t => t.ExcludeFromMigrations(false));
+                                    ab.OwnsOne(s => s.SpecialBookLabel)
+                                        .ToTable("ST11", "SS11")
+                                        .Ignore(l => l.Book)
+                                        .Ignore(l => l.BookLabel);
 
-                                        ab.OwnedEntityType
-                                            .FindNavigation(nameof(BookLabel.SpecialBookLabel))
-                                            .AddAnnotation("Foo", "Bar");
-                                    }
-                                );
-                                tb.OwnsOne(
-                                    l => l.SpecialBookLabel,
-                                    sb =>
-                                    {
-                                        sb.Ignore(l => l.Book);
-                                        sb.ToTable("ST2", "SS2");
-                                        sb.OwnsOne(s => s.AnotherBookLabel)
-                                            .ToTable("AT21", "AS21")
-                                            .Ignore(l => l.Book);
-                                    }
-                                );
-                            }
-                        );
-                        bb.OwnsOne(
-                            b => b.Label,
-                            lb =>
-                            {
-                                lb.Ignore(l => l.Book);
-                                lb.ToTable("LT", "LS");
-                                lb.OwnsOne(
-                                    l => l.SpecialBookLabel,
-                                    sb =>
-                                    {
-                                        sb.Ignore(l => l.Book);
-                                        sb.ToTable("ST1", "SS1");
-                                        sb.OwnsOne(a => a.AnotherBookLabel)
-                                            .ToTable("AT11", "AS11")
-                                            .Ignore(l => l.Book);
-                                    }
-                                );
-                                lb.OwnsOne(
-                                    l => l.AnotherBookLabel,
-                                    ab =>
-                                    {
-                                        ab.Ignore(l => l.Book);
-                                        ab.ToTable("AT2", "AS2");
-                                        ab.OwnsOne(a => a.SpecialBookLabel)
-                                            .ToTable("ST21", "SS21")
-                                            .Ignore(l => l.BookLabel)
-                                            .Ignore(l => l.Book);
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
+                                    ab.OwnedEntityType
+                                        .FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                                        .AddAnnotation("Foo", "Bar");
+                                }
+                            );
+                            tb.OwnsOne(
+                                l => l.SpecialBookLabel,
+                                sb =>
+                                {
+                                    sb.Ignore(l => l.Book);
+                                    sb.ToTable("ST2", "SS2");
+                                    sb.OwnsOne(s => s.AnotherBookLabel)
+                                        .ToTable("AT21", "AS21")
+                                        .Ignore(l => l.Book);
+                                }
+                            );
+                        }
+                    );
+                    bb.OwnsOne(
+                        b => b.Label,
+                        lb =>
+                        {
+                            lb.Ignore(l => l.Book);
+                            lb.ToTable("LT", "LS");
+                            lb.OwnsOne(
+                                l => l.SpecialBookLabel,
+                                sb =>
+                                {
+                                    sb.Ignore(l => l.Book);
+                                    sb.ToTable("ST1", "SS1");
+                                    sb.OwnsOne(a => a.AnotherBookLabel)
+                                        .ToTable("AT11", "AS11")
+                                        .Ignore(l => l.Book);
+                                }
+                            );
+                            lb.OwnsOne(
+                                l => l.AnotherBookLabel,
+                                ab =>
+                                {
+                                    ab.Ignore(l => l.Book);
+                                    ab.ToTable("AT2", "AS2");
+                                    ab.OwnsOne(a => a.SpecialBookLabel)
+                                        .ToTable("ST21", "SS21")
+                                        .Ignore(l => l.BookLabel)
+                                        .Ignore(l => l.Book);
+                                }
+                            );
+                        }
+                    );
+                });
 
                 modelBuilder.FinalizeModel();
 
@@ -1278,16 +1250,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Entity<Customer>()
                     .ToTable(
                         tb =>
-                            tb.IsTemporal(
-                                ttb =>
-                                {
-                                    ttb.UseHistoryTable("HistoryTable", "historySchema");
-                                    ttb.HasPeriodStart("MyPeriodStart")
-                                        .HasColumnName("PeriodStartColumn");
-                                    ttb.HasPeriodEnd("MyPeriodEnd")
-                                        .HasColumnName("PeriodEndColumn");
-                                }
-                            )
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable", "historySchema");
+                                ttb.HasPeriodStart("MyPeriodStart")
+                                    .HasColumnName("PeriodStartColumn");
+                                ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
+                            })
                     );
 
                 modelBuilder.FinalizeModel();
@@ -1328,35 +1297,27 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Entity<Customer>()
                     .ToTable(
                         tb =>
-                            tb.IsTemporal(
-                                ttb =>
-                                {
-                                    ttb.UseHistoryTable("HistoryTable", "historySchema");
-                                    ttb.HasPeriodStart("MyPeriodStart")
-                                        .HasColumnName("PeriodStartColumn");
-                                    ttb.HasPeriodEnd("MyPeriodEnd")
-                                        .HasColumnName("PeriodEndColumn");
-                                }
-                            )
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable", "historySchema");
+                                ttb.HasPeriodStart("MyPeriodStart")
+                                    .HasColumnName("PeriodStartColumn");
+                                ttb.HasPeriodEnd("MyPeriodEnd").HasColumnName("PeriodEndColumn");
+                            })
                     );
 
                 modelBuilder
                     .Entity<Customer>()
                     .ToTable(
                         tb =>
-                            tb.IsTemporal(
-                                ttb =>
-                                {
-                                    ttb.UseHistoryTable(
-                                        "ChangedHistoryTable",
-                                        "changedHistorySchema"
-                                    );
-                                    ttb.HasPeriodStart("ChangedMyPeriodStart")
-                                        .HasColumnName("ChangedPeriodStartColumn");
-                                    ttb.HasPeriodEnd("ChangedMyPeriodEnd")
-                                        .HasColumnName("ChangedPeriodEndColumn");
-                                }
-                            )
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("ChangedHistoryTable", "changedHistorySchema");
+                                ttb.HasPeriodStart("ChangedMyPeriodStart")
+                                    .HasColumnName("ChangedPeriodStartColumn");
+                                ttb.HasPeriodEnd("ChangedMyPeriodEnd")
+                                    .HasColumnName("ChangedPeriodEndColumn");
+                            })
                     );
 
                 modelBuilder.FinalizeModel();
@@ -1400,14 +1361,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Entity<Customer>()
                     .ToTable(
                         tb =>
-                            tb.IsTemporal(
-                                ttb =>
-                                {
-                                    ttb.UseHistoryTable("HistoryTable", schema: null);
-                                    ttb.HasPeriodStart("Start").HasColumnName("PeriodStartColumn");
-                                    ttb.HasPeriodEnd("End").HasColumnName("PeriodEndColumn");
-                                }
-                            )
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable", schema: null);
+                                ttb.HasPeriodStart("Start").HasColumnName("PeriodStartColumn");
+                                ttb.HasPeriodEnd("End").HasColumnName("PeriodEndColumn");
+                            })
                     );
 
                 modelBuilder
@@ -1481,14 +1440,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Entity<Customer>()
                     .ToTable(
                         tb =>
-                            tb.IsTemporal(
-                                ttb =>
-                                {
-                                    ttb.UseHistoryTable("HistoryTable", schema: null);
-                                    ttb.HasPeriodStart("Start");
-                                    ttb.HasPeriodEnd("End");
-                                }
-                            )
+                            tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("HistoryTable", schema: null);
+                                ttb.HasPeriodStart("Start");
+                                ttb.HasPeriodEnd("End");
+                            })
                     );
 
                 modelBuilder.FinalizeModel();

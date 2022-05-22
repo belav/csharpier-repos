@@ -13,14 +13,12 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectEnumTest()
         {
-            _config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerDto>();
-                    cfg.CreateProjection<CustomerType, string>()
-                        .ConvertUsing(ct => ct.ToString().ToUpper());
-                }
-            );
+            _config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerDto>();
+                cfg.CreateProjection<CustomerType, string>()
+                    .ConvertUsing(ct => ct.ToString().ToUpper());
+            });
         }
 
         [Fact]
@@ -80,13 +78,10 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Dest>()
-                        .ConvertUsing(src => new Dest { Value = 10 });
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>().ConvertUsing(src => new Dest { Value = 10 });
+            });
 
         [Fact]
         public void Should_validate_because_of_overridden_projection()

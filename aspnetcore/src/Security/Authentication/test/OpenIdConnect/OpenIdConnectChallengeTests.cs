@@ -23,14 +23,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task ChallengeRedirectIsIssuedCorrectly()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-                opt.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+            opt.ClientId = "Test Id";
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -56,16 +54,14 @@ public class OpenIdConnectChallengeTests
     [InlineData(false)]
     public async Task ChallengeIncludesPkceIfRequested(bool include)
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-                opt.ResponseType = OpenIdConnectResponseType.Code;
-                opt.ClientId = "Test Id";
-                opt.UsePkce = include;
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+            opt.ResponseType = OpenIdConnectResponseType.Code;
+            opt.ClientId = "Test Id";
+            opt.UsePkce = include;
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -92,16 +88,14 @@ public class OpenIdConnectChallengeTests
     [InlineData(OpenIdConnectResponseType.CodeIdToken)]
     public async Task ChallengeDoesNotIncludePkceForOtherResponseTypes(string responseType)
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-                opt.ResponseType = responseType;
-                opt.ClientId = "Test Id";
-                opt.UsePkce = true;
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+            opt.ResponseType = responseType;
+            opt.ClientId = "Test Id";
+            opt.UsePkce = true;
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -117,14 +111,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task AuthorizationRequestDoesNotIncludeTelemetryParametersWhenDisabled()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.DisableTelemetry = true;
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.DisableTelemetry = true;
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -160,14 +152,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task ChallengeFormPostIssuedCorrectly()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
-                opt.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.AuthenticationMethod = OpenIdConnectRedirectBehavior.FormPost;
+            opt.ClientId = "Test Id";
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -197,14 +187,12 @@ public class OpenIdConnectChallengeTests
                 "OIDCTest"
             )
         );
-        var settings = new TestSettings(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.Authority = TestServerBuilder.DefaultAuthority;
-                o.StateDataFormat = stateFormat;
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.ClientId = "Test Id";
+            o.Authority = TestServerBuilder.DefaultAuthority;
+            o.StateDataFormat = stateFormat;
+        });
 
         var properties = new AuthenticationProperties();
         properties.Items.Add(OpenIdConnectDefaults.UserstatePropertiesKey, userState);
@@ -238,22 +226,20 @@ public class OpenIdConnectChallengeTests
                 "OIDCTest"
             )
         );
-        var settings = new TestSettings(
-            opt =>
+        var settings = new TestSettings(opt =>
+        {
+            opt.StateDataFormat = stateFormat;
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Events = new OpenIdConnectEvents()
             {
-                opt.StateDataFormat = stateFormat;
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        context.ProtocolMessage.State = userState;
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    context.ProtocolMessage.State = userState;
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -285,21 +271,19 @@ public class OpenIdConnectChallengeTests
     public async Task OnRedirectToIdentityProviderEventIsHit()
     {
         var eventIsHit = false;
-        var settings = new TestSettings(
-            opts =>
+        var settings = new TestSettings(opts =>
+        {
+            opts.ClientId = "Test Id";
+            opts.Authority = TestServerBuilder.DefaultAuthority;
+            opts.Events = new OpenIdConnectEvents()
             {
-                opts.ClientId = "Test Id";
-                opts.Authority = TestServerBuilder.DefaultAuthority;
-                opts.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        eventIsHit = true;
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    eventIsHit = true;
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -325,21 +309,19 @@ public class OpenIdConnectChallengeTests
     {
         var newClientId = Guid.NewGuid().ToString();
 
-        var settings = new TestSettings(
-            opts =>
+        var settings = new TestSettings(opts =>
+        {
+            opts.ClientId = "Test Id";
+            opts.Authority = TestServerBuilder.DefaultAuthority;
+            opts.Events = new OpenIdConnectEvents()
             {
-                opts.ClientId = "Test Id";
-                opts.Authority = TestServerBuilder.DefaultAuthority;
-                opts.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        context.ProtocolMessage.ClientId = newClientId;
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    context.ProtocolMessage.ClientId = newClientId;
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -378,22 +360,20 @@ public class OpenIdConnectChallengeTests
             TestAuthorizeEndpoint = $"http://example.com/{Guid.NewGuid()}/oauth2/signin"
         };
 
-        var settings = new TestSettings(
-            opts =>
+        var settings = new TestSettings(opts =>
+        {
+            opts.ClientId = "Test Id";
+            opts.Authority = TestServerBuilder.DefaultAuthority;
+            opts.Events = new OpenIdConnectEvents()
             {
-                opts.ClientId = "Test Id";
-                opts.Authority = TestServerBuilder.DefaultAuthority;
-                opts.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        context.ProtocolMessage = newMessage;
+                    context.ProtocolMessage = newMessage;
 
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -410,24 +390,22 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task OnRedirectToIdentityProviderEventHandlesResponse()
     {
-        var settings = new TestSettings(
-            opts =>
+        var settings = new TestSettings(opts =>
+        {
+            opts.ClientId = "Test Id";
+            opts.Authority = TestServerBuilder.DefaultAuthority;
+            opts.Events = new OpenIdConnectEvents()
             {
-                opts.ClientId = "Test Id";
-                opts.Authority = TestServerBuilder.DefaultAuthority;
-                opts.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        context.Response.StatusCode = 410;
-                        context.Response.Headers.Add("tea", "Oolong");
-                        context.HandleResponse();
+                    context.Response.StatusCode = 410;
+                    context.Response.Headers.Add("tea", "Oolong");
+                    context.HandleResponse();
 
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -443,21 +421,19 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task OnRedirectToIdentityProviderEventHandleResponse()
     {
-        var settings = new TestSettings(
-            opts =>
+        var settings = new TestSettings(opts =>
+        {
+            opts.ClientId = "Test Id";
+            opts.Authority = TestServerBuilder.DefaultAuthority;
+            opts.Events = new OpenIdConnectEvents()
             {
-                opts.ClientId = "Test Id";
-                opts.Authority = TestServerBuilder.DefaultAuthority;
-                opts.Events = new OpenIdConnectEvents()
+                OnRedirectToIdentityProvider = context =>
                 {
-                    OnRedirectToIdentityProvider = context =>
-                    {
-                        context.HandleResponse();
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    context.HandleResponse();
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -472,14 +448,12 @@ public class OpenIdConnectChallengeTests
     [InlineData(OpenIdConnectRedirectBehavior.FormPost)]
     public async Task ChallengeSetsNonceAndStateCookies(OpenIdConnectRedirectBehavior method)
     {
-        var settings = new TestSettings(
-            o =>
-            {
-                o.AuthenticationMethod = method;
-                o.ClientId = "Test Id";
-                o.Authority = TestServerBuilder.DefaultAuthority;
-            }
-        );
+        var settings = new TestSettings(o =>
+        {
+            o.AuthenticationMethod = method;
+            o.ClientId = "Test Id";
+            o.Authority = TestServerBuilder.DefaultAuthority;
+        });
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
 
@@ -520,13 +494,11 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_WithEmptyConfig_Fails()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Configuration = new OpenIdConnectConfiguration();
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Configuration = new OpenIdConnectConfiguration();
+        });
 
         var server = settings.CreateTestServer();
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -541,13 +513,11 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_WithDefaultMaxAge_HasExpectedMaxAgeParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -564,14 +534,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_WithSpecificMaxAge_HasExpectedMaxAgeParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.MaxAge = TimeSpan.FromMinutes(20);
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.MaxAge = TimeSpan.FromMinutes(20);
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -588,14 +556,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasExpectedPromptParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Prompt = "consent";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Prompt = "consent";
+        });
 
         var server = settings.CreateTestServer();
         var transaction = await server.SendAsync(ChallengeEndpoint);
@@ -613,14 +579,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenPromptParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Prompt = "consent";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Prompt = "consent";
+        });
         var properties = new OpenIdConnectChallengeProperties() { Prompt = "login", };
 
         var server = settings.CreateTestServer(properties);
@@ -638,14 +602,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenPromptParamFromBaseAuthenticationProperties()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Prompt = "consent";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Prompt = "consent";
+        });
         var properties = new AuthenticationProperties();
         properties.SetParameter(OpenIdConnectChallengeProperties.PromptKey, "login");
 
@@ -664,16 +626,14 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenScopeParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Scope.Clear();
-                opt.Scope.Add("foo");
-                opt.Scope.Add("bar");
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Scope.Clear();
+            opt.Scope.Add("foo");
+            opt.Scope.Add("bar");
+        });
         var properties = new OpenIdConnectChallengeProperties();
         properties.SetScope("baz", "qux");
 
@@ -692,16 +652,14 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenScopeParamFromBaseAuthenticationProperties()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.Scope.Clear();
-                opt.Scope.Add("foo");
-                opt.Scope.Add("bar");
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.Scope.Clear();
+            opt.Scope.Add("foo");
+            opt.Scope.Add("bar");
+        });
         var properties = new AuthenticationProperties();
         properties.SetParameter(
             OpenIdConnectChallengeProperties.ScopeKey,
@@ -723,14 +681,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenMaxAgeParam()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.MaxAge = TimeSpan.FromSeconds(500);
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.MaxAge = TimeSpan.FromSeconds(500);
+        });
         var properties = new OpenIdConnectChallengeProperties()
         {
             MaxAge = TimeSpan.FromSeconds(1234),
@@ -751,14 +707,12 @@ public class OpenIdConnectChallengeTests
     [Fact]
     public async Task Challenge_HasOverwrittenMaxAgeParaFromBaseAuthenticationPropertiesm()
     {
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.ClientId = "Test Id";
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.MaxAge = TimeSpan.FromSeconds(500);
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.ClientId = "Test Id";
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.MaxAge = TimeSpan.FromSeconds(500);
+        });
         var properties = new AuthenticationProperties();
         properties.SetParameter(
             OpenIdConnectChallengeProperties.MaxAgeKey,

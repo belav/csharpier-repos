@@ -224,23 +224,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.Last(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Last(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.LastOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.LastOrDefault(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
         }
 
@@ -249,43 +245,35 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.Last(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Last(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.LastOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.LastOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.Last(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Last(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.LastOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.LastOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -306,23 +294,19 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     UnorderedSources
                         .Default(1)
-                        .Last(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .Last(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     UnorderedSources
                         .Default(1)
-                        .LastOrDefault(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .LastOrDefault(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
         }
 

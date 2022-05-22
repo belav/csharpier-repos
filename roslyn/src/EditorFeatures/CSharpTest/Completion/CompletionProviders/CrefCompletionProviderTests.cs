@@ -550,18 +550,16 @@ class C
             );
             provider
                 .GetTestAccessor()
-                .SetSpeculativeNodeCallback(
-                    n =>
-                    {
-                        // asserts that we aren't be asked speculate on nodes inside documentation trivia.
-                        // This verifies that the provider is asking for a speculative SemanticModel
-                        // by walking to the node the documentation is attached to.
+                .SetSpeculativeNodeCallback(n =>
+                {
+                    // asserts that we aren't be asked speculate on nodes inside documentation trivia.
+                    // This verifies that the provider is asking for a speculative SemanticModel
+                    // by walking to the node the documentation is attached to.
 
-                        called = true;
-                        var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
-                        Assert.Null(parent);
-                    }
-                );
+                    called = true;
+                    var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
+                    Assert.Null(parent);
+                });
 
             var completionList = await GetCompletionListAsync(
                 service,

@@ -17,14 +17,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var t = new TransformBlock<int, int>(i => i * 2);
             int completedCount = 0;
             int prev = -2;
-            var c = new ActionBlock<int>(
-                i =>
-                {
-                    completedCount++;
-                    Assert.Equal(expected: i, actual: prev + 2);
-                    prev = i;
-                }
-            );
+            var c = new ActionBlock<int>(i =>
+            {
+                completedCount++;
+                Assert.Equal(expected: i, actual: prev + 2);
+                prev = i;
+            });
             t.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
 
             t.PostRange(0, Iterations);
@@ -113,14 +111,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var c = new ActionBlock<int>(i => completedCount++);
             var singleAssignments = Enumerable
                 .Range(0, Iterations)
-                .Select(
-                    _ =>
-                    {
-                        var s = new WriteOnceBlock<int>(i => i);
-                        s.LinkTo(c);
-                        return s;
-                    }
-                )
+                .Select(_ =>
+                {
+                    var s = new WriteOnceBlock<int>(i => i);
+                    s.LinkTo(c);
+                    return s;
+                })
                 .ToList();
             var ignored = Task.WhenAll(singleAssignments.Select(s => s.Completion))
                 .ContinueWith(
@@ -197,16 +193,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             int completedCount = 0;
             var tasks = Enumerable
                 .Range(0, 1)
-                .Select(
-                    _ =>
-                    {
-                        var c = new ActionBlock<int>(
-                            i => Interlocked.Increment(ref completedCount)
-                        );
-                        b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
-                        return c.Completion;
-                    }
-                )
+                .Select(_ =>
+                {
+                    var c = new ActionBlock<int>(i => Interlocked.Increment(ref completedCount));
+                    b.LinkTo(c, new DataflowLinkOptions { PropagateCompletion = true });
+                    return c.Completion;
+                })
                 .ToArray();
 
             var posts = Iterations / tasks.Length;
@@ -242,15 +234,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
             ActionBlock<int> c1 = null,
                 c2 = null;
             c1 = new ActionBlock<int>(i => c2.Post(i + 1));
-            c2 = new ActionBlock<int>(
-                i =>
-                {
-                    if (i >= Iterations)
-                        tcs.SetResult(true);
-                    else
-                        c1.Post(i + 1);
-                }
-            );
+            c2 = new ActionBlock<int>(i =>
+            {
+                if (i >= Iterations)
+                    tcs.SetResult(true);
+                else
+                    c1.Post(i + 1);
+            });
             c1.Post(0);
 
             await tcs.Task;
@@ -261,14 +251,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             TransformBlock<int, int> t1 = null,
                 t2 = null;
-            t1 = new TransformBlock<int, int>(
-                i =>
-                {
-                    if (i >= Iterations)
-                        t2.Complete();
-                    return i + 1;
-                }
-            );
+            t1 = new TransformBlock<int, int>(i =>
+            {
+                if (i >= Iterations)
+                    t2.Complete();
+                return i + 1;
+            });
             t2 = new TransformBlock<int, int>(i => i + 1);
             t1.LinkTo(t2);
             t2.LinkTo(t1);

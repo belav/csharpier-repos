@@ -59,23 +59,20 @@ namespace Microsoft.Interop.Analyzers
             // Don't analyze generated code
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                {
-                    INamedTypeSymbol? generatedDllImportAttributeType =
-                        compilationContext.Compilation.GetTypeByMetadataName(
-                            TypeNames.GeneratedDllImportAttribute
-                        );
-                    if (generatedDllImportAttributeType == null)
-                        return;
-
-                    compilationContext.RegisterSymbolAction(
-                        symbolContext =>
-                            AnalyzeSymbol(symbolContext, generatedDllImportAttributeType),
-                        SymbolKind.Method
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                INamedTypeSymbol? generatedDllImportAttributeType =
+                    compilationContext.Compilation.GetTypeByMetadataName(
+                        TypeNames.GeneratedDllImportAttribute
                     );
-                }
-            );
+                if (generatedDllImportAttributeType == null)
+                    return;
+
+                compilationContext.RegisterSymbolAction(
+                    symbolContext => AnalyzeSymbol(symbolContext, generatedDllImportAttributeType),
+                    SymbolKind.Method
+                );
+            });
         }
 
         private static void AnalyzeSymbol(

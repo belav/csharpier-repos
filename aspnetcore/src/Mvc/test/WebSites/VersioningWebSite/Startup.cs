@@ -21,12 +21,10 @@ public class Startup
     public virtual void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 
     protected virtual void ConfigureMvcOptions(MvcOptions options) { }

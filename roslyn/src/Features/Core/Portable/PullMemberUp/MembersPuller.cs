@@ -336,23 +336,21 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 )
                 .ConfigureAwait(false);
             // Add members to destination
-            var pullUpMembersSymbols = result.MemberAnalysisResults.SelectAsArray(
-                memberResult =>
+            var pullUpMembersSymbols = result.MemberAnalysisResults.SelectAsArray(memberResult =>
+            {
+                if (
+                    memberResult.MakeMemberDeclarationAbstract
+                    && !memberResult.Member.IsKind(SymbolKind.Field)
+                )
                 {
-                    if (
-                        memberResult.MakeMemberDeclarationAbstract
-                        && !memberResult.Member.IsKind(SymbolKind.Field)
-                    )
-                    {
-                        // Change the member to abstract if user choose to make them abstract
-                        return MakeAbstractVersion(memberResult.Member);
-                    }
-                    else
-                    {
-                        return memberResult.Member;
-                    }
+                    // Change the member to abstract if user choose to make them abstract
+                    return MakeAbstractVersion(memberResult.Member);
                 }
-            );
+                else
+                {
+                    return memberResult.Member;
+                }
+            });
             var options = new CodeGenerationOptions(
                 reuseSyntax: true,
                 generateMethodBodies: false,

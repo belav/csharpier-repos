@@ -65,16 +65,14 @@ namespace System.SpanTests
 
             input = FixupSequences(input);
             Range[] expectedRangesNormalized = expectedRanges
-                .Select(
-                    element =>
-                    {
-                        Range parsed = ParseRange(element);
-                        (int actualOffset, int actualLength) = parsed.GetOffsetAndLength(
-                            input?.Length ?? 0
-                        );
-                        return actualOffset..(actualOffset + actualLength);
-                    }
-                )
+                .Select(element =>
+                {
+                    Range parsed = ParseRange(element);
+                    (int actualOffset, int actualLength) = parsed.GetOffsetAndLength(
+                        input?.Length ?? 0
+                    );
+                    return actualOffset..(actualOffset + actualLength);
+                })
                 .ToArray();
 
             List<Range> actualRangesNormalized = new List<Range>();

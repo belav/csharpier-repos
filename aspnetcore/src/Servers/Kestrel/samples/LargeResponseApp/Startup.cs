@@ -45,20 +45,16 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, 5001);
-                            }
-                        )
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 5001);
+                    })
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

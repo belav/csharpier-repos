@@ -74,17 +74,15 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<IMapFrom, MapTo>();
-                        cfg.CreateMap<IMapFromElement, IMapToElementWritable>()
-                            .Include<IMapFromElementDerived1, IMapToElementWritableDerived>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<IMapFrom, MapTo>();
+                    cfg.CreateMap<IMapFromElement, IMapToElementWritable>()
+                        .Include<IMapFromElementDerived1, IMapToElementWritableDerived>();
 
-                        cfg.CreateMap<IMapFromElementDerived1, IMapToElementWritableDerived>()
-                            .ConstructUsing(src => new MapToElementDerived());
-                    }
-                );
+                    cfg.CreateMap<IMapFromElementDerived1, IMapToElementWritableDerived>()
+                        .ConstructUsing(src => new MapToElementDerived());
+                });
 
             protected override void Because_of()
             {
@@ -189,18 +187,16 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<iclass1, iclass1DTO>()
-                            .Include<iclass2, iclass2DTO>()
-                            .Include<iclass3, iclass3DTO>()
-                            .Include<iclass4, iclass4DTO>();
-                        cfg.CreateMap<iclass2, iclass2DTO>();
-                        cfg.CreateMap<iclass3, iclass3DTO>();
-                        cfg.CreateMap<iclass4, iclass4DTO>().ConstructUsing(src => new class4DTO());
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<iclass1, iclass1DTO>()
+                        .Include<iclass2, iclass2DTO>()
+                        .Include<iclass3, iclass3DTO>()
+                        .Include<iclass4, iclass4DTO>();
+                    cfg.CreateMap<iclass2, iclass2DTO>();
+                    cfg.CreateMap<iclass3, iclass3DTO>();
+                    cfg.CreateMap<iclass4, iclass4DTO>().ConstructUsing(src => new class4DTO());
+                });
 
             protected override void Because_of()
             {

@@ -44,14 +44,12 @@ namespace BasicApi
 
             services
                 .AddAuthentication()
-                .AddJwtBearer(
-                    options =>
-                    {
-                        options.TokenValidationParameters.IssuerSigningKey = key;
-                        options.TokenValidationParameters.ValidAudience = "Myself";
-                        options.TokenValidationParameters.ValidIssuer = "BasicApi";
-                    }
-                );
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters.IssuerSigningKey = key;
+                    options.TokenValidationParameters.ValidAudience = "Myself";
+                    options.TokenValidationParameters.ValidIssuer = "BasicApi";
+                });
 
             var connectionString = Configuration["ConnectionString"];
             var databaseType = Configuration["Database"];
@@ -123,28 +121,26 @@ namespace BasicApi
                     );
             }
 
-            services.AddAuthorization(
-                options =>
-                {
-                    options.AddPolicy(
-                        "pet-store-reader",
-                        builder =>
-                            builder
-                                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                                .RequireAuthenticatedUser()
-                                .RequireClaim("scope", "pet-store-reader")
-                    );
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "pet-store-reader",
+                    builder =>
+                        builder
+                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                            .RequireAuthenticatedUser()
+                            .RequireClaim("scope", "pet-store-reader")
+                );
 
-                    options.AddPolicy(
-                        "pet-store-writer",
-                        builder =>
-                            builder
-                                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                                .RequireAuthenticatedUser()
-                                .RequireClaim("scope", "pet-store-writer")
-                    );
-                }
-            );
+                options.AddPolicy(
+                    "pet-store-writer",
+                    builder =>
+                        builder
+                            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                            .RequireAuthenticatedUser()
+                            .RequireClaim("scope", "pet-store-writer")
+                );
+            });
 
             services
                 .AddMvcCore()
@@ -191,12 +187,10 @@ namespace BasicApi
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapControllers();
-                }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
 
         private void CreateDatabaseTables(IServiceProvider services)

@@ -101,12 +101,10 @@ public static class Program
                         )
                         .Configure(
                             builder =>
-                                builder.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("I shouldn't work");
-                                    }
-                                )
+                                builder.Run(async context =>
+                                {
+                                    await context.Response.WriteAsync("I shouldn't work");
+                                })
                         )
                         .Build();
                     host.Run();
@@ -130,14 +128,12 @@ public static class Program
                         }
                     )
                     .UseIIS()
-                    .ConfigureServices(
-                        services =>
-                        {
-                            services.Configure<IISServerOptions>(
-                                options => options.MaxRequestBodySize = 2
-                            );
-                        }
-                    )
+                    .ConfigureServices(services =>
+                    {
+                        services.Configure<IISServerOptions>(
+                            options => options.MaxRequestBodySize = 2
+                        );
+                    })
                     .UseStartup<Startup>()
                     .Build();
 

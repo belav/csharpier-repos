@@ -34,13 +34,11 @@ public class BodyValidationIntegrationTests
             BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json;charset=utf-8";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json;charset=utf-8";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -75,13 +73,11 @@ public class BodyValidationIntegrationTests
             BindingInfo = new BindingInfo { BindingSource = BindingSource.Body, },
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json;charset=utf-8";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json;charset=utf-8";
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -107,13 +103,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(ProductViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -156,13 +150,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(ProductViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -198,13 +190,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(ProductViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -237,13 +227,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(SoftwareViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -272,13 +260,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(SoftwareViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -320,13 +306,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(SoftwareViewModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -366,13 +350,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(Person)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+        });
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
         var modelState = testContext.ModelState;
@@ -410,13 +392,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(Person)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+        });
         testContext.MvcOptions.AllowEmptyInputInBodyModelBinding = true;
 
         var modelState = testContext.ModelState;
@@ -446,13 +426,11 @@ public class BodyValidationIntegrationTests
     public async Task FromBodyAndRequiredOnValueTypeProperty_EmptyBody_JsonFormatterAddsModelStateError()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(string.Empty));
+            request.ContentType = "application/json";
+        });
 
         // Override the AllowInputFormatterExceptionMessages setting ModelBindingTestHelper chooses.
         var options = testContext.GetService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
@@ -516,13 +494,11 @@ public class BodyValidationIntegrationTests
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ \"Number\": 5 }"));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ \"Number\": 5 }"));
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -544,15 +520,13 @@ public class BodyValidationIntegrationTests
     public async Task FromBodyWithInvalidPropertyData_JsonFormatterAddsModelError()
     {
         // Arrange
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(
-                    Encoding.UTF8.GetBytes("{ \"Number\": \"not a number\" }")
-                );
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(
+                Encoding.UTF8.GetBytes("{ \"Number\": \"not a number\" }")
+            );
+            request.ContentType = "application/json";
+        });
 
         // Override the AllowInputFormatterExceptionMessages setting ModelBindingTestHelper chooses.
         var options = testContext.GetService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
@@ -681,13 +655,11 @@ public class BodyValidationIntegrationTests
             Name = "param-name",
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
+            request.ContentType = "application/json";
+        });
         var httpContext = testContext.HttpContext;
         var modelState = testContext.ModelState;
 
@@ -740,13 +712,11 @@ public class BodyValidationIntegrationTests
             Name = "param-name",
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes(inputText));
+            request.ContentType = "application/json";
+        });
         var modelState = testContext.ModelState;
 
         // Act

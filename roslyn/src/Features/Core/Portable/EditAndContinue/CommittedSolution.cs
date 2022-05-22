@@ -384,68 +384,64 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         )
         {
-            var projectTasks = documentsByProject.Select(
-                async projectDocumentStates =>
+            var projectTasks = documentsByProject.Select(async projectDocumentStates =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var (project, documentStates) = projectDocumentStates;
+
+                // Skip projects that do not support Roslyn EnC (e.g. F#, etc).
+                // Source files of these do not even need to be captured in the solution snapshot.
+                if (!project.SupportsEditAndContinue())
+                {
+                    return Array.Empty<DocumentId?>();
+                }
+
+                using var debugInfoReaderProvider = GetMethodDebugInfoReader(
+                    compilationOutputsProvider(project),
+                    project.Name
+                );
+                if (debugInfoReaderProvider == null)
+                {
+                    return Array.Empty<DocumentId?>();
+                }
+
+                var debugInfoReader =
+                    debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
+
+                var documentTasks = documentStates.Select(async documentState =>
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var (project, documentStates) = projectDocumentStates;
-
-                    // Skip projects that do not support Roslyn EnC (e.g. F#, etc).
-                    // Source files of these do not even need to be captured in the solution snapshot.
-                    if (!project.SupportsEditAndContinue())
+                    if (documentState.SupportsEditAndContinue())
                     {
-                        return Array.Empty<DocumentId?>();
-                    }
+                        var sourceFilePath = documentState.FilePath;
+                        Contract.ThrowIfNull(sourceFilePath);
 
-                    using var debugInfoReaderProvider = GetMethodDebugInfoReader(
-                        compilationOutputsProvider(project),
-                        project.Name
-                    );
-                    if (debugInfoReaderProvider == null)
-                    {
-                        return Array.Empty<DocumentId?>();
-                    }
+                        // Hydrate the solution snapshot with the content of the file.
+                        // It's important to do this before we start watching for changes so that we have a baseline we can compare future snapshots to.
+                        var sourceText = await documentState
+                            .GetTextAsync(cancellationToken)
+                            .ConfigureAwait(false);
 
-                    var debugInfoReader =
-                        debugInfoReaderProvider.CreateEditAndContinueMethodDebugInfoReader();
-
-                    var documentTasks = documentStates.Select(
-                        async documentState =>
+                        // TODO: https://github.com/dotnet/roslyn/issues/51993
+                        // avoid rereading the file in common case - the workspace should create source texts with the right checksum algorithm and encoding
+                        var (source, hasDocument) = TryGetPdbMatchingSourceText(
+                            debugInfoReader,
+                            sourceFilePath,
+                            sourceText.Encoding
+                        );
+                        if (source != null)
                         {
-                            cancellationToken.ThrowIfCancellationRequested();
-
-                            if (documentState.SupportsEditAndContinue())
-                            {
-                                var sourceFilePath = documentState.FilePath;
-                                Contract.ThrowIfNull(sourceFilePath);
-
-                                // Hydrate the solution snapshot with the content of the file.
-                                // It's important to do this before we start watching for changes so that we have a baseline we can compare future snapshots to.
-                                var sourceText = await documentState
-                                    .GetTextAsync(cancellationToken)
-                                    .ConfigureAwait(false);
-
-                                // TODO: https://github.com/dotnet/roslyn/issues/51993
-                                // avoid rereading the file in common case - the workspace should create source texts with the right checksum algorithm and encoding
-                                var (source, hasDocument) = TryGetPdbMatchingSourceText(
-                                    debugInfoReader,
-                                    sourceFilePath,
-                                    sourceText.Encoding
-                                );
-                                if (source != null)
-                                {
-                                    return documentState.Id;
-                                }
-                            }
-
-                            return null;
+                            return documentState.Id;
                         }
-                    );
+                    }
 
-                    return await Task.WhenAll(documentTasks).ConfigureAwait(false);
-                }
-            );
+                    return null;
+                });
+
+                return await Task.WhenAll(documentTasks).ConfigureAwait(false);
+            });
 
             var documentIdArrays = await Task.WhenAll(projectTasks).ConfigureAwait(false);
 

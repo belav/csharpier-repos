@@ -44,186 +44,181 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationStartContext =>
+            context.RegisterCompilationStartAction(compilationStartContext =>
+            {
+                // State map for fields:
+                //  'isCandidate' : Indicates whether the field is a candidate to be made readonly based on it's options.
+                //  'written'     : Indicates if there are any writes to the field outside the constructor and field initializer.
+                var fieldStateMap =
+                    new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
+
+                var threadStaticAttribute =
+                    compilationStartContext.Compilation.ThreadStaticAttributeType();
+
+                // We register following actions in the compilation:
+                // 1. A symbol action for field symbols to ensure the field state is initialized for every field in
+                //    the compilation.
+                // 2. An operation action for field references to detect if a candidate field is written outside
+                //    constructor and field initializer, and update field state accordingly.
+                // 3. A symbol start/end action for named types to report diagnostics for candidate fields that were
+                //    not written outside constructor and field initializer.
+
+                compilationStartContext.RegisterSymbolAction(AnalyzeFieldSymbol, SymbolKind.Field);
+
+                compilationStartContext.RegisterSymbolStartAction(
+                    symbolStartContext =>
+                    {
+                        symbolStartContext.RegisterOperationAction(
+                            AnalyzeOperation,
+                            OperationKind.FieldReference
+                        );
+                        symbolStartContext.RegisterSymbolEndAction(OnSymbolEnd);
+                    },
+                    SymbolKind.NamedType
+                );
+
+                return;
+
+                // Local functions.
+                void AnalyzeFieldSymbol(SymbolAnalysisContext symbolContext)
                 {
-                    // State map for fields:
-                    //  'isCandidate' : Indicates whether the field is a candidate to be made readonly based on it's options.
-                    //  'written'     : Indicates if there are any writes to the field outside the constructor and field initializer.
-                    var fieldStateMap =
-                        new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
+                    _ = TryGetOrInitializeFieldState(
+                        (IFieldSymbol)symbolContext.Symbol,
+                        symbolContext.Options,
+                        symbolContext.CancellationToken
+                    );
+                }
 
-                    var threadStaticAttribute =
-                        compilationStartContext.Compilation.ThreadStaticAttributeType();
-
-                    // We register following actions in the compilation:
-                    // 1. A symbol action for field symbols to ensure the field state is initialized for every field in
-                    //    the compilation.
-                    // 2. An operation action for field references to detect if a candidate field is written outside
-                    //    constructor and field initializer, and update field state accordingly.
-                    // 3. A symbol start/end action for named types to report diagnostics for candidate fields that were
-                    //    not written outside constructor and field initializer.
-
-                    compilationStartContext.RegisterSymbolAction(
-                        AnalyzeFieldSymbol,
-                        SymbolKind.Field
+                void AnalyzeOperation(OperationAnalysisContext operationContext)
+                {
+                    var fieldReference = (IFieldReferenceOperation)operationContext.Operation;
+                    var (isCandidate, written) = TryGetOrInitializeFieldState(
+                        fieldReference.Field,
+                        operationContext.Options,
+                        operationContext.CancellationToken
                     );
 
-                    compilationStartContext.RegisterSymbolStartAction(
-                        symbolStartContext =>
-                        {
-                            symbolStartContext.RegisterOperationAction(
-                                AnalyzeOperation,
-                                OperationKind.FieldReference
-                            );
-                            symbolStartContext.RegisterSymbolEndAction(OnSymbolEnd);
-                        },
-                        SymbolKind.NamedType
-                    );
-
-                    return;
-
-                    // Local functions.
-                    void AnalyzeFieldSymbol(SymbolAnalysisContext symbolContext)
+                    // Ignore fields that are not candidates or have already been written outside the constructor/field initializer.
+                    if (!isCandidate || written)
                     {
-                        _ = TryGetOrInitializeFieldState(
-                            (IFieldSymbol)symbolContext.Symbol,
-                            symbolContext.Options,
-                            symbolContext.CancellationToken
-                        );
+                        return;
                     }
 
-                    void AnalyzeOperation(OperationAnalysisContext operationContext)
+                    // Check if this is a field write outside constructor and field initializer, and update field state accordingly.
+                    if (IsFieldWrite(fieldReference, operationContext.ContainingSymbol))
                     {
-                        var fieldReference = (IFieldReferenceOperation)operationContext.Operation;
-                        var (isCandidate, written) = TryGetOrInitializeFieldState(
-                            fieldReference.Field,
-                            operationContext.Options,
-                            operationContext.CancellationToken
-                        );
-
-                        // Ignore fields that are not candidates or have already been written outside the constructor/field initializer.
-                        if (!isCandidate || written)
-                        {
-                            return;
-                        }
-
-                        // Check if this is a field write outside constructor and field initializer, and update field state accordingly.
-                        if (IsFieldWrite(fieldReference, operationContext.ContainingSymbol))
-                        {
-                            UpdateFieldStateOnWrite(fieldReference.Field);
-                        }
+                        UpdateFieldStateOnWrite(fieldReference.Field);
                     }
+                }
 
-                    void OnSymbolEnd(SymbolAnalysisContext symbolEndContext)
+                void OnSymbolEnd(SymbolAnalysisContext symbolEndContext)
+                {
+                    // Report diagnostics for candidate fields that are not written outside constructor and field initializer.
+                    var members = ((INamedTypeSymbol)symbolEndContext.Symbol).GetMembers();
+                    foreach (var member in members)
                     {
-                        // Report diagnostics for candidate fields that are not written outside constructor and field initializer.
-                        var members = ((INamedTypeSymbol)symbolEndContext.Symbol).GetMembers();
-                        foreach (var member in members)
+                        if (
+                            member is IFieldSymbol field
+                            && fieldStateMap.TryRemove(field, out var value)
+                        )
                         {
-                            if (
-                                member is IFieldSymbol field
-                                && fieldStateMap.TryRemove(field, out var value)
-                            )
+                            var (isCandidate, written) = value;
+                            if (isCandidate && !written)
                             {
-                                var (isCandidate, written) = value;
-                                if (isCandidate && !written)
-                                {
-                                    var option = GetCodeStyleOption(
-                                        field,
-                                        symbolEndContext.Options,
-                                        symbolEndContext.CancellationToken
-                                    );
-                                    var diagnostic = DiagnosticHelper.Create(
-                                        Descriptor,
-                                        field.Locations[0],
-                                        option.Notification.Severity,
-                                        additionalLocations: null,
-                                        properties: null
-                                    );
-                                    symbolEndContext.ReportDiagnostic(diagnostic);
-                                }
+                                var option = GetCodeStyleOption(
+                                    field,
+                                    symbolEndContext.Options,
+                                    symbolEndContext.CancellationToken
+                                );
+                                var diagnostic = DiagnosticHelper.Create(
+                                    Descriptor,
+                                    field.Locations[0],
+                                    option.Notification.Severity,
+                                    additionalLocations: null,
+                                    properties: null
+                                );
+                                symbolEndContext.ReportDiagnostic(diagnostic);
                             }
                         }
                     }
-
-                    static bool IsCandidateField(
-                        IFieldSymbol symbol,
-                        INamedTypeSymbol threadStaticAttribute
-                    ) =>
-                        symbol.DeclaredAccessibility == Accessibility.Private
-                        && !symbol.IsReadOnly
-                        && !symbol.IsConst
-                        && !symbol.IsImplicitlyDeclared
-                        && symbol.Locations.Length == 1
-                        && symbol.Type.IsMutableValueType() == false
-                        && !symbol.IsFixedSizeBuffer
-                        && !symbol
-                            .GetAttributes()
-                            .Any(
-                                static (a, threadStaticAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        threadStaticAttribute
-                                    ),
-                                threadStaticAttribute
-                            );
-
-                    // Method to update the field state for a candidate field written outside constructor and field initializer.
-                    void UpdateFieldStateOnWrite(IFieldSymbol field)
-                    {
-                        Debug.Assert(IsCandidateField(field, threadStaticAttribute));
-                        Debug.Assert(fieldStateMap.ContainsKey(field));
-
-                        fieldStateMap[field] = (isCandidate: true, written: true);
-                    }
-
-                    // Method to get or initialize the field state.
-                    (bool isCandidate, bool written) TryGetOrInitializeFieldState(
-                        IFieldSymbol fieldSymbol,
-                        AnalyzerOptions options,
-                        CancellationToken cancellationToken
-                    )
-                    {
-                        if (!IsCandidateField(fieldSymbol, threadStaticAttribute))
-                        {
-                            return default;
-                        }
-
-                        if (fieldStateMap.TryGetValue(fieldSymbol, out var result))
-                        {
-                            return result;
-                        }
-
-                        result = ComputeInitialFieldState(
-                            fieldSymbol,
-                            options,
-                            threadStaticAttribute,
-                            cancellationToken
-                        );
-                        return fieldStateMap.GetOrAdd(fieldSymbol, result);
-                    }
-
-                    // Method to compute the initial field state.
-                    static (bool isCandidate, bool written) ComputeInitialFieldState(
-                        IFieldSymbol field,
-                        AnalyzerOptions options,
-                        INamedTypeSymbol threadStaticAttribute,
-                        CancellationToken cancellationToken
-                    )
-                    {
-                        Debug.Assert(IsCandidateField(field, threadStaticAttribute));
-
-                        var option = GetCodeStyleOption(field, options, cancellationToken);
-                        if (option == null || !option.Value)
-                        {
-                            return default;
-                        }
-
-                        return (isCandidate: true, written: false);
-                    }
                 }
-            );
+
+                static bool IsCandidateField(
+                    IFieldSymbol symbol,
+                    INamedTypeSymbol threadStaticAttribute
+                ) =>
+                    symbol.DeclaredAccessibility == Accessibility.Private
+                    && !symbol.IsReadOnly
+                    && !symbol.IsConst
+                    && !symbol.IsImplicitlyDeclared
+                    && symbol.Locations.Length == 1
+                    && symbol.Type.IsMutableValueType() == false
+                    && !symbol.IsFixedSizeBuffer
+                    && !symbol
+                        .GetAttributes()
+                        .Any(
+                            static (a, threadStaticAttribute) =>
+                                SymbolEqualityComparer.Default.Equals(
+                                    a.AttributeClass,
+                                    threadStaticAttribute
+                                ),
+                            threadStaticAttribute
+                        );
+
+                // Method to update the field state for a candidate field written outside constructor and field initializer.
+                void UpdateFieldStateOnWrite(IFieldSymbol field)
+                {
+                    Debug.Assert(IsCandidateField(field, threadStaticAttribute));
+                    Debug.Assert(fieldStateMap.ContainsKey(field));
+
+                    fieldStateMap[field] = (isCandidate: true, written: true);
+                }
+
+                // Method to get or initialize the field state.
+                (bool isCandidate, bool written) TryGetOrInitializeFieldState(
+                    IFieldSymbol fieldSymbol,
+                    AnalyzerOptions options,
+                    CancellationToken cancellationToken
+                )
+                {
+                    if (!IsCandidateField(fieldSymbol, threadStaticAttribute))
+                    {
+                        return default;
+                    }
+
+                    if (fieldStateMap.TryGetValue(fieldSymbol, out var result))
+                    {
+                        return result;
+                    }
+
+                    result = ComputeInitialFieldState(
+                        fieldSymbol,
+                        options,
+                        threadStaticAttribute,
+                        cancellationToken
+                    );
+                    return fieldStateMap.GetOrAdd(fieldSymbol, result);
+                }
+
+                // Method to compute the initial field state.
+                static (bool isCandidate, bool written) ComputeInitialFieldState(
+                    IFieldSymbol field,
+                    AnalyzerOptions options,
+                    INamedTypeSymbol threadStaticAttribute,
+                    CancellationToken cancellationToken
+                )
+                {
+                    Debug.Assert(IsCandidateField(field, threadStaticAttribute));
+
+                    var option = GetCodeStyleOption(field, options, cancellationToken);
+                    if (option == null || !option.Value)
+                    {
+                        return default;
+                    }
+
+                    return (isCandidate: true, written: false);
+                }
+            });
         }
 
         private static bool IsFieldWrite(

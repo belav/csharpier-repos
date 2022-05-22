@@ -90,15 +90,13 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Product>(
-                    eb =>
-                    {
-                        eb.Property(e => e.StoreUpdated)
-                            .HasDefaultValue(0)
-                            .ValueGeneratedOnAddOrUpdate();
-                        eb.ToTable("UpdatedProducts");
-                    }
-                );
+                modelBuilder.Entity<Product>(eb =>
+                {
+                    eb.Property(e => e.StoreUpdated)
+                        .HasDefaultValue(0)
+                        .ValueGeneratedOnAddOrUpdate();
+                    eb.ToTable("UpdatedProducts");
+                });
             }
         }
 

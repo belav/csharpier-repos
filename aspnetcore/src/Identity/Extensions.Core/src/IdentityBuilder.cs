@@ -142,12 +142,10 @@ public class IdentityBuilder
                 )
             );
         }
-        Services.Configure<IdentityOptions>(
-            options =>
-            {
-                options.Tokens.ProviderMap[providerName] = new TokenProviderDescriptor(provider);
-            }
-        );
+        Services.Configure<IdentityOptions>(options =>
+        {
+            options.Tokens.ProviderMap[providerName] = new TokenProviderDescriptor(provider);
+        });
         Services.AddTransient(provider);
         return this;
     }

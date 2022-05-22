@@ -105,13 +105,11 @@ namespace System.Collections.Generic
                 }
 
                 List<T> toRemove = new List<T>();
-                BreadthFirstTreeWalk(
-                    n =>
-                    {
-                        toRemove.Add(n.Item);
-                        return true;
-                    }
-                );
+                BreadthFirstTreeWalk(n =>
+                {
+                    toRemove.Add(n.Item);
+                    return true;
+                });
                 while (toRemove.Count != 0)
                 {
                     _underlying.Remove(toRemove[^1]);
@@ -342,13 +340,11 @@ namespace System.Collections.Generic
                 if (updateCount && _countVersion != _underlying.version)
                 {
                     count = 0;
-                    InOrderTreeWalk(
-                        n =>
-                        {
-                            count++;
-                            return true;
-                        }
-                    );
+                    InOrderTreeWalk(n =>
+                    {
+                        count++;
+                        return true;
+                    });
                     _countVersion = _underlying.version;
                 }
             }

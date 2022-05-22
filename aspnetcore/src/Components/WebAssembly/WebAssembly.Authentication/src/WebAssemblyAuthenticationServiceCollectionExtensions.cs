@@ -45,23 +45,19 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
             AuthenticationStateProvider,
             RemoteAuthenticationService<TRemoteAuthenticationState, TAccount, TProviderOptions>
         >();
-        services.TryAddScoped(
-            sp =>
-            {
-                return (IRemoteAuthenticationService<TRemoteAuthenticationState>)
-                    sp.GetRequiredService<AuthenticationStateProvider>();
-            }
-        );
+        services.TryAddScoped(sp =>
+        {
+            return (IRemoteAuthenticationService<TRemoteAuthenticationState>)
+                sp.GetRequiredService<AuthenticationStateProvider>();
+        });
 
         services.TryAddTransient<BaseAddressAuthorizationMessageHandler>();
         services.TryAddTransient<AuthorizationMessageHandler>();
 
-        services.TryAddScoped(
-            sp =>
-            {
-                return (IAccessTokenProvider)sp.GetRequiredService<AuthenticationStateProvider>();
-            }
-        );
+        services.TryAddScoped(sp =>
+        {
+            return (IAccessTokenProvider)sp.GetRequiredService<AuthenticationStateProvider>();
+        });
 
         services.TryAddScoped<
             IRemoteAuthenticationPathsProvider,

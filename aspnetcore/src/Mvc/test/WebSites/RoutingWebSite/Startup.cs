@@ -22,22 +22,20 @@ public class Startup
         services
             .AddMvc(ConfigureMvcOptions)
             .AddNewtonsoftJson()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AddPageRoute(
-                        "/PageRouteTransformer/PageWithConfiguredRoute",
-                        "/PageRouteTransformer/NewConventionRoute/{id?}"
-                    );
-                    options.Conventions.AddFolderRouteModelConvention(
-                        "/PageRouteTransformer",
-                        model =>
-                        {
-                            pageRouteTransformerConvention.Apply(model);
-                        }
-                    );
-                }
-            );
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute(
+                    "/PageRouteTransformer/PageWithConfiguredRoute",
+                    "/PageRouteTransformer/NewConventionRoute/{id?}"
+                );
+                options.Conventions.AddFolderRouteModelConvention(
+                    "/PageRouteTransformer",
+                    model =>
+                    {
+                        pageRouteTransformerConvention.Apply(model);
+                    }
+                );
+            });
 
         ConfigureRoutingServices(services);
 
@@ -48,88 +46,84 @@ public class Startup
     public virtual void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    "NonParameterConstraintRoute",
-                    "NonParameterConstraintRoute/{controller}/{action}",
-                    defaults: null,
-                    constraints: new
-                    {
-                        controller = "NonParameterConstraint",
-                        nonParameter = new QueryStringConstraint()
-                    }
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                "NonParameterConstraintRoute",
+                "NonParameterConstraintRoute/{controller}/{action}",
+                defaults: null,
+                constraints: new
+                {
+                    controller = "NonParameterConstraint",
+                    nonParameter = new QueryStringConstraint()
+                }
+            );
 
-                endpoints.MapControllerRoute(
-                    "DataTokensRoute",
-                    "DataTokensRoute/{controller}/{action}",
-                    defaults: null,
-                    constraints: new { controller = "DataTokens" },
-                    dataTokens: new { hasDataTokens = true }
-                );
+            endpoints.MapControllerRoute(
+                "DataTokensRoute",
+                "DataTokensRoute/{controller}/{action}",
+                defaults: null,
+                constraints: new { controller = "DataTokens" },
+                dataTokens: new { hasDataTokens = true }
+            );
 
-                endpoints.MapControllerRoute(
-                    "ConventionalTransformerRoute",
-                    "ConventionalTransformerRoute/{controller:slugify}/{action=Index}/{param:slugify?}",
-                    defaults: null,
-                    constraints: new { controller = "ConventionalTransformer" }
-                );
+            endpoints.MapControllerRoute(
+                "ConventionalTransformerRoute",
+                "ConventionalTransformerRoute/{controller:slugify}/{action=Index}/{param:slugify?}",
+                defaults: null,
+                constraints: new { controller = "ConventionalTransformer" }
+            );
 
-                endpoints.MapControllerRoute(
-                    "DefaultValuesRoute_OptionalParameter",
-                    "DefaultValuesRoute/Optional/{controller=DEFAULTVALUES}/{action=OPTIONALPARAMETER}/{id?}/{**catchAll}",
-                    defaults: null,
-                    constraints: new { controller = "DefaultValues", action = "OptionalParameter" }
-                );
+            endpoints.MapControllerRoute(
+                "DefaultValuesRoute_OptionalParameter",
+                "DefaultValuesRoute/Optional/{controller=DEFAULTVALUES}/{action=OPTIONALPARAMETER}/{id?}/{**catchAll}",
+                defaults: null,
+                constraints: new { controller = "DefaultValues", action = "OptionalParameter" }
+            );
 
-                endpoints.MapControllerRoute(
-                    "DefaultValuesRoute_DefaultParameter",
-                    "DefaultValuesRoute/Default/{controller=DEFAULTVALUES}/{action=DEFAULTPARAMETER}/{id=17}/{**catchAll}",
-                    defaults: null,
-                    constraints: new { controller = "DefaultValues", action = "DefaultParameter" }
-                );
+            endpoints.MapControllerRoute(
+                "DefaultValuesRoute_DefaultParameter",
+                "DefaultValuesRoute/Default/{controller=DEFAULTVALUES}/{action=DEFAULTPARAMETER}/{id=17}/{**catchAll}",
+                defaults: null,
+                constraints: new { controller = "DefaultValues", action = "DefaultParameter" }
+            );
 
-                endpoints.MapAreaControllerRoute(
-                    "flightRoute",
-                    "adminRoute",
-                    "{area:exists}/{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" },
-                    constraints: new { area = "Travel" }
-                );
+            endpoints.MapAreaControllerRoute(
+                "flightRoute",
+                "adminRoute",
+                "{area:exists}/{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" },
+                constraints: new { area = "Travel" }
+            );
 
-                endpoints.MapControllerRoute(
-                    "PageRoute",
-                    "{controller}/{action}/{page}",
-                    defaults: null,
-                    constraints: new { controller = "PageRoute" }
-                );
+            endpoints.MapControllerRoute(
+                "PageRoute",
+                "{controller}/{action}/{page}",
+                defaults: null,
+                constraints: new { controller = "PageRoute" }
+            );
 
-                endpoints.MapControllerRoute(
-                    "ActionAsMethod",
-                    "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
+            endpoints.MapControllerRoute(
+                "ActionAsMethod",
+                "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
+            );
 
-                endpoints.MapControllerRoute(
-                    "RouteWithOptionalSegment",
-                    "{controller}/{action}/{path?}"
-                );
+            endpoints.MapControllerRoute(
+                "RouteWithOptionalSegment",
+                "{controller}/{action}/{path?}"
+            );
 
-                endpoints.MapRazorPages();
-            }
-        );
+            endpoints.MapRazorPages();
+        });
 
         app.Map(
             "/afterrouting",
             b =>
-                b.Run(
-                    c =>
-                    {
-                        return c.Response.WriteAsync("Hello from middleware after routing");
-                    }
-                )
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
         );
     }
 

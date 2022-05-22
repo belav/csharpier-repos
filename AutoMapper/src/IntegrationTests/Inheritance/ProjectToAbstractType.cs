@@ -59,13 +59,11 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
-                    cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
+                cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
+            });
 
         [Fact]
         public void Should_project_to_abstract_type()

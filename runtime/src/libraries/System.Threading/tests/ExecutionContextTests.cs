@@ -270,13 +270,11 @@ namespace System.Threading.Tests
             // Queueing a thread pool work item flows context if and only if flow is not suppressed
             asyncLocalValue = -1;
             var done = new AutoResetEvent(false);
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    asyncLocalValue = asyncLocal.Value;
-                    done.Set();
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                asyncLocalValue = asyncLocal.Value;
+                done.Set();
+            });
             done.CheckedWait();
             Assert.Equal(expectedValue, asyncLocalValue);
         }

@@ -48,13 +48,11 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection
             .AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
             .AddPolicyHandler(RetryPolicy)
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -92,13 +90,11 @@ public class PollyHttpClientBuilderExtensionsTest
             .AddPolicyHandler(
                 (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
             )
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -141,13 +137,11 @@ public class PollyHttpClientBuilderExtensionsTest
             .AddPolicyHandler(
                 (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
             )
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -191,14 +185,12 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection
             .AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
             .AddPolicyHandlerFromRegistry("retry")
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
 
-                    builder = b;
-                }
-            );
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -245,13 +237,11 @@ public class PollyHttpClientBuilderExtensionsTest
                         : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
                 }
             )
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -309,13 +299,11 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection
             .AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
             .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = handler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = handler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -364,13 +352,11 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection
             .AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
             .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = handler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = handler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -415,13 +401,11 @@ public class PollyHttpClientBuilderExtensionsTest
                     return r.RequestUri.Host;
                 }
             )
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                }
-            );
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -493,14 +477,12 @@ public class PollyHttpClientBuilderExtensionsTest
         serviceCollection
             .AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
             .AddPolicyHandlerFromRegistry(options.PolicyName)
-            .ConfigureHttpMessageHandlerBuilder(
-                b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
+            .ConfigureHttpMessageHandlerBuilder(b =>
+            {
+                b.PrimaryHandler = PrimaryHandler;
 
-                    builder = b;
-                }
-            );
+                builder = b;
+            });
 
         var services = serviceCollection.BuildServiceProvider();
         var factory = services.GetRequiredService<IHttpClientFactory>();

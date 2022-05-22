@@ -34,14 +34,12 @@ public class RemoteRendererTest
         // Arrange
         var serviceProvider = CreateServiceProvider();
         var renderer = GetRemoteRenderer(serviceProvider);
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenElement(0, "my element");
-                builder.AddContent(1, "some text");
-                builder.CloseElement();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenElement(0, "my element");
+            builder.AddContent(1, "some text");
+            builder.CloseElement();
+        });
 
         // Act
         var componentId = renderer.AssignRootComponentId(component);
@@ -57,14 +55,12 @@ public class RemoteRendererTest
     {
         var serviceProvider = CreateServiceProvider();
         var renderer = GetRemoteRenderer(serviceProvider);
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenElement(0, "my element");
-                builder.AddContent(1, "some text");
-                builder.CloseElement();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenElement(0, "my element");
+            builder.AddContent(1, "some text");
+            builder.CloseElement();
+        });
 
         // Act
         var componentId = renderer.AssignRootComponentId(component);
@@ -82,14 +78,12 @@ public class RemoteRendererTest
     {
         var serviceProvider = CreateServiceProvider();
         var renderer = GetRemoteRenderer(serviceProvider);
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenElement(0, "my element");
-                builder.AddContent(1, "some text");
-                builder.CloseElement();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenElement(0, "my element");
+            builder.AddContent(1, "some text");
+            builder.CloseElement();
+        });
 
         // Act
         var componentId = renderer.AssignRootComponentId(component);
@@ -110,12 +104,10 @@ public class RemoteRendererTest
         var serviceProvider = CreateServiceProvider();
         var renderer = GetRemoteRenderer(serviceProvider);
         var i = 0;
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.AddContent(0, $"Value {i}");
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.AddContent(0, $"Value {i}");
+        });
 
         // Act
         var componentId = renderer.AssignRootComponentId(component);
@@ -160,14 +152,12 @@ public class RemoteRendererTest
             .Returns(firstBatchTCS.Task);
         var circuitClient = new CircuitClientProxy(initialClient.Object, "connection0");
         var renderer = GetRemoteRenderer(serviceProvider, circuitClient);
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenElement(0, "my element");
-                builder.AddContent(1, "some text");
-                builder.CloseElement();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenElement(0, "my element");
+            builder.AddContent(1, "some text");
+            builder.CloseElement();
+        });
 
         var client = new Mock<IClientProxy>();
         client

@@ -71,15 +71,13 @@ public class EndpointRoutingMiddlewareTest
         var listener = new DiagnosticListener("TestListener");
 
         using var subscription = listener.Subscribe(
-            new DelegateObserver(
-                pair =>
-                {
-                    eventFired = true;
+            new DelegateObserver(pair =>
+            {
+                eventFired = true;
 
-                    Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
-                    Assert.IsAssignableFrom<HttpContext>(pair.Value);
-                }
-            )
+                Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
+                Assert.IsAssignableFrom<HttpContext>(pair.Value);
+            })
         );
 
         var httpContext = CreateHttpContext();

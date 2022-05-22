@@ -47,12 +47,10 @@ public class StartupWithMapFallbackToClientSideBlazor
                     filepath =>
                     {
                         filepath.UseRouting();
-                        filepath.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapFallbackToFile("index.html");
-                            }
-                        );
+                        filepath.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapFallbackToFile("index.html");
+                        });
                     }
                 );
                 subApp.Map(
@@ -60,12 +58,10 @@ public class StartupWithMapFallbackToClientSideBlazor
                     patternFilePath =>
                     {
                         patternFilePath.UseRouting();
-                        patternFilePath.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapFallbackToFile("test/{*path:nonfile}", "index.html");
-                            }
-                        );
+                        patternFilePath.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapFallbackToFile("test/{*path:nonfile}", "index.html");
+                        });
                     }
                 );
                 subApp.Map(
@@ -73,12 +69,10 @@ public class StartupWithMapFallbackToClientSideBlazor
                     assemblyPathFilePath =>
                     {
                         assemblyPathFilePath.UseRouting();
-                        assemblyPathFilePath.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapFallbackToFile("index.html");
-                            }
-                        );
+                        assemblyPathFilePath.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapFallbackToFile("index.html");
+                        });
                     }
                 );
                 subApp.Map(
@@ -86,12 +80,10 @@ public class StartupWithMapFallbackToClientSideBlazor
                     assemblyPatternFilePath =>
                     {
                         assemblyPatternFilePath.UseRouting();
-                        assemblyPatternFilePath.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapFallbackToFile("test/{*path:nonfile}", "index.html");
-                            }
-                        );
+                        assemblyPatternFilePath.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapFallbackToFile("test/{*path:nonfile}", "index.html");
+                        });
                     }
                 );
             }

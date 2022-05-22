@@ -556,15 +556,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     buffer.LinkTo(batch);
                     buffer.LinkTo(
-                        new ActionBlock<int>(
-                            i =>
+                        new ActionBlock<int>(i =>
+                        {
+                            if (Interlocked.Decrement(ref remaining) == 0)
                             {
-                                if (Interlocked.Decrement(ref remaining) == 0)
-                                {
-                                    tcs.SetResult(true);
-                                }
+                                tcs.SetResult(true);
                             }
-                        )
+                        })
                     );
                     buffer.Post(42);
                 }

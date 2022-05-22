@@ -1032,12 +1032,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static MyDel M()
         {
-            return new MyDel(
-                x =>
-                {
-                    return x;
-                }
-            );
+            return new MyDel(x =>
+            {
+                return x;
+            });
         }
     }
 }

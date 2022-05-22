@@ -52,74 +52,70 @@ public class StartupForDynamicOrder
     {
         var scenario = Configuration.GetValue<string>("Scenario");
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
+        app.UseEndpoints(endpoints =>
+        {
+            // Route order definition is important for all these routes:
+            switch (scenario)
             {
-                // Route order definition is important for all these routes:
-                switch (scenario)
-                {
-                    case DynamicOrderScenarios.AttributeRouteDynamicRoute:
-                        endpoints.MapDynamicControllerRoute<Transformer>(
-                            "attribute-dynamic-order/{**slug}",
-                            new TransformerState() { Identifier = "slug" }
-                        );
-                        endpoints.MapControllers();
-                        break;
-                    case DynamicOrderScenarios.ConventionalRouteDynamicRoute:
-                        endpoints.MapControllerRoute(
-                            null,
-                            "{**conventional-dynamic-order-before:regex(^((?!conventional\\-dynamic\\-order\\-after).)*$)}",
-                            new { controller = "DynamicOrder", action = "Index" }
-                        );
-                        endpoints.MapDynamicControllerRoute<Transformer>(
-                            "{conventional-dynamic-order}",
-                            new TransformerState() { Identifier = "slug" }
-                        );
-                        endpoints.MapControllerRoute(
-                            null,
-                            "conventional-dynamic-order-after",
-                            new { controller = "DynamicOrder", action = "Index" }
-                        );
-                        break;
-                    case DynamicOrderScenarios.MultipleDynamicRoute:
-                        endpoints.MapDynamicControllerRoute<Transformer>(
-                            "dynamic-order/{**slug}",
-                            new TransformerState() { Identifier = "slug" }
-                        );
-                        endpoints.MapDynamicControllerRoute<Transformer>(
-                            "dynamic-order/specific/{**slug}",
-                            new TransformerState() { Identifier = "specific" }
-                        );
-                        break;
-                    case DynamicOrderScenarios.DynamicControllerAndPages:
-                        endpoints.MapDynamicPageRoute<Transformer>(
-                            "{**dynamic-order-page-controller-before:regex(^((?!dynamic\\-order\\-page\\-controller\\-after).)*$)}",
-                            new TransformerState() { Identifier = "before", ForPages = true }
-                        );
-                        endpoints.MapDynamicControllerRoute<Transformer>(
-                            "{dynamic-order-page-controller}",
-                            new TransformerState() { Identifier = "controller" }
-                        );
-                        endpoints.MapDynamicPageRoute<Transformer>(
-                            "dynamic-order-page-controller-after",
-                            new TransformerState() { Identifier = "after", ForPages = true }
-                        );
-                        break;
-                    default:
-                        throw new InvalidOperationException("Invalid scenario configuration.");
-                }
+                case DynamicOrderScenarios.AttributeRouteDynamicRoute:
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "attribute-dynamic-order/{**slug}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
+                    endpoints.MapControllers();
+                    break;
+                case DynamicOrderScenarios.ConventionalRouteDynamicRoute:
+                    endpoints.MapControllerRoute(
+                        null,
+                        "{**conventional-dynamic-order-before:regex(^((?!conventional\\-dynamic\\-order\\-after).)*$)}",
+                        new { controller = "DynamicOrder", action = "Index" }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "{conventional-dynamic-order}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
+                    endpoints.MapControllerRoute(
+                        null,
+                        "conventional-dynamic-order-after",
+                        new { controller = "DynamicOrder", action = "Index" }
+                    );
+                    break;
+                case DynamicOrderScenarios.MultipleDynamicRoute:
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "dynamic-order/{**slug}",
+                        new TransformerState() { Identifier = "slug" }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "dynamic-order/specific/{**slug}",
+                        new TransformerState() { Identifier = "specific" }
+                    );
+                    break;
+                case DynamicOrderScenarios.DynamicControllerAndPages:
+                    endpoints.MapDynamicPageRoute<Transformer>(
+                        "{**dynamic-order-page-controller-before:regex(^((?!dynamic\\-order\\-page\\-controller\\-after).)*$)}",
+                        new TransformerState() { Identifier = "before", ForPages = true }
+                    );
+                    endpoints.MapDynamicControllerRoute<Transformer>(
+                        "{dynamic-order-page-controller}",
+                        new TransformerState() { Identifier = "controller" }
+                    );
+                    endpoints.MapDynamicPageRoute<Transformer>(
+                        "dynamic-order-page-controller-after",
+                        new TransformerState() { Identifier = "after", ForPages = true }
+                    );
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid scenario configuration.");
             }
-        );
+        });
 
         app.Map(
             "/afterrouting",
             b =>
-                b.Run(
-                    c =>
-                    {
-                        return c.Response.WriteAsync("Hello from middleware after routing");
-                    }
-                )
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
         );
     }
 

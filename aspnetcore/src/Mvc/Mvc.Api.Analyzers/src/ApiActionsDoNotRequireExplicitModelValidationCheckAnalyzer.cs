@@ -23,23 +23,21 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
         context.EnableConcurrentExecution();
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-        context.RegisterCompilationStartAction(
-            compilationStartAnalysisContext =>
-            {
-                if (
-                    !ApiControllerSymbolCache.TryCreate(
-                        compilationStartAnalysisContext.Compilation,
-                        out var symbolCache
-                    )
+        context.RegisterCompilationStartAction(compilationStartAnalysisContext =>
+        {
+            if (
+                !ApiControllerSymbolCache.TryCreate(
+                    compilationStartAnalysisContext.Compilation,
+                    out var symbolCache
                 )
-                {
-                    // No-op if we can't find types we care about.
-                    return;
-                }
-
-                InitializeWorker(compilationStartAnalysisContext, symbolCache);
+            )
+            {
+                // No-op if we can't find types we care about.
+                return;
             }
-        );
+
+            InitializeWorker(compilationStartAnalysisContext, symbolCache);
+        });
     }
 
     private void InitializeWorker(

@@ -222,25 +222,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 kinds.Add(SymbolKind.Parameter);
             }
 
-            return list.Where(
-                s =>
+            return list.Where(s =>
+            {
+                if (s.IsImplicitlyDeclared)
                 {
-                    if (s.IsImplicitlyDeclared)
-                    {
-                        return false;
-                    }
-
-                    foreach (var k in kinds)
-                    {
-                        if (s.Kind == k)
-                        {
-                            return true;
-                        }
-                    }
-
                     return false;
                 }
-            );
+
+                foreach (var k in kinds)
+                {
+                    if (s.Kind == k)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
         }
 
         internal static IList<ISymbol> GetSourceSymbols(

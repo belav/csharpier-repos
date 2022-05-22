@@ -61,17 +61,15 @@ namespace Microsoft.Extensions.Hosting
                         (hostContext, services) =>
                         {
                             services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
-                            services.Configure<EventLogSettings>(
-                                settings =>
+                            services.Configure<EventLogSettings>(settings =>
+                            {
+                                if (string.IsNullOrEmpty(settings.SourceName))
                                 {
-                                    if (string.IsNullOrEmpty(settings.SourceName))
-                                    {
-                                        settings.SourceName = hostContext
-                                            .HostingEnvironment
-                                            .ApplicationName;
-                                    }
+                                    settings.SourceName = hostContext
+                                        .HostingEnvironment
+                                        .ApplicationName;
                                 }
-                            );
+                            });
                             services.Configure(configure);
                         }
                     );

@@ -53,13 +53,11 @@ namespace System.Tests
             RunWithoutSyncCtx(() =>
             {
                 Barrier b = new Barrier(2);
-                Progress<int> p = new Progress<int>(
-                    i =>
-                    {
-                        Assert.Equal(b.CurrentPhaseNumber, i);
-                        b.SignalAndWait();
-                    }
-                );
+                Progress<int> p = new Progress<int>(i =>
+                {
+                    Assert.Equal(b.CurrentPhaseNumber, i);
+                    b.SignalAndWait();
+                });
                 for (int i = 0; i < 3; i++)
                 {
                     ((IProgress<int>)p).Report(i);

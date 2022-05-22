@@ -1584,29 +1584,23 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
-                modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey("_blogId");
-                        b.Property(e => e.Title);
-                    }
-                );
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey("_blogId");
+                    b.Property(e => e.Title);
+                });
 
-                modelBuilder.Entity<BlogQuery>(
-                    b =>
-                    {
-                        b.HasNoKey();
-                        b.Property(e => e.Title);
-                    }
-                );
+                modelBuilder.Entity<BlogQuery>(b =>
+                {
+                    b.HasNoKey();
+                    b.Property(e => e.Title);
+                });
 
-                modelBuilder.Entity<Post>(
-                    b =>
-                    {
-                        b.HasKey("_id");
-                        b.Property(e => e.Title);
-                    }
-                );
+                modelBuilder.Entity<Post>(b =>
+                {
+                    b.HasKey("_id");
+                    b.Property(e => e.Title);
+                });
 
                 modelBuilder.Entity<HasContext<DbContext>>();
                 modelBuilder.Entity<HasContext<WithConstructorsContext>>();

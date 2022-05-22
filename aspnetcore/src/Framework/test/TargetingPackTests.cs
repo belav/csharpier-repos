@@ -262,26 +262,24 @@ public class TargetingPackTests
                 var assemblyDefinition = reader.GetAssemblyDefinition();
                 var hasRefAssemblyAttribute = assemblyDefinition
                     .GetCustomAttributes()
-                    .Any(
-                        attr =>
-                        {
-                            var attribute = reader.GetCustomAttribute(attr);
-                            var attributeConstructor = reader.GetMemberReference(
-                                (MemberReferenceHandle)attribute.Constructor
+                    .Any(attr =>
+                    {
+                        var attribute = reader.GetCustomAttribute(attr);
+                        var attributeConstructor = reader.GetMemberReference(
+                            (MemberReferenceHandle)attribute.Constructor
+                        );
+                        var attributeType = reader.GetTypeReference(
+                            (TypeReferenceHandle)attributeConstructor.Parent
+                        );
+                        return reader.StringComparer.Equals(
+                                attributeType.Namespace,
+                                typeof(ReferenceAssemblyAttribute).Namespace
+                            )
+                            && reader.StringComparer.Equals(
+                                attributeType.Name,
+                                nameof(ReferenceAssemblyAttribute)
                             );
-                            var attributeType = reader.GetTypeReference(
-                                (TypeReferenceHandle)attributeConstructor.Parent
-                            );
-                            return reader.StringComparer.Equals(
-                                    attributeType.Namespace,
-                                    typeof(ReferenceAssemblyAttribute).Namespace
-                                )
-                                && reader.StringComparer.Equals(
-                                    attributeType.Name,
-                                    nameof(ReferenceAssemblyAttribute)
-                                );
-                        }
-                    );
+                    });
 
                 Assert.True(
                     hasRefAssemblyAttribute,
@@ -304,15 +302,13 @@ public class TargetingPackTests
         var expectedAssemblies = TestData
             .GetSharedFxDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
-            .Select(
-                i =>
-                {
-                    var fileName = Path.GetFileName(i);
-                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                        ? fileName.Substring(0, fileName.Length - 4)
-                        : fileName;
-                }
-            )
+            .Select(i =>
+            {
+                var fileName = Path.GetFileName(i);
+                return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                    ? fileName.Substring(0, fileName.Length - 4)
+                    : fileName;
+            })
             .ToHashSet();
 
         _output.WriteLine("==== file contents ====");
@@ -326,15 +322,13 @@ public class TargetingPackTests
 
         var actualAssemblies = manifestFileLines
             .Where(s => !string.IsNullOrEmpty(s))
-            .Select(
-                i =>
-                {
-                    var fileName = i.Split('|')[0];
-                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                        ? fileName.Substring(0, fileName.Length - 4)
-                        : fileName;
-                }
-            )
+            .Select(i =>
+            {
+                var fileName = i.Split('|')[0];
+                return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                    ? fileName.Substring(0, fileName.Length - 4)
+                    : fileName;
+            })
             .ToHashSet();
 
         if (!TestData.VerifyAncmBinary())
@@ -431,15 +425,13 @@ public class TargetingPackTests
             _output.WriteLine(string.Join('\n', expectedAssemblyNames.OrderBy(i => i)));
 
             var actualAssemblyNames = managedEntries
-                .Select(
-                    i =>
-                    {
-                        var fileName = i.Attribute("AssemblyName").Value;
-                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                            ? fileName.Substring(0, fileName.Length - 4)
-                            : fileName;
-                    }
-                )
+                .Select(i =>
+                {
+                    var fileName = i.Attribute("AssemblyName").Value;
+                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                        ? fileName.Substring(0, fileName.Length - 4)
+                        : fileName;
+                })
                 .ToHashSet();
 
             var missing = actualAssemblyNames.Except(actualAssemblyNames);

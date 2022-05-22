@@ -294,28 +294,24 @@ namespace Microsoft.Extensions.Hosting
 
             AddLifetime(services);
 
-            services.AddSingleton<IHost>(
-                _ =>
-                {
-                    return new Internal.Host(
-                        _appServices,
-                        _hostingEnvironment,
-                        _defaultProvider,
-                        _appServices.GetRequiredService<IHostApplicationLifetime>(),
-                        _appServices.GetRequiredService<ILogger<Internal.Host>>(),
-                        _appServices.GetRequiredService<IHostLifetime>(),
-                        _appServices.GetRequiredService<IOptions<HostOptions>>()
-                    );
-                }
-            );
+            services.AddSingleton<IHost>(_ =>
+            {
+                return new Internal.Host(
+                    _appServices,
+                    _hostingEnvironment,
+                    _defaultProvider,
+                    _appServices.GetRequiredService<IHostApplicationLifetime>(),
+                    _appServices.GetRequiredService<ILogger<Internal.Host>>(),
+                    _appServices.GetRequiredService<IHostLifetime>(),
+                    _appServices.GetRequiredService<IOptions<HostOptions>>()
+                );
+            });
             services
                 .AddOptions()
-                .Configure<HostOptions>(
-                    options =>
-                    {
-                        options.Initialize(_hostConfiguration);
-                    }
-                );
+                .Configure<HostOptions>(options =>
+                {
+                    options.Initialize(_hostConfiguration);
+                });
             services.AddLogging();
 
             foreach (

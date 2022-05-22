@@ -466,34 +466,28 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<FullNotificationEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(
-                            ChangeTrackingStrategy.ChangingAndChangedNotifications
-                        );
-                    }
-                );
+                modelBuilder.Entity<FullNotificationEntity>(b =>
+                {
+                    b.Property(e => e.Name).IsConcurrencyToken();
+                    b.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangingAndChangedNotifications
+                    );
+                });
 
-                modelBuilder.Entity<ChangedOnlyEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-                    }
-                );
+                modelBuilder.Entity<ChangedOnlyEntity>(b =>
+                {
+                    b.Property(e => e.Name).IsConcurrencyToken();
+                    b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
+                });
 
-                modelBuilder.Entity<OwnerClass>(
-                    eb =>
-                    {
-                        eb.HasKey(e => e.Id);
-                        var owned = eb.OwnsOne(e => e.Owned);
-                        owned.WithOwner().HasForeignKey("Id");
-                        owned.HasKey("Id");
-                        owned.Property(e => e.Value);
-                    }
-                );
+                modelBuilder.Entity<OwnerClass>(eb =>
+                {
+                    eb.HasKey(e => e.Id);
+                    var owned = eb.OwnsOne(e => e.Owned);
+                    owned.WithOwner().HasForeignKey("Id");
+                    owned.HasKey("Id");
+                    owned.Property(e => e.Value);
+                });
             }
         }
 
@@ -503,23 +497,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<FullNotificationEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(
-                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                        );
-                    }
-                );
+                modelBuilder.Entity<FullNotificationEntity>(b =>
+                {
+                    b.Property(e => e.Name).IsConcurrencyToken();
+                    b.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                    );
+                });
 
-                modelBuilder.Entity<ChangedOnlyEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Name).IsConcurrencyToken();
-                        b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-                    }
-                );
+                modelBuilder.Entity<ChangedOnlyEntity>(b =>
+                {
+                    b.Property(e => e.Name).IsConcurrencyToken();
+                    b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
+                });
             }
         }
     }

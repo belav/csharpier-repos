@@ -47,41 +47,37 @@ public class Startup
 
         services
             .AddAuthentication()
-            .AddGoogle(
-                o =>
+            .AddGoogle(o =>
+            {
+                // Configure your auth keys, usually stored in Config or User Secrets
+                o.ClientId = "<yourid>";
+                o.ClientSecret = "<yoursecret>";
+                o.Scope.Add("https://www.googleapis.com/auth/plus.login");
+                o.ClaimActions.MapJsonKey(ClaimTypes.Gender, "gender");
+                o.SaveTokens = true;
+                o.Events.OnCreatingTicket = ctx =>
                 {
-                    // Configure your auth keys, usually stored in Config or User Secrets
-                    o.ClientId = "<yourid>";
-                    o.ClientSecret = "<yoursecret>";
-                    o.Scope.Add("https://www.googleapis.com/auth/plus.login");
-                    o.ClaimActions.MapJsonKey(ClaimTypes.Gender, "gender");
-                    o.SaveTokens = true;
-                    o.Events.OnCreatingTicket = ctx =>
-                    {
-                        List<AuthenticationToken> tokens = ctx.Properties.GetTokens().ToList();
-                        tokens.Add(
-                            new AuthenticationToken()
-                            {
-                                Name = "TicketCreated",
-                                Value = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
-                            }
-                        );
-                        ctx.Properties.StoreTokens(tokens);
-                        return Task.CompletedTask;
-                    };
-                }
-            );
+                    List<AuthenticationToken> tokens = ctx.Properties.GetTokens().ToList();
+                    tokens.Add(
+                        new AuthenticationToken()
+                        {
+                            Name = "TicketCreated",
+                            Value = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)
+                        }
+                    );
+                    ctx.Properties.StoreTokens(tokens);
+                    return Task.CompletedTask;
+                };
+            });
 
         services
             .AddMvc()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AuthorizeFolder("/Account/Manage");
-                    options.Conventions.AuthorizePage("/Account/Logout");
-                    options.Conventions.AuthorizePage("/MyClaims");
-                }
-            );
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Account/Manage");
+                options.Conventions.AuthorizePage("/Account/Logout");
+                options.Conventions.AuthorizePage("/MyClaims");
+            });
 
         // Register no-op EmailSender used by account confirmation and password reset during development
         // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -110,12 +106,10 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
+        });
     }
 }

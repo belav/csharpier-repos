@@ -264,14 +264,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                    {
-                        c.ReportDiagnostic(
-                            Diagnostic.Create(_rule, Location.Create(c.Tree, new TextSpan(0, 1)))
-                        );
-                    }
-                );
+                context.RegisterSyntaxTreeAction(c =>
+                {
+                    c.ReportDiagnostic(
+                        Diagnostic.Create(_rule, Location.Create(c.Tree, new TextSpan(0, 1)))
+                    );
+                });
             }
 
             public void ChangeSeverity() =>

@@ -9,15 +9,13 @@
         private Destination _destination;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullCollections = false;
-                    cfg.CreateMap<Source, Destination>();
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullCollections = false;
+                cfg.CreateMap<Source, Destination>();
 
-                    _source = new Source { Name = null, Data = null };
-                }
-            );
+                _source = new Source { Name = null, Data = null };
+            });
 
         protected override void Because_of()
         {

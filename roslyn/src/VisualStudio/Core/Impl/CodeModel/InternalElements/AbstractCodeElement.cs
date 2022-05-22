@@ -265,12 +265,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         /// </summary>
         internal void Delete()
         {
-            FileCodeModel.PerformEdit(
-                document =>
-                {
-                    return DeleteCore(document);
-                }
-            );
+            FileCodeModel.PerformEdit(document =>
+            {
+                return DeleteCore(document);
+            });
         }
 
         [SuppressMessage(

@@ -1562,13 +1562,11 @@ namespace Microsoft.CodeAnalysis
                 var transitiveDependencies = solution
                     .GetProjectDependencyGraph()
                     .GetProjectsThatThisProjectTransitivelyDependsOn(this.ProjectState.Id);
-                var orderedProjectIds = transitiveDependencies.OrderBy(
-                    id =>
-                    {
-                        var depProject = solution.GetRequiredProjectState(id);
-                        return (depProject.FilePath, depProject.Name);
-                    }
-                );
+                var orderedProjectIds = transitiveDependencies.OrderBy(id =>
+                {
+                    var depProject = solution.GetRequiredProjectState(id);
+                    return (depProject.FilePath, depProject.Name);
+                });
 
                 foreach (var projectId in orderedProjectIds)
                 {

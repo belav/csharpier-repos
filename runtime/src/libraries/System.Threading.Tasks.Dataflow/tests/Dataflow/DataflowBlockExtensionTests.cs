@@ -229,20 +229,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 bb.Complete();
 
                 int nextValueExpected = 0;
-                var ab = new ActionBlock<int>(
-                    i =>
-                    {
-                        Assert.True(
-                            i == nextValueExpected,
-                            string.Format(
-                                "Expected next value to be {0} but got {1}",
-                                nextValueExpected,
-                                i
-                            )
-                        );
-                        nextValueExpected++;
-                    }
-                );
+                var ab = new ActionBlock<int>(i =>
+                {
+                    Assert.True(
+                        i == nextValueExpected,
+                        string.Format(
+                            "Expected next value to be {0} but got {1}",
+                            nextValueExpected,
+                            i
+                        )
+                    );
+                    nextValueExpected++;
+                });
 
                 bb.AsObservable().Subscribe(ab.AsObserver());
                 await ab.Completion;
@@ -251,20 +249,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Test that new data flows correctly
             {
                 int nextValueExpected = -2;
-                var ab = new ActionBlock<int>(
-                    i =>
-                    {
-                        Assert.True(
-                            i == nextValueExpected,
-                            string.Format(
-                                "Expected next value to be {0} but got {1}",
-                                nextValueExpected,
-                                i
-                            )
-                        );
-                        nextValueExpected++;
-                    }
-                );
+                var ab = new ActionBlock<int>(i =>
+                {
+                    Assert.True(
+                        i == nextValueExpected,
+                        string.Format(
+                            "Expected next value to be {0} but got {1}",
+                            nextValueExpected,
+                            i
+                        )
+                    );
+                    nextValueExpected++;
+                });
 
                 var bb = new BufferBlock<int>();
                 bb.AsObservable().Subscribe(ab.AsObserver());
@@ -305,14 +301,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             // Test that exceptional data flows when exception occurs before and after subscription
             foreach (bool beforeSubscription in DataflowTestHelpers.BooleanValues)
             {
-                var tb = new TransformBlock<int, int>(
-                    i =>
-                    {
-                        if (i == 42)
-                            throw new InvalidOperationException("uh oh");
-                        return i;
-                    }
-                );
+                var tb = new TransformBlock<int, int>(i =>
+                {
+                    if (i == 42)
+                        throw new InvalidOperationException("uh oh");
+                    return i;
+                });
 
                 if (beforeSubscription)
                 {
@@ -456,13 +450,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 GC.Collect();
             }
 
-            int remaining = blockReferences.Count(
-                wr =>
-                {
-                    BufferBlock<int> b;
-                    return wr.TryGetTarget(out b);
-                }
-            );
+            int remaining = blockReferences.Count(wr =>
+            {
+                BufferBlock<int> b;
+                return wr.TryGetTarget(out b);
+            });
             Assert.True(remaining <= 1);
         }
 

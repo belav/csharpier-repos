@@ -426,13 +426,11 @@ public class CollectionModelBinderTest
         var culture = new CultureInfo("fr-FR");
         var bindingContext = GetModelBindingContext(new SimpleValueProvider());
 
-        var elementBinder = new StubModelBinder(
-            mbc =>
-            {
-                Assert.Equal("someName", mbc.ModelName);
-                mbc.Result = ModelBindingResult.Success(42);
-            }
-        );
+        var elementBinder = new StubModelBinder(mbc =>
+        {
+            Assert.Equal("someName", mbc.ModelName);
+            mbc.Result = ModelBindingResult.Success(42);
+        });
 
         var modelBinder = new CollectionModelBinder<int>(elementBinder, NullLoggerFactory.Instance);
 
@@ -471,40 +469,38 @@ public class CollectionModelBinderTest
 
     private static IModelBinder CreateIntBinder()
     {
-        return new StubModelBinder(
-            context =>
+        return new StubModelBinder(context =>
+        {
+            var value = context.ValueProvider.GetValue(context.ModelName);
+            if (value == ValueProviderResult.None)
             {
-                var value = context.ValueProvider.GetValue(context.ModelName);
-                if (value == ValueProviderResult.None)
-                {
-                    return ModelBindingResult.Failed();
-                }
-
-                object valueToConvert = null;
-                if (value.Values.Count == 1)
-                {
-                    valueToConvert = value.Values[0];
-                }
-                else if (value.Values.Count > 1)
-                {
-                    valueToConvert = value.Values.ToArray();
-                }
-
-                var model = ModelBindingHelper.ConvertTo(
-                    valueToConvert,
-                    context.ModelType,
-                    value.Culture
-                );
-                if (model == null)
-                {
-                    return ModelBindingResult.Failed();
-                }
-                else
-                {
-                    return ModelBindingResult.Success(model);
-                }
+                return ModelBindingResult.Failed();
             }
-        );
+
+            object valueToConvert = null;
+            if (value.Values.Count == 1)
+            {
+                valueToConvert = value.Values[0];
+            }
+            else if (value.Values.Count > 1)
+            {
+                valueToConvert = value.Values.ToArray();
+            }
+
+            var model = ModelBindingHelper.ConvertTo(
+                valueToConvert,
+                context.ModelType,
+                value.Culture
+            );
+            if (model == null)
+            {
+                return ModelBindingResult.Failed();
+            }
+            else
+            {
+                return ModelBindingResult.Success(model);
+            }
+        });
     }
 
     private static DefaultModelBindingContext CreateContext()

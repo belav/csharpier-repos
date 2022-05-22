@@ -29,22 +29,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             int insertionIndex
         )
         {
-            return PerformEdit(
-                document =>
-                {
-                    var resultNode = CodeModelService.InsertAttribute(
-                        document,
-                        IsBatchOpen,
-                        insertionIndex,
-                        containerNode,
-                        attributeNode,
-                        CancellationToken.None,
-                        out var newDocument
-                    );
+            return PerformEdit(document =>
+            {
+                var resultNode = CodeModelService.InsertAttribute(
+                    document,
+                    IsBatchOpen,
+                    insertionIndex,
+                    containerNode,
+                    attributeNode,
+                    CancellationToken.None,
+                    out var newDocument
+                );
 
-                    return Tuple.Create(resultNode, newDocument);
-                }
-            );
+                return Tuple.Create(resultNode, newDocument);
+            });
         }
 
         private SyntaxNode InsertAttributeArgument(
@@ -53,22 +51,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             int insertionIndex
         )
         {
-            return PerformEdit(
-                document =>
-                {
-                    var resultNode = CodeModelService.InsertAttributeArgument(
-                        document,
-                        IsBatchOpen,
-                        insertionIndex,
-                        containerNode,
-                        attributeArgumentNode,
-                        CancellationToken.None,
-                        out var newDocument
-                    );
+            return PerformEdit(document =>
+            {
+                var resultNode = CodeModelService.InsertAttributeArgument(
+                    document,
+                    IsBatchOpen,
+                    insertionIndex,
+                    containerNode,
+                    attributeArgumentNode,
+                    CancellationToken.None,
+                    out var newDocument
+                );
 
-                    return Tuple.Create(resultNode, newDocument);
-                }
-            );
+                return Tuple.Create(resultNode, newDocument);
+            });
         }
 
         private SyntaxNode InsertImport(
@@ -77,22 +73,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             int insertionIndex
         )
         {
-            return PerformEdit(
-                document =>
-                {
-                    var resultNode = CodeModelService.InsertImport(
-                        document,
-                        IsBatchOpen,
-                        insertionIndex,
-                        containerNode,
-                        importNode,
-                        CancellationToken.None,
-                        out var newDocument
-                    );
+            return PerformEdit(document =>
+            {
+                var resultNode = CodeModelService.InsertImport(
+                    document,
+                    IsBatchOpen,
+                    insertionIndex,
+                    containerNode,
+                    importNode,
+                    CancellationToken.None,
+                    out var newDocument
+                );
 
-                    return Tuple.Create(resultNode, newDocument);
-                }
-            );
+                return Tuple.Create(resultNode, newDocument);
+            });
         }
 
         private SyntaxNode InsertMember(
@@ -101,22 +95,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             int insertionIndex
         )
         {
-            return PerformEdit(
-                document =>
-                {
-                    var resultNode = CodeModelService.InsertMember(
-                        document,
-                        IsBatchOpen,
-                        insertionIndex,
-                        containerNode,
-                        memberNode,
-                        CancellationToken.None,
-                        out var newDocument
-                    );
+            return PerformEdit(document =>
+            {
+                var resultNode = CodeModelService.InsertMember(
+                    document,
+                    IsBatchOpen,
+                    insertionIndex,
+                    containerNode,
+                    memberNode,
+                    CancellationToken.None,
+                    out var newDocument
+                );
 
-                    return Tuple.Create(resultNode, newDocument);
-                }
-            );
+                return Tuple.Create(resultNode, newDocument);
+            });
         }
 
         private SyntaxNode InsertParameter(
@@ -125,22 +117,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             int insertionIndex
         )
         {
-            return PerformEdit(
-                document =>
-                {
-                    var resultNode = CodeModelService.InsertParameter(
-                        document,
-                        IsBatchOpen,
-                        insertionIndex,
-                        containerNode,
-                        parameterNode,
-                        CancellationToken.None,
-                        out var newDocument
-                    );
+            return PerformEdit(document =>
+            {
+                var resultNode = CodeModelService.InsertParameter(
+                    document,
+                    IsBatchOpen,
+                    insertionIndex,
+                    containerNode,
+                    parameterNode,
+                    CancellationToken.None,
+                    out var newDocument
+                );
 
-                    return Tuple.Create(resultNode, newDocument);
-                }
-            );
+                return Tuple.Create(resultNode, newDocument);
+            });
         }
 
         private EnvDTE.CodeElement CreateInternalCodeMember(
@@ -166,17 +156,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         private void UpdateNode(SyntaxNode node, SyntaxNode updatedNode)
         {
-            PerformEdit(
-                document =>
-                {
-                    return CodeModelService.UpdateNode(
-                        document,
-                        node,
-                        updatedNode,
-                        CancellationToken.None
-                    );
-                }
-            );
+            PerformEdit(document =>
+            {
+                return CodeModelService.UpdateNode(
+                    document,
+                    node,
+                    updatedNode,
+                    CancellationToken.None
+                );
+            });
         }
 
         private static object[] GetValidArray(object itemOrArray, bool allowMultipleElements)

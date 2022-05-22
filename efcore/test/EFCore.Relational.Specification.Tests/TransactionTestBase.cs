@@ -1608,20 +1608,16 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
-                modelBuilder.Entity<TransactionCustomer>(
-                    ps =>
-                    {
-                        ps.Property(c => c.Id).ValueGeneratedNever();
-                        ps.ToTable("Customers");
-                    }
-                );
-                modelBuilder.Entity<TransactionOrder>(
-                    ps =>
-                    {
-                        ps.Property(c => c.Id).ValueGeneratedNever();
-                        ps.ToTable("Orders");
-                    }
-                );
+                modelBuilder.Entity<TransactionCustomer>(ps =>
+                {
+                    ps.Property(c => c.Id).ValueGeneratedNever();
+                    ps.ToTable("Customers");
+                });
+                modelBuilder.Entity<TransactionOrder>(ps =>
+                {
+                    ps.Property(c => c.Id).ValueGeneratedNever();
+                    ps.ToTable("Orders");
+                });
             }
 
             protected override void Seed(PoolableDbContext context)

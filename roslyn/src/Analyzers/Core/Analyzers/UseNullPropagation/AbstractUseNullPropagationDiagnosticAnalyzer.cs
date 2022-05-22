@@ -75,37 +75,33 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                startContext =>
+            context.RegisterCompilationStartAction(startContext =>
+            {
+                if (!ShouldAnalyze(startContext.Compilation))
                 {
-                    if (!ShouldAnalyze(startContext.Compilation))
-                    {
-                        return;
-                    }
-
-                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
-                        "System.Linq.Expressions.Expression`1"
-                    );
-
-                    var objectType = startContext.Compilation.GetSpecialType(
-                        SpecialType.System_Object
-                    );
-                    var referenceEqualsMethodOpt = objectType
-                        ?.GetMembers(nameof(ReferenceEquals))
-                        .OfType<IMethodSymbol>()
-                        .FirstOrDefault(
-                            m =>
-                                m.DeclaredAccessibility == Accessibility.Public
-                                && m.Parameters.Length == 2
-                        );
-
-                    var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-                    startContext.RegisterSyntaxNodeAction(
-                        c => AnalyzeSyntax(c, expressionTypeOpt, referenceEqualsMethodOpt),
-                        syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression)
-                    );
+                    return;
                 }
-            );
+
+                var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
+                    "System.Linq.Expressions.Expression`1"
+                );
+
+                var objectType = startContext.Compilation.GetSpecialType(SpecialType.System_Object);
+                var referenceEqualsMethodOpt = objectType
+                    ?.GetMembers(nameof(ReferenceEquals))
+                    .OfType<IMethodSymbol>()
+                    .FirstOrDefault(
+                        m =>
+                            m.DeclaredAccessibility == Accessibility.Public
+                            && m.Parameters.Length == 2
+                    );
+
+                var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
+                startContext.RegisterSyntaxNodeAction(
+                    c => AnalyzeSyntax(c, expressionTypeOpt, referenceEqualsMethodOpt),
+                    syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression)
+                );
+            });
         }
 
         private void AnalyzeSyntax(

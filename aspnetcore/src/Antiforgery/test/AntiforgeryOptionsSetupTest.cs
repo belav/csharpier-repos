@@ -39,13 +39,11 @@ public class AntiforgeryOptionsSetupTest
     {
         // Arrange
         var serviceCollection = new ServiceCollection();
-        serviceCollection.Configure<AntiforgeryOptions>(
-            o =>
-            {
-                Assert.Null(o.Cookie.Name);
-                o.Cookie.Name = "antiforgery";
-            }
-        );
+        serviceCollection.Configure<AntiforgeryOptions>(o =>
+        {
+            Assert.Null(o.Cookie.Name);
+            o.Cookie.Name = "antiforgery";
+        });
         serviceCollection.AddAntiforgery();
         serviceCollection.AddDataProtection().SetApplicationName("HelloWorldApp");
 

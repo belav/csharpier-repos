@@ -36,14 +36,12 @@ public class BindingSourceMetadataProviderIntegrationTest
             ParameterType = typeof(CancellationTokenBundle),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues> { { "name", new[] { "Fred" } } }
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues> { { "name", new[] { "Fred" } } }
+            );
+        });
 
         var modelState = testContext.ModelState;
         var token = testContext.HttpContext.RequestAborted;
@@ -92,13 +90,11 @@ public class BindingSourceMetadataProviderIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Name", "Fred");
-                UpdateRequest(request, data, "File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Name", "Fred");
+            UpdateRequest(request, data, "File");
+        });
 
         var modelState = testContext.ModelState;
 

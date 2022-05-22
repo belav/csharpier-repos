@@ -130,45 +130,43 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 projectSystemName
             );
 
-            _visualStudioWorkspaceImpl.ApplyChangeToWorkspace(
-                w =>
+            _visualStudioWorkspaceImpl.ApplyChangeToWorkspace(w =>
+            {
+                var projectInfo = ProjectInfo
+                    .Create(
+                        id,
+                        versionStamp,
+                        name: projectSystemName,
+                        assemblyName: assemblyName,
+                        language: language,
+                        filePath: creationInfo.FilePath,
+                        compilationOptions: creationInfo.CompilationOptions,
+                        parseOptions: creationInfo.ParseOptions
+                    )
+                    .WithTelemetryId(creationInfo.ProjectGuid);
+
+                // If we don't have any projects and this is our first project being added, then we'll create a new SolutionId
+                if (w.CurrentSolution.ProjectIds.Count == 0)
                 {
-                    var projectInfo = ProjectInfo
-                        .Create(
-                            id,
-                            versionStamp,
-                            name: projectSystemName,
-                            assemblyName: assemblyName,
-                            language: language,
-                            filePath: creationInfo.FilePath,
-                            compilationOptions: creationInfo.CompilationOptions,
-                            parseOptions: creationInfo.ParseOptions
-                        )
-                        .WithTelemetryId(creationInfo.ProjectGuid);
+                    var solutionSessionId = GetSolutionSessionId();
 
-                    // If we don't have any projects and this is our first project being added, then we'll create a new SolutionId
-                    if (w.CurrentSolution.ProjectIds.Count == 0)
-                    {
-                        var solutionSessionId = GetSolutionSessionId();
-
-                        w.OnSolutionAdded(
-                            SolutionInfo
-                                .Create(
-                                    SolutionId.CreateNewId(solutionFilePath),
-                                    VersionStamp.Create(),
-                                    solutionFilePath,
-                                    projects: new[] { projectInfo },
-                                    analyzerReferences: w.CurrentSolution.AnalyzerReferences
-                                )
-                                .WithTelemetryId(solutionSessionId)
-                        );
-                    }
-                    else
-                    {
-                        w.OnProjectAdded(projectInfo);
-                    }
+                    w.OnSolutionAdded(
+                        SolutionInfo
+                            .Create(
+                                SolutionId.CreateNewId(solutionFilePath),
+                                VersionStamp.Create(),
+                                solutionFilePath,
+                                projects: new[] { projectInfo },
+                                analyzerReferences: w.CurrentSolution.AnalyzerReferences
+                            )
+                            .WithTelemetryId(solutionSessionId)
+                    );
                 }
-            );
+                else
+                {
+                    w.OnProjectAdded(projectInfo);
+                }
+            });
 
             _visualStudioWorkspaceImpl.RefreshProjectExistsUIContextForLanguage(language);
 

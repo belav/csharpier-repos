@@ -43,16 +43,14 @@ public static class ConnectionBuilderExtensions
         Func<ConnectionContext, Func<Task>, Task> middleware
     )
     {
-        return connectionBuilder.Use(
-            next =>
+        return connectionBuilder.Use(next =>
+        {
+            return context =>
             {
-                return context =>
-                {
-                    Func<Task> simpleNext = () => next(context);
-                    return middleware(context, simpleNext);
-                };
-            }
-        );
+                Func<Task> simpleNext = () => next(context);
+                return middleware(context, simpleNext);
+            };
+        });
     }
 
     /// <summary>
@@ -66,14 +64,12 @@ public static class ConnectionBuilderExtensions
         Func<ConnectionContext, Task> middleware
     )
     {
-        return connectionBuilder.Use(
-            next =>
+        return connectionBuilder.Use(next =>
+        {
+            return context =>
             {
-                return context =>
-                {
-                    return middleware(context);
-                };
-            }
-        );
+                return middleware(context);
+            };
+        });
     }
 }

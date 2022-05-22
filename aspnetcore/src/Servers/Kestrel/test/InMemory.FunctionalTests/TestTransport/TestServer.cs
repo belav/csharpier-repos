@@ -85,46 +85,38 @@ internal class TestServer : IAsyncDisposable, IStartup
         HttpClientSlim = new InMemoryHttpClientSlim(this);
 
         var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting(
-                            WebHostDefaults.ShutdownTimeoutKey,
-                            TestConstants.DefaultTimeout.TotalSeconds.ToString(
-                                CultureInfo.InvariantCulture
-                            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseSetting(
+                        WebHostDefaults.ShutdownTimeoutKey,
+                        TestConstants.DefaultTimeout.TotalSeconds.ToString(
+                            CultureInfo.InvariantCulture
                         )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(_app);
-                            }
-                        );
-                }
-            )
-            .ConfigureServices(
-                services =>
+                    )
+                    .Configure(app =>
+                    {
+                        app.Run(_app);
+                    });
+            })
+            .ConfigureServices(services =>
+            {
+                configureServices(services);
+
+                services.AddSingleton<IStartup>(this);
+                services.AddSingleton(context.LoggerFactory);
+
+                services.AddSingleton<IServer>(sp =>
                 {
-                    configureServices(services);
-
-                    services.AddSingleton<IStartup>(this);
-                    services.AddSingleton(context.LoggerFactory);
-
-                    services.AddSingleton<IServer>(
-                        sp =>
-                        {
-                            context.ServerOptions.ApplicationServices = sp;
-                            configureKestrel(context.ServerOptions);
-                            return new KestrelServerImpl(
-                                new IConnectionListenerFactory[] { _transportFactory },
-                                sp.GetServices<IMultiplexedConnectionListenerFactory>(),
-                                context
-                            );
-                        }
+                    context.ServerOptions.ApplicationServices = sp;
+                    configureKestrel(context.ServerOptions);
+                    return new KestrelServerImpl(
+                        new IConnectionListenerFactory[] { _transportFactory },
+                        sp.GetServices<IMultiplexedConnectionListenerFactory>(),
+                        context
                     );
-                }
-            );
+                });
+            });
 
         _host = hostBuilder.Build();
         _host.Start();

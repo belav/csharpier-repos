@@ -911,14 +911,12 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
 
             // Arrange
             var xmlConfigSrc = new XmlConfigurationProvider(new XmlConfigurationSource());
-            xmlConfigSrc.Decryptor = new XmlDocumentDecryptor(
-                doc =>
-                {
-                    var innerEncryptedXml = new EncryptedXml(doc);
-                    innerEncryptedXml.AddKeyNameMapping("myKey", aes);
-                    return innerEncryptedXml;
-                }
-            );
+            xmlConfigSrc.Decryptor = new XmlDocumentDecryptor(doc =>
+            {
+                var innerEncryptedXml = new EncryptedXml(doc);
+                innerEncryptedXml.AddKeyNameMapping("myKey", aes);
+                return innerEncryptedXml;
+            });
 
             // Act
             xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xmlDocument.OuterXml));

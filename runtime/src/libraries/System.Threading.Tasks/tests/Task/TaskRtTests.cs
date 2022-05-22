@@ -1392,12 +1392,10 @@ namespace System.Threading.Tasks.Tests
                         {
                             tsInner1 = TaskScheduler.Current;
                         });
-                        Task continuation = tInner.ContinueWith(
-                            _ =>
-                            {
-                                tsInner2 = TaskScheduler.Current;
-                            }
-                        );
+                        Task continuation = tInner.ContinueWith(_ =>
+                        {
+                            tsInner2 = TaskScheduler.Current;
+                        });
 
                         Task.WaitAll(tInner, continuation);
 

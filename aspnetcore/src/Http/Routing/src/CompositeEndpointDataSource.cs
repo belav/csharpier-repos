@@ -211,17 +211,15 @@ public sealed class CompositeEndpointDataSource : EndpointDataSource
 
             IEnumerable<string> FormatValues(IEnumerable<KeyValuePair<string, object?>> values)
             {
-                return values.Select(
-                    kvp =>
+                return values.Select(kvp =>
+                {
+                    var value = "null";
+                    if (kvp.Value != null)
                     {
-                        var value = "null";
-                        if (kvp.Value != null)
-                        {
-                            value = "\"" + kvp.Value.ToString() + "\"";
-                        }
-                        return kvp.Key + " = " + value;
+                        value = "\"" + kvp.Value.ToString() + "\"";
                     }
-                );
+                    return kvp.Key + " = " + value;
+                });
             }
         }
     }

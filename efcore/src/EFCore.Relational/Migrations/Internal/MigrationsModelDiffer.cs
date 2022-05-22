@@ -2498,16 +2498,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                 sourceEntry,
                                 sourceEntry.EntityType
                                     .GetReferencingForeignKeys()
-                                    .Where(
-                                        fk =>
-                                        {
-                                            var behavior = diffContext
-                                                .FindTarget(fk)
-                                                ?.DeleteBehavior;
-                                            return behavior != null
-                                                && behavior != DeleteBehavior.ClientNoAction;
-                                        }
-                                    )
+                                    .Where(fk =>
+                                    {
+                                        var behavior = diffContext.FindTarget(fk)?.DeleteBehavior;
+                                        return behavior != null
+                                            && behavior != DeleteBehavior.ClientNoAction;
+                                    })
                             );
                         }
                     }

@@ -9,19 +9,17 @@ class Driver
     {
         ManualResetEvent mre = new ManualResetEvent(false);
 
-        ThreadPool.QueueUserWorkItem(
-            _ =>
+        ThreadPool.QueueUserWorkItem(_ =>
+        {
+            try
             {
-                try
-                {
-                    throw new AppDomainUnloadedException();
-                }
-                finally
-                {
-                    mre.Set();
-                }
+                throw new AppDomainUnloadedException();
             }
-        );
+            finally
+            {
+                mre.Set();
+            }
+        });
 
         if (!mre.WaitOne(5000))
             Environment.Exit(1);
@@ -32,12 +30,10 @@ class Driver
 
     static void ThrowThread()
     {
-        Thread thread = new Thread(
-            _ =>
-            {
-                throw new AppDomainUnloadedException();
-            }
-        );
+        Thread thread = new Thread(_ =>
+        {
+            throw new AppDomainUnloadedException();
+        });
         thread.Start();
         thread.Join();
     }

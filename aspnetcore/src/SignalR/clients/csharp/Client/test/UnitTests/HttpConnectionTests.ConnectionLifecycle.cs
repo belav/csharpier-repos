@@ -320,18 +320,16 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 var longPollResult = new TaskCompletionSource<HttpResponseMessage>();
-                httpHandler.OnLongPoll(
-                    cancellationToken =>
+                httpHandler.OnLongPoll(cancellationToken =>
+                {
+                    cancellationToken.Register(() =>
                     {
-                        cancellationToken.Register(() =>
-                        {
-                            longPollResult.TrySetResult(
-                                ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
-                            );
-                        });
-                        return longPollResult.Task;
-                    }
-                );
+                        longPollResult.TrySetResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
+                    });
+                    return longPollResult.Task;
+                });
                 httpHandler.OnLongPollDelete(
                     cancellationToken => ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
                 );

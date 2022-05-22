@@ -90,25 +90,21 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
 
             var hostBuilder = TransportSelector
                 .GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseKestrel(
-                                o =>
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(o =>
+                        {
+                            o.ListenUnixSocket(
+                                path,
+                                builder =>
                                 {
-                                    o.ListenUnixSocket(
-                                        path,
-                                        builder =>
-                                        {
-                                            builder.Run(EchoServer);
-                                        }
-                                    );
+                                    builder.Run(EchoServer);
                                 }
-                            )
-                            .Configure(c => { });
-                    }
-                )
+                            );
+                        })
+                        .Configure(c => { });
+                })
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
@@ -174,25 +170,19 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
         {
             var hostBuilder = TransportSelector
                 .GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseUrls(url)
-                            .UseKestrel()
-                            .Configure(
-                                app =>
-                                {
-                                    app.Run(
-                                        async context =>
-                                        {
-                                            await context.Response.WriteAsync("Hello World");
-                                        }
-                                    );
-                                }
-                            );
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseUrls(url)
+                        .UseKestrel()
+                        .Configure(app =>
+                        {
+                            app.Run(async context =>
+                            {
+                                await context.Response.WriteAsync("Hello World");
+                            });
+                        });
+                })
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())

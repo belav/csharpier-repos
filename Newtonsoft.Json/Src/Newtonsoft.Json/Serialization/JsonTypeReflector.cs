@@ -282,19 +282,17 @@ namespace Newtonsoft.Json.Serialization
                     if (parameters != null)
                     {
                         Type[] paramTypes = parameters
-                            .Select(
-                                param =>
+                            .Select(param =>
+                            {
+                                if (param == null)
                                 {
-                                    if (param == null)
-                                    {
-                                        throw new InvalidOperationException(
-                                            "Cannot pass a null parameter to the constructor."
-                                        );
-                                    }
-
-                                    return param.GetType();
+                                    throw new InvalidOperationException(
+                                        "Cannot pass a null parameter to the constructor."
+                                    );
                                 }
-                            )
+
+                                return param.GetType();
+                            })
                             .ToArray();
                         ConstructorInfo parameterizedConstructorInfo = type.GetConstructor(
                             paramTypes

@@ -34,11 +34,9 @@ public class StartupShutdown
             Console.WriteLine("Stopped end");
         });
 
-        app.Run(
-            context =>
-            {
-                return context.Response.WriteAsync("Hello World");
-            }
-        );
+        app.Run(context =>
+        {
+            return context.Response.WriteAsync("Hello World");
+        });
     }
 }

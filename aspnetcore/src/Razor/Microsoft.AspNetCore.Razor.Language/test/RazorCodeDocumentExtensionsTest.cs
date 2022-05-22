@@ -333,12 +333,10 @@ public class RazorCodeDocumentExtensionsTest
             Array.Empty<RazorSourceDocument>()
         );
         codeDocument.SetCodeGenerationOptions(
-            RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello";
-                }
-            )
+            RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello";
+            })
         );
 
         // Act
@@ -362,12 +360,10 @@ public class RazorCodeDocumentExtensionsTest
         );
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -392,12 +388,10 @@ public class RazorCodeDocumentExtensionsTest
         );
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -421,21 +415,17 @@ public class RazorCodeDocumentExtensionsTest
             Array.Empty<RazorSourceDocument>()
         );
         codeDocument.SetCodeGenerationOptions(
-            RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "World";
-                }
-            )
+            RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "World";
+            })
         );
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -460,12 +450,10 @@ public class RazorCodeDocumentExtensionsTest
         );
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hel?o.World";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hel?o.World";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -493,23 +481,19 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello.World";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -536,12 +520,10 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
@@ -555,24 +537,20 @@ public class RazorCodeDocumentExtensionsTest
             {
                 RazorSyntaxTree.Parse(
                     importSourceDocument,
-                    RazorParserOptions.Create(
-                        options =>
-                        {
-                            options.Directives.Add(NamespaceDirective.Directive);
-                        }
-                    )
+                    RazorParserOptions.Create(options =>
+                    {
+                        options.Directives.Add(NamespaceDirective.Directive);
+                    })
                 )
             }
         );
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello.World";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -599,12 +577,10 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
@@ -618,24 +594,20 @@ public class RazorCodeDocumentExtensionsTest
             {
                 RazorSyntaxTree.Parse(
                     importSourceDocument,
-                    RazorParserOptions.Create(
-                        options =>
-                        {
-                            options.Directives.Add(NamespaceDirective.Directive);
-                        }
-                    )
+                    RazorParserOptions.Create(options =>
+                    {
+                        options.Directives.Add(NamespaceDirective.Directive);
+                    })
                 )
             }
         );
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello.World";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -663,12 +635,10 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
@@ -682,24 +652,20 @@ public class RazorCodeDocumentExtensionsTest
             {
                 RazorSyntaxTree.Parse(
                     importSourceDocument,
-                    RazorParserOptions.Create(
-                        options =>
-                        {
-                            options.Directives.Add(NamespaceDirective.Directive);
-                        }
-                    )
+                    RazorParserOptions.Create(options =>
+                    {
+                        options.Directives.Add(NamespaceDirective.Directive);
+                    })
                 )
             }
         );
 
         var documentNode = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                c =>
-                {
-                    c.RootNamespace = "Hello.World";
-                }
-            )
+            Options = RazorCodeGenerationOptions.Create(c =>
+            {
+                c.RootNamespace = "Hello.World";
+            })
         };
         codeDocument.SetDocumentIntermediateNode(documentNode);
 
@@ -739,12 +705,10 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
@@ -759,12 +723,10 @@ public class RazorCodeDocumentExtensionsTest
             {
                 RazorSyntaxTree.Parse(
                     importSourceDocument,
-                    RazorParserOptions.Create(
-                        options =>
-                        {
-                            options.Directives.Add(NamespaceDirective.Directive);
-                        }
-                    )
+                    RazorParserOptions.Create(options =>
+                    {
+                        options.Directives.Add(NamespaceDirective.Directive);
+                    })
                 )
             }
         );
@@ -791,12 +753,10 @@ public class RazorCodeDocumentExtensionsTest
         codeDocument.SetSyntaxTree(
             RazorSyntaxTree.Parse(
                 sourceDocument,
-                RazorParserOptions.Create(
-                    options =>
-                    {
-                        options.Directives.Add(NamespaceDirective.Directive);
-                    }
-                )
+                RazorParserOptions.Create(options =>
+                {
+                    options.Directives.Add(NamespaceDirective.Directive);
+                })
             )
         );
 
@@ -810,12 +770,10 @@ public class RazorCodeDocumentExtensionsTest
             {
                 RazorSyntaxTree.Parse(
                     importSourceDocument,
-                    RazorParserOptions.Create(
-                        options =>
-                        {
-                            options.Directives.Add(NamespaceDirective.Directive);
-                        }
-                    )
+                    RazorParserOptions.Create(options =>
+                    {
+                        options.Directives.Add(NamespaceDirective.Directive);
+                    })
                 )
             }
         );

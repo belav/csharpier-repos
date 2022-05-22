@@ -304,22 +304,20 @@ public class RegistryPolicyResolverTests
 
     private static RegistryPolicy RunTestWithRegValues(Dictionary<string, object> regValues)
     {
-        return WithUniqueTempRegKey(
-            registryKey =>
+        return WithUniqueTempRegKey(registryKey =>
+        {
+            foreach (var entry in regValues)
             {
-                foreach (var entry in regValues)
-                {
-                    registryKey.SetValue(entry.Key, entry.Value);
-                }
-
-                var policyResolver = new RegistryPolicyResolver(
-                    registryKey,
-                    activator: SimpleActivator.DefaultWithoutServices
-                );
-
-                return policyResolver.ResolvePolicy();
+                registryKey.SetValue(entry.Key, entry.Value);
             }
-        );
+
+            var policyResolver = new RegistryPolicyResolver(
+                registryKey,
+                activator: SimpleActivator.DefaultWithoutServices
+            );
+
+            return policyResolver.ResolvePolicy();
+        });
     }
 
     /// <summary>

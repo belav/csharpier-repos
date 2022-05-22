@@ -130,60 +130,56 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         {
             var stateSets = _stateManager.GetAllStateSets();
 
-            AnalyzerService.RaiseBulkDiagnosticsUpdated(
-                raiseEvents =>
-                {
-                    var handleActiveFile = true;
-                    using var _ = PooledHashSet<DocumentId>.GetInstance(out var documentSet);
+            AnalyzerService.RaiseBulkDiagnosticsUpdated(raiseEvents =>
+            {
+                var handleActiveFile = true;
+                using var _ = PooledHashSet<DocumentId>.GetInstance(out var documentSet);
 
-                    foreach (var stateSet in stateSets)
+                foreach (var stateSet in stateSets)
+                {
+                    var projectIds = stateSet.GetProjectsWithDiagnostics();
+                    foreach (var projectId in projectIds)
                     {
-                        var projectIds = stateSet.GetProjectsWithDiagnostics();
-                        foreach (var projectId in projectIds)
-                        {
-                            stateSet.CollectDocumentsWithDiagnostics(projectId, documentSet);
-                            RaiseProjectDiagnosticsRemoved(
-                                stateSet,
-                                projectId,
-                                documentSet,
-                                handleActiveFile,
-                                raiseEvents
-                            );
-                            documentSet.Clear();
-                        }
+                        stateSet.CollectDocumentsWithDiagnostics(projectId, documentSet);
+                        RaiseProjectDiagnosticsRemoved(
+                            stateSet,
+                            projectId,
+                            documentSet,
+                            handleActiveFile,
+                            raiseEvents
+                        );
+                        documentSet.Clear();
                     }
                 }
-            );
+            });
         }
 
         private void ClearAllDiagnostics(ImmutableArray<StateSet> stateSets, ProjectId projectId)
         {
-            AnalyzerService.RaiseBulkDiagnosticsUpdated(
-                raiseEvents =>
+            AnalyzerService.RaiseBulkDiagnosticsUpdated(raiseEvents =>
+            {
+                using var _ = PooledHashSet<DocumentId>.GetInstance(out var documentSet);
+
+                foreach (var stateSet in stateSets)
                 {
-                    using var _ = PooledHashSet<DocumentId>.GetInstance(out var documentSet);
+                    Debug.Assert(documentSet.Count == 0);
 
-                    foreach (var stateSet in stateSets)
+                    stateSet.CollectDocumentsWithDiagnostics(projectId, documentSet);
+
+                    // PERF: don't fire events for ones that we dont have any diagnostics on
+                    if (documentSet.Count > 0)
                     {
-                        Debug.Assert(documentSet.Count == 0);
-
-                        stateSet.CollectDocumentsWithDiagnostics(projectId, documentSet);
-
-                        // PERF: don't fire events for ones that we dont have any diagnostics on
-                        if (documentSet.Count > 0)
-                        {
-                            RaiseProjectDiagnosticsRemoved(
-                                stateSet,
-                                projectId,
-                                documentSet,
-                                handleActiveFile: true,
-                                raiseEvents
-                            );
-                            documentSet.Clear();
-                        }
+                        RaiseProjectDiagnosticsRemoved(
+                            stateSet,
+                            projectId,
+                            documentSet,
+                            handleActiveFile: true,
+                            raiseEvents
+                        );
+                        documentSet.Clear();
                     }
                 }
-            );
+            });
         }
 
         private void RaiseDiagnosticsCreated(

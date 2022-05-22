@@ -25,13 +25,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ShouldUseConstructor = c => c.IsAssembly;
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ShouldUseConstructor = c => c.IsAssembly;
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_only_map_internal_ctor()
@@ -63,13 +61,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ShouldUseConstructor = c => c.IsPrivate;
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ShouldUseConstructor = c => c.IsPrivate;
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_only_map_private_ctor()
@@ -101,13 +97,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ShouldUseConstructor = c => c.IsPublic;
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ShouldUseConstructor = c => c.IsPublic;
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_only_map_public_ctor()
@@ -137,12 +131,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
     }
 
     public class ShouldIgnoreExplicitStaticConstructor : NonValidatingSpecBase
@@ -165,12 +157,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_ignore_static_constructor()
@@ -200,12 +190,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_ignore_implicit_static_constructor()

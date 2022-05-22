@@ -337,78 +337,66 @@ namespace System.Linq.Tests
             counter = 0;
             Assert.Equal(
                 0,
-                orderBy.First(
-                    i =>
-                    {
-                        counter++;
-                        return true;
-                    }
-                )
+                orderBy.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
             );
             Assert.Equal(1, counter);
 
             counter = 0;
             Assert.Equal(
                 9,
-                orderBy.First(
-                    i =>
-                    {
-                        counter++;
-                        return i == 9;
-                    }
-                )
+                orderBy.First(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    orderBy.First(
-                        i =>
-                        {
-                            counter++;
-                            return false;
-                        }
-                    )
+                    orderBy.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Equal(
                 9,
-                orderByDescending.First(
-                    i =>
-                    {
-                        counter++;
-                        return true;
-                    }
-                )
+                orderByDescending.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
             );
             Assert.Equal(1, counter);
 
             counter = 0;
             Assert.Equal(
                 0,
-                orderByDescending.First(
-                    i =>
-                    {
-                        counter++;
-                        return i == 0;
-                    }
-                )
+                orderByDescending.First(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    orderByDescending.First(
-                        i =>
-                        {
-                            counter++;
-                            return false;
-                        }
-                    )
+                    orderByDescending.First(i =>
+                    {
+                        counter++;
+                        return false;
+                    })
             );
             Assert.Equal(10, counter);
         }
@@ -446,78 +434,66 @@ namespace System.Linq.Tests
             counter = 0;
             Assert.Equal(
                 0,
-                orderBy.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return true;
-                    }
-                )
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
             );
             Assert.Equal(1, counter);
 
             counter = 0;
             Assert.Equal(
                 9,
-                orderBy.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return i == 9;
-                    }
-                )
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Equal(
                 0,
-                orderBy.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return false;
-                    }
-                )
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Equal(
                 9,
-                orderByDescending.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return true;
-                    }
-                )
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
             );
             Assert.Equal(1, counter);
 
             counter = 0;
             Assert.Equal(
                 0,
-                orderByDescending.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return i == 0;
-                    }
-                )
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
             );
             Assert.Equal(10, counter);
 
             counter = 0;
             Assert.Equal(
                 0,
-                orderByDescending.FirstOrDefault(
-                    i =>
-                    {
-                        counter++;
-                        return false;
-                    }
-                )
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
             );
             Assert.Equal(10, counter);
         }

@@ -12,12 +12,10 @@ namespace System.Web.Razor.Generator
         {
             context.FlushBufferedStatement();
 
-            string generatedCode = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteSnippet(target.Content);
-                }
-            );
+            string generatedCode = context.BuildCodeString(cw =>
+            {
+                cw.WriteSnippet(target.Content);
+            });
 
             int startGeneratedCode = target.Start.CharacterIndex;
             int paddingCharCount;

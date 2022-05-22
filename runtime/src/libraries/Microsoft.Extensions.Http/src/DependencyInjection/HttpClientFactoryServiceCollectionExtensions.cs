@@ -73,12 +73,10 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton(new HttpClientMappingRegistry());
 
             // Register default client as HttpClient
-            services.TryAddTransient(
-                s =>
-                {
-                    return s.GetRequiredService<IHttpClientFactory>().CreateClient(string.Empty);
-                }
-            );
+            services.TryAddTransient(s =>
+            {
+                return s.GetRequiredService<IHttpClientFactory>().CreateClient(string.Empty);
+            });
 
             return services;
         }

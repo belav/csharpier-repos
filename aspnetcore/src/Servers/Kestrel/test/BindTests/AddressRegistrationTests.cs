@@ -207,26 +207,19 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            serverOptions =>
-                            {
-                                serverOptions.ConfigureHttpsDefaults(
-                                    httpsOptions =>
-                                    {
-                                        httpsOptions.ServerCertificate =
-                                            TestResources.GetTestCertificate();
-                                    }
-                                );
-                            }
-                        )
-                        .UseUrls(addressInput)
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(serverOptions =>
+                    {
+                        serverOptions.ConfigureHttpsDefaults(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        });
+                    })
+                    .UseUrls(addressInput)
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -274,40 +267,27 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            serverOptions =>
-                            {
-                                serverOptions.ConfigureEndpointDefaults(
-                                    listenOptions =>
-                                    {
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
-                            }
-                        )
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                            {
-                                var serverAddresses =
-                                    app.ServerFeatures.Get<IServerAddressesFeature>();
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Single(serverAddresses.Addresses);
-                                        return context.Response.WriteAsync(
-                                            serverAddresses.Addresses.First()
-                                        );
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(serverOptions =>
+                    {
+                        serverOptions.ConfigureEndpointDefaults(listenOptions =>
+                        {
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
+                    })
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(app =>
+                    {
+                        var serverAddresses = app.ServerFeatures.Get<IServerAddressesFeature>();
+                        app.Run(context =>
+                        {
+                            Assert.Single(serverAddresses.Addresses);
+                            return context.Response.WriteAsync(serverAddresses.Addresses.First());
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -368,30 +348,24 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            endPoint,
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    endPoint,
-                                    listenOptions =>
-                                    {
-                                        if (testUrl.StartsWith("https", StringComparison.Ordinal))
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
-                                            );
-                                        }
-                                    }
-                                );
+                                if (testUrl.StartsWith("https", StringComparison.Ordinal))
+                                {
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                }
                             }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+                        );
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -450,19 +424,15 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.ListenAnyIP(testPort);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.ListenAnyIP(testPort);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -511,19 +481,15 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.ListenLocalhost(testPort);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.ListenLocalhost(testPort);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -632,22 +598,18 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                if (mockHttps)
-                                {
-                                    options.DefaultCertificate = TestResources.GetTestCertificate();
-                                }
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        if (mockHttps)
+                        {
+                            options.DefaultCertificate = TestResources.GetTestCertificate();
+                        }
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -711,15 +673,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
             var hostBuilder = TransportSelector
                 .GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseKestrel()
-                            .UseUrls($"http://127.0.0.1:{port}")
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel()
+                        .UseUrls($"http://127.0.0.1:{port}")
+                        .Configure(ConfigureEchoAddress);
+                })
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
@@ -763,15 +723,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
             var hostBuilder = TransportSelector
                 .GetHostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseKestrel()
-                            .UseUrls($"http://[::1]:{port}")
-                            .Configure(ConfigureEchoAddress);
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel()
+                        .UseUrls($"http://[::1]:{port}")
+                        .Configure(ConfigureEchoAddress);
+                })
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
@@ -802,27 +760,23 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
         var useUrlsAddress = $"http://127.0.0.1:0";
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            new IPEndPoint(IPAddress.Loopback, 0),
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    new IPEndPoint(IPAddress.Loopback, 0),
-                                    listenOptions =>
-                                    {
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
-                        )
-                        .UseUrls(useUrlsAddress)
-                        .PreferHostingUrls(true)
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+                        );
+                    })
+                    .UseUrls(useUrlsAddress)
+                    .PreferHostingUrls(true)
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -871,30 +825,26 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            new IPEndPoint(IPAddress.Loopback, 0),
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    new IPEndPoint(IPAddress.Loopback, 0),
-                                    listenOptions =>
-                                    {
-                                        listenOptions.UseHttps(
-                                            TestResources.TestCertificatePath,
-                                            "testPassword"
-                                        );
-                                    }
+                                listenOptions.UseHttps(
+                                    TestResources.TestCertificatePath,
+                                    "testPassword"
                                 );
                             }
-                        )
-                        .UseUrls($"http://127.0.0.1:0")
-                        .PreferHostingUrls(false)
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+                        );
+                    })
+                    .UseUrls($"http://127.0.0.1:0")
+                    .PreferHostingUrls(false)
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -937,26 +887,22 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            new IPEndPoint(IPAddress.Loopback, 0),
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    new IPEndPoint(IPAddress.Loopback, 0),
-                                    listenOptions =>
-                                    {
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
-                                );
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
-                        )
-                        .PreferHostingUrls(true)
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+                        );
+                    })
+                    .PreferHostingUrls(true)
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1003,15 +949,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://localhost:0")
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://localhost:0")
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1031,12 +975,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseKestrel().UseUrls(address).Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseKestrel().UseUrls(address).Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1055,19 +997,15 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, port);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, port);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1081,19 +1019,15 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, port);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            );
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, port);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            });
 
         using (var host = hostBuilder.Build())
         {
@@ -1115,20 +1049,16 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, port);
-                                options.Listen(IPAddress.IPv6Loopback, port);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, port);
+                        options.Listen(IPAddress.IPv6Loopback, port);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1149,20 +1079,16 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
         hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                options.Listen(IPAddress.Loopback, port);
-                                options.Listen(IPAddress.IPv6Loopback, port);
-                            }
-                        )
-                        .Configure(ConfigureEchoAddress);
-                }
-            );
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, port);
+                        options.Listen(IPAddress.IPv6Loopback, port);
+                    })
+                    .Configure(ConfigureEchoAddress);
+            });
 
         using (var host = hostBuilder.Build())
         {
@@ -1193,33 +1119,29 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
         KestrelServerOptions capturedOptions = null;
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
-                            {
-                                var config = new ConfigurationBuilder()
-                                    .AddInMemoryCollection(
-                                        new[]
-                                        {
-                                            new KeyValuePair<string, string>(
-                                                "EndpointDefaults:Protocols",
-                                                input
-                                            ),
-                                        }
-                                    )
-                                    .Build();
-                                options.Configure(config);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        var config = new ConfigurationBuilder()
+                            .AddInMemoryCollection(
+                                new[]
+                                {
+                                    new KeyValuePair<string, string>(
+                                        "EndpointDefaults:Protocols",
+                                        input
+                                    ),
+                                }
+                            )
+                            .Build();
+                        options.Configure(config);
 
-                                capturedOptions = options;
-                            }
-                        )
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(ConfigureEchoAddress);
-                }
-            )
+                        capturedOptions = options;
+                    })
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(ConfigureEchoAddress);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -1280,15 +1202,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
                 var hostBuilder = TransportSelector
                     .GetHostBuilder()
-                    .ConfigureWebHost(
-                        webHostBuilder =>
-                        {
-                            webHostBuilder
-                                .UseKestrel()
-                                .UseUrls($"http://localhost:{port}")
-                                .Configure(ConfigureEchoAddress);
-                        }
-                    )
+                    .ConfigureWebHost(webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseKestrel()
+                            .UseUrls($"http://localhost:{port}")
+                            .Configure(ConfigureEchoAddress);
+                    })
                     .ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
@@ -1548,12 +1468,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
     private void ConfigureEchoAddress(IApplicationBuilder app)
     {
-        app.Run(
-            context =>
-            {
-                return context.Response.WriteAsync(context.Request.GetDisplayUrl());
-            }
-        );
+        app.Run(context =>
+        {
+            return context.Response.WriteAsync(context.Request.GetDisplayUrl());
+        });
     }
 
     private static int GetNextPort()

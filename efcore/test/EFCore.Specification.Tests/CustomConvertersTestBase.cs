@@ -898,472 +898,421 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<Person>(
-                    b =>
-                    {
-                        b.Property(p => p.SSN)
-                            .HasConversion(
-                                ssn => ssn.HasValue ? ssn.Value.Number : new int?(),
-                                i =>
-                                    i.HasValue
-                                        ? new SocialSecurityNumber { Number = i.Value }
-                                        : new SocialSecurityNumber?()
-                            );
+                modelBuilder.Entity<Person>(b =>
+                {
+                    b.Property(p => p.SSN)
+                        .HasConversion(
+                            ssn => ssn.HasValue ? ssn.Value.Number : new int?(),
+                            i =>
+                                i.HasValue
+                                    ? new SocialSecurityNumber { Number = i.Value }
+                                    : new SocialSecurityNumber?()
+                        );
 
-                        b.Property(p => p.Id).ValueGeneratedNever();
-                        b.HasIndex(p => p.SSN).IsUnique();
-                    }
-                );
+                    b.Property(p => p.Id).ValueGeneratedNever();
+                    b.HasIndex(p => p.SSN).IsUnique();
+                });
 
-                modelBuilder.Entity<NullablePrincipal>(
-                    b =>
-                    {
-                        b.HasMany(e => e.Dependents)
-                            .WithOne(e => e.Principal)
-                            .HasForeignKey(e => e.PrincipalId);
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Id).HasConversion(v => v, v => (int)v);
-                    }
-                );
+                modelBuilder.Entity<NullablePrincipal>(b =>
+                {
+                    b.HasMany(e => e.Dependents)
+                        .WithOne(e => e.Principal)
+                        .HasForeignKey(e => e.PrincipalId);
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Id).HasConversion(v => v, v => (int)v);
+                });
 
                 modelBuilder.Entity<NonNullableDependent>(
                     b => b.Property(e => e.Id).ValueGeneratedNever()
                 );
 
-                modelBuilder.Entity<User>(
-                    b =>
-                    {
-                        b.Property(x => x.Email)
-                            .HasConversion(email => (string)email, value => Email.Create(value));
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<User>(b =>
+                {
+                    b.Property(x => x.Email)
+                        .HasConversion(email => (string)email, value => Email.Create(value));
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<Load>(
-                    b =>
-                    {
-                        b.Property(x => x.Fuel).HasConversion(f => f.Volume, v => new Fuel(v));
-                        b.Property(e => e.LoadId).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<Load>(b =>
+                {
+                    b.Property(x => x.Fuel).HasConversion(f => f.Volume, v => new Fuel(v));
+                    b.Property(e => e.LoadId).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<BuiltInDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.PartitionId).HasConversion(v => (long)v, v => (int)v);
-                        b.Property(e => e.TestInt16).HasConversion(v => (long)v, v => (short)v);
-                        b.Property(e => e.TestInt32).HasConversion(v => (long)v, v => (int)v);
-                        b.Property(e => e.TestInt64).HasConversion(v => v, v => v);
-                        b.Property(e => e.TestDecimal)
-                            .HasConversion(NumberToBytesConverter<decimal>.DefaultInfo.Create());
-                        b.Property(e => e.TestDateTime)
-                            .HasConversion(v => v.ToBinary(), v => DateTime.FromBinary(v));
-                        b.Property(e => e.TestTimeSpan)
-                            .HasConversion(
+                modelBuilder.Entity<BuiltInDataTypes>(b =>
+                {
+                    b.Property(e => e.PartitionId).HasConversion(v => (long)v, v => (int)v);
+                    b.Property(e => e.TestInt16).HasConversion(v => (long)v, v => (short)v);
+                    b.Property(e => e.TestInt32).HasConversion(v => (long)v, v => (int)v);
+                    b.Property(e => e.TestInt64).HasConversion(v => v, v => v);
+                    b.Property(e => e.TestDecimal)
+                        .HasConversion(NumberToBytesConverter<decimal>.DefaultInfo.Create());
+                    b.Property(e => e.TestDateTime)
+                        .HasConversion(v => v.ToBinary(), v => DateTime.FromBinary(v));
+                    b.Property(e => e.TestTimeSpan)
+                        .HasConversion(v => v.TotalMilliseconds, v => TimeSpan.FromMilliseconds(v));
+                    b.Property(e => e.TestSingle)
+                        .HasConversion(new CastingConverter<float, double>());
+                    b.Property(e => e.TestBoolean)
+                        .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yeps"))
+                        .HasMaxLength(4);
+                    b.Property(e => e.TestByte).HasConversion(v => (ushort)v, v => (byte)v);
+                    b.Property(e => e.TestUnsignedInt16)
+                        .HasConversion(v => (ulong)v, v => (ushort)v);
+                    b.Property(e => e.TestUnsignedInt32).HasConversion(v => (ulong)v, v => (uint)v);
+                    b.Property(e => e.TestUnsignedInt64).HasConversion(v => (long)v, v => (ulong)v);
+                    b.Property(e => e.TestCharacter).HasConversion(v => (int)v, v => (char)v);
+                    b.Property(e => e.TestSignedByte).HasConversion(v => (decimal)v, v => (sbyte)v);
+                    b.Property(e => e.Enum64).HasConversion(v => (long)v, v => (Enum64)v);
+                    b.Property(e => e.Enum32).HasConversion(v => (long)v, v => (Enum32)v);
+                    b.Property(e => e.Enum16).HasConversion(v => (long)v, v => (Enum16)v);
+                    b.Property(e => e.EnumU64).HasConversion(v => (ulong)v, v => (EnumU64)v);
+                    b.Property(e => e.EnumU32).HasConversion(v => (ulong)v, v => (EnumU32)v);
+                    b.Property(e => e.EnumU16).HasConversion(v => (ulong)v, v => (EnumU16)v);
+
+                    b.Property(e => e.EnumS8)
+                        .HasConversion(
+                            v => v.ToString(),
+                            v => v == nameof(EnumS8.SomeValue) ? EnumS8.SomeValue : default
+                        )
+                        .HasMaxLength(24);
+
+                    b.Property(e => e.Enum8)
+                        .HasConversion(
+                            v => v.ToString(),
+                            v => v == nameof(Enum8.SomeValue) ? Enum8.SomeValue : default
+                        )
+                        .IsUnicode(false);
+
+                    b.Property(e => e.TestDateTimeOffset)
+                        .HasConversion(
+                            v => v.ToUnixTimeMilliseconds(),
+                            v => DateTimeOffset.FromUnixTimeMilliseconds(v)
+                        );
+
+                    b.Property(e => e.TestDouble)
+                        .HasConversion(
+                            new ValueConverter<double, decimal>(
+                                v => (decimal)v,
+                                v => (double)v,
+                                new ConverterMappingHints(precision: 26, scale: 16)
+                            )
+                        );
+                });
+
+                modelBuilder.Entity<BuiltInNullableDataTypes>(b =>
+                {
+                    b.Property(e => e.PartitionId).HasConversion(v => (long)v, v => (int)v);
+                    b.Property(e => e.TestNullableInt16)
+                        .HasConversion(v => (long?)v, v => (short?)v);
+                    b.Property(e => e.TestNullableInt32).HasConversion(v => (long?)v, v => (int?)v);
+                    b.Property(e => e.TestNullableInt64).HasConversion(v => v, v => v);
+                    b.Property(e => e.TestNullableDecimal)
+                        .HasConversion(NumberToBytesConverter<decimal?>.DefaultInfo.Create());
+                    b.Property(e => e.TestNullableSingle)
+                        .HasConversion(new CastingConverter<float?, double?>());
+                    b.Property(e => e.TestNullableBoolean)
+                        .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
+                    b.Property(e => e.TestNullableByte)
+                        .HasConversion(v => (ushort?)v, v => (byte?)v);
+                    b.Property(e => e.TestNullableUnsignedInt16)
+                        .HasConversion(v => (ulong?)v, v => (ushort?)v);
+                    b.Property(e => e.TestNullableUnsignedInt32)
+                        .HasConversion(v => (ulong?)v, v => (uint?)v);
+                    b.Property(e => e.TestNullableUnsignedInt64)
+                        .HasConversion(v => (long?)v, v => (ulong?)v);
+                    b.Property(e => e.TestNullableCharacter)
+                        .HasConversion(v => (int?)v, v => (char?)v);
+                    b.Property(e => e.TestNullableSignedByte)
+                        .HasConversion(v => (decimal?)v, v => (sbyte?)v);
+                    b.Property(e => e.Enum64).HasConversion(v => (long?)v, v => (Enum64?)v);
+                    b.Property(e => e.Enum32).HasConversion(v => (long?)v, v => (Enum32?)v);
+                    b.Property(e => e.Enum16).HasConversion(v => (long?)v, v => (Enum16?)v);
+                    b.Property(e => e.EnumU64).HasConversion(v => (ulong?)v, v => (EnumU64?)v);
+                    b.Property(e => e.EnumU32).HasConversion(v => (ulong?)v, v => (EnumU32?)v);
+                    b.Property(e => e.EnumU16).HasConversion(v => (ulong?)v, v => (EnumU16?)v);
+
+                    b.Property(e => e.TestNullableDateTime)
+                        .HasConversion(
+                            v => v.Value.ToBinary(),
+                            v => (DateTime?)DateTime.FromBinary(v)
+                        );
+
+                    b.Property(e => e.TestNullableTimeSpan)
+                        .HasConversion(
+                            v => v.Value.TotalMilliseconds,
+                            v => (TimeSpan?)TimeSpan.FromMilliseconds(v)
+                        );
+
+                    b.Property(e => e.EnumS8)
+                        .HasConversion(
+                            v => v.ToString(),
+                            v => v == nameof(EnumS8.SomeValue) ? (EnumS8?)EnumS8.SomeValue : null
+                        );
+
+                    b.Property(e => e.Enum8)
+                        .HasConversion(
+                            v => v.ToString(),
+                            v => v == nameof(Enum8.SomeValue) ? (Enum8?)Enum8.SomeValue : null
+                        );
+
+                    b.Property(e => e.TestNullableDateTimeOffset)
+                        .HasConversion(
+                            v => v.Value.ToUnixTimeMilliseconds(),
+                            v => (DateTimeOffset?)DateTimeOffset.FromUnixTimeMilliseconds(v)
+                        );
+
+                    b.Property(e => e.TestNullableDouble)
+                        .HasConversion(
+                            new ValueConverter<double?, decimal?>(
+                                v => (decimal?)v,
+                                v => (double?)v,
+                                new ConverterMappingHints(precision: 26, scale: 16)
+                            )
+                        );
+                });
+
+                modelBuilder.Entity<BuiltInDataTypesShadow>(b =>
+                {
+                    b.Property(nameof(BuiltInDataTypes.PartitionId))
+                        .HasConversion(new ValueConverter<int, long>(v => (long)v, v => (int)v));
+                    b.Property(nameof(BuiltInDataTypes.TestInt16))
+                        .HasConversion(
+                            new ValueConverter<short, long>(v => (long)v, v => (short)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestInt32))
+                        .HasConversion(new ValueConverter<int, long>(v => (long)v, v => (int)v));
+                    b.Property(nameof(BuiltInDataTypes.TestInt64))
+                        .HasConversion(new ValueConverter<long, long>(v => v, v => v));
+                    b.Property(nameof(BuiltInDataTypes.TestDecimal))
+                        .HasConversion(NumberToBytesConverter<decimal>.DefaultInfo.Create());
+                    b.Property(nameof(BuiltInDataTypes.TestDateTime))
+                        .HasConversion(
+                            new ValueConverter<DateTime, long>(
+                                v => v.ToBinary(),
+                                v => DateTime.FromBinary(v)
+                            )
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestTimeSpan))
+                        .HasConversion(
+                            new ValueConverter<TimeSpan, double>(
                                 v => v.TotalMilliseconds,
                                 v => TimeSpan.FromMilliseconds(v)
-                            );
-                        b.Property(e => e.TestSingle)
-                            .HasConversion(new CastingConverter<float, double>());
-                        b.Property(e => e.TestBoolean)
-                            .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yeps"))
-                            .HasMaxLength(4);
-                        b.Property(e => e.TestByte).HasConversion(v => (ushort)v, v => (byte)v);
-                        b.Property(e => e.TestUnsignedInt16)
-                            .HasConversion(v => (ulong)v, v => (ushort)v);
-                        b.Property(e => e.TestUnsignedInt32)
-                            .HasConversion(v => (ulong)v, v => (uint)v);
-                        b.Property(e => e.TestUnsignedInt64)
-                            .HasConversion(v => (long)v, v => (ulong)v);
-                        b.Property(e => e.TestCharacter).HasConversion(v => (int)v, v => (char)v);
-                        b.Property(e => e.TestSignedByte)
-                            .HasConversion(v => (decimal)v, v => (sbyte)v);
-                        b.Property(e => e.Enum64).HasConversion(v => (long)v, v => (Enum64)v);
-                        b.Property(e => e.Enum32).HasConversion(v => (long)v, v => (Enum32)v);
-                        b.Property(e => e.Enum16).HasConversion(v => (long)v, v => (Enum16)v);
-                        b.Property(e => e.EnumU64).HasConversion(v => (ulong)v, v => (EnumU64)v);
-                        b.Property(e => e.EnumU32).HasConversion(v => (ulong)v, v => (EnumU32)v);
-                        b.Property(e => e.EnumU16).HasConversion(v => (ulong)v, v => (EnumU16)v);
+                            )
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestSingle))
+                        .HasConversion(new CastingConverter<float, double>());
+                    b.Property(nameof(BuiltInDataTypes.TestBoolean))
+                        .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
+                    b.Property(nameof(BuiltInDataTypes.TestByte))
+                        .HasConversion(
+                            new ValueConverter<byte, ushort>(v => (ushort)v, v => (byte)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestUnsignedInt16))
+                        .HasConversion(
+                            new ValueConverter<ushort, ulong>(v => (ulong)v, v => (ushort)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestUnsignedInt32))
+                        .HasConversion(
+                            new ValueConverter<uint, ulong>(v => (ulong)v, v => (uint)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestUnsignedInt64))
+                        .HasConversion(
+                            new ValueConverter<ulong, long>(v => (long)v, v => (ulong)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.TestCharacter))
+                        .HasConversion(new ValueConverter<char, int>(v => (int)v, v => (char)v));
+                    b.Property(nameof(BuiltInDataTypes.TestSignedByte))
+                        .HasConversion(
+                            new ValueConverter<sbyte, decimal>(v => (decimal)v, v => (sbyte)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.Enum64))
+                        .HasConversion(
+                            new ValueConverter<Enum64, long>(v => (long)v, v => (Enum64)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.Enum32))
+                        .HasConversion(
+                            new ValueConverter<Enum32, long>(v => (long)v, v => (Enum32)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.Enum16))
+                        .HasConversion(
+                            new ValueConverter<Enum16, long>(v => (long)v, v => (Enum16)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.EnumU64))
+                        .HasConversion(
+                            new ValueConverter<EnumU64, ulong>(v => (ulong)v, v => (EnumU64)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.EnumU32))
+                        .HasConversion(
+                            new ValueConverter<EnumU32, ulong>(v => (ulong)v, v => (EnumU32)v)
+                        );
+                    b.Property(nameof(BuiltInDataTypes.EnumU16))
+                        .HasConversion(
+                            new ValueConverter<EnumU16, ulong>(v => (ulong)v, v => (EnumU16)v)
+                        );
 
-                        b.Property(e => e.EnumS8)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInDataTypes.EnumS8))
+                        .HasConversion(
+                            new ValueConverter<EnumS8, string>(
                                 v => v.ToString(),
                                 v => v == nameof(EnumS8.SomeValue) ? EnumS8.SomeValue : default
                             )
-                            .HasMaxLength(24);
+                        );
 
-                        b.Property(e => e.Enum8)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInDataTypes.Enum8))
+                        .HasConversion(
+                            new ValueConverter<Enum8, string>(
                                 v => v.ToString(),
                                 v => v == nameof(Enum8.SomeValue) ? Enum8.SomeValue : default
                             )
-                            .IsUnicode(false);
+                        );
 
-                        b.Property(e => e.TestDateTimeOffset)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInDataTypes.TestDateTimeOffset))
+                        .HasConversion(
+                            new ValueConverter<DateTimeOffset, long>(
                                 v => v.ToUnixTimeMilliseconds(),
                                 v => DateTimeOffset.FromUnixTimeMilliseconds(v)
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.TestDouble)
-                            .HasConversion(
-                                new ValueConverter<double, decimal>(
-                                    v => (decimal)v,
-                                    v => (double)v,
-                                    new ConverterMappingHints(precision: 26, scale: 16)
-                                )
-                            );
-                    }
-                );
+                    b.Property(nameof(BuiltInDataTypes.TestDouble))
+                        .HasConversion(
+                            new ValueConverter<double, decimal>(
+                                v => (decimal)v,
+                                v => (double)v,
+                                new ConverterMappingHints(precision: 26, scale: 16)
+                            )
+                        );
+                });
 
-                modelBuilder.Entity<BuiltInNullableDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.PartitionId).HasConversion(v => (long)v, v => (int)v);
-                        b.Property(e => e.TestNullableInt16)
-                            .HasConversion(v => (long?)v, v => (short?)v);
-                        b.Property(e => e.TestNullableInt32)
-                            .HasConversion(v => (long?)v, v => (int?)v);
-                        b.Property(e => e.TestNullableInt64).HasConversion(v => v, v => v);
-                        b.Property(e => e.TestNullableDecimal)
-                            .HasConversion(NumberToBytesConverter<decimal?>.DefaultInfo.Create());
-                        b.Property(e => e.TestNullableSingle)
-                            .HasConversion(new CastingConverter<float?, double?>());
-                        b.Property(e => e.TestNullableBoolean)
-                            .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
-                        b.Property(e => e.TestNullableByte)
-                            .HasConversion(v => (ushort?)v, v => (byte?)v);
-                        b.Property(e => e.TestNullableUnsignedInt16)
-                            .HasConversion(v => (ulong?)v, v => (ushort?)v);
-                        b.Property(e => e.TestNullableUnsignedInt32)
-                            .HasConversion(v => (ulong?)v, v => (uint?)v);
-                        b.Property(e => e.TestNullableUnsignedInt64)
-                            .HasConversion(v => (long?)v, v => (ulong?)v);
-                        b.Property(e => e.TestNullableCharacter)
-                            .HasConversion(v => (int?)v, v => (char?)v);
-                        b.Property(e => e.TestNullableSignedByte)
-                            .HasConversion(v => (decimal?)v, v => (sbyte?)v);
-                        b.Property(e => e.Enum64).HasConversion(v => (long?)v, v => (Enum64?)v);
-                        b.Property(e => e.Enum32).HasConversion(v => (long?)v, v => (Enum32?)v);
-                        b.Property(e => e.Enum16).HasConversion(v => (long?)v, v => (Enum16?)v);
-                        b.Property(e => e.EnumU64).HasConversion(v => (ulong?)v, v => (EnumU64?)v);
-                        b.Property(e => e.EnumU32).HasConversion(v => (ulong?)v, v => (EnumU32?)v);
-                        b.Property(e => e.EnumU16).HasConversion(v => (ulong?)v, v => (EnumU16?)v);
+                modelBuilder.Entity<BuiltInNullableDataTypes>(b =>
+                {
+                    b.Property(nameof(BuiltInNullableDataTypes.PartitionId))
+                        .HasConversion(new ValueConverter<int, long>(v => (long)v, v => (int)v));
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt16))
+                        .HasConversion(
+                            new ValueConverter<short?, long?>(v => (long?)v, v => (short?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt32))
+                        .HasConversion(
+                            new ValueConverter<int?, long?>(v => (long?)v, v => (int?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt64))
+                        .HasConversion(new ValueConverter<long?, long?>(v => v, v => v));
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableDecimal))
+                        .HasConversion(NumberToBytesConverter<decimal?>.DefaultInfo.Create());
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableSingle))
+                        .HasConversion(new CastingConverter<float?, double?>());
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableBoolean))
+                        .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableByte))
+                        .HasConversion(
+                            new ValueConverter<byte?, ushort?>(v => (ushort?)v, v => (byte?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16))
+                        .HasConversion(
+                            new ValueConverter<ushort?, ulong?>(v => (ulong?)v, v => (ushort?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32))
+                        .HasConversion(
+                            new ValueConverter<uint?, ulong?>(v => (ulong?)v, v => (uint?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64))
+                        .HasConversion(
+                            new ValueConverter<ulong?, long?>(v => (long?)v, v => (ulong?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableCharacter))
+                        .HasConversion(
+                            new ValueConverter<char?, int?>(v => (int?)v, v => (char?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableSignedByte))
+                        .HasConversion(
+                            new ValueConverter<sbyte?, decimal?>(v => (decimal?)v, v => (sbyte?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.Enum64))
+                        .HasConversion(
+                            new ValueConverter<Enum64?, long?>(v => (long?)v, v => (Enum64?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.Enum32))
+                        .HasConversion(
+                            new ValueConverter<Enum32?, long?>(v => (long?)v, v => (Enum32?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.Enum16))
+                        .HasConversion(
+                            new ValueConverter<Enum16?, long?>(v => (long?)v, v => (Enum16?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.EnumU64))
+                        .HasConversion(
+                            new ValueConverter<EnumU64?, ulong?>(v => (ulong?)v, v => (EnumU64?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.EnumU32))
+                        .HasConversion(
+                            new ValueConverter<EnumU32?, ulong?>(v => (ulong?)v, v => (EnumU32?)v)
+                        );
+                    b.Property(nameof(BuiltInNullableDataTypes.EnumU16))
+                        .HasConversion(
+                            new ValueConverter<EnumU16?, ulong?>(v => (ulong?)v, v => (EnumU16?)v)
+                        );
 
-                        b.Property(e => e.TestNullableDateTime)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableDateTime))
+                        .HasConversion(
+                            new ValueConverter<DateTime?, long>(
                                 v => v.Value.ToBinary(),
                                 v => (DateTime?)DateTime.FromBinary(v)
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.TestNullableTimeSpan)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableTimeSpan))
+                        .HasConversion(
+                            new ValueConverter<TimeSpan?, double>(
                                 v => v.Value.TotalMilliseconds,
                                 v => (TimeSpan?)TimeSpan.FromMilliseconds(v)
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.EnumS8)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInNullableDataTypes.EnumS8))
+                        .HasConversion(
+                            new ValueConverter<EnumS8?, string>(
                                 v => v.ToString(),
                                 v =>
                                     v == nameof(EnumS8.SomeValue) ? (EnumS8?)EnumS8.SomeValue : null
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.Enum8)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInNullableDataTypes.Enum8))
+                        .HasConversion(
+                            new ValueConverter<Enum8?, string>(
                                 v => v.ToString(),
                                 v => v == nameof(Enum8.SomeValue) ? (Enum8?)Enum8.SomeValue : null
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.TestNullableDateTimeOffset)
-                            .HasConversion(
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset))
+                        .HasConversion(
+                            new ValueConverter<DateTimeOffset?, long>(
                                 v => v.Value.ToUnixTimeMilliseconds(),
                                 v => (DateTimeOffset?)DateTimeOffset.FromUnixTimeMilliseconds(v)
-                            );
+                            )
+                        );
 
-                        b.Property(e => e.TestNullableDouble)
-                            .HasConversion(
-                                new ValueConverter<double?, decimal?>(
-                                    v => (decimal?)v,
-                                    v => (double?)v,
-                                    new ConverterMappingHints(precision: 26, scale: 16)
-                                )
-                            );
-                    }
-                );
+                    b.Property(nameof(BuiltInNullableDataTypes.TestNullableDouble))
+                        .HasConversion(
+                            new ValueConverter<double?, decimal?>(
+                                v => (decimal?)v,
+                                v => (double?)v,
+                                new ConverterMappingHints(precision: 26, scale: 16)
+                            )
+                        );
+                });
 
-                modelBuilder.Entity<BuiltInDataTypesShadow>(
-                    b =>
-                    {
-                        b.Property(nameof(BuiltInDataTypes.PartitionId))
-                            .HasConversion(
-                                new ValueConverter<int, long>(v => (long)v, v => (int)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestInt16))
-                            .HasConversion(
-                                new ValueConverter<short, long>(v => (long)v, v => (short)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestInt32))
-                            .HasConversion(
-                                new ValueConverter<int, long>(v => (long)v, v => (int)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestInt64))
-                            .HasConversion(new ValueConverter<long, long>(v => v, v => v));
-                        b.Property(nameof(BuiltInDataTypes.TestDecimal))
-                            .HasConversion(NumberToBytesConverter<decimal>.DefaultInfo.Create());
-                        b.Property(nameof(BuiltInDataTypes.TestDateTime))
-                            .HasConversion(
-                                new ValueConverter<DateTime, long>(
-                                    v => v.ToBinary(),
-                                    v => DateTime.FromBinary(v)
-                                )
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestTimeSpan))
-                            .HasConversion(
-                                new ValueConverter<TimeSpan, double>(
-                                    v => v.TotalMilliseconds,
-                                    v => TimeSpan.FromMilliseconds(v)
-                                )
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestSingle))
-                            .HasConversion(new CastingConverter<float, double>());
-                        b.Property(nameof(BuiltInDataTypes.TestBoolean))
-                            .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
-                        b.Property(nameof(BuiltInDataTypes.TestByte))
-                            .HasConversion(
-                                new ValueConverter<byte, ushort>(v => (ushort)v, v => (byte)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestUnsignedInt16))
-                            .HasConversion(
-                                new ValueConverter<ushort, ulong>(v => (ulong)v, v => (ushort)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestUnsignedInt32))
-                            .HasConversion(
-                                new ValueConverter<uint, ulong>(v => (ulong)v, v => (uint)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestUnsignedInt64))
-                            .HasConversion(
-                                new ValueConverter<ulong, long>(v => (long)v, v => (ulong)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestCharacter))
-                            .HasConversion(
-                                new ValueConverter<char, int>(v => (int)v, v => (char)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.TestSignedByte))
-                            .HasConversion(
-                                new ValueConverter<sbyte, decimal>(v => (decimal)v, v => (sbyte)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.Enum64))
-                            .HasConversion(
-                                new ValueConverter<Enum64, long>(v => (long)v, v => (Enum64)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.Enum32))
-                            .HasConversion(
-                                new ValueConverter<Enum32, long>(v => (long)v, v => (Enum32)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.Enum16))
-                            .HasConversion(
-                                new ValueConverter<Enum16, long>(v => (long)v, v => (Enum16)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.EnumU64))
-                            .HasConversion(
-                                new ValueConverter<EnumU64, ulong>(v => (ulong)v, v => (EnumU64)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.EnumU32))
-                            .HasConversion(
-                                new ValueConverter<EnumU32, ulong>(v => (ulong)v, v => (EnumU32)v)
-                            );
-                        b.Property(nameof(BuiltInDataTypes.EnumU16))
-                            .HasConversion(
-                                new ValueConverter<EnumU16, ulong>(v => (ulong)v, v => (EnumU16)v)
-                            );
-
-                        b.Property(nameof(BuiltInDataTypes.EnumS8))
-                            .HasConversion(
-                                new ValueConverter<EnumS8, string>(
-                                    v => v.ToString(),
-                                    v => v == nameof(EnumS8.SomeValue) ? EnumS8.SomeValue : default
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInDataTypes.Enum8))
-                            .HasConversion(
-                                new ValueConverter<Enum8, string>(
-                                    v => v.ToString(),
-                                    v => v == nameof(Enum8.SomeValue) ? Enum8.SomeValue : default
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInDataTypes.TestDateTimeOffset))
-                            .HasConversion(
-                                new ValueConverter<DateTimeOffset, long>(
-                                    v => v.ToUnixTimeMilliseconds(),
-                                    v => DateTimeOffset.FromUnixTimeMilliseconds(v)
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInDataTypes.TestDouble))
-                            .HasConversion(
-                                new ValueConverter<double, decimal>(
-                                    v => (decimal)v,
-                                    v => (double)v,
-                                    new ConverterMappingHints(precision: 26, scale: 16)
-                                )
-                            );
-                    }
-                );
-
-                modelBuilder.Entity<BuiltInNullableDataTypes>(
-                    b =>
-                    {
-                        b.Property(nameof(BuiltInNullableDataTypes.PartitionId))
-                            .HasConversion(
-                                new ValueConverter<int, long>(v => (long)v, v => (int)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt16))
-                            .HasConversion(
-                                new ValueConverter<short?, long?>(v => (long?)v, v => (short?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt32))
-                            .HasConversion(
-                                new ValueConverter<int?, long?>(v => (long?)v, v => (int?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableInt64))
-                            .HasConversion(new ValueConverter<long?, long?>(v => v, v => v));
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableDecimal))
-                            .HasConversion(NumberToBytesConverter<decimal?>.DefaultInfo.Create());
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableSingle))
-                            .HasConversion(new CastingConverter<float?, double?>());
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableBoolean))
-                            .HasConversion(new BoolToTwoValuesConverter<string>("Nope", "Yep"));
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableByte))
-                            .HasConversion(
-                                new ValueConverter<byte?, ushort?>(v => (ushort?)v, v => (byte?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt16))
-                            .HasConversion(
-                                new ValueConverter<ushort?, ulong?>(v => (ulong?)v, v => (ushort?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt32))
-                            .HasConversion(
-                                new ValueConverter<uint?, ulong?>(v => (ulong?)v, v => (uint?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableUnsignedInt64))
-                            .HasConversion(
-                                new ValueConverter<ulong?, long?>(v => (long?)v, v => (ulong?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableCharacter))
-                            .HasConversion(
-                                new ValueConverter<char?, int?>(v => (int?)v, v => (char?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableSignedByte))
-                            .HasConversion(
-                                new ValueConverter<sbyte?, decimal?>(
-                                    v => (decimal?)v,
-                                    v => (sbyte?)v
-                                )
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.Enum64))
-                            .HasConversion(
-                                new ValueConverter<Enum64?, long?>(v => (long?)v, v => (Enum64?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.Enum32))
-                            .HasConversion(
-                                new ValueConverter<Enum32?, long?>(v => (long?)v, v => (Enum32?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.Enum16))
-                            .HasConversion(
-                                new ValueConverter<Enum16?, long?>(v => (long?)v, v => (Enum16?)v)
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.EnumU64))
-                            .HasConversion(
-                                new ValueConverter<EnumU64?, ulong?>(
-                                    v => (ulong?)v,
-                                    v => (EnumU64?)v
-                                )
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.EnumU32))
-                            .HasConversion(
-                                new ValueConverter<EnumU32?, ulong?>(
-                                    v => (ulong?)v,
-                                    v => (EnumU32?)v
-                                )
-                            );
-                        b.Property(nameof(BuiltInNullableDataTypes.EnumU16))
-                            .HasConversion(
-                                new ValueConverter<EnumU16?, ulong?>(
-                                    v => (ulong?)v,
-                                    v => (EnumU16?)v
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableDateTime))
-                            .HasConversion(
-                                new ValueConverter<DateTime?, long>(
-                                    v => v.Value.ToBinary(),
-                                    v => (DateTime?)DateTime.FromBinary(v)
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableTimeSpan))
-                            .HasConversion(
-                                new ValueConverter<TimeSpan?, double>(
-                                    v => v.Value.TotalMilliseconds,
-                                    v => (TimeSpan?)TimeSpan.FromMilliseconds(v)
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.EnumS8))
-                            .HasConversion(
-                                new ValueConverter<EnumS8?, string>(
-                                    v => v.ToString(),
-                                    v =>
-                                        v == nameof(EnumS8.SomeValue)
-                                            ? (EnumS8?)EnumS8.SomeValue
-                                            : null
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.Enum8))
-                            .HasConversion(
-                                new ValueConverter<Enum8?, string>(
-                                    v => v.ToString(),
-                                    v =>
-                                        v == nameof(Enum8.SomeValue)
-                                            ? (Enum8?)Enum8.SomeValue
-                                            : null
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableDateTimeOffset))
-                            .HasConversion(
-                                new ValueConverter<DateTimeOffset?, long>(
-                                    v => v.Value.ToUnixTimeMilliseconds(),
-                                    v => (DateTimeOffset?)DateTimeOffset.FromUnixTimeMilliseconds(v)
-                                )
-                            );
-
-                        b.Property(nameof(BuiltInNullableDataTypes.TestNullableDouble))
-                            .HasConversion(
-                                new ValueConverter<double?, decimal?>(
-                                    v => (decimal?)v,
-                                    v => (double?)v,
-                                    new ConverterMappingHints(precision: 26, scale: 16)
-                                )
-                            );
-                    }
-                );
-
-                modelBuilder.Entity<BinaryKeyDataType>(
-                    b =>
-                    {
-                        b.Property(e => e.Id)
-                            .HasConversion(
-                                v => new byte[] { 4, 2, 0 }.Concat(v).ToArray(),
-                                v => v.Skip(3).ToArray()
-                            );
-                    }
-                );
+                modelBuilder.Entity<BinaryKeyDataType>(b =>
+                {
+                    b.Property(e => e.Id)
+                        .HasConversion(
+                            v => new byte[] { 4, 2, 0 }.Concat(v).ToArray(),
+                            v => v.Skip(3).ToArray()
+                        );
+                });
 
                 var caseInsensitiveComparer = new ValueComparer<string>(
                     (l, r) =>
@@ -1374,152 +1323,131 @@ namespace Microsoft.EntityFrameworkCore
                     v => v
                 );
 
-                modelBuilder.Entity<StringKeyDataType>(
-                    b =>
-                    {
-                        var property = b.Property(e => e.Id)
-                            .HasConversion(v => "KeyValue=" + v, v => v.Substring(9))
-                            .Metadata;
+                modelBuilder.Entity<StringKeyDataType>(b =>
+                {
+                    var property = b.Property(e => e.Id)
+                        .HasConversion(v => "KeyValue=" + v, v => v.Substring(9))
+                        .Metadata;
 
 #pragma warning disable 618
-                        property.SetKeyValueComparer(caseInsensitiveComparer);
+                    property.SetKeyValueComparer(caseInsensitiveComparer);
 #pragma warning restore 618
-                    }
-                );
+                });
 
-                modelBuilder.Entity<StringForeignKeyDataType>(
-                    b =>
-                    {
-                        b.Property(e => e.StringKeyDataTypeId)
-                            .HasConversion(
+                modelBuilder.Entity<StringForeignKeyDataType>(b =>
+                {
+                    b.Property(e => e.StringKeyDataTypeId)
+                        .HasConversion(
+                            v => "KeyValue=" + v,
+                            v => v.Substring(9),
+                            caseInsensitiveComparer
+                        );
+                });
+
+                modelBuilder.Entity<MaxLengthDataTypes>(b =>
+                {
+                    var bytesComparer = new ValueComparer<byte[]>(
+                        (v1, v2) => v1.SequenceEqual(v2),
+                        v => v.GetHashCode()
+                    );
+
+                    b.Property(e => e.String3)
+                        .HasConversion(
+                            new ValueConverter<string, string>(
                                 v => "KeyValue=" + v,
-                                v => v.Substring(9),
-                                caseInsensitiveComparer
-                            );
-                    }
-                );
+                                v => v.Substring(9)
+                            )
+                        )
+                        .HasMaxLength(12);
 
-                modelBuilder.Entity<MaxLengthDataTypes>(
-                    b =>
-                    {
-                        var bytesComparer = new ValueComparer<byte[]>(
-                            (v1, v2) => v1.SequenceEqual(v2),
-                            v => v.GetHashCode()
+                    b.Property(e => e.String9000)
+                        .HasConversion(StringToBytesConverter.DefaultInfo.Create());
+
+                    b.Property(e => e.ByteArray5)
+                        .HasConversion(
+                            new ValueConverter<byte[], byte[]>(
+                                v => v.Reverse().Concat(new byte[] { 4, 20 }).ToArray(),
+                                v => v.Reverse().Skip(2).ToArray()
+                            ),
+                            bytesComparer
+                        )
+                        .HasMaxLength(7);
+
+                    b.Property(e => e.ByteArray9000)
+                        .HasConversion(BytesToStringConverter.DefaultInfo.Create(), bytesComparer)
+                        .HasMaxLength(LongStringLength * 2);
+                });
+
+                modelBuilder.Entity<StringListDataType>(b =>
+                {
+                    b.Property(e => e.Strings)
+                        .HasConversion(
+                            v => string.Join(",", v),
+                            v => v.Split(new[] { ',' }).ToList(),
+                            new ValueComparer<IList<string>>(
+                                (v1, v2) => v1.SequenceEqual(v2),
+                                v => v.GetHashCode()
+                            )
                         );
 
-                        b.Property(e => e.String3)
-                            .HasConversion(
-                                new ValueConverter<string, string>(
-                                    v => "KeyValue=" + v,
-                                    v => v.Substring(9)
-                                )
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
+
+                modelBuilder.Entity<Order>(b =>
+                {
+                    b.HasKey(o => o.Id);
+                    b.Property(o => o.Id).HasConversion(new OrderIdEntityFrameworkValueConverter());
+                });
+
+                modelBuilder.Entity<SimpleCounter>(b =>
+                {
+                    b.Property(e => e.CounterId).ValueGeneratedNever();
+                    b.HasKey(c => c.CounterId);
+                    b.Property(c => c.Discriminator)
+                        .HasConversion(
+                            d => StringToDictionarySerializer.Serialize(d),
+                            json => StringToDictionarySerializer.Deserialize(json),
+                            new ValueComparer<IDictionary<string, string>>(
+                                (v1, v2) => v1.SequenceEqual(v2),
+                                v => v.GetHashCode(),
+                                v => new Dictionary<string, string>(v)
                             )
-                            .HasMaxLength(12);
-
-                        b.Property(e => e.String9000)
-                            .HasConversion(StringToBytesConverter.DefaultInfo.Create());
-
-                        b.Property(e => e.ByteArray5)
-                            .HasConversion(
-                                new ValueConverter<byte[], byte[]>(
-                                    v => v.Reverse().Concat(new byte[] { 4, 20 }).ToArray(),
-                                    v => v.Reverse().Skip(2).ToArray()
-                                ),
-                                bytesComparer
-                            )
-                            .HasMaxLength(7);
-
-                        b.Property(e => e.ByteArray9000)
-                            .HasConversion(
-                                BytesToStringConverter.DefaultInfo.Create(),
-                                bytesComparer
-                            )
-                            .HasMaxLength(LongStringLength * 2);
-                    }
-                );
-
-                modelBuilder.Entity<StringListDataType>(
-                    b =>
-                    {
-                        b.Property(e => e.Strings)
-                            .HasConversion(
-                                v => string.Join(",", v),
-                                v => v.Split(new[] { ',' }).ToList(),
-                                new ValueComparer<IList<string>>(
-                                    (v1, v2) => v1.SequenceEqual(v2),
-                                    v => v.GetHashCode()
-                                )
-                            );
-
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
-
-                modelBuilder.Entity<Order>(
-                    b =>
-                    {
-                        b.HasKey(o => o.Id);
-                        b.Property(o => o.Id)
-                            .HasConversion(new OrderIdEntityFrameworkValueConverter());
-                    }
-                );
-
-                modelBuilder.Entity<SimpleCounter>(
-                    b =>
-                    {
-                        b.Property(e => e.CounterId).ValueGeneratedNever();
-                        b.HasKey(c => c.CounterId);
-                        b.Property(c => c.Discriminator)
-                            .HasConversion(
-                                d => StringToDictionarySerializer.Serialize(d),
-                                json => StringToDictionarySerializer.Deserialize(json),
-                                new ValueComparer<IDictionary<string, string>>(
-                                    (v1, v2) => v1.SequenceEqual(v2),
-                                    v => v.GetHashCode(),
-                                    v => new Dictionary<string, string>(v)
-                                )
-                            );
-                    }
-                );
+                        );
+                });
 
                 var urlConverter = new UrlSchemeRemover();
-                modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.Property(e => e.Url).HasConversion(urlConverter);
-                        b.Property(e => e.IsVisible)
-                            .HasConversion(new BoolToStringConverter("N", "Y"));
-                        b.IndexerProperty(typeof(bool), "IndexerVisible")
-                            .HasConversion(new BoolToStringConverter("Nay", "Aye"));
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.Property(e => e.Url).HasConversion(urlConverter);
+                    b.Property(e => e.IsVisible).HasConversion(new BoolToStringConverter("N", "Y"));
+                    b.IndexerProperty(typeof(bool), "IndexerVisible")
+                        .HasConversion(new BoolToStringConverter("Nay", "Aye"));
 
-                        b.HasData(
-                            new
-                            {
-                                BlogId = 1,
-                                Url = "http://blog.com",
-                                IsVisible = true,
-                                IndexerVisible = false,
-                            }
-                        );
-                    }
-                );
+                    b.HasData(
+                        new
+                        {
+                            BlogId = 1,
+                            Url = "http://blog.com",
+                            IsVisible = true,
+                            IndexerVisible = false,
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<RssBlog>(
-                    b =>
-                    {
-                        b.Property(e => e.RssUrl).HasConversion(urlConverter);
-                        b.HasData(
-                            new
-                            {
-                                BlogId = 2,
-                                Url = "http://rssblog.com",
-                                RssUrl = "http://rssblog.com/rss",
-                                IsVisible = false,
-                                IndexerVisible = true,
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<RssBlog>(b =>
+                {
+                    b.Property(e => e.RssUrl).HasConversion(urlConverter);
+                    b.HasData(
+                        new
+                        {
+                            BlogId = 2,
+                            Url = "http://rssblog.com",
+                            RssUrl = "http://rssblog.com/rss",
+                            IsVisible = false,
+                            IndexerVisible = true,
+                        }
+                    );
+                });
 
                 modelBuilder
                     .Entity<Post>()
@@ -1528,119 +1456,103 @@ namespace Microsoft.EntityFrameworkCore
                         new Post { PostId = 2, BlogId = null }
                     );
 
-                modelBuilder.Entity<EntityWithValueWrapper>(
-                    e =>
-                    {
-                        e.Property(e => e.Wrapper)
-                            .HasConversion(w => w.Value, v => new ValueWrapper { Value = v });
-                        e.HasData(
-                            new EntityWithValueWrapper
-                            {
-                                Id = 1,
-                                Wrapper = new ValueWrapper { Value = "foo" }
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<EntityWithValueWrapper>(e =>
+                {
+                    e.Property(e => e.Wrapper)
+                        .HasConversion(w => w.Value, v => new ValueWrapper { Value = v });
+                    e.HasData(
+                        new EntityWithValueWrapper
+                        {
+                            Id = 1,
+                            Wrapper = new ValueWrapper { Value = "foo" }
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<CollectionScalar>(
-                    b =>
-                    {
-                        b.Property(e => e.Tags)
-                            .HasConversion(
-                                c => string.Join(",", c),
-                                s => s.Split(',', StringSplitOptions.None).ToList(),
-                                new ValueComparer<List<string>>(favorStructuralComparisons: true)
-                            );
-
-                        b.HasData(
-                            new CollectionScalar
-                            {
-                                Id = 1,
-                                Tags = new List<string> { "A", "B", "C" }
-                            }
-                        );
-                    }
-                );
-
-                modelBuilder.Entity<CollectionEnum>(
-                    b =>
-                    {
-                        b.Property(e => e.Roles)
-                            .HasConversion(
-                                new RolesToStringConveter(),
-                                new ValueComparer<ICollection<Roles>>(
-                                    favorStructuralComparisons: true
-                                )
-                            );
-
-                        b.HasData(
-                            new CollectionEnum
-                            {
-                                Id = 1,
-                                Roles = new List<Roles> { Roles.Seller }
-                            }
-                        );
-                    }
-                );
-
-                modelBuilder.Entity<Parent>(
-                    b =>
-                    {
-                        b.OwnsOne(
-                            e => e.OwnedWithConverter,
-                            ob =>
-                            {
-                                ob.Property(i => i.Value).HasConversion<string>();
-                                ob.HasData(new { ParentId = 1, Value = 42 });
-                            }
+                modelBuilder.Entity<CollectionScalar>(b =>
+                {
+                    b.Property(e => e.Tags)
+                        .HasConversion(
+                            c => string.Join(",", c),
+                            s => s.Split(',', StringSplitOptions.None).ToList(),
+                            new ValueComparer<List<string>>(favorStructuralComparisons: true)
                         );
 
-                        b.HasData(new Parent { Id = 1 }, new Parent { Id = 2 });
-                    }
-                );
+                    b.HasData(
+                        new CollectionScalar
+                        {
+                            Id = 1,
+                            Tags = new List<string> { "A", "B", "C" }
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<Book>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.Id).HasConversion(e => e.Id, e => new BookId(e));
-
-                        b.HasData(new Book(new BookId(1)) { Value = "Book1" });
-                    }
-                );
-
-                modelBuilder.Entity<User23059>(
-                    b =>
-                    {
-                        b.Property(e => e.MessageGroups)
-                            .HasConversion(
-                                v => string.Join(',', v),
-                                v =>
-                                    v.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(x => Enum.Parse<MessageGroup>(x))
-                                        .ToList(),
-                                new ValueComparer<List<MessageGroup>>(
-                                    favorStructuralComparisons: true
-                                )
-                            );
-
-                        b.HasData(
-                            new User23059
-                            {
-                                Id = 1,
-                                IsSoftDeleted = true,
-                                MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup }
-                            },
-                            new User23059
-                            {
-                                Id = 2,
-                                IsSoftDeleted = false,
-                                MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup }
-                            }
+                modelBuilder.Entity<CollectionEnum>(b =>
+                {
+                    b.Property(e => e.Roles)
+                        .HasConversion(
+                            new RolesToStringConveter(),
+                            new ValueComparer<ICollection<Roles>>(favorStructuralComparisons: true)
                         );
-                    }
-                );
+
+                    b.HasData(
+                        new CollectionEnum
+                        {
+                            Id = 1,
+                            Roles = new List<Roles> { Roles.Seller }
+                        }
+                    );
+                });
+
+                modelBuilder.Entity<Parent>(b =>
+                {
+                    b.OwnsOne(
+                        e => e.OwnedWithConverter,
+                        ob =>
+                        {
+                            ob.Property(i => i.Value).HasConversion<string>();
+                            ob.HasData(new { ParentId = 1, Value = 42 });
+                        }
+                    );
+
+                    b.HasData(new Parent { Id = 1 }, new Parent { Id = 2 });
+                });
+
+                modelBuilder.Entity<Book>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.Id).HasConversion(e => e.Id, e => new BookId(e));
+
+                    b.HasData(new Book(new BookId(1)) { Value = "Book1" });
+                });
+
+                modelBuilder.Entity<User23059>(b =>
+                {
+                    b.Property(e => e.MessageGroups)
+                        .HasConversion(
+                            v => string.Join(',', v),
+                            v =>
+                                v.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(x => Enum.Parse<MessageGroup>(x))
+                                    .ToList(),
+                            new ValueComparer<List<MessageGroup>>(favorStructuralComparisons: true)
+                        );
+
+                    b.HasData(
+                        new User23059
+                        {
+                            Id = 1,
+                            IsSoftDeleted = true,
+                            MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup }
+                        },
+                        new User23059
+                        {
+                            Id = 2,
+                            IsSoftDeleted = false,
+                            MessageGroups = new List<MessageGroup> { MessageGroup.SomeGroup }
+                        }
+                    );
+                });
 
                 modelBuilder
                     .Entity<Dashboard>()

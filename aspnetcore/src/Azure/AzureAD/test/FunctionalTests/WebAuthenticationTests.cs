@@ -71,49 +71,45 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         var client = Factory
             .WithWebHostBuilder(
                 builder =>
-                    builder.ConfigureTestServices(
-                        services =>
-                        {
-                            services
-                                .AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                                .AddAzureAD(
-                                    o =>
-                                    {
-                                        o.Instance = "https://login.microsoftonline.com/";
-                                        o.Domain = "test.onmicrosoft.com";
-                                        o.ClientId = "ClientId";
-                                        o.TenantId = "TenantId";
-                                    }
-                                );
+                    builder.ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddAuthentication(AzureADDefaults.AuthenticationScheme)
+                            .AddAzureAD(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.TenantId = "TenantId";
+                            });
 
-                            services.Configure<OpenIdConnectOptions>(
-                                AzureADDefaults.OpenIdScheme,
-                                o =>
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        Issuer = "https://www.example.com",
-                                        TokenEndpoint = "https://www.example.com/token",
-                                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                                        EndSessionEndpoint = "https://www.example.com/logout"
-                                    };
-                                }
-                            );
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                            }
+                        );
 
-                            services.AddMvc(
-                                o =>
-                                    o.Filters.Add(
-                                        new AuthorizeFilter(
-                                            new AuthorizationPolicyBuilder(
-                                                new[] { AzureADDefaults.AuthenticationScheme }
-                                            )
-                                                .RequireAuthenticatedUser()
-                                                .Build()
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADDefaults.AuthenticationScheme }
                                         )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
                                     )
-                            );
-                        }
-                    )
+                                )
+                        );
+                    })
             )
             .CreateDefaultClient();
 
@@ -146,52 +142,48 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         var client = Factory
             .WithWebHostBuilder(
                 builder =>
-                    builder.ConfigureTestServices(
-                        services =>
-                        {
-                            services
-                                .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                                .AddAzureADB2C(
-                                    o =>
-                                    {
-                                        o.Instance = "https://login.microsoftonline.com/tfp/";
-                                        o.ClientId = "ClientId";
-                                        o.CallbackPath = "/signin-oidc";
-                                        o.Domain = "test.onmicrosoft.com";
-                                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                                        o.EditProfilePolicyId = "B2C_1_SiPe";
-                                    }
-                                );
+                    builder.ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                            .AddAzureADB2C(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/tfp/";
+                                o.ClientId = "ClientId";
+                                o.CallbackPath = "/signin-oidc";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                o.EditProfilePolicyId = "B2C_1_SiPe";
+                            });
 
-                            services.Configure<OpenIdConnectOptions>(
-                                AzureADB2CDefaults.OpenIdScheme,
-                                o =>
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADB2CDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        Issuer = "https://www.example.com",
-                                        TokenEndpoint = "https://www.example.com/token",
-                                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                                        EndSessionEndpoint = "https://www.example.com/logout"
-                                    };
-                                }
-                            );
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                            }
+                        );
 
-                            services.AddMvc(
-                                o =>
-                                    o.Filters.Add(
-                                        new AuthorizeFilter(
-                                            new AuthorizationPolicyBuilder(
-                                                new[] { AzureADB2CDefaults.AuthenticationScheme }
-                                            )
-                                                .RequireAuthenticatedUser()
-                                                .Build()
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADB2CDefaults.AuthenticationScheme }
                                         )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
                                     )
-                            );
-                        }
-                    )
+                                )
+                        );
+                    })
             )
             .CreateDefaultClient();
 
@@ -207,55 +199,51 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         var client = Factory
             .WithWebHostBuilder(
                 builder =>
-                    builder.ConfigureTestServices(
-                        services =>
-                        {
-                            services
-                                .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                                .AddAzureADB2C(
-                                    o =>
-                                    {
-                                        o.Instance = "https://login.microsoftonline.com/tfp/";
-                                        o.ClientId = "ClientId";
-                                        o.CallbackPath = "/signin-oidc";
-                                        o.Domain = "test.onmicrosoft.com";
-                                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                                        o.EditProfilePolicyId = "B2C_1_SiPe";
-                                    }
-                                );
+                    builder.ConfigureTestServices(services =>
+                    {
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                            .AddAzureADB2C(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/tfp/";
+                                o.ClientId = "ClientId";
+                                o.CallbackPath = "/signin-oidc";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                o.EditProfilePolicyId = "B2C_1_SiPe";
+                            });
 
-                            services.Configure<OpenIdConnectOptions>(
-                                AzureADB2CDefaults.OpenIdScheme,
-                                o =>
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADB2CDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
                                 {
-                                    o.Configuration = new OpenIdConnectConfiguration()
-                                    {
-                                        Issuer = "https://www.example.com",
-                                        TokenEndpoint = "https://www.example.com/token",
-                                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                                        EndSessionEndpoint = "https://www.example.com/logout"
-                                    };
-                                    // CookieContainer doesn't allow cookies from other paths
-                                    o.CorrelationCookie.Path = "/";
-                                    o.NonceCookie.Path = "/";
-                                }
-                            );
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                                // CookieContainer doesn't allow cookies from other paths
+                                o.CorrelationCookie.Path = "/";
+                                o.NonceCookie.Path = "/";
+                            }
+                        );
 
-                            services.AddMvc(
-                                o =>
-                                    o.Filters.Add(
-                                        new AuthorizeFilter(
-                                            new AuthorizationPolicyBuilder(
-                                                new[] { AzureADB2CDefaults.AuthenticationScheme }
-                                            )
-                                                .RequireAuthenticatedUser()
-                                                .Build()
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADB2CDefaults.AuthenticationScheme }
                                         )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
                                     )
-                            );
-                        }
-                    )
+                                )
+                        );
+                    })
             )
             .CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
 

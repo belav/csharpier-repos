@@ -362,27 +362,23 @@ namespace Microsoft.EntityFrameworkCore
 
             modelBuilder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
-            modelBuilder.Entity<ProductDetailsTag>(
-                b =>
-                {
-                    b.HasKey(e => new { e.Id1, e.Id2 });
-                    b.HasOne(e => e.TagDetails)
-                        .WithOne(e => e.Tag)
-                        .HasPrincipalKey<ProductDetailsTag>(e => e.Id2)
-                        .HasForeignKey<ProductDetailsTagDetails>(e => e.Id);
-                }
-            );
+            modelBuilder.Entity<ProductDetailsTag>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.HasOne(e => e.TagDetails)
+                    .WithOne(e => e.Tag)
+                    .HasPrincipalKey<ProductDetailsTag>(e => e.Id2)
+                    .HasForeignKey<ProductDetailsTagDetails>(e => e.Id);
+            });
 
-            modelBuilder.Entity<ProductDetails>(
-                b =>
-                {
-                    b.HasKey(e => new { e.Id1, e.Id2 });
-                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                    b.HasOne(e => e.Tag)
-                        .WithOne(e => e.Details)
-                        .HasForeignKey<ProductDetailsTag>(e => new { e.Id1, e.Id2 });
-                }
-            );
+            modelBuilder.Entity<ProductDetails>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id2).ValueGeneratedOnAdd();
+                b.HasOne(e => e.Tag)
+                    .WithOne(e => e.Details)
+                    .HasForeignKey<ProductDetailsTag>(e => new { e.Id1, e.Id2 });
+            });
 
             modelBuilder
                 .Entity<Product>()
@@ -390,18 +386,14 @@ namespace Microsoft.EntityFrameworkCore
                 .WithOne(e => e.Product)
                 .HasForeignKey<ProductDetails>(e => new { e.Id1 });
 
-            modelBuilder.Entity<OrderDetails>(
-                b =>
-                {
-                    b.HasKey(e => new { e.OrderId, e.ProductId });
-                    b.HasOne(e => e.Order)
-                        .WithMany(e => e.OrderDetails)
-                        .HasForeignKey(e => e.OrderId);
-                    b.HasOne(e => e.Product)
-                        .WithMany(e => e.OrderDetails)
-                        .HasForeignKey(e => e.ProductId);
-                }
-            );
+            modelBuilder.Entity<OrderDetails>(b =>
+            {
+                b.HasKey(e => new { e.OrderId, e.ProductId });
+                b.HasOne(e => e.Order).WithMany(e => e.OrderDetails).HasForeignKey(e => e.OrderId);
+                b.HasOne(e => e.Product)
+                    .WithMany(e => e.OrderDetails)
+                    .HasForeignKey(e => e.ProductId);
+            });
 
             return modelBuilder.Model;
         }

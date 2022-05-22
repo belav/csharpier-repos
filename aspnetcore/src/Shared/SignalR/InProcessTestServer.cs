@@ -96,22 +96,20 @@ public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup 
         var url = "http://127.0.0.1:0";
 
         _host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .ConfigureLogging(
-                            builder =>
-                                builder
-                                    .SetMinimumLevel(LogLevel.Trace)
-                                    .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
-                        )
-                        .UseStartup(typeof(TStartup))
-                        .UseKestrel()
-                        .UseUrls(url)
-                        .UseContentRoot(Directory.GetCurrentDirectory());
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .ConfigureLogging(
+                        builder =>
+                            builder
+                                .SetMinimumLevel(LogLevel.Trace)
+                                .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
+                    )
+                    .UseStartup(typeof(TStartup))
+                    .UseKestrel()
+                    .UseUrls(url)
+                    .UseContentRoot(Directory.GetCurrentDirectory());
+            })
             .Build();
 
         _logger.LogInformation("Starting test server...");

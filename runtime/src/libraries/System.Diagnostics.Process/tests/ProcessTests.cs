@@ -2897,35 +2897,33 @@ namespace System.Diagnostics.Tests
 
         private IReadOnlyList<Process> CreateProcessTree()
         {
-            (Process Value, string Message) rootResult = ListenForAnonymousPipeMessage(
-                rootPipeHandleString =>
+            (Process Value, string Message) rootResult =
+                ListenForAnonymousPipeMessage(rootPipeHandleString =>
                 {
                     Process root = CreateProcess(
                         rhs =>
                         {
                             (Process Value, string Message) child1Result =
-                                ListenForAnonymousPipeMessage(
-                                    child1PipeHandleString =>
-                                    {
-                                        Process child1 = CreateProcess(
-                                            c1hs =>
-                                            {
-                                                Process child2 = CreateProcess(() => WaitForever());
-                                                child2.Start();
+                                ListenForAnonymousPipeMessage(child1PipeHandleString =>
+                                {
+                                    Process child1 = CreateProcess(
+                                        c1hs =>
+                                        {
+                                            Process child2 = CreateProcess(() => WaitForever());
+                                            child2.Start();
 
-                                                SendMessage(child2.Id.ToString(), c1hs);
+                                            SendMessage(child2.Id.ToString(), c1hs);
 
-                                                return WaitForever();
-                                            },
-                                            child1PipeHandleString,
-                                            autoDispose: false
-                                        );
+                                            return WaitForever();
+                                        },
+                                        child1PipeHandleString,
+                                        autoDispose: false
+                                    );
 
-                                        child1.Start();
+                                    child1.Start();
 
-                                        return child1;
-                                    }
-                                );
+                                    return child1;
+                                });
 
                             var child1ProcessId = child1Result.Value.Id;
                             var child2ProcessId = child1Result.Message;
@@ -2940,8 +2938,7 @@ namespace System.Diagnostics.Tests
                     root.Start();
 
                     return root;
-                }
-            );
+                });
 
             IEnumerable<Process> childProcesses = rootResult.Message
                 .Split(';')

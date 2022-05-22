@@ -42,14 +42,12 @@ public static class IdentityServiceCollectionExtensions
     {
         // Services used by identity
         services
-            .AddAuthentication(
-                options =>
-                {
-                    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-                    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-                }
-            )
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
             .AddCookie(
                 IdentityConstants.ApplicationScheme,
                 o =>

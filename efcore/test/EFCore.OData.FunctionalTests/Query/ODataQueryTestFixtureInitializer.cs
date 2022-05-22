@@ -37,56 +37,48 @@ namespace Microsoft.EntityFrameworkCore.Query
                     webBuilder =>
                         webBuilder
                             .UseKestrel(options => options.Listen(IPAddress.Loopback, 0))
-                            .ConfigureServices(
-                                services =>
-                                {
-                                    services.AddDbContext<TContext>(
-                                        o =>
-                                            o.UseSqlServer(
-                                                SqlServerTestStore.CreateConnectionString(storeName)
-                                            )
-                                    );
+                            .ConfigureServices(services =>
+                            {
+                                services.AddDbContext<TContext>(
+                                    o =>
+                                        o.UseSqlServer(
+                                            SqlServerTestStore.CreateConnectionString(storeName)
+                                        )
+                                );
 
-                                    services
-                                        .AddControllers()
-                                        .AddOData(
-                                            o =>
-                                            {
-                                                o.AddRouteComponents("odata", edmModel)
-                                                    .SetMaxTop(null)
-                                                    .Expand()
-                                                    .Select()
-                                                    .OrderBy()
-                                                    .Filter()
-                                                    .Count();
+                                services
+                                    .AddControllers()
+                                    .AddOData(o =>
+                                    {
+                                        o.AddRouteComponents("odata", edmModel)
+                                            .SetMaxTop(null)
+                                            .Expand()
+                                            .Select()
+                                            .OrderBy()
+                                            .Filter()
+                                            .Count();
 
-                                                if (customRoutingConventions != null)
-                                                {
-                                                    foreach (
-                                                        var customRoutingConvention in customRoutingConventions
-                                                    )
-                                                    {
-                                                        o.Conventions.Add(customRoutingConvention);
-                                                    }
-                                                }
-                                            }
-                                        );
-
-                                    services.AddHttpClient();
-                                }
-                            )
-                            .Configure(
-                                app =>
-                                {
-                                    app.UseRouting();
-                                    app.UseEndpoints(
-                                        endpoints =>
+                                        if (customRoutingConventions != null)
                                         {
-                                            endpoints.MapControllers();
+                                            foreach (
+                                                var customRoutingConvention in customRoutingConventions
+                                            )
+                                            {
+                                                o.Conventions.Add(customRoutingConvention);
+                                            }
                                         }
-                                    );
-                                }
-                            )
+                                    });
+
+                                services.AddHttpClient();
+                            })
+                            .Configure(app =>
+                            {
+                                app.UseRouting();
+                                app.UseEndpoints(endpoints =>
+                                {
+                                    endpoints.MapControllers();
+                                });
+                            })
                             .ConfigureLogging(
                                 (hostingContext, logging) =>
                                 {

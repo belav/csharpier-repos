@@ -27,29 +27,25 @@ public static class SpaStaticFilesExtensions
         Action<SpaStaticFilesOptions>? configuration = null
     )
     {
-        services.AddSingleton<ISpaStaticFileProvider>(
-            serviceProvider =>
+        services.AddSingleton<ISpaStaticFileProvider>(serviceProvider =>
+        {
+            // Use the options configured in DI (or blank if none was configured)
+            var optionsProvider = serviceProvider.GetService<IOptions<SpaStaticFilesOptions>>()!;
+            var options = optionsProvider.Value;
+
+            // Allow the developer to perform further configuration
+            configuration?.Invoke(options);
+
+            if (string.IsNullOrEmpty(options.RootPath))
             {
-                // Use the options configured in DI (or blank if none was configured)
-                var optionsProvider = serviceProvider.GetService<
-                    IOptions<SpaStaticFilesOptions>
-                >()!;
-                var options = optionsProvider.Value;
-
-                // Allow the developer to perform further configuration
-                configuration?.Invoke(options);
-
-                if (string.IsNullOrEmpty(options.RootPath))
-                {
-                    throw new InvalidOperationException(
-                        $"No {nameof(SpaStaticFilesOptions.RootPath)} "
-                            + $"was set on the {nameof(SpaStaticFilesOptions)}."
-                    );
-                }
-
-                return new DefaultSpaStaticFileProvider(serviceProvider, options);
+                throw new InvalidOperationException(
+                    $"No {nameof(SpaStaticFilesOptions.RootPath)} "
+                        + $"was set on the {nameof(SpaStaticFilesOptions)}."
+                );
             }
-        );
+
+            return new DefaultSpaStaticFileProvider(serviceProvider, options);
+        });
     }
 
     /// <summary>

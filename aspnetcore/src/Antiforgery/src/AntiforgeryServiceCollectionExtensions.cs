@@ -47,14 +47,12 @@ public static class AntiforgeryServiceCollectionExtensions
         >();
         services.TryAddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
 
-        services.TryAddSingleton<ObjectPool<AntiforgerySerializationContext>>(
-            serviceProvider =>
-            {
-                var provider = serviceProvider.GetRequiredService<ObjectPoolProvider>();
-                var policy = new AntiforgerySerializationContextPooledObjectPolicy();
-                return provider.Create(policy);
-            }
-        );
+        services.TryAddSingleton<ObjectPool<AntiforgerySerializationContext>>(serviceProvider =>
+        {
+            var provider = serviceProvider.GetRequiredService<ObjectPoolProvider>();
+            var policy = new AntiforgerySerializationContextPooledObjectPolicy();
+            return provider.Create(policy);
+        });
 
         return services;
     }

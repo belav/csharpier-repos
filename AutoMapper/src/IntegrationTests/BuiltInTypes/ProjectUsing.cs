@@ -129,13 +129,11 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Parent, ParentVM>();
-                    cfg.CreateProjection<Children, int>().ConvertUsing(c => c.ID);
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Parent, ParentVM>();
+                cfg.CreateProjection<Children, int>().ConvertUsing(c => c.ID);
+            });
 
         [Fact]
         public void can_map_with_projection()

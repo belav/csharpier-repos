@@ -646,14 +646,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = httpProtocols;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using (
@@ -690,14 +688,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = HttpProtocols.Http1;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.NoCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.NoCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using var server = new TestServer(
@@ -742,15 +738,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = httpProtocols;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using var server = new TestServer(
@@ -907,15 +901,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = HttpProtocols.Http1;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using var server = new TestServer(
@@ -972,15 +964,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = HttpProtocols.Http1;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.SslProtocols = SslProtocols.Tls12;
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.SslProtocols = SslProtocols.Tls12;
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         // Under 4kb can sometimes work because it fits into Kestrel's header parsing buffer.
@@ -1032,15 +1022,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = HttpProtocols.Http1;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.SslProtocols = SslProtocols.Tls13;
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.SslProtocols = SslProtocols.Tls13;
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         // Under 4kb can sometimes work because it fits into Kestrel's header parsing buffer.
@@ -1220,15 +1208,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.Protocols = HttpProtocols.Http1;
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         var expectedBody = new string('a', 1024 * 4);
@@ -1296,15 +1282,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls11;
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls11;
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using (
@@ -1450,19 +1434,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                    options.ClientCertificateValidation = (
-                        certificate,
-                        x509Chain,
-                        sslPolicyErrors
-                    ) => false;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                options.ClientCertificateValidation = (certificate, x509Chain, sslPolicyErrors) =>
+                    false;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         await using (
@@ -1487,14 +1466,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(
-                options =>
-                {
-                    options.ServerCertificate = _x509Certificate2;
-                    options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                    options.AllowAnyClientCertificate();
-                }
-            );
+            listenOptions.UseHttps(options =>
+            {
+                options.ServerCertificate = _x509Certificate2;
+                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                options.AllowAnyClientCertificate();
+            });
         }
 
         RequestDelegate app = context =>

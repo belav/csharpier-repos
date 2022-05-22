@@ -80,15 +80,13 @@ namespace Microsoft.CodeAnalysis.AddImport
                     substringsAreSimilar: false
                 );
 
-                var result = symbols.SelectAsArray(
-                    s =>
-                    {
-                        var areSimilar = similarityChecker.AreSimilar(s.Name, out var matchCost);
+                var result = symbols.SelectAsArray(s =>
+                {
+                    var areSimilar = similarityChecker.AreSimilar(s.Name, out var matchCost);
 
-                        Debug.Assert(areSimilar);
-                        return SymbolResult.Create(s.Name, nameNode, s, matchCost);
-                    }
-                );
+                    Debug.Assert(areSimilar);
+                    return SymbolResult.Create(s.Name, nameNode, s, matchCost);
+                });
 
                 similarityChecker.Free();
 

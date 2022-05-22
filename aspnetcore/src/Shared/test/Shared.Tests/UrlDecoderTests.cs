@@ -202,14 +202,12 @@ public class UrlDecoderTests
     {
         get
         {
-            return PathTestData.Select(
-                x =>
-                {
-                    var input = Encoding.UTF8.GetBytes((string)x[0]);
-                    var expected = Encoding.UTF8.GetBytes((string)x[1]);
-                    return new[] { input, expected };
-                }
-            );
+            return PathTestData.Select(x =>
+            {
+                var input = Encoding.UTF8.GetBytes((string)x[0]);
+                var expected = Encoding.UTF8.GetBytes((string)x[1]);
+                return new[] { input, expected };
+            });
         }
     }
 }

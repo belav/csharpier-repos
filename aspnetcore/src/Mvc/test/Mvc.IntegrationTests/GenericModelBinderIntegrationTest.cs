@@ -33,12 +33,10 @@ public class GenericModelBinderIntegrationTest
         };
 
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.index=10");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.index=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -73,12 +71,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(List<IFormCollection>)
         };
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?index=10");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?index=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -114,12 +110,10 @@ public class GenericModelBinderIntegrationTest
         };
 
         // Without a key here so the GenericModelBinder will not recurse to bind elements.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -280,14 +274,12 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>[])
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0][0].Key=key0&parameter[0][0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter[0][0].Key=key0&parameter[0][0].Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -329,12 +321,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>[])
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0][0].Key=key0&[0][0].Value=10");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0][0].Key=key0&[0][0].Value=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -376,12 +366,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>[])
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -413,14 +401,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -461,12 +445,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0].Key=key0&[0].Value=10");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0].Key=key0&[0].Value=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -507,12 +489,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -544,14 +524,12 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, List<int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter[0].Key=key0&parameter[0].Value[0]=10&parameter[0].Value[1]=11"
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -596,14 +574,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, List<int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0].Key=key0&[0].Value[0]=10&[0].Value[1]=11");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -648,12 +622,10 @@ public class GenericModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, List<int>>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 

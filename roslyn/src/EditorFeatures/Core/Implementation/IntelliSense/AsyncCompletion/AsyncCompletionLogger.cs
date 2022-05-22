@@ -58,16 +58,14 @@ namespace Microsoft.CodeAnalysis
         {
             Logger.Log(
                 FunctionId.Intellisense_AsyncCompletion_Data,
-                KeyValueLogMessage.Create(
-                    m =>
+                KeyValueLogMessage.Create(m =>
+                {
+                    foreach (var kv in s_logAggregator)
                     {
-                        foreach (var kv in s_logAggregator)
-                        {
-                            var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
-                            m[mergeInfo] = kv.Value.GetCount();
-                        }
+                        var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
+                        m[mergeInfo] = kv.Value.GetCount();
                     }
-                )
+                })
             );
         }
     }

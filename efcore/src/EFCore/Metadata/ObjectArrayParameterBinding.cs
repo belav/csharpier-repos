@@ -46,19 +46,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override Expression BindToParameter(ParameterBindingInfo bindingInfo) =>
             Expression.NewArrayInit(
                 typeof(object),
-                _bindings.Select(
-                    b =>
+                _bindings.Select(b =>
+                {
+                    var expression = b.BindToParameter(bindingInfo);
+
+                    if (expression.Type.IsValueType)
                     {
-                        var expression = b.BindToParameter(bindingInfo);
-
-                        if (expression.Type.IsValueType)
-                        {
-                            expression = Expression.Convert(expression, typeof(object));
-                        }
-
-                        return expression;
+                        expression = Expression.Convert(expression, typeof(object));
                     }
-                )
+
+                    return expression;
+                })
             );
 
         /// <summary>

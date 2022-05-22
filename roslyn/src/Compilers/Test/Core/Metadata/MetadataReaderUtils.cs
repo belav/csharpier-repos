@@ -144,13 +144,11 @@ namespace Roslyn.Test.Utilities
         )
         {
             return reader.TypeDefinitions
-                .Select(
-                    handle =>
-                    {
-                        var td = reader.GetTypeDefinition(handle);
-                        return (td.Namespace, td.Name);
-                    }
-                )
+                .Select(handle =>
+                {
+                    var td = reader.GetTypeDefinition(handle);
+                    return (td.Namespace, td.Name);
+                })
                 .ToArray();
         }
 

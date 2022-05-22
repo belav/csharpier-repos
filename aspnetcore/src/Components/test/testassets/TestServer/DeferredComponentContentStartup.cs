@@ -41,14 +41,12 @@ public class DeferredComponentContentStartup
                 app.UseAuthentication();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapFallbackToPage("/DeferredComponentContentHost");
-                        endpoints.MapBlazorHub();
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/DeferredComponentContentHost");
+                    endpoints.MapBlazorHub();
+                });
             }
         );
     }

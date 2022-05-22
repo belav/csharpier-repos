@@ -47,13 +47,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return runtime
                 .GetModuleInstances()
                 .OfType<DkmClrModuleInstance>()
-                .Where(
-                    module =>
-                    {
-                        var moduleAppDomain = module.AppDomain;
-                        return !moduleAppDomain.IsUnloaded && (moduleAppDomain.Id == appDomainId);
-                    }
-                );
+                .Where(module =>
+                {
+                    var moduleAppDomain = module.AppDomain;
+                    return !moduleAppDomain.IsUnloaded && (moduleAppDomain.Id == appDomainId);
+                });
         }
 
         internal static ImmutableArray<MetadataBlock> GetMetadataBlocks(

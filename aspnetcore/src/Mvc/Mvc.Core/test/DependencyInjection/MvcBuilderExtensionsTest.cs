@@ -77,12 +77,10 @@ namespace Microsoft.AspNetCore.Mvc
             var part = new TestApplicationPart();
 
             // Act
-            var result = builder.ConfigureApplicationPartManager(
-                manager =>
-                {
-                    manager.ApplicationParts.Add(part);
-                }
-            );
+            var result = builder.ConfigureApplicationPartManager(manager =>
+            {
+                manager.ApplicationParts.Add(part);
+            });
 
             // Assert
             Assert.Same(result, builder);
@@ -157,12 +155,10 @@ namespace Microsoft.AspNetCore.Mvc
             var part = new TestApplicationPart();
 
             // Act
-            var result = builder.ConfigureApiBehaviorOptions(
-                o =>
-                {
-                    o.SuppressMapClientErrors = true;
-                }
-            );
+            var result = builder.ConfigureApiBehaviorOptions(o =>
+            {
+                o.SuppressMapClientErrors = true;
+            });
 
             // Assert
             var options = serviceCollection

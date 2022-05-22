@@ -421,23 +421,21 @@ namespace System.Web.WebPages
                 );
             }
 
-            return new HelperResult(
-                writer =>
-                {
-                    path = NormalizePath(path);
-                    WebPageBase subPage = CreatePageFromVirtualPath(
-                        path,
-                        Context,
-                        VirtualPathFactory.Exists,
-                        DisplayModeProvider,
-                        DisplayMode
-                    );
-                    var pageContext = CreatePageContextFromParameters(isLayoutPage, data);
+            return new HelperResult(writer =>
+            {
+                path = NormalizePath(path);
+                WebPageBase subPage = CreatePageFromVirtualPath(
+                    path,
+                    Context,
+                    VirtualPathFactory.Exists,
+                    DisplayModeProvider,
+                    DisplayMode
+                );
+                var pageContext = CreatePageContextFromParameters(isLayoutPage, data);
 
-                    subPage.ConfigurePage(this);
-                    subPage.ExecutePageHierarchy(pageContext, writer);
-                }
-            );
+                subPage.ConfigurePage(this);
+                subPage.ExecutePageHierarchy(pageContext, writer);
+            });
         }
 
         public HelperResult RenderSection(string name)
@@ -451,46 +449,44 @@ namespace System.Web.WebPages
 
             if (PreviousSectionWriters.ContainsKey(name))
             {
-                var result = new HelperResult(
-                    tw =>
+                var result = new HelperResult(tw =>
+                {
+                    if (_renderedSections.Contains(name))
                     {
-                        if (_renderedSections.Contains(name))
-                        {
-                            throw new HttpException(
-                                String.Format(
-                                    CultureInfo.InvariantCulture,
-                                    WebPageResources.WebPage_SectionAleadyRendered,
-                                    name
-                                )
-                            );
-                        }
-                        var body = PreviousSectionWriters[name];
-                        // Since the body can also call RenderSection, we need to temporarily remove
-                        // the current sections from the stack.
-                        var top = SectionWritersStack.Pop();
-
-                        bool pushed = false;
-                        try
-                        {
-                            if (Output != tw)
-                            {
-                                OutputStack.Push(tw);
-                                pushed = true;
-                            }
-
-                            body();
-                        }
-                        finally
-                        {
-                            if (pushed)
-                            {
-                                OutputStack.Pop();
-                            }
-                        }
-                        SectionWritersStack.Push(top);
-                        _renderedSections.Add(name);
+                        throw new HttpException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                WebPageResources.WebPage_SectionAleadyRendered,
+                                name
+                            )
+                        );
                     }
-                );
+                    var body = PreviousSectionWriters[name];
+                    // Since the body can also call RenderSection, we need to temporarily remove
+                    // the current sections from the stack.
+                    var top = SectionWritersStack.Pop();
+
+                    bool pushed = false;
+                    try
+                    {
+                        if (Output != tw)
+                        {
+                            OutputStack.Push(tw);
+                            pushed = true;
+                        }
+
+                        body();
+                    }
+                    finally
+                    {
+                        if (pushed)
+                        {
+                            OutputStack.Pop();
+                        }
+                    }
+                    SectionWritersStack.Push(top);
+                    _renderedSections.Add(name);
+                });
                 return result;
             }
             else if (required)

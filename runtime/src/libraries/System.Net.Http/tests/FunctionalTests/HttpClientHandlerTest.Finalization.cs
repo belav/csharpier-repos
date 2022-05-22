@@ -49,28 +49,26 @@ namespace System.Net.Http.Functional.Tests
                         }
                     },
                     server =>
-                        server.AcceptConnectionAsync(
-                            async connection =>
+                        server.AcceptConnectionAsync(async connection =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    HttpRequestData data = await connection.ReadRequestDataAsync(
-                                        readBody: false
-                                    );
-                                    await connection.SendResponseHeadersAsync(
-                                        headers: new HttpHeaderData[]
-                                        {
-                                            new HttpHeaderData("SomeHeaderName", "AndValue")
-                                        }
-                                    );
-                                    await connection.WaitForCancellationAsync();
-                                }
-                                finally
-                                {
-                                    Volatile.Write(ref stopGCs, true);
-                                }
+                                HttpRequestData data = await connection.ReadRequestDataAsync(
+                                    readBody: false
+                                );
+                                await connection.SendResponseHeadersAsync(
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("SomeHeaderName", "AndValue")
+                                    }
+                                );
+                                await connection.WaitForCancellationAsync();
                             }
-                        )
+                            finally
+                            {
+                                Volatile.Write(ref stopGCs, true);
+                            }
+                        })
                 );
             }
         }

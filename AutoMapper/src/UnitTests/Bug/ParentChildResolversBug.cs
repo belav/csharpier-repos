@@ -85,17 +85,15 @@
             private Dest _dest;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, ParentDest>()
-                            .ForMember(dest => dest.field, opt => opt.MapFrom<ParentResolver>())
-                            .Include<Source, Dest>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, ParentDest>()
+                        .ForMember(dest => dest.field, opt => opt.MapFrom<ParentResolver>())
+                        .Include<Source, Dest>();
 
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(dest => dest.field, opt => opt.MapFrom<Resolver>());
-                    }
-                );
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(dest => dest.field, opt => opt.MapFrom<Resolver>());
+                });
 
             protected override void Because_of()
             {

@@ -136,20 +136,16 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureEndpointDefaults(
-            opt =>
-            {
-                opt.Protocols = HttpProtocols.Http1;
-            }
-        );
+        serverOptions.ConfigureEndpointDefaults(opt =>
+        {
+            opt.Protocols = HttpProtocols.Http1;
+        });
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -196,19 +192,15 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureEndpointDefaults(
-            opt =>
-            {
-                opt.UseHttps(TestResources.GetTestCertificate());
-            }
-        );
+        serverOptions.ConfigureEndpointDefaults(opt =>
+        {
+            opt.UseHttps(TestResources.GetTestCertificate());
+        });
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -783,21 +775,17 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
         var ranDefault = false;
-        serverOptions.ConfigureEndpointDefaults(
-            opt =>
-            {
-                Assert.Equal(expected, opt.Protocols);
-                ranDefault = true;
-            }
-        );
+        serverOptions.ConfigureEndpointDefaults(opt =>
+        {
+            Assert.Equal(expected, opt.Protocols);
+            ranDefault = true;
+        });
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -877,22 +865,18 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
         var ranDefault = false;
-        serverOptions.ConfigureEndpointDefaults(
-            opt =>
-            {
-                // Kestrel default.
-                Assert.Equal(HttpProtocols.Http1AndHttp2, opt.Protocols);
-                ranDefault = true;
-            }
-        );
+        serverOptions.ConfigureEndpointDefaults(opt =>
+        {
+            // Kestrel default.
+            Assert.Equal(HttpProtocols.Http1AndHttp2, opt.Protocols);
+            ranDefault = true;
+        });
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -954,16 +938,14 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         var ranDefault = false;
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
 
-                // Kestrel default
-                Assert.Equal(SslProtocols.None, opt.SslProtocols);
-                ranDefault = true;
-            }
-        );
+            // Kestrel default
+            Assert.Equal(SslProtocols.None, opt.SslProtocols);
+            ranDefault = true;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -991,14 +973,12 @@ public class KestrelConfigurationLoaderTests
             0,
             opt =>
             {
-                opt.UseHttps(
-                    httpsOptions =>
-                    {
-                        // Kestrel default.
-                        Assert.Equal(SslProtocols.None, httpsOptions.SslProtocols);
-                        ran2 = true;
-                    }
-                );
+                opt.UseHttps(httpsOptions =>
+                {
+                    // Kestrel default.
+                    Assert.Equal(SslProtocols.None, httpsOptions.SslProtocols);
+                    ran2 = true;
+                });
             }
         );
 
@@ -1012,13 +992,11 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-                opt.SslProtocols = SslProtocols.Tls12;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+            opt.SslProtocols = SslProtocols.Tls12;
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()
@@ -1050,12 +1028,10 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()
@@ -1087,15 +1063,13 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
 
-                Assert.Equal(SslProtocols.Tls11, opt.SslProtocols);
-                opt.SslProtocols = SslProtocols.Tls12;
-            }
-        );
+            Assert.Equal(SslProtocols.Tls11, opt.SslProtocols);
+            opt.SslProtocols = SslProtocols.Tls12;
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()
@@ -1128,16 +1102,14 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         var ranDefault = false;
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
 
-                // Kestrel default
-                Assert.Equal(ClientCertificateMode.NoCertificate, opt.ClientCertificateMode);
-                ranDefault = true;
-            }
-        );
+            // Kestrel default
+            Assert.Equal(ClientCertificateMode.NoCertificate, opt.ClientCertificateMode);
+            ranDefault = true;
+        });
 
         var ran1 = false;
         var ran2 = false;
@@ -1171,17 +1143,15 @@ public class KestrelConfigurationLoaderTests
             0,
             opt =>
             {
-                opt.UseHttps(
-                    httpsOptions =>
-                    {
-                        // Kestrel default.
-                        Assert.Equal(
-                            ClientCertificateMode.NoCertificate,
-                            httpsOptions.ClientCertificateMode
-                        );
-                        ran2 = true;
-                    }
-                );
+                opt.UseHttps(httpsOptions =>
+                {
+                    // Kestrel default.
+                    Assert.Equal(
+                        ClientCertificateMode.NoCertificate,
+                        httpsOptions.ClientCertificateMode
+                    );
+                    ran2 = true;
+                });
             }
         );
 
@@ -1243,13 +1213,11 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()
@@ -1287,12 +1255,10 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()
@@ -1330,15 +1296,13 @@ public class KestrelConfigurationLoaderTests
     {
         var serverOptions = CreateServerOptions();
 
-        serverOptions.ConfigureHttpsDefaults(
-            opt =>
-            {
-                opt.ServerCertificate = TestResources.GetTestCertificate();
+        serverOptions.ConfigureHttpsDefaults(opt =>
+        {
+            opt.ServerCertificate = TestResources.GetTestCertificate();
 
-                Assert.Equal(ClientCertificateMode.AllowCertificate, opt.ClientCertificateMode);
-                opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+            Assert.Equal(ClientCertificateMode.AllowCertificate, opt.ClientCertificateMode);
+            opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
 
         var ran1 = false;
         var config = new ConfigurationBuilder()

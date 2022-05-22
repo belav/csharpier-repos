@@ -25,23 +25,21 @@ namespace Microsoft.EntityFrameworkCore
             CascadeTiming? deleteOrphansTiming
         )
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.ChangeTracker.DeleteOrphansTiming =
-                        deleteOrphansTiming ?? CascadeTiming.Never;
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Single(IsTheRoot);
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    Assert.False(context.ChangeTracker.HasChanges());
+                Assert.False(context.ChangeTracker.HasChanges());
 
-                    root.OptionalSingleAk = new OptionalSingleAk1();
+                root.OptionalSingleAk = new OptionalSingleAk1();
 
-                    Assert.True(context.ChangeTracker.HasChanges());
+                Assert.True(context.ChangeTracker.HasChanges());
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalTheory]
@@ -1305,23 +1303,21 @@ namespace Microsoft.EntityFrameworkCore
             CascadeTiming? deleteOrphansTiming
         )
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.ChangeTracker.DeleteOrphansTiming =
-                        deleteOrphansTiming ?? CascadeTiming.Never;
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Single(IsTheRoot);
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    Assert.False(context.ChangeTracker.HasChanges());
+                Assert.False(context.ChangeTracker.HasChanges());
 
-                    root.RequiredSingleAk = new RequiredSingleAk1();
+                root.RequiredSingleAk = new RequiredSingleAk1();
 
-                    Assert.True(context.ChangeTracker.HasChanges());
+                Assert.True(context.ChangeTracker.HasChanges());
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalTheory]

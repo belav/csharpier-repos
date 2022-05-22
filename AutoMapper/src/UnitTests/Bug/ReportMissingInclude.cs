@@ -11,12 +11,10 @@ namespace AutoMapper.UnitTests.Bug
         {
             new Action(
                 () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
-                        }
-                    )
+                    new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<object, BaseType>().Include<object, ChildType>();
+                    })
             ).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
@@ -40,13 +38,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             new Action(
                 () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<ReportMissingIncludeCreateMissingMap, BaseType>()
-                                .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
-                        }
-                    )
+                    new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<ReportMissingIncludeCreateMissingMap, BaseType>()
+                            .Include<ReportMissingIncludeCreateMissingMap, ChildType>();
+                    })
             ).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
@@ -70,12 +66,10 @@ namespace AutoMapper.UnitTests.Bug
         {
             new Action(
                 () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
-                        }
-                    )
+                    new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<object, ChildType>().IncludeBase<object, BaseType>();
+                    })
             ).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(
@@ -99,13 +93,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             new Action(
                 () =>
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateMap<ReportMissingIncludeBaseCreateMissingMap, ChildType>()
-                                .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
-                        }
-                    )
+                    new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<ReportMissingIncludeBaseCreateMissingMap, ChildType>()
+                            .IncludeBase<ReportMissingIncludeBaseCreateMissingMap, BaseType>();
+                    })
             ).ShouldThrowException<InvalidOperationException>(
                 ex =>
                     ex.Message.ShouldStartWith(

@@ -102,13 +102,11 @@ namespace Microsoft.EntityFrameworkCore
             Query_logs_DatabaseErrorLogState_test(c => c.Blogs.FirstOrDefaultAsync());
 
         private Task Query_logs_DatabaseErrorLogState_test(Action<BloggingContext> test) =>
-            Query_logs_DatabaseErrorLogState_test(
-                c =>
-                {
-                    test(c);
-                    return Task.CompletedTask;
-                }
-            );
+            Query_logs_DatabaseErrorLogState_test(c =>
+            {
+                test(c);
+                return Task.CompletedTask;
+            });
 
         private async Task Query_logs_DatabaseErrorLogState_test(Func<BloggingContext, Task> test)
         {

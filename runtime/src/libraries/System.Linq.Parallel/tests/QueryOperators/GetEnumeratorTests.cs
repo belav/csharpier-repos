@@ -177,12 +177,10 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item
-                .Select<int, int>(
-                    x =>
-                    {
-                        throw new DeliberateTestException();
-                    }
-                )
+                .Select<int, int>(x =>
+                {
+                    throw new DeliberateTestException();
+                })
                 .OrderBy(x => x);
 
             IEnumerator<int> enumerator = query.GetEnumerator();

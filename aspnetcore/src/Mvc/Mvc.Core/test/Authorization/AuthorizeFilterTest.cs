@@ -534,15 +534,11 @@ public class AuthorizeFilterTest
         var factory = (IFilterFactory)authorizeFilter;
         var serviceProvider = new ServiceCollection()
             .AddOptions()
-            .AddAuthorization(
-                options =>
-                {
-                    var policy = new AuthorizationPolicyBuilder()
-                        .RequireAssertion(_ => true)
-                        .Build();
-                    options.AddPolicy("some-policy", policy);
-                }
-            )
+            .AddAuthorization(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
+                options.AddPolicy("some-policy", policy);
+            })
             .BuildServiceProvider();
 
         // Act

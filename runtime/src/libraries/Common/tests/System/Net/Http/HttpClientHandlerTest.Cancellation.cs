@@ -130,16 +130,14 @@ namespace System.Net.Http.Functional.Tests
                         var partialResponseHeadersSent = new TaskCompletionSource<bool>();
                         var clientFinished = new TaskCompletionSource<bool>();
 
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendPartialResponseHeadersAsync(HttpStatusCode.OK);
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendPartialResponseHeadersAsync(HttpStatusCode.OK);
 
-                                partialResponseHeadersSent.TrySetResult(true);
-                                await clientFinished.Task;
-                            }
-                        );
+                            partialResponseHeadersSent.TrySetResult(true);
+                            await clientFinished.Task;
+                        });
 
                         await ValidateClientCancellationAsync(async () =>
                         {
@@ -200,31 +198,29 @@ namespace System.Net.Http.Functional.Tests
                         var responseHeadersSent = new TaskCompletionSource<bool>();
                         var clientFinished = new TaskCompletionSource<bool>();
 
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            var headers = new List<HttpHeaderData>();
+                            headers.Add(
+                                chunkedTransfer
+                                    ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                    : new HttpHeaderData("Content-Length", "20")
+                            );
+                            if (connectionClose)
                             {
-                                var headers = new List<HttpHeaderData>();
-                                headers.Add(
-                                    chunkedTransfer
-                                        ? new HttpHeaderData("Transfer-Encoding", "chunked")
-                                        : new HttpHeaderData("Content-Length", "20")
-                                );
-                                if (connectionClose)
-                                {
-                                    headers.Add(new HttpHeaderData("Connection", "close"));
-                                }
-
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendResponseAsync(
-                                    HttpStatusCode.OK,
-                                    headers: headers,
-                                    content: "123",
-                                    isFinal: false
-                                );
-                                responseHeadersSent.TrySetResult(true);
-                                await clientFinished.Task;
+                                headers.Add(new HttpHeaderData("Connection", "close"));
                             }
-                        );
+
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: headers,
+                                content: "123",
+                                isFinal: false
+                            );
+                            responseHeadersSent.TrySetResult(true);
+                            await clientFinished.Task;
+                        });
 
                         await ValidateClientCancellationAsync(async () =>
                         {
@@ -289,29 +285,27 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var clientFinished = new TaskCompletionSource<bool>();
 
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            var headers = new List<HttpHeaderData>();
+                            headers.Add(
+                                chunkedTransfer
+                                    ? new HttpHeaderData("Transfer-Encoding", "chunked")
+                                    : new HttpHeaderData("Content-Length", "20")
+                            );
+                            if (connectionClose)
                             {
-                                var headers = new List<HttpHeaderData>();
-                                headers.Add(
-                                    chunkedTransfer
-                                        ? new HttpHeaderData("Transfer-Encoding", "chunked")
-                                        : new HttpHeaderData("Content-Length", "20")
-                                );
-                                if (connectionClose)
-                                {
-                                    headers.Add(new HttpHeaderData("Connection", "close"));
-                                }
-
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendResponseAsync(
-                                    HttpStatusCode.OK,
-                                    headers: headers,
-                                    isFinal: false
-                                );
-                                await clientFinished.Task;
+                                headers.Add(new HttpHeaderData("Connection", "close"));
                             }
-                        );
+
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: headers,
+                                isFinal: false
+                            );
+                            await clientFinished.Task;
+                        });
 
                         var req = new HttpRequestMessage(HttpMethod.Get, url)
                         {
@@ -379,36 +373,31 @@ namespace System.Net.Http.Functional.Tests
                         int responseSegments = 4;
                         int contentLength = responseContentSegment.Length * responseSegments;
 
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendResponseAsync(
-                                    HttpStatusCode.OK,
-                                    headers: new HttpHeaderData[]
-                                    {
-                                        new HttpHeaderData(
-                                            "Content-Length",
-                                            contentLength.ToString()
-                                        )
-                                    },
-                                    isFinal: false
-                                );
-                                for (int i = 0; i < responseSegments; i++)
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestDataAsync();
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.OK,
+                                headers: new HttpHeaderData[]
                                 {
-                                    await connection.SendResponseBodyAsync(
-                                        responseContentSegment,
-                                        isFinal: i == responseSegments - 1
-                                    );
-                                    if (i == 0)
-                                    {
-                                        await clientReadSomeBody.Task;
-                                    }
+                                    new HttpHeaderData("Content-Length", contentLength.ToString())
+                                },
+                                isFinal: false
+                            );
+                            for (int i = 0; i < responseSegments; i++)
+                            {
+                                await connection.SendResponseBodyAsync(
+                                    responseContentSegment,
+                                    isFinal: i == responseSegments - 1
+                                );
+                                if (i == 0)
+                                {
+                                    await clientReadSomeBody.Task;
                                 }
-
-                                await clientFinished.Task;
                             }
-                        );
+
+                            await clientFinished.Task;
+                        });
 
                         using (
                             HttpResponseMessage resp = await client.GetAsync(
@@ -487,20 +476,16 @@ namespace System.Net.Http.Functional.Tests
                         var serverAboutToBlock = new TaskCompletionSource<bool>();
                         var blockServerResponse = new TaskCompletionSource<bool>();
 
-                        Task serverTask1 = server.AcceptConnectionAsync(
-                            async connection1 =>
-                            {
-                                await connection1.ReadRequestHeaderAsync();
-                                await connection1.WriteStringAsync(
-                                    $"HTTP/1.1 200 OK\r\nConnection: close\r\nDate: {DateTimeOffset.UtcNow:R}\r\n"
-                                );
-                                serverAboutToBlock.SetResult(true);
-                                await blockServerResponse.Task;
-                                await connection1.WriteStringAsync(
-                                    "Content-Length: 5\r\n\r\nhello"
-                                );
-                            }
-                        );
+                        Task serverTask1 = server.AcceptConnectionAsync(async connection1 =>
+                        {
+                            await connection1.ReadRequestHeaderAsync();
+                            await connection1.WriteStringAsync(
+                                $"HTTP/1.1 200 OK\r\nConnection: close\r\nDate: {DateTimeOffset.UtcNow:R}\r\n"
+                            );
+                            serverAboutToBlock.SetResult(true);
+                            await blockServerResponse.Task;
+                            await connection1.WriteStringAsync("Content-Length: 5\r\n\r\nhello");
+                        });
 
                         Task get1 = client.GetAsync(url);
                         await serverAboutToBlock.Task;

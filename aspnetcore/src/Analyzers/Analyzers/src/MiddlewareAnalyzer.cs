@@ -47,13 +47,11 @@ internal class MiddlewareAnalyzer
             OperationKind.Invocation
         );
 
-        context.RegisterOperationBlockEndAction(
-            context =>
-            {
-                _context.ReportAnalysis(
-                    new MiddlewareAnalysis(configureMethod, middleware.ToImmutable())
-                );
-            }
-        );
+        context.RegisterOperationBlockEndAction(context =>
+        {
+            _context.ReportAnalysis(
+                new MiddlewareAnalysis(configureMethod, middleware.ToImmutable())
+            );
+        });
     }
 }

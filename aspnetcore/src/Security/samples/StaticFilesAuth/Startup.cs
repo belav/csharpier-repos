@@ -35,72 +35,67 @@ public class Startup
     {
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
-        services.AddAuthorization(
-            options =>
-            {
-                var basePath = Path.Combine(HostingEnvironment.ContentRootPath, "PrivateFiles");
-                var usersPath = Path.Combine(basePath, "Users");
+        services.AddAuthorization(options =>
+        {
+            var basePath = Path.Combine(HostingEnvironment.ContentRootPath, "PrivateFiles");
+            var usersPath = Path.Combine(basePath, "Users");
 
-                // When using this policy users are only authorized to access the base directory, the Users directory,
-                // and their own directory under Users.
-                options.AddPolicy(
-                    "files",
-                    builder =>
-                    {
-                        builder
-                            .RequireAuthenticatedUser()
-                            .RequireAssertion(
-                                context =>
+            // When using this policy users are only authorized to access the base directory, the Users directory,
+            // and their own directory under Users.
+            options.AddPolicy(
+                "files",
+                builder =>
+                {
+                    builder
+                        .RequireAuthenticatedUser()
+                        .RequireAssertion(context =>
+                        {
+                            var userName = context.User.Identity.Name;
+                            userName = userName?.Split('@').FirstOrDefault();
+                            if (userName == null)
+                            {
+                                return false;
+                            }
+                            if (context.Resource is Endpoint endpoint)
+                            {
+                                var userPath = Path.Combine(usersPath, userName);
+
+                                var directory = endpoint.Metadata.GetMetadata<DirectoryInfo>();
+                                if (directory != null)
                                 {
-                                    var userName = context.User.Identity.Name;
-                                    userName = userName?.Split('@').FirstOrDefault();
-                                    if (userName == null)
-                                    {
-                                        return false;
-                                    }
-                                    if (context.Resource is Endpoint endpoint)
-                                    {
-                                        var userPath = Path.Combine(usersPath, userName);
-
-                                        var directory =
-                                            endpoint.Metadata.GetMetadata<DirectoryInfo>();
-                                        if (directory != null)
-                                        {
-                                            return string.Equals(
-                                                    directory.FullName,
-                                                    basePath,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                )
-                                                || string.Equals(
-                                                    directory.FullName,
-                                                    usersPath,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                )
-                                                || string.Equals(
-                                                    directory.FullName,
-                                                    userPath,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                )
-                                                || directory.FullName.StartsWith(
-                                                    userPath + Path.DirectorySeparatorChar,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                );
-                                        }
-
-                                        throw new InvalidOperationException(
-                                            $"Missing file system metadata."
+                                    return string.Equals(
+                                            directory.FullName,
+                                            basePath,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                        || string.Equals(
+                                            directory.FullName,
+                                            usersPath,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                        || string.Equals(
+                                            directory.FullName,
+                                            userPath,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                        || directory.FullName.StartsWith(
+                                            userPath + Path.DirectorySeparatorChar,
+                                            StringComparison.OrdinalIgnoreCase
                                         );
-                                    }
-
-                                    throw new InvalidOperationException(
-                                        $"Unknown resource type '{context.Resource.GetType()}'"
-                                    );
                                 }
+
+                                throw new InvalidOperationException(
+                                    $"Missing file system metadata."
+                                );
+                            }
+
+                            throw new InvalidOperationException(
+                                $"Unknown resource type '{context.Resource.GetType()}'"
                             );
-                    }
-                );
-            }
-        );
+                        });
+                }
+            );
+        });
 
         services.AddMvc();
     }
@@ -164,12 +159,10 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 
     private void SetupFileServer(IApplicationBuilder builder, IFileProvider files)

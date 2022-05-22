@@ -193,13 +193,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<Customer>(
-                b =>
-                {
-                    b.HasKey(c => c.Id);
-                    b.Property(c => c.Name);
-                }
-            );
+            modelBuilder.Entity<Customer>(b =>
+            {
+                b.HasKey(c => c.Id);
+                b.Property(c => c.Name);
+            });
 
             return modelBuilder.Model.FinalizeModel();
         }

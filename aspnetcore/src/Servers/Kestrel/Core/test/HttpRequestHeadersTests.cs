@@ -670,22 +670,20 @@ public class HttpRequestHeadersTests
         var cookieNameBytes = Encoding.ASCII.GetBytes(HeaderNames.Cookie);
         var headerValueBytes = Encoding.UTF8.GetBytes(headerValue);
 
-        var headers = new HttpRequestHeaders(
-            encodingSelector: headerName =>
+        var headers = new HttpRequestHeaders(encodingSelector: headerName =>
+        {
+            // For known headers, the HeaderNames value is passed in.
+            if (ReferenceEquals(headerName, HeaderNames.Accept))
             {
-                // For known headers, the HeaderNames value is passed in.
-                if (ReferenceEquals(headerName, HeaderNames.Accept))
-                {
-                    return Encoding.GetEncoding(
-                        "ASCII",
-                        EncoderFallback.ExceptionFallback,
-                        DecoderFallback.ExceptionFallback
-                    );
-                }
-
-                return Encoding.UTF8;
+                return Encoding.GetEncoding(
+                    "ASCII",
+                    EncoderFallback.ExceptionFallback,
+                    DecoderFallback.ExceptionFallback
+                );
             }
-        );
+
+            return Encoding.UTF8;
+        });
 
         Assert.Throws<InvalidOperationException>(
             () => headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false)

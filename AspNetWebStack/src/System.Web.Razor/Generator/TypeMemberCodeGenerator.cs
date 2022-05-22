@@ -11,12 +11,10 @@ namespace System.Web.Razor.Generator
     {
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
-            string generatedCode = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteSnippet(target.Content);
-                }
-            );
+            string generatedCode = context.BuildCodeString(cw =>
+            {
+                cw.WriteSnippet(target.Content);
+            });
 
             int paddingCharCount;
             string paddedCode = CodeGeneratorPaddingHelper.Pad(

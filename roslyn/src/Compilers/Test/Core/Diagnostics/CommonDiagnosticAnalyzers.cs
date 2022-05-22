@@ -65,24 +65,22 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(
-                    compilationContext =>
-                    {
-                        // With location diagnostic.
-                        var location = compilationContext.Compilation.SyntaxTrees
-                            .First()
-                            .GetRoot()
-                            .GetLocation();
-                        compilationContext.ReportDiagnostic(
-                            Diagnostic.Create(Descriptor1, location, s_properties)
-                        );
+                context.RegisterCompilationAction(compilationContext =>
+                {
+                    // With location diagnostic.
+                    var location = compilationContext.Compilation.SyntaxTrees
+                        .First()
+                        .GetRoot()
+                        .GetLocation();
+                    compilationContext.ReportDiagnostic(
+                        Diagnostic.Create(Descriptor1, location, s_properties)
+                    );
 
-                        // No location diagnostic.
-                        compilationContext.ReportDiagnostic(
-                            Diagnostic.Create(Descriptor2, Location.None, s_properties)
-                        );
-                    }
-                );
+                    // No location diagnostic.
+                    compilationContext.ReportDiagnostic(
+                        Diagnostic.Create(Descriptor2, Location.None, s_properties)
+                    );
+                });
             }
 
             private static string GetExpectedPropertiesMapText()
@@ -725,20 +723,18 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(
-                    compilationContext =>
-                    {
-                        // Report enabled diagnostic.
-                        compilationContext.ReportDiagnostic(
-                            Diagnostic.Create(EnabledRule, Location.None)
-                        );
+                context.RegisterCompilationAction(compilationContext =>
+                {
+                    // Report enabled diagnostic.
+                    compilationContext.ReportDiagnostic(
+                        Diagnostic.Create(EnabledRule, Location.None)
+                    );
 
-                        // Try to report disabled diagnostic.
-                        compilationContext.ReportDiagnostic(
-                            Diagnostic.Create(DisabledRule, Location.None)
-                        );
-                    }
-                );
+                    // Try to report disabled diagnostic.
+                    compilationContext.ReportDiagnostic(
+                        Diagnostic.Create(DisabledRule, Location.None)
+                    );
+                });
             }
         }
 
@@ -785,38 +781,32 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCodeBlockAction(
-                    codeBlockContext =>
-                    {
-                        codeBlockContext.ReportDiagnostic(
-                            Diagnostic.Create(
-                                CodeBlockTopLevelRule,
-                                codeBlockContext.OwningSymbol.Locations[0],
-                                codeBlockContext.OwningSymbol.Name
-                            )
-                        );
-                    }
-                );
+                context.RegisterCodeBlockAction(codeBlockContext =>
+                {
+                    codeBlockContext.ReportDiagnostic(
+                        Diagnostic.Create(
+                            CodeBlockTopLevelRule,
+                            codeBlockContext.OwningSymbol.Locations[0],
+                            codeBlockContext.OwningSymbol.Name
+                        )
+                    );
+                });
 
                 if (!_onlyStatelessAction)
                 {
-                    context.RegisterCompilationStartAction(
-                        compilationStartContext =>
+                    context.RegisterCompilationStartAction(compilationStartContext =>
+                    {
+                        compilationStartContext.RegisterCodeBlockAction(codeBlockContext =>
                         {
-                            compilationStartContext.RegisterCodeBlockAction(
-                                codeBlockContext =>
-                                {
-                                    codeBlockContext.ReportDiagnostic(
-                                        Diagnostic.Create(
-                                            CodeBlockPerCompilationRule,
-                                            codeBlockContext.OwningSymbol.Locations[0],
-                                            codeBlockContext.OwningSymbol.Name
-                                        )
-                                    );
-                                }
+                            codeBlockContext.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    CodeBlockPerCompilationRule,
+                                    codeBlockContext.OwningSymbol.Locations[0],
+                                    codeBlockContext.OwningSymbol.Name
+                                )
                             );
-                        }
-                    );
+                        });
+                    });
                 }
             }
         }
@@ -856,23 +846,21 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
-                    codeBlockStartContext =>
-                    {
-                        codeBlockStartContext.RegisterSyntaxNodeAction(
-                            syntaxNodeContext =>
-                            {
-                                syntaxNodeContext.ReportDiagnostic(
-                                    Diagnostic.Create(
-                                        DiagnosticDescriptor,
-                                        syntaxNodeContext.Node.GetLocation()
-                                    )
-                                );
-                            },
-                            ObjectCreationExpressionKind
-                        );
-                    }
-                );
+                context.RegisterCodeBlockStartAction<TLanguageKindEnum>(codeBlockStartContext =>
+                {
+                    codeBlockStartContext.RegisterSyntaxNodeAction(
+                        syntaxNodeContext =>
+                        {
+                            syntaxNodeContext.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    DiagnosticDescriptor,
+                                    syntaxNodeContext.Node.GetLocation()
+                                )
+                            );
+                        },
+                        ObjectCreationExpressionKind
+                    );
+                });
             }
         }
 
@@ -1160,26 +1148,21 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
+                context.RegisterSyntaxTreeAction(c =>
+                {
+                    try
                     {
-                        try
-                        {
-                            ThrownException = null;
-                            c.ReportDiagnostic(
-                                Diagnostic.Create(
-                                    Descriptor,
-                                    SourceLocation.Create(c.Tree, _badSpan)
-                                )
-                            );
-                        }
-                        catch (Exception e)
-                        {
-                            ThrownException = e;
-                            throw;
-                        }
+                        ThrownException = null;
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, SourceLocation.Create(c.Tree, _badSpan))
+                        );
                     }
-                );
+                    catch (Exception e)
+                    {
+                        ThrownException = e;
+                        throw;
+                    }
+                });
             }
         }
 
@@ -1235,38 +1218,30 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationStartAction(
-                    cc =>
-                    {
-                        cc.RegisterSymbolAction(
-                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Symbol),
-                            SymbolKind.NamedType
-                        );
-                        cc.RegisterCodeBlockAction(
-                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CodeBlock)
-                        );
-                        cc.RegisterCompilationEndAction(
-                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CompilationEnd)
-                        );
+                context.RegisterCompilationStartAction(cc =>
+                {
+                    cc.RegisterSymbolAction(
+                        c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Symbol),
+                        SymbolKind.NamedType
+                    );
+                    cc.RegisterCodeBlockAction(
+                        c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CodeBlock)
+                    );
+                    cc.RegisterCompilationEndAction(
+                        c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CompilationEnd)
+                    );
 
-                        cc.RegisterOperationBlockStartAction(
-                            oc =>
-                            {
-                                oc.RegisterOperationAction(
-                                    c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Operation),
-                                    OperationKind.VariableDeclarationGroup
-                                );
-                                oc.RegisterOperationBlockEndAction(
-                                    c =>
-                                        ReportDiagnostic(
-                                            c.ReportDiagnostic,
-                                            ActionKind.OperationBlockEnd
-                                        )
-                                );
-                            }
+                    cc.RegisterOperationBlockStartAction(oc =>
+                    {
+                        oc.RegisterOperationAction(
+                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Operation),
+                            OperationKind.VariableDeclarationGroup
                         );
-                    }
-                );
+                        oc.RegisterOperationBlockEndAction(
+                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.OperationBlockEnd)
+                        );
+                    });
+                });
 
                 context.RegisterSyntaxTreeAction(
                     c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.SyntaxTree)
@@ -1704,47 +1679,43 @@ namespace Microsoft.CodeAnalysis
                 switch (_actionKind)
                 {
                     case ActionKind.OperationBlockEnd:
-                        context.RegisterOperationBlockStartAction(
-                            blockStartContext =>
-                            {
-                                blockStartContext.RegisterOperationBlockEndAction(
-                                    c =>
-                                        ReportDiagnostic(
-                                            c.ReportDiagnostic,
-                                            c.OwningSymbol.Locations[0]
-                                        )
-                                );
-                                CacheAndVerifyControlFlowGraph(
-                                    blockStartContext.OperationBlocks,
-                                    op =>
-                                        (
-                                            blockStartContext.GetControlFlowGraph(op),
-                                            blockStartContext.OwningSymbol
-                                        )
-                                );
-                            }
-                        );
+                        context.RegisterOperationBlockStartAction(blockStartContext =>
+                        {
+                            blockStartContext.RegisterOperationBlockEndAction(
+                                c =>
+                                    ReportDiagnostic(
+                                        c.ReportDiagnostic,
+                                        c.OwningSymbol.Locations[0]
+                                    )
+                            );
+                            CacheAndVerifyControlFlowGraph(
+                                blockStartContext.OperationBlocks,
+                                op =>
+                                    (
+                                        blockStartContext.GetControlFlowGraph(op),
+                                        blockStartContext.OwningSymbol
+                                    )
+                            );
+                        });
 
                         break;
 
                     case ActionKind.OperationBlock:
-                        context.RegisterOperationBlockAction(
-                            blockContext =>
-                            {
-                                ReportDiagnostic(
-                                    blockContext.ReportDiagnostic,
-                                    blockContext.OwningSymbol.Locations[0]
-                                );
-                                CacheAndVerifyControlFlowGraph(
-                                    blockContext.OperationBlocks,
-                                    op =>
-                                        (
-                                            blockContext.GetControlFlowGraph(op),
-                                            blockContext.OwningSymbol
-                                        )
-                                );
-                            }
-                        );
+                        context.RegisterOperationBlockAction(blockContext =>
+                        {
+                            ReportDiagnostic(
+                                blockContext.ReportDiagnostic,
+                                blockContext.OwningSymbol.Locations[0]
+                            );
+                            CacheAndVerifyControlFlowGraph(
+                                blockContext.OperationBlocks,
+                                op =>
+                                    (
+                                        blockContext.GetControlFlowGraph(op),
+                                        blockContext.OwningSymbol
+                                    )
+                            );
+                        });
 
                         break;
 
@@ -1767,33 +1738,31 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case ActionKind.OperationInOperationBlockStart:
-                        context.RegisterOperationBlockStartAction(
-                            blockContext =>
-                            {
-                                CacheAndVerifyControlFlowGraph(
-                                    blockContext.OperationBlocks,
-                                    op =>
-                                        (
-                                            blockContext.GetControlFlowGraph(op),
-                                            blockContext.OwningSymbol
-                                        )
-                                );
-                                blockContext.RegisterOperationAction(
-                                    operationContext =>
-                                    {
-                                        ReportDiagnostic(
-                                            operationContext.ReportDiagnostic,
-                                            operationContext.Operation.Syntax.GetLocation()
-                                        );
-                                        VerifyControlFlowGraph(
-                                            operationContext,
-                                            inBlockAnalysisContext: true
-                                        );
-                                    },
-                                    OperationKind.Literal
-                                );
-                            }
-                        );
+                        context.RegisterOperationBlockStartAction(blockContext =>
+                        {
+                            CacheAndVerifyControlFlowGraph(
+                                blockContext.OperationBlocks,
+                                op =>
+                                    (
+                                        blockContext.GetControlFlowGraph(op),
+                                        blockContext.OwningSymbol
+                                    )
+                            );
+                            blockContext.RegisterOperationAction(
+                                operationContext =>
+                                {
+                                    ReportDiagnostic(
+                                        operationContext.ReportDiagnostic,
+                                        operationContext.Operation.Syntax.GetLocation()
+                                    );
+                                    VerifyControlFlowGraph(
+                                        operationContext,
+                                        inBlockAnalysisContext: true
+                                    );
+                                },
+                                OperationKind.Literal
+                            );
+                        });
                         break;
                 }
             }
@@ -1816,21 +1785,19 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterOperationBlockAction(
-                    c =>
+                context.RegisterOperationBlockAction(c =>
+                {
+                    foreach (var operationRoot in c.OperationBlocks)
                     {
-                        foreach (var operationRoot in c.OperationBlocks)
-                        {
-                            var diagnostic = Diagnostic.Create(
-                                Descriptor,
-                                c.OwningSymbol.Locations[0],
-                                c.OwningSymbol.Name,
-                                operationRoot.Kind
-                            );
-                            c.ReportDiagnostic(diagnostic);
-                        }
+                        var diagnostic = Diagnostic.Create(
+                            Descriptor,
+                            c.OwningSymbol.Locations[0],
+                            c.OwningSymbol.Name,
+                            operationRoot.Kind
+                        );
+                        c.ReportDiagnostic(diagnostic);
                     }
-                );
+                });
             }
         }
 
@@ -1859,27 +1826,25 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_doOperationBlockAnalysis)
                 {
-                    context.RegisterOperationBlockAction(
-                        operationBlockAnalysisContext =>
+                    context.RegisterOperationBlockAction(operationBlockAnalysisContext =>
+                    {
+                        foreach (
+                            var operationBlock in operationBlockAnalysisContext.OperationBlocks
+                        )
                         {
                             foreach (
-                                var operationBlock in operationBlockAnalysisContext.OperationBlocks
+                                var operation in operationBlock
+                                    .DescendantsAndSelf()
+                                    .OfType<IFieldReferenceOperation>()
                             )
                             {
-                                foreach (
-                                    var operation in operationBlock
-                                        .DescendantsAndSelf()
-                                        .OfType<IFieldReferenceOperation>()
-                                )
-                                {
-                                    AnalyzerFieldReferenceOperation(
-                                        operation,
-                                        operationBlockAnalysisContext.ReportDiagnostic
-                                    );
-                                }
+                                AnalyzerFieldReferenceOperation(
+                                    operation,
+                                    operationBlockAnalysisContext.ReportDiagnostic
+                                );
                             }
                         }
-                    );
+                    });
                 }
                 else
                 {
@@ -2013,25 +1978,21 @@ namespace Microsoft.CodeAnalysis
                     SymbolKind.NamedType
                 );
 
-                context.RegisterSyntaxTreeAction(
-                    treeContext =>
-                    {
-                        sortedCallbackTreePaths.Add(treeContext.Tree.FilePath);
-                        ReportTreeDiagnostics(treeContext.Tree, treeContext.ReportDiagnostic);
-                    }
-                );
+                context.RegisterSyntaxTreeAction(treeContext =>
+                {
+                    sortedCallbackTreePaths.Add(treeContext.Tree.FilePath);
+                    ReportTreeDiagnostics(treeContext.Tree, treeContext.ReportDiagnostic);
+                });
 
-                context.RegisterCompilationEndAction(
-                    endContext =>
-                    {
-                        var arg1 = sortedCallbackSymbolNames.Join(",");
-                        var arg2 = sortedCallbackTreePaths.Join(",");
+                context.RegisterCompilationEndAction(endContext =>
+                {
+                    var arg1 = sortedCallbackSymbolNames.Join(",");
+                    var arg2 = sortedCallbackTreePaths.Join(",");
 
-                        // Summary diagnostics about received callbacks.
-                        var diagnostic = Diagnostic.Create(Summary, Location.None, arg1, arg2);
-                        endContext.ReportDiagnostic(diagnostic);
-                    }
-                );
+                    // Summary diagnostics about received callbacks.
+                    var diagnostic = Diagnostic.Create(Summary, Location.None, arg1, arg2);
+                    endContext.ReportDiagnostic(diagnostic);
+                });
             }
 
             private void ReportSymbolDiagnostics(ISymbol symbol, Action<Diagnostic> addDiagnostic)
@@ -2084,32 +2045,28 @@ namespace Microsoft.CodeAnalysis
                 // Analyze but don't report diagnostics on generated code.
                 context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze);
 
-                context.RegisterCompilationStartAction(
-                    compilationStartContext =>
-                    {
-                        var namedTypes = new HashSet<ISymbol>();
-                        compilationStartContext.RegisterSymbolAction(
-                            symbolContext => namedTypes.Add(symbolContext.Symbol),
-                            SymbolKind.NamedType
-                        );
+                context.RegisterCompilationStartAction(compilationStartContext =>
+                {
+                    var namedTypes = new HashSet<ISymbol>();
+                    compilationStartContext.RegisterSymbolAction(
+                        symbolContext => namedTypes.Add(symbolContext.Symbol),
+                        SymbolKind.NamedType
+                    );
 
-                        compilationStartContext.RegisterCompilationEndAction(
-                            compilationEndContext =>
-                            {
-                                foreach (var namedType in namedTypes)
-                                {
-                                    var diagnostic = Diagnostic.Create(
-                                        Rule,
-                                        namedType.Locations[0],
-                                        namedType.Name,
-                                        namedTypes.Count
-                                    );
-                                    compilationEndContext.ReportDiagnostic(diagnostic);
-                                }
-                            }
-                        );
-                    }
-                );
+                    compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
+                    {
+                        foreach (var namedType in namedTypes)
+                        {
+                            var diagnostic = Diagnostic.Create(
+                                Rule,
+                                namedType.Locations[0],
+                                namedType.Name,
+                                namedTypes.Count
+                            );
+                            compilationEndContext.ReportDiagnostic(diagnostic);
+                        }
+                    });
+                });
             }
         }
 
@@ -2251,57 +2208,51 @@ namespace Microsoft.CodeAnalysis
                     SymbolKind.NamedType
                 );
 
-                context.RegisterSyntaxTreeAction(
-                    treeContext =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                {
+                    context.TryGetValue(
+                        treeContext.Tree,
+                        _treeValueProvider,
+                        out var isGeneratedCode
+                    );
+                    var descriptor = isGeneratedCode
+                        ? GeneratedCodeDescriptor
+                        : NonGeneratedCodeDescriptor;
+
+                    var diagnostic = Diagnostic.Create(
+                        descriptor,
+                        Location.None,
+                        treeContext.Tree.FilePath
+                    );
+                    treeContext.ReportDiagnostic(diagnostic);
+
+                    context.TryGetValue(
+                        treeContext.Tree.GetText(),
+                        _textValueProvider,
+                        out var length
+                    );
+                    diagnostic = Diagnostic.Create(
+                        UniqueTextFileDescriptor,
+                        Location.None,
+                        treeContext.Tree.FilePath
+                    );
+                    treeContext.ReportDiagnostic(diagnostic);
+                });
+
+                context.RegisterCompilationEndAction(endContext =>
+                {
+                    if (_treeCallbackSet.Count != endContext.Compilation.SyntaxTrees.Count())
                     {
-                        context.TryGetValue(
-                            treeContext.Tree,
-                            _treeValueProvider,
-                            out var isGeneratedCode
-                        );
-                        var descriptor = isGeneratedCode
-                            ? GeneratedCodeDescriptor
-                            : NonGeneratedCodeDescriptor;
-
-                        var diagnostic = Diagnostic.Create(
-                            descriptor,
-                            Location.None,
-                            treeContext.Tree.FilePath
-                        );
-                        treeContext.ReportDiagnostic(diagnostic);
-
-                        context.TryGetValue(
-                            treeContext.Tree.GetText(),
-                            _textValueProvider,
-                            out var length
-                        );
-                        diagnostic = Diagnostic.Create(
-                            UniqueTextFileDescriptor,
-                            Location.None,
-                            treeContext.Tree.FilePath
-                        );
-                        treeContext.ReportDiagnostic(diagnostic);
+                        throw new Exception("Expected driver to make a callback for every tree");
                     }
-                );
 
-                context.RegisterCompilationEndAction(
-                    endContext =>
-                    {
-                        if (_treeCallbackSet.Count != endContext.Compilation.SyntaxTrees.Count())
-                        {
-                            throw new Exception(
-                                "Expected driver to make a callback for every tree"
-                            );
-                        }
-
-                        var diagnostic = Diagnostic.Create(
-                            NumberOfUniqueTextFileDescriptor,
-                            Location.None,
-                            _textCallbackSet.Count
-                        );
-                        endContext.ReportDiagnostic(diagnostic);
-                    }
-                );
+                    var diagnostic = Diagnostic.Create(
+                        NumberOfUniqueTextFileDescriptor,
+                        Location.None,
+                        _textCallbackSet.Count
+                    );
+                    endContext.ReportDiagnostic(diagnostic);
+                });
             }
         }
 
@@ -2476,36 +2427,28 @@ namespace Microsoft.CodeAnalysis
                 {
                     context.RegisterSymbolStartAction(onSymbolStart, _symbolKind);
 
-                    context.RegisterCompilationStartAction(
-                        compilationStartContext =>
+                    context.RegisterCompilationStartAction(compilationStartContext =>
+                    {
+                        compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
                         {
-                            compilationStartContext.RegisterCompilationEndAction(
-                                compilationEndContext =>
-                                {
-                                    reportDiagnosticsAtCompilationEnd(compilationEndContext);
-                                }
-                            );
-                        }
-                    );
+                            reportDiagnosticsAtCompilationEnd(compilationEndContext);
+                        });
+                    });
                 }
                 else
                 {
-                    context.RegisterCompilationStartAction(
-                        compilationStartContext =>
-                        {
-                            compilationStartContext.RegisterSymbolStartAction(
-                                onSymbolStart,
-                                _symbolKind
-                            );
+                    context.RegisterCompilationStartAction(compilationStartContext =>
+                    {
+                        compilationStartContext.RegisterSymbolStartAction(
+                            onSymbolStart,
+                            _symbolKind
+                        );
 
-                            compilationStartContext.RegisterCompilationEndAction(
-                                compilationEndContext =>
-                                {
-                                    reportDiagnosticsAtCompilationEnd(compilationEndContext);
-                                }
-                            );
-                        }
-                    );
+                        compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
+                        {
+                            reportDiagnosticsAtCompilationEnd(compilationEndContext);
+                        });
+                    });
                 }
 
                 return;
@@ -2528,15 +2471,10 @@ namespace Microsoft.CodeAnalysis
                         );
                     }
 
-                    symbolStartContext.RegisterSymbolEndAction(
-                        symbolEndContext =>
-                        {
-                            performSymbolEndActionVerification(
-                                symbolEndContext,
-                                symbolStartContext
-                            );
-                        }
-                    );
+                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                    {
+                        performSymbolEndActionVerification(symbolEndContext, symbolStartContext);
+                    });
                 }
 
                 void reportDiagnosticsAtCompilationEnd(
@@ -3054,16 +2992,14 @@ namespace Microsoft.CodeAnalysis
                         context.RegisterSymbolStartAction(
                             symbolStartContext =>
                             {
-                                symbolStartContext.RegisterSymbolEndAction(
-                                    symbolEndContext =>
-                                    {
-                                        _symbolCallbacks.Add(symbolEndContext.Symbol);
-                                        ReportDiagnostic(
-                                            symbolEndContext.Symbol,
-                                            symbolEndContext.ReportDiagnostic
-                                        );
-                                    }
-                                );
+                                symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                                {
+                                    _symbolCallbacks.Add(symbolEndContext.Symbol);
+                                    ReportDiagnostic(
+                                        symbolEndContext.Symbol,
+                                        symbolEndContext.ReportDiagnostic
+                                    );
+                                });
                             },
                             SymbolKind.NamedType
                         );
@@ -3071,29 +3007,27 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case AnalysisKind.CompilationStartEnd:
-                        context.RegisterCompilationStartAction(
-                            compilationStartContext =>
-                            {
-                                compilationStartContext.RegisterSymbolAction(
-                                    c =>
-                                    {
-                                        _symbolCallbacks.Add(c.Symbol);
-                                    },
-                                    SymbolKind.NamedType
-                                );
+                        context.RegisterCompilationStartAction(compilationStartContext =>
+                        {
+                            compilationStartContext.RegisterSymbolAction(
+                                c =>
+                                {
+                                    _symbolCallbacks.Add(c.Symbol);
+                                },
+                                SymbolKind.NamedType
+                            );
 
-                                compilationStartContext.RegisterCompilationEndAction(
-                                    compilationEndContext =>
-                                        compilationEndContext.ReportDiagnostic(
-                                            Diagnostic.Create(
-                                                _rule,
-                                                Location.None,
-                                                GetSortedSymbolCallbacksString()
-                                            )
+                            compilationStartContext.RegisterCompilationEndAction(
+                                compilationEndContext =>
+                                    compilationEndContext.ReportDiagnostic(
+                                        Diagnostic.Create(
+                                            _rule,
+                                            Location.None,
+                                            GetSortedSymbolCallbacksString()
                                         )
-                                );
-                            }
-                        );
+                                    )
+                            );
+                        });
 
                         break;
                 }
@@ -3239,23 +3173,19 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_syntaxTreeAction)
                 {
-                    context.RegisterSyntaxTreeAction(
-                        context =>
+                    context.RegisterSyntaxTreeAction(context =>
+                    {
+                        var fields = context.Tree
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
+                        foreach (var variable in fields.SelectMany(f => f.Declaration.Variables))
                         {
-                            var fields = context.Tree
-                                .GetRoot()
-                                .DescendantNodes()
-                                .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
-                            foreach (
-                                var variable in fields.SelectMany(f => f.Declaration.Variables)
-                            )
-                            {
-                                context.ReportDiagnostic(
-                                    Diagnostic.Create(Descriptor, variable.Identifier.GetLocation())
-                                );
-                            }
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(Descriptor, variable.Identifier.GetLocation())
+                            );
                         }
-                    );
+                    });
                 }
                 else
                 {
@@ -3352,27 +3282,25 @@ namespace Microsoft.CodeAnalysis
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    context =>
+                context.RegisterSyntaxTreeAction(context =>
+                {
+                    // Mimic cancellation by throwing an OperationCanceledException in first callback.
+                    if (!_cancellationTokenSource.IsCancellationRequested)
                     {
-                        // Mimic cancellation by throwing an OperationCanceledException in first callback.
-                        if (!_cancellationTokenSource.IsCancellationRequested)
+                        _cancellationTokenSource.Cancel();
+
+                        while (true)
                         {
-                            _cancellationTokenSource.Cancel();
-
-                            while (true)
-                            {
-                                context.CancellationToken.ThrowIfCancellationRequested();
-                            }
-
-                            throw ExceptionUtilities.Unreachable;
+                            context.CancellationToken.ThrowIfCancellationRequested();
                         }
 
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(s_descriptor, context.Tree.GetRoot().GetLocation())
-                        );
+                        throw ExceptionUtilities.Unreachable;
                     }
-                );
+
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(s_descriptor, context.Tree.GetRoot().GetLocation())
+                    );
+                });
             }
         }
     }

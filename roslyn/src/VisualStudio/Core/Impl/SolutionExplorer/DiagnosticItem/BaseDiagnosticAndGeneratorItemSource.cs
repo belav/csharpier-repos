@@ -137,24 +137,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     )
                     .GroupBy(d => d.Id)
                     .OrderBy(g => g.Key, StringComparer.CurrentCulture)
-                    .Select(
-                        g =>
-                        {
-                            var selectedDiagnostic = g.OrderBy(d => d, s_comparer).First();
-                            var effectiveSeverity = selectedDiagnostic.GetEffectiveSeverity(
-                                options,
-                                analyzerConfigOptions
-                            );
-                            return new DiagnosticItem(
-                                projectId,
-                                AnalyzerReference,
-                                selectedDiagnostic,
-                                effectiveSeverity,
-                                language,
-                                CommandHandler
-                            );
-                        }
-                    )
+                    .Select(g =>
+                    {
+                        var selectedDiagnostic = g.OrderBy(d => d, s_comparer).First();
+                        var effectiveSeverity = selectedDiagnostic.GetEffectiveSeverity(
+                            options,
+                            analyzerConfigOptions
+                        );
+                        return new DiagnosticItem(
+                            projectId,
+                            AnalyzerReference,
+                            selectedDiagnostic,
+                            effectiveSeverity,
+                            language,
+                            CommandHandler
+                        );
+                    })
             );
 
             collection.AddRange(

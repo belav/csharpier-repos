@@ -24,12 +24,10 @@ class Gen<T>
 
         for (int i = 0; i < Test_EnterExit11.nThreads; i++)
         {
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.Consumer(staticLock);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.Consumer(staticLock);
+            });
         }
 
         for (int i = 0; i < 6; i++)

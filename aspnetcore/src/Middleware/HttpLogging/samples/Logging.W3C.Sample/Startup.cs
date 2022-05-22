@@ -15,13 +15,11 @@ public class Startup
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddW3CLogging(
-            logging =>
-            {
-                // Log all W3C fields
-                logging.LoggingFields = W3CLoggingFields.All;
-            }
-        );
+        services.AddW3CLogging(logging =>
+        {
+            // Log all W3C fields
+            logging.LoggingFields = W3CLoggingFields.All;
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,18 +27,16 @@ public class Startup
     {
         app.UseW3CLogging();
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.Map(
-                    "/",
-                    async context =>
-                    {
-                        context.Response.ContentType = "text/plain";
-                        await context.Response.WriteAsync("Hello World!");
-                    }
-                );
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.Map(
+                "/",
+                async context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync("Hello World!");
+                }
+            );
+        });
     }
 }

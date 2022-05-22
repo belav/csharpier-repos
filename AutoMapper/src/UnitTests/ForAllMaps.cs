@@ -54,17 +54,15 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<Source1, Destination1>();
-                    cfg.CreateMap<Source2, Destination2>();
-                    cfg.ForAllMaps(
-                        (tm, map) => map.ForMember("Number", o => o.MapFrom<MinusOneResolver>())
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<Source1, Destination1>();
+                cfg.CreateMap<Source2, Destination2>();
+                cfg.ForAllMaps(
+                    (tm, map) => map.ForMember("Number", o => o.MapFrom<MinusOneResolver>())
+                );
+            });
 
         protected override void Because_of()
         {
@@ -99,14 +97,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ForAllMaps((_, c) => c.ForCtorParam("second", o => o.MapFrom(s => 2)));
-                    cfg.CreateMap<Source, Destination>()
-                        .ForCtorParam("first", o => o.MapFrom(s => 1));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ForAllMaps((_, c) => c.ForCtorParam("second", o => o.MapFrom(s => 2)));
+                cfg.CreateMap<Source, Destination>().ForCtorParam("first", o => o.MapFrom(s => 1));
+            });
 
         [Fact]
         public void Should_map_ok()

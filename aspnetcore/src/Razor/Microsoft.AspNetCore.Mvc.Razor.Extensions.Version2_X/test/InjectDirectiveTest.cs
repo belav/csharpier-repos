@@ -169,14 +169,12 @@ public class InjectDirectiveTest
     private RazorEngine CreateEngine()
     {
         return RazorProjectEngine
-            .Create(
-                b =>
-                {
-                    // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
-                    b.AddDirective(InjectDirective.Directive);
-                    b.AddDirective(ModelDirective.Directive);
-                }
-            )
+            .Create(b =>
+            {
+                // Notice we're not registering the InjectDirective.Pass here so we can run it on demand.
+                b.AddDirective(InjectDirective.Directive);
+                b.AddDirective(ModelDirective.Directive);
+            })
             .Engine;
     }
 

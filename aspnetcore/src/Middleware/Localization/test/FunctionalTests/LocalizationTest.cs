@@ -96,12 +96,10 @@ public class LocalizationTest
     private async Task RunTest(Type startupType, string culture, string expected)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer().UseStartup(startupType);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer().UseStartup(startupType);
+            })
             .Build();
 
         await host.StartAsync();

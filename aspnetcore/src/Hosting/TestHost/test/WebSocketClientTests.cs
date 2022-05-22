@@ -27,23 +27,19 @@ public class WebSocketClientTests
 
         using (
             var testServer = new TestServer(
-                new WebHostBuilder().Configure(
-                    app =>
+                new WebHostBuilder().Configure(app =>
+                {
+                    app.Run(ctx =>
                     {
-                        app.Run(
-                            ctx =>
-                            {
-                                if (ctx.Request.Path.StartsWithSegments("/connect"))
-                                {
-                                    capturedScheme = ctx.Request.Scheme;
-                                    capturedHost = ctx.Request.Host.Value;
-                                    capturedPath = ctx.Request.Path;
-                                }
-                                return Task.FromResult(0);
-                            }
-                        );
-                    }
-                )
+                        if (ctx.Request.Path.StartsWithSegments("/connect"))
+                        {
+                            capturedScheme = ctx.Request.Scheme;
+                            capturedHost = ctx.Request.Host.Value;
+                            capturedPath = ctx.Request.Path;
+                        }
+                        return Task.FromResult(0);
+                    });
+                })
             )
         )
         {
@@ -69,42 +65,33 @@ public class WebSocketClientTests
     {
         using (
             var testServer = new TestServer(
-                new WebHostBuilder().Configure(
-                    app =>
+                new WebHostBuilder().Configure(app =>
+                {
+                    app.UseWebSockets();
+                    app.Run(async ctx =>
                     {
-                        app.UseWebSockets();
-                        app.Run(
-                            async ctx =>
+                        if (ctx.Request.Path.StartsWithSegments("/connect"))
+                        {
+                            if (ctx.WebSockets.IsWebSocketRequest)
                             {
-                                if (ctx.Request.Path.StartsWithSegments("/connect"))
-                                {
-                                    if (ctx.WebSockets.IsWebSocketRequest)
-                                    {
-                                        using var websocket =
-                                            await ctx.WebSockets.AcceptWebSocketAsync();
-                                        var buffer = new byte[1000];
-                                        var res = await websocket.ReceiveAsync(buffer, default);
-                                        await websocket.SendAsync(
-                                            buffer.AsMemory(0, res.Count),
-                                            System.Net.WebSockets.WebSocketMessageType.Binary,
-                                            true,
-                                            default
-                                        );
-                                        await websocket.CloseAsync(
-                                            System
-                                                .Net
-                                                .WebSockets
-                                                .WebSocketCloseStatus
-                                                .NormalClosure,
-                                            null,
-                                            default
-                                        );
-                                    }
-                                }
+                                using var websocket = await ctx.WebSockets.AcceptWebSocketAsync();
+                                var buffer = new byte[1000];
+                                var res = await websocket.ReceiveAsync(buffer, default);
+                                await websocket.SendAsync(
+                                    buffer.AsMemory(0, res.Count),
+                                    System.Net.WebSockets.WebSocketMessageType.Binary,
+                                    true,
+                                    default
+                                );
+                                await websocket.CloseAsync(
+                                    System.Net.WebSockets.WebSocketCloseStatus.NormalClosure,
+                                    null,
+                                    default
+                                );
                             }
-                        );
-                    }
-                )
+                        }
+                    });
+                })
             )
         )
         {
@@ -138,26 +125,22 @@ public class WebSocketClientTests
     {
         using (
             var testServer = new TestServer(
-                new WebHostBuilder().Configure(
-                    app =>
+                new WebHostBuilder().Configure(app =>
+                {
+                    app.Run(async c =>
                     {
-                        app.Run(
-                            async c =>
-                            {
-                                var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
-                                Assert.NotNull(upgradeFeature);
-                                Assert.False(upgradeFeature.IsUpgradableRequest);
-                                await Assert.ThrowsAsync<NotSupportedException>(
-                                    () => upgradeFeature.UpgradeAsync()
-                                );
-
-                                var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
-                                Assert.NotNull(webSocketFeature);
-                                Assert.True(webSocketFeature.IsWebSocketRequest);
-                            }
+                        var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
+                        Assert.NotNull(upgradeFeature);
+                        Assert.False(upgradeFeature.IsUpgradableRequest);
+                        await Assert.ThrowsAsync<NotSupportedException>(
+                            () => upgradeFeature.UpgradeAsync()
                         );
-                    }
-                )
+
+                        var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
+                        Assert.NotNull(webSocketFeature);
+                        Assert.True(webSocketFeature.IsWebSocketRequest);
+                    });
+                })
             )
         )
         {

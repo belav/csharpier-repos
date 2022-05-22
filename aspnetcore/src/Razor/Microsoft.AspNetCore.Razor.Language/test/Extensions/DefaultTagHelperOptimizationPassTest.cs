@@ -99,12 +99,10 @@ public class DefaultTagHelperOptimizationPassTest
     private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
     {
         return RazorProjectEngine
-            .Create(
-                b =>
-                {
-                    b.Features.Add(new TestTagHelperFeature(tagHelpers));
-                }
-            )
+            .Create(b =>
+            {
+                b.Features.Add(new TestTagHelperFeature(tagHelpers));
+            })
             .Engine;
     }
 

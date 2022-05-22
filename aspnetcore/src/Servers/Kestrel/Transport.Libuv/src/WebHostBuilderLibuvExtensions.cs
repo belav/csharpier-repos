@@ -33,12 +33,10 @@ namespace Microsoft.AspNetCore.Hosting
         )] // Remove after .NET 6.
         public static IWebHostBuilder UseLibuv(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IConnectionListenerFactory, LibuvTransportFactory>();
-                }
-            );
+            return hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton<IConnectionListenerFactory, LibuvTransportFactory>();
+            });
         }
 
         /// <summary>
@@ -64,12 +62,10 @@ namespace Microsoft.AspNetCore.Hosting
         {
             return hostBuilder
                 .UseLibuv()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                );
+                .ConfigureServices(services =>
+                {
+                    services.Configure(configureOptions);
+                });
         }
     }
 }

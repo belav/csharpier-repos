@@ -552,21 +552,19 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Category>(
-                    builder =>
-                    {
-                        builder.OwnsOne(
-                            x => x.Picture,
-                            fileSource =>
-                            {
-                                fileSource
-                                    .HasOne<FileMetadata>()
-                                    .WithOne()
-                                    .HasForeignKey<FileSource>(x => x.FileId);
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Category>(builder =>
+                {
+                    builder.OwnsOne(
+                        x => x.Picture,
+                        fileSource =>
+                        {
+                            fileSource
+                                .HasOne<FileMetadata>()
+                                .WithOne()
+                                .HasForeignKey<FileSource>(x => x.FileId);
+                        }
+                    );
+                });
             }
         }
 
@@ -1140,67 +1138,57 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Level>(
-                    eb =>
-                    {
-                        eb.Property(g => g.Id).ValueGeneratedNever();
+                modelBuilder.Entity<Level>(eb =>
+                {
+                    eb.Property(g => g.Id).ValueGeneratedNever();
 
-                        eb.HasKey(l => new { l.GameId, l.Id });
-                    }
-                );
+                    eb.HasKey(l => new { l.GameId, l.Id });
+                });
 
-                modelBuilder.Entity<Actor>(
-                    eb =>
-                    {
-                        eb.Property(g => g.Id).ValueGeneratedNever();
+                modelBuilder.Entity<Actor>(eb =>
+                {
+                    eb.Property(g => g.Id).ValueGeneratedNever();
 
-                        eb.HasKey(a => new { a.GameId, a.Id });
+                    eb.HasKey(a => new { a.GameId, a.Id });
 
-                        eb.HasOne(a => a.Level)
-                            .WithMany(l => l.Actors)
-                            .HasForeignKey(nameof(Actor.GameId), "LevelId")
-                            .IsRequired();
+                    eb.HasOne(a => a.Level)
+                        .WithMany(l => l.Actors)
+                        .HasForeignKey(nameof(Actor.GameId), "LevelId")
+                        .IsRequired();
 
-                        eb.HasMany(a => a.Items)
-                            .WithOne(i => i.Actor)
-                            .HasForeignKey(nameof(Item.GameId), "ActorId");
-                    }
-                );
+                    eb.HasMany(a => a.Items)
+                        .WithOne(i => i.Actor)
+                        .HasForeignKey(nameof(Item.GameId), "ActorId");
+                });
 
-                modelBuilder.Entity<PlayerCharacter>(
-                    eb =>
-                    {
-                        eb.HasOne(p => p.CurrentWeapon)
-                            .WithOne()
-                            .HasForeignKey<PlayerCharacter>(
-                                nameof(PlayerCharacter.GameId),
-                                "CurrentWeaponId"
-                            );
-                    }
-                );
+                modelBuilder.Entity<PlayerCharacter>(eb =>
+                {
+                    eb.HasOne(p => p.CurrentWeapon)
+                        .WithOne()
+                        .HasForeignKey<PlayerCharacter>(
+                            nameof(PlayerCharacter.GameId),
+                            "CurrentWeaponId"
+                        );
+                });
 
-                modelBuilder.Entity<Item>(
-                    eb =>
-                    {
-                        eb.Property(g => g.Id).ValueGeneratedNever();
+                modelBuilder.Entity<Item>(eb =>
+                {
+                    eb.Property(g => g.Id).ValueGeneratedNever();
 
-                        eb.HasKey(l => new { l.GameId, l.Id });
-                    }
-                );
+                    eb.HasKey(l => new { l.GameId, l.Id });
+                });
 
                 modelBuilder.Entity<Container>();
 
-                modelBuilder.Entity<Game>(
-                    eb =>
-                    {
-                        eb.Property(g => g.Id).ValueGeneratedOnAdd();
-                        eb.HasMany(g => g.Levels).WithOne(l => l.Game).HasForeignKey(l => l.GameId);
-                        eb.HasMany(g => g.Actors)
-                            .WithOne(a => a.Game)
-                            .HasForeignKey(a => a.GameId)
-                            .OnDelete(DeleteBehavior.Restrict);
-                    }
-                );
+                modelBuilder.Entity<Game>(eb =>
+                {
+                    eb.Property(g => g.Id).ValueGeneratedOnAdd();
+                    eb.HasMany(g => g.Levels).WithOne(l => l.Game).HasForeignKey(l => l.GameId);
+                    eb.HasMany(g => g.Actors)
+                        .WithOne(a => a.Game)
+                        .HasForeignKey(a => a.GameId)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
             }
         }
 
@@ -1422,13 +1410,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.HasKey(c => c.CustomerID);
-                        b.ToTable("Customers");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.HasKey(c => c.CustomerID);
+                    b.ToTable("Customers");
+                });
             }
         }
 

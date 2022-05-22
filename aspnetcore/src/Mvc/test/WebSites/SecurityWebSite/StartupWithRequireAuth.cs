@@ -20,13 +20,11 @@ public class StartupWithRequireAuth
         services.AddAntiforgery();
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(
-                options =>
-                {
-                    options.LoginPath = "/Home/Login";
-                    options.LogoutPath = "/Home/Logout";
-                }
-            )
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Home/Login";
+                options.LogoutPath = "/Home/Logout";
+            })
             .AddCookie("Cookie2");
     }
 
@@ -38,12 +36,10 @@ public class StartupWithRequireAuth
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapRazorPages().RequireAuthorization();
-                endpoints.MapDefaultControllerRoute().RequireAuthorization();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages().RequireAuthorization();
+            endpoints.MapDefaultControllerRoute().RequireAuthorization();
+        });
     }
 }

@@ -40,13 +40,11 @@ public static class GenericHostBuilderExtensions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        return builder.ConfigureWebHost(
-            webHostBuilder =>
-            {
-                WebHost.ConfigureWebDefaults(webHostBuilder);
+        return builder.ConfigureWebHost(webHostBuilder =>
+        {
+            WebHost.ConfigureWebDefaults(webHostBuilder);
 
-                configure(webHostBuilder);
-            }
-        );
+            configure(webHostBuilder);
+        });
     }
 }

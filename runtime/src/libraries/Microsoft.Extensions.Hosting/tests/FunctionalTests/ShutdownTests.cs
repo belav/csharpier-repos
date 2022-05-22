@@ -44,13 +44,11 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
 
         private async Task ExecuteShutdownTest(string testName, string shutdownMechanic)
         {
-            var xunitTestLoggerFactory = TestLoggerBuilder.Create(
-                builder =>
-                {
-                    builder.SetMinimumLevel(LogLevel.Trace);
-                    builder.AddXunit(_output);
-                }
-            );
+            var xunitTestLoggerFactory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Trace);
+                builder.AddXunit(_output);
+            });
 
             // TODO refactor deployers to not depend on source code
             // see https://github.com/dotnet/extensions/issues/1697 and https://github.com/dotnet/aspnetcore/issues/10268

@@ -1322,28 +1322,26 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     .WithOne()
                     .HasForeignKey<Blog>(e => e.TopPostId);
 
-                modelBuilder.Entity<Order>(
-                    pb =>
-                    {
-                        pb.Property(p => p.Id).ValueGeneratedNever();
-                        pb.OwnsOne(
-                            p => p.OrderDetails,
-                            cb =>
-                            {
-                                cb.Property<int?>("OrderId");
-                                cb.WithOwner(c => c.Order).HasForeignKey("OrderId");
+                modelBuilder.Entity<Order>(pb =>
+                {
+                    pb.Property(p => p.Id).ValueGeneratedNever();
+                    pb.OwnsOne(
+                        p => p.OrderDetails,
+                        cb =>
+                        {
+                            cb.Property<int?>("OrderId");
+                            cb.WithOwner(c => c.Order).HasForeignKey("OrderId");
 
-                                cb.OwnsOne(c => c.BillingAddress)
-                                    .WithOwner(c => c.OrderDetails)
-                                    .HasForeignKey("OrderDetailsId");
+                            cb.OwnsOne(c => c.BillingAddress)
+                                .WithOwner(c => c.OrderDetails)
+                                .HasForeignKey("OrderDetailsId");
 
-                                cb.OwnsOne(c => c.ShippingAddress)
-                                    .WithOwner(c => c.OrderDetails)
-                                    .HasForeignKey("OrderDetailsId");
-                            }
-                        );
-                    }
-                );
+                            cb.OwnsOne(c => c.ShippingAddress)
+                                .WithOwner(c => c.OrderDetails)
+                                .HasForeignKey("OrderDetailsId");
+                        }
+                    );
+                });
             }
 
             protected internal override void OnConfiguring(

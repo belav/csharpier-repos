@@ -23,12 +23,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ServiceCollection().AddLogging(
-                        builder =>
-                        {
-                            builder.AddConsole(null);
-                        }
-                    )
+                    new ServiceCollection().AddLogging(builder =>
+                    {
+                        builder.AddConsole(null);
+                    })
             );
         }
 
@@ -37,12 +35,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ServiceCollection().AddLogging(
-                        builder =>
-                        {
-                            builder.AddSimpleConsole(null);
-                        }
-                    )
+                    new ServiceCollection().AddLogging(builder =>
+                    {
+                        builder.AddSimpleConsole(null);
+                    })
             );
         }
 
@@ -51,12 +47,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ServiceCollection().AddLogging(
-                        builder =>
-                        {
-                            builder.AddSystemdConsole(null);
-                        }
-                    )
+                    new ServiceCollection().AddLogging(builder =>
+                    {
+                        builder.AddSystemdConsole(null);
+                    })
             );
         }
 
@@ -65,12 +59,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ServiceCollection().AddLogging(
-                        builder =>
-                        {
-                            builder.AddJsonConsole(null);
-                        }
-                    )
+                    new ServiceCollection().AddLogging(builder =>
+                    {
+                        builder.AddJsonConsole(null);
+                    })
             );
         }
 
@@ -79,12 +71,10 @@ namespace Microsoft.Extensions.Logging.Test
         {
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ServiceCollection().AddLogging(
-                        builder =>
-                        {
-                            builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
-                        }
-                    )
+                    new ServiceCollection().AddLogging(builder =>
+                    {
+                        builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
+                    })
             );
         }
 
@@ -137,18 +127,14 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddConsoleFormatter<CustomFormatter, CustomOptions>(
-                                fOptions =>
-                                {
-                                    fOptions.CustomLabel = "random";
-                                }
-                            )
-                            .AddConsole(
-                                o =>
-                                {
-                                    o.FormatterName = "custom";
-                                }
-                            )
+                            .AddConsoleFormatter<CustomFormatter, CustomOptions>(fOptions =>
+                            {
+                                fOptions.CustomLabel = "random";
+                            })
+                            .AddConsole(o =>
+                            {
+                                o.FormatterName = "custom";
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -273,14 +259,12 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddSimpleConsole(
-                                o =>
-                                {
-                                    o.TimestampFormat = "HH:mm:ss ";
-                                    o.IncludeScopes = false;
-                                    o.UseUtcTimestamp = true;
-                                }
-                            )
+                            .AddSimpleConsole(o =>
+                            {
+                                o.TimestampFormat = "HH:mm:ss ";
+                                o.IncludeScopes = false;
+                                o.UseUtcTimestamp = true;
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -359,14 +343,12 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddSystemdConsole(
-                                o =>
-                                {
-                                    o.TimestampFormat = "HH:mm:ss ";
-                                    o.IncludeScopes = false;
-                                    o.UseUtcTimestamp = false;
-                                }
-                            )
+                            .AddSystemdConsole(o =>
+                            {
+                                o.TimestampFormat = "HH:mm:ss ";
+                                o.IncludeScopes = false;
+                                o.UseUtcTimestamp = false;
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -450,16 +432,14 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddJsonConsole(
-                                o =>
+                            .AddJsonConsole(o =>
+                            {
+                                o.JsonWriterOptions = new JsonWriterOptions()
                                 {
-                                    o.JsonWriterOptions = new JsonWriterOptions()
-                                    {
-                                        Indented = false,
-                                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                                    };
-                                }
-                            )
+                                    Indented = false,
+                                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                };
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -527,14 +507,12 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+                            .AddConsole(o =>
+                            {
 #pragma warning disable CS0618
-                                    o.IncludeScopes = false;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -576,15 +554,13 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+                            .AddConsole(o =>
+                            {
 #pragma warning disable CS0618
-                                    o.DisableColors = true;
-                                    o.IncludeScopes = false;
+                                o.DisableColors = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -643,15 +619,13 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+                            .AddConsole(o =>
+                            {
 #pragma warning disable CS0618
-                                    o.DisableColors = true;
-                                    o.IncludeScopes = false;
+                                o.DisableColors = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();
@@ -706,15 +680,13 @@ namespace Microsoft.Extensions.Logging.Test
                     builder =>
                         builder
                             .AddConfiguration(configuration)
-                            .AddConsole(
-                                o =>
-                                {
+                            .AddConsole(o =>
+                            {
 #pragma warning disable CS0618
-                                    o.UseUtcTimestamp = true;
-                                    o.IncludeScopes = false;
+                                o.UseUtcTimestamp = true;
+                                o.IncludeScopes = false;
 #pragma warning restore CS0618
-                                }
-                            )
+                            })
                 )
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerProvider>();

@@ -36,18 +36,16 @@ public class Startup
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddScheme<AuthenticationSchemeOptions, ApiAuthHandler>("Api", o => { })
-            .AddCookie(
-                options =>
+            .AddCookie(options =>
+            {
+                // Foward any requests that start with /api to that scheme
+                options.ForwardDefaultSelector = ctx =>
                 {
-                    // Foward any requests that start with /api to that scheme
-                    options.ForwardDefaultSelector = ctx =>
-                    {
-                        return ctx.Request.Path.StartsWithSegments("/api") ? "Api" : null;
-                    };
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/login";
-                }
-            );
+                    return ctx.Request.Path.StartsWithSegments("/api") ? "Api" : null;
+                };
+                options.AccessDeniedPath = "/account/denied";
+                options.LoginPath = "/account/login";
+            });
     }
 
     public class ApiAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
@@ -89,18 +87,16 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
-                endpoints.MapControllerRoute(
-                    name: "api",
-                    pattern: "api/{controller=Home}/{action=Index}/{id?}"
-                );
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
+            endpoints.MapControllerRoute(
+                name: "api",
+                pattern: "api/{controller=Home}/{action=Index}/{id?}"
+            );
+        });
     }
 }

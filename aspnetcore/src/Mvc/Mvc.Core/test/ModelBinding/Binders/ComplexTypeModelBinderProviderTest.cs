@@ -36,20 +36,18 @@ public class ComplexTypeModelBinderProviderTest
         var provider = new ComplexTypeModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(typeof(Person));
-        context.OnCreatingBinder(
-            m =>
+        context.OnCreatingBinder(m =>
+        {
+            if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
             {
-                if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
-                {
-                    return Mock.Of<IModelBinder>();
-                }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
+                return Mock.Of<IModelBinder>();
             }
-        );
+            else
+            {
+                Assert.False(true, "Not the right model type");
+                return null;
+            }
+        });
 
         // Act
         var result = provider.GetBinder(context);
@@ -65,20 +63,18 @@ public class ComplexTypeModelBinderProviderTest
         var provider = new ComplexTypeModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(typeof(Person));
-        context.OnCreatingBinder(
-            m =>
+        context.OnCreatingBinder(m =>
+        {
+            if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
             {
-                if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
-                {
-                    return Mock.Of<IModelBinder>();
-                }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
+                return Mock.Of<IModelBinder>();
             }
-        );
+            else
+            {
+                Assert.False(true, "Not the right model type");
+                return null;
+            }
+        });
 
         // Act
         var result = provider.GetBinder(context);

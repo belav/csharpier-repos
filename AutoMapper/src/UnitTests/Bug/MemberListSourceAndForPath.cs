@@ -27,13 +27,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Input, TargetOuter>(MemberList.Source)
-                        .ForPath(x => x.Inner.MyProp, opt => opt.MapFrom(x => x.Source));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Input, TargetOuter>(MemberList.Source)
+                    .ForPath(x => x.Inner.MyProp, opt => opt.MapFrom(x => x.Source));
+            });
 
         protected override void Because_of()
         {

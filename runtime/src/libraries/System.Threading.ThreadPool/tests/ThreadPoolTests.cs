@@ -1059,20 +1059,18 @@ namespace System.Threading.ThreadPools.Tests
                     var done = new AutoResetEvent(false);
 
                     // Create an AsyncLocal with value change notifications, this changes the EC on this thread to non-default
-                    var asyncLocal = new AsyncLocal<int>(
-                        e =>
-                        {
-                            // There is nothing in this test that should cause a thread's EC to change due to EC flow
-                            Assert.False(e.ThreadContextChanged);
+                    var asyncLocal = new AsyncLocal<int>(e =>
+                    {
+                        // There is nothing in this test that should cause a thread's EC to change due to EC flow
+                        Assert.False(e.ThreadContextChanged);
 
-                            // Record a side-effect from AsyncLocal value changes caused by flow. This is mainly because AsyncLocal
-                            // value change notifications can have side-effects like impersonation, we want to ensure that not only the
-                            // AsyncLocal's value is correct, but also that the side-effect matches the value, confirming that any value
-                            // changes cause matching notifications.
-                            t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect =
-                                e.CurrentValue;
-                        }
-                    );
+                        // Record a side-effect from AsyncLocal value changes caused by flow. This is mainly because AsyncLocal
+                        // value change notifications can have side-effects like impersonation, we want to ensure that not only the
+                        // AsyncLocal's value is correct, but also that the side-effect matches the value, confirming that any value
+                        // changes cause matching notifications.
+                        t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect =
+                            e.CurrentValue;
+                    });
                     asyncLocal.Value = 1;
 
                     ThreadPool.UnsafeQueueUserWorkItem(

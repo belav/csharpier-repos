@@ -25,32 +25,26 @@ public class H2SpecTests : LoggedTest
     public async Task RunIndividualTestCase(H2SpecTestCase testCase)
     {
         var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(
+                            IPAddress.Loopback,
+                            0,
+                            listenOptions =>
                             {
-                                options.Listen(
-                                    IPAddress.Loopback,
-                                    0,
-                                    listenOptions =>
-                                    {
-                                        listenOptions.Protocols = HttpProtocols.Http2;
-                                        if (testCase.Https)
-                                        {
-                                            listenOptions.UseHttps(
-                                                TestResources.GetTestCertificate()
-                                            );
-                                        }
-                                    }
-                                );
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                                if (testCase.Https)
+                                {
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                }
                             }
-                        )
-                        .Configure(ConfigureHelloWorld);
-                }
-            )
+                        );
+                    })
+                    .Configure(ConfigureHelloWorld);
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -143,13 +137,11 @@ public class H2SpecTests : LoggedTest
 
     private void ConfigureHelloWorld(IApplicationBuilder app)
     {
-        app.Run(
-            async context =>
-            {
-                // Read the whole request body to check for errors.
-                await context.Request.Body.CopyToAsync(Stream.Null);
-                await context.Response.WriteAsync("Hello World");
-            }
-        );
+        app.Run(async context =>
+        {
+            // Read the whole request body to check for errors.
+            await context.Request.Body.CopyToAsync(Stream.Null);
+            await context.Response.WriteAsync("Hello World");
+        });
     }
 }

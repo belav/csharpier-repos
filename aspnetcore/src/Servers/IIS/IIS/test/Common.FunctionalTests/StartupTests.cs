@@ -422,33 +422,29 @@ public class StartupTests : IISFunctionalTestBase
         }
 
         deploymentParameters.ApplicationType = ApplicationType.Standalone;
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .RequiredElement("system.applicationHost")
-                    .RequiredElement("applicationPools")
-                    .RequiredElement("add")
-                    .SetAttributeValue("enable32BitAppOnWin64", "true");
-            }
-        );
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .RequiredElement("system.applicationHost")
+                .RequiredElement("applicationPools")
+                .RequiredElement("add")
+                .SetAttributeValue("enable32BitAppOnWin64", "true");
+        });
 
         // Change ANCM dll to 32 bit
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                var ancmElement = element
-                    .RequiredElement("system.webServer")
-                    .RequiredElement("globalModules")
-                    .Elements("add")
-                    .FirstOrDefault(e => e.Attribute("name").Value == "AspNetCoreModuleV2");
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            var ancmElement = element
+                .RequiredElement("system.webServer")
+                .RequiredElement("globalModules")
+                .Elements("add")
+                .FirstOrDefault(e => e.Attribute("name").Value == "AspNetCoreModuleV2");
 
-                ancmElement.SetAttributeValue(
-                    "image",
-                    ancmElement.Attribute("image").Value.Replace("x64", "x86")
-                );
-            }
-        );
+            ancmElement.SetAttributeValue(
+                "image",
+                ancmElement.Attribute("image").Value.Replace("x64", "x86")
+            );
+        });
         var deploymentResult = await DeployAsync(deploymentParameters);
 
         if (DeployerSelector.HasNewShim)
@@ -1693,19 +1689,17 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .Descendants("bindings")
-                    .Single()
-                    .GetOrAdd("binding", "protocol", "https")
-                    .SetAttributeValue(
-                        "bindingInformation",
-                        $":{TestPortHelper.GetNextSSLPort()}:localhost"
-                    );
-            }
-        );
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .GetOrAdd("binding", "protocol", "https")
+                .SetAttributeValue(
+                    "bindingInformation",
+                    $":{TestPortHelper.GetNextSSLPort()}:localhost"
+                );
+        });
 
         deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_ANCM_HTTPS_PORT"] =
             "123";
@@ -1728,18 +1722,16 @@ public class StartupTests : IISFunctionalTestBase
         deploymentParameters.ApplicationBaseUriHint =
             $"http://localhost:{TestPortHelper.GetNextPort()}/";
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .Descendants("bindings")
-                    .Single()
-                    .AddAndGetInnerElement("binding", "protocol", "https")
-                    .SetAttributeValue("bindingInformation", $":{port}:localhost");
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .AddAndGetInnerElement("binding", "protocol", "https")
+                .SetAttributeValue("bindingInformation", $":{port}:localhost");
 
-                element.Descendants("access").Single().SetAttributeValue("sslFlags", "None");
-            }
-        );
+            element.Descendants("access").Single().SetAttributeValue("sslFlags", "None");
+        });
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var handler = new HttpClientHandler
@@ -1774,26 +1766,24 @@ public class StartupTests : IISFunctionalTestBase
 
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .Descendants("bindings")
-                    .Single()
-                    .Add(
-                        new XElement(
-                            "binding",
-                            new XAttribute("protocol", "https"),
-                            new XAttribute("bindingInformation", $":{sslPort}:localhost")
-                        ),
-                        new XElement(
-                            "binding",
-                            new XAttribute("protocol", "https"),
-                            new XAttribute("bindingInformation", $":{anotherSslPort}:localhost")
-                        )
-                    );
-            }
-        );
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .Add(
+                    new XElement(
+                        "binding",
+                        new XAttribute("protocol", "https"),
+                        new XAttribute("bindingInformation", $":{sslPort}:localhost")
+                    ),
+                    new XElement(
+                        "binding",
+                        new XAttribute("protocol", "https"),
+                        new XAttribute("bindingInformation", $":{anotherSslPort}:localhost")
+                    )
+                );
+        });
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var client = CreateNonValidatingClient(deploymentResult);

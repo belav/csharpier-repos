@@ -171,13 +171,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         {
             Logger.Log(
                 InteractiveWindowFunctionId,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m.Add(LogMessage.Window, LogMessage.Close);
-                        m.Add(LogMessage.LanguageBufferCount, languageBufferCount);
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m.Add(LogMessage.Window, LogMessage.Close);
+                    m.Add(LogMessage.LanguageBufferCount, languageBufferCount);
+                })
             );
         }
 

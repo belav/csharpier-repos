@@ -139,12 +139,10 @@ namespace BasicViews
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapDefaultControllerRoute();
-                }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
         }
 
         private void CreateDatabaseTables(IServiceProvider services)

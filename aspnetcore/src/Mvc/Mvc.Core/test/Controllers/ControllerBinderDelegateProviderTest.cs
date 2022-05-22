@@ -1065,21 +1065,19 @@ public class ControllerBinderDelegateProviderTest
         var controller = new TestController();
         var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
 
-        var binder = new StubModelBinder(
-            bindingContext =>
+        var binder = new StubModelBinder(bindingContext =>
+        {
+            // BindingContext.ModelName will be string.Empty here. This is a 'fallback to empty prefix'
+            // because the value providers have no data.
+            if (inputPropertyValues.TryGetValue(bindingContext.FieldName, out var model))
             {
-                // BindingContext.ModelName will be string.Empty here. This is a 'fallback to empty prefix'
-                // because the value providers have no data.
-                if (inputPropertyValues.TryGetValue(bindingContext.FieldName, out var model))
-                {
-                    bindingContext.Result = ModelBindingResult.Success(model);
-                }
-                else
-                {
-                    bindingContext.Result = ModelBindingResult.Failed();
-                }
+                bindingContext.Result = ModelBindingResult.Success(model);
             }
-        );
+            else
+            {
+                bindingContext.Result = ModelBindingResult.Failed();
+            }
+        });
 
         var factory = GetModelBinderFactory(binder);
         controllerContext.ValueProviderFactories.Add(new SimpleValueProviderFactory());
@@ -1347,16 +1345,14 @@ public class ControllerBinderDelegateProviderTest
         var validatorProvider = new Mock<IModelValidatorProvider>();
         validatorProvider
             .Setup(p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>()))
-            .Callback<ModelValidatorProviderContext>(
-                context =>
+            .Callback<ModelValidatorProviderContext>(context =>
+            {
+                foreach (var result in context.Results)
                 {
-                    foreach (var result in context.Results)
-                    {
-                        result.Validator = validator;
-                        result.IsReusable = true;
-                    }
+                    result.Validator = validator;
+                    result.IsReusable = true;
                 }
-            );
+            });
         return validatorProvider.Object;
     }
 
@@ -1365,13 +1361,11 @@ public class ControllerBinderDelegateProviderTest
         var binder = new Mock<IModelBinder>();
         binder
             .Setup(b => b.BindModelAsync(It.IsAny<DefaultModelBindingContext>()))
-            .Returns<DefaultModelBindingContext>(
-                mbc =>
-                {
-                    mbc.Result = ModelBindingResult.Success(model);
-                    return Task.CompletedTask;
-                }
-            );
+            .Returns<DefaultModelBindingContext>(mbc =>
+            {
+                mbc.Result = ModelBindingResult.Success(model);
+                return Task.CompletedTask;
+            });
 
         return GetModelBinderFactory(binder.Object);
     }

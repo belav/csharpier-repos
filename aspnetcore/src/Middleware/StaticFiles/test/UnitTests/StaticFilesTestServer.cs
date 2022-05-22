@@ -26,16 +26,14 @@ public static class StaticFilesTestServer
             .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("webroot", ".") })
             .Build();
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .UseConfiguration(configuration)
-                        .Configure(configureApp)
-                        .ConfigureServices(configureServices ?? defaultConfigureServices);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .UseConfiguration(configuration)
+                    .Configure(configureApp)
+                    .ConfigureServices(configureServices ?? defaultConfigureServices);
+            })
             .Build();
 
         await host.StartAsync();

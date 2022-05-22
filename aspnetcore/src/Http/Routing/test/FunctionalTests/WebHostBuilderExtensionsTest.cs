@@ -110,19 +110,15 @@ public class WebHostBuilderExtensionsTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webhostbuilder =>
-                {
-                    webhostbuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouter(routeBuilder);
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
+            .ConfigureWebHost(webhostbuilder =>
+            {
+                webhostbuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouter(routeBuilder);
+                    })
+                    .UseTestServer();
+            })
             .ConfigureServices(services => services.AddRouting())
             .Build();
 

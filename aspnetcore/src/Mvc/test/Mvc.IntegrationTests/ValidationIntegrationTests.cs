@@ -176,12 +176,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.CustomerName=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.CustomerName=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -215,12 +213,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order1)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -268,12 +264,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order2)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -308,12 +302,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order2)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -363,12 +355,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -403,13 +393,11 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?parameter.Customer.Age=17");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // Force creation of the Customer model.
+            request.QueryString = new QueryString("?parameter.Customer.Age=17");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -459,12 +447,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Items[0].ItemId=17");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Items[0].ItemId=17");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -499,13 +485,11 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // Force creation of the Customer model.
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -550,12 +534,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(List<Order5>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].ProductId=17");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].ProductId=17");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -589,13 +571,11 @@ public class ValidationIntegrationTests
             ParameterType = typeof(List<Order5>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?parameter[0].Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // Force creation of the Customer model.
+            request.QueryString = new QueryString("?parameter[0].Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -640,12 +620,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order6)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -679,12 +657,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order6)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=billybob");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Name=billybob");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -732,12 +708,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order7)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -771,12 +745,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order7)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -813,12 +785,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order7)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -876,12 +846,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order8)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -915,12 +883,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order8)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -990,12 +956,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order9)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Products[0].Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Products[0].Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1029,12 +993,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Order9)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter.Products[0].Name=billybob");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter.Products[0].Name=billybob");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1082,12 +1044,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(List<Order10>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Name=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Name=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1121,12 +1081,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(List<Order10>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Name=billybob");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Name=billybob");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1163,12 +1121,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(List<Order10>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1204,12 +1160,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(User)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Id=bill");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Id=bill");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1246,12 +1200,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(User)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Zip=-123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Zip=-123");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1901,13 +1853,11 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Greeting)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello\" }"));
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello\" }"));
+            request.ContentType = "application/json";
+        });
 
         var httpContext = testContext.HttpContext;
         var modelState = testContext.ModelState;
@@ -1945,16 +1895,12 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Greeting)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This string is too long and will have a validation error.
-                request.Body = new MemoryStream(
-                    Encoding.UTF8.GetBytes("{ message: \"Hello There\" }")
-                );
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This string is too long and will have a validation error.
+            request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello There\" }"));
+            request.ContentType = "application/json";
+        });
 
         var httpContext = testContext.HttpContext;
         var modelState = testContext.ModelState;
@@ -2001,15 +1947,13 @@ public class ValidationIntegrationTests
 
         var input = new Order12 { Id = 10, OrderFile = new byte[40], };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(
-                    Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(input))
-                );
-                request.ContentType = "application/json";
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(
+                Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(input))
+            );
+            request.ContentType = "application/json";
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2059,12 +2003,10 @@ public class ValidationIntegrationTests
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0]=1&[1]=2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0]=1&[1]=2");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2124,12 +2066,10 @@ public class ValidationIntegrationTests
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?[0]=1&[1]=2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?[0]=1&[1]=2");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2207,12 +2147,10 @@ public class ValidationIntegrationTests
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?p[0].Id=1&p[1].Id=2");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?p[0].Id=1&p[1].Id=2");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2278,14 +2216,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(IDictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2330,14 +2264,12 @@ public class ValidationIntegrationTests
             ParameterType = typeof(Dictionary<string, NeverValid>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value.NeverValidProperty=value0"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter[0].Key=key0&parameter[0].Value.NeverValidProperty=value0"
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2399,12 +2331,10 @@ public class ValidationIntegrationTests
             ParameterType = propertyInfo.PropertyType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Model.Id=12");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Model.Id=12");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2465,12 +2395,10 @@ public class ValidationIntegrationTests
             ParameterType = propertyInfo.PropertyType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Model.Id=12");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Model.Id=12");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2527,12 +2455,10 @@ public class ValidationIntegrationTests
             ParameterType = typeof(RecursiveModel)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Property1=8");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2585,12 +2511,10 @@ public class ValidationIntegrationTests
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Property1=8");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -2656,12 +2580,10 @@ public class ValidationIntegrationTests
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?Name=CoolName");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?Name=CoolName");
+        });
         var modelState = testContext.ModelState;
 
         // Act

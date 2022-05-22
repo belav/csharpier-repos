@@ -21,13 +21,11 @@ namespace System.IO.Tests
         {
             int id = Environment.CurrentManagedThreadId;
             bool invoked = false;
-            var s = new DelegateStream(
-                disposeFunc: disposing =>
-                {
-                    invoked = true;
-                    Assert.Equal(id, Environment.CurrentManagedThreadId);
-                }
-            );
+            var s = new DelegateStream(disposeFunc: disposing =>
+            {
+                invoked = true;
+                Assert.Equal(id, Environment.CurrentManagedThreadId);
+            });
             Assert.True(s.DisposeAsync().IsCompletedSuccessfully);
             Assert.True(invoked);
         }

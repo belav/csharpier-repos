@@ -202,21 +202,19 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
         _mockConnectionContext
             .Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>()))
-            .Callback<ConnectionAbortedException>(
-                ex =>
+            .Callback<ConnectionAbortedException>(ex =>
+            {
+                // Emulate transport abort so the _connectionTask completes.
+                Task.Run(() =>
                 {
-                    // Emulate transport abort so the _connectionTask completes.
-                    Task.Run(() =>
-                    {
-                        Logger.LogInformation(
-                            0,
-                            ex,
-                            "ConnectionContext.Abort() was called. Completing _pair.Application.Output."
-                        );
-                        _pair.Application.Output.Complete(ex);
-                    });
-                }
-            );
+                    Logger.LogInformation(
+                        0,
+                        ex,
+                        "ConnectionContext.Abort() was called. Completing _pair.Application.Output."
+                    );
+                    _pair.Application.Output.Complete(ex);
+                });
+            });
 
         _noopApplication = context => Task.CompletedTask;
 

@@ -21,12 +21,10 @@ public class LocalizationSampleTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer().UseStartup(typeof(Startup));
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer().UseStartup(typeof(Startup));
+            })
             .Build();
 
         await host.StartAsync();

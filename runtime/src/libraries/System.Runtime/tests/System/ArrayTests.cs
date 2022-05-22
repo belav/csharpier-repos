@@ -1454,12 +1454,10 @@ namespace System.Tests
         {
             int[] result = Array.ConvertAll(
                 new int[] { },
-                new Converter<int, int>(
-                    i =>
-                    {
-                        throw new InvalidOperationException();
-                    }
-                )
+                new Converter<int, int>(i =>
+                {
+                    throw new InvalidOperationException();
+                })
             );
             Assert.Equal(new int[] { }, result);
 

@@ -688,20 +688,18 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (!useExistingParent)
                     {
-                        newParent = context.CreateProxy<RequiredComposite1>(
-                            e =>
+                        newParent = context.CreateProxy<RequiredComposite1>(e =>
+                        {
+                            e.Id = 3;
+                            e.Parent = context.Set<Root>().Single(IsTheRoot);
+                            e.CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
+                                LegacyReferenceEqualityComparer.Instance
+                            )
                             {
-                                e.Id = 3;
-                                e.Parent = context.Set<Root>().Single(IsTheRoot);
-                                e.CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
-                                    LegacyReferenceEqualityComparer.Instance
-                                )
-                                {
-                                    context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
-                                    context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6)
-                                };
-                            }
-                        );
+                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
+                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6)
+                            };
+                        });
 
                         context.Set<RequiredComposite1>().Add(newParent);
                         context.SaveChanges();

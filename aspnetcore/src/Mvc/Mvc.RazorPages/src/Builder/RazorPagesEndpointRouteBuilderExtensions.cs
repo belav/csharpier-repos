@@ -88,14 +88,12 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         // Maps a fallback endpoint with an empty delegate. This is OK because
         // we don't expect the delegate to run.
         var builder = endpoints.MapFallback(context => Task.CompletedTask);
-        builder.Add(
-            b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            }
-        );
+        builder.Add(b =>
+        {
+            // MVC registers a policy that looks for this metadata.
+            b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
+            b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
+        });
         return builder;
     }
 
@@ -160,14 +158,12 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         // Maps a fallback endpoint with an empty delegate. This is OK because
         // we don't expect the delegate to run.
         var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-        builder.Add(
-            b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            }
-        );
+        builder.Add(b =>
+        {
+            // MVC registers a policy that looks for this metadata.
+            b.Metadata.Add(CreateDynamicPageMetadata(page, area: null));
+            b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
+        });
         return builder;
     }
 
@@ -224,14 +220,12 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         // Maps a fallback endpoint with an empty delegate. This is OK because
         // we don't expect the delegate to run.
         var builder = endpoints.MapFallback(context => Task.CompletedTask);
-        builder.Add(
-            b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            }
-        );
+        builder.Add(b =>
+        {
+            // MVC registers a policy that looks for this metadata.
+            b.Metadata.Add(CreateDynamicPageMetadata(page, area));
+            b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
+        });
         return builder;
     }
 
@@ -298,14 +292,12 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         // Maps a fallback endpoint with an empty delegate. This is OK because
         // we don't expect the delegate to run.
         var builder = endpoints.MapFallback(pattern, context => Task.CompletedTask);
-        builder.Add(
-            b =>
-            {
-                // MVC registers a policy that looks for this metadata.
-                b.Metadata.Add(CreateDynamicPageMetadata(page, area));
-                b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
-            }
-        );
+        builder.Add(b =>
+        {
+            // MVC registers a policy that looks for this metadata.
+            b.Metadata.Add(CreateDynamicPageMetadata(page, area));
+            b.Metadata.Add(new PageEndpointDataSourceIdMetadata(pageDataSource.DataSourceId));
+        });
         return builder;
     }
 

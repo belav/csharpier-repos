@@ -1539,32 +1539,30 @@ namespace System.Threading.Tasks.Tests
             catch (AggregateException ae)
             {
                 ae.Flatten()
-                    .Handle(
-                        e =>
+                    .Handle(e =>
+                    {
+                        var tce = e as TaskCanceledException;
+                        if (tce == null)
                         {
-                            var tce = e as TaskCanceledException;
-                            if (tce == null)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
-                                        "    > FAILED!  Pre-canceled result threw non-TCE from Wait()"
-                                    )
-                                );
-                            }
-                            else if (tce.CancellationToken != correctToken)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
-                                        "    > FAILED!  Pre-canceled result threw TCE w/ wrong token"
-                                    )
-                                );
-                            }
-
-                            return true;
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "    > FAILED!  Pre-canceled result threw non-TCE from Wait()"
+                                )
+                            );
                         }
-                    );
+                        else if (tce.CancellationToken != correctToken)
+                        {
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "    > FAILED!  Pre-canceled result threw TCE w/ wrong token"
+                                )
+                            );
+                        }
+
+                        return true;
+                    });
             }
         }
 

@@ -1451,22 +1451,20 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             // For every property, create a corresponding parameter, as well as an assignment
             // statement from that parameter to the property.
             using var _ = PooledDictionary<string, ISymbol>.GetInstance(out var parameterToPropMap);
-            var parameters = fields.SelectAsArray(
-                field =>
-                {
-                    var parameterName = isRecord
-                        ? field.Name
-                        : parameterNamingRule.NamingStyle.MakeCompliant(field.Name).First();
-                    var parameter = CodeGenerationSymbolFactory.CreateParameterSymbol(
-                        field.Type,
-                        parameterName
-                    );
+            var parameters = fields.SelectAsArray(field =>
+            {
+                var parameterName = isRecord
+                    ? field.Name
+                    : parameterNamingRule.NamingStyle.MakeCompliant(field.Name).First();
+                var parameter = CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    field.Type,
+                    parameterName
+                );
 
-                    parameterToPropMap[parameter.Name] = field;
+                parameterToPropMap[parameter.Name] = field;
 
-                    return parameter;
-                }
-            );
+                return parameter;
+            });
 
             var assignmentStatements = generator.CreateAssignmentStatements(
                 semanticModel,

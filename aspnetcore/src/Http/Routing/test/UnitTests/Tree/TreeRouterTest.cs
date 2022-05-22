@@ -1902,14 +1902,12 @@ public class TreeRouterTest
 
         var next = new Mock<IRouter>();
         next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                c =>
-                {
-                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                    c.Handler = null; // Not a match
-                }
-            )
+            .Callback<RouteContext>(c =>
+            {
+                nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                c.Handler = null; // Not a match
+            })
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1940,14 +1938,12 @@ public class TreeRouterTest
 
         var next = new Mock<IRouter>();
         next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                c =>
-                {
-                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                    c.Handler = null; // Not a match
-                }
-            )
+            .Callback<RouteContext>(c =>
+            {
+                nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                c.Handler = null; // Not a match
+            })
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -1985,14 +1981,12 @@ public class TreeRouterTest
 
         var next = new Mock<IRouter>();
         next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                c =>
-                {
-                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                    nestedRouters = new List<IRouter>(c.RouteData.Routers);
-                    throw new Exception();
-                }
-            )
+            .Callback<RouteContext>(c =>
+            {
+                nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                nestedRouters = new List<IRouter>(c.RouteData.Routers);
+                throw new Exception();
+            })
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();
@@ -2032,13 +2026,11 @@ public class TreeRouterTest
         RouteValueDictionary nestedValues = null;
         var next = new Mock<IRouter>();
         next.Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                c =>
-                {
-                    nestedValues = new RouteValueDictionary(c.RouteData.Values);
-                    c.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(c =>
+            {
+                nestedValues = new RouteValueDictionary(c.RouteData.Values);
+                c.Handler = NullHandler;
+            })
             .Returns(Task.CompletedTask);
 
         var builder = CreateBuilder();

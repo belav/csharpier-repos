@@ -282,18 +282,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_create_materializer_for_entity_with_fields()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<SomeEntityWithFields>(
-                eb =>
-                {
-                    eb.UsePropertyAccessMode(PropertyAccessMode.Field);
+            modelBuilder.Entity<SomeEntityWithFields>(eb =>
+            {
+                eb.UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                    eb.Property(e => e.Enum).HasField("_enum");
-                    eb.Property(e => e.Foo).HasField("_foo");
-                    eb.Property(e => e.Goo).HasField("_goo");
-                    eb.Property(e => e.Id).HasField("_id");
-                    eb.Property(e => e.MaybeEnum).HasField("_maybeEnum");
-                }
-            );
+                eb.Property(e => e.Enum).HasField("_enum");
+                eb.Property(e => e.Foo).HasField("_foo");
+                eb.Property(e => e.Goo).HasField("_goo");
+                eb.Property(e => e.Id).HasField("_id");
+                eb.Property(e => e.MaybeEnum).HasField("_maybeEnum");
+            });
 
             var entityType = modelBuilder
                 .FinalizeModel()
@@ -323,13 +321,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_read_nulls()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<SomeEntity>(
-                eb =>
-                {
-                    eb.Ignore(e => e.Enum);
-                    eb.Ignore(e => e.MaybeEnum);
-                }
-            );
+            modelBuilder.Entity<SomeEntity>(eb =>
+            {
+                eb.Ignore(e => e.Enum);
+                eb.Ignore(e => e.MaybeEnum);
+            });
 
             var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(SomeEntity));
 
@@ -355,19 +351,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var modelBuilder = CreateConventionalModelBuilder();
 
-            modelBuilder.Entity<SomeEntity>(
-                eb =>
-                {
-                    eb.UsePropertyAccessMode(PropertyAccessMode.Property);
+            modelBuilder.Entity<SomeEntity>(eb =>
+            {
+                eb.UsePropertyAccessMode(PropertyAccessMode.Property);
 
-                    eb.Ignore(e => e.Enum);
-                    eb.Ignore(e => e.MaybeEnum);
+                eb.Ignore(e => e.Enum);
+                eb.Ignore(e => e.MaybeEnum);
 
-                    eb.Property<int>("IdShadow");
-                    eb.Property<string>("FooShadow");
-                    eb.Property<Guid>("GooShadow");
-                }
-            );
+                eb.Property<int>("IdShadow");
+                eb.Property<string>("FooShadow");
+                eb.Property<Guid>("GooShadow");
+            });
 
             var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(SomeEntity));
 

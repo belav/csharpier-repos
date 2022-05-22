@@ -21,12 +21,10 @@ namespace AutoMapper.Tests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -55,12 +53,10 @@ namespace AutoMapper.Tests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -89,13 +85,11 @@ namespace AutoMapper.Tests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<Enum, string>().ConvertUsing((Enum src) => "Test");
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<Enum, string>().ConvertUsing((Enum src) => "Test");
+            });
 
         protected override void Because_of()
         {
@@ -239,13 +233,11 @@ namespace AutoMapper.Tests
         [Fact]
         public void ShouldMapNullableEnumToNullWhenSourceEnumIsNullAndDestinationWasNotNull()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = true;
-                    cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = true;
+                cfg.CreateMap<OrderWithNullableStatus, OrderDtoWithOwnNullableStatus>();
+            });
 
             var dto = new OrderDtoWithOwnNullableStatus() { Status = StatusForDto.Complete };
 
@@ -423,13 +415,11 @@ namespace AutoMapper.Tests
     public class When_mapping_from_a_null_object_with_an_enum : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.CreateMap<SourceClass, DestinationClass>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
+                cfg.CreateMap<SourceClass, DestinationClass>();
+            });
 
         public enum EnumValues
         {
@@ -460,12 +450,10 @@ namespace AutoMapper.Tests
     public class When_mapping_to_a_nullable_flags_enum : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceClass, DestinationClass>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceClass, DestinationClass>();
+            });
 
         [Flags]
         public enum EnumValues
@@ -499,13 +487,11 @@ namespace AutoMapper.Tests
     public class When_mapping_from_a_null_object_with_a_nullable_enum : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.CreateMap<SourceClass, DestinationClass>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
+                cfg.CreateMap<SourceClass, DestinationClass>();
+            });
 
         public enum EnumValues
         {
@@ -536,12 +522,10 @@ namespace AutoMapper.Tests
     public class When_mapping_from_a_null_object_with_a_nullable_enum_as_string : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SourceClass, DestinationClass>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SourceClass, DestinationClass>();
+            });
 
         public enum EnumValues
         {

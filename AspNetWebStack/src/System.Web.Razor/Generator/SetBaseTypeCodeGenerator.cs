@@ -25,17 +25,15 @@ namespace System.Web.Razor.Generator
             if (context.Host.DesignTimeMode)
             {
                 int generatedCodeStart = 0;
-                string code = context.BuildCodeString(
-                    cw =>
-                    {
-                        generatedCodeStart = cw.WriteVariableDeclaration(
-                            target.Content,
-                            "__inheritsHelper",
-                            null
-                        );
-                        cw.WriteEndStatement();
-                    }
-                );
+                string code = context.BuildCodeString(cw =>
+                {
+                    generatedCodeStart = cw.WriteVariableDeclaration(
+                        target.Content,
+                        "__inheritsHelper",
+                        null
+                    );
+                    cw.WriteEndStatement();
+                });
 
                 int paddingCharCount;
 

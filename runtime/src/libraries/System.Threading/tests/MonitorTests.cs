@@ -275,95 +275,76 @@ namespace System.Threading.Tests
                 var backgroundTestDelegates = new List<Action<object>>();
                 Barrier readyBarrier = null;
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        Monitor.Enter(lockObj);
-                        Monitor.Exit(lockObj);
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    Monitor.Enter(lockObj);
+                    Monitor.Exit(lockObj);
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        bool lockTaken = false;
-                        Monitor.Enter(lockObj, ref lockTaken);
-                        Assert.True(lockTaken);
-                        Monitor.Exit(lockObj);
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    bool lockTaken = false;
+                    Monitor.Enter(lockObj, ref lockTaken);
+                    Assert.True(lockTaken);
+                    Monitor.Exit(lockObj);
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        lock (lockObj) { }
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    lock (lockObj) { }
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        Assert.True(
-                            Monitor.TryEnter(
-                                lockObj,
-                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                            )
-                        );
-                        Monitor.Exit(lockObj);
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    Assert.True(
+                        Monitor.TryEnter(lockObj, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                    );
+                    Monitor.Exit(lockObj);
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        Assert.True(
-                            Monitor.TryEnter(
-                                lockObj,
-                                TimeSpan.FromMilliseconds(
-                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                )
-                            )
-                        );
-                        Monitor.Exit(lockObj);
-                    }
-                );
-
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        bool lockTaken = false;
-                        Monitor.TryEnter(
-                            lockObj,
-                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
-                            ref lockTaken
-                        );
-                        Assert.True(lockTaken);
-                        Monitor.Exit(lockObj);
-                    }
-                );
-
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        bool lockTaken = false;
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    Assert.True(
                         Monitor.TryEnter(
                             lockObj,
                             TimeSpan.FromMilliseconds(
                                 ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                            ),
-                            ref lockTaken
-                        );
-                        Assert.True(lockTaken);
-                        Monitor.Exit(lockObj);
-                    }
-                );
+                            )
+                        )
+                    );
+                    Monitor.Exit(lockObj);
+                });
+
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    bool lockTaken = false;
+                    Monitor.TryEnter(
+                        lockObj,
+                        ThreadTestHelpers.UnexpectedTimeoutMilliseconds,
+                        ref lockTaken
+                    );
+                    Assert.True(lockTaken);
+                    Monitor.Exit(lockObj);
+                });
+
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    bool lockTaken = false;
+                    Monitor.TryEnter(
+                        lockObj,
+                        TimeSpan.FromMilliseconds(ThreadTestHelpers.UnexpectedTimeoutMilliseconds),
+                        ref lockTaken
+                    );
+                    Assert.True(lockTaken);
+                    Monitor.Exit(lockObj);
+                });
 
                 int testCount = backgroundTestDelegates.Count * 2; // two iterations each, one for thin lock and one for aware lock
                 readyBarrier = new Barrier(testCount + 1); // plus main thread
@@ -403,60 +384,48 @@ namespace System.Threading.Tests
                 var backgroundTestDelegates = new List<Action<object>>();
                 Barrier readyBarrier = null;
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        Assert.False(
-                            Monitor.TryEnter(lockObj, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
-                        );
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    Assert.False(
+                        Monitor.TryEnter(lockObj, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+                    );
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        Assert.False(
-                            Monitor.TryEnter(
-                                lockObj,
-                                TimeSpan.FromMilliseconds(
-                                    ThreadTestHelpers.ExpectedTimeoutMilliseconds
-                                )
-                            )
-                        );
-                    }
-                );
-
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        bool lockTaken = false;
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    Assert.False(
                         Monitor.TryEnter(
                             lockObj,
-                            ThreadTestHelpers.ExpectedTimeoutMilliseconds,
-                            ref lockTaken
-                        );
-                        Assert.False(lockTaken);
-                    }
-                );
+                            TimeSpan.FromMilliseconds(ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+                        )
+                    );
+                });
 
-                backgroundTestDelegates.Add(
-                    lockObj =>
-                    {
-                        readyBarrier.SignalAndWait();
-                        bool lockTaken = false;
-                        Monitor.TryEnter(
-                            lockObj,
-                            TimeSpan.FromMilliseconds(
-                                ThreadTestHelpers.ExpectedTimeoutMilliseconds
-                            ),
-                            ref lockTaken
-                        );
-                        Assert.False(lockTaken);
-                    }
-                );
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    bool lockTaken = false;
+                    Monitor.TryEnter(
+                        lockObj,
+                        ThreadTestHelpers.ExpectedTimeoutMilliseconds,
+                        ref lockTaken
+                    );
+                    Assert.False(lockTaken);
+                });
+
+                backgroundTestDelegates.Add(lockObj =>
+                {
+                    readyBarrier.SignalAndWait();
+                    bool lockTaken = false;
+                    Monitor.TryEnter(
+                        lockObj,
+                        TimeSpan.FromMilliseconds(ThreadTestHelpers.ExpectedTimeoutMilliseconds),
+                        ref lockTaken
+                    );
+                    Assert.False(lockTaken);
+                });
 
                 int testCount = backgroundTestDelegates.Count * 2; // two iterations each, one for thin lock and one for aware lock
                 readyBarrier = new Barrier(testCount + 1); // plus main thread

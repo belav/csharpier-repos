@@ -165,16 +165,14 @@ public static class HubConnectionBuilderHttpExtensions
             throw new ArgumentNullException(nameof(hubConnectionBuilder));
         }
 
-        hubConnectionBuilder.Services.Configure<HttpConnectionOptions>(
-            o =>
+        hubConnectionBuilder.Services.Configure<HttpConnectionOptions>(o =>
+        {
+            o.Url = url;
+            if (transports != null)
             {
-                o.Url = url;
-                if (transports != null)
-                {
-                    o.Transports = transports.Value;
-                }
+                o.Transports = transports.Value;
             }
-        );
+        });
 
         if (configureHttpConnection != null)
         {

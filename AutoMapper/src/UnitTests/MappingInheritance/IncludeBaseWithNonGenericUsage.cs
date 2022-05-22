@@ -23,16 +23,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    // It does not matter if generic type is <String> or <>, result is the same.
-                    cfg.CreateMap(typeof(SourceBase<string>), typeof(DestinationBase<string>))
-                        .ForMember("Time", mo => mo.MapFrom("Timestamp"));
-                    cfg.CreateMap(typeof(Source), typeof(Destination))
-                        .IncludeBase(typeof(SourceBase<string>), typeof(DestinationBase<string>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                // It does not matter if generic type is <String> or <>, result is the same.
+                cfg.CreateMap(typeof(SourceBase<string>), typeof(DestinationBase<string>))
+                    .ForMember("Time", mo => mo.MapFrom("Timestamp"));
+                cfg.CreateMap(typeof(Source), typeof(Destination))
+                    .IncludeBase(typeof(SourceBase<string>), typeof(DestinationBase<string>));
+            });
 
         [Fact]
         public void Should_pass_validation()
@@ -60,16 +58,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    // It does not matter if generic type is <String> or <>, result is the same.
-                    cfg.CreateMap<SourceBase<string>, DestinationBase<string>>()
-                        .ForMember("Time", mo => mo.MapFrom("Timestamp"));
-                    cfg.CreateMap<Source, Destination>()
-                        .IncludeBase<SourceBase<string>, DestinationBase<string>>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                // It does not matter if generic type is <String> or <>, result is the same.
+                cfg.CreateMap<SourceBase<string>, DestinationBase<string>>()
+                    .ForMember("Time", mo => mo.MapFrom("Timestamp"));
+                cfg.CreateMap<Source, Destination>()
+                    .IncludeBase<SourceBase<string>, DestinationBase<string>>();
+            });
 
         [Fact]
         public void Should_pass_validation()

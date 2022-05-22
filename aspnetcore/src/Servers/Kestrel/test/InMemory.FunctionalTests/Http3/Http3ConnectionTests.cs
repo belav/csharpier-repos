@@ -39,22 +39,18 @@ public class Http3ConnectionTests : Http3TestBase
         var appCompletedTcs = new TaskCompletionSource(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        await Http3Api.InitializeConnectionAsync(
-            async context =>
+        await Http3Api.InitializeConnectionAsync(async context =>
+        {
+            var buffer = new byte[16 * 1024];
+            var received = 0;
+
+            while ((received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
-                var buffer = new byte[16 * 1024];
-                var received = 0;
-
-                while (
-                    (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                )
-                {
-                    await context.Response.Body.WriteAsync(buffer, 0, received);
-                }
-
-                await appCompletedTcs.Task;
+                await context.Response.Body.WriteAsync(buffer, 0, received);
             }
-        );
+
+            await appCompletedTcs.Task;
+        });
 
         await Http3Api.CreateControlStream();
         await Http3Api.GetInboundControlStream();
@@ -86,20 +82,16 @@ public class Http3ConnectionTests : Http3TestBase
     [Fact]
     public async Task HEADERS_Received_ContainsExpect100Continue_100ContinueSent()
     {
-        await Http3Api.InitializeConnectionAsync(
-            async context =>
-            {
-                var buffer = new byte[16 * 1024];
-                var received = 0;
+        await Http3Api.InitializeConnectionAsync(async context =>
+        {
+            var buffer = new byte[16 * 1024];
+            var received = 0;
 
-                while (
-                    (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0
-                )
-                {
-                    await context.Response.Body.WriteAsync(buffer, 0, received);
-                }
+            while ((received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            {
+                await context.Response.Body.WriteAsync(buffer, 0, received);
             }
-        );
+        });
 
         await Http3Api.CreateControlStream();
         await Http3Api.GetInboundControlStream();
@@ -471,23 +463,21 @@ public class Http3ConnectionTests : Http3TestBase
         var requestCount = 0;
         IHeaderDictionary trailersFirst = null;
         IHeaderDictionary trailersLast = null;
-        await Http3Api.InitializeConnectionAsync(
-            context =>
+        await Http3Api.InitializeConnectionAsync(context =>
+        {
+            var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+            if (requestCount == 0)
             {
-                var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
-                if (requestCount == 0)
-                {
-                    trailersFirst = new ResponseTrailersWrapper(trailersFeature.Trailers);
-                    trailersFeature.Trailers = trailersFirst;
-                }
-                else
-                {
-                    trailersLast = trailersFeature.Trailers;
-                }
-                trailersFeature.Trailers[$"trailer-{requestCount++}"] = "true";
-                return Task.CompletedTask;
+                trailersFirst = new ResponseTrailersWrapper(trailersFeature.Trailers);
+                trailersFeature.Trailers = trailersFirst;
             }
-        );
+            else
+            {
+                trailersLast = trailersFeature.Trailers;
+            }
+            trailersFeature.Trailers[$"trailer-{requestCount++}"] = "true";
+            return Task.CompletedTask;
+        });
 
         for (int i = 0; i < 3; i++)
         {

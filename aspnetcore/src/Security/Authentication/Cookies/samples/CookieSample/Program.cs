@@ -16,39 +16,36 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(
-        options =>
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+        options.Events = new CookieAuthenticationEvents()
         {
-            options.ExpireTimeSpan = TimeSpan.FromSeconds(20);
-            options.Events = new CookieAuthenticationEvents()
+            OnCheckSlidingExpiration = context =>
             {
-                OnCheckSlidingExpiration = context =>
-                {
-                    // If 25% expired instead of the default 50%.
-                    context.ShouldRenew =
-                        context.ElapsedTime > (context.Options.ExpireTimeSpan / 4);
+                // If 25% expired instead of the default 50%.
+                context.ShouldRenew = context.ElapsedTime > (context.Options.ExpireTimeSpan / 4);
 
-                    // Don't renew on API endpoints that use JWT.
-                    var authData = context.HttpContext
-                        .GetEndpoint()
-                        ?.Metadata.GetMetadata<IAuthorizeData>();
-                    if (
-                        authData != null
-                        && string.Equals(
-                            authData.AuthenticationSchemes,
-                            "Bearer",
-                            StringComparison.Ordinal
-                        )
+                // Don't renew on API endpoints that use JWT.
+                var authData = context.HttpContext
+                    .GetEndpoint()
+                    ?.Metadata.GetMetadata<IAuthorizeData>();
+                if (
+                    authData != null
+                    && string.Equals(
+                        authData.AuthenticationSchemes,
+                        "Bearer",
+                        StringComparison.Ordinal
                     )
-                    {
-                        context.ShouldRenew = false;
-                    }
-
-                    return Task.CompletedTask;
+                )
+                {
+                    context.ShouldRenew = false;
                 }
-            };
-        }
-    );
+
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 var app = builder.Build();
 

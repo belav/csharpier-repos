@@ -487,12 +487,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.RemoveRange(
                 Enumerable
                     .Range(1, 1)
-                    .Select<int, int>(
-                        n =>
-                        {
-                            throw ExceptionUtilities.Unreachable;
-                        }
-                    )
+                    .Select<int, int>(n =>
+                    {
+                        throw ExceptionUtilities.Unreachable;
+                    })
             );
         }
 

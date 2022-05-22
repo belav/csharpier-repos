@@ -81,64 +81,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterOperationBlockStartAction(
-                    context =>
-                    {
-                        var localsToIsAssignedMap = new ConcurrentDictionary<ILocalSymbol, bool>();
-                        var usedLocals = new HashSet<ILocalSymbol>();
-                        context.RegisterOperationAction(
-                            context =>
-                            {
-                                var declarator = (IVariableDeclaratorOperation)context.Operation;
-                                var hasInitializer = declarator.GetVariableInitializer() != null;
-                                localsToIsAssignedMap.GetOrAdd(declarator.Symbol, hasInitializer);
-                            },
-                            OperationKind.VariableDeclarator
-                        );
+                context.RegisterOperationBlockStartAction(context =>
+                {
+                    var localsToIsAssignedMap = new ConcurrentDictionary<ILocalSymbol, bool>();
+                    var usedLocals = new HashSet<ILocalSymbol>();
+                    context.RegisterOperationAction(
+                        context =>
+                        {
+                            var declarator = (IVariableDeclaratorOperation)context.Operation;
+                            var hasInitializer = declarator.GetVariableInitializer() != null;
+                            localsToIsAssignedMap.GetOrAdd(declarator.Symbol, hasInitializer);
+                        },
+                        OperationKind.VariableDeclarator
+                    );
 
-                        context.RegisterOperationAction(
-                            context =>
+                    context.RegisterOperationAction(
+                        context =>
+                        {
+                            var localReference = (ILocalReferenceOperation)context.Operation;
+                            if (
+                                localReference.Parent is ISimpleAssignmentOperation simpleAssignment
+                                && simpleAssignment.Target == localReference
+                            )
                             {
-                                var localReference = (ILocalReferenceOperation)context.Operation;
-                                if (
-                                    localReference.Parent
-                                        is ISimpleAssignmentOperation simpleAssignment
-                                    && simpleAssignment.Target == localReference
-                                )
-                                {
-                                    localsToIsAssignedMap.AddOrUpdate(
-                                        localReference.Local,
-                                        true,
-                                        (_1, _2) => true
-                                    );
-                                }
-                                else
-                                {
-                                    usedLocals.Add(localReference.Local);
-                                }
-                            },
-                            OperationKind.LocalReference
-                        );
-
-                        context.RegisterOperationBlockEndAction(
-                            context =>
-                            {
-                                foreach (var (local, isAssigned) in localsToIsAssignedMap)
-                                {
-                                    if (usedLocals.Contains(local))
-                                    {
-                                        continue;
-                                    }
-
-                                    var rule = !isAssigned ? Descriptor0168 : Descriptor0219;
-                                    context.ReportDiagnostic(
-                                        Diagnostic.Create(rule, local.Locations[0])
-                                    );
-                                }
+                                localsToIsAssignedMap.AddOrUpdate(
+                                    localReference.Local,
+                                    true,
+                                    (_1, _2) => true
+                                );
                             }
-                        );
-                    }
-                );
+                            else
+                            {
+                                usedLocals.Add(localReference.Local);
+                            }
+                        },
+                        OperationKind.LocalReference
+                    );
+
+                    context.RegisterOperationBlockEndAction(context =>
+                    {
+                        foreach (var (local, isAssigned) in localsToIsAssignedMap)
+                        {
+                            if (usedLocals.Contains(local))
+                            {
+                                continue;
+                            }
+
+                            var rule = !isAssigned ? Descriptor0168 : Descriptor0219;
+                            context.ReportDiagnostic(Diagnostic.Create(rule, local.Locations[0]));
+                        }
+                    });
+                });
             }
         }
 

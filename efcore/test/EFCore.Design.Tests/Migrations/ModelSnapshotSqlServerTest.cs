@@ -715,13 +715,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Test(
                 builder =>
-                    builder.Entity<TestKeylessType>(
-                        kb =>
-                        {
-                            kb.Property(k => k.Something);
-                            kb.HasNoKey().ToFunction("GetCount");
-                        }
-                    ),
+                    builder.Entity<TestKeylessType>(kb =>
+                    {
+                        kb.Property(k => k.Something);
+                        kb.HasNoKey().ToFunction("GetCount");
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -1290,27 +1288,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     builder
                         .Entity<AnotherDerivedEntityWithStructDiscriminator>()
                         .HasBaseType<BaseEntityWithStructDiscriminator>();
-                    builder.Entity<BaseEntityWithStructDiscriminator>(
-                        b =>
-                        {
-                            b.Property(e => e.Discriminator)
-                                .HasConversion(v => v.Value, v => new() { Value = v });
-                            b.HasDiscriminator(e => e.Discriminator)
-                                .IsComplete()
-                                .HasValue(
-                                    typeof(BaseEntityWithStructDiscriminator),
-                                    new StructDiscriminator { Value = "Base" }
-                                )
-                                .HasValue(
-                                    typeof(DerivedEntityWithStructDiscriminator),
-                                    new StructDiscriminator { Value = "Derived" }
-                                )
-                                .HasValue(
-                                    typeof(AnotherDerivedEntityWithStructDiscriminator),
-                                    new StructDiscriminator { Value = "Another" }
-                                );
-                        }
-                    );
+                    builder.Entity<BaseEntityWithStructDiscriminator>(b =>
+                    {
+                        b.Property(e => e.Discriminator)
+                            .HasConversion(v => v.Value, v => new() { Value = v });
+                        b.HasDiscriminator(e => e.Discriminator)
+                            .IsComplete()
+                            .HasValue(
+                                typeof(BaseEntityWithStructDiscriminator),
+                                new StructDiscriminator { Value = "Base" }
+                            )
+                            .HasValue(
+                                typeof(DerivedEntityWithStructDiscriminator),
+                                new StructDiscriminator { Value = "Derived" }
+                            )
+                            .HasValue(
+                                typeof(AnotherDerivedEntityWithStructDiscriminator),
+                                new StructDiscriminator { Value = "Another" }
+                            );
+                    });
                 },
                 AddBoilerPlate(
                     GetHeading()
@@ -2067,23 +2063,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Test(
                 builder =>
                 {
-                    builder.Entity<EntityWithOneProperty>(
-                        b =>
-                        {
-                            b.ToTable("EntityWithProperties");
-                            b.Property<int>("AlternateId").HasColumnName("AlternateId");
-                        }
-                    );
-                    builder.Entity<EntityWithTwoProperties>(
-                        b =>
-                        {
-                            b.ToTable("EntityWithProperties");
-                            b.Property(e => e.AlternateId).HasColumnName("AlternateId");
-                            b.HasOne(e => e.EntityWithOneProperty)
-                                .WithOne(e => e.EntityWithTwoProperties)
-                                .HasForeignKey<EntityWithTwoProperties>(e => e.Id);
-                        }
-                    );
+                    builder.Entity<EntityWithOneProperty>(b =>
+                    {
+                        b.ToTable("EntityWithProperties");
+                        b.Property<int>("AlternateId").HasColumnName("AlternateId");
+                    });
+                    builder.Entity<EntityWithTwoProperties>(b =>
+                    {
+                        b.ToTable("EntityWithProperties");
+                        b.Property(e => e.AlternateId).HasColumnName("AlternateId");
+                        b.HasOne(e => e.EntityWithOneProperty)
+                            .WithOne(e => e.EntityWithTwoProperties)
+                            .HasForeignKey<EntityWithTwoProperties>(e => e.Id);
+                    });
                 },
                 AddBoilerPlate(
                     GetHeading()
@@ -2286,13 +2278,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             Test(
                 builder =>
-                    builder.Entity<EntityWithEnumType>(
-                        x =>
-                        {
-                            x.Property(e => e.Day).HasConversion<string>();
-                            x.HasDiscriminator(e => e.Day);
-                        }
-                    ),
+                    builder.Entity<EntityWithEnumType>(x =>
+                    {
+                        x.Property(e => e.Day).HasConversion<string>();
+                        x.HasDiscriminator(e => e.Day);
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -2336,14 +2326,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         .Entity<EntityWithStringProperty>()
                         .ToTable(
                             tb =>
-                                tb.IsTemporal(
-                                    ttb =>
-                                    {
-                                        ttb.UseHistoryTable("HistoryTable");
-                                        ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
-                                        ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
-                                    }
-                                )
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
+                                    ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
+                                })
                         ),
                 AddBoilerPlate(
                     GetHeading()
@@ -2510,32 +2498,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Test(
                 builder =>
                 {
-                    builder.Entity<EntityWithOneProperty>(
-                        b =>
-                        {
-                            b.HasKey(e => e.Id).HasName("PK_Custom");
+                    builder.Entity<EntityWithOneProperty>(b =>
+                    {
+                        b.HasKey(e => e.Id).HasName("PK_Custom");
 
-                            b.OwnsOne(
-                                eo => eo.EntityWithTwoProperties,
-                                eb =>
-                                {
-                                    eb.HasKey(e => e.AlternateId).HasName("PK_Custom");
-                                    eb.WithOwner(e => e.EntityWithOneProperty)
-                                        .HasForeignKey(e => e.AlternateId)
-                                        .HasConstraintName("FK_Custom");
-                                    eb.HasIndex(e => e.Id).IncludeProperties(e => e.AlternateId);
+                        b.OwnsOne(
+                            eo => eo.EntityWithTwoProperties,
+                            eb =>
+                            {
+                                eb.HasKey(e => e.AlternateId).HasName("PK_Custom");
+                                eb.WithOwner(e => e.EntityWithOneProperty)
+                                    .HasForeignKey(e => e.AlternateId)
+                                    .HasConstraintName("FK_Custom");
+                                eb.HasIndex(e => e.Id).IncludeProperties(e => e.AlternateId);
 
-                                    eb.HasOne(e => e.EntityWithStringKey).WithOne();
+                                eb.HasOne(e => e.EntityWithStringKey).WithOne();
 
-                                    eb.HasData(
-                                        new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
-                                    );
-                                }
-                            );
+                                eb.HasData(
+                                    new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
+                                );
+                            }
+                        );
 
-                            b.HasData(new EntityWithOneProperty { Id = 1 });
-                        }
-                    );
+                        b.HasData(new EntityWithOneProperty { Id = 1 });
+                    });
 
                     builder.Entity<EntityWithStringKey>(
                         b =>
@@ -2771,55 +2757,51 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Test(
                 builder =>
                 {
-                    builder.Entity<EntityWithOneProperty>(
-                        b =>
-                        {
-                            b.HasKey(e => e.Id).HasName("PK_Custom");
+                    builder.Entity<EntityWithOneProperty>(b =>
+                    {
+                        b.HasKey(e => e.Id).HasName("PK_Custom");
 
-                            b.OwnsOne(
-                                eo => eo.EntityWithTwoProperties,
-                                eb =>
-                                {
-                                    eb.HasKey(e => e.AlternateId).HasName("PK_Custom");
-                                    eb.WithOwner(e => e.EntityWithOneProperty)
-                                        .HasForeignKey(e => e.AlternateId)
-                                        .HasConstraintName("FK_Custom");
-                                    eb.HasIndex(e => e.Id);
+                        b.OwnsOne(
+                            eo => eo.EntityWithTwoProperties,
+                            eb =>
+                            {
+                                eb.HasKey(e => e.AlternateId).HasName("PK_Custom");
+                                eb.WithOwner(e => e.EntityWithOneProperty)
+                                    .HasForeignKey(e => e.AlternateId)
+                                    .HasConstraintName("FK_Custom");
+                                eb.HasIndex(e => e.Id);
 
-                                    eb.HasOne(e => e.EntityWithStringKey).WithOne();
+                                eb.HasOne(e => e.EntityWithStringKey).WithOne();
 
-                                    eb.HasData(
-                                        new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
-                                    );
-                                }
-                            );
+                                eb.HasData(
+                                    new EntityWithTwoProperties { AlternateId = 1, Id = -1 }
+                                );
+                            }
+                        );
 
-                            b.HasData(new EntityWithOneProperty { Id = 1 });
+                        b.HasData(new EntityWithOneProperty { Id = 1 });
 
-                            b.ToTable("EntityWithOneProperty", e => e.ExcludeFromMigrations());
-                        }
-                    );
+                        b.ToTable("EntityWithOneProperty", e => e.ExcludeFromMigrations());
+                    });
 
-                    builder.Entity<EntityWithStringKey>(
-                        b =>
-                        {
-                            b.OwnsMany(
-                                es => es.Properties,
-                                es =>
-                                {
-                                    es.HasKey(e => e.Id);
-                                    es.HasOne(e => e.EntityWithOneProperty).WithOne();
+                    builder.Entity<EntityWithStringKey>(b =>
+                    {
+                        b.OwnsMany(
+                            es => es.Properties,
+                            es =>
+                            {
+                                es.HasKey(e => e.Id);
+                                es.HasOne(e => e.EntityWithOneProperty).WithOne();
 
-                                    es.ToTable(
-                                        "EntityWithStringProperty",
-                                        t => t.ExcludeFromMigrations()
-                                    );
-                                }
-                            );
+                                es.ToTable(
+                                    "EntityWithStringProperty",
+                                    t => t.ExcludeFromMigrations()
+                                );
+                            }
+                        );
 
-                            b.ToTable("EntityWithStringKey", e => e.ExcludeFromMigrations());
-                        }
-                    );
+                        b.ToTable("EntityWithStringKey", e => e.ExcludeFromMigrations());
+                    });
                 },
                 AddBoilerPlate(
                     GetHeading()
@@ -3581,20 +3563,18 @@ namespace RootNamespace
         {
             Test(
                 modelBuilder =>
-                    modelBuilder.Entity<EntityWithEnumType>(
-                        x =>
-                        {
-                            x.Property(e => e.Id)
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
-                            x.Property(e => e.Day)
-                                .ValueGeneratedOnAdd()
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
-                        }
-                    ),
+                    modelBuilder.Entity<EntityWithEnumType>(x =>
+                    {
+                        x.Property(e => e.Id)
+                            .Metadata.SetValueGenerationStrategy(
+                                SqlServerValueGenerationStrategy.None
+                            );
+                        x.Property(e => e.Day)
+                            .ValueGeneratedOnAdd()
+                            .Metadata.SetValueGenerationStrategy(
+                                SqlServerValueGenerationStrategy.None
+                            );
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -4344,18 +4324,16 @@ namespace RootNamespace
         {
             Test(
                 builder =>
-                    builder.Entity<EntityWithEnumType>(
-                        eb =>
-                        {
-                            eb.Property(e => e.Day)
-                                .HasDefaultValue(Days.Wed)
-                                .HasConversion(
-                                    v => v.ToString(),
-                                    v => (Days)Enum.Parse(typeof(Days), v)
-                                );
-                            eb.HasData(new { Id = 1, Day = Days.Fri });
-                        }
-                    ),
+                    builder.Entity<EntityWithEnumType>(eb =>
+                    {
+                        eb.Property(e => e.Day)
+                            .HasDefaultValue(Days.Wed)
+                            .HasConversion(
+                                v => v.ToString(),
+                                v => (Days)Enum.Parse(typeof(Days), v)
+                            );
+                        eb.HasData(new { Id = 1, Day = Days.Fri });
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -5305,15 +5283,13 @@ namespace RootNamespace
         {
             Test(
                 builder =>
-                    builder.Entity<EntityWithStringProperty>(
-                        x =>
-                        {
-                            const string propertyName =
-                                "SomePropertyWithAnExceedinglyLongIdentifierThatCausesTheDefaultIndexNameToExceedTheMaximumIdentifierLimit";
-                            x.Property<string>(propertyName);
-                            x.HasIndex(propertyName);
-                        }
-                    ),
+                    builder.Entity<EntityWithStringProperty>(x =>
+                    {
+                        const string propertyName =
+                            "SomePropertyWithAnExceedinglyLongIdentifierThatCausesTheDefaultIndexNameToExceedTheMaximumIdentifierLimit";
+                        x.Property<string>(propertyName);
+                        x.HasIndex(propertyName);
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -5499,12 +5475,10 @@ namespace RootNamespace
         {
             Test(
                 builder =>
-                    builder.Entity<EntityWithStringProperty>(
-                        x =>
-                        {
-                            x.HasIndex(e => e.Id).IncludeProperties(e => e.Name);
-                        }
-                    ),
+                    builder.Entity<EntityWithStringProperty>(x =>
+                    {
+                        x.HasIndex(e => e.Id).IncludeProperties(e => e.Name);
+                    }),
                 AddBoilerPlate(
                     GetHeading()
                         + @"
@@ -6698,113 +6672,111 @@ namespace RootNamespace
             Test(
                 builder =>
                 {
-                    builder.Entity<EntityWithManyProperties>(
-                        eb =>
-                        {
-                            eb.Property<decimal?>("OptionalProperty");
+                    builder.Entity<EntityWithManyProperties>(eb =>
+                    {
+                        eb.Property<decimal?>("OptionalProperty");
 
-                            eb.HasData(
-                                new EntityWithManyProperties
-                                {
-                                    Id = 42,
-                                    String = "FortyThree",
-                                    Bytes = new byte[] { 44, 45 },
-                                    Int16 = 46,
-                                    Int32 = 47,
-                                    Int64 = 48,
-                                    Double = 49.0,
-                                    Decimal = 50.0m,
-                                    DateTime = new DateTime(
-                                        1973,
-                                        9,
-                                        3,
-                                        12,
-                                        10,
-                                        42,
-                                        344,
-                                        DateTimeKind.Utc
-                                    ),
-                                    DateTimeOffset = new DateTimeOffset(
-                                        new DateTime(1973, 9, 3, 12, 10, 42, 344),
-                                        new TimeSpan(1, 0, 0)
-                                    ),
-                                    TimeSpan = new TimeSpan(51, 52, 53),
-                                    Single = 54.0f,
-                                    Boolean = true,
-                                    Byte = 55,
-                                    UnsignedInt16 = 56,
-                                    UnsignedInt32 = 57,
-                                    UnsignedInt64 = 58,
-                                    Character = '9',
-                                    SignedByte = 60,
-                                    Enum64 = Enum64.SomeValue,
-                                    Enum32 = Enum32.SomeValue,
-                                    Enum16 = Enum16.SomeValue,
-                                    Enum8 = Enum8.SomeValue,
-                                    EnumU64 = EnumU64.SomeValue,
-                                    EnumU32 = EnumU32.SomeValue,
-                                    EnumU16 = EnumU16.SomeValue,
-                                    EnumS8 = EnumS8.SomeValue,
-                                    SpatialBGeometryCollection = geometryCollection,
-                                    SpatialBLineString = lineString1,
-                                    SpatialBMultiLineString = multiLineString,
-                                    SpatialBMultiPoint = multiPoint,
-                                    SpatialBMultiPolygon = multiPolygon,
-                                    SpatialBPoint = point1,
-                                    SpatialBPolygon = polygon1,
-                                    SpatialCGeometryCollection = geometryCollection,
-                                    SpatialCLineString = lineString1,
-                                    SpatialCMultiLineString = multiLineString,
-                                    SpatialCMultiPoint = multiPoint,
-                                    SpatialCMultiPolygon = multiPolygon,
-                                    SpatialCPoint = point1,
-                                    SpatialCPolygon = polygon1
-                                },
-                                new
-                                {
-                                    Id = 43,
-                                    String = "FortyThree",
-                                    Bytes = new byte[] { 44, 45 },
-                                    Int16 = (short)-46,
-                                    Int32 = -47,
-                                    Int64 = (long)-48,
-                                    Double = -49.0,
-                                    Decimal = -50.0m,
-                                    DateTime = new DateTime(
-                                        1973,
-                                        9,
-                                        3,
-                                        12,
-                                        10,
-                                        42,
-                                        344,
-                                        DateTimeKind.Utc
-                                    ),
-                                    DateTimeOffset = new DateTimeOffset(
-                                        new DateTime(1973, 9, 3, 12, 10, 42, 344),
-                                        new TimeSpan(-1, 0, 0)
-                                    ),
-                                    TimeSpan = new TimeSpan(-51, 52, 53),
-                                    Single = -54.0f,
-                                    Boolean = true,
-                                    Byte = (byte)55,
-                                    UnsignedInt16 = (ushort)56,
-                                    UnsignedInt32 = (uint)57,
-                                    UnsignedInt64 = (ulong)58,
-                                    Character = '9',
-                                    SignedByte = (sbyte)-60,
-                                    Enum64 = Enum64.SomeValue,
-                                    Enum32 = Enum32.SomeValue,
-                                    Enum16 = Enum16.SomeValue,
-                                    Enum8 = Enum8.SomeValue,
-                                    EnumU64 = EnumU64.SomeValue,
-                                    EnumU32 = EnumU32.SomeValue,
-                                    EnumU16 = EnumU16.SomeValue,
-                                    EnumS8 = EnumS8.SomeValue
-                                }
-                            );
-                        }
-                    );
+                        eb.HasData(
+                            new EntityWithManyProperties
+                            {
+                                Id = 42,
+                                String = "FortyThree",
+                                Bytes = new byte[] { 44, 45 },
+                                Int16 = 46,
+                                Int32 = 47,
+                                Int64 = 48,
+                                Double = 49.0,
+                                Decimal = 50.0m,
+                                DateTime = new DateTime(
+                                    1973,
+                                    9,
+                                    3,
+                                    12,
+                                    10,
+                                    42,
+                                    344,
+                                    DateTimeKind.Utc
+                                ),
+                                DateTimeOffset = new DateTimeOffset(
+                                    new DateTime(1973, 9, 3, 12, 10, 42, 344),
+                                    new TimeSpan(1, 0, 0)
+                                ),
+                                TimeSpan = new TimeSpan(51, 52, 53),
+                                Single = 54.0f,
+                                Boolean = true,
+                                Byte = 55,
+                                UnsignedInt16 = 56,
+                                UnsignedInt32 = 57,
+                                UnsignedInt64 = 58,
+                                Character = '9',
+                                SignedByte = 60,
+                                Enum64 = Enum64.SomeValue,
+                                Enum32 = Enum32.SomeValue,
+                                Enum16 = Enum16.SomeValue,
+                                Enum8 = Enum8.SomeValue,
+                                EnumU64 = EnumU64.SomeValue,
+                                EnumU32 = EnumU32.SomeValue,
+                                EnumU16 = EnumU16.SomeValue,
+                                EnumS8 = EnumS8.SomeValue,
+                                SpatialBGeometryCollection = geometryCollection,
+                                SpatialBLineString = lineString1,
+                                SpatialBMultiLineString = multiLineString,
+                                SpatialBMultiPoint = multiPoint,
+                                SpatialBMultiPolygon = multiPolygon,
+                                SpatialBPoint = point1,
+                                SpatialBPolygon = polygon1,
+                                SpatialCGeometryCollection = geometryCollection,
+                                SpatialCLineString = lineString1,
+                                SpatialCMultiLineString = multiLineString,
+                                SpatialCMultiPoint = multiPoint,
+                                SpatialCMultiPolygon = multiPolygon,
+                                SpatialCPoint = point1,
+                                SpatialCPolygon = polygon1
+                            },
+                            new
+                            {
+                                Id = 43,
+                                String = "FortyThree",
+                                Bytes = new byte[] { 44, 45 },
+                                Int16 = (short)-46,
+                                Int32 = -47,
+                                Int64 = (long)-48,
+                                Double = -49.0,
+                                Decimal = -50.0m,
+                                DateTime = new DateTime(
+                                    1973,
+                                    9,
+                                    3,
+                                    12,
+                                    10,
+                                    42,
+                                    344,
+                                    DateTimeKind.Utc
+                                ),
+                                DateTimeOffset = new DateTimeOffset(
+                                    new DateTime(1973, 9, 3, 12, 10, 42, 344),
+                                    new TimeSpan(-1, 0, 0)
+                                ),
+                                TimeSpan = new TimeSpan(-51, 52, 53),
+                                Single = -54.0f,
+                                Boolean = true,
+                                Byte = (byte)55,
+                                UnsignedInt16 = (ushort)56,
+                                UnsignedInt32 = (uint)57,
+                                UnsignedInt64 = (ulong)58,
+                                Character = '9',
+                                SignedByte = (sbyte)-60,
+                                Enum64 = Enum64.SomeValue,
+                                Enum32 = Enum32.SomeValue,
+                                Enum16 = Enum16.SomeValue,
+                                Enum8 = Enum8.SomeValue,
+                                EnumU64 = EnumU64.SomeValue,
+                                EnumU32 = EnumU32.SomeValue,
+                                EnumU16 = EnumU16.SomeValue,
+                                EnumS8 = EnumS8.SomeValue
+                            }
+                        );
+                    });
                     builder.Ignore<EntityWithTwoProperties>();
                 },
                 @"// <auto-generated />

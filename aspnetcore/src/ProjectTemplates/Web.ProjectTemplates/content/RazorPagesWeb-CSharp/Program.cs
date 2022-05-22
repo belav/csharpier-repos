@@ -89,13 +89,11 @@ builder.Services
 #endif
 #if (OrganizationalAuth)
 
-builder.Services.AddAuthorization(
-    options =>
-    {
-        // By default, all incoming requests will be authorized according to the default policy.
-        options.FallbackPolicy = options.DefaultPolicy;
-    }
-);
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
 builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
 builder.Services
@@ -107,13 +105,11 @@ builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
-builder.Services.AddAuthorization(
-    options =>
-    {
-        // By default, all incoming requests will be authorized according to the default policy.
-        options.FallbackPolicy = options.DefaultPolicy;
-    }
-);
+builder.Services.AddAuthorization(options =>
+{
+    // By default, all incoming requests will be authorized according to the default policy.
+    options.FallbackPolicy = options.DefaultPolicy;
+});
 builder.Services.AddRazorPages();
 #else
 builder.Services.AddRazorPages();

@@ -92,28 +92,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(
-                    c =>
-                    {
-                        var additionalLocations = ImmutableArray.Create(
-                            Location.Create(c.Tree, new TextSpan(0, 10))
-                        );
-                        var additionalUnnecessaryLocations = ImmutableArray.Create(
-                            Location.Create(c.Tree, new TextSpan(0, 1)),
-                            Location.Create(c.Tree, new TextSpan(9, 1))
-                        );
+                context.RegisterSyntaxTreeAction(c =>
+                {
+                    var additionalLocations = ImmutableArray.Create(
+                        Location.Create(c.Tree, new TextSpan(0, 10))
+                    );
+                    var additionalUnnecessaryLocations = ImmutableArray.Create(
+                        Location.Create(c.Tree, new TextSpan(0, 1)),
+                        Location.Create(c.Tree, new TextSpan(9, 1))
+                    );
 
-                        c.ReportDiagnostic(
-                            DiagnosticHelper.CreateWithLocationTags(
-                                _rule,
-                                Location.Create(c.Tree, new TextSpan(0, 10)),
-                                ReportDiagnostic.Error,
-                                additionalLocations,
-                                additionalUnnecessaryLocations
-                            )
-                        );
-                    }
-                );
+                    c.ReportDiagnostic(
+                        DiagnosticHelper.CreateWithLocationTags(
+                            _rule,
+                            Location.Create(c.Tree, new TextSpan(0, 10)),
+                            ReportDiagnostic.Error,
+                            additionalLocations,
+                            additionalUnnecessaryLocations
+                        )
+                    );
+                });
             }
         }
     }

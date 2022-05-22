@@ -44,13 +44,11 @@ internal class OptionsAnalyzer
             OperationKind.SimpleAssignment
         );
 
-        context.RegisterOperationBlockEndAction(
-            context =>
-            {
-                _context.ReportAnalysis(
-                    new OptionsAnalysis(configureServicesMethod, options.ToImmutable())
-                );
-            }
-        );
+        context.RegisterOperationBlockEndAction(context =>
+        {
+            _context.ReportAnalysis(
+                new OptionsAnalysis(configureServicesMethod, options.ToImmutable())
+            );
+        });
     }
 }

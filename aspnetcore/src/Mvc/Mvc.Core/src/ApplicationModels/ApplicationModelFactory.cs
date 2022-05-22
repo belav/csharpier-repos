@@ -263,15 +263,13 @@ internal class ApplicationModelFactory
 
                 if (!template.Equals(other, StringComparison.OrdinalIgnoreCase))
                 {
-                    var descriptions = actions.Select(
-                        a =>
-                        {
-                            return Resources.FormatAttributeRoute_DuplicateNames_Item(
-                                a.action.DisplayName,
-                                a.selector.AttributeRouteModel!.Template
-                            );
-                        }
-                    );
+                    var descriptions = actions.Select(a =>
+                    {
+                        return Resources.FormatAttributeRoute_DuplicateNames_Item(
+                            a.action.DisplayName,
+                            a.selector.AttributeRouteModel!.Template
+                        );
+                    });
 
                     var message = Resources.FormatAttributeRoute_DuplicateNames(
                         routeName,

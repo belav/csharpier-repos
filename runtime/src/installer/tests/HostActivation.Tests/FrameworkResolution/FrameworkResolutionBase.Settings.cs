@@ -125,13 +125,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                         testSettings.WithRuntimeConfigCustomizer(rc => rc.WithRollForward(value));
                 case SettingLocation.FrameworkReference:
                     return testSettings =>
-                        testSettings.WithRuntimeConfigCustomizer(
-                            rc =>
-                            {
-                                rc.GetFramework(frameworkReferenceName).WithRollForward(value);
-                                return rc;
-                            }
-                        );
+                        testSettings.WithRuntimeConfigCustomizer(rc =>
+                        {
+                            rc.GetFramework(frameworkReferenceName).WithRollForward(value);
+                            return rc;
+                        });
                 default:
                     throw new Exception(
                         $"RollForward forward doesn't support setting location {location}."
@@ -171,14 +169,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                         );
                 case SettingLocation.FrameworkReference:
                     return testSettings =>
-                        testSettings.WithRuntimeConfigCustomizer(
-                            rc =>
-                            {
-                                rc.GetFramework(frameworkReferenceName)
-                                    .WithRollForwardOnNoCandidateFx(value);
-                                return rc;
-                            }
-                        );
+                        testSettings.WithRuntimeConfigCustomizer(rc =>
+                        {
+                            rc.GetFramework(frameworkReferenceName)
+                                .WithRollForwardOnNoCandidateFx(value);
+                            return rc;
+                        });
                 default:
                     throw new Exception(
                         $"RollForwardOnNoCandidateFx doesn't support setting location {location}."
@@ -204,13 +200,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                         testSettings.WithRuntimeConfigCustomizer(rc => rc.WithApplyPatches(value));
                 case SettingLocation.FrameworkReference:
                     return testSettings =>
-                        testSettings.WithRuntimeConfigCustomizer(
-                            rc =>
-                            {
-                                rc.GetFramework(frameworkReferenceName).WithApplyPatches(value);
-                                return rc;
-                            }
-                        );
+                        testSettings.WithRuntimeConfigCustomizer(rc =>
+                        {
+                            rc.GetFramework(frameworkReferenceName).WithApplyPatches(value);
+                            return rc;
+                        });
                 default:
                     throw new Exception(
                         $"ApplyPatches doesn't support setting location {location}."

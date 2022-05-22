@@ -96,42 +96,38 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     await server
-                        .AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                Task t = useNtlm
-                                    ? NtAuthTests.HandleNtlmAuthenticationRequest(
-                                        connection,
-                                        closeConnection: false
-                                    )
-                                    : NtAuthTests.HandleNegotiateAuthenticationRequest(
-                                        connection,
-                                        closeConnection: false
-                                    );
-                                await t;
-                                _output.WriteLine("Finished first request");
+                        .AcceptConnectionAsync(async connection =>
+                        {
+                            Task t = useNtlm
+                                ? NtAuthTests.HandleNtlmAuthenticationRequest(
+                                    connection,
+                                    closeConnection: false
+                                )
+                                : NtAuthTests.HandleNegotiateAuthenticationRequest(
+                                    connection,
+                                    closeConnection: false
+                                );
+                            await t;
+                            _output.WriteLine("Finished first request");
 
-                                // Second request should use new connection as it runs as different user.
-                                // We keep first connection open so HttpClient may be tempted top use it.
-                                await server
-                                    .AcceptConnectionAsync(
-                                        async connection =>
-                                        {
-                                            Task t = useNtlm
-                                                ? NtAuthTests.HandleNtlmAuthenticationRequest(
-                                                    connection,
-                                                    closeConnection: false
-                                                )
-                                                : NtAuthTests.HandleNegotiateAuthenticationRequest(
-                                                    connection,
-                                                    closeConnection: false
-                                                );
-                                            await t;
-                                        }
-                                    )
-                                    .ConfigureAwait(false);
-                            }
-                        )
+                            // Second request should use new connection as it runs as different user.
+                            // We keep first connection open so HttpClient may be tempted top use it.
+                            await server
+                                .AcceptConnectionAsync(async connection =>
+                                {
+                                    Task t = useNtlm
+                                        ? NtAuthTests.HandleNtlmAuthenticationRequest(
+                                            connection,
+                                            closeConnection: false
+                                        )
+                                        : NtAuthTests.HandleNegotiateAuthenticationRequest(
+                                            connection,
+                                            closeConnection: false
+                                        );
+                                    await t;
+                                })
+                                .ConfigureAwait(false);
+                        })
                         .ConfigureAwait(false);
                 }
             );

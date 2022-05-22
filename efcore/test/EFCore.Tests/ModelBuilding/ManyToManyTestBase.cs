@@ -172,24 +172,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     )
                     .HasKey(j => new { j.DependentWithFieldId, j.ManyToManyPrincipalWithFieldId });
 
-                modelBuilder.Entity<ManyToManyPrincipalWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.Name);
-                        e.HasKey(p => p.Id);
-                    }
-                );
-                modelBuilder.Entity<DependentWithField>(
-                    e =>
-                    {
-                        e.Property(d => d.DependentWithFieldId);
-                        e.Property(d => d.AnotherOneToManyPrincipalId);
-                        e.Ignore(d => d.OneToManyPrincipal);
-                        e.Ignore(d => d.OneToOnePrincipal);
-                        e.HasKey(d => d.DependentWithFieldId);
-                    }
-                );
+                modelBuilder.Entity<ManyToManyPrincipalWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.Name);
+                    e.HasKey(p => p.Id);
+                });
+                modelBuilder.Entity<DependentWithField>(e =>
+                {
+                    e.Property(d => d.DependentWithFieldId);
+                    e.Property(d => d.AnotherOneToManyPrincipalId);
+                    e.Ignore(d => d.OneToManyPrincipal);
+                    e.Ignore(d => d.OneToOnePrincipal);
+                    e.HasKey(d => d.DependentWithFieldId);
+                });
 
                 var principalEntityType = model.FindEntityType(
                     typeof(ManyToManyPrincipalWithField)

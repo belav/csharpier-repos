@@ -27,25 +27,21 @@ namespace System.CommandLine.Hosting
                         hostBuilderFactory?.Invoke(argsRemaining) ?? new HostBuilder();
                     hostBuilder.Properties[typeof(InvocationContext)] = invocation;
 
-                    hostBuilder.ConfigureHostConfiguration(
-                        config =>
-                        {
-                            config.AddCommandLineDirectives(
-                                invocation.ParseResult,
-                                ConfigurationDirectiveName
-                            );
-                        }
-                    );
-                    hostBuilder.ConfigureServices(
-                        services =>
-                        {
-                            services.AddSingleton(invocation);
-                            services.AddSingleton(invocation.BindingContext);
-                            services.AddSingleton(invocation.Console);
-                            services.AddTransient(_ => invocation.InvocationResult);
-                            services.AddTransient(_ => invocation.ParseResult);
-                        }
-                    );
+                    hostBuilder.ConfigureHostConfiguration(config =>
+                    {
+                        config.AddCommandLineDirectives(
+                            invocation.ParseResult,
+                            ConfigurationDirectiveName
+                        );
+                    });
+                    hostBuilder.ConfigureServices(services =>
+                    {
+                        services.AddSingleton(invocation);
+                        services.AddSingleton(invocation.BindingContext);
+                        services.AddSingleton(invocation.Console);
+                        services.AddTransient(_ => invocation.InvocationResult);
+                        services.AddTransient(_ => invocation.ParseResult);
+                    });
                     hostBuilder.UseInvocationLifetime(invocation);
                     configureHost?.Invoke(hostBuilder);
 
@@ -72,15 +68,13 @@ namespace System.CommandLine.Hosting
             Action<InvocationLifetimeOptions> configureOptions = null
         )
         {
-            return host.ConfigureServices(
-                services =>
-                {
-                    services.TryAddSingleton(invocation);
-                    services.AddSingleton<IHostLifetime, InvocationLifetime>();
-                    if (configureOptions is Action<InvocationLifetimeOptions>)
-                        services.Configure(configureOptions);
-                }
-            );
+            return host.ConfigureServices(services =>
+            {
+                services.TryAddSingleton(invocation);
+                services.AddSingleton<IHostLifetime, InvocationLifetime>();
+                if (configureOptions is Action<InvocationLifetimeOptions>)
+                    services.Configure(configureOptions);
+            });
         }
 
         public static OptionsBuilder<TOptions> BindCommandLine<TOptions>(
@@ -140,12 +134,10 @@ namespace System.CommandLine.Hosting
                     handlerType,
                     c => c.GetService<IHost>().Services.GetService(handlerType)
                 );
-                builder.ConfigureServices(
-                    services =>
-                    {
-                        services.AddTransient(handlerType);
-                    }
-                );
+                builder.ConfigureServices(services =>
+                {
+                    services.AddTransient(handlerType);
+                });
 
                 command.Handler = CommandHandler.Create(
                     handlerType.GetMethod(nameof(ICommandHandler.InvokeAsync))

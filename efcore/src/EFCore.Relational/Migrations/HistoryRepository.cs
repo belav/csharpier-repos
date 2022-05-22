@@ -108,13 +108,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 );
 
                 var modelBuilder = new ModelBuilder(conventionSet);
-                modelBuilder.Entity<HistoryRow>(
-                    x =>
-                    {
-                        ConfigureTable(x);
-                        x.ToTable(TableName, TableSchema);
-                    }
-                );
+                modelBuilder.Entity<HistoryRow>(x =>
+                {
+                    ConfigureTable(x);
+                    x.ToTable(TableName, TableSchema);
+                });
 
                 _model = Dependencies.ModelRuntimeInitializer.Initialize(
                     (IModel)modelBuilder.Model,

@@ -360,14 +360,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             // If we have any instance exports, then we also
             // need activation.
-            return ExportDefinitions.Any(
-                definition =>
-                {
-                    ExportingMember? member = GetExportingMemberFromDefinition(definition);
-                    Debug.Assert(member != null);
-                    return member.RequiresInstance;
-                }
-            );
+            return ExportDefinitions.Any(definition =>
+            {
+                ExportingMember? member = GetExportingMemberFromDefinition(definition);
+                Debug.Assert(member != null);
+                return member.RequiresInstance;
+            });
         }
 
         // this is called under a lock

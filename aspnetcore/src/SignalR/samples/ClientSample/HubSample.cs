@@ -34,19 +34,15 @@ internal class HubSample
 
         Console.WriteLine("Connecting to {0}", uri);
 
-        var connectionBuilder = new HubConnectionBuilder().ConfigureLogging(
-            logging =>
-            {
-                logging.AddConsole();
-            }
-        );
+        var connectionBuilder = new HubConnectionBuilder().ConfigureLogging(logging =>
+        {
+            logging.AddConsole();
+        });
 
-        connectionBuilder.Services.Configure<LoggerFilterOptions>(
-            options =>
-            {
-                options.MinLevel = LogLevel.Trace;
-            }
-        );
+        connectionBuilder.Services.Configure<LoggerFilterOptions>(options =>
+        {
+            options.MinLevel = LogLevel.Trace;
+        });
 
         if (uri.Scheme == "net.tcp")
         {

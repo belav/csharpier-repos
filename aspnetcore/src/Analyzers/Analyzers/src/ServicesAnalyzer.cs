@@ -42,13 +42,11 @@ internal class ServicesAnalyzer
             OperationKind.Invocation
         );
 
-        context.RegisterOperationBlockEndAction(
-            context =>
-            {
-                _context.ReportAnalysis(
-                    new ServicesAnalysis(configureServicesMethod, services.ToImmutable())
-                );
-            }
-        );
+        context.RegisterOperationBlockEndAction(context =>
+        {
+            _context.ReportAnalysis(
+                new ServicesAnalysis(configureServicesMethod, services.ToImmutable())
+            );
+        });
     }
 }

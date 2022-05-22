@@ -623,13 +623,11 @@ public class AuthorizeViewTest
         // Arrange
         var authorizationService = new TestAuthorizationService();
         var renderer = CreateTestRenderer(authorizationService);
-        var rootComponent = new TestAuthStateProviderComponent(
-            builder =>
-            {
-                builder.OpenComponent<AuthorizeViewCoreWithScheme>(0);
-                builder.CloseComponent();
-            }
-        );
+        var rootComponent = new TestAuthStateProviderComponent(builder =>
+        {
+            builder.OpenComponent<AuthorizeViewCoreWithScheme>(0);
+            builder.CloseComponent();
+        });
         renderer.AssignRootComponentId(rootComponent);
 
         // Act/Assert
@@ -650,20 +648,18 @@ public class AuthorizeViewTest
         object resource = null
     )
     {
-        return new TestAuthStateProviderComponent(
-            builder =>
-            {
-                builder.OpenComponent<AuthorizeView>(0);
-                builder.AddAttribute(1, nameof(AuthorizeView.ChildContent), childContent);
-                builder.AddAttribute(2, nameof(AuthorizeView.Authorized), authorized);
-                builder.AddAttribute(3, nameof(AuthorizeView.NotAuthorized), notAuthorized);
-                builder.AddAttribute(4, nameof(AuthorizeView.Authorizing), authorizing);
-                builder.AddAttribute(5, nameof(AuthorizeView.Policy), policy);
-                builder.AddAttribute(6, nameof(AuthorizeView.Roles), roles);
-                builder.AddAttribute(7, nameof(AuthorizeView.Resource), resource);
-                builder.CloseComponent();
-            }
-        );
+        return new TestAuthStateProviderComponent(builder =>
+        {
+            builder.OpenComponent<AuthorizeView>(0);
+            builder.AddAttribute(1, nameof(AuthorizeView.ChildContent), childContent);
+            builder.AddAttribute(2, nameof(AuthorizeView.Authorized), authorized);
+            builder.AddAttribute(3, nameof(AuthorizeView.NotAuthorized), notAuthorized);
+            builder.AddAttribute(4, nameof(AuthorizeView.Authorizing), authorizing);
+            builder.AddAttribute(5, nameof(AuthorizeView.Policy), policy);
+            builder.AddAttribute(6, nameof(AuthorizeView.Roles), roles);
+            builder.AddAttribute(7, nameof(AuthorizeView.Resource), resource);
+            builder.CloseComponent();
+        });
     }
 
     class TestAuthStateProviderComponent : AutoRenderComponent

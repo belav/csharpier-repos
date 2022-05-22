@@ -33,17 +33,15 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificateSelector = (context, host) =>
                             {
-                                httpsOptions.ServerCertificateSelector = (context, host) =>
-                                {
-                                    Assert.Null(context); // The context isn't available durring the quic handshake.
-                                    Assert.Equal("localhost", host);
-                                    return TestResources.GetTestCertificate();
-                                };
-                            }
-                        );
+                                Assert.Null(context); // The context isn't available durring the quic handshake.
+                                Assert.Equal("localhost", host);
+                                return TestResources.GetTestCertificate();
+                            };
+                        });
                     }
                 );
             }
@@ -103,14 +101,12 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
-                            {
-                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                                httpsOptions.ClientCertificateMode = mode;
-                                httpsOptions.AllowAnyClientCertificate();
-                            }
-                        );
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
                     }
                 );
             }
@@ -160,14 +156,12 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
-                            {
-                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                                httpsOptions.ClientCertificateMode = mode;
-                                httpsOptions.AllowAnyClientCertificate();
-                            }
-                        );
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
                     }
                 );
             }
@@ -223,18 +217,16 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
-                            {
-                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                                httpsOptions.ClientCertificateMode = mode;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
 
-                                if (serverAllowInvalid)
-                                {
-                                    httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
-                                }
+                            if (serverAllowInvalid)
+                            {
+                                httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
                             }
-                        );
+                        });
                     }
                 );
             }
@@ -294,15 +286,13 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
-                            {
-                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                                httpsOptions.ClientCertificateMode =
-                                    ClientCertificateMode.AllowCertificate;
-                                httpsOptions.AllowAnyClientCertificate();
-                            }
-                        );
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode =
+                                ClientCertificateMode.AllowCertificate;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
                     }
                 );
             }
@@ -345,12 +335,10 @@ public class Http3TlsTests : LoggedTest
                     listenOptions =>
                     {
                         listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            httpsOptions =>
-                            {
-                                httpsOptions.OnAuthenticate = (_, _) => { };
-                            }
-                        );
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.OnAuthenticate = (_, _) => { };
+                        });
                     }
                 );
             }

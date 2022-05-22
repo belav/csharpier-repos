@@ -26,28 +26,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             //   void M(object, object);
             // }
             var reference =
-                Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(
-                    moduleBuilder =>
-                    {
-                        var typeBuilder = moduleBuilder.DefineType(
-                            "I",
-                            TypeAttributes.Interface
-                                | TypeAttributes.Public
-                                | TypeAttributes.Abstract
-                        );
-                        var methodBuilder = typeBuilder.DefineMethod(
-                            "M",
-                            MethodAttributes.Public
-                                | MethodAttributes.Abstract
-                                | MethodAttributes.Virtual,
-                            typeof(void),
-                            new Type[] { typeof(object), typeof(object) }
-                        );
-                        methodBuilder.DefineParameter(1, ParameterAttributes.None, null);
-                        methodBuilder.DefineParameter(2, ParameterAttributes.None, null);
-                        typeBuilder.CreateType();
-                    }
-                );
+                Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(moduleBuilder =>
+                {
+                    var typeBuilder = moduleBuilder.DefineType(
+                        "I",
+                        TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract
+                    );
+                    var methodBuilder = typeBuilder.DefineMethod(
+                        "M",
+                        MethodAttributes.Public
+                            | MethodAttributes.Abstract
+                            | MethodAttributes.Virtual,
+                        typeof(void),
+                        new Type[] { typeof(object), typeof(object) }
+                    );
+                    methodBuilder.DefineParameter(1, ParameterAttributes.None, null);
+                    methodBuilder.DefineParameter(2, ParameterAttributes.None, null);
+                    typeBuilder.CreateType();
+                });
             var source =
                 @"class C
 {

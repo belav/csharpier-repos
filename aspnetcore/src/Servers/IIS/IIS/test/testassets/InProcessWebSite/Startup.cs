@@ -200,13 +200,11 @@ public partial class Startup
     {
         builder.UseResponseCompression();
         // write random bytes to check that compressed data is passed through
-        builder.Run(
-            async context =>
-            {
-                context.Response.ContentType = "text/html";
-                await context.Response.Body.WriteAsync(new byte[100], 0, 100);
-            }
-        );
+        builder.Run(async context =>
+        {
+            context.Response.ContentType = "text/html";
+            await context.Response.Body.WriteAsync(new byte[100], 0, 100);
+        });
     }
 
     [DllImport("kernel32.dll")]

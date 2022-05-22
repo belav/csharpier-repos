@@ -173,13 +173,11 @@ public class MvcOptionsSetupTest
     public void Setup_SetsUpMetadataDetailsProviders()
     {
         // Arrange & Act
-        var options = GetOptions<MvcOptions>(
-            services =>
-            {
-                var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
-                builder.AddXmlDataContractSerializerFormatters();
-            }
-        );
+        var options = GetOptions<MvcOptions>(services =>
+        {
+            var builder = new MvcCoreBuilder(services, new ApplicationPartManager());
+            builder.AddXmlDataContractSerializerFormatters();
+        });
 
         // Assert
         var providers = options.ModelMetadataDetailsProviders;

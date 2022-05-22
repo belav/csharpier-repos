@@ -37,22 +37,20 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
-                {
-                    if (
-                        MakeLocalFunctionStaticHelper.IsStaticLocalFunctionSupported(
-                            ((CSharpCompilation)context.Compilation).LanguageVersion
-                        )
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (
+                    MakeLocalFunctionStaticHelper.IsStaticLocalFunctionSupported(
+                        ((CSharpCompilation)context.Compilation).LanguageVersion
                     )
-                    {
-                        context.RegisterSyntaxNodeAction(
-                            AnalyzeSyntax,
-                            SyntaxKind.LocalFunctionStatement
-                        );
-                    }
+                )
+                {
+                    context.RegisterSyntaxNodeAction(
+                        AnalyzeSyntax,
+                        SyntaxKind.LocalFunctionStatement
+                    );
                 }
-            );
+            });
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {

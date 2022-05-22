@@ -73,13 +73,11 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             // look at the ones we'd need to parse.
             var siblingDocumentsAndRoots = document.Project.Documents
                 .Where(d => d != document)
-                .Select(
-                    d =>
-                    {
-                        d.TryGetSyntaxRoot(out var siblingRoot);
-                        return (document: d, root: siblingRoot);
-                    }
-                )
+                .Select(d =>
+                {
+                    d.TryGetSyntaxRoot(out var siblingRoot);
+                    return (document: d, root: siblingRoot);
+                })
                 .OrderBy(
                     (t1, t2) =>
                         (t1.root != null) == (t2.root != null)

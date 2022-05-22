@@ -13,19 +13,17 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services
-            .AddControllers(
-                options =>
-                {
-                    options.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(Developer))
-                    );
-                    options.ModelMetadataDetailsProviders.Add(
-                        new SuppressChildValidationMetadataProvider(typeof(Supplier))
-                    );
+            .AddControllers(options =>
+            {
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Developer))
+                );
+                options.ModelMetadataDetailsProviders.Add(
+                    new SuppressChildValidationMetadataProvider(typeof(Supplier))
+                );
 
-                    options.InputFormatters.Add(new StringInputFormatter());
-                }
-            )
+                options.InputFormatters.Add(new StringInputFormatter());
+            })
             .AddNewtonsoftJson(
                 options => options.SerializerSettings.Converters.Insert(0, new IModelConverter())
             )
@@ -37,11 +35,9 @@ public class Startup
         app.UseDeveloperExceptionPage();
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 }

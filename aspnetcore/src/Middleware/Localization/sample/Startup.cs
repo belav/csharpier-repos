@@ -222,17 +222,15 @@ public class Startup
         var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .ConfigureLogging(factory => factory.AddConsole())
-                        .UseKestrel()
-                        .UseConfiguration(config)
-                        .UseIISIntegration()
-                        .UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .ConfigureLogging(factory => factory.AddConsole())
+                    .UseKestrel()
+                    .UseConfiguration(config)
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

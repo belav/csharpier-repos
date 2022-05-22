@@ -77,30 +77,28 @@ public class ClientHandler : HttpMessageHandler
         {
             // Read content from the request HttpContent into a pipe in a background task. This will allow the request
             // delegate to start before the request HttpContent is complete. A background task allows duplex streaming scenarios.
-            contextBuilder.SendRequestStream(
-                async writer =>
+            contextBuilder.SendRequestStream(async writer =>
+            {
+                if (requestContent is StreamContent)
                 {
-                    if (requestContent is StreamContent)
+                    // This is odd but required for backwards compat. If StreamContent is passed in then seek to beginning.
+                    // This is safe because StreamContent.ReadAsStreamAsync doesn't block. It will return the inner stream.
+                    var body = await requestContent.ReadAsStreamAsync();
+                    if (body.CanSeek)
                     {
-                        // This is odd but required for backwards compat. If StreamContent is passed in then seek to beginning.
-                        // This is safe because StreamContent.ReadAsStreamAsync doesn't block. It will return the inner stream.
-                        var body = await requestContent.ReadAsStreamAsync();
-                        if (body.CanSeek)
-                        {
-                            // This body may have been consumed before, rewind it.
-                            body.Seek(0, SeekOrigin.Begin);
-                        }
-
-                        await body.CopyToAsync(writer);
-                    }
-                    else
-                    {
-                        await requestContent.CopyToAsync(writer.AsStream());
+                        // This body may have been consumed before, rewind it.
+                        body.Seek(0, SeekOrigin.Begin);
                     }
 
-                    await writer.CompleteAsync();
+                    await body.CopyToAsync(writer);
                 }
-            );
+                else
+                {
+                    await requestContent.CopyToAsync(writer.AsStream());
+                }
+
+                await writer.CompleteAsync();
+            });
         }
 
         contextBuilder.Configure(
@@ -193,25 +191,23 @@ public class ClientHandler : HttpMessageHandler
         var response = new HttpResponseMessage();
 
         // Copy trailers to the response message when the response stream is complete
-        contextBuilder.RegisterResponseReadCompleteCallback(
-            context =>
-            {
-                var responseTrailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+        contextBuilder.RegisterResponseReadCompleteCallback(context =>
+        {
+            var responseTrailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                // Trailers collection is settable so double check the app hasn't set it to null.
-                if (responseTrailersFeature?.Trailers != null)
+            // Trailers collection is settable so double check the app hasn't set it to null.
+            if (responseTrailersFeature?.Trailers != null)
+            {
+                foreach (var trailer in responseTrailersFeature.Trailers)
                 {
-                    foreach (var trailer in responseTrailersFeature.Trailers)
-                    {
-                        bool success = response.TrailingHeaders.TryAddWithoutValidation(
-                            trailer.Key,
-                            (IEnumerable<string>)trailer.Value
-                        );
-                        Contract.Assert(success, "Bad trailer");
-                    }
+                    bool success = response.TrailingHeaders.TryAddWithoutValidation(
+                        trailer.Key,
+                        (IEnumerable<string>)trailer.Value
+                    );
+                    Contract.Assert(success, "Bad trailer");
                 }
             }
-        );
+        });
 
         var httpContext = await contextBuilder.SendAsync(cancellationToken);
 

@@ -497,22 +497,14 @@ namespace System.Net.Http.Functional.Tests
 
                                     Task<HttpResponseMessage> clientTask1 = client.GetAsync(uri1);
                                     Task<HttpResponseMessage> clientTask2 = client.GetAsync(uri2);
-                                    await server1.AcceptConnectionAsync(
-                                        async connection1 =>
+                                    await server1.AcceptConnectionAsync(async connection1 =>
+                                    {
+                                        await server2.AcceptConnectionAsync(async connection2 =>
                                         {
-                                            await server2.AcceptConnectionAsync(
-                                                async connection2 =>
-                                                {
-                                                    await connection1.HandleRequestAsync(
-                                                        content: Content
-                                                    );
-                                                    await connection2.HandleRequestAsync(
-                                                        content: Content
-                                                    );
-                                                }
-                                            );
-                                        }
-                                    );
+                                            await connection1.HandleRequestAsync(content: Content);
+                                            await connection2.HandleRequestAsync(content: Content);
+                                        });
+                                    });
 
                                     using (var response1 = await clientTask1)
                                     {
@@ -802,15 +794,13 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"GET {uri}/ HTTP/1.1", headers);
-                        }
-                    )
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"GET {uri}/ HTTP/1.1", headers);
+                    })
             );
 
             Assert.True(connectionAccepted);
@@ -846,15 +836,13 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"GET {expectedAddressUri} HTTP/1.1", headers);
-                        }
-                    )
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"GET {expectedAddressUri} HTTP/1.1", headers);
+                    })
             );
 
             Assert.True(connectionAccepted);
@@ -886,15 +874,13 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"CONNECT {requestTarget} HTTP/1.1", headers);
-                        }
-                    )
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"CONNECT {requestTarget} HTTP/1.1", headers);
+                    })
             );
 
             Assert.True(connectionAccepted);
@@ -937,23 +923,21 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"CONNECT {host}:443 HTTP/1.1", headers);
+                        if (addUserAgentHeader)
                         {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"CONNECT {host}:443 HTTP/1.1", headers);
-                            if (addUserAgentHeader)
-                            {
-                                Assert.Contains("User-Agent: Mozilla/5.0", headers);
-                            }
-                            else
-                            {
-                                Assert.DoesNotContain("User-Agent:", headers);
-                            }
+                            Assert.Contains("User-Agent: Mozilla/5.0", headers);
                         }
-                    )
+                        else
+                        {
+                            Assert.DoesNotContain("User-Agent:", headers);
+                        }
+                    })
             );
 
             Assert.True(connectionAccepted);

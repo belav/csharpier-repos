@@ -29,24 +29,22 @@ public static class HeaderPropagationHttpClientBuilderExtensions
 
         builder.Services.AddHeaderPropagation();
 
-        builder.AddHttpMessageHandler(
-            services =>
+        builder.AddHttpMessageHandler(services =>
+        {
+            var options = new HeaderPropagationMessageHandlerOptions();
+            var middlewareOptions = services.GetRequiredService<
+                IOptions<HeaderPropagationOptions>
+            >();
+            for (var i = 0; i < middlewareOptions.Value.Headers.Count; i++)
             {
-                var options = new HeaderPropagationMessageHandlerOptions();
-                var middlewareOptions = services.GetRequiredService<
-                    IOptions<HeaderPropagationOptions>
-                >();
-                for (var i = 0; i < middlewareOptions.Value.Headers.Count; i++)
-                {
-                    var header = middlewareOptions.Value.Headers[i];
-                    options.Headers.Add(header.CapturedHeaderName, header.CapturedHeaderName);
-                }
-                return new HeaderPropagationMessageHandler(
-                    options,
-                    services.GetRequiredService<HeaderPropagationValues>()
-                );
+                var header = middlewareOptions.Value.Headers[i];
+                options.Headers.Add(header.CapturedHeaderName, header.CapturedHeaderName);
             }
-        );
+            return new HeaderPropagationMessageHandler(
+                options,
+                services.GetRequiredService<HeaderPropagationValues>()
+            );
+        });
 
         return builder;
     }
@@ -76,17 +74,15 @@ public static class HeaderPropagationHttpClientBuilderExtensions
 
         builder.Services.AddHeaderPropagation();
 
-        builder.AddHttpMessageHandler(
-            services =>
-            {
-                var options = new HeaderPropagationMessageHandlerOptions();
-                configure(options);
-                return new HeaderPropagationMessageHandler(
-                    options,
-                    services.GetRequiredService<HeaderPropagationValues>()
-                );
-            }
-        );
+        builder.AddHttpMessageHandler(services =>
+        {
+            var options = new HeaderPropagationMessageHandlerOptions();
+            configure(options);
+            return new HeaderPropagationMessageHandler(
+                options,
+                services.GetRequiredService<HeaderPropagationValues>()
+            );
+        });
 
         return builder;
     }

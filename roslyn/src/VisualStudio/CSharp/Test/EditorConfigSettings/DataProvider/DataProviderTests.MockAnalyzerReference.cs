@@ -112,20 +112,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
                 public override void Initialize(AnalysisContext context)
                 {
-                    context.RegisterSyntaxTreeAction(
-                        c =>
+                    context.RegisterSyntaxTreeAction(c =>
+                    {
+                        foreach (var descriptor in SupportedDiagnostics)
                         {
-                            foreach (var descriptor in SupportedDiagnostics)
-                            {
-                                c.ReportDiagnostic(
-                                    Diagnostic.Create(
-                                        descriptor,
-                                        c.Tree.GetLocation(TextSpan.FromBounds(0, 0))
-                                    )
-                                );
-                            }
+                            c.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    descriptor,
+                                    c.Tree.GetLocation(TextSpan.FromBounds(0, 0))
+                                )
+                            );
                         }
-                    );
+                    });
                 }
             }
         }

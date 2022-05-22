@@ -450,12 +450,10 @@ namespace System.ComponentModel.Composition
         )
         {
             return new CompositionResult<T>(
-                errorIds.Select(
-                    id =>
-                    {
-                        return ErrorFactory.Create(id);
-                    }
-                )
+                errorIds.Select(id =>
+                {
+                    return ErrorFactory.Create(id);
+                })
             );
         }
 

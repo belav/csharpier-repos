@@ -17,18 +17,16 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    webBuilder.UseSetting(
-                        WebHostDefaults.ApplicationKey,
-                        typeof(Program).Assembly.GetName().Name
-                    );
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseSetting(
+                    WebHostDefaults.ApplicationKey,
+                    typeof(Program).Assembly.GetName().Name
+                );
 
-                    // We require this line because we run in Production environment
-                    // and static web assets are only on by default during development.
-                    webBuilder.UseStaticWebAssets();
-                    webBuilder.UseStartup<Startup>();
-                }
-            );
+                // We require this line because we run in Production environment
+                // and static web assets are only on by default during development.
+                webBuilder.UseStaticWebAssets();
+                webBuilder.UseStartup<Startup>();
+            });
 }

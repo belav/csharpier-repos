@@ -48,16 +48,14 @@
             [Fact]
             public void Example()
             {
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Entity, EntityViewModel>()
-                            .ForMember(
-                                m => m.SubEntityNames,
-                                o => o.MapFrom(f => f.SubEntities.Select(e => e.Name))
-                            );
-                    }
-                );
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Entity, EntityViewModel>()
+                        .ForMember(
+                            m => m.SubEntityNames,
+                            o => o.MapFrom(f => f.SubEntities.Select(e => e.Name))
+                        );
+                });
 
                 var expression = config
                     .Internal()
@@ -84,15 +82,13 @@
             [Fact]
             public void SubMap()
             {
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<SubEntity, SubEntityViewModel>()
-                            .ForMember(m => m.Description, o => o.MapFrom(s => s.Description));
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<SubEntity, SubEntityViewModel>()
+                        .ForMember(m => m.Description, o => o.MapFrom(s => s.Description));
 
-                        cfg.CreateProjection<Entity, EntityDetailledViewModel>();
-                    }
-                );
+                    cfg.CreateProjection<Entity, EntityDetailledViewModel>();
+                });
 
                 var expression = config
                     .Internal()

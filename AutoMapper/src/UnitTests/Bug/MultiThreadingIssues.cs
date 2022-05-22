@@ -59,15 +59,13 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Task.Factory
                     .StartNew(doMapping)
-                    .ContinueWith(
-                        a =>
+                    .ContinueWith(a =>
+                    {
+                        if (Interlocked.Increment(ref _done) == threadCount)
                         {
-                            if (Interlocked.Increment(ref _done) == threadCount)
-                            {
-                                _allDone.Set();
-                            }
+                            _allDone.Set();
                         }
-                    );
+                    });
             }
 
             _allDone.WaitOne(TimeSpan.FromSeconds(10));
@@ -627,12 +625,10 @@ namespace AutoMapper.UnitTests.Bug
         {
             var sourceType = typeof(Entity<>);
             var destinationType = typeof(Dto<>);
-            var c = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
-                }
-            );
+            var c = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
+            });
             var types = new[]
             {
                 new[] { typeof(SomeEntityA), typeof(SomeDtoA) },
@@ -1172,12 +1168,10 @@ namespace AutoMapper.UnitTests.Bug
         {
             var sourceType = typeof(Entity<>);
             var destinationType = typeof(Dto<>);
-            var c = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
-                }
-            );
+            var c = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
+            });
             var mapper = c.CreateMapper();
             var types = new[]
             {

@@ -12,13 +12,11 @@
 
         public NonGenericQueryableTests()
         {
-            _config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Movie, MovieDto>();
-                    cfg.CreateProjection<Actor, ActorDto>();
-                }
-            );
+            _config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Movie, MovieDto>();
+                cfg.CreateProjection<Actor, ActorDto>();
+            });
         }
 
         [Fact]

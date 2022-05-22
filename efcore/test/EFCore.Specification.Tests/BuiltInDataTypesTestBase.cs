@@ -3294,89 +3294,85 @@ namespace Microsoft.EntityFrameworkCore
             {
                 modelBuilder.Entity<BinaryKeyDataType>();
                 modelBuilder.Entity<StringKeyDataType>();
-                modelBuilder.Entity<BuiltInDataTypes>(
-                    eb =>
-                    {
-                        eb.HasData(
-                            new BuiltInDataTypes
-                            {
-                                Id = 13,
-                                PartitionId = 1,
-                                TestInt16 = -1234,
-                                TestInt32 = -123456789,
-                                TestInt64 = -1234567890123456789L,
-                                TestDouble = -1.23456789,
-                                TestDecimal = -1234567890.01M,
-                                TestDateTime = DateTime.Parse("01/01/2000 12:34:56"),
-                                TestDateTimeOffset = new DateTimeOffset(
-                                    DateTime.Parse("01/01/2000 12:34:56"),
-                                    TimeSpan.FromHours(-8.0)
-                                ),
-                                TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                                TestSingle = -1.234F,
-                                TestBoolean = true,
-                                TestByte = 255,
-                                TestUnsignedInt16 = 1234,
-                                TestUnsignedInt32 = 1234565789U,
-                                TestUnsignedInt64 = 1234567890123456789UL,
-                                TestCharacter = 'a',
-                                TestSignedByte = -128,
-                                Enum64 = Enum64.SomeValue,
-                                Enum32 = Enum32.SomeValue,
-                                Enum16 = Enum16.SomeValue,
-                                Enum8 = Enum8.SomeValue,
-                                EnumU64 = EnumU64.SomeValue,
-                                EnumU32 = EnumU32.SomeValue,
-                                EnumU16 = EnumU16.SomeValue,
-                                EnumS8 = EnumS8.SomeValue
-                            }
-                        );
-                        eb.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<BuiltInDataTypes>(eb =>
+                {
+                    eb.HasData(
+                        new BuiltInDataTypes
+                        {
+                            Id = 13,
+                            PartitionId = 1,
+                            TestInt16 = -1234,
+                            TestInt32 = -123456789,
+                            TestInt64 = -1234567890123456789L,
+                            TestDouble = -1.23456789,
+                            TestDecimal = -1234567890.01M,
+                            TestDateTime = DateTime.Parse("01/01/2000 12:34:56"),
+                            TestDateTimeOffset = new DateTimeOffset(
+                                DateTime.Parse("01/01/2000 12:34:56"),
+                                TimeSpan.FromHours(-8.0)
+                            ),
+                            TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                            TestSingle = -1.234F,
+                            TestBoolean = true,
+                            TestByte = 255,
+                            TestUnsignedInt16 = 1234,
+                            TestUnsignedInt32 = 1234565789U,
+                            TestUnsignedInt64 = 1234567890123456789UL,
+                            TestCharacter = 'a',
+                            TestSignedByte = -128,
+                            Enum64 = Enum64.SomeValue,
+                            Enum32 = Enum32.SomeValue,
+                            Enum16 = Enum16.SomeValue,
+                            Enum8 = Enum8.SomeValue,
+                            EnumU64 = EnumU64.SomeValue,
+                            EnumU32 = EnumU32.SomeValue,
+                            EnumU16 = EnumU16.SomeValue,
+                            EnumS8 = EnumS8.SomeValue
+                        }
+                    );
+                    eb.Property(e => e.Id).ValueGeneratedNever();
+                });
                 modelBuilder
                     .Entity<BuiltInDataTypesShadow>()
                     .Property(e => e.Id)
                     .ValueGeneratedNever();
-                modelBuilder.Entity<BuiltInNullableDataTypes>(
-                    eb =>
-                    {
-                        eb.HasData(
-                            new BuiltInNullableDataTypes
-                            {
-                                Id = 13,
-                                PartitionId = 1,
-                                TestNullableInt16 = -1234,
-                                TestNullableInt32 = -123456789,
-                                TestNullableInt64 = -1234567890123456789L,
-                                TestNullableDouble = -1.23456789,
-                                TestNullableDecimal = -1234567890.01M,
-                                TestNullableDateTimeOffset = new DateTimeOffset(
-                                    new DateTime(),
-                                    TimeSpan.FromHours(-8.0)
-                                ),
-                                TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                                TestNullableSingle = -1.234F,
-                                TestNullableBoolean = true,
-                                TestNullableByte = 255,
-                                TestNullableUnsignedInt16 = 1234,
-                                TestNullableUnsignedInt32 = 1234565789U,
-                                TestNullableUnsignedInt64 = 1234567890123456789UL,
-                                TestNullableCharacter = 'a',
-                                TestNullableSignedByte = -128,
-                                Enum64 = Enum64.SomeValue,
-                                Enum32 = Enum32.SomeValue,
-                                Enum16 = Enum16.SomeValue,
-                                Enum8 = Enum8.SomeValue,
-                                EnumU64 = EnumU64.SomeValue,
-                                EnumU32 = EnumU32.SomeValue,
-                                EnumU16 = EnumU16.SomeValue,
-                                EnumS8 = EnumS8.SomeValue
-                            }
-                        );
-                        eb.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<BuiltInNullableDataTypes>(eb =>
+                {
+                    eb.HasData(
+                        new BuiltInNullableDataTypes
+                        {
+                            Id = 13,
+                            PartitionId = 1,
+                            TestNullableInt16 = -1234,
+                            TestNullableInt32 = -123456789,
+                            TestNullableInt64 = -1234567890123456789L,
+                            TestNullableDouble = -1.23456789,
+                            TestNullableDecimal = -1234567890.01M,
+                            TestNullableDateTimeOffset = new DateTimeOffset(
+                                new DateTime(),
+                                TimeSpan.FromHours(-8.0)
+                            ),
+                            TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                            TestNullableSingle = -1.234F,
+                            TestNullableBoolean = true,
+                            TestNullableByte = 255,
+                            TestNullableUnsignedInt16 = 1234,
+                            TestNullableUnsignedInt32 = 1234565789U,
+                            TestNullableUnsignedInt64 = 1234567890123456789UL,
+                            TestNullableCharacter = 'a',
+                            TestNullableSignedByte = -128,
+                            Enum64 = Enum64.SomeValue,
+                            Enum32 = Enum32.SomeValue,
+                            Enum16 = Enum16.SomeValue,
+                            Enum8 = Enum8.SomeValue,
+                            EnumU64 = EnumU64.SomeValue,
+                            EnumU32 = EnumU32.SomeValue,
+                            EnumU16 = EnumU16.SomeValue,
+                            EnumS8 = EnumS8.SomeValue
+                        }
+                    );
+                    eb.Property(e => e.Id).ValueGeneratedNever();
+                });
                 modelBuilder
                     .Entity<BuiltInNullableDataTypesShadow>()
                     .Property(e => e.Id)
@@ -3392,72 +3388,62 @@ namespace Microsoft.EntityFrameworkCore
                 MakeRequired<BuiltInDataTypes>(modelBuilder);
                 MakeRequired<BuiltInDataTypesShadow>(modelBuilder);
 
-                modelBuilder.Entity<MaxLengthDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.ByteArray5).HasMaxLength(5);
-                        b.Property(e => e.String3).HasMaxLength(3);
-                        b.Property(e => e.ByteArray9000).HasMaxLength(LongStringLength);
-                        b.Property(e => e.String9000).HasMaxLength(LongStringLength);
-                    }
-                );
+                modelBuilder.Entity<MaxLengthDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.ByteArray5).HasMaxLength(5);
+                    b.Property(e => e.String3).HasMaxLength(3);
+                    b.Property(e => e.ByteArray9000).HasMaxLength(LongStringLength);
+                    b.Property(e => e.String9000).HasMaxLength(LongStringLength);
+                });
 
-                modelBuilder.Entity<UnicodeDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.StringAnsi).IsUnicode(false);
-                        b.Property(e => e.StringAnsi3).HasMaxLength(3).IsUnicode(false);
-                        b.Property(e => e.StringAnsi9000)
-                            .IsUnicode(false)
-                            .HasMaxLength(LongStringLength);
-                        b.Property(e => e.StringUnicode).IsUnicode();
-                    }
-                );
+                modelBuilder.Entity<UnicodeDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.StringAnsi).IsUnicode(false);
+                    b.Property(e => e.StringAnsi3).HasMaxLength(3).IsUnicode(false);
+                    b.Property(e => e.StringAnsi9000)
+                        .IsUnicode(false)
+                        .HasMaxLength(LongStringLength);
+                    b.Property(e => e.StringUnicode).IsUnicode();
+                });
 
-                modelBuilder.Entity<BuiltInDataTypesShadow>(
-                    b =>
+                modelBuilder.Entity<BuiltInDataTypesShadow>(b =>
+                {
+                    foreach (
+                        var property in modelBuilder
+                            .Entity<BuiltInDataTypes>()
+                            .Metadata.GetProperties()
+                            .Where(p => p.Name != "Id")
+                    )
                     {
-                        foreach (
-                            var property in modelBuilder
-                                .Entity<BuiltInDataTypes>()
-                                .Metadata.GetProperties()
-                                .Where(p => p.Name != "Id")
-                        )
+                        b.Property(property.ClrType, property.Name);
+                    }
+                });
+
+                modelBuilder.Entity<BuiltInNullableDataTypesShadow>(b =>
+                {
+                    foreach (
+                        var property in modelBuilder
+                            .Entity<BuiltInNullableDataTypes>()
+                            .Metadata.GetProperties()
+                            .Where(p => p.Name != "Id")
+                    )
+                    {
+                        b.Property(property.ClrType, property.Name);
+                    }
+                });
+
+                modelBuilder.Entity<EmailTemplate>(b =>
+                {
+                    b.HasData(
+                        new EmailTemplate
                         {
-                            b.Property(property.ClrType, property.Name);
+                            Id = Guid.Parse("3C56082A-005A-4FFB-A9CF-F5EBD641E07D"),
+                            TemplateType = EmailTemplateType.PasswordResetRequest
                         }
-                    }
-                );
-
-                modelBuilder.Entity<BuiltInNullableDataTypesShadow>(
-                    b =>
-                    {
-                        foreach (
-                            var property in modelBuilder
-                                .Entity<BuiltInNullableDataTypes>()
-                                .Metadata.GetProperties()
-                                .Where(p => p.Name != "Id")
-                        )
-                        {
-                            b.Property(property.ClrType, property.Name);
-                        }
-                    }
-                );
-
-                modelBuilder.Entity<EmailTemplate>(
-                    b =>
-                    {
-                        b.HasData(
-                            new EmailTemplate
-                            {
-                                Id = Guid.Parse("3C56082A-005A-4FFB-A9CF-F5EBD641E07D"),
-                                TemplateType = EmailTemplateType.PasswordResetRequest
-                            }
-                        );
-                    }
-                );
+                    );
+                });
 
                 modelBuilder
                     .Entity<ObjectBackedDataTypes>()

@@ -7,20 +7,18 @@ namespace AutoMapper.UnitTests.Bug
     public class GenericCreateMapsWithCircularReference : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(User<>), typeof(UserPoco<>));
-                    cfg.CreateMap(typeof(Role<>), typeof(RolePoco<>));
-                    cfg.CreateMap(typeof(UsersInRole<>), typeof(UsersInRolePoco<>));
-                    cfg.ForAllMaps(
-                        (t, c) =>
-                        {
-                            c.PreserveReferences();
-                        }
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(User<>), typeof(UserPoco<>));
+                cfg.CreateMap(typeof(Role<>), typeof(RolePoco<>));
+                cfg.CreateMap(typeof(UsersInRole<>), typeof(UsersInRolePoco<>));
+                cfg.ForAllMaps(
+                    (t, c) =>
+                    {
+                        c.PreserveReferences();
+                    }
+                );
+            });
 
         [Fact]
         public void Main()

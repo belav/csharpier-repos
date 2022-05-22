@@ -140,12 +140,10 @@ namespace Microsoft.Extensions.Hosting.Tests
             );
             var loggerProvider = new ScopeDelegateLoggerProvider(logger);
             using var host = Host.CreateDefaultBuilder()
-                .ConfigureLogging(
-                    logging =>
-                    {
-                        logging.AddProvider(loggerProvider);
-                    }
-                )
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddProvider(loggerProvider);
+                })
                 .Build();
 
             logger.LogInformation("Dummy log");
@@ -162,12 +160,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var host = Host.CreateDefaultBuilder()
                 .UseEnvironment(Environments.Development)
-                .ConfigureServices(
-                    serices =>
-                    {
-                        serices.AddScoped<ServiceA>();
-                    }
-                )
+                .ConfigureServices(serices =>
+                {
+                    serices.AddScoped<ServiceA>();
+                })
                 .Build();
 
             Assert.Throws<InvalidOperationException>(() =>
@@ -187,12 +183,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = Host.CreateDefaultBuilder()
                 .UseEnvironment(Environments.Development)
-                .ConfigureServices(
-                    serices =>
-                    {
-                        serices.AddSingleton<ServiceB>();
-                    }
-                );
+                .ConfigureServices(serices =>
+                {
+                    serices.AddSingleton<ServiceB>();
+                });
 
             Assert.Throws<AggregateException>(() => hostBuilder.Build());
         }
@@ -204,20 +198,18 @@ namespace Microsoft.Extensions.Hosting.Tests
             var expectedEnvironment = "SomeOtherEnvironment";
             using var host = new HostBuilder()
                 .UseEnvironment(environment)
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    HostDefaults.EnvironmentKey,
-                                    expectedEnvironment
-                                )
-                            }
-                        );
-                    }
-                ) // This overwrites the call to UseEnvironment
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>(
+                                HostDefaults.EnvironmentKey,
+                                expectedEnvironment
+                            )
+                        }
+                    );
+                }) // This overwrites the call to UseEnvironment
                 .Build();
 
             var hostEnv = host.Services.GetRequiredService<IHostEnvironment>();
@@ -230,20 +222,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var willBeOverwritten = "SomeOtherEnvironment";
             using var host = new HostBuilder()
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    HostDefaults.EnvironmentKey,
-                                    willBeOverwritten
-                                )
-                            }
-                        );
-                    }
-                )
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>(
+                                HostDefaults.EnvironmentKey,
+                                willBeOverwritten
+                            )
+                        }
+                    );
+                })
                 .UseEnvironment(Guid.NewGuid().ToString())
                 .UseEnvironment(environment) // Last one wins...
                 .Build();
@@ -279,12 +269,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using var host = Host.CreateDefaultBuilder()
                 .UseContentRoot(Path.GetDirectoryName(appSettingsPath))
-                .ConfigureHostConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(reloadFlagConfig);
-                    }
-                )
+                .ConfigureHostConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(reloadFlagConfig);
+                })
                 .Build();
 
             var config = host.Services.GetRequiredService<IConfiguration>();
@@ -325,12 +313,10 @@ namespace Microsoft.Extensions.Hosting.Tests
 
                 using var host = Host.CreateDefaultBuilder()
                     .UseContentRoot(Path.GetDirectoryName(appSettingsPath))
-                    .ConfigureHostConfiguration(
-                        builder =>
-                        {
-                            builder.AddInMemoryCollection(reloadFlagConfig);
-                        }
-                    )
+                    .ConfigureHostConfiguration(builder =>
+                    {
+                        builder.AddInMemoryCollection(reloadFlagConfig);
+                    })
                     .Build();
 
                 var config = host.Services.GetRequiredService<IConfiguration>();
@@ -390,12 +376,10 @@ namespace Microsoft.Extensions.Hosting.Tests
             var host = Host.CreateDefaultBuilder(
                     new[] { "environment=Development", $"applicationName={secretId}" }
                 )
-                .ConfigureHostConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(reloadFlagConfig);
-                    }
-                )
+                .ConfigureHostConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(reloadFlagConfig);
+                })
                 .Build();
 
             var config = host.Services.GetRequiredService<IConfiguration>();
@@ -432,20 +416,18 @@ namespace Microsoft.Extensions.Hosting.Tests
                 "Test value must be not equal to default"
             );
             var host = Host.CreateDefaultBuilder()
-                .ConfigureHostConfiguration(
-                    configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(
-                            new KeyValuePair<string, string>[]
-                            {
-                                new KeyValuePair<string, string>(
-                                    "SHUTDOWNTIMEOUTSECONDS",
-                                    notDefaultTimeoutSeconds.ToString()
-                                )
-                            }
-                        );
-                    }
-                )
+                .ConfigureHostConfiguration(configBuilder =>
+                {
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            new KeyValuePair<string, string>(
+                                "SHUTDOWNTIMEOUTSECONDS",
+                                notDefaultTimeoutSeconds.ToString()
+                            )
+                        }
+                    );
+                })
                 .Build();
 
             var hostOptions = host.Services.GetRequiredService<IOptions<HostOptions>>();

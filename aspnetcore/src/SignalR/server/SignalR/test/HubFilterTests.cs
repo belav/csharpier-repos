@@ -22,12 +22,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter<VerifyMethodFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter<VerifyMethodFilter>();
+                    });
 
                     services.AddSingleton(tcsService);
                 },
@@ -47,12 +45,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter(new VerifyMethodFilter(tcsService));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter(new VerifyMethodFilter(tcsService));
+                    });
                 },
                 LoggerFactory
             );
@@ -72,12 +68,10 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter(new VerifyMethodFilter(tcsService));
-                            }
-                        );
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter(new VerifyMethodFilter(tcsService));
+                        });
                 },
                 LoggerFactory
             );
@@ -97,12 +91,10 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter<VerifyMethodFilter>();
-                            }
-                        );
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter<VerifyMethodFilter>();
+                        });
 
                     services.AddSingleton(tcsService);
                 },
@@ -124,12 +116,10 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter(typeof(VerifyMethodFilter));
-                            }
-                        );
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter(typeof(VerifyMethodFilter));
+                        });
 
                     services.AddSingleton(tcsService);
                 },
@@ -180,12 +170,10 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<DynamicTestHub>(
-                            options =>
-                            {
-                                options.AddFilter(typeof(EmptyFilter));
-                            }
-                        );
+                        .AddHubOptions<DynamicTestHub>(options =>
+                        {
+                            options.AddFilter(typeof(EmptyFilter));
+                        });
                 },
                 LoggerFactory
             );
@@ -221,13 +209,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter(new VerifyMethodFilter(tcsService1));
-                            options.AddFilter(new VerifyMethodFilter(tcsService2));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter(new VerifyMethodFilter(tcsService1));
+                        options.AddFilter(new VerifyMethodFilter(tcsService2));
+                    });
                 },
                 LoggerFactory
             );
@@ -276,13 +262,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter(new VerifyMethodFilter(tcsService1));
-                            options.AddFilter<VerifyMethodFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter(new VerifyMethodFilter(tcsService1));
+                        options.AddFilter<VerifyMethodFilter>();
+                    });
 
                     services.AddSingleton(tcsService2);
                 },
@@ -335,13 +319,11 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter(new VerifyMethodFilter(tcsService1));
-                                options.AddFilter<VerifyMethodFilter>();
-                            }
-                        );
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter(new VerifyMethodFilter(tcsService1));
+                            options.AddFilter<VerifyMethodFilter>();
+                        });
 
                     services.AddSingleton(tcsService2);
                 },
@@ -392,13 +374,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter(new SyncPointFilter(syncPoints1));
-                            options.AddFilter(new SyncPointFilter(syncPoints2));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter(new SyncPointFilter(syncPoints1));
+                        options.AddFilter(new SyncPointFilter(syncPoints2));
+                    });
                 },
                 LoggerFactory
             );
@@ -458,13 +438,11 @@ public class HubFilterTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter(new SyncPointFilter(syncPoints1));
-                                options.AddFilter(new SyncPointFilter(syncPoints2));
-                            }
-                        );
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter(new SyncPointFilter(syncPoints1));
+                            options.AddFilter(new SyncPointFilter(syncPoints2));
+                        });
                 },
                 LoggerFactory
             );
@@ -523,18 +501,14 @@ public class HubFilterTests : VerifiableLoggedTest
                 services =>
                 {
                     services
-                        .AddSignalR(
-                            options =>
-                            {
-                                options.AddFilter(new SyncPointFilter(syncPoints1));
-                            }
-                        )
-                        .AddHubOptions<MethodHub>(
-                            options =>
-                            {
-                                options.AddFilter(new SyncPointFilter(syncPoints2));
-                            }
-                        );
+                        .AddSignalR(options =>
+                        {
+                            options.AddFilter(new SyncPointFilter(syncPoints1));
+                        })
+                        .AddHubOptions<MethodHub>(options =>
+                        {
+                            options.AddFilter(new SyncPointFilter(syncPoints2));
+                        });
                 },
                 LoggerFactory
             );
@@ -591,12 +565,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter<VerifyMethodFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter<VerifyMethodFilter>();
+                    });
 
                     // If this instance wasn't resolved, then the tcsService.StartedMethod waits would never trigger and fail the test
                     services.AddSingleton(new VerifyMethodFilter(tcsService));
@@ -617,12 +589,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter<CounterFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter<CounterFilter>();
+                    });
 
                     services.AddSingleton(counter);
                 },
@@ -672,12 +642,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter<CounterFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter<CounterFilter>();
+                    });
 
                     services.AddSingleton<CounterFilter>();
                     services.AddSingleton(counter);
@@ -724,13 +692,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter<NoExceptionFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter<NoExceptionFilter>();
+                    });
                 },
                 LoggerFactory
             );
@@ -765,13 +731,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter(new SkipNextFilter(skipOnConnected: true));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter(new SkipNextFilter(skipOnConnected: true));
+                    });
                 },
                 LoggerFactory
             );
@@ -804,12 +768,10 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.AddFilter(new SkipNextFilter(skipInvoke: true));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.AddFilter(new SkipNextFilter(skipInvoke: true));
+                    });
                 },
                 LoggerFactory
             );
@@ -845,13 +807,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter<DisposableFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter<DisposableFilter>();
+                    });
 
                     services.AddSingleton(tcsService);
                 },
@@ -891,13 +851,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter(new DisposableFilter(tcsService));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter(new DisposableFilter(tcsService));
+                    });
 
                     services.AddSingleton(tcsService);
                 },
@@ -931,13 +889,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter<AsyncDisposableFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter<AsyncDisposableFilter>();
+                    });
 
                     services.AddSingleton(tcsService);
                 },
@@ -977,13 +933,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter(new AsyncDisposableFilter(tcsService));
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter(new AsyncDisposableFilter(tcsService));
+                    });
 
                     services.AddSingleton(tcsService);
                 },
@@ -1023,13 +977,11 @@ public class HubFilterTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = true;
-                            options.AddFilter<ChangeMethodFilter>();
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = true;
+                        options.AddFilter<ChangeMethodFilter>();
+                    });
                 },
                 LoggerFactory
             );

@@ -38,13 +38,11 @@ public class HotReloadStartup
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_ServerHost");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapBlazorHub();
+            endpoints.MapFallbackToPage("/_ServerHost");
+        });
     }
 }

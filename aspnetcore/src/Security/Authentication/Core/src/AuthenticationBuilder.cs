@@ -32,32 +32,28 @@ public class AuthenticationBuilder
         where TOptions : AuthenticationSchemeOptions, new()
         where THandler : class, IAuthenticationHandler
     {
-        Services.Configure<AuthenticationOptions>(
-            o =>
-            {
-                o.AddScheme(
-                    authenticationScheme,
-                    scheme =>
-                    {
-                        scheme.HandlerType = typeof(THandler);
-                        scheme.DisplayName = displayName;
-                    }
-                );
-            }
-        );
+        Services.Configure<AuthenticationOptions>(o =>
+        {
+            o.AddScheme(
+                authenticationScheme,
+                scheme =>
+                {
+                    scheme.HandlerType = typeof(THandler);
+                    scheme.DisplayName = displayName;
+                }
+            );
+        });
         if (configureOptions != null)
         {
             Services.Configure(authenticationScheme, configureOptions);
         }
         Services
             .AddOptions<TOptions>(authenticationScheme)
-            .Validate(
-                o =>
-                {
-                    o.Validate(authenticationScheme);
-                    return true;
-                }
-            );
+            .Validate(o =>
+            {
+                o.Validate(authenticationScheme);
+                return true;
+            });
         Services.AddTransient<THandler>();
         return this;
     }

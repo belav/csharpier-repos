@@ -34,12 +34,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_validation() =>
@@ -223,13 +221,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>()
-                        .ForCtorParam("blarg", opt => opt.MapFrom(src => src.Value));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>()
+                    .ForCtorParam("blarg", opt => opt.MapFrom(src => src.Value));
+            });
 
         [Fact]
         public void Should_throw()
@@ -259,12 +255,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>().DisableCtorValidation();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>().DisableCtorValidation();
+            });
 
         [Fact]
         public void Should_throw()
@@ -322,14 +316,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, ModelDto>();
-                    cfg.CreateMap<ModelObject2, ModelDto2>();
-                    cfg.CreateMap<ModelObject3, ModelDto3>(MemberList.Source);
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, ModelDto>();
+                cfg.CreateMap<ModelObject2, ModelDto2>();
+                cfg.CreateMap<ModelObject3, ModelDto3>(MemberList.Source);
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -381,13 +373,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, ModelDto>()
-                        .ForMember(dto => dto.Bar, opt => opt.MapFrom(m => m.Barr));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, ModelDto>()
+                    .ForMember(dto => dto.Bar, opt => opt.MapFrom(m => m.Barr));
+            });
 
         [Fact]
         public void Should_pass_an_inspection_of_missing_mappings()
@@ -410,12 +400,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -453,13 +441,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<OtherSource, OtherDest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<OtherSource, OtherDest>();
+            });
 
         protected override void Because_of()
         {
@@ -498,13 +484,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, ModelDto>()
-                        .ForMember(dest => dest.Bar, opt => opt.Ignore());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, ModelDto>()
+                    .ForMember(dest => dest.Bar, opt => opt.Ignore());
+            });
 
         protected override void Because_of()
         {
@@ -543,12 +527,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         public class DestinationItem { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -577,12 +559,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         public class DestinationItem { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -614,12 +594,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -653,25 +631,23 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProfile(
-                        "Good",
-                        profile =>
-                        {
-                            profile.CreateMap<GoodSource, GoodDest>();
-                        }
-                    );
-                    cfg.CreateProfile(
-                        "Bad",
-                        profile =>
-                        {
-                            profile.CreateMap<GoodSource, BadDest>();
-                        }
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProfile(
+                    "Good",
+                    profile =>
+                    {
+                        profile.CreateMap<GoodSource, GoodDest>();
+                    }
+                );
+                cfg.CreateProfile(
+                    "Bad",
+                    profile =>
+                    {
+                        profile.CreateMap<GoodSource, BadDest>();
+                    }
+                );
+            });
 
         [Fact]
         public void Should_ignore_bad_dtos_in_other_profiles() =>
@@ -705,13 +681,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, ModelDto>()
-                        .ForMember(dest => dest.Bar, opt => opt.MapFrom(src => src.Barr));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, ModelDto>()
+                    .ForMember(dest => dest.Bar, opt => opt.MapFrom(src => src.Barr));
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -732,14 +706,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    object i = 7;
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => i));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                object i = 7;
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => i));
+            });
 
         [Fact]
         public void Should_validate_successfully()
@@ -766,12 +738,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -795,12 +765,10 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_a_configuration_check()
@@ -814,14 +782,12 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
     public class When_redirecting_types : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ConcreteSource, ConcreteDest>()
-                        .ForMember(d => d.DifferentName, opt => opt.MapFrom(s => s.Name));
-                    cfg.CreateMap<ConcreteSource, IAbstractDest>().As<ConcreteDest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ConcreteSource, ConcreteDest>()
+                    .ForMember(d => d.DifferentName, opt => opt.MapFrom(s => s.Name));
+                cfg.CreateMap<ConcreteSource, IAbstractDest>().As<ConcreteDest>();
+            });
 
         [Fact]
         public void Should_pass_configuration_check()
@@ -850,13 +816,11 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
     public class When_configuring_a_resolver : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Query, Command>()
-                        .ForMember(d => d.Details, o => o.MapFrom<DetailsValueResolver>());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Query, Command>()
+                    .ForMember(d => d.Details, o => o.MapFrom<DetailsValueResolver>());
+            });
 
         public class DetailsValueResolver
             : IValueResolver<Query, Command, List<KeyValuePair<string, string>>>

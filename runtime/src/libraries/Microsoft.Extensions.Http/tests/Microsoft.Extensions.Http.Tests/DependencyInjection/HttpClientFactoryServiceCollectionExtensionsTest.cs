@@ -606,12 +606,10 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            serviceCollection.AddHttpClient<TestTypedClient>(
-                c =>
-                {
-                    c.BaseAddress = new Uri("http://example.com");
-                }
-            );
+            serviceCollection.AddHttpClient<TestTypedClient>(c =>
+            {
+                c.BaseAddress = new Uri("http://example.com");
+            });
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -709,12 +707,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient<TestTypedClient>(
-                c =>
-                {
-                    c.BaseAddress = new Uri("http://example.com");
-                }
-            );
+            serviceCollection.AddHttpClient<TestTypedClient>(c =>
+            {
+                c.BaseAddress = new Uri("http://example.com");
+            });
 
             // Act
             serviceCollection
@@ -741,12 +737,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient<TestTypedClient>(
-                c =>
-                {
-                    c.BaseAddress = new Uri("http://example.com");
-                }
-            );
+            serviceCollection.AddHttpClient<TestTypedClient>(c =>
+            {
+                c.BaseAddress = new Uri("http://example.com");
+            });
 
             // Act
             serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>("TestTypedClient");
@@ -886,14 +880,12 @@ namespace Microsoft.Extensions.DependencyInjection
             // Act1
             serviceCollection
                 .AddHttpClient("example.com")
-                .ConfigureHttpMessageHandlerBuilder(
-                    b =>
-                    {
-                        builder = b;
+                .ConfigureHttpMessageHandlerBuilder(b =>
+                {
+                    builder = b;
 
-                        b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
-                    }
-                );
+                    b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
+                });
 
             var services = serviceCollection.BuildServiceProvider();
             var options = services.GetRequiredService<IOptionsMonitor<HttpClientFactoryOptions>>();
@@ -920,12 +912,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(
-                options =>
-                {
-                    options.BaseAddress = "http://example.com/";
-                }
-            );
+            serviceCollection.Configure<OtherTestOptions>(options =>
+            {
+                options.BaseAddress = "http://example.com/";
+            });
 
             // Act1
             serviceCollection.AddHttpClient<TestTypedClient>(
@@ -951,12 +941,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(
-                options =>
-                {
-                    options.BaseAddress = "http://example.com/";
-                }
-            );
+            serviceCollection.Configure<OtherTestOptions>(options =>
+            {
+                options.BaseAddress = "http://example.com/";
+            });
 
             // Act1
             serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
@@ -982,12 +970,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(
-                options =>
-                {
-                    options.BaseAddress = "http://example.com/";
-                }
-            );
+            serviceCollection.Configure<OtherTestOptions>(options =>
+            {
+                options.BaseAddress = "http://example.com/";
+            });
 
             // Act1
             serviceCollection.AddHttpClient<TestTypedClient>(
@@ -1014,12 +1000,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.Configure<OtherTestOptions>(
-                options =>
-                {
-                    options.BaseAddress = "http://example.com/";
-                }
-            );
+            serviceCollection.Configure<OtherTestOptions>(options =>
+            {
+                options.BaseAddress = "http://example.com/";
+            });
 
             // Act1
             serviceCollection.AddHttpClient<ITestTypedClient, TestTypedClient>(
@@ -1054,14 +1038,12 @@ namespace Microsoft.Extensions.DependencyInjection
             // Act1
             serviceCollection
                 .AddHttpClient("example.com")
-                .ConfigureHttpMessageHandlerBuilder(
-                    b =>
-                    {
-                        builder = b;
+                .ConfigureHttpMessageHandlerBuilder(b =>
+                {
+                    builder = b;
 
-                        b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
-                    }
-                );
+                    b.AdditionalHandlers.Add(Mock.Of<DelegatingHandler>());
+                });
 
             var services = serviceCollection.BuildServiceProvider();
 
@@ -1418,13 +1400,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(
-                    s =>
-                    {
-                        capturedServices = s;
-                        return Mock.Of<DelegatingHandler>();
-                    }
-                );
+                .AddHttpMessageHandler(s =>
+                {
+                    capturedServices = s;
+                    return Mock.Of<DelegatingHandler>();
+                });
 
             serviceCollection.Configure<HttpClientFactoryOptions>(
                 "test",
@@ -1455,13 +1435,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(
-                    s =>
-                    {
-                        capturedServices = s;
-                        return Mock.Of<DelegatingHandler>();
-                    }
-                );
+                .AddHttpMessageHandler(s =>
+                {
+                    capturedServices = s;
+                    return Mock.Of<DelegatingHandler>();
+                });
 
             serviceCollection.Configure<HttpClientFactoryOptions>(
                 "test",
@@ -1496,13 +1474,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(
-                    s =>
-                    {
-                        capturedServices = s;
-                        return Mock.Of<DelegatingHandler>();
-                    }
-                );
+                .AddHttpMessageHandler(s =>
+                {
+                    capturedServices = s;
+                    return Mock.Of<DelegatingHandler>();
+                });
 
             serviceCollection.Configure<HttpClientFactoryOptions>(
                 "test",
@@ -1533,13 +1509,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient<TestTypedClient>("test")
-                .AddHttpMessageHandler(
-                    s =>
-                    {
-                        capturedServices = s;
-                        return Mock.Of<DelegatingHandler>();
-                    }
-                );
+                .AddHttpMessageHandler(s =>
+                {
+                    capturedServices = s;
+                    return Mock.Of<DelegatingHandler>();
+                });
 
             serviceCollection.Configure<HttpClientFactoryOptions>(
                 "test",

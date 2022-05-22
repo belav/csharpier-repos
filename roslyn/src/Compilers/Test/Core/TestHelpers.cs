@@ -38,13 +38,11 @@ namespace Roslyn.Test.Utilities
         {
             return assembly
                 .GetTypes()
-                .Where(
-                    t =>
-                    {
-                        return t.GetFields(BindingFlags.Public | BindingFlags.Static)
-                            .Any(f => type.IsAssignableFrom(f.FieldType));
-                    }
-                )
+                .Where(t =>
+                {
+                    return t.GetFields(BindingFlags.Public | BindingFlags.Static)
+                        .Any(f => type.IsAssignableFrom(f.FieldType));
+                })
                 .ToList();
         }
 

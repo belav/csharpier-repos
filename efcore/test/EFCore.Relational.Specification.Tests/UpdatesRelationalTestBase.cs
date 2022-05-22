@@ -60,28 +60,24 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual void SaveChanges_throws_for_entities_only_mapped_to_view()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var category = context.Categories.Single();
-                    context.Add(
-                        new ProductTableView
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = "Pear Cider",
-                            Price = 1.39M,
-                            DependentId = category.Id
-                        }
-                    );
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var category = context.Categories.Single();
+                context.Add(
+                    new ProductTableView
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Pear Cider",
+                        Price = 1.39M,
+                        DependentId = category.Id
+                    }
+                );
 
-                    Assert.Equal(
-                        RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
-                        Assert
-                            .Throws<InvalidOperationException>(() => context.SaveChanges())
-                            .Message
-                    );
-                }
-            );
+                Assert.Equal(
+                    RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
+                    Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message
+                );
+            });
         }
 
         [ConditionalFact]

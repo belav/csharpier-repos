@@ -49,15 +49,10 @@ public class MvcApplicationBuilderExtensionsTest
         var appBuilder = new ApplicationBuilder(serviceProvider);
 
         // Act
-        appBuilder.UseMvc(
-            routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                );
-            }
-        );
+        appBuilder.UseMvc(routes =>
+        {
+            routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+        });
 
         var endpointDataSource =
             appBuilder.ApplicationServices.GetRequiredService<EndpointDataSource>();
@@ -79,15 +74,13 @@ public class MvcApplicationBuilderExtensionsTest
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() =>
         {
-            appBuilder.UseMvc(
-                routes =>
-                {
-                    routes.MapRoute(
-                        name: "default",
-                        template: "{controller=Home}/{action=Index}/{id?}"
-                    );
-                }
-            );
+            appBuilder.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
+            });
         });
 
         var expected =

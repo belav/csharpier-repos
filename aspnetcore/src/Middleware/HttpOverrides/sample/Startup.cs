@@ -46,15 +46,13 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        // .UseIIS() // This repo can no longer reference IIS because IISIntegration depends on it.
-                        .UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    // .UseIIS() // This repo can no longer reference IIS because IISIntegration depends on it.
+                    .UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

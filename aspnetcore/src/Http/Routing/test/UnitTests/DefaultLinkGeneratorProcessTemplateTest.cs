@@ -436,13 +436,11 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.LowercaseUrls = true;
+                o.LowercaseQueryStrings = true;
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
@@ -502,14 +500,12 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                    o.AppendTrailingSlash = true;
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.LowercaseUrls = true;
+                o.LowercaseQueryStrings = true;
+                o.AppendTrailingSlash = true;
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
@@ -598,13 +594,11 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.LowercaseUrls = true;
-                    o.LowercaseQueryStrings = true;
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.LowercaseUrls = true;
+                o.LowercaseQueryStrings = true;
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
@@ -635,13 +629,11 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}");
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.LowercaseUrls = false;
-                    o.LowercaseQueryStrings = false;
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.LowercaseUrls = false;
+                o.LowercaseQueryStrings = false;
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });

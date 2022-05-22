@@ -17,13 +17,11 @@
         public class Inner { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Outer, Outer>();
-                    cfg.CreateMap<Inner, Inner>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Outer, Outer>();
+                cfg.CreateMap<Inner, Inner>();
+            });
 
         protected override void Because_of()
         {

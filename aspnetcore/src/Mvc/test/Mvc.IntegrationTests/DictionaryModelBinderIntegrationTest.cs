@@ -29,14 +29,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[0].Key=key0&parameter[0].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -73,12 +69,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0]=10");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[key0]=10");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -112,14 +106,12 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10"
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -169,12 +161,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -210,12 +200,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -430,12 +418,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, int>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -505,12 +491,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -762,12 +746,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -864,12 +846,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
 
         var modelState = testContext.ModelState;
 
@@ -921,12 +901,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, Person>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1276,12 +1254,10 @@ public class DictionaryModelBinderIntegrationTest
         };
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(queryString);
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -1320,13 +1296,11 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<SuccessfulModel, SuccessfulModel>),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // CollectionModelBinder binds an empty collection when value providers are all empty.
-                request.QueryString = new QueryString("?a=b");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // CollectionModelBinder binds an empty collection when value providers are all empty.
+            request.QueryString = new QueryString("?a=b");
+        });
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -1352,12 +1326,10 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, string>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0]=");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString("?parameter[key0]=");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1411,14 +1383,12 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, NonNullPerson>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1504,14 +1474,12 @@ public class DictionaryModelBinderIntegrationTest
             ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = new QueryString(
-                    "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = new QueryString(
+                "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+            );
+        });
 
         var modelState = testContext.ModelState;
 

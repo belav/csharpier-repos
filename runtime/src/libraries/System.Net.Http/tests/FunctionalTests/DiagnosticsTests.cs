@@ -81,43 +81,41 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource responseLoggedTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Request"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Request"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    requestLogged = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    requestGuid = GetProperty<Guid>(kvp.Value, "LoggingRequestId");
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    responseLogged = GetProperty<HttpResponseMessage>(
-                                        kvp.Value,
-                                        "Response"
-                                    );
-                                    responseGuid = GetProperty<Guid>(kvp.Value, "LoggingRequestId");
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
-                                    responseLoggedTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    exceptionLogged = true;
-                                }
-                                else if (kvp.Key.StartsWith("System.Net.Http.HttpRequestOut"))
-                                {
-                                    activityLogged = true;
-                                }
+                                Assert.NotNull(kvp.Value);
+                                requestLogged = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                requestGuid = GetProperty<Guid>(kvp.Value, "LoggingRequestId");
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Response"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                responseLogged = GetProperty<HttpResponseMessage>(
+                                    kvp.Value,
+                                    "Response"
+                                );
+                                responseGuid = GetProperty<Guid>(kvp.Value, "LoggingRequestId");
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
+                                responseLoggedTcs.SetResult();
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                exceptionLogged = true;
+                            }
+                            else if (kvp.Key.StartsWith("System.Net.Http.HttpRequestOut"))
+                            {
+                                activityLogged = true;
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -169,27 +167,25 @@ namespace System.Net.Http.Functional.Tests
                         bool activityStartLogged = false;
                         bool activityStopLogged = false;
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Request"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Request"))
-                                {
-                                    requestLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    responseLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    activityStartLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    activityStopLogged = true;
-                                }
+                                requestLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Response"))
+                            {
+                                responseLogged = true;
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
+                            {
+                                activityStartLogged = true;
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                activityStopLogged = true;
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -298,29 +294,24 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource responseLoggedTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Response"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.Faulted, requestStatus);
-                                    responseLoggedTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    exceptionLogged = GetProperty<Exception>(
-                                        kvp.Value,
-                                        "Exception"
-                                    );
-                                }
+                                Assert.NotNull(kvp.Value);
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.Faulted, requestStatus);
+                                responseLoggedTcs.SetResult();
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                exceptionLogged = GetProperty<Exception>(kvp.Value, "Exception");
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -355,32 +346,30 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource activityStopTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Response"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    TaskStatus status = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.Canceled, status);
-                                    responseLoggedTcs.SetResult();
-                                }
-                                else if (kvp.Key == "System.Net.Http.HttpRequestOut.Stop")
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    GetProperty<HttpRequestMessage>(kvp.Value, "Request");
-                                    TaskStatus status = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.Canceled, status);
-                                    activityStopTcs.SetResult();
-                                }
+                                Assert.NotNull(kvp.Value);
+                                TaskStatus status = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.Canceled, status);
+                                responseLoggedTcs.SetResult();
                             }
-                        );
+                            else if (kvp.Key == "System.Net.Http.HttpRequestOut.Stop")
+                            {
+                                Assert.NotNull(kvp.Value);
+                                GetProperty<HttpRequestMessage>(kvp.Value, "Request");
+                                TaskStatus status = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.Canceled, status);
+                                activityStopTcs.SetResult();
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -400,15 +389,13 @@ namespace System.Net.Http.Functional.Tests
                                     },
                                     async server =>
                                     {
-                                        await server.AcceptConnectionAsync(
-                                            async connection =>
-                                            {
-                                                cts.Cancel();
+                                        await server.AcceptConnectionAsync(async connection =>
+                                        {
+                                            cts.Cancel();
 
-                                                await responseLoggedTcs.Task;
-                                                await activityStopTcs.Task;
-                                            }
-                                        );
+                                            await responseLoggedTcs.Task;
+                                            await activityStopTcs.Task;
+                                        });
                                     }
                                 );
                         }
@@ -457,54 +444,52 @@ namespace System.Net.Http.Functional.Tests
 
                         Assert.Equal(idFormat, parentActivity.IdFormat);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Request"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Request"))
-                                {
-                                    requestLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    responseLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    exceptionLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    Assert.NotNull(Activity.Current);
-                                    Assert.Equal(parentActivity, Activity.Current.Parent);
-                                    activityStartRequestLogged = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    Assert.NotNull(Activity.Current);
-                                    Assert.Equal(parentActivity, Activity.Current.Parent);
-                                    Assert.True(Activity.Current.Duration != TimeSpan.Zero);
-                                    activityStopRequestLogged = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    activityStopResponseLogged = GetProperty<HttpResponseMessage>(
-                                        kvp.Value,
-                                        "Response"
-                                    );
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
-                                    activityStopTcs.SetResult();
-                                }
+                                requestLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Response"))
+                            {
+                                responseLogged = true;
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                exceptionLogged = true;
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                Assert.NotNull(Activity.Current);
+                                Assert.Equal(parentActivity, Activity.Current.Parent);
+                                activityStartRequestLogged = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                Assert.NotNull(Activity.Current);
+                                Assert.Equal(parentActivity, Activity.Current.Parent);
+                                Assert.True(Activity.Current.Duration != TimeSpan.Zero);
+                                activityStopRequestLogged = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                activityStopResponseLogged = GetProperty<HttpResponseMessage>(
+                                    kvp.Value,
+                                    "Response"
+                                );
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
+                                activityStopTcs.SetResult();
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -573,48 +558,43 @@ namespace System.Net.Http.Functional.Tests
                         parentActivity.AddBaggage("key", "value");
                         parentActivity.Start();
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    Assert.NotNull(Activity.Current);
-                                    Assert.Equal(parentActivity, Activity.Current.Parent);
-                                    Assert.True(Activity.Current.Duration != TimeSpan.Zero);
-                                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    Assert.True(
-                                        request.Headers.TryGetValues(
-                                            "Request-Id",
-                                            out var requestId
-                                        )
-                                    );
-                                    Assert.True(
-                                        request.Headers.TryGetValues(
-                                            "Correlation-Context",
-                                            out var correlationContext
-                                        )
-                                    );
-                                    Assert.Equal(
-                                        "key=value, goodkey=bad%2Fvalue, bad%2Fkey=value",
-                                        Assert.Single(correlationContext)
-                                    );
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
-                                    activityStopTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    exceptionLogged = true;
-                                }
+                                Assert.NotNull(kvp.Value);
+                                Assert.NotNull(Activity.Current);
+                                Assert.Equal(parentActivity, Activity.Current.Parent);
+                                Assert.True(Activity.Current.Duration != TimeSpan.Zero);
+                                HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                Assert.True(
+                                    request.Headers.TryGetValues("Request-Id", out var requestId)
+                                );
+                                Assert.True(
+                                    request.Headers.TryGetValues(
+                                        "Correlation-Context",
+                                        out var correlationContext
+                                    )
+                                );
+                                Assert.Equal(
+                                    "key=value, goodkey=bad%2Fvalue, bad%2Fkey=value",
+                                    Assert.Single(correlationContext)
+                                );
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.RanToCompletion, requestStatus);
+                                activityStopTcs.SetResult();
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                exceptionLogged = true;
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -666,41 +646,37 @@ namespace System.Net.Http.Functional.Tests
                         parentActivity.Start();
 
                         string customRequestIdHeader = "|foo.bar.";
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    request.Headers.Add("Request-Id", customRequestIdHeader);
+                                HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                request.Headers.Add("Request-Id", customRequestIdHeader);
 
-                                    activityStartLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    Assert.Single(request.Headers.GetValues("Request-Id"));
-                                    Assert.Equal(
-                                        customRequestIdHeader,
-                                        request.Headers.GetValues("Request-Id").Single()
-                                    );
-
-                                    Assert.False(
-                                        request.Headers.TryGetValues("traceparent", out var _)
-                                    );
-                                    Assert.False(
-                                        request.Headers.TryGetValues("tracestate", out var _)
-                                    );
-                                    activityStopTcs.SetResult();
-                                }
+                                activityStartLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                Assert.Single(request.Headers.GetValues("Request-Id"));
+                                Assert.Equal(
+                                    customRequestIdHeader,
+                                    request.Headers.GetValues("Request-Id").Single()
+                                );
+
+                                Assert.False(
+                                    request.Headers.TryGetValues("traceparent", out var _)
+                                );
+                                Assert.False(request.Headers.TryGetValues("tracestate", out var _));
+                                activityStopTcs.SetResult();
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -753,36 +729,30 @@ namespace System.Net.Http.Functional.Tests
 
                         string customTraceParentHeader =
                             "00-abcdef0123456789abcdef0123456789-abcdef0123456789-01";
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
-                                        kvp.Value,
-                                        "Request"
-                                    );
-                                    Assert.Single(request.Headers.GetValues("traceparent"));
-                                    Assert.False(
-                                        request.Headers.TryGetValues("tracestate", out var _)
-                                    );
-                                    Assert.Equal(
-                                        customTraceParentHeader,
-                                        request.Headers.GetValues("traceparent").Single()
-                                    );
+                                HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                                    kvp.Value,
+                                    "Request"
+                                );
+                                Assert.Single(request.Headers.GetValues("traceparent"));
+                                Assert.False(request.Headers.TryGetValues("tracestate", out var _));
+                                Assert.Equal(
+                                    customTraceParentHeader,
+                                    request.Headers.GetValues("traceparent").Single()
+                                );
 
-                                    Assert.False(
-                                        request.Headers.TryGetValues("Request-Id", out var _)
-                                    );
+                                Assert.False(request.Headers.TryGetValues("Request-Id", out var _));
 
-                                    activityStartLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    activityStopTcs.SetResult();
-                                }
+                                activityStartLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                activityStopTcs.SetResult();
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -829,19 +799,17 @@ namespace System.Net.Http.Functional.Tests
                         bool activityStartLogged = false;
                         bool activityStopLogged = false;
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    activityStartLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    activityStopLogged = true;
-                                }
+                                activityStartLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                activityStopLogged = true;
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -898,30 +866,25 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource activityStopTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    GetProperty<HttpRequestMessage>(kvp.Value, "Request");
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.Faulted, requestStatus);
-                                    activityStopTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    exceptionLogged = GetProperty<Exception>(
-                                        kvp.Value,
-                                        "Exception"
-                                    );
-                                }
+                                Assert.NotNull(kvp.Value);
+                                GetProperty<HttpRequestMessage>(kvp.Value, "Request");
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.Faulted, requestStatus);
+                                activityStopTcs.SetResult();
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                exceptionLogged = GetProperty<Exception>(kvp.Value, "Exception");
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -956,30 +919,25 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource activityStopTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    GetProperty<HttpRequestMessage>(kvp.Value, "Request");
-                                    TaskStatus requestStatus = GetProperty<TaskStatus>(
-                                        kvp.Value,
-                                        "RequestTaskStatus"
-                                    );
-                                    Assert.Equal(TaskStatus.Faulted, requestStatus);
-                                    activityStopTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    exceptionLogged = GetProperty<Exception>(
-                                        kvp.Value,
-                                        "Exception"
-                                    );
-                                }
+                                Assert.NotNull(kvp.Value);
+                                GetProperty<HttpRequestMessage>(kvp.Value, "Request");
+                                TaskStatus requestStatus = GetProperty<TaskStatus>(
+                                    kvp.Value,
+                                    "RequestTaskStatus"
+                                );
+                                Assert.Equal(TaskStatus.Faulted, requestStatus);
+                                activityStopTcs.SetResult();
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                exceptionLogged = GetProperty<Exception>(kvp.Value, "Exception");
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -1052,27 +1010,25 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource responseLoggedTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.Request"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.Request"))
-                                {
-                                    requestLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Response"))
-                                {
-                                    responseLoggedTcs.SetResult();
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
-                                {
-                                    activityStartLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    activityStopLogged = true;
-                                }
+                                requestLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Response"))
+                            {
+                                responseLoggedTcs.SetResult();
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Start"))
+                            {
+                                activityStartLogged = true;
+                            }
+                            else if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
+                            {
+                                activityStopLogged = true;
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -1118,24 +1074,19 @@ namespace System.Net.Http.Functional.Tests
                         TaskCompletionSource exceptionLoggedTcs =
                             new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
                             {
-                                if (kvp.Key.Equals("System.Net.Http.HttpRequestOut.Stop"))
-                                {
-                                    activityLogged = true;
-                                }
-                                else if (kvp.Key.Equals("System.Net.Http.Exception"))
-                                {
-                                    Assert.NotNull(kvp.Value);
-                                    exceptionLogged = GetProperty<Exception>(
-                                        kvp.Value,
-                                        "Exception"
-                                    );
-                                    exceptionLoggedTcs.SetResult();
-                                }
+                                activityLogged = true;
                             }
-                        );
+                            else if (kvp.Key.Equals("System.Net.Http.Exception"))
+                            {
+                                Assert.NotNull(kvp.Value);
+                                exceptionLogged = GetProperty<Exception>(kvp.Value, "Exception");
+                                exceptionLoggedTcs.SetResult();
+                            }
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
@@ -1256,12 +1207,10 @@ namespace System.Net.Http.Functional.Tests
                         );
 
                         bool anyEventLogged = false;
-                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(
-                            kvp =>
-                            {
-                                anyEventLogged = true;
-                            }
-                        );
+                        var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
+                        {
+                            anyEventLogged = true;
+                        });
 
                         using (
                             DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver)
