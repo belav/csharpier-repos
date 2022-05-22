@@ -106,8 +106,9 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr inst = IntPtr.Zero;
             IntPtr sel = IntPtr.Zero;
 
-            Exception ex = Assert.Throws<PendingException>(() =>
-                LibObjC.CallPInvoke(msgSend, inst, sel));
+            Exception ex = Assert.Throws<PendingException>(
+                () => LibObjC.CallPInvoke(msgSend, inst, sel)
+            );
             Assert.Equal(msgSend.ToString(), ex.Message);
         }
     }

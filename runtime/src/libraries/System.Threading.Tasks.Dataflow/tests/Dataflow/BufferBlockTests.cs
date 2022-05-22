@@ -524,16 +524,18 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                     if (fault)
                     {
-                        Assert.Throws<ArgumentNullException>(() =>
-                            ((IDataflowBlock)bb).Fault(null));
+                        Assert.Throws<ArgumentNullException>(
+                            () => ((IDataflowBlock)bb).Fault(null)
+                        );
                         ((IDataflowBlock)bb).Fault(new InvalidCastException());
                         await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
                     }
                     else
                     {
                         cts.Cancel();
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                            bb.Completion);
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                            () => bb.Completion
+                        );
                     }
 
                     await Task.WhenAll(sends);

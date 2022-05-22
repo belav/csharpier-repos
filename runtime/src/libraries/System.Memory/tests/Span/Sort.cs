@@ -26,42 +26,55 @@ namespace System.SpanTests
                     )
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2]));
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1]));
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort(
-                    (Span<byte>)new byte[1],
-                    (Span<byte>)new byte[2],
-                    Comparer<byte>.Default.Compare
-                ));
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort(
-                    (Span<byte>)new byte[2],
-                    (Span<byte>)new byte[1],
-                    Comparer<byte>.Default.Compare
-                ));
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort(
-                    (Span<byte>)new byte[1],
-                    (Span<byte>)new byte[2],
-                    Comparer<byte>.Default
-                ));
-            Assert.Throws<ArgumentException>(() =>
-                MemoryExtensions.Sort(
-                    (Span<byte>)new byte[2],
-                    (Span<byte>)new byte[1],
-                    Comparer<byte>.Default
-                ));
+            Assert.Throws<ArgumentException>(
+                () => MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2])
+            );
+            Assert.Throws<ArgumentException>(
+                () => MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1])
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MemoryExtensions.Sort(
+                        (Span<byte>)new byte[1],
+                        (Span<byte>)new byte[2],
+                        Comparer<byte>.Default.Compare
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MemoryExtensions.Sort(
+                        (Span<byte>)new byte[2],
+                        (Span<byte>)new byte[1],
+                        Comparer<byte>.Default.Compare
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MemoryExtensions.Sort(
+                        (Span<byte>)new byte[1],
+                        (Span<byte>)new byte[2],
+                        Comparer<byte>.Default
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MemoryExtensions.Sort(
+                        (Span<byte>)new byte[2],
+                        (Span<byte>)new byte[1],
+                        Comparer<byte>.Default
+                    )
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                MemoryExtensions.Sort((Span<NotImcomparable>)new NotImcomparable[10]));
-            Assert.Throws<InvalidOperationException>(() =>
-                MemoryExtensions.Sort(
-                    (Span<NotImcomparable>)new NotImcomparable[10],
-                    (Span<byte>)new byte[10]
-                ));
+            Assert.Throws<InvalidOperationException>(
+                () => MemoryExtensions.Sort((Span<NotImcomparable>)new NotImcomparable[10])
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    MemoryExtensions.Sort(
+                        (Span<NotImcomparable>)new NotImcomparable[10],
+                        (Span<byte>)new byte[10]
+                    )
+            );
         }
 
         private struct NotImcomparable { }

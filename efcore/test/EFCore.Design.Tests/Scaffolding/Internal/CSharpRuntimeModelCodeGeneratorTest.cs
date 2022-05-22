@@ -1847,8 +1847,9 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                principalId.GetIdentityIncrement())
+                            .Throws<InvalidOperationException>(
+                                () => principalId.GetIdentityIncrement()
+                            )
                             .Message
                     );
                     Assert.Null(principalId[SqlServerAnnotationNames.Sparse]);
@@ -1913,8 +1914,9 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                compositeIndex.IsCreatedOnline())
+                            .Throws<InvalidOperationException>(
+                                () => compositeIndex.IsCreatedOnline()
+                            )
                             .Message
                     );
                     Assert.Null(compositeIndex[SqlServerAnnotationNames.FillFactor]);
@@ -1928,8 +1930,9 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                compositeIndex.GetIncludeProperties())
+                            .Throws<InvalidOperationException>(
+                                () => compositeIndex.GetIncludeProperties()
+                            )
                             .Message
                     );
 
@@ -2020,15 +2023,17 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                referenceOwnedType.GetPropertyAccessMode())
+                            .Throws<InvalidOperationException>(
+                                () => referenceOwnedType.GetPropertyAccessMode()
+                            )
                             .Message
                     );
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                referenceOwnedType.GetNavigationAccessMode())
+                            .Throws<InvalidOperationException>(
+                                () => referenceOwnedType.GetNavigationAccessMode()
+                            )
                             .Message
                     );
 
@@ -2139,8 +2144,9 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                collectionOwnedType.IsTableExcludedFromMigrations())
+                            .Throws<InvalidOperationException>(
+                                () => collectionOwnedType.IsTableExcludedFromMigrations()
+                            )
                             .Message
                     );
                     Assert.Null(collectionOwnedType.BaseType);
@@ -3541,8 +3547,9 @@ namespace TestNamespace
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
                         Assert
-                            .Throws<InvalidOperationException>(() =>
-                                dataEntity.GetCheckConstraints())
+                            .Throws<InvalidOperationException>(
+                                () => dataEntity.GetCheckConstraints()
+                            )
                             .Message
                     );
                 }
@@ -4136,8 +4143,9 @@ namespace TestNamespace
                 Assert.Equal(
                     expectedExceptionMessage,
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            generator.GenerateModel(model, options))
+                        .Throws<InvalidOperationException>(
+                            () => generator.GenerateModel(model, options)
+                        )
                         .Message
                 );
                 return;

@@ -90,8 +90,9 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 return;
 
             // An exception may be thrown during Create() if the Oid is bad, or later during native calls
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsaFactory.Create(curveDef.Curve).ExportParameters(false));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => ECDsaFactory.Create(curveDef.Curve).ExportParameters(false)
+            );
         }
 
         [ConditionalTheory(nameof(ECExplicitCurvesSupported)), MemberData(nameof(TestCurvesFull))]
@@ -168,15 +169,19 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 null,
                 () => ECCurve.CreateFromFriendlyName("")
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsaFactory
-                    .Create(ECCurve.CreateFromFriendlyName("Invalid"))
-                    .ExportExplicitParameters(false));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    ECDsaFactory
+                        .Create(ECCurve.CreateFromFriendlyName("Invalid"))
+                        .ExportExplicitParameters(false)
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => ECCurve.CreateFromValue(""));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsaFactory
-                    .Create(ECCurve.CreateFromValue("Invalid"))
-                    .ExportExplicitParameters(false));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    ECDsaFactory
+                        .Create(ECCurve.CreateFromValue("Invalid"))
+                        .ExportExplicitParameters(false)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () => ECCurve.CreateFromOid(new Oid(null, null))
@@ -317,8 +322,9 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
                     temp = p;
                     temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid"));
-                    Assert.ThrowsAny<PlatformNotSupportedException>(() =>
-                        ec.ImportParameters(temp));
+                    Assert.ThrowsAny<PlatformNotSupportedException>(
+                        () => ec.ImportParameters(temp)
+                    );
                 }
             }
         }
@@ -379,8 +385,9 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
                 if (ECExplicitCurvesSupported)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        cavs.ExportExplicitParameters(true));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => cavs.ExportExplicitParameters(true)
+                    );
                 }
             }
         }

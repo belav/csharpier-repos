@@ -39,8 +39,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Assert.Equal(
                 RelationalStrings.MigrationNotFound("Spike"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        CreateMigrationsAssembly().GetMigrationId("Spike"))
+                    .Throws<InvalidOperationException>(
+                        () => CreateMigrationsAssembly().GetMigrationId("Spike")
+                    )
                     .Message
             );
 

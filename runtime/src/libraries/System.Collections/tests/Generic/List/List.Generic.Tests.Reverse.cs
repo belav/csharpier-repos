@@ -159,8 +159,9 @@ namespace System.Collections.Tests
                 InvalidParameters,
                 invalidSet =>
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.Reverse(invalidSet.Item1, invalidSet.Item2));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => list.Reverse(invalidSet.Item1, invalidSet.Item2)
+                    );
                 }
             );
         }

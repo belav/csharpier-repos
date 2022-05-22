@@ -858,8 +858,9 @@ namespace XDocumentTests.SDMSample
         [Fact]
         public void ElementGetPrefixOfNamespace()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new XElement("foo").GetPrefixOfNamespace(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new XElement("foo").GetPrefixOfNamespace(null)
+            );
 
             XNamespace ns = XNamespace.Get("http://test");
             XElement e = new XElement(ns + "foo");

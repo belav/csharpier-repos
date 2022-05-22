@@ -86,8 +86,9 @@ namespace System.IO.Tests
         public void BinaryWriter_EncodingCtorAndWriteTests_Negative()
         {
             // [] Check for ArgumentNullException on null stream
-            Assert.Throws<ArgumentNullException>(() =>
-                new BinaryReader((Stream)null, Encoding.UTF8));
+            Assert.Throws<ArgumentNullException>(
+                () => new BinaryReader((Stream)null, Encoding.UTF8)
+            );
 
             // [] Check for ArgumentNullException on null encoding
             Assert.Throws<ArgumentNullException>(() => new BinaryReader(CreateStream(), null));
@@ -378,8 +379,9 @@ namespace System.IO.Tests
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((byte)4));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(new byte[] { 1, 2 }));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write('a'));
-            Assert.Throws<ObjectDisposedException>(() =>
-                binaryWriter.Write(new char[] { 'a', 'b' }));
+            Assert.Throws<ObjectDisposedException>(
+                () => binaryWriter.Write(new char[] { 'a', 'b' })
+            );
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(5.3));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((Half)5.3));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((short)3));

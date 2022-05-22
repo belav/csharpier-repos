@@ -208,8 +208,9 @@ namespace System.Net.Tests
                     const SecurityProtocolType ssl2 = (SecurityProtocolType)(
                         ssl2Client | ssl2Server
                     );
-                    Assert.Throws<NotSupportedException>(() =>
-                        ServicePointManager.SecurityProtocol = ssl2);
+                    Assert.Throws<NotSupportedException>(
+                        () => ServicePointManager.SecurityProtocol = ssl2
+                    );
 
                     AssertExtensions.Throws<ArgumentNullException>(
                         "uriString",
@@ -247,11 +248,13 @@ namespace System.Net.Tests
                         "address",
                         () => ServicePointManager.FindServicePoint((Uri)null, null)
                     );
-                    Assert.Throws<NotSupportedException>(() =>
-                        ServicePointManager.FindServicePoint(
-                            "http://anything",
-                            new FixedWebProxy("https://anything")
-                        ));
+                    Assert.Throws<NotSupportedException>(
+                        () =>
+                            ServicePointManager.FindServicePoint(
+                                "http://anything",
+                                new FixedWebProxy("https://anything")
+                            )
+                    );
 
                     ServicePoint sp = ServicePointManager.FindServicePoint(
                         "http://" + Guid.NewGuid().ToString("N"),
@@ -296,10 +299,12 @@ namespace System.Net.Tests
             try
             {
 #pragma warning disable 0618 // Ssl2, Ssl3 are deprecated.
-                Assert.Throws<NotSupportedException>(() =>
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3);
-                Assert.Throws<NotSupportedException>(() =>
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | ssl2);
+                Assert.Throws<NotSupportedException>(
+                    () => ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | ssl2
+                );
 #pragma warning restore
             }
             finally

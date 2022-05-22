@@ -169,8 +169,9 @@ namespace System.Web.WebPages.Test
                     throw new InvalidOperationException(contents);
                 }
             );
-            var e = Assert.Throws<HttpUnhandledException>(() =>
-                new WebPageHttpHandler(page).ProcessRequestInternal(httpContext));
+            var e = Assert.Throws<HttpUnhandledException>(
+                () => new WebPageHttpHandler(page).ProcessRequestInternal(httpContext)
+            );
             Assert.IsType<InvalidOperationException>(e.InnerException);
             Assert.Equal(contents, e.InnerException.Message, StringComparer.Ordinal);
         }

@@ -207,8 +207,9 @@ namespace AutoMapper.UnitTests.Bug
             var orgDto = new OrganizationDTO { ID = 5, Name = "O1" };
             orgDto.BranchCollection.Models = new BranchDTO[] { branchDto };
 
-            new Action(() =>
-                Mapper.Map<Organization>(orgDto)).ShouldThrowException<AutoMapperMappingException>(
+            new Action(
+                () => Mapper.Map<Organization>(orgDto)
+            ).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
                     ex.InnerException.Message.ShouldStartWith(
                         typeof(CollectionController<Branch, short, EventArgs>)

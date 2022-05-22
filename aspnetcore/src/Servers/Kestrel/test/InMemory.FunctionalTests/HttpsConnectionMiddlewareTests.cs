@@ -252,8 +252,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             var server = new TestServer(App, new TestServiceContext(LoggerFactory), listenOptions)
         )
         {
-            await Assert.ThrowsAnyAsync<Exception>(() =>
-                server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/"));
+            await Assert.ThrowsAnyAsync<Exception>(
+                () => server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
+            );
         }
     }
 
@@ -343,11 +344,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [Fact]
     public void ThrowsWhenNoServerCertificateIsProvided()
     {
-        Assert.Throws<ArgumentException>(() =>
-            new HttpsConnectionMiddleware(
-                context => Task.CompletedTask,
-                new HttpsConnectionAdapterOptions()
-            ));
+        Assert.Throws<ArgumentException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    new HttpsConnectionAdapterOptions()
+                )
+        );
     }
 
     [Fact]
@@ -538,13 +541,15 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls12 | SslProtocols.Tls11,
-                        false
-                    ));
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
+                );
                 Assert.Equal(1, selectorCalled);
             }
         }
@@ -619,13 +624,15 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls12 | SslProtocols.Tls11,
-                        false
-                    ));
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
+                );
                 Assert.Equal(1, selectorCalled);
             }
         }
@@ -987,8 +994,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
+                );
                 Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
@@ -1046,8 +1054,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
 
-                var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    context.Connection.GetClientCertificateAsync());
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
+                );
                 Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
                 Assert.Null(tlsFeature.ClientCertificate);
                 Assert.Null(context.Connection.ClientCertificate);
@@ -1312,13 +1321,15 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStreamWithCert(connection.Stream);
-                var ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                    await stream.AuthenticateAsClientAsync(
-                        "localhost",
-                        new X509CertificateCollection(),
-                        SslProtocols.Tls,
-                        false
-                    ));
+                var ex = await Assert.ThrowsAnyAsync<Exception>(
+                    async () =>
+                        await stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls,
+                            false
+                        )
+                );
             }
         }
     }
@@ -1558,11 +1569,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var eku = Assert.Single(cert.Extensions.OfType<X509EnhancedKeyUsageExtension>());
         Assert.NotEmpty(eku.EnhancedKeyUsages);
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new HttpsConnectionMiddleware(
-                context => Task.CompletedTask,
-                new HttpsConnectionAdapterOptions { ServerCertificate = cert, }
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    new HttpsConnectionAdapterOptions { ServerCertificate = cert, }
+                )
+        );
 
         Assert.Equal(CoreStrings.FormatInvalidServerCertificateEku(cert.Thumbprint), ex.Message);
     }
@@ -1663,11 +1676,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             HttpProtocols = HttpProtocols.Http2
         };
 
-        Assert.Throws<NotSupportedException>(() =>
-            new HttpsConnectionMiddleware(
-                context => Task.CompletedTask,
-                httpConnectionAdapterOptions
-            ));
+        Assert.Throws<NotSupportedException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    httpConnectionAdapterOptions
+                )
+        );
     }
 
     [ConditionalFact]

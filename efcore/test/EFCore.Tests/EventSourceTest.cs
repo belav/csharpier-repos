@@ -134,8 +134,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 if (async)
                 {
-                    await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
-                        await context.SaveChangesAsync());
+                    await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+                        async () => await context.SaveChangesAsync()
+                    );
                 }
                 else
                 {
@@ -169,17 +170,19 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.IsType<ArgumentOutOfRangeException>(
                         (
-                            await Assert.ThrowsAsync<RetryLimitExceededException>(() =>
-                                executionStrategyMock.ExecuteAsync(() =>
-                                {
-                                    if (executionCount++ < 3)
+                            await Assert.ThrowsAsync<RetryLimitExceededException>(
+                                () =>
+                                    executionStrategyMock.ExecuteAsync(() =>
                                     {
-                                        throw new ArgumentOutOfRangeException();
-                                    }
+                                        if (executionCount++ < 3)
+                                        {
+                                            throw new ArgumentOutOfRangeException();
+                                        }
 
-                                    Assert.True(false);
-                                    return Task.FromResult(1);
-                                }))
+                                        Assert.True(false);
+                                        return Task.FromResult(1);
+                                    })
+                            )
                         ).InnerException
                     );
                 }
@@ -187,17 +190,19 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Assert.IsType<ArgumentOutOfRangeException>(
                         Assert
-                            .Throws<RetryLimitExceededException>(() =>
-                                executionStrategyMock.Execute(() =>
-                                {
-                                    if (executionCount++ < 3)
+                            .Throws<RetryLimitExceededException>(
+                                () =>
+                                    executionStrategyMock.Execute(() =>
                                     {
-                                        throw new ArgumentOutOfRangeException();
-                                    }
+                                        if (executionCount++ < 3)
+                                        {
+                                            throw new ArgumentOutOfRangeException();
+                                        }
 
-                                    Assert.True(false);
-                                    return 0;
-                                }))
+                                        Assert.True(false);
+                                        return 0;
+                                    })
+                            )
                             .InnerException
                     );
                 }

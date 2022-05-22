@@ -47,8 +47,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void NegativeInfinitySymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.NegativeInfinitySymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.NegativeInfinitySymbol = ""
+            );
         }
     }
 }

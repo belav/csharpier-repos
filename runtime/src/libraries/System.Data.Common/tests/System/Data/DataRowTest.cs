@@ -827,8 +827,9 @@ namespace System.Data.Tests
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 
-            Assert.Throws<InvalidConstraintException>(() =>
-                childRow1.SetParentRow(parent1Row, relation2));
+            Assert.Throws<InvalidConstraintException>(
+                () => childRow1.SetParentRow(parent1Row, relation2)
+            );
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 

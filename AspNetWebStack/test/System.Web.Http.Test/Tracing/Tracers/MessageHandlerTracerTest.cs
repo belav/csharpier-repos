@@ -110,8 +110,9 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act
-            Exception thrown = Assert.Throws<TargetInvocationException>(() =>
-                method.Invoke(tracer, new object[] { request, CancellationToken.None }));
+            Exception thrown = Assert.Throws<TargetInvocationException>(
+                () => method.Invoke(tracer, new object[] { request, CancellationToken.None })
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

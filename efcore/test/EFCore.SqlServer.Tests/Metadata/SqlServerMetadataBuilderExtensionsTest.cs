@@ -213,18 +213,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        propertyBuilder.HasValueGenerationStrategy(
-                            SqlServerValueGenerationStrategy.SequenceHiLo
-                        ))
+                    .Throws<ArgumentException>(
+                        () =>
+                            propertyBuilder.HasValueGenerationStrategy(
+                                SqlServerValueGenerationStrategy.SequenceHiLo
+                            )
+                    )
                     .Message
             );
 
             Assert.Equal(
                 SqlServerStrings.SequenceBadType("Name", nameof(Splot), "string"),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        new PropertyBuilder((IMutableProperty)propertyBuilder.Metadata).UseHiLo())
+                    .Throws<ArgumentException>(
+                        () =>
+                            new PropertyBuilder(
+                                (IMutableProperty)propertyBuilder.Metadata
+                            ).UseHiLo()
+                    )
                     .Message
             );
         }
@@ -239,20 +245,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 SqlServerStrings.IdentityBadType("Name", nameof(Splot), "string"),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        propertyBuilder.HasValueGenerationStrategy(
-                            SqlServerValueGenerationStrategy.IdentityColumn
-                        ))
+                    .Throws<ArgumentException>(
+                        () =>
+                            propertyBuilder.HasValueGenerationStrategy(
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            )
+                    )
                     .Message
             );
 
             Assert.Equal(
                 SqlServerStrings.IdentityBadType("Name", nameof(Splot), "string"),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        new PropertyBuilder(
-                            (IMutableProperty)propertyBuilder.Metadata
-                        ).UseIdentityColumn())
+                    .Throws<ArgumentException>(
+                        () =>
+                            new PropertyBuilder(
+                                (IMutableProperty)propertyBuilder.Metadata
+                            ).UseIdentityColumn()
+                    )
                     .Message
             );
         }

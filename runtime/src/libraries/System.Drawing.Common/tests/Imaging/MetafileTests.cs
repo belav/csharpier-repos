@@ -52,8 +52,9 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var metafile = new Metafile(GetPath(WmfFile)))
             {
-                Assert.Throws<ExternalException>(() =>
-                    new Metafile(metafile.GetHenhmetafile(), false));
+                Assert.Throws<ExternalException>(
+                    () => new Metafile(metafile.GetHenhmetafile(), false)
+                );
             }
         }
 
@@ -686,10 +687,12 @@ namespace System.Drawing.Imaging.Tests
             {
                 IntPtr referenceHdc = g.GetHdc();
                 Assert.Throws<PathTooLongException>(() => new Metafile(fileName, referenceHdc));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, EmfType.EmfOnly));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description"));
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly)
+                );
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description")
+                );
                 DeleteFile(fileName);
             }
         }
@@ -1223,32 +1226,39 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, _rectangleF));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(
-                        fileName,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible
-                    ));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(
-                        fileName,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible,
-                        EmfType.EmfOnly
-                    ));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(
-                        fileName,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible,
-                        EmfType.EmfOnly,
-                        "description"
-                    ));
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, _rectangleF)
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
                 DeleteFile(fileName);
             }
         }
@@ -1515,32 +1525,39 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile((Stream)null, referenceHdc, _rectangleF));
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile(
-                        (Stream)null,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible
-                    ));
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile(
-                        (Stream)null,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible,
-                        EmfType.EmfOnly
-                    ));
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile(
-                        (Stream)null,
-                        referenceHdc,
-                        _rectangleF,
-                        MetafileFrameUnit.GdiCompatible,
-                        EmfType.EmfOnly,
-                        "description"
-                    ));
+                Assert.Throws<NullReferenceException>(
+                    () => new Metafile((Stream)null, referenceHdc, _rectangleF)
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 

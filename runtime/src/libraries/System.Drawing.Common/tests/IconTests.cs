@@ -53,8 +53,9 @@ namespace System.Drawing.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void Unix_OverflowException_CorruptIcon()
         {
-            Assert.Throws<OverflowException>(() =>
-                new Icon(Helpers.GetTestBitmapPath("overflowicon.ico")));
+            Assert.Throws<OverflowException>(
+                () => new Icon(Helpers.GetTestBitmapPath("overflowicon.ico"))
+            );
         }
 
         public static IEnumerable<object[]> Size_TestData()
@@ -508,8 +509,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullType_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new Icon(null, "48x48_multiple_entries_4bit.ico"));
+            Assert.Throws<NullReferenceException>(
+                () => new Icon(null, "48x48_multiple_entries_4bit.ico")
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -681,8 +683,9 @@ namespace System.Drawing.Tests
             }
             else
             {
-                Assert.Throws<FileNotFoundException>(() =>
-                    Icon.ExtractAssociatedIcon("http://microsoft.com"));
+                Assert.Throws<FileNotFoundException>(
+                    () => Icon.ExtractAssociatedIcon("http://microsoft.com")
+                );
             }
         }
 
@@ -709,8 +712,9 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void ExtractAssociatedIcon_NoSuchPath_ThrowsFileNotFoundException()
         {
-            Assert.Throws<FileNotFoundException>(() =>
-                Icon.ExtractAssociatedIcon("no-such-file.png"));
+            Assert.Throws<FileNotFoundException>(
+                () => Icon.ExtractAssociatedIcon("no-such-file.png")
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]

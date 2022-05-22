@@ -301,8 +301,9 @@ public class ResponseBodyTests
             )
         )
         {
-            await Assert.ThrowsAsync<HttpRequestException>(async () =>
-                await SendRequestAsync(address));
+            await Assert.ThrowsAsync<HttpRequestException>(
+                async () => await SendRequestAsync(address)
+            );
         }
     }
 
@@ -318,8 +319,9 @@ public class ResponseBodyTests
                 {
                     httpContext.Response.Headers["Content-lenGth"] = " 10 ";
                     await httpContext.Response.Body.WriteAsync(new byte[5], 0, 5);
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        httpContext.Response.Body.WriteAsync(new byte[6], 0, 6));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => httpContext.Response.Body.WriteAsync(new byte[6], 0, 6)
+                    );
                     completed = true;
                 }
             )

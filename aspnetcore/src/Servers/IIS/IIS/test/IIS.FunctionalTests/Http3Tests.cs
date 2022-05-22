@@ -137,8 +137,9 @@ public class Http3Tests
             Fixture.Client.BaseAddress.ToString() + "Http3_ResetAfterHeaders_SetResult"
         );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsStringAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync()
+        );
         var qex = Assert.IsType<QuicStreamAbortedException>(
             ex.InnerException?.InnerException?.InnerException
         );
@@ -160,8 +161,9 @@ public class Http3Tests
                 + "Http3_AppExceptionAfterHeaders_InternalError_SetResult"
         );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsStringAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync()
+        );
         var qex = Assert.IsType<QuicStreamAbortedException>(
             ex.InnerException?.InnerException?.InnerException
         );

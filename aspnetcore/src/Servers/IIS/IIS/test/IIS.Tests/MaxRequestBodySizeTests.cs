@@ -279,8 +279,9 @@ public class MaxRequestBodySizeTests : LoggedTest
                     var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
                     Assert.True(feature.IsReadOnly);
 
-                    invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize);
+                    invalidOpEx = Assert.Throws<InvalidOperationException>(
+                        () => feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                    );
                     throw invalidOpEx;
                 },
                 LoggerFactory
@@ -361,12 +362,12 @@ public class MaxRequestBodySizeTests : LoggedTest
                 async ctx =>
                 {
                     var buffer = new byte[1];
-                    requestRejectedEx1 =
-                        await Assert.ThrowsAnyAsync<BadHttpRequestException>(async () =>
-                            await ctx.Request.Body.ReadAsync(buffer, 0, 1));
-                    requestRejectedEx2 =
-                        await Assert.ThrowsAnyAsync<BadHttpRequestException>(async () =>
-                            await ctx.Request.Body.ReadAsync(buffer, 0, 1));
+                    requestRejectedEx1 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
+                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                    );
+                    requestRejectedEx2 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
+                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                    );
                     throw requestRejectedEx2;
                 },
                 LoggerFactory,

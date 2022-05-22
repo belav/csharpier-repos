@@ -90,10 +90,12 @@ namespace System.Text.Json.Serialization.Tests
             string trailingTrivia
         )
         {
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithComplexObjects>(
-                    leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithComplexObjects>(
+                        leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia
+                    )
+            );
         }
 
         [Fact]
@@ -256,27 +258,37 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadObjectFail_ReferenceTypeMissingPublicParameterlessConstructor()
         {
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithInternalParameterlessCtor>(
-                    @"{""Name"":""Name!""}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithPrivateParameterlessCtor>(
-                    @"{""Name"":""Name!""}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<CollectionWithoutPublicParameterlessCtor>(
-                    @"[""foo"", 1, false]"
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithInternalParameterlessCtor>(
+                        @"{""Name"":""Name!""}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithPrivateParameterlessCtor>(
+                        @"{""Name"":""Name!""}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<CollectionWithoutPublicParameterlessCtor>(
+                        @"[""foo"", 1, false]"
+                    )
+            );
 
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<GenericClassWithProtectedInternalCtor<string>>(
-                    "{\"Result\":null}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ConcreteDerivedClassWithNoPublicDefaultCtor>(
-                    "{\"ErrorString\":\"oops\"}"
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<GenericClassWithProtectedInternalCtor<string>>(
+                        "{\"Result\":null}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ConcreteDerivedClassWithNoPublicDefaultCtor>(
+                        "{\"ErrorString\":\"oops\"}"
+                    )
+            );
         }
 
         private class PublicParameterizedConstructorTestClass
@@ -716,8 +728,9 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(jsonBytes));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result);
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result
+            );
 
             // Using a reader directly doesn't throw since it stops once POCO is read.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);
@@ -740,8 +753,9 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(jsonBytes));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result);
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result
+            );
 
             // Using a reader directly throws since it can't read full object.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);

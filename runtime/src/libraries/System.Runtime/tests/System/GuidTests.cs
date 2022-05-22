@@ -2094,14 +2094,17 @@ namespace System.Tests
         [MemberData(nameof(InvalidFormat_TestData))]
         public static void TryFormat_InvalidFormat_ThrowsFormatException(string format)
         {
-            Assert.Throws<FormatException>(() =>
-                s_testGuid.TryFormat(new Span<char>(), out int charsWritten, format));
-            Assert.Throws<FormatException>(() =>
-                s_testGuid.TryFormat(
-                    new Span<char>(),
-                    out int charsWritten,
-                    format.ToUpperInvariant()
-                ));
+            Assert.Throws<FormatException>(
+                () => s_testGuid.TryFormat(new Span<char>(), out int charsWritten, format)
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    s_testGuid.TryFormat(
+                        new Span<char>(),
+                        out int charsWritten,
+                        format.ToUpperInvariant()
+                    )
+            );
         }
 
         [Theory]

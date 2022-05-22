@@ -484,8 +484,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                collection.CopyTo(array, int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => collection.CopyTo(array, int.MinValue)
+            );
         }
 
         [Theory]

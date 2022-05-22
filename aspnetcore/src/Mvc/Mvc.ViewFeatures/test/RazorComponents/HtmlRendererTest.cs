@@ -37,8 +37,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -66,8 +67,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -95,8 +97,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -124,8 +127,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -170,8 +174,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -230,8 +235,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -276,8 +282,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -306,8 +313,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -336,8 +344,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -383,8 +392,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -440,8 +450,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -498,8 +509,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -544,8 +556,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -601,8 +614,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -659,8 +673,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -717,12 +732,14 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<ComponentWithParameters>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object> { { "update", change }, { "value", 5 } }
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () =>
+                    htmlRenderer.RenderComponentAsync<ComponentWithParameters>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object> { { "update", change }, { "value", 5 } }
+                        )
                     )
-                ))
+            )
         );
 
         // Assert
@@ -772,8 +789,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -824,8 +842,9 @@ public class HtmlRendererTest
 
         // Act
         var result = GetResult(
-            htmlRenderer.Dispatcher.InvokeAsync(() =>
-                htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty))
+            htmlRenderer.Dispatcher.InvokeAsync(
+                () => htmlRenderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+            )
         );
 
         // Assert
@@ -877,10 +896,12 @@ public class HtmlRendererTest
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
 
         // Act
-        var result = await htmlRenderer.Dispatcher.InvokeAsync(() =>
-            htmlRenderer.RenderComponentAsync<AsyncComponent>(
-                ParameterView.FromDictionary(new Dictionary<string, object> { ["Value"] = 10 })
-            ));
+        var result = await htmlRenderer.Dispatcher.InvokeAsync(
+            () =>
+                htmlRenderer.RenderComponentAsync<AsyncComponent>(
+                    ParameterView.FromDictionary(new Dictionary<string, object> { ["Value"] = 10 })
+                )
+        );
 
         // Assert
         Assert.Equal(expectedHtml, result.Tokens);
@@ -915,12 +936,14 @@ public class HtmlRendererTest
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
 
         // Act
-        var result = await htmlRenderer.Dispatcher.InvokeAsync(() =>
-            htmlRenderer.RenderComponentAsync<NestedAsyncComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object> { ["Nested"] = false, ["Value"] = 10 }
+        var result = await htmlRenderer.Dispatcher.InvokeAsync(
+            () =>
+                htmlRenderer.RenderComponentAsync<NestedAsyncComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object> { ["Nested"] = false, ["Value"] = 10 }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.Equal(expectedHtml, result.Tokens);
@@ -945,10 +968,12 @@ public class HtmlRendererTest
         var renderer = GetHtmlRenderer(serviceProvider);
 
         // Act
-        var first = await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<TestComponent>(ParameterView.Empty));
-        var second = await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<TestComponent>(ParameterView.Empty));
+        var first = await renderer.Dispatcher.InvokeAsync(
+            () => renderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+        );
+        var second = await renderer.Dispatcher.InvokeAsync(
+            () => renderer.RenderComponentAsync<TestComponent>(ParameterView.Empty)
+        );
 
         // Assert
         Assert.Equal(0, first.ComponentId);

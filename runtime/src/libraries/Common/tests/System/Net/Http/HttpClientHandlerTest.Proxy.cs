@@ -395,12 +395,13 @@ namespace System.Net.Http.Functional.Tests
                 handler.ServerCertificateCustomValidationCallback = TestHelper.AllowAllCertificates;
                 using (HttpClient client = CreateHttpClient(handler))
                 {
-                    HttpRequestException e =
-                        await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                    HttpRequestException e = await Assert.ThrowsAnyAsync<HttpRequestException>(
+                        async () =>
                             await client.PostAsync(
                                 "https://nosuchhost.invalid",
                                 new StringContent(content)
-                            ));
+                            )
+                    );
                     Assert.Contains("407", e.Message);
                 }
             }

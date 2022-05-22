@@ -195,8 +195,9 @@ public class HttpRequestStreamTests
         pipeReader.StartAcceptingReads(null);
         var error = new Exception();
         pipeReader.Abort(error);
-        var exception = await Assert.ThrowsAsync<Exception>(() =>
-            stream.ReadAsync(new byte[1], 0, 1));
+        var exception = await Assert.ThrowsAsync<Exception>(
+            () => stream.ReadAsync(new byte[1], 0, 1)
+        );
         Assert.Same(error, exception);
     }
 
@@ -222,8 +223,9 @@ public class HttpRequestStreamTests
         var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), pipeReader);
         pipeReader.StartAcceptingReads(null);
         pipeReader.Abort();
-        await Assert.ThrowsAsync<TaskCanceledException>(() =>
-            stream.CopyToAsync(Mock.Of<Stream>()));
+        await Assert.ThrowsAsync<TaskCanceledException>(
+            () => stream.CopyToAsync(Mock.Of<Stream>())
+        );
     }
 
     [Fact]
@@ -234,8 +236,9 @@ public class HttpRequestStreamTests
         pipeReader.StartAcceptingReads(null);
         var error = new Exception();
         pipeReader.Abort(error);
-        var exception = await Assert.ThrowsAsync<Exception>(() =>
-            stream.CopyToAsync(Mock.Of<Stream>()));
+        var exception = await Assert.ThrowsAsync<Exception>(
+            () => stream.CopyToAsync(Mock.Of<Stream>())
+        );
         Assert.Same(error, exception);
     }
 

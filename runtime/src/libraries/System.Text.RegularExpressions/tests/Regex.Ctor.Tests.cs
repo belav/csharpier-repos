@@ -140,30 +140,40 @@ namespace System.Text.RegularExpressions.Tests
             if (PlatformDetection.IsNetCore)
             {
                 // NonBacktracking option is not supported together with these other options
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex(
-                        "abc",
-                        RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking
-                    ));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex(
-                        "abc",
-                        RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking
-                    ));
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                        new Regex(
+                            "abc",
+                            RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking
+                        )
+                );
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                        new Regex(
+                            "abc",
+                            RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking
+                        )
+                );
 
                 // NonBacktracking option is not supported for these constructs
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking));
-                Assert.Throws<NotSupportedException>(() =>
-                    new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking));
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex("(?=a)", RegexHelpers.RegexOptionNonBacktracking)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex("(?!a)", RegexHelpers.RegexOptionNonBacktracking)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex("(?<=a)", RegexHelpers.RegexOptionNonBacktracking)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex("(?<!a)", RegexHelpers.RegexOptionNonBacktracking)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex(@"(?(0)ab)", RegexHelpers.RegexOptionNonBacktracking)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => new Regex(@"([ab])\1", RegexHelpers.RegexOptionNonBacktracking)
+                );
             }
 
             // Pattern is null
@@ -428,10 +438,12 @@ namespace System.Text.RegularExpressions.Tests
         public void Serialization_ThrowsNotSupported()
         {
             var r = new SerializableDerivedRegex();
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new SerializableDerivedRegex(default, default));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                ((ISerializable)r).GetObjectData(default, default));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new SerializableDerivedRegex(default, default)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => ((ISerializable)r).GetObjectData(default, default)
+            );
         }
 
         [Serializable]

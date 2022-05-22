@@ -21,8 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IXMLDOMNode? localNode = null;
             if (
                 !ErrorHandler.Succeeded(
-                    ErrorHandler.CallWithCOMConvention(() =>
-                        expansionSession.GetHeaderNode(query, out localNode))
+                    ErrorHandler.CallWithCOMConvention(
+                        () => expansionSession.GetHeaderNode(query, out localNode)
+                    )
                 )
             )
             {

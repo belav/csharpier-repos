@@ -120,12 +120,14 @@ namespace System.Text.Json.Serialization.Tests
             using var cts = new CancellationTokenSource(
                 delay: TimeSpan.FromMilliseconds(cancellationTokenSourceDelayMilliseconds)
             );
-            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await JsonSerializer.SerializeAsync(
-                    utf8Stream,
-                    longRunningEnumerable,
-                    cancellationToken: cts.Token
-                ));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                async () =>
+                    await JsonSerializer.SerializeAsync(
+                        utf8Stream,
+                        longRunningEnumerable,
+                        cancellationToken: cts.Token
+                    )
+            );
 
             Assert.Equal(1, longRunningEnumerable.TotalCreatedEnumerators);
             Assert.Equal(1, longRunningEnumerable.TotalDisposedEnumerators);
@@ -210,8 +212,9 @@ namespace System.Text.Json.Serialization.Tests
             IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
                 Enumerable.Range(1, 10)
             );
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(asyncEnumerable));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(asyncEnumerable)
+            );
         }
 
         [Fact]
@@ -220,10 +223,12 @@ namespace System.Text.Json.Serialization.Tests
             IAsyncEnumerable<int> asyncEnumerable = new MockedAsyncEnumerable<int>(
                 Enumerable.Range(1, 10)
             );
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    new { Data = asyncEnumerable }
-                ));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        new { Data = asyncEnumerable }
+                    )
+            );
         }
 
         [Fact]
@@ -234,11 +239,13 @@ namespace System.Text.Json.Serialization.Tests
                 Enumerable.Repeat(ThrowingEnumerable(), 2)
             );
 
-            await Assert.ThrowsAsync<DivideByZeroException>(async () =>
-                await JsonSerializerWrapperForStream.SerializeWrapper(
-                    stream,
-                    new { Data = asyncEnumerable }
-                ));
+            await Assert.ThrowsAsync<DivideByZeroException>(
+                async () =>
+                    await JsonSerializerWrapperForStream.SerializeWrapper(
+                        stream,
+                        new { Data = asyncEnumerable }
+                    )
+            );
             Assert.Equal(1, asyncEnumerable.TotalCreatedEnumerators);
             Assert.Equal(1, asyncEnumerable.TotalDisposedEnumerators);
 
@@ -288,8 +295,10 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ReadRootLevelAsyncEnumerableDerivative_ThrowsNotSupportedException()
         {
             var utf8Stream = new Utf8MemoryStream("[0,1,2,3,4]");
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializer.DeserializeAsync<MockedAsyncEnumerable<int>>(utf8Stream));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializer.DeserializeAsync<MockedAsyncEnumerable<int>>(utf8Stream)
+            );
         }
 
         public static IEnumerable<object[]> GetAsyncEnumerableSources()
@@ -347,12 +356,14 @@ namespace System.Text.Json.Serialization.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/57360
             using var stream = new Utf8MemoryStream();
             using var cts = new CancellationTokenSource(millisecondsDelay: 1000);
-            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await JsonSerializer.SerializeAsync(
-                    stream,
-                    GetNumbersAsync(),
-                    cancellationToken: cts.Token
-                ));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                async () =>
+                    await JsonSerializer.SerializeAsync(
+                        stream,
+                        GetNumbersAsync(),
+                        cancellationToken: cts.Token
+                    )
+            );
 
             static async IAsyncEnumerable<int> GetNumbersAsync()
             {
@@ -370,11 +381,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Regression test for https://github.com/dotnet/aspnetcore/issues/36977
             using var stream = new MemoryStream();
-            await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await JsonSerializer.SerializeAsync(
-                    stream,
-                    new { Data = GetFailingAsyncEnumerable() }
-                ));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () =>
+                    await JsonSerializer.SerializeAsync(
+                        stream,
+                        new { Data = GetFailingAsyncEnumerable() }
+                    )
+            );
             Assert.Equal(0, stream.Length);
 
             static async IAsyncEnumerable<int> GetFailingAsyncEnumerable()

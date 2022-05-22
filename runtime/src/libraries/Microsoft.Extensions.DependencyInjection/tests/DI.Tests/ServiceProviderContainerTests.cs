@@ -29,8 +29,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = CreateServiceProvider(serviceCollection);
 
-            var ex1 = Assert.Throws<Exception>(() =>
-                provider.GetService<ClassWithThrowingEmptyCtor>());
+            var ex1 = Assert.Throws<Exception>(
+                () => provider.GetService<ClassWithThrowingEmptyCtor>()
+            );
             Assert.Equal(nameof(ClassWithThrowingEmptyCtor), ex1.Message);
 
             var ex2 = Assert.Throws<Exception>(() => provider.GetService<ClassWithThrowingCtor>());
@@ -50,8 +51,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                serviceProvider.GetServices<ClassDependsOnPrivateConstructorClass>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => serviceProvider.GetServices<ClassDependsOnPrivateConstructorClass>()
+            );
             Assert.Equal(expectedMessage, ex.Message);
         }
 
@@ -64,8 +66,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var provider = CreateServiceProvider(collection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                provider.GetService<DependOnNonexistentService>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.GetService<DependOnNonexistentService>()
+            );
             Assert.Equal(
                 $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting to activate "
                     + $"'{typeof(DependOnNonexistentService)}'.",
@@ -82,8 +85,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var provider = CreateServiceProvider(collection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                provider.GetService<IEnumerable<DependOnNonexistentService>>());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.GetService<IEnumerable<DependOnNonexistentService>>()
+            );
             Assert.Equal(
                 $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting to activate "
                     + $"'{typeof(DependOnNonexistentService)}'.",
@@ -178,8 +182,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient(serviceType, implementationType);
 
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(() =>
-                CreateServiceProvider(serviceCollection));
+            var exception = Assert.Throws<ArgumentException>(
+                () => CreateServiceProvider(serviceCollection)
+            );
             Assert.Equal(
                 $"Cannot instantiate implementation type '{implementationType}' for service type '{serviceType}'.",
                 exception.Message
@@ -199,8 +204,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient(serviceType, implementationType);
 
             // Act and Assert
-            var exception = Assert.Throws<ArgumentException>(() =>
-                CreateServiceProvider(serviceCollection));
+            var exception = Assert.Throws<ArgumentException>(
+                () => CreateServiceProvider(serviceCollection)
+            );
             Assert.StartsWith(errorMessage, exception.Message);
         }
 
@@ -378,8 +384,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = provider.CreateScope();
             ((IDisposable)provider).Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                scope.ServiceProvider.GetService<IFakeService>());
+            Assert.Throws<ObjectDisposedException>(
+                () => scope.ServiceProvider.GetService<IFakeService>()
+            );
         }
 
         [Fact]
@@ -392,8 +399,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = provider.CreateScope();
             scope.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                scope.ServiceProvider.GetService<IFakeService>());
+            Assert.Throws<ObjectDisposedException>(
+                () => scope.ServiceProvider.GetService<IFakeService>()
+            );
             //Check that resolution from root works
             Assert.NotNull(provider.CreateScope());
         }
@@ -1055,8 +1063,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = CreateServiceProvider(serviceCollection);
             var disposable = serviceProvider.GetService<AsyncDisposable>();
 
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                (serviceProvider as IDisposable).Dispose());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => (serviceProvider as IDisposable).Dispose()
+            );
             Assert.Equal(
                 "'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderContainerTests+AsyncDisposable' type only implements IAsyncDisposable. Use DisposeAsync to dispose the container.",
                 exception.Message
@@ -1118,8 +1127,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = serviceProvider.CreateScope();
             var disposable = scope.ServiceProvider.GetService<AsyncDisposable>();
 
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                (scope as IDisposable).Dispose());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => (scope as IDisposable).Dispose()
+            );
             Assert.Equal(
                 "'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderContainerTests+AsyncDisposable' type only implements IAsyncDisposable. Use DisposeAsync to dispose the container.",
                 exception.Message

@@ -390,11 +390,13 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             foreach (DSASignatureFormat format in Enum.GetValues(typeof(DSASignatureFormat)))
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    SignData(key, empty, unknown, format));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => SignData(key, empty, unknown, format)
+                );
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    VerifyData(key, empty, empty, unknown, format));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => VerifyData(key, empty, empty, unknown, format)
+                );
             }
         }
 

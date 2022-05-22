@@ -146,8 +146,9 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
 
         // Send a bogus sign in
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
-            server.SendAsync("https://example.com/signin-twitter"));
+        var error = await Assert.ThrowsAnyAsync<Exception>(
+            () => server.SendAsync("https://example.com/signin-twitter")
+        );
         Assert.Equal("Invalid state cookie.", error.GetBaseException().Message);
     }
 
@@ -664,21 +665,25 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                                         var res = context.Response;
                                         if (req.Path == new PathString("/signIn"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                                context.SignInAsync(
-                                                    "Twitter",
-                                                    new ClaimsPrincipal()
-                                                ));
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () =>
+                                                    context.SignInAsync(
+                                                        "Twitter",
+                                                        new ClaimsPrincipal()
+                                                    )
+                                            );
                                         }
                                         else if (req.Path == new PathString("/signOut"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                                context.SignOutAsync("Twitter"));
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.SignOutAsync("Twitter")
+                                            );
                                         }
                                         else if (req.Path == new PathString("/forbid"))
                                         {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                                context.ForbidAsync("Twitter"));
+                                            await Assert.ThrowsAsync<InvalidOperationException>(
+                                                () => context.ForbidAsync("Twitter")
+                                            );
                                         }
                                         else if (req.Path == new PathString("/me"))
                                         {

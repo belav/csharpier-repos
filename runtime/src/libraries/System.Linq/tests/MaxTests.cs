@@ -847,8 +847,9 @@ namespace System.Linq.Tests
         public void Max_DateTime_EmptySource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Max());
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<DateTime>().Max(i => i));
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<DateTime>().Max(i => i)
+            );
         }
 
         public static IEnumerable<object[]> Max_String_TestData()
@@ -1213,10 +1214,12 @@ namespace System.Linq.Tests
         public static void Max_Generic_EmptyStructSource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<int>().Max());
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().Max(comparer: null));
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().Max(Comparer<int>.Create((_, _) => 0)));
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().Max(comparer: null)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().Max(Comparer<int>.Create((_, _) => 0))
+            );
         }
 
         [Theory]
@@ -1323,14 +1326,18 @@ namespace System.Linq.Tests
         [Fact]
         public static void MaxBy_Generic_EmptyStructSource_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().MaxBy(x => x.ToString()));
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable.Empty<int>().MaxBy(x => x.ToString(), comparer: null));
-            Assert.Throws<InvalidOperationException>(() =>
-                Enumerable
-                    .Empty<int>()
-                    .MaxBy(x => x.ToString(), Comparer<string>.Create((_, _) => 0)));
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().MaxBy(x => x.ToString())
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => Enumerable.Empty<int>().MaxBy(x => x.ToString(), comparer: null)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Enumerable
+                        .Empty<int>()
+                        .MaxBy(x => x.ToString(), Comparer<string>.Create((_, _) => 0))
+            );
         }
 
         [Fact]

@@ -117,8 +117,9 @@ namespace System.Net.Http
 
         private void InitializeStreamTask()
         {
-            _streamTask = new Lazy<Task<Stream>>(() =>
-                Content == null ? null : Content.ReadAsStreamAsync());
+            _streamTask = new Lazy<Task<Stream>>(
+                () => Content == null ? null : Content.ReadAsStreamAsync()
+            );
         }
 
         /// <summary>

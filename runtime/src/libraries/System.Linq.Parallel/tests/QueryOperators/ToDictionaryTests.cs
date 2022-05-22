@@ -125,10 +125,12 @@ namespace System.Linq.Parallel.Tests
         {
             if (count > 2)
             {
-                ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() =>
-                    UnorderedSources
-                        .Default(count)
-                        .ToDictionary(x => x, new ModularCongruenceComparer(2)));
+                ArgumentException e = AssertThrows.Wrapped<ArgumentException>(
+                    () =>
+                        UnorderedSources
+                            .Default(count)
+                            .ToDictionary(x => x, new ModularCongruenceComparer(2))
+                );
             }
             else if (count == 1 || count == 2)
             {
@@ -170,10 +172,12 @@ namespace System.Linq.Parallel.Tests
         {
             if (count > 2)
             {
-                AssertThrows.Wrapped<ArgumentException>(() =>
-                    UnorderedSources
-                        .Default(count)
-                        .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2)));
+                AssertThrows.Wrapped<ArgumentException>(
+                    () =>
+                        UnorderedSources
+                            .Default(count)
+                            .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2))
+                );
             }
             else if (count == 1 || count == 2)
             {
@@ -209,33 +213,39 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ToDictionary_DuplicateKeys()
         {
-            AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x));
+            AssertThrows.Wrapped<ArgumentException>(
+                () => ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x)
+            );
         }
 
         [Fact]
         public static void ToDictionary_DuplicateKeys_ElementSelector()
         {
-            AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x, y => y));
+            AssertThrows.Wrapped<ArgumentException>(
+                () => ParallelEnumerable.Repeat(0, 2).ToDictionary(x => x, y => y)
+            );
         }
 
         [Fact]
         public static void ToDictionary_DuplicateKeys_CustomComparator()
         {
-            AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable
-                    .Repeat(0, 2)
-                    .ToDictionary(x => x, new ModularCongruenceComparer(2)));
+            AssertThrows.Wrapped<ArgumentException>(
+                () =>
+                    ParallelEnumerable
+                        .Repeat(0, 2)
+                        .ToDictionary(x => x, new ModularCongruenceComparer(2))
+            );
         }
 
         [Fact]
         public static void ToDictionary_DuplicateKeys_ElementSelector_CustomComparator()
         {
-            AssertThrows.Wrapped<ArgumentException>(() =>
-                ParallelEnumerable
-                    .Repeat(0, 2)
-                    .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2)));
+            AssertThrows.Wrapped<ArgumentException>(
+                () =>
+                    ParallelEnumerable
+                        .Repeat(0, 2)
+                        .ToDictionary(x => x, y => y, new ModularCongruenceComparer(2))
+            );
         }
 
         [Fact]
@@ -310,73 +320,87 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
 
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    (Func<int, int>)(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
                     )
-                ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    (Func<int, int>)(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ),
-                    y => y
-                ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    x => x,
-                    (Func<int, int>)(
-                        y =>
-                        {
-                            throw new DeliberateTestException();
-                        }
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        ),
+                        y => y
                     )
-                ));
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        x => x,
+                        (Func<int, int>)(
+                            y =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+                    )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    (Func<int, int>)(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ),
-                    EqualityComparer<int>.Default
-                ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    (Func<int, int>)(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ),
-                    y => y,
-                    EqualityComparer<int>.Default
-                ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(
-                    x => x,
-                    (Func<int, int>)(
-                        y =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ),
-                    EqualityComparer<int>.Default
-                ));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        ),
+                        EqualityComparer<int>.Default
+                    )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        ),
+                        y => y,
+                        EqualityComparer<int>.Default
+                    )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    labeled.Item.ToDictionary(
+                        x => x,
+                        (Func<int, int>)(
+                            y =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        ),
+                        EqualityComparer<int>.Default
+                    )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(x => x, new FailingEqualityComparer<int>()));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled.Item.ToDictionary(x => x, y => y, new FailingEqualityComparer<int>()));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () => labeled.Item.ToDictionary(x => x, new FailingEqualityComparer<int>())
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () => labeled.Item.ToDictionary(x => x, y => y, new FailingEqualityComparer<int>())
+            );
         }
 
         [Fact]

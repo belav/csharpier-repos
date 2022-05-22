@@ -1042,8 +1042,9 @@ namespace Microsoft.EntityFrameworkCore
                 && contextLifetime == ServiceLifetime.Singleton
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    scope.ServiceProvider.GetRequiredService<WoolacombeContext>());
+                Assert.Throws<InvalidOperationException>(
+                    () => scope.ServiceProvider.GetRequiredService<WoolacombeContext>()
+                );
             }
             else
             {
@@ -1418,8 +1419,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    serviceProvider.GetRequiredService<WoolacombeContext>());
+                Assert.Throws<InvalidOperationException>(
+                    () => serviceProvider.GetRequiredService<WoolacombeContext>()
+                );
             }
             else
             {
@@ -1428,8 +1430,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (validateScopes && factoryLifetime == ServiceLifetime.Scoped)
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                Assert.Throws<InvalidOperationException>(
+                    () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+                );
             }
             else
             {
@@ -1807,8 +1810,9 @@ namespace Microsoft.EntityFrameworkCore
                 && effectiveOptionsLifetime == ServiceLifetime.Scoped
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                Assert.Throws<InvalidOperationException>(
+                    () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+                );
             }
             else
             {
@@ -2185,8 +2189,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    serviceProvider.GetRequiredService<WoolacombeContext>());
+                Assert.Throws<InvalidOperationException>(
+                    () => serviceProvider.GetRequiredService<WoolacombeContext>()
+                );
             }
             else
             {
@@ -2201,8 +2206,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>());
+                Assert.Throws<InvalidOperationException>(
+                    () => serviceProvider.GetRequiredService<IDbContextFactory<WoolacombeContext>>()
+                );
             }
             else
             {

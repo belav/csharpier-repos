@@ -119,8 +119,9 @@ public class DecimalTest
 
     private static void RunCurrencyTests()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            DecimalTestNative.CreateCurrencyFromInt(StartingIntValue));
+        Assert.Throws<MarshalDirectiveException>(
+            () => DecimalTestNative.CreateCurrencyFromInt(StartingIntValue)
+        );
 
         Assert.True(
             DecimalTestNative.CurrencyEqualToInt((decimal)StartingIntValue, StartingIntValue)

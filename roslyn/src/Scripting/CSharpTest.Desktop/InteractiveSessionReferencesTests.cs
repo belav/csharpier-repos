@@ -667,8 +667,9 @@ c1 = c2;
                 var script = CSharpScript.Create("new S1()", options);
                 script.Compile();
 
-                Assert.Throws<TypeLoadException>(() =>
-                    script.EvaluateAsync().GetAwaiter().GetResult());
+                Assert.Throws<TypeLoadException>(
+                    () => script.EvaluateAsync().GetAwaiter().GetResult()
+                );
             }
             finally
             {

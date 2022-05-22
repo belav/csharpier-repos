@@ -27,8 +27,9 @@ namespace System.ServiceProcess.Tests
                 ServiceControllerStatus.Running,
                 _testService.ControlTimeout
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                prerequisiteServiceController.Stop(stopDependentServices: false));
+            Assert.Throws<InvalidOperationException>(
+                () => prerequisiteServiceController.Stop(stopDependentServices: false)
+            );
         }
 
         [ConditionalFact(nameof(IsProcessElevated))]

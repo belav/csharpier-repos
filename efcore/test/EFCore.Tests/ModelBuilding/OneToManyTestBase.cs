@@ -1052,12 +1052,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Order)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder
-                                .Entity<Customer>()
-                                .HasNoKey()
-                                .HasMany(c => c.Orders)
-                                .WithOne(o => o.Customer))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                modelBuilder
+                                    .Entity<Customer>()
+                                    .HasNoKey()
+                                    .HasMany(c => c.Orders)
+                                    .WithOne(o => o.Customer)
+                        )
                         .Message
                 );
             }
@@ -2218,8 +2220,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Product) + "." + nameof(Product.Categories)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder.Entity<Category>().HasMany(o => o.Products).WithOne())
+                        .Throws<InvalidOperationException>(
+                            () => modelBuilder.Entity<Category>().HasMany(o => o.Products).WithOne()
+                        )
                         .Message
                 );
             }
@@ -2251,8 +2254,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         principalType.DisplayName() + "." + nameof(Nob.Hob)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder.Entity<Nob>().HasMany(e => e.Hobs).WithOne(e => e.Nob))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                modelBuilder.Entity<Nob>().HasMany(e => e.Hobs).WithOne(e => e.Nob)
+                        )
                         .Message
                 );
             }
@@ -2270,8 +2275,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Dre)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder.Entity<Dr>().HasMany<Dre>(d => d.Jrs))
+                        .Throws<InvalidOperationException>(
+                            () => modelBuilder.Entity<Dr>().HasMany<Dre>(d => d.Jrs)
+                        )
                         .Message
                 );
             }
@@ -3108,11 +3114,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CoreStrings.CanOnlyConfigureExistingNavigations("Name", "NavDependent"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder
-                                .Entity<NavDependent>()
-                                .Navigation(e => e.Name)
-                                .UsePropertyAccessMode(PropertyAccessMode.Property))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                modelBuilder
+                                    .Entity<NavDependent>()
+                                    .Navigation(e => e.Name)
+                                    .UsePropertyAccessMode(PropertyAccessMode.Property)
+                        )
                         .Message
                 );
             }
@@ -3149,11 +3157,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(Store)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder
-                                .Entity<KeylessCollectionNavigation>()
-                                .HasNoKey()
-                                .HasMany(e => e.Stores))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                modelBuilder
+                                    .Entity<KeylessCollectionNavigation>()
+                                    .HasNoKey()
+                                    .HasMany(e => e.Stores)
+                        )
                         .Message
                 );
             }
@@ -3169,12 +3179,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(KeylessCollectionNavigation)
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            modelBuilder
-                                .Entity<KeylessCollectionNavigation>()
-                                .HasNoKey()
-                                .HasOne(e => e.Reference)
-                                .WithMany(e => e.Collection))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                modelBuilder
+                                    .Entity<KeylessCollectionNavigation>()
+                                    .HasNoKey()
+                                    .HasOne(e => e.Reference)
+                                    .WithMany(e => e.Collection)
+                        )
                         .Message
                 );
             }

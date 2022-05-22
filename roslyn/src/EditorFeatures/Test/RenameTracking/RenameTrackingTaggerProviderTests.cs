@@ -1045,18 +1045,22 @@ End Enum";
             );
 
             source = new TaskCompletionSource<RenameTrackingTaggerProvider.TriggerIdentifierKind>();
-            Assert.Throws<OperationCanceledException>(() =>
-                RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
-                    source.Task,
-                    new CancellationToken(canceled: true)
-                ));
+            Assert.Throws<OperationCanceledException>(
+                () =>
+                    RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
+                        source.Task,
+                        new CancellationToken(canceled: true)
+                    )
+            );
             var thrownException = new Exception();
             source.TrySetException(thrownException);
-            var caughtException = Assert.Throws<Exception>(() =>
-                RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
-                    source.Task,
-                    CancellationToken.None
-                ));
+            var caughtException = Assert.Throws<Exception>(
+                () =>
+                    RenameTrackingTaggerProvider.WaitForIsRenamableIdentifier(
+                        source.Task,
+                        CancellationToken.None
+                    )
+            );
             Assert.Same(thrownException, caughtException);
         }
 

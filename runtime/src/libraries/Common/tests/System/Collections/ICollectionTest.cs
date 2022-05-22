@@ -182,8 +182,9 @@ namespace Tests.Collections
         {
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
-            Assert.Throws<ArgumentException>(() =>
-                collection.CopyTo(new object[1, collection.Count], 0));
+            Assert.Throws<ArgumentException>(
+                () => collection.CopyTo(new object[1, collection.Count], 0)
+            );
         }
 
         protected void AssertThrows(Type[] exceptionTypes, Action testCode)

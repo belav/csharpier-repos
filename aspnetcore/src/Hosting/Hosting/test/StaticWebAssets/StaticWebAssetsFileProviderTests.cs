@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public void StaticWebAssetsFileProvider_ConstructorThrows_WhenPathIsNotFound()
         {
             // Arrange, Act & Assert
-            var provider = Assert.Throws<DirectoryNotFoundException>(() =>
-                new StaticWebAssetsFileProvider("/prefix", "/nonexisting"));
+            var provider = Assert.Throws<DirectoryNotFoundException>(
+                () => new StaticWebAssetsFileProvider("/prefix", "/nonexisting")
+            );
         }
 
         [Fact]

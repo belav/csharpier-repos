@@ -27,57 +27,63 @@ namespace Microsoft.EntityFrameworkCore.Query
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_nav_projected_in_subquery_when_client_eval(bool async)
         {
-            return AssertTranslationFailed(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().Select(o => ClientProjection(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .Select(od => ClientProjection(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c,
-                    entryCount: 89
-                ));
+            return AssertTranslationFailed(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from c in ss.Set<Customer>()
+                            join o in ss.Set<Order>().Select(o => ClientProjection(o, o.Customer))
+                                on c.CustomerID equals o.CustomerID
+                            join od in ss.Set<OrderDetail>()
+                                .Select(od => ClientProjection(od, od.Product))
+                                on o.OrderID equals od.OrderID
+                            select c,
+                        entryCount: 89
+                    )
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_nav_in_predicate_in_subquery_when_client_eval(bool async)
         {
-            return AssertTranslationFailed(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().Where(o => ClientPredicate(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .Where(od => ClientPredicate(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c,
-                    entryCount: 89
-                ));
+            return AssertTranslationFailed(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from c in ss.Set<Customer>()
+                            join o in ss.Set<Order>().Where(o => ClientPredicate(o, o.Customer))
+                                on c.CustomerID equals o.CustomerID
+                            join od in ss.Set<OrderDetail>()
+                                .Where(od => ClientPredicate(od, od.Product))
+                                on o.OrderID equals od.OrderID
+                            select c,
+                        entryCount: 89
+                    )
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Join_with_nav_in_orderby_in_subquery_when_client_eval(bool async)
         {
-            return AssertTranslationFailed(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().OrderBy(o => ClientOrderBy(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .OrderBy(od => ClientOrderBy(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c,
-                    entryCount: 89
-                ));
+            return AssertTranslationFailed(
+                () =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from c in ss.Set<Customer>()
+                            join o in ss.Set<Order>().OrderBy(o => ClientOrderBy(o, o.Customer))
+                                on c.CustomerID equals o.CustomerID
+                            join od in ss.Set<OrderDetail>()
+                                .OrderBy(od => ClientOrderBy(od, od.Product))
+                                on o.OrderID equals od.OrderID
+                            select c,
+                        entryCount: 89
+                    )
+            );
         }
 
         private static readonly Random _randomGenerator = new();

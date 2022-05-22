@@ -379,8 +379,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         )
         {
             var message = Assert
-                .Throws<InvalidOperationException>(() =>
-                    Validate(modelBuilder, sensitiveDataLoggingEnabled))
+                .Throws<InvalidOperationException>(
+                    () => Validate(modelBuilder, sensitiveDataLoggingEnabled)
+                )
                 .Message;
             Assert.Equal(expectedMessage, message);
         }

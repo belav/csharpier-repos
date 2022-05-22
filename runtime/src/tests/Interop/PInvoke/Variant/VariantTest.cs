@@ -76,8 +76,9 @@ partial class Test_VariantTest
 
         Assert.Throws<ArgumentException>(() => Marshal_ByValue_Invalid(TimeSpan.Zero));
         Assert.Throws<NotSupportedException>(() => Marshal_ByValue_Invalid(new CustomStruct()));
-        Assert.Throws<ArgumentException>(() =>
-            Marshal_ByValue_Invalid(new VariantWrapper(CharValue)));
+        Assert.Throws<ArgumentException>(
+            () => Marshal_ByValue_Invalid(new VariantWrapper(CharValue))
+        );
     }
 
     private unsafe static void TestByRef(bool hasComSupport)

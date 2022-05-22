@@ -928,8 +928,14 @@ namespace System.Web.Mvc.Async.Test
             using (var mockResult = new MockAsyncResult())
             {
                 // Act & assert
-                Assert.Throws<ThreadAbortException>(() =>
-                    BeginInvokeActionMethodWithFiltersEndTester(mockResult, action, actionFilter));
+                Assert.Throws<ThreadAbortException>(
+                    () =>
+                        BeginInvokeActionMethodWithFiltersEndTester(
+                            mockResult,
+                            action,
+                            actionFilter
+                        )
+                );
 
                 // Assert
                 Assert.True(onActionExecutedWasCalled);

@@ -75,8 +75,9 @@ public partial class HttpConnectionTests
                         await connection.StartAsync().DefaultTimeout();
                         await connection.DisposeAsync().DefaultTimeout();
                         var exception = await Assert
-                            .ThrowsAsync<ObjectDisposedException>(async () =>
-                                await connection.StartAsync())
+                            .ThrowsAsync<ObjectDisposedException>(
+                                async () => await connection.StartAsync()
+                            )
                             .DefaultTimeout();
 
                         Assert.Equal(nameof(HttpConnection), exception.ObjectName);
@@ -354,8 +355,9 @@ public partial class HttpConnectionTests
                             .WriteAsync(new byte[] { 0x42 })
                             .DefaultTimeout();
 
-                        await Assert.ThrowsAsync<HttpRequestException>(async () =>
-                            await connection.Transport.Input.ReadAsync());
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            async () => await connection.Transport.Input.ReadAsync()
+                        );
                     }
                 );
             }
@@ -393,8 +395,9 @@ public partial class HttpConnectionTests
                     CreateConnection(httpHandler, loggerFactory: LoggerFactory, transport: sse),
                     async (connection) =>
                     {
-                        await Assert.ThrowsAsync<AggregateException>(() =>
-                            connection.StartAsync().DefaultTimeout());
+                        await Assert.ThrowsAsync<AggregateException>(
+                            () => connection.StartAsync().DefaultTimeout()
+                        );
                     }
                 );
             }
@@ -510,8 +513,9 @@ public partial class HttpConnectionTests
                         // We aggregate failures that happen when we start the transport. The operation canceled exception will
                         // be an inner exception.
                         var ex = await Assert
-                            .ThrowsAsync<AggregateException>(async () =>
-                                await connection.StartAsync(cts.Token))
+                            .ThrowsAsync<AggregateException>(
+                                async () => await connection.StartAsync(cts.Token)
+                            )
                             .DefaultTimeout();
                         Assert.Equal(3, ex.InnerExceptions.Count);
                         var innerEx = ex.InnerExceptions[2];
@@ -542,8 +546,12 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         await Assert
-                            .ThrowsAsync<TaskCanceledException>(async () =>
-                                await connection.StartAsync(new CancellationToken(canceled: true)))
+                            .ThrowsAsync<TaskCanceledException>(
+                                async () =>
+                                    await connection.StartAsync(
+                                        new CancellationToken(canceled: true)
+                                    )
+                            )
                             .DefaultTimeout();
                     }
                 );
@@ -588,8 +596,9 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         var ex = await Assert
-                            .ThrowsAsync<AggregateException>(async () =>
-                                await connection.StartAsync())
+                            .ThrowsAsync<AggregateException>(
+                                async () => await connection.StartAsync()
+                            )
                             .DefaultTimeout();
                     }
                 );
@@ -626,8 +635,9 @@ public partial class HttpConnectionTests
                     ),
                     async (connection) =>
                     {
-                        var ex = await Assert.ThrowsAsync<AggregateException>(async () =>
-                            await connection.StartAsync(cts.Token).DefaultTimeout());
+                        var ex = await Assert.ThrowsAsync<AggregateException>(
+                            async () => await connection.StartAsync(cts.Token).DefaultTimeout()
+                        );
                     }
                 );
             }
@@ -635,8 +645,9 @@ public partial class HttpConnectionTests
 
         private static async Task AssertDisposedAsync(HttpConnection connection)
         {
-            var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                connection.StartAsync());
+            var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => connection.StartAsync()
+            );
             Assert.Equal(nameof(HttpConnection), exception.ObjectName);
         }
     }

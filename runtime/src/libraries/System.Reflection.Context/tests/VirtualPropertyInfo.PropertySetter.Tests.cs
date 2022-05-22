@@ -86,61 +86,71 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void Invoke_NullParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(
-                    null,
-                    BindingFlags.GetProperty,
-                    null,
-                    null,
-                    CultureInfo.InvariantCulture
-                ));
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        null,
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_NotSingleParameter_Throws()
         {
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(
-                    _testObject,
-                    BindingFlags.GetProperty,
-                    null,
-                    new object[] { },
-                    CultureInfo.InvariantCulture
-                ));
-            Assert.Throws<TargetParameterCountException>(() =>
-                _virtualPropertySetter.Invoke(
-                    _testObject,
-                    BindingFlags.GetProperty,
-                    null,
-                    new object[] { "a", 1 },
-                    CultureInfo.InvariantCulture
-                ));
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { },
+                        CultureInfo.InvariantCulture
+                    )
+            );
+            Assert.Throws<TargetParameterCountException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        _testObject,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { "a", 1 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_NullObject_Throws()
         {
-            Assert.Throws<TargetException>(() =>
-                _virtualPropertySetter.Invoke(
-                    null,
-                    BindingFlags.GetProperty,
-                    null,
-                    new object[] { 2 },
-                    CultureInfo.InvariantCulture
-                ));
+            Assert.Throws<TargetException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        null,
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 2 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
         public void Invoke_WrongObject_Throws()
         {
-            Assert.Throws<TargetException>(() =>
-                _virtualPropertySetter.Invoke(
-                    "text",
-                    BindingFlags.GetProperty,
-                    null,
-                    new object[] { 2 },
-                    CultureInfo.InvariantCulture
-                ));
+            Assert.Throws<TargetException>(
+                () =>
+                    _virtualPropertySetter.Invoke(
+                        "text",
+                        BindingFlags.GetProperty,
+                        null,
+                        new object[] { 2 },
+                        CultureInfo.InvariantCulture
+                    )
+            );
         }
 
         [Fact]
@@ -238,8 +248,9 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetGenericMethodDefinitionTest()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                _virtualPropertySetter.GetGenericMethodDefinition());
+            Assert.Throws<InvalidOperationException>(
+                () => _virtualPropertySetter.GetGenericMethodDefinition()
+            );
         }
 
         [Fact]
@@ -254,8 +265,9 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void MakeGenericMethodTest()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                _virtualPropertySetter.MakeGenericMethod());
+            Assert.Throws<InvalidOperationException>(
+                () => _virtualPropertySetter.MakeGenericMethod()
+            );
         }
 
         [Fact]

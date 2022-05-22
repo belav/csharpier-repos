@@ -14,18 +14,22 @@ namespace System.Reflection.Metadata.Ecma335.Tests
         {
             var mdBuilder = new MetadataBuilder();
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new PortablePdbBuilder(
-                    null,
-                    MetadataRootBuilder.EmptyRowCounts,
-                    default(MethodDefinitionHandle)
-                ));
-            Assert.Throws<ArgumentNullException>(() =>
-                new PortablePdbBuilder(
-                    mdBuilder,
-                    default(ImmutableArray<int>),
-                    default(MethodDefinitionHandle)
-                ));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new PortablePdbBuilder(
+                        null,
+                        MetadataRootBuilder.EmptyRowCounts,
+                        default(MethodDefinitionHandle)
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new PortablePdbBuilder(
+                        mdBuilder,
+                        default(ImmutableArray<int>),
+                        default(MethodDefinitionHandle)
+                    )
+            );
 
             var rowCounts = new int[128];
             rowCounts[64] = 1;
@@ -77,21 +81,25 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             rowCounts = new int[64];
             rowCounts[(int)TableIndex.MethodDef] = -1;
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PortablePdbBuilder(
-                    mdBuilder,
-                    ImmutableArray.Create(rowCounts),
-                    default(MethodDefinitionHandle)
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new PortablePdbBuilder(
+                        mdBuilder,
+                        ImmutableArray.Create(rowCounts),
+                        default(MethodDefinitionHandle)
+                    )
+            );
 
             rowCounts = new int[64];
             rowCounts[(int)TableIndex.GenericParamConstraint] = 0x01000000;
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new PortablePdbBuilder(
-                    mdBuilder,
-                    ImmutableArray.Create(rowCounts),
-                    default(MethodDefinitionHandle)
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new PortablePdbBuilder(
+                        mdBuilder,
+                        ImmutableArray.Create(rowCounts),
+                        default(MethodDefinitionHandle)
+                    )
+            );
         }
 
         [Fact]

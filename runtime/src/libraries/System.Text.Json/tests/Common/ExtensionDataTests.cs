@@ -243,10 +243,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string BadJson = @"{""Good"":""OK"",""Bad"":!}";
 
-            JsonException jsonException = await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsObject>(
-                    BadJson
-                ));
+            JsonException jsonException = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsObject>(
+                        BadJson
+                    )
+            );
             Assert.Contains(
                 "Path: $.Bad | LineNumber: 0 | BytePositionInLine: 19.",
                 jsonException.ToString()
@@ -421,14 +423,18 @@ namespace System.Text.Json.Serialization.Tests
                 @"{}"
             );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithInvalidExtensionProperty>(
-                    @"{}"
-                ));
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithTwoExtensionProperties>(
-                    @"{}"
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithInvalidExtensionProperty>(
+                        @"{}"
+                    )
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithTwoExtensionProperties>(
+                        @"{}"
+                    )
+            );
         }
 
         public class ClassWithIgnoredData
@@ -734,11 +740,12 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new JsonObjectOverflowConverter());
 
             // A custom converter for JsonObject is not allowed on an extension property.
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
                     await JsonSerializerWrapperForString.DeserializeWrapper<
                         ClassWithExtensionData<JsonObject>
-                    >(@"{""TestKey"":""TestValue""}", options));
+                    >(@"{""TestKey"":""TestValue""}", options)
+            );
 
             Assert.Contains("JsonObject", ex.ToString());
         }
@@ -1137,20 +1144,24 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""MyDict"":{""Property1"":1}}";
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsSystemObject>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsSystemObject>(
+                        json
+                    )
+            );
 
             // Cannot deserialize into System.Object overflow even if UnknownTypeHandling is set to use JsonNode.
             var options = new JsonSerializerOptions
             {
                 UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode
             };
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsSystemObject>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsSystemObject>(
+                        json
+                    )
+            );
         }
 
         public class ClassWithReference
@@ -1545,16 +1556,19 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ExtensionProperty_InvalidDictionary()
         {
             var obj1 = new ClassWithInvalidExtensionPropertyStringString();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+            );
 
             var obj2 = new ClassWithInvalidExtensionPropertyObjectString();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj2));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj2)
+            );
 
             var obj3 = new ClassWithInvalidExtensionPropertyStringJsonNode();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj3));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj3)
+            );
         }
 
         public class ClassWithExtensionPropertyAlreadyInstantiated
@@ -1620,30 +1634,42 @@ namespace System.Text.Json.Serialization.Tests
                 @"{}"
             );
 
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsImmutable>(
-                    "{\"hello\":\"world\"}"
-                ));
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsImmutableJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyPrivateConstructor>(
-                    "{\"hello\":\"world\"}"
-                ));
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyPrivateConstructorJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyCustomIImmutable>(
-                    "{\"hello\":\"world\"}"
-                ));
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyCustomIImmutableJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsImmutable>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsImmutableJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyPrivateConstructor>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyPrivateConstructorJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyCustomIImmutable>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyCustomIImmutableJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
         }
 
         [Fact]
@@ -1850,12 +1876,13 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new JsonObjectConverter());
 
             // A custom converter for JsonObject is not allowed on an extension property.
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
                     await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithExtensionPropertyAsJsonObject>(
                         Json,
                         options
-                    ));
+                    )
+            );
 
             Assert.Contains("JsonObject", ex.ToString());
         }

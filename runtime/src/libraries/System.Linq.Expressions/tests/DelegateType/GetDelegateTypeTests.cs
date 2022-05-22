@@ -67,8 +67,9 @@ namespace System.Linq.Expressions.Tests
         public void CantBeFunc(Type[] typeArgs)
         {
 #if !FEATURE_COMPILE
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Expression.GetDelegateType(typeArgs));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Expression.GetDelegateType(typeArgs)
+            );
 #else
             Type delType = Expression.GetDelegateType(typeArgs);
             Assert.True(typeof(MulticastDelegate).IsAssignableFrom(delType));
@@ -94,8 +95,9 @@ namespace System.Linq.Expressions.Tests
         {
             Type[] delegateArgs = typeArgs.Append(typeof(void)).ToArray();
 #if !FEATURE_COMPILE
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Expression.GetDelegateType(delegateArgs));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Expression.GetDelegateType(delegateArgs)
+            );
 #else
             Type delType = Expression.GetDelegateType(delegateArgs);
             Assert.True(typeof(MulticastDelegate).IsAssignableFrom(delType));

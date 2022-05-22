@@ -66,8 +66,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.OptionsExtensionNotFound(nameof(FakeDbContextOptionsExtension1)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>())
+                    .Throws<InvalidOperationException>(
+                        () => optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>()
+                    )
                     .Message
             );
 

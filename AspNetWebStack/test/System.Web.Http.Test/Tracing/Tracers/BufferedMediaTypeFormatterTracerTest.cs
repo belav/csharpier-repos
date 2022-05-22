@@ -203,8 +203,10 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.ReadFromStream(typeof(string), new MemoryStream(), request.Content, null));
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () =>
+                    tracer.ReadFromStream(typeof(string), new MemoryStream(), request.Content, null)
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(
@@ -371,13 +373,15 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                tracer.WriteToStream(
-                    typeof(string),
-                    "sampleValue",
-                    new MemoryStream(),
-                    request.Content
-                ));
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () =>
+                    tracer.WriteToStream(
+                        typeof(string),
+                        "sampleValue",
+                        new MemoryStream(),
+                        request.Content
+                    )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

@@ -103,8 +103,9 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder module = Helpers.DynamicModule();
             module.CreateGlobalFunctions();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                module.DefineUninitializedData("TestField", 1, attributes));
+            Assert.Throws<InvalidOperationException>(
+                () => module.DefineUninitializedData("TestField", 1, attributes)
+            );
         }
     }
 }

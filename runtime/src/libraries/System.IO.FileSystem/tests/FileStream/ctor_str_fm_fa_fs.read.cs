@@ -80,13 +80,15 @@ namespace System.IO.Tests
                 )
             )
             {
-                FSAssert.ThrowsSharingViolation(() =>
-                    CreateFileStream(
-                        fileName,
-                        FileMode.Open,
-                        FileAccess.Read,
-                        FileShare.ReadWrite | FileShare.Delete
-                    ));
+                FSAssert.ThrowsSharingViolation(
+                    () =>
+                        CreateFileStream(
+                            fileName,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.ReadWrite | FileShare.Delete
+                        )
+                );
             }
         }
     }

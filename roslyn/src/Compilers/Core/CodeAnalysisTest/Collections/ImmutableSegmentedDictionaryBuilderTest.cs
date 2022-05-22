@@ -297,8 +297,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Type proxyType = DebuggerAttributes.GetProxyType(
                 ImmutableSegmentedDictionary.Create<string, int>()
             );
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object?)null));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

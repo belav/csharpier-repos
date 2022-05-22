@@ -1112,8 +1112,9 @@ public static partial class XmlSerializerTests
             );
             writer.Flush();
             stream.Position = 0;
-            Assert.Throws<InvalidOperationException>(() =>
-                (TypeWithByteProperty)serializer.Deserialize(stream));
+            Assert.Throws<InvalidOperationException>(
+                () => (TypeWithByteProperty)serializer.Deserialize(stream)
+            );
         }
     }
 

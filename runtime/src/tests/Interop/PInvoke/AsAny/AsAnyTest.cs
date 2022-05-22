@@ -471,13 +471,15 @@ class AsAnyTests
             UnmappableString,
             MappableString
         );
-        Assert.Throws<ArgumentException>(() =>
-            PassAnsiCharArrayTT(
-                unMappableCharArray_In,
-                unMappableCharArray_InOut,
-                unMappableCharArray_Out,
-                true
-            ));
+        Assert.Throws<ArgumentException>(
+            () =>
+                PassAnsiCharArrayTT(
+                    unMappableCharArray_In,
+                    unMappableCharArray_InOut,
+                    unMappableCharArray_Out,
+                    true
+                )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,
@@ -513,13 +515,15 @@ class AsAnyTests
             UnmappableString,
             MappableString
         );
-        Assert.Throws<ArgumentException>(() =>
-            PassAnsiCharArrayFT(
-                unMappableCharArray_In,
-                unMappableCharArray_InOut,
-                unMappableCharArray_Out,
-                true
-            ));
+        Assert.Throws<ArgumentException>(
+            () =>
+                PassAnsiCharArrayFT(
+                    unMappableCharArray_In,
+                    unMappableCharArray_InOut,
+                    unMappableCharArray_Out,
+                    true
+                )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,
@@ -531,13 +535,15 @@ class AsAnyTests
             UnmappableString,
             MappableString
         );
-        Assert.Throws<ArgumentException>(() =>
-            PassAnsiCharArrayFT(
-                mappableCharArray_In,
-                mappableCharArray_InOut,
-                mappableCharArray_Out,
-                false
-            ));
+        Assert.Throws<ArgumentException>(
+            () =>
+                PassAnsiCharArrayFT(
+                    mappableCharArray_In,
+                    mappableCharArray_InOut,
+                    mappableCharArray_Out,
+                    false
+                )
+        );
 
         CharArrayInit(
             unMappableCharArray_In,

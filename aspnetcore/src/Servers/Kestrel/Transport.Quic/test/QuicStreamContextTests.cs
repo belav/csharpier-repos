@@ -328,8 +328,9 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort from client.
         var ex = await Assert
-            .ThrowsAsync<ConnectionResetException>(() =>
-                serverStream.Transport.Input.ReadAsync().AsTask())
+            .ThrowsAsync<ConnectionResetException>(
+                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            )
             .DefaultTimeout();
 
         // Server completes its output.
@@ -428,8 +429,9 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort from client.
         var ex = await Assert
-            .ThrowsAsync<ConnectionResetException>(() =>
-                serverStream.Transport.Input.ReadAsync().AsTask())
+            .ThrowsAsync<ConnectionResetException>(
+                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            )
             .DefaultTimeout();
 
         // Assert
@@ -574,8 +576,9 @@ public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
         serverStream.Abort(new ConnectionAbortedException("Test message"));
 
         var ex = await Assert
-            .ThrowsAsync<QuicStreamAbortedException>(() =>
-                clientStream.ReadAsync(new byte[1024]).AsTask())
+            .ThrowsAsync<QuicStreamAbortedException>(
+                () => clientStream.ReadAsync(new byte[1024]).AsTask()
+            )
             .DefaultTimeout();
 
         // Assert

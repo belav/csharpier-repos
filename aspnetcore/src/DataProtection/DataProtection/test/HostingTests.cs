@@ -37,12 +37,14 @@ public class HostingTests
                     s.AddDataProtection()
                         .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
                         .AddSingleton<IServer>(
-                            new FakeServer(onStart: () =>
-                                tcs.TrySetException(
-                                    new InvalidOperationException(
-                                        "Server was started before key ring was initialized"
+                            new FakeServer(
+                                onStart: () =>
+                                    tcs.TrySetException(
+                                        new InvalidOperationException(
+                                            "Server was started before key ring was initialized"
+                                        )
                                     )
-                                ))
+                            )
                         )
             );
 
@@ -71,12 +73,14 @@ public class HostingTests
                     s.AddDataProtection()
                         .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
                         .AddSingleton<IServer>(
-                            new FakeServer(onStart: () =>
-                                tcs.TrySetException(
-                                    new InvalidOperationException(
-                                        "Server was started before key ring was initialized"
+                            new FakeServer(
+                                onStart: () =>
+                                    tcs.TrySetException(
+                                        new InvalidOperationException(
+                                            "Server was started before key ring was initialized"
+                                        )
                                     )
-                                ))
+                            )
                         )
             )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());

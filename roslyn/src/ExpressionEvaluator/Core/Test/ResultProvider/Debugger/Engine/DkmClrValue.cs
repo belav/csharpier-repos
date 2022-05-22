@@ -466,10 +466,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 );
             }
 
-            workList.AddWork(() =>
-                completionRoutine(
-                    new DkmEvaluateDebuggerDisplayStringAsyncResult(pooled.ToStringAndFree())
-                ));
+            workList.AddWork(
+                () =>
+                    completionRoutine(
+                        new DkmEvaluateDebuggerDisplayStringAsyncResult(pooled.ToStringAndFree())
+                    )
+            );
         }
 
         public DkmClrValue GetMemberValue(

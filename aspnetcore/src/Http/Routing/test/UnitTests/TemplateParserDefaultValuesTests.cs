@@ -57,13 +57,15 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act & Assert
-        var ex = Assert.Throws<RouteCreationException>(() =>
-            routeBuilder.MapRoute(
-                "mockName",
-                "{controller}/{action}/{id:int=12}",
-                defaults: new { id = 13 },
-                constraints: null
-            ));
+        var ex = Assert.Throws<RouteCreationException>(
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=12}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
+        );
 
         var message =
             "An error occurred while creating the route with name 'mockName' and template"
@@ -86,13 +88,15 @@ public class TemplateParserDefaultValuesTests
         var routeBuilder = CreateRouteBuilder();
 
         // Act & Assert
-        var ex = Assert.Throws<RouteCreationException>(() =>
-            routeBuilder.MapRoute(
-                "mockName",
-                "{controller}/{action}/{id:int=?}",
-                defaults: new { id = 13 },
-                constraints: null
-            ));
+        var ex = Assert.Throws<RouteCreationException>(
+            () =>
+                routeBuilder.MapRoute(
+                    "mockName",
+                    "{controller}/{action}/{id:int=?}",
+                    defaults: new { id = 13 },
+                    constraints: null
+                )
+        );
 
         var message =
             "An error occurred while creating the route with name 'mockName' and template"

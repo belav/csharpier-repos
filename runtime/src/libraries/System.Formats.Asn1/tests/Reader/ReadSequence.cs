@@ -213,8 +213,9 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -239,8 +240,9 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -269,13 +271,15 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.Application, 5)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.Application, 5))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 7)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 7))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
@@ -304,13 +308,15 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.Application, 5)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.Application, 5))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 7)));
+            Assert.Throws<AsnContentException>(
+                () => reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 7))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

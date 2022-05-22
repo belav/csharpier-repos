@@ -434,8 +434,9 @@ namespace System.Diagnostics.Tests
         {
             using (var eventRecords = new EventObserverAndRecorder())
             {
-                var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    new HttpClient().GetAsync($"http://{Guid.NewGuid()}.com"));
+                var ex = await Assert.ThrowsAsync<HttpRequestException>(
+                    () => new HttpClient().GetAsync($"http://{Guid.NewGuid()}.com")
+                );
 
                 // check that request failed because of the wrong domain name and not because of reflection
                 var webException = (WebException)ex.InnerException;
@@ -467,8 +468,9 @@ namespace System.Diagnostics.Tests
             {
                 using (var client = new HttpClient())
                 {
-                    var ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                        client.GetAsync(Configuration.Http.RemoteEchoServer, cts.Token));
+                    var ex = await Assert.ThrowsAnyAsync<Exception>(
+                        () => client.GetAsync(Configuration.Http.RemoteEchoServer, cts.Token)
+                    );
                     Assert.True(ex is TaskCanceledException || ex is WebException);
                 }
 

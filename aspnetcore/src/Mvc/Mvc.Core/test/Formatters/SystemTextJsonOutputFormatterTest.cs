@@ -88,11 +88,13 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
-            formatter.WriteResponseBodyAsync(
-                outputFormatterContext,
-                Encoding.GetEncoding("utf-16")
-            ));
+        await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () =>
+                formatter.WriteResponseBodyAsync(
+                    outputFormatterContext,
+                    Encoding.GetEncoding("utf-16")
+                )
+        );
     }
 
     [Fact]

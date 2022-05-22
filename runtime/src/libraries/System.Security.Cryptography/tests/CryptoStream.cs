@@ -258,8 +258,9 @@ namespace System.Security.Cryptography.Tests
             )
             {
                 encryptStream.Clear();
-                Assert.Throws<NotSupportedException>(() =>
-                    encryptStream.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5));
+                Assert.Throws<NotSupportedException>(
+                    () => encryptStream.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5)
+                );
             }
         }
 
@@ -592,8 +593,9 @@ namespace System.Security.Cryptography.Tests
                 )
             )
             {
-                Assert.Throws<OverflowException>(() =>
-                    cryptoStream.Write(buffer, 0, buffer.Length));
+                Assert.Throws<OverflowException>(
+                    () => cryptoStream.Write(buffer, 0, buffer.Length)
+                );
             }
         }
 

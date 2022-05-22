@@ -35,8 +35,9 @@ namespace Microsoft.EntityFrameworkCore
                             Assert.Equal(
                                 RelationalStrings.UpdateConcurrencyException("1", "0"),
                                 Assert
-                                    .Throws<DbUpdateConcurrencyException>(() =>
-                                        context.SaveChanges())
+                                    .Throws<DbUpdateConcurrencyException>(
+                                        () => context.SaveChanges()
+                                    )
                                     .Message
                             );
                         }

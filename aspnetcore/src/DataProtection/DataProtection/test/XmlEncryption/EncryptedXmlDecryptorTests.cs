@@ -27,8 +27,9 @@ public class EncryptedXmlDecryptorTests
         var encryptedXml = encryptor.Encrypt(data);
         var decryptor = new EncryptedXmlDecryptor();
 
-        var ex = Assert.Throws<CryptographicException>(() =>
-            decryptor.Decrypt(encryptedXml.EncryptedElement));
+        var ex = Assert.Throws<CryptographicException>(
+            () => decryptor.Decrypt(encryptedXml.EncryptedElement)
+        );
         Assert.Equal("Unable to retrieve the decryption key.", ex.Message);
     }
 
@@ -51,8 +52,9 @@ public class EncryptedXmlDecryptorTests
         var encryptedXml = encryptor.Encrypt(data);
         var decryptor = new EncryptedXmlDecryptor(services);
 
-        var ex = Assert.Throws<CryptographicException>(() =>
-            decryptor.Decrypt(encryptedXml.EncryptedElement));
+        var ex = Assert.Throws<CryptographicException>(
+            () => decryptor.Decrypt(encryptedXml.EncryptedElement)
+        );
         Assert.Equal("Unable to retrieve the decryption key.", ex.Message);
     }
 
@@ -75,8 +77,9 @@ public class EncryptedXmlDecryptorTests
         var encryptedXml = encryptor.Encrypt(data);
         var decryptor = new EncryptedXmlDecryptor(services);
 
-        var ex = Assert.Throws<CryptographicException>(() =>
-            decryptor.Decrypt(encryptedXml.EncryptedElement));
+        var ex = Assert.Throws<CryptographicException>(
+            () => decryptor.Decrypt(encryptedXml.EncryptedElement)
+        );
         Assert.Equal("Unable to retrieve the decryption key.", ex.Message);
     }
 

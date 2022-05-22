@@ -101,17 +101,21 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(() =>
-                    socket.SetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveRetryCount,
-                        RetryCount
-                    ));
-                Assert.Throws<SocketException>(() =>
-                    socket.GetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveRetryCount
-                    ));
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.SetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveRetryCount,
+                            RetryCount
+                        )
+                );
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.GetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveRetryCount
+                        )
+                );
             }
         }
 
@@ -332,12 +336,14 @@ namespace System.Net.Sockets.Tests
             {
                 if (PlatformDetection.IsWindows)
                 {
-                    Assert.Throws<SocketException>(() =>
-                        socket.GetSocketOption(
-                            SocketOptionLevel.Tcp,
-                            SocketOptionName.TcpKeepAliveTime,
-                            0
-                        ));
+                    Assert.Throws<SocketException>(
+                        () =>
+                            socket.GetSocketOption(
+                                SocketOptionLevel.Tcp,
+                                SocketOptionName.TcpKeepAliveTime,
+                                0
+                            )
+                    );
                 }
                 else
                 {
@@ -369,12 +375,14 @@ namespace System.Net.Sockets.Tests
             {
                 if (PlatformDetection.IsWindows)
                 {
-                    Assert.Throws<SocketException>(() =>
-                        socket.GetSocketOption(
-                            SocketOptionLevel.Tcp,
-                            SocketOptionName.TcpKeepAliveTime,
-                            buffer
-                        ));
+                    Assert.Throws<SocketException>(
+                        () =>
+                            socket.GetSocketOption(
+                                SocketOptionLevel.Tcp,
+                                SocketOptionName.TcpKeepAliveTime,
+                                buffer
+                            )
+                    );
                 }
                 else
                 {
@@ -400,12 +408,14 @@ namespace System.Net.Sockets.Tests
             )
             {
                 byte[] bufferNull = null;
-                Assert.Throws<SocketException>(() =>
-                    socket.SetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime,
-                        bufferNull
-                    ));
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.SetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime,
+                            bufferNull
+                        )
+                );
             }
         }
 
@@ -421,12 +431,14 @@ namespace System.Net.Sockets.Tests
             )
             {
                 byte[] bufferLengthZero = new byte[0];
-                Assert.Throws<SocketException>(() =>
-                    socket.SetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime,
-                        bufferLengthZero
-                    ));
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.SetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime,
+                            bufferLengthZero
+                        )
+                );
             }
         }
 
@@ -442,12 +454,14 @@ namespace System.Net.Sockets.Tests
             )
             {
                 byte[] bufferShort = new byte[1];
-                Assert.Throws<SocketException>(() =>
-                    socket.SetSocketOption(
-                        SocketOptionLevel.Tcp,
-                        SocketOptionName.TcpKeepAliveTime,
-                        bufferShort
-                    ));
+                Assert.Throws<SocketException>(
+                    () =>
+                        socket.SetSocketOption(
+                            SocketOptionLevel.Tcp,
+                            SocketOptionName.TcpKeepAliveTime,
+                            bufferShort
+                        )
+                );
             }
         }
 

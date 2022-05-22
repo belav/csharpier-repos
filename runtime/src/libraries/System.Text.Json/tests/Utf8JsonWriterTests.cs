@@ -40,11 +40,13 @@ namespace System.Text.Json.Tests
             };
 
             Assert.Throws<ArgumentNullException>(() => new Utf8JsonWriter((Stream)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                new Utf8JsonWriter((IBufferWriter<byte>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => new Utf8JsonWriter((IBufferWriter<byte>)null)
+            );
             Assert.Throws<ArgumentNullException>(() => new Utf8JsonWriter((Stream)null, options));
-            Assert.Throws<ArgumentNullException>(() =>
-                new Utf8JsonWriter((IBufferWriter<byte>)null, options));
+            Assert.Throws<ArgumentNullException>(
+                () => new Utf8JsonWriter((IBufferWriter<byte>)null, options)
+            );
         }
 
         [Theory]
@@ -1100,8 +1102,9 @@ namespace System.Text.Json.Tests
             using var writeToStream = new Utf8JsonWriter(stream, options);
 
             Assert.Throws<ArgumentNullException>(() => writeToStream.Reset((Stream)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                writeToStream.Reset((IBufferWriter<byte>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => writeToStream.Reset((IBufferWriter<byte>)null)
+            );
 
             stream.Dispose();
 
@@ -1524,8 +1527,9 @@ namespace System.Text.Json.Tests
 
             using var jsonUtf8 = new Utf8JsonWriter(output, options);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                jsonUtf8.WriteNumberValue((ulong)12345678901));
+            Assert.Throws<InvalidOperationException>(
+                () => jsonUtf8.WriteNumberValue((ulong)12345678901)
+            );
         }
 
         [Theory]
@@ -1845,8 +1849,9 @@ namespace System.Text.Json.Tests
                     jsonUtf8.WriteStartArray();
                     jsonUtf8.WriteStringValue(utf8String);
                     jsonUtf8.Flush();
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteNumberValue(value));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteNumberValue(value)
+                    );
                 }
 
                 sizeTooSmall += formatted ? 9 : 1;
@@ -2290,8 +2295,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartArray("property at start"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartArray("property at start")
+                    );
                 }
             }
 
@@ -2303,8 +2309,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartObject("property at start"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartObject("property at start")
+                    );
                 }
             }
 
@@ -2317,8 +2324,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartArray("property inside array"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartArray("property inside array")
+                    );
                 }
             }
 
@@ -2357,8 +2365,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStringValue("key"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStringValue("key")
+                    );
                 }
             }
 
@@ -2371,8 +2380,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteString("key", "value"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteString("key", "value")
+                    );
                 }
             }
 
@@ -2388,11 +2398,13 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteString(
-                            JsonEncodedText.Encode("key"),
-                            JsonEncodedText.Encode("value")
-                        ));
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            jsonUtf8.WriteString(
+                                JsonEncodedText.Encode("key"),
+                                JsonEncodedText.Encode("value")
+                            )
+                    );
                 }
             }
 
@@ -2462,8 +2474,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartObject("some object"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartObject("some object")
+                    );
                     Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteEndObject());
                 }
             }
@@ -2550,14 +2563,18 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName(JsonEncodedText.Encode("test name")));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name".AsSpan()));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName(Encoding.UTF8.GetBytes("test name")));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName(JsonEncodedText.Encode("test name"))
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name".AsSpan())
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName(Encoding.UTF8.GetBytes("test name"))
+                    );
                 }
             }
 
@@ -2570,8 +2587,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
 
@@ -2585,8 +2603,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
 
@@ -2600,8 +2619,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartArray("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartArray("test name")
+                    );
                 }
             }
 
@@ -2615,8 +2635,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartObject("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartObject("test name")
+                    );
                 }
             }
 
@@ -2644,8 +2665,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteString("another property name", "some value"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteString("another property name", "some value")
+                    );
                 }
             }
 
@@ -2659,8 +2681,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteNumber("another property name", 12345));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteNumber("another property name", 12345)
+                    );
                 }
             }
 
@@ -2674,8 +2697,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteNull("another property name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteNull("another property name")
+                    );
                 }
             }
 
@@ -2689,8 +2713,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteBoolean("another property name", true));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteBoolean("another property name", true)
+                    );
                 }
             }
         }
@@ -2776,8 +2801,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteNumberValue(12345));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteNumberValue(12345)
+                    );
                 }
             }
 
@@ -2816,8 +2842,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartArray("property name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartArray("property name")
+                    );
                 }
             }
 
@@ -2830,8 +2857,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartObject("property name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartObject("property name")
+                    );
                 }
             }
 
@@ -2844,8 +2872,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteString("property name", "value"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteString("property name", "value")
+                    );
                 }
             }
 
@@ -2861,11 +2890,13 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteString(
-                            JsonEncodedText.Encode("property name"),
-                            JsonEncodedText.Encode("value")
-                        ));
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            jsonUtf8.WriteString(
+                                JsonEncodedText.Encode("property name"),
+                                JsonEncodedText.Encode("value")
+                            )
+                    );
                 }
             }
 
@@ -2904,8 +2935,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
 
@@ -2918,8 +2950,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
 
@@ -2932,8 +2965,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
 
@@ -2946,8 +2980,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WritePropertyName("test name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WritePropertyName("test name")
+                    );
                 }
             }
         }
@@ -2968,14 +3003,16 @@ namespace System.Text.Json.Tests
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumberValue(double.NegativeInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumberValue(double.NegativeInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumberValue(double.PositiveInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumberValue(double.PositiveInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -2985,14 +3022,16 @@ namespace System.Text.Json.Tests
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumberValue(float.PositiveInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumberValue(float.PositiveInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumberValue(float.NegativeInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumberValue(float.NegativeInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -3003,15 +3042,17 @@ namespace System.Text.Json.Tests
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumber("name", double.NegativeInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumber("name", double.NegativeInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumber("name", double.PositiveInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumber("name", double.PositiveInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -3023,15 +3064,17 @@ namespace System.Text.Json.Tests
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumber("name", float.PositiveInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumber("name", float.PositiveInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteNumber("name", float.NegativeInfinity));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteNumber("name", float.NegativeInfinity)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -3186,8 +3229,9 @@ namespace System.Text.Json.Tests
                 {
                     jsonUtf8.WriteStartObject(Encoding.UTF8.GetBytes("name"));
                 }
-                Assert.Throws<InvalidOperationException>(() =>
-                    jsonUtf8.WriteStartArray(Encoding.UTF8.GetBytes("name")));
+                Assert.Throws<InvalidOperationException>(
+                    () => jsonUtf8.WriteStartArray(Encoding.UTF8.GetBytes("name"))
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -3197,8 +3241,9 @@ namespace System.Text.Json.Tests
                 {
                     jsonUtf8.WriteStartObject(JsonEncodedText.Encode("name"));
                 }
-                Assert.Throws<InvalidOperationException>(() =>
-                    jsonUtf8.WriteStartArray(JsonEncodedText.Encode("name")));
+                Assert.Throws<InvalidOperationException>(
+                    () => jsonUtf8.WriteStartArray(JsonEncodedText.Encode("name"))
+                );
             }
         }
 
@@ -3330,23 +3375,28 @@ namespace System.Text.Json.Tests
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64StringValue(value.AsSpan(0, 125_000_001)));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteBase64StringValue(value.AsSpan(0, 125_000_001))
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64String(value.AsSpan(0, 166_666_667), value.AsSpan(0, 1)));
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        jsonUtf8.WriteBase64String(value.AsSpan(0, 166_666_667), value.AsSpan(0, 1))
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64String(
-                        Encoding.UTF8.GetString(value).ToCharArray().AsSpan(0, 166_666_667),
-                        value.AsSpan(0, 1)
-                    ));
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        jsonUtf8.WriteBase64String(
+                            Encoding.UTF8.GetString(value).ToCharArray().AsSpan(0, 166_666_667),
+                            value.AsSpan(0, 1)
+                        )
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
@@ -3363,22 +3413,25 @@ namespace System.Text.Json.Tests
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64String(Encoding.UTF8.GetBytes("foo"), value));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteBase64String(Encoding.UTF8.GetBytes("foo"), value)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64String("foo".AsSpan(), value));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteBase64String("foo".AsSpan(), value)
+                );
             }
 
             using (var jsonUtf8 = new Utf8JsonWriter(output, options))
             {
                 jsonUtf8.WriteStartObject();
-                Assert.Throws<ArgumentException>(() =>
-                    jsonUtf8.WriteBase64String(JsonEncodedText.Encode("foo"), value));
+                Assert.Throws<ArgumentException>(
+                    () => jsonUtf8.WriteBase64String(JsonEncodedText.Encode("foo"), value)
+                );
             }
         }
 
@@ -4232,8 +4285,9 @@ namespace System.Text.Json.Tests
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    jsonUtf8.WriteStringValue("Hello, World!"));
+                Assert.Throws<InvalidOperationException>(
+                    () => jsonUtf8.WriteStringValue("Hello, World!")
+                );
                 Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteEndArray());
             }
         }
@@ -4271,8 +4325,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteBase64StringValue(new byte[] { 1, 2 }));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteBase64StringValue(new byte[] { 1, 2 })
+                    );
                     Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteEndArray());
                 }
             }
@@ -4302,8 +4357,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteBase64String("foo", new byte[] { 1, 2 }));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteBase64String("foo", new byte[] { 1, 2 })
+                    );
                     Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteEndObject());
                 }
             }
@@ -4404,8 +4460,9 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        jsonUtf8.WriteStartObject("name"));
+                    Assert.Throws<InvalidOperationException>(
+                        () => jsonUtf8.WriteStartObject("name")
+                    );
                 }
             }
         }
@@ -4503,8 +4560,9 @@ namespace System.Text.Json.Tests
 
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteCommentValue(comment));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteCommentValue(comment.AsSpan()));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteCommentValue(Encoding.UTF8.GetBytes(comment)));
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteCommentValue(Encoding.UTF8.GetBytes(comment))
+            );
         }
 
         [Theory]
@@ -7446,21 +7504,30 @@ namespace System.Text.Json.Tests
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(bytes, bytesTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(bytesTooLarge, chars));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(chars, bytesTooLarge));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(bytesTooLarge, new DateTime(2015, 11, 9)));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(bytesTooLarge, new DateTimeOffset(new DateTime(2015, 11, 9))));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(bytesTooLarge, Guid.NewGuid()));
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteString(bytesTooLarge, new DateTime(2015, 11, 9))
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    jsonUtf8.WriteString(
+                        bytesTooLarge,
+                        new DateTimeOffset(new DateTime(2015, 11, 9))
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteString(bytesTooLarge, Guid.NewGuid())
+            );
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteStringValue(bytesTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteCommentValue(bytesTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(bytesTooLarge, 10m));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(bytesTooLarge, 10.1));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(bytesTooLarge, 10.1f));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteNumber(bytesTooLarge, 12345678901));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteNumber(bytesTooLarge, (ulong)12345678901));
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteNumber(bytesTooLarge, 12345678901)
+            );
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteNumber(bytesTooLarge, (ulong)12345678901)
+            );
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteBoolean(bytesTooLarge, true));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNull(bytesTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WritePropertyName(bytesTooLarge));
@@ -7470,21 +7537,30 @@ namespace System.Text.Json.Tests
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(chars, charsTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(charsTooLarge, bytes));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteString(bytes, charsTooLarge));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(charsTooLarge, new DateTime(2015, 11, 9)));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(charsTooLarge, new DateTimeOffset(new DateTime(2015, 11, 9))));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteString(charsTooLarge, Guid.NewGuid()));
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteString(charsTooLarge, new DateTime(2015, 11, 9))
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    jsonUtf8.WriteString(
+                        charsTooLarge,
+                        new DateTimeOffset(new DateTime(2015, 11, 9))
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteString(charsTooLarge, Guid.NewGuid())
+            );
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteStringValue(charsTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteCommentValue(charsTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(charsTooLarge, 10m));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(charsTooLarge, 10.1));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNumber(charsTooLarge, 10.1f));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteNumber(charsTooLarge, 12345678901));
-            Assert.Throws<ArgumentException>(() =>
-                jsonUtf8.WriteNumber(charsTooLarge, (ulong)12345678901));
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteNumber(charsTooLarge, 12345678901)
+            );
+            Assert.Throws<ArgumentException>(
+                () => jsonUtf8.WriteNumber(charsTooLarge, (ulong)12345678901)
+            );
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteBoolean(charsTooLarge, true));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WriteNull(charsTooLarge));
             Assert.Throws<ArgumentException>(() => jsonUtf8.WritePropertyName(charsTooLarge));

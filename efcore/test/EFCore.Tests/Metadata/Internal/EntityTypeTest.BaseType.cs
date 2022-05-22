@@ -799,8 +799,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'CustomerId'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        specialCustomerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            specialCustomerForeignKey.SetPrincipalToDependent(
+                                Customer.OrdersProperty
+                            )
+                    )
                     .Message
             );
         }
@@ -843,8 +847,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'CustomerId'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        specialCustomerForeignKey.SetPrincipalToDependent("Orders"))
+                    .Throws<InvalidOperationException>(
+                        () => specialCustomerForeignKey.SetPrincipalToDependent("Orders")
+                    )
                     .Message
             );
 
@@ -889,8 +894,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Id'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        customerForeignKey.SetPrincipalToDependent("Orders"))
+                    .Throws<InvalidOperationException>(
+                        () => customerForeignKey.SetPrincipalToDependent("Orders")
+                    )
                     .Message
             );
         }
@@ -933,8 +939,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Id'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty))
+                    .Throws<InvalidOperationException>(
+                        () => customerForeignKey.SetPrincipalToDependent(Customer.OrdersProperty)
+                    )
                     .Message
             );
 
@@ -1081,8 +1088,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        verySpecialOrderType.BaseType = specialOrderType)
+                    .Throws<InvalidOperationException>(
+                        () => verySpecialOrderType.BaseType = specialOrderType
+                    )
                     .Message
             );
         }
@@ -1254,12 +1262,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        specialOrderType.AddForeignKey(
-                            foreignKeyProperty,
-                            customerKey,
-                            customerType
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            specialOrderType.AddForeignKey(
+                                foreignKeyProperty,
+                                customerKey,
+                                customerType
+                            )
+                    )
                     .Message
             );
         }
@@ -1291,12 +1301,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        verySpecialOrderType.AddForeignKey(
-                            foreignKeyProperty,
-                            customerKey,
-                            customerType
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            verySpecialOrderType.AddForeignKey(
+                                foreignKeyProperty,
+                                customerKey,
+                                customerType
+                            )
+                    )
                     .Message
             );
         }
@@ -1325,8 +1337,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType))
+                    .Throws<InvalidOperationException>(
+                        () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                    )
                     .Message
             );
         }
@@ -1358,8 +1371,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType))
+                    .Throws<InvalidOperationException>(
+                        () => orderType.AddForeignKey(foreignKeyProperty, customerKey, customerType)
+                    )
                     .Message
             );
         }
@@ -1505,8 +1519,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        entityType.AddIndex(new[] { idProperty }))
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { idProperty })
+                    )
                     .Message
             );
         }
@@ -1524,8 +1539,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     Customer.IdProperty.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        entityType.AddIndex(new[] { idProperty, idProperty }))
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { idProperty, idProperty })
+                    )
                     .Message
             );
         }
@@ -1549,8 +1565,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        specialOrderType.AddIndex(indexProperty))
+                    .Throws<InvalidOperationException>(
+                        () => specialOrderType.AddIndex(indexProperty)
+                    )
                     .Message
             );
         }
@@ -1577,8 +1594,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Order).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        verySpecialOrderType.AddIndex(indexProperty))
+                    .Throws<InvalidOperationException>(
+                        () => verySpecialOrderType.AddIndex(indexProperty)
+                    )
                     .Message
             );
         }

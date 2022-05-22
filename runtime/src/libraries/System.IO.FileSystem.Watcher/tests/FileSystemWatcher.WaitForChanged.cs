@@ -151,8 +151,9 @@ namespace System.IO.Tests
             {
                 for (int i = 1; i <= DefaultAttemptsForExpectedEvent; i++)
                 {
-                    Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(changeType, LongWaitTimeout));
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () => fsw.WaitForChanged(changeType, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         string path = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
@@ -193,8 +194,9 @@ namespace System.IO.Tests
                     string name = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
                     File.Create(name).Dispose();
 
-                    Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout));
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () => fsw.WaitForChanged(WatcherChangeTypes.Changed, LongWaitTimeout)
+                    );
                     while (!t.IsCompleted)
                     {
                         File.AppendAllText(name, "text");
@@ -227,11 +229,13 @@ namespace System.IO.Tests
             {
                 for (int i = 1; i <= DefaultAttemptsForExpectedEvent; i++)
                 {
-                    Task<WaitForChangedResult> t = Task.Run(() =>
-                        fsw.WaitForChanged(
-                            WatcherChangeTypes.Renamed | WatcherChangeTypes.Created,
-                            LongWaitTimeout
-                        )); // on some OSes, the renamed might come through as Deleted/Created
+                    Task<WaitForChangedResult> t = Task.Run(
+                        () =>
+                            fsw.WaitForChanged(
+                                WatcherChangeTypes.Renamed | WatcherChangeTypes.Created,
+                                LongWaitTimeout
+                            )
+                    ); // on some OSes, the renamed might come through as Deleted/Created
 
                     string name = Path.Combine(testDirectory.Path, Path.GetRandomFileName());
                     File.Create(name).Dispose();

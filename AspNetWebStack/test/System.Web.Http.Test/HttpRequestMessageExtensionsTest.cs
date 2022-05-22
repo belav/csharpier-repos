@@ -1097,8 +1097,9 @@ namespace System.Net.Http
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(() =>
-                    expectedIsLocal);
+                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(
+                    () => expectedIsLocal
+                );
 
                 // Act
                 bool isLocal = request.IsLocal();
@@ -1119,8 +1120,9 @@ namespace System.Net.Http
             using (HttpRequestMessage request = CreateRequest())
             {
                 request.SetRequestContext(new HttpRequestContext { IsLocal = expectedIsLocal });
-                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(() =>
-                    !expectedIsLocal);
+                request.Properties[HttpPropertyKeys.IsLocalKey] = new Lazy<bool>(
+                    () => !expectedIsLocal
+                );
 
                 // Act
                 bool isLocal = request.IsLocal();
@@ -1184,8 +1186,9 @@ namespace System.Net.Http
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
-                    expected);
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(
+                    () => expected
+                );
 
                 // Act
                 bool actual = request.ShouldIncludeErrorDetail();
@@ -1206,8 +1209,9 @@ namespace System.Net.Http
             using (HttpRequestMessage request = CreateRequest())
             {
                 request.SetRequestContext(new HttpRequestContext { IncludeErrorDetail = expected });
-                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(() =>
-                    !expected);
+                request.Properties[HttpPropertyKeys.IncludeErrorDetailKey] = new Lazy<bool>(
+                    () => !expected
+                );
 
                 // Act
                 bool actual = request.ShouldIncludeErrorDetail();

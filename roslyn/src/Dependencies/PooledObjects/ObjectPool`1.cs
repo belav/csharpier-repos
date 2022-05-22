@@ -264,8 +264,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 
 #if DETECT_LEAKS
-        private static Lazy<Type> _stackTraceType = new Lazy<Type>(() =>
-            Type.GetType("System.Diagnostics.StackTrace"));
+        private static Lazy<Type> _stackTraceType = new Lazy<Type>(
+            () => Type.GetType("System.Diagnostics.StackTrace")
+        );
 
         private static object CaptureStackTrace()
         {

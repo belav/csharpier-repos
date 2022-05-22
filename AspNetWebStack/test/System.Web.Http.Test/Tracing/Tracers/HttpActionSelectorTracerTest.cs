@@ -153,8 +153,9 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                ((IHttpActionSelector)tracer).SelectAction(_controllerContext));
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () => ((IHttpActionSelector)tracer).SelectAction(_controllerContext)
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

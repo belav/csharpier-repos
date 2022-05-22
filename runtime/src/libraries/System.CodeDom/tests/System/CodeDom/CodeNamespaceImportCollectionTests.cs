@@ -95,8 +95,9 @@ namespace System.CodeDom.Tests
         public void AddRange_NullObjectInValue_ThrowsNullReferenceException()
         {
             var collection = new CodeNamespaceImportCollection();
-            Assert.Throws<NullReferenceException>(() =>
-                collection.AddRange(new CodeNamespaceImport[] { null }));
+            Assert.Throws<NullReferenceException>(
+                () => collection.AddRange(new CodeNamespaceImport[] { null })
+            );
         }
 
         [Theory]

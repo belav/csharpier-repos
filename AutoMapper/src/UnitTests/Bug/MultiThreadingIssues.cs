@@ -665,8 +665,9 @@ namespace AutoMapper.UnitTests.Bug
                 .ToArray()
                 .Select(
                     s =>
-                        Task.Factory.StartNew(() =>
-                            c.ResolveTypeMap(s.SourceType, s.DestinationType))
+                        Task.Factory.StartNew(
+                            () => c.ResolveTypeMap(s.SourceType, s.DestinationType)
+                        )
                 )
                 .ToArray();
             Task.WaitAll(tasks);
@@ -1210,8 +1211,9 @@ namespace AutoMapper.UnitTests.Bug
                 .ToArray()
                 .Select(
                     s =>
-                        Task.Factory.StartNew(() =>
-                            mapper.Map(null, s.SourceType, s.DestinationType))
+                        Task.Factory.StartNew(
+                            () => mapper.Map(null, s.SourceType, s.DestinationType)
+                        )
                 )
                 .ToArray();
             Task.WaitAll(tasks);

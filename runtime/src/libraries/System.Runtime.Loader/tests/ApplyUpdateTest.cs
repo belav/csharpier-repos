@@ -369,22 +369,26 @@ namespace System.Reflection.Metadata
             );
 
             // Tests fail on non-runtime assemblies
-            Assert.Throws<ArgumentException>(() =>
-                MetadataUpdater.ApplyUpdate(
-                    new NonRuntimeAssembly(),
-                    new ReadOnlySpan<byte>(metadataDelta),
-                    new ReadOnlySpan<byte>(ilDelta),
-                    ReadOnlySpan<byte>.Empty
-                ));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    MetadataUpdater.ApplyUpdate(
+                        new NonRuntimeAssembly(),
+                        new ReadOnlySpan<byte>(metadataDelta),
+                        new ReadOnlySpan<byte>(ilDelta),
+                        ReadOnlySpan<byte>.Empty
+                    )
+            );
 
             // Tests that this assembly isn't not editable
-            Assert.Throws<InvalidOperationException>(() =>
-                MetadataUpdater.ApplyUpdate(
-                    typeof(AssemblyExtensions).Assembly,
-                    new ReadOnlySpan<byte>(metadataDelta),
-                    new ReadOnlySpan<byte>(ilDelta),
-                    ReadOnlySpan<byte>.Empty
-                ));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    MetadataUpdater.ApplyUpdate(
+                        typeof(AssemblyExtensions).Assembly,
+                        new ReadOnlySpan<byte>(metadataDelta),
+                        new ReadOnlySpan<byte>(ilDelta),
+                        ReadOnlySpan<byte>.Empty
+                    )
+            );
         }
 
         [Fact]

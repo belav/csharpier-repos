@@ -105,8 +105,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData("E=\u65E5\u672C\u8A9E", InvalidIA5StringFragment)]
         public static void InvalidInput(string input, string messageFragment)
         {
-            CryptographicException exception = Assert.ThrowsAny<CryptographicException>(() =>
-                new X500DistinguishedName(input));
+            CryptographicException exception = Assert.ThrowsAny<CryptographicException>(
+                () => new X500DistinguishedName(input)
+            );
 
             if (CultureInfo.CurrentCulture.Name == "en-US")
             {

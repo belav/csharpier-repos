@@ -109,8 +109,9 @@ namespace System.Drawing.Printing.Tests
         public void OnStartPrint_InvokeNullDocument_ThrowsNullReferenceException()
         {
             var controller = new SubPrintController();
-            Assert.Throws<NullReferenceException>(() =>
-                controller.OnStartPrint(null, new PrintEventArgs()));
+            Assert.Throws<NullReferenceException>(
+                () => controller.OnStartPrint(null, new PrintEventArgs())
+            );
         }
 
         [Theory]

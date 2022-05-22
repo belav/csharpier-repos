@@ -267,8 +267,9 @@ public class IdentityBuilderTest
         );
         var builder = services.AddIdentity<PocoUser, PocoRole>();
         Assert.Throws<InvalidOperationException>(() => builder.AddTokenProvider<object>("whatevs"));
-        Assert.Throws<InvalidOperationException>(() =>
-            builder.AddTokenProvider("whatevs", typeof(object)));
+        Assert.Throws<InvalidOperationException>(
+            () => builder.AddTokenProvider("whatevs", typeof(object))
+        );
     }
 
     private class MyUberThingy

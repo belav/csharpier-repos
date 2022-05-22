@@ -222,8 +222,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal("A scheme with the name 'AzureAD' was already added.", exception.Message);
     }
@@ -248,8 +249,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
             + "The Open ID Connect scheme 'AzureADOpenID' is already mapped to the Azure Active Directory scheme 'AzureAD'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -274,8 +276,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
             + "The cookie scheme 'AzureADCookie' is already mapped to the Azure Active Directory scheme 'AzureAD'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -295,8 +298,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var expectedMessage = "The 'Instance' option must be provided.";
 
         // Act & Assert
-        var exception = Assert.Throws<OptionsValidationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<OptionsValidationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Contains(expectedMessage, exception.Failures);
     }
@@ -461,8 +465,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var azureADOptionsMonitor = provider.GetService<IOptionsMonitor<AzureADOptions>>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(
             "A scheme with the name 'AzureADBearer' was already added.",
@@ -490,8 +495,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
             + "The JSON Web Token Bearer scheme 'AzureADJwtBearer' is already mapped to the Azure Active Directory scheme 'AzureADBearer'";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -511,8 +517,9 @@ public class AzureADAuthenticationBuilderExtensionsTests
         var expectedMessage = "The 'Instance' option must be provided.";
 
         // Act & Assert
-        var exception = Assert.Throws<OptionsValidationException>(() =>
-            azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme));
+        var exception = Assert.Throws<OptionsValidationException>(
+            () => azureADOptionsMonitor.Get(AzureADDefaults.AuthenticationScheme)
+        );
 
         Assert.Contains(expectedMessage, exception.Failures);
     }

@@ -235,8 +235,9 @@ public class InvalidUrlRewriteFormatExceptionHandlingTests
     )
     {
         // Arrange, Act, Assert
-        var ex = Assert.Throws<InvalidUrlRewriteFormatException>(() =>
-            new UrlRewriteFileParser().Parse(new StringReader(input), false));
+        var ex = Assert.Throws<InvalidUrlRewriteFormatException>(
+            () => new UrlRewriteFileParser().Parse(new StringReader(input), false)
+        );
         Assert.Equal(expected, ex.Message);
     }
 }

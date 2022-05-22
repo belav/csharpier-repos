@@ -1300,8 +1300,9 @@ FROM [Customers] AS [c]"
 
         public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async)
         {
-            return AssertTranslationFailed(() =>
-                base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
+            return AssertTranslationFailed(
+                () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
+            );
         }
 
         public override async Task Filtered_collection_projection_is_tracked(bool async)

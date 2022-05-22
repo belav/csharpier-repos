@@ -249,8 +249,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             d = 2.0;
             new StaticAndInstanceSameName().DoSomething(d); // No exception
             d = 2;
-            Assert.Throws<RuntimeBinderException>(() =>
-                new StaticAndInstanceSameName().DoSomething(d));
+            Assert.Throws<RuntimeBinderException>(
+                () => new StaticAndInstanceSameName().DoSomething(d)
+            );
         }
 
         [Fact]
@@ -291,8 +292,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, Type, string> target = callSite.Target;
-            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() =>
-                target(callSite, typeof(string)));
+            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(
+                () => target(callSite, typeof(string))
+            );
             Assert.Contains("0", rbe.Message);
         }
 
@@ -320,8 +322,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, Type, object, object, object, object, object, object> target =
                 callSite.Target;
-            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(() =>
-                target.Invoke(callSite, typeof(string), null, null, null, null, null));
+            RuntimeBinderException rbe = Assert.Throws<RuntimeBinderException>(
+                () => target.Invoke(callSite, typeof(string), null, null, null, null, null)
+            );
             Assert.Contains("5", rbe.Message);
         }
 
@@ -400,8 +403,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object, object> target = site.Target;
-            Assert.Throws<RuntimeBinderException>(() =>
-                target.Invoke(site, EqualityComparer<int>.Default, 2, 2));
+            Assert.Throws<RuntimeBinderException>(
+                () => target.Invoke(site, EqualityComparer<int>.Default, 2, 2)
+            );
         }
 
         public static IEnumerable<object[]> WrongArgumentCounts(int correct) =>
@@ -539,8 +543,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             CultureInfo prev = CultureInfo.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             dynamic d = "";
-            RuntimeBinderException e = Assert.Throws<RuntimeBinderException>(() =>
-                d.op_Equality("", ""));
+            RuntimeBinderException e = Assert.Throws<RuntimeBinderException>(
+                () => d.op_Equality("", "")
+            );
             Assert.Equal(
                 "'string.operator ==(string, string)': cannot explicitly call operator or accessor",
                 e.Message

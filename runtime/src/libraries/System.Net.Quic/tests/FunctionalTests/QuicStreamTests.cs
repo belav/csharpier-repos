@@ -486,8 +486,9 @@ namespace System.Net.Quic.Tests
 
                     byte[] buffer = new byte[100];
                     QuicStreamAbortedException ex =
-                        await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                            serverStream.ReadAsync(buffer).AsTask());
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => serverStream.ReadAsync(buffer).AsTask()
+                        );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
                 }
             );
@@ -560,8 +561,9 @@ namespace System.Net.Quic.Tests
                 using (clientStream)
                 using (serverStream)
                 {
-                    Task exTask = Assert.ThrowsAsync<QuicOperationAbortedException>(() =>
-                        serverStream.ReadAsync(new byte[1]).AsTask());
+                    Task exTask = Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        () => serverStream.ReadAsync(new byte[1]).AsTask()
+                    );
                     Assert.False(exTask.IsCompleted);
 
                     serverStream.AbortRead(ExpectedErrorCode);
@@ -586,8 +588,9 @@ namespace System.Net.Quic.Tests
                     ValueTask<int> readTask = serverStream.ReadAsync(new byte[1]);
                     Assert.False(readTask.IsCompleted);
 
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await serverStream.ReadAsync(new byte[1]));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await serverStream.ReadAsync(new byte[1])
+                    );
 
                     sem.Release();
 
@@ -615,8 +618,9 @@ namespace System.Net.Quic.Tests
                     byte[] buffer = new byte[1];
 
                     QuicStreamAbortedException ex =
-                        await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                            ReadAll(stream, buffer));
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => ReadAll(stream, buffer)
+                        );
                     Assert.Equal(expectedErrorCode, ex.ErrorCode);
 
                     // We should still return true from CanRead, even though the read has been aborted.
@@ -641,8 +645,9 @@ namespace System.Net.Quic.Tests
                     await using QuicStream stream = await connection.AcceptStreamAsync();
 
                     QuicStreamAbortedException ex =
-                        await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                            WriteForever(stream));
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => WriteForever(stream)
+                        );
                     Assert.Equal(expectedErrorCode, ex.ErrorCode);
 
                     // We should still return true from CanWrite, even though the write has been aborted.
@@ -664,12 +669,14 @@ namespace System.Net.Quic.Tests
                     CancellationTokenSource cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        stream.WriteAsync(new byte[1], cts.Token).AsTask());
+                    await Assert.ThrowsAsync<OperationCanceledException>(
+                        () => stream.WriteAsync(new byte[1], cts.Token).AsTask()
+                    );
 
                     // next write would also throw
-                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        stream.WriteAsync(new byte[1]).AsTask());
+                    await Assert.ThrowsAsync<OperationCanceledException>(
+                        () => stream.WriteAsync(new byte[1]).AsTask()
+                    );
 
                     // manual write abort is still required
                     stream.AbortWrite(expectedErrorCode);
@@ -683,8 +690,9 @@ namespace System.Net.Quic.Tests
                     byte[] buffer = new byte[1024 * 1024];
 
                     QuicStreamAbortedException ex =
-                        await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                            ReadAll(stream, buffer));
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => ReadAll(stream, buffer)
+                        );
 
                     await stream.ShutdownCompleted();
                 }
@@ -719,12 +727,14 @@ namespace System.Net.Quic.Tests
                     }
 
                     // a write would eventually be canceled
-                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        WriteUntilCanceled().WaitAsync(TimeSpan.FromSeconds(3)));
+                    await Assert.ThrowsAsync<OperationCanceledException>(
+                        () => WriteUntilCanceled().WaitAsync(TimeSpan.FromSeconds(3))
+                    );
 
                     // next write would also throw
-                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                        stream.WriteAsync(new byte[1]).AsTask());
+                    await Assert.ThrowsAsync<OperationCanceledException>(
+                        () => stream.WriteAsync(new byte[1]).AsTask()
+                    );
 
                     // manual write abort is still required
                     stream.AbortWrite(expectedErrorCode);
@@ -749,8 +759,9 @@ namespace System.Net.Quic.Tests
                     }
 
                     QuicStreamAbortedException ex =
-                        await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                            ReadUntilAborted());
+                        await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                            () => ReadUntilAborted()
+                        );
 
                     await stream.ShutdownCompleted();
                 }

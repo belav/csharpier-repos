@@ -206,18 +206,22 @@ namespace System.IO.MemoryMappedFiles.Tests
         [MemberData(nameof(CreateValidMapNames))]
         public void MapNamesNotSupported_Unix(string mapName)
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.CreateNew(mapName, 4096));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.CreateNew(mapName, 4096, MemoryMappedFileAccess.Read));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                MemoryMappedFile.CreateNew(
-                    mapName,
-                    4096,
-                    MemoryMappedFileAccess.Read,
-                    MemoryMappedFileOptions.None,
-                    HandleInheritability.None
-                ));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => MemoryMappedFile.CreateNew(mapName, 4096)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => MemoryMappedFile.CreateNew(mapName, 4096, MemoryMappedFileAccess.Read)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    MemoryMappedFile.CreateNew(
+                        mapName,
+                        4096,
+                        MemoryMappedFileAccess.Read,
+                        MemoryMappedFileOptions.None,
+                        HandleInheritability.None
+                    )
+            );
         }
 
         /// <summary>

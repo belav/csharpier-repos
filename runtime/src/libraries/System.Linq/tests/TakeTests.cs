@@ -719,36 +719,41 @@ namespace System.Linq.Tests
             Assert.Equal(5, source.Take(5).Last());
             Assert.Equal(5, source.Take(40).Last());
             Assert.Throws<InvalidOperationException>(() => source.Take(0).Last());
-            Assert.Throws<InvalidOperationException>(() =>
-                ForceNotCollection(Array.Empty<int>()).Take(40).Last());
+            Assert.Throws<InvalidOperationException>(
+                () => ForceNotCollection(Array.Empty<int>()).Take(40).Last()
+            );
 
             Assert.Equal(1, source.Take(0..1).Last());
             Assert.Equal(5, source.Take(0..5).Last());
             Assert.Equal(5, source.Take(0..40).Last());
             Assert.Throws<InvalidOperationException>(() => source.Take(0..0).Last());
-            Assert.Throws<InvalidOperationException>(() =>
-                ForceNotCollection(Array.Empty<int>()).Take(0..40).Last());
+            Assert.Throws<InvalidOperationException>(
+                () => ForceNotCollection(Array.Empty<int>()).Take(0..40).Last()
+            );
 
             Assert.Equal(1, source.Take(^5..1).Last());
             Assert.Equal(5, source.Take(^5..5).Last());
             Assert.Equal(5, source.Take(^5..40).Last());
             Assert.Throws<InvalidOperationException>(() => source.Take(^5..0).Last());
-            Assert.Throws<InvalidOperationException>(() =>
-                ForceNotCollection(Array.Empty<int>()).Take(^5..40).Last());
+            Assert.Throws<InvalidOperationException>(
+                () => ForceNotCollection(Array.Empty<int>()).Take(^5..40).Last()
+            );
 
             Assert.Equal(1, source.Take(0..^4).Last());
             Assert.Equal(5, source.Take(0..^0).Last());
             Assert.Equal(5, source.Take(3..^0).Last());
             Assert.Throws<InvalidOperationException>(() => source.Take(0..^5).Last());
-            Assert.Throws<InvalidOperationException>(() =>
-                ForceNotCollection(Array.Empty<int>()).Take(0..^0).Last());
+            Assert.Throws<InvalidOperationException>(
+                () => ForceNotCollection(Array.Empty<int>()).Take(0..^0).Last()
+            );
 
             Assert.Equal(1, source.Take(^5..^4).Last());
             Assert.Equal(5, source.Take(^5..^0).Last());
             Assert.Equal(5, source.Take(^5..^0).Last());
             Assert.Throws<InvalidOperationException>(() => source.Take(^5..^5).Last());
-            Assert.Throws<InvalidOperationException>(() =>
-                ForceNotCollection(Array.Empty<int>()).Take(^40..^0).Last());
+            Assert.Throws<InvalidOperationException>(
+                () => ForceNotCollection(Array.Empty<int>()).Take(^40..^0).Last()
+            );
         }
 
         [Fact]

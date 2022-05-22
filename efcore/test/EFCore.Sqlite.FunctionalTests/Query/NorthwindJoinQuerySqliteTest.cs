@@ -26,8 +26,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_client_eval(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.SelectMany_with_client_eval(async)
+                    )
                 ).Message
             );
 
@@ -35,8 +36,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_client_eval_with_collection_shaper(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.SelectMany_with_client_eval_with_collection_shaper(async)
+                    )
                 ).Message
             );
 
@@ -46,8 +48,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_client_eval_with_collection_shaper_ignored(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.SelectMany_with_client_eval_with_collection_shaper_ignored(async)
+                    )
                 ).Message
             );
 
@@ -55,8 +58,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_selecting_outer_entity(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.SelectMany_with_selecting_outer_entity(async)
+                    )
                 ).Message
             );
 
@@ -64,8 +68,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_selecting_outer_element(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.SelectMany_with_selecting_outer_element(async)
+                    )
                 ).Message
             );
 
@@ -75,8 +80,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            base.SelectMany_with_selecting_outer_entity_column_and_inner_column(
+                                async
+                            )
+                    )
                 ).Message
             );
 
@@ -86,8 +95,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            base.Take_in_collection_projection_with_FirstOrDefault_on_top_level(
+                                async
+                            )
+                    )
                 ).Message
             );
     }

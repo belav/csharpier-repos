@@ -112,8 +112,9 @@ namespace MonoTests.System.Configuration
         {
             InfiniteIntConverter cv = new InfiniteIntConverter();
 
-            Assert.Throws<NullReferenceException>(() =>
-                cv.ConvertTo(null, null, null, typeof(string)));
+            Assert.Throws<NullReferenceException>(
+                () => cv.ConvertTo(null, null, null, typeof(string))
+            );
         }
 
         [Fact]

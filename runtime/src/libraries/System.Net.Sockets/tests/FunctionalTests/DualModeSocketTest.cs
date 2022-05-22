@@ -372,8 +372,10 @@ namespace System.Net.Sockets.Tests
             bool dualModeServer
         )
         {
-            Assert.ThrowsAny<SocketException>(() =>
-                DualModeConnect_IPAddressListToHost_Success(connectTo, listenOn, dualModeServer));
+            Assert.ThrowsAny<SocketException>(
+                () =>
+                    DualModeConnect_IPAddressListToHost_Success(connectTo, listenOn, dualModeServer)
+            );
         }
 
         [Theory]
@@ -558,12 +560,14 @@ namespace System.Net.Sockets.Tests
             using (Socket socket = new Socket(SocketType.Stream, ProtocolType.Tcp))
             {
                 socket.DualMode = false;
-                Assert.Throws<NotSupportedException>(() =>
-                    socket.BeginConnect(
-                        new IPEndPoint(IPAddress.Loopback, UnusedPort),
-                        null,
-                        null
-                    ));
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                        socket.BeginConnect(
+                            new IPEndPoint(IPAddress.Loopback, UnusedPort),
+                            null,
+                            null
+                        )
+                );
             }
         }
 
@@ -1944,12 +1948,15 @@ namespace System.Net.Sockets.Tests
                 byte[] buf = new byte[1];
 
                 Assert.Throws<PlatformNotSupportedException>(() => sock.ReceiveFrom(buf, ref ep));
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.ReceiveFrom(buf, SocketFlags.None, ref ep));
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.ReceiveFrom(buf, buf.Length, SocketFlags.None, ref ep));
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.ReceiveFrom(buf, 0, buf.Length, SocketFlags.None, ref ep));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => sock.ReceiveFrom(buf, SocketFlags.None, ref ep)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => sock.ReceiveFrom(buf, buf.Length, SocketFlags.None, ref ep)
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => sock.ReceiveFrom(buf, 0, buf.Length, SocketFlags.None, ref ep)
+                );
             }
         }
     }
@@ -2376,15 +2383,17 @@ namespace System.Net.Sockets.Tests
                 byte[] buf = new byte[1];
                 SocketFlags flags = SocketFlags.None;
 
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.ReceiveMessageFrom(
-                        buf,
-                        0,
-                        buf.Length,
-                        ref flags,
-                        ref ep,
-                        out IPPacketInformation packetInfo
-                    ));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        sock.ReceiveMessageFrom(
+                            buf,
+                            0,
+                            buf.Length,
+                            ref flags,
+                            ref ep,
+                            out IPPacketInformation packetInfo
+                        )
+                );
             }
         }
 
@@ -2402,8 +2411,9 @@ namespace System.Net.Sockets.Tests
                 args.SetBuffer(buf, 0, buf.Length);
                 args.RemoteEndPoint = ep;
 
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.ReceiveMessageFromAsync(args));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => sock.ReceiveMessageFromAsync(args)
+                );
             }
         }
 
@@ -3181,16 +3191,18 @@ namespace System.Net.Sockets.Tests
 
                 byte[] buf = new byte[1];
 
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.BeginReceiveFrom(
-                        buf,
-                        0,
-                        buf.Length,
-                        SocketFlags.None,
-                        ref ep,
-                        null,
-                        null
-                    ));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        sock.BeginReceiveFrom(
+                            buf,
+                            0,
+                            buf.Length,
+                            SocketFlags.None,
+                            ref ep,
+                            null,
+                            null
+                        )
+                );
             }
         }
 
@@ -3205,16 +3217,18 @@ namespace System.Net.Sockets.Tests
 
                 byte[] buf = new byte[1];
 
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    sock.BeginReceiveMessageFrom(
-                        buf,
-                        0,
-                        buf.Length,
-                        SocketFlags.None,
-                        ref ep,
-                        null,
-                        null
-                    ));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () =>
+                        sock.BeginReceiveMessageFrom(
+                            buf,
+                            0,
+                            buf.Length,
+                            SocketFlags.None,
+                            ref ep,
+                            null,
+                            null
+                        )
+                );
             }
         }
     }

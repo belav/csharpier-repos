@@ -291,10 +291,12 @@ namespace System.Threading.Tasks.Tests
                 Assert.Throws<InvalidOperationException>(() => tcs.SetResult(10));
                 Assert.Throws<InvalidOperationException>(() => tcs.SetCanceled());
                 Assert.Throws<InvalidOperationException>(() => tcs.SetCanceled());
-                Assert.Throws<InvalidOperationException>(() =>
-                    tcs.SetException(new Exception("some other exception")));
-                Assert.Throws<InvalidOperationException>(() =>
-                    tcs.SetException(new[] { new Exception("some other exception") }));
+                Assert.Throws<InvalidOperationException>(
+                    () => tcs.SetException(new Exception("some other exception"))
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () => tcs.SetException(new[] { new Exception("some other exception") })
+                );
             }
         }
 
@@ -1772,13 +1774,16 @@ namespace System.Threading.Tasks.Tests
                 "tasks",
                 () => Task.WaitAny(new Task[] { null })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Task.WaitAny(new Task[] { Task.Factory.StartNew(() => { }) }, -2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Task.WaitAny(
-                    new Task[] { Task.Factory.StartNew(() => { }) },
-                    TimeSpan.FromMilliseconds(-2)
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Task.WaitAny(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Task.WaitAny(
+                        new Task[] { Task.Factory.StartNew(() => { }) },
+                        TimeSpan.FromMilliseconds(-2)
+                    )
+            );
         }
 
         private static void CoreWaitAnyTest(
@@ -1882,8 +1887,9 @@ namespace System.Threading.Tasks.Tests
             var tokenSrc = new CancellationTokenSource();
             var task1 = Task.Factory.StartNew(() => mre.WaitOne());
             var task2 = Task.Factory.StartNew(() => mre.WaitOne());
-            var waiterTask = Task.Factory.StartNew(() =>
-                Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token));
+            var waiterTask = Task.Factory.StartNew(
+                () => Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token)
+            );
             tokenSrc.Cancel();
             Assert.Throws<AggregateException>(() => waiterTask.Wait());
             mre.Set();
@@ -2002,13 +2008,16 @@ namespace System.Threading.Tasks.Tests
                 "tasks",
                 () => Task.WaitAll(new Task[] { null })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Task.WaitAll(new Task[] { Task.Factory.StartNew(() => { }) }, -2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                Task.WaitAll(
-                    new Task[] { Task.Factory.StartNew(() => { }) },
-                    TimeSpan.FromMilliseconds(-2)
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Task.WaitAll(new Task[] { Task.Factory.StartNew(() => { }) }, -2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Task.WaitAll(
+                        new Task[] { Task.Factory.StartNew(() => { }) },
+                        TimeSpan.FromMilliseconds(-2)
+                    )
+            );
 
             ThreadPoolHelpers.EnsureMinThreadsAtLeast(10);
             RunTaskWaitAllTest(false, 1);
@@ -3953,10 +3962,12 @@ namespace System.Threading.Tasks.Tests
             // test exceptions
             var task = Task.Factory.StartNew(() => { });
             Assert.Throws<ArgumentOutOfRangeException>(() => task.Wait(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                task.Wait(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                task.Wait(TimeSpan.FromMilliseconds(uint.MaxValue)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => task.Wait(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => task.Wait(TimeSpan.FromMilliseconds(uint.MaxValue))
+            );
 
             // wait on a task that gets canceled
             CancellationTokenSource cts = new CancellationTokenSource();

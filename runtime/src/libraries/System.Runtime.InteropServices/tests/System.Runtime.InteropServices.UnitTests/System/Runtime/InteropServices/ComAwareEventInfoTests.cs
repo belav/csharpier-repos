@@ -67,18 +67,22 @@ namespace System.Runtime.InteropServices.Tests
         public void Methods_NoSuchEvent_ThrowsNullReferenceException()
         {
             var attribute = new ComAwareEventInfo(typeof(NonComObject), string.Empty);
-            Assert.Throws<NullReferenceException>(() =>
-                attribute.AddEventHandler(new object(), new EventHandler(EventHandler)));
-            Assert.Throws<NullReferenceException>(() =>
-                attribute.RemoveEventHandler(new object(), new EventHandler(EventHandler)));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.AddEventHandler(new object(), new EventHandler(EventHandler))
+            );
+            Assert.Throws<NullReferenceException>(
+                () => attribute.RemoveEventHandler(new object(), new EventHandler(EventHandler))
+            );
             Assert.Throws<NullReferenceException>(() => attribute.GetAddMethod(false));
             Assert.Throws<NullReferenceException>(() => attribute.GetRaiseMethod(false));
             Assert.Throws<NullReferenceException>(() => attribute.GetRemoveMethod(false));
-            Assert.Throws<NullReferenceException>(() =>
-                attribute.GetCustomAttributes(typeof(ComVisibleAttribute), false));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.GetCustomAttributes(typeof(ComVisibleAttribute), false)
+            );
             Assert.Throws<NullReferenceException>(() => attribute.GetCustomAttributes(false));
-            Assert.Throws<NullReferenceException>(() =>
-                attribute.IsDefined(typeof(ComVisibleAttribute), false));
+            Assert.Throws<NullReferenceException>(
+                () => attribute.IsDefined(typeof(ComVisibleAttribute), false)
+            );
         }
 
         [Fact]

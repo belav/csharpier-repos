@@ -305,15 +305,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             TestExecutionStrategy.Suspended = true;
             var executionCount = 0;
-            Assert.Throws<DbUpdateException>(() =>
-                execute(
-                    CreateFailOnRetryStrategy(),
-                    () =>
-                    {
-                        executionCount++;
-                        throw new DbUpdateException("", new ArgumentOutOfRangeException());
-                    }
-                ));
+            Assert.Throws<DbUpdateException>(
+                () =>
+                    execute(
+                        CreateFailOnRetryStrategy(),
+                        () =>
+                        {
+                            executionCount++;
+                            throw new DbUpdateException("", new ArgumentOutOfRangeException());
+                        }
+                    )
+            );
             TestExecutionStrategy.Suspended = false;
 
             Assert.Equal(1, executionCount);
@@ -381,19 +383,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var executionCount = 0;
 
-            Assert.Throws<ArgumentNullException>(() =>
-                execute(
-                    executionStrategyMock,
-                    () =>
-                    {
-                        if (executionCount++ < 3)
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    execute(
+                        executionStrategyMock,
+                        () =>
                         {
-                            throw new ArgumentOutOfRangeException();
-                        }
+                            if (executionCount++ < 3)
+                            {
+                                throw new ArgumentOutOfRangeException();
+                            }
 
-                        throw new ArgumentNullException();
-                    }
-                ));
+                            throw new ArgumentNullException();
+                        }
+                    )
+            );
 
             Assert.Equal(4, executionCount);
         }
@@ -425,20 +429,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.IsType<ArgumentOutOfRangeException>(
                 Assert
-                    .Throws<RetryLimitExceededException>(() =>
-                        execute(
-                            executionStrategyMock,
-                            () =>
-                            {
-                                if (executionCount++ < 3)
+                    .Throws<RetryLimitExceededException>(
+                        () =>
+                            execute(
+                                executionStrategyMock,
+                                () =>
                                 {
-                                    throw new ArgumentOutOfRangeException();
-                                }
+                                    if (executionCount++ < 3)
+                                    {
+                                        throw new ArgumentOutOfRangeException();
+                                    }
 
-                                Assert.True(false);
-                                return 0;
-                            }
-                        ))
+                                    Assert.True(false);
+                                    return 0;
+                                }
+                            )
+                    )
                     .InnerException
             );
 
@@ -474,8 +480,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         "DbContext.Database.CreateExecutionStrategy()"
                     ),
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            executeAsync(mockExecutionStrategy))
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => executeAsync(mockExecutionStrategy)
+                        )
                     ).Message
                 );
             }
@@ -510,8 +517,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         "DbContext.Database.CreateExecutionStrategy()"
                     ),
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            executeAsync(mockExecutionStrategy))
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => executeAsync(mockExecutionStrategy)
+                        )
                     ).Message
                 );
             }
@@ -547,8 +555,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "DbContext.Database.CreateExecutionStrategy()"
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        executeAsync(mockExecutionStrategy))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => executeAsync(mockExecutionStrategy)
+                    )
                 ).Message
             );
         }
@@ -709,15 +718,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             TestExecutionStrategy.Suspended = true;
             var executionCount = 0;
-            await Assert.ThrowsAsync<DbUpdateException>(() =>
-                executeAsync(
-                    CreateFailOnRetryStrategy(),
-                    ct =>
-                    {
-                        executionCount++;
-                        throw new DbUpdateException("", new ArgumentOutOfRangeException());
-                    }
-                ));
+            await Assert.ThrowsAsync<DbUpdateException>(
+                () =>
+                    executeAsync(
+                        CreateFailOnRetryStrategy(),
+                        ct =>
+                        {
+                            executionCount++;
+                            throw new DbUpdateException("", new ArgumentOutOfRangeException());
+                        }
+                    )
+            );
             TestExecutionStrategy.Suspended = false;
 
             Assert.Equal(1, executionCount);
@@ -795,19 +806,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var executionCount = 0;
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() =>
-                executeAsync(
-                    executionStrategyMock,
-                    ct =>
-                    {
-                        if (executionCount++ < 3)
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () =>
+                    executeAsync(
+                        executionStrategyMock,
+                        ct =>
                         {
-                            throw new ArgumentOutOfRangeException();
-                        }
+                            if (executionCount++ < 3)
+                            {
+                                throw new ArgumentOutOfRangeException();
+                            }
 
-                        throw new ArgumentNullException();
-                    }
-                ));
+                            throw new ArgumentNullException();
+                        }
+                    )
+            );
 
             Assert.Equal(4, executionCount);
         }
@@ -843,23 +856,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             // ReSharper disable once PossibleNullReferenceException
             Assert.IsType<ArgumentOutOfRangeException>((
-                    await Assert.ThrowsAsync<RetryLimitExceededException>(() =>
-                        executeAsync(
-                            executionStrategyMock,
-                            ct =>
-                            {
-                                if (executionCount++ < 3)
+                    await Assert.ThrowsAsync<RetryLimitExceededException>(
+                        () =>
+                            executeAsync(
+                                executionStrategyMock,
+                                ct =>
                                 {
-                                    throw new DbUpdateException(
-                                        "",
-                                        new ArgumentOutOfRangeException()
-                                    );
-                                }
+                                    if (executionCount++ < 3)
+                                    {
+                                        throw new DbUpdateException(
+                                            "",
+                                            new ArgumentOutOfRangeException()
+                                        );
+                                    }
 
-                                Assert.True(false);
-                                return Task.FromResult(0);
-                            }
-                        ))
+                                    Assert.True(false);
+                                    return Task.FromResult(0);
+                                }
+                            )
+                    )
                 ).InnerException.InnerException);
 
             Assert.Equal(3, executionCount);

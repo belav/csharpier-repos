@@ -74,10 +74,12 @@ namespace System.Text.Json.Serialization.Tests
             options.PropertyNamingPolicy = new NullNamingPolicy();
 
             // A policy that returns null is not allowed.
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<SimpleTestClass>(@"{}", options));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new SimpleTestClass(), options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<SimpleTestClass>(@"{}", options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new SimpleTestClass(), options)
+            );
         }
 
         [Fact]
@@ -152,20 +154,24 @@ namespace System.Text.Json.Serialization.Tests
         {
             {
                 var options = new JsonSerializerOptions();
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Deserialize<DuplicatePropertyNameDesignTime_TestClass>(
-                        "{}",
-                        options
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Deserialize<DuplicatePropertyNameDesignTime_TestClass>(
+                            "{}",
+                            options
+                        )
+                );
             }
 
             {
                 var options = new JsonSerializerOptions();
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(
-                        new DuplicatePropertyNameDesignTime_TestClass(),
-                        options
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Serialize(
+                            new DuplicatePropertyNameDesignTime_TestClass(),
+                            options
+                        )
+                );
             }
         }
 
@@ -177,8 +183,9 @@ namespace System.Text.Json.Serialization.Tests
             options.PropertyNameCaseInsensitive = true;
 
             // A null name in JsonPropertyNameAttribute is not allowed.
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new NullPropertyName_TestClass(), options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new NullPropertyName_TestClass(), options)
+            );
         }
 
         [Fact]
@@ -195,16 +202,20 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions();
                 options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Deserialize<IntPropertyNamesDifferentByCaseOnly_TestClass>(
-                        "{}",
-                        options
-                    ));
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(
-                        new IntPropertyNamesDifferentByCaseOnly_TestClass(),
-                        options
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Deserialize<IntPropertyNamesDifferentByCaseOnly_TestClass>(
+                            "{}",
+                            options
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Serialize(
+                            new IntPropertyNamesDifferentByCaseOnly_TestClass(),
+                            options
+                        )
+                );
             }
 
             {
@@ -220,16 +231,20 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions();
                 options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Deserialize<ObjectPropertyNamesDifferentByCaseOnly_TestClass>(
-                        "{}",
-                        options
-                    ));
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(
-                        new ObjectPropertyNamesDifferentByCaseOnly_TestClass(),
-                        options
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Deserialize<ObjectPropertyNamesDifferentByCaseOnly_TestClass>(
+                            "{}",
+                            options
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Serialize(
+                            new ObjectPropertyNamesDifferentByCaseOnly_TestClass(),
+                            options
+                        )
+                );
             }
         }
 
@@ -242,16 +257,20 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions();
                 options.PropertyNameCaseInsensitive = true;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Deserialize<IntPropertyNamesDifferentByCaseOnly_TestClass>(
-                        json,
-                        options
-                    ));
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonSerializer.Serialize(
-                        new IntPropertyNamesDifferentByCaseOnly_TestClass(),
-                        options
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Deserialize<IntPropertyNamesDifferentByCaseOnly_TestClass>(
+                            json,
+                            options
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        JsonSerializer.Serialize(
+                            new IntPropertyNamesDifferentByCaseOnly_TestClass(),
+                            options
+                        )
+                );
             }
         }
 
@@ -622,16 +641,18 @@ namespace System.Text.Json.Serialization.Tests
 
             var inputPrimitive = new Dictionary<string, int> { { "validKey", 1 } };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(inputPrimitive, options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(inputPrimitive, options)
+            );
 
             var inputClass = new Dictionary<string, OverridePropertyNameDesignTime_TestClass>
             {
                 { "validKey", new OverridePropertyNameDesignTime_TestClass() }
             };
 
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(inputClass, options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(inputClass, options)
+            );
         }
     }
 

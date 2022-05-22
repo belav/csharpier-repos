@@ -555,8 +555,9 @@ namespace System.Net.Sockets.Tests
         public void UnixDomainSocketEndPoint_InvalidPaths_Throws()
         {
             Assert.Throws<ArgumentNullException>(() => new UnixDomainSocketEndPoint(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new UnixDomainSocketEndPoint(string.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnixDomainSocketEndPoint(string.Empty)
+            );
 
             FieldInfo fi = typeof(UnixDomainSocketEndPoint).GetField(
                 "s_nativePathLength",
@@ -566,8 +567,9 @@ namespace System.Net.Sockets.Tests
 
             int maxNativeSize = (int)fi.GetValue(null);
             string invalidLengthString = new string('a', maxNativeSize + 1);
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new UnixDomainSocketEndPoint(invalidLengthString));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnixDomainSocketEndPoint(invalidLengthString)
+            );
         }
 
         [ConditionalTheory(nameof(PlatformSupportsUnixDomainSockets))]
@@ -658,8 +660,9 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.ThrowsAny<SocketException>(() =>
-                    socket.Bind(new UnixDomainSocketEndPoint(address)));
+                Assert.ThrowsAny<SocketException>(
+                    () => socket.Bind(new UnixDomainSocketEndPoint(address))
+                );
             }
 
             // Connect
@@ -671,8 +674,9 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.ThrowsAny<SocketException>(() =>
-                    socket.Connect(new UnixDomainSocketEndPoint(address)));
+                Assert.ThrowsAny<SocketException>(
+                    () => socket.Connect(new UnixDomainSocketEndPoint(address))
+                );
             }
         }
 
@@ -692,8 +696,9 @@ namespace System.Net.Sockets.Tests
                 "path",
                 () => new UnixDomainSocketEndPoint(new string('s', 1000))
             );
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new UnixDomainSocketEndPoint("hello"));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new UnixDomainSocketEndPoint("hello")
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

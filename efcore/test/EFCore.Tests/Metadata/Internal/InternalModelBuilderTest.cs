@@ -523,20 +523,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ClashingSharedType(typeof(Details).Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit))
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
+                    )
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.ClashingOwnedEntityType(typeof(Details).Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.SharedTypeEntity(
-                            nameof(Details),
-                            typeof(Details),
-                            ConfigurationSource.Explicit
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                nameof(Details),
+                                typeof(Details),
+                                ConfigurationSource.Explicit
+                            )
+                    )
                     .Message
             );
 
@@ -559,8 +562,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ClashingNonOwnedEntityType("Details (Details)"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit))
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
+                    )
                     .Message
             );
         }
@@ -788,12 +792,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.ClashingMismatchedSharedType("SpecialDetails", nameof(Product)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.SharedTypeEntity(
-                            sharedTypeName,
-                            typeof(Details),
-                            ConfigurationSource.Explicit
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                sharedTypeName,
+                                typeof(Details),
+                                ConfigurationSource.Explicit
+                            )
+                    )
                     .Message
             );
 
@@ -805,12 +811,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.SharedTypeEntity(
-                            typeof(Customer).DisplayName(),
-                            typeof(Customer),
-                            ConfigurationSource.Explicit
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                typeof(Customer).DisplayName(),
+                                typeof(Customer),
+                                ConfigurationSource.Explicit
+                            )
+                    )
                     .Message
             );
         }

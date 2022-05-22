@@ -106,14 +106,18 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath_Throws_DirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Delete(Path.Combine(Path.GetRandomFileName(), "C")));
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Delete(
-                    Path.Combine(Path.GetPathRoot(TestDirectory), Path.GetRandomFileName(), "C")
-                ));
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Delete(Path.Combine(TestDirectory, GetTestFileName(), "C")));
+            Assert.Throws<DirectoryNotFoundException>(
+                () => Delete(Path.Combine(Path.GetRandomFileName(), "C"))
+            );
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Delete(
+                        Path.Combine(Path.GetPathRoot(TestDirectory), Path.GetRandomFileName(), "C")
+                    )
+            );
+            Assert.Throws<DirectoryNotFoundException>(
+                () => Delete(Path.Combine(TestDirectory, GetTestFileName(), "C"))
+            );
         }
 
         #endregion
@@ -143,8 +147,9 @@ namespace System.IO.Tests
             ReadOnly_FileSystemHelper(
                 readOnlyDirectory =>
                 {
-                    Assert.Throws<IOException>(() =>
-                        Delete(Path.Combine(readOnlyDirectory, "subdir")));
+                    Assert.Throws<IOException>(
+                        () => Delete(Path.Combine(readOnlyDirectory, "subdir"))
+                    );
                 },
                 subDirectoryName: "subdir"
             );

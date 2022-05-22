@@ -271,10 +271,16 @@ namespace System.Threading.Channels.Tests
             };
             yield return new object[]
             {
-                new Func<Channel<int>>(() =>
-                    Channel.CreateUnbounded<int>(
-                        new UnboundedChannelOptions() { SingleReader = true, SingleWriter = true }
-                    ))
+                new Func<Channel<int>>(
+                    () =>
+                        Channel.CreateUnbounded<int>(
+                            new UnboundedChannelOptions()
+                            {
+                                SingleReader = true,
+                                SingleWriter = true
+                            }
+                        )
+                )
             };
             yield return new object[]
             {

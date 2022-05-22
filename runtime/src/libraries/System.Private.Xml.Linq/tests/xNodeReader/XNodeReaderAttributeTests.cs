@@ -46,8 +46,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementZero();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dataReader.GetAttribute(dataReader.AttributeCount));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader.GetAttribute(dataReader.AttributeCount)
+            );
         }
 
         [Fact]
@@ -55,8 +56,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementOne();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dataReader.GetAttribute(dataReader.AttributeCount + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader.GetAttribute(dataReader.AttributeCount + 1)
+            );
         }
 
         [Fact]
@@ -72,8 +74,9 @@ namespace System.Xml.Linq.xNodeReader.Tests
         {
             XmlReader dataReader = GetReaderFromXDocumentAndPositionOnElementOne();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dataReader[dataReader.AttributeCount + 1]);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dataReader[dataReader.AttributeCount + 1]
+            );
         }
 
         [Fact]

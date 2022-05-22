@@ -154,10 +154,12 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void ReadInt16_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
-                Marshal.ReadInt16(IntPtr.Zero));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
-                Marshal.ReadInt16(IntPtr.Zero, 2));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt16(IntPtr.Zero)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt16(IntPtr.Zero, 2)
+            );
         }
 
         [Fact]
@@ -196,10 +198,12 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void WriteInt16_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
-                Marshal.WriteInt16(IntPtr.Zero, 0));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
-                Marshal.WriteInt16(IntPtr.Zero, 2, 0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt16(IntPtr.Zero, 0)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt16(IntPtr.Zero, 2, 0)
+            );
         }
 
         [Fact]

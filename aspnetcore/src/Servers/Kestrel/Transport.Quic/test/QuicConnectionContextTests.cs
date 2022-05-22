@@ -446,8 +446,9 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort form client.
         var ex = await Assert
-            .ThrowsAsync<ConnectionResetException>(() =>
-                serverStream.Transport.Input.ReadAsync().AsTask())
+            .ThrowsAsync<ConnectionResetException>(
+                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            )
             .DefaultTimeout();
         Assert.Equal("Stream aborted by peer (258).", ex.Message);
         Assert.Equal(
@@ -509,8 +510,9 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         // Receive abort form client.
         var serverEx = await Assert
-            .ThrowsAsync<ConnectionResetException>(() =>
-                serverStream.Transport.Input.ReadAsync().AsTask())
+            .ThrowsAsync<ConnectionResetException>(
+                () => serverStream.Transport.Input.ReadAsync().AsTask()
+            )
             .DefaultTimeout();
         Assert.Equal("Stream aborted by peer (258).", serverEx.Message);
         Assert.Equal(

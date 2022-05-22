@@ -28,8 +28,9 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_ZeroBufferSize_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new StreamContent(new MemoryStream(), 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StreamContent(new MemoryStream(), 0)
+            );
         }
 
         [Fact]
@@ -285,8 +286,9 @@ namespace System.Net.Http.Functional.Tests
             Assert.Throws<NotSupportedException>(() => contentReadStream.Flush());
             Assert.Throws<NotSupportedException>(() => contentReadStream.SetLength(1));
             Assert.Throws<NotSupportedException>(() => contentReadStream.Write(null, 0, 0));
-            Assert.Throws<NotSupportedException>(() =>
-                contentReadStream.Write(new Span<byte>(Array.Empty<byte>())));
+            Assert.Throws<NotSupportedException>(
+                () => contentReadStream.Write(new Span<byte>(Array.Empty<byte>()))
+            );
             Assert.Throws<NotSupportedException>(() => contentReadStream.WriteByte(1));
 
             Assert.Equal(0, source.DisposeCount);

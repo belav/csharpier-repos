@@ -326,20 +326,24 @@ namespace System.Globalization.Tests
         public void AddYears_Invalid_ThrowsArgumentException()
         {
             Calendar calendar = Calendar;
-            Assert.ThrowsAny<ArgumentException>(() =>
-                calendar.AddYears(calendar.MaxSupportedDateTime, 1));
-            Assert.ThrowsAny<ArgumentException>(() =>
-                calendar.AddYears(calendar.MinSupportedDateTime, -1));
+            Assert.ThrowsAny<ArgumentException>(
+                () => calendar.AddYears(calendar.MaxSupportedDateTime, 1)
+            );
+            Assert.ThrowsAny<ArgumentException>(
+                () => calendar.AddYears(calendar.MinSupportedDateTime, -1)
+            );
         }
 
         [Fact]
         public void AddMonths_Invalid_ThrowsArgumentException()
         {
             Calendar calendar = Calendar;
-            Assert.ThrowsAny<ArgumentException>(() =>
-                calendar.AddMonths(calendar.MaxSupportedDateTime, 1));
-            Assert.ThrowsAny<ArgumentException>(() =>
-                calendar.AddMonths(calendar.MinSupportedDateTime, -1)); // JapaneseCalendar throws ArgumentException
+            Assert.ThrowsAny<ArgumentException>(
+                () => calendar.AddMonths(calendar.MaxSupportedDateTime, 1)
+            );
+            Assert.ThrowsAny<ArgumentException>(
+                () => calendar.AddMonths(calendar.MinSupportedDateTime, -1)
+            ); // JapaneseCalendar throws ArgumentException
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "months",
@@ -501,116 +505,147 @@ namespace System.Globalization.Tests
                 int year = MaxCalendarYearInEra(calendar, era) - 2;
 
                 // Year is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(-1, month, day, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(0, month, day, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(
-                        MaxCalendarYearInEras(calendar, era) + 1,
-                        month,
-                        day,
-                        hour,
-                        minute,
-                        second,
-                        millisecond,
-                        era
-                    ));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(-1, month, day, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(0, month, day, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(
+                            MaxCalendarYearInEras(calendar, era) + 1,
+                            month,
+                            day,
+                            hour,
+                            minute,
+                            second,
+                            millisecond,
+                            era
+                        )
+                );
 
                 // Month is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, -1, day, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, 0, day, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, -1, day, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, 0, day, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(
+                            year,
+                            calendar.GetMonthsInYear(year, era) + 1,
+                            day,
+                            hour,
+                            minute,
+                            second,
+                            millisecond,
+                            era
+                        )
+                );
+
+                // Day is invalid
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(year, month, -1, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(year, month, 0, hour, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(
+                            year,
+                            month,
+                            calendar.GetDaysInMonth(year, month, era) + 1,
+                            hour,
+                            minute,
+                            second,
+                            millisecond,
+                            era
+                        )
+                );
+
+                // Hour is invalid
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(year, month, day, -1, minute, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        calendar.ToDateTime(year, month, day, 60, minute, second, millisecond, era)
+                );
+
+                // Minute is invalid
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, -1, second, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, 60, second, millisecond, era)
+                );
+
+                // Second is invalid
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, minute, -1, millisecond, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, minute, 60, millisecond, era)
+                );
+
+                // Millisecond is invalid
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, minute, second, -1, era)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => calendar.ToDateTime(year, month, day, hour, minute, second, 1000, era)
+                );
+            }
+            // Year is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
                     calendar.ToDateTime(
-                        year,
-                        calendar.GetMonthsInYear(year, era) + 1,
+                        MinCalendarYearInEra(calendar, MinEra(calendar)) - 1,
+                        month,
                         day,
                         hour,
                         minute,
                         second,
                         millisecond,
-                        era
-                    ));
+                        MinEra(calendar)
+                    )
+            );
 
-                // Day is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, -1, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, 0, hour, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
+            // Era is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
                     calendar.ToDateTime(
-                        year,
+                        calendar.GetYear(calendar.MaxSupportedDateTime),
                         month,
-                        calendar.GetDaysInMonth(year, month, era) + 1,
+                        day,
                         hour,
                         minute,
                         second,
                         millisecond,
-                        era
-                    ));
-
-                // Hour is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, -1, minute, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, 60, minute, second, millisecond, era));
-
-                // Minute is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, -1, second, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, 60, second, millisecond, era));
-
-                // Second is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, minute, -1, millisecond, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, minute, 60, millisecond, era));
-
-                // Millisecond is invalid
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, minute, second, -1, era));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    calendar.ToDateTime(year, month, day, hour, minute, second, 1000, era));
-            }
-            // Year is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                calendar.ToDateTime(
-                    MinCalendarYearInEra(calendar, MinEra(calendar)) - 1,
-                    month,
-                    day,
-                    hour,
-                    minute,
-                    second,
-                    millisecond,
-                    MinEra(calendar)
-                ));
-
-            // Era is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                calendar.ToDateTime(
-                    calendar.GetYear(calendar.MaxSupportedDateTime),
-                    month,
-                    day,
-                    hour,
-                    minute,
-                    second,
-                    millisecond,
-                    MinEra(calendar) - 2
-                ));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                calendar.ToDateTime(
-                    calendar.GetYear(calendar.MaxSupportedDateTime),
-                    month,
-                    day,
-                    hour,
-                    minute,
-                    second,
-                    millisecond,
-                    MaxEra(calendar) + 1
-                ));
+                        MinEra(calendar) - 2
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    calendar.ToDateTime(
+                        calendar.GetYear(calendar.MaxSupportedDateTime),
+                        month,
+                        day,
+                        hour,
+                        minute,
+                        second,
+                        millisecond,
+                        MaxEra(calendar) + 1
+                    )
+            );
 
             // New date is out of range
             DateTime minDateTime = calendar.MinSupportedDateTime;
@@ -621,28 +656,32 @@ namespace System.Globalization.Tests
             int maxEra = calendar.GetEra(maxDateTime);
             int maxYear = calendar.GetYear(maxDateTime);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                calendar.ToDateTime(
-                    minYear - 1,
-                    minDateTime.Month,
-                    minDateTime.Day,
-                    minDateTime.Hour,
-                    minDateTime.Minute,
-                    minDateTime.Second,
-                    minDateTime.Millisecond,
-                    minEra
-                ));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                calendar.ToDateTime(
-                    maxYear + 1,
-                    maxDateTime.Month,
-                    maxDateTime.Day,
-                    maxDateTime.Hour,
-                    maxDateTime.Minute,
-                    maxDateTime.Second,
-                    maxDateTime.Millisecond,
-                    maxEra
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    calendar.ToDateTime(
+                        minYear - 1,
+                        minDateTime.Month,
+                        minDateTime.Day,
+                        minDateTime.Hour,
+                        minDateTime.Minute,
+                        minDateTime.Second,
+                        minDateTime.Millisecond,
+                        minEra
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    calendar.ToDateTime(
+                        maxYear + 1,
+                        maxDateTime.Month,
+                        maxDateTime.Day,
+                        maxDateTime.Hour,
+                        maxDateTime.Minute,
+                        maxDateTime.Second,
+                        maxDateTime.Millisecond,
+                        maxEra
+                    )
+            );
         }
 
         [Fact]

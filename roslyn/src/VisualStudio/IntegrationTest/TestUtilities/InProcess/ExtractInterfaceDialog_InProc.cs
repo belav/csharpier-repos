@@ -31,8 +31,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 while (true)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var window = JoinableTaskFactory.Run(() =>
-                        TryGetDialogAsync(cancellationToken));
+                    var window = JoinableTaskFactory.Run(
+                        () => TryGetDialogAsync(cancellationToken)
+                    );
                     if (window is null)
                     {
                         // Thread.Yield is insufficient; something in the light bulb must be relying on a UI thread
@@ -76,11 +77,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.OKButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.OKButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
@@ -92,11 +95,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.CancelButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.CancelButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
@@ -108,11 +113,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.SelectAllButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.SelectAllButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
@@ -124,11 +131,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.DeselectAllButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.DeselectAllButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
@@ -140,11 +149,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.DestinationCurrentFileSelectionRadioButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.DestinationCurrentFileSelectionRadioButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 

@@ -243,8 +243,9 @@ namespace System.Web.Http.Cors
             request.Headers.Add(CorsConstants.Origin, "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "RandomMethod");
 
-            await Assert.ThrowsAsync<HttpResponseException>(() =>
-                invoker.SendAsync(request, CancellationToken.None));
+            await Assert.ThrowsAsync<HttpResponseException>(
+                () => invoker.SendAsync(request, CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -264,8 +265,9 @@ namespace System.Web.Http.Cors
             request.SetConfiguration(config);
             request.Headers.Add(CorsConstants.Origin, "http://localhost");
 
-            await Assert.ThrowsAsync<Exception>(() =>
-                invoker.SendAsync(request, CancellationToken.None));
+            await Assert.ThrowsAsync<Exception>(
+                () => invoker.SendAsync(request, CancellationToken.None)
+            );
         }
 
         [Fact]

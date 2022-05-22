@@ -606,10 +606,12 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Value_conversion_with_property_named_value()
         {
             using var context = CreateContext();
-            Assert.Throws<InvalidOperationException>(() =>
-                context
-                    .Set<EntityWithValueWrapper>()
-                    .SingleOrDefault(e => e.Wrapper.Value == "foo"));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    context
+                        .Set<EntityWithValueWrapper>()
+                        .SingleOrDefault(e => e.Wrapper.Value == "foo")
+            );
         }
 
         [ConditionalFact]
@@ -711,8 +713,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Contains(
                 @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList())
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
+                    )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -727,8 +730,9 @@ namespace Microsoft.EntityFrameworkCore
                     @"DbSet<CollectionScalar>()    .Where(c => c.Tags.Count == 2)"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList())
+                    .Throws<InvalidOperationException>(
+                        () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
+                    )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -748,11 +752,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Contains(
                 @"See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.",
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context
-                            .Set<CollectionEnum>()
-                            .Where(e => e.Roles.Contains(sameRole))
-                            .ToList())
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            context
+                                .Set<CollectionEnum>()
+                                .Where(e => e.Roles.Contains(sameRole))
+                                .ToList()
+                    )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -779,11 +785,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 "Nullable object must have a value.",
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context
-                            .Set<Parent>()
-                            .Select(e => new { e.OwnedWithConverter.Value })
-                            .ToList())
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            context
+                                .Set<Parent>()
+                                .Select(e => new { e.OwnedWithConverter.Value })
+                                .ToList()
+                    )
                     .Message
             );
         }
@@ -841,22 +849,24 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.TranslationFailed(@"l => new {     H = l.Height,     W = l.Width }"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context
-                            .Set<Dashboard>()
-                            .AsNoTracking()
-                            .Select(
-                                d =>
-                                    new
-                                    {
-                                        Id = d.Id,
-                                        Name = d.Name,
-                                        Layouts = d.Layouts
-                                            .Select(l => new { H = l.Height, W = l.Width })
-                                            .ToList()
-                                    }
-                            )
-                            .ToList())
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            context
+                                .Set<Dashboard>()
+                                .AsNoTracking()
+                                .Select(
+                                    d =>
+                                        new
+                                        {
+                                            Id = d.Id,
+                                            Name = d.Name,
+                                            Layouts = d.Layouts
+                                                .Select(l => new { H = l.Height, W = l.Width })
+                                                .ToList()
+                                        }
+                                )
+                                .ToList()
+                    )
                     .Message.Replace("\r", "")
                     .Replace("\n", "")
             );

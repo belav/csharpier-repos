@@ -490,8 +490,9 @@ namespace System.Formats.Cbor.Tests
             CborReaderState state = reader.PeekState();
 
             // the final element violates sorting invariant
-            Assert.Throws<CborContentException>(() =>
-                Helpers.VerifyValue(reader, keySequence.Last()));
+            Assert.Throws<CborContentException>(
+                () => Helpers.VerifyValue(reader, keySequence.Last())
+            );
 
             // ensure reader state is preserved
             Assert.Equal(bytesRemaining, reader.BytesRemaining);

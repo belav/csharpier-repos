@@ -244,8 +244,9 @@ namespace System.Collections.Tests
             tempLinkedList.Clear();
             tempLinkedList.AddLast(CreateT(seed++));
             tempLinkedList.AddLast(CreateT(seed++));
-            Assert.Throws<InvalidOperationException>(() =>
-                linkedList.AddFirst(tempLinkedList.Last)); //"Err_98809ahied Node that already exists in another collection throws InvalidOperationException\n"
+            Assert.Throws<InvalidOperationException>(
+                () => linkedList.AddFirst(tempLinkedList.Last)
+            ); //"Err_98809ahied Node that already exists in another collection throws InvalidOperationException\n"
             InitialItems_Tests(linkedList, items);
         }
     }

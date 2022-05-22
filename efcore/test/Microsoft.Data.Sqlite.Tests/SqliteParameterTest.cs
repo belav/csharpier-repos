@@ -96,8 +96,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void Direction_validates_value()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                new SqliteParameter().Direction = ParameterDirection.Output);
+            var ex = Assert.Throws<ArgumentException>(
+                () => new SqliteParameter().Direction = ParameterDirection.Output
+            );
             Assert.Equal(
                 Resources.InvalidParameterDirection(ParameterDirection.Output),
                 ex.Message

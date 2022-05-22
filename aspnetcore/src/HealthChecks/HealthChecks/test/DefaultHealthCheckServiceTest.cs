@@ -60,8 +60,9 @@ public class DefaultHealthCheckServiceTest
         var logger = services.GetRequiredService<ILogger<DefaultHealthCheckService>>();
 
         // Act
-        var exception = Assert.Throws<ArgumentException>(() =>
-            new DefaultHealthCheckService(scopeFactory, options, logger));
+        var exception = Assert.Throws<ArgumentException>(
+            () => new DefaultHealthCheckService(scopeFactory, options, logger)
+        );
 
         // Assert
         Assert.StartsWith(

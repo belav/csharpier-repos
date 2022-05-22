@@ -1155,8 +1155,9 @@ public partial class Startup
         Assert.True(context.Response.SupportsTrailers());
         foreach (var header in DisallowedTrailers)
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                context.Response.AppendTrailer(header, "value"));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Response.AppendTrailer(header, "value")
+            );
         }
         return Task.FromResult(0);
     }

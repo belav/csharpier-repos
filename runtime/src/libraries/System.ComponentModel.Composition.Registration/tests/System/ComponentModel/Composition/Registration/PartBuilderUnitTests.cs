@@ -343,8 +343,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
                 catalog,
                 CompositionOptions.DisableSilentRejection
             );
-            Assert.Throws<CompositionException>(() =>
-                container.GetExportedValue<AmbiguousConstructors>());
+            Assert.Throws<CompositionException>(
+                () => container.GetExportedValue<AmbiguousConstructors>()
+            );
         }
     }
 }

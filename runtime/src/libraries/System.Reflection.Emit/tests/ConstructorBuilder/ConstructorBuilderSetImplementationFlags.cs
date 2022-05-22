@@ -47,8 +47,9 @@ namespace System.Reflection.Emit.Tests
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
             Type createdType = type.CreateTypeInfo().AsType();
-            Assert.Throws<InvalidOperationException>(() =>
-                constructor.SetImplementationFlags(MethodImplAttributes.Runtime));
+            Assert.Throws<InvalidOperationException>(
+                () => constructor.SetImplementationFlags(MethodImplAttributes.Runtime)
+            );
         }
     }
 }

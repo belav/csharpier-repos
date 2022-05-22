@@ -78,31 +78,38 @@ class Module1
                 "System.Runtime.CompilerServices.IsLong",
                 type.GetTypeArgumentCustomModifiers(0).Single().Modifier.ToTestDisplayString()
             );
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                type.GetTypeArgumentCustomModifiers(1));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                type.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => type.GetTypeArgumentCustomModifiers(1)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => type.GetTypeArgumentCustomModifiers(-1)
+            );
 
             var nullable = type.OriginalDefinition;
             Assert.Equal("System.Nullable<T>", nullable.ToTestDisplayString());
             Assert.True(nullable.GetTypeArgumentCustomModifiers(0).IsEmpty);
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                nullable.GetTypeArgumentCustomModifiers(1));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                nullable.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => nullable.GetTypeArgumentCustomModifiers(1)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => nullable.GetTypeArgumentCustomModifiers(-1)
+            );
 
             var i = (INamedTypeSymbol)type.TypeArguments.First();
             Assert.Equal("System.Int32", i.ToTestDisplayString());
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                i.GetTypeArgumentCustomModifiers(0));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => i.GetTypeArgumentCustomModifiers(0)
+            );
 
             nullable = nullable.Construct(i);
             Assert.Equal("System.Int32?", nullable.ToTestDisplayString());
             Assert.True(nullable.GetTypeArgumentCustomModifiers(0).IsEmpty);
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                nullable.GetTypeArgumentCustomModifiers(1));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                nullable.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => nullable.GetTypeArgumentCustomModifiers(1)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => nullable.GetTypeArgumentCustomModifiers(-1)
+            );
 
             CompileAndVerify(compilation, expectedOutput: "Test");
         }
@@ -174,10 +181,12 @@ class Module1
                 "System.Runtime.CompilerServices.IsLong",
                 modifiers.Last().Modifier.ToTestDisplayString()
             );
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                type.GetTypeArgumentCustomModifiers(2));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                type.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => type.GetTypeArgumentCustomModifiers(2)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => type.GetTypeArgumentCustomModifiers(-1)
+            );
 
             var dictionary = type.OriginalDefinition;
             Assert.Equal(
@@ -186,10 +195,12 @@ class Module1
             );
             Assert.True(dictionary.GetTypeArgumentCustomModifiers(0).IsEmpty);
             Assert.True(dictionary.GetTypeArgumentCustomModifiers(1).IsEmpty);
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                dictionary.GetTypeArgumentCustomModifiers(2));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                dictionary.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => dictionary.GetTypeArgumentCustomModifiers(2)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => dictionary.GetTypeArgumentCustomModifiers(-1)
+            );
 
             var i = type.TypeArguments.First();
             dictionary = dictionary.Construct(i, i);
@@ -199,10 +210,12 @@ class Module1
             );
             Assert.True(dictionary.GetTypeArgumentCustomModifiers(0).IsEmpty);
             Assert.True(dictionary.GetTypeArgumentCustomModifiers(1).IsEmpty);
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                dictionary.GetTypeArgumentCustomModifiers(2));
-            Assert.Throws<System.IndexOutOfRangeException>(() =>
-                dictionary.GetTypeArgumentCustomModifiers(-1));
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => dictionary.GetTypeArgumentCustomModifiers(2)
+            );
+            Assert.Throws<System.IndexOutOfRangeException>(
+                () => dictionary.GetTypeArgumentCustomModifiers(-1)
+            );
 
             CompileAndVerify(compilation, expectedOutput: "Test");
         }

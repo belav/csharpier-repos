@@ -58,8 +58,9 @@ public class DotNetObjectReferenceTest
         jsRuntime1.TrackObjectReference(objRef);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            jsRuntime2.TrackObjectReference(objRef));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => jsRuntime2.TrackObjectReference(objRef)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);

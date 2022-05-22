@@ -42,8 +42,9 @@ public class RouteBuilderTest
             .Returns(Mock.Of<IServiceProvider>());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            new RouteBuilder(applicationBuilderMock.Object));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => new RouteBuilder(applicationBuilderMock.Object)
+        );
 
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling "

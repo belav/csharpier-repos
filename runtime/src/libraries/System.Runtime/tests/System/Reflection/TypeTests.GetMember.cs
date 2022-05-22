@@ -18,8 +18,9 @@ public static class TypeTests_GetMember
     public static void TestNull()
     {
         Type t = typeof(Mixed);
-        Assert.Throws<ArgumentNullException>(() =>
-            t.GetMember(null, MemberTypes.All, BindingFlags.Public | BindingFlags.Instance));
+        Assert.Throws<ArgumentNullException>(
+            () => t.GetMember(null, MemberTypes.All, BindingFlags.Public | BindingFlags.Instance)
+        );
     }
 
     [Fact]

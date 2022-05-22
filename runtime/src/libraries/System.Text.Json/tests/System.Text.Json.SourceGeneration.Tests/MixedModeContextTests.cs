@@ -170,10 +170,12 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 MixedModeContext.Default.StructWithCustomConverterPropertyFactory.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                MixedModeContext.Default.ClassWithBadCustomConverter.SerializeHandler);
-            Assert.Throws<InvalidOperationException>(() =>
-                MixedModeContext.Default.StructWithBadCustomConverter.SerializeHandler);
+            Assert.Throws<InvalidOperationException>(
+                () => MixedModeContext.Default.ClassWithBadCustomConverter.SerializeHandler
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MixedModeContext.Default.StructWithBadCustomConverter.SerializeHandler
+            );
         }
 
         [Fact]

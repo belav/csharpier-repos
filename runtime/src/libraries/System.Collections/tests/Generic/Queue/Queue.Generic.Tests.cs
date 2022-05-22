@@ -396,8 +396,9 @@ namespace System.Collections.Tests
         )
         {
             var queue = GenericQueueFactory();
-            AssertExtensions.Throws<OutOfMemoryException>(() =>
-                queue.EnsureCapacity(requestedCapacity));
+            AssertExtensions.Throws<OutOfMemoryException>(
+                () => queue.EnsureCapacity(requestedCapacity)
+            );
         }
 
         [Theory]

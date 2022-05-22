@@ -103,8 +103,9 @@ namespace Microsoft.EntityFrameworkCore
                         // inner exception for details.
                         // SqlException : Cannot insert explicit value for identity column in table
                         // 'Blog' when IDENTITY_INSERT is set to OFF.
-                        var updateException = Assert.Throws<DbUpdateException>(() =>
-                            context.SaveChanges());
+                        var updateException = Assert.Throws<DbUpdateException>(
+                            () => context.SaveChanges()
+                        );
                         Assert.Single(updateException.Entries);
 
                         foreach (var entity in entities.Take(100))

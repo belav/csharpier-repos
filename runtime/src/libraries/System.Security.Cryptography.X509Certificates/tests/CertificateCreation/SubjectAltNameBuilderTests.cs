@@ -102,8 +102,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
 
             // [nihongo]@[nihongo].example.org
-            Assert.Throws<CryptographicException>(() =>
-                builder.AddEmailAddress("\u65E5\u672C\u8A8E@\u65E5\u672C\u8A8E.example.org"));
+            Assert.Throws<CryptographicException>(
+                () => builder.AddEmailAddress("\u65E5\u672C\u8A8E@\u65E5\u672C\u8A8E.example.org")
+            );
         }
 
         [Fact]
@@ -156,8 +157,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
 
-            Assert.Throws<CryptographicException>(() =>
-                builder.AddUri(new Uri("http://\u65E5\u672C\u8A8E.example.org/")));
+            Assert.Throws<CryptographicException>(
+                () => builder.AddUri(new Uri("http://\u65E5\u672C\u8A8E.example.org/"))
+            );
         }
 
         [Fact]

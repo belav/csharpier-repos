@@ -386,8 +386,9 @@ public class CircuitRegistryTest
         var newId = "new-connection";
 
         // Act
-        var connect = Task.Run(() =>
-            registry.ConnectAsync(circuitHost.CircuitId, client, newId, default));
+        var connect = Task.Run(
+            () => registry.ConnectAsync(circuitHost.CircuitId, client, newId, default)
+        );
         var disconnect = Task.Run(() => registry.DisconnectAsync(circuitHost, oldId));
         registry.BeforeConnect.Set();
         await Task.WhenAll(connect, disconnect);

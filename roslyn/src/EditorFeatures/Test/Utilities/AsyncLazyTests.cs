@@ -108,8 +108,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 );
 
             var actual = consumerAsync
-                ? await Assert.ThrowsAsync<ArgumentException>(async () =>
-                    await lazy.GetValueAsync(CancellationToken.None))
+                ? await Assert.ThrowsAsync<ArgumentException>(
+                    async () => await lazy.GetValueAsync(CancellationToken.None)
+                )
                 : Assert.Throws<ArgumentException>(() => lazy.GetValue(CancellationToken.None));
 
             Assert.Same(exception, actual);

@@ -167,11 +167,13 @@ public class AzureAppendBlobTests
             _blobName,
             new HttpClient(testMessageHandler)
         );
-        await Assert.ThrowsAsync<HttpRequestException>(() =>
-            blob.AppendAsync(
-                new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
-                CancellationToken.None
-            ));
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () =>
+                blob.AppendAsync(
+                    new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+                    CancellationToken.None
+                )
+        );
 
         Assert.Equal(1, stage);
     }
@@ -228,11 +230,13 @@ public class AzureAppendBlobTests
             _blobName,
             new HttpClient(testMessageHandler)
         );
-        await Assert.ThrowsAsync<HttpRequestException>(() =>
-            blob.AppendAsync(
-                new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
-                CancellationToken.None
-            ));
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () =>
+                blob.AppendAsync(
+                    new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+                    CancellationToken.None
+                )
+        );
 
         Assert.Equal(2, stage);
     }

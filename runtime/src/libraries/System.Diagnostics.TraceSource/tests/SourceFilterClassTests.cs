@@ -44,8 +44,19 @@ namespace System.Diagnostics.TraceSourceTests
                     null
                 )
             );
-            Assert.Throws<ArgumentNullException>(() =>
-                filter.ShouldTrace(cache, null, TraceEventType.Warning, 0, null, null, null, null));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    filter.ShouldTrace(
+                        cache,
+                        null,
+                        TraceEventType.Warning,
+                        0,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+            );
         }
 
         [Fact]

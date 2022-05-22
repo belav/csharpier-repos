@@ -31,8 +31,9 @@ public partial class WebHostTests
     [Fact]
     public async Task WebHostThrowsWithNoServer()
     {
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            CreateBuilder().Build().StartAsync());
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => CreateBuilder().Build().StartAsync()
+        );
         Assert.Equal(
             "No service for type 'Microsoft.AspNetCore.Hosting.Server.IServer' has been registered.",
             ex.Message
@@ -1041,8 +1042,9 @@ public partial class WebHostTests
             Assert.NotNull(capturedRequest);
 
             Assert.Throws<ObjectDisposedException>(() => capturedContext.TraceIdentifier);
-            Assert.Throws<ObjectDisposedException>(() =>
-                capturedContext.Features.Get<IHttpRequestIdentifierFeature>());
+            Assert.Throws<ObjectDisposedException>(
+                () => capturedContext.Features.Get<IHttpRequestIdentifierFeature>()
+            );
 
             Assert.Throws<ObjectDisposedException>(() => capturedRequest.Scheme);
         }

@@ -481,8 +481,9 @@ namespace System.Security.Cryptography.Apple
         }
 
         public static SafeTemporaryKeychainHandle InvalidHandle =>
-            SafeHandleCache<SafeTemporaryKeychainHandle>.GetInvalidHandle(() =>
-                new SafeTemporaryKeychainHandle());
+            SafeHandleCache<SafeTemporaryKeychainHandle>.GetInvalidHandle(
+                () => new SafeTemporaryKeychainHandle()
+            );
 
         internal static void TrackKeychain(SafeTemporaryKeychainHandle toTrack)
         {

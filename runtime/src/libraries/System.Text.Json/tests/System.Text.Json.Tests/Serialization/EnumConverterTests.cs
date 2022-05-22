@@ -131,8 +131,9 @@ namespace System.Text.Json.Serialization.Tests
             // Not permitting integers should throw
             options = new JsonSerializerOptions();
             options.Converters.Add(new JsonStringEnumConverter(allowIntegerValues: false));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Serialize((FileAttributes)(-1), options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Serialize((FileAttributes)(-1), options)
+            );
 
             // Flag values honor naming policy correctly
             options = new JsonSerializerOptions();

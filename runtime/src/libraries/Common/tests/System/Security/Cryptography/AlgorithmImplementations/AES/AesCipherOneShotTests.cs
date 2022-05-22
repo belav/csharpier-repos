@@ -233,14 +233,16 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    alg.TryEncryptCfb(
-                        ReadOnlySpan<byte>.Empty,
-                        IV,
-                        Span<byte>.Empty,
-                        out _,
-                        feedbackSizeInBits: 120
-                    ));
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        alg.TryEncryptCfb(
+                            ReadOnlySpan<byte>.Empty,
+                            IV,
+                            Span<byte>.Empty,
+                            out _,
+                            feedbackSizeInBits: 120
+                        )
+                );
             }
         }
 
@@ -249,14 +251,16 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    alg.TryDecryptCfb(
-                        ReadOnlySpan<byte>.Empty,
-                        IV,
-                        Span<byte>.Empty,
-                        out _,
-                        feedbackSizeInBits: 120
-                    ));
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        alg.TryDecryptCfb(
+                            ReadOnlySpan<byte>.Empty,
+                            IV,
+                            Span<byte>.Empty,
+                            out _,
+                            feedbackSizeInBits: 120
+                        )
+                );
             }
         }
 

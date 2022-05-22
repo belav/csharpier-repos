@@ -33,19 +33,23 @@ unsafe partial class GenericsTest
 {
     private static void TestPoint3B()
     {
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint3B(true, false, true));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint3B(true, false, true)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint3BOut(
-                true,
-                false,
-                true,
-                out GenericsNative.Point3<bool> value3
-            ));
+        Assert.Throws<MarshalDirectiveException>(
+            () =>
+                GenericsNative.GetPoint3BOut(
+                    true,
+                    false,
+                    true,
+                    out GenericsNative.Point3<bool> value3
+                )
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetPoint3BRef(true, false, true));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint3BRef(true, false, true)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint3B(default, default));
 
@@ -58,10 +62,12 @@ unsafe partial class GenericsTest
             default
         };
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint3Bs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint3Bs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.AddPoint3Bs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint3Bs(in values[0], values.Length)
+        );
     }
 }

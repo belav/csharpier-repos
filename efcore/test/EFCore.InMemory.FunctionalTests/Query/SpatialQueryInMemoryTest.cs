@@ -15,8 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.ThrowsAsync<NullReferenceException>(() => base.Intersects_equal_to_null(async));
 
         public override Task Intersects_not_equal_to_null(bool async) =>
-            Assert.ThrowsAsync<NullReferenceException>(() =>
-                base.Intersects_not_equal_to_null(async));
+            Assert.ThrowsAsync<NullReferenceException>(
+                () => base.Intersects_not_equal_to_null(async)
+            );
 
         public override Task Distance_constant_lhs(bool async) => Task.CompletedTask;
 

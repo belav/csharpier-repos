@@ -48,27 +48,32 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AlignedAllocOOMTest()
         {
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.AlignedAlloc(
-                    nuint.MaxValue - ((uint)sizeof(nuint) - 1),
-                    (uint)sizeof(nuint)
-                ));
+            Assert.Throws<OutOfMemoryException>(
+                () =>
+                    NativeMemory.AlignedAlloc(
+                        nuint.MaxValue - ((uint)sizeof(nuint) - 1),
+                        (uint)sizeof(nuint)
+                    )
+            );
         }
 
         [Fact]
         public void AlignedAllocZeroAlignmentTest()
         {
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0));
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0)
+            );
         }
 
         [Fact]
         public void AlignedAllocNonPowerOfTwoAlignmentTest()
         {
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) + 1));
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) * 3));
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) + 1)
+            );
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) * 3)
+            );
         }
 
         [Fact]
@@ -92,11 +97,13 @@ namespace System.Runtime.InteropServices.Tests
             // *       ulong.MaxValue + 7 == 6, so overflows and is less than alignment
 
             nuint maxAlignment = (nuint)1 << ((sizeof(nuint) * 8) - 1);
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.AlignedAlloc(maxAlignment + 1, maxAlignment));
+            Assert.Throws<OutOfMemoryException>(
+                () => NativeMemory.AlignedAlloc(maxAlignment + 1, maxAlignment)
+            );
 
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.AlignedAlloc(nuint.MaxValue, (uint)sizeof(nuint)));
+            Assert.Throws<OutOfMemoryException>(
+                () => NativeMemory.AlignedAlloc(nuint.MaxValue, (uint)sizeof(nuint))
+            );
         }
 
         [Fact]
@@ -177,8 +184,9 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AlignedReallocNullPtrOOMTest()
         {
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.AlignedRealloc(null, nuint.MaxValue, (uint)sizeof(nuint)));
+            Assert.Throws<OutOfMemoryException>(
+                () => NativeMemory.AlignedRealloc(null, nuint.MaxValue, (uint)sizeof(nuint))
+            );
         }
 
         [Fact]
@@ -200,8 +208,9 @@ namespace System.Runtime.InteropServices.Tests
             Assert.True(ptr != null);
             Assert.True((nuint)ptr % (uint)sizeof(nuint) == 0);
 
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), 0));
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), 0)
+            );
             NativeMemory.AlignedFree(ptr);
         }
 
@@ -213,10 +222,12 @@ namespace System.Runtime.InteropServices.Tests
             Assert.True(ptr != null);
             Assert.True((nuint)ptr % (uint)sizeof(nuint) == 0);
 
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) + 1));
-            Assert.Throws<ArgumentException>(() =>
-                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) * 3));
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) + 1)
+            );
+            Assert.Throws<ArgumentException>(
+                () => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) * 3)
+            );
             NativeMemory.AlignedFree(ptr);
         }
 
@@ -289,8 +300,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.Alloc(1, nuint.MaxValue));
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.Alloc(nuint.MaxValue, 1));
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.Alloc(nuint.MaxValue, nuint.MaxValue));
+            Assert.Throws<OutOfMemoryException>(
+                () => NativeMemory.Alloc(nuint.MaxValue, nuint.MaxValue)
+            );
         }
 
         [Fact]
@@ -350,8 +362,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.AllocZeroed(1, nuint.MaxValue));
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.AllocZeroed(nuint.MaxValue, 1));
-            Assert.Throws<OutOfMemoryException>(() =>
-                NativeMemory.AllocZeroed(nuint.MaxValue, nuint.MaxValue));
+            Assert.Throws<OutOfMemoryException>(
+                () => NativeMemory.AllocZeroed(nuint.MaxValue, nuint.MaxValue)
+            );
         }
 
         [Fact]

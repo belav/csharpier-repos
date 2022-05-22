@@ -23,12 +23,14 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             var sw = Stopwatch.StartNew();
-            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                invoker.SendAsync(
-                    TestAsync,
-                    new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion },
-                    default
-                ));
+            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () =>
+                    invoker.SendAsync(
+                        TestAsync,
+                        new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion },
+                        default
+                    )
+            );
             sw.Stop();
 
             Assert.IsType<TimeoutException>(oce.InnerException);

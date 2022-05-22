@@ -119,8 +119,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             // call should fail because "Foo" is internal to the calling context.
-            Assert.Throws<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(() =>
-                MySite.mySite.Target(MySite.mySite, typed));
+            Assert.Throws<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
+                () => MySite.mySite.Target(MySite.mySite, typed)
+            );
         }
 
         public class OuterType<T>

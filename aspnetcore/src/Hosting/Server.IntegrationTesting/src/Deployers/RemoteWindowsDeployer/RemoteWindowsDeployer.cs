@@ -24,8 +24,9 @@ public class RemoteWindowsDeployer : ApplicationDeployer
     private string _deployedFolderPathInFileShare;
     private readonly RemoteWindowsDeploymentParameters _deploymentParameters;
     private bool _isDisposed;
-    private static readonly Lazy<Scripts> _scripts = new Lazy<Scripts>(() =>
-        CopyEmbeddedScriptFilesToDisk());
+    private static readonly Lazy<Scripts> _scripts = new Lazy<Scripts>(
+        () => CopyEmbeddedScriptFilesToDisk()
+    );
 
     public RemoteWindowsDeployer(
         RemoteWindowsDeploymentParameters deploymentParameters,

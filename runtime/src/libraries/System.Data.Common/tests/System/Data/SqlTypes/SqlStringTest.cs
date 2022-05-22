@@ -96,11 +96,13 @@ namespace System.Data.Tests.SqlTypes
         public void CultureInfo_InvalidLcid_Throws()
         {
             const string value = "foo";
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new SqlString(value, int.MinValue).CultureInfo);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new SqlString(value, int.MinValue).CultureInfo
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => new SqlString(value, -1).CultureInfo);
-            Assert.Throws<CultureNotFoundException>(() =>
-                new SqlString(value, int.MaxValue).CultureInfo);
+            Assert.Throws<CultureNotFoundException>(
+                () => new SqlString(value, int.MaxValue).CultureInfo
+            );
         }
 
         // Test constructor
@@ -412,8 +414,9 @@ namespace System.Data.Tests.SqlTypes
                 CompareOptions.IgnoreCase,
                 SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.IgnoreCase)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.BinarySort));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => SqlString.CompareOptionsFromSqlCompareOptions(SqlCompareOptions.BinarySort)
+            );
         }
 
         [Fact]

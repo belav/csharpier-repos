@@ -189,8 +189,9 @@ public class NegotiateProtocolTests
     {
         var responseData = Encoding.UTF8.GetBytes(payload);
 
-        var exception = Assert.Throws<InvalidDataException>(() =>
-            NegotiateProtocol.ParseResponse(responseData));
+        var exception = Assert.Throws<InvalidDataException>(
+            () => NegotiateProtocol.ParseResponse(responseData)
+        );
 
         Assert.Equal(expectedMessage, exception.InnerException.Message);
     }
@@ -211,8 +212,9 @@ public class NegotiateProtocolTests
 
         var responseData = Encoding.UTF8.GetBytes(payload);
 
-        var exception = Assert.Throws<InvalidDataException>(() =>
-            NegotiateProtocol.ParseResponse(responseData));
+        var exception = Assert.Throws<InvalidDataException>(
+            () => NegotiateProtocol.ParseResponse(responseData)
+        );
 
         Assert.Equal(
             "Detected a connection attempt to an ASP.NET SignalR Server. This client only supports connecting to an ASP.NET Core SignalR Server. See https://aka.ms/signalr-core-differences for details.",

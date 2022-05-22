@@ -38,8 +38,9 @@ public class SystemTextJsonResultExecutorTest : JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
-            executor.ExecuteAsync(context, result));
+        await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => executor.ExecuteAsync(context, result)
+        );
     }
 
     protected override object GetIndentedSettings()

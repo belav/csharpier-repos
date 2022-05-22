@@ -300,26 +300,32 @@ namespace System.Text.Json.Serialization.Tests
             dictionary.Add("self", dictionary);
             json = SerializeWithPreserve(dictionary);
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<RecursiveDictionary>(json, s_optionsIgnoreCycles));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<RecursiveDictionary>(json, s_optionsIgnoreCycles)
+            );
             using var ms2 = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            await Assert.ThrowsAsync<JsonException>(() =>
-                JsonSerializer
-                    .DeserializeAsync<RecursiveDictionary>(ms2, s_optionsIgnoreCycles)
-                    .AsTask());
+            await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    JsonSerializer
+                        .DeserializeAsync<RecursiveDictionary>(ms2, s_optionsIgnoreCycles)
+                        .AsTask()
+            );
 
             // List
             var list = new RecursiveList();
             list.Add(list);
             json = SerializeWithPreserve(list);
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<RecursiveList>(json, s_optionsIgnoreCycles));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<RecursiveList>(json, s_optionsIgnoreCycles)
+            );
             using var ms3 = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            await Assert.ThrowsAsync<JsonException>(() =>
-                JsonSerializer
-                    .DeserializeAsync<RecursiveList>(ms3, s_optionsIgnoreCycles)
-                    .AsTask());
+            await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    JsonSerializer
+                        .DeserializeAsync<RecursiveList>(ms3, s_optionsIgnoreCycles)
+                        .AsTask()
+            );
         }
 
         [Fact]

@@ -376,8 +376,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext());
+                                Assert.Throws<InvalidOperationException>(
+                                    () => enumerator.MoveNext()
+                                );
                             }
                             else
                             {
@@ -437,8 +438,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext());
+                                Assert.Throws<InvalidOperationException>(
+                                    () => enumerator.MoveNext()
+                                );
                             }
                             else
                             {
@@ -495,8 +497,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                                 Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
                             )
                             {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext());
+                                Assert.Throws<InvalidOperationException>(
+                                    () => enumerator.MoveNext()
+                                );
                             }
                             else
                             {

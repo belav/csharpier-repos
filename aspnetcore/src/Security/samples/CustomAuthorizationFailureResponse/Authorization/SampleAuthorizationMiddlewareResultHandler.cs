@@ -69,10 +69,12 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 // and modifications of the response are not allowed once the writing has started
                 var message = Startup.CustomForbiddenMessage;
 
-                httpContext.Response.OnStarting(() =>
-                    httpContext.Response.BodyWriter
-                        .WriteAsync(Encoding.UTF8.GetBytes(message))
-                        .AsTask());
+                httpContext.Response.OnStarting(
+                    () =>
+                        httpContext.Response.BodyWriter
+                            .WriteAsync(Encoding.UTF8.GetBytes(message))
+                            .AsTask()
+                );
             }
         }
 

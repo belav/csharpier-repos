@@ -218,8 +218,9 @@ namespace System.Reflection.Emit.Tests
             MethodInfo body = createdType.GetMethod(method.Name);
             MethodInfo declaration = typeof(DefineMethodOverrideInterface).GetMethod(method.Name);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineMethodOverride(body, declaration));
+            Assert.Throws<InvalidOperationException>(
+                () => type.DefineMethodOverride(body, declaration)
+            );
         }
 
         [Fact]

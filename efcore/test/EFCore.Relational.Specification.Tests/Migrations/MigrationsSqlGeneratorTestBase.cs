@@ -361,16 +361,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.InsertDataOperationNoModel("dbo.People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -382,17 +384,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     "dbo.People.First Name"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                ColumnTypes = new[] { "char[]" },
-                                Values = new object[,] { { null } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    ColumnTypes = new[] { "char[]" },
+                                    Values = new object[,] { { null } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -401,16 +405,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.InsertDataOperationValuesCountMismatch(1, 2, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "First Name", "Last Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "First Name", "Last Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -419,16 +425,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.InsertDataOperationTypesCountMismatch(2, 1, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "First Name" },
-                                ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "First Name" },
+                                    ColumnTypes = new[] { "string", "string" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -437,17 +445,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.DataOperationNoTable("dbo.People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -456,16 +466,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.DataOperationNoProperty("People", "Name"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -536,15 +548,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationNoModel("People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -553,16 +567,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationValuesCountMismatch(1, 2, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name", "Last Name" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -571,16 +587,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationTypesCountMismatch(2, 1, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string", "string" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -723,17 +741,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationNoModel("People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -742,19 +762,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationRowCountMismatch(1, 2, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string" },
-                                KeyValues = new object[,] { { "Daenerys" }, { "John" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string" },
+                                    KeyValues = new object[,] { { "Daenerys" }, { "John" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -763,18 +785,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationKeyValuesCountMismatch(1, 2, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name", "Last Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -783,18 +807,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationKeyTypesCountMismatch(2, 1, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string", "string" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -803,18 +829,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationValuesCountMismatch(1, 2, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance", "Culture" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance", "Culture" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 
@@ -823,18 +851,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationTypesCountMismatch(2, 1, "People"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    ColumnTypes = new[] { "string", "string" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
                     .Message
             );
 

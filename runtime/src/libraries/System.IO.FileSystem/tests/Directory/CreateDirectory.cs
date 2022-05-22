@@ -300,10 +300,9 @@ namespace System.IO.Tests
             Assert.All(
                 paths,
                 path =>
-                    AssertExtensions.ThrowsAny<
-                        PathTooLongException,
-                        DirectoryNotFoundException
-                    >(() => Create(path))
+                    AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException>(
+                        () => Create(path)
+                    )
             );
         }
 

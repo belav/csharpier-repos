@@ -25,8 +25,9 @@ namespace System.Tests
         [MemberData(nameof(UnsupportedSignals))]
         public void Create_InvalidSignal_Throws(PosixSignal signal)
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                PosixSignalRegistration.Create(signal, ctx => { }));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => PosixSignalRegistration.Create(signal, ctx => { })
+            );
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]

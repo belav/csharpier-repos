@@ -342,11 +342,13 @@ namespace Microsoft.Extensions.Options.Tests
                 .Configure(o => o.Boolean = true)
                 .Validate(o => !o.Boolean, "named Boolean must be false.");
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Boolean must be true.");
-            error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named"));
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named")
+            );
             ValidateFailure<ComplexOptions>(error, "named", 1, "named Boolean must be false.");
         }
 
@@ -359,8 +361,9 @@ namespace Microsoft.Extensions.Options.Tests
                 .Configure(o => o.Boolean = false)
                 .Validate(o => o.Boolean);
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error);
         }
 
@@ -381,8 +384,9 @@ namespace Microsoft.Extensions.Options.Tests
                 .Validate(o => o.Integer > 12);
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(
                 error,
                 Options.DefaultName,
@@ -410,8 +414,9 @@ namespace Microsoft.Extensions.Options.Tests
                 .Validate(o => o.Integer > 12, "Integer");
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(
                 error,
                 Options.DefaultName,
@@ -436,8 +441,9 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IValidateOptions<FakeOptions>, BadValidator>();
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<NotImplementedException>(() =>
-                sp.GetRequiredService<IOptions<FakeOptions>>().Value);
+            var error = Assert.Throws<NotImplementedException>(
+                () => sp.GetRequiredService<IOptions<FakeOptions>>().Value
+            );
         }
 
         private class MultiOptionValidator
@@ -479,12 +485,14 @@ namespace Microsoft.Extensions.Options.Tests
             services.AddSingleton<IValidateOptions<FakeOptions>>(validator);
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != real");
 
-            error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<FakeOptions>>().Value);
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<FakeOptions>>().Value
+            );
             ValidateFailure<FakeOptions>(error, Options.DefaultName, 1, "Message != real");
 
             var fake = sp.GetRequiredService<IOptionsMonitor<FakeOptions>>().Get("fake");
@@ -547,16 +555,21 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != target");
 
-            error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get(Options.DefaultName));
+            error = Assert.Throws<OptionsValidationException>(
+                () =>
+                    sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>()
+                        .Get(Options.DefaultName)
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != target");
 
-            error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("no"));
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("no")
+            );
             ValidateFailure<ComplexOptions>(error, "no", 1, "Virtual != target");
 
             var op = sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("yes");
@@ -741,8 +754,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var startupValidator = sp.GetRequiredService<IStartupValidator>();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                startupValidator.Validate());
+            var error = Assert.Throws<OptionsValidationException>(
+                () => startupValidator.Validate()
+            );
             ValidateFailure<ComplexOptions>(
                 error,
                 Options.DefaultName,
@@ -830,8 +844,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
             ValidateFailure<AnnotatedOptions>(
                 error,
                 Options.DefaultName,
@@ -864,8 +879,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
             ValidateFailure<AnnotatedOptions>(
                 error,
                 Options.DefaultName,
@@ -905,8 +921,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
             ValidateFailure<AnnotatedOptions>(
                 error,
                 Options.DefaultName,
@@ -947,8 +964,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
             ValidateFailure<AnnotatedOptions>(
                 error,
                 Options.DefaultName,
@@ -990,8 +1008,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() =>
-                sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
             ValidateFailure<AnnotatedOptions>(
                 error,
                 Options.DefaultName,

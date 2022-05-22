@@ -38,8 +38,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void PerMilleSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PerMilleSymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PerMilleSymbol = ""
+            );
         }
     }
 }

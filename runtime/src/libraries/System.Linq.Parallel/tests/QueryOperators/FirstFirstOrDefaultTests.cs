@@ -304,24 +304,28 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void First_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(1)
-                    .First(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                UnorderedSources
-                    .Default(1)
-                    .FirstOrDefault(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .First(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .FirstOrDefault(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
         }
 
         [Fact]

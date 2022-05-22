@@ -820,8 +820,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Command_default_argument_value_does_not_override_parsed_value()
         {
-            var argument = new Argument<DirectoryInfo>(() =>
-                new DirectoryInfo(Directory.GetCurrentDirectory()))
+            var argument = new Argument<DirectoryInfo>(
+                () => new DirectoryInfo(Directory.GetCurrentDirectory())
+            )
             {
                 Name = "the-arg"
             };

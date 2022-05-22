@@ -128,8 +128,9 @@ namespace System.Net.Security.Tests
                     return serverCert;
                 };
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.AuthenticateAsServerAsync(options, CancellationToken.None));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.AuthenticateAsServerAsync(options, CancellationToken.None)
+                );
 
                 Assert.Equal(0, timesCallbackCalled);
             }
@@ -227,8 +228,9 @@ namespace System.Net.Security.Tests
 
                     var cts = new CancellationTokenSource();
                     await Assert.ThrowsAsync<AuthenticationException>(
-                        WithAggregateExceptionUnwrapping(async () =>
-                            await server.AuthenticateAsServerAsync(options, cts.Token))
+                        WithAggregateExceptionUnwrapping(
+                            async () => await server.AuthenticateAsServerAsync(options, cts.Token)
+                        )
                     );
 
                     // to break connection so that client is not waiting

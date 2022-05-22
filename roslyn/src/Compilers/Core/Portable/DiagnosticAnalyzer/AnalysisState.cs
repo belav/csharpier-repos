@@ -84,8 +84,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _pendingSourceEvents = new Dictionary<SyntaxTree, HashSet<CompilationEvent>>();
             _pendingNonSourceEvents = new HashSet<CompilationEvent>();
             _partialSymbolsWithGeneratedSourceEvents = new HashSet<ISymbol>();
-            _compilationEventsPool = new ObjectPool<HashSet<CompilationEvent>>(() =>
-                new HashSet<CompilationEvent>());
+            _compilationEventsPool = new ObjectPool<HashSet<CompilationEvent>>(
+                () => new HashSet<CompilationEvent>()
+            );
             _pooledEventsWithAnyActionsSet = new HashSet<CompilationEvent>();
         }
 
@@ -94,11 +95,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             out ImmutableArray<PerAnalyzerState> analyzerStates
         )
         {
-            var analyzerStateDataPool = new ObjectPool<AnalyzerStateData>(() =>
-                new AnalyzerStateData());
-            var declarationAnalyzerStateDataPool =
-                new ObjectPool<DeclarationAnalyzerStateData>(() =>
-                    new DeclarationAnalyzerStateData());
+            var analyzerStateDataPool = new ObjectPool<AnalyzerStateData>(
+                () => new AnalyzerStateData()
+            );
+            var declarationAnalyzerStateDataPool = new ObjectPool<DeclarationAnalyzerStateData>(
+                () => new DeclarationAnalyzerStateData()
+            );
             var currentlyAnalyzingDeclarationsMapPool = new ObjectPool<
                 Dictionary<int, DeclarationAnalyzerStateData>
             >(() => new Dictionary<int, DeclarationAnalyzerStateData>());

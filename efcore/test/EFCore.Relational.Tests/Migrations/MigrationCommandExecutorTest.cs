@@ -141,11 +141,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(
                         RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
                         (
-                            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                                await migrationCommandExecutor.ExecuteNonQueryAsync(
-                                    commandList,
-                                    fakeConnection
-                                ))
+                            await Assert.ThrowsAsync<NotSupportedException>(
+                                async () =>
+                                    await migrationCommandExecutor.ExecuteNonQueryAsync(
+                                        commandList,
+                                        fakeConnection
+                                    )
+                            )
                         ).Message
                     );
                 }
@@ -154,11 +156,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(
                         RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
                         Assert
-                            .Throws<NotSupportedException>(() =>
-                                migrationCommandExecutor.ExecuteNonQuery(
-                                    commandList,
-                                    fakeConnection
-                                ))
+                            .Throws<NotSupportedException>(
+                                () =>
+                                    migrationCommandExecutor.ExecuteNonQuery(
+                                        commandList,
+                                        fakeConnection
+                                    )
+                            )
                             .Message
                     );
                 }
@@ -387,16 +391,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             if (async)
             {
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await migrationCommandExecutor.ExecuteNonQueryAsync(
-                        commandList,
-                        fakeConnection
-                    ));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () =>
+                        await migrationCommandExecutor.ExecuteNonQueryAsync(
+                            commandList,
+                            fakeConnection
+                        )
+                );
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection));
+                Assert.Throws<InvalidOperationException>(
+                    () => migrationCommandExecutor.ExecuteNonQuery(commandList, fakeConnection)
+                );
             }
 
             Assert.Equal(1, fakeDbConnection.OpenCount);

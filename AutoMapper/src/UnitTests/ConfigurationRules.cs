@@ -39,8 +39,9 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() =>
-                config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -55,8 +56,9 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(() =>
-                config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -70,8 +72,9 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() =>
-                config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -86,8 +89,9 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(() =>
-                config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -101,8 +105,9 @@ namespace AutoMapper.UnitTests
                 }
             );
 
-            new Action(() =>
-                config.AssertConfigurationIsValid()).ShouldThrowException<DuplicateTypeMapConfigurationException>(
+            new Action(
+                () => config.AssertConfigurationIsValid()
+            ).ShouldThrowException<DuplicateTypeMapConfigurationException>(
                 c =>
                 {
                     c.Errors.SelectMany(t => t.ProfileNames).ShouldNotContain(string.Empty);

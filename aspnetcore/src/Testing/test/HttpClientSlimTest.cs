@@ -28,8 +28,9 @@ public class HttpClientSlimTest
     {
         using (var host = StartHost(out var address, statusCode: 500))
         {
-            await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                HttpClientSlim.GetStringAsync(address));
+            await Assert.ThrowsAnyAsync<HttpRequestException>(
+                () => HttpClientSlim.GetStringAsync(address)
+            );
         }
     }
 
@@ -56,8 +57,9 @@ public class HttpClientSlimTest
     {
         using (var host = StartHost(out var address, statusCode: 500))
         {
-            await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                HttpClientSlim.PostAsync(address, new StringContent("")));
+            await Assert.ThrowsAnyAsync<HttpRequestException>(
+                () => HttpClientSlim.PostAsync(address, new StringContent(""))
+            );
         }
     }
 

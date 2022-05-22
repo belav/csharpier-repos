@@ -161,8 +161,9 @@ Delta: Gamma: Beta: Test B
 
             var b = beta.CreateInstance("Beta.B")!;
             var writeMethod = b.GetType().GetMethod("Write")!;
-            var exception = Assert.Throws<TargetInvocationException>(() =>
-                writeMethod.Invoke(b, new object[] { sb, "Test B" }));
+            var exception = Assert.Throws<TargetInvocationException>(
+                () => writeMethod.Invoke(b, new object[] { sb, "Test B" })
+            );
             Assert.IsAssignableFrom<FileNotFoundException>(exception.InnerException);
 
             var actual = sb.ToString();
@@ -566,8 +567,13 @@ Delta: Epsilon: Test E
 
             if (ExecutionConditionUtil.IsCoreClr)
             {
-                var ex = Assert.ThrowsAny<Exception>(() =>
-                    analyzer.GetType().GetMethod("Method")!.Invoke(analyzer, new object[] { sb }));
+                var ex = Assert.ThrowsAny<Exception>(
+                    () =>
+                        analyzer
+                            .GetType()
+                            .GetMethod("Method")!
+                            .Invoke(analyzer, new object[] { sb })
+                );
                 Assert.True(
                     ex is MissingMethodException or TargetInvocationException,
                     $@"Unexpected exception type: ""{ex.GetType()}"""

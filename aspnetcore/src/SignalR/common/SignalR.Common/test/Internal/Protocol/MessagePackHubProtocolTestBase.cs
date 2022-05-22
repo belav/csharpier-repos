@@ -547,8 +547,9 @@ public abstract class MessagePackHubProtocolTestBase
         var buffer = Frame(testData.Encoded);
         var binder = new TestBinder(new[] { typeof(string) }, typeof(string));
         var data = new ReadOnlySequence<byte>(buffer);
-        var exception = Assert.Throws<InvalidDataException>(() =>
-            HubProtocol.TryParseMessage(ref data, binder, out _));
+        var exception = Assert.Throws<InvalidDataException>(
+            () => HubProtocol.TryParseMessage(ref data, binder, out _)
+        );
 
         Assert.Equal(testData.ErrorMessage, exception.Message);
     }

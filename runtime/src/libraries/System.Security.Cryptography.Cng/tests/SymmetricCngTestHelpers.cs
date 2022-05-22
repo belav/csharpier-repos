@@ -399,23 +399,27 @@ namespace System.Security.Cryptography.Cng.Tests
                     alg.Padding = PaddingMode.None;
 
                     byte[] destination = new byte[alg.BlockSize / 8];
-                    CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() =>
-                        alg.EncryptCfb(
-                            Array.Empty<byte>(),
-                            destination,
-                            PaddingMode.None,
-                            notSupportedFeedbackSizeInBits
-                        ));
+                    CryptographicException ce = Assert.ThrowsAny<CryptographicException>(
+                        () =>
+                            alg.EncryptCfb(
+                                Array.Empty<byte>(),
+                                destination,
+                                PaddingMode.None,
+                                notSupportedFeedbackSizeInBits
+                            )
+                    );
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 
-                    ce = Assert.ThrowsAny<CryptographicException>(() =>
-                        alg.DecryptCfb(
-                            Array.Empty<byte>(),
-                            destination,
-                            PaddingMode.None,
-                            notSupportedFeedbackSizeInBits
-                        ));
+                    ce = Assert.ThrowsAny<CryptographicException>(
+                        () =>
+                            alg.DecryptCfb(
+                                Array.Empty<byte>(),
+                                destination,
+                                PaddingMode.None,
+                                notSupportedFeedbackSizeInBits
+                            )
+                    );
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 

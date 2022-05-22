@@ -140,8 +140,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoValueGenerator("Float", "AnEntity", "float"),
                 Assert
-                    .Throws<NotSupportedException>(() =>
-                        selector.Select(entityType.FindProperty("Float"), entityType))
+                    .Throws<NotSupportedException>(
+                        () => selector.Select(entityType.FindProperty("Float"), entityType)
+                    )
                     .Message
             );
         }

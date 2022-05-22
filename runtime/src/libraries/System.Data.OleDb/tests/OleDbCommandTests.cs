@@ -252,8 +252,9 @@ namespace System.Data.OleDb.Tests
                         var innerCommand = new OleDbCommand(cmdText: @"SELECT * FROM " + tableName)
                     )
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(() =>
-                            innerCommand.CommandType = (CommandType)0);
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            () => innerCommand.CommandType = (CommandType)0
+                        );
                     }
                 }
             );

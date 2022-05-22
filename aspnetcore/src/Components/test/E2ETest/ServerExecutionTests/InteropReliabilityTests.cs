@@ -369,8 +369,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -440,8 +441,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -469,8 +471,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -510,8 +513,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -547,8 +551,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -575,8 +580,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // a circuit that's gone.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() =>
-                Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 

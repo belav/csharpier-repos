@@ -127,8 +127,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        derivedType.SetDiscriminatorProperty(property))
+                    .Throws<InvalidOperationException>(
+                        () => derivedType.SetDiscriminatorProperty(property)
+                    )
                     .Message
             );
         }
@@ -147,8 +148,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        otherType.SetDiscriminatorProperty(property))
+                    .Throws<InvalidOperationException>(
+                        () => otherType.SetDiscriminatorProperty(property)
+                    )
                     .Message
             );
         }

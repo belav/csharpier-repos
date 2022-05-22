@@ -46,8 +46,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void PercentSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PercentSymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PercentSymbol = ""
+            );
         }
     }
 }

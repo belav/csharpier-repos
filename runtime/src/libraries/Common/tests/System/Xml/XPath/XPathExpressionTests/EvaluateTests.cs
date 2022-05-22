@@ -60,8 +60,9 @@ namespace XPathTests.XPathExpressionTests
 
         private static void EvaluateTestsErrors(string toEvaluate, string exceptionString)
         {
-            Assert.Throws<XPathException>(() =>
-                EvaluateTestCompiledXPathExpression<object>(toEvaluate, null));
+            Assert.Throws<XPathException>(
+                () => EvaluateTestCompiledXPathExpression<object>(toEvaluate, null)
+            );
             Assert.Throws<XPathException>(() => EvaluateTestNonCompiled<object>(toEvaluate, null));
         }
 

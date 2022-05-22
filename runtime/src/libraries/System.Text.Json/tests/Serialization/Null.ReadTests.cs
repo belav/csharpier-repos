@@ -127,8 +127,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ParseNullArgumentFail()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                JsonSerializer.Deserialize<string>((string)null));
+            Assert.Throws<ArgumentNullException>(
+                () => JsonSerializer.Deserialize<string>((string)null)
+            );
             Assert.Throws<ArgumentNullException>(() => JsonSerializer.Deserialize("1", (Type)null));
         }
 
@@ -172,11 +173,13 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\""));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("")); // Empty JSON is invalid
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("1234")); // Can't convert a JSON number to JSON string/char
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<char>("\"stringTooLong\""));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<char>("\"stringTooLong\"")
+            );
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\u0059B\""));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<char>("\"\uD800\uDC00\""));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<char>("\"\uD800\uDC00\"")
+            );
             Assert.Equal('a', JsonSerializer.Deserialize<char>("\"a\""));
             Assert.Equal('Y', JsonSerializer.Deserialize<char>("\"\u0059\""));
         }
@@ -193,10 +196,12 @@ namespace System.Text.Json.Serialization.Tests
                 reader,
                 (reader) => JsonSerializer.Deserialize<SimpleStruct>(ref reader)
             );
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<SimpleStruct>(nullStringAsBytes));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<SimpleStruct>(nullString));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<SimpleStruct>(nullStringAsBytes)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<SimpleStruct>(nullString)
+            );
 
             // null can be assigned to nullable structs.
             Assert.Null(JsonSerializer.Deserialize<SimpleStruct?>(nullStringAsBytes));
@@ -208,8 +213,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes("null")))
             {
-                await Assert.ThrowsAsync<JsonException>(async () =>
-                    await JsonSerializer.DeserializeAsync<SimpleStruct>(stream));
+                await Assert.ThrowsAsync<JsonException>(
+                    async () => await JsonSerializer.DeserializeAsync<SimpleStruct>(stream)
+                );
 
                 // null can be assigned to nullable structs.
                 stream.Position = 0;
@@ -257,8 +263,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
             // We still throw when we have an unsupported root.
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<int[,]>("null", options));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<int[,]>("null", options)
+            );
         }
     }
 }

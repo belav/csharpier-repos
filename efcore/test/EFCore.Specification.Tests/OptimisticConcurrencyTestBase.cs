@@ -90,8 +90,9 @@ namespace Microsoft.EntityFrameworkCore
                             .Entry(sponsor)
                             .Property<int?>(Sponsor.ClientTokenPropertyName)
                             .OriginalValue = null;
-                        Assert.Throws<DbUpdateConcurrencyException>(() =>
-                            innerContext.SaveChanges());
+                        Assert.Throws<DbUpdateConcurrencyException>(
+                            () => innerContext.SaveChanges()
+                        );
                     }
                 );
         }
@@ -443,8 +444,9 @@ namespace Microsoft.EntityFrameworkCore
 
                         await innerContext.SaveChangesAsync();
 
-                        await Assert.ThrowsAnyAsync<DbUpdateException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAnyAsync<DbUpdateException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                 );
         }
@@ -880,8 +882,9 @@ namespace Microsoft.EntityFrameworkCore
                         storeChange(innerContext);
                         await innerContext.SaveChangesAsync();
 
-                        var updateException = await Assert.ThrowsAnyAsync<TException>(() =>
-                            context.SaveChangesAsync());
+                        var updateException = await Assert.ThrowsAnyAsync<TException>(
+                            () => context.SaveChangesAsync()
+                        );
 
                         if (typeof(TException) == typeof(DbUpdateConcurrencyException))
                         {

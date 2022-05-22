@@ -218,10 +218,12 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetObjectForNativeVariant_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetObjectForNativeVariant(IntPtr.Zero));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetObjectForNativeVariant(IntPtr.Zero)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
+            );
         }
 
         [Fact]
@@ -485,8 +487,9 @@ namespace System.Runtime.InteropServices.Tests
                 variant.m_Variant.vt = VT_VARIANT | VT_BYREF;
                 variant.m_Variant._unionTypes._pvarVal = ptr;
 
-                Assert.Throws<InvalidOleVariantTypeException>(() =>
-                    GetObjectForNativeVariant(variant));
+                Assert.Throws<InvalidOleVariantTypeException>(
+                    () => GetObjectForNativeVariant(variant)
+                );
             }
             finally
             {

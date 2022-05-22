@@ -189,15 +189,17 @@ public class SniOptionsSelectorTests
             logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
         );
 
-        var authExWithServerName = Assert.Throws<AuthenticationException>(() =>
-            sniOptionsSelector.GetOptions(new MockConnectionContext(), "example.org"));
+        var authExWithServerName = Assert.Throws<AuthenticationException>(
+            () => sniOptionsSelector.GetOptions(new MockConnectionContext(), "example.org")
+        );
         Assert.Equal(
             CoreStrings.FormatSniNotConfiguredForServerName("example.org", "TestEndpointName"),
             authExWithServerName.Message
         );
 
-        var authExWithoutServerName = Assert.Throws<AuthenticationException>(() =>
-            sniOptionsSelector.GetOptions(new MockConnectionContext(), null));
+        var authExWithoutServerName = Assert.Throws<AuthenticationException>(
+            () => sniOptionsSelector.GetOptions(new MockConnectionContext(), null)
+        );
         Assert.Equal(
             CoreStrings.FormatSniNotConfiguredToAllowNoServerName("TestEndpointName"),
             authExWithoutServerName.Message
@@ -375,15 +377,17 @@ public class SniOptionsSelectorTests
             { "www.example.org", new SniConfig() }
         };
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new SniOptionsSelector(
-                "TestEndpointName",
-                sniDictionary,
-                new MockCertificateConfigLoader(),
-                fallbackHttpsOptions: new HttpsConnectionAdapterOptions(),
-                fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
-                logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                new SniOptionsSelector(
+                    "TestEndpointName",
+                    sniDictionary,
+                    new MockCertificateConfigLoader(),
+                    fallbackHttpsOptions: new HttpsConnectionAdapterOptions(),
+                    fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
+                    logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
+                )
+        );
 
         Assert.Equal(CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound, ex.Message);
     }

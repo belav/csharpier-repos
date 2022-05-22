@@ -46,13 +46,15 @@ public class ProducesResponseTypeAttributeTests
         var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
 
         // Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new ProducesResponseTypeAttribute(
-                typeof(void),
-                StatusCodes.Status200OK,
-                contentTypes[0],
-                contentTypes.Skip(1).ToArray()
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                new ProducesResponseTypeAttribute(
+                    typeof(void),
+                    StatusCodes.Status200OK,
+                    contentTypes[0],
+                    contentTypes.Skip(1).ToArray()
+                )
+        );
 
         Assert.Equal(
             $"Could not parse '{invalidContentType}'. Content types with wildcards are not supported.",

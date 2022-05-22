@@ -46,12 +46,14 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         );
 
         // Act
-        await Client.ExpectCircuitError(() =>
-            Client.HubConnection.SendAsync(
-                "DispatchBrowserEvent",
-                eventDescriptor,
-                default(JsonElement)
-            ));
+        await Client.ExpectCircuitError(
+            () =>
+                Client.HubConnection.SendAsync(
+                    "DispatchBrowserEvent",
+                    eventDescriptor,
+                    default(JsonElement)
+                )
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);
@@ -88,12 +90,14 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         };
 
         // Act
-        await Client.ExpectCircuitError(() =>
-            Client.HubConnection.SendAsync(
-                "DispatchBrowserEvent",
-                eventDescriptor,
-                Serialize(eventArgs)
-            ));
+        await Client.ExpectCircuitError(
+            () =>
+                Client.HubConnection.SendAsync(
+                    "DispatchBrowserEvent",
+                    eventDescriptor,
+                    Serialize(eventArgs)
+                )
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);
@@ -123,8 +127,9 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         await Client.ClickAsync("counter");
 
         // Act
-        await Client.ExpectCircuitError(() =>
-            Client.HubConnection.SendAsync("OnRenderCompleted", 1846, null));
+        await Client.ExpectCircuitError(
+            () => Client.HubConnection.SendAsync("OnRenderCompleted", 1846, null)
+        );
 
         // Assert
         var actualError = Assert.Single(Errors);

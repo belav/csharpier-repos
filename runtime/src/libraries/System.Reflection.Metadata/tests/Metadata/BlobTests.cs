@@ -968,8 +968,9 @@ namespace System.Reflection.Metadata.Tests
             builder.WriteByte(1);
 
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((Stream)null));
-            Assert.Throws<NotSupportedException>(() =>
-                builder.WriteContentTo(new MemoryStream(new byte[] { 1 }, writable: false)));
+            Assert.Throws<NotSupportedException>(
+                () => builder.WriteContentTo(new MemoryStream(new byte[] { 1 }, writable: false))
+            );
         }
 
         [Fact]
@@ -1369,8 +1370,9 @@ namespace System.Reflection.Metadata.Tests
             Assert.Throws<InvalidOperationException>(() => builder1.GetBlobs());
             Assert.Throws<InvalidOperationException>(() => builder1.ContentEquals(builder1));
             Assert.Throws<InvalidOperationException>(() => builder1.WriteUTF16("str"));
-            Assert.Throws<InvalidOperationException>(() =>
-                builder1.WriteUTF8("str", allowUnpairedSurrogates: false));
+            Assert.Throws<InvalidOperationException>(
+                () => builder1.WriteUTF8("str", allowUnpairedSurrogates: false)
+            );
 
             builder2.LinkSuffix(builder3);
             AssertEx.Equal(new byte[] { 1, 2, 3 }, builder2.ToArray());
@@ -1390,39 +1392,50 @@ namespace System.Reflection.Metadata.Tests
             var builder = new BlobBuilder(16);
             Assert.Throws<ArgumentNullException>(() => builder.WriteUTF16((char[])null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteUTF16((string)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                builder.WriteUTF8(null, allowUnpairedSurrogates: true));
-            Assert.Throws<ArgumentNullException>(() =>
-                builder.WriteUTF8(null, allowUnpairedSurrogates: true));
+            Assert.Throws<ArgumentNullException>(
+                () => builder.WriteUTF8(null, allowUnpairedSurrogates: true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => builder.WriteUTF8(null, allowUnpairedSurrogates: true)
+            );
             Assert.Throws<ArgumentNullException>(() => builder.TryWriteBytes((Stream)null, 0));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes(null, 0, 0));
             Assert.Throws<ArgumentNullException>(() => builder.WriteBytes((byte*)null, 0));
-            Assert.Throws<ArgumentNullException>(() =>
-                builder.WriteBytes(default(ImmutableArray<byte>)));
-            Assert.Throws<ArgumentNullException>(() =>
-                builder.WriteBytes(default(ImmutableArray<byte>), 0, 0));
+            Assert.Throws<ArgumentNullException>(
+                () => builder.WriteBytes(default(ImmutableArray<byte>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => builder.WriteBytes(default(ImmutableArray<byte>), 0, 0)
+            );
 
             var bw = default(BlobWriter);
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo(ref bw));
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((Stream)null));
             Assert.Throws<ArgumentNullException>(() => builder.WriteContentTo((BlobBuilder)null));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.TryWriteBytes(new MemoryStream(), -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.TryWriteBytes(new MemoryStream(), -1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(0, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(new byte[] { }, 1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(new byte[] { }, 0, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(new byte[] { }, 0, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(ImmutableArray<byte>.Empty, 1, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(ImmutableArray<byte>.Empty, 0, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteBytes(ImmutableArray<byte>.Empty, 1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(new byte[] { }, 1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(new byte[] { }, 0, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(new byte[] { }, 0, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(ImmutableArray<byte>.Empty, 1, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(ImmutableArray<byte>.Empty, 0, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteBytes(ImmutableArray<byte>.Empty, 1, -1)
+            );
         }
 
         [Fact]
@@ -1528,11 +1541,13 @@ namespace System.Reflection.Metadata.Tests
             var builder = new BlobBuilder();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => writer.WriteCompressedInteger(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                writer.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => writer.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteCompressedInteger(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => builder.WriteCompressedInteger(BlobWriterImpl.MaxCompressedIntegerValue + 1)
+            );
         }
 
         [Fact]
@@ -1554,22 +1569,30 @@ namespace System.Reflection.Metadata.Tests
             var writer = new BlobWriter(4);
             var builder = new BlobBuilder();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                writer.WriteCompressedSignedInteger(
-                    BlobWriterImpl.MinSignedCompressedIntegerValue - 1
-                ));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                writer.WriteCompressedSignedInteger(
-                    BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
-                ));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteCompressedSignedInteger(
-                    BlobWriterImpl.MinSignedCompressedIntegerValue - 1
-                ));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                builder.WriteCompressedSignedInteger(
-                    BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    writer.WriteCompressedSignedInteger(
+                        BlobWriterImpl.MinSignedCompressedIntegerValue - 1
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    writer.WriteCompressedSignedInteger(
+                        BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    builder.WriteCompressedSignedInteger(
+                        BlobWriterImpl.MinSignedCompressedIntegerValue - 1
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    builder.WriteCompressedSignedInteger(
+                        BlobWriterImpl.MaxSignedCompressedIntegerValue + 1
+                    )
+            );
         }
 
         [Fact]

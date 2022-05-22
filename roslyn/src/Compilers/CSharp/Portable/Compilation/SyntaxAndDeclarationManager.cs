@@ -333,8 +333,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref DeclarationTable declTable
         )
         {
-            var lazyRoot = new Lazy<RootSingleNamespaceDeclaration>(() =>
-                DeclarationTreeBuilder.ForTree(tree, scriptClassName, isSubmission));
+            var lazyRoot = new Lazy<RootSingleNamespaceDeclaration>(
+                () => DeclarationTreeBuilder.ForTree(tree, scriptClassName, isSubmission)
+            );
             declMapBuilder.Add(tree, lazyRoot); // Callers are responsible for checking for existing entries.
             declTable = declTable.AddRootDeclaration(lazyRoot);
         }

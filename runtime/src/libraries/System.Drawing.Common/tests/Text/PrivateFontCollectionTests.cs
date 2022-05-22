@@ -146,13 +146,15 @@ namespace System.Drawing.Text.Tests
                 // Throws PathTooLongException on Desktop and FileNotFoundException elsewhere.
                 if (PlatformDetection.IsNetFramework)
                 {
-                    Assert.Throws<PathTooLongException>(() =>
-                        fontCollection.AddFontFile(new string('a', 261)));
+                    Assert.Throws<PathTooLongException>(
+                        () => fontCollection.AddFontFile(new string('a', 261))
+                    );
                 }
                 else
                 {
-                    Assert.Throws<FileNotFoundException>(() =>
-                        fontCollection.AddFontFile(new string('a', 261)));
+                    Assert.Throws<FileNotFoundException>(
+                        () => fontCollection.AddFontFile(new string('a', 261))
+                    );
                 }
             }
         }
@@ -162,8 +164,9 @@ namespace System.Drawing.Text.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<FileNotFoundException, ExternalException>(() =>
-                    fontCollection.AddFontFile(AppContext.BaseDirectory));
+                AssertExtensions.Throws<FileNotFoundException, ExternalException>(
+                    () => fontCollection.AddFontFile(AppContext.BaseDirectory)
+                );
             }
         }
 

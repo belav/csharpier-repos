@@ -221,24 +221,28 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void CountLongCount_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .Count(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ));
-            AssertThrows.Wrapped<DeliberateTestException>(() =>
-                ParallelEnumerable
-                    .Range(0, 1)
-                    .LongCount(
-                        x =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Count(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .LongCount(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
+                        )
+            );
         }
 
         [Fact]

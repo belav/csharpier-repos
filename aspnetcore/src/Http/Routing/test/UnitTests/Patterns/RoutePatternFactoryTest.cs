@@ -101,13 +101,15 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Pattern(
-                original.RawText,
-                defaults,
-                constraints,
-                original.PathSegments
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
         Assert.Equal(
@@ -158,13 +160,15 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Pattern(
-                original.RawText,
-                defaults,
-                constraints,
-                original.PathSegments
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
         Assert.Equal("An optional parameter cannot have default value.", ex.Message);
@@ -509,13 +513,15 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RoutePatternFactory.Pattern(
-                original.RawText,
-                defaults,
-                constraints,
-                original.PathSegments
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RoutePatternFactory.Pattern(
+                    original.RawText,
+                    defaults,
+                    constraints,
+                    original.PathSegments
+                )
+        );
 
         // Assert
         Assert.Equal(

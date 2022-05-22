@@ -110,12 +110,14 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act & Assert
-            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
-                ((IHttpControllerActivator)tracer).Create(
-                    request,
-                    controllerDescriptor: null,
-                    controllerType: mockController.Object.GetType()
-                ));
+            Exception thrown = Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((IHttpControllerActivator)tracer).Create(
+                        request,
+                        controllerDescriptor: null,
+                        controllerType: mockController.Object.GetType()
+                    )
+            );
 
             // Assert
             Assert.Equal<TraceRecord>(

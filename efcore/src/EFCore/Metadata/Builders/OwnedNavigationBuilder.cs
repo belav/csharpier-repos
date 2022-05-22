@@ -156,15 +156,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="propertyName">The name of the property to be configured.</param>
         /// <returns>An object that can be used to configure the property.</returns>
         public virtual PropertyBuilder Property(string propertyName) =>
-            UpdateBuilder(() =>
-                new PropertyBuilder(
-                    DependentEntityType.Builder
-                        .Property(
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                ));
+            UpdateBuilder(
+                () =>
+                    new PropertyBuilder(
+                        DependentEntityType.Builder
+                            .Property(
+                                Check.NotEmpty(propertyName, nameof(propertyName)),
+                                ConfigurationSource.Explicit
+                            )!
+                            .Metadata
+                    )
+            );
 
         /// <summary>
         ///     Returns an object that can be used to configure a property of the owned entity type.
@@ -181,16 +183,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="propertyName">The name of the property to be configured.</param>
         /// <returns>An object that can be used to configure the property.</returns>
         public virtual PropertyBuilder<TProperty> Property<TProperty>(string propertyName) =>
-            UpdateBuilder(() =>
-                new PropertyBuilder<TProperty>(
-                    DependentEntityType.Builder
-                        .Property(
-                            typeof(TProperty),
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                ));
+            UpdateBuilder(
+                () =>
+                    new PropertyBuilder<TProperty>(
+                        DependentEntityType.Builder
+                            .Property(
+                                typeof(TProperty),
+                                Check.NotEmpty(propertyName, nameof(propertyName)),
+                                ConfigurationSource.Explicit
+                            )!
+                            .Metadata
+                    )
+            );
 
         /// <summary>
         ///     Returns an object that can be used to configure a property of the owned entity type.

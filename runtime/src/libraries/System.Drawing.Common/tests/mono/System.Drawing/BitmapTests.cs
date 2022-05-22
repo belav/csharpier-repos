@@ -74,8 +74,9 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format8bppIndexed))
             {
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(() =>
-                    bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb));
+                Assert.Throws<ArgumentException>(
+                    () => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+                );
             }
         }
 
@@ -87,8 +88,15 @@ namespace MonoTests.System.Drawing
             {
                 BitmapData bd = new BitmapData();
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(() =>
-                    bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, bd));
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        bmp.LockBits(
+                            rect,
+                            ImageLockMode.ReadWrite,
+                            PixelFormat.Format8bppIndexed,
+                            bd
+                        )
+                );
 
                 // test to see if there's a leak or not in this case
                 Assert.Equal(IntPtr.Zero, bd.Scan0);
@@ -134,8 +142,9 @@ namespace MonoTests.System.Drawing
                 );
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb));
+                    Assert.Throws<InvalidOperationException>(
+                        () => bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb)
+                    );
                 }
                 finally
                 {
@@ -1653,8 +1662,9 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void SetResolution_NegativeInfinity()
         {
-            Assert.Throws<ArgumentException>(() =>
-                SetResolution(float.NegativeInfinity, float.NegativeInfinity));
+            Assert.Throws<ArgumentException>(
+                () => SetResolution(float.NegativeInfinity, float.NegativeInfinity)
+            );
         }
     }
 

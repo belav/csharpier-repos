@@ -503,8 +503,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var errorNumber = async
                             ? (
-                                await Assert.ThrowsAsync<SqlException>(() =>
-                                    creator.HasTablesAsyncBase())
+                                await Assert.ThrowsAsync<SqlException>(
+                                    () => creator.HasTablesAsyncBase()
+                                )
                             ).Number
                             : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
 

@@ -114,8 +114,9 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateInlineCategories_NullCategory_ThrowsArgumentNullException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                Formatter.CreateInlineCategoriesEntryPoint(null));
+            Assert.Throws<NullReferenceException>(
+                () => Formatter.CreateInlineCategoriesEntryPoint(null)
+            );
         }
 
         [Fact]
@@ -135,8 +136,9 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateReferencedCategories_NullCategory_ThrowsArgumentNullException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                Formatter.CreateReferencedCategoriesEntryPoint(null));
+            Assert.Throws<NullReferenceException>(
+                () => Formatter.CreateReferencedCategoriesEntryPoint(null)
+            );
         }
 
         [Fact]

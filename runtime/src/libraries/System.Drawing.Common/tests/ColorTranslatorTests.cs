@@ -216,8 +216,9 @@ namespace System.Drawing.Tests
                 new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
             )
             {
-                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(() =>
-                    ColorTranslator.FromHtml(htmlColor));
+                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => ColorTranslator.FromHtml(htmlColor)
+                );
                 if (exception is ArgumentException argumentException)
                     Assert.Equal("htmlColor", argumentException.ParamName);
             }

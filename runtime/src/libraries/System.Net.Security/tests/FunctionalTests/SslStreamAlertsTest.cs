@@ -55,10 +55,12 @@ namespace System.Net.Security.Tests
                     .ThrowsAsync<AuthenticationException>(() => serverAuth)
                     .WaitAsync(TestConfiguration.PassingTestTimeout);
 
-                await Assert.ThrowsAsync<AuthenticationException>(() =>
-                    server.WriteAsync(buffer, 0, buffer.Length));
-                await Assert.ThrowsAsync<AuthenticationException>(() =>
-                    server.ReadAsync(buffer, 0, buffer.Length));
+                await Assert.ThrowsAsync<AuthenticationException>(
+                    () => server.WriteAsync(buffer, 0, buffer.Length)
+                );
+                await Assert.ThrowsAsync<AuthenticationException>(
+                    () => server.ReadAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 
@@ -161,8 +163,9 @@ namespace System.Net.Security.Tests
                 Assert.False(client.CanWrite);
 
                 await Assert.ThrowsAsync<InvalidOperationException>(() => client.ShutdownAsync());
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    client.WriteAsync(buffer, 0, buffer.Length));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => client.WriteAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 

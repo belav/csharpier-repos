@@ -62,14 +62,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             var descriptors = await Client.GetPrerenderDescriptors(baseUri);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync(
-                    "StartCircuit",
-                    baseUri,
-                    baseUri + "/home",
-                    descriptors,
-                    null
-                ));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () =>
+                    Client.HubConnection.SendAsync(
+                        "StartCircuit",
+                        baseUri,
+                        baseUri + "/home",
+                        descriptors,
+                        null
+                    )
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -91,8 +93,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             var descriptors = await Client.GetPrerenderDescriptors(uri);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync("StartCircuit", null, null, descriptors, null));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () => Client.HubConnection.SendAsync("StartCircuit", null, null, descriptors, null)
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -148,8 +151,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Assert.Empty(Batches);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync("BeginInvokeDotNetFromJS", "", "", "", 0, ""));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () => Client.HubConnection.SendAsync("BeginInvokeDotNetFromJS", "", "", "", 0, "")
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -209,8 +213,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Assert.Empty(Batches);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync("DispatchBrowserEvent", "", ""));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () => Client.HubConnection.SendAsync("DispatchBrowserEvent", "", "")
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -238,8 +243,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Assert.Empty(Batches);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync("OnRenderCompleted", 5, null));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () => Client.HubConnection.SendAsync("OnRenderCompleted", 5, null)
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -267,8 +273,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             Assert.Empty(Batches);
 
             // Act
-            await Client.ExpectCircuitErrorAndDisconnect(() =>
-                Client.HubConnection.SendAsync("OnLocationChanged", baseUri.AbsoluteUri, false));
+            await Client.ExpectCircuitErrorAndDisconnect(
+                () =>
+                    Client.HubConnection.SendAsync("OnLocationChanged", baseUri.AbsoluteUri, false)
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -299,8 +307,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await ConnectAutomaticallyAndWait(baseUri);
 
             // Act
-            await Client.ExpectCircuitError(() =>
-                Client.HubConnection.SendAsync("OnLocationChanged", "http://example.com", false));
+            await Client.ExpectCircuitError(
+                () =>
+                    Client.HubConnection.SendAsync("OnLocationChanged", "http://example.com", false)
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -336,12 +346,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             );
 
             // Act
-            await Client.ExpectCircuitError(() =>
-                Client.HubConnection.SendAsync(
-                    "OnLocationChanged",
-                    new Uri(baseUri, "/test").AbsoluteUri,
-                    false
-                ));
+            await Client.ExpectCircuitError(
+                () =>
+                    Client.HubConnection.SendAsync(
+                        "OnLocationChanged",
+                        new Uri(baseUri, "/test").AbsoluteUri,
+                        false
+                    )
+            );
 
             // Assert
             var actualError = Assert.Single(Errors);
@@ -395,8 +407,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // a circuit that's gone.
             await Client.ExpectCircuitErrorAndDisconnect(async () =>
             {
-                await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                    await Client.ClickAsync(id, expectRenderBatch: false));
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await Client.ClickAsync(id, expectRenderBatch: false)
+                );
             });
 
             // Checking logs at the end to avoid race condition.
@@ -429,8 +442,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // a circuit that's gone.
             await Client.ExpectCircuitErrorAndDisconnect(async () =>
             {
-                await Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                    await Client.ClickAsync("dispose-throw", expectRenderBatch: false));
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await Client.ClickAsync("dispose-throw", expectRenderBatch: false)
+                );
             });
 
             // Checking logs at the end to avoid race condition.

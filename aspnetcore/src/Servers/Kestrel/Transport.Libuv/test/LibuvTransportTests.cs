@@ -174,8 +174,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             await transport.UnbindAsync();
             await transport.DisposeAsync();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                transport.AcceptAsync().AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => transport.AcceptAsync().AsTask()
+            );
         }
 
         [Fact]

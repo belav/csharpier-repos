@@ -17,13 +17,15 @@ namespace WebviewAppShared
 
         public ExampleJsInterop(IJSRuntime jsRuntime)
         {
-            moduleTask = new(() =>
-                jsRuntime
-                    .InvokeAsync<IJSObjectReference>(
-                        "import",
-                        "./_content/WebviewAppShared/exampleJsInterop.js"
-                    )
-                    .AsTask());
+            moduleTask = new(
+                () =>
+                    jsRuntime
+                        .InvokeAsync<IJSObjectReference>(
+                            "import",
+                            "./_content/WebviewAppShared/exampleJsInterop.js"
+                        )
+                        .AsTask()
+            );
         }
 
         public async ValueTask<string> Prompt(string message)

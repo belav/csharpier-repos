@@ -49,8 +49,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 GeneratedCodeAnalysisFlags.None
             )
         {
-            _lazySupportedCompilerErrorCodes = new Lazy<ImmutableHashSet<int>>(() =>
-                GetSupportedCompilerErrorCodes());
+            _lazySupportedCompilerErrorCodes = new Lazy<ImmutableHashSet<int>>(
+                () => GetSupportedCompilerErrorCodes()
+            );
         }
 
         protected abstract string CompilerErrorCodePrefix { get; }

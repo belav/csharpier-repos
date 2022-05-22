@@ -69,19 +69,21 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         ? syntaxContext.InferredTypes
                         : ImmutableArray<ITypeSymbol>.Empty;
 
-                    var getItemsTask = Task.Run(() =>
-                        ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsAsync(
-                            completionContext.Document,
-                            completionContext.Position,
-                            receiverTypeSymbol,
-                            namespaceInScope,
-                            inferredTypes,
-                            forceIndexCreation: isExpandedCompletion,
-                            hideAdvancedMembers: completionContext
-                                .CompletionOptions
-                                .HideAdvancedMembers,
-                            linkedTokenSource.Token
-                        ));
+                    var getItemsTask = Task.Run(
+                        () =>
+                            ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsAsync(
+                                completionContext.Document,
+                                completionContext.Position,
+                                receiverTypeSymbol,
+                                namespaceInScope,
+                                inferredTypes,
+                                forceIndexCreation: isExpandedCompletion,
+                                hideAdvancedMembers: completionContext
+                                    .CompletionOptions
+                                    .HideAdvancedMembers,
+                                linkedTokenSource.Token
+                            )
+                    );
 
                     var timeoutInMilliseconds = completionContext
                         .CompletionOptions

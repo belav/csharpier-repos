@@ -39,8 +39,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage("ArcticMonkeys", "ArcticMonkeys"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys")))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => AssertQuery(async, ss => ss.Set<Order>().Include("ArcticMonkeys"))
+                    )
                 ).Message
             );
         }
@@ -52,8 +53,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage("OrderDate", "OrderDate"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate)))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => AssertQuery(async, ss => ss.Set<Order>().Include(o => o.OrderDate))
+                    )
                 ).Message
             );
         }
@@ -65,11 +67,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .LogInvalidIncludePath(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage("CustomerID", "Customer.CustomerID"),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertQuery(
-                            async,
-                            ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
-                        ))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            AssertQuery(
+                                async,
+                                ss => ss.Set<Order>().Include(o => o.Customer.CustomerID)
+                            )
+                    )
                 ).Message
             );
         }
@@ -168,14 +172,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeOnNonEntity("\"Item1.Orders\""),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<Customer>()
-                                    .Select(c => new Tuple<Customer, int>(c, 5))
-                                    .Include(t => t.Item1.Orders)
-                        ))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            AssertQuery(
+                                async,
+                                ss =>
+                                    ss.Set<Customer>()
+                                        .Select(c => new Tuple<Customer, int>(c, 5))
+                                        .Include(t => t.Item1.Orders)
+                            )
+                    )
                 ).Message
             );
         }

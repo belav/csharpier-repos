@@ -125,8 +125,9 @@ namespace System.Threading.Tests
         public static void WaitAny_MaxHandles()
         {
             Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(64)));
-            Assert.Throws<NotSupportedException>(() =>
-                WaitHandle.WaitAny(CreateManualResetEvents(65)));
+            Assert.Throws<NotSupportedException>(
+                () => WaitHandle.WaitAny(CreateManualResetEvents(65))
+            );
         }
 
         [ConditionalFact(
@@ -145,8 +146,9 @@ namespace System.Threading.Tests
             Thread t = new Thread(() =>
             {
                 Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(63)));
-                Assert.Throws<NotSupportedException>(() =>
-                    WaitHandle.WaitAny(CreateManualResetEvents(64)));
+                Assert.Throws<NotSupportedException>(
+                    () => WaitHandle.WaitAny(CreateManualResetEvents(64))
+                );
             });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -465,8 +467,9 @@ namespace System.Threading.Tests
             else
             {
                 Assert.True(toSignal is Semaphore);
-                Assert.Throws<InvalidOperationException>(() =>
-                    callSignalAndWait(toSignal, toWaitOn));
+                Assert.Throws<InvalidOperationException>(
+                    () => callSignalAndWait(toSignal, toWaitOn)
+                );
                 Assert.True(toWaitOn.WaitOne(0));
             }
         }
@@ -482,19 +485,22 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentNullException>(() => WaitHandle.SignalAndWait(toSignal, null));
             Assert.False(toSignal.WaitOne(0));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                WaitHandle.SignalAndWait(toSignal, toWaitOn, -2, false));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => WaitHandle.SignalAndWait(toSignal, toWaitOn, -2, false)
+            );
             Assert.False(toSignal.WaitOne(0));
             Assert.True(WaitHandle.SignalAndWait(toSignal, toWaitOn, -1, false));
             Assert.True(toSignal.WaitOne(0));
             toSignal.Reset();
 
             var invalidWh = new TestWaitHandle();
-            Assert.Throws<ObjectDisposedException>(() =>
-                WaitHandle.SignalAndWait(invalidWh, toWaitOn));
+            Assert.Throws<ObjectDisposedException>(
+                () => WaitHandle.SignalAndWait(invalidWh, toWaitOn)
+            );
             Assert.False(toSignal.WaitOne(0));
-            Assert.Throws<ObjectDisposedException>(() =>
-                WaitHandle.SignalAndWait(toSignal, invalidWh));
+            Assert.Throws<ObjectDisposedException>(
+                () => WaitHandle.SignalAndWait(toSignal, invalidWh)
+            );
             Assert.False(toSignal.WaitOne(0));
         }
 

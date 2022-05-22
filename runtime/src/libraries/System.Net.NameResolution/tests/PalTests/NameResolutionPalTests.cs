@@ -552,13 +552,15 @@ namespace System.Net.NameResolution.PalTests
             const string hostName = "test.123";
 
             SocketException socketException = await Assert
-                .ThrowsAnyAsync<SocketException>(() =>
-                    NameResolutionPal.GetAddrInfoAsync(
-                        hostName,
-                        justAddresses,
-                        AddressFamily.Unspecified,
-                        CancellationToken.None
-                    ))
+                .ThrowsAnyAsync<SocketException>(
+                    () =>
+                        NameResolutionPal.GetAddrInfoAsync(
+                            hostName,
+                            justAddresses,
+                            AddressFamily.Unspecified,
+                            CancellationToken.None
+                        )
+                )
                 .ConfigureAwait(false);
             SocketError socketError = socketException.SocketErrorCode;
 

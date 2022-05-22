@@ -42,8 +42,9 @@ public class HttpConnectionFactoryTests
         );
 
         // We don't care about the specific exception
-        await Assert.ThrowsAnyAsync<Exception>(async () =>
-            await factory.ConnectAsync(new UriEndPoint(new Uri("http://example.com"))));
+        await Assert.ThrowsAnyAsync<Exception>(
+            async () => await factory.ConnectAsync(new UriEndPoint(new Uri("http://example.com")))
+        );
 
         // We care that the handler (and by extension the client) was disposed
         Assert.True(testHandler.Disposed);
@@ -59,8 +60,9 @@ public class HttpConnectionFactoryTests
             NullLoggerFactory.Instance
         );
 
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
-            await factory.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 0)));
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(
+            async () => await factory.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 0))
+        );
 
         Assert.Equal("The provided EndPoint must be of type UriEndPoint.", ex.Message);
     }
@@ -82,8 +84,9 @@ public class HttpConnectionFactoryTests
             NullLoggerFactory.Instance
         );
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await factory.ConnectAsync(new UriEndPoint(url2)));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await factory.ConnectAsync(new UriEndPoint(url2))
+        );
         Assert.Equal(
             "If HttpConnectionOptions.Url was set, it must match the UriEndPoint.Uri passed to ConnectAsync.",
             ex.Message

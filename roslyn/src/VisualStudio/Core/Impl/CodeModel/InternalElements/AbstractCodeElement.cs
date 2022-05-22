@@ -141,8 +141,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                var options = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                    GetDocument().GetOptionsAsync(CancellationToken.None));
+                var options = State.ThreadingContext.JoinableTaskFactory.Run(
+                    () => GetDocument().GetOptionsAsync(CancellationToken.None)
+                );
                 var point = CodeModelService.GetStartPoint(LookupNode(), options);
                 if (point == null)
                 {
@@ -157,8 +158,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                var options = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                    GetDocument().GetOptionsAsync(CancellationToken.None));
+                var options = State.ThreadingContext.JoinableTaskFactory.Run(
+                    () => GetDocument().GetOptionsAsync(CancellationToken.None)
+                );
                 var point = CodeModelService.GetEndPoint(LookupNode(), options);
                 if (point == null)
                 {
@@ -171,8 +173,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public virtual EnvDTE.TextPoint GetStartPoint(EnvDTE.vsCMPart part)
         {
-            var options = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                GetDocument().GetOptionsAsync(CancellationToken.None));
+            var options = State.ThreadingContext.JoinableTaskFactory.Run(
+                () => GetDocument().GetOptionsAsync(CancellationToken.None)
+            );
             var point = CodeModelService.GetStartPoint(LookupNode(), options, part);
             if (point == null)
             {
@@ -184,8 +187,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public virtual EnvDTE.TextPoint GetEndPoint(EnvDTE.vsCMPart part)
         {
-            var options = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                GetDocument().GetOptionsAsync(CancellationToken.None));
+            var options = State.ThreadingContext.JoinableTaskFactory.Run(
+                () => GetDocument().GetOptionsAsync(CancellationToken.None)
+            );
             var point = CodeModelService.GetEndPoint(LookupNode(), options, part);
             if (point == null)
             {

@@ -673,8 +673,9 @@ namespace System.Text.Tests
                 // at that time we shouldn't expect exceptions when creating the following encodings.
                 foreach (object[] mapping in CodePageInfo())
                 {
-                    Assert.Throws<NotSupportedException>(() =>
-                        Encoding.GetEncoding((int)mapping[0]));
+                    Assert.Throws<NotSupportedException>(
+                        () => Encoding.GetEncoding((int)mapping[0])
+                    );
                     AssertExtensions.Throws<ArgumentException>(
                         "name",
                         () => Encoding.GetEncoding((string)mapping[2])

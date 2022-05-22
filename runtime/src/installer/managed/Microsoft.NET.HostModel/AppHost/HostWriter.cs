@@ -267,13 +267,15 @@ namespace Microsoft.NET.HostModel.AppHost
             };
 
             // Re-write the destination apphost with the proper contents.
-            RetryUtil.RetryOnIOError(() =>
-                BinaryUtils.SearchAndReplace(
-                    appHostPath,
-                    bundleHeaderPlaceholder,
-                    BitConverter.GetBytes(bundleHeaderOffset),
-                    pad0s: false
-                ));
+            RetryUtil.RetryOnIOError(
+                () =>
+                    BinaryUtils.SearchAndReplace(
+                        appHostPath,
+                        bundleHeaderPlaceholder,
+                        BitConverter.GetBytes(bundleHeaderOffset),
+                        pad0s: false
+                    )
+            );
 
             RetryUtil.RetryOnIOError(() => MachOUtils.AdjustHeadersForBundle(appHostPath));
 

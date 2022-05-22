@@ -5805,10 +5805,12 @@ ORDER BY [c].[CustomerID]"
         [ConditionalFact]
         public async Task Single_Predicate_Cancellation()
         {
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-                await Single_Predicate_Cancellation_test(
-                    Fixture.TestSqlLoggerFactory.CancelQuery()
-                ));
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                async () =>
+                    await Single_Predicate_Cancellation_test(
+                        Fixture.TestSqlLoggerFactory.CancelQuery()
+                    )
+            );
         }
 
         [ConditionalFact]
@@ -5858,8 +5860,9 @@ ORDER BY [c].[CustomerID]"
                 task = context.Customers;
             }
 
-            return Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                task.SingleAsync(c => c.CustomerID == "ALFKI"));
+            return Assert.ThrowsAsync<ObjectDisposedException>(
+                () => task.SingleAsync(c => c.CustomerID == "ALFKI")
+            );
         }
 
         [ConditionalFact]

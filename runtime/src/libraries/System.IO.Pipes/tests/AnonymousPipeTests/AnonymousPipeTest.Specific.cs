@@ -293,10 +293,12 @@ namespace System.IO.Pipes.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(() =>
-                    server.ReadMode = PipeTransmissionMode.Message);
-                Assert.Throws<NotSupportedException>(() =>
-                    client.ReadMode = PipeTransmissionMode.Message);
+                Assert.Throws<NotSupportedException>(
+                    () => server.ReadMode = PipeTransmissionMode.Message
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => client.ReadMode = PipeTransmissionMode.Message
+                );
             }
         }
 
@@ -313,10 +315,12 @@ namespace System.IO.Pipes.Tests
                 )
             )
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    server.ReadMode = (PipeTransmissionMode)999);
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    client.ReadMode = (PipeTransmissionMode)999);
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => server.ReadMode = (PipeTransmissionMode)999
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => client.ReadMode = (PipeTransmissionMode)999
+                );
             }
         }
     }

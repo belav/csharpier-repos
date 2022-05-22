@@ -37,8 +37,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Assert.Equal(
                 CoreStrings.CannotMaterializeAbstractType(nameof(SomeAbstractEntity)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        source.CreateMaterializeExpression((IEntityType)entityType, "", null!))
+                    .Throws<InvalidOperationException>(
+                        () => source.CreateMaterializeExpression((IEntityType)entityType, "", null!)
+                    )
                     .Message
             );
         }

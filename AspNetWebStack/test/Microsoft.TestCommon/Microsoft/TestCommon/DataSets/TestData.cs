@@ -199,47 +199,52 @@ namespace Microsoft.TestCommon
         /// <summary>
         /// Expected permutations of non supported file paths.
         /// </summary>
-        public static readonly TestData<string> NotSupportedFilePaths =
-            new RefTypeTestData<string>(() => new List<string>() { "cc:\\a\\b", });
+        public static readonly TestData<string> NotSupportedFilePaths = new RefTypeTestData<string>(
+            () => new List<string>() { "cc:\\a\\b", }
+        );
 
         /// <summary>
         /// Expected permutations of invalid file paths.
         /// </summary>
         public static readonly TestData<string> InvalidNonNullFilePaths =
-            new RefTypeTestData<string>(() =>
-                new List<string>()
-                {
-                    String.Empty,
-                    "",
-                    " ",
-                    "  ",
-                    "\t\t \n ",
-                    "c:\\a<b",
-                    "c:\\a>b",
-                    "c:\\a\"b",
-                    "c:\\a\tb",
-                    "c:\\a|b",
-                    "c:\\a\bb",
-                    "c:\\a\0b",
-                });
+            new RefTypeTestData<string>(
+                () =>
+                    new List<string>()
+                    {
+                        String.Empty,
+                        "",
+                        " ",
+                        "  ",
+                        "\t\t \n ",
+                        "c:\\a<b",
+                        "c:\\a>b",
+                        "c:\\a\"b",
+                        "c:\\a\tb",
+                        "c:\\a|b",
+                        "c:\\a\bb",
+                        "c:\\a\0b",
+                    }
+            );
 
         /// <summary>
         /// All expected permutations of an empty string.
         /// </summary>
-        public static readonly TestData<string> NonNullEmptyStrings =
-            new RefTypeTestData<string>(() => new List<string>() { String.Empty, " ", "\t\r\n" });
+        public static readonly TestData<string> NonNullEmptyStrings = new RefTypeTestData<string>(
+            () => new List<string>() { String.Empty, " ", "\t\r\n" }
+        );
 
         /// <summary>
         /// All expected permutations of an empty string.
         /// </summary>
-        public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(() =>
-            new List<string>() { null, String.Empty, " ", "\t\r\n" });
+        public static readonly TestData<string> EmptyStrings = new RefTypeTestData<string>(
+            () => new List<string>() { null, String.Empty, " ", "\t\r\n" }
+        );
 
         /// <summary>
         ///  Common <see cref="TestData"/> for a <see cref="string"/>.
         /// </summary>
-        public static readonly RefTypeTestData<string> StringTestData =
-            new RefTypeTestData<string>(() =>
+        public static readonly RefTypeTestData<string> StringTestData = new RefTypeTestData<string>(
+            () =>
                 new List<string>()
                 {
                     "",
@@ -248,7 +253,8 @@ namespace Microsoft.TestCommon
                     " data ", // leading and trailing whitespace
                     "\t\t \n ",
                     "Some String!"
-                });
+                }
+        );
 
         /// <summary>
         ///  Common <see cref="TestData"/> for a class that implements <see cref="ISerializable"/>.

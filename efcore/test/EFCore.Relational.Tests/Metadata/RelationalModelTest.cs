@@ -25,8 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(
                 CoreStrings.ModelNotFinalized("GetRelationalModel"),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ((IModel)modelBuilder.Model).GetRelationalModel())
+                    .Throws<InvalidOperationException>(
+                        () => ((IModel)modelBuilder.Model).GetRelationalModel()
+                    )
                     .Message
             );
         }
@@ -499,8 +500,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ordersTable.GetReferencingRowInternalForeignKeys(specialCustomerType))
+                    .Throws<InvalidOperationException>(
+                        () => ordersTable.GetReferencingRowInternalForeignKeys(specialCustomerType)
+                    )
                     .Message
             );
             Assert.Equal(
@@ -509,8 +511,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ordersTable.GetRowInternalForeignKeys(specialCustomerType))
+                    .Throws<InvalidOperationException>(
+                        () => ordersTable.GetRowInternalForeignKeys(specialCustomerType)
+                    )
                     .Message
             );
             Assert.False(ordersTable.IsOptional(orderType));
@@ -521,8 +524,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     ordersTable.Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        ordersTable.IsOptional(specialCustomerType))
+                    .Throws<InvalidOperationException>(
+                        () => ordersTable.IsOptional(specialCustomerType)
+                    )
                     .Message
             );
             Assert.Empty(orderDetailsOwnership.GetMappedConstraints());
@@ -646,13 +650,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "Customer"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            specialityProperty.IsColumnNullable(
-                                StoreObjectIdentifier.Table(
-                                    customerTable.Name,
-                                    customerTable.Schema
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                specialityProperty.IsColumnNullable(
+                                    StoreObjectIdentifier.Table(
+                                        customerTable.Name,
+                                        customerTable.Schema
+                                    )
                                 )
-                            ))
+                        )
                         .Message
                 );
 

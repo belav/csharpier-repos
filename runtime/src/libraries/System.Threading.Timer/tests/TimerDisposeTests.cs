@@ -153,8 +153,9 @@ namespace System.Threading.Tests
                 var mre = new ManualResetEvent(false);
                 b.SignalAndWait();
                 t.Dispose(mre);
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await t.DisposeAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await t.DisposeAsync()
+                );
                 b.SignalAndWait();
                 mre.WaitOne();
 

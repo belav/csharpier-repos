@@ -108,12 +108,15 @@ namespace System.Xml.Tests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<root />");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.GetElementsByTagName(null, "MyNamespace"));
-            Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.GetElementsByTagName("product", null));
-            Assert.Throws<ArgumentNullException>(() =>
-                xmlDocument.GetElementsByTagName(null, null));
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName(null, "MyNamespace")
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName("product", null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.GetElementsByTagName(null, null)
+            );
         }
 
         #region Helper verify methods

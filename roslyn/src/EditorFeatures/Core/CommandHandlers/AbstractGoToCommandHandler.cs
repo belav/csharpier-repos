@@ -109,13 +109,15 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     )
                 )
                 {
-                    messageToShow = _threadingContext.JoinableTaskFactory.Run(() =>
-                        NavigateToOrPresentResultsAsync(
-                            document,
-                            caretPosition,
-                            service,
-                            userCancellationToken
-                        ));
+                    messageToShow = _threadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            NavigateToOrPresentResultsAsync(
+                                document,
+                                caretPosition,
+                                service,
+                                userCancellationToken
+                            )
+                    );
                 }
 
                 if (messageToShow != null)

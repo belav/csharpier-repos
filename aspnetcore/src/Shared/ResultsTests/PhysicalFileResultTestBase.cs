@@ -433,8 +433,9 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
-            ExecuteAsync(httpContext, path, "text/plain"));
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(
+            () => ExecuteAsync(httpContext, path, "text/plain")
+        );
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);
@@ -457,8 +458,9 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
-            ExecuteAsync(httpContext, path, "text/plain"));
+        Assert.ThrowsAsync<DirectoryNotFoundException>(
+            () => ExecuteAsync(httpContext, path, "text/plain")
+        );
     }
 
     [Theory]
@@ -470,8 +472,9 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<FileNotFoundException>(() =>
-            ExecuteAsync(httpContext, path, "text/plain"));
+        Assert.ThrowsAsync<FileNotFoundException>(
+            () => ExecuteAsync(httpContext, path, "text/plain")
+        );
     }
 
     private class TestSendFileFeature : IHttpResponseBodyFeature

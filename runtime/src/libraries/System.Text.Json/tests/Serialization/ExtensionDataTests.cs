@@ -168,8 +168,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string BadJson = @"{""Good"":""OK"",""Bad"":!}";
 
-            JsonException jsonException = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyAsObject>(BadJson));
+            JsonException jsonException = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithExtensionPropertyAsObject>(BadJson)
+            );
             Assert.Contains(
                 "Path: $.Bad | LineNumber: 0 | BytePositionInLine: 19.",
                 jsonException.ToString()
@@ -321,10 +322,12 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializer.Deserialize<ClassWithExtensionProperty>(@"{}");
             JsonSerializer.Deserialize<ClassWithExtensionPropertyAsObject>(@"{}");
 
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithInvalidExtensionProperty>(@"{}"));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithTwoExtensionProperties>(@"{}"));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithInvalidExtensionProperty>(@"{}")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithTwoExtensionProperties>(@"{}")
+            );
         }
 
         private class ClassWithIgnoredData
@@ -1234,30 +1237,42 @@ namespace System.Text.Json.Serialization.Tests
                 @"{}"
             );
 
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyAsImmutable>(
-                    "{\"hello\":\"world\"}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyAsImmutableJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyPrivateConstructor>(
-                    "{\"hello\":\"world\"}"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyPrivateConstructorJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyCustomIImmutable>(
-                    "{\"hello\":\"world\"}"
-                ));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionPropertyCustomIImmutableJsonElement>(
-                    "{\"hello\":\"world\"}"
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyAsImmutable>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyAsImmutableJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyPrivateConstructor>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyPrivateConstructorJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyCustomIImmutable>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithExtensionPropertyCustomIImmutableJsonElement>(
+                        "{\"hello\":\"world\"}"
+                    )
+            );
         }
 
         [Fact]

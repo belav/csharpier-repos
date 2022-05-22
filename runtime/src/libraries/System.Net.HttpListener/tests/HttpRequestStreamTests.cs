@@ -509,8 +509,9 @@ namespace System.Net.Tests
                     Assert.Throws<NotSupportedException>(() => inputStream.Position);
                     Assert.Throws<NotSupportedException>(() => inputStream.Position = 1);
 
-                    Assert.Throws<NotSupportedException>(() =>
-                        inputStream.Seek(0, SeekOrigin.Begin));
+                    Assert.Throws<NotSupportedException>(
+                        () => inputStream.Seek(0, SeekOrigin.Begin)
+                    );
                 }
 
                 context.Response.Close();
@@ -560,10 +561,12 @@ namespace System.Net.Tests
                 {
                     Assert.False(inputStream.CanWrite);
 
-                    Assert.Throws<InvalidOperationException>(() =>
-                        inputStream.Write(new byte[0], 0, 0));
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        inputStream.WriteAsync(new byte[0], 0, 0));
+                    Assert.Throws<InvalidOperationException>(
+                        () => inputStream.Write(new byte[0], 0, 0)
+                    );
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => inputStream.WriteAsync(new byte[0], 0, 0)
+                    );
                     Assert.Throws<InvalidOperationException>(() => inputStream.EndWrite(null));
 
                     // Flushing the output stream is a no-op.
@@ -637,10 +640,12 @@ namespace System.Net.Tests
 
                 using (Stream inputStream = request.InputStream)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        inputStream.Read(new byte[2], offset, 0));
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                        inputStream.ReadAsync(new byte[2], offset, 0));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => inputStream.Read(new byte[2], offset, 0)
+                    );
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                        () => inputStream.ReadAsync(new byte[2], offset, 0)
+                    );
                 }
 
                 context.Response.Close();
@@ -675,10 +680,12 @@ namespace System.Net.Tests
 
                 using (Stream inputStream = request.InputStream)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        inputStream.Read(new byte[2], offset, size));
-                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-                        inputStream.ReadAsync(new byte[2], offset, size));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => inputStream.Read(new byte[2], offset, size)
+                    );
+                    await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                        () => inputStream.ReadAsync(new byte[2], offset, size)
+                    );
                 }
 
                 context.Response.Close();
@@ -798,8 +805,9 @@ namespace System.Net.Tests
                     );
                     inputStream.EndRead(beginReadResult);
 
-                    Assert.Throws<InvalidOperationException>(() =>
-                        inputStream.EndRead(beginReadResult));
+                    Assert.Throws<InvalidOperationException>(
+                        () => inputStream.EndRead(beginReadResult)
+                    );
                 }
 
                 context.Response.Close();
@@ -828,10 +836,12 @@ namespace System.Net.Tests
 
                 // Reading from a closed connection should fail.
                 byte[] buffer = new byte[expected.Length];
-                await Assert.ThrowsAsync<HttpListenerException>(() =>
-                    context.Request.InputStream.ReadAsync(buffer, 0, buffer.Length));
-                await Assert.ThrowsAsync<HttpListenerException>(() =>
-                    context.Request.InputStream.ReadAsync(buffer, 0, buffer.Length));
+                await Assert.ThrowsAsync<HttpListenerException>(
+                    () => context.Request.InputStream.ReadAsync(buffer, 0, buffer.Length)
+                );
+                await Assert.ThrowsAsync<HttpListenerException>(
+                    () => context.Request.InputStream.ReadAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 
@@ -856,10 +866,12 @@ namespace System.Net.Tests
 
                 // Reading from a closed connection should fail.
                 byte[] buffer = new byte[expected.Length];
-                Assert.Throws<HttpListenerException>(() =>
-                    context.Request.InputStream.Read(buffer, 0, buffer.Length));
-                Assert.Throws<HttpListenerException>(() =>
-                    context.Request.InputStream.Read(buffer, 0, buffer.Length));
+                Assert.Throws<HttpListenerException>(
+                    () => context.Request.InputStream.Read(buffer, 0, buffer.Length)
+                );
+                Assert.Throws<HttpListenerException>(
+                    () => context.Request.InputStream.Read(buffer, 0, buffer.Length)
+                );
             }
         }
     }

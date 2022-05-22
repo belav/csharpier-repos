@@ -335,12 +335,14 @@ namespace System.Data.Tests
             DataTable newdt = new DataTable();
 
             // DataTable does not support schema inference from Xml.
-            Assert.Throws<InvalidOperationException>(() =>
-                newdt.ReadXml(new StringReader(xmlDTNone)));
+            Assert.Throws<InvalidOperationException>(
+                () => newdt.ReadXml(new StringReader(xmlDTNone))
+            );
 
             // DataTable does not support schema inference from Xml.
-            Assert.Throws<InvalidOperationException>(() =>
-                newdt.ReadXml(new StringReader(xmlDTDiffGram)));
+            Assert.Throws<InvalidOperationException>(
+                () => newdt.ReadXml(new StringReader(xmlDTDiffGram))
+            );
 
             DataTable multiTable = new DataTable();
             multiTable.ReadXml(new StringReader(xmlMultiTable));

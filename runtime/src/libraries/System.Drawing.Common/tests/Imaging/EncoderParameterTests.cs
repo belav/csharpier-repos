@@ -393,8 +393,15 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_Encoder_NumberOfValues_NotExistingType_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                new EncoderParameter(s_anyEncoder, 1, (EncoderParameterValueType)999, IntPtr.Zero));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    new EncoderParameter(
+                        s_anyEncoder,
+                        1,
+                        (EncoderParameterValueType)999,
+                        IntPtr.Zero
+                    )
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -504,15 +511,17 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_Encoder_NullString_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(s_anyEncoder, (string)null));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(s_anyEncoder, (string)null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_Encoder_ByteArray_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(s_anyEncoder, (byte[])null));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(s_anyEncoder, (byte[])null)
+            );
         }
 
         public static IEnumerable<object[]> EncoderParameterCtor_NullEncoder_TestData
@@ -577,22 +586,28 @@ namespace System.Drawing.Imaging.Tests
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, (byte)0));
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, (byte)0, false));
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, (short)0));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, numerator: 0, denominator: 0));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, rangebegin: 0, rangeend: 0));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, numerator: 0, denominator: 0)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, rangebegin: 0, rangeend: 0)
+            );
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, 0, 0, 0, 0));
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, "anyString"));
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, new byte[] { }));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, new byte[] { }, false));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, new short[] { }));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, new byte[] { }, false)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, new short[] { })
+            );
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, new long[] { }));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, new int[] { }, new int[] { }));
-            Assert.Throws<NullReferenceException>(() =>
-                new EncoderParameter(null, new long[] { }, new long[] { }));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, new int[] { }, new int[] { })
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, new long[] { }, new long[] { })
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -650,8 +665,9 @@ namespace System.Drawing.Imaging.Tests
 
             IntPtr anyValue = IntPtr.Zero;
             EncoderParameterValueType anyTypw = EncoderParameterValueType.ValueTypeAscii;
-            Assert.Throws<OutOfMemoryException>(() =>
-                new EncoderParameter(s_anyEncoder, numberOfValues, anyTypw, anyValue));
+            Assert.Throws<OutOfMemoryException>(
+                () => new EncoderParameter(s_anyEncoder, numberOfValues, anyTypw, anyValue)
+            );
         }
     }
 }

@@ -203,8 +203,9 @@ namespace System.Reflection.Tests
             }
             else
             {
-                Assert.Throws<FileNotFoundException>(() =>
-                    asm.GetFile("System.Reflection.Tests.dll"));
+                Assert.Throws<FileNotFoundException>(
+                    () => asm.GetFile("System.Reflection.Tests.dll")
+                );
             }
         }
 
@@ -301,10 +302,12 @@ namespace System.Reflection.Tests
         public void GetType_DoesntSearchMscorlib()
         {
             Assembly a = typeof(AssemblyTests).Assembly;
-            Assert.Throws<TypeLoadException>(() =>
-                a.GetType("System.Object", throwOnError: true, ignoreCase: false));
-            Assert.Throws<TypeLoadException>(() =>
-                a.GetType("G`1[[System.Object]]", throwOnError: true, ignoreCase: false));
+            Assert.Throws<TypeLoadException>(
+                () => a.GetType("System.Object", throwOnError: true, ignoreCase: false)
+            );
+            Assert.Throws<TypeLoadException>(
+                () => a.GetType("G`1[[System.Object]]", throwOnError: true, ignoreCase: false)
+            );
         }
 
         [Fact]
@@ -391,8 +394,9 @@ namespace System.Reflection.Tests
         public void Load_Invalid()
         {
             Assert.Throws<ArgumentNullException>(() => Assembly.Load((AssemblyName)null)); // AssemblyRef is null
-            Assert.Throws<FileNotFoundException>(() =>
-                Assembly.Load(new AssemblyName("no such assembly"))); // No such assembly
+            Assert.Throws<FileNotFoundException>(
+                () => Assembly.Load(new AssemblyName("no such assembly"))
+            ); // No such assembly
         }
 
         [Fact]
@@ -494,12 +498,14 @@ namespace System.Reflection.Tests
         [Fact]
         public void LoadFromUsingHashValue()
         {
-            Assert.Throws<NotSupportedException>(() =>
-                Assembly.LoadFrom(
-                    "abc",
-                    null,
-                    System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    Assembly.LoadFrom(
+                        "abc",
+                        null,
+                        System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1
+                    )
+            );
         }
 
         [Fact]
@@ -565,12 +571,14 @@ namespace System.Reflection.Tests
         [Fact]
         public void LoadFrom_WithHashValue_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() =>
-                Assembly.LoadFrom(
-                    DestTestAssemblyPath,
-                    new byte[0],
-                    Configuration.Assemblies.AssemblyHashAlgorithm.None
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    Assembly.LoadFrom(
+                        DestTestAssemblyPath,
+                        new byte[0],
+                        Configuration.Assemblies.AssemblyHashAlgorithm.None
+                    )
+            );
         }
 
         [Fact]
@@ -908,14 +916,17 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetSatelliteAssemblyNeg()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                (typeof(AssemblyTests).Assembly.GetSatelliteAssembly(null)));
-            Assert.Throws<System.IO.FileNotFoundException>(() =>
-                (
-                    typeof(AssemblyTests).Assembly.GetSatelliteAssembly(
-                        CultureInfo.InvariantCulture
+            Assert.Throws<ArgumentNullException>(
+                () => (typeof(AssemblyTests).Assembly.GetSatelliteAssembly(null))
+            );
+            Assert.Throws<System.IO.FileNotFoundException>(
+                () =>
+                    (
+                        typeof(AssemblyTests).Assembly.GetSatelliteAssembly(
+                            CultureInfo.InvariantCulture
+                        )
                     )
-                ));
+            );
         }
 
         [Fact]
@@ -1003,8 +1014,9 @@ namespace System.Reflection.Tests
         public void AssemblyReflectionOnlyLoadFromString()
         {
             AssemblyName an = typeof(AssemblyTests).Assembly.GetName();
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Assembly.ReflectionOnlyLoad(an.FullName));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Assembly.ReflectionOnlyLoad(an.FullName)
+            );
         }
 
         [Fact]
@@ -1020,12 +1032,15 @@ namespace System.Reflection.Tests
         [Fact]
         public void AssemblyReflectionOnlyLoadFromNeg()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Assembly.ReflectionOnlyLoad((string)null));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Assembly.ReflectionOnlyLoad(string.Empty));
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Assembly.ReflectionOnlyLoad((byte[])null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Assembly.ReflectionOnlyLoad((string)null)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Assembly.ReflectionOnlyLoad(string.Empty)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Assembly.ReflectionOnlyLoad((byte[])null)
+            );
         }
 #pragma warning restore SYSLIB0018
 
@@ -1106,8 +1121,9 @@ namespace System.Reflection.Tests
         public static void AssemblyGetForwardedTypesLoadFailure()
         {
             Assembly a = typeof(TypeInForwardedAssembly).Assembly;
-            ReflectionTypeLoadException rle = Assert.Throws<ReflectionTypeLoadException>(() =>
-                a.GetForwardedTypes());
+            ReflectionTypeLoadException rle = Assert.Throws<ReflectionTypeLoadException>(
+                () => a.GetForwardedTypes()
+            );
             Assert.Equal(2, rle.Types.Length);
             Assert.Equal(2, rle.LoaderExceptions.Length);
 

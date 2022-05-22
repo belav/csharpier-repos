@@ -69,8 +69,9 @@ namespace System.Diagnostics.Tests
             {
                 EventLog.CreateEventSource(firstSource, firstLog);
                 Assert.True(EventLog.SourceExists(firstSource));
-                Assert.Throws<ArgumentException>(() =>
-                    EventLog.CreateEventSource(secondSource, secondLog));
+                Assert.Throws<ArgumentException>(
+                    () => EventLog.CreateEventSource(secondSource, secondLog)
+                );
             }
             finally
             {
@@ -99,8 +100,9 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
         public void DeleteUnregisteredSource()
         {
-            Assert.Throws<ArgumentException>(() =>
-                EventLog.DeleteEventSource(Guid.NewGuid().ToString("N")));
+            Assert.Throws<ArgumentException>(
+                () => EventLog.DeleteEventSource(Guid.NewGuid().ToString("N"))
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]

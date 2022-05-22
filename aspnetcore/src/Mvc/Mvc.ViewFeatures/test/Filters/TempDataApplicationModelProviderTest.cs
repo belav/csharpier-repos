@@ -43,8 +43,9 @@ public class TempDataApplicationModelProviderTest
         var context = GetContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -62,8 +63,9 @@ public class TempDataApplicationModelProviderTest
         var context = GetContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 

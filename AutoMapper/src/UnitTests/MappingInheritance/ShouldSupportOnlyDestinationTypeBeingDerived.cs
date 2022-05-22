@@ -60,10 +60,12 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Should_detect_unrelated_override()
         {
-            new Action(() =>
-                new MapperConfiguration(
-                    c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
-                )).ShouldThrowException<ArgumentOutOfRangeException>(
+            new Action(
+                () =>
+                    new MapperConfiguration(
+                        c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
+                    )
+            ).ShouldThrowException<ArgumentOutOfRangeException>(
                 ex =>
                 {
                     ex.Message.ShouldStartWith(

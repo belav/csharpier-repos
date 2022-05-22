@@ -16,10 +16,12 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void Factory_NullArgs_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                JavaScriptEncoder.Create((TextEncoderSettings)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                JavaScriptEncoder.Create((UnicodeRange)null));
+            Assert.Throws<ArgumentNullException>(
+                () => JavaScriptEncoder.Create((TextEncoderSettings)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => JavaScriptEncoder.Create((UnicodeRange)null)
+            );
         }
 
         [Theory]

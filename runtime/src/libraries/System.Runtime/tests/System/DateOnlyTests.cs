@@ -93,8 +93,9 @@ namespace System.Tests
             Assert.Equal(dayNumber, dateOnly.DayNumber);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => DateOnly.FromDayNumber(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1)
+            );
         }
 
         [Fact]
@@ -357,8 +358,14 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(() =>
-                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.AdjustToUniversal
+                    )
+            );
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -367,8 +374,9 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(() =>
-                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal));
+            Assert.Throws<ArgumentException>(
+                () => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
+            );
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -377,8 +385,10 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(() =>
-                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+            );
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -387,12 +397,14 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(() =>
-                DateOnly.Parse(
-                    s,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.NoCurrentDateDefault
-                ));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.NoCurrentDateDefault
+                    )
+            );
 
             s = "     " + s + "     ";
             parsedDateOnly = DateOnly.Parse(

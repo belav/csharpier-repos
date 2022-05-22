@@ -191,8 +191,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     "CoreEventId.DuplicateDependentEntityTypeInstanceWarning"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(principal).Reference(p => p.Child2).TargetEntry)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(principal).Reference(p => p.Child2).TargetEntry
+                    )
                     .Message
             );
         }
@@ -2617,8 +2618,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -2723,8 +2725,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -2863,8 +2866,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3009,8 +3013,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3130,8 +3135,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "ParentPN.Child1#ChildPN"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3278,8 +3284,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.Child1#Child"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3467,8 +3474,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "ParentPN.ChildCollection1#ChildPN"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3672,8 +3680,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection1#Child"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
             }
@@ -3940,8 +3949,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.Child2#Child"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
                 return;
@@ -4221,8 +4231,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
                 return;
@@ -4894,8 +4905,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.DetectChanges())
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
                         .Message
                 );
                 return;

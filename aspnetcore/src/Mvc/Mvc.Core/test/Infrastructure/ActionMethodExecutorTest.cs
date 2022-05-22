@@ -341,13 +341,15 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            actionMethodExecutor.Execute(
-                mapper,
-                objectMethodExecutor,
-                controller,
-                Array.Empty<object>()
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                actionMethodExecutor.Execute(
+                    mapper,
+                    objectMethodExecutor,
+                    controller,
+                    Array.Empty<object>()
+                )
+        );
 
         Assert.Equal(
             $"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.",

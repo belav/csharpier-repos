@@ -183,8 +183,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() =>
-                dictionary.Add(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Add(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -204,8 +205,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() =>
-                dictionary.Contains(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Contains(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -215,8 +217,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() =>
-                dictionary.CopyTo(new KeyValuePair<int, int>[1], 1));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.CopyTo(new KeyValuePair<int, int>[1], 1)
+            );
         }
 
         [Fact]
@@ -246,8 +249,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() =>
-                dictionary.Remove(new KeyValuePair<int, int>(0, 0)));
+            Assert.Throws<NotImplementedException>(
+                () => dictionary.Remove(new KeyValuePair<int, int>(0, 0))
+            );
         }
 
         [Fact]
@@ -257,8 +261,9 @@ namespace System.Collections.Concurrent
             ConcurrentDictionary<int, int> dictionary = new ConcurrentDictionary<int, int>();
 
             // Act/Assert
-            Assert.Throws<NotImplementedException>(() =>
-                ((System.Collections.IEnumerable)dictionary).GetEnumerator());
+            Assert.Throws<NotImplementedException>(
+                () => ((System.Collections.IEnumerable)dictionary).GetEnumerator()
+            );
         }
 
         [Fact]

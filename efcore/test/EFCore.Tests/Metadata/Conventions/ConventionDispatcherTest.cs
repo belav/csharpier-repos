@@ -31,12 +31,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 CoreStrings.ConventionsInfiniteLoop,
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        entityBuilder.Property(
-                            typeof(int),
-                            shadowPropertyName,
-                            ConfigurationSource.Convention
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            entityBuilder.Property(
+                                typeof(int),
+                                shadowPropertyName,
+                                ConfigurationSource.Convention
+                            )
+                    )
                     .Message
             );
         }

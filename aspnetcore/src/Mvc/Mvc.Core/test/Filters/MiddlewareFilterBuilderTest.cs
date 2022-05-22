@@ -110,8 +110,9 @@ public class MiddlewareFilterBuilderTest
 
         // Assert
         Assert.NotNull(pipeline);
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            pipeline(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
         Assert.Equal(
             "Could not find 'IMiddlewareFilterFeature' in the feature list.",
             exception.Message
@@ -244,8 +245,9 @@ public class MiddlewareFilterBuilderTest
         // Assert
         Assert.NotNull(pipeline);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            pipeline(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
         Assert.Null(exception.InnerException);
         Assert.Equal("Error!!!", exception.Message);
 
@@ -324,8 +326,9 @@ public class MiddlewareFilterBuilderTest
         // Assert
         Assert.NotNull(pipeline);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            pipeline(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
         Assert.Null(exception.InnerException);
         Assert.Equal("Error!!!", exception.Message);
 

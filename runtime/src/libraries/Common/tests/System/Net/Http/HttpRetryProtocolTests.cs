@@ -104,8 +104,9 @@ namespace System.Net.Http.Functional.Tests
                             contentSending,
                             connectionClosed.Task
                         );
-                        await Assert.ThrowsAsync<HttpRequestException>(() =>
-                            client.SendAsync(TestAsync, request));
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            () => client.SendAsync(TestAsync, request)
+                        );
                     }
                 },
                 async server =>

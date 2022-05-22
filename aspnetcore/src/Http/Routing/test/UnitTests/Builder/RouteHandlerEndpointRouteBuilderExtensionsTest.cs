@@ -279,8 +279,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.MapGet("/", (Todo todo) => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.MapGet("/", (Todo todo) => { })
+        );
         Assert.Contains(
             "Body was inferred but the method does not allow inferred body parameters.",
             ex.Message
@@ -297,8 +298,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.MapDelete("/", (Todo todo) => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.MapDelete("/", (Todo todo) => { })
+        );
         Assert.Contains(
             "Body was inferred but the method does not allow inferred body parameters.",
             ex.Message
@@ -332,8 +334,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.MapMethods("/", new[] { method }, (Todo todo) => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.MapMethods("/", new[] { method }, (Todo todo) => { })
+        );
         Assert.Contains(
             "Body was inferred but the method does not allow inferred body parameters.",
             ex.Message
@@ -625,8 +628,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
             Assert.Equal(expectedMethod, method);
         }
 
-        Assert.Throws<InvalidOperationException>(() =>
-            endpointBuilder.WithMetadata(new RouteNameMetadata("Foo")));
+        Assert.Throws<InvalidOperationException>(
+            () => endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
+        );
     }
 
     [Theory]
@@ -739,8 +743,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.MapGet("/", ([FromRoute] int id) => { }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.MapGet("/", ([FromRoute] int id) => { })
+        );
         Assert.Equal("'id' is not a route parameter.", ex.Message);
     }
 
@@ -808,11 +813,13 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
         var builder = new DefaultEndpointRouteBuilder(
             new ApplicationBuilder(new EmptyServiceProvider())
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.MapGet(
-                "/{id}",
-                ([FromRoute(Name = "value")] int id, HttpContext httpContext) => { }
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                builder.MapGet(
+                    "/{id}",
+                    ([FromRoute(Name = "value")] int id, HttpContext httpContext) => { }
+                )
+        );
         Assert.Equal("'value' is not a route parameter.", ex.Message);
     }
 
@@ -1003,8 +1010,9 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest
 
         if (throwOnBadRequest)
         {
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-                endpoint.RequestDelegate!(httpContext));
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+                () => endpoint.RequestDelegate!(httpContext)
+            );
             Assert.Equal(400, ex.StatusCode);
         }
         else

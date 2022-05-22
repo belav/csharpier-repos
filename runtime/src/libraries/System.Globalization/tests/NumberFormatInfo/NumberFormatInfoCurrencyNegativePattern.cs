@@ -93,8 +93,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrencyNegativePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencyNegativePattern = 1);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyNegativePattern = 1
+            );
         }
     }
 }

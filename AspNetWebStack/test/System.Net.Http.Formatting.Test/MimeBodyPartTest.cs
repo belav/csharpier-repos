@@ -37,8 +37,9 @@ namespace System.Net.Http
             bodypart.Segments.Add(new ArraySegment<byte>(new byte[] { 1 }));
 
             // Act and Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                bodypart.WriteSegment(bodypart.Segments[0], CancellationToken.None));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => bodypart.WriteSegment(bodypart.Segments[0], CancellationToken.None)
+            );
         }
 
         [Fact]

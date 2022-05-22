@@ -22,8 +22,9 @@ namespace System.Security.Cryptography.Algorithms.Tests
         public void Create_InvalidECCurveFriendlyName_ThrowsPlatformNotSupportedException()
         {
             ECCurve curve = ECCurve.CreateFromFriendlyName("bad potato");
-            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(() =>
-                ECDsa.Create(curve));
+            PlatformNotSupportedException pnse = Assert.Throws<PlatformNotSupportedException>(
+                () => ECDsa.Create(curve)
+            );
             Assert.Contains("'bad potato'", pnse.Message);
         }
 
@@ -34,13 +35,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
             {
                 Assert.Throws<NotSupportedException>(() => ecdsa.ExportParameters(false));
                 Assert.Throws<NotSupportedException>(() => ecdsa.ExportExplicitParameters(false));
-                Assert.Throws<NotSupportedException>(() =>
-                    ecdsa.ImportParameters(default(ECParameters)));
+                Assert.Throws<NotSupportedException>(
+                    () => ecdsa.ImportParameters(default(ECParameters))
+                );
                 Assert.Throws<NotSupportedException>(() => ecdsa.GenerateKey(default(ECCurve)));
-                Assert.Throws<NotSupportedException>(() =>
-                    ecdsa.BaseHashData(null, HashAlgorithmName.SHA256));
-                Assert.Throws<NotSupportedException>(() =>
-                    ecdsa.BaseHashData(null, 0, 0, HashAlgorithmName.SHA256));
+                Assert.Throws<NotSupportedException>(
+                    () => ecdsa.BaseHashData(null, HashAlgorithmName.SHA256)
+                );
+                Assert.Throws<NotSupportedException>(
+                    () => ecdsa.BaseHashData(null, 0, 0, HashAlgorithmName.SHA256)
+                );
 
                 Assert.Throws<NotImplementedException>(() => ecdsa.FromXmlString(null));
                 Assert.Throws<NotImplementedException>(() => ecdsa.ToXmlString(false));

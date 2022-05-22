@@ -930,13 +930,15 @@ public class ComponentRendererTest
         var viewContext = GetViewContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new { IsAsync = false }
-            ));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                renderer.RenderComponentAsync(
+                    viewContext,
+                    typeof(ExceptionComponent),
+                    RenderMode.Static,
+                    new { IsAsync = false }
+                )
+        );
 
         // Assert
         Assert.Equal("Threw an exception synchronously", exception.Message);
@@ -949,13 +951,15 @@ public class ComponentRendererTest
         var viewContext = GetViewContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new { IsAsync = true }
-            ));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                renderer.RenderComponentAsync(
+                    viewContext,
+                    typeof(ExceptionComponent),
+                    RenderMode.Static,
+                    new { IsAsync = true }
+                )
+        );
 
         // Assert
         Assert.Equal("Threw an exception asynchronously", exception.Message);
@@ -968,13 +972,15 @@ public class ComponentRendererTest
         var viewContext = GetViewContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.RenderComponentAsync(
-                viewContext,
-                typeof(ExceptionComponent),
-                RenderMode.Static,
-                new { JsInterop = true }
-            ));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                renderer.RenderComponentAsync(
+                    viewContext,
+                    typeof(ExceptionComponent),
+                    RenderMode.Static,
+                    new { JsInterop = true }
+                )
+        );
 
         // Assert
         Assert.Equal(
@@ -1001,13 +1007,15 @@ public class ComponentRendererTest
         var viewContext = GetViewContext(ctx);
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            renderer.RenderComponentAsync(
-                viewContext,
-                typeof(RedirectComponent),
-                RenderMode.Static,
-                new { RedirectUri = "http://localhost/redirect" }
-            ));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                renderer.RenderComponentAsync(
+                    viewContext,
+                    typeof(RedirectComponent),
+                    RenderMode.Static,
+                    new { RedirectUri = "http://localhost/redirect" }
+                )
+        );
 
         Assert.Equal(
             "A navigation command was attempted during prerendering after the server already started sending the response. "

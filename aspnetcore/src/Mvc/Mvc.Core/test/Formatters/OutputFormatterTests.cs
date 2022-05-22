@@ -237,8 +237,9 @@ public class OutputFormatterTests
         formatter.SupportedMediaTypes.Clear();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() =>
-            formatter.GetSupportedContentTypes("application/json", typeof(object)));
+        Assert.Throws<InvalidOperationException>(
+            () => formatter.GetSupportedContentTypes("application/json", typeof(object))
+        );
     }
 
     private class TestOutputFormatter : OutputFormatter

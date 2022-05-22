@@ -141,14 +141,16 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyArithmeticNegateCheckedByte(byte value, bool useInterpreter)
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(byte))));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.NegateChecked(Expression.Constant(value, typeof(byte)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedChar(char value, bool useInterpreter)
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(char))));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.NegateChecked(Expression.Constant(value, typeof(char)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedDecimal(decimal value, bool useInterpreter)
@@ -219,8 +221,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyArithmeticNegateCheckedSByte(sbyte value, bool useInterpreter)
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                Expression.NegateChecked(Expression.Constant(value, typeof(sbyte))));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.NegateChecked(Expression.Constant(value, typeof(sbyte)))
+            );
         }
 
         private static void VerifyArithmeticNegateCheckedShort(short value, bool useInterpreter)

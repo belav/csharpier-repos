@@ -41,8 +41,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrencySymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencySymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencySymbol = ""
+            );
         }
     }
 }

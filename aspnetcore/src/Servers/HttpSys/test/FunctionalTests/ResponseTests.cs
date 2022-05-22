@@ -275,8 +275,9 @@ public class ResponseTests
                         },
                         httpContext
                     );
-                    Assert.Throws<InvalidTimeZoneException>(() =>
-                        httpContext.Response.Body.Write(new byte[10], 0, 10));
+                    Assert.Throws<InvalidTimeZoneException>(
+                        () => httpContext.Response.Body.Write(new byte[10], 0, 10)
+                    );
                     return Task.FromResult(0);
                 }
             )

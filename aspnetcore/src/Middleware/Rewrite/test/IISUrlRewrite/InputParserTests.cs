@@ -99,15 +99,17 @@ public class InputParserTests
     [InlineData("{HTTPS")]
     public void FormatExceptionsOnBadSyntax(string testString)
     {
-        Assert.Throws<FormatException>(() =>
-            new InputParser().ParseInputString(testString, UriMatchPart.Path));
+        Assert.Throws<FormatException>(
+            () => new InputParser().ParseInputString(testString, UriMatchPart.Path)
+        );
     }
 
     [Fact]
     public void Should_throw_FormatException_if_no_rewrite_maps_are_defined()
     {
-        Assert.Throws<FormatException>(() =>
-            new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path));
+        Assert.Throws<FormatException>(
+            () => new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path)
+        );
     }
 
     [Fact]
@@ -117,11 +119,13 @@ public class InputParserTests
         const string undefinedMapName = "apiMap";
         var map = new IISRewriteMap(definedMapName);
         var maps = new IISRewriteMapCollection { map };
-        Assert.Throws<FormatException>(() =>
-            new InputParser(maps, false).ParseInputString(
-                $"{{{undefinedMapName}:{{R:1}}}}",
-                UriMatchPart.Path
-            ));
+        Assert.Throws<FormatException>(
+            () =>
+                new InputParser(maps, false).ParseInputString(
+                    $"{{{undefinedMapName}:{{R:1}}}}",
+                    UriMatchPart.Path
+                )
+        );
     }
 
     [Fact]

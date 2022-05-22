@@ -553,8 +553,9 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer.Dispatcher.InvokeAsync<int>(async () =>
-                await dotNetStreamReference.Stream.ReadAsync(buffer));
+            return await Renderer.Dispatcher.InvokeAsync<int>(
+                async () => await dotNetStreamReference.Stream.ReadAsync(buffer)
+            );
         }
         catch (Exception ex)
         {

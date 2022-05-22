@@ -23,8 +23,9 @@ namespace System.Reflection.Tests
         public void SetValue_ConstantField_ThrowsFieldAccessException(string field, object value)
         {
             FieldInfo fieldInfo = GetField(typeof(FieldInfoTests), field);
-            Assert.Throws<FieldAccessException>(() =>
-                fieldInfo.SetValue(new FieldInfoTests(), value));
+            Assert.Throws<FieldAccessException>(
+                () => fieldInfo.SetValue(new FieldInfoTests(), value)
+            );
         }
 
         [Fact]

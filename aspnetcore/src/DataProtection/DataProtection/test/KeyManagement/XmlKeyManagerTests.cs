@@ -78,12 +78,14 @@ public class XmlKeyManagerTests
         );
 
         // Act & assert - we don't care about exception type, only exception message
-        Exception ex = Assert.ThrowsAny<Exception>(() =>
-            new XmlKeyManager(
-                options,
-                SimpleActivator.DefaultWithoutServices,
-                NullLoggerFactory.Instance
-            ));
+        Exception ex = Assert.ThrowsAny<Exception>(
+            () =>
+                new XmlKeyManager(
+                    options,
+                    SimpleActivator.DefaultWithoutServices,
+                    NullLoggerFactory.Instance
+                )
+        );
         Assert.Contains("IXmlRepository", ex.Message);
     }
 

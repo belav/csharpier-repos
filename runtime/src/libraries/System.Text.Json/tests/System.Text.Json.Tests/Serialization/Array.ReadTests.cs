@@ -216,16 +216,19 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadPrimitiveArrayFail()
         {
             // Invalid data
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,""a""]")));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<int[]>(Encoding.UTF8.GetBytes(@"[1,""a""]"))
+            );
 
             // Invalid data
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<int?>>(Encoding.UTF8.GetBytes(@"[1,""a""]")));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<int?>>(Encoding.UTF8.GetBytes(@"[1,""a""]"))
+            );
 
             // Multidimensional arrays currently not supported
-            Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<int[,]>(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]")));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<int[,]>(Encoding.UTF8.GetBytes(@"[[1,2],[3,4]]"))
+            );
         }
 
         public static IEnumerable<object[]> ReadNullJson
@@ -789,10 +792,12 @@ namespace System.Text.Json.Serialization.Tests
 
             // ImmutableArray<T> is a struct and cannot be null.
             inputJsonWithNullCollections = @"{""MyImmutableArray"":null}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
-                    inputJsonWithNullCollections
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
+                        inputJsonWithNullCollections
+                    )
+            );
         }
 
         [Fact]

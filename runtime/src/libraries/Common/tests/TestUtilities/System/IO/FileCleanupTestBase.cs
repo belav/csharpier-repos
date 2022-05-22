@@ -11,8 +11,9 @@ namespace System.IO
     /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
     public abstract class FileCleanupTestBase : IDisposable
     {
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() =>
-            AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
 
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
 

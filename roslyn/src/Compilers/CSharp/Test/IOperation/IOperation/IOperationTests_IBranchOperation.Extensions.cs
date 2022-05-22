@@ -20,8 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void GetCorrespondingOperation_ForNull_ThrowsArgumentNullException()
         {
-            Assert.ThrowsAny<ArgumentNullException>(() =>
-                OperationExtensions.GetCorrespondingOperation(null));
+            Assert.ThrowsAny<ArgumentNullException>(
+                () => OperationExtensions.GetCorrespondingOperation(null)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]

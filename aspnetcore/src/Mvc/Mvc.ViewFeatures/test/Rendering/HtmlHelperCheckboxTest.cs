@@ -91,8 +91,9 @@ public class HtmlHelperCheckBoxTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(GetTestModelViewData());
 
         // Act & Assert
-        var ex = Assert.Throws<FormatException>(() =>
-            helper.CheckBox("Property2", isChecked: null, htmlAttributes: null));
+        var ex = Assert.Throws<FormatException>(
+            () => helper.CheckBox("Property2", isChecked: null, htmlAttributes: null)
+        );
         Assert.Contains("Boolean", ex.Message);
     }
 

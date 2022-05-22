@@ -156,8 +156,12 @@ public abstract class WebViewManager : IAsyncDisposable
         // enough to have updated the dictionary.
         if (_currentPageContext != null && rootComponent.ComponentId.HasValue)
         {
-            return Dispatcher.InvokeAsync(() =>
-                _currentPageContext.Renderer.RemoveRootComponent(rootComponent.ComponentId.Value));
+            return Dispatcher.InvokeAsync(
+                () =>
+                    _currentPageContext.Renderer.RemoveRootComponent(
+                        rootComponent.ComponentId.Value
+                    )
+            );
         }
         else
         {

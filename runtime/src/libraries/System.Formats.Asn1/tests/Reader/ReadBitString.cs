@@ -583,12 +583,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveBitString(
-                    out _,
-                    out _,
-                    new Asn1Tag(TagClass.ContextSpecific, 0)
-                ));
+            Assert.Throws<AsnContentException>(
+                () =>
+                    reader.TryReadPrimitiveBitString(
+                        out _,
+                        out _,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -632,23 +634,28 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveBitString(out _, out _));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _)
+            );
             Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _));
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveBitString(out _, out _, wrongTag1));
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadBitString(output, out _, out _, wrongTag1));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag1)
+            );
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadBitString(output, out _, out _, wrongTag1)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag1));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadPrimitiveBitString(out _, out _, wrongTag2));
-            Assert.Throws<AsnContentException>(() =>
-                reader.TryReadBitString(output, out _, out _, wrongTag2));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag2)
+            );
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadBitString(output, out _, out _, wrongTag2)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag2));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

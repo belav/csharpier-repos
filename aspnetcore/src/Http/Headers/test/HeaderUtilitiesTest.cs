@@ -121,8 +121,9 @@ public class HeaderUtilitiesTest
     [InlineData(long.MinValue)]
     public void FormatNonNegativeInt64_Throws_ForNegativeValues(long value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-            HeaderUtilities.FormatNonNegativeInt64(value));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => HeaderUtilities.FormatNonNegativeInt64(value)
+        );
     }
 
     [Theory]

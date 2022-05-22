@@ -240,8 +240,9 @@ namespace System.Web.Http.Dispatcher
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                await Assert.ThrowsAsync<Exception>(
+                    () => product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -336,8 +337,9 @@ namespace System.Web.Http.Dispatcher
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                await Assert.ThrowsAsync<Exception>(
+                    () => product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -407,8 +409,9 @@ namespace System.Web.Http.Dispatcher
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    product.SendAsync(expectedRequest, cancellationToken));
+                await Assert.ThrowsAsync<OperationCanceledException>(
+                    () => product.SendAsync(expectedRequest, cancellationToken)
+                );
             }
         }
 
@@ -454,8 +457,9 @@ namespace System.Web.Http.Dispatcher
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<Exception>(() =>
-                    product.SendAsync(request, cancellationToken));
+                var exception = await Assert.ThrowsAsync<Exception>(
+                    () => product.SendAsync(request, cancellationToken)
+                );
 
                 Assert.Same(exceptionInfo.SourceException, exception);
                 Assert.NotNull(exception.StackTrace);

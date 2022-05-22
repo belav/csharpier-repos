@@ -155,8 +155,9 @@ namespace System.Net.NetworkInformation.Tests
 
                         if (!nic.Supports(NetworkInterfaceComponent.IPv4))
                         {
-                            var nie = Assert.Throws<NetworkInformationException>(() =>
-                                ipProperties.GetIPv4Properties());
+                            var nie = Assert.Throws<NetworkInformationException>(
+                                () => ipProperties.GetIPv4Properties()
+                            );
                             Assert.Equal(
                                 SocketError.ProtocolNotSupported,
                                 (SocketError)nie.ErrorCode
@@ -201,8 +202,9 @@ namespace System.Net.NetworkInformation.Tests
 
                         if (!nic.Supports(NetworkInterfaceComponent.IPv6))
                         {
-                            var nie = Assert.Throws<NetworkInformationException>(() =>
-                                ipProperties.GetIPv6Properties());
+                            var nie = Assert.Throws<NetworkInformationException>(
+                                () => ipProperties.GetIPv6Properties()
+                            );
                             Assert.Equal(
                                 SocketError.ProtocolNotSupported,
                                 (SocketError)nie.ErrorCode

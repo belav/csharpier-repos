@@ -206,8 +206,9 @@ namespace Microsoft.Data.Sqlite
                     return;
                 }
 
-                ex = Assert.Throws<SqliteException>(() =>
-                    connection1.ExecuteNonQuery("SELECT load_extension('unknown');"));
+                ex = Assert.Throws<SqliteException>(
+                    () => connection1.ExecuteNonQuery("SELECT load_extension('unknown');")
+                );
                 disabledMessage = ex.Message;
 
                 connection1.EnableExtensions();
@@ -217,8 +218,9 @@ namespace Microsoft.Data.Sqlite
             connection2.Open();
             Assert.Same(db, connection2.Handle);
 
-            ex = Assert.Throws<SqliteException>(() =>
-                connection2.ExecuteNonQuery("SELECT load_extension('unknown');"));
+            ex = Assert.Throws<SqliteException>(
+                () => connection2.ExecuteNonQuery("SELECT load_extension('unknown');")
+            );
             Assert.Equal(disabledMessage, ex.Message);
         }
 

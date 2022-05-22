@@ -272,11 +272,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             );
 
             UpdateReferenceLocationsTask(
-                ThreadingContext.JoinableTaskFactory.RunAsync(() =>
-                    _renameInfo.FindRenameLocationsAsync(
-                        _optionSet,
-                        _cancellationTokenSource.Token
-                    ))
+                ThreadingContext.JoinableTaskFactory.RunAsync(
+                    () =>
+                        _renameInfo.FindRenameLocationsAsync(
+                            _optionSet,
+                            _cancellationTokenSource.Token
+                        )
+                )
             );
 
             RenameTrackingDismisser.DismissRenameTracking(

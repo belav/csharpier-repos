@@ -88,21 +88,25 @@ namespace System.Net.Quic.Tests
                     // TODO: Which exception is correct?
                     if (IsMockProvider)
                     {
-                        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                            await serverConnection.AcceptStreamAsync());
-                        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                            await OpenAndUseStreamAsync(serverConnection));
+                        await Assert.ThrowsAsync<ObjectDisposedException>(
+                            async () => await serverConnection.AcceptStreamAsync()
+                        );
+                        await Assert.ThrowsAsync<ObjectDisposedException>(
+                            async () => await OpenAndUseStreamAsync(serverConnection)
+                        );
                     }
                     else
                     {
-                        await Assert.ThrowsAsync<QuicOperationAbortedException>(async () =>
-                            await serverConnection.AcceptStreamAsync());
+                        await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                            async () => await serverConnection.AcceptStreamAsync()
+                        );
 
                         // TODO: ActiveIssue https://github.com/dotnet/runtime/issues/56133
                         // MsQuic fails with System.Net.Quic.QuicException: Failed to open stream to peer. Error Code: INVALID_STATE
                         //await Assert.ThrowsAsync<QuicOperationAbortedException>(async () => await OpenAndUseStreamAsync(serverConnection));
-                        await Assert.ThrowsAsync<QuicException>(() =>
-                            OpenAndUseStreamAsync(serverConnection));
+                        await Assert.ThrowsAsync<QuicException>(
+                            () => OpenAndUseStreamAsync(serverConnection)
+                        );
                     }
                 }
             );
@@ -136,10 +140,12 @@ namespace System.Net.Quic.Tests
 
                     // Subsequent attempts should fail
                     // TODO: Should these be QuicOperationAbortedException, to match above? Or vice-versa?
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                        await serverConnection.AcceptStreamAsync());
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                        await OpenAndUseStreamAsync(serverConnection));
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () => await serverConnection.AcceptStreamAsync()
+                    );
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () => await OpenAndUseStreamAsync(serverConnection)
+                    );
                 }
             );
         }
@@ -176,25 +182,29 @@ namespace System.Net.Quic.Tests
 
                     ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(() => acceptTask);
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
-                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(() =>
-                        connectTask);
+                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        () => connectTask
+                    );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
 
                     // Subsequent attempts should fail
-                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(() =>
-                        serverConnection.AcceptStreamAsync().AsTask());
+                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        () => serverConnection.AcceptStreamAsync().AsTask()
+                    );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
                     // TODO: ActiveIssue https://github.com/dotnet/runtime/issues/56133
                     // MsQuic fails with System.Net.Quic.QuicException: Failed to open stream to peer. Error Code: INVALID_STATE
                     if (IsMsQuicProvider)
                     {
-                        await Assert.ThrowsAsync<QuicException>(() =>
-                            OpenAndUseStreamAsync(serverConnection));
+                        await Assert.ThrowsAsync<QuicException>(
+                            () => OpenAndUseStreamAsync(serverConnection)
+                        );
                     }
                     else
                     {
-                        ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(() =>
-                            OpenAndUseStreamAsync(serverConnection));
+                        ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                            () => OpenAndUseStreamAsync(serverConnection)
+                        );
                         Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
                     }
                 }
@@ -243,10 +253,12 @@ namespace System.Net.Quic.Tests
 
                     await clientConnection.CloseAsync(ExpectedErrorCode);
 
-                    await Assert.ThrowsAsync<QuicOperationAbortedException>(async () =>
-                        await clientStream.ReadAsync(new byte[1]));
-                    await Assert.ThrowsAsync<QuicOperationAbortedException>(async () =>
-                        await clientStream.WriteAsync(new byte[1]));
+                    await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        async () => await clientStream.ReadAsync(new byte[1])
+                    );
+                    await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        async () => await clientStream.WriteAsync(new byte[1])
+                    );
                 },
                 async serverConnection =>
                 {
@@ -257,11 +269,13 @@ namespace System.Net.Quic.Tests
 
                     // Since the peer did the abort, we should receive the abort error code in the exception.
                     QuicConnectionAbortedException ex;
-                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(async () =>
-                        await serverStream.ReadAsync(new byte[1]));
+                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        async () => await serverStream.ReadAsync(new byte[1])
+                    );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
-                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(async () =>
-                        await serverStream.WriteAsync(new byte[1]));
+                    ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        async () => await serverStream.WriteAsync(new byte[1])
+                    );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
                 }
             );
@@ -297,10 +311,12 @@ namespace System.Net.Quic.Tests
 
                     clientConnection.Dispose();
 
-                    await Assert.ThrowsAsync<QuicOperationAbortedException>(async () =>
-                        await clientStream.ReadAsync(new byte[1]));
-                    await Assert.ThrowsAsync<QuicOperationAbortedException>(async () =>
-                        await clientStream.WriteAsync(new byte[1]));
+                    await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        async () => await clientStream.ReadAsync(new byte[1])
+                    );
+                    await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        async () => await clientStream.WriteAsync(new byte[1])
+                    );
                 },
                 async serverConnection =>
                 {
@@ -311,10 +327,12 @@ namespace System.Net.Quic.Tests
 
                     // The client has done an abortive shutdown of the connection, which means we are not notified that the connection has closed.
                     // But the connection idle timeout should kick in and eventually we will get exceptions.
-                    await Assert.ThrowsAsync<QuicConnectionAbortedException>(async () =>
-                        await serverStream.ReadAsync(new byte[1]));
-                    await Assert.ThrowsAsync<QuicConnectionAbortedException>(async () =>
-                        await serverStream.WriteAsync(new byte[1]));
+                    await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        async () => await serverStream.ReadAsync(new byte[1])
+                    );
+                    await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                        async () => await serverStream.WriteAsync(new byte[1])
+                    );
                 },
                 listenerOptions: listenerOptions
             );

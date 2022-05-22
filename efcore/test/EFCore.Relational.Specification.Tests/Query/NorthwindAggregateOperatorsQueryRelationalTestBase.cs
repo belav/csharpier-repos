@@ -23,8 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Last_when_no_order_by(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Last_when_no_order_by(async)
+                    )
                 ).Message
             );
         }
@@ -34,8 +35,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.LastOrDefault)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.LastOrDefault_when_no_order_by(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.LastOrDefault_when_no_order_by(async)
+                    )
                 ).Message
             );
         }
@@ -45,8 +47,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.EntityEqualityOnKeylessEntityNotSupported("==", nameof(CustomerQuery)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Contains_over_keyless_entity_throws(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Contains_over_keyless_entity_throws(async)
+                    )
                 ).Message
             );
         }
@@ -56,8 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Nullable object must have a value.",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Min_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Min_no_data_subquery(async)
+                    )
                 ).Message
             );
         }
@@ -67,8 +71,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Nullable object must have a value.",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Max_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Max_no_data_subquery(async)
+                    )
                 ).Message
             );
         }
@@ -78,8 +83,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Nullable object must have a value.",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Average_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Average_no_data_subquery(async)
+                    )
                 ).Message
             );
         }

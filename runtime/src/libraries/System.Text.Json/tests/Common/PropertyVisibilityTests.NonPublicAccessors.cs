@@ -168,10 +168,12 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyEnum"":""AnotherValue"",""MyInt"":2}";
 
             // Deserialization baseline, without enum converter, we get JsonException.
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<StructWithPropertiesWithConverter>(
-                    json
-                ));
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<StructWithPropertiesWithConverter>(
+                        json
+                    )
+            );
 
             var obj =
                 await JsonSerializerWrapperForString.DeserializeWrapper<StructWithPropertiesWithConverter>(
@@ -182,8 +184,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(25, obj.MyInt);
 
             // ConverterForInt32 throws this exception.
-            await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
         }
 
         public struct StructWithPropertiesWithConverter
@@ -402,19 +405,21 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(ClassWithProtected_InitOnlyProperty_WithJsonIncludeProperty))]
         public virtual async Task NonPublicProperty_WithJsonInclude_Invalid(Type type)
         {
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper("{}", type));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.DeserializeWrapper("{}", type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("MyString", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);
             Assert.Contains("JsonIncludeAttribute", exAsStr);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    Activator.CreateInstance(type),
-                    type
-                ));
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        Activator.CreateInstance(type),
+                        type
+                    )
+            );
             exAsStr = ex.ToString();
             Assert.Contains("MyString", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);

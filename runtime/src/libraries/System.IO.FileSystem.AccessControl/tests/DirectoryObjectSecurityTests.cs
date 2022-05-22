@@ -707,8 +707,9 @@ namespace System.Security.AccessControl
             );
 
             customObjectSecurity.AddAccessRule(customAccessRuleReadWrite);
-            AssertExtensions.Throws<InvalidOperationException, SystemException>(() =>
-                customObjectSecurity.RemoveAccessRuleAll(customAccessRuleReadWrite));
+            AssertExtensions.Throws<InvalidOperationException, SystemException>(
+                () => customObjectSecurity.RemoveAccessRuleAll(customAccessRuleReadWrite)
+            );
         }
 
         [Fact]

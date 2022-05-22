@@ -111,8 +111,9 @@ namespace System.Xml.Tests
 
             var cdataNode = (XmlCharacterData)xmlDocument.DocumentElement.FirstChild;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                cdataNode.DeleteData(cdataNode.Data.Length + 1, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => cdataNode.DeleteData(cdataNode.Data.Length + 1, 1)
+            );
         }
 
         [Fact]

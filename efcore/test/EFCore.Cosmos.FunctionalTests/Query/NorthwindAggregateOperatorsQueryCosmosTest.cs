@@ -371,8 +371,9 @@ WHERE (c[""Discriminator""] = ""Order"")"
         public override async Task Sum_with_division_on_decimal(bool async)
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Sum_with_division_on_decimal(async));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () => await base.Sum_with_division_on_decimal(async)
+            );
 
             AssertSql();
         }
@@ -380,8 +381,9 @@ WHERE (c[""Discriminator""] = ""Order"")"
         public override async Task Sum_with_division_on_decimal_no_significant_digits(bool async)
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Sum_with_division_on_decimal_no_significant_digits(async));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () => await base.Sum_with_division_on_decimal_no_significant_digits(async)
+            );
 
             AssertSql();
         }
@@ -408,8 +410,9 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""ProductID""] < 40))"
         public override async Task Sum_over_nested_subquery_is_client_eval(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Sum_over_nested_subquery_is_client_eval(async));
+            await AssertTranslationFailed(
+                () => base.Sum_over_nested_subquery_is_client_eval(async)
+            );
 
             AssertSql();
         }
@@ -545,8 +548,9 @@ WHERE ((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] = -1))"
         public override async Task Average_with_no_arg(bool async)
         {
             // Average truncates. Issue #26378.
-            await Assert.ThrowsAsync<EqualException>(async () =>
-                await base.Average_with_no_arg(async));
+            await Assert.ThrowsAsync<EqualException>(
+                async () => await base.Average_with_no_arg(async)
+            );
 
             AssertSql(
                 @"SELECT AVG(c[""OrderID""]) AS c
@@ -569,8 +573,9 @@ WHERE (c[""Discriminator""] = ""Order"")"
         public override async Task Average_with_arg(bool async)
         {
             // Average truncates. Issue #26378.
-            await Assert.ThrowsAsync<EqualException>(async () =>
-                await base.Average_with_arg(async));
+            await Assert.ThrowsAsync<EqualException>(
+                async () => await base.Average_with_arg(async)
+            );
 
             AssertSql(
                 @"SELECT AVG(c[""OrderID""]) AS c
@@ -593,8 +598,9 @@ WHERE (c[""Discriminator""] = ""Order"")"
         public override async Task Average_with_division_on_decimal(bool async)
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Average_with_division_on_decimal(async));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () => await base.Average_with_division_on_decimal(async)
+            );
 
             AssertSql();
         }
@@ -604,8 +610,9 @@ WHERE (c[""Discriminator""] = ""Order"")"
         )
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Average_with_division_on_decimal_no_significant_digits(async));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () => await base.Average_with_division_on_decimal_no_significant_digits(async)
+            );
 
             AssertSql();
         }
@@ -632,8 +639,9 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""ProductID""] < 40))"
         public override async Task Average_over_nested_subquery_is_client_eval(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Average_over_nested_subquery_is_client_eval(async));
+            await AssertTranslationFailed(
+                () => base.Average_over_nested_subquery_is_client_eval(async)
+            );
 
             AssertSql();
         }
@@ -641,8 +649,9 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""ProductID""] < 40))"
         public override async Task Average_over_max_subquery_is_client_eval(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Average_over_max_subquery_is_client_eval(async));
+            await AssertTranslationFailed(
+                () => base.Average_over_max_subquery_is_client_eval(async)
+            );
 
             AssertSql();
         }
@@ -669,8 +678,9 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""ProductID""] = 1))"
         public override async Task Average_on_float_column_in_subquery_with_cast(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Average_on_float_column_in_subquery_with_cast(async));
+            await AssertTranslationFailed(
+                () => base.Average_on_float_column_in_subquery_with_cast(async)
+            );
 
             AssertSql();
         }
@@ -741,8 +751,9 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""ProductID""] < 40))"
         public override async Task Min_over_nested_subquery_is_client_eval(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Min_over_nested_subquery_is_client_eval(async));
+            await AssertTranslationFailed(
+                () => base.Min_over_nested_subquery_is_client_eval(async)
+            );
 
             AssertSql();
         }
@@ -799,8 +810,9 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (c[""ProductID""] < 40))"
         public override async Task Max_over_nested_subquery_is_client_eval(bool async)
         {
             // Aggregates. Issue #16146.
-            await AssertTranslationFailed(() =>
-                base.Max_over_nested_subquery_is_client_eval(async));
+            await AssertTranslationFailed(
+                () => base.Max_over_nested_subquery_is_client_eval(async)
+            );
 
             AssertSql();
         }
@@ -957,8 +969,9 @@ WHERE (((c[""Discriminator""] = ""Order"") AND (c[""OrderID""] > 10)) AND (c[""C
 
         public override async Task OrderBy_client_Take(bool async)
         {
-            await Assert.ThrowsAsync<CosmosException>(async () =>
-                await base.OrderBy_client_Take(async));
+            await Assert.ThrowsAsync<CosmosException>(
+                async () => await base.OrderBy_client_Take(async)
+            );
 
             AssertSql(
                 @"@__p_0='10'
@@ -1011,8 +1024,9 @@ ORDER BY c[""CustomerID""]"
             Assert.Equal(
                 "See issue#16156",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await base.Distinct_OrderBy(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await base.Distinct_OrderBy(async)
+                    )
                 ).Message
             );
         }
@@ -1023,8 +1037,9 @@ ORDER BY c[""CustomerID""]"
             Assert.Equal(
                 "See issue#16156",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await base.Distinct_OrderBy2(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await base.Distinct_OrderBy2(async)
+                    )
                 ).Message
             );
         }
@@ -1035,8 +1050,9 @@ ORDER BY c[""CustomerID""]"
             Assert.Equal(
                 "See issue#16156",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await base.Distinct_OrderBy3(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await base.Distinct_OrderBy3(async)
+                    )
                 ).Message
             );
 
@@ -1074,8 +1090,9 @@ OFFSET 0 LIMIT 2"
         public override async Task FirstOrDefault_inside_subquery_gets_server_evaluated(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.FirstOrDefault_inside_subquery_gets_server_evaluated(async));
+            await AssertTranslationFailed(
+                () => base.FirstOrDefault_inside_subquery_gets_server_evaluated(async)
+            );
 
             AssertSql();
         }
@@ -1085,10 +1102,12 @@ OFFSET 0 LIMIT 2"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1096,8 +1115,9 @@ OFFSET 0 LIMIT 2"
         public override async Task First_inside_subquery_gets_client_evaluated(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.First_inside_subquery_gets_client_evaluated(async));
+            await AssertTranslationFailed(
+                () => base.First_inside_subquery_gets_client_evaluated(async)
+            );
 
             AssertSql();
         }
@@ -1230,8 +1250,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND c[""CustomerID""] IN (""ABCDE""
         public override async Task Contains_with_subquery_and_local_array_closure(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_with_subquery_and_local_array_closure(async));
+            await AssertTranslationFailed(
+                () => base.Contains_with_subquery_and_local_array_closure(async)
+            );
 
             AssertSql();
         }
@@ -1439,8 +1460,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         public override async Task Contains_with_local_tuple_array_closure(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_with_local_tuple_array_closure(async));
+            await AssertTranslationFailed(
+                () => base.Contains_with_local_tuple_array_closure(async)
+            );
 
             AssertSql();
         }
@@ -1448,8 +1470,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         public override async Task Contains_with_local_anonymous_type_array_closure(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_with_local_anonymous_type_array_closure(async));
+            await AssertTranslationFailed(
+                () => base.Contains_with_local_anonymous_type_array_closure(async)
+            );
 
             AssertSql();
         }
@@ -1475,10 +1498,12 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         )
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
-                    async
-                ));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () =>
+                    await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1488,10 +1513,12 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         )
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Max_with_non_matching_types_in_projection_introduces_explicit_cast(
-                    async
-                ));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () =>
+                    await base.Max_with_non_matching_types_in_projection_introduces_explicit_cast(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1501,10 +1528,12 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         )
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Min_with_non_matching_types_in_projection_introduces_explicit_cast(
-                    async
-                ));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () =>
+                    await base.Min_with_non_matching_types_in_projection_introduces_explicit_cast(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1514,8 +1543,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
             Assert.Equal(
                 CosmosStrings.ReverseAfterSkipTakeNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await base.OrderBy_Take_Last_gives_correct_result(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await base.OrderBy_Take_Last_gives_correct_result(async)
+                    )
                 ).Message
             );
 
@@ -1527,8 +1557,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
             Assert.Equal(
                 CosmosStrings.ReverseAfterSkipTakeNotSupported,
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        await base.OrderBy_Skip_Last_gives_correct_result(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await base.OrderBy_Skip_Last_gives_correct_result(async)
+                    )
                 ).Message
             );
 
@@ -1540,8 +1571,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND NOT((true = false)))"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_should_rewrite_to_identity_equality(async));
+            await AssertTranslationFailed(
+                () => base.Contains_over_entityType_should_rewrite_to_identity_equality(async)
+            );
 
             AssertSql(
                 @"SELECT c
@@ -1556,8 +1588,9 @@ OFFSET 0 LIMIT 2"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.List_Contains_over_entityType_should_rewrite_to_identity_equality(async));
+            await AssertTranslationFailed(
+                () => base.List_Contains_over_entityType_should_rewrite_to_identity_equality(async)
+            );
 
             AssertSql();
         }
@@ -1655,8 +1688,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND c[""CustomerID""] IN (""ALFKI""
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_with_null_should_rewrite_to_false(async));
+            await AssertTranslationFailed(
+                () => base.Contains_over_entityType_with_null_should_rewrite_to_false(async)
+            );
 
             AssertSql();
         }
@@ -1664,8 +1698,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND c[""CustomerID""] IN (""ALFKI""
         public override async Task Contains_over_entityType_with_null_in_projection(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_with_null_in_projection(async));
+            await AssertTranslationFailed(
+                () => base.Contains_over_entityType_with_null_in_projection(async)
+            );
 
             AssertSql();
         }
@@ -1812,8 +1847,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Enumerable_min_is_mapped_to_Queryable_1(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Enumerable_min_is_mapped_to_Queryable_1(async));
+            await AssertTranslationFailed(
+                () => base.Enumerable_min_is_mapped_to_Queryable_1(async)
+            );
 
             AssertSql();
         }
@@ -1821,8 +1857,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Enumerable_min_is_mapped_to_Queryable_2(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Enumerable_min_is_mapped_to_Queryable_2(async));
+            await AssertTranslationFailed(
+                () => base.Enumerable_min_is_mapped_to_Queryable_2(async)
+            );
 
             AssertSql();
         }
@@ -1830,8 +1867,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task DefaultIfEmpty_selects_only_required_columns(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.DefaultIfEmpty_selects_only_required_columns(async));
+            await AssertTranslationFailed(
+                () => base.DefaultIfEmpty_selects_only_required_columns(async)
+            );
 
             AssertSql();
         }
@@ -1841,8 +1879,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Collection_Last_member_access_in_projection_translated(async));
+            await AssertTranslationFailed(
+                () => base.Collection_Last_member_access_in_projection_translated(async)
+            );
 
             AssertSql();
         }
@@ -1852,8 +1891,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Collection_LastOrDefault_member_access_in_projection_translated(async));
+            await AssertTranslationFailed(
+                () => base.Collection_LastOrDefault_member_access_in_projection_translated(async)
+            );
 
             AssertSql();
         }
@@ -1861,8 +1901,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Sum_over_explicit_cast_over_column(bool async)
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await base.Sum_over_explicit_cast_over_column(async));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                async () => await base.Sum_over_explicit_cast_over_column(async)
+            );
 
             AssertSql();
         }
@@ -1872,10 +1913,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1885,10 +1928,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1898,10 +1943,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1911,10 +1958,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1924,10 +1973,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1937,10 +1988,12 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
-                    async
-                ));
+            await AssertTranslationFailed(
+                () =>
+                    base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
+                        async
+                    )
+            );
 
             AssertSql();
         }
@@ -1950,8 +2003,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_should_materialize_when_composite(async));
+            await AssertTranslationFailed(
+                () => base.Contains_over_entityType_should_materialize_when_composite(async)
+            );
 
             AssertSql();
         }
@@ -1961,8 +2015,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Contains_over_entityType_should_materialize_when_composite2(async));
+            await AssertTranslationFailed(
+                () => base.Contains_over_entityType_should_materialize_when_composite2(async)
+            );
 
             AssertSql();
         }
@@ -1970,8 +2025,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Average_after_default_if_empty_does_not_throw(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Average_after_default_if_empty_does_not_throw(async));
+            await AssertTranslationFailed(
+                () => base.Average_after_default_if_empty_does_not_throw(async)
+            );
 
             AssertSql();
         }
@@ -1979,8 +2035,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Max_after_default_if_empty_does_not_throw(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Max_after_default_if_empty_does_not_throw(async));
+            await AssertTranslationFailed(
+                () => base.Max_after_default_if_empty_does_not_throw(async)
+            );
 
             AssertSql();
         }
@@ -1988,8 +2045,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         public override async Task Min_after_default_if_empty_does_not_throw(bool async)
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Min_after_default_if_empty_does_not_throw(async));
+            await AssertTranslationFailed(
+                () => base.Min_after_default_if_empty_does_not_throw(async)
+            );
 
             AssertSql();
         }
@@ -1999,8 +2057,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Aggregate selecting non-mapped type. Issue #20677.
-            await Assert.ThrowsAsync<KeyNotFoundException>(() =>
-                AssertAverage(async, ss => ss.Set<Order>(), selector: c => c.ShipVia));
+            await Assert.ThrowsAsync<KeyNotFoundException>(
+                () => AssertAverage(async, ss => ss.Set<Order>(), selector: c => c.ShipVia)
+            );
 
             AssertSql();
         }
@@ -2010,8 +2069,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         )
         {
             // Contains over subquery. Issue #17246.
-            await AssertTranslationFailed(() =>
-                base.Multiple_collection_navigation_with_FirstOrDefault_chained(async));
+            await AssertTranslationFailed(
+                () => base.Multiple_collection_navigation_with_FirstOrDefault_chained(async)
+            );
 
             AssertSql();
         }

@@ -144,8 +144,9 @@ namespace System.Text.Json.Node.Tests
 
             // We can't convert an unquoted string to a Guid
             dynamic dynamicString = JsonValue.Create(GuidJson);
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                (Guid)dynamicString);
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => (Guid)dynamicString
+            );
             // "A value of type 'System.String' cannot be converted to a 'System.Guid'."
             Assert.Contains(typeof(string).ToString(), ex.Message);
             Assert.Contains(typeof(Guid).ToString(), ex.Message);

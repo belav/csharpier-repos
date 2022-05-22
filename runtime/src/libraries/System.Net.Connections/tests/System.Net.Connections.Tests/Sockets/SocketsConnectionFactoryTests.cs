@@ -163,8 +163,9 @@ namespace System.Net.Connections.Tests
                 ProtocolType.Tcp
             );
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() =>
-                factory.ConnectAsync(endPoint).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(endPoint).AsTask()
+            );
             Assert.Equal(NetworkError.ConnectionRefused, ex.NetworkError);
         }
 
@@ -185,8 +186,9 @@ namespace System.Net.Connections.Tests
                 unusedPort
             );
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() =>
-                factory.ConnectAsync(endPoint).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(endPoint).AsTask()
+            );
             Assert.Equal(NetworkError.HostNotFound, ex.NetworkError);
         }
 
@@ -202,8 +204,9 @@ namespace System.Net.Connections.Tests
 
             IPEndPoint doesNotExist = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 23);
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() =>
-                factory.ConnectAsync(doesNotExist).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(doesNotExist).AsTask()
+            );
             Assert.Equal(NetworkError.TimedOut, ex.NetworkError);
         }
 
@@ -221,9 +224,9 @@ namespace System.Net.Connections.Tests
             CancellationTokenSource cts = new CancellationTokenSource();
             cts.CancelAfter(100);
 
-            OperationCanceledException ex =
-                await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    factory.ConnectAsync(doesNotExist, cancellationToken: cts.Token).AsTask());
+            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(
+                () => factory.ConnectAsync(doesNotExist, cancellationToken: cts.Token).AsTask()
+            );
             Assert.Equal(cts.Token, ex.CancellationToken);
         }
 
@@ -238,11 +241,12 @@ namespace System.Net.Connections.Tests
 
             CancellationToken cancellationToken = new CancellationToken(true);
 
-            OperationCanceledException ex =
-                await Assert.ThrowsAsync<OperationCanceledException>(() =>
+            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(
+                () =>
                     factory
                         .ConnectAsync(doesNotExist, cancellationToken: cancellationToken)
-                        .AsTask());
+                        .AsTask()
+            );
             Assert.Equal(cancellationToken, ex.CancellationToken);
         }
 

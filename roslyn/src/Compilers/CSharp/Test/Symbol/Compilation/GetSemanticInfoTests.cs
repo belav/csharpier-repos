@@ -2880,10 +2880,12 @@ class Program
             {
                 var comp = CreateCompilation(text);
 
-                var task1 = new Task(() =>
-                    comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMembers());
-                var task2 = new Task(() =>
-                    comp.GlobalNamespace.GetMember<NamedTypeSymbol>("IA").GetMembers());
+                var task1 = new Task(
+                    () => comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMembers()
+                );
+                var task2 = new Task(
+                    () => comp.GlobalNamespace.GetMember<NamedTypeSymbol>("IA").GetMembers()
+                );
 
                 if (i % 2 == 0)
                 {
@@ -4861,20 +4863,24 @@ static class Program
                     .ToTestDisplayString()
             );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                method1.ReducedFrom.GetTypeInferredDuringReduction(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                method1.GetTypeInferredDuringReduction(null));
-            Assert.Throws<ArgumentException>(() =>
-                method1.GetTypeInferredDuringReduction(
-                    comp.Assembly.GlobalNamespace
-                        .GetMember<INamedTypeSymbol>("Program")
-                        .GetMembers("Any")
-                        .Where((m) => (object)m != (object)method1.ReducedFrom)
-                        .Cast<IMethodSymbol>()
-                        .Single()
-                        .TypeParameters[0]
-                ));
+            Assert.Throws<InvalidOperationException>(
+                () => method1.ReducedFrom.GetTypeInferredDuringReduction(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => method1.GetTypeInferredDuringReduction(null)
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    method1.GetTypeInferredDuringReduction(
+                        comp.Assembly.GlobalNamespace
+                            .GetMember<INamedTypeSymbol>("Program")
+                            .GetMembers("Any")
+                            .Where((m) => (object)m != (object)method1.ReducedFrom)
+                            .Cast<IMethodSymbol>()
+                            .Single()
+                            .TypeParameters[0]
+                    )
+            );
 
             Assert.Equal("Any", method1.Name);
             var reducedFrom1 = method1.GetSymbol().CallsiteReducedFromMethod;
@@ -6513,8 +6519,9 @@ class C2<T> : E2<T> { }";
             Assert.False(type.IsErrorType());
             Assert.Throws<ArgumentException>(() => type.Construct(new ITypeSymbol[] { null })); // null type arg
             Assert.Throws<ArgumentException>(() => type.Construct()); // typeArgs.Length != Arity
-            Assert.Throws<InvalidOperationException>(() =>
-                type.Construct(objectType).Construct(objectType)); // constructed type
+            Assert.Throws<InvalidOperationException>(
+                () => type.Construct(objectType).Construct(objectType)
+            ); // constructed type
 
             // Generic error type.
             type = type.BaseType.ConstructedFrom;
@@ -6522,8 +6529,9 @@ class C2<T> : E2<T> { }";
             Assert.True(type.IsErrorType());
             Assert.Throws<ArgumentException>(() => type.Construct(new ITypeSymbol[] { null })); // null type arg
             Assert.Throws<ArgumentException>(() => type.Construct()); // typeArgs.Length != Arity
-            Assert.Throws<InvalidOperationException>(() =>
-                type.Construct(objectType).Construct(objectType)); // constructed type
+            Assert.Throws<InvalidOperationException>(
+                () => type.Construct(objectType).Construct(objectType)
+            ); // constructed type
         }
 
         [Fact]

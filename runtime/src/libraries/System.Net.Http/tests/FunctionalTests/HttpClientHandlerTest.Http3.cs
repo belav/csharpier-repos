@@ -352,8 +352,9 @@ namespace System.Net.Http.Functional.Tests
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact
                     };
 
-                await Assert.ThrowsAsync<HttpRequestException>(async () =>
-                    await client.SendAsync(request));
+                await Assert.ThrowsAsync<HttpRequestException>(
+                    async () => await client.SendAsync(request)
+                );
             });
 
             await new[] { clientTask, serverTask }.WhenAllOrAnyFailed(20_000);
@@ -803,8 +804,9 @@ namespace System.Net.Http.Functional.Tests
                 // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
-                var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                    SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10)));
+                var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                    () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10))
+                );
                 Assert.Equal(
                     (type == CancellationType.CancellationToken ? 268 : 0xffffffff),
                     ex.ErrorCode
@@ -843,8 +845,9 @@ namespace System.Net.Http.Functional.Tests
                 CancellationToken readCt =
                     type == CancellationType.CancellationToken ? cts.Token : default;
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                    stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    () => stream.ReadAsync(new byte[1024], cancellationToken: readCt).AsTask()
+                );
 
                 if (type == CancellationType.CancellationToken)
                 {
@@ -906,8 +909,9 @@ namespace System.Net.Http.Functional.Tests
                 // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
-                var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                    SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(20)));
+                var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                    () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(20))
+                );
                 // exact error code depends on who won the race
                 Assert.True(
                     ex.ErrorCode == 268 /* cancellation */
@@ -944,8 +948,9 @@ namespace System.Net.Http.Functional.Tests
                 var cts = new CancellationTokenSource(200);
                 cts.Token.Register(() => response.Dispose());
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                    stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    () => stream.ReadAsync(new byte[1024], cancellationToken: cts.Token).AsTask()
+                );
 
                 // exact exception depends on who won the race
                 if (ex is not OperationCanceledException)
@@ -1048,8 +1053,9 @@ namespace System.Net.Http.Functional.Tests
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact
                     };
 
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10)));
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                    () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
+                );
                 Assert.Contains("ALPN_NEG_FAILURE", ex.Message);
 
                 clientDone.Release();
@@ -1308,8 +1314,9 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(TimeSpan.FromSeconds(11)); // longer than client.Timeout
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    requestStream.WriteAsync(message).AsTask());
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled on timeout
                 var tce = await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
                 Assert.IsType<TimeoutException>(tce.InnerException);
@@ -1318,8 +1325,9 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                serverTask.WaitAsync(TimeSpan.FromSeconds(120)));
+            var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                () => serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            );
             Assert.Equal(
                 268 /*H3_REQUEST_CANCELLED (0x10C)*/
                 ,
@@ -1389,8 +1397,9 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(250);
 
                 // Http3WriteStream is disposed after cancellation fired
-                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                    requestStream.WriteAsync(message).AsTask());
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => requestStream.WriteAsync(message).AsTask()
+                );
                 // client is properly canceled
                 await Assert.ThrowsAsync<TaskCanceledException>(() => responseTask);
             });
@@ -1398,8 +1407,9 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(() =>
-                serverTask.WaitAsync(TimeSpan.FromSeconds(120)));
+            var ex = await Assert.ThrowsAsync<QuicStreamAbortedException>(
+                () => serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            );
             Assert.Equal(
                 268 /*H3_REQUEST_CANCELLED (0x10C)*/
                 ,

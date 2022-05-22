@@ -16,8 +16,9 @@ namespace Moq.Tests
         [Fact]
         public void Prevents_compilation()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                GetExpression().CompileUsingExpressionCompiler());
+            var ex = Assert.Throws<ArgumentException>(
+                () => GetExpression().CompileUsingExpressionCompiler()
+            );
             Assert.Contains("ReduceAndCheck", ex.StackTrace);
         }
 

@@ -97,19 +97,23 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 (IMefHostExportProvider)services.HostServices
             ).GetExportedValue<TestSerializerService.Factory>();
 
-            _lazyManager = new Lazy<WorkspaceManager>(() =>
-                new WorkspaceManager(
-                    RemoteAssetStorage ?? new SolutionAssetCache(),
-                    testSerializerServiceFactory.SharedTestGeneratorReferences,
-                    AdditionalRemoteParts
-                ));
-            _lazyClient = new Lazy<RemoteHostClient>(() =>
-                InProcRemoteHostClient.Create(
-                    _services,
-                    callbackDispatchers,
-                    TraceListener,
-                    new RemoteHostTestData(_lazyManager.Value, isInProc: true)
-                ));
+            _lazyManager = new Lazy<WorkspaceManager>(
+                () =>
+                    new WorkspaceManager(
+                        RemoteAssetStorage ?? new SolutionAssetCache(),
+                        testSerializerServiceFactory.SharedTestGeneratorReferences,
+                        AdditionalRemoteParts
+                    )
+            );
+            _lazyClient = new Lazy<RemoteHostClient>(
+                () =>
+                    InProcRemoteHostClient.Create(
+                        _services,
+                        callbackDispatchers,
+                        TraceListener,
+                        new RemoteHostTestData(_lazyManager.Value, isInProc: true)
+                    )
+            );
         }
 
         public void Dispose()

@@ -138,8 +138,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() =>
-                mock.Setup(x => x.Bar(MatcherHookWithoutMatcherMethod())));
+            Assert.Throws<MissingMethodException>(
+                () => mock.Setup(x => x.Bar(MatcherHookWithoutMatcherMethod()))
+            );
         }
 
         [Matcher]
@@ -153,8 +154,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() =>
-                mock.Setup(x => x.Bar(MatcherHook2WithoutMatcherMethod(6))));
+            Assert.Throws<MissingMethodException>(
+                () => mock.Setup(x => x.Bar(MatcherHook2WithoutMatcherMethod(6)))
+            );
         }
 
         [Matcher]
@@ -191,8 +193,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() =>
-                mock.Setup(x => x.Bar(NonStaticMatcherHookWithoutMatcherMethod())));
+            Assert.Throws<MissingMethodException>(
+                () => mock.Setup(x => x.Bar(NonStaticMatcherHookWithoutMatcherMethod()))
+            );
         }
 
         [Matcher]

@@ -173,8 +173,9 @@ public class DefaultEndpointSelectorTest
         var selector = CreateSelector();
 
         // Act
-        var ex = await Assert.ThrowsAsync<AmbiguousMatchException>(() =>
-            selector.SelectAsync(httpContext, candidateSet));
+        var ex = await Assert.ThrowsAsync<AmbiguousMatchException>(
+            () => selector.SelectAsync(httpContext, candidateSet)
+        );
 
         // Assert
         Assert.Equal(

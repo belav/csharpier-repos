@@ -28,8 +28,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             {
                 CmsRecipient cmsRecipient = new CmsRecipient(cert);
 
-                CryptographicException e = Assert.Throws<CryptographicException>(() =>
-                    ecms.Encrypt(cmsRecipient));
+                CryptographicException e = Assert.Throws<CryptographicException>(
+                    () => ecms.Encrypt(cmsRecipient)
+                );
 
                 Assert.Contains(cert.GetKeyAlgorithm(), e.Message);
             }

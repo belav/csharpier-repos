@@ -44,17 +44,20 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceC());
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetIComInterfaceCOut(out GenericsNative.IComInterface<char> value2));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetIComInterfaceCOut(out GenericsNative.IComInterface<char> value2)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceCRef());
 
         GenericsNative.IComInterface<char>[] values = new GenericsNative.IComInterface<char>[3];
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetIComInterfaceCs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetIComInterfaceCs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() =>
-            GenericsNative.GetIComInterfaceCs(ref values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetIComInterfaceCs(ref values[0], values.Length)
+        );
     }
 }

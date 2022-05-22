@@ -67,8 +67,9 @@ namespace System.Net.Http.Functional.Tests
 
                     handler.MaxResponseHeadersLength = 1;
                     (await client.GetStreamAsync(uri)).Dispose();
-                    Assert.Throws<InvalidOperationException>(() =>
-                        handler.MaxResponseHeadersLength = 1);
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MaxResponseHeadersLength = 1
+                    );
                 },
                 server => server.AcceptConnectionSendResponseAndCloseAsync()
             );
@@ -112,8 +113,9 @@ namespace System.Net.Http.Functional.Tests
                                     }
                                 );
 
-                                Exception e = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                    getAsync);
+                                Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                    () => getAsync
+                                );
                                 cts.Cancel();
                                 if (!IsWinHttpHandler)
                                 {
@@ -168,9 +170,9 @@ namespace System.Net.Http.Functional.Tests
                                 }
                                 else
                                 {
-                                    Exception e =
-                                        await Assert.ThrowsAsync<HttpRequestException>(() =>
-                                            getAsync);
+                                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                        () => getAsync
+                                    );
                                     if (!IsWinHttpHandler)
                                     {
                                         Assert.Contains(

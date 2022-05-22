@@ -33,20 +33,23 @@ public class DefaultModelBindingMessageProvider : ModelBindingMessageProvider
     {
         SetMissingBindRequiredValueAccessor(Resources.FormatModelBinding_MissingBindRequiredMember);
         SetMissingKeyOrValueAccessor(() => Resources.KeyValuePair_BothKeyAndValueMustBePresent);
-        SetMissingRequestBodyRequiredValueAccessor(() =>
-            Resources.ModelBinding_MissingRequestBodyRequiredMember);
+        SetMissingRequestBodyRequiredValueAccessor(
+            () => Resources.ModelBinding_MissingRequestBodyRequiredMember
+        );
         SetValueMustNotBeNullAccessor(Resources.FormatModelBinding_NullValueNotValid);
         SetAttemptedValueIsInvalidAccessor(Resources.FormatModelState_AttemptedValueIsInvalid);
         SetNonPropertyAttemptedValueIsInvalidAccessor(
             Resources.FormatModelState_NonPropertyAttemptedValueIsInvalid
         );
         SetUnknownValueIsInvalidAccessor(Resources.FormatModelState_UnknownValueIsInvalid);
-        SetNonPropertyUnknownValueIsInvalidAccessor(() =>
-            Resources.ModelState_NonPropertyUnknownValueIsInvalid);
+        SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => Resources.ModelState_NonPropertyUnknownValueIsInvalid
+        );
         SetValueIsInvalidAccessor(Resources.FormatHtmlGeneration_ValueIsInvalid);
         SetValueMustBeANumberAccessor(Resources.FormatHtmlGeneration_ValueMustBeNumber);
-        SetNonPropertyValueMustBeANumberAccessor(() =>
-            Resources.HtmlGeneration_NonPropertyValueMustBeNumber);
+        SetNonPropertyValueMustBeANumberAccessor(
+            () => Resources.HtmlGeneration_NonPropertyValueMustBeNumber
+        );
     }
 
     /// <summary>

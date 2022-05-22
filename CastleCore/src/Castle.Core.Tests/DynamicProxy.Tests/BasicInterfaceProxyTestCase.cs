@@ -460,8 +460,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Cannot_proxy_open_generic_type()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(typeof(IList<>), new IInterceptor[0]));
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IList<>),
+                        new IInterceptor[0]
+                    )
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type System.Collections.Generic.IList`1 because it is an open generic type.",
                 ex.Message
@@ -473,8 +478,9 @@ namespace Castle.DynamicProxy.Tests
         {
             var innerType = typeof(IList<>);
             var targetType = innerType.MakeGenericType(typeof(IList<>));
-            var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(targetType, new IInterceptor[0]));
+            var ex = Assert.Throws<ArgumentException>(
+                () => generator.CreateInterfaceProxyWithoutTarget(targetType, new IInterceptor[0])
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type IList`1 because type System.Collections.Generic.IList`1 is an open generic type.",
                 ex.Message
@@ -484,11 +490,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Cannot_proxy_inaccessible_interface()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(
-                    typeof(PrivateInterface),
-                    new IInterceptor[0]
-                ));
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(PrivateInterface),
+                        new IInterceptor[0]
+                    )
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
                 ex.Message
@@ -498,11 +506,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Cannot_proxy_generic_interface_with_inaccessible_type_argument()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(
-                    typeof(IList<PrivateInterface>),
-                    new IInterceptor[0]
-                ));
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IList<PrivateInterface>),
+                        new IInterceptor[0]
+                    )
+            );
             StringAssert.StartsWith(
                 "Can not create proxy for type System.Collections.Generic.IList`1[[Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface is not accessible. Make it public, or internal",
                 ex.Message
@@ -518,11 +528,13 @@ namespace Castle.DynamicProxy.Tests
                 typeof(PrivateInterface).FullName
             );
 
-            var exception = Assert.Throws<ArgumentException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(
-                    typeof(IList<IList<PrivateInterface>>),
-                    new IInterceptor[0]
-                ));
+            var exception = Assert.Throws<ArgumentException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IList<IList<PrivateInterface>>),
+                        new IInterceptor[0]
+                    )
+            );
             StringAssert.StartsWith(expected, exception.Message);
         }
 

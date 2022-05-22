@@ -704,10 +704,12 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(3, 3))
             {
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new Rectangle(x, y, width, height), bitmap.PixelFormat));
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new RectangleF(x, y, width, height), bitmap.PixelFormat));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(x, y, width, height), bitmap.PixelFormat)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(x, y, width, height), bitmap.PixelFormat)
+                );
             }
         }
 
@@ -725,10 +727,12 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1))
             {
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new Rectangle(0, 0, 1, 1), format));
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new RectangleF(0, 0, 1, 1), format));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(0, 0, 1, 1), format)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(0, 0, 1, 1), format)
+                );
             }
         }
 
@@ -738,10 +742,12 @@ namespace System.Drawing.Tests
         {
             using (var bitmap = new Bitmap(1, 1, PixelFormat.Format16bppGrayScale))
             {
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb));
-                Assert.Throws<OutOfMemoryException>(() =>
-                    bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb));
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new Rectangle(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => bitmap.Clone(new RectangleF(0, 0, 1, 1), PixelFormat.Format32bppArgb)
+                );
             }
         }
 
@@ -2114,33 +2120,41 @@ namespace System.Drawing.Tests
                     bitmap.PixelFormat
                 );
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    bitmap.LockBits(
-                        new Rectangle(0, 0, 1, 1),
-                        ImageLockMode.ReadOnly,
-                        bitmap.PixelFormat
-                    ));
-                Assert.Throws<InvalidOperationException>(() =>
-                    bitmap.LockBits(
-                        new Rectangle(0, 0, 1, 1),
-                        ImageLockMode.ReadOnly,
-                        bitmap.PixelFormat,
-                        new BitmapData()
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(0, 0, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat,
+                            new BitmapData()
+                        )
+                );
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    bitmap.LockBits(
-                        new Rectangle(1, 1, 1, 1),
-                        ImageLockMode.ReadOnly,
-                        bitmap.PixelFormat
-                    ));
-                Assert.Throws<InvalidOperationException>(() =>
-                    bitmap.LockBits(
-                        new Rectangle(1, 1, 1, 1),
-                        ImageLockMode.ReadOnly,
-                        bitmap.PixelFormat,
-                        new BitmapData()
-                    ));
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(1, 1, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat
+                        )
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        bitmap.LockBits(
+                            new Rectangle(1, 1, 1, 1),
+                            ImageLockMode.ReadOnly,
+                            bitmap.PixelFormat,
+                            new BitmapData()
+                        )
+                );
             }
         }
 

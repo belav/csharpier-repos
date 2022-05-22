@@ -245,16 +245,20 @@ namespace System.Threading.Tests
             using (ReaderWriterLockSlim rwls = new ReaderWriterLockSlim())
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterReadLock(-2));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterUpgradeableReadLock(-3));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => rwls.TryEnterUpgradeableReadLock(-3)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => rwls.TryEnterWriteLock(-4));
 
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterReadLock(TimeSpan.MaxValue));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2)));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => rwls.TryEnterReadLock(TimeSpan.MaxValue)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => rwls.TryEnterUpgradeableReadLock(TimeSpan.MinValue)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => rwls.TryEnterWriteLock(TimeSpan.FromMilliseconds(-2))
+                );
             }
         }
 

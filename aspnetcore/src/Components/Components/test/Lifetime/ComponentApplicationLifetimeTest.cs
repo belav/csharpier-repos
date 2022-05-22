@@ -55,8 +55,9 @@ public class ComponentApplicationLifetimeTest
         await lifetime.RestoreStateAsync(store);
 
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            lifetime.RestoreStateAsync(store));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => lifetime.RestoreStateAsync(store)
+        );
     }
 
     [Fact]
@@ -285,8 +286,9 @@ public class ComponentApplicationLifetimeTest
         await lifetime.PersistStateAsync(store, renderer);
 
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            lifetime.PersistStateAsync(store, renderer));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => lifetime.PersistStateAsync(store, renderer)
+        );
     }
 
     private class TestRenderer : Renderer

@@ -416,8 +416,9 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions()
             );
 
-            var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
-                client.ReceiveAsync(Memory<byte>.Empty, CancellationToken).AsTask());
+            var exception = await Assert.ThrowsAsync<WebSocketException>(
+                () => client.ReceiveAsync(Memory<byte>.Empty, CancellationToken).AsTask()
+            );
 
             Assert.Equal(
                 "The WebSocket received compressed frame when compression is not enabled.",
@@ -452,8 +453,9 @@ namespace System.Net.WebSockets.Tests
 
             // Client sends compressed, but server compression is disabled and should throw on receive
             await SendTextAsync("Hello back", client);
-            var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
-                ReceiveTextAsync(server));
+            var exception = await Assert.ThrowsAsync<WebSocketException>(
+                () => ReceiveTextAsync(server)
+            );
             Assert.Equal(
                 "The WebSocket received compressed frame when compression is not enabled.",
                 exception.Message
@@ -486,8 +488,9 @@ namespace System.Net.WebSockets.Tests
             Assert.Equal("Hello", await ReceiveTextAsync(client));
 
             stream.Enqueue(0xc1, 0x07, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00);
-            var exception = await Assert.ThrowsAsync<WebSocketException>(() =>
-                ReceiveTextAsync(client));
+            var exception = await Assert.ThrowsAsync<WebSocketException>(
+                () => ReceiveTextAsync(client)
+            );
 
             Assert.Equal(
                 "The message was compressed using an unsupported compression method.",

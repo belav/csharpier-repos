@@ -262,17 +262,19 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                Assert.Throws<EncoderFallbackException>(() =>
-                    encoder.Convert(
-                        pChars,
-                        1,
-                        pBytes,
-                        2,
-                        true,
-                        out charsUsed,
-                        out bytesUsed,
-                        out completed
-                    ));
+                Assert.Throws<EncoderFallbackException>(
+                    () =>
+                        encoder.Convert(
+                            pChars,
+                            1,
+                            pBytes,
+                            2,
+                            true,
+                            out charsUsed,
+                            out bytesUsed,
+                            out completed
+                        )
+                );
             }
         }
 
@@ -397,10 +399,12 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                Assert.Throws<EncoderFallbackException>(() =>
-                    encoder.GetBytes(pChars, 1, pBytes, 2, true));
-                Assert.Throws<EncoderFallbackException>(() =>
-                    encoder.GetByteCount(pChars, 1, true));
+                Assert.Throws<EncoderFallbackException>(
+                    () => encoder.GetBytes(pChars, 1, pBytes, 2, true)
+                );
+                Assert.Throws<EncoderFallbackException>(
+                    () => encoder.GetByteCount(pChars, 1, true)
+                );
             }
         }
 
@@ -418,8 +422,9 @@ namespace System.Text.Encodings.Tests
             char[] chars = new char[] { '\uFFFF' };
             byte[] bytes = new byte[2];
 
-            Assert.Throws<EncoderFallbackException>(() =>
-                encoder.GetBytes(chars, 0, 1, bytes, 0, true));
+            Assert.Throws<EncoderFallbackException>(
+                () => encoder.GetBytes(chars, 0, 1, bytes, 0, true)
+            );
 
             EncoderFallbackBuffer fallbackBuffer = encoder.FallbackBuffer;
             Assert.True(
@@ -428,8 +433,9 @@ namespace System.Text.Encodings.Tests
             );
             Assert.Throws<EncoderFallbackException>(() => fallbackBuffer.Fallback(chars[0], 0));
             Assert.Throws<EncoderFallbackException>(() => fallbackBuffer.Fallback('\u0040', 0));
-            Assert.Throws<EncoderFallbackException>(() =>
-                fallbackBuffer.Fallback('\uD800', '\uDC00', 0));
+            Assert.Throws<EncoderFallbackException>(
+                () => fallbackBuffer.Fallback('\uD800', '\uDC00', 0)
+            );
 
             Assert.Equal(0, fallbackBuffer.Remaining);
             Assert.Equal('\u0000', fallbackBuffer.GetNextChar());
@@ -469,15 +475,17 @@ namespace System.Text.Encodings.Tests
                 encoder.GetBytes(firstPayload, 0, firstPayload.Length, new byte[0], 0, flush: false)
             );
 
-            EncoderFallbackException ex = Assert.Throws<EncoderFallbackException>(() =>
-                encoder.GetBytes(
-                    secondPayload,
-                    0,
-                    secondPayload.Length,
-                    new byte[8],
-                    0,
-                    flush: true
-                ));
+            EncoderFallbackException ex = Assert.Throws<EncoderFallbackException>(
+                () =>
+                    encoder.GetBytes(
+                        secondPayload,
+                        0,
+                        secondPayload.Length,
+                        new byte[8],
+                        0,
+                        flush: true
+                    )
+            );
             Assert.Equal(expectedIndex, ex.Index);
 
             // Then test GetBytes / GetByteCount
@@ -488,8 +496,9 @@ namespace System.Text.Encodings.Tests
                 encoder.GetBytes(firstPayload, 0, firstPayload.Length, new byte[0], 0, flush: false)
             );
 
-            ex = Assert.Throws<EncoderFallbackException>(() =>
-                encoder.GetByteCount(secondPayload, 0, secondPayload.Length, flush: true));
+            ex = Assert.Throws<EncoderFallbackException>(
+                () => encoder.GetByteCount(secondPayload, 0, secondPayload.Length, flush: true)
+            );
             Assert.Equal(expectedIndex, ex.Index);
         }
 

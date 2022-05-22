@@ -136,8 +136,9 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveKeyword_EmptyIsInvalid()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            DirectiveDescriptor.CreateSingleLineDirective(""));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => DirectiveDescriptor.CreateSingleLineDirective("")
+        );
 
         // Assert
         Assert.Equal(
@@ -150,8 +151,9 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveKeyword_InvalidCharacter()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            DirectiveDescriptor.CreateSingleLineDirective("test_directive"));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => DirectiveDescriptor.CreateSingleLineDirective("test_directive")
+        );
 
         // Assert
         Assert.Equal(
@@ -164,15 +166,17 @@ public class DirectiveDescriptorTest
     public void Build_ValidatesDirectiveName_NonOptionalTokenFollowsOptionalToken()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            DirectiveDescriptor.CreateSingleLineDirective(
-                "test",
-                b =>
-                {
-                    b.AddOptionalMemberToken();
-                    b.AddMemberToken();
-                }
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                DirectiveDescriptor.CreateSingleLineDirective(
+                    "test",
+                    b =>
+                    {
+                        b.AddOptionalMemberToken();
+                        b.AddMemberToken();
+                    }
+                )
+        );
 
         // Assert
         Assert.Equal(

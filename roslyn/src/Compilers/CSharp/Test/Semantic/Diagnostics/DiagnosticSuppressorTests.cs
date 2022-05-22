@@ -817,12 +817,14 @@ class C { }";
             );
             var cancellationToken = suppressor.CancellationTokenSource.Token;
             var analyzersAndSuppressors = new DiagnosticAnalyzer[] { analyzer, suppressor };
-            Assert.Throws<OperationCanceledException>(() =>
-                compilation.GetAnalyzerDiagnostics(
-                    analyzersAndSuppressors,
-                    reportSuppressedDiagnostics: true,
-                    cancellationToken: cancellationToken
-                ));
+            Assert.Throws<OperationCanceledException>(
+                () =>
+                    compilation.GetAnalyzerDiagnostics(
+                        analyzersAndSuppressors,
+                        reportSuppressedDiagnostics: true,
+                        cancellationToken: cancellationToken
+                    )
+            );
         }
     }
 }

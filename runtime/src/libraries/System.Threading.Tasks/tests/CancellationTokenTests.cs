@@ -31,10 +31,12 @@ namespace System.Threading.Tasks.Tests
                 "callback",
                 () => token.Register((Action<object>)null, null, false)
             );
-            AssertExtensions.Throws<ArgumentNullException>(() =>
-                token.Register((Action<object>)null, null, true));
-            AssertExtensions.Throws<ArgumentNullException>(() =>
-                token.Register((Action<object, CancellationToken>)null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                () => token.Register((Action<object>)null, null, true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                () => token.Register((Action<object, CancellationToken>)null, null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "callback",
@@ -1319,11 +1321,13 @@ namespace System.Threading.Tasks.Tests
             bool registration2Invoked = false;
 
             var cts = new CancellationTokenSource();
-            CancellationTokenRegistration ctr1 = cts.Token.Register(() =>
-                registration1Invoked = true);
+            CancellationTokenRegistration ctr1 = cts.Token.Register(
+                () => registration1Invoked = true
+            );
             Assert.True(cts.TryReset());
-            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
-                registration2Invoked = true);
+            CancellationTokenRegistration ctr2 = cts.Token.Register(
+                () => registration2Invoked = true
+            );
 
             cts.Cancel();
 
@@ -1750,8 +1754,9 @@ namespace System.Threading.Tasks.Tests
                             for (int i = 0; i < Iters; i++)
                             {
                                 barrier.SignalAndWait();
-                                CancellationTokenRegistration ctr = cts.Token.Register(() =>
-                                    callbackInvoked = true);
+                                CancellationTokenRegistration ctr = cts.Token.Register(
+                                    () => callbackInvoked = true
+                                );
                                 barrier.SignalAndWait();
                                 unregisterResult = ctr.Unregister();
                                 barrier.SignalAndWait();

@@ -37,8 +37,9 @@ public class FormatExceptionTests
     public void ThrowFormatExceptionWithCorrectMessage(string input, string expected)
     {
         // Arrange, Act, Assert
-        var ex = Assert.Throws<FormatException>(() =>
-            new FileParser().Parse(new StringReader(input)));
+        var ex = Assert.Throws<FormatException>(
+            () => new FileParser().Parse(new StringReader(input))
+        );
         Assert.Equal(expected, ex.Message);
     }
 }

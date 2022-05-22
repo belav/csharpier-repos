@@ -105,13 +105,15 @@ public class HttpsTests : LoggedTest
                 )
             )
             {
-                var ex = await Assert.ThrowsAnyAsync<Exception>(() =>
-                    sslStream.AuthenticateAsClientAsync(
-                        "127.0.0.1",
-                        clientCertificates: null,
-                        enabledSslProtocols: SslProtocols.None,
-                        checkCertificateRevocation: false
-                    ));
+                var ex = await Assert.ThrowsAnyAsync<Exception>(
+                    () =>
+                        sslStream.AuthenticateAsClientAsync(
+                            "127.0.0.1",
+                            clientCertificates: null,
+                            enabledSslProtocols: SslProtocols.None,
+                            checkCertificateRevocation: false
+                        )
+                );
 
                 Logger.LogTrace(ex, "AuthenticateAsClientAsync Exception");
             }
@@ -760,19 +762,21 @@ public class HttpsTests : LoggedTest
             options =>
             {
                 options.Protocols = HttpProtocols.Http3;
-                var exception = Assert.Throws<NotSupportedException>(() =>
-                    options.UseHttps(
-                        (
-                            SslStream stream,
-                            SslClientHelloInfo clientHelloInfo,
-                            object state,
-                            CancellationToken cancellationToken
-                        ) =>
-                        {
-                            return ValueTask.FromResult((new SslServerAuthenticationOptions()));
-                        },
-                        state: null
-                    ));
+                var exception = Assert.Throws<NotSupportedException>(
+                    () =>
+                        options.UseHttps(
+                            (
+                                SslStream stream,
+                                SslClientHelloInfo clientHelloInfo,
+                                object state,
+                                CancellationToken cancellationToken
+                            ) =>
+                            {
+                                return ValueTask.FromResult((new SslServerAuthenticationOptions()));
+                            },
+                            state: null
+                        )
+                );
                 Assert.Equal(
                     "UseHttps with ServerOptionsSelectionCallback is not supported with HTTP/3.",
                     exception.Message
@@ -792,16 +796,20 @@ public class HttpsTests : LoggedTest
             options =>
             {
                 options.Protocols = HttpProtocols.Http3;
-                var exception = Assert.Throws<NotSupportedException>(() =>
-                    options.UseHttps(
-                        new TlsHandshakeCallbackOptions()
-                        {
-                            OnConnection = context =>
+                var exception = Assert.Throws<NotSupportedException>(
+                    () =>
+                        options.UseHttps(
+                            new TlsHandshakeCallbackOptions()
                             {
-                                return ValueTask.FromResult(new SslServerAuthenticationOptions());
+                                OnConnection = context =>
+                                {
+                                    return ValueTask.FromResult(
+                                        new SslServerAuthenticationOptions()
+                                    );
+                                }
                             }
-                        }
-                    ));
+                        )
+                );
                 Assert.Equal(
                     "UseHttps with TlsHandshakeCallbackOptions is not supported with HTTP/3.",
                     exception.Message
@@ -843,13 +851,15 @@ public class HttpsTests : LoggedTest
             )
             {
                 // SslProtocols.Tls is TLS 1.0 which isn't supported by Kestrel by default.
-                await Assert.ThrowsAnyAsync<Exception>(() =>
-                    sslStream.AuthenticateAsClientAsync(
-                        "127.0.0.1",
-                        clientCertificates: null,
-                        enabledSslProtocols: SslProtocols.Tls,
-                        checkCertificateRevocation: false
-                    ));
+                await Assert.ThrowsAnyAsync<Exception>(
+                    () =>
+                        sslStream.AuthenticateAsClientAsync(
+                            "127.0.0.1",
+                            clientCertificates: null,
+                            enabledSslProtocols: SslProtocols.Tls,
+                            checkCertificateRevocation: false
+                        )
+                );
             }
         }
 

@@ -28,8 +28,9 @@ public class LayoutViewTest
     public void GivenNoParameters_RendersNothing()
     {
         // Arrange/Act
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(ParameterView.Empty));
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () => _layoutViewComponent.SetParametersAsync(ParameterView.Empty)
+        );
         Assert.True(setParametersTask.IsCompletedSuccessfully);
         var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId).AsEnumerable();
 
@@ -42,24 +43,26 @@ public class LayoutViewTest
     public void GivenContentButNoLayout_RendersContent()
     {
         // Arrange/Act
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(123, "Hello");
-                                    builder.AddContent(456, "Goodbye");
-                                }
-                            )
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(123, "Hello");
+                                        builder.AddContent(456, "Goodbye");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
         Assert.True(setParametersTask.IsCompletedSuccessfully);
         var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId).AsEnumerable();
 
@@ -76,15 +79,17 @@ public class LayoutViewTest
     public void GivenLayoutButNoContent_RendersLayoutWithEmptyBody()
     {
         // Arrange/Act
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(RootLayout) }
-                    }
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { nameof(LayoutView.Layout), typeof(RootLayout) }
+                        }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -115,25 +120,27 @@ public class LayoutViewTest
     public void RendersContentInsideLayout()
     {
         // Arrange/Act
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(RootLayout) },
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(123, "Hello");
-                                    builder.AddContent(456, "Goodbye");
-                                }
-                            )
+                            { nameof(LayoutView.Layout), typeof(RootLayout) },
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(123, "Hello");
+                                        builder.AddContent(456, "Goodbye");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -166,25 +173,27 @@ public class LayoutViewTest
     public void RendersContentInsideNestedLayout()
     {
         // Arrange/Act
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(NestedLayout) },
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(123, "Hello");
-                                    builder.AddContent(456, "Goodbye");
-                                }
-                            )
+                            { nameof(LayoutView.Layout), typeof(NestedLayout) },
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(123, "Hello");
+                                        builder.AddContent(456, "Goodbye");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.True(setParametersTask.IsCompletedSuccessfully);
@@ -230,45 +239,49 @@ public class LayoutViewTest
     public void CanChangeContentWithSameLayout()
     {
         // Arrange
-        var setParametersTask = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(NestedLayout) },
+        var setParametersTask = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(0, "Initial content");
-                                }
-                            )
+                            { nameof(LayoutView.Layout), typeof(NestedLayout) },
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(0, "Initial content");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
 
         // Act
         Assert.True(setParametersTask.IsCompletedSuccessfully);
-        _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(NestedLayout) },
+        _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(0, "Changed content");
-                                }
-                            )
+                            { nameof(LayoutView.Layout), typeof(NestedLayout) },
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(0, "Changed content");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.Equal(2, _renderer.Batches.Count);
@@ -302,36 +315,40 @@ public class LayoutViewTest
     public void CanChangeLayout()
     {
         // Arrange
-        var setParametersTask1 = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(NestedLayout) },
+        var setParametersTask1 = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
                         {
-                            nameof(LayoutView.ChildContent),
-                            (RenderFragment)(
-                                builder =>
-                                {
-                                    builder.AddContent(0, "Some content");
-                                }
-                            )
+                            { nameof(LayoutView.Layout), typeof(NestedLayout) },
+                            {
+                                nameof(LayoutView.ChildContent),
+                                (RenderFragment)(
+                                    builder =>
+                                    {
+                                        builder.AddContent(0, "Some content");
+                                    }
+                                )
+                            }
                         }
-                    }
+                    )
                 )
-            ));
+        );
         Assert.True(setParametersTask1.IsCompletedSuccessfully);
 
         // Act
-        var setParametersTask2 = _renderer.Dispatcher.InvokeAsync(() =>
-            _layoutViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(LayoutView.Layout), typeof(OtherNestedLayout) },
-                    }
+        var setParametersTask2 = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _layoutViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { nameof(LayoutView.Layout), typeof(OtherNestedLayout) },
+                        }
+                    )
                 )
-            ));
+        );
 
         // Assert
         Assert.True(setParametersTask2.IsCompletedSuccessfully);

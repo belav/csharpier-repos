@@ -16,10 +16,12 @@ public class UserSecretsTestFixture : IDisposable
 
     public UserSecretsTestFixture()
     {
-        _disposables.Push(() =>
-            TryDelete(
-                Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
-            ));
+        _disposables.Push(
+            () =>
+                TryDelete(
+                    Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
+                )
+        );
     }
 
     public void Dispose()

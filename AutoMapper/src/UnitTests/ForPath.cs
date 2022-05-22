@@ -182,8 +182,9 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_unflatten()
         {
-            new Action(() =>
-                Mapper.Map<Order>(new OrderDto())).ShouldThrowException<AutoMapperMappingException>(
+            new Action(
+                () => Mapper.Map<Order>(new OrderDto())
+            ).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
                     ex.InnerException?.Message.ShouldBe(
                         "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."

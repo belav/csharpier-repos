@@ -60,10 +60,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using var synchronizationEvent = new ManualResetEventSlim(false);
             using var blockingSemaphore = new SemaphoreSlim(0);
-            var blockingTask = Task.Run(() =>
-                context.Customers
-                    .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                    .ToList());
+            var blockingTask = Task.Run(
+                () =>
+                    context.Customers
+                        .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                        .ToList()
+            );
 
             var throwingTask = Task.Run(() =>
             {
@@ -71,8 +73,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Equal(
                     CoreStrings.ConcurrentMethodInvocation,
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers"""))
+                        .Throws<InvalidOperationException>(
+                            () => context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
+                        )
                         .Message
                 );
             });
@@ -240,10 +243,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using var synchronizationEvent = new ManualResetEventSlim(false);
             using var blockingSemaphore = new SemaphoreSlim(0);
-            var blockingTask = Task.Run(() =>
-                context.Customers
-                    .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                    .ToList());
+            var blockingTask = Task.Run(
+                () =>
+                    context.Customers
+                        .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                        .ToList()
+            );
 
             var throwingTask = Task.Run(async () =>
             {
@@ -251,8 +256,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Equal(
                     CoreStrings.ConcurrentMethodInvocation,
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                            context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers"""))
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () =>
+                                context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
+                        )
                     ).Message
                 );
             });

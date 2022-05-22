@@ -308,8 +308,13 @@ namespace System.Linq.Parallel.Tests
             ParallelExecutionMode second
         )
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Range(0, 1).WithExecutionMode(first).WithExecutionMode(second));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithExecutionMode(first)
+                        .WithExecutionMode(second)
+            );
         }
 
         [Fact]

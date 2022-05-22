@@ -192,8 +192,9 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldSkipped("key"));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => source.MarkFieldSkipped("key")
+        );
 
         // Assert
         Assert.Equal(
@@ -253,8 +254,9 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some-error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldValid("key"));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => source.MarkFieldValid("key")
+        );
 
         // Assert
         Assert.Equal(
@@ -1019,8 +1021,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() =>
-            "Hmm, the supplied value is not valid.");
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var method = typeof(string).GetMethod(nameof(string.Copy));
         var parameter = method.GetParameters()[0]; // Copy(string str)
@@ -1049,8 +1052,9 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() =>
-            "Hmm, the supplied value is not valid.");
+        optionsAccessor.Value.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(
+            () => "Hmm, the supplied value is not valid."
+        );
 
         var provider = new DefaultModelMetadataProvider(compositeProvider, optionsAccessor);
         var metadata = provider.GetMetadataForType(typeof(int));

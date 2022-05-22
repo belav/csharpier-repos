@@ -140,8 +140,9 @@ public class MapPathMiddlewareTests
     [InlineData("/foo/cho/")]
     public void MatchPathWithTrailingSlashThrowsException(string matchPath)
     {
-        Assert.Throws<ArgumentException>(() =>
-            new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build());
+        Assert.Throws<ArgumentException>(
+            () => new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build()
+        );
     }
 
     [Theory]

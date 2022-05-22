@@ -250,8 +250,9 @@ namespace System.Web.Http.Owin
                 CancellationToken cancellationToken = new CancellationToken(true);
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                    filter.AuthenticateAsync(context, cancellationToken));
+                await Assert.ThrowsAsync<OperationCanceledException>(
+                    () => filter.AuthenticateAsync(context, cancellationToken)
+                );
             }
         }
 

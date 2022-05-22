@@ -411,15 +411,18 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassWithPropertyNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyNamingConflictWhichThrows>(
+                        json
+                    )
+            );
         }
 
         [Fact]
@@ -427,15 +430,18 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassWithPropertyFieldNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyFieldNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyFieldNamingConflictWhichThrows>(
+                        json
+                    )
+            );
         }
 
         [Fact]
@@ -443,8 +449,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassInheritedWithPropertyNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"MyString":"ConflictingValue"}
@@ -453,10 +460,12 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyNamingConflictWhichThrows>(
+                        json
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -468,8 +477,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassInheritedWithPropertyFieldNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"MyString":"ConflictingValue"}
@@ -478,10 +488,12 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(
+                        json
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -493,8 +505,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassTwiceInheritedWithPropertyNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"MyString":"ConflictingValue"}
@@ -504,10 +517,12 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(
+                        json
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -519,8 +534,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Serialize
             var obj = new ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"MyString":"ConflictingValue"}
@@ -530,10 +546,12 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                    json
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(
+                        json
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -550,16 +568,19 @@ namespace System.Text.Json.Serialization.Tests
 
             // Serialize
             var obj = new ClassWithPropertyPolicyConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -572,16 +593,19 @@ namespace System.Text.Json.Serialization.Tests
 
             // Serialize
             var obj = new ClassWithPropertyFieldPolicyConflictWhichThrows();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyFieldPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithPropertyFieldPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -595,8 +619,9 @@ namespace System.Text.Json.Serialization.Tests
             // Serialize
             var obj = new ClassInheritedWithPropertyPolicyConflictWhichThrows();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"myString":"ConflictingValue"}
@@ -605,11 +630,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -627,8 +654,9 @@ namespace System.Text.Json.Serialization.Tests
             // Serialize
             var obj = new ClassInheritedWithPropertyFieldPolicyConflictWhichThrows();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"myString":"ConflictingValue"}
@@ -637,11 +665,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyFieldPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassInheritedWithPropertyFieldPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -659,8 +689,9 @@ namespace System.Text.Json.Serialization.Tests
             // Serialize
             var obj = new ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"myString":"ConflictingValue"}
@@ -670,11 +701,13 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -692,8 +725,9 @@ namespace System.Text.Json.Serialization.Tests
             // Serialize
             var obj = new ClassTwiceInheritedWithPropertyFieldPolicyConflictWhichThrows();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(obj, options));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(obj, options)
+            );
 
             // The output for Newtonsoft.Json is:
             // {"myString":"ConflictingValue"}
@@ -703,11 +737,13 @@ namespace System.Text.Json.Serialization.Tests
             // Deserialize
             string json = @"{""MyString"":""NewValue""}";
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyFieldPolicyConflictWhichThrows>(
-                    json,
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassTwiceInheritedWithPropertyFieldPolicyConflictWhichThrows>(
+                        json,
+                        options
+                    )
+            );
 
             // The output for Newtonsoft.Json is:
             // obj.myString = "NewValue"
@@ -782,10 +818,12 @@ namespace System.Text.Json.Serialization.Tests
             // Conflicts at different type-hierarchy levels that are not caused by
             // deriving or the new keyword are allowed. Properties on more derived types win.
             // This is invalid in System.Text.Json.
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    new DerivedClass_WithConflictingPropertyName()
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        new DerivedClass_WithConflictingPropertyName()
+                    )
+            );
 
             serialized = await JsonSerializerWrapperForString.SerializeWrapper(
                 new FurtherDerivedClass_With_IgnoredOverride()
@@ -1343,10 +1381,12 @@ namespace System.Text.Json.Serialization.Tests
                     }";
 
             // Unsupported collections will throw on deserialize by default.
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithUnsupportedDictionary>(
-                    json
-                ));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithUnsupportedDictionary>(
+                        json
+                    )
+            );
 
             // Using new options instance to prevent using previously cached metadata.
             JsonSerializerOptions options = new JsonSerializerOptions();
@@ -1372,21 +1412,25 @@ namespace System.Text.Json.Serialization.Tests
                 MyIDict = dictionary
             };
 
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(instance, options));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(instance, options)
+            );
 
             // Unsupported collections will throw on deserialize by default if they contain elements.
             options = new JsonSerializerOptions();
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForClassWithUnsupportedDictionary>(
-                    wrapperJson,
-                    options
-                ));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForClassWithUnsupportedDictionary>(
+                        wrapperJson,
+                        options
+                    )
+            );
 
             options = new JsonSerializerOptions();
             // Unsupported collections will throw on serialize by default if they contain elements.
-            await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(instance, options));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                async () => await JsonSerializerWrapperForString.SerializeWrapper(instance, options)
+            );
 
             // When ignored, we can serialize and deserialize without exceptions.
             options = new JsonSerializerOptions();
@@ -1438,17 +1482,21 @@ namespace System.Text.Json.Serialization.Tests
             string wrapperJson = @"{""MyClass"":{""MyBigInteger"":1}}";
 
             // Unsupported types will throw by default.
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithUnsupportedBigInteger>(
-                    json
-                ));
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<ClassWithUnsupportedBigInteger>(
+                        json
+                    )
+            );
             // Using new options instance to prevent using previously cached metadata.
             JsonSerializerOptions options = new JsonSerializerOptions();
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForClassWithUnsupportedBigInteger>(
-                    wrapperJson,
-                    options
-                ));
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<WrapperForClassWithUnsupportedBigInteger>(
+                        wrapperJson,
+                        options
+                    )
+            );
 
             // When ignored, we can serialize and deserialize without exceptions.
             options = new JsonSerializerOptions();
@@ -1917,8 +1965,10 @@ namespace System.Text.Json.Serialization.Tests
 
             // Null being assigned to non-nullable types is invalid.
             json = @"{""Int1"":1,""MyInt"":null,""Int2"":2}";
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper(json, type, options));
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper(json, type, options)
+            );
         }
 
         public class ClassWithStructProperty_IgnoreConditionWhenWritingDefault
@@ -2837,20 +2887,22 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(StructWithBadIgnoreAttribute))]
         public virtual async Task JsonIgnoreCondition_WhenWritingNull_OnValueType_Fail(Type type)
         {
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper("{}", type));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.DeserializeWrapper("{}", type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);
             Assert.Contains("JsonIgnoreCondition.WhenWritingDefault", exAsStr);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    Activator.CreateInstance(type),
-                    type
-                ));
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        Activator.CreateInstance(type),
+                        type
+                    )
+            );
             exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
@@ -2865,19 +2917,21 @@ namespace System.Text.Json.Serialization.Tests
             Type type
         )
         {
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await JsonSerializerWrapperForString.DeserializeWrapper("", type));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await JsonSerializerWrapperForString.DeserializeWrapper("", type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);
             Assert.Contains("JsonIgnoreCondition.WhenWritingDefault", exAsStr);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    Activator.CreateInstance(type)
-                ));
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        Activator.CreateInstance(type)
+                    )
+            );
             exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
             Assert.Contains("MyBadMember", exAsStr);
@@ -2988,18 +3042,22 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonIgnoreCondition_ConverterCalledOnDeserialize()
         {
             // Verify converter is called.
-            await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<MyValueTypeWithProperties>(
-                    "{}"
-                ));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<MyValueTypeWithProperties>(
+                        "{}"
+                    )
+            );
 
             var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
-            await Assert.ThrowsAsync<NotImplementedException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<MyValueTypeWithProperties>(
-                    "{}",
-                    options
-                ));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<MyValueTypeWithProperties>(
+                        "{}",
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -3239,23 +3297,31 @@ namespace System.Text.Json.Serialization.Tests
 
 #if !BUILDING_SOURCE_GENERATOR_TESTS
             // Without [JsonIgnore], serializer throws exceptions due to runtime-reflection-based property metadata inspection.
-            await Assert.ThrowsAsync<ArgumentException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    new TypeWith_RefStringProp()
-                ));
-            await Assert.ThrowsAsync<ArgumentException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<TypeWith_RefStringProp>(
-                    "{}"
-                ));
+            await Assert.ThrowsAsync<ArgumentException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        new TypeWith_RefStringProp()
+                    )
+            );
+            await Assert.ThrowsAsync<ArgumentException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<TypeWith_RefStringProp>(
+                        "{}"
+                    )
+            );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    new TypeWith_PropWith_BadConverter()
-                ));
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<TypeWith_PropWith_BadConverter>(
-                    "{}"
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        new TypeWith_PropWith_BadConverter()
+                    )
+            );
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<TypeWith_PropWith_BadConverter>(
+                        "{}"
+                    )
+            );
 #else
             // Ref returns supported in source-gen mode
             string expected = @"{""NameRef"":""John Doe"",""Name"":""John Doe""}";

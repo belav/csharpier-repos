@@ -1028,9 +1028,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1055,7 +1056,8 @@ zM=
   <Exponent>AQAB</Exponent>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1064,9 +1066,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1094,7 +1097,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1103,9 +1107,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1131,7 +1136,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1140,9 +1146,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1168,7 +1175,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1177,9 +1185,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1205,7 +1214,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1214,9 +1224,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1242,7 +1253,8 @@ zM=
   </Modulus>
 </RSAKeyValue>
 "
-                    ));
+                        )
+                );
             }
         }
 
@@ -1252,9 +1264,10 @@ zM=
             using (RSA rsa = RSAFactory.Create())
             {
                 // The D value is missing the terminating ==.
-                Assert.Throws<FormatException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.Throws<FormatException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1282,7 +1295,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSAKeyValue>"
-                    ));
+                        )
+                );
             }
         }
 
@@ -1319,9 +1333,10 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                Exception exception = Assert.ThrowsAny<Exception>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Exception exception = Assert.ThrowsAny<Exception>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1349,7 +1364,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSA"
-                    ));
+                        )
+                );
 
                 if (PlatformDetection.IsNetFramework)
                 {
@@ -1373,9 +1389,10 @@ zM=
             // This is DiminishedDPParameters XML, but with a P that is way too long.
             using (RSA rsa = RSAFactory.Create())
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.FromXmlString(
-                        @"
+                Assert.ThrowsAny<CryptographicException>(
+                    () =>
+                        rsa.FromXmlString(
+                            @"
 <RSAKeyValue>
   <D>
     r+byNi+cr17FpJH4MCEiPXaKnmkH4c4U52EJtL9yg2gijBrpYkat3c2nWb0EGGi5
@@ -1404,7 +1421,8 @@ zM=
     UERRHhvKNiUn4Xz0KzgGFQ==
   </Modulus>
 </RSAKeyValue>"
-                    ));
+                        )
+                );
             }
         }
 

@@ -66,8 +66,9 @@ namespace System.Security.Cryptography.Tests
             using (PositionValueStream stream = new SlowPositionValueStream(10000))
             using (HashAlgorithm hash = new SummingTestHashAlgorithm())
             {
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    hash.ComputeHashAsync(stream, cancellationSource.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () => hash.ComputeHashAsync(stream, cancellationSource.Token)
+                );
             }
         }
 

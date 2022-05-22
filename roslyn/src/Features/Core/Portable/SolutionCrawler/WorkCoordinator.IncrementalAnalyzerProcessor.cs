@@ -66,26 +66,29 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     _cacheService =
                         registration.Workspace.Services.GetService<IProjectCacheService>();
 
-                    _lazyDiagnosticAnalyzerService = new Lazy<IDiagnosticAnalyzerService?>(() =>
-                        GetDiagnosticAnalyzerService(analyzerProviders));
+                    _lazyDiagnosticAnalyzerService = new Lazy<IDiagnosticAnalyzerService?>(
+                        () => GetDiagnosticAnalyzerService(analyzerProviders)
+                    );
 
                     var analyzersGetter = new AnalyzersGetter(analyzerProviders);
 
                     // create analyzers lazily.
-                    var lazyActiveFileAnalyzers = new Lazy<
-                        ImmutableArray<IIncrementalAnalyzer>
-                    >(() =>
-                        GetIncrementalAnalyzers(
-                            _registration,
-                            analyzersGetter,
-                            onlyHighPriorityAnalyzer: true
-                        ));
-                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() =>
-                        GetIncrementalAnalyzers(
-                            _registration,
-                            analyzersGetter,
-                            onlyHighPriorityAnalyzer: false
-                        ));
+                    var lazyActiveFileAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                        () =>
+                            GetIncrementalAnalyzers(
+                                _registration,
+                                analyzersGetter,
+                                onlyHighPriorityAnalyzer: true
+                            )
+                    );
+                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                        () =>
+                            GetIncrementalAnalyzers(
+                                _registration,
+                                analyzersGetter,
+                                onlyHighPriorityAnalyzer: false
+                            )
+                    );
 
                     if (!initializeLazily)
                     {

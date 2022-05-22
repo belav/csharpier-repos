@@ -166,11 +166,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 showProgress: true,
                 (operationContext) =>
                 {
-                    solution = ThreadHelper.JoinableTaskFactory.Run(() =>
-                        syncService.SyncNamespacesAsync(
-                            projects,
-                            operationContext.UserCancellationToken
-                        ));
+                    solution = ThreadHelper.JoinableTaskFactory.Run(
+                        () =>
+                            syncService.SyncNamespacesAsync(
+                                projects,
+                                operationContext.UserCancellationToken
+                            )
+                    );
                 }
             );
 

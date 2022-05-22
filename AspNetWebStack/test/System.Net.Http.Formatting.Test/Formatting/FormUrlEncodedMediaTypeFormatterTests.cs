@@ -131,8 +131,9 @@ namespace System.Net.Http.Formatting
                 "application/x-www-form-urlencoded"
             );
             var contentStream = await content.ReadAsStreamAsync();
-            await Assert.ThrowsAsync<ArgumentException>(() =>
-                formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null));
+            await Assert.ThrowsAsync<ArgumentException>(
+                () => formatter.ReadFromStreamAsync(typeof(JToken), contentStream, content, null)
+            );
         }
 
         [Fact]

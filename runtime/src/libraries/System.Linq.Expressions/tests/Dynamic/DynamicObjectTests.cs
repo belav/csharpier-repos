@@ -725,8 +725,9 @@ namespace System.Dynamic.Tests
             Assert.Throws<RuntimeBinderException>(() => d.modulo(233, 12));
             Assert.Throws<RuntimeBinderException>(() => d.Modulo());
             Assert.Throws<RuntimeBinderException>(() => d.Modulo(233, 12, 9));
-            Assert.Throws<RuntimeBinderException>(() =>
-                d.Modulo("two hundred and thirty-three", "twelve"));
+            Assert.Throws<RuntimeBinderException>(
+                () => d.Modulo("two hundred and thirty-three", "twelve")
+            );
         }
 
         [Fact]

@@ -3434,8 +3434,9 @@ namespace System.Tests
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
-                Assert.Throws<DivideByZeroException>(() =>
-                    Math.DivRem(dividend, divisor, out int remainder));
+                Assert.Throws<DivideByZeroException>(
+                    () => Math.DivRem(dividend, divisor, out int remainder)
+                );
             }
             else
             {
@@ -3510,8 +3511,9 @@ namespace System.Tests
             if (divisor == 0)
             {
                 Assert.Throws<DivideByZeroException>(() => Math.DivRem(dividend, divisor));
-                Assert.Throws<DivideByZeroException>(() =>
-                    Math.DivRem(dividend, divisor, out long remainder));
+                Assert.Throws<DivideByZeroException>(
+                    () => Math.DivRem(dividend, divisor, out long remainder)
+                );
             }
             else
             {

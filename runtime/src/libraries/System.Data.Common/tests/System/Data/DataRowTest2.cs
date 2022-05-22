@@ -1139,8 +1139,9 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
-                dr[new DataColumn("ZZZ")]);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[new DataColumn("ZZZ")]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1184,14 +1185,16 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
-                dr[(DataColumn)null]);
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null]
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("column", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
-                dr[(DataColumn)null] = personB);
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null] = personB
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("column", ex2.ParamName);
@@ -1603,8 +1606,9 @@ namespace System.Data.Tests
             Assert.Matches(@"\b" + "Persons" + @"\b", ex1.Message);
             Assert.Null(ex1.ParamName);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
-                dr[string.Empty] = personB);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[string.Empty] = personB
+            );
             // Column '' does not belong to table Persons
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1633,14 +1637,16 @@ namespace System.Data.Tests
 
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
-                dr[(string)null]);
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(
+                () => dr[(string)null]
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("name", ex1.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
-                dr[(string)null] = personB);
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(
+                () => dr[(string)null] = personB
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("name", ex2.ParamName);
@@ -1837,8 +1843,9 @@ namespace System.Data.Tests
             dtA.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dtA.Rows[0];
 
-            ArgumentException ex1 = Assert.Throws<ArgumentException>(() =>
-                dr[dcB1, DataRowVersion.Default]);
+            ArgumentException ex1 = Assert.Throws<ArgumentException>(
+                () => dr[dcB1, DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
@@ -1848,8 +1855,9 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
-                dr[new DataColumn("ZZZ"), DataRowVersion.Default]);
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(
+                () => dr[new DataColumn("ZZZ"), DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1861,8 +1869,9 @@ namespace System.Data.Tests
 
             dtA.Columns.Remove(dcA2);
 
-            ArgumentException ex3 = Assert.Throws<ArgumentException>(() =>
-                dr[dcA2, DataRowVersion.Default]);
+            ArgumentException ex3 = Assert.Throws<ArgumentException>(
+                () => dr[dcA2, DataRowVersion.Default]
+            );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex3.InnerException);
             Assert.NotNull(ex3.Message);
@@ -1889,8 +1898,9 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                dr[(DataColumn)null, DataRowVersion.Default]);
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => dr[(DataColumn)null, DataRowVersion.Default]
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("column", ex.ParamName);
@@ -1935,15 +1945,17 @@ namespace System.Data.Tests
             dt.Rows.Add(new object[] { addressA, personA });
             DataRow dr = dt.Rows[0];
 
-            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(() =>
-                dr[dc0, DataRowVersion.Original]);
+            VersionNotFoundException ex1 = Assert.Throws<VersionNotFoundException>(
+                () => dr[dc0, DataRowVersion.Original]
+            );
             // There is no Original data to access
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Contains("Original", ex1.Message);
 
-            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(() =>
-                dr[dc0, DataRowVersion.Proposed]);
+            VersionNotFoundException ex2 = Assert.Throws<VersionNotFoundException>(
+                () => dr[dc0, DataRowVersion.Proposed]
+            );
             // There is no Proposed data to access
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);

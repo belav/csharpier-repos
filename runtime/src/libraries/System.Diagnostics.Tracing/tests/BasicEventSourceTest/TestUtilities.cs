@@ -16,8 +16,9 @@ namespace BasicEventSourceTests
     internal class TestUtilities
     {
         // Specifies whether the process is elevated or not.
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() =>
-            AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
         internal static bool IsProcessElevated => s_isElevated.Value;
 
         /// <summary>

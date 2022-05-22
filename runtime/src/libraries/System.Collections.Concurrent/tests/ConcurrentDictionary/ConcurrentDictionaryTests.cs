@@ -751,8 +751,9 @@ namespace System.Collections.Concurrent.Tests
             Type proxyType = DebuggerAttributes.GetProxyType(
                 new ConcurrentDictionary<string, int>()
             );
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                Activator.CreateInstance(proxyType, (object)null));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -837,21 +838,26 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public static void TestConstructor_Negative()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new ConcurrentDictionary<int, int>((ICollection<KeyValuePair<int, int>>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => new ConcurrentDictionary<int, int>((ICollection<KeyValuePair<int, int>>)null)
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection is passed");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new ConcurrentDictionary<int, int>(
-                    (ICollection<KeyValuePair<int, int>>)null,
-                    EqualityComparer<int>.Default
-                ));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new ConcurrentDictionary<int, int>(
+                        (ICollection<KeyValuePair<int, int>>)null,
+                        EqualityComparer<int>.Default
+                    )
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection and non null IEqualityComparer passed");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new ConcurrentDictionary<string, int>(
-                    new[] { new KeyValuePair<string, int>(null, 1) }
-                ));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new ConcurrentDictionary<string, int>(
+                        new[] { new KeyValuePair<string, int>(null, 1) }
+                    )
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when collection has null key passed");
 
             // Duplicate keys.
@@ -863,16 +869,19 @@ namespace System.Collections.Concurrent.Tests
                     )
             );
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new ConcurrentDictionary<int, int>(1, null, EqualityComparer<int>.Default));
+            Assert.Throws<ArgumentNullException>(
+                () => new ConcurrentDictionary<int, int>(1, null, EqualityComparer<int>.Default)
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when null collection is passed");
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ConcurrentDictionary<int, int>(0, 10));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ConcurrentDictionary<int, int>(0, 10)
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw AORE when <1 concurrencyLevel passed");
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new ConcurrentDictionary<int, int>(-1, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new ConcurrentDictionary<int, int>(-1, 0)
+            );
             // "TestConstructor:  FAILED.  Constructor didn't throw AORE when < 0 capacity passed");
         }
 
@@ -917,23 +926,29 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentNullException>(() => dictionary.GetOrAdd(null, 0));
             // "TestExceptions:  FAILED.  GetOrAdd didn't throw ANE when null key is passed");
 
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate(null, (k, m) => 0, (k, v, m) => 0, 42));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate(null, (k, m) => 0, (k, v, m) => 0, 42)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null key is passed");
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate("1", (k, m) => 0, null, 42));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate("1", (k, m) => 0, null, 42)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null updateFactory is passed");
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate("1", null, (k, v, m) => 0, 42));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate("1", null, (k, v, m) => 0, 42)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null addFactory is passed");
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate(null, (k) => 0, (k, v) => 0));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate(null, (k) => 0, (k, v) => 0)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null key is passed");
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate("1", null, (k, v) => 0));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate("1", null, (k, v) => 0)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null updateFactory is passed");
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.AddOrUpdate(null, (k) => 0, null));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.AddOrUpdate(null, (k) => 0, null)
+            );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null addFactory is passed");
 
             // Duplicate key.
@@ -1051,8 +1066,9 @@ namespace System.Collections.Concurrent.Tests
         public static void IDictionary_Remove_NullKeyInKeyValuePair_ThrowsArgumentNullException()
         {
             IDictionary<string, int> dictionary = new ConcurrentDictionary<string, int>();
-            Assert.Throws<ArgumentNullException>(() =>
-                dictionary.Remove(new KeyValuePair<string, int>(null, 0)));
+            Assert.Throws<ArgumentNullException>(
+                () => dictionary.Remove(new KeyValuePair<string, int>(null, 0))
+            );
         }
 
         [Fact]
@@ -1102,8 +1118,9 @@ namespace System.Collections.Concurrent.Tests
             // "TestICollection:  FAILED.  SyncRoot property didn't throw");
             Assert.Throws<ArgumentNullException>(() => dictionary.CopyTo(null, 0));
             // "TestICollection:  FAILED.  CopyTo didn't throw ANE when null Array is passed");
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                dictionary.CopyTo(new object[] { }, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => dictionary.CopyTo(new object[] { }, -1)
+            );
             // "TestICollection:  FAILED.  CopyTo didn't throw AORE when negative index passed");
 
             //add one item to the dictionary

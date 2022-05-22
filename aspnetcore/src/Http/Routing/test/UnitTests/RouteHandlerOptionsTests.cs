@@ -70,8 +70,9 @@ public class RouteHandlerOptionsTests
         services.AddRouting();
         var serviceProvider = services.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(() =>
-            serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>());
+        Assert.Throws<InvalidOperationException>(
+            () => serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>()
+        );
     }
 
     private class HostEnvironment : IHostEnvironment

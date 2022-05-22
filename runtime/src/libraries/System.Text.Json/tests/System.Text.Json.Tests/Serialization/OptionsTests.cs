@@ -80,31 +80,41 @@ namespace System.Text.Json.Serialization.Tests
             Assert.False(options.Converters.IsReadOnly);
 
             // Setters should always throw; we don't check to see if the value is the same or not.
-            Assert.Throws<InvalidOperationException>(() =>
-                options.AllowTrailingCommas = options.AllowTrailingCommas);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.DefaultBufferSize = options.DefaultBufferSize);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.DictionaryKeyPolicy = options.DictionaryKeyPolicy);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.Encoder = JavaScriptEncoder.Default);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.IgnoreNullValues = options.IgnoreNullValues);
+            Assert.Throws<InvalidOperationException>(
+                () => options.AllowTrailingCommas = options.AllowTrailingCommas
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.DefaultBufferSize = options.DefaultBufferSize
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.DictionaryKeyPolicy = options.DictionaryKeyPolicy
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.Encoder = JavaScriptEncoder.Default
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.IgnoreNullValues = options.IgnoreNullValues
+            );
             Assert.Throws<InvalidOperationException>(() => options.MaxDepth = options.MaxDepth);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.PropertyNamingPolicy = options.PropertyNamingPolicy);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.ReadCommentHandling = options.ReadCommentHandling);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.WriteIndented = options.WriteIndented);
+            Assert.Throws<InvalidOperationException>(
+                () => options.PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.PropertyNamingPolicy = options.PropertyNamingPolicy
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.ReadCommentHandling = options.ReadCommentHandling
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => options.WriteIndented = options.WriteIndented
+            );
 
             Assert.Throws<InvalidOperationException>(() => options.Converters[0] = tc);
             Assert.Throws<InvalidOperationException>(() => options.Converters.Clear());
             Assert.Throws<InvalidOperationException>(() => options.Converters.Add(tc));
-            Assert.Throws<InvalidOperationException>(() =>
-                options.Converters.Insert(0, new TestConverter()));
+            Assert.Throws<InvalidOperationException>(
+                () => options.Converters.Insert(0, new TestConverter())
+            );
             Assert.Throws<InvalidOperationException>(() => options.Converters.Remove(tc));
             Assert.Throws<InvalidOperationException>(() => options.Converters.RemoveAt(0));
         }
@@ -112,10 +122,12 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void DefaultBufferSizeFail()
         {
-            Assert.Throws<ArgumentException>(() =>
-                new JsonSerializerOptions().DefaultBufferSize = 0);
-            Assert.Throws<ArgumentException>(() =>
-                new JsonSerializerOptions().DefaultBufferSize = -1);
+            Assert.Throws<ArgumentException>(
+                () => new JsonSerializerOptions().DefaultBufferSize = 0
+            );
+            Assert.Throws<ArgumentException>(
+                () => new JsonSerializerOptions().DefaultBufferSize = -1
+            );
         }
 
         [Fact]
@@ -170,13 +182,15 @@ namespace System.Text.Json.Serialization.Tests
             const string json = @"{""MyIntMissing"":2,}";
 
             // Verify baseline without options.
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionProperty>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithExtensionProperty>(json)
+            );
 
             // Verify baseline with options.
             var options = new JsonSerializerOptions();
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithExtensionProperty>(json, options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithExtensionProperty>(json, options)
+            );
 
             // Set AllowTrailingCommas to true.
             options = new JsonSerializerOptions();
@@ -218,13 +232,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadCommentHandling()
         {
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<object>("/* commment */"));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<object>("/* commment */")
+            );
 
             var options = new JsonSerializerOptions();
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<object>("/* commment */", options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<object>("/* commment */", options)
+            );
 
             options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
@@ -270,8 +286,9 @@ namespace System.Text.Json.Serialization.Tests
             options = new JsonSerializerOptions();
             options.MaxDepth = 1;
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<BasicCompany>(BasicCompany.s_data, options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<BasicCompany>(BasicCompany.s_data, options)
+            );
         }
 
         private class TestClassForEncoding
@@ -568,8 +585,9 @@ namespace System.Text.Json.Serialization.Tests
 
             // Perform serialization with options, after which it will be locked.
             JsonSerializer.Serialize("1", options);
-            Assert.Throws<InvalidOperationException>(() =>
-                options.ReferenceHandler = ReferenceHandler.Preserve);
+            Assert.Throws<InvalidOperationException>(
+                () => options.ReferenceHandler = ReferenceHandler.Preserve
+            );
 
             var newOptions = new JsonSerializerOptions(options);
             VerifyOptionsEqual(options, newOptions);
@@ -595,12 +613,14 @@ namespace System.Text.Json.Serialization.Tests
 
                 string effectiveMaxDepthAsStr = effectiveMaxDepth.ToString();
 
-                JsonException ex = Assert.Throws<JsonException>(() =>
-                    JsonSerializer.Serialize(myList, options));
+                JsonException ex = Assert.Throws<JsonException>(
+                    () => JsonSerializer.Serialize(myList, options)
+                );
                 Assert.Contains(effectiveMaxDepthAsStr, ex.ToString());
 
-                ex = Assert.Throws<JsonException>(() =>
-                    JsonSerializer.Serialize(myList, newOptions));
+                ex = Assert.Throws<JsonException>(
+                    () => JsonSerializer.Serialize(myList, newOptions)
+                );
                 Assert.Contains(effectiveMaxDepthAsStr, ex.ToString());
             }
 
@@ -622,8 +642,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CopyConstructor_NullInput()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
-                new JsonSerializerOptions(null));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => new JsonSerializerOptions(null)
+            );
             Assert.Contains("options", ex.ToString());
         }
 
@@ -646,8 +667,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var optionsSingleton = JsonSerializerOptions.Default;
             Assert.Throws<InvalidOperationException>(() => optionsSingleton.IncludeFields = true);
-            Assert.Throws<InvalidOperationException>(() =>
-                optionsSingleton.Converters.Add(new JsonStringEnumConverter()));
+            Assert.Throws<InvalidOperationException>(
+                () => optionsSingleton.Converters.Add(new JsonStringEnumConverter())
+            );
         }
 
         [Fact]
@@ -673,8 +695,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void PredefinedSerializerOptions_UnhandledDefaults(int enumValue)
         {
             var outOfRangeSerializerDefaults = (JsonSerializerDefaults)enumValue;
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonSerializerOptions(outOfRangeSerializerDefaults));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonSerializerOptions(outOfRangeSerializerDefaults)
+            );
         }
 
         private static JsonSerializerOptions GetFullyPopulatedOptionsInstance()
@@ -825,8 +848,9 @@ namespace System.Text.Json.Serialization.Tests
             // Set IgnoreNullValues first.
             JsonSerializerOptions options = new JsonSerializerOptions { IgnoreNullValues = true };
 
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("IgnoreNullValues", exAsStr);
             Assert.Contains("DefaultIgnoreCondition", exAsStr);
@@ -851,8 +875,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CannotSet_DefaultIgnoreCondition_To_Always()
         {
-            Assert.Throws<ArgumentException>(() =>
-                new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.Always });
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new JsonSerializerOptions
+                    {
+                        DefaultIgnoreCondition = JsonIgnoreCondition.Always
+                    }
+            );
         }
 
         [Fact]

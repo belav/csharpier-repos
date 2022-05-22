@@ -38,8 +38,9 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             )
             {
                 var id = "Test" + character;
-                Assert.Throws<InvalidOperationException>(() =>
-                    PathHelper.GetSecretsPathFromSecretsId(id));
+                Assert.Throws<InvalidOperationException>(
+                    () => PathHelper.GetSecretsPathFromSecretsId(id)
+                );
             }
         }
     }

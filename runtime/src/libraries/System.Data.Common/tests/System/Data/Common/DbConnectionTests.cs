@@ -122,16 +122,21 @@ namespace System.Data.Common.Tests
         public void GetSchemaAsync_with_cancelled_token()
         {
             var conn = new MockDbConnection();
-            Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await conn.GetSchemaAsync(new CancellationToken(true)));
-            Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await conn.GetSchemaAsync("MetaDataCollections", new CancellationToken(true)));
-            Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await conn.GetSchemaAsync(
-                    "MetaDataCollections",
-                    new string[0],
-                    new CancellationToken(true)
-                ));
+            Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await conn.GetSchemaAsync(new CancellationToken(true))
+            );
+            Assert.ThrowsAsync<TaskCanceledException>(
+                async () =>
+                    await conn.GetSchemaAsync("MetaDataCollections", new CancellationToken(true))
+            );
+            Assert.ThrowsAsync<TaskCanceledException>(
+                async () =>
+                    await conn.GetSchemaAsync(
+                        "MetaDataCollections",
+                        new string[0],
+                        new CancellationToken(true)
+                    )
+            );
         }
 
         [Fact]
@@ -139,10 +144,12 @@ namespace System.Data.Common.Tests
         {
             var conn = new MockDbConnection();
             Assert.ThrowsAsync<NotSupportedException>(async () => await conn.GetSchemaAsync());
-            Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await conn.GetSchemaAsync("MetaDataCollections"));
-            Assert.ThrowsAsync<NotSupportedException>(async () =>
-                await conn.GetSchemaAsync("MetaDataCollections", new string[0]));
+            Assert.ThrowsAsync<NotSupportedException>(
+                async () => await conn.GetSchemaAsync("MetaDataCollections")
+            );
+            Assert.ThrowsAsync<NotSupportedException>(
+                async () => await conn.GetSchemaAsync("MetaDataCollections", new string[0])
+            );
         }
 
         [Fact]

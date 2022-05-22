@@ -623,8 +623,9 @@ Environment.ProcessorCount
             Assert.Equal(3, state3.Result.ReturnValue);
             var c3C3 = (INamedTypeSymbol)lookupMember(compilation3, "Submission#2", "C3");
             var c3C1 = c3C3.BaseType;
-            Assert.Throws<ArgumentException>(() =>
-                compilation2.IsSymbolAccessibleWithin(c3C3, c3C1));
+            Assert.Throws<ArgumentException>(
+                () => compilation2.IsSymbolAccessibleWithin(c3C3, c3C1)
+            );
             Assert.True(compilation3.IsSymbolAccessibleWithin(c3C3, c3C1));
 
             INamedTypeSymbol lookupType(Compilation c, string name)
@@ -751,15 +752,18 @@ Environment.ProcessorCount
         {
             var s0 = await CSharpScript.RunAsync("int x = 1;");
 
-            Assert.Throws<CompilationErrorException>(() =>
-                s0.ContinueWithAsync("invalid$syntax").Result);
+            Assert.Throws<CompilationErrorException>(
+                () => s0.ContinueWithAsync("invalid$syntax").Result
+            );
 
             var s1 = await s0.ContinueWithAsync("x = 2; x = 10");
 
-            Assert.Throws<CompilationErrorException>(() =>
-                s1.ContinueWithAsync("invalid$syntax").Result);
-            Assert.Throws<CompilationErrorException>(() =>
-                s1.ContinueWithAsync("x = undefined_symbol").Result);
+            Assert.Throws<CompilationErrorException>(
+                () => s1.ContinueWithAsync("invalid$syntax").Result
+            );
+            Assert.Throws<CompilationErrorException>(
+                () => s1.ContinueWithAsync("x = undefined_symbol").Result
+            );
 
             var s2 = await s1.ContinueWithAsync("int y = 2;");
 
@@ -2571,12 +2575,14 @@ int F() => i + j + k + l;
 "
             );
 
-            await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                s3.RunAsync(
-                    globals,
-                    catchException: e => e is not OperationCanceledException,
-                    cancellationToken: cancellationSource.Token
-                ));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                () =>
+                    s3.RunAsync(
+                        globals,
+                        catchException: e => e is not OperationCanceledException,
+                        cancellationToken: cancellationSource.Token
+                    )
+            );
         }
 
         #endregion

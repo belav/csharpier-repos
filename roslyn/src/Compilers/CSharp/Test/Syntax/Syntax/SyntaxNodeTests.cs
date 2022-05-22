@@ -673,8 +673,9 @@ a + b";
                 classDecl2.FindNode(nodeEndPositionSpan, findInsideTrivia: true)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                classDecl.FindNode(nodeEndPositionSpan));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => classDecl.FindNode(nodeEndPositionSpan)
+            );
 
             // Invalid spans.
             var invalidSpan = new TextSpan(100, 100);
@@ -2206,12 +2207,14 @@ class Test
             var stat2 = SyntaxFactory.ParseStatement("m2(y)");
 
             // you cannot replace a node that is a single node member with multiple nodes
-            Assert.Throws<InvalidOperationException>(() =>
-                ifstatement.ReplaceNode(then, new[] { stat1, stat2 }));
+            Assert.Throws<InvalidOperationException>(
+                () => ifstatement.ReplaceNode(then, new[] { stat1, stat2 })
+            );
 
             // you cannot replace a node that is a single node member with an empty list
-            Assert.Throws<InvalidOperationException>(() =>
-                ifstatement.ReplaceNode(then, new StatementSyntax[] { }));
+            Assert.Throws<InvalidOperationException>(
+                () => ifstatement.ReplaceNode(then, new StatementSyntax[] { })
+            );
         }
 
         [Fact]
@@ -2260,12 +2263,14 @@ class Test
             var stat2 = SyntaxFactory.ParseStatement("m2(y)");
 
             // you cannot insert nodes before/after a node that is not part of a list
-            Assert.Throws<InvalidOperationException>(() =>
-                ifstatement.InsertNodesBefore(then, new[] { stat1, stat2 }));
+            Assert.Throws<InvalidOperationException>(
+                () => ifstatement.InsertNodesBefore(then, new[] { stat1, stat2 })
+            );
 
             // you cannot insert nodes before/after a node that is not part of a list
-            Assert.Throws<InvalidOperationException>(() =>
-                ifstatement.InsertNodesAfter(then, new StatementSyntax[] { }));
+            Assert.Throws<InvalidOperationException>(
+                () => ifstatement.InsertNodesAfter(then, new StatementSyntax[] { })
+            );
         }
 
         [Fact]
@@ -2377,12 +2382,14 @@ class Test
             var identifierB = SyntaxFactory.ParseToken("B");
 
             // you cannot replace a token that is a single token member with multiple tokens
-            Assert.Throws<InvalidOperationException>(() =>
-                cu.ReplaceToken(identifierC, new[] { identifierA, identifierB }));
+            Assert.Throws<InvalidOperationException>(
+                () => cu.ReplaceToken(identifierC, new[] { identifierA, identifierB })
+            );
 
             // you cannot replace a token that is a single token member with an empty list of tokens
-            Assert.Throws<InvalidOperationException>(() =>
-                cu.ReplaceToken(identifierC, new SyntaxToken[] { }));
+            Assert.Throws<InvalidOperationException>(
+                () => cu.ReplaceToken(identifierC, new SyntaxToken[] { })
+            );
         }
 
         [Fact]
@@ -2410,12 +2417,14 @@ class Test
             var identifierB = SyntaxFactory.ParseToken("B");
 
             // you cannot insert a token before/after a token that is not part of a list of tokens
-            Assert.Throws<InvalidOperationException>(() =>
-                cu.InsertTokensBefore(identifierC, new[] { identifierA, identifierB }));
+            Assert.Throws<InvalidOperationException>(
+                () => cu.InsertTokensBefore(identifierC, new[] { identifierA, identifierB })
+            );
 
             // you cannot insert a token before/after a token that is not part of a list of tokens
-            Assert.Throws<InvalidOperationException>(() =>
-                cu.InsertTokensAfter(identifierC, new[] { identifierA, identifierB }));
+            Assert.Throws<InvalidOperationException>(
+                () => cu.InsertTokensAfter(identifierC, new[] { identifierA, identifierB })
+            );
         }
 
         [Fact]
@@ -3776,16 +3785,22 @@ class Program
                 new SyntaxNodeOrToken[] { intType, commaToken, intType, commaToken }
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.SeparatedList<TypeSyntax>(new SyntaxNodeOrToken[] { commaToken }));
-            Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.SeparatedList<TypeSyntax>(
-                    new SyntaxNodeOrToken[] { intType, commaToken, commaToken }
-                ));
-            Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.SeparatedList<TypeSyntax>(
-                    new SyntaxNodeOrToken[] { intType, intType }
-                ));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SyntaxFactory.SeparatedList<TypeSyntax>(new SyntaxNodeOrToken[] { commaToken })
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SyntaxFactory.SeparatedList<TypeSyntax>(
+                        new SyntaxNodeOrToken[] { intType, commaToken, commaToken }
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SyntaxFactory.SeparatedList<TypeSyntax>(
+                        new SyntaxNodeOrToken[] { intType, intType }
+                    )
+            );
         }
 
         [WorkItem(543310, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543310")]
@@ -3993,8 +4008,9 @@ namespace HelloWorld
 
             // With null tree
             SyntaxTree BlankTree = null;
-            Assert.Throws<ArgumentNullException>(() =>
-                FirstUsingClause.SyntaxTree.GetChanges(BlankTree));
+            Assert.Throws<ArgumentNullException>(
+                () => FirstUsingClause.SyntaxTree.GetChanges(BlankTree)
+            );
         }
 
         [Fact, WorkItem(658329, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/658329")]
@@ -4030,8 +4046,9 @@ namespace HelloWorld
 
             // With null tree
             SyntaxTree BlankTree = null;
-            Assert.Throws<ArgumentNullException>(() =>
-                FirstUsingClause.SyntaxTree.GetChangedSpans(BlankTree));
+            Assert.Throws<ArgumentNullException>(
+                () => FirstUsingClause.SyntaxTree.GetChangedSpans(BlankTree)
+            );
         }
 
         [Fact]

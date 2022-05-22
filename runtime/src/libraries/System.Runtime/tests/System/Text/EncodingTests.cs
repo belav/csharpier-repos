@@ -30,12 +30,14 @@ namespace System.Text.Tests
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(codePage));
-            Assert.Throws<NotSupportedException>(() =>
-                Encoding.GetEncoding(
-                    codePage,
-                    EncoderFallback.ReplacementFallback,
-                    DecoderFallback.ReplacementFallback
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    Encoding.GetEncoding(
+                        codePage,
+                        EncoderFallback.ReplacementFallback,
+                        DecoderFallback.ReplacementFallback
+                    )
+            );
         }
 
         [ConditionalTheory(
@@ -71,12 +73,14 @@ namespace System.Text.Tests
                 () =>
                 {
                     Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(codePage));
-                    Assert.Throws<NotSupportedException>(() =>
-                        Encoding.GetEncoding(
-                            codePage,
-                            EncoderFallback.ReplacementFallback,
-                            DecoderFallback.ReplacementFallback
-                        ));
+                    Assert.Throws<NotSupportedException>(
+                        () =>
+                            Encoding.GetEncoding(
+                                codePage,
+                                EncoderFallback.ReplacementFallback,
+                                DecoderFallback.ReplacementFallback
+                            )
+                    );
                 }
             );
         }
@@ -91,12 +95,14 @@ namespace System.Text.Tests
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
         {
             Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(encodingName));
-            Assert.Throws<NotSupportedException>(() =>
-                Encoding.GetEncoding(
-                    encodingName,
-                    EncoderFallback.ReplacementFallback,
-                    DecoderFallback.ReplacementFallback
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    Encoding.GetEncoding(
+                        encodingName,
+                        EncoderFallback.ReplacementFallback,
+                        DecoderFallback.ReplacementFallback
+                    )
+            );
         }
 
         [ConditionalTheory(
@@ -130,12 +136,14 @@ namespace System.Text.Tests
                 () =>
                 {
                     Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(encodingName));
-                    Assert.Throws<NotSupportedException>(() =>
-                        Encoding.GetEncoding(
-                            encodingName,
-                            EncoderFallback.ReplacementFallback,
-                            DecoderFallback.ReplacementFallback
-                        ));
+                    Assert.Throws<NotSupportedException>(
+                        () =>
+                            Encoding.GetEncoding(
+                                encodingName,
+                                EncoderFallback.ReplacementFallback,
+                                DecoderFallback.ReplacementFallback
+                            )
+                    );
                 }
             );
         }

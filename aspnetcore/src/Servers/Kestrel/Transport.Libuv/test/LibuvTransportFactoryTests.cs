@@ -22,12 +22,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var options = new LibuvTransportOptions { ThreadCount = threadCount };
 #pragma warning restore CS0618
 
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new LibuvTransportFactory(
-                    Options.Create(options),
-                    new LifetimeNotImplemented(),
-                    Mock.Of<ILoggerFactory>()
-                ));
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new LibuvTransportFactory(
+                        Options.Create(options),
+                        new LifetimeNotImplemented(),
+                        Mock.Of<ILoggerFactory>()
+                    )
+            );
 
             Assert.Equal("threadCount", exception.ParamName);
         }

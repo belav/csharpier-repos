@@ -294,8 +294,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, count, 1)); //"ArgumentOutOfRangeException expected on index larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, count + 1, 1)); //"ArgumentOutOfRangeException expected  on index larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, count + 1)); //"ArgumentOutOfRangeException expected  on count larger than array."
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                list.IndexOf(element, count / 2, count / 2 + 2)); //"ArgumentOutOfRangeException expected.."
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.IndexOf(element, count / 2, count / 2 + 2)
+            ); //"ArgumentOutOfRangeException expected.."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, count + 1)); //"ArgumentOutOfRangeException expected  on count larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, -1)); //"ArgumentOutOfRangeException expected on negative count."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, -1, 1)); //"ArgumentOutOfRangeException expected on negative index."
@@ -323,18 +324,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             if (count > 0)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.LastIndexOf(element, 0, count + 1)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.LastIndexOf(element, count / 2, count / 2 + 2)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.LastIndexOf(element, 0, count + 1)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, 0, count + 1)
+                ); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, count / 2, count / 2 + 2)
+                ); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, 0, count + 1)
+                ); //"Expected ArgumentOutOfRangeException."
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, 0, -1)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.LastIndexOf(element, -1, count)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, -1, count)
+                ); //"Expected ArgumentOutOfRangeException."
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, -1, 1)); //"Expected ArgumentOutOfRangeException."                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count, 0)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.LastIndexOf(element, count, 1)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, count, 1)
+                ); //"Expected ArgumentOutOfRangeException."
             }
             else // IndexOf with a 0 count List is special cased to return -1.
             {

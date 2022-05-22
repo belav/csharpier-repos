@@ -62,8 +62,9 @@ namespace AutoMapper.UnitTests.Bug
             }
 
             Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities);
-            typeof(AutoMapperMappingException).ShouldNotBeThrownBy(() =>
-                Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities));
+            typeof(AutoMapperMappingException).ShouldNotBeThrownBy(
+                () => Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities)
+            );
         }
     }
 }

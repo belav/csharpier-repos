@@ -584,8 +584,13 @@ public class ClientHandlerTests
             )
         );
         var httpClient = new HttpClient(handler);
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            httpClient.GetAsync("https://example.com/", HttpCompletionOption.ResponseHeadersRead));
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                httpClient.GetAsync(
+                    "https://example.com/",
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+        );
     }
 
     [Fact]
@@ -613,8 +618,9 @@ public class ClientHandlerTests
         );
         Assert.Equal("TestValue", response.Headers.GetValues("TestHeader").First());
         block.SetResult(0);
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsStringAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync()
+        );
         Assert.IsType<InvalidOperationException>(ex.GetBaseException());
     }
 
@@ -635,8 +641,13 @@ public class ClientHandlerTests
             )
         );
         var httpClient = new HttpClient(handler);
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            httpClient.GetAsync("https://example.com/", HttpCompletionOption.ResponseHeadersRead));
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                httpClient.GetAsync(
+                    "https://example.com/",
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+        );
     }
 
     [Fact]
@@ -656,8 +667,13 @@ public class ClientHandlerTests
             )
         );
         var httpClient = new HttpClient(handler);
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            httpClient.GetAsync("https://example.com/", HttpCompletionOption.ResponseHeadersRead));
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                httpClient.GetAsync(
+                    "https://example.com/",
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+        );
     }
 
     [Fact]
@@ -686,8 +702,13 @@ public class ClientHandlerTests
             )
         );
         var httpClient = new HttpClient(handler);
-        return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            httpClient.GetAsync("https://example.com/", HttpCompletionOption.ResponseHeadersRead));
+        return Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                httpClient.GetAsync(
+                    "https://example.com/",
+                    HttpCompletionOption.ResponseHeadersRead
+                )
+        );
     }
 
     private class DummyApplication : ApplicationWrapper, IHttpApplication<TestHostingContext>

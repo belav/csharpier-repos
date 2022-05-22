@@ -216,8 +216,9 @@ namespace System.Dynamic.Tests
                     "Didn't find DebuggerTypeProxyAttribute on BindingRestrictions."
                 );
             }
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
-                BindingRestrictionsProxyCtor.Invoke(new object[] { null }));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => BindingRestrictionsProxyCtor.Invoke(new object[] { null })
+            );
             ArgumentNullException ane = (ArgumentNullException)tie.InnerException;
             Assert.Equal("node", ane.ParamName);
         }

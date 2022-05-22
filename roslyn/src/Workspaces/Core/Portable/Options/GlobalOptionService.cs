@@ -84,8 +84,9 @@ namespace Microsoft.CodeAnalysis.Options
         )
         {
             _workspaceThreadingService = workspaceThreadingService;
-            _lazyAllOptions = new Lazy<ImmutableHashSet<IOption>>(() =>
-                optionProviders.SelectMany(p => p.Value.Options).ToImmutableHashSet());
+            _lazyAllOptions = new Lazy<ImmutableHashSet<IOption>>(
+                () => optionProviders.SelectMany(p => p.Value.Options).ToImmutableHashSet()
+            );
             _optionPersisterProviders = optionPersisters.ToImmutableArray();
             _serializableOptionsByLanguage = CreateLazySerializableOptionsByLanguage(
                 optionProviders
@@ -113,8 +114,9 @@ namespace Microsoft.CodeAnalysis.Options
             {
                 builder.Add(
                     language,
-                    new Lazy<ImmutableHashSet<IOption>>(() =>
-                        ComputeSerializableOptionsFromProviders(lazyProvidersAndMetadata))
+                    new Lazy<ImmutableHashSet<IOption>>(
+                        () => ComputeSerializableOptionsFromProviders(lazyProvidersAndMetadata)
+                    )
                 );
             }
 
@@ -176,8 +178,9 @@ namespace Microsoft.CodeAnalysis.Options
             {
                 if (workspaceThreadingService is not null)
                 {
-                    return workspaceThreadingService.Run(() =>
-                        GetOptionPersistersAsync(persisterProviders, cancellationToken));
+                    return workspaceThreadingService.Run(
+                        () => GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                    );
                 }
                 else
                 {

@@ -47,9 +47,11 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            Assert.Throws<ArgumentException>(() =>
-                mock.Setup(x => x.Submit(It.IsAny<string>()))
-                    .Callback((string s1, string s2) => System.Console.WriteLine(s1 + s2)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    mock.Setup(x => x.Submit(It.IsAny<string>()))
+                        .Callback((string s1, string s2) => System.Console.WriteLine(s1 + s2))
+            );
         }
 
         [Fact]

@@ -343,8 +343,9 @@ namespace Moq.Tests
 
             Assert.Throws<MockException>(() => VerifySet(Times.AtMostOnce()));
 
-            var mockException = Assert.Throws<MockException>(() =>
-                VerifySet(Times.AtMostOnce(), "custom fail message"));
+            var mockException = Assert.Throws<MockException>(
+                () => VerifySet(Times.AtMostOnce(), "custom fail message")
+            );
             Assert.StartsWith("custom fail message", mockException.Message);
         }
 

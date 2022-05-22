@@ -219,8 +219,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.InvalidEnumValue("-1", "value", typeof(EntityState).FullName),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        context.Entry(entity).State = (EntityState)(-1))
+                    .Throws<ArgumentException>(
+                        () => context.Entry(entity).State = (EntityState)(-1)
+                    )
                     .Message
             );
 
@@ -326,8 +327,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     "string"
                 ),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        context.Entry(entity).Property<string>("Monkey"))
+                    .Throws<ArgumentException>(
+                        () => context.Entry(entity).Property<string>("Monkey")
+                    )
                     .Message
             );
         }
@@ -350,22 +352,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Property("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Property("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Property("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Property("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Property<int>("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Property<int>("Chimp").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -385,8 +390,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Property("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Property("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -398,8 +404,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Property("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Property("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -411,8 +418,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Property<Cherry>("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Property<Cherry>("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -424,8 +432,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Property(e => e.Garcia).Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Property(e => e.Garcia).Metadata.Name
+                    )
                     .Message
             );
         }
@@ -467,22 +476,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Reference("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Reference("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -502,8 +514,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference("Monkey").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference("Monkey").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -515,8 +528,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Reference("Monkey").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Reference("Monkey").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -528,8 +542,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference<Random>("Monkey").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference<Random>("Monkey").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -541,8 +556,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name
+                    )
                     .Message
             );
         }
@@ -561,8 +577,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference("Monkeys").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference("Monkeys").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -573,8 +590,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Reference("Monkeys").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Reference("Monkeys").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -585,8 +603,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference<Random>("Monkeys").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference<Random>("Monkeys").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -597,8 +616,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Collection)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Reference(e => e.Monkeys).Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Reference(e => e.Monkeys).Metadata.Name
+                    )
                     .Message
             );
         }
@@ -646,22 +666,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Collection("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Collection("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -681,8 +704,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -694,8 +718,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Collection("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Collection("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -707,8 +732,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection<Random>("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection<Random>("Garcia").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -727,8 +753,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Reference)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -739,8 +766,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Reference)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Collection("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Collection("Garcia").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -751,8 +779,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Reference)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Collection<Cherry>("Garcia").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Collection<Cherry>("Garcia").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -781,15 +810,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Member("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Member("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Member("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Member("Chimp").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -833,15 +864,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Navigation("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Navigation("Chimp").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Navigation("Chimp").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Navigation("Chimp").Metadata.Name
+                    )
                     .Message
             );
         }
@@ -891,8 +924,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry(entity).Navigation("Monkey").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(entity).Navigation("Monkey").Metadata.Name
+                    )
                     .Message
             );
             Assert.Equal(
@@ -904,8 +938,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     nameof(EntityEntry.Property)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        context.Entry((object)entity).Navigation("Monkey").Metadata.Name)
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry((object)entity).Navigation("Monkey").Metadata.Name
+                    )
                     .Message
             );
         }

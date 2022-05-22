@@ -327,8 +327,9 @@ public abstract class JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            executor.ExecuteAsync(context, result));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => executor.ExecuteAsync(context, result)
+        );
 
         // Assert
         Assert.StartsWith(

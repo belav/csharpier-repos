@@ -467,15 +467,17 @@ public class AuthorizeRouteViewTest
             typeof(TestPageRequiringAuthorization),
             EmptyParametersDictionary
         );
-        var render2Task = _renderer.Dispatcher.InvokeAsync(() =>
-            _authorizeRouteViewComponent.SetParametersAsync(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        { nameof(AuthorizeRouteView.RouteData), routeData2 },
-                    }
+        var render2Task = _renderer.Dispatcher.InvokeAsync(
+            () =>
+                _authorizeRouteViewComponent.SetParametersAsync(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            { nameof(AuthorizeRouteView.RouteData), routeData2 },
+                        }
+                    )
                 )
-            ));
+        );
 
         // Assert: we retain the layout instance, and mutate its contents
         Assert.True(render2Task.IsCompletedSuccessfully);

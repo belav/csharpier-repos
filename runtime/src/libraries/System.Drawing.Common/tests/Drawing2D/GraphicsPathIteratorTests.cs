@@ -391,8 +391,9 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath gp = new GraphicsPath())
             using (GraphicsPathIterator gpi = new GraphicsPathIterator(gp))
             {
-                Assert.Throws<NullReferenceException>(() =>
-                    gpi.CopyData(ref points, ref types, 0, 1));
+                Assert.Throws<NullReferenceException>(
+                    () => gpi.CopyData(ref points, ref types, 0, 1)
+                );
             }
         }
 

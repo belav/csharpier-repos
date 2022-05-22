@@ -289,14 +289,16 @@ static class PathExtensions
                 else if (recursive)
                 {
                     subfolderTasks.Add(
-                        Task.Run(() =>
-                            LocateOutputFoldersAsync(
-                                dir,
-                                coreRootFolder,
-                                runners,
-                                recursive,
-                                directories
-                            ))
+                        Task.Run(
+                            () =>
+                                LocateOutputFoldersAsync(
+                                    dir,
+                                    coreRootFolder,
+                                    runners,
+                                    recursive,
+                                    directories
+                                )
+                        )
                     );
                 }
             }

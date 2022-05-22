@@ -4983,8 +4983,9 @@ namespace System.Tests
                         {
                             // If hostInvariantMode is false, means the child process should enable the globalization invariant mode.
                             // We validate here that by trying to create a culture which should throws in such mode.
-                            Assert.Throws<CultureNotFoundException>(() =>
-                                CultureInfo.GetCultureInfo("en-US"));
+                            Assert.Throws<CultureNotFoundException>(
+                                () => CultureInfo.GetCultureInfo("en-US")
+                            );
                         }
 
                         Assert.Equal(tzId, TimeZoneInfo.Local.Id);
@@ -5112,8 +5113,9 @@ namespace System.Tests
             }
             else
             {
-                Assert.Throws<TimeZoneNotFoundException>(() =>
-                    TimeZoneInfo.FindSystemTimeZoneById(s_isWindows ? ianaId : windowsId));
+                Assert.Throws<TimeZoneNotFoundException>(
+                    () => TimeZoneInfo.FindSystemTimeZoneById(s_isWindows ? ianaId : windowsId)
+                );
                 TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(
                     s_isWindows ? windowsId : ianaId
                 );
@@ -5192,8 +5194,9 @@ namespace System.Tests
         {
             string nonNativeTzName = s_isWindows ? "America/Los_Angeles" : "Pacific Standard Time";
 
-            Assert.Throws<TimeZoneNotFoundException>(() =>
-                TimeZoneInfo.FindSystemTimeZoneById(nonNativeTzName));
+            Assert.Throws<TimeZoneNotFoundException>(
+                () => TimeZoneInfo.FindSystemTimeZoneById(nonNativeTzName)
+            );
         }
 
         [ConditionalTheory(nameof(SupportIanaNamesConversion))]
@@ -5442,11 +5445,13 @@ namespace System.Tests
             string destinationTimeZoneId
         ) where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                ));
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
+            );
         }
 
         private static void VerifyConvertException<TException>(
@@ -5454,11 +5459,13 @@ namespace System.Tests
             string destinationTimeZoneId
         ) where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                ));
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
+            );
         }
 
         private static void VerifyConvertException<TException>(
@@ -5467,12 +5474,14 @@ namespace System.Tests
             string destinationTimeZoneId
         ) where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTime(
-                    inputTime,
-                    TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId),
-                    TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
-                ));
+            Assert.ThrowsAny<TException>(
+                () =>
+                    TimeZoneInfo.ConvertTime(
+                        inputTime,
+                        TimeZoneInfo.FindSystemTimeZoneById(sourceTimeZoneId),
+                        TimeZoneInfo.FindSystemTimeZoneById(destinationTimeZoneId)
+                    )
+            );
         }
 
         private static void VerifyConvert(
@@ -5794,8 +5803,9 @@ namespace System.Tests
             TimeZoneInfo sourceTimeZone
         ) where TException : Exception
         {
-            Assert.ThrowsAny<TException>(() =>
-                TimeZoneInfo.ConvertTimeToUtc(dateTime, sourceTimeZone));
+            Assert.ThrowsAny<TException>(
+                () => TimeZoneInfo.ConvertTimeToUtc(dateTime, sourceTimeZone)
+            );
         }
 
         private static void VerifyCustomTimeZoneException<TException>(

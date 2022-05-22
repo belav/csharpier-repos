@@ -100,8 +100,9 @@ namespace System.Web.Http
             )
             {
                 ModelValidatorCache validatorCache = new ModelValidatorCache(
-                    new Lazy<IEnumerable<ModelValidatorProvider>>(() =>
-                        Services.GetModelValidatorProviders())
+                    new Lazy<IEnumerable<ModelValidatorProvider>>(
+                        () => Services.GetModelValidatorProviders()
+                    )
                 );
                 settings.Services.Replace(typeof(IModelValidatorCache), validatorCache);
             }

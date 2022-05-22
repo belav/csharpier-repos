@@ -125,8 +125,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -219,8 +220,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -305,8 +307,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -390,8 +393,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -735,8 +739,9 @@ namespace Microsoft.EntityFrameworkCore
                     }
                     else
                     {
-                        await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() =>
-                            context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+                            () => context.SaveChangesAsync()
+                        );
                     }
                 }
                 else
@@ -1038,8 +1043,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var transaction = TestStore.BeginTransaction();
             using var context = CreateContextWithConnectionString();
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.UseTransaction(transaction));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => context.Database.UseTransaction(transaction)
+            );
             Assert.Equal(
                 RelationalStrings.TransactionAssociatedWithDifferentConnection,
                 ex.Message
@@ -1108,8 +1114,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var transaction = TestStore.BeginTransaction();
                 using var context = CreateContextWithConnectionString();
-                var ex = Assert.Throws<InvalidOperationException>(() =>
-                    context.Database.UseTransaction(transaction));
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => context.Database.UseTransaction(transaction)
+                );
                 Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
             }
         }
@@ -1129,8 +1136,9 @@ namespace Microsoft.EntityFrameworkCore
 
             context.Database.EnlistTransaction(t);
 
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.UseTransaction(transaction));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => context.Database.UseTransaction(transaction)
+            );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
             context.Database.CloseConnection();
         }
@@ -1141,8 +1149,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContextWithConnectionString();
             using (context.Database.BeginTransaction())
             {
-                var ex = Assert.Throws<InvalidOperationException>(() =>
-                    context.Database.BeginTransaction());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => context.Database.BeginTransaction()
+                );
                 Assert.Equal(RelationalStrings.TransactionAlreadyStarted, ex.Message);
             }
         }
@@ -1158,8 +1167,9 @@ namespace Microsoft.EntityFrameworkCore
             using (TestUtilities.TestStore.CreateTransactionScope())
             {
                 using var context = CreateContextWithConnectionString();
-                var ex = Assert.Throws<InvalidOperationException>(() =>
-                    context.Database.BeginTransaction());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => context.Database.BeginTransaction()
+                );
                 Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
             }
         }
@@ -1178,10 +1188,14 @@ namespace Microsoft.EntityFrameworkCore
 
             context.Database.EnlistTransaction(transaction);
 
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                context.Database.BeginTransaction(
-                    DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
-                ));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    context.Database.BeginTransaction(
+                        DirtyReadsOccur
+                            ? IsolationLevel.ReadUncommitted
+                            : IsolationLevel.Unspecified
+                    )
+            );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
             context.Database.CloseConnection();
         }
@@ -1268,8 +1282,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContextWithConnectionString();
             using (context.Database.BeginTransaction())
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    context.Database.EnlistTransaction(transaction));
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.EnlistTransaction(transaction)
+                );
             }
         }
 
@@ -1287,8 +1302,9 @@ namespace Microsoft.EntityFrameworkCore
                 using var context = CreateContextWithConnectionString();
                 context.Database.OpenConnection();
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    context.Database.EnlistTransaction(transaction));
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.EnlistTransaction(transaction)
+                );
 
                 context.Database.CloseConnection();
             }
@@ -1498,14 +1514,16 @@ namespace Microsoft.EntityFrameworkCore
                 if (async)
                 {
                     await transaction.ReleaseSavepointAsync("FooSavepoint");
-                    await Assert.ThrowsAnyAsync<DbException>(async () =>
-                        await transaction.ReleaseSavepointAsync("FooSavepoint"));
+                    await Assert.ThrowsAnyAsync<DbException>(
+                        async () => await transaction.ReleaseSavepointAsync("FooSavepoint")
+                    );
                 }
                 else
                 {
                     transaction.ReleaseSavepoint("FooSavepoint");
-                    Assert.ThrowsAny<DbException>(() =>
-                        transaction.ReleaseSavepoint("FooSavepoint"));
+                    Assert.ThrowsAny<DbException>(
+                        () => transaction.ReleaseSavepoint("FooSavepoint")
+                    );
                 }
 
                 await transaction.CommitAsync();

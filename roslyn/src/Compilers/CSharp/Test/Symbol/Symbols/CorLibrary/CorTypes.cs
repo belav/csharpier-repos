@@ -201,8 +201,9 @@ namespace System
             Assert.Same(system_object, c1.GetSpecialType(SpecialType.System_Object));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => c1.GetSpecialType(SpecialType.None));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                c1.GetSpecialType(SpecialType.Count + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => c1.GetSpecialType(SpecialType.Count + 1)
+            );
         }
 
         [WorkItem(697521, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/697521")]

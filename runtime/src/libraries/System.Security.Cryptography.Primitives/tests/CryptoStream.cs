@@ -256,8 +256,9 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
             )
             {
                 encryptStream.Clear();
-                Assert.Throws<NotSupportedException>(() =>
-                    encryptStream.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5));
+                Assert.Throws<NotSupportedException>(
+                    () => encryptStream.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5)
+                );
             }
         }
 

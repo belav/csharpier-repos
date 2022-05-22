@@ -89,8 +89,9 @@ unsafe class Program
         {
             // Multiple modopts with calling conventions
             Console.WriteLine($" -- unmanaged modopt(stdcall) modopt(cdecl)");
-            var ex = Assert.Throws<InvalidProgramException>(() =>
-                CallFunctionPointers.CallUnmanagedIntInt_ModOptStdcall_ModOptCdecl(cbCdecl, a));
+            var ex = Assert.Throws<InvalidProgramException>(
+                () => CallFunctionPointers.CallUnmanagedIntInt_ModOptStdcall_ModOptCdecl(cbCdecl, a)
+            );
             Assert.Equal(
                 "Multiple unmanaged calling conventions are specified. Only a single calling convention is supported.",
                 ex.Message
@@ -172,8 +173,10 @@ unsafe class Program
         {
             // Multiple modopts with calling conventions
             Console.WriteLine($" -- unmanaged modopt(stdcall) modopt(cdecl)");
-            var ex = Assert.Throws<InvalidProgramException>(() =>
-                CallFunctionPointers.CallUnmanagedCharChar_ModOptStdcall_ModOptCdecl(cbCdecl, a));
+            var ex = Assert.Throws<InvalidProgramException>(
+                () =>
+                    CallFunctionPointers.CallUnmanagedCharChar_ModOptStdcall_ModOptCdecl(cbCdecl, a)
+            );
             Assert.Equal(
                 "Multiple unmanaged calling conventions are specified. Only a single calling convention is supported.",
                 ex.Message

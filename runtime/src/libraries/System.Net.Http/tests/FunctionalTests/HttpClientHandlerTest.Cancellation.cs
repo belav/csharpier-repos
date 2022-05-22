@@ -35,18 +35,20 @@ namespace System.Net.Http.Functional.Tests
                         handler.ConnectTimeout = TimeSpan.FromSeconds(1);
 
                         var sw = Stopwatch.StartNew();
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                            invoker.SendAsync(
-                                TestAsync,
-                                new HttpRequestMessage(
-                                    HttpMethod.Get,
-                                    new UriBuilder(uri) { Scheme = "https" }.ToString()
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                            () =>
+                                invoker.SendAsync(
+                                    TestAsync,
+                                    new HttpRequestMessage(
+                                        HttpMethod.Get,
+                                        new UriBuilder(uri) { Scheme = "https" }.ToString()
+                                    )
+                                    {
+                                        Version = UseVersion
+                                    },
+                                    default
                                 )
-                                {
-                                    Version = UseVersion
-                                },
-                                default
-                            ));
+                        );
                         sw.Stop();
 
                         Assert.InRange(sw.ElapsedMilliseconds, 500, 85_000);

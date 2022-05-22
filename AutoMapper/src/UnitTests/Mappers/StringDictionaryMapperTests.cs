@@ -399,10 +399,9 @@ namespace AutoMapper.UnitTests.Mappers
         [Fact]
         public void Should_throw()
         {
-            new Action(() =>
-                Mapper.Map<SomeBase>(
-                    new StringDictionary()
-                )).ShouldThrowException<AutoMapperMappingException>(
+            new Action(
+                () => Mapper.Map<SomeBase>(new StringDictionary())
+            ).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
                     ex.InnerException.Message.ShouldStartWith(
                         $"Cannot create an instance of abstract type {typeof(SomeBase)}."

@@ -648,8 +648,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
-                dt.Columns[-1]);
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(
+                () => dt.Columns[-1]
+            );
             // Cannot find column -1
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -660,8 +661,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
-                dt.Columns[6]);
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(
+                () => dt.Columns[6]
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }

@@ -300,8 +300,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'double', 'float', 'decimal'"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        new EnumToNumberConverter<Beatles, Guid>())
+                    .Throws<InvalidOperationException>(
+                        () => new EnumToNumberConverter<Beatles, Guid>()
+                    )
                     .Message
             );
         }

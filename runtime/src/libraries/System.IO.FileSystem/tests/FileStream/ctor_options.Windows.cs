@@ -68,16 +68,18 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             Assert.StartsWith(Path.GetTempPath(), filePath); // this is what IsFat32 method relies on
 
-            IOException ex = Assert.Throws<IOException>(() =>
-                CreateFileStream(
-                    filePath,
-                    mode,
-                    FileAccess.Write,
-                    FileShare.None,
-                    bufferSize: 4096,
-                    FileOptions.None,
-                    tooMuch
-                ));
+            IOException ex = Assert.Throws<IOException>(
+                () =>
+                    CreateFileStream(
+                        filePath,
+                        mode,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize: 4096,
+                        FileOptions.None,
+                        tooMuch
+                    )
+            );
             Assert.Contains(filePath, ex.Message);
             Assert.Contains(tooMuch.ToString(), ex.Message);
 

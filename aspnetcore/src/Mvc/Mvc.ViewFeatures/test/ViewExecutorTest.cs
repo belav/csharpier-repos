@@ -94,15 +94,17 @@ public class ViewExecutorTest
         var viewExecutor = CreateViewExecutor();
 
         // Act
-        var exception = await Assert.ThrowsAsync<NotImplementedException>(async () =>
-            await viewExecutor.ExecuteAsync(
-                actionContext,
-                view,
-                viewData,
-                Mock.Of<ITempDataDictionary>(),
-                contentType: null,
-                statusCode: null
-            ));
+        var exception = await Assert.ThrowsAsync<NotImplementedException>(
+            async () =>
+                await viewExecutor.ExecuteAsync(
+                    actionContext,
+                    view,
+                    viewData,
+                    Mock.Of<ITempDataDictionary>(),
+                    contentType: null,
+                    statusCode: null
+                )
+        );
 
         // Assert
         Assert.Equal("This should be raw!", exception.Message);
@@ -315,15 +317,17 @@ public class ViewExecutorTest
         var viewExecutor = CreateViewExecutor();
 
         // Act
-        await Record.ExceptionAsync(() =>
-            viewExecutor.ExecuteAsync(
-                actionContext,
-                view.Object,
-                viewData,
-                Mock.Of<ITempDataDictionary>(),
-                contentType: null,
-                statusCode: null
-            ));
+        await Record.ExceptionAsync(
+            () =>
+                viewExecutor.ExecuteAsync(
+                    actionContext,
+                    view.Object,
+                    viewData,
+                    Mock.Of<ITempDataDictionary>(),
+                    contentType: null,
+                    statusCode: null
+                )
+        );
 
         // Assert
         Assert.Equal(expectedLength, memoryStream.Length);

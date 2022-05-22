@@ -13,8 +13,10 @@ namespace System.Reflection.Tests
         public static void TestNull()
         {
             Type t = typeof(Mixed).Project();
-            Assert.Throws<ArgumentNullException>(() =>
-                t.GetMember(null, MemberTypes.All, BindingFlags.Public | BindingFlags.Instance));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    t.GetMember(null, MemberTypes.All, BindingFlags.Public | BindingFlags.Instance)
+            );
         }
 
         [Fact]

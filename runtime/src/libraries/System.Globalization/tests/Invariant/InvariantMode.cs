@@ -1692,8 +1692,9 @@ namespace System.Globalization.Tests
             ci.DateTimeFormat.Calendar = calendar;
             Assert.Equal(calendar, ci.DateTimeFormat.Calendar);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                ci.DateTimeFormat.Calendar = new TaiwanCalendar());
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ci.DateTimeFormat.Calendar = new TaiwanCalendar()
+            );
         }
 
         [ConditionalFact(nameof(PredefinedCulturesOnlyIsDisabled))]

@@ -3484,8 +3484,9 @@ namespace System.Data.Tests
             DataSet ds = new DataSet();
             Assert.Equal(SchemaSerializationMode.IncludeSchema, ds.SchemaSerializationMode);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema);
+            Assert.Throws<InvalidOperationException>(
+                () => ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema
+            );
         }
 
         ///<?xml version="1.0" encoding="utf-16"?>

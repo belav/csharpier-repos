@@ -20,8 +20,9 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             string projectAssetsFilePath
         )
         {
-            var doesProjectAssetsFileExist = IOUtilities.PerformIO(() =>
-                File.Exists(projectAssetsFilePath));
+            var doesProjectAssetsFileExist = IOUtilities.PerformIO(
+                () => File.Exists(projectAssetsFilePath)
+            );
             if (!doesProjectAssetsFileExist)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;

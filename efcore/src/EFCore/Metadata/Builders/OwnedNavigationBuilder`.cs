@@ -105,17 +105,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual PropertyBuilder<TProperty> Property<TProperty>(
             Expression<Func<TDependentEntity, TProperty>> propertyExpression
         ) =>
-            UpdateBuilder(() =>
-                new PropertyBuilder<TProperty>(
-                    DependentEntityType.Builder
-                        .Property(
-                            Check
-                                .NotNull(propertyExpression, nameof(propertyExpression))
-                                .GetMemberAccess(),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                ));
+            UpdateBuilder(
+                () =>
+                    new PropertyBuilder<TProperty>(
+                        DependentEntityType.Builder
+                            .Property(
+                                Check
+                                    .NotNull(propertyExpression, nameof(propertyExpression))
+                                    .GetMemberAccess(),
+                                ConfigurationSource.Explicit
+                            )!
+                            .Metadata
+                    )
+            );
 
         /// <summary>
         ///     Returns an object that can be used to configure an existing navigation property

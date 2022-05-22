@@ -17,10 +17,12 @@ namespace System.ServiceProcess.Tests
 
         private const int readTimeout = 60000;
 
-        private static readonly Lazy<bool> s_runningWithElevatedPrivileges = new Lazy<bool>(() =>
-            new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(
-                WindowsBuiltInRole.Administrator
-            ));
+        private static readonly Lazy<bool> s_runningWithElevatedPrivileges = new Lazy<bool>(
+            () =>
+                new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(
+                    WindowsBuiltInRole.Administrator
+                )
+        );
 
         private NamedPipeClientStream _client;
 

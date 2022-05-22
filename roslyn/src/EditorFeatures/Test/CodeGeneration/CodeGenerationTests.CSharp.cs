@@ -1619,13 +1619,15 @@ class D { }";
             {
                 var input = "[|class C { } class D {} |]";
                 var expected = "";
-                await Assert.ThrowsAsync<AggregateException>(async () =>
-                    await TestAddAttributeAsync(
-                        input,
-                        expected,
-                        typeof(SerializableAttribute),
-                        SyntaxFactory.Token(SyntaxKind.RefKeyword)
-                    ));
+                await Assert.ThrowsAsync<AggregateException>(
+                    async () =>
+                        await TestAddAttributeAsync(
+                            input,
+                            expected,
+                            typeof(SerializableAttribute),
+                            SyntaxFactory.Token(SyntaxKind.RefKeyword)
+                        )
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.CodeGeneration)]

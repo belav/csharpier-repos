@@ -20,22 +20,28 @@ namespace System.Threading.Tests
         {
             var rwl = new ReaderWriterLock();
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireReaderLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.AcquireReaderLock(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.AcquireReaderLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireReaderLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.AcquireWriterLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.AcquireWriterLock(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.AcquireWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.AcquireWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => rwl.UpgradeToWriterLock(-2));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds(-2)));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds(-2))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => rwl.UpgradeToWriterLock(TimeSpan.FromMilliseconds((uint)int.MaxValue + 1))
+            );
         }
 
         [Fact]
@@ -74,10 +80,12 @@ namespace System.Threading.Tests
 
             Action verifyCannotRestore = () =>
             {
-                Assert.Throws<SynchronizationLockException>(() =>
-                    trwl.RestoreLock(restoreReadLockTlc));
-                Assert.Throws<SynchronizationLockException>(() =>
-                    trwl.RestoreLock(restoreWriteLockTlc));
+                Assert.Throws<SynchronizationLockException>(
+                    () => trwl.RestoreLock(restoreReadLockTlc)
+                );
+                Assert.Throws<SynchronizationLockException>(
+                    () => trwl.RestoreLock(restoreWriteLockTlc)
+                );
             };
 
             trwl.AcquireReaderLock();
@@ -513,10 +521,12 @@ namespace System.Threading.Tests
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the write lock releases all waiting readers
             trwl.ReleaseWriterLock();
@@ -555,10 +565,12 @@ namespace System.Threading.Tests
             waitingWriter2.IsBackground = true;
             waitingWriter1.Start();
             waitingWriter2.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingWriter1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingWriter2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases a waiting writer, that writer releases its write lock, in turn releasing the
             // other writer
@@ -594,8 +606,9 @@ namespace System.Threading.Tests
             );
             waitingWriter.IsBackground = true;
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             Action acquireReleaseReaderLock = () =>
             {
@@ -616,10 +629,12 @@ namespace System.Threading.Tests
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases the waiting writer
             trwl.ReleaseReaderLock();
@@ -662,8 +677,9 @@ namespace System.Threading.Tests
             );
             waitingUpgrader.IsBackground = true;
             waitingUpgrader.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingUpgrader.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             Action acquireReleaseReaderLock = () =>
             {
@@ -684,10 +700,12 @@ namespace System.Threading.Tests
             waitingReader2.IsBackground = true;
             waitingReader1.Start();
             waitingReader2.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingReader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases the waiting upgrader
             trwl.ReleaseReaderLock();
@@ -746,12 +764,15 @@ namespace System.Threading.Tests
             waitingUpgrader1AcquiredReadLock.CheckedWait();
             waitingUpgrader2.Start();
             waitingUpgrader3.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingUpgrader1.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingUpgrader2.ThreadState & ThreadState.WaitSleepJoin) != 0);
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingUpgrader3.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader1.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader2.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingUpgrader3.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Releasing the read lock releases a waiting upgrader, that writer downgrades its write lock, in turn releasing the
             // other upgrader, and so on
@@ -783,8 +804,9 @@ namespace System.Threading.Tests
                 }
             );
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Acquire a recursive read lock successfully while there is a waiting writer
             trwl.AcquireReaderLock();
@@ -817,8 +839,9 @@ namespace System.Threading.Tests
                 }
             );
             waitingWriter.Start();
-            ThreadTestHelpers.WaitForCondition(() =>
-                (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0);
+            ThreadTestHelpers.WaitForCondition(
+                () => (waitingWriter.ThreadState & ThreadState.WaitSleepJoin) != 0
+            );
 
             // Downgrade to a read lock successfully while there is a waiting writer
             trwl.DowngradeFromWriterLock(tlc);

@@ -167,8 +167,9 @@ namespace System.Reflection.Tests
             foreach (int length in arraylength)
             {
                 // Create big Array with  elements
-                Assert.Throws<OverflowException>(() =>
-                    (object[])constructors[0].Invoke(new object[] { length }));
+                Assert.Throws<OverflowException>(
+                    () => (object[])constructors[0].Invoke(new object[] { length })
+                );
             }
         }
 
@@ -226,16 +227,18 @@ namespace System.Reflection.Tests
         public void Invoke_NoParameters_ThowsTargetParameterCountException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            Assert.Throws<TargetParameterCountException>(() =>
-                constructors[2].Invoke(new object[0]));
+            Assert.Throws<TargetParameterCountException>(
+                () => constructors[2].Invoke(new object[0])
+            );
         }
 
         [Fact]
         public void Invoke_ParameterMismatch_ThrowsTargetParameterCountException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            Assert.Throws<TargetParameterCountException>(() =>
-                (ClassWith3Constructors)constructors[2].Invoke(new object[] { 121 }));
+            Assert.Throws<TargetParameterCountException>(
+                () => (ClassWith3Constructors)constructors[2].Invoke(new object[] { 121 })
+            );
         }
 
         [Fact]
@@ -266,8 +269,9 @@ namespace System.Reflection.Tests
         public void Invoke_AbstractClass_ThrowsMemberAccessException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ConstructorInfoAbstractBase));
-            Assert.Throws<MemberAccessException>(() =>
-                (ConstructorInfoAbstractBase)constructors[0].Invoke(new object[0]));
+            Assert.Throws<MemberAccessException>(
+                () => (ConstructorInfoAbstractBase)constructors[0].Invoke(new object[0])
+            );
         }
 
         [Fact]

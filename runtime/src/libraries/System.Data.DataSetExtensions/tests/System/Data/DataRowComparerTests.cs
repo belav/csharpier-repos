@@ -283,10 +283,12 @@ namespace System.Data.Tests
             table.AcceptChanges();
             row1.Delete();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                DataRowComparer<DataRow>.Default.Equals(row1, row2));
-            Assert.Throws<InvalidOperationException>(() =>
-                DataRowComparer<DataRow>.Default.Equals(row2, row1));
+            Assert.Throws<InvalidOperationException>(
+                () => DataRowComparer<DataRow>.Default.Equals(row1, row2)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => DataRowComparer<DataRow>.Default.Equals(row2, row1)
+            );
         }
 
         public static IEnumerable<object[]> GetHashCode_TestData()
@@ -366,8 +368,9 @@ namespace System.Data.Tests
             table.AcceptChanges();
             row.Delete();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                DataRowComparer<DataRow>.Default.GetHashCode(row));
+            Assert.Throws<InvalidOperationException>(
+                () => DataRowComparer<DataRow>.Default.GetHashCode(row)
+            );
         }
     }
 }

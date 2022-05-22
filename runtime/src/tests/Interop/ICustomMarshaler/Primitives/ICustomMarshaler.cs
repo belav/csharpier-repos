@@ -770,8 +770,9 @@ namespace System.Runtime.InteropServices.Tests
 
         public static void Field_ParentIsStruct_ThrowsTypeLoadException()
         {
-            Assert.Throws<TypeLoadException>(() =>
-                StructWithCustomMarshalerFieldMethod(new StructWithCustomMarshalerField()));
+            Assert.Throws<TypeLoadException>(
+                () => StructWithCustomMarshalerFieldMethod(new StructWithCustomMarshalerField())
+            );
         }
 
         public struct StructWithCustomMarshalerField

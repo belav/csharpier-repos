@@ -92,12 +92,14 @@ namespace System.Reflection.Emit.Tests
                 FieldAttributes.Public
             );
             module.CreateGlobalFunctions();
-            Assert.Throws<InvalidOperationException>(() =>
-                module.DefineInitializedData(
-                    "MyField2",
-                    new byte[] { 1, 0, 1 },
-                    FieldAttributes.Public
-                ));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    module.DefineInitializedData(
+                        "MyField2",
+                        new byte[] { 1, 0, 1 },
+                        FieldAttributes.Public
+                    )
+            );
         }
     }
 }

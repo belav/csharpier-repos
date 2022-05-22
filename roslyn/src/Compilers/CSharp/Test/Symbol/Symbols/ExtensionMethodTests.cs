@@ -3014,18 +3014,22 @@ S"
                     var genericExtension = type.GetMember<MethodSymbol>("Generic");
 
                     Assert.True(nonGenericExtension.IsExtensionMethod);
-                    Assert.Throws<ArgumentNullException>(() =>
-                        nonGenericExtension.ReduceExtensionMethod(
-                            receiverType: null,
-                            compilation: null!
-                        ));
+                    Assert.Throws<ArgumentNullException>(
+                        () =>
+                            nonGenericExtension.ReduceExtensionMethod(
+                                receiverType: null,
+                                compilation: null!
+                            )
+                    );
 
                     Assert.True(genericExtension.IsExtensionMethod);
-                    Assert.Throws<ArgumentNullException>(() =>
-                        genericExtension.ReduceExtensionMethod(
-                            receiverType: null,
-                            compilation: null!
-                        ));
+                    Assert.Throws<ArgumentNullException>(
+                        () =>
+                            genericExtension.ReduceExtensionMethod(
+                                receiverType: null,
+                                compilation: null!
+                            )
+                    );
                 }
             );
         }

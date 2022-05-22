@@ -2537,17 +2537,21 @@ namespace System.Tests
         [MemberData(nameof(ParseExact_TestData_InvalidData_O))]
         public static void ParseExact_InvalidData_O(string invalidString)
         {
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(invalidString, "o", null));
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(invalidString, "o", null, DateTimeStyles.None));
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(
-                    invalidString,
-                    new string[] { "o" },
-                    null,
-                    DateTimeStyles.None
-                ));
+            Assert.Throws<FormatException>(
+                () => DateTimeOffset.ParseExact(invalidString, "o", null)
+            );
+            Assert.Throws<FormatException>(
+                () => DateTimeOffset.ParseExact(invalidString, "o", null, DateTimeStyles.None)
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    DateTimeOffset.ParseExact(
+                        invalidString,
+                        new string[] { "o" },
+                        null,
+                        DateTimeStyles.None
+                    )
+            );
         }
 
         public static IEnumerable<object[]> ParseExact_TestData_InvalidData_O() =>
@@ -2637,17 +2641,21 @@ namespace System.Tests
         [MemberData(nameof(ParseExact_TestData_InvalidData_R))]
         public static void ParseExact_InvalidData_R(string invalidString)
         {
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(invalidString, "r", null));
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(invalidString, "r", null, DateTimeStyles.None));
-            Assert.Throws<FormatException>(() =>
-                DateTimeOffset.ParseExact(
-                    invalidString,
-                    new string[] { "r" },
-                    null,
-                    DateTimeStyles.None
-                ));
+            Assert.Throws<FormatException>(
+                () => DateTimeOffset.ParseExact(invalidString, "r", null)
+            );
+            Assert.Throws<FormatException>(
+                () => DateTimeOffset.ParseExact(invalidString, "r", null, DateTimeStyles.None)
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    DateTimeOffset.ParseExact(
+                        invalidString,
+                        new string[] { "r" },
+                        null,
+                        DateTimeStyles.None
+                    )
+            );
         }
 
         public static IEnumerable<object[]> ParseExact_TestData_InvalidData_R() =>

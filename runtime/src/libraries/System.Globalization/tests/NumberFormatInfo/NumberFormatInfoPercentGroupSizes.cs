@@ -65,8 +65,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void PercentGroupSizes_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.PercentGroupSizes = new int[] { 1, 2, 3 });
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PercentGroupSizes = new int[] { 1, 2, 3 }
+            );
         }
     }
 }

@@ -139,26 +139,33 @@ namespace System.Threading.Tasks.Tests
             TaskFactory tf = new TaskFactory();
 
             // Checking top-level TF exception handling.
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tf = new TaskFactory(
-                    (TaskCreationOptions)0x40000000,
-                    TaskContinuationOptions.None
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tf = new TaskFactory(
+                        (TaskCreationOptions)0x40000000,
+                        TaskContinuationOptions.None
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tf = new TaskFactory((TaskCreationOptions)0x100, TaskContinuationOptions.None));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => tf = new TaskFactory((TaskCreationOptions)0x100, TaskContinuationOptions.None)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tf = new TaskFactory(
-                    TaskCreationOptions.None,
-                    (TaskContinuationOptions)0x40000000
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tf = new TaskFactory(
+                        TaskCreationOptions.None,
+                        (TaskContinuationOptions)0x40000000
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tf = new TaskFactory(
-                    TaskCreationOptions.None,
-                    TaskContinuationOptions.NotOnFaulted
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tf = new TaskFactory(
+                        TaskCreationOptions.None,
+                        TaskContinuationOptions.NotOnFaulted
+                    )
+            );
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -194,29 +201,37 @@ namespace System.Threading.Tasks.Tests
             TaskFactory<int> tfi = new TaskFactory<int>();
 
             // Checking top-level TF<int> exception handling.
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tfi = new TaskFactory<int>(
-                    (TaskCreationOptions)0x40000000,
-                    TaskContinuationOptions.None
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tfi = new TaskFactory<int>(
+                        (TaskCreationOptions)0x40000000,
+                        TaskContinuationOptions.None
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tfi = new TaskFactory<int>(
-                    (TaskCreationOptions)0x100,
-                    TaskContinuationOptions.None
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tfi = new TaskFactory<int>(
+                        (TaskCreationOptions)0x100,
+                        TaskContinuationOptions.None
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tfi = new TaskFactory<int>(
-                    TaskCreationOptions.None,
-                    (TaskContinuationOptions)0x40000000
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tfi = new TaskFactory<int>(
+                        TaskCreationOptions.None,
+                        (TaskContinuationOptions)0x40000000
+                    )
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                tfi = new TaskFactory<int>(
-                    TaskCreationOptions.None,
-                    TaskContinuationOptions.NotOnFaulted
-                ));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    tfi = new TaskFactory<int>(
+                        TaskCreationOptions.None,
+                        TaskContinuationOptions.NotOnFaulted
+                    )
+            );
         }
 
         [Fact]

@@ -772,8 +772,9 @@ public class MiddlewareTests
 
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<IndexOutOfRangeException>(() =>
-            server.CreateClient().GetAsync("article/23?p1=123&p2=abc"));
+        var ex = await Assert.ThrowsAsync<IndexOutOfRangeException>(
+            () => server.CreateClient().GetAsync("article/23?p1=123&p2=abc")
+        );
 
         Assert.Equal(
             "Cannot access back reference at index 9. Only 5 back references were captured.",

@@ -264,10 +264,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.StartsWith(
                 CoreStrings.HiLoBadBlockSize,
                 Assert
-                    .Throws<ArgumentOutOfRangeException>(() =>
-                        cache
-                            .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                            .Sequence.IncrementBy)
+                    .Throws<ArgumentOutOfRangeException>(
+                        () =>
+                            cache
+                                .GetOrAddSequenceState((IProperty)property, CreateConnection())
+                                .Sequence.IncrementBy
+                    )
                     .Message
             );
         }

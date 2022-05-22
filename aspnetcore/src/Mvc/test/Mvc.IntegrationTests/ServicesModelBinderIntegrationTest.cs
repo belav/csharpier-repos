@@ -162,8 +162,9 @@ public class ServicesModelBinderIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Contains(typeof(IActionResult).FullName, exception.Message);
     }
 

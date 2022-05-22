@@ -104,8 +104,9 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
-                writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { }));
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () => writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { })
+            );
             Assert.Equal("category", exception.ParamName);
         }
 
@@ -116,13 +117,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
-                writer.Trace(
-                    new HttpRequestMessage(),
-                    "MyCategory",
-                    TraceLevel.Info,
-                    traceAction: null
-                ));
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
+                () =>
+                    writer.Trace(
+                        new HttpRequestMessage(),
+                        "MyCategory",
+                        TraceLevel.Info,
+                        traceAction: null
+                    )
+            );
             Assert.Equal("traceAction", exception.ParamName);
         }
 
@@ -135,8 +138,9 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             SystemDiagnosticsTraceWriter writer = new SystemDiagnosticsTraceWriter();
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { }));
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { })
+            );
             Assert.Equal("level", exception.ParamName);
             Assert.Contains(
                 "The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.",

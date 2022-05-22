@@ -284,8 +284,10 @@ namespace System.Linq.Parallel.Tests
             ParallelMergeOptions second
         )
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                ParallelEnumerable.Range(0, 1).WithMergeOptions(first).WithMergeOptions(second));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable.Range(0, 1).WithMergeOptions(first).WithMergeOptions(second)
+            );
         }
 
         [Fact]

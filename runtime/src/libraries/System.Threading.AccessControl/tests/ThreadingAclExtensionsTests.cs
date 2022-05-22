@@ -38,14 +38,17 @@ namespace System.Threading.Tests
             var m = new Mutex();
 
             Assert.Throws<PlatformNotSupportedException>(() => e.GetAccessControl());
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                e.SetAccessControl(new EventWaitHandleSecurity()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => e.SetAccessControl(new EventWaitHandleSecurity())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => s.GetAccessControl());
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                s.SetAccessControl(new SemaphoreSecurity()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => s.SetAccessControl(new SemaphoreSecurity())
+            );
             Assert.Throws<PlatformNotSupportedException>(() => m.GetAccessControl());
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                m.SetAccessControl(new MutexSecurity()));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => m.SetAccessControl(new MutexSecurity())
+            );
         }
     }
 }

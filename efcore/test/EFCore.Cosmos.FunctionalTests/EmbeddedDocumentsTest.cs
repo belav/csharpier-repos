@@ -474,8 +474,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     "{VehicleName: Fuel transport}"
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        context.SaveChangesAsync())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => context.SaveChangesAsync()
+                    )
                 ).Message
             );
         }

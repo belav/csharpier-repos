@@ -115,8 +115,9 @@ public class UserStoreWithGenericsTest
     {
         var services = new ServiceCollection();
         var builder = services.AddIdentity<object, IdentityRole>();
-        var e = Assert.Throws<InvalidOperationException>(() =>
-            builder.AddEntityFrameworkStores<ContextWithGenerics>());
+        var e = Assert.Throws<InvalidOperationException>(
+            () => builder.AddEntityFrameworkStores<ContextWithGenerics>()
+        );
         Assert.Contains("AddEntityFrameworkStores", e.Message);
     }
 
@@ -125,8 +126,9 @@ public class UserStoreWithGenericsTest
     {
         var services = new ServiceCollection();
         var builder = services.AddIdentity<IdentityUser, object>();
-        var e = Assert.Throws<InvalidOperationException>(() =>
-            builder.AddEntityFrameworkStores<ContextWithGenerics>());
+        var e = Assert.Throws<InvalidOperationException>(
+            () => builder.AddEntityFrameworkStores<ContextWithGenerics>()
+        );
         Assert.Contains("AddEntityFrameworkStores", e.Message);
     }
 

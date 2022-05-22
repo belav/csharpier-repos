@@ -114,8 +114,9 @@ public class ResponseResetTests
 
         var client = host.GetTestServer().CreateClient();
         client.DefaultRequestVersion = HttpVersion.Version20;
-        var rex = await Assert.ThrowsAsync<HttpResetTestException>(() =>
-            client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead));
+        var rex = await Assert.ThrowsAsync<HttpResetTestException>(
+            () => client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead)
+        );
         Assert.Equal("The application reset the request with error code 12345.", rex.Message);
         Assert.Equal(12345, rex.ErrorCode);
         resetReceived.SetResult(0);
@@ -146,8 +147,9 @@ public class ResponseResetTests
         var response = await client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead);
         responseReceived.SetResult(0);
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsByteArrayAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsByteArrayAsync()
+        );
         var rex = Assert.IsAssignableFrom<HttpResetTestException>(ex.GetBaseException());
         Assert.Equal("The application reset the request with error code 12345.", rex.Message);
         Assert.Equal(12345, rex.ErrorCode);
@@ -179,8 +181,9 @@ public class ResponseResetTests
         var response = await client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead);
         responseReceived.SetResult(0);
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
-            response.Content.ReadAsByteArrayAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsByteArrayAsync()
+        );
         var rex = Assert.IsAssignableFrom<HttpResetTestException>(ex.GetBaseException());
         Assert.Equal("The application reset the request with error code 12345.", rex.Message);
         Assert.Equal(12345, rex.ErrorCode);

@@ -414,8 +414,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void GetDigestedOutput_Null()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new XmlDsigExcC14NTransform().GetDigestedOutput(null));
+            Assert.Throws<NullReferenceException>(
+                () => new XmlDsigExcC14NTransform().GetDigestedOutput(null)
+            );
         }
     }
 }

@@ -596,24 +596,28 @@ namespace System.Net
             // This is because the task needs to call FromAsync and marshal the inner Task out, and
             // Task.Run's implementation of this is sufficiently more efficient than what we can do with
             // Unwrap() that it's worth it to just rely on Task.Run and accept the closure/delegate.
-            return Task.Run(() =>
-                Task<Stream>.Factory.FromAsync(
-                    (callback, state) =>
-                        ((WebRequest)state!).BeginGetRequestStream(callback, state),
-                    iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
-                    this
-                ));
+            return Task.Run(
+                () =>
+                    Task<Stream>.Factory.FromAsync(
+                        (callback, state) =>
+                            ((WebRequest)state!).BeginGetRequestStream(callback, state),
+                        iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
+                        this
+                    )
+            );
         }
 
         public virtual Task<WebResponse> GetResponseAsync()
         {
             // See comment in GetRequestStreamAsync().  Same logic applies here.
-            return Task.Run(() =>
-                Task<WebResponse>.Factory.FromAsync(
-                    (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
-                    iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
-                    this
-                ));
+            return Task.Run(
+                () =>
+                    Task<WebResponse>.Factory.FromAsync(
+                        (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
+                        iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
+                        this
+                    )
+            );
         }
 
         public virtual void Abort()

@@ -400,8 +400,10 @@ namespace Microsoft.Extensions.Options.Tests
             );
 
             var sp = services.BuildServiceProvider();
-            Assert.Throws<MissingMethodException>(() =>
-                sp.GetRequiredService<IOptionsMonitor<OptionsWithoutDefaultCtor>>().Get("Named"));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    sp.GetRequiredService<IOptionsMonitor<OptionsWithoutDefaultCtor>>().Get("Named")
+            );
         }
 
         private class OptionsWithoutDefaultCtor

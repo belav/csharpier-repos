@@ -133,14 +133,15 @@ namespace System.Net.Security.Tests
                         false
                     );
 
-                    AuthenticationException e =
-                        await Assert.ThrowsAsync<AuthenticationException>(() =>
+                    AuthenticationException e = await Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
                             serverStream.AuthenticateAsServerAsync(
                                 serverCertificate,
                                 false,
                                 serverProtocol,
                                 false
-                            ));
+                            )
+                    );
 
                     Assert.NotNull(e.InnerException);
                     Assert.Contains("SSL_ERROR_SSL", e.InnerException.Message);
@@ -526,8 +527,9 @@ namespace System.Net.Security.Tests
                 // Server don't drain the client data
                 await server.ReadAsync(new byte[1]);
                 // Fail as it is not allowed to receive non hnadshake frames during handshake.
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync(cts.Token));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.NegotiateClientCertificateAsync(cts.Token)
+                );
 
                 // Drain client data.
                 await server.ReadAsync(new byte[499]);
@@ -725,8 +727,9 @@ namespace System.Net.Security.Tests
                 await server.WriteAsync(TestHelper.s_ping, cts.Token);
                 await t;
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.NegotiateClientCertificateAsync()
+                );
             }
         }
 
@@ -788,13 +791,15 @@ namespace System.Net.Security.Tests
                 if (doRead)
                 {
                     byte[] buffer = new byte[TestHelper.s_ping.Length];
-                    await Assert.ThrowsAsync<NotSupportedException>(() =>
-                        server.ReadAsync(buffer).AsTask());
+                    await Assert.ThrowsAsync<NotSupportedException>(
+                        () => server.ReadAsync(buffer).AsTask()
+                    );
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<NotSupportedException>(() =>
-                        server.WriteAsync(TestHelper.s_ping).AsTask());
+                    await Assert.ThrowsAsync<NotSupportedException>(
+                        () => server.WriteAsync(TestHelper.s_ping).AsTask()
+                    );
                 }
             }
         }
@@ -857,8 +862,9 @@ namespace System.Net.Security.Tests
                 // when we read part of the frame, remaining part should left decrypted
                 await server.ReadAsync(readBuffer, cts.Token);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.NegotiateClientCertificateAsync(cts.Token));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.NegotiateClientCertificateAsync(cts.Token)
+                );
             }
         }
 
@@ -877,8 +883,9 @@ namespace System.Net.Security.Tests
                     false
                 );
                 // Do it again without waiting for previous one to finish.
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    ssl.AuthenticateAsClientAsync("foo.com", null, SslProtocols.Tls12, false));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => ssl.AuthenticateAsClientAsync("foo.com", null, SslProtocols.Tls12, false)
+                );
             }
         }
 

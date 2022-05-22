@@ -593,10 +593,12 @@ namespace System.Drawing.Printing.Tests
         public void CreateMeasurementGraphics_Null_ThrowsNullReferenceException()
         {
             var printerSettings = new PrinterSettings();
-            Assert.Throws<NullReferenceException>(() =>
-                printerSettings.CreateMeasurementGraphics(null));
-            Assert.Throws<NullReferenceException>(() =>
-                printerSettings.CreateMeasurementGraphics(null, true));
+            Assert.Throws<NullReferenceException>(
+                () => printerSettings.CreateMeasurementGraphics(null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => printerSettings.CreateMeasurementGraphics(null, true)
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]

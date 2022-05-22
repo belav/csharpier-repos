@@ -467,8 +467,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // invalid:
             AssemblyIdentity id;
-            Assert.Throws<ArgumentNullException>(() =>
-                AssemblyIdentity.TryParseDisplayName(null, out id));
+            Assert.Throws<ArgumentNullException>(
+                () => AssemblyIdentity.TryParseDisplayName(null, out id)
+            );
 
             TestParseDisplayName("", null);
             TestParseDisplayName("fo=o, Culture=neutral, Version=1.0.0.0", null);

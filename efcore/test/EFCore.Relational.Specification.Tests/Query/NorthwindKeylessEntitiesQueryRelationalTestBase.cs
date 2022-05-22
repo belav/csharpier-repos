@@ -27,25 +27,27 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<CustomerQuery>()
-                                .Select(
-                                    cq =>
-                                        new
-                                        {
-                                            cq.City,
-                                            cq.CompanyName,
-                                            OrderDetailIds = ss.Set<Customer>()
-                                                .Where(c => c.City == cq.City)
-                                                .ToList()
-                                        }
-                                )
-                                .OrderBy(x => x.City)
-                                .Take(2)
-                    ))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<CustomerQuery>()
+                                    .Select(
+                                        cq =>
+                                            new
+                                            {
+                                                cq.City,
+                                                cq.CompanyName,
+                                                OrderDetailIds = ss.Set<Customer>()
+                                                    .Where(c => c.City == cq.City)
+                                                    .ToList()
+                                            }
+                                    )
+                                    .OrderBy(x => x.City)
+                                    .Take(2)
+                        )
+                )
             ).Message;
 
             Assert.Equal(
@@ -61,23 +63,25 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .OrderBy(c => c.CustomerID)
-                                .Select(
-                                    c =>
-                                        new
-                                        {
-                                            c.City,
-                                            Collection = ss.Set<CustomerQuery>()
-                                                .Where(cq => cq.City == c.City)
-                                                .ToList(),
-                                        }
-                                )
-                    ))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        AssertQuery(
+                            async,
+                            ss =>
+                                ss.Set<Customer>()
+                                    .OrderBy(c => c.CustomerID)
+                                    .Select(
+                                        c =>
+                                            new
+                                            {
+                                                c.City,
+                                                Collection = ss.Set<CustomerQuery>()
+                                                    .Where(cq => cq.City == c.City)
+                                                    .ToList(),
+                                            }
+                                    )
+                        )
+                )
             ).Message;
 
             Assert.Equal(
@@ -91,8 +95,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override async Task KeylessEntity_with_included_navs_multi_level(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.KeylessEntity_with_included_navs_multi_level(async))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.KeylessEntity_with_included_navs_multi_level(async)
+                )
             ).Message;
 
             Assert.Equal(
@@ -108,8 +113,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         )
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.KeylessEntity_with_defining_query_and_correlated_collection(async))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.KeylessEntity_with_defining_query_and_correlated_collection(async)
+                )
             ).Message;
 
             Assert.Equal(

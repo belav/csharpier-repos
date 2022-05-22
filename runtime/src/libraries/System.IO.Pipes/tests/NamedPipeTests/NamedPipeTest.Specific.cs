@@ -43,8 +43,9 @@ namespace System.IO.Pipes.Tests
                 var ctx = new CancellationTokenSource();
                 Assert.Throws<TimeoutException>(() => client.Connect(60)); // 60 to be over internal 50 interval
                 await Assert.ThrowsAsync<TimeoutException>(() => client.ConnectAsync(50));
-                await Assert.ThrowsAsync<TimeoutException>(() =>
-                    client.ConnectAsync(60, ctx.Token)); // testing Token overload; ctx is not canceled in this test
+                await Assert.ThrowsAsync<TimeoutException>(
+                    () => client.ConnectAsync(60, ctx.Token)
+                ); // testing Token overload; ctx is not canceled in this test
             }
         }
 
@@ -60,8 +61,9 @@ namespace System.IO.Pipes.Tests
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => clientConnectToken);
 
                 ctx.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    client.ConnectAsync(ctx.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () => client.ConnectAsync(ctx.Token)
+                );
             }
         }
 
@@ -160,23 +162,26 @@ namespace System.IO.Pipes.Tests
             using (new NamedPipeServerStream(name, PipeDirection.InOut, 1))
             {
                 // NPSS was created with max of 1, so creating another fails.
-                Assert.Throws<IOException>(() =>
-                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
+                Assert.Throws<IOException>(
+                    () => new NamedPipeServerStream(name, PipeDirection.InOut, 1)
+                );
             }
 
             using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
             {
                 // NPSS was created with max of 3, but NPSS not only validates against the original max but also
                 // against the max of the stream being created, so since there's already 1 and this specifies max == 1, it fails.
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    new NamedPipeServerStream(name, PipeDirection.InOut, 1));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => new NamedPipeServerStream(name, PipeDirection.InOut, 1)
+                );
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 2)) // lower max ignored
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 4)) // higher max ignored
                 {
                     // NPSS was created with a max of 3, and we're creating a 4th, so it fails.
-                    Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 3));
+                    Assert.Throws<IOException>(
+                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 3)
+                    );
                 }
 
                 using (new NamedPipeServerStream(name, PipeDirection.InOut, 3))
@@ -184,10 +189,12 @@ namespace System.IO.Pipes.Tests
                 {
                     // NPSS was created with a max of 3, and we've already created 3, so it fails,
                     // even if the new stream tries to raise it.
-                    Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 4));
-                    Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(name, PipeDirection.InOut, 2));
+                    Assert.Throws<IOException>(
+                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 4)
+                    );
+                    Assert.Throws<IOException>(
+                        () => new NamedPipeServerStream(name, PipeDirection.InOut, 2)
+                    );
                 }
             }
         }
@@ -515,13 +522,15 @@ namespace System.IO.Pipes.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix currently doesn't support message mode
         public void Unix_MessagePipeTransmissionMode()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                new NamedPipeServerStream(
-                    PipeStreamConformanceTests.GetUniquePipeName(),
-                    PipeDirection.InOut,
-                    1,
-                    PipeTransmissionMode.Message
-                ));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    new NamedPipeServerStream(
+                        PipeStreamConformanceTests.GetUniquePipeName(),
+                        PipeDirection.InOut,
+                        1,
+                        PipeTransmissionMode.Message
+                    )
+            );
         }
 
         [Theory]
@@ -679,8 +688,9 @@ namespace System.IO.Pipes.Tests
                 clientConnect.Wait();
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    server.ReadMode = PipeTransmissionMode.Byte);
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => server.ReadMode = PipeTransmissionMode.Byte
+                );
                 client.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -700,8 +710,9 @@ namespace System.IO.Pipes.Tests
                 clientConnect.Wait();
 
                 // Throws regardless of connection status for the pipe that is set to PipeDirection.In
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    client.ReadMode = PipeTransmissionMode.Byte);
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => client.ReadMode = PipeTransmissionMode.Byte
+                );
                 server.ReadMode = PipeTransmissionMode.Byte;
             }
 
@@ -826,10 +837,12 @@ namespace System.IO.Pipes.Tests
                 server.WaitForConnection();
                 clientConnect.Wait();
 
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    server.ReadMode = (PipeTransmissionMode)999);
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    client.ReadMode = (PipeTransmissionMode)999);
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => server.ReadMode = (PipeTransmissionMode)999
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => client.ReadMode = (PipeTransmissionMode)999
+                );
             }
         }
 

@@ -27,8 +27,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override async Task Collection_projection_before_set_operation_fails(bool async)
         {
             var message = (
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    base.Collection_projection_before_set_operation_fails(async))
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Collection_projection_before_set_operation_fails(async)
+                )
             ).Message;
 
             Assert.Equal(InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation, message);

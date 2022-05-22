@@ -28,8 +28,9 @@ namespace System.Tests
         [Fact]
         public void NullVariableThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                Environment.SetEnvironmentVariable(null, "test"));
+            Assert.Throws<ArgumentNullException>(
+                () => Environment.SetEnvironmentVariable(null, "test")
+            );
         }
 
         [Fact]

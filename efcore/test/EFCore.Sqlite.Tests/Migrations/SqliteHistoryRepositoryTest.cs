@@ -83,8 +83,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public void GetBeginIfNotExistsScript_works()
         {
             var repository = CreateHistoryRepository();
-            var ex = Assert.Throws<NotSupportedException>(() =>
-                repository.GetBeginIfNotExistsScript("Migration1"));
+            var ex = Assert.Throws<NotSupportedException>(
+                () => repository.GetBeginIfNotExistsScript("Migration1")
+            );
 
             Assert.Equal(SqliteStrings.MigrationScriptGenerationNotSupported, ex.Message);
         }
@@ -93,8 +94,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public void GetBeginIfExistsScript_works()
         {
             var repository = CreateHistoryRepository();
-            var ex = Assert.Throws<NotSupportedException>(() =>
-                repository.GetBeginIfExistsScript("Migration1"));
+            var ex = Assert.Throws<NotSupportedException>(
+                () => repository.GetBeginIfExistsScript("Migration1")
+            );
 
             Assert.Equal(SqliteStrings.MigrationScriptGenerationNotSupported, ex.Message);
         }

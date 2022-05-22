@@ -227,8 +227,9 @@ namespace System.Web.WebPages.Test
             Thread thread = Thread.CurrentThread;
 
             // Act and Assert
-            Assert.Throws<CultureNotFoundException>(() =>
-                CultureUtil.SetCulture(thread, context, "sans-culture"));
+            Assert.Throws<CultureNotFoundException>(
+                () => CultureUtil.SetCulture(thread, context, "sans-culture")
+            );
         }
 
         [Fact]
@@ -240,8 +241,9 @@ namespace System.Web.WebPages.Test
             Thread thread = Thread.CurrentThread;
 
             // Act and Assert
-            Assert.Throws<CultureNotFoundException>(() =>
-                CultureUtil.SetUICulture(thread, context, "sans-culture"));
+            Assert.Throws<CultureNotFoundException>(
+                () => CultureUtil.SetUICulture(thread, context, "sans-culture")
+            );
         }
 
         [Fact]

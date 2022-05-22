@@ -1651,16 +1651,20 @@ namespace System.Threading.Tasks.Tests
             void Validate(IValueTaskSource vts)
             {
                 var vt = new ValueTask(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    vt.GetAwaiter().OnCompleted(() => { }));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    vt.GetAwaiter().UnsafeOnCompleted(() => { }));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => vt.GetAwaiter().OnCompleted(() => { })
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => vt.GetAwaiter().UnsafeOnCompleted(() => { })
+                );
                 foreach (bool continueOnCapturedContext in new[] { true, false })
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { }));
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { }));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { })
+                    );
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { })
+                    );
                 }
             }
 
@@ -1685,16 +1689,20 @@ namespace System.Threading.Tasks.Tests
             void Validate(IValueTaskSource<int> vts)
             {
                 var vt = new ValueTask<int>(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    vt.GetAwaiter().OnCompleted(() => { }));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    vt.GetAwaiter().UnsafeOnCompleted(() => { }));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => vt.GetAwaiter().OnCompleted(() => { })
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => vt.GetAwaiter().UnsafeOnCompleted(() => { })
+                );
                 foreach (bool continueOnCapturedContext in new[] { true, false })
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { }));
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { }));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => vt.ConfigureAwait(false).GetAwaiter().OnCompleted(() => { })
+                    );
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => vt.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { })
+                    );
                 }
             }
 
@@ -1883,8 +1891,9 @@ namespace System.Threading.Tasks.Tests
                 ValueTask vt = ValueTask.FromException(e);
                 Assert.True(vt.IsCompleted);
                 Assert.True(vt.IsFaulted);
-                FormatException actual = await Assert.ThrowsAnyAsync<FormatException>(async () =>
-                    await vt);
+                FormatException actual = await Assert.ThrowsAnyAsync<FormatException>(
+                    async () => await vt
+                );
                 Assert.Same(e, actual);
                 Assert.Same(vt.AsTask(), vt.AsTask());
             }
@@ -1893,8 +1902,9 @@ namespace System.Threading.Tasks.Tests
                 ValueTask<int> vt = ValueTask.FromException<int>(e);
                 Assert.True(vt.IsCompleted);
                 Assert.True(vt.IsFaulted);
-                FormatException actual = await Assert.ThrowsAnyAsync<FormatException>(async () =>
-                    await vt);
+                FormatException actual = await Assert.ThrowsAnyAsync<FormatException>(
+                    async () => await vt
+                );
                 Assert.Same(e, actual);
                 Assert.Same(vt.AsTask(), vt.AsTask());
             }

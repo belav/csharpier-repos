@@ -21,8 +21,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionBoolArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckBoolArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckBoolArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -40,8 +41,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionByteArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckByteArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -59,8 +61,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCustomArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckCustomArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckCustomArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -78,8 +81,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCharArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckCharArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckCharArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -97,8 +101,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCustom2ArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckCustom2ArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckCustom2ArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -116,8 +121,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionDecimalArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckDecimalArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckDecimalArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -135,8 +141,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionDelegateArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckDelegateArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckDelegateArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -154,8 +161,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptiondoubleArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckDoubleArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckDoubleArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -173,8 +181,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionEnumArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckEnumArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckEnumArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -192,8 +201,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionEnumLongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckEnumLongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckEnumLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -211,8 +221,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionFloatArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckFloatArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckFloatArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -230,8 +241,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionFuncArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckFuncArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckFuncArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -249,8 +261,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionInterfaceArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckInterfaceArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckInterfaceArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -268,8 +281,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIEquatableArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckIEquatableArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckIEquatableArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -287,8 +301,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIEquatable2ArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckIEquatable2ArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckIEquatable2ArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -306,8 +321,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIntArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckIntArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -325,8 +341,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionLongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckLongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -344,8 +361,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionObjectArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckObjectArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckObjectArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -363,8 +381,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStructArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStructArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -382,8 +401,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionSByteArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckSByteArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckSByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -410,8 +430,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithStringArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStructWithStringArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStructWithStringArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -440,8 +461,9 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStructWithStringAndStructArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStructWithStringAndStructArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -459,8 +481,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionShortArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckShortArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -487,8 +510,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithTwoFieldsArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStructWithTwoFieldsArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStructWithTwoFieldsArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -515,8 +539,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithValueArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStructWithValueArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStructWithValueArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -534,8 +559,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStringArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckStringArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckStringArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -553,8 +579,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionUIntArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckUIntArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckUIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -572,8 +599,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionULongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckULongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckULongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -591,8 +619,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionUShortArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckUShortArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckUShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -820,8 +849,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericArrayLengthTestHelper<T>(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericArrayLengthExpression<T>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () => CheckGenericArrayLengthExpression<T>(null, useInterpreter)
+            );
         }
 
         private static void CheckGenericWithClassRestrictionArrayLengthTestHelper<Tc>(
@@ -846,8 +876,10 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         ) where Tc : class
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(null, useInterpreter)
+            );
         }
 
         private static void CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(
@@ -872,11 +904,13 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         ) where Tcn : class, new()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
-                    null,
-                    useInterpreter
-                ));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+                        null,
+                        useInterpreter
+                    )
+            );
         }
 
         private static void CheckGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(
@@ -901,8 +935,13 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         ) where TC : C
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
+                        null,
+                        useInterpreter
+                    )
+            );
         }
 
         private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(
@@ -927,11 +966,13 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         ) where TCn : C, new()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
-                    null,
-                    useInterpreter
-                ));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+                        null,
+                        useInterpreter
+                    )
+            );
         }
 
         private static void CheckGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
@@ -956,8 +997,10 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         ) where Ts : struct
         {
-            Assert.Throws<NullReferenceException>(() =>
-                CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter)
+            );
         }
 
         #endregion

@@ -40,8 +40,9 @@ public class FormFeatureTests
         var formContent = Encoding.UTF8.GetBytes("foo=bar&baz=2");
         context.Request.Body = new NonSeekableReadStream(formContent);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
 
         Assert.Equal("Form value count limit 1 exceeded.", exception.Message);
     }
@@ -508,8 +509,9 @@ public class FormFeatureTests
         );
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -536,8 +538,9 @@ public class FormFeatureTests
         );
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
         Assert.Equal("Form value count limit 2 exceeded.", exception.Message);
     }
 
@@ -614,8 +617,9 @@ public class FormFeatureTests
         IFormFeature formFeature = new FormFeature(context.Request, new FormOptions());
         context.Features.Set<IFormFeature>(formFeature);
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            context.Request.ReadFormAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => context.Request.ReadFormAsync()
+        );
 
         Assert.Equal(
             "Form section has invalid Content-Disposition value: " + InvalidContentDispositionValue,

@@ -1536,8 +1536,9 @@ namespace System.Numerics.Tensors.Tests
                 new[,] { { 0, 0, 0 }, { 0, 1, 2 }, { 0, 2, 4 }, { 0, 3, 6 }, }
             );
 
-            Assert.Throws<ArgumentException>(() =>
-                TensorOperations.Contract(left, right, new int[] { }, new[] { 1 }));
+            Assert.Throws<ArgumentException>(
+                () => TensorOperations.Contract(left, right, new int[] { }, new[] { 1 })
+            );
 
             // reshape to include dimension of length 1.
             var leftReshaped = left.Reshape(new[] { 1, (int)left.Length });

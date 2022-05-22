@@ -17,8 +17,9 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
             var configurationBuilder = new ConfigurationBuilder();
 
             // Act and Assert
-            var ex = Assert.Throws<ArgumentNullException>(() =>
-                configurationBuilder.SetBasePath(basePath: null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => configurationBuilder.SetBasePath(basePath: null)
+            );
             Assert.Equal("basePath", ex.ParamName);
         }
 

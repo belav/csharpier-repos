@@ -20,8 +20,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<XmlException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<XmlException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Root element is missing.", exception.Message);
         }
 
@@ -33,8 +34,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 
@@ -46,8 +48,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 
@@ -59,8 +62,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Unknown manifest version", exception.Message);
         }
 
@@ -75,8 +79,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 
@@ -92,8 +97,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 
@@ -109,8 +115,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 
@@ -127,8 +134,9 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             var manifest = CreateManifest(manifestContent);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-                StaticWebAssetsReader.Parse(manifest).ToArray());
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => StaticWebAssetsReader.Parse(manifest).ToArray()
+            );
             Assert.StartsWith("Invalid manifest", exception.Message);
         }
 

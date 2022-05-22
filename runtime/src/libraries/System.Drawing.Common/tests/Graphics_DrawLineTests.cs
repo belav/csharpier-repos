@@ -203,14 +203,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLine(pen, Point.Empty, Point.Empty));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLine(pen, 0, 0, 0, 0));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLine(pen, PointF.Empty, PointF.Empty));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLine(pen, 0f, 0f, 0f, 0f));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLine(pen, Point.Empty, Point.Empty)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLine(pen, 0, 0, 0, 0)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLine(pen, PointF.Empty, PointF.Empty)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLine(pen, 0f, 0f, 0f, 0f)
+                    );
                 }
                 finally
                 {
@@ -333,10 +337,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLines(pen, new Point[2]));
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.DrawLines(pen, new PointF[2]));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLines(pen, new Point[2])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawLines(pen, new PointF[2])
+                    );
                 }
                 finally
                 {

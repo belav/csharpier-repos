@@ -178,12 +178,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 _analysisOptions.Options?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty
             );
             _analyzerManager = new AnalyzerManager(analyzers);
-            _driverPool = new ObjectPool<AnalyzerDriver>(() =>
-                _compilation.CreateAnalyzerDriver(
-                    analyzers,
-                    _analyzerManager,
-                    severityFilter: SeverityFilter.None
-                ));
+            _driverPool = new ObjectPool<AnalyzerDriver>(
+                () =>
+                    _compilation.CreateAnalyzerDriver(
+                        analyzers,
+                        _analyzerManager,
+                        severityFilter: SeverityFilter.None
+                    )
+            );
             _executingConcurrentTreeTasksOpt = analysisOptions.ConcurrentAnalysis
                 ? new Dictionary<SourceOrAdditionalFile, Tuple<Task, CancellationTokenSource>>()
                 : null;

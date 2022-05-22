@@ -19,25 +19,29 @@ namespace System.IO.Tests
         public void InvalidParameters()
         {
             Assert.Throws<ArgumentException>(() => GetAttributes(string.Empty));
-            Assert.Throws<ArgumentException>(() =>
-                SetAttributes(string.Empty, FileAttributes.Normal));
+            Assert.Throws<ArgumentException>(
+                () => SetAttributes(string.Empty, FileAttributes.Normal)
+            );
         }
 
         [Theory, MemberData(nameof(TrailingCharacters))]
         public void SetAttributes_MissingFile(char trailingChar)
         {
-            Assert.Throws<FileNotFoundException>(() =>
-                SetAttributes(GetTestFilePath() + trailingChar, FileAttributes.ReadOnly));
+            Assert.Throws<FileNotFoundException>(
+                () => SetAttributes(GetTestFilePath() + trailingChar, FileAttributes.ReadOnly)
+            );
         }
 
         [Theory, MemberData(nameof(TrailingCharacters))]
         public void SetAttributes_MissingDirectory(char trailingChar)
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                SetAttributes(
-                    Path.Combine(GetTestFilePath(), "file" + trailingChar),
-                    FileAttributes.ReadOnly
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    SetAttributes(
+                        Path.Combine(GetTestFilePath(), "file" + trailingChar),
+                        FileAttributes.ReadOnly
+                    )
+            );
         }
 
         [ConditionalFact(nameof(CanCreateSymbolicLinks))]

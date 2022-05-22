@@ -33,8 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Average_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Average_no_data_subquery(async)
+                    )
                 ).Message
             );
         }
@@ -44,8 +45,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Max_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Max_no_data_subquery(async)
+                    )
                 ).Message
             );
         }
@@ -55,8 +57,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Min_no_data_subquery(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Min_no_data_subquery(async)
+                    )
                 ).Message
             );
         }
@@ -66,16 +69,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 "Sequence contains no elements",
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Average_on_nav_subquery_in_projection(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Average_on_nav_subquery_in_projection(async)
+                    )
                 ).Message
             );
         }
 
         public override Task Collection_Last_member_access_in_projection_translated(bool async)
         {
-            return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                base.Collection_Last_member_access_in_projection_translated(async));
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => base.Collection_Last_member_access_in_projection_translated(async)
+            );
         }
     }
 }

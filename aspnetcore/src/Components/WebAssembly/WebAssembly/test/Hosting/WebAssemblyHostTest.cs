@@ -50,8 +50,9 @@ public class WebAssemblyHostTest
         var task = host.RunAsyncCore(cts.Token, cultureProvider);
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            host.RunAsyncCore(cts.Token));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => host.RunAsyncCore(cts.Token)
+        );
 
         cts.Cancel();
         await task.TimeoutAfter(TimeSpan.FromSeconds(3));

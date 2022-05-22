@@ -39,8 +39,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 },
                 new[]
                 {
-                    new Lazy<IOptionPersisterProvider>(() =>
-                        optionPersisterProvider ??= new TestOptionsPersisterProvider())
+                    new Lazy<IOptionPersisterProvider>(
+                        () => optionPersisterProvider ??= new TestOptionsPersisterProvider()
+                    )
                 }
             );
         }

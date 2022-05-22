@@ -132,8 +132,9 @@ public class MultipartReaderTests
         var stream = MakeStream(OnePartBodyTwoHeaders);
         var reader = new MultipartReader(Boundary, stream) { HeadersCountLimit = 1, };
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            reader.ReadNextSectionAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => reader.ReadNextSectionAsync()
+        );
         Assert.Equal("Multipart headers count limit 1 exceeded.", exception.Message);
     }
 
@@ -143,8 +144,9 @@ public class MultipartReaderTests
         var stream = MakeStream(OnePartBodyTwoHeaders);
         var reader = new MultipartReader(Boundary, stream) { HeadersLengthLimit = 60, };
 
-        var exception = await Assert.ThrowsAsync<InvalidDataException>(() =>
-            reader.ReadNextSectionAsync());
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => reader.ReadNextSectionAsync()
+        );
         Assert.Equal("Line length limit 17 exceeded.", exception.Message);
     }
 

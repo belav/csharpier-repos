@@ -513,8 +513,9 @@ namespace System.Net.NetworkInformation.Tests
         [MemberData(nameof(InvalidAddressStrings))]
         public void ParseString_Invalid_ThrowsFormatException(string address)
         {
-            FormatException ex = Assert.Throws<FormatException>(() =>
-                PhysicalAddress.Parse(address));
+            FormatException ex = Assert.Throws<FormatException>(
+                () => PhysicalAddress.Parse(address)
+            );
             Assert.Contains(address, ex.Message);
         }
 
@@ -530,8 +531,9 @@ namespace System.Net.NetworkInformation.Tests
         [MemberData(nameof(InvalidAddressStrings))]
         public void ParseSpan_Invalid_ThrowsFormatException(string address)
         {
-            FormatException ex = Assert.Throws<FormatException>(() =>
-                PhysicalAddress.Parse(address.AsSpan()));
+            FormatException ex = Assert.Throws<FormatException>(
+                () => PhysicalAddress.Parse(address.AsSpan())
+            );
             Assert.Contains(address, ex.Message);
         }
 

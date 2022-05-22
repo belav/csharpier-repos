@@ -94,7 +94,7 @@ namespace Microsoft.Extensions.Options
                 name ?? Options.DefaultName,
                 new Lazy<TOptions>(
 #if !NETSTANDARD2_1
-                () =>
+                    () =>
 #endif
                     options
                 )

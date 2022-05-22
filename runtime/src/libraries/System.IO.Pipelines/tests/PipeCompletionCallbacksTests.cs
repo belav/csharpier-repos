@@ -151,8 +151,9 @@ namespace System.IO.Pipelines.Tests
                 callbackState2
             );
 
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                pipe.Reader.Complete());
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => pipe.Reader.Complete()
+            );
             Assert.Equal(exception1, aggregateException.InnerExceptions[0]);
             Assert.Equal(exception2, aggregateException.InnerExceptions[1]);
             Assert.Equal(2, counter);
@@ -465,8 +466,9 @@ namespace System.IO.Pipelines.Tests
                 callbackState2
             );
 
-            var aggregateException = Assert.Throws<AggregateException>(() =>
-                pipe.Writer.Complete());
+            var aggregateException = Assert.Throws<AggregateException>(
+                () => pipe.Writer.Complete()
+            );
             Assert.Equal(exception1, aggregateException.InnerExceptions[0]);
             Assert.Equal(exception2, aggregateException.InnerExceptions[1]);
             Assert.Equal(2, counter);

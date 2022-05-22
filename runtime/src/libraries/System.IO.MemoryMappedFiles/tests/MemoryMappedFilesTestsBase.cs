@@ -138,12 +138,20 @@ namespace System.IO.MemoryMappedFiles.Tests
             }
             else
             {
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Read));
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Write));
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.ReadWrite));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Read)
+                );
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Write)
+                );
+                Assert.Throws<UnauthorizedAccessException>(
+                    () =>
+                        mmf.CreateViewAccessor(
+                            0,
+                            expectedCapacity,
+                            MemoryMappedFileAccess.ReadWrite
+                        )
+                );
             }
         }
 

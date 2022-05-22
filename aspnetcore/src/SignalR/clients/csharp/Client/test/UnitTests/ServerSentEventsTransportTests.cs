@@ -218,8 +218,9 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                 .StartAsync(new Uri("http://fakeuri.org"), TransferFormat.Text)
                 .DefaultTimeout();
 
-            var exception = await Assert.ThrowsAsync<FormatException>(() =>
-                sseTransport.Input.ReadAllAsync());
+            var exception = await Assert.ThrowsAsync<FormatException>(
+                () => sseTransport.Input.ReadAllAsync()
+            );
 
             await sseTransport.Running.DefaultTimeout();
 
@@ -308,8 +309,9 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
 
             await sseTransport.Output.WriteAsync(new byte[] { 0x42 });
 
-            var exception = await Assert.ThrowsAsync<HttpRequestException>(() =>
-                sseTransport.Input.ReadAllAsync().DefaultTimeout());
+            var exception = await Assert.ThrowsAsync<HttpRequestException>(
+                () => sseTransport.Input.ReadAllAsync().DefaultTimeout()
+            );
             Assert.Contains("500", exception.Message);
 
             // Errors are only communicated through the pipe
@@ -536,10 +538,12 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                 loggerFactory: LoggerFactory
             );
 
-            var ex = await Assert.ThrowsAsync<ArgumentException>(() =>
-                sseTransport
-                    .StartAsync(new Uri("http://fakeuri.org"), TransferFormat.Binary)
-                    .DefaultTimeout());
+            var ex = await Assert.ThrowsAsync<ArgumentException>(
+                () =>
+                    sseTransport
+                        .StartAsync(new Uri("http://fakeuri.org"), TransferFormat.Binary)
+                        .DefaultTimeout()
+            );
 
             Assert.Equal("transferFormat", ex.ParamName);
             Assert.Equal(
@@ -578,8 +582,9 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                 httpClient,
                 loggerFactory: LoggerFactory
             );
-            var exception = await Assert.ThrowsAsync<ArgumentException>(() =>
-                sseTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat));
+            var exception = await Assert.ThrowsAsync<ArgumentException>(
+                () => sseTransport.StartAsync(new Uri("http://fakeuri.org"), transferFormat)
+            );
 
             Assert.Contains(
                 $"The '{transferFormat}' transfer format is not supported by this transport.",

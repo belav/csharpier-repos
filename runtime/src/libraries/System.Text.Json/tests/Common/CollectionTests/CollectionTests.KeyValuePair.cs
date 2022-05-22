@@ -505,19 +505,22 @@ namespace System.Text.Json.Serialization.Tests
                 PropertyNamingPolicy = (JsonNamingPolicy)Activator.CreateInstance(policyType)
             };
 
-            InvalidOperationException ex =
-                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
                     await JsonSerializerWrapperForString.DeserializeWrapper<
                         KeyValuePair<string, string>
-                    >("{}", options));
+                    >("{}", options)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(offendingProperty, exAsStr);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await JsonSerializerWrapperForString.SerializeWrapper(
-                    new KeyValuePair<string, string>("", ""),
-                    options
-                ));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () =>
+                    await JsonSerializerWrapperForString.SerializeWrapper(
+                        new KeyValuePair<string, string>("", ""),
+                        options
+                    )
+            );
         }
 
         public class KeyNameNullPolicy : JsonNamingPolicy
@@ -546,10 +549,12 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(@"{""Value"":1,null:1}")]
         public async Task InvalidJsonFail(string json)
         {
-            await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
-                    json
-                ));
+            await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
+                        json
+                    )
+            );
         }
 
         [Theory]
@@ -557,17 +562,21 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(@"{""Key"":1,""Value"":""2""}", "$.Value")]
         public async Task JsonPathIsAccurate(string json, string expectedPath)
         {
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
-                    json
-                ));
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
+                        json
+                    )
+            );
             Assert.Contains(expectedPath, ex.ToString());
 
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
-                    json
-                ));
+            ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
+                        json
+                    )
+            );
             Assert.Contains(expectedPath, ex.ToString());
         }
 
@@ -577,11 +586,13 @@ namespace System.Text.Json.Serialization.Tests
         public async Task JsonPathIsAccurate_CaseInsensitive(string json, string expectedPath)
         {
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
-                    json,
-                    options
-                ));
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
+                        json,
+                        options
+                    )
+            );
             Assert.Contains(expectedPath, ex.ToString());
         }
 
@@ -594,11 +605,13 @@ namespace System.Text.Json.Serialization.Tests
             {
                 PropertyNamingPolicy = new LeadingUnderscorePolicy()
             };
-            JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
-                await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
-                    json,
-                    options
-                ));
+            JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                async () =>
+                    await JsonSerializerWrapperForString.DeserializeWrapper<KeyValuePair<int, int>>(
+                        json,
+                        options
+                    )
+            );
             Assert.Contains(expectedPath, ex.ToString());
         }
 

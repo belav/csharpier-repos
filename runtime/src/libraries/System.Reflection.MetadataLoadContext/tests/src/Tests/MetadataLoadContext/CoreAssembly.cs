@@ -17,8 +17,9 @@ namespace System.Reflection.Tests
         [Fact]
         public static void InvalidAssemblyName()
         {
-            Assert.Throws<ArgumentException>(() =>
-                new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver(), ""));
+            Assert.Throws<ArgumentException>(
+                () => new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver(), "")
+            );
         }
 
         [Fact]

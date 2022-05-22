@@ -37,8 +37,9 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 additionalData[0] ^= 1;
 
                 byte[] decrypted = new byte[dataLength];
-                Assert.Throws<CryptographicException>(() =>
-                    aesGcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData));
+                Assert.Throws<CryptographicException>(
+                    () => aesGcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData)
+                );
             }
         }
 
@@ -226,10 +227,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesGcm = new AesGcm(key))
             {
-                Assert.Throws<ArgumentException>(() =>
-                    aesGcm.Encrypt(nonce, plaintext, ciphertext, tag));
-                Assert.Throws<ArgumentException>(() =>
-                    aesGcm.Decrypt(nonce, ciphertext, tag, plaintext));
+                Assert.Throws<ArgumentException>(
+                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                );
+                Assert.Throws<ArgumentException>(
+                    () => aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
+                );
             }
         }
 
@@ -253,10 +256,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesGcm = new AesGcm(key))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Encrypt((byte[])null, plaintext, ciphertext, tag));
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Decrypt((byte[])null, ciphertext, tag, plaintext));
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Encrypt((byte[])null, plaintext, ciphertext, tag)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Decrypt((byte[])null, ciphertext, tag, plaintext)
+                );
             }
         }
 
@@ -274,10 +279,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesGcm = new AesGcm(key))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Encrypt(nonce, (byte[])null, ciphertext, tag));
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Decrypt(nonce, ciphertext, tag, (byte[])null));
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Encrypt(nonce, (byte[])null, ciphertext, tag)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Decrypt(nonce, ciphertext, tag, (byte[])null)
+                );
             }
         }
 
@@ -295,10 +302,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesGcm = new AesGcm(key))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Encrypt(nonce, plaintext, (byte[])null, tag));
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Decrypt(nonce, (byte[])null, tag, plaintext));
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Encrypt(nonce, plaintext, (byte[])null, tag)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Decrypt(nonce, (byte[])null, tag, plaintext)
+                );
             }
         }
 
@@ -316,10 +325,12 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             using (var aesGcm = new AesGcm(key))
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null));
-                Assert.Throws<ArgumentNullException>(() =>
-                    aesGcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext));
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => aesGcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext)
+                );
             }
         }
 
@@ -427,14 +438,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
                 byte[] plaintext = new byte[testCase.Plaintext.Length];
                 RandomNumberGenerator.Fill(plaintext);
-                Assert.Throws<CryptographicException>(() =>
-                    aesGcm.Decrypt(
-                        testCase.Nonce,
-                        ciphertext,
-                        tag,
-                        plaintext,
-                        testCase.AssociatedData
-                    ));
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        aesGcm.Decrypt(
+                            testCase.Nonce,
+                            ciphertext,
+                            tag,
+                            plaintext,
+                            testCase.AssociatedData
+                        )
+                );
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }
@@ -465,14 +478,16 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
                 byte[] plaintext = new byte[testCase.Plaintext.Length];
                 RandomNumberGenerator.Fill(plaintext);
-                Assert.Throws<CryptographicException>(() =>
-                    aesGcm.Decrypt(
-                        testCase.Nonce,
-                        ciphertext,
-                        tag,
-                        plaintext,
-                        testCase.AssociatedData
-                    ));
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        aesGcm.Decrypt(
+                            testCase.Nonce,
+                            ciphertext,
+                            tag,
+                            plaintext,
+                            testCase.AssociatedData
+                        )
+                );
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }

@@ -209,15 +209,17 @@ public class RequestBodyLimitTests
                     Assert.False(feature.IsReadOnly);
                     Assert.Equal(11, httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    var ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.Read(input, 0, input.Length));
+                    var ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.Read(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.Read(input, 0, input.Length));
+                    ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.Read(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message
@@ -291,15 +293,17 @@ public class RequestBodyLimitTests
                     Assert.False(feature.IsReadOnly);
                     Assert.Equal(11, httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    var ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null));
+                    var ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                    );
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null));
+                    ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                    );
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message
@@ -331,15 +335,17 @@ public class RequestBodyLimitTests
                     Assert.False(feature.IsReadOnly);
                     Assert.Null(httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    var ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.Read(input, 0, input.Length));
+                    var ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.Read(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.Read(input, 0, input.Length));
+                    ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.Read(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
                         ex.Message
@@ -370,15 +376,17 @@ public class RequestBodyLimitTests
                     Assert.False(feature.IsReadOnly);
                     Assert.Null(httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.ReadAsync(input, 0, input.Length));
+                    var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+                        () => httpContext.Request.Body.ReadAsync(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.ReadAsync(input, 0, input.Length));
+                    ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+                        () => httpContext.Request.Body.ReadAsync(input, 0, input.Length)
+                    );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
@@ -409,15 +417,17 @@ public class RequestBodyLimitTests
                     Assert.Null(httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
                     var body = httpContext.Request.Body;
-                    var ex = Assert.Throws<BadHttpRequestException>(() =>
-                        body.EndRead(body.BeginRead(input, 0, input.Length, null, null)));
+                    var ex = Assert.Throws<BadHttpRequestException>(
+                        () => body.EndRead(body.BeginRead(input, 0, input.Length, null, null))
+                    );
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = Assert.Throws<BadHttpRequestException>(() =>
-                        body.EndRead(body.BeginRead(input, 0, input.Length, null, null)));
+                    ex = Assert.Throws<BadHttpRequestException>(
+                        () => body.EndRead(body.BeginRead(input, 0, input.Length, null, null))
+                    );
                     Assert.Equal(
                         "The total number of bytes read 11 has exceeded the request body size limit 10.",
                         ex.Message
@@ -453,8 +463,9 @@ public class RequestBodyLimitTests
                     int read = httpContext.Request.Body.Read(input, 0, input.Length);
                     Assert.Equal(10, read);
                     content.Block.Release();
-                    var ex = Assert.Throws<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.Read(input, 0, input.Length));
+                    var ex = Assert.Throws<BadHttpRequestException>(
+                        () => httpContext.Request.Body.Read(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The total number of bytes read 20 has exceeded the request body size limit 10.",
                         ex.Message
@@ -489,8 +500,9 @@ public class RequestBodyLimitTests
                     int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
                     Assert.Equal(10, read);
                     content.Block.Release();
-                    var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-                        httpContext.Request.Body.ReadAsync(input, 0, input.Length));
+                    var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+                        () => httpContext.Request.Body.ReadAsync(input, 0, input.Length)
+                    );
                     Assert.Equal(
                         "The total number of bytes read 20 has exceeded the request body size limit 10.",
                         ex.Message

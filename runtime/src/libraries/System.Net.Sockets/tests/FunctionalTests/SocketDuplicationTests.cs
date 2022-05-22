@@ -69,8 +69,9 @@ namespace System.Net.Sockets.Tests
             );
             socket.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                socket.DuplicateAndClose(Environment.ProcessId));
+            Assert.Throws<ObjectDisposedException>(
+                () => socket.DuplicateAndClose(Environment.ProcessId)
+            );
         }
 
         [PlatformSpecific(TestPlatforms.Windows)]
@@ -287,8 +288,9 @@ namespace System.Net.Sockets.Tests
                 SocketInformation info = originalServer.DuplicateAndClose(Environment.ProcessId);
 
                 using Socket cloneServer = new Socket(info);
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    cloneServer.ReceiveAsync(_receiveBuffer, SocketFlags.None));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => cloneServer.ReceiveAsync(_receiveBuffer, SocketFlags.None)
+                );
             }
         }
 
@@ -314,8 +316,9 @@ namespace System.Net.Sockets.Tests
         {
             SocketInformation socketInformation = default;
 
-            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                new Socket(socketInformation));
+            ArgumentException ex = Assert.Throws<ArgumentException>(
+                () => new Socket(socketInformation)
+            );
             Assert.Equal("socketInformation", ex.ParamName);
         }
 
@@ -328,8 +331,9 @@ namespace System.Net.Sockets.Tests
                 ProtocolInformation = new byte[4]
             };
 
-            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                new Socket(socketInformation));
+            ArgumentException ex = Assert.Throws<ArgumentException>(
+                () => new Socket(socketInformation)
+            );
             Assert.Equal("socketInformation", ex.ParamName);
         }
 

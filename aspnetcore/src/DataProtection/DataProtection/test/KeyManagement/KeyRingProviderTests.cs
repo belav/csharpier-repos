@@ -279,8 +279,9 @@ public class KeyRingProviderTests
         );
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            keyRingProvider.GetCacheableKeyRing(now));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => keyRingProvider.GetCacheableKeyRing(now)
+        );
 
         // Assert
         Assert.Equal(

@@ -830,12 +830,14 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var l2 = ilcf2.DefineLabel();
 
             Assert.Throws<InvalidOperationException>(() => il.DefineLabel());
-            Assert.Throws<InvalidOperationException>(() =>
-                il.Branch(ILOpCode.Br, default(LabelHandle)));
+            Assert.Throws<InvalidOperationException>(
+                () => il.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<InvalidOperationException>(() => il.MarkLabel(default(LabelHandle)));
 
-            Assert.Throws<ArgumentNullException>(() =>
-                ilcf1.Branch(ILOpCode.Br, default(LabelHandle)));
+            Assert.Throws<ArgumentNullException>(
+                () => ilcf1.Branch(ILOpCode.Br, default(LabelHandle))
+            );
             Assert.Throws<ArgumentNullException>(() => ilcf1.MarkLabel(default(LabelHandle)));
             AssertExtensions.Throws<ArgumentException>(
                 "label",

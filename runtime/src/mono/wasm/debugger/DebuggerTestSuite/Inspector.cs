@@ -228,8 +228,9 @@ namespace DebuggerTests
 
                 var init_cmds = getInitCmds(Client, _cancellationTokenSource.Token);
 
-                Task<Result> readyTask = Task.Run(async () =>
-                    Result.FromJson(await WaitFor(READY)));
+                Task<Result> readyTask = Task.Run(
+                    async () => Result.FromJson(await WaitFor(READY))
+                );
                 init_cmds.Add((READY, readyTask));
 
                 _logger.LogInformation("waiting for the runtime to be ready");

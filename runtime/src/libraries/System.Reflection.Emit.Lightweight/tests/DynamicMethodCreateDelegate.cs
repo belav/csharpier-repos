@@ -134,10 +134,12 @@ namespace System.Reflection.Emit.Tests
                 typeof(IDClass)
             );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                method.CreateDelegate(typeof(IntDelegate)));
-            Assert.Throws<InvalidOperationException>(() =>
-                method.CreateDelegate(typeof(IntDelegate), target));
+            Assert.Throws<InvalidOperationException>(
+                () => method.CreateDelegate(typeof(IntDelegate))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => method.CreateDelegate(typeof(IntDelegate), target)
+            );
         }
 
         [Fact]

@@ -221,8 +221,9 @@ public unsafe class SecretTests
         secret.Dispose();
 
         // Act & assert
-        Assert.Throws<ObjectDisposedException>(testCode: () =>
-            secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16])));
+        Assert.Throws<ObjectDisposedException>(
+            testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16]))
+        );
     }
 
     [Fact]

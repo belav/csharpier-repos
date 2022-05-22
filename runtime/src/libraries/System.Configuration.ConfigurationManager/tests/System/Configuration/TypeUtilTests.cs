@@ -77,8 +77,9 @@ namespace System.ConfigurationTests
         [Fact]
         public void GetType_ThrowOnError()
         {
-            Assert.Throws<TypeLoadException>(() =>
-                TypeUtil.GetType("Mxyzptlk", throwOnError: true));
+            Assert.Throws<TypeLoadException>(
+                () => TypeUtil.GetType("Mxyzptlk", throwOnError: true)
+            );
         }
 
         [Fact]

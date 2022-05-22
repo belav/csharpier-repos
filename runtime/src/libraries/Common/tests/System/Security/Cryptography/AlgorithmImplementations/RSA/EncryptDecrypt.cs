@@ -72,8 +72,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 enc = Encrypt(rsa, data, RSAEncryptionPadding.Pkcs1);
             }
 
-            Assert.Throws<ObjectDisposedException>(() =>
-                Decrypt(rsa, enc, RSAEncryptionPadding.Pkcs1));
+            Assert.Throws<ObjectDisposedException>(
+                () => Decrypt(rsa, enc, RSAEncryptionPadding.Pkcs1)
+            );
         }
 
         [Fact]
@@ -368,8 +369,9 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                 rsa.ImportParameters(pubParameters);
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA1));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA1)
+                );
             }
         }
 
@@ -399,8 +401,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 }
                 else
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA256));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA256)
+                    );
 
                     return;
                 }
@@ -684,8 +687,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 }
                 else
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA384));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA384)
+                    );
 
                     return;
                 }
@@ -720,8 +724,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 }
                 else
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA512));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, cipherBytes, RSAEncryptionPadding.OaepSHA512)
+                    );
 
                     return;
                 }
@@ -901,8 +906,9 @@ namespace System.Security.Cryptography.Rsa.Tests
             {
                 if (!expectSuccess)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Encrypt(rsa, TestData.HelloBytes, paddingMode));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Encrypt(rsa, TestData.HelloBytes, paddingMode)
+                    );
 
                     return;
                 }
@@ -1033,8 +1039,9 @@ namespace System.Security.Cryptography.Rsa.Tests
 
             using (RSA rsa = RSAFactory.Create(TestData.RSA2048Params))
             {
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA384));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA384)
+                );
             }
         }
 
@@ -1046,8 +1053,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] data = TestData.HelloBytes;
                 byte[] encrypted = Encrypt(rsa, data, RSAEncryptionPadding.OaepSHA256);
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA384));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA384)
+                );
             }
         }
 
@@ -1060,16 +1068,18 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] encrypted = Encrypt(rsa, data, RSAEncryptionPadding.OaepSHA1);
                 encrypted[1] ^= 0xFF;
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1)
+                );
 
                 if (RSAFactory.SupportsSha2Oaep)
                 {
                     encrypted = Encrypt(rsa, data, RSAEncryptionPadding.OaepSHA256);
                     encrypted[1] ^= 0xFF;
 
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256)
+                    );
                 }
             }
         }
@@ -1124,8 +1134,9 @@ namespace System.Security.Cryptography.Rsa.Tests
                 byte[] decrypted = Decrypt(rsa, correctlyPadded, RSAEncryptionPadding.Pkcs1);
                 Assert.NotNull(decrypted);
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    rsa.Decrypt(encrypted, RSAEncryptionPadding.Pkcs1));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => rsa.Decrypt(encrypted, RSAEncryptionPadding.Pkcs1)
+                );
             }
         }
 
@@ -1145,14 +1156,16 @@ namespace System.Security.Cryptography.Rsa.Tests
                     || rsa.GetType().Assembly.GetName().Name != "System.Core"
                 )
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, encrypted, RSAEncryptionPadding.Pkcs1));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, encrypted, RSAEncryptionPadding.Pkcs1)
+                    );
                 }
 
                 Array.Resize(ref encrypted, encrypted.Length - 2);
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, encrypted, RSAEncryptionPadding.Pkcs1));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, encrypted, RSAEncryptionPadding.Pkcs1)
+                );
             }
         }
 
@@ -1168,14 +1181,16 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                 if (!PlatformDetection.IsNetFramework)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1)
+                    );
                 }
 
                 Array.Resize(ref encrypted, encrypted.Length - 2);
 
-                Assert.ThrowsAny<CryptographicException>(() =>
-                    Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA1)
+                );
 
                 if (RSAFactory.SupportsSha2Oaep)
                 {
@@ -1184,14 +1199,16 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                     if (!PlatformDetection.IsNetFramework)
                     {
-                        Assert.ThrowsAny<CryptographicException>(() =>
-                            Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256));
+                        Assert.ThrowsAny<CryptographicException>(
+                            () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256)
+                        );
                     }
 
                     Array.Resize(ref encrypted, encrypted.Length - 2);
 
-                    Assert.ThrowsAny<CryptographicException>(() =>
-                        Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256));
+                    Assert.ThrowsAny<CryptographicException>(
+                        () => Decrypt(rsa, encrypted, RSAEncryptionPadding.OaepSHA256)
+                    );
                 }
             }
         }

@@ -156,13 +156,15 @@ namespace System.Net.Security.Tests
                     )
                 )
                 {
-                    await Assert.ThrowsAsync<AuthenticationException>(() =>
-                        sslStream.AuthenticateAsClientAsync(
-                            "localhost",
-                            null,
-                            SslProtocolSupport.DefaultSslProtocols,
-                            false
-                        ));
+                    await Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
+                            sslStream.AuthenticateAsClientAsync(
+                                "localhost",
+                                null,
+                                SslProtocolSupport.DefaultSslProtocols,
+                                false
+                            )
+                    );
                 }
             }
         }

@@ -210,8 +210,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<NotImplementedException>(() =>
-                    format.SetTabStops(0, new float[] { float.NegativeInfinity }));
+                Assert.Throws<NotImplementedException>(
+                    () => format.SetTabStops(0, new float[] { float.NegativeInfinity })
+                );
             }
         }
 
@@ -262,8 +263,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<NullReferenceException>(() =>
-                    format.SetMeasurableCharacterRanges(null));
+                Assert.Throws<NullReferenceException>(
+                    () => format.SetMeasurableCharacterRanges(null)
+                );
             }
         }
 
@@ -272,8 +274,9 @@ namespace System.Drawing.Tests
         {
             using (var format = new StringFormat())
             {
-                Assert.Throws<OverflowException>(() =>
-                    format.SetMeasurableCharacterRanges(new CharacterRange[33]));
+                Assert.Throws<OverflowException>(
+                    () => format.SetMeasurableCharacterRanges(new CharacterRange[33])
+                );
             }
         }
 

@@ -225,10 +225,12 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try
             {
-                Assert.Throws<InvalidCastException>(() =>
-                    Marshal.GetNativeVariantForObject(obj, pNative));
-                Assert.Throws<InvalidCastException>(() =>
-                    Marshal.GetNativeVariantForObject<object>(obj, pNative));
+                Assert.Throws<InvalidCastException>(
+                    () => Marshal.GetNativeVariantForObject(obj, pNative)
+                );
+                Assert.Throws<InvalidCastException>(
+                    () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
+                );
             }
             finally
             {

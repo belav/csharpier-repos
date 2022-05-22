@@ -152,8 +152,9 @@ public class UseMiddlewareTest
         var builder = new ApplicationBuilder(new DummyServiceProvider());
         builder.UseMiddleware(typeof(MiddlewareInjectInvokeNoService));
         var app = builder.Build();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            app(new DefaultHttpContext()));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => app(new DefaultHttpContext())
+        );
         Assert.Equal(
             Resources.FormatException_InvokeMiddlewareNoService(
                 typeof(object),
@@ -186,8 +187,9 @@ public class UseMiddlewareTest
     {
         var mockServiceProvider = new DummyServiceProvider();
         var builder = new ApplicationBuilder(mockServiceProvider);
-        var exception = Assert.Throws<NotSupportedException>(() =>
-            builder.UseMiddleware(typeof(Middleware), "arg"));
+        var exception = Assert.Throws<NotSupportedException>(
+            () => builder.UseMiddleware(typeof(Middleware), "arg")
+        );
         Assert.Equal(
             Resources.FormatException_UseMiddlewareExplicitArgumentsNotSupported(
                 typeof(IMiddleware)

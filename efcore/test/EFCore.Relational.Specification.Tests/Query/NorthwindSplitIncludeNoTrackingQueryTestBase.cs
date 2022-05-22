@@ -148,8 +148,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Queryable.Last)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        base.Include_collection_with_last_no_orderby(async))
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Include_collection_with_last_no_orderby(async)
+                    )
                 ).Message
             );
         }

@@ -116,8 +116,9 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Contains("propertyName", ex.ToString());
 
             var iDictionary = (IDictionary<string, JsonNode?>)jObject;
-            ex = Assert.Throws<ArgumentNullException>(() =>
-                iDictionary.TryGetValue(null, out JsonNode _));
+            ex = Assert.Throws<ArgumentNullException>(
+                () => iDictionary.TryGetValue(null, out JsonNode _)
+            );
             Assert.Contains("propertyName", ex.ToString());
         }
 
@@ -324,8 +325,9 @@ namespace System.Text.Json.Nodes.Tests
         {
             using (JsonDocument document = JsonDocument.Parse(json))
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    JsonObject.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonObject.Create(document.RootElement)
+                );
             }
         }
 
@@ -547,8 +549,9 @@ namespace System.Text.Json.Nodes.Tests
 
             var jObject = new JsonObject();
             jObject.Add("Prop", jValue);
-            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
-                jObject.Add("Prop", jValue));
+            ArgumentException ex = Assert.Throws<ArgumentException>(
+                () => jObject.Add("Prop", jValue)
+            );
             Assert.Contains("Prop", ex.ToString());
         }
 

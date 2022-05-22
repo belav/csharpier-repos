@@ -26,14 +26,24 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType1_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute((Type)null));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int)));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string)));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string), typeof(bool)));
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute((Type)null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute(null, typeof(int))
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute(null, typeof(int), typeof(string))
+            );
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new ComSourceInterfacesAttribute(
+                        null,
+                        typeof(int),
+                        typeof(string),
+                        typeof(bool)
+                    )
+            );
         }
 
         [Fact]
@@ -46,12 +56,21 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType2_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string)));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string), typeof(bool)));
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute(typeof(int), null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute(typeof(int), null, typeof(string))
+            );
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new ComSourceInterfacesAttribute(
+                        typeof(int),
+                        null,
+                        typeof(string),
+                        typeof(bool)
+                    )
+            );
         }
 
         [Fact]
@@ -68,10 +87,18 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType3_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null));
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null, typeof(bool)));
+            Assert.Throws<NullReferenceException>(
+                () => new ComSourceInterfacesAttribute(typeof(int), typeof(string), null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new ComSourceInterfacesAttribute(
+                        typeof(int),
+                        typeof(string),
+                        null,
+                        typeof(bool)
+                    )
+            );
         }
 
         [Fact]
@@ -92,8 +119,15 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType4_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), null));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new ComSourceInterfacesAttribute(
+                        typeof(int),
+                        typeof(string),
+                        typeof(bool),
+                        null
+                    )
+            );
         }
     }
 }

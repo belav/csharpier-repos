@@ -205,8 +205,9 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateTypeInfo();
 
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineField("Name", typeof(int), FieldAttributes.Public));
+            Assert.Throws<InvalidOperationException>(
+                () => type.DefineField("Name", typeof(int), FieldAttributes.Public)
+            );
         }
 
         [Theory]

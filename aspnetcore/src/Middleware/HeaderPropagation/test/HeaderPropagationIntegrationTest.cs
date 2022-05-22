@@ -107,8 +107,9 @@ public class HeaderPropagationIntegrationTest
 
         // Act & Assert
         var client = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient("test");
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            client.GetAsync("http://localhost/"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => client.GetAsync("http://localhost/")
+        );
         Assert.Equal(
             "The HeaderPropagationValues.Headers property has not been initialized. Register the header propagation middleware "
                 + "by adding 'app.UseHeaderPropagation()' in the 'Configure(...)' method. Header propagation can only be used within "
@@ -188,8 +189,9 @@ public class HeaderPropagationIntegrationTest
             )
             .Build();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            host.StartAsync());
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => host.StartAsync()
+        );
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddHeaderPropagation' inside the call to 'ConfigureServices(...)' in the application startup code.",
             exception.Message

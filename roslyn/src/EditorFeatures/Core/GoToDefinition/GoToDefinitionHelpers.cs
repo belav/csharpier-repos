@@ -130,15 +130,17 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             bool thirdPartyNavigationAllowed = true
         )
         {
-            return threadingContext.JoinableTaskFactory.Run(() =>
-                TryGoToDefinitionAsync(
-                    symbol,
-                    solution,
-                    threadingContext,
-                    streamingPresenter,
-                    cancellationToken,
-                    thirdPartyNavigationAllowed
-                ));
+            return threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    TryGoToDefinitionAsync(
+                        symbol,
+                        solution,
+                        threadingContext,
+                        streamingPresenter,
+                        cancellationToken,
+                        thirdPartyNavigationAllowed
+                    )
+            );
         }
 
         public static async Task<bool> TryGoToDefinitionAsync(

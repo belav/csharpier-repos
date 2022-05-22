@@ -47,14 +47,16 @@ public class DefaultTransportFactoryTests
         HttpTransportType transportType
     )
     {
-        var exception = Assert.Throws<ArgumentNullException>(() =>
-            new DefaultTransportFactory(
-                transportType,
-                new LoggerFactory(),
-                httpClient: null,
-                httpConnectionOptions: null,
-                accessTokenProvider: null
-            ));
+        var exception = Assert.Throws<ArgumentNullException>(
+            () =>
+                new DefaultTransportFactory(
+                    transportType,
+                    new LoggerFactory(),
+                    httpClient: null,
+                    httpConnectionOptions: null,
+                    accessTokenProvider: null
+                )
+        );
 
         Assert.Equal("httpClient", exception.ParamName);
     }
@@ -107,8 +109,9 @@ public class DefaultTransportFactoryTests
             httpConnectionOptions: null,
             accessTokenProvider: null
         );
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            transportFactory.CreateTransport(~requestedTransport));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => transportFactory.CreateTransport(~requestedTransport)
+        );
 
         Assert.Equal("No requested transports available on the server.", ex.Message);
     }
@@ -168,8 +171,9 @@ public class DefaultTransportFactoryTests
                 httpConnectionOptions: null,
                 accessTokenProvider: null
             );
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                transportFactory.CreateTransport(AllTransportTypes));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => transportFactory.CreateTransport(AllTransportTypes)
+            );
 
             Assert.Equal("No requested transports available on the server.", ex.Message);
         }

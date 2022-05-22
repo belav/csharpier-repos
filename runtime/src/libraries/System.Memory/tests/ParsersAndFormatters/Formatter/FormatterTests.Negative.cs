@@ -18,13 +18,15 @@ namespace System.Buffers.Text.Tests
             }
 
             object value = Activator.CreateInstance(integerType);
-            Assert.Throws<FormatException>(() =>
-                TryFormatUtf8(
-                    value,
-                    Array.Empty<byte>(),
-                    out int bytesWritten,
-                    new StandardFormat('$', 1)
-                ));
+            Assert.Throws<FormatException>(
+                () =>
+                    TryFormatUtf8(
+                        value,
+                        Array.Empty<byte>(),
+                        out int bytesWritten,
+                        new StandardFormat('$', 1)
+                    )
+            );
         }
 
         [Theory]
@@ -33,20 +35,24 @@ namespace System.Buffers.Text.Tests
         public static void TestGFormatWithPrecisionNotSupported(Type type)
         {
             object value = Activator.CreateInstance(type);
-            Assert.Throws<NotSupportedException>(() =>
-                TryFormatUtf8(
-                    value,
-                    Array.Empty<byte>(),
-                    out int bytesWritten,
-                    new StandardFormat('G', 1)
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                TryFormatUtf8(
-                    value,
-                    Array.Empty<byte>(),
-                    out int bytesWritten,
-                    new StandardFormat('g', 1)
-                ));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    TryFormatUtf8(
+                        value,
+                        Array.Empty<byte>(),
+                        out int bytesWritten,
+                        new StandardFormat('G', 1)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    TryFormatUtf8(
+                        value,
+                        Array.Empty<byte>(),
+                        out int bytesWritten,
+                        new StandardFormat('g', 1)
+                    )
+            );
         }
     }
 }

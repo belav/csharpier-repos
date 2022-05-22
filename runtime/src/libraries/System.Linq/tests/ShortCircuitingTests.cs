@@ -254,8 +254,9 @@ namespace System.Linq.Tests
             Assert.Throws<InvalidOperationException>(() => tracker0.SingleOrDefault(pred0.Func));
             var tracker1 = new TrackingEnumerable(10);
             var pred1 = new CountedFunction<int, bool>(i => i > 2);
-            Assert.Throws<InvalidOperationException>(() =>
-                tracker1.Where(pred1.Func).SingleOrDefault());
+            Assert.Throws<InvalidOperationException>(
+                () => tracker1.Where(pred1.Func).SingleOrDefault()
+            );
 
             // .NET Core shortcircuits as an optimization.
             // See https://github.com/dotnet/corefx/pull/2350.

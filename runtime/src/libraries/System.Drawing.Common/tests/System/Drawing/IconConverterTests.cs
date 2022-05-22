@@ -126,18 +126,29 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal(_icon.Height, newIcon.Height);
             Assert.Equal(_icon.Width, newIcon.Width);
 
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, "System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertFrom("System.Drawing.String")
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConv.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
 
             newIcon = (Icon)
                 _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, _iconBytes);
@@ -145,22 +156,36 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal(_icon.Height, newIcon.Height);
             Assert.Equal(_icon.Width, newIcon.Width);
 
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom("System.Drawing.String"));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    "System.Drawing.String"
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Bitmap(20, 20)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object()));
+            Assert.Throws<NotSupportedException>(
+                () => _icoConvFrmTD.ConvertFrom("System.Drawing.String")
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        "System.Drawing.String"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertFrom(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        new Bitmap(20, 20)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new Point(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new SizeF(10, 10))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConvFrmTD.ConvertFrom(null, CultureInfo.InvariantCulture, new object())
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -180,20 +205,29 @@ namespace System.ComponentModel.TypeConverterTests
             newIconBytes = (byte[])_icoConv.ConvertTo(_icon, _iconBytes.GetType());
             Assert.Equal(_iconBytes, newIconBytes);
 
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Rectangle)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, _icon.GetType()));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Size)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Point)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Metafile)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(object)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Rectangle))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, _icon.GetType())
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Size))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Point))
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Metafile))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(object))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => _icoConv.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(int))
+            );
 
             Assert.Equal(
                 _iconStr,
@@ -219,35 +253,59 @@ namespace System.ComponentModel.TypeConverterTests
             newIconBytes = (byte[])_icoConvFrmTD.ConvertTo(_icon, _iconBytes.GetType());
             Assert.Equal(_iconBytes, newIconBytes);
 
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _icon,
-                    typeof(Rectangle)
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _icon,
-                    _icon.GetType()
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Size)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Point)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(
-                    null,
-                    CultureInfo.InvariantCulture,
-                    _icon,
-                    typeof(Metafile)
-                ));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(object)));
-            Assert.Throws<NotSupportedException>(() =>
-                _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(int)));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        typeof(Rectangle)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        _icon.GetType()
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(Size))
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        typeof(Point)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        typeof(Metafile)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(
+                        null,
+                        CultureInfo.InvariantCulture,
+                        _icon,
+                        typeof(object)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    _icoConvFrmTD.ConvertTo(null, CultureInfo.InvariantCulture, _icon, typeof(int))
+            );
 
             using (
                 new ThreadCultureChange(

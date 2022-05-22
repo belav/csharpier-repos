@@ -250,8 +250,9 @@ public class ServerSentEventsParserTests
         await pipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(encodedMessagePart2));
         result = await pipe.Reader.ReadAsync();
 
-        var ex = Assert.Throws<FormatException>(() =>
-            parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer));
+        var ex = Assert.Throws<FormatException>(
+            () => parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 

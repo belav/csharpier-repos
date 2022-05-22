@@ -332,8 +332,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            policy.ApplyAsync(httpContext, candidates));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => policy.ApplyAsync(httpContext, candidates)
+        );
     }
 
     [Fact]

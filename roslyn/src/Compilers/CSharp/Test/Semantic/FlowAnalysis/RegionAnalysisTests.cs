@@ -3251,17 +3251,22 @@ class C
                 .DescendantNodesAndSelf()
                 .OfType<StatementSyntax>()
                 .First();
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeControlFlow(statement, null));
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeControlFlow(null, statement));
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeControlFlow(statement, null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeControlFlow(null, statement)
+            );
             Assert.Throws<ArgumentNullException>(() => semanticModel.AnalyzeControlFlow(null));
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow(null, statement));
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow(statement, null));
-            Assert.Throws<ArgumentNullException>(() =>
-                semanticModel.AnalyzeDataFlow((StatementSyntax)null));
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow(null, statement)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow(statement, null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => semanticModel.AnalyzeDataFlow((StatementSyntax)null)
+            );
         }
 
         [WorkItem(542507, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542507")]

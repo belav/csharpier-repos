@@ -11166,8 +11166,9 @@ class C
             uint manifestSize;
             if (expectedManifest == null)
             {
-                Assert.Throws<Win32Exception>(() =>
-                    Win32Res.GetResource(lib, resourceId, resourceType, out manifestSize));
+                Assert.Throws<Win32Exception>(
+                    () => Win32Res.GetResource(lib, resourceId, resourceType, out manifestSize)
+                );
             }
             else
             {

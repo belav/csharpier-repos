@@ -191,8 +191,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() =>
-                CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(
+                () => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }
@@ -244,8 +245,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() =>
-                CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(
+                () => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }

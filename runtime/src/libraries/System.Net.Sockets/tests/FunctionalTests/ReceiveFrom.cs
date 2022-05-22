@@ -49,8 +49,9 @@ namespace System.Net.Sockets.Tests
                 Offset = offset
             }.ToActual();
 
-            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(() =>
-                ReceiveFromAsync(socket, buffer, GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
+                () => ReceiveFromAsync(socket, buffer, GetGetDummyTestEndpoint())
+            );
         }
 
         [Fact]
@@ -59,8 +60,9 @@ namespace System.Net.Sockets.Tests
             if (!ValidatesArrayArguments)
                 return;
             using Socket socket = CreateSocket();
-            await AssertThrowsSynchronously<ArgumentNullException>(() =>
-                ReceiveFromAsync(socket, null, GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<ArgumentNullException>(
+                () => ReceiveFromAsync(socket, null, GetGetDummyTestEndpoint())
+            );
         }
 
         [Fact]
@@ -69,13 +71,15 @@ namespace System.Net.Sockets.Tests
             using Socket socket = CreateSocket();
             if (UsesEap)
             {
-                await AssertThrowsSynchronously<ArgumentException>(() =>
-                    ReceiveFromAsync(socket, new byte[1], null));
+                await AssertThrowsSynchronously<ArgumentException>(
+                    () => ReceiveFromAsync(socket, new byte[1], null)
+                );
             }
             else
             {
-                await AssertThrowsSynchronously<ArgumentNullException>(() =>
-                    ReceiveFromAsync(socket, new byte[1], null));
+                await AssertThrowsSynchronously<ArgumentNullException>(
+                    () => ReceiveFromAsync(socket, new byte[1], null)
+                );
             }
         }
 
@@ -84,8 +88,9 @@ namespace System.Net.Sockets.Tests
         {
             using var ipv4Socket = CreateSocket();
             EndPoint ipV6Endpoint = GetGetDummyTestEndpoint(AddressFamily.InterNetworkV6);
-            await AssertThrowsSynchronously<ArgumentException>(() =>
-                ReceiveFromAsync(ipv4Socket, new byte[1], ipV6Endpoint));
+            await AssertThrowsSynchronously<ArgumentException>(
+                () => ReceiveFromAsync(ipv4Socket, new byte[1], ipV6Endpoint)
+            );
         }
 
         [Fact]
@@ -97,8 +102,9 @@ namespace System.Net.Sockets.Tests
                 return;
 
             using Socket socket = CreateSocket();
-            await AssertThrowsSynchronously<InvalidOperationException>(() =>
-                ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<InvalidOperationException>(
+                () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+            );
         }
 
         [Theory]
@@ -210,8 +216,9 @@ namespace System.Net.Sockets.Tests
             else
                 socket.Dispose();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()));
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+            );
         }
 
         [Theory]
@@ -307,8 +314,9 @@ namespace System.Net.Sockets.Tests
                 await Task.Delay(50);
 
             SocketException exception = await Assert
-                .ThrowsAnyAsync<SocketException>(() =>
-                    ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()))
+                .ThrowsAnyAsync<SocketException>(
+                    () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+                )
                 .WaitAsync(CancellationTestTimeout);
 
             Assert.Equal(SocketError.Shutdown, exception.SocketErrorCode);
@@ -368,8 +376,9 @@ namespace System.Net.Sockets.Tests
             EndPoint endpoint = new IPEndPoint(IPAddress.Loopback, 1);
             using Socket socket = CreateSocket();
 
-            Assert.Throws<ArgumentException>(() =>
-                socket.EndReceiveFrom(Task.CompletedTask, ref endpoint));
+            Assert.Throws<ArgumentException>(
+                () => socket.EndReceiveFrom(Task.CompletedTask, ref endpoint)
+            );
         }
 
         [Fact]
@@ -485,10 +494,17 @@ namespace System.Net.Sockets.Tests
                 cts.CancelAfter(100);
 
             OperationCanceledException ex = await Assert
-                .ThrowsAnyAsync<OperationCanceledException>(() =>
-                    socket
-                        .ReceiveFromAsync(buffer, SocketFlags.None, dummy.LocalEndPoint, cts.Token)
-                        .AsTask())
+                .ThrowsAnyAsync<OperationCanceledException>(
+                    () =>
+                        socket
+                            .ReceiveFromAsync(
+                                buffer,
+                                SocketFlags.None,
+                                dummy.LocalEndPoint,
+                                cts.Token
+                            )
+                            .AsTask()
+                )
                 .WaitAsync(CancellationTestTimeout);
             Assert.Equal(cts.Token, ex.CancellationToken);
         }

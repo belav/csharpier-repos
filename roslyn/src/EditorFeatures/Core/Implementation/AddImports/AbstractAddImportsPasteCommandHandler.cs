@@ -151,12 +151,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AddImports
             var addMissingImportsService =
                 document.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
 #pragma warning disable VSTHRD102 // Implement internal logic asynchronously
-            var updatedDocument = _threadingContext.JoinableTaskFactory.Run(() =>
-                addMissingImportsService.AddMissingImportsAsync(
-                    document,
-                    textSpan,
-                    cancellationToken
-                ));
+            var updatedDocument = _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    addMissingImportsService.AddMissingImportsAsync(
+                        document,
+                        textSpan,
+                        cancellationToken
+                    )
+            );
 #pragma warning restore VSTHRD102 // Implement internal logic asynchronously
             if (updatedDocument is null)
             {

@@ -49,8 +49,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             CancellationToken cancellationToken
         )
         {
-            var solutionFolder = IOUtilities.PerformIO(() =>
-                Path.GetDirectoryName(solutionKey.FilePath));
+            var solutionFolder = IOUtilities.PerformIO(
+                () => Path.GetDirectoryName(solutionKey.FilePath)
+            );
             if (RoslynString.IsNullOrEmpty(solutionFolder))
                 return null;
 

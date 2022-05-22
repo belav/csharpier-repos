@@ -38,8 +38,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void NumberGroupSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.NumberGroupSeparator = "string");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.NumberGroupSeparator = "string"
+            );
         }
     }
 }

@@ -792,12 +792,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (_batchDocument != null)
                     {
                         // perform expensive operations at once
-                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                            Simplifier.ReduceAsync(
-                                _batchDocument,
-                                Simplifier.Annotation,
-                                cancellationToken: CancellationToken.None
-                            ));
+                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(
+                            () =>
+                                Simplifier.ReduceAsync(
+                                    _batchDocument,
+                                    Simplifier.Annotation,
+                                    cancellationToken: CancellationToken.None
+                                )
+                        );
 
                         _batchDocument.Project.Solution.Workspace.TryApplyChanges(
                             newDocument.Project.Solution

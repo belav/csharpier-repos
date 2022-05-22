@@ -63,8 +63,9 @@ namespace System.IO.Tests
         public static void IsCancelled(Task task, CancellationToken ct)
         {
             Assert.True(task.IsCanceled);
-            OperationCanceledException tce = Assert.ThrowsAny<OperationCanceledException>(() =>
-                task.GetAwaiter().GetResult());
+            OperationCanceledException tce = Assert.ThrowsAny<OperationCanceledException>(
+                () => task.GetAwaiter().GetResult()
+            );
             Assert.NotNull(tce);
             Assert.Equal(ct, tce.CancellationToken);
         }

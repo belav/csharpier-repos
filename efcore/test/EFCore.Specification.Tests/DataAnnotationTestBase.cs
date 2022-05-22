@@ -932,12 +932,14 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(CompositeKeyAttribute)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder
-                            .Entity<CompositeKeyAttribute>()
-                            .HasOne<KeyFluentApiAndKeylessAttribute>()
-                            .WithOne()
-                            .HasForeignKey<CompositeKeyAttribute>("fk"))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<CompositeKeyAttribute>()
+                                .HasOne<KeyFluentApiAndKeylessAttribute>()
+                                .WithOne()
+                                .HasForeignKey<CompositeKeyAttribute>("fk")
+                    )
                     .Message
             );
         }
@@ -2863,8 +2865,9 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(A)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        modelBuilder.Entity<ConflictingFKAttributes>())
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<ConflictingFKAttributes>()
+                    )
                     .Message
             );
         }

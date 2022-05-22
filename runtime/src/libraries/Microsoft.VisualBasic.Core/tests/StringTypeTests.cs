@@ -383,8 +383,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [InlineData("abc", 1, -3, "")]
         public void MidStmtStr_ArgumentException(string str, int start, int length, string insert)
         {
-            Assert.Throws<ArgumentException>(() =>
-                StringType.MidStmtStr(ref str, start, length, insert));
+            Assert.Throws<ArgumentException>(
+                () => StringType.MidStmtStr(ref str, start, length, insert)
+            );
         }
 
         [Theory]
@@ -460,10 +461,12 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [InlineData(null, "*")]
         public void StrLike_NullReferenceException(string source, string pattern)
         {
-            Assert.Throws<NullReferenceException>(() =>
-                StringType.StrLike(source, pattern, CompareMethod.Binary));
-            Assert.Throws<NullReferenceException>(() =>
-                StringType.StrLike(source, pattern, CompareMethod.Text));
+            Assert.Throws<NullReferenceException>(
+                () => StringType.StrLike(source, pattern, CompareMethod.Binary)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => StringType.StrLike(source, pattern, CompareMethod.Text)
+            );
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeBinary(source, pattern));
             Assert.Throws<NullReferenceException>(() => StringType.StrLikeText(source, pattern));
         }

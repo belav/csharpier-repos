@@ -991,28 +991,34 @@ namespace System.Text.Json.Serialization.Tests
 
             // A JSON object that contains a '$ref' metadata property must not contain any other properties.
             string testJson = baseJson + @"{""foo"":""value"",""$ref"":""1""}}";
-            JsonException ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithObjectProperty>(
-                    testJson,
-                    s_serializerOptionsPreserve
-                ));
+            JsonException ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             testJson = baseJson + @"{""$ref"":""1"",""bar"":""value""}}";
-            ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithObjectProperty>(
-                    testJson,
-                    s_serializerOptionsPreserve
-                ));
+            ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
 
             // The '$id' and '$ref' metadata properties must be JSON strings.
             testJson = baseJson + @"{""$ref"":1}}";
-            ex = Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithObjectProperty>(
-                    testJson,
-                    s_serializerOptionsPreserve
-                ));
+            ex = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithObjectProperty>(
+                        testJson,
+                        s_serializerOptionsPreserve
+                    )
+            );
             Assert.Equal("$.Sibling", ex.Path);
         }
 

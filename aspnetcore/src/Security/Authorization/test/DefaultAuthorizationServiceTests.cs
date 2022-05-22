@@ -36,11 +36,13 @@ public class DefaultAuthorizationServiceTests
         );
 
         // Act
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AuthorizationPolicy.CombineAsync(
-                provider,
-                new AuthorizeAttribute[] { new AuthorizeAttribute { Policy = "Wut" } }
-            ));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                AuthorizationPolicy.CombineAsync(
+                    provider,
+                    new AuthorizeAttribute[] { new AuthorizeAttribute { Policy = "Wut" } }
+                )
+        );
     }
 
     [Fact]
@@ -484,8 +486,14 @@ public class DefaultAuthorizationServiceTests
 
         // Act
         // Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            authorizationService.AuthorizeAsync(new ClaimsPrincipal(), "whatever", "BogusPolicy"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                authorizationService.AuthorizeAsync(
+                    new ClaimsPrincipal(),
+                    "whatever",
+                    "BogusPolicy"
+                )
+        );
         Assert.Equal("No policy found: BogusPolicy.", exception.Message);
     }
 
@@ -627,18 +635,20 @@ public class DefaultAuthorizationServiceTests
     [Fact]
     public void PolicyThrowsWithNoRequirements()
     {
-        Assert.Throws<InvalidOperationException>(() =>
-            BuildAuthorizationService(
-                services =>
-                {
-                    services.AddAuthorization(
-                        options =>
-                        {
-                            options.AddPolicy("Basic", policy => { });
-                        }
-                    );
-                }
-            ));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                BuildAuthorizationService(
+                    services =>
+                    {
+                        services.AddAuthorization(
+                            options =>
+                            {
+                                options.AddPolicy("Basic", policy => { });
+                            }
+                        );
+                    }
+                )
+        );
     }
 
     [Fact]

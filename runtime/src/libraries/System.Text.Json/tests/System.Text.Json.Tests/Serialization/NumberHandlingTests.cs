@@ -146,8 +146,9 @@ namespace System.Text.Json.Serialization.Tests
                 number,
                 JsonSerializer.Deserialize<T>(jsonWithNumberAsNumber, s_optionWriteAsStr)
             );
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<T>(jsonWithNumberAsString, s_optionWriteAsStr));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<T>(jsonWithNumberAsString, s_optionWriteAsStr)
+            );
 
             // Serialize
             Assert.Equal(
@@ -604,20 +605,25 @@ namespace System.Text.Json.Serialization.Tests
             );
             AssertIEnumerableEqual(numbers, deserialized);
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<T>>(json_NumbersAsStrings, s_optionWriteAsStr));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<T>>(json_NumbersAsStrings, s_optionWriteAsStr)
+            );
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<T>>(
-                    json_NumbersAsNumbersAndStrings,
-                    s_optionWriteAsStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<List<T>>(
+                        json_NumbersAsNumbersAndStrings,
+                        s_optionWriteAsStr
+                    )
+            );
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<List<T>>(
-                    json_NumbersAsNumbersAndStrings_Alternate,
-                    s_optionWriteAsStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<List<T>>(
+                        json_NumbersAsNumbersAndStrings_Alternate,
+                        s_optionWriteAsStr
+                    )
+            );
 
             // Serialize
             Assert.Equal(
@@ -941,11 +947,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""ListOfFloats"":[""1""]}";
             // Strict handling on property overrides loose global policy.
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<MyClassWithNumbers_PropsHasAttribute>(
-                    json,
-                    s_optionReadFromStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<MyClassWithNumbers_PropsHasAttribute>(
+                        json,
+                        s_optionReadFromStr
+                    )
+            );
 
             // Serialize
             json = @"{""ListOfFloats"":[1]}";
@@ -1034,11 +1042,13 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.Equal(double.NegativeInfinity, obj.DoubleNumber);
                         break;
                     default:
-                        Assert.Throws<JsonException>(() =>
-                            JsonSerializer.Deserialize<StructWithNumbers>(
-                                testJson,
-                                s_optionsAllowFloatConstants
-                            ));
+                        Assert.Throws<JsonException>(
+                            () =>
+                                JsonSerializer.Deserialize<StructWithNumbers>(
+                                    testJson,
+                                    s_optionsAllowFloatConstants
+                                )
+                        );
                         return;
                 }
 
@@ -1086,22 +1096,28 @@ namespace System.Text.Json.Serialization.Tests
             string testStringAsJson = $@"""{testString}""";
 
             string testJson = @$"{{""FloatNumber"":{testStringAsJson}}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<StructWithNumbers>(
-                    testJson,
-                    s_optionsAllowFloatConstants
-                ));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<StructWithNumbers>(testJson, s_optionReadFromStr));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<StructWithNumbers>(
+                        testJson,
+                        s_optionsAllowFloatConstants
+                    )
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<StructWithNumbers>(testJson, s_optionReadFromStr)
+            );
 
             testJson = @$"{{""DoubleNumber"":{testStringAsJson}}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<StructWithNumbers>(
-                    testJson,
-                    s_optionsAllowFloatConstants
-                ));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<StructWithNumbers>(testJson, s_optionReadFromStr));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<StructWithNumbers>(
+                        testJson,
+                        s_optionsAllowFloatConstants
+                    )
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<StructWithNumbers>(testJson, s_optionReadFromStr)
+            );
         }
 
         [Fact]
@@ -1122,15 +1138,19 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("-Infinity")]
         public static void Unquoted_FloatingPointConstants_Read_Fail(string testString)
         {
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<float>(testString, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<double?>(testString, s_optionReadFromStr));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<double>(
-                    testString,
-                    s_optionReadFromStrAllowFloatConstants
-                ));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<float>(testString, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<double?>(testString, s_optionReadFromStr)
+            );
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<double>(
+                        testString,
+                        s_optionReadFromStrAllowFloatConstants
+                    )
+            );
         }
 
         private struct StructWithNumbers
@@ -1161,11 +1181,13 @@ namespace System.Text.Json.Serialization.Tests
         public static void WriteAsString_AllowFloatingPoint()
         {
             string json = @"{""IntNumber"":""1"",""FloatNumber"":""NaN""}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithNumbers>(
-                    json,
-                    s_optionWriteAsStrAllowFloatConstants
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithNumbers>(
+                        json,
+                        s_optionWriteAsStrAllowFloatConstants
+                    )
+            );
 
             var obj = new ClassWithNumbers { IntNumber = 1, FloatNumber = float.NaN };
 
@@ -1210,8 +1232,10 @@ namespace System.Text.Json.Serialization.Tests
 
             foreach (string test in testCases)
             {
-                Assert.Throws<JsonException>(() =>
-                    JsonSerializer.Deserialize<T>(test, s_optionReadFromStrAllowFloatConstants));
+                Assert.Throws<JsonException>(
+                    () =>
+                        JsonSerializer.Deserialize<T>(test, s_optionReadFromStrAllowFloatConstants)
+                );
             }
         }
 
@@ -1252,8 +1276,9 @@ namespace System.Text.Json.Serialization.Tests
 
             foreach (string test in testCases)
             {
-                Assert.Throws<JsonException>(() =>
-                    JsonSerializer.Deserialize<T>(test, s_optionReadFromStr));
+                Assert.Throws<JsonException>(
+                    () => JsonSerializer.Deserialize<T>(test, s_optionReadFromStr)
+                );
             }
         }
 
@@ -1376,11 +1401,13 @@ namespace System.Text.Json.Serialization.Tests
             string nullAsJson = "null";
             string nullAsQuotedJson = $@"""{nullAsJson}""";
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<T>(nullAsJson, s_optionReadAndWriteFromStr));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<T>(nullAsJson, s_optionReadAndWriteFromStr)
+            );
             Assert.Equal("0", JsonSerializer.Serialize(default(T)));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<T>(nullAsQuotedJson, s_optionReadAndWriteFromStr));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<T>(nullAsQuotedJson, s_optionReadAndWriteFromStr)
+            );
         }
 
         [Fact]
@@ -1405,8 +1432,9 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Null(JsonSerializer.Deserialize<T>(nullAsJson, s_optionReadAndWriteFromStr));
             Assert.Equal(nullAsJson, JsonSerializer.Serialize(default(T)));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<T>(nullAsQuotedJson, s_optionReadAndWriteFromStr));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<T>(nullAsQuotedJson, s_optionReadAndWriteFromStr)
+            );
         }
 
         [Fact]
@@ -1414,50 +1442,72 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"""12345""";
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<byte>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<sbyte>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<short>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<int>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<long>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ushort>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<uint>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ulong>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<float>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<double>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<decimal>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<byte?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<sbyte?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<short?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<int?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<long?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ushort?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<uint?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ulong?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<float?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<double?>(json, s_optionsAllowFloatConstants));
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<decimal?>(json, s_optionsAllowFloatConstants));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<byte>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<sbyte>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<short>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<int>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<long>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ushort>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<uint>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ulong>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<float>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<double>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<decimal>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<byte?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<sbyte?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<short?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<int?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<long?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ushort?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<uint?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ulong?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<float?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<double?>(json, s_optionsAllowFloatConstants)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<decimal?>(json, s_optionsAllowFloatConstants)
+            );
         }
 
         [Fact]
@@ -1472,8 +1522,9 @@ namespace System.Text.Json.Serialization.Tests
             // Good JSON because Float can be number.
             string floatIsNumber = @"{""Float"":1234.5,""Int"":12345}";
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWith_Attribute_OnNumber>(intIsString));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWith_Attribute_OnNumber>(intIsString)
+            );
 
             ClassWith_Attribute_OnNumber obj =
                 JsonSerializer.Deserialize<ClassWith_Attribute_OnNumber>(floatIsString);
@@ -1507,8 +1558,9 @@ namespace System.Text.Json.Serialization.Tests
             // Allowed
             string floatIsNan = @"{""Float"":""NaN"",""Int"":123}";
 
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<Type_AllowFloatConstants>(floatIsString));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Type_AllowFloatConstants>(floatIsString)
+            );
 
             Type_AllowFloatConstants obj = JsonSerializer.Deserialize<Type_AllowFloatConstants>(
                 floatIsNan
@@ -1538,11 +1590,13 @@ namespace System.Text.Json.Serialization.Tests
 
             // Global options loose, type options strict
             json = @"{""Float"":""12345""}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWith_StrictAttribute>(
-                    json,
-                    s_optionReadAndWriteFromStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWith_StrictAttribute>(
+                        json,
+                        s_optionReadAndWriteFromStr
+                    )
+            );
 
             var obj2 = new ClassWith_StrictAttribute() { Float = 12345 };
             Assert.Equal(
@@ -1569,8 +1623,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void AttributeOnMember_WinsOver_AttributeOnType()
         {
             string json = @"{""Double"":""NaN""}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWith_Attribute_On_TypeAndMember>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWith_Attribute_On_TypeAndMember>(json)
+            );
 
             var obj = new ClassWith_Attribute_On_TypeAndMember { Double = float.NaN };
             Assert.Throws<ArgumentException>(() => JsonSerializer.Serialize(obj));
@@ -1592,10 +1647,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.Short);
 
             string jsonWithMyObjectProperty = @"{""MyObject"":{""Float"":""1""}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWith_ReadAsStringAttribute>(
-                    jsonWithMyObjectProperty
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWith_ReadAsStringAttribute>(
+                        jsonWithMyObjectProperty
+                    )
+            );
         }
 
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
@@ -1645,11 +1702,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Strict policy on the collection element type overrides read-as-string on the collection property
             string json = @"{""MyList"":[{""Float"":""1""}]}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithComplexListProperty>(
-                    json,
-                    s_optionReadAndWriteFromStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithComplexListProperty>(
+                        json,
+                        s_optionReadAndWriteFromStr
+                    )
+            );
 
             // Strict policy on the collection element type overrides write-as-string on the collection property
             var obj = new ClassWithComplexListProperty
@@ -1673,14 +1732,18 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NumberHandlingAttribute_NotAllowedOn_CollectionOfNonNumbers()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWith_AttributeOnComplexListProperty>(""));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new ClassWith_AttributeOnComplexListProperty()));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWith_AttributeOnComplexDictionaryProperty>(""));
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new ClassWith_AttributeOnComplexDictionaryProperty()));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWith_AttributeOnComplexListProperty>("")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new ClassWith_AttributeOnComplexListProperty())
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWith_AttributeOnComplexDictionaryProperty>("")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new ClassWith_AttributeOnComplexDictionaryProperty())
+            );
         }
 
         public class ClassWith_AttributeOnComplexListProperty
@@ -1718,11 +1781,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Strict policy on the dictionary element type overrides read-as-string on the collection property.
             string json = @"{""MyDictionary"":{""Key"":{""Float"":""1""}}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<ClassWithComplexDictionaryProperty>(
-                    json,
-                    s_optionReadFromStr
-                ));
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithComplexDictionaryProperty>(
+                        json,
+                        s_optionReadFromStr
+                    )
+            );
 
             // Strict policy on the collection element type overrides write-as-string on the collection property
             var obj = new ClassWithComplexDictionaryProperty
@@ -1803,8 +1868,9 @@ namespace System.Text.Json.Serialization.Tests
             // Recursive behavior, where number handling setting on a property is applied to subsequent
             // properties in its type closure, would allow a string number. This is not supported.
             string json = @"{""NestedClass"":{""MyInt"":""1""}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<AttributeAppliedToFirstLevelProp>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<AttributeAppliedToFirstLevelProp>(json)
+            );
 
             var obj = new AttributeAppliedToFirstLevelProp
             {
@@ -1830,8 +1896,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void HandlingOnMemberOverridesHandlingOnType_Enumerable()
         {
             string json = @"{""List"":[""1""]}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<MyCustomListWrapper>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<MyCustomListWrapper>(json)
+            );
 
             var obj = new MyCustomListWrapper { List = new MyCustomList { 1 } };
             Assert.Equal(@"{""List"":[1]}", JsonSerializer.Serialize(obj));
@@ -1847,8 +1914,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void HandlingOnMemberOverridesHandlingOnType_Dictionary()
         {
             string json = @"{""Dictionary"":{""Key"":""1""}}";
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<MyCustomDictionaryWrapper>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<MyCustomDictionaryWrapper>(json)
+            );
 
             var obj1 = new MyCustomDictionaryWrapper
             {
@@ -1895,8 +1963,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(25, obj.Prop);
 
             // Converter throws this exception regardless of input.
-            NotImplementedException ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(obj));
+            NotImplementedException ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(obj)
+            );
             Assert.Equal("Converter was called", ex.Message);
         }
 
@@ -1914,16 +1983,20 @@ namespace System.Text.Json.Serialization.Tests
             NotImplementedException ex;
 
             // Assert regular Read/Write methods on custom converter are called.
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(
-                    json
-                ));
+            ex = Assert.Throws<NotImplementedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(
+                        json
+                    )
+            );
             Assert.Equal("Converter was called", ex.Message);
 
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(
-                    new ClassWith_NumberHandlingOn_Type_WithCustomConverter()
-                ));
+            ex = Assert.Throws<NotImplementedException>(
+                () =>
+                    JsonSerializer.Serialize(
+                        new ClassWith_NumberHandlingOn_Type_WithCustomConverter()
+                    )
+            );
             Assert.Equal("Converter was called", ex.Message);
         }
 
@@ -1967,8 +2040,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(25, JsonSerializer.Deserialize<int>(json, options));
 
             // Converter throws this exception regardless of input.
-            NotImplementedException ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(4, options));
+            NotImplementedException ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(4, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
 
             json = @"""NaN""";
@@ -2016,17 +2090,21 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonNumberHandling_ArgOutOfRangeFail()
         {
             // Global options
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(-1) });
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(-1) }
+            );
             Assert.Contains("value", ex.ToString());
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(8) });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonSerializerOptions { NumberHandling = (JsonNumberHandling)(8) }
+            );
 
-            ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonNumberHandlingAttribute((JsonNumberHandling)(-1)));
+            ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonNumberHandlingAttribute((JsonNumberHandling)(-1))
+            );
             Assert.Contains("handling", ex.ToString());
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new JsonNumberHandlingAttribute((JsonNumberHandling)(8)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new JsonNumberHandlingAttribute((JsonNumberHandling)(8))
+            );
         }
 
         [Fact]
@@ -2044,14 +2122,16 @@ namespace System.Text.Json.Serialization.Tests
             // Converter returns 25 regardless of input.
             Assert.Equal(25, JsonSerializer.Deserialize<List<int>>(@"[""1""]", options)[0]);
             // Converter throws this exception regardless of input.
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(list, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(list, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
 
             var list2 = new List<int?> { 1 };
             Assert.Equal(25, JsonSerializer.Deserialize<List<int?>>(@"[""1""]", options)[0]);
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(list2, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(list2, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
 
             // Okay to set number handling for number collection property when number is handled with custom converter;
@@ -2062,8 +2142,9 @@ namespace System.Text.Json.Serialization.Tests
                     options
                 );
             Assert.Equal(25, obj1.Prop[0]);
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(obj1, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(obj1, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
 
             ClassWithDictPropAndAttribute obj2 =
@@ -2072,8 +2153,9 @@ namespace System.Text.Json.Serialization.Tests
                     options
                 );
             Assert.Equal(25, obj2.Prop[1]);
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(obj2, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(obj2, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
         }
 
@@ -2097,23 +2179,27 @@ namespace System.Text.Json.Serialization.Tests
         public static void InternalCollectionConverter_CustomNumberConverter_OnProperty()
         {
             // Invalid to set number handling for number collection property when number is handled with custom converter.
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithListPropAndAttribute_ConverterOnProp>(""));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithListPropAndAttribute_ConverterOnProp>("")
+            );
             Assert.Contains(nameof(ClassWithListPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new ClassWithListPropAndAttribute_ConverterOnProp()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new ClassWithListPropAndAttribute_ConverterOnProp())
+            );
             Assert.Contains(nameof(ClassWithListPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithDictPropAndAttribute_ConverterOnProp>(""));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithDictPropAndAttribute_ConverterOnProp>("")
+            );
             Assert.Contains(nameof(ClassWithDictPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(new ClassWithDictPropAndAttribute_ConverterOnProp()));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new ClassWithDictPropAndAttribute_ConverterOnProp())
+            );
             Assert.Contains(nameof(ClassWithDictPropAndAttribute_ConverterOnProp), ex.ToString());
             Assert.Contains("IntProp", ex.ToString());
         }
@@ -2168,8 +2254,9 @@ namespace System.Text.Json.Serialization.Tests
                 25,
                 JsonSerializer.Deserialize<Dictionary<int, int?>>(@"{""1"":""1""}", options)[1]
             );
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(dict, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(dict, options)
+            );
             Assert.Equal("Converter was called", ex.Message);
 
             var obj = JsonSerializer.Deserialize<ClassWithDictPropAndAttribute>(
@@ -2177,8 +2264,9 @@ namespace System.Text.Json.Serialization.Tests
                 options
             );
             Assert.Equal(25, obj.Prop[1]);
-            ex = Assert.Throws<NotImplementedException>(() =>
-                JsonSerializer.Serialize(obj, options));
+            ex = Assert.Throws<NotImplementedException>(
+                () => JsonSerializer.Serialize(obj, options)
+            );
             Assert.Throws<NotImplementedException>(() => JsonSerializer.Serialize(dict, options));
             Assert.Equal("Converter was called", ex.Message);
         }

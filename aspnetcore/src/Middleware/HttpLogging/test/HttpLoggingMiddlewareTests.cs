@@ -33,32 +33,38 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-            new HttpLoggingMiddleware(
-                null,
-                CreateOptionsAccessor(),
-                LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
-            ));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    null,
+                    CreateOptionsAccessor(),
+                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() =>
-            new HttpLoggingMiddleware(
-                c =>
-                {
-                    return Task.CompletedTask;
-                },
-                null,
-                LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
-            ));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() =>
-            new HttpLoggingMiddleware(
-                c =>
-                {
-                    return Task.CompletedTask;
-                },
-                CreateOptionsAccessor(),
-                null
-            ));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    CreateOptionsAccessor(),
+                    null
+                )
+        );
     }
 
     [Fact]

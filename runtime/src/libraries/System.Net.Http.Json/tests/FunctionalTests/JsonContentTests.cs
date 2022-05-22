@@ -172,8 +172,9 @@ namespace System.Net.Http.Json.Functional.Tests
                 var foo = new Foo();
                 Type typeOfBar = typeof(Bar);
 
-                Exception ex = Assert.Throws<ArgumentException>(() =>
-                    JsonContent.Create(foo, typeOfBar));
+                Exception ex = Assert.Throws<ArgumentException>(
+                    () => JsonContent.Create(foo, typeOfBar)
+                );
 
                 string strTypeOfBar = typeOfBar.ToString();
                 Assert.Contains(strTypeOfBar, ex.Message);

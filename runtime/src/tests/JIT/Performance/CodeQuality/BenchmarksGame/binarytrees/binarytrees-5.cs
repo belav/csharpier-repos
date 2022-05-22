@@ -57,8 +57,9 @@ namespace BenchmarksGame
                         // Parallelized computation for relatively large tasks
                         var miniTasks = new Task<int>[iterationCount];
                         for (var i = 0; i < iterationCount; i++)
-                            miniTasks[i] = Task.Run(() =>
-                                TreeNode.CreateTree(depthCopy).CountNodes());
+                            miniTasks[i] = Task.Run(
+                                () => TreeNode.CreateTree(depthCopy).CountNodes()
+                            );
                         Task.WaitAll(miniTasks);
                         for (var i = 0; i < iterationCount; i++)
                             count += miniTasks[i].Result;

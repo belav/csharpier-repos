@@ -54,8 +54,9 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrencyDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                NumberFormatInfo.InvariantInfo.CurrencyDecimalDigits = 2);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyDecimalDigits = 2
+            );
         }
     }
 }

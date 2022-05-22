@@ -79,8 +79,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     modelBuilder
                         .Entity<TestKeylessType>()
                         .HasNoKey()
-                        .ToQuery(() =>
-                            context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")),
+                        .ToQuery(
+                            () => context.Set<TestKeylessType>().FromSqlRaw("SELECT * FROM Vista")
+                        ),
 #pragma warning restore CS0618 // Type or member is obsolete
                 result => Assert.Empty(result)
             );

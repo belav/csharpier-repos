@@ -493,8 +493,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.UnknownKeyValue(nameof(Weak), nameof(Weak.HeroId)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    )
                 ).Message
             );
         }
@@ -520,8 +522,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.SaveOwnedWithoutOwner(nameof(Skinner)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    )
                 ).Message
             );
         }
@@ -547,8 +551,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.SaveOwnedWithoutOwner(nameof(TheStreets)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                        _ = async ? await context.SaveChangesAsync() : context.SaveChanges())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () =>
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    )
                 ).Message
             );
         }
@@ -2644,17 +2650,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 Assert.Equal(
                     CoreStrings.TrackingTypeMismatch(nameof(OfThis), "Dreams.Are#AreMade"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            context.ChangeTracker.TrackGraph(
-                                dreams,
-                                e =>
-                                {
-                                    e.Entry.State =
-                                        e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
-                                            ? EntityState.Unchanged
-                                            : EntityState.Added;
-                                }
-                            ))
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                context.ChangeTracker.TrackGraph(
+                                    dreams,
+                                    e =>
+                                    {
+                                        e.Entry.State =
+                                            e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
+                                                ? EntityState.Unchanged
+                                                : EntityState.Added;
+                                    }
+                                )
+                        )
                         .Message
                 );
             }

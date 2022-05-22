@@ -52,11 +52,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.OKButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.OKButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
@@ -68,11 +70,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(() =>
-                    ClickAsync(
-                        testAccessor => testAccessor.CancelButton,
-                        cancellationTokenSource.Token
-                    ));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.CancelButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 

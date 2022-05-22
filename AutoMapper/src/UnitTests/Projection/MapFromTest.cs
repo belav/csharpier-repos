@@ -26,8 +26,9 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
                 }
             );
 
-            typeof(NullReferenceException).ShouldNotBeThrownBy(() =>
-                config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()); //null reference exception here
+            typeof(NullReferenceException).ShouldNotBeThrownBy(
+                () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()
+            ); //null reference exception here
         }
 
         [Fact]

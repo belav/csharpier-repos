@@ -49,8 +49,9 @@ namespace Microsoft.Data.Sqlite
             {
                 connection.Open();
 
-                var ex = Assert.Throws<ArgumentException>(() =>
-                    connection.BeginTransaction(isolationLevel));
+                var ex = Assert.Throws<ArgumentException>(
+                    () => connection.BeginTransaction(isolationLevel)
+                );
 
                 Assert.Equal(Resources.InvalidIsolationLevel(isolationLevel), ex.Message);
             }
@@ -84,8 +85,9 @@ namespace Microsoft.Data.Sqlite
 
                     connection2.DefaultTimeout = 1;
 
-                    var ex = Assert.Throws<SqliteException>(() =>
-                        connection2.ExecuteScalar<long>("SELECT * FROM Data;"));
+                    var ex = Assert.Throws<SqliteException>(
+                        () => connection2.ExecuteScalar<long>("SELECT * FROM Data;")
+                    );
 
                     Assert.Equal(SQLITE_LOCKED, ex.SqliteErrorCode);
                     Assert.Equal(SQLITE_LOCKED_SHAREDCACHE, ex.SqliteExtendedErrorCode);

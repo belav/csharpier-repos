@@ -214,8 +214,9 @@ namespace System.Reflection.Emit.Tests
 
             type.DefineEvent("TestEvent", EventAttributes.None, typeof(int));
             type.CreateTypeInfo().AsType();
-            Assert.Throws<InvalidOperationException>(() =>
-                type.DefineEvent("TestEvent2", EventAttributes.None, typeof(int)));
+            Assert.Throws<InvalidOperationException>(
+                () => type.DefineEvent("TestEvent2", EventAttributes.None, typeof(int))
+            );
         }
 
         [Theory]

@@ -90,8 +90,9 @@ namespace XPathTests.Common
             string startingNodePath = null
         ) where T : Exception
         {
-            Assert.Throws<T>(() =>
-                XPathMatch(xml, testExpression, namespaceManager, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathMatch(xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
         private static T XPathObject<T>(
@@ -137,8 +138,9 @@ namespace XPathTests.Common
             string startingNodePath = null
         ) where T : Exception
         {
-            Assert.Throws<T>(() =>
-                XPathObject<string>(xml, testExpression, null, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathObject<string>(xml, testExpression, null, startingNodePath)
+            );
         }
 
         internal static void XPathNumberTest(
@@ -177,8 +179,9 @@ namespace XPathTests.Common
             string startingNodePath = null
         ) where T : Exception
         {
-            Assert.Throws<T>(() =>
-                XPathObject<double>(xml, testExpression, namespaceManager, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathObject<double>(xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
         internal static void XPathNodesetTest(

@@ -13,12 +13,13 @@ namespace Internal.TypeSystem
 {
     partial class TypeSystemException : Exception
     {
-        private static Lazy<ResourceManager> s_stringResourceManager =
-            new Lazy<ResourceManager>(() =>
+        private static Lazy<ResourceManager> s_stringResourceManager = new Lazy<ResourceManager>(
+            () =>
                 new ResourceManager(
                     "Internal.TypeSystem.Strings",
                     typeof(TypeSystemException).GetTypeInfo().Assembly
-                ));
+                )
+        );
 
         public static string GetFormatString(ExceptionStringID id)
         {

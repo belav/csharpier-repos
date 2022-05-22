@@ -97,8 +97,10 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                     "AnEntity"
                 ),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        new TemporaryNumberValueGeneratorFactory().Create(property, entityType))
+                    .Throws<ArgumentException>(
+                        () =>
+                            new TemporaryNumberValueGeneratorFactory().Create(property, entityType)
+                    )
                     .Message
             );
         }

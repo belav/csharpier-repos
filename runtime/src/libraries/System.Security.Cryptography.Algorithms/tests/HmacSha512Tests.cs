@@ -72,8 +72,9 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
 #pragma warning disable SYSLIB0029 // ProduceLegacyHmacValues is obsolete
                 Assert.False(h.ProduceLegacyHmacValues);
                 h.ProduceLegacyHmacValues = false; // doesn't throw
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    h.ProduceLegacyHmacValues = true);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => h.ProduceLegacyHmacValues = true
+                );
 #pragma warning restore SYSLIB0029
             }
         }

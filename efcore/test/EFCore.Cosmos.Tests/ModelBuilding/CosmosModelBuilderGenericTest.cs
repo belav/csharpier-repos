@@ -24,8 +24,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            base.Properties_can_set_row_version())
+                        .Throws<InvalidOperationException>(
+                            () => base.Properties_can_set_row_version()
+                        )
                         .Message
                 );
             }
@@ -35,8 +36,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 Assert.Equal(
                     CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            base.Properties_can_be_made_concurrency_tokens())
+                        .Throws<InvalidOperationException>(
+                            () => base.Properties_can_be_made_concurrency_tokens()
+                        )
                         .Message
                 );
             }
@@ -372,8 +374,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public override void Relationships_on_derived_types_are_discovered_first_if_base_is_one_sided()
             {
                 // Base discovered as owned
-                Assert.Throws<NullReferenceException>(() =>
-                    base.Relationships_on_derived_types_are_discovered_first_if_base_is_one_sided());
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        base.Relationships_on_derived_types_are_discovered_first_if_base_is_one_sided()
+                );
             }
 
             protected override TestModelBuilder CreateModelBuilder(
@@ -618,8 +622,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "List<ImplicitManyToManyB>"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            base.Join_type_is_automatically_configured_by_convention())
+                        .Throws<InvalidOperationException>(
+                            () => base.Join_type_is_automatically_configured_by_convention()
+                        )
                         .Message
                 );
             }
@@ -634,8 +639,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "ICollection<ProductWithAttribute>"
                     ),
                     Assert
-                        .Throws<InvalidOperationException>(() =>
-                            base.ForeignKeyAttribute_configures_the_properties())
+                        .Throws<InvalidOperationException>(
+                            () => base.ForeignKeyAttribute_configures_the_properties()
+                        )
                         .Message
                 );
             }

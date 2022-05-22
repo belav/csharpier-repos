@@ -51,17 +51,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             string? binOutputPath
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(() =>
-                this.CreateProjectContextAsync(
-                    languageName,
-                    projectUniqueName,
-                    projectFilePath,
-                    projectGuid,
-                    hierarchy,
-                    binOutputPath,
-                    assemblyName: null,
-                    CancellationToken.None
-                ));
+            return _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    this.CreateProjectContextAsync(
+                        languageName,
+                        projectUniqueName,
+                        projectFilePath,
+                        projectGuid,
+                        hierarchy,
+                        binOutputPath,
+                        assemblyName: null,
+                        CancellationToken.None
+                    )
+            );
         }
 
         IWorkspaceProjectContext IWorkspaceProjectContextFactory.CreateProjectContext(
@@ -74,17 +76,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             string? assemblyName
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(() =>
-                this.CreateProjectContextAsync(
-                    languageName,
-                    projectUniqueName,
-                    projectFilePath,
-                    projectGuid,
-                    hierarchy,
-                    binOutputPath,
-                    assemblyName,
-                    CancellationToken.None
-                ));
+            return _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    this.CreateProjectContextAsync(
+                        languageName,
+                        projectUniqueName,
+                        projectFilePath,
+                        projectGuid,
+                        hierarchy,
+                        binOutputPath,
+                        assemblyName,
+                        CancellationToken.None
+                    )
+            );
         }
 
         public async Task<IWorkspaceProjectContext> CreateProjectContextAsync(

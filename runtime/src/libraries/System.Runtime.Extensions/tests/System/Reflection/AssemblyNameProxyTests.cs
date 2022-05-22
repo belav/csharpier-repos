@@ -26,8 +26,9 @@ namespace System.Reflection.Tests
                 null,
                 () => anp.GetAssemblyName(string.Empty)
             );
-            Assert.Throws<FileNotFoundException>(() =>
-                anp.GetAssemblyName(Guid.NewGuid().ToString("N")));
+            Assert.Throws<FileNotFoundException>(
+                () => anp.GetAssemblyName(Guid.NewGuid().ToString("N"))
+            );
 
             Assembly a = typeof(AssemblyNameProxyTests).Assembly;
             Assert.Equal(

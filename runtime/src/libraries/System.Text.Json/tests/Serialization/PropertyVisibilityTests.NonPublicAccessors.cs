@@ -157,8 +157,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyEnum"":""AnotherValue"",""MyInt"":2}";
 
             // Deserialization baseline, without enum converter, we get JsonException.
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<StructWithPropertiesWithConverter>(json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<StructWithPropertiesWithConverter>(json)
+            );
 
             var obj = JsonSerializer.Deserialize<StructWithPropertiesWithConverter>(json, options);
             Assert.Equal(MySmallEnum.AnotherValue, obj.GetMyEnum);
@@ -348,15 +349,17 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(ClassWithProtected_InitOnlyProperty_WithJsonIncludeProperty))]
         public static void NonPublicProperty_WithJsonInclude_Invalid(Type type)
         {
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize("", type));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize("", type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains("MyString", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);
             Assert.Contains("JsonIncludeAttribute", exAsStr);
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Serialize(Activator.CreateInstance(type), type));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(Activator.CreateInstance(type), type)
+            );
             exAsStr = ex.ToString();
             Assert.Contains("MyString", exAsStr);
             Assert.Contains(type.ToString(), exAsStr);

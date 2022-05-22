@@ -26,8 +26,9 @@ public class JSStreamReferenceJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(
+            () => JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsObjectId not found.", ex.Message);
     }
 
@@ -38,8 +39,9 @@ public class JSStreamReferenceJsonConverterTest
         var json = "{\"foo\":2}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(
+            () => JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Unexcepted JSON property foo.", ex.Message);
     }
 
@@ -50,8 +52,9 @@ public class JSStreamReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":5";
 
         // Act & Assert
-        var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+        var ex = Record.Exception(
+            () => JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -62,8 +65,9 @@ public class JSStreamReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":3,\"__jsObjectId\":7}}";
 
         // Act & Assert
-        var ex = Record.Exception(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+        var ex = Record.Exception(
+            () => JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -75,8 +79,9 @@ public class JSStreamReferenceJsonConverterTest
         var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() =>
-            JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(
+            () => JsonSerializer.Deserialize<IJSStreamReference>(json, JsonSerializerOptions)
+        );
         Assert.Equal("Required property __jsStreamReferenceLength not found.", ex.Message);
     }
 

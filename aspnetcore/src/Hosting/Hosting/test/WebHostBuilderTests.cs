@@ -77,8 +77,9 @@ public class WebHostBuilderTests
     public void UseStartupThrowsWhenFactoryIsNull(IWebHostBuilder builder)
     {
         var server = new TestServer();
-        Assert.Throws<ArgumentNullException>(() =>
-            builder.UseServer(server).UseStartup((Func<WebHostBuilderContext, object>)null));
+        Assert.Throws<ArgumentNullException>(
+            () => builder.UseServer(server).UseStartup((Func<WebHostBuilderContext, object>)null)
+        );
     }
 
     [Theory]
@@ -86,8 +87,9 @@ public class WebHostBuilderTests
     public void UseStartupThrowsWhenFactoryReturnsNull(IWebHostBuilder builder)
     {
         var server = new TestServer();
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            builder.UseServer(server).UseStartup<object>(context => null).Build());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.UseServer(server).UseStartup<object>(context => null).Build()
+        );
         Assert.Equal("The specified factory returned null startup instance.", ex.Message);
     }
 
@@ -1515,8 +1517,9 @@ public class WebHostBuilderTests
 
         using (var host = builder.Build())
         {
-            var startEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                host.StartAsync());
+            var startEx = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => host.StartAsync()
+            );
             Assert.Equal("Hosted Service throws in StartAsync", startEx.Message);
             var stopEx = await Assert.ThrowsAsync<AggregateException>(() => host.StopAsync());
             Assert.Single(stopEx.InnerExceptions);

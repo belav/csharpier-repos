@@ -890,8 +890,9 @@ public class SessionTests
                                 app.Run(
                                     async context =>
                                     {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                                            context.Session.LoadAsync());
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () => context.Session.LoadAsync()
+                                        );
                                         Assert.False(context.Session.IsAvailable);
                                         Assert.Equal(string.Empty, context.Session.Id);
                                         Assert.False(context.Session.Keys.Any());
@@ -954,8 +955,9 @@ public class SessionTests
                                 app.Run(
                                     async context =>
                                     {
-                                        await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                            context.Session.LoadAsync());
+                                        await Assert.ThrowsAsync<OperationCanceledException>(
+                                            () => context.Session.LoadAsync()
+                                        );
                                     }
                                 );
                             }
@@ -1015,8 +1017,9 @@ public class SessionTests
                                         var cts = new CancellationTokenSource();
                                         var token = cts.Token;
                                         cts.Cancel();
-                                        await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                            context.Session.LoadAsync(token));
+                                        await Assert.ThrowsAsync<OperationCanceledException>(
+                                            () => context.Session.LoadAsync(token)
+                                        );
                                     }
                                 );
                             }
@@ -1270,8 +1273,9 @@ public class SessionTests
                                         var cts = new CancellationTokenSource();
                                         var token = cts.Token;
                                         cts.Cancel();
-                                        await Assert.ThrowsAsync<OperationCanceledException>(() =>
-                                            context.Session.CommitAsync(token));
+                                        await Assert.ThrowsAsync<OperationCanceledException>(
+                                            () => context.Session.CommitAsync(token)
+                                        );
                                     }
                                 );
                             }

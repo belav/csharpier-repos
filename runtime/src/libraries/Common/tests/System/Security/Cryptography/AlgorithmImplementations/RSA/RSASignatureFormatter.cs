@@ -60,8 +60,9 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                 using (SHA1 alg = SHA1.Create())
                 {
-                    Assert.Throws<CryptographicUnexpectedOperationException>(() =>
-                        VerifySignature(formatter, deformatter, alg, "INVALIDVALUE"));
+                    Assert.Throws<CryptographicUnexpectedOperationException>(
+                        () => VerifySignature(formatter, deformatter, alg, "INVALIDVALUE")
+                    );
                 }
             }
         }

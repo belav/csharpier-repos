@@ -263,8 +263,9 @@ namespace AutoMapper.UnitTests
 
         [Fact]
         public void Should_validate() =>
-            new Action(() =>
-                Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(
+            new Action(
+                () => Configuration.AssertConfigurationIsValid()
+            ).ShouldThrowException<AutoMapperConfigurationException>(
                 ex => ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Address.Id))
             );
     }

@@ -61,8 +61,9 @@ public class TestRenderer : Renderer
 
     public void RenderRootComponent(int componentId, ParameterView? parameters = default)
     {
-        var task = Dispatcher.InvokeAsync(() =>
-            base.RenderRootComponentAsync(componentId, parameters ?? ParameterView.Empty));
+        var task = Dispatcher.InvokeAsync(
+            () => base.RenderRootComponentAsync(componentId, parameters ?? ParameterView.Empty)
+        );
         UnwrapTask(task);
     }
 

@@ -34,8 +34,9 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new DefaultComponentActivator());
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType));
+        var ex = Assert.Throws<ArgumentException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType)
+        );
         Assert.StartsWith(
             $"The type {componentType.FullName} does not implement {nameof(IComponent)}.",
             ex.Message
@@ -73,8 +74,9 @@ public class ComponentFactoryTest
         var factory = new ComponentFactory(new NullResultComponentActivator());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            factory.InstantiateComponent(GetServiceProvider(), componentType));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => factory.InstantiateComponent(GetServiceProvider(), componentType)
+        );
         Assert.Equal(
             $"The component activator returned a null value for a component of type {componentType.FullName}.",
             ex.Message

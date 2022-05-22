@@ -101,8 +101,9 @@ namespace System.Xml.Tests
                 )
             )
             {
-                Assert.Throws<System.Net.Http.HttpRequestException>(() =>
-                    reader.ReadAsync().GetAwaiter().GetResult());
+                Assert.Throws<System.Net.Http.HttpRequestException>(
+                    () => reader.ReadAsync().GetAwaiter().GetResult()
+                );
             }
         }
 
@@ -123,11 +124,13 @@ namespace System.Xml.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void InitializationWithUriOnNonAsyncReaderThrows()
         {
-            Assert.Throws<System.Net.Http.HttpRequestException>(() =>
-                XmlReader.Create(
-                    "http://test.test/test.html",
-                    new XmlReaderSettings() { Async = false }
-                ));
+            Assert.Throws<System.Net.Http.HttpRequestException>(
+                () =>
+                    XmlReader.Create(
+                        "http://test.test/test.html",
+                        new XmlReaderSettings() { Async = false }
+                    )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

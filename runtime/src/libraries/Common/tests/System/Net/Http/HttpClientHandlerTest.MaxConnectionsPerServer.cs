@@ -39,8 +39,9 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    handler.MaxConnectionsPerServer = invalidValue);
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => handler.MaxConnectionsPerServer = invalidValue
+                );
             }
         }
 

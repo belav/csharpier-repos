@@ -29,8 +29,13 @@ namespace System.Text.Json.SourceGeneration.Tests
                         object[] objArr = new object[] { new MyStruct() };
 
                         // Metadata not generated for MyStruct without JsonSerializableAttribute.
-                        NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                            JsonSerializer.Serialize(objArr, MetadataContext.Default.ObjectArray));
+                        NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                            () =>
+                                JsonSerializer.Serialize(
+                                    objArr,
+                                    MetadataContext.Default.ObjectArray
+                                )
+                        );
                         string exAsStr = ex.ToString();
                         Assert.Contains(typeof(MyStruct).ToString(), exAsStr);
                         Assert.Contains("JsonSerializerOptions", exAsStr);

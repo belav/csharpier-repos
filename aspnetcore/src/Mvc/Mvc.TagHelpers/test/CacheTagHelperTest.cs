@@ -785,8 +785,9 @@ public class CacheTagHelperTest
         var task1 = Task.Run(async () =>
         {
             await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-            await Assert.ThrowsAsync<Exception>(() =>
-                cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1));
+            await Assert.ThrowsAsync<Exception>(
+                () => cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1)
+            );
             event3.SetResult(0);
         });
 
@@ -878,8 +879,9 @@ public class CacheTagHelperTest
 
         // Act - 1
 
-        await Assert.ThrowsAsync<Exception>(() =>
-            cacheTagHelper.ProcessAsync(tagHelperContext1, tagHelperOutput1));
+        await Assert.ThrowsAsync<Exception>(
+            () => cacheTagHelper.ProcessAsync(tagHelperContext1, tagHelperOutput1)
+        );
 
         // Assert - 1
 
@@ -891,8 +893,9 @@ public class CacheTagHelperTest
 
         // Act - 2
 
-        await Assert.ThrowsAsync<Exception>(() =>
-            cacheTagHelper.ProcessAsync(tagHelperContext2, tagHelperOutput2));
+        await Assert.ThrowsAsync<Exception>(
+            () => cacheTagHelper.ProcessAsync(tagHelperContext2, tagHelperOutput2)
+        );
 
         // Assert - 2
 
@@ -1018,10 +1021,12 @@ public class CacheTagHelperTest
         );
 
         // Act
-        var task1 = Task.Run(() =>
-            cacheTagHelper1.ProcessAsync(GetTagHelperContext(cache.Key1), tagHelperOutput));
-        var task2 = Task.Run(() =>
-            cacheTagHelper2.ProcessAsync(GetTagHelperContext(cache.Key2), tagHelperOutput));
+        var task1 = Task.Run(
+            () => cacheTagHelper1.ProcessAsync(GetTagHelperContext(cache.Key1), tagHelperOutput)
+        );
+        var task2 = Task.Run(
+            () => cacheTagHelper2.ProcessAsync(GetTagHelperContext(cache.Key2), tagHelperOutput)
+        );
 
         // Assert
         await Assert.ThrowsAsync<DivideByZeroException>(() => task1);
@@ -1081,10 +1086,12 @@ public class CacheTagHelperTest
         );
 
         // Act
-        var task1 = Task.Run(() =>
-            cacheTagHelper1.ProcessAsync(GetTagHelperContext(cache.Key1), tagHelperOutput1));
-        var task2 = Task.Run(() =>
-            cacheTagHelper2.ProcessAsync(GetTagHelperContext(cache.Key2), tagHelperOutput2));
+        var task1 = Task.Run(
+            () => cacheTagHelper1.ProcessAsync(GetTagHelperContext(cache.Key1), tagHelperOutput1)
+        );
+        var task2 = Task.Run(
+            () => cacheTagHelper2.ProcessAsync(GetTagHelperContext(cache.Key2), tagHelperOutput2)
+        );
 
         // Assert
         await Task.WhenAll(task1, task2);

@@ -56,8 +56,9 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             byte[] data = { 0x05, 0x00 };
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new AsnReader(data, (AsnEncodingRules)invalidRuleSetValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new AsnReader(data, (AsnEncodingRules)invalidRuleSetValue)
+            );
         }
 
         [Theory]
@@ -71,8 +72,9 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             byte[] inputData = inputHex.HexToByteArray();
 
-            Assert.Throws<AsnContentException>(() =>
-                ReadTagAndLength(inputData, AsnEncodingRules.DER, out _, out _));
+            Assert.Throws<AsnContentException>(
+                () => ReadTagAndLength(inputData, AsnEncodingRules.DER, out _, out _)
+            );
         }
 
         [Theory]
@@ -112,8 +114,9 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, rules);
 
-            Assert.Throws<AsnContentException>(() =>
-                ReadTagAndLength(inputData, rules, out _, out _));
+            Assert.Throws<AsnContentException>(
+                () => ReadTagAndLength(inputData, rules, out _, out _)
+            );
         }
 
         [Theory]

@@ -39,8 +39,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.TransformElements);
-                    Assert.Throws<InvalidOperationException>(() =>
-                        graphics.TransformElements = Matrix3x2.Identity);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.TransformElements = Matrix3x2.Identity
+                    );
                 }
                 finally
                 {

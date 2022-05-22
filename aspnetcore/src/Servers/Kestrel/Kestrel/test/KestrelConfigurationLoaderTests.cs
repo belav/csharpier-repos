@@ -630,8 +630,9 @@ public class KestrelConfigurationLoaderTests
             )
             .Build();
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            serverOptions.Configure(config).Load());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => serverOptions.Configure(config).Load()
+        );
         Assert.Equal(
             CoreStrings.FormatEndpointHasUnusedHttpsConfig("End1", "Certificate"),
             ex.Message

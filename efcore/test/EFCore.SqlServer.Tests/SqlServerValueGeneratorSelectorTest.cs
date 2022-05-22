@@ -193,8 +193,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NoValueGenerator("Random", "AnEntity", "Something"),
                 Assert
-                    .Throws<NotSupportedException>(() =>
-                        selector.Select(entityType.FindProperty("Random"), entityType))
+                    .Throws<NotSupportedException>(
+                        () => selector.Select(entityType.FindProperty("Random"), entityType)
+                    )
                     .Message
             );
         }

@@ -87,8 +87,9 @@ namespace System.Web.Http.Owin
 
                 // Act & Assert
                 InvalidOperationException exception =
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        handler.SendAsync(request, CancellationToken.None));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => handler.SendAsync(request, CancellationToken.None)
+                    );
                 Assert.Equal(
                     "No OWIN authentication manager is associated with the request.",
                     exception.Message
@@ -110,8 +111,9 @@ namespace System.Web.Http.Owin
             {
                 // Act & Assert
                 InvalidOperationException exception =
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        handler.SendAsync(request, CancellationToken.None));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => handler.SendAsync(request, CancellationToken.None)
+                    );
                 Assert.Equal(
                     "No OWIN authentication manager is associated with the request.",
                     exception.Message

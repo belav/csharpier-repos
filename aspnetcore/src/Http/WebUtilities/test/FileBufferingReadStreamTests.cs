@@ -285,8 +285,9 @@ public class FileBufferingReadStreamTests
             Assert.True(stream.InMemory);
             Assert.Null(stream.TempFileName);
 
-            var exception = await Assert.ThrowsAsync<IOException>(() =>
-                stream.ReadAsync(bytes, 0, bytes.Length));
+            var exception = await Assert.ThrowsAsync<IOException>(
+                () => stream.ReadAsync(bytes, 0, bytes.Length)
+            );
             Assert.Equal("Buffer limit exceeded.", exception.Message);
             Assert.True(stream.InMemory);
             Assert.Null(stream.TempFileName);
@@ -318,8 +319,9 @@ public class FileBufferingReadStreamTests
             tempFileName = stream.TempFileName!;
             Assert.True(File.Exists(tempFileName));
 
-            var exception = await Assert.ThrowsAsync<IOException>(() =>
-                stream.ReadAsync(bytes, 0, bytes.Length));
+            var exception = await Assert.ThrowsAsync<IOException>(
+                () => stream.ReadAsync(bytes, 0, bytes.Length)
+            );
             Assert.Equal("Buffer limit exceeded.", exception.Message);
             Assert.False(stream.InMemory);
             Assert.NotNull(stream.TempFileName);

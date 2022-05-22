@@ -395,8 +395,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 }
 
                 Lazy<ParameterInfo> lazyParameter = parameterImport.ImportingLazyParameter;
-                Lazy<ParameterInfo> parameter = new Lazy<ParameterInfo>(() =>
-                    GetParameter(lazyParameter));
+                Lazy<ParameterInfo> parameter = new Lazy<ParameterInfo>(
+                    () => GetParameter(lazyParameter)
+                );
 
                 if (isExportFactory)
                 {

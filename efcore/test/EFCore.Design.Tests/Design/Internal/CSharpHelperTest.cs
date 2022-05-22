@@ -193,8 +193,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         [ConditionalFact]
         public void UnknownLiteral_throws_when_unknown()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                new CSharpHelper(TypeMappingSource).UnknownLiteral(new object()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new CSharpHelper(TypeMappingSource).UnknownLiteral(new object())
+            );
             Assert.Equal(DesignStrings.UnknownLiteral(typeof(object)), ex.Message);
         }
 
@@ -412,8 +413,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assert.Equal(
                 CoreStrings.LiteralGenerationNotSupported(nameof(SimpleTestType)),
                 Assert
-                    .Throws<NotSupportedException>(() =>
-                        new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType()))
+                    .Throws<NotSupportedException>(
+                        () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                    )
                     .Message
             );
         }
@@ -713,8 +715,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             Assert.Equal(
                 DesignStrings.LiteralExpressionNotSupported("(10 * 10)", nameof(SimpleTestType)),
                 Assert
-                    .Throws<NotSupportedException>(() =>
-                        new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType()))
+                    .Throws<NotSupportedException>(
+                        () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                    )
                     .Message
             );
         }

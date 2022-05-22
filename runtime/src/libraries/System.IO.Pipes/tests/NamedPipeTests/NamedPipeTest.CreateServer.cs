@@ -504,8 +504,9 @@ namespace System.IO.Pipes.Tests
                     IntPtr handle = safeHandle.DangerousGetHandle();
 
                     SafePipeHandle fakePipeHandle = new SafePipeHandle(handle, ownsHandle: false);
-                    Assert.Throws<IOException>(() =>
-                        new NamedPipeServerStream(direction, false, true, fakePipeHandle));
+                    Assert.Throws<IOException>(
+                        () => new NamedPipeServerStream(direction, false, true, fakePipeHandle)
+                    );
                 }
                 finally
                 {
@@ -534,8 +535,10 @@ namespace System.IO.Pipes.Tests
             );
             SafePipeHandle handle = pipe.SafePipeHandle;
             pipe.Dispose();
-            Assert.Throws<ObjectDisposedException>(() =>
-                new NamedPipeServerStream(direction, true, true, pipe.SafePipeHandle).Dispose());
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                    new NamedPipeServerStream(direction, true, true, pipe.SafePipeHandle).Dispose()
+            );
         }
 
         [Fact]
@@ -616,8 +619,9 @@ namespace System.IO.Pipes.Tests
                 )
             )
             {
-                Assert.Throws<UnauthorizedAccessException>(() =>
-                    new NamedPipeServerStream(uniqueServerName, PipeDirection.Out));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => new NamedPipeServerStream(uniqueServerName, PipeDirection.Out)
+                );
             }
         }
     }

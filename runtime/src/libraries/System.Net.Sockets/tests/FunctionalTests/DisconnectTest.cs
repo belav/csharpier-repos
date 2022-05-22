@@ -55,13 +55,15 @@ namespace System.Net.Sockets.Tests
                     }
                     else if (UsesSync)
                     {
-                        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                            await ConnectAsync(client, server2.EndPoint));
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await ConnectAsync(client, server2.EndPoint)
+                        );
                     }
                     else
                     {
-                        SocketException se = await Assert.ThrowsAsync<SocketException>(async () =>
-                            await ConnectAsync(client, server2.EndPoint));
+                        SocketException se = await Assert.ThrowsAsync<SocketException>(
+                            async () => await ConnectAsync(client, server2.EndPoint)
+                        );
                         Assert.Equal(SocketError.IsConnected, se.SocketErrorCode);
                     }
                 }
@@ -102,8 +104,9 @@ namespace System.Net.Sockets.Tests
                     // Note that the new connect operation must be asynchronous
                     // (why? I'm not sure, but that's the way it works currently)
                     // So try connecting synchronously, and it should fail
-                    Assert.Throws<InvalidOperationException>(() =>
-                        client.Connect(server2.EndPoint));
+                    Assert.Throws<InvalidOperationException>(
+                        () => client.Connect(server2.EndPoint)
+                    );
                 }
             }
         }
@@ -121,8 +124,9 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                    await DisconnectAsync(s, reuseSocket));
+                Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await DisconnectAsync(s, reuseSocket)
+                );
             }
         }
 
@@ -140,8 +144,9 @@ namespace System.Net.Sockets.Tests
             )
             {
                 s.Dispose();
-                Assert.ThrowsAsync<ObjectDisposedException>(async () =>
-                    await DisconnectAsync(s, reuseSocket));
+                Assert.ThrowsAsync<ObjectDisposedException>(
+                    async () => await DisconnectAsync(s, reuseSocket)
+                );
             }
         }
     }
@@ -221,8 +226,10 @@ namespace System.Net.Sockets.Tests
                     precanceledSource.Cancel();
 
                     OperationCanceledException oce =
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
-                            await client.DisconnectAsync(reuseSocket, precanceledSource.Token));
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                            async () =>
+                                await client.DisconnectAsync(reuseSocket, precanceledSource.Token)
+                        );
                     Assert.Equal(precanceledSource.Token, oce.CancellationToken);
                 }
             }

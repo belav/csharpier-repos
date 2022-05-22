@@ -1380,19 +1380,21 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Assert.Contains(
                 "(No exception was thrown)",
                 Assert
-                    .Throws<ThrowsException>(() =>
-                        VerifyError(
-                            RelationalStrings.DuplicateForeignKeyTableMismatch(
-                                "{'FriendId'}",
-                                nameof(Dog),
-                                "{'FriendId'}",
-                                nameof(Cat),
-                                "FK",
-                                "Cats",
-                                "Dogs"
-                            ),
-                            modelBuilder
-                        ))
+                    .Throws<ThrowsException>(
+                        () =>
+                            VerifyError(
+                                RelationalStrings.DuplicateForeignKeyTableMismatch(
+                                    "{'FriendId'}",
+                                    nameof(Dog),
+                                    "{'FriendId'}",
+                                    nameof(Cat),
+                                    "FK",
+                                    "Cats",
+                                    "Dogs"
+                                ),
+                                modelBuilder
+                            )
+                    )
                     .Message
             );
         }

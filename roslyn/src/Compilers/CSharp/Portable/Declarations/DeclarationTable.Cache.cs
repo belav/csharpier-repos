@@ -32,21 +32,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public Cache(DeclarationTable table)
             {
-                this.MergedRoot = new Lazy<MergedNamespaceDeclaration>(() =>
-                    MergedNamespaceDeclaration.Create(
-                        table._allOlderRootDeclarations.InInsertionOrder.AsImmutable<SingleNamespaceDeclaration>()
-                    ));
+                this.MergedRoot = new Lazy<MergedNamespaceDeclaration>(
+                    () =>
+                        MergedNamespaceDeclaration.Create(
+                            table._allOlderRootDeclarations.InInsertionOrder.AsImmutable<SingleNamespaceDeclaration>()
+                        )
+                );
 
                 this.TypeNames = new Lazy<ISet<string>>(() => GetTypeNames(this.MergedRoot.Value));
 
-                this.NamespaceNames = new Lazy<ISet<string>>(() =>
-                    GetNamespaceNames(this.MergedRoot.Value));
+                this.NamespaceNames = new Lazy<ISet<string>>(
+                    () => GetNamespaceNames(this.MergedRoot.Value)
+                );
 
-                this.ReferenceDirectives = new Lazy<ImmutableArray<ReferenceDirective>>(() =>
-                    MergedRoot.Value.Declarations
-                        .OfType<RootSingleNamespaceDeclaration>()
-                        .SelectMany(r => r.ReferenceDirectives)
-                        .AsImmutable());
+                this.ReferenceDirectives = new Lazy<ImmutableArray<ReferenceDirective>>(
+                    () =>
+                        MergedRoot.Value.Declarations
+                            .OfType<RootSingleNamespaceDeclaration>()
+                            .SelectMany(r => r.ReferenceDirectives)
+                            .AsImmutable()
+                );
             }
         }
     }

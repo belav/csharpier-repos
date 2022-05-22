@@ -382,8 +382,9 @@ namespace System.Tests
                 }
                 else
                 {
-                    Assert.Throws<NullReferenceException>(() =>
-                        comparable.CompareTo(valueTuple, null));
+                    Assert.Throws<NullReferenceException>(
+                        () => comparable.CompareTo(valueTuple, null)
+                    );
                 }
             }
 

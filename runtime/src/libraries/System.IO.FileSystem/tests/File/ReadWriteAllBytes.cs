@@ -116,8 +116,9 @@ namespace System.IO.Tests
                     Assert.Equal(Encoding.UTF8.GetBytes("text"), File.ReadAllBytes(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(() =>
-                        File.WriteAllBytes(path, Encoding.UTF8.GetBytes("text")));
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => File.WriteAllBytes(path, Encoding.UTF8.GetBytes("text"))
+                    );
             }
             finally
             {

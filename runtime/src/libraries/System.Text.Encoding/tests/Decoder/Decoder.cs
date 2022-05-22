@@ -250,17 +250,19 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                Assert.Throws<DecoderFallbackException>(() =>
-                    decoder.Convert(
-                        pBytes,
-                        2,
-                        pChars,
-                        2,
-                        true,
-                        out bytesUsed,
-                        out charsUsed,
-                        out completed
-                    ));
+                Assert.Throws<DecoderFallbackException>(
+                    () =>
+                        decoder.Convert(
+                            pBytes,
+                            2,
+                            pChars,
+                            2,
+                            true,
+                            out bytesUsed,
+                            out charsUsed,
+                            out completed
+                        )
+                );
             }
         }
 
@@ -387,10 +389,12 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                Assert.Throws<DecoderFallbackException>(() =>
-                    decoder.GetChars(pBytes, 2, pChars, 2, true));
-                Assert.Throws<DecoderFallbackException>(() =>
-                    decoder.GetCharCount(pBytes, 2, true));
+                Assert.Throws<DecoderFallbackException>(
+                    () => decoder.GetChars(pBytes, 2, pChars, 2, true)
+                );
+                Assert.Throws<DecoderFallbackException>(
+                    () => decoder.GetCharCount(pBytes, 2, true)
+                );
             }
         }
 
@@ -416,8 +420,9 @@ namespace System.Text.Encodings.Tests
                 "Expected to get DecoderExceptionFallbackBuffer type"
             );
             Assert.Throws<DecoderFallbackException>(() => fallbackBuffer.Fallback(bytes, 0));
-            Assert.Throws<DecoderFallbackException>(() =>
-                fallbackBuffer.Fallback(new byte[] { 0x40, 0x60 }, 0));
+            Assert.Throws<DecoderFallbackException>(
+                () => fallbackBuffer.Fallback(new byte[] { 0x40, 0x60 }, 0)
+            );
 
             Assert.Equal(0, fallbackBuffer.Remaining);
             Assert.Equal('\u0000', fallbackBuffer.GetNextChar());
@@ -460,15 +465,17 @@ namespace System.Text.Encodings.Tests
                 decoder.GetChars(firstPayload, 0, firstPayload.Length, new char[0], 0, flush: false)
             );
 
-            DecoderFallbackException ex = Assert.Throws<DecoderFallbackException>(() =>
-                decoder.GetChars(
-                    secondPayload,
-                    0,
-                    secondPayload.Length,
-                    new char[8],
-                    0,
-                    flush: true
-                ));
+            DecoderFallbackException ex = Assert.Throws<DecoderFallbackException>(
+                () =>
+                    decoder.GetChars(
+                        secondPayload,
+                        0,
+                        secondPayload.Length,
+                        new char[8],
+                        0,
+                        flush: true
+                    )
+            );
             Assert.Equal(expectedIndex, ex.Index);
 
             // Then test GetChars / GetCharCount
@@ -479,8 +486,9 @@ namespace System.Text.Encodings.Tests
                 decoder.GetChars(firstPayload, 0, firstPayload.Length, new char[0], 0, flush: false)
             );
 
-            ex = Assert.Throws<DecoderFallbackException>(() =>
-                decoder.GetCharCount(secondPayload, 0, secondPayload.Length, flush: true));
+            ex = Assert.Throws<DecoderFallbackException>(
+                () => decoder.GetCharCount(secondPayload, 0, secondPayload.Length, flush: true)
+            );
             Assert.Equal(expectedIndex, ex.Index);
         }
 

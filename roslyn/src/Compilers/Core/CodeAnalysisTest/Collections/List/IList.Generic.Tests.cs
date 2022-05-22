@@ -435,8 +435,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, validAdd));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    list.Insert(int.MinValue, validAdd));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.Insert(int.MinValue, validAdd)
+                );
                 Assert.Equal(count, list.Count);
             }
         }

@@ -60,17 +60,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestArgumentExceptions()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>((Func<int, Task<IEnumerable<int>>>)null));
-            Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable, null));
-            Assert.Throws<ArgumentNullException>(() =>
-                new TransformManyBlock<int, int>(
-                    i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
-                    null
-                ));
+            Assert.Throws<ArgumentNullException>(
+                () => new TransformManyBlock<int, int>((Func<int, IEnumerable<int>>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new TransformManyBlock<int, int>((Func<int, Task<IEnumerable<int>>>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable, null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new TransformManyBlock<int, int>(
+                        i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
+                        null
+                    )
+            );
 
             DataflowTestHelpers.TestArgumentsExceptions(
                 new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable)
@@ -153,8 +158,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public Task TestCompletionTask()
         {
-            return DataflowTestHelpers.TestCompletionTask(() =>
-                new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable));
+            return DataflowTestHelpers.TestCompletionTask(
+                () => new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable)
+            );
         }
 
         [Fact]
@@ -284,8 +290,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                         )
                                         : new TransformManyBlock<int, int>(
                                             i =>
-                                                Task.Run(() =>
-                                                    Enumerable.Repeat(i, elementsPerItem)),
+                                                Task.Run(
+                                                    () => Enumerable.Repeat(i, elementsPerItem)
+                                                ),
                                             options
                                         );
 

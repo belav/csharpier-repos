@@ -185,8 +185,9 @@ namespace System.Threading.Tests
             for (int i = 0; i < handles.Length; i++)
                 handles[i] = new AutoResetEvent(false);
 
-            Task<bool> t = Task.Run(() =>
-                WaitHandle.WaitAll(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Task<bool> t = Task.Run(
+                () => WaitHandle.WaitAll(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             for (int i = 0; i < handles.Length; i++)
             {
                 Assert.False(t.IsCompleted);
@@ -204,8 +205,9 @@ namespace System.Threading.Tests
             for (int i = 0; i < handles.Length; i++)
                 handles[i] = new AutoResetEvent(false);
 
-            Task<int> t = Task.Run(() =>
-                WaitHandle.WaitAny(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Task<int> t = Task.Run(
+                () => WaitHandle.WaitAny(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             handles[5].Set();
             Assert.Equal(5, t.Result);
 

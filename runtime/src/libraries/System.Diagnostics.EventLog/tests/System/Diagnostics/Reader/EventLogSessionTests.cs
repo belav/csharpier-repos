@@ -36,13 +36,15 @@ namespace System.Diagnostics.Tests
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
             )
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    session.ExportLogAndMessages(
-                        null,
-                        PathType.LogName,
-                        LogName,
-                        GetTestFilePath()
-                    ));
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        session.ExportLogAndMessages(
+                            null,
+                            PathType.LogName,
+                            LogName,
+                            GetTestFilePath()
+                        )
+                );
                 // Does not throw:
                 session.ExportLogAndMessages(LogName, PathType.LogName, LogName, GetTestFilePath());
                 session.ExportLogAndMessages(
@@ -66,14 +68,18 @@ namespace System.Diagnostics.Tests
                 var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
             )
             {
-                Assert.Throws<ArgumentNullException>(() =>
-                    session.ExportLog(null, PathType.LogName, LogName, GetTestFilePath()));
-                Assert.Throws<ArgumentNullException>(() =>
-                    session.ExportLog(LogName, PathType.LogName, LogName, null));
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    session.ExportLog(LogName, (PathType)0, LogName, GetTestFilePath()));
-                Assert.Throws<EventLogNotFoundException>(() =>
-                    session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath()));
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ExportLog(null, PathType.LogName, LogName, GetTestFilePath())
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ExportLog(LogName, PathType.LogName, LogName, null)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => session.ExportLog(LogName, (PathType)0, LogName, GetTestFilePath())
+                );
+                Assert.Throws<EventLogNotFoundException>(
+                    () => session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath())
+                );
                 // Does not throw:
                 session.ExportLog(
                     LogName,
@@ -111,11 +117,16 @@ namespace System.Diagnostics.Tests
             using (var session = new EventLogSession())
             {
                 Assert.Throws<ArgumentNullException>(() => session.ClearLog(null));
-                Assert.Throws<ArgumentNullException>(() =>
-                    session.ClearLog(null, backupPath: GetTestFilePath()));
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ClearLog(null, backupPath: GetTestFilePath())
+                );
                 Assert.Throws<EventLogException>(() => session.ClearLog(""));
-                Assert.Throws<EventLogNotFoundException>(() =>
-                    session.ClearLog(logName: nameof(ClearLog_LogNameNullEmptyOrNotExist_Throws)));
+                Assert.Throws<EventLogNotFoundException>(
+                    () =>
+                        session.ClearLog(
+                            logName: nameof(ClearLog_LogNameNullEmptyOrNotExist_Throws)
+                        )
+                );
             }
         }
 

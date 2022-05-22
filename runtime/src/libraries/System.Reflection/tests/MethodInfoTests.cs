@@ -960,15 +960,21 @@ namespace System.Reflection.Tests
         [Fact]
         public void MakeGenericMethod_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod1))
-                    .MakeGenericMethod(null)); // TypeArguments is null
-            Assert.Throws<ArgumentNullException>(() =>
-                GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod2))
-                    .MakeGenericMethod(typeof(string), null)); // TypeArguments has null Type
-            Assert.Throws<InvalidOperationException>(() =>
-                GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
-                    .MakeGenericMethod(typeof(int))); // Method is non generic
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod1))
+                        .MakeGenericMethod(null)
+            ); // TypeArguments is null
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.GenericMethod2))
+                        .MakeGenericMethod(typeof(string), null)
+            ); // TypeArguments has null Type
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
+                        .MakeGenericMethod(typeof(int))
+            ); // Method is non generic
 
             // Number of typeArguments does not match
             AssertExtensions.Throws<ArgumentException>(
@@ -1005,9 +1011,11 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetGenericMethodDefinition_MethodNotGeneric_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
-                    .GetGenericMethodDefinition());
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    GetMethod(typeof(MI_SubClass), nameof(MI_SubClass.VoidMethodReturningInt))
+                        .GetGenericMethodDefinition()
+            );
         }
 
         [Fact]

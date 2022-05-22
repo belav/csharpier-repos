@@ -95,24 +95,32 @@ namespace System.Net.NameResolution.Tests
                         e => events.Enqueue((e, e.ActivityId)),
                         async () =>
                         {
-                            await Assert.ThrowsAnyAsync<SocketException>(async () =>
-                                await Dns.GetHostEntryAsync(InvalidHostName));
-                            await Assert.ThrowsAnyAsync<SocketException>(async () =>
-                                await Dns.GetHostAddressesAsync(InvalidHostName));
+                            await Assert.ThrowsAnyAsync<SocketException>(
+                                async () => await Dns.GetHostEntryAsync(InvalidHostName)
+                            );
+                            await Assert.ThrowsAnyAsync<SocketException>(
+                                async () => await Dns.GetHostAddressesAsync(InvalidHostName)
+                            );
 
-                            Assert.ThrowsAny<SocketException>(() =>
-                                Dns.GetHostEntry(InvalidHostName));
-                            Assert.ThrowsAny<SocketException>(() =>
-                                Dns.GetHostAddresses(InvalidHostName));
+                            Assert.ThrowsAny<SocketException>(
+                                () => Dns.GetHostEntry(InvalidHostName)
+                            );
+                            Assert.ThrowsAny<SocketException>(
+                                () => Dns.GetHostAddresses(InvalidHostName)
+                            );
 
-                            Assert.ThrowsAny<SocketException>(() =>
-                                Dns.EndGetHostEntry(
-                                    Dns.BeginGetHostEntry(InvalidHostName, null, null)
-                                ));
-                            Assert.ThrowsAny<SocketException>(() =>
-                                Dns.EndGetHostAddresses(
-                                    Dns.BeginGetHostAddresses(InvalidHostName, null, null)
-                                ));
+                            Assert.ThrowsAny<SocketException>(
+                                () =>
+                                    Dns.EndGetHostEntry(
+                                        Dns.BeginGetHostEntry(InvalidHostName, null, null)
+                                    )
+                            );
+                            Assert.ThrowsAny<SocketException>(
+                                () =>
+                                    Dns.EndGetHostAddresses(
+                                        Dns.BeginGetHostAddresses(InvalidHostName, null, null)
+                                    )
+                            );
                         }
                     );
 

@@ -140,10 +140,12 @@ namespace Moq.Tests.Regressions
         {
             public void TestMethod(IIssue78Interface intOne)
             {
-                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory.StartNew(() =>
-                    intOne.GetTypeOne());
-                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory.StartNew(() =>
-                    intOne.GetTypeTwo());
+                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory.StartNew(
+                    () => intOne.GetTypeOne()
+                );
+                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory.StartNew(
+                    () => intOne.GetTypeTwo()
+                );
 
                 Issue78TypeOne objOne = getTypeOneTask.Result;
                 Issue78TypeTwo objTwo = getTypeTwoTask.Result;
@@ -450,8 +452,9 @@ namespace Moq.Tests.Regressions
                 // First, establish that we're looking at situation involving a type that DynamicProxy
                 // cannot handle:
                 var proxyGenerator = new ProxyGenerator();
-                Assert.Throws<ArgumentException>(() =>
-                    proxyGenerator.CreateClassProxy<NoDeserializationCtor>());
+                Assert.Throws<ArgumentException>(
+                    () => proxyGenerator.CreateClassProxy<NoDeserializationCtor>()
+                );
 
                 // With such a type, Moq should fall back to the empty default value provider:
                 var foo = Mock.Of<Foo>();
@@ -517,8 +520,9 @@ namespace Moq.Tests.Regressions
                 public void DoesMindMissingDeserializationCtor(Type classToProxy)
                 {
                     var proxyGenerator = new ProxyGenerator();
-                    Assert.Throws<ArgumentException>(() =>
-                        proxyGenerator.CreateClassProxy(classToProxy));
+                    Assert.Throws<ArgumentException>(
+                        () => proxyGenerator.CreateClassProxy(classToProxy)
+                    );
                 }
 
                 [Theory]
@@ -526,8 +530,9 @@ namespace Moq.Tests.Regressions
                 public void DoesMindNonVirtualGetObjectData(Type classToProxy)
                 {
                     var proxyGenerator = new ProxyGenerator();
-                    Assert.Throws<ArgumentException>(() =>
-                        proxyGenerator.CreateClassProxy(classToProxy));
+                    Assert.Throws<ArgumentException>(
+                        () => proxyGenerator.CreateClassProxy(classToProxy)
+                    );
                 }
 
                 public abstract class NoSerializableAttribute : ISerializable
@@ -4675,8 +4680,9 @@ namespace Moq.Tests.Regressions
             public void Test()
             {
                 var mock = new Mock<IList<string>>();
-                Assert.Throws<NotSupportedException>(() =>
-                    mock.Setup(l => l.FirstOrDefault()).Returns("Hello world"));
+                Assert.Throws<NotSupportedException>(
+                    () => mock.Setup(l => l.FirstOrDefault()).Returns("Hello world")
+                );
             }
         }
 
@@ -5332,11 +5338,13 @@ namespace Moq.Tests.Regressions
                 mock.Object.HttpContext.Response.Write("stuff");
                 mock.Object.HttpContext.Response.ShouldEncode = true;
 
-                Assert.Throws<MockException>(() =>
-                    mock.VerifySet(
-                        c => c.HttpContext.Response.ShouldEncode = It.IsAny<bool>(),
-                        Times.Never()
-                    ));
+                Assert.Throws<MockException>(
+                    () =>
+                        mock.VerifySet(
+                            c => c.HttpContext.Response.ShouldEncode = It.IsAny<bool>(),
+                            Times.Never()
+                        )
+                );
             }
 
             public class ControllerContext

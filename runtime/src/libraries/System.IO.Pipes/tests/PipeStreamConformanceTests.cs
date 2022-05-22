@@ -113,8 +113,9 @@ namespace System.IO.Pipes.Tests
             Assert.Throws<ObjectDisposedException>(() => server.Disconnect());
             Assert.Throws<ObjectDisposedException>(() => server.GetImpersonationUserName());
             Assert.Throws<ObjectDisposedException>(() => server.WaitForConnection());
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                server.WaitForConnectionAsync());
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => server.WaitForConnectionAsync()
+            );
             await ValidateDisposedExceptionsAsync(server as Stream);
         }
 
@@ -309,8 +310,9 @@ namespace System.IO.Pipes.Tests
 
             Assert.Throws<InvalidOperationException>(() => server.IsMessageComplete);
             Assert.Throws<InvalidOperationException>(() => server.WaitForConnection());
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                server.WaitForConnectionAsync()); // fails because allowed connections is set to 1
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => server.WaitForConnectionAsync()
+            ); // fails because allowed connections is set to 1
 
             server.Disconnect();
             Assert.Throws<InvalidOperationException>(() => server.Disconnect()); // double disconnect
@@ -321,8 +323,9 @@ namespace System.IO.Pipes.Tests
             {
                 if (ReferenceEquals(writeable, server))
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        server.Write(buffer, 0, buffer.Length));
+                    Assert.Throws<InvalidOperationException>(
+                        () => server.Write(buffer, 0, buffer.Length)
+                    );
                     Assert.Throws<InvalidOperationException>(() => server.WriteByte(5));
                     Assert.Throws<InvalidOperationException>(() =>
                     {
@@ -331,8 +334,9 @@ namespace System.IO.Pipes.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() =>
-                        server.Read(buffer, 0, buffer.Length));
+                    Assert.Throws<InvalidOperationException>(
+                        () => server.Read(buffer, 0, buffer.Length)
+                    );
                     Assert.Throws<InvalidOperationException>(() => server.ReadByte());
                     Assert.Throws<InvalidOperationException>(() =>
                     {
@@ -387,8 +391,9 @@ namespace System.IO.Pipes.Tests
 
                     if (!OperatingSystem.IsWindows()) // NumberOfServerInstances not supported on Unix
                     {
-                        Assert.Throws<PlatformNotSupportedException>(() =>
-                            client.NumberOfServerInstances);
+                        Assert.Throws<PlatformNotSupportedException>(
+                            () => client.NumberOfServerInstances
+                        );
                     }
                 }
             }
@@ -416,8 +421,9 @@ namespace System.IO.Pipes.Tests
             {
                 // On Unix, the server still thinks that it is connected after client Disposal.
                 Assert.Throws<InvalidOperationException>(() => server.WaitForConnection());
-                await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    server.WaitForConnectionAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => server.WaitForConnectionAsync()
+                );
                 Assert.NotNull(server.GetImpersonationUserName());
             }
         }
@@ -431,8 +437,9 @@ namespace System.IO.Pipes.Tests
 
             // doesn't throw exceptions
             PipeTransmissionMode transmitMode = server.TransmissionMode;
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                server.ReadMode = (PipeTransmissionMode)999);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => server.ReadMode = (PipeTransmissionMode)999
+            );
 
             var buffer = new byte[4];
 
@@ -441,8 +448,9 @@ namespace System.IO.Pipes.Tests
                 if (ReferenceEquals(writeable, server))
                 {
                     Assert.Equal(0, server.OutBufferSize);
-                    Assert.Throws<InvalidOperationException>(() =>
-                        server.Write(buffer, 0, buffer.Length));
+                    Assert.Throws<InvalidOperationException>(
+                        () => server.Write(buffer, 0, buffer.Length)
+                    );
                     Assert.Throws<InvalidOperationException>(() => server.WriteByte(5));
                     Assert.Throws<InvalidOperationException>(() =>
                     {
@@ -453,8 +461,9 @@ namespace System.IO.Pipes.Tests
                 {
                     Assert.Equal(0, server.InBufferSize);
                     PipeTransmissionMode readMode = server.ReadMode;
-                    Assert.Throws<InvalidOperationException>(() =>
-                        server.Read(buffer, 0, buffer.Length));
+                    Assert.Throws<InvalidOperationException>(
+                        () => server.Read(buffer, 0, buffer.Length)
+                    );
                     Assert.Throws<InvalidOperationException>(() => server.ReadByte());
                     Assert.Throws<InvalidOperationException>(() =>
                     {
@@ -478,22 +487,25 @@ namespace System.IO.Pipes.Tests
 
             if (client.CanRead)
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    client.Read(buffer, 0, buffer.Length));
+                Assert.Throws<InvalidOperationException>(
+                    () => client.Read(buffer, 0, buffer.Length)
+                );
                 Assert.Throws<InvalidOperationException>(() => client.ReadByte());
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     client.ReadAsync(buffer, 0, buffer.Length);
                 });
                 Assert.Throws<InvalidOperationException>(() => client.ReadMode);
-                Assert.Throws<InvalidOperationException>(() =>
-                    client.ReadMode = PipeTransmissionMode.Byte);
+                Assert.Throws<InvalidOperationException>(
+                    () => client.ReadMode = PipeTransmissionMode.Byte
+                );
             }
 
             if (client.CanWrite)
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    client.Write(buffer, 0, buffer.Length));
+                Assert.Throws<InvalidOperationException>(
+                    () => client.Write(buffer, 0, buffer.Length)
+                );
                 Assert.Throws<InvalidOperationException>(() => client.WriteByte(5));
                 Assert.Throws<InvalidOperationException>(() =>
                 {
@@ -518,8 +530,9 @@ namespace System.IO.Pipes.Tests
             Assert.Throws<ObjectDisposedException>(() => server.Disconnect());
             Assert.Throws<ObjectDisposedException>(() => server.GetImpersonationUserName());
             Assert.Throws<ObjectDisposedException>(() => server.WaitForConnection());
-            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                server.WaitForConnectionAsync());
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => server.WaitForConnectionAsync()
+            );
         }
 
         [Fact]

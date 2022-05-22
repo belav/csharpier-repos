@@ -339,8 +339,9 @@ public partial class HttpConnectionTests
                 CreateConnection(),
                 async (connection) =>
                 {
-                    var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout());
+                    var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                    );
                     Assert.Equal(
                         $"Cannot access the {nameof(Transport)} pipe before the connection has started.",
                         exception.Message
@@ -359,8 +360,9 @@ public partial class HttpConnectionTests
                     await connection.StartAsync().DefaultTimeout();
                     await connection.DisposeAsync().DefaultTimeout();
 
-                    var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout());
+                    var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
+                        () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                    );
                     Assert.Equal(nameof(HttpConnection), exception.ObjectName);
                 }
             );

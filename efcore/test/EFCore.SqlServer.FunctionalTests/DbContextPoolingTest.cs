@@ -194,17 +194,21 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Invalid_pool_size()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildServiceProvider<PooledContext>(poolSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildServiceProvider<PooledContext>(poolSize: 0)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildServiceProvider<PooledContext>(poolSize: -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildServiceProvider<PooledContext>(poolSize: -1)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildServiceProvider<IPooledContext, PooledContext>(poolSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildServiceProvider<IPooledContext, PooledContext>(poolSize: 0)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildServiceProvider<IPooledContext, PooledContext>(poolSize: -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildServiceProvider<IPooledContext, PooledContext>(poolSize: -1)
+            );
         }
 
         [ConditionalTheory]
@@ -212,11 +216,13 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Invalid_pool_size_with_factory(bool withDependencyInjection)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildFactory<PooledContext>(withDependencyInjection, poolSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildFactory<PooledContext>(withDependencyInjection, poolSize: 0)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                BuildFactory<PooledContext>(withDependencyInjection, poolSize: -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => BuildFactory<PooledContext>(withDependencyInjection, poolSize: -1)
+            );
         }
 
         [ConditionalFact]
@@ -366,10 +372,12 @@ namespace Microsoft.EntityFrameworkCore
 
             try
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    useInterface
-                        ? scopedProvider.GetService<IPooledContext>()
-                        : scopedProvider.GetService<PooledContext>());
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        useInterface
+                            ? scopedProvider.GetService<IPooledContext>()
+                            : scopedProvider.GetService<PooledContext>()
+                );
             }
             finally
             {
@@ -406,24 +414,30 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        serviceCollection.AddDbContextPool<BadCtorContext>(_ => { }))
+                    .Throws<ArgumentException>(
+                        () => serviceCollection.AddDbContextPool<BadCtorContext>(_ => { })
+                    )
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { }))
+                    .Throws<ArgumentException>(
+                        () => serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { })
+                    )
                     .Message
             );
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
                 Assert
-                    .Throws<ArgumentException>(() =>
-                        serviceCollection.AddPooledDbContextFactory<BadCtorContext>((_, __) => { }))
+                    .Throws<ArgumentException>(
+                        () =>
+                            serviceCollection.AddPooledDbContextFactory<BadCtorContext>(
+                                (_, __) => { }
+                            )
+                    )
                     .Message
             );
         }
@@ -440,8 +454,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.PoolingContextCtorError(nameof(TwoParameterConstructorContext)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        scope.ServiceProvider.GetService<TwoParameterConstructorContext>())
+                    .Throws<InvalidOperationException>(
+                        () => scope.ServiceProvider.GetService<TwoParameterConstructorContext>()
+                    )
                     .Message
             );
         }
@@ -464,8 +479,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.PoolingContextCtorError(nameof(WrongParameterConstructorContext)),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        scope.ServiceProvider.GetService<WrongParameterConstructorContext>())
+                    .Throws<InvalidOperationException>(
+                        () => scope.ServiceProvider.GetService<WrongParameterConstructorContext>()
+                    )
                     .Message
             );
         }

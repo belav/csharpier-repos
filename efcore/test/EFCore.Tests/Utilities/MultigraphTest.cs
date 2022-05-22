@@ -475,8 +475,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        graph.BatchingTopologicalSort(null, formatter))
+                    .Throws<InvalidOperationException>(
+                        () => graph.BatchingTopologicalSort(null, formatter)
+                    )
                     .Message
             );
 
@@ -530,8 +531,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        graph.BatchingTopologicalSort(null, formatter))
+                    .Throws<InvalidOperationException>(
+                        () => graph.BatchingTopologicalSort(null, formatter)
+                    )
                     .Message
             );
 

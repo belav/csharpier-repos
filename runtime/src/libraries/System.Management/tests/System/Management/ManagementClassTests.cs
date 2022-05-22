@@ -93,12 +93,14 @@ namespace System.Management.Tests
 
             try
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                    managementClass.GetStronglyTypedClassCode(
-                        lang,
-                        tempFilePath,
-                        "Wmi.Test.CoreFx"
-                    ));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () =>
+                        managementClass.GetStronglyTypedClassCode(
+                            lang,
+                            tempFilePath,
+                            "Wmi.Test.CoreFx"
+                        )
+                );
             }
             finally
             {
@@ -189,8 +191,9 @@ namespace System.Management.Tests
                 // If any of the steps below fail it is likely that the new namespace was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 targetNamespace.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() =>
-                    targetNamespace.Get());
+                ManagementException managementException = Assert.Throws<ManagementException>(
+                    () => targetNamespace.Get()
+                );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
             }
         }

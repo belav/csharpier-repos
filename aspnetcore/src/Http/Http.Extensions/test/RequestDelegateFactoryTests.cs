@@ -187,10 +187,12 @@ public class RequestDelegateFactoryTests : LoggedTest
 
         var serviceProvider = new EmptyServiceProvider();
 
-        var exNullAction = Assert.Throws<ArgumentNullException>(() =>
-            RequestDelegateFactory.Create(handler: null!));
-        var exNullMethodInfo1 = Assert.Throws<ArgumentNullException>(() =>
-            RequestDelegateFactory.Create(methodInfo: null!));
+        var exNullAction = Assert.Throws<ArgumentNullException>(
+            () => RequestDelegateFactory.Create(handler: null!)
+        );
+        var exNullMethodInfo1 = Assert.Throws<ArgumentNullException>(
+            () => RequestDelegateFactory.Create(methodInfo: null!)
+        );
 
         Assert.Equal("handler", exNullAction.ParamName);
         Assert.Equal("methodInfo", exNullMethodInfo1.ParamName);
@@ -341,11 +343,13 @@ public class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void SpecifiedEmptyRouteParametersThrowIfRouteParameterDoesNotExist()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(
-                ([FromRoute] int id) => { },
-                new() { RouteParameterNames = Array.Empty<string>() }
-            ));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RequestDelegateFactory.Create(
+                    ([FromRoute] int id) => { },
+                    new() { RouteParameterNames = Array.Empty<string>() }
+                )
+        );
 
         Assert.Equal("'id' is not a route parameter.", ex.Message);
     }
@@ -967,10 +971,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         var fromRouteRequestDelegate = fromRouteFactoryResult.RequestDelegate;
         var fromQueryRequestDelegate = fromQueryFactoryResult.RequestDelegate;
 
-        await Assert.ThrowsAsync<NotImplementedException>(() =>
-            fromRouteRequestDelegate(httpContext));
-        await Assert.ThrowsAsync<NotImplementedException>(() =>
-            fromQueryRequestDelegate(httpContext));
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () => fromRouteRequestDelegate(httpContext)
+        );
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () => fromQueryRequestDelegate(httpContext)
+        );
     }
 
     [Fact]
@@ -1052,8 +1058,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         Delegate action
     )
     {
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(action));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(action)
+        );
         Assert.Equal(
             "No public static bool object.TryParse(string, out object) method found for notTryParsable.",
             ex.Message
@@ -1065,8 +1072,9 @@ public class RequestDelegateFactoryTests : LoggedTest
     {
         var unnamedParameter = Expression.Parameter(typeof(int));
         var lambda = Expression.Lambda(Expression.Block(), unnamedParameter);
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(lambda.Compile()));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(lambda.Compile())
+        );
         Assert.Equal(
             "Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.",
             ex.Message
@@ -1136,8 +1144,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1212,8 +1221,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
 
         var requestDelegate = factoryResult.RequestDelegate;
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1294,8 +1304,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
 
         var requestDelegate = factoryResult.RequestDelegate;
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1323,8 +1334,9 @@ public class RequestDelegateFactoryTests : LoggedTest
 
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            requestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => requestDelegate(httpContext)
+        );
         Assert.Equal("BindAsync failed", ex.Message);
     }
 
@@ -1642,8 +1654,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
         Assert.StartsWith("Implicit body inferred for parameter", ex.Message);
         Assert.EndsWith(
             "but no body was provided. Did you mean to use a Service instead?",
@@ -1803,8 +1816,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1886,8 +1900,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
-            requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1914,12 +1929,15 @@ public class RequestDelegateFactoryTests : LoggedTest
         void TestInferredInvalidAction(Todo value1, Todo value2) { }
         void TestBothInvalidAction(Todo value1, [FromBody] int value2) { }
 
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestAttributedInvalidAction));
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestInferredInvalidAction));
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBothInvalidAction));
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestAttributedInvalidAction)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestInferredInvalidAction)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBothInvalidAction)
+        );
     }
 
     [Fact]
@@ -1928,10 +1946,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         void TestTryParseStruct(BadTryParseStruct value1) { }
         void TestTryParseClass(BadTryParseClass value1) { }
 
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestTryParseStruct));
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestTryParseClass));
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestTryParseStruct)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestTryParseClass)
+        );
     }
 
     private struct BadTryParseStruct
@@ -1953,10 +1973,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         void TestBindAsyncStruct(BadBindAsyncStruct value1) { }
         void TestBindAsyncClass(BadBindAsyncClass value1) { }
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBindAsyncStruct));
-        Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(TestBindAsyncClass));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBindAsyncStruct)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBindAsyncClass)
+        );
     }
 
     private struct BadBindAsyncStruct
@@ -2098,8 +2120,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
 
         var requestDelegateResult = RequestDelegateFactory.Create(action);
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            requestDelegateResult.RequestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => requestDelegateResult.RequestDelegate(httpContext)
+        );
         Assert.Equal(
             "No service for type 'Microsoft.AspNetCore.Routing.Internal.RequestDelegateFactoryTests+MyService' has been registered.",
             ex.Message
@@ -2602,8 +2625,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var exception = await Assert.ThrowsAnyAsync<InvalidOperationException>(async () =>
-            await requestDelegate(httpContext));
+        var exception = await Assert.ThrowsAnyAsync<InvalidOperationException>(
+            async () => await requestDelegate(httpContext)
+        );
         Assert.Contains(message, exception.Message);
     }
 

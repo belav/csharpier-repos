@@ -130,8 +130,9 @@ namespace System.IO.Ports.Tests
                 );
                 com.Open();
 
-                Assert.Throws<TimeoutException>(() =>
-                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+                Assert.Throws<TimeoutException>(
+                    () => com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+                );
 
                 VerifyTimeout(com);
             }
@@ -337,16 +338,18 @@ namespace System.IO.Ports.Tests
             double percentageDifference;
 
             //Warm up read method
-            Assert.Throws<TimeoutException>(() =>
-                com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+            Assert.Throws<TimeoutException>(
+                () => com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+            );
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
             for (int i = 0; i < NUM_TRYS; i++)
             {
                 timer.Start();
 
-                Assert.Throws<TimeoutException>(() =>
-                    com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize));
+                Assert.Throws<TimeoutException>(
+                    () => com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+                );
 
                 timer.Stop();
 

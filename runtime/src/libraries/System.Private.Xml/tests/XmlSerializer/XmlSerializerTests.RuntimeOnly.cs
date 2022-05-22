@@ -559,12 +559,15 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_StringWithNullChar()
     {
-        Assert.Throws<InvalidOperationException>(() =>
-            SerializeWithDefaultValue<string>("Sample\0String", null));
-        Assert.Throws<InvalidOperationException>(() =>
-            DeserializeFromXmlString<string>(
-                "<?xml version=\"1.0\"?><string>Sample&#x0;String</string>"
-            ));
+        Assert.Throws<InvalidOperationException>(
+            () => SerializeWithDefaultValue<string>("Sample\0String", null)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                DeserializeFromXmlString<string>(
+                    "<?xml version=\"1.0\"?><string>Sample&#x0;String</string>"
+                )
+        );
     }
 
     [Fact]
@@ -1777,8 +1780,9 @@ public static partial class XmlSerializerTests
         element3.InnerText = "Element innertext3";
         value = new TypeWithMultiNamedXmlAnyElement() { Things = new object[] { element3 } };
 
-        Assert.Throws<InvalidOperationException>(() =>
-            actual = SerializeAndDeserialize(value, string.Empty, skipStringCompare: true));
+        Assert.Throws<InvalidOperationException>(
+            () => actual = SerializeAndDeserialize(value, string.Empty, skipStringCompare: true)
+        );
     }
 
     [Fact]
@@ -2640,8 +2644,9 @@ public static partial class XmlSerializerTests
         XmlMembersMapping mappings = importer.ImportMembersMapping("root", "", members, true);
         XmlSchemas schema = new XmlSchemas();
         XmlSchemaExporter exporter = new XmlSchemaExporter(schema);
-        AssertExtensions.Throws<XmlException, Exception>(() =>
-            exporter.ExportMembersMapping(mappings));
+        AssertExtensions.Throws<XmlException, Exception>(
+            () => exporter.ExportMembersMapping(mappings)
+        );
     }
 
     [Fact]

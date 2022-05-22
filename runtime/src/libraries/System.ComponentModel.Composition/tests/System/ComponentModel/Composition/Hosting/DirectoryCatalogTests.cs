@@ -432,17 +432,21 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor_NonExistentDirectory_ShouldThrow()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                new DirectoryCatalog(
-                    TemporaryFileCopier.GetTemporaryDirectory()
-                        + @"\NonexistentDirectoryWithoutEndingSlash"
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    new DirectoryCatalog(
+                        TemporaryFileCopier.GetTemporaryDirectory()
+                            + @"\NonexistentDirectoryWithoutEndingSlash"
+                    )
+            );
 
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                new DirectoryCatalog(
-                    TemporaryFileCopier.GetTemporaryDirectory()
-                        + @"\NonexistentDirectoryWithEndingSlash\"
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    new DirectoryCatalog(
+                        TemporaryFileCopier.GetTemporaryDirectory()
+                            + @"\NonexistentDirectoryWithEndingSlash\"
+                    )
+            );
         }
 
         [Fact]
@@ -454,19 +458,26 @@ namespace System.ComponentModel.Composition
                     Path.Combine(TemporaryFileCopier.GetTemporaryDirectory(), "Test.txt")
                 )
             ) { }
-            Assert.Throws<IOException>(() =>
-                new DirectoryCatalog(
-                    Path.Combine(TemporaryFileCopier.GetTemporaryDirectory(), "Test.txt")
-                ));
+            Assert.Throws<IOException>(
+                () =>
+                    new DirectoryCatalog(
+                        Path.Combine(TemporaryFileCopier.GetTemporaryDirectory(), "Test.txt")
+                    )
+            );
         }
 
         [Fact]
         public void Constructor_PassNonExistingFileName_ShouldThrow()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                new DirectoryCatalog(
-                    Path.Combine(TemporaryFileCopier.GetTemporaryDirectory(), "NonExistingFile.txt")
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    new DirectoryCatalog(
+                        Path.Combine(
+                            TemporaryFileCopier.GetTemporaryDirectory(),
+                            "NonExistingFile.txt"
+                        )
+                    )
+            );
         }
 
         [Fact]

@@ -209,8 +209,9 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await context.Response.WriteAsJsonAsync(value: null, type: null!));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            async () => await context.Response.WriteAsJsonAsync(value: null, type: null!)
+        );
     }
 
     [Fact]
@@ -222,12 +223,14 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-            await HttpResponseJsonExtensions.WriteAsJsonAsync(
-                response: null!,
-                value: null,
-                typeof(int?)
-            ));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            async () =>
+                await HttpResponseJsonExtensions.WriteAsJsonAsync(
+                    response: null!,
+                    value: null,
+                    typeof(int?)
+                )
+        );
     }
 
     [Fact]
@@ -398,12 +401,14 @@ public class HttpResponseJsonExtensionsTests
         var iterated = false;
 
         // Act
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            context.Response.WriteAsJsonAsync(
-                AsyncEnumerable(),
-                typeof(IAsyncEnumerable<int>),
-                cts.Token
-            ));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () =>
+                context.Response.WriteAsJsonAsync(
+                    AsyncEnumerable(),
+                    typeof(IAsyncEnumerable<int>),
+                    cts.Token
+                )
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);
@@ -439,8 +444,9 @@ public class HttpResponseJsonExtensionsTests
         var iterated = false;
 
         // Act
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token)
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);

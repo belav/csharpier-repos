@@ -21,10 +21,12 @@ namespace System.Reflection.Tests
                     TestData.s_SimpleAssemblyImage
                 ).ManifestModule;
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(inherit: false));
-                Assert.Throws<InvalidOperationException>(() =>
-                    icp.GetCustomAttributes(null, inherit: false));
+                Assert.Throws<InvalidOperationException>(
+                    () => icp.GetCustomAttributes(inherit: false)
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () => icp.GetCustomAttributes(null, inherit: false)
+                );
                 Assert.Throws<InvalidOperationException>(() => icp.IsDefined(null, inherit: false));
             }
         }

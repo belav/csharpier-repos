@@ -128,8 +128,9 @@ namespace System.IO.Tests
 
         [Fact]
         public Task Read_FileNotFound() =>
-            Assert.ThrowsAsync<FileNotFoundException>(async () =>
-                await ReadAsync(GetTestFilePath()));
+            Assert.ThrowsAsync<FileNotFoundException>(
+                async () => await ReadAsync(GetTestFilePath())
+            );
 
         /// <summary>
         /// On Unix, modifying a file that is ReadOnly will fail under normal permissions.
@@ -152,8 +153,9 @@ namespace System.IO.Tests
                     Assert.Equal(new string[] { "text" }, await ReadAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
-                        await WriteAsync(path, new[] { "text" }));
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
+                        async () => await WriteAsync(path, new[] { "text" })
+                    );
             }
             finally
             {
@@ -187,8 +189,9 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllLinesAsync(path, new[] { "" }, token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.WriteAllLinesAsync(path, new[] { "" }, token));
+            return Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await File.WriteAllLinesAsync(path, new[] { "" }, token)
+            );
         }
 
         #endregion
@@ -227,8 +230,9 @@ namespace System.IO.Tests
             Assert.True(
                 File.WriteAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token).IsCanceled
             );
-            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
-                await File.WriteAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token));
+            return Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await File.WriteAllLinesAsync(path, new[] { "" }, Encoding.UTF8, token)
+            );
         }
     }
 }

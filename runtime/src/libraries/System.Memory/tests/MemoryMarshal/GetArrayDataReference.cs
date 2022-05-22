@@ -13,10 +13,12 @@ namespace System.SpanTests
         [Fact]
         public static void GetArrayDataReference_NullInput_ThrowsNullRef()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                MemoryMarshal.GetArrayDataReference<object>((object[])null));
-            Assert.Throws<NullReferenceException>(() =>
-                MemoryMarshal.GetArrayDataReference((Array)null));
+            Assert.Throws<NullReferenceException>(
+                () => MemoryMarshal.GetArrayDataReference<object>((object[])null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => MemoryMarshal.GetArrayDataReference((Array)null)
+            );
         }
 
         [Fact]

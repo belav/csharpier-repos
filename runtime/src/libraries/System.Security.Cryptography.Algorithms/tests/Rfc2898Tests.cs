@@ -21,51 +21,61 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_NullPasswordBytes()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                new Rfc2898DeriveBytes((byte[])null, s_testSalt, DefaultIterationCount));
+            Assert.Throws<NullReferenceException>(
+                () => new Rfc2898DeriveBytes((byte[])null, s_testSalt, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_NullPasswordString()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new Rfc2898DeriveBytes((string)null, s_testSalt, DefaultIterationCount));
+            Assert.Throws<ArgumentNullException>(
+                () => new Rfc2898DeriveBytes((string)null, s_testSalt, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_NullSalt()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, null, DefaultIterationCount));
+            Assert.Throws<ArgumentNullException>(
+                () => new Rfc2898DeriveBytes(TestPassword, null, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_GenerateNegativeSalt()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, int.MinValue / 2)
+            );
         }
 
         [Fact]
         public static void Ctor_TooFewIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0)
+            );
         }
 
         [Fact]
         public static void Ctor_NegativeIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue / 2)
+            );
         }
 
         [Fact]
@@ -74,38 +84,45 @@ namespace System.Security.Cryptography.DeriveBytesTests
             HashAlgorithmName alg = default(HashAlgorithmName);
 
             // (byte[], byte[], int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() =>
-                new Rfc2898DeriveBytes(s_testSalt, s_testSalt, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(s_testSalt, s_testSalt, DefaultIterationCount, alg)
+            );
             // (string, byte[], int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, alg)
+            );
             // (string, int, int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() =>
-                new Rfc2898DeriveBytes(TestPassword, 8, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(TestPassword, 8, DefaultIterationCount, alg)
+            );
         }
 
         [Fact]
         public static void Ctor_MD5NotSupported()
         {
-            Assert.Throws<CryptographicException>(() =>
-                new Rfc2898DeriveBytes(
-                    TestPassword,
-                    s_testSalt,
-                    DefaultIterationCount,
-                    HashAlgorithmName.MD5
-                ));
+            Assert.Throws<CryptographicException>(
+                () =>
+                    new Rfc2898DeriveBytes(
+                        TestPassword,
+                        s_testSalt,
+                        DefaultIterationCount,
+                        HashAlgorithmName.MD5
+                    )
+            );
         }
 
         [Fact]
         public static void Ctor_UnknownAlgorithm()
         {
-            Assert.Throws<CryptographicException>(() =>
-                new Rfc2898DeriveBytes(
-                    TestPassword,
-                    s_testSalt,
-                    DefaultIterationCount,
-                    new HashAlgorithmName("PotatoLemming")
-                ));
+            Assert.Throws<CryptographicException>(
+                () =>
+                    new Rfc2898DeriveBytes(
+                        TestPassword,
+                        s_testSalt,
+                        DefaultIterationCount,
+                        new HashAlgorithmName("PotatoLemming")
+                    )
+            );
         }
 
         [Fact]
@@ -215,8 +232,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
             Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt);
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-                deriveBytes.GetBytes(int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => deriveBytes.GetBytes(int.MinValue / 2)
+            );
         }
 
         [Fact]
@@ -538,8 +556,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
             using (var deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt))
             {
 #pragma warning disable SYSLIB0033 // Rfc2898DeriveBytes.CryptDeriveKey is obsolete
-                Assert.Throws<PlatformNotSupportedException>(() =>
-                    deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[8]));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[8])
+                );
 #pragma warning restore SYSLIB0033
             }
         }

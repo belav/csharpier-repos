@@ -324,8 +324,9 @@ public class OpaqueUpgradeTests
             )
         )
         {
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await SendOpaqueRequestAsync(method, address, extraHeader));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await SendOpaqueRequestAsync(method, address, extraHeader)
+            );
             Assert.Equal("The response status code was incorrect: HTTP/1.1 200 OK", ex.Message);
         }
     }

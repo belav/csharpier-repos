@@ -316,11 +316,13 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ShadowKey).DisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() =>
-                        Find<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
-                            context,
-                            77
-                        ))
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Find<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
+                                context,
+                                77
+                            )
+                    )
                     .Message
             );
         }
@@ -554,8 +556,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindNotCompositeKey("IntKey", 2),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        FindAsync<IntKey>(context, 77, 88).AsTask())
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<IntKey>(context, 77, 88).AsTask()
+                    )
                 ).Message
             );
         }
@@ -567,8 +570,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindValueCountMismatch("CompositeKey", 2, 1),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        FindAsync<CompositeKey>(context, 77).AsTask())
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<CompositeKey>(context, 77).AsTask()
+                    )
                 ).Message
             );
         }
@@ -580,8 +584,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(0, "IntKey", "string", "int"),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        FindAsync<IntKey>(context, "77").AsTask())
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<IntKey>(context, "77").AsTask()
+                    )
                 ).Message
             );
         }
@@ -593,8 +598,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(1, "CompositeKey", "int", "string"),
                 (
-                    await Assert.ThrowsAsync<ArgumentException>(() =>
-                        FindAsync<CompositeKey>(context, 77, 88).AsTask())
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<CompositeKey>(context, 77, 88).AsTask()
+                    )
                 ).Message
             );
         }
@@ -606,8 +612,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.InvalidSetType(nameof(Random)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        FindAsync<Random>(context, 77).AsTask())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => FindAsync<Random>(context, 77).AsTask()
+                    )
                 ).Message
             );
         }
@@ -623,12 +630,14 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(ShadowKey).DisplayName()
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        FindAsync<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
-                                context,
-                                77
-                            )
-                            .AsTask())
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            FindAsync<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
+                                    context,
+                                    77
+                                )
+                                .AsTask()
+                    )
                 ).Message
             );
         }

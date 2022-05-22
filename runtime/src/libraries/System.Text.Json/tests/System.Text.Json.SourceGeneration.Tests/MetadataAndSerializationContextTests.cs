@@ -125,10 +125,12 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.NotNull(
                 MetadataAndSerializationContext.Default.StructWithCustomConverterPropertyFactory
             );
-            Assert.Throws<InvalidOperationException>(() =>
-                MetadataAndSerializationContext.Default.ClassWithBadCustomConverter);
-            Assert.Throws<InvalidOperationException>(() =>
-                MetadataAndSerializationContext.Default.StructWithBadCustomConverter);
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataAndSerializationContext.Default.ClassWithBadCustomConverter
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataAndSerializationContext.Default.StructWithBadCustomConverter
+            );
         }
     }
 }

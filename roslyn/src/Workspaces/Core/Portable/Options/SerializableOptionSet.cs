@@ -70,8 +70,9 @@ namespace Microsoft.CodeAnalysis.Options
                 changedOptionKeysNonSerializable.All(optionKey => !ShouldSerialize(optionKey))
             );
 
-            _languages = new Lazy<ImmutableHashSet<string>>(() =>
-                this.GetLanguagesAndValuesToSerialize(includeValues: false).languages);
+            _languages = new Lazy<ImmutableHashSet<string>>(
+                () => this.GetLanguagesAndValuesToSerialize(includeValues: false).languages
+            );
         }
 
         internal SerializableOptionSet(

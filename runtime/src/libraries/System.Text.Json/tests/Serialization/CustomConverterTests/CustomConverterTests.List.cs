@@ -284,8 +284,9 @@ namespace System.Text.Json.Serialization.Tests
                 + @"""ItemsDictionary"":{""hello"":""hello"",""1"":1,""true"":true}}";
 
             // Baseline failure (no JsonConverterAttributes).
-            Assert.Throws<JsonException>(() =>
-                JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json)
+            );
 
             // Success case.
             MyModelWithConverterAttributes obj;

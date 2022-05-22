@@ -74,8 +74,9 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void CreateAggregatedObject_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() =>
-                Marshal.CreateAggregatedObject(IntPtr.Zero, 1));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.CreateAggregatedObject(IntPtr.Zero, 1)
+            );
         }
 
         [Fact]

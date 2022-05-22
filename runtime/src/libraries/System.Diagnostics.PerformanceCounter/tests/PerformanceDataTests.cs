@@ -91,22 +91,38 @@ namespace System.Diagnostics.Tests
 
                                 // Instance counters readers
                                 using (
-                                    PerformanceCounter totalWordsTyped = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter("Typing", "Total Words Typed")),
-                                        wordsTypedInInterval = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter(
-                                                "Typing",
-                                                "Words Typed In Interval"
-                                            )),
-                                        aKeyPressed = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter("Typing", "Letter A Pressed")),
-                                        wordsContainingA = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter("Typing", "Words Containing A")),
-                                        percentofWordsContaingA = Helpers.RetryOnAllPlatforms(() =>
-                                            new PerformanceCounter(
-                                                "Typing",
-                                                "Percent of Words Containing A"
-                                            ))
+                                    PerformanceCounter totalWordsTyped = Helpers.RetryOnAllPlatforms(
+                                            () =>
+                                                new PerformanceCounter(
+                                                    "Typing",
+                                                    "Total Words Typed"
+                                                )
+                                        ),
+                                        wordsTypedInInterval = Helpers.RetryOnAllPlatforms(
+                                            () =>
+                                                new PerformanceCounter(
+                                                    "Typing",
+                                                    "Words Typed In Interval"
+                                                )
+                                        ),
+                                        aKeyPressed = Helpers.RetryOnAllPlatforms(
+                                            () =>
+                                                new PerformanceCounter("Typing", "Letter A Pressed")
+                                        ),
+                                        wordsContainingA = Helpers.RetryOnAllPlatforms(
+                                            () =>
+                                                new PerformanceCounter(
+                                                    "Typing",
+                                                    "Words Containing A"
+                                                )
+                                        ),
+                                        percentofWordsContaingA = Helpers.RetryOnAllPlatforms(
+                                            () =>
+                                                new PerformanceCounter(
+                                                    "Typing",
+                                                    "Percent of Words Containing A"
+                                                )
+                                        )
                                 )
                                 {
                                     typingCsInstance.Counters[1].Increment();
@@ -185,8 +201,9 @@ namespace System.Diagnostics.Tests
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(() =>
-                    typingCounterSet.CreateCounterSetInstance("Typing Instance"));
+                Assert.Throws<InvalidOperationException>(
+                    () => typingCounterSet.CreateCounterSetInstance("Typing Instance")
+                );
             }
         }
 
@@ -364,8 +381,9 @@ namespace System.Diagnostics.Tests
             )
             {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
-                Assert.Throws<ArgumentException>(() =>
-                    typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base"));
+                Assert.Throws<ArgumentException>(
+                    () => typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base")
+                );
             }
         }
     }

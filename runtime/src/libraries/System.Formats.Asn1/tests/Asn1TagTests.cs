@@ -250,8 +250,9 @@ namespace System.Formats.Asn1.Tests
             Assert.Equal(0, consumed);
             Assert.Equal(default(Asn1Tag), tag);
 
-            Assert.Throws<AsnContentException>(() =>
-                Asn1Tag.Decode(input.AsSpan(0, input.Length - 1), out consumed));
+            Assert.Throws<AsnContentException>(
+                () => Asn1Tag.Decode(input.AsSpan(0, input.Length - 1), out consumed)
+            );
             Assert.Equal(0, consumed);
 
             Assert.True(Asn1Tag.TryDecode(padded, out tag, out consumed));

@@ -36,13 +36,16 @@ namespace System.IO.Tests
         public void NonExistentDirectory()
         {
             DirectoryInfo valid = Directory.CreateDirectory(GetTestFilePath());
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Move(GetTestFilePath(), valid.FullName));
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Move(
-                    valid.FullName,
-                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () => Move(GetTestFilePath(), valid.FullName)
+            );
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Move(
+                        valid.FullName,
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
+                    )
+            );
         }
 
         [Fact]
@@ -103,8 +106,9 @@ namespace System.IO.Tests
             string source = GetTestFilePath();
             string destination = GetTestFilePath();
             File.Create(source).Dispose();
-            Assert.Throws<IOException>(() =>
-                Move(source + Path.DirectorySeparatorChar, destination));
+            Assert.Throws<IOException>(
+                () => Move(source + Path.DirectorySeparatorChar, destination)
+            );
         }
 
         [Fact]
@@ -114,8 +118,9 @@ namespace System.IO.Tests
             string source = GetTestFilePath();
             string destination = GetTestFilePath();
             File.Create(source).Dispose();
-            Assert.Throws<IOException>(() =>
-                Move(source + Path.AltDirectorySeparatorChar, destination));
+            Assert.Throws<IOException>(
+                () => Move(source + Path.AltDirectorySeparatorChar, destination)
+            );
         }
 
         [Fact]
@@ -131,16 +136,18 @@ namespace System.IO.Tests
         public void MoveIntoCurrentDirectory()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
-            Assert.Throws<IOException>(() =>
-                Move(testDir.FullName, Path.Combine(testDir.FullName, ".")));
+            Assert.Throws<IOException>(
+                () => Move(testDir.FullName, Path.Combine(testDir.FullName, "."))
+            );
         }
 
         [Fact]
         public void MoveOntoParentDirectory()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
-            Assert.Throws<IOException>(() =>
-                Move(testDir.FullName, Path.Combine(testDir.FullName, "..")));
+            Assert.Throws<IOException>(
+                () => Move(testDir.FullName, Path.Combine(testDir.FullName, ".."))
+            );
         }
 
         [Fact]
@@ -221,14 +228,12 @@ namespace System.IO.Tests
                 (IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath())),
                 (path) =>
                 {
-                    AssertExtensions.ThrowsAny<
-                        PathTooLongException,
-                        DirectoryNotFoundException
-                    >(() => Move(testDir, path));
-                    AssertExtensions.ThrowsAny<
-                        PathTooLongException,
-                        DirectoryNotFoundException
-                    >(() => Move(path, testDir));
+                    AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException>(
+                        () => Move(testDir, path)
+                    );
+                    AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException>(
+                        () => Move(path, testDir)
+                    );
                 }
             );
         }
@@ -237,11 +242,13 @@ namespace System.IO.Tests
         public void ThrowIOExceptionWhenMovingDirectoryToItself()
         {
             Directory.CreateDirectory(Path.Combine(TestDirectory, "foo"));
-            Assert.Throws<IOException>(() =>
-                Directory.Move(
-                    Path.Combine(TestDirectory, "foo"),
-                    Path.Combine(TestDirectory, "foo")
-                ));
+            Assert.Throws<IOException>(
+                () =>
+                    Directory.Move(
+                        Path.Combine(TestDirectory, "foo"),
+                        Path.Combine(TestDirectory, "foo")
+                    )
+            );
         }
 
         [Fact]
@@ -249,11 +256,13 @@ namespace System.IO.Tests
         {
             Directory.CreateDirectory(Path.Combine(TestDirectory, "foo"));
             Directory.CreateDirectory(Path.Combine(TestDirectory, "bar", "foo"));
-            Assert.Throws<IOException>(() =>
-                Directory.Move(
-                    Path.Combine(TestDirectory, "foo"),
-                    Path.Combine(TestDirectory, "bar", "foo")
-                ));
+            Assert.Throws<IOException>(
+                () =>
+                    Directory.Move(
+                        Path.Combine(TestDirectory, "foo"),
+                        Path.Combine(TestDirectory, "bar", "foo")
+                    )
+            );
         }
 
         [Fact]
@@ -335,11 +344,13 @@ namespace System.IO.Tests
         {
             Directory.CreateDirectory(Path.Combine(TestDirectory, "FOO"));
             Directory.CreateDirectory(Path.Combine(TestDirectory, "bar"));
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Directory.Move(
-                    Path.Combine(TestDirectory, "foo"),
-                    Path.Combine(TestDirectory, "bar", "FOO")
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Directory.Move(
+                        Path.Combine(TestDirectory, "foo"),
+                        Path.Combine(TestDirectory, "bar", "FOO")
+                    )
+            );
         }
 
         [Fact]
@@ -347,11 +358,13 @@ namespace System.IO.Tests
         public void DirectoryWithDifferentCasingThanFileSystem_ToItself_CaseSensitiveOS()
         {
             Directory.CreateDirectory(Path.Combine(TestDirectory, "FOO"));
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                Directory.Move(
-                    Path.Combine(TestDirectory, "foo"),
-                    Path.Combine(TestDirectory, "FOO")
-                ));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Directory.Move(
+                        Path.Combine(TestDirectory, "foo"),
+                        Path.Combine(TestDirectory, "FOO")
+                    )
+            );
         }
 
         [Fact]
@@ -363,8 +376,9 @@ namespace System.IO.Tests
             Directory.CreateDirectory(Path.Combine(TestDirectory, "FOO", "bar"));
             Directory.CreateDirectory(Path.Combine(TestDirectory, "foo"));
 
-            Assert.Throws<IOException>(() =>
-                Directory.Move(directoryToBeMoved, Path.Combine(newPath, "bar")));
+            Assert.Throws<IOException>(
+                () => Directory.Move(directoryToBeMoved, Path.Combine(newPath, "bar"))
+            );
         }
 
         [Fact]
@@ -373,8 +387,9 @@ namespace System.IO.Tests
         {
             Directory.CreateDirectory($"{TestDirectory}/FOO");
             Directory.CreateDirectory($"{TestDirectory}/bar/foo");
-            Assert.Throws<IOException>(() =>
-                Directory.Move($"{TestDirectory}/FOO", $"{TestDirectory}/bar/foo"));
+            Assert.Throws<IOException>(
+                () => Directory.Move($"{TestDirectory}/FOO", $"{TestDirectory}/bar/foo")
+            );
         }
 
         [Fact]
@@ -395,8 +410,9 @@ namespace System.IO.Tests
         {
             Directory.CreateDirectory($"{TestDirectory}/bar/FOO");
             Directory.CreateDirectory($"{TestDirectory}/foo");
-            Assert.Throws<IOException>(() =>
-                Directory.Move($"{TestDirectory}/foo", $"{TestDirectory}/bar/foo"));
+            Assert.Throws<IOException>(
+                () => Directory.Move($"{TestDirectory}/foo", $"{TestDirectory}/bar/foo")
+            );
         }
 
         [ConditionalFact(nameof(AreAllLongPathsAvailable))]
@@ -434,14 +450,18 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsWildCharacterPath_Core()
         {
-            Assert.ThrowsAny<IOException>(() =>
-                Move(Path.Combine(TestDirectory, "*"), GetTestFilePath()));
-            Assert.ThrowsAny<IOException>(() =>
-                Move(TestDirectory, Path.Combine(TestDirectory, "*")));
-            Assert.ThrowsAny<IOException>(() =>
-                Move(TestDirectory, Path.Combine(TestDirectory, "Test*t")));
-            Assert.ThrowsAny<IOException>(() =>
-                Move(TestDirectory, Path.Combine(TestDirectory, "*Test")));
+            Assert.ThrowsAny<IOException>(
+                () => Move(Path.Combine(TestDirectory, "*"), GetTestFilePath())
+            );
+            Assert.ThrowsAny<IOException>(
+                () => Move(TestDirectory, Path.Combine(TestDirectory, "*"))
+            );
+            Assert.ThrowsAny<IOException>(
+                () => Move(TestDirectory, Path.Combine(TestDirectory, "Test*t"))
+            );
+            Assert.ThrowsAny<IOException>(
+                () => Move(TestDirectory, Path.Combine(TestDirectory, "*Test"))
+            );
         }
 
         [Fact]

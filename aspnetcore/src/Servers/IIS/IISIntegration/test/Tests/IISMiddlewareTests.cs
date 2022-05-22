@@ -139,8 +139,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime.ApplicationStopping.Register(() =>
-                                    applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -210,8 +211,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime.ApplicationStopping.Register(() =>
-                                    applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -267,8 +269,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime.ApplicationStopping.Register(() =>
-                                    applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>
@@ -324,8 +327,9 @@ public class IISMiddlewareTests
                             {
                                 var appLifetime =
                                     app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                                appLifetime.ApplicationStopping.Register(() =>
-                                    applicationStoppingFired.SetResult(0));
+                                appLifetime.ApplicationStopping.Register(
+                                    () => applicationStoppingFired.SetResult(0)
+                                );
 
                                 app.Run(
                                     context =>

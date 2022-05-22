@@ -118,8 +118,9 @@ namespace Activator
 
                 if (builtInComDisabled)
                 {
-                    Assert.Throws<NotSupportedException>(() =>
-                        ComActivator.GetClassFactoryForType(cxt));
+                    Assert.Throws<NotSupportedException>(
+                        () => ComActivator.GetClassFactoryForType(cxt)
+                    );
                     return;
                 }
 

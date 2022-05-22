@@ -54,8 +54,9 @@ public class NewtonsoftJsonHubProtocolTests : JsonHubProtocolTestsBase
 
         var binder = new TestBinder(Array.Empty<Type>(), typeof(object));
         var data = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(input));
-        var ex = Assert.Throws<InvalidDataException>(() =>
-            JsonHubProtocol.TryParseMessage(ref data, binder, out var _));
+        var ex = Assert.Throws<InvalidDataException>(
+            () => JsonHubProtocol.TryParseMessage(ref data, binder, out var _)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
